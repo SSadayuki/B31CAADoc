@@ -1,0 +1,143 @@
+#ifndef CATIAAnalysisCases_IDL
+#define CATIAAnalysisCases_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAAnalysisCases.idl
+// Automation interface for the AnalysisCases element 
+//
+//===================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAAnalysisCase;
+
+/**  
+ * The collection of analysis case making an Analysis.
+ */
+interface CATIAAnalysisCases : CATIACollection 
+{
+
+
+/**
+ * Creates a new case and adds it to the case collection.
+ * This case will be plugged under the analysis model.
+ * @return The created case
+ * <! @sample >
+ * <dt><b>Example:</b>
+ * <dd>
+ * The following example creates a case <tt>NewCase</tt> 
+ * in the case collection of the <tt>ModelAnalysis</tt> Analysis model <p>.
+ * <pre>
+ * Dim ModelAnalysis As AnalysisModel
+ * Dim NewCase As AnalysisCase
+ * Set NewCase = ModelAnalysis.AnalysisCases.<font color="red">Add</font>()
+ * </pre>
+ */
+    HRESULT     Add
+                ( out  /*IDLRETVAL*/ CATIAAnalysisCase            oCase );
+
+/**
+ * Adds an existing analysis case to the analysis cases collection.<br>
+ * @param iCase
+ * The Existing Analysis Case.
+ *
+ * <! @sample >
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example adds <tt>ThisAnalysisCase</tt> in the <tt>analysisCases</tt> analysis cases collection. 
+ * <pre>
+ * Dim ThisAnalysisCase As AnalysisCase
+ * Dim analysisCases As AnalysisCases
+ * ...
+ * analysisCases.<font color="red">AddExistingCase</font>(ThisAnalysisCase)
+ * </pre>
+ */
+	HRESULT     AddExistingCase( in  CATIAAnalysisCase    iCase);
+
+/**
+ * Creates a new case and adds it to the case collection.
+ * This case will be plugged under the analysis model.
+ * @return The created case
+ * <! @sample >
+ * @param iType under the form : oStartUpName@oCatalogName?oClientId (For User defined Startups).
+ * <dt><b>Example:</b>
+ * <dd>
+ * The following example creates a case <tt>NewCase</tt> 
+ * in the case collection of the <tt>ModelAnalysis</tt> Analysis model <p>.
+ * <pre>
+ * Dim ModelAnalysis As AnalysisModel
+ * Dim NewCase As AnalysisCase
+ * Set NewCase = ModelAnalysis.AnalysisCases.<font color="red">NewCase("AnalysisPreproCase")</font>()
+ * </pre>
+ */
+    HRESULT     NewCase(in CATBSTR iType, out  /*IDLRETVAL*/ CATIAAnalysisCase oCase );
+
+/**
+ * Returns a case using its index or its name from the case
+ * collection.
+ * @param iIndex
+ *   The index or the name of the case to retrieve from
+ *   the collection of cases.
+ *   As a numeric, this index is the rank of the case
+ *   in the collection. The index of the first case in the collection is 1,
+ *   and the index of the last case is Count.
+ *   As a string, it is the name you assigned to the case using
+ *   the @href CATIABase#Name property.
+ * @return The retrieved case.
+ *
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example retrieves in <tt> ThisCase</tt> the fifth case
+ * in the collection and in <tt> ThatCase</tt> the case
+ * named <tt>"MyCase</tt> in the case collection of the <tt>AnalysisModel</tt> Analysis model.
+ * <pre>
+ * Set CaseColl = AnalysisModel.AnalysisCases
+ * Set ThisCase = CaseColl.<font color="red">Item</font>(5)
+ * Set ThatCase = CaseColl.<font color="red">Item</font>("MyCase")
+ * </pre>
+ */
+
+    HRESULT     Item
+                ( in                CATVariant           iIndex,
+                  out /*IDLRETVAL*/ CATIAAnalysisCase    oCase );
+
+/**
+ * Removes a case using its index or its name from the case collection.
+ * @param iIndex
+ *   The index or the name of the case to retrieve from
+ *   the collection of cases.
+ *   As a numeric, this index is the rank of the case
+ *   in the collection. The index of the first case in the collection is 1,
+ *   and the index of the last case is Count.
+ *   As a string, it is the name you assigned to the case using
+ *   the @href CATIABase#Name property.
+ *
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example removes the fifth case in the collection.
+ * <pre>
+ * AnalysisModel.AnalysisCases<font color="red">.Remove (5)</font>
+ * </pre>
+
+*/
+
+	HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAAnalysisCases
+#pragma ID CATIAAnalysisCases "DCE:50c47b42-58bb-11d4-9ef900508b6a3154"
+#pragma DUAL CATIAAnalysisCases
+
+// VB object name : AnalysisCases (Id used in Visual Basic)
+#pragma ID AnalysisCases "DCE:50c47b43-58bb-11d4-9ef900508b6a3154"
+#pragma ALIAS CATIAAnalysisCases AnalysisCases
+
+#endif

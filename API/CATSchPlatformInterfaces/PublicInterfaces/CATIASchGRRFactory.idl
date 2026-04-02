@@ -1,0 +1,150 @@
+#ifndef CATIASchGRRFactory_IDL 
+#define CATIASchGRRFactory_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+    
+interface  CATIASchGRRRoute;
+interface  CATIASchGRRCntr;
+interface  CATIASchListOfObjects;
+interface  CATIASchGRRZone;
+interface  CATIASchGRRRouteEllipse;
+    
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Factory to create graphical representations of schematic objects.
+  */
+
+interface CATIASchGRRFactory : CATIABase
+{
+  /**
+  * Create the graphical representation of a Schematic Route.
+  * @param iLDbPtPath
+  *   A list of X-Y coordinates of points defining the Route. 
+  *   2 doubles per point.
+  * @param oGRRRoute
+  *   The graphical representation of the Route 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRFactory
+  * Dim dbVar1(x) As CATSafeArrayVariant
+  * Dim objArg3 As SchGRRRoute
+  *  ...
+  * objThisIntf.<font color="red">CreateGRRRoute</font>dbVar1,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT CreateGRRRoute ( 
+    in CATSafeArrayVariant iLDbLinePath,
+    inout CATIASchGRRRoute oGRRRoute );
+    
+  /**
+  * Create the graphical representation of a Schematic Connector.
+  * @param oGRRCntr
+  *   The graphical representation of the connector 
+
+
+
+
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRFactory
+  * Dim objArg1 As SchGRRCntr
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">CreateGRRCntr</font>
+  * </pre>
+  *    
+  */
+  HRESULT CreateGRRCntr ( 
+    out /*IDLRETVAL*/ CATIASchGRRCntr oGRRCntr );
+    
+  /**
+  * Create the graphical representation of a Schematic Group.
+  * @param iLPrimitives
+  *   A list of 2D drafting detail pointers 
+  *   Members are CATI2DDetail interface poiners.
+  * @param oGRRGroup
+  *   The graphical representation of the Group
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRFactory
+  * Dim objArg1 As SchListOfObjects
+  * Dim objArg2 As AnyObject
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">CreateGRRGroup</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT CreateGRRGroup ( 
+    in CATIASchListOfObjects iLPrimitive, 
+    out /*IDLRETVAL*/ CATIABase oGRRGroup );
+    
+/**
+  * Create the graphical representation of a Schematic Zone.
+  * @param iLPrimitives
+  *   A list of 2D drafting object pointers defining the zone boundaries.
+  * @param oGRRZone
+  *   The graphical representation of the Zone
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRFactory
+  * Dim objArg1 As SchListOfObjects
+  * Dim objArg2 As SchGRRZone
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">CreateGRRZone</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT CreateGRRZone ( 
+    in CATIASchListOfObjects iLPrimitive, 
+    out /*IDLRETVAL*/ CATIASchGRRZone oGRRZone );
+    
+  /**
+  * Create the graphical representation of a Schematic Route Ellipse.
+  * @param iDbXYSeedPt
+  *   X-Y coordinate of the seed point for the ellipse.  If NULL,
+  *   the seed point will not be set.
+  * @param oGRRRouteEllipse
+  *   The graphical representation of the Route Ellipse
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRFactory
+  * Dim dbVar1(X) As CATSafeArrayVariant
+  * Dim objArg2 As SchGRRRouteEllipse
+  *  ...
+  * objThisIntf.<font color="red">CreateGRRRouteEllipse</font>dbVar1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT CreateGRRRouteEllipse ( 
+    in CATSafeArrayVariant iDbXYSeedPt, 
+    inout CATIASchGRRRouteEllipse oGRRRouteEllipse );
+    
+};
+    
+// Interface name : CATIASchGRRFactory
+#pragma ID CATIASchGRRFactory "DCE:c3132f99-9bed-444c-9ef69c979381da3f"
+#pragma DUAL CATIASchGRRFactory
+    
+// VB object name : SchGRRFactory
+#pragma ID SchGRRFactory "DCE:f3554b7c-55d2-4db3-aa7d3ca2846c5315"
+#pragma ALIAS CATIASchGRRFactory SchGRRFactory
+    
+#endif 
+    

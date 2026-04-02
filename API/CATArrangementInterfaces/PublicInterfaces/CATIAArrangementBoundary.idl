@@ -1,0 +1,173 @@
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAArrangementBoundary.idl
+// Automation interface for the ArrangementBoundary element 
+//
+#ifndef CATIAArrangementBoundary_IDL
+#define CATIAArrangementBoundary_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+interface CATIAMove;
+interface CATIAArrangementNodes;
+
+#include "CATIABase.idl"
+#include "CATArrangementRouteVisuMode.idl"
+#include "CATArrangementRouteSection.idl"
+
+/**  
+ * Access properties and functions of an ArrangementBoundary object.
+ * <b> Role: </b> Use this interface to control the visualization mode,
+ * section parameters, nodes that define the ArrangementBoundary
+ * object.
+ */
+interface CATIAArrangementBoundary : CATIABase 
+{
+
+  /**
+   * Returns or sets the Visualization Mode for an ArrangementBoundary object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example sets the Visualization Mode for the <tt>objBoundary1</tt>
+   * object to <tt>CatArrangementRouteVisuModeSolid</tt>.
+   * <pre>
+   * objBoundary1.<font color="red">VisuMode</font> = CatArrangementRouteVisuModeSolid
+   * </pre>
+   * </dl>
+   */
+
+#pragma PROPERTY VisuMode
+   HRESULT get_VisuMode(out /*IDLRETVAL*/ CATArrangementRouteVisuMode oVisuMode);
+   HRESULT put_VisuMode(in  CATArrangementRouteVisuMode iVisuMode);
+
+  /**
+   * Returns or sets the SectionType for an ArrangementBoundary object.
+   * <br><b>Legal values</b>:
+   *   <dl>
+   *     <dt>CatArrangementRouteSectionNone</dt>
+   *     <dt>CatArrangementRouteSectionRectangular</dt>
+   *   </dl>
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example sets the SectionType for the <tt>objBoundary1</tt>
+   * object to <tt>CatArrangementRouteSectionRectangular</tt>.
+   * <pre>
+   * objBoundary1.<font color="red">SectionType</font> = CatArrangementRouteSectionRectangular
+   * </pre>
+   * </dl>
+   */
+
+#pragma PROPERTY SectionType
+   HRESULT get_SectionType(out /*IDLRETVAL*/ CATArrangementRouteSection oRouteSection);
+   HRESULT put_SectionType(in  CATArrangementRouteSection iRouteSection);
+
+  /**
+   * Returns or sets the SectionWidth for an ArrangementBoundary object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example gets the SectionWidth for the <tt>objBoundary1</tt>
+   * object.
+   * <pre>
+   * Dim dblSectionWidth   As Double
+   * dblSectionWidth = objBoundary1.<font color="red">SectionWidth</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY SectionWidth
+   HRESULT get_SectionWidth(out /*IDLRETVAL*/ double oSectionWidth);
+   HRESULT put_SectionWidth(in double iSectionWidth);
+
+  /**
+   * Returns or sets the SectionHeight for an ArrangementBoundary object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example gets the SectionHeight for the <tt>objBoundary1</tt>
+   * object.
+   * <pre>
+   * Dim dblSectionHeight   As Double
+   * dblSectionHeight = objBoundary1.<font color="red">SectionHeight</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY SectionHeight
+   HRESULT get_SectionHeight(out /*IDLRETVAL*/ double oSectionHeight);
+   HRESULT put_SectionHeight(in double iSectionHeight);
+
+  /**
+   * Returns the collection of ArrangementNodes that make up the ArrangementBoundary.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example gets the ArrangementNodes for the <tt>objBoundary1</tt>
+   * object.
+   * <pre>
+   * Dim objArrNodes   As ArrangementNodes
+   * Set objArrNodes = objBoundary1.<font color="red">ArrangementNodes</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY ArrangementNodes
+   HRESULT get_ArrangementNodes(out /*IDLRETVAL*/ CATIAArrangementNodes oArrNodes);
+
+
+#pragma PROPERTY Length
+  /**
+   * Returns the length of the ArrangementBoundary object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the Length of the <tt>objBoundary1</tt> object.
+   * <pre>
+   * Dim dblBoundaryLength   As Double
+   * dblBoundaryLength  = objBoundary1.<font color="red">Length</font>
+   * </pre>
+   * </dl>
+   */
+   HRESULT get_Length(out /*IDLRETVAL*/ double oBoundaryLength);
+
+  /**
+   * Returns the applicative data whose type is the given parameter.
+   * @param iApplicationType
+   *   The type of applicative data searched.
+   * @param oApplicativeObj
+   *   The matched applicative object. 
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the desired applicative object from the <tt>objBoundary1</tt> object.
+   * <pre>
+   * Dim objProd   As Product
+   * objProd  = objBoundary1.<font color="red">GetTechnologicalObject("Product")</font>
+   * </pre>
+   * </dl>
+   */
+  HRESULT GetTechnologicalObject (  in CATBSTR iApplicationType, 
+                                    out /*IDLRETVAL*/ CATBaseDispatch oApplicativeObj);
+
+};
+
+// Interface name : CATIAArrangementBoundary
+#pragma ID CATIAArrangementBoundary "DCE:631fb4f2-cc5f-11d4-8df300d0b7acadba"
+#pragma DUAL CATIAArrangementBoundary
+
+// VB object name : ArrangementBoundary (Id used in Visual Basic)
+#pragma ID ArrangementBoundary "DCE:631fb4f3-cc5f-11d4-8df300d0b7acadba"
+#pragma ALIAS CATIAArrangementBoundary ArrangementBoundary
+
+#endif

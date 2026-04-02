@@ -1,0 +1,202 @@
+// COPYRIGHT DASSAULT SYSTEMES 2003
+#ifndef CATIA2DPrintArea_IDL
+#define CATIA2DPrintArea_IDL
+
+/*IDLREP*/
+
+#include "CATIABase.idl"
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+ /**
+ * Manages print area of drawing sheet.
+ * <p>
+ * This interface is obtained from @href CATIADrawingSheet#PrintArea method.
+ */
+interface CATIA2DPrintArea : CATIABase
+{
+/**
+ * Sets a set of coordinates to define a rectangle print area. 
+ * <dt> All the values are given in mm.
+ * @param <tt>in double iX</tt>
+ * [in] The low x coordinate of the area.
+ * @param <tt>in double iY</tt>
+ * [in] The low y coordinate of the area.
+ * @param <tt>in double iWidth</tt>
+ * [in] The width of the area. The value must be strictly positive.
+ * @param <tt>in double iHeigth</tt>
+ * [in] The heigth of the area. The value must be strictly positive.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>     <dd> The print area was successfully defined.
+ * <dt> <tt>E_FAIL</tt>   <dd> No print area could be defined.
+ * </dl>
+ */
+  HRESULT SetArea( in double iX, in double iY, in double iWidth, in double iHeigth );
+
+/**
+ * Gets the printing area defined on an object. 
+ * Also communicates the activation state of the printing area.
+ * <dt> All the values are given in mm.
+ * @param <tt>out double oX</tt>
+ * [out] The low x coordinate of the area.
+ * @param <tt>out double oY</tt>
+ * [out] The low y coordinate of the area.
+ * @param <tt>out double oWidth</tt>
+ * [out] The width of the area.
+ * @param <tt>out double oHeigth</tt>
+ * [out] The heigth of the area.
+ * @param <tt>out boolean oActivated</tt>
+ * [out] The activation state of the print area (TRUE means activated, FALSE means deactivated).
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>     <dd> The print area was succesfully retrieved.
+ * <dt> <tt>E_FAIL</tt>   <dd> No print area could be retrived.
+ * </dl>
+ */
+  HRESULT GetArea( out double oX, out double oY, 
+                   out double oWidth, out double oHeigth,
+                   out boolean oActivated );
+
+#pragma PROPERTY AreaLowX
+/**
+ * Valuates the low x coordinate of the print area.
+ * @param <tt>in double iX</tt>
+ * [in] The low x coordinate.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>
+ * <dt> <tt>E_FAIL</tt>
+ * </dl>
+ */
+  HRESULT put_AreaLowX( in double iX );
+/**
+ * Retrieves the low x coordinate of the print area.
+ * @param <tt>out double oX</tt>
+ * [out] The low x coordinate.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>
+ * <dt> <tt>E_FAIL</tt>
+ * </dl>
+ */
+  HRESULT get_AreaLowX( out /*IDLRETVAL*/ double oX );
+
+#pragma PROPERTY AreaLowY
+/**
+ * Valuates the low y coordinate of the print area.
+ * @param <tt>in double iY</tt>
+ * [in] The low y coordinate.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>
+ * <dt> <tt>E_FAIL</tt>
+ * </dl>
+ */
+  HRESULT put_AreaLowY( in double iY );
+/**
+ * Retrieves the low y coordinate of the print area.
+ * @param <tt>out double oY</tt>
+ * [out] The low y coordinate.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>
+ * <dt> <tt>E_FAIL</tt>
+ * </dl>
+ */
+  HRESULT get_AreaLowY( out /*IDLRETVAL*/ double oY );
+
+#pragma PROPERTY AreaWidth
+/**
+ * Valuates the width of the print area.
+ * @param <tt>in double iWidth</tt>
+ * [in] The width of the print area.  The value must be strictly positive.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>
+ * <dt> <tt>E_FAIL</tt>
+ * </dl>
+ */
+  HRESULT put_AreaWidth( in double iWidth );
+/**
+ * Retrieves the width of the print area.
+ * @param <tt>out double oWidth</tt>
+ * [out] The width of the print area.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>
+ * <dt> <tt>E_FAIL</tt>
+ * </dl>
+ */
+  HRESULT get_AreaWidth( out /*IDLRETVAL*/ double oWidth );
+
+#pragma PROPERTY AreaHeigth
+/**
+ * Valuates the heigth of the print area.
+ * @param <tt>in double iHeigth</tt>
+ * [in] The heigth of the print area. The value must be strictly positive.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>
+ * <dt> <tt>E_FAIL</tt>
+ * </dl>
+ */
+  HRESULT put_AreaHeigth( in double iHeigth );
+/**
+ * Retrieves the heigth of the print area.
+ * @param <tt>out double oHeigth</tt>
+ * [out] The heigth of the print area.
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>
+ * <dt> <tt>E_FAIL</tt>
+ * </dl>
+ */
+  HRESULT get_AreaHeigth( out /*IDLRETVAL*/ double oHeigth );
+
+#pragma PROPERTY ActivationState
+/**
+ * Activates or deactivates the print area.
+ * @param <tt>in boolean iActivated</tt>
+ * [in] The activation state of the print area (TRUE means activated, FALSE means deactivated).
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>     <dd> The activation state could be valuated.
+ * <dt> <tt>E_FAIL</tt>   <dd> No activation or deactivation possible.
+ * </dl>
+ */
+  HRESULT put_ActivationState( in boolean iActivated );
+/**
+ * Returns the activation state of the print area.
+ * @param <tt>out boolean oActivated</tt>
+ * [out] The activation state of the print area (TRUE means activated, FALSE means deactivated).
+ * @return
+ * Un <tt>HRESULT</tt>
+ * <dl>
+ * <dt> <tt>S_OK</tt>     <dd> The print area activation state was succesfully retrieved.
+ * <dt> <tt>E_FAIL</tt>   <dd> No activation state available.
+ * </dl>
+ */
+  HRESULT get_ActivationState( out /*IDLRETVAL*/ boolean oActivated );
+};
+
+#pragma ID CATIA2DPrintArea "DCE:E7395A6E-FC96-49df-A03F77066FF22789"
+#pragma DUAL CATIA2DPrintArea
+#pragma ID PrintArea "DCE:CA01ECB8-8525-436c-A7D5109BAC761F1D"
+#pragma ALIAS CATIA2DPrintArea PrintArea
+
+#endif

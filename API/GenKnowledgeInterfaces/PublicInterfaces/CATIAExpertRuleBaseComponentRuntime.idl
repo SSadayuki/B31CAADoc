@@ -1,0 +1,140 @@
+#ifndef CATIAExpertRuleBaseComponentRuntime_IDL
+#define CATIAExpertRuleBaseComponentRuntime_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+
+/**
+ * Represents a rule base component in a ruleset.
+ */
+//-----------------------------------------------------------------
+interface CATIAExpertRuleBaseComponentRuntime : CATIABase
+{
+    //=================================
+    //========= Properties ============
+    //=================================
+	/**
+	 * Returns or sets the comment of a rulebase component.
+	 */
+#pragma PROPERTY Comment
+    HRESULT    get_Comment
+                (inout /*IDLRETVAL*/ CATBSTR oComment);
+    HRESULT    put_Comment
+                (in CATBSTR iComment);
+
+    //=================================
+    //==========  Methods  ============
+    //=================================
+    /**
+     * Activates the RuleBaseComponent.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example activates the <tt>SolidActivity</tt> ExpertCheck:
+     * <pre>
+     * Dim CATDocs As Document
+     * Set CATDocs   = CATIA.Documents
+	 * Dim partdoc As PartDocument
+	 * Set partdoc   = CATDocs.Add("CATPart")
+	 * Dim part As Part
+	 * Set part      = partdoc.Part
+     *  part.Relations.Item("RuleBase").RuleSet.ExpertRuleBaseComponentRuntimes.Item("SolidActivity").<font color="red">Activate</font>()
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT    Activate ();
+    /**
+     * Desactivates the RuleBaseComponent.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example Desactivates the <tt>SolidActivity</tt> ExpertCheck:
+     * <pre>
+	 * Dim CATDocs As Document
+	 * Set CATDocs   = CATIA.Documents
+	 * Dim partdoc As PartDocument
+	 * Set partdoc   = CATDocs.Add("CATPart")
+	 * Dim part As Part
+	 * Set part      = partdoc.Part
+     *  part.Relations.Item("RuleBase").RuleSet.ExpertRuleBaseComponentRuntimes.Item("SolidActivity").<font color="red">Deactivate</font>()
+     * </pre>
+     * </dl>
+     */
+    HRESULT    Deactivate ();    
+    
+	/**
+     * Tells if the RuleBaseComponent is active.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example tells if the <tt>SolidActivity</tt> ExpertCheck is active :
+     * <pre>
+	 * Dim CATDocs As Document
+	 * Set CATDocs   = CATIA.Documents
+	 * Dim partdoc As PartDocument
+	 * Set partdoc   = CATDocs.Add("CATPart")
+	 * Dim part As Part
+	 * Set part      = partdoc.Part
+     * status = part.Relations.Item("RuleBase").RuleSet.ExpertRuleBaseComponentRuntimes.Item("SolidActivity").<font color="red">Isactivate</font>()
+     * </pre>
+     * </dl>
+	 *
+	 * @return Activity of the rule base component
+     */
+    HRESULT    Isactivate ( out /*IDLRETVAL*/ boolean oActivated  );
+
+   	/**
+     * Returns as a string the type of component.
+	 *
+	 * Returns a string among ("ExpertCheck", "ExpertCheckRuntime", "ExpertRule",
+	 * "ExpertRuleRuntime", "ExpertRuleSet", "ExpertRuleSetRuntime").
+	 *
+	 * @return Type name of the rule base component
+	 */
+   HRESULT     AccurateType
+                (inout /*IDLRETVAL*/ CATBSTR oName); 
+ 
+   
+    /**
+     * Prevents any access to the component for reading or deleting.
+	 *
+	 * Be careful : this operation is not reversible.
+     */
+    HRESULT    SetUseOnly ();
+
+    /**
+	 * Retrieves the use-only status of the component.
+	 *
+	 * @return Use only status of the component
+     */
+    HRESULT    IsUseOnly ( out /*IDLRETVAL*/ boolean oUseOnly  );
+
+    /**
+	 * Syntactically analyses (ie parses) the component.
+	 *
+	 * @return Empty string if the parse is correct, otherwise comments on the errors
+     */
+    HRESULT    Parse ( inout /*IDLRETVAL*/ CATBSTR oParseErrors  );
+};
+
+// Interface name : CATIAExpertRuleBaseComponentRuntime
+#pragma ID CATIAExpertRuleBaseComponentRuntime "DCE:266937e0-bebd-11d4-9f0a00d0b7af59ef"
+#pragma DUAL CATIAExpertRuleBaseComponentRuntime
+
+// VB object name : Relation (Id used in Visual Basic)
+#pragma ID ExpertRuleBaseComponentRuntime "DCE:304ee640-bebe-11d4-9f0a00d0b7af59ef"
+#pragma ALIAS CATIAExpertRuleBaseComponentRuntime ExpertRuleBaseComponentRuntime
+
+#endif
+// CATIAExpertRuleBaseComponentRuntime_IDL
+

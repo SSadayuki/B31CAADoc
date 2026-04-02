@@ -1,0 +1,28 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+
+LINK_WITH = CATSysFile 
+SRC_LINK_WITH = CATSysCompFile
+#
+OS = AIX
+BUILD = NO
+
+OS = HP-UX
+BUILD = NO
+#
+OS = IRIX
+BUILD = NO
+#
+OS = SunOS
+BUILD = NO
+
+#
+OS = Linux
+BUILD = NO
+
+OS = Windows_NT
+LOCAL_LDFLAGS = /DEF:$(MODPATH)\src\CATSysPreview.def
+SYS_LIBS = Gdiplus.lib netapi32.lib

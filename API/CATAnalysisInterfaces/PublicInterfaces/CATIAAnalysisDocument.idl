@@ -1,0 +1,65 @@
+#ifndef CATIAAnalysisDocument_IDL
+#define CATIAAnalysisDocument_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAAnalysisDocument:                           
+// Exposed interface for Analysis Document
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+#include "CATIADocument.idl"
+#include "CATIAAnalysisManager.idl"
+
+interface CATIAAnalysisManager;
+
+/**
+ * Represents the document object for analysis.
+ * This objects is used for all CAE applications to defines specifications and managed associated results.<br>
+ * The document for analysis data is typed as ".CATAnalysis".<br>  
+ * When an analysis document object is created, an analysis manager is also created.<br>
+ * This analysis manager is the root object at the top of the 
+ * structure of the Analysis document. 
+ * @see CATIADocument
+ */
+
+//-----------------------------------------------------------------
+interface CATIAAnalysisDocument : CATIADocument
+{
+ /**
+  * Returns the root analysis object from the current analysis document.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns in <tt>RootAnalysis</tt> the root analysis
+  * object of the active document, assumed to be an analysis document:
+  * <pre>
+  * Dim AnalysisDocument As Document
+  * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+  * Dim RootAnalysis As AnalysisManager
+  * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+  *</pre>
+  * </dl>
+  */
+#pragma PROPERTY Analysis
+  HRESULT get_Analysis(out /*IDLRETVAL*/ CATIAAnalysisManager oAnalysis);
+};
+
+// Interface Name : CATIAAnalysisDocument
+#pragma ID CATIAAnalysisDocument "DCE:c19926f6-7d4f-11d2-a88d00805fc71459"
+#pragma DUAL CATIAAnalysisDocument
+ 
+// VB Object Name : AnalysisDocument
+#pragma ID AnalysisDocument "DCE:d06a644c-7d4f-11d2-a88d00805fc71459"
+#pragma ALIAS CATIAAnalysisDocument AnalysisDocument
+
+#endif
+// CATIAAnalysisDocument_IDL

@@ -1,0 +1,194 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>VPMInterfaces ENOVIAFilterer Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../VPMInterfaces.htm" href="../VPMInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "VPMInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "ENOVIAFilterer"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>VPMInterfaces Framework:  ENOVIAFilterer Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_ENOVIAFilterer_20873','ENOVIAFilterer','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>ENOVIAFilterer</b>
+</p>
+<p>
+<b><i> Interface to define the properties of a Generalized filter.</i></b><br>
+
+ <b>Role</b>: ENOVIAFilterer is a behavior interface. It defines
+ the properties of a Generalized Filter, which can be used to filter
+ the filterable objects.
+ Important: the objects which adhere to ENOVIAFilterer are assumed to be organized in a tree, not a graph.
+ <p> The generalized filter is an AND combination of specialized sub-filters:
+ <ol>
+ <li> an ATTRIBUTE filter : specifies a predicate on the attribute values
+ <li> a DISCIPLINE filter : specifies a predicate on a discipline attribute
+ <li> a ZONE filter : specifies how the Bounding volume of the filterable objects are related to the volume
+                   of an other object contained in the filter (FULLY_IN, PARTLY_IN, ....)
+ <li> a CONFIG filter : specifies rank, date, milestone and specification criteria.
+ <li> a VOLUMIC filter : specifies how the Bounding volume of the filterable objects are related to the 3D volume
+                   contained in the filter (FULLY_IN, PARTLY_IN, ....)
+ </ol>
+ <p> EACH sub-filter can itself be an AND combination of elementary filters (of the same type).
+ <p> For example:
+ The generalized filter can be made of a CONFIG sub-filter and a ZONE sub-filter.
+ The CONFIG sub-filter can be made of two elementary CONFIG filters combined by an AND operation.
+ The ZONE sub-filter can be made of three elementary ZONE filters combined by an AND operation.
+ <p> When making changes to the contents of the generalized filter, a 'type' must be specified.
+ The mode controls which specialized sub-filter is to be changed.</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#ResetCurrentFilter()"><b>ResetCurrentFilter</b></a>()
+</td><td id='tdright'>  Resets totally the generalized filter
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RestoreCurrentFilter()"><b>RestoreCurrentFilter</b></a>()
+</td><td id='tdright'>  Restores the Current Filter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SaveCurrentFilter()"><b>SaveCurrentFilter</b></a>()
+</td><td id='tdright'>  Saves the Current Filter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#add_Filter(long,CATIVpmPredicate*)"><b>add_Filter</b></a>(long,CATIVpmPredicate*)
+</td><td id='tdright'>  Adds a sub-filter of a given type to the Generalized filter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#dump_CurrentFilter()"><b>dump_CurrentFilter</b></a>()
+</td><td id='tdright'>  Dumps the current filter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#put_GlobalFilterModeByType(long,boolean)"><b>put_GlobalFilterModeByType</b></a>(long,boolean)
+</td><td id='tdright'>  Turns the sub-filter of the given type ON or OFF.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="ResetCurrentFilter"></a><a id="ResetCurrentFilter()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ResetCurrentFilter</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Resets totally the generalized filter
+</dd>
+<dt class='dtmethod' >
+  <a id="RestoreCurrentFilter"></a><a id="RestoreCurrentFilter()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>RestoreCurrentFilter</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Restores the Current Filter.
+</dd>
+<dt class='dtmethod' >
+  <a id="SaveCurrentFilter"></a><a id="SaveCurrentFilter()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SaveCurrentFilter</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Saves the Current Filter.
+ <br><b>Role</b>: Filters can be saved in a stack, in order to temporarily change the value of the filter
+ without losing the value specified previously.
+ FilterType can take the value (#define) : FLT_ATTRIBUTE, FLT_DISCIPLINE, FLT_CONFIG,
+                                          FLT_ZONE, FLT_VOLUME or other one or a | combination
+ FLT_XXX are defined in CATVpmTPInclude.h
+</dd>
+<dt class='dtmethod' >
+  <a id="add_Filter"></a><a id="add_Filter(long,CATIVpmPredicate*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>add_Filter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('long','long')</script> <span class='param'>FilterType</span>,<script type="text/javascript"> activateLink('CATIVpmPredicate','CATIVpmPredicate*')</script> <span class='param'>AttFilter</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds a sub-filter of a given type to the Generalized filter.
+ <br><b>Role</b>: The sub-filter types that are not specified by the 'FilterType' argument are left UNCHANGED.
+ <p>Example:
+ add_Filter( FLT_ATTRIBUTE, <attribute filter> )
+ -> adds a new component to the CONFIG part of the generalized filter.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> FilterType</span></dt>
+   <dd>   Filter Type.
+ 
+ </ dd>
+    <dt><span class='paramitem'> AttFilter</span></dt>
+   <dd>   Attrubute Filter.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="dump_CurrentFilter"></a><a id="dump_CurrentFilter()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>dump_CurrentFilter</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Dumps the current filter. Debug purposes.
+</dd>
+<dt class='dtmethod' >
+  <a id="put_GlobalFilterModeByType"></a><a id="put_GlobalFilterModeByType(long,boolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>put_GlobalFilterModeByType</span><span class = 'signature'>(<script type="text/javascript"> activateLink('long','long')</script> <span class='param'>FilterType</span>,<script type="text/javascript"> activateLink('boolean','boolean')</script> <span class='param'>FilterActivated</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Turns the sub-filter of the given type ON or OFF.
+ <br><b>Role</b>: the sub-filter types that are not specified by the 'FilterType' argument are left UNCHANGED.
+ <p>Example:
+ put_GlobalFilterModeByType( FLT_ATTRIBUTE, TRUE )
+ -> turns the CONFIG part of the generalized filter ON, leaving the other sub-filter types unchanged.
+ put_GlobalFilterModeByType( FLT_ZONE, FALSE )
+ -> turns the CONFIG part of the generalized filter OFF, leaving the other sub-filter types unchanged.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> FilterType</span></dt>
+   <dd>   Filter Type.
+ 
+ </ dd>
+    <dt><span class='paramitem'> FilterActivated</span></dt>
+   <dd>   FilterActivated a boolean value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>ENOVIAFilterer.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>GUIDVPMInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

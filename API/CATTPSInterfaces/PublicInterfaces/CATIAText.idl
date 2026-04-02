@@ -1,0 +1,50 @@
+#ifndef CATIAText_IDL
+#define CATIAText_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIADrawingText;
+interface CATIATPSParallelOnScreen;
+
+/**
+ * Interface for the TPS Text object.
+ */
+interface CATIAText : CATIABase
+{
+  #pragma PROPERTY Text
+    /**
+     * Gets the annotation's text.
+     */
+    HRESULT get_Text (inout /*IDLRETVAL*/ CATBSTR oText);
+    /**
+     * Sets the annotation's text.
+     */
+    HRESULT put_Text (in CATBSTR iText);
+
+    /**
+     * Retrieves Drafting text.
+     */
+    HRESULT Get2dAnnot (out /*IDLRETVAL*/ CATIADrawingText oText);
+
+    /**
+    * Gets the annotation on TPSParallelOnScreen interface.
+    */
+    HRESULT  TPSParallelOnScreen (out /*IDLRETVAL*/ CATIATPSParallelOnScreen  oTPSParallelOnScreen);
+};
+
+// Interface name : CATIAText
+#pragma ID CATIAText "DCE:d0c00056-a0ce-11d3-9c940008c725d79e"
+#pragma DUAL CATIAText
+
+// VB object name : Text3D
+#pragma ID Text "DCE:d0c00056-a0ce-11d3-9c940008c725d79f"
+#pragma ALIAS CATIAText Text
+
+#endif

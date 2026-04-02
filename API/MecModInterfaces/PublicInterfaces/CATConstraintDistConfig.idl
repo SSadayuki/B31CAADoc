@@ -1,0 +1,65 @@
+#ifndef CatConstraintDistConfig_IDL
+#define CatConstraintDistConfig_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CatConstraintDistConfig:						   
+// enumeration specifying precise configurations for Line/Line or
+// Cylinder/Cylinder distance constraints
+//								   
+//=================================================================
+// Jan 98 Creation                                    JJ Auffret 
+//=================================================================
+/**
+ * Special constraint configurations for distance constraints.
+ * <br>
+ * When distance constraints involve lines or cylinders, the constrained 
+ * elements  can  rotate around the line on which the distance is 
+ * measured, while still respecting the distance constraint. This degree of 
+ * freedom is in most cases not wanted.<br>
+ * This enum is used to further qualify the distance constraint, so that 
+ * such  degree of freedom can be eliminated in case of need, without 
+ * requiring another distinct constraint to be defined.   
+ * 
+ * @param catCstDCUnspec
+ *    No additional condition is set on the constraint.
+ * @param catCstDCParallel
+ *    In addition to being positioned at a given distance, constrained 
+ *    elements are required to be parallel. Their orientation can be 
+ *    the same or opposite.
+ * @param catCstDCParallelSameOrient
+ *    In addition to being positioned at a given distance, constrained 
+ *    elements are required to be parallel, and their orientations 
+ *    are required to be the same.
+ * @param catCstDCParallelOppOrient
+ *    In addition to being positioned at a given distance, constrained 
+ *    elements are required to be parallel, and their orientations 
+ *    are required to be opposite.
+ */
+
+enum CatConstraintDistConfig	
+{
+	catCstDCUnspec, 
+	catCstDCParallel, 
+	catCstDCParallelSameOrient, 
+	catCstDCParallelOppOrient 
+};
+
+#endif // CatConstraintDistConfig_IDL 
+
+
+
+
+
+
+
+
+

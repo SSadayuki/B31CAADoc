@@ -1,0 +1,28 @@
+# COPYRIGHT DASSAULT SYSTEMES 2004
+#======================================================================
+# Imakefile for module ENODicMacro.m
+#======================================================================
+#
+# SHARED LIBRARY 
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY 
+ 
+# DO NOT EDIT :: THE CAA2 WIZARDS WILL ADD CODE HERE
+WIZARD_LINK_MODULES = \
+    JS0GROUP 
+# END WIZARD EDITION ZONE
+
+#LINK_WITH = VPMIDicInterfaces JS0STR NS0S3STR JS0ERROR
+LINK_WITH = VPMIDicInterfaces JS0GROUP
+
+# System dependant variables
+#
+OS = AIX
+#
+OS = HP-UX
+#
+OS = IRIX
+#
+OS = SunOS
+#
+OS = Windows_NT

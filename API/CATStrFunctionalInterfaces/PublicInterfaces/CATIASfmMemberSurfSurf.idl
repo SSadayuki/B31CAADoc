@@ -1,0 +1,141 @@
+// COPYRIGHT Dassault Systemes 2007
+//=============================================================================
+// CATIASfmMemberSurfSurf
+//   Define the CATIASfmMemberSurfSurf interface for managing SfmMemberSurfSurf
+//   attributes
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar. 2007  Creation                                                S. QUINCI
+//=============================================================================
+#ifndef CATIASfmMemberSurfSurf_IDL
+#define CATIASfmMemberSurfSurf_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASfmMember.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Interface to manage Member created by the intersection of two surfaces.
+ * <b>Role</b>: To manage member created by the intersection of two surfaces.
+ */
+interface CATIASfmMemberSurfSurf : CATIASfmMember
+{
+  /**
+  * Returns or sets the SuperMember's first surface.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>FirstSurface</code> the first surface of the <code>SuperMember</code> feature.
+  * <pre>
+  * Dim Surface As Reference
+  * Set Surface = SuperMember.<font color="red">FirstSurface</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY FirstSurface
+  HRESULT get_FirstSurface(out /*IDLRETVAL*/ CATIAReference oFirstSurface);
+  HRESULT put_FirstSurface(in CATIAReference iFirstSurface);
+
+  /**
+  * Returns or sets the SuperMember's first surface orientation.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Orient</code> the first surface orientation for <code>SuperMember</code> feature.
+  * <pre>
+  * Dim Orient As Integer
+  * Set Orient = SuperMember.<font color="red">FirstSurfaceOrientation</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY FirstSurfaceOrientation
+  HRESULT get_FirstSurfaceOrientation(out /*IDLRETVAL*/ long oOrientation);
+  HRESULT put_FirstSurfaceOrientation(in long iOrientation);
+
+  /**
+  * Returns or sets the SuperMember's first surface offset.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Offset</code> the first surface offset of the <code>SuperMember</code> feature.
+  * <pre>
+  * Dim Offset As Double
+  * Set Offset = SuperMember.<font color="red">FirstSurfaceOffset</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY FirstSurfaceOffset
+  HRESULT get_FirstSurfaceOffset(out /*IDLRETVAL*/ double oOffset);
+  HRESULT put_FirstSurfaceOffset(in double iOffset);
+
+  #pragma PROPERTY FirstSurfaceOffsetParam
+  HRESULT get_FirstSurfaceOffsetParam(out /*IDLRETVAL*/ CATIALength oParam);
+
+  /**
+  * Returns the SuperMember's second surface.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Surface</code> the second surface of the <code>SuperMember</code> feature.
+  * <pre>
+  * Dim Surface As Reference
+  * Set Surface = SuperMember.<font color="red">SecondSurface</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY SecondSurface
+  HRESULT get_SecondSurface(out /*IDLRETVAL*/ CATIAReference oSecondSurface);
+  HRESULT put_SecondSurface(in CATIAReference iSecondSurface);
+
+  /**
+  * Returns or sets the SuperMember's second surface orientation.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Orient</code> the second surface orientation for <code>SuperMember</code> feature.
+  * <pre>
+  * Dim Orient As Integer
+  * Set Orient = SuperMember.<font color="red">SecondSurfaceOrientation</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY SecondSurfaceOrientation
+  HRESULT get_SecondSurfaceOrientation(out /*IDLRETVAL*/ long oOrientation);
+  HRESULT put_SecondSurfaceOrientation(in long iOrientation);
+
+  /**
+  * Returns or sets the SuperMember's second surface offset.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Offset</code> the second surface offset of the <code>SuperMember</code> feature.
+  * <pre>
+  * Dim Offset As Double
+  * Set Offset = SuperMember.<font color="red">SecondSurfaceOffset</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY SecondSurfaceOffset
+  HRESULT get_SecondSurfaceOffset(out /*IDLRETVAL*/ double oOffset);
+  HRESULT put_SecondSurfaceOffset(in double iOffset);
+
+  #pragma PROPERTY SecondSurfaceOffsetParam
+  HRESULT get_SecondSurfaceOffsetParam(out /*IDLRETVAL*/ CATIALength oParam);
+};
+
+// Interface name : CATIASfmMemberSurfSurf
+#pragma ID CATIASfmMemberSurfSurf "DCE:51510d3b-437d-41d7-81326b4592ff12ec"
+#pragma DUAL CATIASfmMemberSurfSurf
+
+// VB object name : SfmMemberSurfSurf (Id used in Visual Basic)
+#pragma ID SfmMemberSurfSurf "DCE:d9154209-41eb-4d81-95f01acf457eb8d2"
+#pragma ALIAS CATIASfmMemberSurfSurf SfmMemberSurfSurf
+
+#endif

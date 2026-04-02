@@ -1,0 +1,76 @@
+#ifndef CATIASchCompGroupExt_IDL 
+#define CATIASchCompGroupExt_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfDoubles;
+    
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Manage the graphical representation of a temporary group of schematic objects.
+  */
+
+interface CATIASchCompGroupExt : CATIABase
+{
+  /**
+  * Get the placement axis for the component group.
+  * @param oDb6PlaceMatrix
+  *   Placement matrix of the component group (an array of 6 doubles)
+  *   See @href CATIASchGRRComp#GetTransformation2D
+  *   for explanation of this argument.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGroupExt
+  * Dim objArg1 As SchListOfDoubles
+  *  ...
+  * objThisIntf.<font color="red">GetPlacementAxis</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT GetPlacementAxis ( 
+    inout CATIASchListOfDoubles oDb6PlaceMatrix );
+    
+  /**
+  * Set the placement axis for the component group.
+  * @param iDb6PlaceMatrix
+  *   Placement matrix of the component group (an array of 6 doubles)
+  *   See @href CATIASchGRRComp#GetTransformation2D
+  *   for explanation of this argument.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGroupExt
+  * Dim dbVar1(x) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetPlacementAxis</font>dbVar1
+  * </pre>
+  *    
+  */
+  HRESULT SetPlacementAxis ( 
+    in CATSafeArrayVariant oDb6PlaceMatrix );
+    
+};
+    
+// Interface name : CATIASchCompGroupExt
+#pragma ID CATIASchCompGroupExt "DCE:286b4b3b-82bc-4cd8-b0ef63a933dffff9"
+#pragma DUAL CATIASchCompGroupExt
+    
+// VB object name : SchCompGroupExt
+#pragma ID SchCompGroupExt "DCE:6467dd59-28c7-4166-96f7cf515e9b1cb6"
+#pragma ALIAS CATIASchCompGroupExt SchCompGroupExt
+    
+#endif 
+    

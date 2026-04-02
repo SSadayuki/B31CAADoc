@@ -1,0 +1,291 @@
+#ifndef CATIAAnalysisImage_IDL
+#define CATIAAnalysisImage_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIAAnalysisImage:                           
+// Exposed interface for Analysis Image
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// May.2002		Creation                  Christophe DAGRON
+//=================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+#include "CATIAAnalysisEntities.idl"
+#include "CATIAAnalysisImages.idl"
+#include "CATIAFolder.idl"
+#include "CATIAProduct.idl"
+#include "CATIAAxisSystem.idl"
+#include "CATSafeArray.idl"
+#include "CATAxisOrientationType.idl"
+
+interface CATIAReference;
+interface CATIAAnalysisImages;    
+interface CATIAAnalysisColorMap;
+
+/**
+ * Represents the analysis image object.
+ */
+ //-----------------------------------------------------------------
+interface CATIAAnalysisImage : CATIABase
+{
+/**
+ * Returns the analysis images collection associated with an analysis image.
+ */
+#pragma PROPERTY AnalysisImages
+	HRESULT get_AnalysisImages(out /*IDLRETVAL*/ CATIAAnalysisImages oAnalysisImages);
+
+/**
+ * Returns the color map object associated with an analysis image.
+*/
+#pragma PROPERTY AnalysisColorMap
+  HRESULT get_AnalysisColorMap( out /*IDLRETVAL*/ CATIAAnalysisColorMap oAnalysisColorMap );
+  
+/**
+ * Extracts image results.
+ * <br>The export is done related to an existing image 
+ * and will be stored in a CATIA Folder as a Text file or as an Excel file.
+ * <br><b>Limitations</b>:
+ * <ul>
+ * <li>The allowed output positions are:
+ * node, element, center of element, and node of element</li>
+ * <li>The allowed values are: integer, real or double</li>
+ * <li>The allowed value types are: average or discontinuous iso, symbol, fringe or text</li>
+ * </ul>
+ * <p>To export data with mesh-part identification use @href #ExportDataWithMeshPartId </p>
+ * @param iFolder  The folder to store the file to create
+ * @param iFileName The name of the file to create
+ * @param iExtensionType 
+ *   The extension of the file
+ * <br><b>Legal values</b>:
+ * <ul>
+ * <li>"xls" for a Microsoft Excel workbook</li>
+ * <li>"txt" for a text file.</li>
+ * </ul>
+ */ 
+
+	HRESULT ExportData( in CATIAFolder iFolder,
+						in CATBSTR     iFileName,
+						in CATBSTR     iExtensionType);
+  /**
+  * Activates oe deactivates an image.
+  * <br>This is done related to an existing image 
+  * @param iActivationStatus 
+  * To activate or not the current image.
+  */
+	HRESULT SetActivationStatus( in CATVariant iActivationStatus );
+
+/**
+ * Adds a selection to an image.
+ * <br>This is done related to an existing image 
+ * @param iReference  The selectionGroup to add
+ * @param iReplaceMode
+ * To replace or not the current selections.
+ */
+	HRESULT SetSelection( in CATIAReference iReference, in  CATVariant iReplaceMode );
+
+/**
+ * Resets all selections in an image.
+ * <br>This is done related to an existing image 
+ */
+	HRESULT ResetSelection( );
+
+/**
+ * Sets occurrence number for an image.
+ * <br>This is done related to an existing image
+ * @param iOccurrenceNumber  The number to select
+ * <br><b>Legal value</b>: 1 &le; iOccurrenceNumber &le; nbOccurrence
+ */
+	HRESULT SetCurrentOccurrence( in  CATVariant iOccurrenceNumber );
+
+/**
+ * Updates an image. 
+ * <br>This is done related to an existing image 
+ */
+	HRESULT Update();
+
+/**
+ * Extracts image results and location with mesh part name (as identifier).
+ * <br>The export is done related to an existing image 
+ * and will be stored in a CATIA Folder as a Text file or as an Excel file.
+ * <br><b>Limitations</b>:
+ * <ul>
+ * <li>The allowed output positions are:
+ * element, center of element, and node of element</li>
+ * <li>The allowed values are: integer, real or double</li>
+ * <li>The allowed value types are: average or discontinuous iso, symbol, fringe or text</li>
+ * </ul>
+ * <p>To export data with mesh-part identification use @href #ExportData </p>
+ * @param iFolder  The folder to store the file to create
+ * @param iFileName The name of the file to create
+ * @param iExtensionType 
+ *   The extension of the file
+ * <br><b>Legal values</b>:
+ * <ul>
+ * <li>"xls" for a Microsoft Excel workbook</li>
+ * <li>"txt" for a text file.</li>
+ * </ul>
+ */
+ 
+  HRESULT ExportDataWithMeshPartId( in CATIAFolder    iFolder,
+                                    in CATBSTR  iFileName,
+                                    in CATBSTR  iExtensionType);
+  /**
+  * Extracts image results.
+  * <br>The export is done related to an existing image 
+  * and will be stored in a CATIA Folder as a Text file or as an Excel file.
+  * <br><b>Limitations</b>:
+  * <ul>
+  * <li>The allowed output positions are:
+  * node, element, center of element, and node of element</li>
+  * <li>The allowed values are: integer, real or double</li>
+  * <li>The allowed value types are: average or discontinuous iso, symbol, fringe or text</li>
+  * </ul>
+  * @param iFolder  The folder to store the file to create
+  * @param iFileName The name of the file to create
+  * @param iExtensionType 
+  *   The extension of the file
+  * <br><b>Legal values</b>:
+  * <ul>
+  * <li>"xls" for a Microsoft Excel workbook</li>
+  * <li>"txt" for a text file.</li>
+  * </ul>
+  * @param iAxisOrientationType Coordinate system type of location axis system
+  * @param iExportMeshPartID Flag for exporting with meshpartid or not
+  */ 
+
+  HRESULT ExportDataInGlobalAxis( in CATIAFolder iFolder,
+                                  in CATBSTR     iFileName,
+                                  in CATBSTR     iExtensionType,
+                                  in CATAxisOrientationType iAxisOrientationType,
+                                  in boolean iExportMeshPartID);
+  /**
+  * Extracts image results.
+  * <br>The export is done related to an existing image 
+  * and will be stored in a CATIA Folder as a Text file or as an Excel file.
+  * <br><b>Limitations</b>:
+  * <ul>
+  * <li>The allowed output positions are:
+  * node, element, center of element, and node of element</li>
+  * <li>The allowed values are: integer, real or double</li>
+  * <li>The allowed value types are: average or discontinuous iso, symbol, fringe or text</li>
+  * </ul>
+  * <p>To export data with mesh-part identification use @href #ExportDataWithMeshPartId </p>
+  * @param iFolder  The folder to store the file to create
+  * @param iFileName The name of the file to create
+  * @param iExtensionType 
+  *   The extension of the file
+  * <br><b>Legal values</b>:
+  * <ul>
+  * <li>"xls" for a Microsoft Excel workbook</li>
+  * <li>"txt" for a text file.</li>
+  * </ul>
+  * @param iAxisSystem Reference to the axis system to be used for location transformation.
+  * @param iProduct Reference to the product, where the above axis system is defined.  
+  * @param iAxisOrientationType Coordinate system type of location axis system
+  * @param iExportMeshPartID Flag for exporting with meshpartid or not
+  */ 
+
+  HRESULT ExportDataInUserAxis( in CATIAFolder iFolder,
+                                in CATBSTR     iFileName,
+                                in CATBSTR     iExtensionType,
+                                in CATIAAxisSystem     iAxisSystem,
+                                in CATIAProduct iProduct,
+                                in CATAxisOrientationType iAxisOrientationType,
+                                in boolean iExportMeshPartID);
+
+  /**
+  * Extracts image results.
+  * <br>The export is done related to an existing image 
+  * and will be stored in a CATIA Folder as a Text file or as an Excel file.
+  * If User has not implemented CATIAAxisSystem interface for axis system, but 
+  * has CATIABase interface implementation.
+  * <br><b>Limitations</b>:
+  * <ul>
+  * <li>The allowed output positions are:
+  * node, element, center of element, and node of element</li>
+  * <li>The allowed values are: integer, real or double</li>
+  * <li>The allowed value types are: average or discontinuous iso, symbol, fringe or text</li>
+  * </ul>
+  * <p>To export data with mesh-part identification use @href #ExportDataWithMeshPartId </p>
+  * @param iFolder  The folder to store the file to create
+  * @param iFileName The name of the file to create
+  * @param iExtensionType 
+  *   The extension of the file
+  * <br><b>Legal values</b>:
+  * <ul>
+  * <li>"xls" for a Microsoft Excel workbook</li>
+  * <li>"txt" for a text file.</li>
+  * </ul>
+  * @param iAxisSystem Reference to the axis system to be used for location transformation.
+  * @param iProduct Reference to the product, where the above axis system is defined.  
+  * @param iAxisOrientationType Coordinate system type of location axis system
+  * @param iExportMeshPartID Flag for exporting with meshpartid or not
+  */ 
+
+  HRESULT ExportDataInAnyUserAxis( in CATIAFolder iFolder,
+                                in CATBSTR     iFileName,
+                                in CATBSTR     iExtensionType,
+                                in CATIABase     iAxisSystem,
+                                in CATIAProduct iProduct,
+                                in CATAxisOrientationType iAxisOrientationType,
+                                in boolean iExportMeshPartID);
+  /**
+  * Extracts image results.
+  * <br>The export is done related to an existing image 
+  * and will be stored in a CATIA Folder as a Text file or as an Excel file.
+  * <br><b>Limitations</b>:
+  * <ul>
+  * <li>The allowed output positions are:
+  * node, element, center of element, and node of element</li>
+  * <li>The allowed values are: integer, real or double</li>
+  * <li>The allowed value types are: average or discontinuous iso, symbol, fringe or text</li>
+  * </ul>
+  * @param iFolder  The folder to store the file to create
+  * @param iFileName The name of the file to create
+  * @param iExtensionType 
+  *   The extension of the file
+  * <br><b>Legal values</b>:
+  * <ul>
+  * <li>"xls" for a Microsoft Excel workbook</li>
+  * <li>"txt" for a text file.</li>
+  * </ul>
+  * @param iOrigin Origin of Location axis system
+  * @param iXDirection co-ordinates of a point on X- axis of Location axis system
+  * @param iYDirection co-ordinates of a point on Y- axis of Location axis system
+  * @param iZDirection co-ordinates of a point on Z- axis of Location axis system
+  * @param iAxisOrientationType Coordinate system type of location axis system
+  * @param iExportMeshPartID Flag for exporting with meshpartid or not
+  */ 
+
+  HRESULT ExportDataInManualAxis( in CATIAFolder iFolder,
+                                  in CATBSTR     iFileName,
+                                  in CATBSTR     iExtensionType,
+                                  in CATSafeArrayVariant iOrigin,
+                                  in CATSafeArrayVariant iXDirection,
+                                  in CATSafeArrayVariant iYDirection,
+                                  in CATSafeArrayVariant iZDirection,
+                                  in CATAxisOrientationType iAxisOrientationType,
+                                  in boolean iExportMeshPartID);
+};
+
+// Interface name : CATIAAnalysisImage
+#pragma ID CATIAAnalysisImage "DCE:e34a3830-6805-11d6-b8de00025521aada"
+#pragma DUAL CATIAAnalysisImage
+
+// VB object name : CATIAAnalysisImage (Id used in Visual Basic)
+#pragma ID AnalysisImage "DCE:e4667110-6805-11d6-b8de00025521aada"
+#pragma ALIAS CATIAAnalysisImage AnalysisImage
+
+#endif
+// CATIAAnalysisImage_IDL
+

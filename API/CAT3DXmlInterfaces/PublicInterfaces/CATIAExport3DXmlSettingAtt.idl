@@ -1,0 +1,753 @@
+#ifndef  CATIAExport3DXmlSettingAtt_IDL  
+#define  CATIAExport3DXmlSettingAtt_IDL  
+// COPYRIGHT DASSAULT SYSTEMES 2006
+/*IDLREP*/  
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+ 
+// CAT3DXmlInterfaces
+// ------------------
+#include "Cat3DXmlGeomRepresentationType.idl"
+#include "Cat3DXmlPPRSaveConfig.idl"
+
+// System
+// ------
+#include "CATIASettingController.idl"  
+#include "CATBSTR.idl"  
+
+/**  
+  *  Represents  a  setting  controller  for  the  3D XML  export  settings.  
+  *  <b>Role</b>:  This  interface  is  implemented  by  a  component  which  
+  *  represents  the  controller  of  the  3D XML  export  settings. 
+  */  
+
+interface  CATIAExport3DXmlSettingAtt  :  CATIASettingController { 
+
+#pragma  PROPERTY GeometryRepresentationFormat
+    
+    /**
+     * Returns or sets the format of geometry representation.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  sets  the  representation  format  to
+     *  the  exact  mode.
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">GeometryRepresentationFormat</font> = cat3DXmlExact
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_GeometryRepresentationFormat(out /*IDLRETVAL*/ Cat3DXmlGeomRepresentationType oGeometryRepresentationFormat );
+    
+    /**
+     * Set the format of geometry representation.     
+     */
+    HRESULT put_GeometryRepresentationFormat(in Cat3DXmlGeomRepresentationType iGeometryRepresentationFormat);
+    /** 
+     * Retrieves environment informations for the geometry representation format setting.
+     * <br><b>Role</b>:Retrieves the state of the parameter geometry representation format setting in the current environment.
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetGeometryRepresentationFormatInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,  
+        out  /*IDLRETVAL*/  boolean  oModified);
+        
+    /** 
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetGeometryRepresentationFormatLock(in  boolean  iLocked);    
+
+#pragma  PROPERTY SurfaceAccuracy
+    
+    /**
+     * Returns or sets the surface accuracy.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  sets  the  surface accuracy  used  by
+     *  the  exact  mode.
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">SurfaceAccuracy</font> = 0.01
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_SurfaceAccuracy(out /*IDLRETVAL*/ float oSurfaceAccuracy );
+    /**
+     * Set the surface accuracy.
+     */
+    HRESULT put_SurfaceAccuracy(in float iSurfaceAccuracy );
+    /** 
+     * Retrieves environment informations for the surface accuracy setting.
+     * <br><b>Role</b>:Retrieves the state of the surface accuracy setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetSurfaceAccuracyInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+    
+    /** 
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetSurfaceAccuracyLock(in  boolean  iLocked);
+
+#pragma  PROPERTY AnnotatedView
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#get_DesignReview 
+     * Returns or sets the annotated view activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  annotated  view  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">AnnotatedView</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_AnnotatedView(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#put_DesignReview 
+     * Set the annotated view activation flag.
+     */
+    HRESULT put_AnnotatedView(in boolean iIsActive );
+    /** 
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#GetDesignReviewInfo 
+     * Retrieves environment informations for the annotated view setting.
+     * <br><b>Role</b>:Retrieves the state of the annotated view setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetAnnotatedViewInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+    
+    /** 
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#SetDesignReviewLock
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetAnnotatedViewLock(in  boolean  iLocked);
+    
+#pragma  PROPERTY AlternateView
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#get_DesignReview
+     * Returns or sets the alternate view activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  alternate  view  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">AlternateView</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_AlternateView(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#put_DesignReview
+     * Set the alternate view activation flag.
+     */
+    HRESULT put_AlternateView(in boolean iIsActive );
+    /** 
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#GetDesignReviewInfo 
+     * Retrieves environment informations for the alternate view setting.
+     * <br><b>Role</b>:Retrieves the state of the alternate view setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetAlternateViewInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+        
+   /** 
+     * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#SetDesignReviewLock
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetAlternateViewLock(in  boolean  iLocked);
+    
+#pragma  PROPERTY Presentation
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#get_DesignReview
+     * Returns or sets the presentation activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  presentation  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">Presentation</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_Presentation(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#put_DesignReview
+     * Set the presentation activation flag.
+     */
+    HRESULT put_Presentation(in boolean iIsActive );
+    /** 
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#GetDesignReviewInfo 
+     * Retrieves environment informations for the presentation setting.
+     * <br><b>Role</b>:Retrieves the state of the presentation setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetPresentationInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+        
+    /** 
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#SetDesignReviewLock
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetPresentationLock(in  boolean  iLocked);
+
+#pragma  PROPERTY Section
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#get_DesignReview
+     * Returns or sets the section activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  section  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">Section</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_Section(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#put_DesignReview
+     * Set the section activation flag.
+     */
+    HRESULT put_Section(in boolean iIsActive );
+    /** 
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#GetDesignReviewInfo 
+     * Retrieves environment informations for the section setting.
+     * <br><b>Role</b>:Retrieves the state of the section setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetSectionInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+    
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#SetDesignReviewLock
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetSectionLock(in  boolean  iLocked);
+
+#pragma  PROPERTY Measure
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#get_DesignReview
+     * Returns or sets the measure activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  measure  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">Measure</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_Measure(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#put_DesignReview
+     * Set the measure activation flag.
+     */
+    HRESULT put_Measure(in boolean iIsActive );
+    /** 
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#GetDesignReviewInfo
+     * Retrieves environment informations for the measure setting.
+     * <br><b>Role</b>:Retrieves the state of the measure setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetMeasureInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+        
+    /** 
+	 * @deprecated R19
+	 * This method will be replaced by @href  CATIAExport3DXmlSettingAtt#SetDesignReviewLock
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetMeasureLock(in  boolean  iLocked);
+        
+#pragma  PROPERTY Animation
+    /**
+     * Returns or sets the animation activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  animation  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">Animation</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_Animation(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+     * Set the animation activation flag.
+     */
+    HRESULT put_Animation(in boolean iIsActive );
+    /** 
+     * Retrieves environment informations for the animation setting.
+     * <br><b>Role</b>:Retrieves the state of the animation setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetAnimationInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+    
+    /** 
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetAnimationLock(in  boolean  iLocked);
+    
+#pragma  PROPERTY Annotation3D
+    /**
+     * Returns or sets the 3D annotation activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  3D annotation  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">Annotation3D</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_Annotation3D(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+     * Set the 3D Annotation activation flag.
+     */
+    HRESULT put_Annotation3D(in boolean iIsActive );
+    /** 
+     * Retrieves environment informations for the 3D annotation setting.
+     * <br><b>Role</b>:Retrieves the state of the 3D annotation setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetAnnotation3DInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+        
+    /** 
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetAnnotation3DLock(in  boolean  iLocked);
+    
+#pragma  PROPERTY PPRSaveConfig
+    /**
+     * Returns or sets the PPR config.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  sets  the  PPR config. Product  And  resources  
+     *  export  is  acivated.
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">PPRSaveConfig</font> = cat3DXmlProductAndResourceList
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_PPRSaveConfig(out  /*IDLRETVAL*/  Cat3DXmlPPRSaveConfig oProcessDocumentExport );
+    /**
+     * Set the PPR save config flag.
+     */
+    HRESULT put_PPRSaveConfig(in Cat3DXmlPPRSaveConfig iProcessDocumentExport );
+    /** 
+     * Retrieves environment informations for the PPRSaveConfig setting.
+     * <br><b>Role</b>:Retrieves the state of the PPRSaveConfig setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetPPRSaveConfigInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+        
+    /** 
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetPPRSaveConfigLock(in  boolean  iLocked);
+
+#pragma  PROPERTY DesignReview
+    /**
+     * Returns or sets the Design Review activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  Design Review  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">DesignReview</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_DesignReview(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+     * Set the Design Review activation flag.
+     */
+    HRESULT put_DesignReview(in boolean iIsActive );
+    /** 
+     * Retrieves environment informations for the Design Review setting.
+     * <br><b>Role</b>:Retrieves the state of the Design Review setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetDesignReviewInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+        
+    /** 
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetDesignReviewLock(in  boolean  iLocked);
+    
+
+#pragma  PROPERTY WorkInstructions
+    /**
+     * Returns or sets the Work Instructions activation flag.
+     * <!  @sample  >  
+     *  <dl>  
+     *  <dt><b>Example:</b>  
+     *  <dd>  
+     *  This  example  activates  the  Work Instructions  export.     
+     *  <pre>  
+     *  export3DXmlSettingAtt.<font  color="red">DesignReview</font> = True
+     *  </pre>  
+     *  </dl>  
+     *   
+     */
+    HRESULT get_WorkInstructions(out  /*IDLRETVAL*/  boolean oIsActive );
+    /**
+     * Set the Work Instructions activation flag.
+     */
+    HRESULT put_WorkInstructions(in boolean iIsActive );
+    /** 
+     * Retrieves environment informations for the Work Instructions setting.
+     * <br><b>Role</b>:Retrieves the state of the Work Instructions setting in the current environment. 
+     * @param AdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *	 <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param oLocked   Indicates if the parameter has been locked.
+     * @param oModified Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  GetWorkInstructionsInfo(inout    CATBSTR  ioAdminLevel,  
+        inout                          CATBSTR  ioLocked,
+        out  /*IDLRETVAL*/  boolean  oModified);
+        
+    /** 
+     * Locks or unlocks the flag.
+     * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+     * possible in the current administrated. In user mode this method 
+     * will always return E_FAIL.
+     * @param iLocked The locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>TRUE :</tt>   to lock the parameter.
+     * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     * @return
+     * <b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+    HRESULT  SetWorkInstructionsLock(in  boolean  iLocked);
+
+};
+
+//  Interface  name  :  CATIAExport3DXmlSettingAtt  
+#pragma  ID  CATIAExport3DXmlSettingAtt  "DCE:60fe4c0a-f771-4105-9413fa83abb57dfa"
+#pragma  DUAL  CATIAExport3DXmlSettingAtt  
+
+//  VB  object  name  :  Export3DXmlSettingAtt  (Id  used  in  Visual  Basic)  
+#pragma  ID  Export3DXmlSettingAtt  "DCE:77254a2b-09bc-43d2-8238bf3e079a69dd"
+#pragma  ALIAS  CATIAExport3DXmlSettingAtt  Export3DXmlSettingAtt  
+
+#endif  
+   
+ 
+ 
+  
+   
+ 
+ 

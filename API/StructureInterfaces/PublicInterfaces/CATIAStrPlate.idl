@@ -1,0 +1,119 @@
+#ifndef CATIAStrPlate_IDL
+#define CATIAStrPlate_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIAStrObject
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 11/12/97
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIAParameter;
+
+#include "CATSafeArray.idl"
+#include "CATIASketch.idl"
+#include "CATIAStrObject.idl"
+#include "CATIAStrServices.idl"
+
+	/**
+	* Represents a structure plate object.
+	* A plate is defined by a thickness and aggregates a support object and a
+	* sketch defining its contour. 
+	*/
+
+interface CATIAStrPlate : CATIAStrObject
+{
+
+	/**
+	* Returns the standard thickness following the support orientation. 
+	*/
+
+#pragma PROPERTY StandardThickness
+
+	HRESULT get_StandardThickness(out /*IDLRETVAL*/ double oThickness);
+
+	HRESULT put_StandardThickness(in double iThickness);
+
+	/**
+	* Returns or sets the support of the plate. 
+	*/
+
+#pragma PROPERTY Support
+
+	HRESULT get_Support(out /*IDLRETVAL*/ CATIAReference oSupport);
+
+	HRESULT put_Support(in CATIAReference iSupport);
+
+	/**
+	* Returns the offset between the given support and the support of
+	* the plate. 
+	*/
+
+#pragma PROPERTY Offset
+
+	HRESULT get_Offset(out /*IDLRETVAL*/ CATIAParameter oParameter);
+
+	/**
+	* Returns the sketch object of the plate.
+	*/
+
+#pragma PROPERTY Sketch
+
+	HRESULT get_Sketch(out /*IDLRETVAL*/ CATIASketch oSketch);
+
+	/**
+	* Reverses the material orientation of the plate. 
+    * 
+    * <pre>
+    * Plate_1.<font color="red">ReverseDirection</font> 
+    * </pre>
+	*/
+
+	HRESULT ReverseDirection();
+	HRESULT SetMaterialAndGrade (in CATBSTR iMaterial,in CATBSTR iGrade);
+
+};
+
+// Interface name : CATIAStrPlate
+#pragma ID CATIAStrPlate "DCE:80c376ab-1dc6-0280-020c320000000000"
+#pragma DUAL CATIAStrPlate
+
+// VB name : StrPlate
+#pragma ID StrPlate "DCE:80c37728-0c46-0280-020c320000000000"
+#pragma ALIAS CATIAStrPlate StrPlate
+
+#endif

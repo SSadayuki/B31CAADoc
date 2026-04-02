@@ -1,0 +1,407 @@
+#ifndef CATIAExpertRuleBaseRuntime_IDL
+#define CATIAExpertRuleBaseRuntime_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIARelation.idl"
+#include "CATIAExpertRuleSet.idl"
+#include "CatOutPutFormatType.idl"
+#include "CatShowResultType.idl"
+#include "CatVisualizationType.idl"
+#include "CatSolveType.idl"
+#include "CatDescriptionLengthType.idl"
+
+
+interface CATIAExpertRuleBase ;
+
+/**
+ * Represents the Runtime part of the RuleBase.
+ *
+ * The following example shows how to create the Rule Base RB1
+ * from a newly created part document: 
+ * <pre>
+ * Dim CATDocs As Document
+ * Set CATDocs   = CATIA.Documents
+ * Dim partdoc As PartDocument
+ * Set partdoc   = CATDocs.Add("CATPart")
+ * Dim part As Part
+ * Set part      = partdoc.Part
+ * Dim relations As Relations
+ * Set relations = part.Relations
+ * Dim Rulebase As ExpertRuleBaseRuntime
+ * Set RuleBase  = relations.CreateRuleBase("RB1")
+ * </pre>
+ * @see CATIARelations
+ */
+interface CATIAExpertRuleBaseRuntime : CATIARelation
+{
+    //==================================
+    //========== Properties ============
+    //==================================
+  
+	/**
+     * Returns the edition part of a rule base.
+     */
+
+#pragma PROPERTY RuleBaseEdition
+	/**
+	* Returns the editable object corresponding to this rulebase.
+	* Be careful that, according to your licence, or the type of rulebase
+	* you're handling, you may not have the right to edit the rulebase.
+	*
+	* <! @sample >
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim aRBEdition As CATIAExpertRuleBase
+	* Set aRBEdition = aRBRuntime.RuleBaseEdition
+	*
+	* If not(aRBEdition is Nothing) Then
+	*   ' .. action on the editable rulebase
+	* End if
+	* </pre>
+	* </dl>
+	*/
+    HRESULT    get_RuleBaseEdition
+                 ( out /*IDLRETVAL*/ CATIAExpertRuleBase oRuleBaseEdition  );
+
+	 
+
+    /**
+     * Returns the Set linked to the RuleBase.
+	 * This is the main RuleSet that contains all the RuleBase components.
+	 */
+#pragma PROPERTY RuleSet  
+    HRESULT    get_RuleSet   
+                ( out /*IDLRETVAL*/ CATIAExpertRuleSet oRuleCollection  );
+
+
+
+    /**
+     * Returns or sets the Report OutPut Format.
+	 * <dl>
+	 * <dt>0<dd>Html
+	 * <dt>1<dd>Text
+	 * <dt>2<dd>Print
+	 * <dt>3<dd>Email
+	 * </dl>
+	 */
+#pragma PROPERTY ReportOutPutFormat 
+    HRESULT    get_ReportOutPutFormat
+                ( out /*IDLRETVAL*/ CatOutPutFormatType oType  );
+    HRESULT    put_ReportOutPutFormat
+                ( in  CatOutPutFormatType iType  );
+
+	 
+
+    /**
+     * Returns or sets the Report Description Length (For Text option only).
+	 *
+	 * <dl>
+	 * <dt>0<dd>ShortText
+	 * <dt>1<dd>LongText
+	 * </dl>
+	 *
+	 */
+#pragma PROPERTY ReportDescriptionLength 
+    HRESULT    get_ReportDescriptionLength
+                ( out /*IDLRETVAL*/ CatDescriptionLengthType oType  );
+    HRESULT    put_ReportDescriptionLength
+                ( in CatDescriptionLengthType iType  );
+
+
+    /**
+     * Returns or sets the option for sorting the report.
+	 * <dl>
+	 * <dt>0<dd>ByRule
+	 * <dt>1<dd>ByObject
+	 * <dt>2<dd>ByState
+	 * </dl>
+	 */
+#pragma PROPERTY ReportShowResult
+    HRESULT    get_ReportShowResult
+                ( out /*IDLRETVAL*/ CatShowResultType oType  );
+    HRESULT    put_ReportShowResult
+                ( in  CatShowResultType iType  );
+
+	 
+
+    /**
+     * Returns or sets the Report option for visualization.
+	 * <dl>
+	 * <dt>0<dd>Passed
+	 * <dt>1<dd>Failed
+	 * <dt>2<dd>Both
+	 * </dl>
+	 */
+#pragma PROPERTY TextVisualization 
+    HRESULT    get_TextVisualization
+                ( out /*IDLRETVAL*/ CatVisualizationType oType  );
+    HRESULT    put_TextVisualization
+                ( in CatVisualizationType oType  );
+	 
+
+    /**
+     * Returns or sets the solve option.
+	 */
+#pragma PROPERTY SolveType 
+  HRESULT    get_SolveType
+                ( out /*IDLRETVAL*/ CatSolveType oType  );
+    HRESULT    put_SolveType
+                ( in CatSolveType oType  );
+
+
+	 
+
+    /**
+     * Returns or sets the Report output path.
+	 */
+#pragma PROPERTY ReportPath	 
+    HRESULT    get_ReportPath
+                ( inout /*IDLRETVAL*/ CATBSTR  Path );
+    HRESULT    put_ReportPath
+                ( in CATBSTR  Path );
+
+
+	//==========================
+    //======== Methods =========
+    //==========================
+
+
+   	/**
+     * Returns as a string the type of component.
+	 *
+	 * @return A string among ("ExpertRuleBase", "ExpertRuleBaseRuntime")
+	 */
+   HRESULT     AccurateType
+                (inout /*IDLRETVAL*/ CATBSTR oName); 
+
+    /**
+     * Launch a Forward chaining Solve on the current RuleBase.
+	 *
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * <pre>
+	 *  Dim rulebase as ExpertRuleBase
+	 *
+     *  Set rulebase = part.Relations.Item("RuleBase")
+	 *  rulebase.<font color="red">Deduce</font> ()
+     * </pre>
+     * </dl>
+     */
+    HRESULT     Deduce();
+
+
+	/**
+     * Adds new fact to the rule base resolution.
+	 *
+	 * @param iFact Fact to be added
+	 *
+	 * </dl>
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * <pre>
+	 *  Dim pad3 as Shape
+	 *  Dim rulebase as ExpertRuleBase
+	 *
+     *  Set pad3 = part.MainBody.Shapes.Item("Pad3")
+	 *  Set rulebase = part.Relations.Item("RuleBase")
+	 *  rulebase.<font color="red">AddFact</font> (pad3)
+     * </pre>
+     * </dl>
+     */
+    HRESULT     AddFact(in CATIABase iFact );
+
+	/** @nodoc */
+    HRESULT     RemoveFact(in CATIABase iFact );
+
+	/** @nodoc */
+    HRESULT     ReloadFact(in CATIABase iFact );
+
+	/**
+     * Adds a new root of facts to the rule base.
+	 *
+	 * @param iRootFacts root of facts to be added.
+	 */
+	HRESULT     AddRootOfFacts (in CATIABase iRootFacts);
+
+	/**
+     * Removes a root of facts from the rule base.
+	 *
+	 * @param iRootFacts root of facts to be removed.
+	 */
+	HRESULT     RemoveRootOfFacts(in CATIABase iRootFacts);
+
+	/**
+     * Retrieves all the roots of facts from the rule base.
+	 *
+	 * @param oRootsOfFacts array of roots of facts.
+	 */
+	HRESULT     GetRootsOfFacts(inout CATSafeArrayVariant oRootsOfFacts);
+
+	/**
+     * Retrieves the number of roots of facts of the rule base.
+	 *
+	 * @return Number of roots of facts.
+	 */
+	HRESULT     GetNumberOfRootsOfFacts(out /*IDLRETVAL*/  long oArraySize);
+
+	 /**
+     * Launch a Report. The default output format is HTML
+	 *
+	 * @param reallyStartBrowser Boolean : if True (= 1), then the browser is started on the report
+	 *
+	 * </dl>
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * <pre>
+     *  part.Relations.Item("RuleBase").<font color="red">Report</font> (0)
+     * </pre>
+     * </dl>
+     */
+     HRESULT     Report ( in boolean reallyStartBrowser );
+
+    /**
+     * Returns the Fingerprint information.
+	 * The fingerprint indicates if the last result of the rulebase is relevant 
+	 * regarding to the objects the rule base has checked. In other words, if the part has evolved
+	 * since last <tt>Deduce</tt>, the fingerprint is false.
+	 * Be careful : on volatile rulebases (@href CATIAExpertRuleBase#VolatileCopy ), it raises
+	 * an error.
+	 *
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+	 * <pre>
+	 *  on error resume next
+     *  part.Relations.Item("RuleBase").<font color="red">Fingerprint</font> ()
+	 *  on error goto 0
+     * </pre>
+     * </dl>
+	 *
+	 * @return Fingerprint information
+     */
+    HRESULT    Fingerprint    
+                ( out /*IDLRETVAL*/   boolean             oFingerprint );
+
+	 /**
+     * Import from file.
+	 *
+	 * @param iPath CATBSTR : the path of the document user want to import. 
+	 *
+	 * @param iForce Boolean : if True (= 1), then if imported rules allready exist in target document,
+	 * rules of target document are replaced.
+	 * if False (= 0), then if imported rules allready exist in target document,
+	 * rules of imported document are ignored.* </dl>
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * <pre>
+     *  part.Relations.Item("RuleBase").<font color="red">ImportFromFile</font> ("e:\importeddocument.CATProduct",0)
+     * </pre>
+     * </dl>
+     */
+	HRESULT   ImportFromFile(in CATBSTR iPath,in boolean iForce );
+
+	 /**
+     * Import from RuleSet.
+	 *
+	 * @param iRuleSet CATIAExpertRuleSet : the RuleSet user want to import. 
+	 *
+	 * @param iForce Boolean : if True (= 1), then if imported rules allready exist in target document,
+	 * rules of target document are replaced.
+	 * </dl>
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * <pre>
+	 * Dim CATDocs As Documents
+	 * Set CATDocs   = CATIA.Documents
+	 * Dim partdoc As Document
+	 * Set partdoc = CATDocs.Open("e:\TargetDocument.CATPart")
+	 * Dim part As Part
+	 * Set part      = partdoc.Part
+	 * Dim productdoc As Document
+	 * Set productdoc = CATDocs.Open("e:\ImportedDocument.CATProduct")
+	 * Dim product As Product
+	 * Set product      = productdoc.Product
+	 * Dim ruleset As ExpertRuleSet
+	 * Set ruleset    = product.Relations.Item("RuleBase").RuleSet.ExpertRuleBaseComponentRuntimes.ShallowItem(1)
+     * part.Relations.Item("RuleBase").<font color="red">Import</font> (ruleset,0)
+	 * 
+	 * </pre>
+     * </dl>
+     */
+	HRESULT   Import(in CATIAExpertRuleSet iRuleSet,in boolean iForce  );
+
+
+	 /**
+     * Import with link to a document.
+	 *
+	 * @param iRoot CATIABase : the root user want to import into. 
+	 *
+	 * @param iForce Boolean : if True (= 1), then if imported rules allready exist in target document,
+	 * rules of target document are replaced.
+	 * if False (= 0), then if imported rules allready exist in target document,
+	 * rules of imported document are ignored.* </dl>
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * <pre>
+     *  part.Relations.Item("RuleBase").<font color="red">ImportWithLink</font> (root,0)
+     * </pre>
+     * </dl>
+     */
+	HRESULT   ImportWithLink(in CATIABase iRoot,in boolean iForce );
+
+
+    /**
+     * Returns the Synchronize information.
+	 *
+	 * The synchronize status indicates for a linked rule base if the rulebase is  synchronized.
+	 * Be careful : on volatile rulebases (@href CATIAExpertRuleBase#VolatileCopy ), it raises
+	 * an error.
+	 *
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+	 * <pre>
+	 *  on error resume next
+     *  part.Relations.Item("RuleBase").<font color="red">SynchronizeStatus</font> ()
+	 *  on error goto 0
+     * </pre>
+     * </dl>
+	 *
+	 * @return Synchronize status
+     */
+    HRESULT    SynchronizeStatus    
+                ( out /*IDLRETVAL*/   boolean             oStatus );
+
+
+};
+
+// Interface name : CATIAExpertRuleBaseRuntime
+#pragma ID CATIAExpertRuleBaseRuntime "DCE:23f084d0-9f4c-11d4-9efb00d0b752954c"
+#pragma DUAL CATIAExpertRuleBaseRuntime
+
+// VB object name : Relation (Id used in Visual Basic)
+#pragma ID ExpertRuleBaseRuntime "DCE:f1442100-a051-11d4-9efb00d0b752954c"
+#pragma ALIAS CATIAExpertRuleBaseRuntime ExpertRuleBaseRuntime
+
+
+#endif
+// CATIAExpertRuleBaseRuntime_IDL
+

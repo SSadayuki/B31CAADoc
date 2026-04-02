@@ -1,0 +1,72 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIAPPRDocument_IDL
+#define CATIAPPRDocument_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIADocument.idl"
+
+interface CATIAActivities ;
+interface CATIAPPRProducts ;
+
+/**  
+ * This interface is used to access Processes, Products and Resources.  
+ * Due to the inherent design restrictions, PPRDocument and another interface
+ * ProcessDocument need to be used with care, since the ActiveDocument could
+ * be either ProcessDocument or PPRDocument. With that in mind, a good
+ * practice of writing more robust VB script is to first tell the real
+ * type of document (interface). E.g. The following sentence
+ *   Dim MyDoc As PPRDocument
+ *   Set MyDoc = DELMIA.ActiveDocument.PPRDocument
+ * could be replaced by the following:
+ *   Dim MyDoc As PPRDocument
+ *   Set MyProcDoc = DELMIA.ActiveDocument
+ *   if (TypeName(MyProcDoc)="ProcessDocument") then
+ *   	MyDoc = MyProcDoc.PPRDocument
+ *   else
+ *   	MyDoc = DELMIA.ActiveDocument
+ *   end if
+ *
+ */
+
+interface CATIAPPRDocument : CATIADocument 
+{
+/**
+* Retrieves the list of Processes as Activities contained in the current document.
+* @return
+*    The list of Activities contained in the current document.
+*/
+#pragma PROPERTY Processes
+	HRESULT get_Processes(out  /*IDLRETVAL*/ CATIAActivities oProcesses);
+
+/**
+* Retrieves the list of Products contained in the current document.
+* @return
+*    The list of Products contained in the current document.
+*/
+#pragma PROPERTY Products
+	HRESULT get_Products(out  /*IDLRETVAL*/ CATIAPPRProducts oProducts);
+
+/**
+* Retrieves the list of Resources contained in the current document.
+* @return
+*    The list of Resources contained in the current document.
+*/
+#pragma PROPERTY Resources
+	HRESULT get_Resources(out  /*IDLRETVAL*/ CATIAPPRProducts oResources);
+};
+
+// Interface name : CATIAPPRDocument
+#pragma ID CATIAPPRDocument "DCE:a9201093-027e-11d5-85940000863e1bbb"
+#pragma DUAL CATIAPPRDocument
+
+// VB object name : PPRDocument (Id used in Visual Basic)
+#pragma ID PPRDocument "DCE:a9201094-027e-11d5-85940000863e1bbb"
+#pragma ALIAS CATIAPPRDocument PPRDocument
+
+#endif

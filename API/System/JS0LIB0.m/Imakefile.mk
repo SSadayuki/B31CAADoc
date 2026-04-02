@@ -1,0 +1,19 @@
+#
+# SHARED LIBRARY
+#
+OS = COMMON
+BUILT_OBJECT_TYPE=NONE
+LINK_WITH = JS03TRA JS0HTTP
+
+#
+# AIX
+#
+OS = AIX
+LOCAL_CFLAGS = -D_AIX_SOURCE
+
+#
+# NT
+#
+OS = Windows_NT
+SYS_LIBS = wsock32.lib netapi32.lib kernel32.lib
+LINK_WITH = JS03TRA JS0HTTP ShFolder 

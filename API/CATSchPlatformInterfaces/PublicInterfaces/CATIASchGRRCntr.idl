@@ -1,0 +1,97 @@
+#ifndef CATIASchGRRCntr_IDL 
+#define CATIASchGRRCntr_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchGRR;
+    
+#include "CatSchIDLCntrSymbolType.idl"
+#include "CatSchIDLCntrSymbolType.idl"
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Manage the graphical representation of a schematic connector.
+  */
+
+interface CATIASchGRRCntr : CATIABase
+{
+  /**
+  * Set the symbol or graphics used to represent a connector.
+  * @param iGRRSymbol
+  *   The graphical primitive (detail) to be used as the connector's symbol.
+  *   iGRRSymbol can be NULL if iESymbolType is a point or point/vector.
+  * @param iESymbolType
+  *   Connector symbol type such as: point, point/vector,
+  *   OnOffSheet, LineBoundary.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRCntr
+  * Dim objArg1 As SchGRR
+  *
+  *  ...
+  * objThisIntf.<font color="red">SetSymbol</font>objArg1,CatSchIDLCntrSymbolType_Enum
+  * </pre>
+  *    
+  */
+  HRESULT SetSymbol ( 
+    in CATIASchGRR iGRRSymbol, 
+    in CatSchIDLCntrSymbolType iESymbolType );
+    
+  /**
+  * Remove the graphical primitive used as the connector's symbol.
+  * The default connector's symbol type will be set to point.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRCntr
+  *  ...
+  * objThisIntf.<font color="red">RemoveSymbol</font>
+  * </pre>
+  *    
+  */
+  HRESULT RemoveSymbol ( );
+    
+  /**
+  * Get the graphical primitive of a connector.
+  * @param oGRR
+  *   The graphical primitive (ditto) used to represent a connector.
+  * @param oESymbolType
+  *   Connector symbol type such as: point, point/vector,
+  *   OnOffSheet, LineBoundary.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRCntr
+  * Dim objArg1 As SchGRR
+  *
+  *  ...
+  * objThisIntf.<font color="red">GetSymbol</font>objArg1,CatSchIDLCntrSymbolType_Enum
+  * </pre>
+  *    
+  */
+  HRESULT GetSymbol ( 
+    inout CATIASchGRR oGRR, 
+    inout CatSchIDLCntrSymbolType oESymbolType );
+    
+};
+    
+// Interface name : CATIASchGRRCntr
+#pragma ID CATIASchGRRCntr "DCE:bd98868d-2e78-4f3f-bfb8b8d92473ccaf"
+#pragma DUAL CATIASchGRRCntr
+    
+// VB object name : SchGRRCntr
+#pragma ID SchGRRCntr "DCE:fc3ab36e-57d8-4c6a-b784243bc5fcb955"
+#pragma ALIAS CATIASchGRRCntr SchGRRCntr
+    
+#endif 
+    

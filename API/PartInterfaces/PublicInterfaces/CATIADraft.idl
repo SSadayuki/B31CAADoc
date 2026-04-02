@@ -1,0 +1,121 @@
+#ifndef CATIADraft_IDL
+#define CATIADraft_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIADraft:						   
+// Exposed interface for Mechanical Draft
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation					Ph Baucher
+// Dec97 Modification				  	 L Lalere	
+//=================================================================
+#include "CATIADressUpShape.idl"
+#include "CATDraftDefs.idl"
+
+interface CATIADraftDomains;
+interface CATIAReference;
+
+/**
+ * Represents the draft shape.
+ * A draft shape is made up of draft domains (at least one)
+ * and of a parting element.
+ */
+
+//-----------------------------------------------------------------
+interface CATIADraft : CATIADressUpShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//	ON MODE
+	//	-------
+	//
+    /**
+     * Returns or sets the draft mode.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>mode</tt> the draft mode of
+     * the <tt>firstDraft</tt> draft, and then sets it
+     * to <tt>CatReflectKeepFaceDraftMode</tt>:
+     * <pre>
+     * Set mode = firstDraft.<font color="red">Mode</font>
+     * Set firstDraft.<font color="red">Mode</font> = CatReflectKeepFaceDraftMode
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Mode
+	HRESULT	get_Mode ( out /*IDLRETVAL*/ CatDraftMode oMode );
+	HRESULT	put_Mode ( in                CatDraftMode iMode );
+
+        //      ON PARTING ELEMENT
+        //      ------------------
+        //
+    /**
+     * Returns or sets the draft parting element.<br>
+     * To set the property, you can use the following @href CATIABoundary object: 
+     * @href CATIAPlanarFace.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>element</tt>
+     * the parting element of the <tt>firstDraft</tt> draft, and then sets
+     * it to the <tt>element2</tt> geometrical element:
+     * <pre>
+     * Set element = firstDraft.<font color="red">PartingElement</font>
+     * Set firstDraft.<font color="red">PartingElement</font> = element2
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY PartingElement
+        HRESULT get_PartingElement ( out /*IDLRETVAL*/ CATIAReference oPartingElement );
+        HRESULT put_PartingElement ( in     CATIAReference iPartingElement );
+
+	//
+	//	ON DRAFT DOMAINS
+	//	----------------
+	//
+#pragma PROPERTY DraftDomains
+    /**
+     * Returns the collection of draft domains.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>list</tt> the collection of
+     * draft domains of the <tt>firstDraft</tt> draft:
+     * <pre>
+     * Set list = firstDraft.<font color="red">DraftDomains</font>
+     * </pre>
+     * </dl>
+     */
+	HRESULT	get_DraftDomains ( out /*IDLRETVAL*/ CATIADraftDomains oDraftDomains );
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+};
+
+// Interface name : CATIADraft
+#pragma ID CATIADraft "DCE:003f3094-60b9-11d1-a27d0000f87546fd"
+#pragma DUAL CATIADraft
+
+// VB object name : Draft (Id used in Visual Basic)
+#pragma ID Draft "DCE:004c4d83-60b9-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIADraft Draft
+
+
+#endif
+// CATIADraft_IDL
+

@@ -1,0 +1,105 @@
+#ifndef CATIASolidShape_IDL
+#define CATIASolidShape_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//                                   
+// CATIASolidShape:                           
+// Exposed interface for the imported solid (datum)
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct99 Creation                                        JMarc Gautier
+//=================================================================
+#include "CATIAShape.idl"
+#include "CATIAMove.idl"
+
+//-----------------------------------------------------------------
+/**
+ * Represents an imported solid object.
+ * <b>Role</b>: the imported solid is a solid obtained from copy/paste with link or design in context.
+ * <br> The solid object has a link to a source element obtained from @href #SourceElement and a source product
+ * obtained from @href #SourceProduct .
+ * 
+*/
+interface CATIASolidShape : CATIAShape
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+#pragma PROPERTY SourceElement
+        /**
+         * Returns the source element of the imported solid.
+		 * <br><b>Role</b>: returns the linked element in the source part.
+		 *
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>element</tt> the source element 
+         * of the imported solid <tt>importedSolid</tt>:
+         * <pre>
+         * Set element = importedSolid.SourceElement
+         * </pre>
+         * </dl>
+         */
+	HRESULT	get_SourceElement ( out /*IDLRETVAL*/ CATIABase oSourceElement );
+    
+    /**
+     * Returns the move object of the solid.
+	 * <br><b>Role</b>:
+     * The move object is aggregated by the solid object
+     * and itself aggregates a movable object
+     * to which you can apply a move transformation
+     * by means of an isometry matrix. It moves the solid
+     * according to this isometry.
+     * @sample
+     * This example retrieves the move object <tt>EngineMoveObject</tt> for the
+     * <tt>Engine</tt> product.
+     * <pre>
+     * Dim EngineMoveObject As Move
+     * Set EngineMoveObject = Engine.<font color="red">Move</font>
+     * </pre>
+	 * @see CATIAMove
+     */
+#pragma PROPERTY Move
+  HRESULT get_Move(out /*IDLRETVAL*/ CATIAMove oMove);
+
+        /**
+         * Returns the source product instance of the imported solid.
+		 * <br><b>Role</b>: returns the product instance which was selected when the import was created.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>prod1</tt> the source product instance 
+         * of the imported solid <tt>importedSolid</tt>:
+         * <pre>
+         * Set prod1 = importedSolid.SourceProduct
+         *</pre>
+         * </dl>
+         */
+#pragma PROPERTY SourceProduct
+	HRESULT	get_SourceProduct ( out /*IDLRETVAL*/ CATIABase oProduct );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+};
+
+// Interface name : CATIASolidShape
+#pragma ID CATIASolidShape "DCE:c146df2a-8e08-11d3-859a00108301432b"
+#pragma DUAL CATIASolidShape
+
+// VB object name : Solid (Id used in Visual Basic)
+#pragma ID Solid "DCE:1f087858-8e09-11d3-859a00108301432b"
+#pragma ALIAS CATIASolidShape Solid
+
+#endif
+// CATIASolidShape_IDL
+

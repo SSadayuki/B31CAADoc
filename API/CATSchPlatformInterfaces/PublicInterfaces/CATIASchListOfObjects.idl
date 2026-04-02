@@ -1,0 +1,98 @@
+#ifndef CATIASchListOfObjects_IDL
+#define CATIASchListOfObjects_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+#include "CATIABase.idl"
+
+ /** 
+  * Represent a non-persistant list of schematic objects.
+  */
+
+interface CATIASchListOfObjects : CATIABase
+{
+    /**
+     * Returns the number of objects in the list.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in  <tt>NumberOfObjects</tt> the number of objects
+     * currently gathered in <tt>MyList</tt>.
+     * <pre>
+     * NumberOfObjects = MyList.<font color="red">Count</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Count
+  HRESULT get_Count (out /*IDLRETVAL*/ long oNbItems);
+
+    /**
+     * Returns an object from its index in the list.
+     * @param iIndex
+     *   The index of the first object in the collection is 1, and
+     *   the index of the last object is Count.
+	 * @param iInterfaceName
+	 *   The interface name of oObj.
+	 *
+     * @return the retrieved object.
+     *
+     * @sample
+     * The following example returns in the third object in the list.
+     * <pre>
+     * Dim MyObject As AnyObject
+	 * Dim MyList As SchListOfObjects
+     * Set MyObject = SchListOfObjects.<font color="red">Item</font>(2,"CATIASchComponent")
+     * </pre>
+     */
+  HRESULT Item (in long iIndex, in CATBSTR iInterfaceName, out /*IDLRETVAL*/ CATIABase oObject);
+
+    /**
+     * Adds an object to the end of the list.
+     * @param iObject
+     *   The object to be added to the list.
+     *
+     * @sample
+     * The following example appends an object to the list.
+     * <pre>
+     * Dim MyObject As AnyObject
+	 * Dim MyList As SchListOfObjects
+     * MyList.<font color="red">Append</font>(MyObject)
+     * </pre>
+     */
+  HRESULT Append (in CATIABase iObject);
+
+    /**
+     * Remove an object from the list by specifying its position in the list.
+     * @param iIndex
+     *   The position of the object to be removed in the list.
+     *
+     * @sample
+     * The following example removes the second entry in the list. Please note that the
+	 * list index starts with 1.
+     * <pre>
+	 * Dim MyList As SchListOfObjects
+     * MyList.<font color="red">Remove</font>(1)
+     * </pre>
+     */
+
+  HRESULT RemoveByIndex (in long iIndex);
+
+};
+
+// Interface name : CATIASchListOfObjects
+#pragma ID CATIASchListOfObjects "DCE:eb80f927-7f08-49af-87dbf0c447ccfbee"
+#pragma DUAL CATIASchListOfObjects
+
+// VB object name : SchListOfObjects
+#pragma ID SchListOfObjects "DCE:58213222-046e-4fd9-a8ced35bbf01745e"
+#pragma ALIAS CATIASchListOfObjects SchListOfObjects
+
+#endif

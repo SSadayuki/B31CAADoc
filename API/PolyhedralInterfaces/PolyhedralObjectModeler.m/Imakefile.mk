@@ -1,0 +1,24 @@
+BUILT_OBJECT_TYPE=NONE 
+ 
+# DO NOT EDIT :: THE CAA2 WIZARDS WILL ADD CODE HERE
+WIZARD_LINK_MODULES =  \
+JS0FM JS0GROUP PolyhedralInterfacesUUID 
+# END WIZARD EDITION ZONE
+
+LINK_WITH = $(WIZARD_LINK_MODULES)
+
+# System dependant variables
+#
+OS = AIX
+#
+OS = HP-UX
+#
+OS = IRIX
+#
+OS = SunOS
+#
+OS = Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP = /O2
+#endif

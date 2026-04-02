@@ -1,0 +1,112 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIAPlanarFace_IDL
+#define CATIAPlanarFace_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// PlanarFace Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIAFace.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+/**
+ * 2-D boundary with a planar geometry.
+ * <b>Role</b>: 
+ * This @href CATIABoundary object may be, for example, the face of a cube.</br>
+ * You will create a PlanarFace object using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it
+ * to the operator (such as @href CATIAShapeFactory#AddNewDraft ).</br> 
+ * The lifetime of a PlanarFace object is limited, see @href CATIABoundary.</br> 
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example asks the end user to select a face and two planar faces, and creates a draft on these faces:
+ * <pre>
+ * Dim InputObjectType(0)
+ * Set Document = CATIA.ActiveDocument
+ * Set Selection = Document.Selection
+ * 'We propose to the user that he select the face to draft
+ * InputObjectType(0)="Face"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the face to draft",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set FaceToDraft = Selection.Item(1).Value
+ * Selection.Clear
+ * 'We propose to the user that he select the neutral face
+ * InputObjectType(0)="PlanarFace"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the neutral face",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set NeutralFace = Selection.Item(1).Value
+ * Selection.Clear
+ * 'We propose to the user that he select the parting element
+ * InputObjectType(0)="PlanarFace"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the parting element",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set PartingElement = Selection.Item(1).Value
+ * Set Draft = ShapeFactory.AddNewDraft(FaceToDraft,NeutralFace,0,PartingElement,0.0,0.0,1.0,0,5.0,0)
+ * Set DraftDomains = Draft.DraftDomains
+ * Set DraftDomain = DraftDomains.Item(1)
+ * DraftDomain.SetPullingDirection 0.0, 0.0,1.0
+ * Document.Part.Update  
+ * </pre>
+ * </dl>
+ */ 
+
+interface CATIAPlanarFace : CATIAFace
+{
+  /**
+    * Returns the origin of the planar face. 	
+    *   @param oOrigin[0]
+    *   The X Coordinate of the planar face origin
+    *   @param oOrigin[1]
+    *   The Y Coordinate of the planar face origin
+    *   @param oOrigin[2]
+    *   The Z Coordinate of the planar face origin
+    */
+  HRESULT GetOrigin (inout  CATSafeArrayVariant oOrigin);
+
+  /**
+    *  Returns the planar face first axis
+    *   @param oFirstAxis[0]
+    *   The X Coordinate of the planar face first axis
+    *   @param oFirstAxis[1]
+    *   The Y Coordinate of the planar face first axis
+    *   @param oFirstAxis[2]
+    *   The Z Coordinate of the planar face first axis
+    */ 
+  HRESULT GetFirstAxis (inout  CATSafeArrayVariant oFirstAxis);
+
+
+  /**
+    *  Returns the planar face second axis.
+    *   @param oSecondAxis[0]
+    *    The X Coordinate of the planar face second axis
+    *   @param oSecondAxis[1]
+    *   The Y Coordinate of the planar face second axis
+    *   @param oSecondAxis[2]
+    *   The Z Coordinate of the planar face second axis
+    */ 
+  HRESULT GetSecondAxis (inout CATSafeArrayVariant oSecondAxis);
+};
+
+// Interface Name : CATIAPlanarFace
+
+#pragma ID CATIAPlanarFace "DCE:1b7551d0-1be1-11d6-80600010b5d44ab2"
+#pragma DUAL CATIAPlanarFace
+
+// VB Object Name : PlanarFace
+#pragma ID PlanarFace "DCE:889afa40-1be7-11d6-80600010b5d44ab2"
+#pragma ALIAS CATIAPlanarFace PlanarFace
+
+#endif
+//#endif
+

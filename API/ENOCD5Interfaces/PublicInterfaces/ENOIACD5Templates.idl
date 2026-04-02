@@ -1,0 +1,64 @@
+// COPYRIGHT Dassault Systemes 2013
+//===================================================================
+//
+// ENOIACD5Templates.idl
+// Automation interface for the ENOIACD5Templates element 
+//
+//===================================================================
+
+#ifndef ENOIACD5Templates_IDL
+#define ENOIACD5Templates_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+interface CATIADocument;
+interface IDispatch;
+interface ENOIACD5Template;
+
+/**
+ * Represents a List of all Templates from a Template type.
+ *
+ * @sample
+ * The following example indicates how to retrieve the List of all Templates.
+ * <pre>
+ * <font color="blue">Dim</font> oTemplates <font color="blue">As</font> ENOIACD5Templates
+ * <font color="blue">Set</font> oTemplates = oTemplateType.Templates
+ * </pre>
+ * @see ENOIACD5TemplateType
+ */
+interface ENOIACD5Templates : CATIACollection 
+{
+
+    /**
+    * Returns (gets) an item from the list of items.
+    *
+    * @sample
+    * The following example gets a Template at index 1.
+    * <pre>
+	* <font color="blue">Dim</font> oTemplate <font color="blue">As</font> ENOIACD5Template
+    * <font color="blue">Set</font> oTemplate = oTemplates.<font color="red">Item</font>(1)
+    * </pre>
+    */
+
+    HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ ENOIACD5Template Template);
+
+};
+
+// Interface name : ENOIACD5Templates
+#pragma ID ENOIACD5Templates "DCE:B02E26DD-825A-48ed-A9BE0F1BEB1BBCBE"
+#pragma DUAL ENOIACD5Templates
+
+// VB object name : CD5Templates (Id used in Visual Basic)
+#pragma ID CD5Templates "DCE:4CE8797A-2404-416a-8FF57C701DDA56FC"
+#pragma ALIAS ENOIACD5Templates CD5Templates
+
+#endif
+
+  

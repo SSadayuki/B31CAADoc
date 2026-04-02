@@ -1,0 +1,66 @@
+//=============================================================================
+// COPYRIGHT Dassault Systemes 2013
+//=============================================================================
+// CATIASfmSplitPlate
+//   Interface for managing Split Plates
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar  Creation                                                Bhupendra MITHE
+//=============================================================================
+
+#ifndef CATIASfmSplitPlates_IDL
+#define CATIASfmSplitPlates_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASfmSplitPlate.idl"
+#include "CATVariant.idl"
+#include "CATIACollection.idl"
+
+/**
+* Interface to manage the Structure Functional Modeler Split Plates object.
+* <b>Role</b>: Provides access to split plates of a super plate as a collection.
+*/
+
+interface CATIASfmSplitPlates : CATIACollection
+{
+  /**
+  * Gets Split Plate.
+  * @param iIndex [in]
+  *     Index of the Split Plate to be retrieved.  
+  * @param oSfmSplitPlate [out]
+  *      The retrieved Split Plate.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets existing Split Plate of a Super Plate.
+  * <pre>
+  * Dim ListSplitPlates As SfmSplitPlates
+  * Set ListSplitPlates = SuperPlate.SplitPlatesObjects
+  * Dim Split_Plate As SfmSplitPlate
+  * Set Split_Plate = ListSplitPlates.<font color="red">Item</font>(i)
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/CATIASfmSplitPlate oSfmSplitPlate);
+};
+
+// Interface name : CATIASfmSplitPlates
+#pragma ID CATIASfmSplitPlates "DCE:BBA1BAF9-16AB-4d1b-8CAC0052A256B154"
+#pragma DUAL CATIASfmSplitPlates
+
+// VB object name : SfmSplitPlates 
+#pragma ID SfmSplitPlates "DCE:FC41D01E-5E26-40f2-B5A269815EA37B46"
+#pragma ALIAS CATIASfmSplitPlates SfmSplitPlates
+
+#endif
+

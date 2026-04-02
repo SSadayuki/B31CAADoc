@@ -1,0 +1,128 @@
+#ifndef CATIAFaceFillet_IDL
+#define CATIAFaceFillet_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAFaceFillet:                           
+// Exposed interface for Mechanical Fillet between 2 Faces
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification                                     L Lalere
+//=================================================================
+#include "CATIAFillet.idl"
+
+interface CATIAReference;
+interface CATIALength;
+
+/**
+ * Represents the face fillet shape.
+ * A face fillet shape is built between two faces with a fillet radius.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAFaceFillet : CATIAFillet
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON RADIUS
+    //    ---------
+    //
+    /**
+     * Returns the face fillet radius.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>radius</tt> the fillet radius
+     * of the face fillet <tt>firstFaceFillet</tt>:
+     * <pre>
+     * Set radius = firstFaceFillet.<font color="red">Radius</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Radius
+    HRESULT    get_Radius ( out /*IDLRETVAL*/ CATIALength oRadius );    
+
+    //
+    //    ON FIRST FACE
+    //    -------------
+    //
+#pragma PROPERTY FirstFace
+//
+    /**
+     * Returns or sets the first limiting face.<br>
+     * To set the property, you can use the following @href CATIABoundary object: 
+     * @href CATIAFace.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>face1</tt> the first
+     * limiting face of the
+     * face fillet <tt>firstFaceFillet</tt>,
+     * and then sets it to <tt>NewFace1</tt>:
+     * <pre>
+     * Set face1 = firstFaceFillet.<font color="red">FirstFace</font>
+     * firstFaceFillet.<font color="red">FirstFace</font> = NewFace1
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_FirstFace ( out /*IDLRETVAL*/ CATIAReference oFirstFace );
+    HRESULT    put_FirstFace ( in                CATIAReference iFirstFace );
+
+    //
+    //    ON SECOND FACE
+    //    --------------
+    //
+#pragma PROPERTY SecondFace
+//
+    /**
+     * Returns or sets the second limiting face.<br>
+     * To set the property, you can use the following @href CATIABoundary object: 
+     * @href CATIAFace.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>face2</tt> the second
+     * limiting face of the
+     * face fillet <tt>firstFaceFillet</tt>,
+     * and then sets it to <tt>NewFace2</tt>:
+     * <pre>
+     * Set face2 = firstFaceFillet.<font color="red">SecondFace</font>
+     * firstFaceFillet.<font color="red">SecondFace</font> = NewFace2
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_SecondFace ( out /*IDLRETVAL*/ CATIAReference oSecondFace );
+    HRESULT    put_SecondFace ( in                CATIAReference iSecondFace );
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+};
+
+// Interface name : CATIAFaceFillet
+#pragma ID CATIAFaceFillet "DCE:9f7cc59f-6109-11d1-a27d0000f87546fd"
+#pragma DUAL CATIAFaceFillet
+
+// VB object name : FaceFillet (Id used in Visual Basic)
+#pragma ID FaceFillet "DCE:9fa54d99-6109-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIAFaceFillet FaceFillet
+
+
+#endif
+// CATIAFaceFillet_IDL
+

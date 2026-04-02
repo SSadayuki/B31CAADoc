@@ -1,0 +1,184 @@
+#ifndef CATIASewing_IDL
+#define CATIASewing_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIASewing:                           
+// Exposed interface for Sewing
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Dec98 Creation                                    JL Delvordre
+// Fev99 Revision migration CATIASurfaceBasedShape   JL Delvordre
+//=================================================================
+#include "CATSplitDefs.idl"
+#include "CATIASurfaceBasedShape.idl"
+
+interface CATIAReference;
+
+/**
+ * Represents the sewing  operation.
+ * It sews a shape using a sewing element,
+ * such as a surface or a face 
+ */
+
+//-----------------------------------------------------------------
+interface CATIASewing : CATIASurfaceBasedShape     
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //
+    //    ON SEWING SIDE
+    //    ----------------
+    //
+    /**
+     * Returns or sets the sewing side .
+     * The sewing side is the side of the body 
+     * kept after the sewing.
+     * A positive side refers to the same orientation
+     * than the sewing element normal vector.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>sptSide</tt> the sewing side
+     * of the sew shape <tt>mySew</tt>, and then sets it to
+     * <tt>catPositiveSide</tt>:
+     * <pre>
+     * Set sptSide = mySew.<font color="red">SewingSide</font>
+     * mySew.<font color="red">SewingSide</font> = catPositiveSide
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SewingSide
+    HRESULT    get_SewingSide    
+                ( out /*IDLRETVAL*/  CatSplitSide            oSewingSide );
+    HRESULT    put_SewingSide    
+                ( in                 CatSplitSide            iSewingSide );
+
+
+    /**
+     * Returns or sets the sewing mode .
+     * The sewing side is the side of the body 
+     * kept after the sewing.
+     * A positive side refers to the same orientation
+     * than the sewing element normal vector.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>sptSide</tt> the sewing side
+     * of the sew shape <tt>mySew</tt>, and then sets it to
+     * <tt>catPositiveSide</tt>:
+     * <pre>
+     * Set sptSide = mySew.<font color="red">SewingSide</font>
+     * mySew.<font color="red">SewingSide</font> = catPositiveSide
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SewingIntersectionMode
+    HRESULT    get_SewingIntersectionMode    
+                ( out /*IDLRETVAL*/  CatSewingIntersectionMode            oSewingIntersectionMode );
+    HRESULT    put_SewingIntersectionMode    
+                ( in                 CatSewingIntersectionMode            iSewingIntersectionMode );
+
+   /**
+  * Returns or sets the Deviation mode taken into account during Sew construction.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>Unknown Deviation mode.</dd>
+  * <dt>1</dt>
+  * <dd>None Deviation mode. Error thrown if maximum deviation exceeds CATIA resolution.</dd>
+  * <dt>2</dt>
+  * <dd>Automatic Deviation mode. Error thrown if maximum deviation exceeds 100 times CATIA resolution.</dd>
+  * <dt>3</dt>
+  * <dd>Manual Deviation mode. Error thrown if maximum deviation exceeds input user deviation.</dd>
+  * </dl>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oMode</code> the Deviation mode
+  * for the <code>Sew</code> feature.
+  * <pre>
+  * Dim oMode
+  * Set oMode = Sew.<font color="red">DeviationMode</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY DeviationMode  
+    HRESULT get_DeviationMode (out /*IDLRETVAL*/ long oDeviationMode);
+    HRESULT put_DeviationMode (in                long iDeviationMode);
+
+
+   /**
+    * Sets or Gets the maximum deviation allowed for smoothing operation in sewing command.
+    * This value must be set in SI unit (m).
+    * <dl>
+    * <dt><b>Example</b>:
+    * This example retrieves in <code>DeviationValue</code> the maximum deviation value for the
+    * <code>Sew</code>feature.
+    * <pre>
+    * Dim DeviationValue As double
+    * Set DeviationValue = Sew.<font color="red">MaximumDeviationValue</font>
+    * </pre>
+    * </dl> 
+    */
+#pragma PROPERTY Deviation 
+    HRESULT get_Deviation (out /*IDLRETVAL*/ double oDevValue);
+    HRESULT put_Deviation (in                double iDevValue);
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+	/**
+         * Sets the volume support for volume sew surface.
+         * @param iVolume
+         *    A Reference object to a volume (see @href CATIAReference for more information)<br>
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example sets the volume support of
+         * SewSurface <tt>firstSewSurface</tt> to <tt>volumeExtrude</tt> volume reference :
+         * <pre>
+         * firstSewSurface.<font color="red">SetVolumeSupport</font> volumeExtrudeRef
+         *</pre>
+         * </dl>
+         */
+	HRESULT	SetVolumeSupport( in CATIAReference iVolume );
+
+	/**
+         * Sets the surface support for surfacic sew surface.
+         * @param iSupportSurface
+         *    A Reference object to a surface (see @href CATIAReference for more information)<br>         
+         */
+	HRESULT	SetSurfaceSupport( in CATIAReference iSupportSurface );
+};
+
+// Interface name : CATIASewing
+#pragma ID CATIASewing "DCE:8c4d6500-8aa0-11d2-9f830008c7ca6093"
+#pragma DUAL CATIASewing
+
+// VB object name : SewSurface (Id used in Visual Basic)
+#pragma ID SewSurface "DCE:be0c61a0-8aa0-11d2-9f830008c7ca6093"
+#pragma ALIAS CATIASewing SewSurface
+
+
+#endif
+// CATIASewing_IDL
+
+
+
+
+
+

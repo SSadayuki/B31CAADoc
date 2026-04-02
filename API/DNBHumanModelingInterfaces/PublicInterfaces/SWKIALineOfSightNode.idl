@@ -1,0 +1,129 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIALineOfSightNode_IDL
+#define SWKIALineOfSightNode_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//    Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//    CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//    ResetPosture
+//    LockPosture
+//    ResetPrefAngles
+//    ResetAngularLimitations
+//    Optimize
+//    SetPercentage
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Julie GUEVREMONT
+//  Date  : 04/01/12
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- System
+#include "CATIABase.idl"
+
+/**
+  *  This interface characterizes a node.<br>
+  *  A node is a convenient way to regroup different attributes of the manikin.
+  **/
+interface SWKIALineOfSightNode : CATIABase 
+{
+
+ // ===========================================================================
+ //  ResetPosture
+ //  ------
+ //
+    /**
+      * Reset the posture of the line of sight for the dof piDOFId.
+      **/
+    HRESULT ResetPosture(in long piDOFId);
+
+ // ===========================================================================
+ //  LockPosture
+ //  ------
+ //
+    /**
+      * Lock the posture of the line of sight for the dof piDOFId.
+      **/
+    HRESULT LockPosture(in long piDOFId);
+ 
+ // ===========================================================================
+ //  ResetPrefAngles
+ //  ------
+ //
+    /**
+      * Reset the preferred angles of the line of sight for the dof piDOFId.
+      **/
+    HRESULT ResetPrefAngles(in long piDOFId);
+ 
+ // ===========================================================================
+ //  ResetAngularLimitations
+ //  ------
+ //
+    /**
+      * Reset the angular limitations of the line of sight depending on piReset:
+      * 0 -> 2 OR 3 OR 4 depending of the first encountered.
+      * 1 -> 2 AND 3 AND 4
+      * 2 -> Unlock the value
+      * 3 -> Restore the angular limitations if it is "No Limits"
+      * 4 -> Set back the angular limitations to their default value (50.0%)
+      **/
+    HRESULT ResetAngularLimitations(in long piDOFId, in long piReset);
+ 
+ // ===========================================================================
+ //  Optimize
+ //  ------
+ //
+    /**
+      * Sets the limits to match the best PrefAngle for the DOF piDOFId
+      **/
+    HRESULT Optimize(in long piDOFId);
+ 
+ // ===========================================================================
+ //  SetPercentage
+ //  ------
+ //
+    /**
+      * Sets the angular limitations to a percentage for the DOF piDOFId
+      **/
+    HRESULT SetPercentage(in double piPercentage, in long piDOFId);
+
+};
+
+// Interface name : SWKIALineOfSightNode
+#pragma ID SWKIALineOfSightNode "DCE:415ebfd6-7d7e-4c60-8142f833fa248bed"
+#pragma DUAL SWKIALineOfSightNode
+
+// VB object name : SWKLineOfSightNode (Id used in Visual Basic)
+#pragma ID SWKLineOfSightNode "DCE:3f72b736-95fe-41a4-8ac43adae9687f03"
+#pragma ALIAS SWKIALineOfSightNode SWKLineOfSightNode
+
+#endif

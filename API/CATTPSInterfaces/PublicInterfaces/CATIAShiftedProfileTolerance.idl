@@ -1,0 +1,70 @@
+#ifndef CATIAShiftedProfileTolerance_IDL
+#define CATIAShiftedProfileTolerance_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * Interface for accessing shifted tolerance zone informations of a TPS.
+ */
+interface CATIAShiftedProfileTolerance : CATIABase 
+{
+    /**
+     * Retrieves or sets shift value of tolerance zone (in millimeters).
+     * The shift value is the distance between the toleranced surface
+     * and the median surface of tolerance zone. The value is always
+     * positive because shift side is given by GetShiftSide method.
+     */
+#pragma PROPERTY ShiftValue
+   HRESULT get_ShiftValue (out /*IDLRETVAL*/ double oValue);
+   HRESULT put_ShiftValue (in double iValue);
+
+   /**
+   * Retrieves shift side.
+   *   @param opPoint
+   *     a mathematical point located on the shift side of surface.
+   *     The 3 values of opPoint correspond to the X,Y and Z values
+   *     of the point located on the shift side of surface.
+   * @sample
+   * This example gets the shift side point in a VB Script
+   * Dim oShiftTab(3) As CATSafeArrayVariant
+   * Set shiftTol = annotation.ShiftedProfileTolerance
+   * shiftTol.GetShiftSide(oShiftTab)
+   * oStream.Write "      Shifted Side Point : "& oShiftTab(0) & " " & oShiftTab(1) & " " & oShiftTab(2) & sLF
+   */
+   HRESULT GetShiftSide (inout CATSafeArrayVariant opPoint);
+
+   /**
+   * Retrieves the shift direction by two points.
+   *   @param opDirection
+   *     The first 3 values of opDirection correspond to the X,Y and Z values
+   *     of the start point respectively and the next 3 values correspond to the
+   *     X, Y and Z values of the end point respectively.
+   * @sample
+   * This example gets the start and end points in a VB Script
+   * Dim oTab(6) As CATSafeArrayVariant
+   * Set shiftTol = annotation.ShiftedProfileTolerance
+   * shiftTol.GetShiftDirection(oTab)
+   * oStream.Write "      Shifted Direction Start Point : "& oTab(0) & " " & oTab(1) & " " & oTab(2) & sLF
+   * oStream.Write "      Shifted Direction End Point : "& oTab(3) & " " & oTab(4) & " " & oTab(5) & sLF
+   */
+   HRESULT GetShiftDirection (inout CATSafeArrayVariant opDirection);
+
+};
+
+// Interface name : CATIAShiftedProfileTolerance
+#pragma ID CATIAShiftedProfileTolerance "DCE:cf8b8c6c-2f89-11d6-be8a0002b341dd3a"
+#pragma DUAL CATIAShiftedProfileTolerance
+
+// VB object name : ShiftedProfileTolerance (Id used in Visual Basic)
+#pragma ID ShiftedProfileTolerance "DCE:cf8b8c6d-2f89-11d6-be8a0002b341dd3a"
+#pragma ALIAS CATIAShiftedProfileTolerance ShiftedProfileTolerance
+
+#endif

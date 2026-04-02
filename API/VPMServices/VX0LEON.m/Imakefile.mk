@@ -1,0 +1,17 @@
+#
+# LOAD MODULE
+#
+BUILT_OBJECT_TYPE=LOAD MODULE
+
+LINK_WITH = VX0TOOLS GUIDVPMServices ObjectModeler    \
+            JS0SETT JS0CORBA JS0SCBAK           \
+            JS03TRA JS0LIB0 JS0ERROR JS0STR     \
+            CO0LSTPV CO0LSTST  \
+            NS0S3STR NS0S1MSG GUIDVPMInterfaces
+
+OS = AIX
+OS = HP-UX
+OS = IRIX
+OS = SunOS
+OS = Windows_NT
+

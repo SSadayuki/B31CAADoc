@@ -1,0 +1,87 @@
+#ifndef CATIAAnalysisOutputEntities_IDL
+#define CATIAAnalysisOutputEntities_IDL
+/*IDLREP*/
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAAnalysisOutputEntities.idl
+// Automation interface for the AnalysisOutputEntities element 
+//
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIACollection.idl"
+#include "CATIAAnalysisEntity.idl"
+
+/**  
+ * The collection of analysis entities results of a set.
+ * This collection is implemented only for analysis sets. with analysis entities as Output
+ * (regarding to the update mechanism).
+ */
+interface CATIAAnalysisOutputEntities : CATIACollection 
+{
+/**
+ * Creates a new analysis entity and adds it to the analysis entities collection.<br>
+ * This collection may be extracted from an analysis set.The Analysis entity will be created on the Analysis Model.
+ * @param iType under the form : oStartUpName@oCatalogName?oClientId (For User defined Startups).
+ * The type of the entity to create.
+ * @return The created analysis entity
+ *
+ * @sample
+ * This example create <tt>ThisAnalysisEntity</tt> in the <tt>AnalysisOutputEntities</tt> collection <br>
+ * <pre>
+ * Dim AnalysisOutputEntities As CATIAAnalysisOutputEntities
+ * Dim ThisAnalysisEntity As AnalysisEntity
+ * Set ThisAnalysisEntity = AnalysisOutputEntities.Add("MyEntity")
+ * </pre>
+ */
+    HRESULT     Add
+                ( in	  CATBSTR				                    iType, 
+                  out   /*IDLRETVAL*/ CATIAAnalysisEntity oEntity );
+
+ /**
+  * Returns an analysis entity using its index or its name from the analysis entities collection. 
+  * @param iIndex
+  *   The index or the name of the analysis entity to retrieve from
+  *   the collection of analysis entities.
+  *   As a numerics, this index is the rank of the analysis entity
+  *   in the collection.
+  *   The index of the first analysis entity in the collection is 1, and
+  *   the index of the last analysis entity is Count.
+  *   As a string, it is the name you assigned to the analysis entity using
+  *   the @href CATIABase#Name property or when creating it using
+  *   the @href #Add method.
+  * @return The retrieved analysis entity
+  */
+    HRESULT     Item(in                CATVariant           iIndex,
+                 out /*IDLRETVAL*/ CATIAAnalysisEntity    oEntity);
+
+/**
+ * Removes a entity using its index or its name from the entity collection.
+ * @param iIndex
+ *   The index or the name of the entity to retrieve from
+ *   the collection of entities.
+ *   As a numeric, this index is the rank of the entity
+ *   in the collection. The index of the first entity in the collection is 1,
+ *   and the index of the last entity is Count.
+ *   As a string, it is the name you assigned to the entity using
+ *   the @href CATIABase#Name property.
+*/
+
+	HRESULT Remove(in CATVariant iIndex);
+
+
+};
+
+// Interface name : CATIAAnalysisOutputEntities
+#pragma ID CATIAAnalysisOutputEntities "DCE:23BCBC83-F4BB-4b28-A6752978E5E2AE8F"
+#pragma DUAL CATIAAnalysisOutputEntities
+
+// VB object name : AnalysisOutputEntities (Id used in Visual Basic)
+#pragma ID AnalysisOutputEntities "DCE:B09F8ECE-3F33-4799-9B3315999045981C"
+#pragma ALIAS CATIAAnalysisOutputEntities AnalysisOutputEntities
+
+#endif
+

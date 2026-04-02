@@ -1,0 +1,111 @@
+#ifndef CATIAArrNomenclature_IDL
+#define CATIAArrNomenclature_IDL
+
+// ****************************************************************************
+// Copyright Dassault Systemes 1999
+// ****************************************************************************
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+interface CATIAArrNomenclatures;
+//-----------------------------------------------------------------
+/**
+ * Represents the UserNomenclature object.
+ * The UserNomenclature object is used in the CATIAArrNomenclatureTree object to
+ * maintain the hierarchy of user type names and associated icons.
+ * 
+ * CATIAArrNomenclatureTree
+ * |
+ * |_______ Area - (I_ArrArea)
+ * |        |_______ Building     - (I_ArrBuilding)
+ * |        |_______ Safety Zone  - (I_ArrSafetyZone)
+ * |
+ * |-------- Run - (I_ArrRun)
+ * |        |_______ Conduit Run
+ *          |_______ Raceway Run
+ *
+ * In the diagram shown above, Area (along with its subtypes) and
+ * and Run (also along with it's subtypes) are all UserNomenclature
+ * objects.
+ *
+ * Entries such as the Area and Run are called System or SuperClass
+ * objects that have to be defined first before the subclasses such
+ * as Building and Safety Zone are defined. SuperClasses will not 
+ * have a supertype.
+ *
+ * Each Nomenclature holds the following information...
+ * (1) NLSName   - So as to support names in different languages
+ * (2) IconName  - So as to allow user's to define their own icons
+ * (3) SuperType - For subtypes to fetch their parent names
+ * (4) SubTypes  - SubTypes defined under this User Nomenclature
+ *
+ */
+interface CATIAArrNomenclature : CATIABase
+{
+  //        ================
+  //        == PROPERTIES ==
+  //        ================
+  //
+  /**
+   * Gets/Sets the Icon Name associated to the Type Name.
+   * The IconName is the file name, without the extension, of the 
+   * Icon bitmap representing this user type. The icon definition 
+   * file must be in one of the icon directories defined in the 
+   * search paths used by CATIA.
+   */
+#pragma PROPERTY IconName
+  HRESULT get_IconName(inout /*IDLRETVAL*/ CATBSTR oIconName);           
+  HRESULT put_IconName(in                CATBSTR iIconName);
+
+  /**
+   * Gets/Sets the internal class names for System nomenclatures.
+   * This value is set only for System nomenclatures
+   */
+
+#pragma PROPERTY IntSysClassName
+  HRESULT get_IntSysClassName(inout /*IDLRETVAL*/ CATBSTR oNomenclatureType);           
+  HRESULT put_IntSysClassName(in                CATBSTR iNomenclatureType);
+
+  /**
+   * Gets/Sets the InstanceName
+   */
+
+#pragma PROPERTY NLSInstanceName
+  HRESULT get_NLSInstanceName(inout /*IDLRETVAL*/ CATBSTR oName);
+  HRESULT put_NLSInstanceName(in                CATBSTR iName);
+
+  /**
+   * Get/Set the Supertype Information
+   * This property is used to set the subtypes for system classes
+   */
+#pragma PROPERTY SuperTypeName
+   HRESULT get_SuperTypeName(inout /*IDLRETVAL*/ CATBSTR oSuperTypeName);
+   HRESULT put_SuperTypeName(in                CATBSTR iSuperTypeName);
+
+  /**
+   * Returns the collection of subtype UserNomenclatures within this 
+   * UserNomenclature.
+   */
+#pragma PROPERTY SubTypes
+  HRESULT get_SubTypes(out /*IDLRETVAL*/ CATIAArrNomenclatures oSubTypeNomenclatures);
+            
+  /**
+   * Returns TRUE if the nomenclature happens to be a system nomenclature.
+   * Returns FALSE if it is a user specified nomenclature.
+   */
+  HRESULT IsSystemNomenclature(out /*IDLRETVAL*/ boolean oIsSystem);
+
+};
+
+// Interface name : CATIAArrNomenclature
+#pragma ID CATIAArrNomenclature "DCE:22e26320-153e-11d3-92db00104b1f6bd2"
+#pragma DUAL CATIAArrNomenclature
+
+// VB object name : ArrNomenclature 
+#pragma ID ArrNomenclature "DCE:22e26321-153e-11d3-92db00104b1f6bd2"
+#pragma ALIAS CATIAArrNomenclature ArrNomenclature 
+
+#endif

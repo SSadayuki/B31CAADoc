@@ -1,0 +1,109 @@
+#ifndef CATIAHybridShapeExtremumPolar_IDL
+#define CATIAHybridShapeExtremumPolar_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//           
+// CATIAHybridShapeExtremumPolar:         
+// Exposed interface for HybridShape Extremum Polar
+//           
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAHybridShapeDirection.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+/**
+ * Represents the hybrid shape extremum polar  feature.
+ * <b>Role</b>: To access the data of the extremum polar  feature .
+ * This data includes:
+ * <ul>
+ * <li>The contour  </li>
+ * <li>The support (if exist ) </li>
+ * <li>The direction of evaluation  </li>
+ * <li>The extermum type  </li>
+ * </ul>
+ * <p>Use the @href CATIAHybridShapeFactory#AddNewExtremumPolarto create a HybridShapeExtremumPolar object.
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeExtremumPolar : CATIAHybridShape
+{
+
+
+// ------------------------------------------
+// Inputs 
+// ------------------------------------------
+/**
+ * returns or sets the input contour.
+ */
+#pragma PROPERTY Contour	
+ HRESULT  get_Contour (out /*IDLRETVAL*/ CATIAReference   opIAContour);
+ HRESULT  put_Contour (in   CATIAReference   ipIAContour);
+
+/**
+ * returns or sets the support (if exist).
+ */
+#pragma PROPERTY Support
+ HRESULT  get_Support (out /*IDLRETVAL*/ CATIAReference   opIASupport);
+ HRESULT  put_Support (in   CATIAReference   ipIASupport);
+
+/**
+ * returns or sets the direction of computation.
+ */
+#pragma PROPERTY Dir
+ HRESULT  get_Dir (out /*IDLRETVAL*/ CATIAHybridShapeDirection   opIADir);
+ HRESULT  put_Dir (in   CATIAHybridShapeDirection   ipIADir);
+
+
+/**
+ * returns or sets the origin of the polar axis.
+ */
+#pragma PROPERTY Origin 
+ HRESULT  get_Origin (out /*IDLRETVAL*/ CATIAReference   opIAOrigin);
+ HRESULT  put_Origin (in   CATIAReference   ipIAOrigin);
+
+/**
+ * returns or sets the type of extremum. 
+ */
+#pragma PROPERTY ExtremumType
+ HRESULT  get_ExtremumType (out /*IDLRETVAL*/ short             oType);
+ HRESULT  put_ExtremumType (in   short             iType);
+
+// ------------------------------------------
+// Output 
+// ------------------------------------------
+
+/**
+ * returns  the resulting radius of extremum. 
+ */
+#pragma PROPERTY Radius
+ HRESULT  get_Radius (out /*IDLRETVAL*/ CATIALength             opIARadius);
+
+ 
+/**
+ * returns the resulting angle  of extremum. 
+ */
+#pragma PROPERTY Angle
+ HRESULT  get_Angle (out /*IDLRETVAL*/ CATIAAngle             opIAAngle);
+};
+
+
+// Interface name : CATIAHybridShapeExtremumPolar
+#pragma ID CATIAHybridShapeExtremumPolar "DCE:54BA08FC-8737-11d6-A2F100065BDD6075"
+#pragma DUAL CATIAHybridShapeExtremumPolar
+
+
+// VB object name : HybridShapeExtremumPolar (Id used in Visual Basic)
+#pragma ID HybridShapeExtremumPolar "DCE:54BA08FD-8737-11d6-A2F100065BDD6075"
+#pragma ALIAS CATIAHybridShapeExtremumPolar HybridShapeExtremumPolar
+
+
+#endif
+// CATIAHybridShapeExtremumPolar_IDL

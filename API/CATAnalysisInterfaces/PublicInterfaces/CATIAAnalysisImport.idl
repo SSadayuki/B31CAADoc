@@ -1,0 +1,74 @@
+#ifndef CATIAAnalysisImport_IDL
+#define CATIAAnalysisImport_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//=================================================================
+//                                   
+// CATIAAnalysisExport:                           
+// Exposed interface for Import of:
+//       - Computed Loads
+//       - Displacements
+//=================================================================                                 
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+interface CATIAProduct;
+interface CATIAAnalysisCase;
+interface CATIABase;
+interface CATIAAnalysisManager;
+
+/**  
+ * The interface to access a CATIAAnalysisExport
+ */
+interface CATIAAnalysisImport : CATIABase 
+{
+/**
+ * AddSupport for loads import if needed.<br>)
+ * @param iManager          The Analysis manager.<br>)
+ * @param iProductSupport   Product of the geometrical support.<br>)
+ * @param iSupports         Geometrical support.<br>)
+ */
+   HRESULT AddSupport( in CATIAAnalysisManager  iManager,
+                       in CATIAProduct  iProductSupport ,
+                       in CATIABase  iSupport) ;
+
+/**
+ * Import displacements from a CATAnalysisExport file.<br>)
+ * @param iFatherCase   case where Displacements will be exported.<br>)
+ * @param iFullPath     The full path of the file.<br>)
+ * @param iManager      analysis manager where the disp is exported.<br>)
+ * @param iAxis         The user axis system to be taken into account.<br>)
+ */ 
+ HRESULT ImportDisp ( in CATIAAnalysisCase  iFatherCase, 
+                      in CATBSTR            iFullPath,
+                      in CATIAAnalysisManager  iManager,
+                      in CATIABase          iAxis );
+
+/**
+ * Import loads from a CATAnalysisExport file.<br>)
+ * @param iFatherCase   case where loads will be exported.<br>)
+ * @param iFullPath     The full path of the file.<br>)
+ * @param iManager      analysis manager where the disp is exported.<br>)
+ * @param iAxis         The user axis system to be taken into account.<br>)
+ */ 
+ HRESULT ImportForce ( in CATIAAnalysisCase  iFatherCase, 
+                       in CATBSTR            iFullPath,
+                       in CATIAAnalysisManager iManager,
+                       in CATIABase          iAxis );
+
+};
+
+// Interface name : CATIAAnalysisImport
+#pragma ID CATIAAnalysisImport "DCE:37eaf083-3ae1-4d5c-810d1a4d0cc81b85"
+#pragma DUAL CATIAAnalysisImport
+
+// VB object name : AnalysisImport (Id used in Visual Basic)
+#pragma ID AnalysisImport "DCE:74c852ec-72ed-4bf4-b2381c72b811375f"
+#pragma ALIAS CATIAAnalysisImport AnalysisImport
+
+#endif

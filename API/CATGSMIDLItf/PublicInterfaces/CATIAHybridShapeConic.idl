@@ -1,0 +1,574 @@
+#ifndef CATIAHybridShapeConic_IDL
+#define CATIAHybridShapeConic_IDL
+/*IDLREP*/
+
+// 
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//===================================================================
+// CATIAHybridShapeConic.idl
+// Automation interface for the HybridShapeConic element 
+//===================================================================
+//
+// Usage notes:
+//
+//===================================================================
+//  Mar2000  Creation T
+//===================================================================
+
+
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIAHybridShapeDirection.idl"
+#include "CATIAReference.idl"
+//#include "CATIARealParam.idl"
+
+/**
+ * Represents the hybrid shape conic object.
+ * <b>Role</b>: To access the data of the hybrid shape conic object.
+ * This data includes:
+ * <ul>
+ * <li>The start point and its associated tangent contraint</li>
+ * <li>The end point and its associated tangent contraint</li>
+ * <li>The supporting plane</li>
+ * <li>The tangent intersection point</li>
+ * <li>The conic parameter: p = 0.5 (parabola), 0&lt;=p&lt;=0.5 (ellipse), 0.5&lt;= p &lt;=1.0 (hyperbola)</li>
+ * </ul>
+ * <p>Use the @href CATIAHybridShapeFactory to create a HybridShapeConic object.
+ */
+interface CATIAHybridShapeConic : CATIAHybridShape 
+{
+
+
+/**
+ * Sets the tangent directions at conic start and end points, and a passing point.  
+ * @param iStartTgt
+ *   The tangent direction at the start point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * @param iEndTgt
+ *   The tangent direction at the end point
+ * @param iPassingPt
+ *   A point through which the conic must pass.
+ *   <br><b>Legal values</b>: This point must differ from the start and end points.
+ * @sample
+ * This example sets <code>firstDir</code> and <code>secondDir</code> as the tangent directions at the start
+ * and end points of the conic <code>hybConic</code>, and <code>passingPoint</code> as a point through
+ * which the conic must pass.
+ * <pre>
+ * hybConic.<font color="red">SetStartAndEndTangentsPlusPassingPoint</font> firstDir, secondDir, passingPoint
+ * </pre> 
+ */ 
+   HRESULT SetStartAndEndTangentsPlusPassingPoint ( in  CATIAHybridShapeDirection   iStartTgt,
+                                                    in  CATIAHybridShapeDirection   iEndTgt,
+                                                    in  CATIAReference              iPassingPt );
+
+/**
+ * Sets the tangent directions at conic start and end points, and the conic parameter.
+ * @param iStartTgt
+ *   The tangent direction at the start point
+ * @param iEndTgt
+ *   The tangent direction at the end point
+ * @param iConicParam
+ *   The conic parameter
+ *   <br><b>Legal values</b>: p = 0.5 (parabola), 0&lt;=p&lt;=0.5 (ellipse), 0.5&lt;= p &lt;=1.0 (hyperbola)
+ * @sample
+ * This example sets <code>firstDir</code> and <code>secondDir</code> as the tangent directions at the start
+ * and end points of the conic <code>hybConic</code>, and <code>conicParm</code> as the conic parameter.
+ * <pre>
+ * hybConic.<font color="red">SetStartAndEndTangentsPlusConicParameter</font> firstDir, secondDir, conicParm
+ * </pre>
+ */ 
+   HRESULT SetStartAndEndTangentsPlusConicParameter ( in  CATIAHybridShapeDirection   iStartTgt,
+                                                      in  CATIAHybridShapeDirection   iEndTgt,
+                                                      in  double                      iConicParam );
+
+/**
+ * Sets the intersection point of the conic tangents to the start and end points, and a passing point. 
+ * @param iTgtInt
+ *   The point intersection of the conic tangents to the start and end point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * @param iPassingPt
+ *   A point through which the conic must pass.
+ *   <br><b>Legal values</b>: This point must differ from the start and end points.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * @sample
+ * This example sets <code>tgtIntPoint</code> as the intersection point of the tangents
+ * to the start and end points of the conic <code>hybConic</code>, and <code>passingPoint</code> as a point through
+ * which the conic must pass.
+ * <pre>
+ * hybConic.<font color="red">SetTangentIntersectPointPlusPassingPoint</font> tgtIntPoint, passingPoint
+ * </pre>
+ */ 
+   HRESULT SetTangentIntersectPointPlusPassingPoint ( in  CATIAReference       iTgtInt,
+                                                      in  CATIAReference       iPassingPt );
+
+/**
+ * Sets the intersection point of the conic tangents to the start and end points, and the conic parameter.
+ * @param iTgtInt
+ *   The point intersection of the conic tangents to the start and end point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex. 
+ * @param iConicParam
+ *   The conic parameter
+ *   <br><b>Legal values</b>: p = 0.5 (parabola), 0&lt;=p&lt;=0.5 (ellipse), 0.5&lt;= p &lt;=1.0 (hyperbola)
+ * @sample
+ * This example sets <code>tgtIntPoint</code> as the intersection point of the tangents
+ * to the start and end points of the conic <code>hybConic</code>, and <code>conicParm</code> as the conic parameter.
+ * <pre>
+ * hybConic.<font color="red">SetTangentIntersectPointPlusConicParm</font> tgtIntPoint, conicParm
+ * </pre>
+ */ 
+   HRESULT SetTangentIntersectPointPlusConicParm ( in  CATIAReference       iTgtInt,
+                                                   in  double               iConicParam);
+
+
+/**
+ * Sets three conic intermediate passing points. 
+ * @param iPassPt1
+ *   The first intermediate passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * @param iPassPt2
+ *   The second intermediate passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * @param iPassPt3
+ *   The third intermediate passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * @sample
+ * This example sets <code>passingPoint1</code>, <code>passingPoint2</code>, and <code>passingPoint3</code> as the
+ * three intermediate points through which the conic <code>hybConic</code> must pass.
+ * <pre>
+ * hybConic.<font color="red">SetThreeIntermediatePassingPoints</font> passingPoint1, passingPoint2, passingPoint3
+ * </pre>
+ */ 
+   HRESULT SetThreeIntermediatePassingPoints ( in  CATIAReference       iPassPt1,
+                                               in  CATIAReference       iPassPt2,
+                                               in  CATIAReference       iPassPt3 );
+
+
+/**
+ * Sets two conic intermediate passing points and a tangent at one of the passing points. 
+ * @param iPassPt1
+ *   The first intermediate passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex. 
+ * @param iPassPt2
+ *   The second intermediate passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * @param iTgtDir
+ *   The tangent direction at one of the intermediate passing points
+ * @param iIndexPoint
+ *   An index indicating the passing point to which the tangent direction applies
+ *   <br><b>Legal values</b>: 1 for the first passing point, and 2 for the second one
+ * @sample
+ * This example sets <code>passingPoint1</code> and <code>passingPoint2</code> as two
+ * intermediate points through which the conic <code>hybConic</code> must pass,
+ * <code>tgtDir</code> as the tangent direction at the passing point designated by <code>passingPointIdx</code>.
+ * <pre>
+ * hybConic.<font color="red">SetTwoIntermediatePassingPointsPlusOneTangent</font> passingPoint1, passingPoint2, tgtDir, passingPointIdx
+ * </pre>
+ */ 
+   HRESULT SetTwoIntermediatePassingPointsPlusOneTangent ( in  CATIAReference              iPassPt1,
+                                                           in  CATIAReference              iPassPt2,
+                                                           in  CATIAHybridShapeDirection   iTgtDir,
+                                                           in  long                        iIndexPoint);
+
+/**
+ * Retrieves one of the conic intermediate passing points.
+ * @param iIndexPoint
+ *   An index that designates the passing point to retrieve
+ *   <br><b>Legal values</b>: 1 for the first passing point, 2 for the second one, and 3 for the third one 
+ * @param oEndPoint
+ *   The retrieved passing point
+ * @sample
+ * This example retrieves in <code>passingPt</code> the second point through which
+ * the conic <code>hybConic</code> passes.
+ * <pre>
+ * Dim passingPt As Reference
+ * passingPtIdx = 2
+ * hybConic.<font color="red">GetIntermediatePoint</font> passingPtIdx, passingPt
+ * </pre>
+ */
+ HRESULT GetIntermediatePoint  (in long           iIndexPoint,
+                                out               CATIAReference  oEndPoint);
+
+/**
+ * Sets one of the conic intermediate passing points.
+ * @param iIndexPoint
+ *   An index that designates the passing point to retrieve
+ *   <br><b>Legal values</b>: 1 for the first passing point, 2 for the second one, and 3 for the third one 
+ * @param iEndPoint
+ *   The passing point to set.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * @sample
+ * This example sets <code>passingPt</code> as the first point through which
+ * the conic <code>hybConic</code> must pass.
+ * <pre>
+ * Dim passingPt As Reference
+ * ... ' Value passingPt
+ * passingPtIdx = 1
+ * hybConic.<font color="red">SetIntermediatePoint</font> passingPtIdx, passingPt
+ * </pre>
+ */
+ HRESULT SetIntermediatePoint  (in long           iIndexPoint,
+                                in                CATIAReference  iEndPoint);
+
+
+/**
+ * Retrieves the tangent direction at one of the conic intermediate passing points.
+ * @param iIndexPoint
+ *   An index that designates the passing point to retrieve
+ *   <br><b>Legal values</b>: 1 for the first passing point, and 2 for the second one
+ * @param oTgtDir
+ *   The retrieved tangent direction at the given passing point
+ * @sample
+ * This example retrieves in <code>tgtDir</code> the tangent direction at point <code>passingPtIdx</code> 
+ * through which the conic <code>hybConic</code> passes.
+ * <pre>
+ * Dim tgtDir As Reference
+ * passingPtIdx = 1
+ * Set tgtDir = hybConic.<font color="red">GetIntermedTangent</font> (passingPtIdx)
+ * </pre>
+ */
+
+ HRESULT GetIntermedTangent (in long           iIndexPoint,
+                                 out  /*IDLRETVAL*/ CATIAHybridShapeDirection oTgtDir);
+
+
+/**
+ * Sets the tangent direction at one of the conic intermediate passing points.
+ * @param iIndexPoint
+ *   An index that designates the passing point where the tangent direction is to be set
+ *   <br><b>Legal values</b>: 1 for the first passing point, and 2 for the second one
+ * @param iTgtDir
+ *   The direction to set as the tangent direction at the given passing point
+ * @sample
+ * This example sets <code>tgtDir</code> as the tangent direction at the first point through which
+ * the conic <code>hybConic</code> passes.
+ * <pre>
+ * Dim tgtDir As Reference
+ * ... ' Value tgtDir
+ * passingPtIdx = 1
+ * hybConic.<font color="red">SetIntermediateTangent</font> passingPtIdx, tgtDir
+ * </pre>
+ */
+ HRESULT SetIntermediateTangent (in long           iIndexPoint,
+                                 in                CATIAHybridShapeDirection iTgtDir);
+
+/**
+ * Inverts the tangent direction orientation of one of the conic intermediate points.
+ * @param iIndexPoint
+ *   An index that designates the passing point where the tangent direction is to be inverted
+ *   <br><b>Legal values</b>: 1 for the first passing point, and 2 for the second one
+ * @sample
+ * This example inverts the direction orientation of the tangent at the first point through which
+ * the conic <code>hybConic</code> passes.
+ * <pre>
+ * passingPtIdx = 1
+ * hybConic.<font color="red">SwitchIntermediateTangentDirection</font> passingPtIdx
+ * </pre>
+ */
+ HRESULT SwitchIntermediateTangentDirection (in long  iIndexPoint);
+
+/**
+ * Sets the tangent direction orientation of one of the conic intermediate points.
+ * @param iIndexPoint
+ *   An index that designates the passing point to retrieve
+ *   <br><b>Legal values</b>: 1 for the first passing point, and 2 for the second one
+ * @param iOrientation
+ *   The direction orientation to be applied to the tangent direction at the intermediate passing point
+ *   <br><b>Legal values</b>: 1 if the tangent direction is to be used as is, and -1 if it
+ *   must be inverted
+ * @sample
+ * This example sets the direction orientation of the tangent at the first point through which
+ * the conic <code>hybConic</code> passes to the inverse of the one of the direction used for
+ * the tangent.
+ * <pre>
+ * passingPtIdx = 1
+ * passingPtTgtOrient = -1
+ * hybConic.<font color="red">SetIntermediateTangentDirectionFlag</font> passingPtIdx, passingPtTgtOrient
+ * </pre>
+ */
+ HRESULT SetIntermediateTangentDirectionFlag (in long  iIndexPoint, in long iOrientation);
+
+
+/**
+ * Retrieves the tangent direction orientation of one of the conic intermediate points.
+ * @param iIndexPoint
+ *   An index that designates the passing point to retrieve
+ *   <br><b>Legal values</b>: 1 for the first passing point, and 2 for the second one
+ * @param oOrientation
+ *   The direction orientation applied to the tangent direction at the intermediate passing point
+ *   <br><b>Legal values</b>: 1 if the tangent direction is used as is, and -1 if it
+ *   is inverted
+ * @sample
+ * This example retrieves the direction orientation of the tangent at the first point through which
+ * the conic <code>hybConic</code> passes.
+ * <pre>
+ * passingPtIdx = 1
+ * Dim passingPtTgtOrient As long
+ * hybConic.<font color="red">GetIntermediateTangentDirectionFlag</font> passingPtIdx, passingPtTgtOrient
+ * </pre>
+ */
+     HRESULT GetIntermediateTangentDirectionFlag (in long  iIndexPoint, out long oOrientation);
+   
+/**
+ * Inverts the tangent direction orientation at the conic start point.
+ * @sample
+ * This example inverts the direction orientation of the tangent at the start point of
+ * the conic <code>hybConic</code>.
+ * <pre>
+ * hybConic.<font color="red">SwitchStartTangentDirection</font>
+ * </pre>
+ */
+ HRESULT SwitchStartTangentDirection ();
+
+/**
+ * Sets the tangent direction orientation at the conic start point.
+ * @param iOrientation
+ *   The direction orientation to be applied to the tangent direction at the conic start point
+ *   <br><b>Legal values</b>: 1 if the tangent direction is to be used as is, and -1 if it
+ *   must be inverted
+ * @sample
+ * This example sets the direction orientation of the tangent at the start point of
+ * the conic <code>hybConic</code> to the inverse of the one of the direction used for
+ * the tangent.
+ * <pre>
+ * startPtTgtOrient = -1
+ * hybConic.<font color="red">SetStartTangentDirectionFlag</font> startPtTgtOrient
+ * </pre>
+ */
+     HRESULT SetStartTangentDirectionFlag ( in long iOrientation);
+
+/**
+ * Retrieves the tangent direction orientation at the conic start point.
+ * @param oOrientation
+ *   The direction orientation applied to the tangent direction at the conic start point
+ *   <br><b>Legal values</b>: 1 if the tangent direction is used as is, and -1 if it
+ *   is inverted
+ * @sample
+ * This example retrieves the direction orientation of the tangent at the start point of
+ * the conic <code>hybConic</code>.
+ * <pre>
+ * Dim startPtTgtOrient As long
+ * hybConic.<font color="red">GetStartTangentDirectionFlag</font> startPtTgtOrient
+ * </pre>
+ */
+     HRESULT GetStartTangentDirectionFlag (out long oOrientation);
+   
+/**
+ * Inverts the tangent direction orientation at the conic end point.
+ * @sample
+ * This example inverts the direction orientation of the tangent at the end point of
+ * the conic <code>hybConic</code>.
+ * <pre>
+ * hybConic.<font color="red">SwitchEndTangentDirection</font>
+ * </pre>
+ */
+ HRESULT SwitchEndTangentDirection ();
+
+/**
+ * Sets the tangent direction orientation at the conic end point.
+ * @param iOrientation
+ *   The direction orientation to be applied to the tangent direction at the conic end point
+ *   <br><b>Legal values</b>: 1 if the tangent direction is to be used as is, and -1 if it
+ *   must be inverted
+ * @sample
+ * This example sets the direction orientation of the tangent at the end point of
+ * the conic <code>hybConic</code> to the one of the direction used for
+ * the tangent.
+ * <pre>
+ * endPtTgtOrient = 1
+ * hybConic.<font color="red">SetEndTangentDirectionFlag</font> endPtTgtOrient
+ * </pre>
+ */
+     HRESULT SetEndTangentDirectionFlag ( in long iOrientation);
+
+/**
+ * Retrieves the tangent direction orientation at the conic end point.
+ * @param oOrientation
+ *   The direction orientation applied to the tangent direction at the conic end point
+ *   <br><b>Legal values</b>: 1 if the tangent direction is used as is, and -1 if it
+ *   is inverted
+ * @sample
+ * This example retrieves the direction orientation of the tangent at the end point of
+ * the conic <code>hybConic</code>.
+ * <pre>
+ * Dim endPtTgtOrient As long
+ * hybConic.<font color="red">GetEndTangentDirectionFlag</font> endPtTgtOrient
+ * </pre>
+ */
+     HRESULT GetEndTangentDirectionFlag (out long oOrientation);
+
+// ************** PROPERTIES *************************************************************
+
+/**
+ * Returns or sets the conic supporting plane.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAPlanarFace.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>supportPln</code> the supporting plane
+ * of the conic <code>hybConic</code>.
+ * <pre>
+ * Dim supportPln As Reference 
+ * Set supportPln = hybConic.<font color="red">SupportPlane</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY SupportPlane
+ HRESULT get_SupportPlane  (out /*IDLRETVAL*/ CATIAReference   oSupportPlane);
+ HRESULT put_SupportPlane  (in                CATIAReference   iSupport);
+
+/**
+ * Returns or sets the conic tangent intersection point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>tgtIntPt</code> the tangent intersection point
+ * of the conic <code>hybConic</code>.
+ * <pre>
+ * Dim tgtIntPt As Reference 
+ * Set tgtIntPt = hybConic.<font color="red">TangentIntPoint</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY TangentIntPoint
+ HRESULT get_TangentIntPoint  (out /*IDLRETVAL*/ CATIAReference  oTgtPtInt);
+ HRESULT put_TangentIntPoint  (in                CATIAReference  iTgtPtInt);
+
+/**
+ * Returns or sets the conic start point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets <code>startPt</code> as the start point 
+ * of the conic <code>hybConic</code>.
+ * <pre>
+ * Dim startPt As Reference
+ * ... ' Value startPt
+ * hybConic.<font color="red">StartPoint</font> startPt
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY StartPoint
+ HRESULT get_StartPoint  (out /*IDLRETVAL*/ CATIAReference  oStartPoint);
+ HRESULT put_StartPoint  (in                CATIAReference  iStartPoint);
+
+/**
+ * Returns or sets the conic end point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>endPt</code> the end point 
+ * of the conic <code>hybConic</code>.
+ * <pre>
+ * Dim endPt As Reference 
+ * Set endPt = hybConic.<font color="red">EndPoint</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY EndPoint 
+ HRESULT get_EndPoint  (out /*IDLRETVAL*/ CATIAReference  oEndPoint);
+ HRESULT put_EndPoint  (in              CATIAReference  iEndPoint);
+
+/**
+ * Returns or sets the tangent direction at the conic start point.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets <code>startTgt</code> as the tangent direction at the start point 
+ * of the conic <code>hybConic</code>.
+ * <pre>
+ * Dim startTgt As Reference
+ * ... ' Value startTangent
+ * hybConic.<font color="red">StartTangent</font> startTgt
+ * </pre>
+ * </dl>
+ */
+
+#pragma PROPERTY StartTangent
+ HRESULT get_StartTangent  (out /*IDLRETVAL*/ CATIAHybridShapeDirection  oStartTangent);
+ HRESULT put_StartTangent (in                 CATIAHybridShapeDirection  iStartTangent);
+
+/**
+ * Returns or sets the tangent direction at the conic end point.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>endTgt</code> the tangent direction associated with the end point 
+ * of the conic <code>hybConic</code>.
+ * <pre>
+ * Dim endTgt As Reference 
+ * Set endTgt = hybConic.<font color="red">EndTangent</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY EndTangent
+ HRESULT get_EndTangent  (out /*IDLRETVAL*/ CATIAHybridShapeDirection  oEndTangent);
+ HRESULT put_EndTangent (in                 CATIAHybridShapeDirection  iEndTangent);
+
+/**
+ * Returns or sets the  conic parameter.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>conicParm</code> the conic parameter  
+ * of the conic <code>hybConic</code>.
+ * <pre>
+ * Dim conicParm As double 
+ * Set conicParm = hybConic.<font color="red">ConicParameter</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY ConicParameter
+ HRESULT get_ConicParameter  (out /*IDLRETVAL*/  double oConicParameter);
+ HRESULT put_ConicParameter  (in                 double iConicParameter);
+
+/**
+ * Gets or sets the  conic User Tolerance.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>conicUserTol</code> the conic user tolerance  
+ * of the conic <code>HybridShapeConic</code>.
+ * <pre>
+ * Dim oConicUserTol As  CATIALength 
+ * Set oConicUserTol = HybridShapeConic.<font color="red">conicUserTol</font>
+ * </pre>
+ * </dl>
+ * @see CATIALength
+ */ 
+#pragma PROPERTY ConicUserTol
+ HRESULT get_ConicUserTol  (out /*IDLRETVAL*/ CATIALength  oConicUserTol);
+
+};
+
+// Interface name : CATIAHybridShapeConic
+#pragma ID CATIAHybridShapeConic "DCE:7bb6f121-f048-11d3-84960000863d36ff"
+#pragma DUAL CATIAHybridShapeConic
+
+// VB object name : HybridShapeConic (Id used in Visual Basic)
+#pragma ID HybridShapeConic "DCE:7bb6f122-f048-11d3-84960000863d36ff"
+#pragma ALIAS CATIAHybridShapeConic HybridShapeConic
+
+#endif

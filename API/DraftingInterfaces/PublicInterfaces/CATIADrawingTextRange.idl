@@ -1,0 +1,184 @@
+// COPYRIGHT DASSAULT SYSTEMES 1997
+#ifndef CATIADrawingTextRange_IDL
+#define CATIADrawingTextRange_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+
+#include "CATIADrawingTextProperties.idl"
+#include "CatWeldingParameters.idl"
+
+ /** 
+  * Represents a drawing text range, or contiguous area, in a drawing text.
+  * <p>
+  * A range is a contiguous area in a drawing text defined by the position of 
+  * a starting and ending character, or by the position of a starting character
+  * and a length expressed in number of characters.
+  */
+interface CATIADrawingTextRange : CATBaseDispatch
+{
+ /**
+  * Returns the starting character position of the drawing text range.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in  <tt>StartCharPos</tt>the starting character position of
+  * the <tt>MyTextRange</tt> drawing text range.
+  * <pre>
+  * StartCharPos = MyTextRange.<font color="red">Start</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Start	 
+  HRESULT get_Start (out /*IDLRETVAL*/ long oStart);
+
+ /**
+  * Returns the number of characters of the drawing text range.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>NbChar</tt> the number of characters of
+  * the <tt>MyTextRange</tt> drawing text range.
+  * <pre>
+  * NbChar = MyTextRange.<font color="red">Length</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Length	 
+  HRESULT get_Length (out /*IDLRETVAL*/ long oLength);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the character string making up the drawing text range.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets in <tt>text</tt> the character string that makes up
+  * the <tt>MyTextRange</tt> drawing text range.
+  * <pre>
+  * MyTextRange.<font color="red">Text</font> = text
+  * Set MyTextProperties = MyTextRange.<font color="red">TextProperties</font>
+  * MyTextProperties.<font color="red">Update</font>
+  * </pre>
+  * </dl>
+  * @see CATIADrawingTextProperties#Update
+  */
+#pragma PROPERTY Text	 
+  HRESULT get_Text(inout /*IDLRETVAL*/ CATBSTR oString);
+  HRESULT put_Text(in CATBSTR iString);
+
+//------------------------------------------------------------------------------
+ /**
+  * Inserts a character string at the beginning of the drawing text range.
+  * @param iString
+  *   The character string to be added
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example inserts the <tt>String</tt> character string at the beginning of
+  * the <tt>MyTextRange</tt> drawing text range.
+  * <pre>
+  * String = "String to insert before"
+  * MyTextRange.<font color="red">InsertBefore</font>(String)
+  * Set MyTextProperties = MyTextRange.<font color="red">TextProperties</font>
+  * MyTextProperties.<font color="red">Update</font>
+  * </pre>
+  * </dl>
+  * @see CATIADrawingTextProperties#Update
+  */
+  HRESULT InsertBefore(in CATBSTR iString);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Inserts a character string at the end of the drawing text range.
+  * @param iString
+  *   The character string to be added
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example inserts the <tt>String</tt> character string at the end of
+  * the <tt>MyTextRange</tt> drawing text range.
+  * <pre>
+  * String = "String to insert after"
+  * MyTextRange.<font color="red">InsertAfter</font>(String)
+  * Set MyTextProperties = MyTextRange.<font color="red">TextProperties</font>
+  * MyTextProperties.<font color="red">Update</font>
+  * </pre>
+  * </dl>
+  * @see CATIADrawingTextProperties#Update
+  */
+  HRESULT InsertAfter(in CATBSTR iString);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * @deprecated V5R18 
+  * use @href CATIADrawingWelding#TextProperties
+  * This method has not to be used to manage the text range properties.
+  * Text properties is only applied on the whole text, not on a sub text identified 
+  * by a text range.
+  * Returns the drawing text range properties.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns in <tt>Prop</tt> the text properties of
+  * the <tt>MyTextRange</tt> drawing text range.
+  * <pre>
+  * Dim Prop As CATIADrawingTextProperties
+  * Set Prop = MyTextRange.<font color="red">TextProperties</font>(String)
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TextProperties	 
+  HRESULT get_TextProperties(out /*IDLRETVAL*/ CATIADrawingTextProperties oTextProp);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns a drawing text range within another drawing text range.
+  * The text range is retrieved using its starting and ending character positions.
+  * @param iStart
+  *   The position of the drawing text range starting character
+  * @param iEnd  
+  *   The position of the drawing text range ending character   
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>extractedTextRange</tt> the drawing text range that begins at
+  * the eighth character and end at the fifteenth character of
+  * the <tt>MyTextRange</tt> drawing text range.
+  * <pre>
+  * Dim extractedTextRange As DrawingTextRange
+  * start = 8
+  * end = 15
+  * extractedTextRange = MyTextRange.<font color="red">GetTextRange</font>(start, end)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetTextRange(in long iStart, in long iEnd, 
+                       out /*IDLRETVAL*/ CATIADrawingTextRange oTextRange);
+};
+
+#pragma ID CATIADrawingTextRange "DCE:2fad86fa-293f-11d3-ad44006094eb80b5"
+#pragma DUAL CATIADrawingTextRange
+
+// Visual Basic name
+#pragma ID DrawingTextRange "DCE:2ecb0794-293f-11d3-ad44006094eb80b5"
+#pragma ALIAS CATIADrawingTextRange DrawingTextRange
+
+#endif

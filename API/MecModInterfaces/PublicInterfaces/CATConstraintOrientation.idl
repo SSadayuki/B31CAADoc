@@ -1,0 +1,74 @@
+#ifndef CatConstraintOrientation_IDL
+#define CatConstraintOrientation_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CatConstraintOrientation:						   
+// enumeration specifying on which side of first constrained element
+// the constraint value should apply.
+//								   
+//=================================================================
+// Dec97 Creation                                    JJ Auffret 
+//=================================================================
+/**
+ * Constraint elements relative orientation.
+ * <br>
+ * When two geometrical elements are constrained, there is often a variety 
+ * of relative positions and orientations of these elements that respect 
+ * the constraint. For instance,   
+ * if a distance constraint is placed on two planes, 
+ * the second plane can lie on both sides of first plane while maintaining
+ * the requested distance: the constraint is respected, but 
+ * geometry remains unresolved. Furthermore, even if the side is fixed,
+ * second plane still can be oriented so that its normal points towards the
+ * first plane or in the opposite direction, without breaking the constraint.
+ * <br>
+ * Managing such indetermination requires control over two variables:
+ * <dl>
+ * <dt><b>Side</b>
+ *   <dd>determines, when relevant, on which side of each other constrained
+ *       elements should be positionned
+ * <dt><b>Orientation</b>
+ *   <dd>determines, when relevant, how to orient constrained elements,  
+ *       whith respect to each other.  
+ * </dl>
+ * 
+ * This enum deals with possibles options for dealing with the 
+ * <b>Orientation</b> variable (see @href CatConstraintSide
+ * for possibles options for <b>Side</b>).  
+ * <p>
+ * This enum is based on the notion of characteristic vector. A
+ * characteristic vector is a vector which is associated with a constrained
+ * element each time it can be assimilated to a line or a plane. The vector
+ * represents the direction of the line, or the direction normal to the 
+ * plane. 
+ *  
+ * @param catCstOrientSame
+ *   specifies that characteristic vectors associated to  constrained 
+ *   elements have same orientation.
+ *   
+ * @param catCstOrientOpposite
+ *   specifies that characteristic vectors associated to constrained 
+ *   elements have opposite orientation.  
+ * 
+ * @param catCstOrientUndefined
+ *   specifies that the relative orientation of characteristic vectors 
+ *   associated to constrained elements is not specified
+ */
+enum CatConstraintOrientation	
+{
+	catCstOrientSame, 
+	catCstOrientOpposite,
+        catCstOrientUndefined  
+};
+
+#endif // CatConstraintOrientation_IDL 
+

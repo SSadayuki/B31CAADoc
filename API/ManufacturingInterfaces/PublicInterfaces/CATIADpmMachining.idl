@@ -1,0 +1,104 @@
+// COPYRIGHT Dassault Systemes 2005
+#ifndef CATIADpmMachining_IDL
+#define CATIADpmMachining_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L0
+ * @CAA2Usage U3
+ */
+
+#include "CATBaseDispatch.idl"
+#include "CATIADocument.idl"
+
+/**  
+ * The interface is used to synchronize drawing document associated to the activity 
+ */
+ interface CATIADpmMachining : CATBaseDispatch  
+{
+
+
+	  /**
+        * Synchronizes the drawing associated to the activity and save it under a new path.
+		* <! sample >
+		* <dl>
+		* <dt><b>Example:</b>
+		* <pre>
+		* ' VBA sample
+		* Dim X As DpmMachining
+		* ' Retrieve the DpmMachining extension associated to the activity MyAct under the key "DpmMachining"
+		* Set X = MyAct.GetItem("DpmMachining")
+		* Dim NewPath As CATBSTR
+		* NewPath = "C:\Tmp\NewDrawing.CATDrawing"
+		* X.SynchronizeDrawingLinks(NewPath)
+		* </pre>
+		* </dl>
+        */
+	 HRESULT	  SynchronizeDrawingLinks(in CATBSTR iNewPath);
+
+
+	/**
+        * Navigates thru the In-Process Model and puts the IPM into the state corresponding to the activity.
+		* <! sample >
+		* <dl>
+		* <dt><b>Example:</b>
+		* <pre>
+		* ' VBA sample
+		* Dim X As DpmMachining
+		* ' Retrieve the DpmMachining extension associated to the activity MyAct under the key "DpmMachining"
+		* Set X = MyAct.GetItem("DpmMachining")
+		* X.Navigate()
+		* </pre>
+		* </dl>
+     */
+	 HRESULT	Navigate();
+	
+	 /**
+	 * Get the path of the drawing associated to the activity.
+	 * <! sample >
+	 * <dl>
+	 * <dt><b>Example:</b>
+	 * <pre>
+	 * ' VBA sample
+	 * Dim X As DpmMachining
+	 * ' Retrieve the DpmMachining extension associated to the activity MyAct under the key "DpmMachining"
+	 * Set X = MyAct.GetItem("DpmMachining")
+	 * Dim Path As CATBSTR
+	 * Path = X.GetExtractedDrawingPath
+	 * </pre>
+	 * </dl>
+	 */
+	 HRESULT GetExtractedDrawingPath(inout /*IDLRETVAL*/  CATBSTR oExtractedDrawingPath);
+
+
+	 /**
+	 * Creates an IPM Instance Part for the Part Operation previous to the current Part Operation.
+	 * <! sample >
+	 * <dl>
+	 * <dt><b>Example:</b>
+	 * <pre>
+	 * ' VBA sample
+	 * Dim DPMMPP As DpmMachining
+	 * Set DPMMPP = SelectPO.GetItem("DpmMachining")
+	 * Dim  IPMInstancePartFullPath  As  CATBSTR
+	 * DPMMPP.CreateAndInsertIPMInstance(IPMInstancePartFullPath)
+	 * IPMInstancePartFullPath is the full path of the IPM Instance stored. It is stored in the CATTemp directory
+	 * </pre>
+	 * </dl>
+	 */
+	 HRESULT CreateIPMInstance(inout CATBSTR iInstancePartName);
+
+};
+
+// Interface name : CATIADpmMachining
+#pragma ID CATIADpmMachining "DCE:438a4c2c-0227-4406-a60400000fee96ae"
+//"DCE:33e38444-8fcf-11d4-85670000863e1bbb"
+#pragma DUAL CATIADpmMachining
+
+// VB object name : PPRActivity (Id used in Visual Basic)
+#pragma ID DpmMachining "DCE:55e9238b-b9d0-4bdd-8a3500004d6b9ca7"
+//"DCE:33e38445-8fcf-11d4-85670000863e1bbb"
+#pragma ALIAS CATIADpmMachining DpmMachining
+
+#endif

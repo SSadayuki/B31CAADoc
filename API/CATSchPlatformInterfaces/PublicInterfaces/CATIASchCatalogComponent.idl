@@ -1,0 +1,80 @@
+#ifndef CATIASchCatalogComponent_IDL 
+#define CATIASchCatalogComponent_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchGRRComp;
+interface  CATIASchCompGroupExt;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic component catalog.
+  */
+
+interface CATIASchCatalogComponent : CATIABase
+{
+  /**
+  * Check to see if it is OK to be dropped to the current document.
+  * @param oBYes
+  *   If TRUE, then it is OK to be dropped.
+  * @param oPointedToComp
+  *   Graphical representation of a component pointed-to by the
+  *   catalog description 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCatalogComponent
+  * Dim bVar1 As boolean
+  * Dim objArg2 As SchGRRComp
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">QueryDropAbility</font>
+  * </pre>
+  *    
+  */
+  HRESULT QueryDropAbility ( 
+    inout boolean oBYes, 
+    out /*IDLRETVAL*/ CATIASchGRRComp oPointedToGRRComp );
+    
+  /**
+  * Check to see if it is OK to be dropped a component group 
+  * to the current document.
+  * @param oBYes
+  *   If TRUE, then it is OK to be dropped.
+  * @param oPointedToGroup
+  *   Component group extension pointed-to by the catalog description
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCatalogComponent
+  * Dim bVar1 As boolean
+  * Dim objArg2 As SchCompGroupExt
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">QueryDropCompGroupAbility</font>
+  * </pre>
+  *    
+  */
+  HRESULT QueryDropCompGroupAbility ( 
+    inout boolean oBYes, 
+    out /*IDLRETVAL*/ CATIASchCompGroupExt oPointedToGroup );
+    
+};
+    
+// Interface name : CATIASchCatalogComponent
+#pragma ID CATIASchCatalogComponent "DCE:89383a34-3148-4441-8692df589874045a"
+#pragma DUAL CATIASchCatalogComponent
+    
+// VB object name : SchCatalogComponent
+#pragma ID SchCatalogComponent "DCE:3ed9ff3b-3c7c-48d7-80c27066d3bc8429"
+#pragma ALIAS CATIASchCatalogComponent SchCatalogComponent
+    
+#endif 
+    

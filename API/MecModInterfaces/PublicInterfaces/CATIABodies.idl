@@ -1,0 +1,110 @@
+#ifndef CATIABodies_IDL
+#define CATIABodies_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIABodies:                           
+// Exposed interface for Mechanical Bodies collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                        Ph Baucher
+// Feb98 COM compliance					  L Lalere
+// Dec98 AddOpenBody/PartBody put_MainBody			 JM Gautier
+// Apr99 Retirer AddOpenBody/AddPartBody/get_MainBody JM Gautier
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIABody;
+
+//-----------------------------------------------------------------
+    /**
+     * A collection of all the Body objects contained in the part.
+     */
+ 
+interface CATIABodies : CATIACollection
+{
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+
+    /**
+     * Creates a new body and adds it to the Bodies collection.
+     * This body becomes the current one
+     * @return The created body
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example creates a body names <tt>NewBody</tt>
+     * in the body collection of the <tt>rootPart</tt> part
+     * in the <tt>partDoc</tt> part document. <tt>NewBody</tt> becomes
+     * the current body in <tt>partDoc</tt>.
+     * <pre>
+     * Set rootPart = partDoc.Part
+     * Set NewBody = rootPart.Bodies.<font color="red">Add</font>()
+     * </pre>
+     */
+    HRESULT     Add
+                ( out /*IDLRETVAL*/ CATIABody            oBody );
+
+    /**
+     * Returns a body using its index or its name from the Bodies
+     * collection.
+     * @param iIndex
+     *   The index or the name of the body to retrieve from
+     *   the collection of bodies.
+     *   As a numerics, this index is the rank of the body
+     *   in the collection.
+     *   The index of the first body in the collection is 1, and
+     *   the index of the last body is Count.
+     *   As a string, it is the name you assigned to the body using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved body
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisBody</tt> the fifth body
+     * in the collection and in <tt>ThatBody</tt> the body
+     * named <tt>MyBody</tt> in the body collection of the <tt>partDoc</tt>
+     * part document.
+     * <pre>
+     * Set BodyColl = partDoc.Part.Bodies
+     * Set ThisBody = BodyColl.<font color="red">Item</font>(5)
+     * Set ThatBody = BodyColl.<font color="red">Item</font>("MyBody")
+     * </pre>
+     */
+    HRESULT     Item
+                ( in                CATVariant           iIndex
+                , out /*IDLRETVAL*/ CATIABody            oBody
+                );
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	
+
+
+};
+
+// Interface name : CATIABodies
+#pragma ID CATIABodies "DCE:eb50b19a-3b2d-11d1-a26c0000f87546fd"
+#pragma DUAL CATIABodies
+
+// VB object name : Bodies (Id used in Visual Basic)
+#pragma ID Bodies "DCE:ebbaca3f-3b2d-11d1-a26c0000f87546fd"
+#pragma ALIAS CATIABodies Bodies
+
+
+#endif
+// CATIABodies_IDL
+

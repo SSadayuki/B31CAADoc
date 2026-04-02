@@ -1,0 +1,36 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef  CATFunctOrientationDirection_H
+#define  CATFunctOrientationDirection_H
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/**  
+ * The qualifications of Orientation and Direction of a Functional Action.
+ * <li>
+ *	<li> When NotOriented, no distinction is made between the two Elements the Action is connected on.
+ *		<br>Graphically,they are connected by a line without any arrow.
+ *		<br>(but they still have to be accessed thru the "From" and "To" properties)
+ *		<br><i>Such qualification is used when the Action is in fact a relationship that points the Elements
+ *		<br>(a Welding relationship might be used to point 2 Entities : Flange and Stiffener)</i>
+ *	<li> When Oriented, there are two possibilities :
+ *		<ul>
+ *		<li> When Unidirectional, the "From" and "To" Elements are connected by a simple arrow matching the direction.
+ *			<br><i>Such qualification is used when the Action is a true Subject-Action-Object relationship.
+ *			<br>(a Welding relationship might be used to point 2 Entities : Flange and Stiffener)</i>
+ *		<li> When Bidirectional, they are connected by a double arrow, that avoids to create two symetrical unidirectional actions with the same identification.
+ *			<br><i>Such qualification is used when the Action is a true Subject-Action-Object relationship.
+ *			<br>(a Heating relationship might be used to point 2 Entities : DiskBrake and BrakeJaws)</i>
+ *		</ul>
+ * </ul>
+ */
+enum CATFunctOrientationDirection
+{
+	CATFunctNotOriented
+	,CATFunctOrientedUnidirectional
+	,CATFunctOrientedBidirectional
+};
+
+#endif

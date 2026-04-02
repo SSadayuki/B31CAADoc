@@ -1,0 +1,160 @@
+// COPYRIGHT Dassault Systemes 2002
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+ 
+#ifndef CATIADMOThicknesses_IDL
+#define CATIADMOThicknesses_IDL
+/*IDLREP*/
+
+#include "CATIACollection.idl"
+#include "CATIADMOThickness.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R8
+#include "CATIAGroup.idl"
+#include "CATIADocument.idl"
+#endif
+
+interface CATIAProduct;
+
+/**  
+ * Interface to access a CATIADMOThicknesses and compute Thicknesses
+ */
+interface CATIADMOThicknesses : CATIACollection 
+{
+#ifdef CATIAV5R8
+
+/**
+ * Compute a thickness on the selected products.
+ * <b>This method is deprecated.</b>
+ * @param GroupOfSelectedProducts
+ *   The selected products on which you want to perform the thickness.
+ * @param iThickness1
+ *   First thickness value.
+ * @param iThickness2
+ *   Second thickness value. <b>Old way</b>
+ * @param iUseConstraints
+ *   Do we use normals constraints or not ?
+ * @param iConstraints
+ *   Constraints array.
+ * @return 
+ *   ThicknessDocument: Document containing the result.
+ */
+
+      HRESULT ComputeAThickness(in CATIAGroup GroupOfSelectedProducts, 
+	  in double iThickness1, in double iThickness2, in long iUseConstraints,
+	  in CATSafeArrayVariant iConstraints,
+	  out /*IDLRETVAL*/ CATIADocument ThicknessDocument);
+
+
+/**
+ * Compute a thickness on the selected products, according to a reference product.
+ * <b>This method is deprecated.</b>
+ * @param iGroupOfSelectedProducts
+ *   The selected products on which you want to perform the thickness.
+ * @param iReferenceProduct
+ *   The reference product.
+ * @param iThickness1
+ *   First thickness value.
+ * @param iThickness2
+ *   Second thickness value. <b>Old way</b>
+ * @param iUseConstraints
+ *   Do we use normals constraints or not ?
+ * @param iConstraints
+ *   Constraints array.
+ * @return 
+ *   ThicknessDocument: Document containing the result.
+ */
+
+      HRESULT ComputeAThicknessWithAReference(in CATIAGroup iGroupOfSelectedProducts, 
+	  in CATIAProduct iReferenceProduct, in double iThickness1, in double iThickness2, 
+	  in long iUseConstraints, in CATSafeArrayVariant iConstraints,
+	  out /*IDLRETVAL*/ CATIADocument ThicknessDocument);
+
+
+/**
+ * Compute a thickness on the selected products.
+ * @param GroupOfSelectedProducts
+ *   The selected products on which you want to perform the thickness.
+ * @param iThickness1
+ *   First thickness value.
+ * @param iThickness2
+ *   Second thickness value.
+ * @param iUseConstraints
+ *   Do we use normals constraints or not ?
+ * @param iConstraints
+ *   Constraints array.
+ * @return 
+ *   ThicknessDocument: Document containing the result.
+ */
+
+      HRESULT ComputeThickness(in CATIAGroup GroupOfSelectedProducts, 
+	                           in double iThickness1, in double iThickness2, in long iUseConstraints,
+	                           in CATSafeArrayVariant iConstraints,
+	                           out /*IDLRETVAL*/ CATIADocument ThicknessDocument);
+
+
+/**
+ * Compute a thickness on the selected products, according to a reference product.
+ * @param iGroupOfSelectedProducts
+ *   The selected products on which you want to perform the thickness.
+ * @param iReferenceProduct
+ *   The reference product.
+ * @param iThickness1
+ *   First thickness value.
+ * @param iThickness2
+ *   Second thickness value.
+ * @param iUseConstraints
+ *   Do we use normals constraints or not ?
+ * @param iConstraints
+ *   Constraints array.
+ * @return 
+ *   ThicknessDocument: Document containing the result.
+ */
+
+      HRESULT ComputeThicknessWithReference(in CATIAGroup iGroupOfSelectedProducts, 
+	                                        in CATIAProduct iReferenceProduct, 
+								            in double iThickness1, in double iThickness2, 
+	                                        in long iUseConstraints, in CATSafeArrayVariant iConstraints,
+	                                        out /*IDLRETVAL*/ CATIADocument ThicknessDocument);
+
+
+/**
+ * Returns the name of the associated shape.
+ */
+
+      HRESULT ThicknessShapeName(out /*IDLRETVAL*/ CATBSTR Name);
+
+#endif
+	
+
+	/**
+	* Creates a new Silhouette and adds it to the DMOThicknesses collection.
+	* <b>This function is deprecated.</b>
+	*/
+
+	  HRESULT Add	(	in CATIAProduct iProductToThickness, 
+						in double iThickness1, 
+						in double iThickness2,
+						in long iUseConstraints,
+						in CATSafeArrayVariant iConstraints,						
+						in CATBSTR iShapeName, 
+						in long iActivatedShape, 
+						in long iDefaultShape, 
+						out /*IDLRETVAL*/ CATIADMOThickness oThickness );	
+};
+
+// Interface name : CATIADMOThicknesses
+#pragma ID CATIADMOThicknesses "DCE:3b6f97dc-2584-11d3-a796006094eb381a"
+#pragma DUAL CATIADMOThicknesses
+
+// VB object name : DMOThicknesses (Id used in Visual Basic)
+#pragma ID DMOThicknesses "DCE:3b6f97dd-2584-11d3-a796006094eb381a"
+#pragma ALIAS CATIADMOThicknesses DMOThicknesses
+
+#endif

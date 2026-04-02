@@ -1,0 +1,70 @@
+#ifndef CATIAPspCntrFlow_IDL
+#define CATIAPspCntrFlow_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+
+#include "CatPspIDLAttrDataType.idl"
+#include "CatPspIDLFlowCapability.idl"
+#include "CatPspIDLFlowReality.idl"
+
+#include "CATIABase.idl"
+
+/**
+ * Represents Interface to manage Connector Flow property.
+ * <b>Role</b>: To query and modify Plant-Ship Connector Flow property.
+ */
+interface CATIAPspCntrFlow : CATIABase
+{
+ /**
+  * Returns or sets Flow capability of the connector.  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspCntrFlow
+  * Dim ojArg1 As CatPspIDLFlowCapability
+  *  ...
+  * Set ojArg1 = objThisIntf.<font color="red">FlowCapability</font>
+  * </pre>
+  *    
+  */
+
+
+#pragma PROPERTY FlowCapability
+  HRESULT get_FlowCapability (out /*IDLRETVAL*/ CatPspIDLFlowCapability oeFlowCapability);
+  HRESULT put_FlowCapability (in CatPspIDLFlowCapability ieFlowCapability);
+
+
+  /**
+  * Returns or sets Flow reality of the connector.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspCntrFlow
+  * Dim ojArg1 As CatPspIDLFlowReality
+  *  ...
+  * Set ojArg1 = objThisIntf.<font color="red">FlowReality</font>  
+  * </pre>
+  *    
+  */
+
+#pragma PROPERTY FlowReality
+  HRESULT get_FlowReality (out /*IDLRETVAL*/ CatPspIDLFlowReality oeFlowReality);
+  HRESULT put_FlowReality (in CatPspIDLFlowReality ieFlowReality);
+	         
+};
+
+// Interface name : CATIAPspCntrFlow
+#pragma ID CATIAPspCntrFlow "DCE:9131183d-7277-45ee-b0983420a6715429"
+#pragma DUAL CATIAPspCntrFlow
+
+// VB object name : PspCntrFlow
+#pragma ID PspCntrFlow      "DCE:902c59ca-ad82-4c50-8cb19ba6bc2f555b"
+#pragma ALIAS CATIAPspCntrFlow PspCntrFlow
+
+#endif

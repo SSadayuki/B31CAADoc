@@ -1,0 +1,116 @@
+#ifndef CATIAHybridShapeAxisLine_IDL
+#define CATIAHybridShapeAxisLine_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//           
+// CATIAHybridShapeAxisLine:         
+// Exposed interface for HybridShape AxisLine
+//           
+// 2003 Creation
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAHybridShapeDirection.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape axis line feature object.
+ * <b>Role</b>: To access the data of the hybrid shape axis line feature object.
+ * This data includes:
+ * <ul>
+ * <li>The element used to compute the axis </li>
+ * <li>The direction used in orientation of axis </li>
+ * <li>AxisLineType to change the axis type </li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeAxisLine object.
+ * @see CATIAHybridShapeFactory
+ */
+
+interface CATIAHybridShapeAxisLine : CATIAHybridShape
+{
+ /**
+ * Returns or sets the element from which axis is computed.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>Element</code> the element from which axis is computed
+ * for the <code>AxisLine</code> hybrid shape feature.
+ * <pre>
+ * Dim Element As Reference 
+ * Set Element = AxisLine.<font color="red">Element</font>
+ * </pre>
+ * </dl>
+ */ 
+
+#pragma PROPERTY Element
+  HRESULT get_Element (out /*IDLRETVAL*/ CATIAReference ohElem);
+  HRESULT put_Element (in                CATIAReference ihElem);
+
+
+ /**
+ * Gets the reference direction used in computation of axis.
+ * <br>This is useful only if the element selected is circle, 
+ * arc or sphere. If the element is circle or arc Axis may be normal to reference direction or aligned with reference direction
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oDir</code> the direction     
+ * for the <code>AxisLine</code> hybrid shape feature.
+ * <pre>
+ * Dim oDir As CATIAHybridShapeDirection
+ * Set oDir = AxisLine.<font color="red">Direction</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY Direction
+ HRESULT get_Direction ( out /*IDLRETVAL*/  CATIAHybridShapeDirection   ohDir);
+ HRESULT put_Direction ( in					CATIAHybridShapeDirection   ihDir);
+
+/**
+  * Returns or sets the axis line type.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>1</dt>
+  * <dd>This option creates Axis along major axis if element is ellipse or oblong, 
+  * Axis is aligned with direction specified if input is circle and coincides with revolution axis
+  * if element is revolution surface</dd>
+  * <dt>2</dt>
+  * <dd>This option creates Axis along minor axis if element is ellipse or oblong, 
+  * Axis is normal to direction specified if input is circle</dd>
+  * <dt>3</dt>
+  * <dd>This option creates Axis normal to the element if it is circle, ellipse or oblong</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oType</code> the axis line type
+  * for the <code>AxisLine</code> hybrid shape feature.
+  * <pre>
+  * Dim oType
+  * Set oType = AxisLine.<font color="red">AxisLineType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY AxisLineType
+    HRESULT get_AxisLineType (out /*IDLRETVAL*/ long oType);
+    HRESULT put_AxisLineType (in long iType);
+};
+
+// Interface name : CATIAHybridShapeAxisLine
+#pragma ID CATIAHybridShapeAxisLine "DCE:039dc266-360a-44e4-96a42126c971e52e"
+#pragma DUAL CATIAHybridShapeAxisLine
+
+// VB object name : HybridShapeAxisLine (Id used in Visual Basic)
+#pragma ID HybridShapeAxisLine "DCE:c8899804-e282-425f-83965079bbc54078"
+#pragma ALIAS CATIAHybridShapeAxisLine HybridShapeAxisLine
+
+#endif
+// CATIAHybridShapeAxisLine_IDL
+

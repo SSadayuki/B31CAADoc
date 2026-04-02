@@ -1,0 +1,11 @@
+#
+BUILT_OBJECT_TYPE = NONE
+#
+#if os intel_a
+BUILD = YES
+LOCAL_CCFLAGS  = /wd4996
+OPTIMIZATION_C = /O2
+#else
+BUILD = NO
+#endif
+#

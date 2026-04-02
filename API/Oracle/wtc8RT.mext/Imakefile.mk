@@ -1,0 +1,25 @@
+BUILT_OBJECT_TYPE = LOAD MODULE 
+
+DELIVERABLE = NO
+
+OS = AIX
+BUILD=NO
+
+OS = IRIX
+BUILD=NO
+
+OS = HP-UX
+BUILD=NO
+
+OS = SunOS
+BUILD = NO
+PROGRAM_NAME=libwtc8.so
+
+OS = alpha_a
+BUILD=NO
+
+OS = intel_a
+BUILD=NO
+
+OS = win_b64
+BUILD=NO

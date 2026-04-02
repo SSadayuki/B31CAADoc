@@ -1,0 +1,216 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATInstantCollabDesignCAAItf CATIColMergeable Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATInstantCollabDesignCAAItf.htm" href="../CATInstantCollabDesignCAAItf.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATInstantCollabDesignCAAItf";	}
+		function getCurrentObjectName() { 
+ 	return "CATIColMergeable"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>CATInstantCollabDesignCAAItf Framework:  CATIColMergeable Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIColMergeable_51145','CATIColMergeable','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can reimplement this interface by deriving the supplied <a href="../CATInstantCollabDesignCAAItf/class_CATColIMergeableAdapter_62054.htm">CATColIMergeableAdapter</a> adapter class.</b></p>
+<hr/>
+<p>
+ interface <b>CATIColMergeable</b>
+</p>
+<p>
+<b><i>	Interface to be implemented by the objects which are to be streamed/unstreamed by the collaborative engine <br>
+	The merge step is composed by 2 steps :
+		<li>Preprocess step : objects in the briefcase are compared with the destination model.</i></b><br>
+ If the colaboration <br>
+		id can be retreived, the associated feature will be replaced by the one inside the briefcase. If not, <br>
+		the feature inside the briefcase will be instantiated.</li>
+		<li>Merge step : this step is composed by 3 steps which are done for all the feature (loop on all before merge <br>
+		then loop on all merge then loop on all afterMerge)
+				<li>BeforeMerge : this method is called before the unstream. </li>
+				<li>Merge : this method is called just after the unstream </li>
+				<li>AfterMerge : this method is called when all the features are unstreamed and merged</li>
+		</li>
+	IMPORTANT : this interface MUST not be manipulated directly. A feature can be mergeable thanks to the adhesion of this
+	CAA interface OR the internal DS interface. Use the CATCollabWrapper  methods instead	<br>
+	<u>When do I implement this interface ?</u><br>
+	1- I own a feature which inherits from a DS feature implementing itself the collaborative interfaces and I want <br>
+		to add applicative rule during the merge step.
+	2- I have created a feature which does not inherit from a known collaborative feature and I have no access to the DS <br>
+	internal interfaces. IMPORTANT : in that case I have to inherit my component from the provide adapter : 
+<script type="text/javascript"> activateLinkAnchor('CATColIMergeableAdapter','','CATColIMergeableAdapter') </script>  <p><b>BOA  information</b>:  this  interface  can  be  implemented 
+  using  the  BOA  (Basic  Object  Adapter). 
+  To  know  more  about  the  BOA,  refer  to  the  CAA  Encyclopedia  home  page.   
+  Click  Middleware  at  the  bottom  left,  then  click  the  Object  Modeler  tab  page. 
+  Several  articles  deal  with  the  BOA.</p>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AfterMerge(CATIColMergeContextTable*,CATIColMergeItem*)"><b>AfterMerge</b></a>(CATIColMergeContextTable*,CATIColMergeItem*)
+</td><td id='tdright'> 	Method called just after the mergeOne may implement to post-process the merge :
+	<li>Replug some missing links or link which have been marked IGNORED during share step</li>
+	<li>Post-process the feature to guarantee the applicative model integrity
+	
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BeforeMerge(CATIColMergeContextTable*,CATIColMergeItem*,CATBaseUnknown*&amp;,CATBoolean)"><b>BeforeMerge</b></a>(CATIColMergeContextTable*,CATIColMergeItem*,CATBaseUnknown*&amp;,CATBoolean)
+</td><td id='tdright'> 	Method called before the merge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ComputeMergeFlagFromContext(CATIColMergeItem*,CATIColMergeItem::MergeFlag,CATIColMergeItem::MergeFlag&amp;)"><b>ComputeMergeFlagFromContext</b></a>(CATIColMergeItem*,CATIColMergeItem::MergeFlag,CATIColMergeItem::MergeFlag&amp;)
+</td><td id='tdright'> 	This method is the first called by the collaboration engine during the preprocess step<br>
+	The feature can change its merge flag depending on the context.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Merge(CATIColMergeContextTable*)"><b>Merge</b></a>(CATIColMergeContextTable*)
+</td><td id='tdright'> 	Method called just after the unstream.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AfterMerge"></a><a id="AfterMerge(CATIColMergeContextTable*,CATIColMergeItem*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AfterMerge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIColMergeContextTable','CATIColMergeContextTable*')</script> <span class='param'>iMergeContextTable</span>,<script type="text/javascript"> activateLink('CATIColMergeItem','CATIColMergeItem*')</script> <span class='param'>iMyMergeItem</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+	Method called just after the mergeOne may implement to post-process the merge :
+	<li>Replug some missing links or link which have been marked IGNORED during share step</li>
+	<li>Post-process the feature to guarantee the applicative model integrity
+	
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMergeContextTable</span></dt>
+   <dd>		feature's Context table created during the share step
+	
+ </ dd>
+    <dt><span class='paramitem'> iMyMergeItem</span></dt>
+   <dd>		current merge item being processed
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BeforeMerge"></a><a id="BeforeMerge(CATIColMergeContextTable*,CATIColMergeItem*,CATBaseUnknown*&amp;,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>BeforeMerge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIColMergeContextTable','CATIColMergeContextTable*')</script> <span class='param'>iMergeContextTable</span>,<script type="text/javascript"> activateLink('CATIColMergeItem','CATIColMergeItem*')</script> <span class='param'>iMyMergeItem</span>,<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*&amp;')</script> <span class='param'>oSubstitute</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>HaveBeenCreated</span><span class='param'>=FALSE</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+	Method called before the merge. One may implement this method for different reasons :<br>
+	<li>Caching some information of the destination feature if it already exists</li>
+	<li>Proposing a substitute feature for the merge.<br>
+	<u>Example</u><br>
+	A must be merged on A'. But responsible of feature A decides that if A' exists, A' must be replaced by B
+	</li>
+	
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMergeContextTable</span></dt>
+   <dd>		feature's Context table created during the share step
+	
+ </ dd>
+    <dt><span class='paramitem'> iMyMergeItem</span></dt>
+   <dd>		current merge item being processed
+	
+ </ dd>
+    <dt><span class='paramitem'> oSubstitute</span></dt>
+   <dd>		feature which will replace this during the merge
+	
+ </ dd>
+    <dt><span class='paramitem'> HaveBeenCreated</span></dt>
+   <dd>		HaveBeenCreated=true : skeleton has been created so the feature has not been retrieved in the destination model<br>
+		HaveBeenCreated=false : skeleton does not exist. Pointer "this" refers to the "real" feature which is going to be replaced.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ComputeMergeFlagFromContext"></a><a id="ComputeMergeFlagFromContext(CATIColMergeItem*,CATIColMergeItem::MergeFlag,CATIColMergeItem::MergeFlag&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ComputeMergeFlagFromContext</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIColMergeItem','CATIColMergeItem*')</script> <span class='param'>iMyMergeItem</span>,<script type="text/javascript"> activateLink('CATIColMergeItem::MergeFlag','CATIColMergeItem::MergeFlag')</script> <span class='param'>iOldMergeFlag</span>,<script type="text/javascript"> activateLink('CATIColMergeItem::MergeFlag','CATIColMergeItem::MergeFlag&amp;')</script> <span class='param'>oNewMergeFlag</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+	This method is the first called by the collaboration engine during the preprocess step<br>
+	The feature can change its merge flag depending on the context.<br<
+	<b>Example</b><br>
+	Feature must be always discarded if it already exists in the destination part, even it it has been <br>
+	explicitely selected by a user or a batch.
+	==> Implement that method and set oNewMergeFlag=CATIColMergeItem::NO_MERGE
+	
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMyMergeItem</span></dt>
+   <dd>		the input collaborative object which is currently pre-processed
+	
+ </ dd>
+    <dt><span class='paramitem'> iOldMergeFlag</span></dt>
+   <dd>		the default flag computed by the collabration engine
+	
+ </ dd>
+    <dt><span class='paramitem'> oNewMergeFlag</span></dt>
+   <dd>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Merge"></a><a id="Merge(CATIColMergeContextTable*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Merge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIColMergeContextTable','CATIColMergeContextTable*')</script> <span class='param'>iMergeContextTable</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+	Method called just after the unstream.
+	
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMergeContextTable</span></dt>
+   <dd>		feature's Context table created during the share step
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIColMergeable.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATInstantCollabDesignItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

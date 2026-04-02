@@ -1,0 +1,18 @@
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+BUILD = NO
+LINK_WITH = JS0CATLM JS03TRA
+
+OS = intel_a
+BUILD = YES
+
+OS = win_b
+BUILD = YES
+
+OS = win_b64
+BUILD = YES
+
+OS = intel_a64
+BUILD = YES
+
+OS = win_a
+BUILD = YES

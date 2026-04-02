@@ -1,0 +1,200 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAClash.idl
+//   This automation interface allows the query of Clash data.
+//
+//===================================================================
+#ifndef CATIAClash_IDL
+#define CATIAClash_IDL
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R5
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATIAGroup.idl"
+#include "CATIAAnnotatedViews.idl"
+#include "CATIAMarker3Ds.idl"
+#include "CATIAConflicts.idl"
+#include "CatClashInterferenceType.idl"
+#include "CatClashComputationType.idl"
+#include "CatClashExportType.idl"
+
+/**  
+ * Represents the Clash object.
+ * The Clash object is a specification of a collision detection of products.
+ */
+interface CATIAClash : CATIABase
+{
+  /**
+   * Returns or sets the computation type.
+   * @sample
+   *    The first example retrieves the computation type of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim ComputationType As CatClashComputationType
+   *    ComputationType = NewClash.<font color="red">ComputationType</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the computation type of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    NewClash.<font color="red">ComputationType</font> = catClashComputationTypeBetweenAll
+   *    </pre>
+   */
+#pragma PROPERTY ComputationType
+  HRESULT get_ComputationType (out /*IDLRETVAL*/ CatClashComputationType oType);
+  HRESULT put_ComputationType (in CatClashComputationType iType);
+
+  /**
+   * Returns or sets the interference type for the computation.
+   * @sample
+   *    The first example retrieves the interference type of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim InterferenceType As CatClashInterferenceType
+   *    InterferenceType = NewClash.<font color="red">InterferenceType</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the interference Type of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    NewClash.<font color="red">InterferenceType</font> = CatClashInterferenceTypeContact
+   *    </pre>
+   */
+#pragma PROPERTY InterferenceType
+  HRESULT get_InterferenceType (out /*IDLRETVAL*/ CatClashInterferenceType oType);
+  HRESULT put_InterferenceType (in CatClashInterferenceType iType);
+
+  /**
+   * Returns or sets the clearance value for the computation.
+   * <p>The clearance value must be greater than 0. Units are Millimeter.
+   * @sample
+   *    The first example retrieves the clearance value of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim Value As double
+   *    Value = NewClash.<font color="red">Clearance</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the clearance value of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    NewClash.<font color="red">Clearance</font> = 10.
+   *    </pre>
+   */
+#pragma PROPERTY Clearance
+  HRESULT get_Clearance (out /*IDLRETVAL*/ double oClearance);
+  HRESULT put_Clearance (in double iClearance);
+
+  /**
+   * Returns or sets the first group used by the computation.
+   * @sample
+   *    The first example retrieves the first group of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim FirstGroup As Group
+   *    Set FirstGroup = NewClash.<font color="red">FirstGroup</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the first  group of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim FirstGroup As Group
+   *    NewClash.<font color="red">FirstGroup</font> = FirstGroup
+   *    </pre>
+   */
+#pragma PROPERTY FirstGroup
+  HRESULT get_FirstGroup (out /*IDLRETVAL*/ CATIAGroup oGroup);
+  HRESULT put_FirstGroup (in CATIAGroup iGroup);
+
+  /**
+   * Returns or sets the second group used by the computation.
+   * @sample
+   *    The first example retrieves the second group of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim SecondGroup As Group
+   *    Set SecondGroup = NewClash.<font color="red">SecondGroup</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the second group of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim SecondGroup As Group
+   *    NewClash.<font color="red">SecondGroup</font> = SecondGroup
+   *    </pre>
+   */
+#pragma PROPERTY SecondGroup
+  HRESULT get_SecondGroup (out /*IDLRETVAL*/ CATIAGroup oGroup);
+  HRESULT put_SecondGroup (in CATIAGroup iGroup);
+
+  /**
+   * Computes the conflicts.
+   * @sample
+   *    This example computes the conflicts of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    NewClash.<font color="red">Compute</font>
+   *    </pre>
+   */
+  HRESULT Compute ();
+
+  /**
+   * Returns the collection of computed Conflicts.
+   * @sample
+   *    This example retrieves the conflicts of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim NewConflicts As Conflicts
+   *    Set NewConflicts = NewClash.<font color="red">Conflicts</font>
+   *    </pre>
+   */
+#pragma PROPERTY Conflicts
+  HRESULT get_Conflicts (out /*IDLRETVAL*/ CATIAConflicts oConflicts);
+
+  /**
+   * Returns the AnnotatedViews collection of the clash.
+   * @sample
+   *    This example retrieves the AnnotatedViews collection of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim TheAnnotatedViewsList As AnnotatedViews
+   *    Set TheAnnotatedViewsList = NewClash.<font color="red">AnnotatedViews</font>
+   *    </pre>
+   */
+#pragma PROPERTY AnnotatedViews
+  HRESULT get_AnnotatedViews (out /*IDLRETVAL*/ CATIAAnnotatedViews oAnnotatedViews);
+
+  /**
+   * Returns the Marker3Ds collection of the clash.
+   * @sample
+   *    This example retrieves the Marker3Ds collection of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim TheMarker3DsList As Marker3Ds
+   *    Set TheMarker3DsList = NewClash.<font color="red">Marker3Ds</font>
+   *    </pre>
+   */
+#pragma PROPERTY Marker3Ds
+  HRESULT get_Marker3Ds (out /*IDLRETVAL*/ CATIAMarker3Ds oMarker3Ds);
+
+  /**
+   * Exports the results in a XML file.
+   * @param iType
+   *    The type of export.
+   * @param iPath
+   *    The path of the file.
+   * @sample
+   *    This example exports the results of <tt>NewClash</tt> Clash.
+   *    <pre>
+   *    Dim ThePath As String
+   *    NewClash.<font color="red">Export</font> CatClashExportTypeXMLResultOnly, "c:\tmp\sample.xml"
+   *    </pre>
+   */
+  HRESULT Export (in CatClashExportType iType, in CATBSTR iPath);
+};
+
+// Interface name : CATIAClash
+#pragma ID CATIAClash "DCE:e1f32364-45f0-11d4-9468006094eb3826"
+#pragma DUAL CATIAClash
+
+// VB object name : Clash (Id used in Visual Basic)
+#pragma ID Clash "DCE:e33c27e8-45f0-11d4-9468006094eb3826"
+#pragma ALIAS CATIAClash Clash
+
+#endif
+#endif

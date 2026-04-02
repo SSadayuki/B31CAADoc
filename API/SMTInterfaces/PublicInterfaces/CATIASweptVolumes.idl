@@ -1,0 +1,272 @@
+// COPYRIGHT Dassault Systemes 1997-2003
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#ifndef CATIASweptVolumes_IDL
+#define CATIASweptVolumes_IDL
+/*IDLREP*/
+
+#include "CATIABase.idl"
+#include "CATIACollection.idl"
+#include "CATIAReplay.idl"
+#include "CATIASweptVolume.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+//#ifdef DMO_Feature
+#include "CATIADocument.idl"
+//#endif
+
+interface CATIAProduct;
+
+/**  
+ * Interface to compute swept volumes.  
+ */
+interface CATIASweptVolumes : CATIACollection 
+{
+	
+	/**
+	* Creates a new SweptVolume and adds it to the SweptVolumes collection.
+   * <b>This function is deprecated.</b>
+	* @return The created SweptVolume
+	* <! @sample >
+	* <dt><b>Example:</b>
+	* <dd>
+	* The following example creates a SweptVolume <tt>newSweptVolume</tt>
+	* in the SweptVolume collection.
+	* <pre>
+	* Set SweptVolume = SweptVolumes.<font color="red">Add</font>
+	* </pre>	
+	*/
+
+	HRESULT Add	(	in CATIAReplay replay, 
+					in CATSafeArrayVariant iProductsToSwept,
+					in CATIAProduct iProductReference,
+					in long iLODMode, 
+					in double  iAccuracy , 
+					in CATBSTR iShapeName, 
+					in long iActivatedShape, 
+					in long iDefaultShape, 
+					out /*IDLRETVAL*/ CATIASweptVolume oSwept );	
+
+	
+  /**
+	* Creates a new SweptVolume and adds it to the SweptVolumes collection.
+   * <b>This function is deprecated.</b>
+	* @return The created SweptVolume
+   */
+	HRESULT AddFromSweptAble(	in CATBaseDispatch iSweptAble, 
+								in CATSafeArrayVariant iProductsToSwept,
+								in CATIAProduct iProductReference,
+								in long iLODMode, 
+								in double  iAccuracy , 
+								in CATBSTR iShapeName, 
+								in long iActivatedShape, 
+								in long iDefaultShape, 
+								out /*IDLRETVAL*/ CATIASweptVolume oSwept );	
+
+
+  /**
+	* Computes a swept volume.
+   * <b>This function is deprecated.</b>
+	* @return The created SweptVolume
+   */
+	HRESULT ComputeASweptVolume(
+		in CATIAReplay iReplay,
+		in CATBaseDispatch iSweptAble, 
+		in CATSafeArrayVariant iProductsToSwept,
+		in CATIAProduct iProductReference,
+		in long iLODMode,
+		in double  iAccuracy , 
+		in double iWrappingGrain,
+		in double iWrappingRatio,
+		in double iSimplifAccuracy, 
+        out /*IDLRETVAL*/ CATIADocument oSweptVolumeDocument);
+
+  /**
+	* Computes a swept volume.
+   * <b>This function is deprecated.</b>
+	* @return The created SweptVolume
+   */
+
+     HRESULT ComputeASweptVolumeFromReplay(
+		in CATIAReplay iReplay,
+		in CATSafeArrayVariant iProductsToSwept,
+		in CATIAProduct iProductReference,
+		in long iLODMode,
+		in double  iAccuracy , 
+		in double iWrappingGrain,
+		in double iWrappingRatio,
+		in double iSimplifAccuracy, 
+        out /*IDLRETVAL*/ CATIADocument oSweptVolumeDocument) ;
+
+  /**
+	* Computes a swept volume.
+   * <b>This function is deprecated.</b>
+	* @return The created SweptVolume
+   */
+
+     HRESULT ComputeASweptVolumeFromSweptable(
+		in CATBaseDispatch iSweptAble, 
+		in CATSafeArrayVariant iProductsToSwept,
+		in CATIAProduct iProductReference,
+		in long iLODMode,
+		in double iAccuracy,
+		in double iWrappingGrain,
+		in double iWrappingRatio,
+		in double iSimplifAccuracy, 
+        out /*IDLRETVAL*/ CATIADocument oSweptVolumeDocument);
+
+
+/**
+ * Computes a swept volume, from a replay or a track.
+ * @param iReplay
+ *   Replay on which we perfom the swept volume. Can be NULL.
+ * @param iSweptAble
+ *   Track (or any other thing that implements CATISweptAble) on which we perfom the swept volume. Can be NULL.
+ * @param iProductsToSwept
+ *   Selection of products to sweep.
+ * @param iProductReference
+ *   Product taken as a reference.
+ * @param iLODMode
+ *   Do we want levels of details or not?
+ * @param iAccuracy
+ *   Filtering positions parameter.
+ * @param iPerformWrapping
+ *   Do we perform a wrapping?
+ * @param iPerformSimplif
+ *   Do we perform a simplification?
+ * @param iWrappingGrain
+ *   Grain for wrapping.
+ * @param iWrappingRatio
+ *   Offset ratio for wrapping.
+ * @param iSimplifAccuracy
+ *   Accuracy for simplification.
+ * @return
+ *   oSweptVolumeDocuments: Documents containing the results.
+ */
+	HRESULT ComputeSweptVolumes(
+		in CATIAReplay iReplay,
+		in CATBaseDispatch iSweptAble, 
+		in CATSafeArrayVariant iProductsToSwept,
+		in CATIAProduct iProductReference,
+		in long iLODMode,
+		in double  iAccuracy , 
+        in long iPerformWrapping,
+        in long iPerformSimplif,
+		in double iWrappingGrain,
+		in double iWrappingRatio,
+		in double iSimplifAccuracy, 
+        inout CATSafeArrayVariant oSweptVolumeDocuments);
+
+
+/**
+ * Computes a swept volume from a replay.
+ * @param iReplay
+ *   Replay on which we perfom the swept volume.
+ * @param iProductsToSwept
+ *   Selection of products to sweep.
+ * @param iProductReference
+ *   Product taken as a reference.
+ * @param iLODMode
+ *   Do we want levels of details or not?
+ * @param iAccuracy
+ *   Filtering positions parameter.
+ * @param iPerformWrapping
+ *   Do we perform a wrapping?
+ * @param iPerformSimplif
+ *   Do we perform a simplification?
+ * @param iWrappingGrain
+ *   Grain for wrapping.
+ * @param iWrappingRatio
+ *   Offset ratio for wrapping.
+ * @param iSimplifAccuracy
+ *   Accuracy for simplification.
+ * @return
+ *   oSweptVolumeDocuments: Documents containing the results.
+ */
+
+     HRESULT ComputeSweptVolumesFromReplay(
+		in CATIAReplay iReplay,
+		in CATSafeArrayVariant iProductsToSwept,
+		in CATIAProduct iProductReference,
+		in long iLODMode,
+		in double  iAccuracy , 
+        in long iPerformWrapping,
+        in long iPerformSimplif,
+		in double iWrappingGrain,
+		in double iWrappingRatio,
+		in double iSimplifAccuracy, 
+        inout CATSafeArrayVariant oSweptVolumeDocuments) ;
+
+
+/**
+ * Computes a swept volume from a track.
+ * @param iSweptAble
+ *   Track (or any other thing that implements CATISweptAble) on which we perfom the swept volume.
+ * @param iProductsToSwept
+ *   Selection of products to sweep.
+ * @param iProductReference
+ *   Product taken as a reference.
+ * @param iLODMode
+ *   Do we want levels of details or not?
+ * @param iAccuracy
+ *   Filtering positions parameter.
+ * @param iPerformWrapping
+ *   Do we perform a wrapping?
+ * @param iPerformSimplif
+ *   Do we perform a simplification?
+ * @param iWrappingGrain
+ *   Grain for wrapping.
+ * @param iWrappingRatio
+ *   Offset ratio for wrapping.
+ * @param iSimplifAccuracy
+ *   Accuracy for simplification.
+ * @return
+ *   oSweptVolumeDocuments: Documents containing the results.
+ */
+
+     HRESULT ComputeSweptVolumesFromSweptable(
+		in CATBaseDispatch iSweptAble, 
+		in CATSafeArrayVariant iProductsToSwept,
+		in CATIAProduct iProductReference,
+		in long iLODMode,
+		in double iAccuracy,
+        in long iPerformWrapping,
+        in long iPerformSimplif,
+		in double iWrappingGrain,
+		in double iWrappingRatio,
+		in double iSimplifAccuracy, 
+        inout CATSafeArrayVariant oSweptVolumeDocuments);
+
+/**
+ * Adds the possibility to make a silhouette before the swept volume
+ */
+
+     HRESULT SetSilhouette(in long OnOff);
+
+/**
+ * Adds the possibility to parallelize swept&wrapping after a spatial split. This gains in memory but not in CPU usage (takes longer.)
+ */
+     HRESULT SetSpatialSplit(in long OnOff);
+
+
+/**
+ * Cleans up.
+ */
+     HRESULT CleanUp();
+
+};
+
+// Interface name : CATIASweptVolumes
+#pragma ID CATIASweptVolumes "DCE:8c4198eb-cd55-0000-0280030d89000000"
+#pragma DUAL CATIASweptVolumes
+
+// VB object name : PartComps (Id used in Visual Basic)
+#pragma ID SweptVolumes "DCE:8c419936-4231-0000-0280030d89000000"
+#pragma ALIAS CATIASweptVolumes SweptVolumes
+
+#endif

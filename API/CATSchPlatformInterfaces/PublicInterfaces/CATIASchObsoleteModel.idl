@@ -1,0 +1,71 @@
+#ifndef CATIASchObsoleteModel_IDL 
+#define CATIASchObsoleteModel_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+    
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage obsolete model elements.
+  */
+
+interface CATIASchObsoleteModel : CATIABase
+{
+  /**
+  * Find obsolete base classes. This method will internally call 
+  * CATISchAppObsoleteClass to ask the application for the names of the
+  * obsolete classes.
+  * @param oListObsoleteObj
+  *   A list of objects with obsoleted base class types.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchObsoleteModel
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">FindObsoleteClasses</font>
+  * </pre>
+  *    
+  */
+  HRESULT FindObsoleteClasses ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oListObsoleteObj );
+    
+  /**
+  * Is there any obsolete class in the application model.
+  * @param oBYes
+  *   If yes, then there is.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchObsoleteModel
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">HasObsoleteClass</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT HasObsoleteClass ( 
+    inout boolean oBYes );
+    
+};
+    
+// Interface name : CATIASchObsoleteModel
+#pragma ID CATIASchObsoleteModel "DCE:f133a750-d1dc-40e3-8edae8d2805bb544"
+#pragma DUAL CATIASchObsoleteModel
+    
+// VB object name : SchObsoleteModel
+#pragma ID SchObsoleteModel "DCE:f197e42a-8ea2-4d06-8dfda1eee0e5b609"
+#pragma ALIAS CATIASchObsoleteModel SchObsoleteModel
+    
+#endif 
+    

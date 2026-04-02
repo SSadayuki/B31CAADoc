@@ -1,0 +1,56 @@
+#ifndef CATIAAnalysisLocalSensor_IDL
+#define CATIAAnalysisLocalSensor_IDL
+/*IDLREP*/
+
+//
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//
+//                                   
+// CATIAAnalysisLocalSensor:                           
+// Exposed interface for Analysis Local Sensor
+//                                   
+//
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIAAnalysisSensor.idl"
+
+/**
+ * Represent the  analysis local sensor. <br>
+ * This object is a kind of AnalysisSensor based on analysis feature results <br>
+ * based on a finite element selection. This sensor definition is based on an XML file  <br>
+ * stored in the CATIARuntimeView.
+ */ 
+
+interface CATIAAnalysisLocalSensor : CATIAAnalysisSensor
+{
+
+/**
+ * Returns or sets the Identifier of the sensor as defined in the XML file.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd> This example retrieves in <tt>MyXMLName</tt> the identifier of the <tt>AnalysisSensor1</tt> object.
+ * <pre>
+ * MyObjectName = AnalysisSensor1.<font color="red">XMLName</font>
+ * </pre>
+ * </dl>
+ */
+
+#pragma PROPERTY XMLName
+  HRESULT get_XMLName(inout /*IDLRETVAL*/ CATBSTR oName);
+  HRESULT put_XMLName(in CATBSTR iName);
+
+};
+
+// Interface name : CATIAAnalysisLocalSensor
+#pragma ID CATIAAnalysisLocalSensor "DCE:29683666-F570-43cf-90E3405B2A4A3EC4"
+#pragma DUAL CATIAAnalysisLocalSensor
+
+// VB object name : AnalysisLocalSensor (Id used in Visual Basic)
+#pragma ID AnalysisLocalSensor "DCE:CEE4CD4B-A9A4-4a80-A4D93CED1DA93F8C"
+#pragma ALIAS CATIAAnalysisLocalSensor AnalysisLocalSensor
+
+#endif
+// CATIAAnalysisLocalSensor_IDL

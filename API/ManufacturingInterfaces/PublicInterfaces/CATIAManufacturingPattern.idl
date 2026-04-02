@@ -1,0 +1,328 @@
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//=============================================================================
+
+#ifndef CATIAManufacturingPattern_IDL
+#define CATIAManufacturingPattern_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingFeature.idl"
+#include "CATIAProduct.idl"
+#include "CATIAParameter.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * The Manufacturing Pattern is a specialized feature used to machine the same item 
+ * several times at several positions.
+ */
+interface CATIAManufacturingPattern : CATIAManufacturingFeature 
+{
+// Method SetItemToCopy
+
+         /**
+         * Sets the feature to be copied.  
+         * @param iItemToCopy
+         *   The feature to be copied. It may be a Design Hole or a Manufacturing Hole.
+         *   <br><b>Legal values</b>: The parameter name can be
+         *   <dl>
+         *     <dt><tt>Diameter</tt>   <dd>The hole diameter 
+         *   </dl> 
+         * @param oParameter
+         *   The value of the parameter  
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example sets the item to copy 'Hole1' to the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">SetItemToCopy</font>(Hole1)
+         *</pre>
+         * </dl>
+         */
+
+	HRESULT	SetItemToCopy ( in CATIABase iItem );
+
+// Method AddPosition
+
+         /**
+         * Adds a position to the Manufacturing Pattern.  
+         * @param iPosition
+         *   The position to be added.
+         *   <br><b>Legal values</b>: The position can be a
+         *   <dl>
+         *     <dt><tt>Design Hole</tt>     <dd> the point is the origin point of the hole   
+         *     <dt><tt>Design Pattern</tt>  <dd> points are retrieved from the design pattern  
+         *     <dt><tt>Point</tt>           <dd> the point coordinates are retrieved from the added point
+         *     <dt><tt>Circle</tt>          <dd> the point is the center of the circle   
+         *   </dl> 
+         * @param iProduct
+         *   The product containing the position to add. 
+         * @param iNotify
+         *   The flag to specify if a refresh of the visualization is needed.
+         *   Usually, this parameter is set to 1. In the case of a loop, it should be set to 1
+         *   only on the last call of the method. 
+         *   <br><b>Legal values</b>: The parameter can be
+         *   <dl>
+         *     <dt><tt>0</tt>     <dd> no notification is sent
+         *     <dt><tt>1</tt>     <dd> a notification is sent
+         *   </dl> 
+         *
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example adds the position 'DesignPattern1' to the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">AddPosition</font>(DesignPattern1,Product1,1)
+         *</pre>
+         * </dl>
+         */
+
+	HRESULT	AddPosition ( in CATIABase iPosition, in CATIAProduct iProduct, in short iNotify );
+
+// Method GetAnAttribute
+
+
+         /**
+         * Retreive the attribute of Manufacturing Pattern from its name.  
+         * @param iAttribute
+         *   The identifier of the attribute to be read.
+         *   <br><b>Legal values</b>: The identifier can be 
+         *   <dl>
+         *     <dt><tt>JumpDistance</tt>     <dd> the jump distance of the pattern   
+         *     <dt><tt>TopMode</tt>          <dd> the Top Mode of the pattern   
+         *   </dl> 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the attribute 'JumpDistance' of the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">GetAnAttribute</font>(JumpDistance,JumpParm)
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	GetAnAttribute(in CATBSTR iAttribut,out  /*IDLRETVAL*/ CATIAParameter oAttributCke);
+
+// Method DeactivatePoint
+
+         /**
+         * Deactivates a point of a Manufacturing Pattern.  
+         * @param iPointNumber
+         *   The number of the point to deactivate.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example deactivates the point number 2 of the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">DeactivatePoint</font>(2)
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	DeactivatePoint(in short iPointNumber);
+
+// Method ActivatePoint
+
+         /**
+         * Activates a point of a Manufacturing Pattern.  
+         * @param iPointNumber
+         *   The number of the point to activate.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example activates the point number 2 of the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">ActivatePoint</font>(2)
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	ActivatePoint(in short iPointNumber);
+
+// Method AddPartSurface
+
+         /**
+         * Adds a Part Surface to the Manufacturing Pattern.  
+         * @param iPartSurface
+         *   The part surface to be added.
+         * @param iProduct
+         *   The product containing the part surface to add. 
+         * @param iNotify
+         *   The flag to specify if a refresh of the visualization is needed.
+         *   Usually, this parameter is set to 1. In the case of a loop, it should be set to 1
+         *   only on the last call of the method. 
+         *   <br><b>Legal values</b>: The parameter can be
+         *   <dl>
+         *     <dt><tt>0</tt>     <dd> no notification is sent
+         *     <dt><tt>1</tt>     <dd> a notification is sent
+         *   </dl> 
+         *
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example adds the part surface 'TopPlane' to the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">AddPartSurface</font>(TopPlane,Product1,1)
+         *</pre>
+         * </dl>
+         */
+
+	HRESULT	AddPartSurface( in CATIABase iPartSurface, in CATIAProduct iProduct, in short iNotify );
+
+// Method RemovePartSurfaces
+
+         /**
+         * Remove the Part Surfaces of the Manufacturing Pattern.  
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example removes the part surfaces of the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">RemovePartSurfaces</font>()
+         *</pre>
+         * </dl>
+         */
+
+	HRESULT	RemovePartSurfaces ();
+
+// Method GetNumbers
+
+         /**
+         * Retrieve the number of the points of a Manufacturing Pattern.  
+         * @param oNumbers
+         *   The numbers of the points of the pattern.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the numbers of the points of the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">GetNumbers</font>(oNumbers)
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	GetNumbers (out CATSafeArrayVariant oNumbers);
+
+// Method StartPoint
+
+         /**
+         * Sets a point of a Manufacturing Pattern as the start point.  
+         * @param iPointNumber
+         *   The number of the point to set as start point.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example sets the point number 2 as the start point of the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">StartPoint</font>(2)
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	StartPoint (in short iPointNumber);
+
+// Method Reverse
+
+         /**
+         * Reverses the numbering of a Manufacturing Pattern.  
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example reverses the numbering of the
+         * manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">Reverse</font>()
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	Reverse();
+
+// Method SetLocalToolAxis
+
+         /**
+         * Sets a local tool axis to a point of a Manufacturing Pattern.  
+         * @param iPointNumber
+         *   The number of the point on which the tool axis is set .
+         * @param iX
+         *   The first coordinate of the tool axis.
+         * @param iY
+         *   The second coordinate of the tool axis.
+         * @param iZ
+         *   The third coordinate of the tool axis.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example sets the Z axis as tool axis
+         * of the point number 3 of manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">SetLocalToolAxis</font>(3,0,0,1)
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	SetLocalToolAxis(in short iPointNumber, in double iX, in double iY, in double iZ);
+
+// Method GetLocalToolAxis
+
+         /**
+         * Retrieve the local tool axis of a point of a Manufacturing Pattern.  
+         * @param iPointNumber
+         *   The number of the point on which the tool axis is set.
+         * @param oX
+         *   The first coordinate of the tool axis.
+         * @param oY
+         *   The second coordinate of the tool axis.
+         * @param oZ
+         *   The third coordinate of the tool axis.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the tool axis
+         * of the point number 3 of manufacturing pattern <tt>mfgPattern</tt>:
+         * <pre>
+         * call mfgPattern.<font color="red">GetLocalToolAxis</font>(3,oX,oY,oZ)
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	GetLocalToolAxis(in short iPointNumber, out double oX, out double oY, out double oZ);
+
+#pragma PROPERTY ToolAxisStrategy
+		/**
+		* Returns or sets the Tool Axis Strategy of a Manufacturing Pattern.
+		* <br><b>Legal values</b>: The parameter name can be
+        *   <dl>
+        *     <dt><tt>Fixed</tt>   <dd>
+		*     <dt><tt>Variable</tt>   <dd>
+		*     <dt><tt>NormalToPS</tt>   <dd>
+        *   </dl>
+		* <dt><b>Examples:</b>
+		* <dd>The following example returns the Tool Axis Strategy <tt>ThisToolAxisStrategy</tt>
+		* of the manufacturing pattern <tt>CurrentMfgPattern</tt>
+		* <pre>
+		* Dim ThisToolAxisStrategy As CATBSTR
+		* ThisToolAxisStrategy = CurrentMfgPattern.<font color="red">ToolAxisStrategy</font>
+		* </pre>
+		* The next example sets the Tool Axis Strategy of the manufacturing pattern <tt>CurrentMfgPattern</tt>
+		* <pre>
+		* CurrentMfgPattern.<font color="red">ToolAxisStrategy</font> = "Fixed"
+		* </pre>
+		*/
+
+    HRESULT get_ToolAxisStrategy ( inout /*IDLRETVAL*/ CATBSTR oToolAxisStrategy );
+    HRESULT put_ToolAxisStrategy ( in CATBSTR iToolAxisStrategy );
+
+};
+
+// Interface name : CATIAManufacturingPattern
+#pragma ID CATIAManufacturingPattern "DCE:4f0aded4-9d42-11d5-be620002b319b251"
+#pragma DUAL CATIAManufacturingPattern
+
+// VB object name : ManufacturingPattern (Id used in Visual Basic)
+#pragma ID ManufacturingPattern  "DCE:4bd1f130-9d42-11d5-be620002b319b251"
+#pragma ALIAS CATIAManufacturingPattern ManufacturingPattern  
+
+#endif // CATIAManufacturingPattern_IDL
+
+

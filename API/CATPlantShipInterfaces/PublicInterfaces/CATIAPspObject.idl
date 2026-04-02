@@ -1,0 +1,88 @@
+#ifndef CATIAPspObject_IDL
+#define CATIAPspObject_IDL
+/*IDLREP*/
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+
+#include "CATBSTR.idl"
+#include "CATIABase.idl"
+
+#include "CatPspIDLApplicationID.idl"
+#include "CatPspIDLDomainID.idl"
+
+/**
+ * Represents PspObject. 
+ * <b>Role</b>: To access Plant Ship object information. 
+ */
+
+interface CATIAPspObject : CATIABase
+{
+   
+/** 
+  * Returns  the ApplicationID of the object.
+  *
+  *@sample
+  * <pre>
+  * Dim objThisIntf As PspObject
+  * Dim eApplID As CatPSPIDLApplicationID
+  *  ...
+  * eApplID = objThisIntf.<font color="red">ApplicationID</font>
+  * </pre>
+  *
+  */
+ #pragma  PROPERTY ApplicationID		
+ HRESULT get_ApplicationID(	out /*IDLRETVAL*/ CatPspIDLApplicationID	oApplicationID);
+ 
+ 
+ /**  
+  * Returns  the DomainID of the object.
+  *
+   *@sample
+  * <pre>
+  * Dim objThisIntf As PspObject
+  * Dim eDomanID As CatPspIDLDomainID
+  *  ...
+  * eDomanID = objThisIntf.<font color="red">DomainID</font>
+  * </pre>
+  *
+  */
+ #pragma  PROPERTY DomainID		
+ HRESULT get_DomainID(	out /*IDLRETVAL*/ CatPspIDLDomainID	oDomainID);
+ 
+
+
+/**
+  * Returns the Startup type of the object.
+  *
+  *@sample
+  * <pre>
+  * Dim objThisIntf As PspObject
+  * Dim strStartUp As String
+  * ...
+  * strStartUp = objThisIntf.<font color="red">StartupType</font>
+  * </pre>
+  *
+  */
+ 
+ #pragma PROPERTY StartupType				
+  HRESULT get_StartupType(
+    inout /*IDLRETVAL*/ CATBSTR	oStartupType);
+
+
+};
+
+// Interface name : CATIAPspObject
+                          
+#pragma ID CATIAPspObject "DCE:4a0608a1-939a-4d03-9cb38b190e1231dc"                               
+#pragma DUAL CATIAPspObject
+
+// VB object name : PspObject                        
+#pragma ID PspObject      "DCE:7867ea7a-c1f7-4b1c-ac65dd96aa2c8fc0"                             
+#pragma ALIAS CATIAPspObject PspObject
+
+#endif

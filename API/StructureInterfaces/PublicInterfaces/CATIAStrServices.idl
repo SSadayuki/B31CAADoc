@@ -1,0 +1,221 @@
+#ifndef CATIAStructuralServices_IDL
+#define CATIAStructuralServices_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 09/12/97
+//  But   : Creation
+//
+// ****************************************************************************
+
+  /**
+   * Material orientations. Each geometric object such as a plane or a surface has
+   * an intrinsic orientation. This intrinsic orientation or its reverse can be used 
+   * when using this object as a reference.
+   * @param catStrStandardOrientation
+   * the same
+   * @param  cat StrReverseOrientation
+   * 
+   */
+
+enum CatStrMaterialOrientation {catStrStandardOrientation,
+								catStrReverseOrientation};
+
+  /**
+   * Extremities of a Member object.
+   * @param catStartExtremity
+   * the member's start extremity
+   * @param catEndExtremity
+   * the member's end extremity
+   * @param catBothExtremity
+   * the member's both extremities
+   */
+
+enum CatStrMemberExtremity {catStartExtremity,catEndExtremity,
+							catBothExtremity};
+
+ /**
+   * Anchor points of a @href CATIASection object.
+   * @param catStrBottomLeft
+   * the bottom left anchor point
+   * @param catStrBottomCenter
+   * the bottom center anchor point
+   * @param catStrBottomRight
+   * the bottom right anchor point
+   * @param catStrCenterLeft
+   * the center left anchor point
+   * @param catStrCenterCenter
+   * the center center anchor point
+   * @param catStrCenterRight
+   * the center right anchor point
+   * @param catStrTopLeft
+   * the top left anchor point
+   * @param catStrTopCenter
+   * the top center anchor point
+   * @param catStrTopRight
+   * the top right anchor point
+   * @param catStrGravity
+   * the gravity center anchor point
+   * @param catStrGravityBottom
+   * the anchor point is the vertical projection of the gravity center on the
+   * bottom edge of the sections's profile.
+   * @param catStrGravityLeft
+   * the anchor point is the horizontal projection of the gravity center on the
+   * left edge of the sections's profile.
+   * @param catStrGravityRight
+   * the anchor point is the horizontal projection of the gravity center on the
+   * right edge of the sections's profile.
+   * @param catStrGravityTop
+   * the anchor point is the vertical projection of the gravity center on the
+   * top edge of the sections's profile.
+   * @param catStrUserPoint
+   * the user defined anchor point
+   */
+
+enum CatStrPlacementPoint {catStrDefault,
+							catStrBottomLeft,
+							catStrBottomCenter,
+							catStrBottomRight,
+							catStrCenterLeft,
+							catStrCenterCenter,
+							catStrCenterRight,
+							catStrTopLeft,
+							catStrTopCenter,
+							catStrTopRight,
+							catStrGravity,
+							catStrGravityBottom,
+							catStrGravityLeft,
+							catStrGravityRight,
+							catStrGravityTop,
+							catStrUserPoint
+							};
+
+ /**
+   * Kinds of @href CATIAStrCutback objects. Defines the plane that will cut the members extremities.
+   * @param catStrNormalType
+   * the cut plane is normal to the relimited member axis.
+   * @param catStrWeldedType
+   * the cut plane is defined by the relimiting member intersecting face.
+   * @param catStrMiteredType
+   * the cut plane is the mean plane between the two members.
+   * @param catStrNotchingType
+   * not yet implemented.
+   */
+
+enum CatStrCutbackType {catStrNoneType,
+						catStrNormalType,
+						catStrWeldedType,
+						catStrMiteredType,
+						catStrNotchingType
+						};
+
+ /**
+   * Not yet implemented.
+   */
+
+enum CatStrCreationMode {catStrPartMode,
+				         catStrSheetMetalMode
+					     };
+
+ /**
+   * Associative mode. Creating a cutback uses, in a member, contextual geometry from 
+   * other parts. This geometry can be copied with or without a link on the original
+   * geometry.
+   * @param catStrWithLinkMode
+   * a links is kept
+   * @param catStrNoLinkMode
+   * no links is kept
+   * @param catStrWithRefLinkMode
+   * a reference links is kept
+   */
+
+enum CatStrLinkMode {catStrWithLinkMode,
+					 catStrNoLinkMode,
+					 catStrRefRefWithLinkMode,
+					 catStrRefRefNoLinkMode
+					 };
+						  
+ /**
+   * Usage modes of a plane used as a support for a member support axis.
+   * @param catStrNonePlane
+   * The support is not a plane.
+   * @param catStrOnPlane
+   * The member support axis is in the support plane.
+   * @param catStrParallelToPlane
+   * The member support axis is in a plane parallel to the support plane.
+   */
+
+enum CatStrPlaneMode {catStrNoneMode,
+					catStrOnPlane,
+					catStrParallelToPlane
+					    };
+
+ /**
+   * @nodoc
+   */
+
+enum CatStrProfileFace {catStrFaceStart,
+				        catStrFaceEnd,
+				        catStrFaceTop,
+						catStrFaceBottom,
+						catStrFaceLeft,
+						catStrFaceRight
+					    };
+
+ /**
+   * @nodoc
+   */
+
+enum CatStrProductOption {catStrAddProduct,
+				        catStrAddComponent,
+						catStrAddPart
+					    };
+ /**
+   * Property type.
+   * @param catStrNonePlane
+   * The support is not a plane.
+   * @param catStrOnPlane
+   * The member support axis is in the support plane.
+   * @param catStrParallelToPlane
+   * The member support axis is in a plane parallel to the support plane.
+   */
+						
+enum CATStrSectionProperties
+{
+  CatStrArea, CatStrInertiaXX, CatStrInertiaYY, CatStrModuleInertiaX, CatStrModuleInertiaY,
+	  CatStrGirationModuleX, CatStrGirationModuleY
+};
+
+#endif

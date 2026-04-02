@@ -1,0 +1,99 @@
+#ifndef CATIASetOfEquation_IDL
+#define CATIASetOfEquation_IDL
+/*IDLREP*/
+
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+#include "CATIARelation.idl"
+#include "CATIAParameter.idl"
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/**
+ * Represents the set of equations object.
+ */
+interface CATIASetOfEquation : CATIARelation
+{
+	/**
+	* @nodoc. Specifies that the parameter if index iIndex must be considered as output parameter. 
+	* @param iIndex
+	* The searched input parameter index. Legal values: 1 &le; iIndex &le; NbInParameters.
+	*/
+	HRESULT SetInputParameters(in long iIndex);
+
+
+	/**
+	* Specifies that the parameter must be considered as input parameter. 
+	* @param iParameter The parameter to set up as input of the SetOfEquationObject
+	*/
+	HRESULT SetParameterAsInput(in CATIAParameter iParameter);
+
+	/**
+	* Specifies that the parameter must be considered as an output parameter. 
+	* @param iParameter The parameter to set up as output of the SetOfEquationObject
+	*/
+	HRESULT SetParameterAsOutput(in CATIAParameter iParameter);
+
+    /**
+    * Sets the calculation precision.
+	* @param iEps a precision
+	* <br><b>Legal values</b>: 1e-10 &le; iEps &le; 0.1
+    */
+    HRESULT SetPrecision(in double iEps);
+
+    /**
+    * Returns the calculation precision.
+    */
+    HRESULT GetPrecision(out /*IDLRETVAL*/ double oEps);
+
+    /**
+    * Specifies whether the Gauss method should be used during the symbolic transformation.
+	* <br><b>TRUE</b> to use the Gauss method during the symbolic transformation.
+    */
+    HRESULT UseSymbolcTransformations(in boolean iGauss);
+
+    /**
+    * Returns whether the Gauss method is used during the symbolic transformation.
+	* <br><b>TRUE</b> if the Gauss method is used during the symbolic transformation.
+    */
+    HRESULT GetSymbolcTransformations(out /*IDLRETVAL*/ boolean oGauss);
+
+    /**
+    * Specifies whether the 'Stop Dialog' should be shown during calculations.
+	* <br><b>TRUE</b> to show the 'Stop Dialog' during calculations.
+    */
+    HRESULT UseStopDialog(in boolean iUsed);
+
+    /**
+    * Returns whether the "Stop Dialog" will be shown during calculations.
+	* <br><b>TRUE</b> if the 'Stop Dialog' will be shown during calculations.
+    */
+    HRESULT IsStopDialog(out /*IDLRETVAL*/ boolean oUsed);
+
+    /**
+    * Sets a maximum time to the model calculations.
+    */
+    HRESULT SetMaxCalculationTime(in long iMaxTime);
+
+    /**
+    * Returns the maximum time of the model calculations.
+    */
+    HRESULT GetMaxCalculationTime(out /*IDLRETVAL*/ long oMaxTime);
+
+};
+
+// Interface name : CATIASetOfEquation
+#pragma ID CATIASetOfEquation "DCE:5c3e5f20-220a-11d5-9ef800508b617ae8"
+#pragma DUAL CATIASetOfEquation
+
+// VB object name : SetOfEquation (Id used in Visual Basic)
+#pragma ID SetOfEquation "DCE:8ceee390-220a-11d5-9ef800508b617ae8"
+#pragma ALIAS CATIASetOfEquation SetOfEquation
+
+
+#endif // CATIASetOfEquation_IDL
+

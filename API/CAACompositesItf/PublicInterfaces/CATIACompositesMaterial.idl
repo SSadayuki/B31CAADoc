@@ -1,0 +1,124 @@
+#ifndef CATIACompositesMaterial_IDL
+#define CATIACompositesMaterial_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIACompositesMaterial:                           
+// Exposed interface for Composites Material object
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun09 Creation					EHR
+//=================================================================
+
+#include "CATIABase.idl"
+
+/**
+ * Represents a Composites Material object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIACompositesMaterial : CATIABase
+{
+
+  /**
+  * Returns true if a composites properties exists on the current material.
+  */
+  HRESULT ExistCompositesData(out /*IDLRETVAL*/ short bAnswer);
+
+  /**
+  * Create a default composites properties on the current material.
+  */
+  HRESULT CreateCompositesData();
+
+#pragma PROPERTY MaterialType
+  /**
+   * returns or set the material type defined in Composites tab.
+   * the input or output value is the following:
+   * 1 for Undefiened
+   * 2 for Unidirectional
+   * 3 for Bi Directional
+   * 4 for NCF (Non Crimp Fabric)
+   * 5 for Non Structural
+   */
+  HRESULT get_MaterialType(out /*IDLRETVAL*/ short oMaterialType);
+  HRESULT put_MaterialType(in short iMaterialType);
+
+#pragma PROPERTY UncuredThickness
+  /**
+   * returns or set the uncured thicknes defined in Composites tab in mm.
+   */
+  HRESULT get_UncuredThickness(out /*IDLRETVAL*/ double oUncuredThickness);
+  HRESULT put_UncuredThickness(in double iUncuredThickness);
+
+#pragma PROPERTY CuredThickness
+  /**
+   * returns or set the cured thicknes defined in Composites tab in mm.
+   */
+  HRESULT get_CuredThickness(out /*IDLRETVAL*/ double oCuredThickness);
+  HRESULT put_CuredThickness(in double iCuredThickness);
+
+#pragma PROPERTY MaxDeformation
+  /**
+   * returns or set the maximum deformation defined in Composites tab in radian.
+   */
+  HRESULT get_MaxDeformation(out /*IDLRETVAL*/ double oMaxDeformation);
+  HRESULT put_MaxDeformation(in double iMaxDeformation);
+
+#pragma PROPERTY LimitDeformation
+  /**
+   * returns or set the limit deformation defined in Composites tab in radian.
+   */
+  HRESULT get_LimitDeformation(out /*IDLRETVAL*/ double oLimitDeformation);
+  HRESULT put_LimitDeformation(in double iLimitDeformation);
+
+#pragma PROPERTY FabricWidth
+  /**
+   * returns or set the fabric width defined in Composites tab in mm.
+   */
+  HRESULT get_FabricWidth(out /*IDLRETVAL*/ double oFabricWidth);
+  HRESULT put_FabricWidth(in double iFabricWidth);
+
+#pragma PROPERTY SurfacicWeigth
+  /**
+   * returns or set the surfacic weigth defined in Composites tab in kg per m2.
+   */
+  HRESULT get_SurfacicWeigth(out /*IDLRETVAL*/ double oSurfacicWeigth);
+  HRESULT put_SurfacicWeigth(in double iSurfacicWeigth);
+
+#pragma PROPERTY MassCost
+  /**
+   * returns or set the cost per mess defined in Composites tab in $ per kg.
+   */
+  HRESULT get_MassCost(out /*IDLRETVAL*/ double oMassCost);
+  HRESULT put_MassCost(in double iMassCost);
+
+};
+
+// Interface Name : CATIACompositesMaterial
+#pragma ID CATIACompositesMaterial "DCE:67031798-4ff4-41fa-b5469214651847fa"
+#pragma DUAL CATIACompositesMaterial
+ 
+// VB Object Name : CompositesMaterial
+#pragma ID CompositesMaterial "DCE:1ab5e43a-4ff4-41fa-b5469214651847fa"
+#pragma ALIAS CATIACompositesMaterial CompositesMaterial
+
+#endif
+// CATIACompositesMaterial_IDL
+
+
+
+
+
+
+

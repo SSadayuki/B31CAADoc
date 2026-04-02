@@ -1,0 +1,86 @@
+#ifndef CATIADraftDomains_IDL
+#define CATIADraftDomains_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIADraftDomains:                           
+// Exposed interface for DraftDomains collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                        Ph Baucher
+// Dec97 Modification                                     L Lalere
+// Feb98 COM compliance					  L Lalere
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIADraftDomain;
+
+/**
+ * The collection of draft domains used by the draft shape.
+ */
+//-----------------------------------------------------------------
+interface CATIADraftDomains : CATIACollection
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+    /**
+     * Returns a draft domain using its index or its name from the
+     * DraftDomains collection.
+     * @param iIndex
+     *   The index or the name of the draft domain to retrieve from
+     *   the collection of draft domains.
+     *   As a numerics, this index is the rank of the draft domain
+     *   in the collection.
+     *   The index of the first draft domain in the collection is 1, and
+     *   the index of the last draft domain is Count.
+     *   As a string, it is the name you assigned to the draft domain using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved draft domain
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>domain</tt> the third
+     * draft domain of the <tt>firstDraftDomains</tt> collection:
+     * <pre>
+     * Set domain = firstDraftDomains.<font color="red">Item</font>(3)
+     *</pre>
+     * </dl>
+     */
+    HRESULT        Item
+                ( in                CATVariant          iIndex
+                , out /*IDLRETVAL*/ CATIADraftDomain    oDraftDomain
+                );
+
+};
+
+// Interface name : CATIADraftDomains
+#pragma ID CATIADraftDomains "DCE:7cef791f-60bd-11d1-a27d0000f87546fd"
+#pragma DUAL CATIADraftDomains
+
+// VB object name : DraftDomains (Id used in Visual Basic)
+#pragma ID DraftDomains "DCE:7d23ecdb-60bd-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIADraftDomains DraftDomains
+
+
+#endif
+// CATIADraftDomains_IDL
+

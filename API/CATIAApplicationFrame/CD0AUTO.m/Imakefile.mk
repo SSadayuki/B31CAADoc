@@ -1,0 +1,12 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= NONE
+LINK_WITH= JS0GROUP JS0FM DI0STATE ListImpl SystemUUID BatchInfrastructureUUID \
+           CATScriptReplayInteractions YP00IMPL
+
+OS = AIX
+SYS_LIBS=-lXm
+
+OS = IRIX
+SYS_LIBS=-lXm

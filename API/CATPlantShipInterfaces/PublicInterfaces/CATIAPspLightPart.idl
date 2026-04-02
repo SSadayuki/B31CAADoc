@@ -1,0 +1,90 @@
+#ifndef CATIAPspLightPart_IDL
+#define CATIAPspLightPart_IDL
+
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+interface CATIAPspListOfDoubles;
+
+#include "CATIAProduct.idl"
+#include "CATSafeArray.idl"
+#include "CATIABase.idl"
+
+
+/**
+ * Represents the light part.
+ * <b>Role</b>: To access light object data.
+ */
+
+interface CATIAPspLightPart : CATIABase
+{
+
+ /**
+  * Retrieves the points defining the object.
+  * @param iRelAxis
+  *   The relative axis object (Nothing means relative to parent).
+  * @return
+  *   List of points defining object. A list of X-Y-Z coordinates 
+  * of the points. 3 doubles per point.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightPart
+  * Dim objArg1 As Product
+  * Dim objArg2 As PspListOfDoubles
+  * Set objArg1 = Nothing
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">GetDefinition</font> (objArg1)
+  * </pre>
+  *    
+  */
+
+
+  HRESULT GetDefinition (            
+            in CATIAProduct	iRelAxis,
+            out /*IDLRETVAL*/ CATIAPspListOfDoubles oListPoints );
+
+ /**
+  * Set the points defining the light object.
+  * @param iRelAxis
+  *   The relative axis object (Nothing means relative to parent).
+  * @param oListPoints
+  *   List of points defining object. A list of X-Y-Z coordinates 
+  * of the points. 3 doubles per point.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightPart
+  * Dim objArg1 As CATSafeArrayVariant
+  * Dim dbVar2(3) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetDefinition</font> objArg1, dbVar2
+  * </pre>
+  *    
+  */
+
+
+  HRESULT SetDefinition (            
+            in CATIAProduct	iRelAxis,
+            in CATSafeArrayVariant iListPoints );
+  
+
+      
+};
+
+// Interface name : CATIAPspLightPart
+
+#pragma ID CATIAPspLightPart "DCE:24f84df6-a0af-4c59-aa6f924dbef8d251"
+#pragma DUAL CATIAPspLightPart
+
+// VB object name : PspLightPart
+#pragma ID PspLightPart      "DCE:c10930d3-9987-4253-92b2e593c4f0dac2"
+#pragma ALIAS CATIAPspLightPart PspLightPart
+
+#endif

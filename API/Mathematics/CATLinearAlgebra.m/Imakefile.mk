@@ -1,0 +1,15 @@
+#
+BUILT_OBJECT_TYPE = NONE
+#
+
+#
+OS = Windows_NT
+#if os win_b64
+### A VOIR AVEC ABI !!! ###
+### OPTIMIZATION_CPP = /GL /Ox
+LOCAL_CCFLAGS    = /D_NOPRECOMPIL /D_WIN64
+### LOCAL_LDFLAGS    = /LTCG
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+#

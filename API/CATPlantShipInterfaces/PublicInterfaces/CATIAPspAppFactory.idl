@@ -1,0 +1,300 @@
+#ifndef CATIAPspAppFactory_IDL 
+#define CATIAPspAppFactory_IDL 
+/*IDLREP*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004    
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+interface CATIAPspLogicalLine;   
+interface CATIAPspGroup;
+interface CATIAPspListOfObjects;
+    
+#include "CATBSTR.idl"    
+#include "CATIABase.idl"
+#include "CatPspIDLDomainID.idl"
+#include "CATIAProduct.idl"
+
+/**
+ * Represents the application factory.
+ * <b>Role</b>: To create, instanciate, delete and query groups,
+ * logical lines, compartments and parts.
+ */
+interface CATIAPspAppFactory : CATIABase
+{
+ /**
+  * Returns a list of Physical objects in the node.
+  * @param iCurrentProduct
+  *   The current Product to query.
+  * @param iDomainID
+  *   Physical objects that have this domain ID. To get list of all
+  *   in all domains set iDomainID= catPspIDLNone.
+  * @return
+  *   A list of physical objects
+  *   (A list of PspPhysical objects)  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As Product
+  * Dim iobjArg2 As CatPspIDLDomainID
+  * Dim objArg3 As PspListOfObjects
+  * 
+  *  ...
+  * Set ObjArg3 = objThisIntf.<font color="red">ListPhysicals</font> (iobj1, iobjArg2 )
+  * </pre>
+  *    
+  */
+  HRESULT ListPhysicals ( 
+    in CATIAProduct iCurrentProduct, 
+    in CatPspIDLDomainID iDomainID,    
+    out /*IDLRETVAL*/CATIAPspListOfObjects oListPhysicals
+    );
+
+
+  /**
+  * Returns a PspLogicalLine Logical line Instance.
+  * @param iCurrentProduct
+  *   The current Product into which a logical line will be instanciated.
+  * @param iLogicalLineID
+  *   Logical line ID to get from the logical line catalog.
+  * @return
+  *   Logical line instance.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As Product
+  * Dim iStrVar2 As String
+  *  ...
+  * objThisIntf.<font color="red">GetLogicalLine</font> (iobj1,iStrVar2 )
+  * </pre>
+  *    
+  */
+  HRESULT GetLogicalLine ( 
+    in CATIAProduct iCurrentProduct, 
+    in CATBSTR      iLogicalLineID, 
+    out /*IDLRETVAL*/ CATIAPspLogicalLine	oLogicalLine);
+    
+  /**
+  * Returns a list of logical lines in the current Product.
+  * @param iCurrentProduct
+  *   The current Product to query.. 
+  * @return
+  *   A list of logical Lines
+  *   (A list of PspLogicalLine)  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As Product
+  * Dim objArg2 As PspListOfObjects
+  * 
+  *  ...
+  * Set ObjArg2 = objThisIntf.<font color="red">ListLogicalLines</font> (iobj1 )
+  * </pre>
+  *    
+  */
+  HRESULT ListLogicalLines ( 
+    in CATIAProduct iCurrentProduct,     
+    out /*IDLRETVAL*/CATIAPspListOfObjects oListLogLines
+    );
+
+ /**
+  * Delete a logical line instance.
+  * @param iLogicalLine
+  *   Logical Line to be deleted
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As PspLogicalLine
+  *
+  * 
+  *  ...
+  * objThisIntf.<font color="red">DeleteLogicalLine</font> iobj1
+  * </pre>
+  *    
+  */
+
+  HRESULT DeleteLogicalLine (     
+    in CATIAPspLogicalLine iLogicalLine
+    );
+
+ /**
+  * Instanciate a compartment from the catalog into the current Product.
+  * @param iCurrentProduct
+  *   The current Product into which a compartment will be instanciated.
+  * @param iCompartmentID
+  *   Compartment ID to get from the compartment catalog.
+  * @return
+  *   Compartment instance.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As Product
+  * Dim iStrVar2 As String
+  * Dim iObj3 As PspGroup
+  *  ...
+  * Set iObj3=objThisIntf.<font color="red">GetCompartment</font> (iobj1,iStrVar2 )
+  * </pre>
+  *    
+  */
+  HRESULT GetCompartment ( 
+    in CATIAProduct iCurrentProduct, 
+    in CATBSTR      iCompartmentID, 
+    out /*IDLRETVAL*/ CATIAPspGroup	oCompartment);
+    
+  /**
+  * Retrieves a list of Compartments in the current Product.
+  * @param iCurrentProduct
+  *   The current Product to query.
+  * @return
+  *   A list of Compartmemts
+  *   ( A list of CATIAPspGroup)
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As Product
+  * Dim objArg2 As PspListOfObjects
+  * 
+  *  ...
+  * Set ObjArg2 = objThisIntf.<font color="red">ListCompartments</font> (iobj1 )
+  * </pre>
+  *    
+  */
+  HRESULT ListCompartments( 
+    in CATIAProduct iCurrentProduct,     
+    out /*IDLRETVAL*/CATIAPspListOfObjects oListCompartments
+    );
+  	
+ /**
+  * Delete a compartment instance.
+  * @param iCompartment
+  *   Compartment to be deleted   
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As PspGroup
+  *
+  * 
+  *  ...
+  * objThisIntf.<font color="red">DeleteCompartment</font> iobj1
+  * </pre>
+  *    
+  */
+
+  HRESULT DeleteCompartment (     
+    in CATIAPspGroup iCompartment
+    );
+		
+
+ /**
+  * Creates a group in the current Product.
+  * @param iCurrentProduct
+  *   The current Product to query.
+  * @param iGroupType
+  *   Group Startup type.
+  * @param iGroupID
+  *   Group ID. A default ID will be generated if input is NULL.
+  * @return
+  *   Created Group instance.
+  *   
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As Product
+  * Dim iStrVar2 As String
+  * Dim iStrVar3 As String
+  * Dim iObj4 As PspGroup
+  *  ...
+  * Set iObj4=objThisIntf.<font color="red">CreateGroup</font> (iobj1,iStrVar2,iStrVar3 )
+  * </pre>
+  *    
+  */
+  HRESULT CreateGroup ( 
+    in CATIAProduct iCurrentProduct, 
+    in CATBSTR      iGroupType, 
+    in CATBSTR      iGroupID, 
+    out /*IDLRETVAL*/ CATIAPspGroup	oGroup);
+    
+  /**
+  * Retrieve a list of Groups in the current Product.
+  * @param iCurrentProduct
+  *   The current Product to query.. 
+  * @return  
+  *   A list of Groups
+  *   ( A list of CATIAPspGroup)
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As Product
+  * Dim objArg2 As ListOfObjects
+  * 
+  *  ...
+  * Set ObjArg2 = objThisIntf.<font color="red">ListGroups</font> (iobj1)
+  * </pre>
+  *    
+  */
+  HRESULT ListGroups( 
+    in CATIAProduct iCurrentProduct,     
+    out /*IDLRETVAL*/CATIAPspListOfObjects oListGroups
+    );
+  	
+ /**
+  * Delete a group.
+  * @param iGroup
+  *   Group to be deleted.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As PspGroup
+  *
+  * 
+  *  ...
+  * objThisIntf.<font color="red">DeleteGroup</font> iobj1
+  * </pre>
+  *    
+  */
+
+  HRESULT DeleteGroup (     
+    in CATIAPspGroup iGroup
+    );
+		
+    
+ /**  
+  * Delete a part.
+  * @param iProduct
+  *   Part to be deleted.  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAppFactory
+  * Dim iobj1 As Product
+  *
+  * 
+  *  ...
+  * objThisIntf.<font color="red">DeletePart</font> iobj1
+  * </pre>
+  *    
+  */
+
+  HRESULT DeletePart (     
+    in CATIAProduct iPart
+    );
+		
+  
+};
+    
+// Interface name : CATIAPspAppFactory
+#pragma ID CATIAPspAppFactory "DCE:ff8ba6db-443f-42bf-a80a14251c825b39"
+#pragma DUAL CATIAPspAppFactory
+    
+// VB object name : PspAppFactory
+#pragma ID      PspAppFactory "DCE:908945e0-0b6e-4f22-ba1c597bbb2a9478"
+#pragma ALIAS CATIAPspAppFactory PspAppFactory
+    
+#endif 
+    

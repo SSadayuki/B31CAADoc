@@ -1,0 +1,127 @@
+//=============================================================================
+// COPYRIGHT Dassault Systemes 2013
+//=============================================================================
+// CATIASfmSplitPlate
+//   Interface for managing Weld Feature attributes.
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar  Creation                                                Bhupendra MITHE
+//=============================================================================
+
+#ifndef CATIASfmWeld_IDL
+#define CATIASfmWeld_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl" 
+#include "CATBSTR.idl" 
+
+/**
+* Interface to manage the Structure Functional Modeler Weld object.
+* <b>Role</b>:  Provides access to each Weld object's attributes.
+*/
+
+interface CATIASfmWeld : CATIABase
+{
+  /**
+  * Gets Weld Type.
+  * @param oWeldType [out]
+  *      The retrieved Weld Type.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets Weld Feature.
+  * <pre>
+  * Dim ListWelds As SfmWelds
+  * Set ListWelds = SplitPlate.GetWelds(Nothing)
+  * Dim WeldFeature As SfmWeld
+  * Set WeldFeature = ListWelds.Item(1)
+  * Dim EachWeld As SfmWeld
+  * ustrWeldType = EachWeld.<font color="red">WeldType</font>
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY WeldType
+  HRESULT get_WeldType(inout /*IDLRETVAL*/ CATBSTR oWeldType);
+
+  /**
+  * Gets Added Material.
+  * @param oAddedMaterial [out]
+  *      The retrieved Added Material.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets Weld Feature.
+  * <pre>
+  * Dim EachWeld As SfmWeld
+  * ustrAddedMaterial = EachWeld.<font color="red">AddedMaterial</font>
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY AddedMaterial
+  HRESULT get_AddedMaterial(inout /*IDLRETVAL*/ CATBSTR oAddedMaterial);
+
+  /**
+  * Gets Fit Up.
+  * @param oFitUp [out]
+  *      The retrieved Fit Up.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets Weld Feature.
+  * <pre>
+  * Dim EachWeld As SfmWeld
+  * ustrFitUp = EachWeld.<font color="red">FitUp</font>
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY FitUp
+  HRESULT get_FitUp(inout /*IDLRETVAL*/ CATBSTR oFitUp);
+
+  /**
+  * Gets Edge Preparation.
+  * @param oEdgePreparation [out]
+  *      The retrieved Edge Preparation.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets Weld Feature.
+  * <pre>
+  * Dim EachWeld As SfmWeld
+  * ustrEdgePrep = EachWeld.<font color="red">EdgePreparation</font>
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY EdgePreparation
+  HRESULT get_EdgePreparation(inout /*IDLRETVAL*/ CATBSTR oEdgePreparation);
+
+};
+
+// Interface name : CATIASfmWeld
+#pragma ID CATIASfmWeld "DCE:4A965004-B637-42f2-94E1C9F3AC3EB874"
+#pragma DUAL CATIASfmWeld
+
+// VB object name : SfmWeld
+#pragma ID SfmWeld "DCE:09B62DB4-92DB-4ca0-B7D637BCCF314E93"
+#pragma ALIAS CATIASfmWeld SfmWeld
+
+#endif
+

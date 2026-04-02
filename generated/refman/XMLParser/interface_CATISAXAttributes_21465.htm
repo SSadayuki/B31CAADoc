@@ -1,0 +1,515 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>XMLParser CATISAXAttributes Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../XMLParser.htm" href="../XMLParser.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "XMLParser";	}
+		function getCurrentObjectName() { 
+ 	return "CATISAXAttributes"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>XMLParser Framework:  CATISAXAttributes Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATISAXAttributes_21465','CATISAXAttributes','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATISAXAttributes</b>
+</p>
+<p>
+<b><i> Interface for a list of XML attributes.</i></b><br>
+
+ 
+ <p>This interface allows access to a list of attributes in three different ways:</p>
+ <ol>
+ <li>by attribute index;</li>
+ <li>by Namespace-qualified name; or</li>
+ <li>by qualified (prefixed) name.</li>
+ </ol>
+ 
+ <p>The list will not contain attributes that were declared
+ <tt>#IMPLIED</tt> but not specified in the start tag.  It will also not
+ contain attributes used as Namespace declarations (xmlns*) unless
+ the <tt>http://xml.org/sax/features/namespace-prefixes</tt> 
+ feature is set to <tt>TRUE</tt> (it is <tt>FALSE</tt> by 
+ default).</p>
+ 
+ <p>If the namespace-prefixes feature (see above) is <tt>FALSE</tt>, 
+ access by qualified name may not be available; if the 
+ <tt>http://xml.org/sax/features/namespaces</tt>
+ feature is <tt>FALSE</tt>, access by Namespace-qualified names 
+ may not be available.</p>
+ 
+ <p>This interface replaces the SAX1 <script type="text/javascript"> activateLinkAnchor('CATISAXAttributeList','','CATISAXAttributeList') </script> interface, which does not  contain Namespace support.  In addition to Namespace support, it 
+ adds the 
+<script type="text/javascript"> activateLinkAnchor('','GetIndex','GetIndex') </script> methods (below).</p> 
+ <p>The order of attributes in the list is unspecified, and will
+ vary from implementation to implementation.</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATISAXXMLReader','SetFeature','CATISAXXMLReader.SetFeature') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetIndex(CATUnicodeString&amp;,unsigned int&amp;)"><b>GetIndex</b></a>(CATUnicodeString&amp;,unsigned int&amp;)
+</td><td id='tdright'>  Retrieves the index of an attribute by XML 1&middot;0 qualified name.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetIndex(CATUnicodeString&amp;,CATUnicodeString&amp;,unsigned int&amp;)"><b>GetIndex</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;,unsigned int&amp;)
+</td><td id='tdright'>  Retrieves the index of an attribute by Namespace name.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLength(unsigned int&amp;)"><b>GetLength</b></a>(unsigned int&amp;)
+</td><td id='tdright'>  Retrieves the number of attributes in this list.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLocalName(unsigned int,CATUnicodeString&amp;)"><b>GetLocalName</b></a>(unsigned int,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves an attribute's XML 1&middot;0 local name by index.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetQName(unsigned int,CATUnicodeString&amp;)"><b>GetQName</b></a>(unsigned int,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves an attribute's XML 1&middot;0 qualified name by index.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetType(unsigned int,CATUnicodeString&amp;)"><b>GetType</b></a>(unsigned int,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the type of an attribute (by position).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetType(CATUnicodeString&amp;,CATUnicodeString&amp;)"><b>GetType</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the type of an attribute (by XML 1&middot;0 qualified name).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetType(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)"><b>GetType</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the type of an attribute (by Namespace name).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetURI(unsigned int,CATUnicodeString&amp;)"><b>GetURI</b></a>(unsigned int,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves an attribute's Namespace URI by index.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetValue(unsigned int,CATUnicodeString&amp;)"><b>GetValue</b></a>(unsigned int,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the value of an attribute (by position).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetValue(CATUnicodeString&amp;,CATUnicodeString&amp;)"><b>GetValue</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the value of an attribute (by XML 1&middot;0 qualified name).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetValue(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)"><b>GetValue</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the value of an attribute (by Namespace name).
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetIndex"></a><a id="GetIndex(CATUnicodeString&amp;,unsigned int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetIndex</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iQualifiedName</span>,<script type="text/javascript"> activateLink('unsigned int','unsigned int&amp;')</script> <span class='param'>oIndex</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the index of an attribute by XML 1&middot;0 qualified name.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iQualifiedName</span></dt>
+   <dd> The qualified (prefixed) name.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oIndex</span></dt>
+   <dd> The index of the attribute.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if the attribute is not in the list, <tt>S_OK</tt> otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetIndex"></a><a id="GetIndex(CATUnicodeString&amp;,CATUnicodeString&amp;,unsigned int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetIndex</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iURI</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iLocalName</span>,<script type="text/javascript"> activateLink('unsigned int','unsigned int&amp;')</script> <span class='param'>oIndex</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the index of an attribute by Namespace name.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iURI</span></dt>
+   <dd> The Namespace URI, or the empty string if the name has no Namespace URI.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLocalName</span></dt>
+   <dd> The attribute's local name.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oIndex</span></dt>
+   <dd> The index of the attribute.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if the attribute is not in the list, <tt>S_OK</tt> otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLength"></a><a id="GetLength(unsigned int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetLength</span><span class = 'signature'>(<script type="text/javascript"> activateLink('unsigned int','unsigned int&amp;')</script> <span class='param'>oLength</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the number of attributes in this list.
+
+ Once you know the number of attributes, you can iterate through the list.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oLength</span></dt>
+   <dd> The number of attributes in the list.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLocalName"></a><a id="GetLocalName(unsigned int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetLocalName</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('unsigned int','unsigned int')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oName</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves an attribute's XML 1&middot;0 local name by index.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPosition</span></dt>
+   <dd>  The attribute index (zero-based).
+ 
+ </ dd>
+    <dt><span class='paramitem'> oName</span></dt>
+   <dd> The local name, or the empty string if Namespace processing is not being performed.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if the index is out of range, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetLength','GetLength') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetQName"></a><a id="GetQName(unsigned int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetQName</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('unsigned int','unsigned int')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oName</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves an attribute's XML 1&middot;0 qualified name by index.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPosition</span></dt>
+   <dd>  The attribute index (zero-based).
+ 
+ </ dd>
+    <dt><span class='paramitem'> oName</span></dt>
+   <dd> The XML 1&middot;0 qualified name, or the empty string if none is available.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if the index is out of range, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetLength','GetLength') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetType"></a><a id="GetType(unsigned int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetType</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('unsigned int','unsigned int')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oType</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the type of an attribute (by position).
+
+ The attribute type is one of the strings <tt>"CDATA"</tt>, <tt>"ID"</tt>,
+ <tt>"IDREF"</tt>, <tt>"IDREFS"</tt>, <tt>"NMTOKEN"</tt>, <tt>"NMTOKENS"</tt>, <tt>"ENTITY"</tt>, <tt>"ENTITIES"</tt>,
+ or <tt>"NOTATION"</tt> (always in upper case).
+
+ If the parser has not read a declaration for the attribute,
+ or if the parser does not report attribute types, then it must
+ return the value <tt>"CDATA"</tt> as stated in the XML 1&middot;0 Recommentation
+ (clause 3.3.3, "Attribute-Value Normalization").
+
+ For an enumerated attribute that is not a notation, the
+ parser will report the type as <tt>"NMTOKEN"</tt>.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPosition</span></dt>
+   <dd> The index of the attribute in the list (starting at 0).
+ 
+ </ dd>
+    <dt><span class='paramitem'> oType</span></dt>
+   <dd> The attribute type as a string.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if the index is out of range, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetLength','GetLength') </script>, <script type="text/javascript"> activateLinkAnchor('','GetType','GetType') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetType"></a><a id="GetType(CATUnicodeString&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetType</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iQualifiedName</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oType</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the type of an attribute (by XML 1&middot;0 qualified name).
+
+ The return value is the same as the return value for
+ 
+<script type="text/javascript"> activateLinkAnchor('','GetType','GetType') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iQualifiedName</span></dt>
+   <dd>  The XML 1&middot;0 qualified name.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oType</span></dt>
+   <dd> The attribute type as a string.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if no such attribute exists, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetType','GetType') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetType"></a><a id="GetType(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetType</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iURI</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iLocalName</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oType</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the type of an attribute (by Namespace name).
+
+ The return value is the same as the return value for
+ 
+<script type="text/javascript"> activateLinkAnchor('','GetType','GetType') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iURI</span></dt>
+   <dd> The Namespace URI, or the empty string if the name has no Namespace URI.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLocalName</span></dt>
+   <dd> The attribute's local name.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oType</span></dt>
+   <dd> The attribute type as a string.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if no such attribute exists, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetType','GetType') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetURI"></a><a id="GetURI(unsigned int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetURI</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('unsigned int','unsigned int')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oURI</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves an attribute's Namespace URI by index.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPosition</span></dt>
+   <dd>  The attribute index (zero-based).
+ 
+ </ dd>
+    <dt><span class='paramitem'> oURI</span></dt>
+   <dd> The Namespace URI, or the empty string if none is available.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if the index is out of range, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetLength','GetLength') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetValue"></a><a id="GetValue(unsigned int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('unsigned int','unsigned int')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the value of an attribute (by position).
+
+ If the attribute value is a list of tokens (IDREFS,
+ ENTITIES, or NMTOKENS), the tokens will be concatenated
+ into a single string separated by whitespace.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPosition</span></dt>
+   <dd> The index of the attribute in the list (starting at 0).
+ 
+ </ dd>
+    <dt><span class='paramitem'> oValue</span></dt>
+   <dd> The attribute value as a string
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if the index is out of range, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetLength','GetLength') </script>, <script type="text/javascript"> activateLinkAnchor('','GetValue','GetValue') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetValue"></a><a id="GetValue(CATUnicodeString&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iQualifiedName</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the value of an attribute (by XML 1&middot;0 qualified name).
+
+ The return value is the same as the return value for
+ 
+<script type="text/javascript"> activateLinkAnchor('','GetValue','GetValue') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iQualifiedName</span></dt>
+   <dd> The XML 1&middot;0 qualified name.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oValue</span></dt>
+   <dd> The attribute value as a string, or null if no such attribute exists.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if no such attribute exists, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetValue','GetValue') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetValue"></a><a id="GetValue(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iURI</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iLocalName</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the value of an attribute (by Namespace name).
+
+ The return value is the same as the return value for
+ 
+<script type="text/javascript"> activateLinkAnchor('','GetValue','GetValue') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iURI</span></dt>
+   <dd> The Namespace URI, or the empty string if the name has no Namespace URI.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLocalName</span></dt>
+   <dd> The attribute's local name.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oValue</span></dt>
+   <dd> The attribute value as a string, or null if no such attribute exists.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The method returns <tt>E_FAIL</tt> if no such attribute exists, <tt>S_OK</tt> otherwise.
+
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetValue','GetValue') </script></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATISAXAttributes.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATXMLParserItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

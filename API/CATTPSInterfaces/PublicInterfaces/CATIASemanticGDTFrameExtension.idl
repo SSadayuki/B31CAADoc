@@ -1,0 +1,77 @@
+#ifndef CATIASemanticGDTFrameExtension_IDL
+#define CATIASemanticGDTFrameExtension_IDL
+
+// COPYRIGHT Dassault Systemes 2018
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIADatumSimple;
+
+/**
+ * Interface to parse Semantic GDT auxiliary feature.
+ * <br />Its allows getting information of Intersection Plane, Orientation Plane,
+ * Collection Plane or Direction Feature.
+ * (ISO Standard only).
+ */
+interface CATIASemanticGDTFrameExtension : CATIABase 
+{
+  /**
+   * Gets the Type.
+   * @param oType
+   *   The Type.
+   *
+   * <br />List of types available:
+   * <br /> Type = "FTA_IntersectionPlane"
+   * <br /> Type = "FTA_OrientationPlane"
+   * <br /> Type = "FTA_CollectionPlane"
+   * <br /> Type = "FTA_DirectionFeature"
+   */
+#pragma PROPERTY Type
+  HRESULT get_Type (inout /*IDLRETVAL*/ CATBSTR oType);
+
+  /**
+   * Gets the direction specification.
+   * @param oDirSpec
+   *   The Direction of Specification.
+   *
+   * <br />List of legal values are the same as the ones obtained using SuperType property
+   * (equals to "FTA_Orientation") from Annotation2 augmented by specific type 
+   * "FTA_Symmetry":
+   * <br /> oDirSpec = "FTA_Parallelism"
+   * <br /> oDirSpec = "FTA_Perpendicularity"
+   * <br /> oDirSpec = "FTA_Angularity"
+   * <br /> oDirSpec = "FTA_Symmetry"
+   */
+#pragma PROPERTY DirectionSpecification
+  HRESULT get_DirectionSpecification (inout /*IDLRETVAL*/ CATBSTR oDirSpec);
+
+  /**
+   * Returns the Datum Feature used as reference to specify auxiliary feature.
+   * @param oDatumFeature
+   *   The Datum Feature.
+   */
+  HRESULT DirectionReference (out /*IDLRETVAL*/ CATIADatumSimple oDatumFeature);
+
+  /**
+   * Retrieves orientation angle when DirectionSpecification is "FTA_Angularity".
+   * <br />These values are expressed in degrees.
+   * @param oOrientation
+   *   The orientation value with respect to Datum Feature reference.
+   */
+  HRESULT Orientation (out /*IDLRETVAL*/ double oOrientation);
+};
+
+// Interface name : CATIASemanticGDTFrameExtension
+#pragma ID CATIASemanticGDTFrameExtension "DCE:de5f3312-ab8d-4c89-9904c2495a4b0554"
+#pragma DUAL CATIASemanticGDTFrameExtension
+
+// VB object name : SemanticGDTFrameExtension (Id used in Visual Basic)
+#pragma ID SemanticGDTFrameExtension "DCE:443e0f41-9520-4485-83b128a62c6f05cc"
+#pragma ALIAS CATIASemanticGDTFrameExtension SemanticGDTFrameExtension
+
+#endif

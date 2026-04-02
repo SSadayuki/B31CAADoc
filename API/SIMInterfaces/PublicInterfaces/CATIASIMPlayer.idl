@@ -1,0 +1,215 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//#include "CATIAV5Level.h"
+//#ifdef CATIAV5R6
+//
+#ifndef CATIASIMPlayer_IDL
+#define CATIASIMPlayer_IDL
+//===================================================================
+// CATIASIMPlayer.idl
+//   This automation interface for the access the Simulation Player 
+//===================================================================
+/*IDLREP*/
+
+/**
+ * @CAA2Level L0
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CatSIMLoopMode.idl"
+#include "CatSIMPlayExitMode.idl"
+
+/**  
+ * The interface to Play Simulations  
+ */
+interface CATIASIMPlayer : CATIABase 
+{
+
+/** @nodoc */ 
+/**  
+ * Load a Simulation in the Simulation Player
+ */
+HRESULT LoadAgent
+	(in CATBaseDispatch iAgent);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+//HRESULT LoadExperimentByName(in CATBSTR iExperiment);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT GetLoadedAgent
+	(out /*IDLRETVAL*/ CATBaseDispatch oAgent);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT SetClockInterval
+	(in double iLowerBound, 
+	 in double iUpperBound, 
+	 out /*IDLRETVAL*/ long oIndex);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT UnSetClockInterval
+	(in long iIndex);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT GetClockLowerBound
+	(out /*IDLRETVAL*/ double oLowerBound);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT GetClockUpperBound
+	(out /*IDLRETVAL*/ double oUpperBound);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+#pragma PROPERTY LoopMode
+HRESULT get_LoopMode
+	(out /*IDLRETVAL*/ CatSIMLoopMode oMode);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT put_LoopMode
+	(in CatSIMLoopMode iMode);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+#pragma PROPERTY ClockStep
+HRESULT get_ClockStep
+	(out /*IDLRETVAL*/ double oClockStep);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT put_ClockStep
+	(in double iClockStep);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+#pragma PROPERTY Tempo
+HRESULT get_Tempo
+	(out /*IDLRETVAL*/ double oTempo);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT put_Tempo
+	(in double iTempo);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+#pragma PROPERTY PlayExitMode
+HRESULT get_PlayExitMode
+	(out /*IDLRETVAL*/ CatSIMPlayExitMode oPlayExitMode);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT put_PlayExitMode
+	(in CatSIMPlayExitMode iPlayExitMode);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT PlayBegin
+	();
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT PlayEnd
+	();
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT PlayForward
+	();
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT PlayBackward
+	();
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT PlayStepForward
+	();
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT PlayStepBackward
+	();
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT Pause
+	();
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+HRESULT PlayJump
+	(in double iClockValue);
+
+/** @nodoc */ 
+/**  
+ * 
+ */
+#pragma PROPERTY AbsoluteClock
+HRESULT get_AbsoluteClock
+	(out /*IDLRETVAL*/ double oClockValue);
+
+};
+
+// Interface name : CATIASIMPlayer
+#pragma ID CATIASIMPlayer "DCE:385ca560-aa44-11d4-852e00d0b7adde56"
+#pragma DUAL CATIASIMPlayer
+
+// VB object name : SimulationPlayer (Id used in Visual Basic)
+#pragma ID SimulationPlayer "DCE:39a52eb0-aa44-11d4-852e00d0b7adde56"
+#pragma ALIAS CATIASIMPlayer SimulationPlayer
+
+#endif
+//#endif

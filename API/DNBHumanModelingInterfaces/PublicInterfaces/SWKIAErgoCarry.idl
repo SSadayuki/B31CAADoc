@@ -1,0 +1,135 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAErgoCarry_IDL
+#define SWKIAErgoCarry_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework (2000) Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_Frequency
+//   put_Frequency
+//
+//   get_DistanceOfCarry
+//   put_DistanceOfCarry
+//
+//   get_Population
+//   put_Population
+//
+//   get_MaximumWeight
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 14/06/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- System
+#include "CATIABase.idl"
+
+
+/**
+  *  This interface deals the carry ergonomic analysis.
+  **/
+interface SWKIAErgoCarry : CATIABase
+{
+ // ===========================================================================
+ //  get_Frequency
+ //  ------------
+ //  put_Frequency
+ //  ------------
+ //
+    /**
+      * Returns or sets the carry frequecy.<br>
+      * This frequency must be expressed in carries per second, and must<br>
+      * be specified before attempting to retrive any output value from the study.<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY Frequency
+    HRESULT get_Frequency(out /*IDLRETVAL*/ double poFrequency);
+    HRESULT put_Frequency(in double piFrequency);
+
+
+
+ // ===========================================================================
+ //  get_DistanceOfCarry
+ //  ------------------
+ //  put_DistanceOfCarry
+ //  ------------------
+ //
+    /**
+      * Returns or sets the distance of carry.<br>
+      * This distance must specified at least once.<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY DistanceOfCarry
+    HRESULT get_DistanceOfCarry(inout /*IDLRETVAL*/ CATBSTR pioDistanceOfCarry);
+    HRESULT put_DistanceOfCarry(in CATBSTR piDistanceOfCarry);
+
+
+ // ===========================================================================
+ //  get_Population
+ //  --------------
+ //  put_Population
+ //  --------------
+ //
+    /**
+      * Returns or sets the percentage of the population that should be able to
+      * perform the carry task safely.<br>
+      * This property can only take the values 50.0, 75.0 and 90.0, and must be specified
+      * <br>at least once.<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY Population
+    HRESULT get_Population(out /*IDLRETVAL*/ double poPopulation);
+    HRESULT put_Population(in double piPopulation);
+
+
+ // ===========================================================================
+ //  get_MaximumWeight
+ //  -----------------
+ //
+    /**
+      * This field is the maximum weight that can be carried force,
+      * given the current input guidelines.
+      **/
+#pragma PROPERTY MaximumWeight
+    HRESULT get_MaximumWeight(inout /*IDLRETVAL*/ CATBSTR pioMaximumWeight);
+};
+
+// Interface name : SWKIAErgoCarry
+#pragma ID SWKIAErgoCarry "DCE:fcb35510-4206-11d4-a223000629753ac1"
+#pragma DUAL SWKIAErgoCarry
+
+// VB object name : SWKErgoCarry (Id used in Visual Basic)
+#pragma ID SWKErgoCarry "DCE:08cb36f0-4207-11d4-a223000629753ac1"
+#pragma ALIAS SWKIAErgoCarry SWKErgoCarry
+
+#endif

@@ -1,0 +1,91 @@
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAArrangementPathways.idl
+// Automation interface for the ArrangementPathways element 
+//
+#ifndef CATIAArrangementPathways_IDL
+#define CATIAArrangementPathways_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+
+interface CATIAMove;
+interface CATIAArrangementPathway;
+
+/**  
+ * A collection object for ArrangementPathway objects.
+ * <b> Role: </b> Use this collection object to manage (create, retrieve and remmove) ArrangementPathway objects.
+ */
+interface CATIAArrangementPathways : CATIACollection 
+{
+
+  /**
+   * Creates an ArrangementItemReservation and adds it to the collection.
+   *
+   * @param iRelAxis
+   *   Relative Axis to be considered.
+   * @param iListofMathPoints
+   *   List of points through which to route.
+   * @param iMathDirection
+   *   Starting routing direction.
+   * @return
+   *   Returns the newly created ArrangementPathway object and adds it to the collection.
+   */
+
+  HRESULT AddPathway(in CATIAMove       iRelAxis,
+                 in CATSafeArrayVariant iListofMathPoints,
+                 in CATSafeArrayVariant iMathDirection,
+                 out /*IDLRETVAL*/ CATIAArrangementPathway oArrPathway);
+
+
+  /**
+   * Returns the specified ArrangementPathway item of the collection object.
+   * 
+   * @param iIndex
+   *   The index or the name of the ArrangementPathway to retrieve from this collection.
+   *   <dl>
+   *   <dt> To retrieve a specific object by number, use the rank of the ArrangementPathway in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To retrieve a specific ArrangementPathway by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   * @return
+   *    The retrieved ArrangementPathway object.
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAArrangementPathway oArrPathway);
+
+  /**
+   * Removes the specified ArrangementPathway object from the collection.
+   * @param iIndex
+   *   The index or the name of the ArrangementPathway to remove from this collection.
+   *   <dl>
+   *   <dt> To remove a specific object by number, use the rank of the ArrangementPathway in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To remove a specific ArrangementPathway by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   */
+   HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAArrangementPathways
+#pragma ID CATIAArrangementPathways "DCE:998dcde2-ba53-11d4-8df200d0b7acadba"
+#pragma DUAL CATIAArrangementPathways
+
+// VB object name : ArrangementPathways (Id used in Visual Basic)
+#pragma ID ArrangementPathways "DCE:998dcde3-ba53-11d4-8df200d0b7acadba"
+#pragma ALIAS CATIAArrangementPathways ArrangementPathways
+
+#endif

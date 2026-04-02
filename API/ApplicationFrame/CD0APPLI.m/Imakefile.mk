@@ -1,0 +1,21 @@
+#
+# LOAD MODULE CD0APPLI.m
+#
+BUILT_OBJECT_TYPE=NONE
+
+# Begin JDU
+/** @c++ansi fbq 2004-08-04.09:43:14 [win_b support] **/
+OS = Windows
+LINK_WITH=CATIAAppObject VBAIntegration
+LOCAL_CCFLAGS = /GX /D _ATL_NO_UUIDOF
+
+OS = win_b64
+LINK_WITH=CATIAAppObject VBAIntegration
+LOCAL_CCFLAGS = /EHsc /D _ATL_NO_UUIDOF
+# End JDU
+
+OS = IRIX
+
+LOCAL_CCFLAGS = -G0
+LOCAL_LDFLAGS =  -G0
+

@@ -1,0 +1,59 @@
+#ifndef CATIAPPRExportServices_IDL
+#define CATIAPPRExportServices_IDL
+
+/*IDLREP*/
+/* -*-idl-*- */
+
+// COPYRIGHT Dassault Systemes 2007
+
+/**
+ * @CAA2Level L0
+ * @CAA2Usage U3
+ */
+
+/** Interface CATIAPPRExportServices
+ *  It is a utility class to assign, remove and get fastener from process and resource.
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATIAPPRDocument.idl"
+#include "CATIAProductDocument.idl"
+
+interface CATIAPPRExportServices : CATIABase
+{
+/**
+* Export the item and save as a CGR file.
+* @return
+*    Whether the save as CGR operation is successful.
+*/
+    HRESULT ExportAsCGR(in CATSafeArrayVariant iItems, in CATBSTR iWhere);
+
+/**
+* Set the CGR file as rollup CGR
+* @return
+*    Whether the rollup association is successful.
+*/
+    HRESULT SetAsRollupCGR(in CATIABase iItem, in CATBSTR iPath);
+
+/**
+* Export the item and save as a CATProduct file.
+* @return
+*    Whether the save as CATProduct operation is successful.
+*/
+    HRESULT ExportAsCATProduct(in CATSafeArrayVariant iItems, out CATIAProductDocument oTargetProduct);
+
+};
+
+// Interface name : CATIAPPRExportServices
+#pragma ID CATIAPPRExportServices "DCE:9c2bfdb7-7235-43e9-840a0f5e92c10a10"
+#pragma DUAL CATIAPPRExportServices
+
+// VB object name : PPRExportServices (Id used in Visual Basic)
+#pragma ID PPRExportServices "DCE:48f7a3a8-cd8f-4843-9e40ee44f58ab715"
+#pragma ALIAS CATIAPPRExportServices PPRExportServices
+
+#endif /*CATIAPPRExportServices_IDL*/
+
+
+

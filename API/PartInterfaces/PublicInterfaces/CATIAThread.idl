@@ -1,0 +1,286 @@
+#ifndef CATIAThread_IDL
+#define CATIAThread_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//=================================================================
+//                                   
+// CATIAThread:                           
+// Exposed interface for Thread
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Janv 2001 :Creation        			 JL Delvordre
+//=================================================================
+#include "CATIADressUpShape.idl"
+#include "CATThreadDefs.idl"
+
+interface CATIAReference;
+interface CATIALength;
+interface CATIAStrParam;
+
+/**
+ * Represents the Thread feature.
+ * It threads or taps cylindrical surface .
+ */
+
+//-----------------------------------------------------------------
+interface CATIAThread : CATIADressUpShape     
+{
+/**
+ * Returns or sets the lateral face (must be cylindrical) .<br>
+ * To set the property, you can use the following @href CATIABoundary object: 
+ * @href CATIAFace.
+ */
+#pragma PROPERTY LateralFaceElement
+	HRESULT	get_LateralFaceElement ( out /*IDLRETVAL*/ CATIAReference oLateralFaceElement );
+	HRESULT	put_LateralFaceElement ( in CATIAReference iLateralFaceElement );
+
+/**
+ * Returns or sets the limit face (must be planar ) .<br>
+ * To set the property, you can use the following @href CATIABoundary object: 
+ * @href CATIAPlanarFace.
+ */
+#pragma PROPERTY LimitFaceElement
+	HRESULT	get_LimitFaceElement ( out /*IDLRETVAL*/ CATIAReference oLimitFaceElement );
+	HRESULT	put_LimitFaceElement ( in CATIAReference iLimitFaceElement );
+
+
+/**
+ * Swap the direction of the thread or the tap.
+ */
+	HRESULT	ReverseDirection( );
+
+
+#pragma PROPERTY Side
+//
+/**
+  * Returns the  thread or tap side.
+  * @return oThreadSide
+  *   The thread/tap side (see @href CatThreadSide for list of possible sides)
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns in <tt>ThreadSide</tt> the thread/tap side of
+  * thread <tt>firstthread</tt>:
+  * <pre>
+  * Set ThreadSide = firstthread<font color="red">oThreadSide</font>
+  *</pre>
+  * </dl>
+  */
+HRESULT	get_Side ( out /*IDLRETVAL*/ CatThreadSide  oThreadSide );
+
+/**
+  * Sets the  thread side.
+  * @param iThreadSide
+  *   The thread/tap side (see @href CatThreadSide for list of possible sides)
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example sets the thread side of thread <tt>firstthread</tt>
+  * so that the thread  will now be Right-Threaded.
+  * <pre>
+  * firstthread.<font color="red">CatThreadSide</font> = catRightSide
+  *</pre>
+  * </dl>
+  */
+HRESULT	put_Side ( in CatThreadSide iThreadSide );
+
+
+
+#pragma PROPERTY Depth
+//
+/**
+  * Returns the thread/tap depth.<br>
+  * @return oDepth
+  *    Value of the thread/tap depth 
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns in <tt>Depth</tt> the depth of
+  * thread <tt>firstthread</tt>:
+  * <pre>
+  * Set Depth = firstthread.<font color="red">Depth</font>
+  *</pre>
+  * </dl>
+  */
+HRESULT	get_Depth	( out /*IDLRETVAL*/ double oDepth );
+/**
+  * Sets the thread/tap depth.<br>
+  * @Param iDepth
+  *    Value of the thread/tap depth 
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns in <tt>Depth</tt> the depth of
+  * thread <tt>firstthread</tt>:
+  * <pre>
+  * firstthread.<font color="red">Depth</font>=iDepth
+  *</pre>
+  * </dl>
+  */
+HRESULT	put_Depth	( in double iDepth );
+
+#pragma PROPERTY Diameter
+//
+/**
+  * Returns the thread/tap diameter.<br>
+  * @return oDiameter
+  *    Value of the thread/tap diameter 
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns in <tt>ThreadDiameter</tt> the diameter of
+  * thread <tt>firstthread</tt>:
+  * <pre>
+  * Set ThreadDiameter = firstthread.<font color="red">Diameter</font>
+  *</pre>
+  * </dl>
+  */
+HRESULT	get_Diameter	( out /*IDLRETVAL*/ double oDiameter );
+
+/**
+  * Setss the thread/tap diameter.<br>
+  * @Param iDiameter
+  *    Value of the thread/tap diameter 
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example sets in <tt>ThreadDiameter</tt> the diameter of
+  * thread <tt>firstthread</tt>:
+  * <pre>
+  * firstthread.<font color="red">Diameter</font> = iDiameter
+  *</pre>
+  * </dl>
+  */
+HRESULT	put_Diameter	( in    double     iDiameter);
+
+
+#pragma PROPERTY Pitch
+//
+/**
+  * Returns the thread/tap pitch.<br>
+  * @return oPitch
+  *    Value of the thread/tap pitch 
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns in <tt>ThreadPitch</tt> the thread pitch of
+  * thread <tt>firstthread</tt>:
+  * <pre>
+  * Set ThreadPitch = firstthread.<font color="red">ThreadPitch</font>
+  *</pre>
+  * </dl>
+  */
+HRESULT	get_Pitch	( out /*IDLRETVAL*/ double oPitch );
+
+/**
+  * Sets the thread/tap pitch.<br>
+  * @Parm iPitch
+  *    Value of the thread/tap pitch 
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns in <tt>ThreadPitch</tt> the thread pitch of
+  * thread <tt>firstthread</tt>:
+  * <pre>
+  * firstthread.<font color="red">Pitch</font>=iPitch
+  *</pre>
+  * </dl>
+  */
+HRESULT	put_Pitch	( in double iPitch );
+
+#pragma PROPERTY ThreadDescription
+//
+        /**
+         * Returns the thread/tap description parameter.
+		 * This call is valid only when a standard/user design table created
+         * @return oThreadDescParam
+         *    A Parameter object controlling the thread/tap description (see @href CATIAStrParam for more information)
+		 * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>threadDescription</tt> the thread description (M12 etc) of
+         * thread <tt>firstthread</tt>:
+         * <pre>
+         * Set threadDescription = firstthread.<font color="red">ThreadDescription</font>
+         *</pre>
+         * </dl>
+         */
+	HRESULT	get_ThreadDescription ( out /*IDLRETVAL*/ CATIAStrParam oThreadDescParam );
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+        // Thread Standard design table
+        /**
+         * Creates a Standard Thread design table .<br>
+		 * @param iStandardType
+         *   Standard type for thread (see @href CatThreadStandard for list of possible types)
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example creates a standard table for MetricThinPitch for
+         * thread <tt>firstthread</tt>:
+         * <pre>
+         * firstthread.<font color="red">CreateStandardThreadDesignTable</font> catMetricThinPitch
+         *</pre>
+         * </dl>
+         */
+        HRESULT CreateStandardThreadDesignTable(in CatThreadStandard iStandardType);
+		
+		// Thread User Standard design table
+        /**
+         * Creates a UserStandard Thread design table .<br>
+		 * @param iStandardName
+         *   Name of the UserStandard thread. iStandardName should be empty if filepath is to be defined.
+		 * @param iPath
+		 *   Path of the UserStandard file. iPath is empty if the filepath is already defined through CATReffilesPath.
+         * <dl>
+         * <dt><b>Example1:</b>
+         * <dd>The following example creates a standard table for UserStandard for
+         * thread <tt>firstThread</tt>. The file path is already defined thru CATReffilesPath:
+         * <pre>
+         * firstThread.<font color="red">CreateUserStandardDesignTable</font> "UserStandard",""
+         *</pre>
+         * </dd>
+         * <dt><b>Example2:</b>
+         * <dd>The following example creates a standard table for UserStandard for
+         * thread <tt>firstThread</tt> when file path is not defined thru CATReffilesPath:
+         * <pre>
+         * firstThread.<font color="red">CreateUserStandardDesignTable</font> "","E:\user\standard\UserStandard.txt"
+         *</pre>
+		 * </dd>
+         * </dl>
+         */
+        HRESULT CreateUserStandardDesignTable(in CATBSTR iStandardName, in CATBSTR iPath);
+
+		// Thread explicit polarity management
+        /**
+         * Sets the thread polarity explicit. Thread polarity is no more evaluated
+		 * implicitly on basis of support face polarity
+		 * @param iThreadPolarity
+		 *   Standard type for thread (see @href CatThreadPolarity for list of possible types)
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example sets the thread polarity to Tap explicitly
+         * thread <tt>firstthread</tt>:
+         * <pre>
+         * firstthread.<font color="red">SetExplicitPolarity</font> catTap
+         *</pre>
+         * </dl>
+         */
+        HRESULT SetExplicitPolarity(in CatThreadPolarity iThreadPolarity);
+};
+
+// Interface name : CATIAThread
+#pragma ID CATIAThread "DCE:16aeca35-ede2-11d4-9f0c00508b1316f4"
+#pragma DUAL CATIAThread
+
+// VB object name : Thread (Id used in Visual Basic)
+#pragma ID Thread "DCE:457c6f65-ede2-11d4-9f0c00508b1316f4"
+#pragma ALIAS CATIAThread Thread
+
+
+#endif
+// CATIAThread_IDL
+

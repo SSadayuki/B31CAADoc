@@ -1,0 +1,113 @@
+// COPYRIGHT Dassault Systemes 2002
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+ 
+#ifndef CATIASilhouettes_IDL
+#define CATIASilhouettes_IDL
+/*IDLREP*/
+
+#include "CATIACollection.idl"
+#include "CATIASilhouette.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R8
+#include "CATIAGroup.idl"
+#include "CATIADocument.idl"
+#endif
+
+interface CATIAProduct;
+
+/**  
+ * Interface to compute Silhouettes.
+ */
+interface CATIASilhouettes : CATIACollection 
+{
+
+/**
+ * Computes a silhouette on the selected products.
+ * @param GroupOfSelectedProducts
+ *   The selected products on which you want to perform the silhouette.
+ * @param iViewPoints
+ *   Array containing the viewpoints (cameras) used to perform the silhouette.
+ * @param iAccuracy
+ *   Grain value for the voxels.
+ * @param iAccuracyForSimplification
+ *   Accuracy for simplification of the silhouette. Let it null for no simplification.
+ * @return 
+ *   SilhouetteDocument: Document containing the result.
+ */
+
+      HRESULT ComputeASilhouette(in CATIAGroup GroupOfSelectedProducts, 
+	  in CATSafeArrayVariant iViewPoints,
+	  in double iAccuracy, in double iAccuracyForSimplification, 
+	  out /*IDLRETVAL*/ CATIADocument SilhouetteDocument);
+
+
+/**
+ * Computes a silhouette on the selected products, according to a reference product.
+ * @param iGroupOfSelectedProducts
+ *   The selected products on which you want to perform the silhouette.
+ * @param iReferenceProduct
+ *   Product taken as a reference.
+ * @param iViewPoints
+ *   Array containing the viewpoints (cameras) used to perform the silhouette.
+ * @param iAccuracy
+ *   Grain value for the voxels.
+ * @param iAccuracyForSimplification
+ *   Accuracy for simplification of the silhouette. Let it null for no simplification.
+ * @return 
+ *   SilhouetteDocument: Document containing the result.
+ */
+
+      HRESULT ComputeASilhouetteWithAReference(in CATIAGroup iGroupOfSelectedProducts, 
+	  in CATIAProduct iReferenceProduct, in CATSafeArrayVariant iViewPoints,
+      in double iAccuracy, in double iAccuracyForSimplification, 
+      out /*IDLRETVAL*/ CATIADocument SilhouetteDocument);
+
+
+/**
+ * Returns the name of the associated shape.
+ */
+
+      HRESULT SilhouetteShapeName(out /*IDLRETVAL*/ CATBSTR Name);
+
+
+     /**
+     * Creates a new Silhouette and adds it to the Silhouettes collection.
+     * <b>This function is deprecated.</b>
+     * @return The created Silhouette
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example creates a Silhouette <tt>newSilhouette</tt>
+     * in the Silhouette collection.
+     * <pre>
+     * Set newSilhouette = Silhouettes.<font color="red">Add</font>
+     * </pre>
+     */
+      HRESULT Add (in CATIAProduct iProductToSilhouette, in double iAccuracy, 
+	  in CATSafeArrayVariant iAzimuts,in CATBSTR iShapeName, in long iActivatedShape,
+	  in long iDefaultShape, out /*IDLRETVAL*/ CATIASilhouette oSilhouette );
+
+
+/**
+ * Performs some clean-up.
+ */
+
+	  HRESULT CleanUp();
+};
+
+// Interface name : CATIASilhouettes
+#pragma ID CATIASilhouettes "DCE:ac0d1642-23e8-11d3-b8030008c7bf20d9"
+#pragma DUAL CATIASilhouettes
+
+// VB object name : Silhouettes (Id used in Visual Basic)
+#pragma ID Silhouettes "DCE:ac0d1643-23e8-11d3-b8030008c7bf20d9"
+#pragma ALIAS CATIASilhouettes Silhouettes
+
+#endif

@@ -1,0 +1,87 @@
+#ifndef CATIARenderingLights_IDL
+#define CATIARenderingLights_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIARenderingLights:                           
+// Exposed interface for Rendering Lights collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jul02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIACollection.idl"
+#include "CATIARenderingLight.idl"
+#include "CATVariant.idl"
+
+/**
+ * A collection of all the Rendering Lights objects.
+ */
+
+//-----------------------------------------------------------------
+interface CATIARenderingLights : CATIACollection
+{
+    /**
+     * Returns a rendering light index in the rendering light collection.
+     * @param iIndex
+     *   The index of the light to retrieve in the collection of lights.
+     *   Compared with other collections, you cannot use the name of the
+     *   light as argument.
+     * @return The retrieved light
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example returns in <tt>MyLight</tt> the sixth
+     * light in a lights collection.
+     * <pre>
+     * Dim MyLight As RenderingLight
+     * Set MyLight = RenderingLights.<font color="red">Item</font>(6)
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIARenderingLight oLight);
+
+    /**
+     * Adds a new light to the lights collection.
+     */
+    HRESULT Add(out /*IDLRETVAL*/ CATIARenderingLight oLight);
+
+    /**
+     * Removes a light from the lights collection.
+     */
+    HRESULT Remove(in CATVariant iIndex);
+
+	/**
+     * Removes all lights from the collection.
+     */
+    HRESULT RemoveAll();
+};
+
+// Interface Name : CATIARenderingLights
+#pragma ID CATIARenderingLights "DCE:57d3f7b0-999a-11d6-805e0030f113d1bf"
+#pragma DUAL CATIARenderingLights
+ 
+// VB Object Name : RenderingLights
+#pragma ID RenderingLights "DCE:5fcbf300-999a-11d6-805e0030f113d1bf"
+#pragma ALIAS CATIARenderingLights RenderingLights
+
+#endif
+// CATIARenderingLights_IDL
+
+
+
+
+
+
+

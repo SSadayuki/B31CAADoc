@@ -1,0 +1,154 @@
+#ifndef CATIAAnalysisSet_IDL
+#define CATIAAnalysisSet_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAAnalysisSet:                           
+// Exposed interface for Analysis Set
+//                                   
+//=================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+
+interface CATIAAnalysisSets;    
+interface CATIAAnalysisEntities;
+interface CATIABasicComponents;
+interface CATIAAnalysisOutputEntities;
+interface CATIAAnalysisImages;
+/**
+ * Represent the analysis set object.
+ * In the Analysis Model, an <b>Analysis Set</b> is the data 
+ * dedicated to manage the <b>Analysis Entities</b> for specific preprocessing data.
+ *<br> For example, LoadSet will manage loading conditions...
+ * <p>
+ */
+ //-----------------------------------------------------------------
+interface CATIAAnalysisSet : CATIABase
+{
+/**
+  * Returns the type of the analysis Set.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns <tt>TypeofSet</tt> of <tt>MySet</tt>.
+  * <pre>
+  * Dim MySet As AnalysisSet
+  * Dim TypeofSet As CATBSTR
+  * Set TypeofSet = MySet.<font color="red">Type</font>
+  *</pre>
+  * </dl>
+  */
+#pragma PROPERTY Type
+  HRESULT get_Type(inout /*IDLRETVAL*/ CATBSTR oType);
+
+/**
+ * Returns the analysis entities collection associated to a set.
+ * The corresponding entities are default preprocessing objects.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example :</b>
+ * <dd>This example retrieves <tt>analysis entities</tt> collection .<br>
+ * <pre>
+ * Dim MySet As AnalysisSet
+ * Dim analysisEntities As AnalysisEntities
+ * Set analysisEntities = MySet.<font color="red">AnalysisEntities</font>
+ *</pre>
+ * </dl>
+ */
+
+#pragma PROPERTY AnalysisEntities
+	HRESULT get_AnalysisEntities(out /*IDLRETVAL*/ CATIAAnalysisEntities oAnalysisEntities);
+
+/**
+ * Returns the analysis entities collection associated to a set.
+ * The corresponding entities are not preprocessing features but can be used, 
+ * for example to manage error features.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>This example retrieves <tt>analysisEntities</tt> collection .<br>
+ * <pre>
+ * Dim MySet As AnalysisSet
+ * Dim analysisEntities As AnalysisOutputEntities
+ * Set analysisEntities = MySet.<font color="red">AnalysisOutputEntities</font>
+ * </pre>
+ * </dl>
+ */
+
+#pragma PROPERTY AnalysisOutputEntities
+	HRESULT get_AnalysisOutputEntities(out /*IDLRETVAL*/ CATIAAnalysisOutputEntities oAnalysisEntities);
+
+/**
+ * Returns the analysis sets collection associated with an analysis set.
+ * This method will return a collection only if the set is made of other sets.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>This example retrieves <tt>analysisSets</tt> collection .<br>
+ * <pre>
+ * Dim MySet As AnalysisSet
+ * Dim analysisSets As AnalysisSets
+ * Set analysisSets = MySet.<font color="red">AnalysisSets</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY AnalysisSets
+	HRESULT get_AnalysisSets(out /*IDLRETVAL*/ CATIAAnalysisSets oAnalysisSets);
+
+/**
+ * Returns the analysis images collection associated with an analysis set.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>This example retrieves <tt>analysisimages</tt> collection .<br>
+ * <pre>
+ * Dim MySet As AnalysisSet
+ * Dim analysisimages As AnalysisImages
+ * Set analysisimages = MySet.<font color="red">AnalysisImages </font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY AnalysisImages
+	HRESULT get_AnalysisImages(out /*IDLRETVAL*/ CATIAAnalysisImages oAnalysisImages);
+
+/**
+ * Returns the basic components collection associated with an analysis set.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>This example retrieves <tt> basiccomponents</tt> collection .<br>
+ * <pre>
+ * Dim MySet As AnalysisSet
+ * Dim basiccomponents As BasicComponents 
+ * Set basiccomponents = MySet.<font color="red">BasicComponents </font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY BasicComponents
+	HRESULT get_BasicComponents(out  /*IDLRETVAL*/ CATIABasicComponents oBasicComponents);
+
+/**
+ * Launch the update (computation if needed) of an AnalysisSet.
+ */
+  HRESULT Update();
+
+
+};
+
+// Interface name : CATIAAnalysisSet
+#pragma ID CATIAAnalysisSet "DCE:d8f25c39-e38d-11d2-97ca0008c71933b6"
+#pragma DUAL CATIAAnalysisSet
+
+// VB object name : CATIAAnalysisSet (Id used in Visual Basic)
+#pragma ID AnalysisSet "DCE:f7499249-e38d-11d2-97ca0008c71933b6"
+#pragma ALIAS CATIAAnalysisSet AnalysisSet
+
+#endif
+// CATIAAnalysisSet_IDL
+

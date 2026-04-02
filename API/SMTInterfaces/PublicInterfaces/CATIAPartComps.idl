@@ -1,0 +1,107 @@
+// COPYRIGHT Dassault Systemes 2002
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+ 
+#ifndef CATIAPartComps_IDL
+#define CATIAPartComps_IDL
+/*IDLREP*/
+
+#include "CATIACollection.idl"
+#include "CATIAPartComp.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAProduct;
+
+/**  
+ * Interface to access a CATIAPartComps  
+ */
+interface CATIAPartComps : CATIACollection 
+{
+
+/**
+ * Returns the added material percentage.
+ */ 
+
+#pragma PROPERTY AddedMaterialPercentage	
+	HRESULT get_AddedMaterialPercentage(out /*IDLRETVAL*/ double oPercentAdded);	
+
+/**
+ * Returns the added material volume.
+ */ 
+
+#pragma PROPERTY AddedMaterialVolume	
+	HRESULT get_AddedMaterialVolume(out /*IDLRETVAL*/ double oVolumeAdded);	
+
+/**
+ * Returns the removed material percentage.
+ */ 
+
+#pragma PROPERTY RemovedMaterialPercentage	
+	HRESULT get_RemovedMaterialPercentage(out /*IDLRETVAL*/ double oPercentRemoved);	
+
+/**
+ * Returns the removed material volume.
+ */ 
+
+#pragma PROPERTY RemovedMaterialVolume	
+	HRESULT get_RemovedMaterialVolume(out /*IDLRETVAL*/ double oVolumeRemoved);
+
+	/**
+   * Computes a new comparison between products.
+   * Documents created are added to the documents in the session.
+   * Document containing the added material is called
+   * <b> AddedMaterial.3dmap</b>.
+   * Document containing the removed material is called
+   * <b> RemovedMaterial.3dmap</b>.
+   * Document containing the changed material is called
+   * <b> ChangedMaterial.3dmap</b>.
+   * If the document are meant to be kept they must be renamed,
+   * otherwise they should be deleted. Document lifecyle must be
+   * managed either with SaveAs or Close.
+   * @param iCompAccuracy
+   * Accuracy of the 3dmaps for the computation.
+   * @param iDispAccuracy
+   * Accuracy of the displayed 3dmaps.
+   * @param iComputationType
+   * 0 : Added with position taken into account<br>
+   * 1 : Removed with position<br>
+   * 2 : Added + Removed with positions<br>
+   * 3 : Added without position<br>
+   * 4 : Removed without position<br>
+   * 5 : Added + Removed without positions<br>
+   * @return Created PartComp
+	* @sample
+	* The following example computes a comparison between two products:
+	* <pre>
+   * Dim newPartComp As PartComp
+	* Set newPartComp = PartComps.<font color="red">Add</font>(product1, product2, 5.0, 5.0, 2)
+   * Dim documents1 As Documents
+   * Set documents1 = CATIA.Documents
+   * Dim document1 As Document
+   * Set document1 = documents1.Item("AddedMaterial.3dmap")
+	* </pre>	
+	*/
+
+	HRESULT Add	(	in CATIAProduct iProduct1, 
+						in CATIAProduct iProduct2, 
+						in double iCompAccuracy, 
+						in double iDispAccuracy, 
+						in long iComputationType, 
+						out /*IDLRETVAL*/ CATIAPartComp oPartComp 
+						);	
+					
+};
+
+// Interface name : CATIAPartComps
+#pragma ID CATIAPartComps "DCE:8bc992f2-3718-0000-0280030d76000000"
+#pragma DUAL CATIAPartComps
+
+// VB object name : PartComps (Id used in Visual Basic)
+#pragma ID PartComps "DCE:8bc99339-11d7-0000-0280030d76000000"
+#pragma ALIAS CATIAPartComps PartComps
+
+#endif

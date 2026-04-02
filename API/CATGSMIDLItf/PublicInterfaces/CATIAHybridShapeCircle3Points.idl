@@ -1,0 +1,130 @@
+#ifndef CATIAHybridShapeCircle3Points_IDL
+#define CATIAHybridShapeCircle3Points_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeCircle:         
+// Exposed interface for HybridShape Circle3Points
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation 
+//=================================================================
+
+#include "CATIAHybridShapeCircle.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape circle object defined using three points.
+ * <b>Role</b>: To access the data of the hybrid shape circle object.
+ * <p>This data includes the circle three passing points.
+ * <p>Use the CATIAHybridShapeFactory to create a HybridShapeCircle2PointsRad object.
+ * @see CATIAHybridShapeFactory
+ */
+interface CATIAHybridShapeCircle3Points : CATIAHybridShapeCircle
+{
+
+/**
+  * Returns or sets the circle first passing point.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAVertex.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the first passing point
+  * of the <code>HybShpCircle3Pt</code> hybrid shape circle
+  * in <code>HybShpCircle3PtFirstPassingPoint</code> point.
+  * <pre>
+  * Dim HybShpCircle3PtFirstPassingPoint As Reference
+  * Set HybShpCircle3PtFirstPassingPoint= HybShpCircle3Pt.<font color="red">Element1</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Element1
+ HRESULT get_Element1 (out /*IDLRETVAL*/ CATIAReference   oElem);
+ HRESULT put_Element1 (in                CATIAReference   iElem);
+
+/**
+  * Returns or sets the circle second passing point.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAVertex.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the second passing point
+  * of the <code>HybShpCircle3Pt</code> hybrid shape circle
+  * as the <code>Point2</code> point.
+  * <pre>
+  * HybShpCircle3Pt.<font color="red">Element2</font> Point2
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Element2
+ HRESULT get_Element2 (out /*IDLRETVAL*/ CATIAReference   oElem);
+ HRESULT put_Element2 (in                CATIAReference   iElem);
+
+/**
+  * Returns or sets the circle third passing point.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAVertex.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the third passing point
+  * of the <code>HybShpCircle3Pt</code> hybrid shape circle
+  * in <code>HybShpCircle3PtThirdPassingPoint</code> point.
+  * <pre>
+  * Dim HybShpCircle3PtThirdPassingPoint As Reference
+  * Set HybShpCircle3PtThirdPassingPoint= HybShpCircle3Pt.<font color="red">Element3</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Element3
+ HRESULT get_Element3 (out /*IDLRETVAL*/ CATIAReference   oElem);
+ HRESULT put_Element3 (in     CATIAReference   iElem);
+ /**
+  * Returns or sets the circle support surface.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAFace.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpCircleSupportSurf</code> the support surface
+  * of the <code>HybShpCircle</code> hybrid shape circle.
+  * <pre>
+  * Dim HybShpCircleSupportSurf As Reference 
+  * HybShpCircleSupportSurf = HybShpCircle.<font color="red">Support</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY Support
+ HRESULT get_Support (out /*IDLRETVAL*/ CATIAReference   oSupport);
+ HRESULT put_Support (in                CATIAReference   iSupport);
+
+ /**
+ * Removes the support surface.
+ */
+ HRESULT RemoveSupport();
+};
+
+// Interface name : CATIAHybridShapeCircle3Points
+#pragma ID CATIAHybridShapeCircle3Points "DCE:8d7e9c71-72c7-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeCircle3Points
+
+
+// VB object name : HybridShapeCircle3Points (Id used in Visual Basic)
+#pragma ID HybridShapeCircle3Points "DCE:8d7e9c76-a038-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeCircle3Points HybridShapeCircle3Points
+#endif

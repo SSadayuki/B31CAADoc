@@ -1,0 +1,375 @@
+#ifndef CATIAHybridShapeCurvePar_IDL
+#define CATIAHybridShapeCurvePar_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeCurvePar:         
+// Exposed interface for HybridShape CurvePar
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril 98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape curve parameter object.
+ * <b>Role</b>: To access the data of the hybrid shape curve parameter object.
+ * This data includes:
+ * <ul>
+ * <li>The face to process</li>
+ * <li>The offset parameter.</li>
+ * </ul>
+ * <p>Use the @href CATIAHybridShapeFactory to create a HybridShapeCurvePar object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeCurvePar : CATIAHybridShape
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+
+/**
+ * Returns the offset parameter of the curve parameter object. 
+ * @sample
+ * This example retrieves the offset parameter of
+ * the <code>hybShpCurvePar</code> in <code>offsetParm</code>.
+ * <pre>
+ * Dim offsetParm As CATIALength
+ * offsetParm = hybShpCurvePar.Offset
+ * </pre>
+ */ 
+#pragma PROPERTY Offset
+ HRESULT get_Offset ( out /*IDLRETVAL*/ CATIALength oCurvePar );
+
+/**
+ * Returns the second offset parameter of the curve parameter object. 
+ * @sample
+ * This example retrieves the second offset parameter of
+ * the <code>hybShpCurvePar</code> in <code>offsetParm</code>.
+ * <pre>
+ * Dim offsetParm As CATIALength
+ * offsetParm = hybShpCurvePar.Offset2
+ * </pre>
+ */ 
+#pragma PROPERTY Offset2 
+ HRESULT get_Offset2 ( out /*IDLRETVAL*/ CATIALength oCurvePar2);
+
+/**
+ * Returns or sets the offset curve of the curve parameter object.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href  CATIATriDimFeatEdge or @href CATIABiDimFeatEdge.
+ * @sample
+ * This example retrieves the offset curve of
+ * the <code>hybShpCurvePar</code> in <code>offsetCrv</code>.
+ * <pre>
+ * Dim offsetCrv As CATIAReference
+ * offsetCrv = hybShpCurvePar.CurveOffseted
+ * </pre>
+ */ 
+#pragma PROPERTY CurveOffseted
+ HRESULT get_CurveOffseted ( out /*IDLRETVAL*/ CATIAReference oFaceToCurvePar );
+ HRESULT put_CurveOffseted ( in                CATIAReference iFaceToCurvePar );
+
+
+/**
+ * Returns or sets the smoothing Type.
+ * <br> Smoothing type: 
+ * <ul> 
+ * <li>   : 0 -> No Smoothing </li> 
+ * <li>   : 2 -> G1 Smoothing : Enhance current continuity to tangent continuity </li> 
+ * <li>	  : 3 -> G2 Smoothing : Enhance current continuity to curvature continuity </li> 
+ * </ul> 
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>SType</code> the smoothing type for the
+ * <code>CurvePar</code> hybrid shape feature.
+ * <pre>
+ * Dim SType As long
+ * Set SType = CurvePar.<font color="red">SmoothingType</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY SmoothingType 
+    HRESULT get_SmoothingType (out /*IDLRETVAL*/ long oType);
+    HRESULT put_SmoothingType (in                long iType);
+	 
+
+ /**
+ * Sets or Gets the maximum deviation allowed for smoothing operation.
+ * <br> Sets in  distance unit, it corresponds to the radius of a
+ * pipe around the input curve in which the result is allowed to be.
+ * This value must be set in SI unit (m).
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>DeviationValue</code> the maximum deviation value for the
+ * <code>CurvePar</code> hybrid shape feature.
+ * <pre>
+ * Dim DeviationValue As CATIALength
+ * Set DeviationValue = CurvePar.<font color="red">MaximumDeviationValue</font>
+ * </pre>
+ * </dl> 
+ */
+#pragma PROPERTY MaximumDeviationValue 
+    HRESULT get_MaximumDeviationValue (out /*IDLRETVAL*/ double oDevValue);
+    HRESULT put_MaximumDeviationValue (in                double iDevValue);
+
+ /**
+ * Returns or sets the '3D Smoothing' option.
+ * <b>Role</b>: To activate or not the 3D smoothing option 
+ * Available only for tangent or curvature smoothing type
+ *      TRUE  : Smoothing performed without specifying support
+ *      FALSE : Smoothing performed with specific support
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>3DSmoothingOption</code> the support for the
+ * <code>Project</code> hybrid shape feature.
+ * <pre>
+ * Dim 3DSmoothingOption As boolean
+ * Set 3DSmoothingOption = Project.<font color="red">p3DSmoothing</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY p3DSmoothing  
+    HRESULT get_p3DSmoothing (out /*IDLRETVAL*/ boolean o3DSmoothing);
+    HRESULT put_p3DSmoothing (in                boolean i3DSmoothing);
+
+
+/**
+ * Returns or sets the passing point of the curve parameter object.
+ * <br>Sub-element(s) supported (see @href CATIAHybridShapePoint object): 
+ * @sample
+ * This example retrieves the offset curve of
+ * the <code>hybShpCurvePar</code> in <code>offsetCrv</code>.
+ * <pre>
+ * Dim PassingPoint As CATIAReference
+ * offsetCrv = hybShpCurvePar.PassingPoint
+ * </pre>
+ */ 
+#pragma PROPERTY PassingPoint
+ HRESULT get_PassingPoint ( out /*IDLRETVAL*/ CATIAReference oPassingPoint );
+ HRESULT put_PassingPoint ( in                CATIAReference iPassingPoint );
+
+/**
+ * Returns or sets the both sides mode of the curve parameter object.
+ * @sample
+ * This example retrieves the both sides mode of
+ * the <code>hybShpCurvePar</code>
+ * <pre>
+ * Dim bothSides As Boolean
+ * bothSides = hybShpCurvePar.KeepBothSides
+ * </pre>
+ */
+#pragma PROPERTY KeepBothSides
+ HRESULT get_KeepBothSides ( out /*IDLRETVAL*/ boolean oKeepBothSides );
+ HRESULT put_KeepBothSides ( in                boolean iKeepBothSides );
+
+
+/**
+ * Returns the other side of parallel curve if both sides mode is on.
+ * @sample
+ * This example retrieves the other side of
+ * the <code>hybShpCurvePar</code>
+ * <pre>
+ * Dim otherSide As CATIAReference
+ * Set otherSide = hybShpCurvePar.OtherSide
+ * </pre>
+ */
+
+#pragma PROPERTY OtherSide
+ HRESULT get_OtherSide ( out /*IDLRETVAL*/ CATIAReference oOtherSide );
+
+/**
+ * Returns or sets the support of the curve..
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oElem</code> the support of the curve
+ * for the <code>hybShpCurvePar</code> hybrid shape feature.
+ * <pre>
+ * Dim oElem As Reference 
+ * Set oElem = hybShpCurvePar.<font color="red">Support</font>
+ * </pre>
+ * </dl>
+ */ 
+
+#pragma PROPERTY Support
+  HRESULT get_Support (out /*IDLRETVAL*/ CATIAReference oElem);
+  HRESULT put_Support (in                CATIAReference iElem);
+
+/**
+ *  Returns or sets Geodesic mode.
+ * <br><b>Legal values</b>: <b>True</b> Geodesic mode and <b>False</b> Euclidian mode .
+ * @sample
+ * This example sets that the geodesic mode of
+ * the <code>hybShpCurvePar</code> hybrid shape curve par feature to True.
+ * <pre>
+ * hybShpCurvePar.<font color="red">Geodesic</font> = True
+ * </pre>
+ */ 
+#pragma PROPERTY Geodesic
+ HRESULT get_Geodesic (out /*IDLRETVAL*/ boolean oMode);
+ HRESULT put_Geodesic (in boolean iMode);
+
+/**
+  * Returns or sets the law type.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>CATGSMBasicLawType_None. Undefined law type. </dd>
+  * <dt>1</dt>
+  * <dd>CATGSMBasicLawType_Constant. Constant law type.</dd>
+  * <dt>2</dt>
+  * <dd>CATGSMBasicLawType_Linear. Linear law type.</dd>
+  * <dt>3</dt>
+  * <dd>CATGSMBasicLawType_SType. S law type.</dd>
+  * <dt>4</dt>
+  * <dd>CATGSMBasicLawType_Advanced. Law specified by a GSD law feature.</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oLawType</code> the law type
+  * for the <code>hybShpCurvePar</code> hybrid shape feature.
+  * <pre>
+  * oLawType = hybShpCurvePar.<font color="red">LawType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY LawType
+    HRESULT get_LawType (out /*IDLRETVAL*/ long oLawType);
+    HRESULT put_LawType (in long iLawType);
+
+/**
+  * Returns or sets the corner type.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>CATGSMCurvePar_Sharp. corner with angle. </dd>
+  * <dt>1</dt>
+  * <dd>CATGSMCurvePar_Round. round corner.</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oCurveParType</code> the curve par type
+  * for the <code>hybShpCurvePar</code> hybrid shape feature.
+  * <pre>
+  * oCurveParType = hybShpCurvePar.<font color="red">CurveParType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY CurveParType
+    HRESULT get_CurveParType (out /*IDLRETVAL*/ long oCurveParType);
+    HRESULT put_CurveParType (in long iCurveParType);
+
+/**
+ * Returns or sets the offset law.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oLaw</code> the offset law
+ * for the <code>hybShpCurvePar</code> hybrid shape feature.
+ * <pre>
+ * Dim oLaw As Reference 
+ * Set oLaw = hybShpCurvePar.<font color="red">CurveParLaw</font>
+ * </pre>
+ * </dl>
+ */ 
+
+#pragma PROPERTY CurveParLaw
+  HRESULT get_CurveParLaw (out /*IDLRETVAL*/ CATIAReference oLaw);
+  HRESULT put_CurveParLaw (in                CATIAReference iLaw);
+
+/**
+ *  Returns or sets the mapping orientation of the law (if offset is specified by a law).
+ * <br><b>Legal values</b>: 
+ * <b>True</b> Law is applied from the end to the beginning of the curve (mapping is inverted).
+ * <b>False</b> Law is applied from the beginning to the end of the curve (mapping is not inverted).
+ * @sample
+ * This example sets that the mapping orientation of
+ * the <code>hybShpCurvePar</code> hybrid shape curve par feature to True.
+ * <pre>
+ * hybShpCurvePar.<font color="red">InvertMappingLaw</font> = True
+ * </pre>
+ */ 
+#pragma PROPERTY InvertMappingLaw
+ HRESULT get_InvertMappingLaw (out /*IDLRETVAL*/ boolean oInvert);
+ HRESULT put_InvertMappingLaw (in boolean iInvert);
+
+/**
+ *  Returns or sets the orientation.
+ * <br><b>Legal values</b>: <b>True</b> True to invert this orientation and <b>False</b> False means that there is no invertion of the curve orientation 
+ *   (orientation is the vector product of the tangent of the curve  by the normal on the support).
+ * @sample
+ * This example sets that the orientation of
+ * the <code>hybShpCurvePar</code> hybrid shape curve par feature to True.
+ * <pre>
+ * hybShpCurvePar.<font color="red">InvertDirection</font> = True
+ * </pre>
+ */ 
+#pragma PROPERTY InvertDirection
+ HRESULT get_InvertDirection (out /*IDLRETVAL*/ boolean oInvert);
+ HRESULT put_InvertDirection (in boolean iInvert);
+
+/**
+  * Returns the Normal of the plane created when the Support of the curve is not specified.
+  * @param oNormal 
+  *   Plane normal. It is returned as an array of three coordinates in SafeArrayVariant
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oNormal</code> the normal
+  * of the <code>hybShpCurvePar</code> plane created.
+  * <pre>
+  * Dim oNormal(2)
+  * hybShpCurvePar.<font color="red">GetPlaneNormal</font>(oNormal)
+  * </pre>
+  * <p>You can access each normal coordinate as follows:
+  *  <ul>
+  *    <li><code>x</code> is in <code>oNormal(0)</code>
+  *    <li><code>y</code> is in <code>oNormal(1)</code>
+  *    <li><code>z</code> is in <code>oNormal(2)</code>
+  *  <ul>
+  * </dl>
+  */ 
+ HRESULT GetPlaneNormal (inout  CATSafeArrayVariant  oNormal);
+
+
+/**
+ * Sets the Normal of the plane created when the Support of the curve is not specified.
+ * @param iNormal 
+    *   @param iNormal[0]
+    *   The X Coordinate of the normal vector 
+    *   @param iNormal[1]
+    *   The Y Coordinate of the normal vector
+    *   @param iNormal[2]
+    *   The Z Coordinate of the normal vector 
+ */ 
+ HRESULT PutPlaneNormal (in    CATSafeArrayVariant  iNormal);
+};
+
+// Interface name : CATIAHybridShapeCurvePar
+#pragma ID CATIAHybridShapeCurvePar "DCE:8c91daf8-48cc-0000-0280020b5c000000"
+#pragma DUAL CATIAHybridShapeCurvePar
+
+// VB object name : HybridShapeCurvePar (Id used in Visual Basic)
+#pragma ID HybridShapeCurvePar "DCE:8c91db05-211c-0000-0280020b5c000000"
+#pragma ALIAS CATIAHybridShapeCurvePar HybridShapeCurvePar
+
+#endif
+// CATIAHybridShapeCurvePar_IDL

@@ -1,0 +1,61 @@
+#ifndef CATIAAnalysisMaterial_IDL
+#define CATIAAnalysisMaterial_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIAAnalysisMaterial.idl
+// Automation interface for the AnalysisMaterial object 
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Apr03 Creation						BMB
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+
+/**
+ * Represents an AnalysisMaterial object.
+ * This object is used to manage the Analysis properties of a material.
+ */
+
+interface CATIAAnalysisMaterial : CATIABase
+{
+
+/**
+ * Returns an analysis value of the material. 
+ * The name of the parameter is needed 
+ */
+  HRESULT  GetValue (in CATBSTR iLabel, inout /*IDLRETVAL*/ CATVariant oValue);
+
+/**
+ * Sets an analysis value of the material. 
+ * The name of the parameter is needed 
+ */
+  HRESULT  PutValue (in CATBSTR iLabel, in CATVariant iValue);
+
+/**
+ * Returns the analysis type (Ex: MATERIAL_ORTHOTROPIC, MATERIAL_ISOTROPIC).
+ */
+  HRESULT GetType(inout /*IDLRETVAL*/ CATBSTR oType);
+
+};
+// Interface name : CATIAAnalysisMaterial
+#pragma ID CATIAAnalysisMaterial "DCE:ffe59733-e681-4979-a7597b2dcdc58b07"
+#pragma DUAL CATIAAnalysisMaterial
+
+// VB object name : AnalysisMaterial (Id used in Visual Basic)
+#pragma ID AnalysisMaterial "DCE:54ac707f-9069-4e00-82c8fad5a9205e9d"
+#pragma ALIAS CATIAAnalysisMaterial AnalysisMaterial
+
+#endif

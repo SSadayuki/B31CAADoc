@@ -1,0 +1,42 @@
+// COPYRIGHT Dassault Systemes 2014
+//===================================================================
+
+#ifndef CATIAMfgResourceFactory_IDL
+#define CATIAMfgResourceFactory_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+
+
+/**   
+* Interface to create manufacturing resources.
+* Role: This interface offers services to create manufacturing resources
+*/
+interface CATIAMfgResourceFactory : CATIABase
+{
+	/**
+	* This method is used to create a new manufacturing resource.
+	* @param iType
+	*   The type of the resource to create.
+	* @param iAddList
+	*   Flag to add the resource into the resource List.
+	* @param oResource
+	*   Handler on the newly created resource of given type.
+	* @see DELIMAMfgResource
+	**/
+	HRESULT CreateResource (in CATBSTR iType, in boolean iAddList, out /*IDLRETVAL*/ CATIABase oResource);
+
+};
+
+#pragma ID CATIAMfgResourceFactory "DCE:22BDE35C-1A5D-4CEB-B9DE2427C236F1ED"
+#pragma DUAL CATIAMfgResourceFactory
+
+#pragma ID ManufacturingResourceFactory "DCE:72951F9C-07C6-4099-9213FA0788A11FA3"
+#pragma ALIAS CATIAMfgResourceFactory ManufacturingResourceFactory
+
+#endif

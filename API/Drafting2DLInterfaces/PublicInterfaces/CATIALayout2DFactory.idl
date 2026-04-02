@@ -1,0 +1,54 @@
+// COPYRIGHT DASSAULT SYSTEMES 2005
+#ifndef CATIALayout2DFactory_IDL
+#define CATIALayout2DFactory_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+interface CATIALayout2DLayout;
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+interface  CATIALayout2DFactory : CATIABase
+{
+/**
+ * Create the <tt>2DLayout</tt> associated to the 3D mechanical feature tha implement this interface.
+ * E.g. a Mechanical Part.
+ * @param CATBSTR iStandardName
+ * The standard name to apply to the new layout.
+ * @param oLayout
+ * The created <tt>2DLayout</tt>. This feature is unique for a given 3D context feature. Consequently
+ * requesting this interface on a 3D feature that is already associated to a <tt>2DLayout</tt>
+ * feature will fail. You must first request for any existing <tt>2DLayout</tt> via 
+ * @href CATIABase#GetItem method using <tt>CATLayoutRoot</tt> key parameter to check for
+ * <tt>2DLayout</tt> pre-existing feature as follow :<br>
+ * <pre>
+ * Dim MyRoot As Layout2DRoot
+ * Set MyRoot = CATIA.ActiveDocument.Part.GetItem("CATLayoutRoot")
+ * if MyRoot Is Nothing then
+ *   Dim MyRootFact As Layout2DFactory
+ *   Set MyRootFact = CATIA.ActiveDocument.Part.GetItem("CATLayoutRootFactory")
+ *   Set MyRoot = MyRootFact.Create2DLayout("ISO_3D")
+ * end if
+ * </pre>
+ */
+  HRESULT Create2DLayout(in CATBSTR iStandardName, out /*IDLRETVAL*/ CATIALayout2DLayout oLayout );
+
+};
+
+// Interface name : CATIALayout2DFactory
+#pragma ID CATIALayout2DFactory "DCE:7c769f52-1e39-4405-b08f3d39c0944f63"
+#pragma DUAL CATIALayout2DFactory
+
+// VB object name : Layout2DRoot (Id used in Visual Basic)
+#pragma ID Layout2DFactory "DCE:25a1d5a8-eebf-42e8-b0fca3a55ea58de0"
+#pragma ALIAS CATIALayout2DFactory Layout2DFactory
+
+
+#endif
+

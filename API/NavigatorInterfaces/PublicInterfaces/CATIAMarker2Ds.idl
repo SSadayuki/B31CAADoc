@@ -1,0 +1,237 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAMarker2Ds.idl
+//   This automation interface allows to manage a Marker2D collection.
+//
+//===================================================================
+//
+//  Jul 2000  Creation: LJE
+//
+//===================================================================
+#ifndef CATIAMarker2Ds_IDL
+#define CATIAMarker2Ds_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIAMarker2D.idl"
+#include "CATVariant.idl"
+
+/**  
+ * A collection of Marker2Ds objects.
+ */
+interface CATIAMarker2Ds : CATIACollection
+{
+  /**
+   * Creates  a line marker 2D and adds it to the marker 2D collection.
+   * The line segment is defined using the coordinates of its two endpoints.
+   * @param iCoordinates
+   *    The coordinates of the endpoints
+   *    <ul>
+   *    <li>iCoordinates(0) is the X coordinate of the first endpoint
+   *    <li>iCoordinates(1) is the Y coordinate of the first endpoint
+   *    <li>iCoordinates(2) is the X coordinate of the second endpoint
+   *    <li>iCoordinates(3) is the Y coordinate of the second endpoint
+   *    </ul>
+   * @return
+   *    The created marker 2D
+   * @sample
+   *    This example creates a new marker 2D in the <tt>TheMarker2Ds</tt> collection.
+   *    <pre>
+   *    Dim NewMarker2DLine As Marker2D
+   *    Set NewMarker2DLine = TheMarker2Ds.<font color="red">Add2DLine</font>(Positions)
+   *    </pre>
+   */
+  HRESULT Add2DLine(in CATSafeArrayVariant iCoordinates, out /*IDLRETVAL*/ CATIAMarker2D oMarker2D);
+
+  /**
+   * Creates an arrow marker 2D and adds it to the marker 2D collection.
+   * The arrow is defined using the coordinates of its head and tail points.
+   * @param iCoordinates
+   *    The coordinates
+   *    <ul>
+   *    <li>iCoordinates(0) is the X coordinate of the head point
+   *    <li>iCoordinates(1) is the Y coordinate of the head point
+   *    <li>iCoordinates(2) is the X coordinate of the tail point
+   *    <li>iCoordinates(3) is the Y coordinate of the tail point
+   *    </ul>
+   * @return
+   *    The created marker 2D
+   * @sample
+   *    This example creates a new marker 2D in the <tt>TheMarker2Ds</tt> collection.
+   *    <pre>
+   *    Dim NewMarker2DArrow As Marker2D
+   *    Set NewMarker2DArrow = TheMarker2Ds.<font color="red">Add2DArrow</font>(Positions)
+   *    </pre>
+   */
+  HRESULT Add2DArrow(in CATSafeArrayVariant iCoordinates, out /*IDLRETVAL*/ CATIAMarker2D oMarker2D);
+
+  /**
+   * Creates a rectangle marker 2D and adds it to the marker 2D collection.
+   * The rectangle is defined using the coordinates of its bottom-left and top-right corners.
+   * @param iCoordinates
+   *    The coordinates
+   *    <ul>
+   *    <li>iCoordinates(0) is the X coordinate of the bottom-left point
+   *    <li>iCoordinates(1) is the Y coordinate of the bottom-left point
+   *    <li>iCoordinates(2) is the X coordinate of the top-right point
+   *    <li>iCoordinates(3) is the Y coordinate of the top-right point
+   *    </ul>
+   * @param iFillStatus
+   *    The filling status (1 the figure is filled, 0 the figure is not filled).
+   * @return
+   *    The created marker 2D
+   * @sample
+   *    This example creates a new marker 2D in the <tt>TheMarker2Ds</tt> collection.
+   *    <pre>
+   *    Dim NewMarker2DRectangle As Marker2D
+   *    Set NewMarker2DRectangle = TheMarker2Ds.<font color="red">Add2DRectangle</font>(Positions, 0)
+   *    </pre>
+   */
+  HRESULT Add2DRectangle(in CATSafeArrayVariant iCoordinates, in long iFillStatus, out /*IDLRETVAL*/ CATIAMarker2D oMarker2D);
+
+  /**
+   * Creates a circle marker 2D and adds it to the marker 2D collection.
+   * The circle is defined using the coordinates of its center and a point through which it passes.
+   * @param iCoordinates
+   *    The coordinates
+   *    <ul>
+   *    <li>iCoordinates(0) is the X coordinate of the center
+   *    <li>iCoordinates(1) is the Y coordinate of the center
+   *    <li>iCoordinates(2) is the X coordinate of the a point on the circle
+   *    <li>iCoordinates(3) is the Y coordinate of the a point on the circle
+   *    </ul>
+   * @param iFillStatus
+   *    The filling status (1 the figure is filled, 0 the figure is not filled).
+   * @return
+   *    The created marker 2D
+   * @sample
+   *    This example creates a new marker 2D in the <tt>TheMarker2Ds</tt> collection.
+   *    <pre>
+   *    Dim NewMarker2DCircle As Marker2D
+   *    Set NewMarker2DCircle = TheMarker2Ds.<font color="red">Add2DCircle</font>(Positions, 0)
+   *    </pre>
+   */
+  HRESULT Add2DCircle(in CATSafeArrayVariant iCoordinates, in long iFillStatus, out /*IDLRETVAL*/ CATIAMarker2D oMarker2D);
+
+  /**
+   * Creates a free hand drawing marker 2D and adds it to the marker 2D collection.
+   * The free hand drawing is defined using the coordinates of a series of points.
+   * @param iCoordinates
+   *    The coordinates
+   *    <ul>
+   *    <li>iCoordinates(0) is the X coordinate of the first point
+   *    <li>iCoordinates(1) is the Y coordinate of the first point
+   *    <li>iCoordinates(2) is the X coordinate of the second point
+   *    <li>iCoordinates(3) is the Y coordinate of the second point
+   *    <li>iCoordinates(n*2-2) is the X coordinate of the n-th point
+   *    <li>iCoordinates(n*2-1) is the Y coordinate of the n-th point
+   *    </ul>
+   * @return
+   *    The created marker 2D
+   * @sample
+   *    This example creates a new marker 2D in the <tt>TheMarker2Ds</tt> collection.
+   *    <pre>
+   *    Dim NewMarker2DFreeHand As Marker2D
+   *    Set NewMarker2DFreeHand = TheMarker2Ds.<font color="red">Add2DFreeHand</font>(Positions)
+   *    </pre>
+   */
+  HRESULT Add2DFreeHand(in CATSafeArrayVariant iCoordinates, out /*IDLRETVAL*/ CATIAMarker2D oMarker2D);
+
+  /**
+   * Creates a text marker 2D and adds it to the marker 2D collection.
+   * The text is anchored using the coordinates of its bottom-left point.
+   * @param iCoordinates
+   *    The coordinates
+   *    <ul>
+   *    <li>iCoordinates(0) is the X coordinate of the bottom-left point
+   *    <li>iCoordinates(1) is the Y coordinate of the bottom-left point
+   *    </ul>
+   * @param iText
+   *    The text
+   * @return
+   *    The created marker 2D
+   * @sample
+   *    This example creates a new marker 2D in the <tt>TheMarker2Ds</tt> collection.
+   *    <pre>
+   *    Dim NewMarker2DText As Marker2D
+   *    Set NewMarker2DText = TheMarker2Ds.<font color="red">Add2DText</font>(Positions, "example")
+   *    </pre>
+   */
+  HRESULT Add2DText(in CATSafeArrayVariant iCoordinates, in CATBSTR iText, out /*IDLRETVAL*/ CATIAMarker2D oMarker2D);
+
+  /**
+   * Creates a picture marker 2D and adds it to the marker 2D collection.
+   * The picture is defined as a rectangle whose bottom-left and top-right corners are given.
+   * @param iCoordinates
+   *    The coordinates of the corners
+   *    <ul>
+   *    <li>iCoordinates(0) is the X coordinate of the bottom-left point
+   *    <li>iCoordinates(1) is the Y coordinate of the bottom-left point
+   *    <li>iCoordinates(2) is the X coordinate of the top-right point
+   *    <li>iCoordinates(3) is the Y coordinate of the top-right point
+   *    </ul>
+   * @param iPath
+   *    The path to the picture file
+   * @return
+   *    The created marker 2D
+   * @sample
+   *    This example creates a new marker 2D in the <tt>TheMarker2Ds</tt> collection.
+   *    <pre>
+   *    Dim NewMarker2DPicture As Marker2D
+   *    Set NewMarker2DPicture = TheMarker2Ds.<font color="red">Add2DPicture</font>(Positions, "e:\picture.bmp")
+   *    </pre>
+   */
+  HRESULT Add2DPicture(in CATSafeArrayVariant iCoordinates, in CATBSTR iPath, out /*IDLRETVAL*/ CATIAMarker2D oMarker2D);
+
+  /**
+   * Returns a marker 2D using its index from the Marker2Ds collection.
+   * @param iIndex
+   *    The index of the marker 2D to retrieve from the collection of Marker2Ds.
+   *    As a numerics, this index is the rank of the marker 2D in the collection.
+   *    The index of the first marker 2D in the collection is 1, and
+   *    the index of the last marker 2D is Count.
+   * @return
+   *    The retrieved marker 2D
+   * @sample
+   *    This example retrieves in <tt>ThisMarker2D</tt> the ninth marker 2D 
+   *    from the <tt>TheMarker2Ds</tt> collection. 
+   *    <pre>
+   *    Dim ThisMarker2D As Marker2D
+   *    Set ThisMarker2D = TheMarker2Ds.<font color="red">Item</font>(9)
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAMarker2D oMarker2D);
+
+  /**
+   * Removes a marker 2D from the Marker2Ds collection.
+   * @param iIndex
+   *    The index of the marker 2D to retrieve from he collection of Marker2Ds.
+   *    As a numerics, this index is the rank of the marker 2D in the collection.
+   *    The index of the first marker 2D in the collection is 1, and
+   *    the index of the last marker 2D is Count.
+   * @sample
+   *    The following example removes the tenth marker 2D from the <tt>TheMarker2Ds</tt> collection.
+   *    <pre>
+   *    TheMarker2Ds.<font color="red">Remove</font>(10)
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAMarker2Ds
+#pragma ID CATIAMarker2Ds "DCE:063fdb64-517b-11d4-9469006094eb3826"
+#pragma DUAL CATIAMarker2Ds
+
+// VB object name : Marker2Ds (Id used in Visual Basic)
+#pragma ID Marker2Ds "DCE:06dad43e-517b-11d4-9469006094eb3826"
+#pragma ALIAS CATIAMarker2Ds Marker2Ds
+
+#endif

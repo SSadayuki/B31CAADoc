@@ -1,0 +1,359 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>ApplicationFrame CATCommandHeader Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../ApplicationFrame.htm" href="../ApplicationFrame.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "ApplicationFrame";	}
+		function getCurrentObjectName() { 
+ 	return "CATCommandHeader"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>ApplicationFrame Framework: CATCommandHeader <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATCommandHeader_25410','CATCommandHeader','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can derive this class.</b></p>
+<hr/>
+<p>
+ public class <b>CATCommandHeader</b>
+</p>
+<p>
+<b><i> Class to create a command header.</i></b><br>
+
+ <b>Role</b>: Each command you want to make available in your workshop or workbench 
+ must have a command header. It holds the necessary information to load the command, 
+ such as the name of the shared library in which the 
+ command's executable code is located, the name of the command class, and the data to pass 
+ to the command's code when this command becomes the current one. 
+ <p>The command header has 
+ resources for each command  to display, such as the command name shown to the end user, 
+ its ToolTip displayed in a balloon, it help message, and its icon. This enables the 
+ workshop or workbench to be  displayed, that is loaded in memory, without any of its 
+ commands being itself loaded, except the default one, spares memory space, and improves 
+ performance. The end user can  see the icons in the toolbars, the items in the menu bar, 
+ can ask for help on a given command, without the command being loaded. It is only when 
+ he/she clicks on the menu item or on the icon that the command code is actually loaded.</p>
+ 
+ <p>You cannot directly instanciate a <tt>CATCommandHeader</tt>, you must derive 
+ this class. The easiest way is using the <script type="text/javascript"> activateLinkAnchor('MacDeclareHeader','','MacDeclareHeader') </script> macro such that: <pre>
+    #include "CATCommandHeader.h"
+    MacDeclareHeader(MyHeader);
+ </pre>
+ <tt>MyHeader</tt> is a command header class always available and with a
+ default representation: a push button in a toolbar, and a push item is the menu bar or
+ in a contextual menu. In most cases it is sufficient. However you can create a <b>customized 
+ command header</b> for two reasons:
+ <ul>
+ <li>To manage the command availability with respect to what 
+ the end user does, or what exists in the document.</li>
+  <br>The new class must at least derive from <tt>CATCommandHeader</tt>
+ <li>To customize the command header representation.</li>
+ <br>The new class must at least derive from 
+<script type="text/javascript"> activateLinkAnchor('CATAfrDialogCommandHeader','','CATAfrDialogCommandHeader') </script>  </ul>
+ Creating a customized command header implies to have (or overwrite) at least
+ the following methods:
+ <ul>
+   <li>In public</li>
+    <ul>
+   <li>Constructor calling the base class constructor</li>
+   <li>Destructor</li>
+   <li>
+<script type="text/javascript"> activateLinkAnchor('','Clone','Clone') </script> which calls the constructor class</li>   </ul>
+   <li>In private - to implement</li>
+    <ul>
+   <li>Constructor, with a <tt>CATCommandHeader</tt> pointer as argument, and 
+    calling the constructor with a <tt>CATCommandHeader</tt> of
+    the base class</li>
+    </ul>
+   <li>In private - not implemented</li>
+    <ul>
+   <li>Defauft constructor</li>
+   <li>Copy constructor</li>
+   <li>Assignment operator </li>
+    </ul>
+ </ul>
+ The customized command header (named <tt>MyHeader</tt>) must be a <b>component</b> to implement 
+ any kind interfaces, so it must contain the following macros:
+   <ul>
+   <li>in header file: 
+<script type="text/javascript"> activateLinkAnchor('CATDeclareClass','','CATDeclareClass') </script> </li>   <li>in source file: 
+<script type="text/javascript"> activateLinkAnchor('CATImplementClass','','CATImplementClass') </script> with the following arguments:       <pre>(MyHeader, Implementation,CATBaseUnknown,CATNull)</pre</li>                
+   </ul>
+ To assign <b>resources</b> to the command header,
+ it must contain the following macros:
+   <ul>
+   <li>in header file: 
+<script type="text/javascript"> activateLinkAnchor('CATDeclareHeaderResources','','CATDeclareHeaderResources') </script> ;</li>   <li>in source file: 
+<script type="text/javascript"> activateLinkAnchor('CATImplementHeaderResources','','CATImplementHeaderResources') </script> with the following arguments:                  <pre>(MyHeader, BaseClass,MyHeaderResourceFile)</pre> </li>               
+   </ul> 
+ <b>Where</b> to create command header instances ? 
+ Generaly, you create instances in the following methods: 
+ <ul>
+ <li>
+<script type="text/javascript"> activateLinkAnchor('CATIWorkshop','CreateCommands','CATIWorkshop.CreateCommands') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('CATIWorkbench','CreateCommands','CATIWorkbench.CreateCommands') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('CATIWorkbenchAddin','CreateCommands','CATIWorkbenchAddin.CreateCommands') </script> </li> </ul>
+ In this case, the command header instance, identified by the first argument of the constructor 
+ class, is <b>associated with a starter</b> thanks to the 
+ 
+<script type="text/javascript"> activateLinkAnchor('SetAccessCommand','','SetAccessCommand') </script> macro </p> You can also create command header instances to set in the "Tools Palette" toolbar. It is
+ a specific toolbar which can be filled, for a specific workbench by implementing 
+ 
+<script type="text/javascript"> activateLinkAnchor('CATIAfrPaletteOptions','','CATIAfrPaletteOptions') </script>, or/and for a specific command thanks 
+<script type="text/javascript"> activateLinkAnchor('CATIAfrCmdPaletteOptions','','CATIAfrCmdPaletteOptions') </script> . In these two cases, before creating a command header instance, you must check that the
+ instance does not already exist in the current editor. It is possible thanks to the
+ 
+<script type="text/javascript"> activateLinkAnchor('CATAfrGetCommandHeader','','CATAfrGetCommandHeader') </script> global function.  <p>Who <b>delete</b> command header instances ? 
+ <br>Each command header instance is kept in a list by the 
+<script type="text/javascript"> activateLinkAnchor('CATFrmEditor','','CATFrmEditor') </script> associated   with the document to edit. The editor manages the command header deletion. You must never 
+ delete a command header instance.  </p>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATCommandHeader(CATCommandHeader*)"><b>CATCommandHeader</b></a>(CATCommandHeader*)
+</td><td id='tdright'>  Constructs a command header instance.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATCommandHeader(CATString&amp;,CATString&amp;,CATString&amp;,void*,int)"><b>CATCommandHeader</b></a>(CATString&amp;,CATString&amp;,CATString&amp;,void*,int)
+</td><td id='tdright'>  Constructs a command header.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATCommandHeader()"><b>~CATCommandHeader</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#BecomeAvailable()"><b>BecomeAvailable</b></a>()
+</td><td id='tdright'>   Makes the command Available.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BecomeUnavailable()"><b>BecomeUnavailable</b></a>()
+</td><td id='tdright'>   Makes the command Unavailable.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Clone()"><b>Clone</b></a>()
+</td><td id='tdright'>     Clones the command header.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCurrentArgument()"><b>GetCurrentArgument</b></a>()
+</td><td id='tdright'>  Retrieves the argument of the header.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetVisibility()"><b>GetVisibility</b></a>()
+</td><td id='tdright'>  Returns the header visibility in the Tools/Customize command.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetVisibility(int)"><b>SetVisibility</b></a>(int)
+</td><td id='tdright'>  Sets the header visibility in the Tools/Customize command.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATCommandHeader"></a><a id="CATCommandHeader(CATCommandHeader*)"></a>
+<span class = 'method'>protected <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATCommandHeader</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommandHeader','CATCommandHeader*')</script> <span class='param'>header</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a command header instance.
+ <br<b>Role:</b>This method calls the copy constructor. 
+ In your derived class overwrite this method such that:
+ 
+ <pre>
+ MyHeader::MyHeader(CATCommandHeader * iHeaderToCopy):
+                           CATCommandHeader(iHeaderToCopy)
+ {
+ }   
+ </pre>
+ This method is called by the 
+<script type="text/javascript"> activateLinkAnchor('','Clone','Clone') </script> method. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iHeaderToCopy</span></dt>
+   <dd> The header to copy.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATCommandHeader"></a><a id="CATCommandHeader(CATString&amp;,CATString&amp;,CATString&amp;,void*,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATCommandHeader</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iHeaderID</span>, const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iLoadName</span>, const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iClassName</span>,<script type="text/javascript"> activateLink('void','void*')</script> <span class='param'>iArgument</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iState</span><span class='param'>= CATFrmAvailable</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a command header. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iHeaderID</span></dt>
+   <dd>     The identifier of the header. It iss the <tt>command</tt> argument of the <tt>
+     SetAccessCommand </tt> macro.It iss used for NLS resources.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLoadName</span></dt>
+   <dd>    The name of the shared library where <tt>iClassName</tt> is.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iClassName</span></dt>
+   <dd>    The name of the <tt> CATCommand </tt> class.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iArgument</span></dt>
+   <dd>    The argument of the <tt> CATCommand </tt> class.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iState</span></dt>
+   <dd>    The CATCommandHeader state.
+    <br><b>Legal values</b>: 
+       <li> CATFrmAvailable (The default value) </li>
+       <li> CATFrmUnavailable </li>
+ 
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATCommand','','CATCommand') </script>, <script type="text/javascript"> activateLinkAnchor('SetAccessCommand','','SetAccessCommand') </script>, <script type="text/javascript"> activateLinkAnchor('CATFrmState','','CATFrmState') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATCommandHeader"></a><a id="~CATCommandHeader()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATCommandHeader</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="BecomeAvailable"></a><a id="BecomeAvailable()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BecomeAvailable</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Makes the command Available.
+ <br><b>Role</b>: The command of the header becomes available. The icon switches from
+ the grayed to the normal state.
+</dd>
+<dt class='dtmethod' >
+  <a id="BecomeUnavailable"></a><a id="BecomeUnavailable()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BecomeUnavailable</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Makes the command Unavailable.
+ <br><b>Role</b>: The command of the header becomes unavailable. The icon switches from
+ the normal to the grayed state.
+</dd>
+<dt class='dtmethod' >
+  <a id="Clone"></a><a id="Clone()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATCommandHeader','CATCommandHeader *')</script>  <span class='objname'>Clone</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+    Clones the command header.
+ <br<b>Role:</b>This method calls the constructor with a <tt>CATCommandHeader</tt> 
+  pointer as argument. In your derived class overwrite this method such that:
+  
+ <pre>
+ CATCommandHeader * MyHeader::Clone ()                                  
+ { 
+   return new MyHeader(this); 
+ }   
+ </pre>
+ You must never call a <tt>Clone</tt> method. This method is called by the "frame".
+ Today, it is called for your CAA instances in only one case: when the command header 
+ instance is created in an Add-in of the General workshop, refer to the 
+ 
+<script type="text/javascript"> activateLinkAnchor('CATIAfrGeneralWksAddin','','CATIAfrGeneralWksAddin') </script> interface for more details about these Add-ins.  
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The new command header instance.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCurrentArgument"></a><a id="GetCurrentArgument()"></a>
+<span class = 'method'>public static <script type="text/javascript"> activateLink('CATString','CATString &')</script>  <span class='objname'>GetCurrentArgument</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the argument of the header.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetVisibility"></a><a id="GetVisibility()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetVisibility</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the header visibility in the Tools/Customize command.
+ <br><b>Role</b>: This method returns if the command header is visible or not
+ in the Tools/Customize command.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   The header visibility in the Tools/Customize command.
+ <br><b>Legal values</b>: <tt>1</tt> Visible, <tt>0</tt> : invisible
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetVisibility"></a><a id="SetVisibility(int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetVisibility</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIsVisible</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the header visibility in the Tools/Customize command.
+ <br><b>Role</b>: This method enables you to hide or show the 
+ command header instance in the Tools/Customize command. It can be interesting
+ to hide some command header instances, when you do not want that the end user 
+ drag and drop your command in a toolbar. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIsVisible</span></dt>
+   <dd> The header visibility in the Tools/Customize command.
+ <br><b>Legal values</b>: <tt>1</tt> Visible, <tt>0</tt> : invisible
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATCommandHeader.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATApplicationFrame</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

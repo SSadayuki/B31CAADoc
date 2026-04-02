@@ -1,0 +1,16 @@
+OS = COMMON
+#if defined(CATIAR201)
+BUILT_OBJECT_TYPE = RUNTIME DATA
+BUILD = YES
+RTV_ROOT_SRCPATH=CNext
+#
+#else
+#if defined(CATIAV5R21)
+BUILT_OBJECT_TYPE=NONE
+BUILD=NO
+#
+#endif
+#endif
+
+
+

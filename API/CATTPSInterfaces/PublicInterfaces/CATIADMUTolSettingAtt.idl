@@ -1,0 +1,216 @@
+
+#ifndef CATIADMUTolSettingAtt_IDL
+#define CATIADMUTolSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT Dassault Systemes 2003
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+// Putting your explanations in the following "JavaDoc"-like comment will enable mkdcidl to document your class.
+/**
+ * Represents the DMU Tolerancing setting controller object.
+ * <b>Role</b>: The DMU Tolerancing setting controller object deals with the setting
+ * parameters displayed in:
+ * <ul>
+ * <li>The DMU Tolerancing property page for the Related Surface Color and 
+ * the Design Mode setting parameters.
+ * <br>To access this property page:
+ *   <ul>
+ *    <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *    <li>Click + left of </b>Digital Mockup</b> to unfold the workbench list</li>   
+ *    <li>Click </b>DMU Tolerancing Review</b></li>
+ *   </ul>
+ * </li>
+ * <li>The Cgr Management property page for the Save in CGR setting parameter.
+ * <br>To access this property page:
+ *   <ul>
+ *    <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *    <li>Click + left of </b>Infrastructure</b> to unfold the workbench list</li>   
+ *    <li>Click </b>Product Structure</b></li>
+ *    <li>Click the </b>Cgr Management</b> property page</li>
+ *   </ul>
+ * <p>The Save in CGR setting parameter represents the state of the check button named:
+ * Save FTA 3D Annotation representation in CGR.
+ * </li>
+ * </ul>
+ */
+interface CATIADMUTolSettingAtt : CATIASettingController 
+{
+
+  //------------------------------------------------------
+  //  Related Surface Color setting parameter
+  //------------------------------------------------------
+   /**
+    * Retrieves the Related Surface Color setting parameter value.
+    * <br><b>Role</b>: The Related Surface Color setting parameter defines the color of the annotation related surfaces,
+    * that is, of all the surfaces referenced or toleranced using the CATIA V4 FD&amp;T function.
+    * <br><b>Legal values</b>:The three color indexes range from 0 to 255.
+    * @param oRelatedR [out]
+    *   The Related Surface Color red index
+    * @param oRelatedG [out]
+    *   The Related Surface Color green index
+    * @param oRelatedB [out]
+    *   The Related Surface Color blue index
+    */
+     HRESULT GetRelatedColors (out long oRelatedR, 
+                               out long oRelatedG, 
+                               out long oRelatedB);
+   /**
+    * Sets the Related Surface Color setting parameter value.
+    * <br><b>Role</b>: The Related Surface Color setting parameter defines the color of the annotation related surfaces,
+    * that is, of all the surfaces referenced or toleranced using the CATIA V4 FD&amp;T function.
+    * <br><b>Legal values</b>:The three color indexes range from 0 to 255.
+    * @param iRelatedR [in]
+    *   The Related Surface Color red index
+    * @param iRelatedG [in]
+    *   The Related Surface Color green index
+    * @param iRelatedB [in]
+    *   The Related Surface Color blue index
+    */
+     HRESULT SetRelatedColors (in long iRelatedR, 
+                               in long iRelatedG, 
+                               in long iRelatedB);
+
+   /** 
+    * Locks or unlocks the Related Surface Color setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailed description.
+    */
+    HRESULT SetRelatedColorsLock (in  boolean iLocked );
+
+
+   /** 
+    * Retrieves informations about the Related Surface Color setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailled description.
+    */ 
+    HRESULT GetRelatedColorsInfo (inout CATBSTR AdminLevel,
+                                  inout CATBSTR oLocked,
+                                  out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Design Mode setting parameter
+  //------------------------------------------------------
+
+   /**
+    * Returns or sets the Design Mode setting parameter value.
+    * <br><b>True</b> if the Design Mode setting parameter is checked and thus set to Automatic.
+    * <br><b>Role</b>: When set to True, models are loaded in Design Mode to access technological data.
+    * Otherwise, when set to False, models are loaded in Visualization Mode, 
+    * and only visualization data is loaded.
+    */
+#pragma PROPERTY DesignMode
+    HRESULT get_DesignMode (out /*IDLRETVAL*/ boolean oDesignMode);
+    HRESULT put_DesignMode (in boolean iDesignMode);
+
+   /** 
+    * Locks or unlocks the Design Mode setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailed description.
+    */
+    HRESULT SetDesignModeLock (in  boolean iLocked );
+
+   /**
+    * Retrieves informations about the Design Mode setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailled description.
+    */
+    HRESULT GetDesignModeInfo (inout CATBSTR AdminLevel,
+                               inout CATBSTR oLocked,
+                               out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Save in CGR setting parameter
+  //------------------------------------------------------
+   /**
+    * Returns or sets the Save in CGR setting parameter value.
+    * <br><b>True</b> if the Save in CGR setting parameter is checked.
+    * <br><b>Role</b>: When set to True, the FTA 3D Annotation representations are saved in CGR.
+    * Otherwise, they are not saved.
+    */
+#pragma PROPERTY SaveCGR
+    HRESULT get_SaveCGR (out /*IDLRETVAL*/ boolean oSaveCGR);
+    HRESULT put_SaveCGR (in boolean iSaveCGR);
+
+   /** 
+    * Locks or unlocks the Save in CGR setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailed description.
+    */
+    HRESULT SetSaveCGRLock (in  boolean iLocked );
+
+   /** 
+    * Retrieves informations about the Save in CGR setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailled description.
+    */
+    HRESULT GetSaveCGRInfo (inout CATBSTR AdminLevel,
+                            inout CATBSTR oLocked,
+                            out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Pattern of Visu setting parameter
+  //------------------------------------------------------
+   /**
+    * Returns or sets the Pattern of Visu setting parameter value.
+    * <br><b>True</b> if the Pattern of Visu setting parameter is checked.
+    * <br><b>Role</b>: When set to True, the FTA 3D Annotation representations are saved in CGR.
+    * Otherwise, they are not saved.
+    */
+#pragma PROPERTY SectPattern
+    HRESULT get_SectPattern (out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_SectPattern (in boolean iValue);
+
+   /** 
+    * Locks or unlocks the Pattern of Visu setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailed description.
+    */
+    HRESULT SetSectPatternLock (in  boolean iLocked );
+
+   /** 
+    * Retrieves informations about the Pattern of Visu setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailled description.
+    */
+    HRESULT GetSectPatternInfo (inout CATBSTR AdminLevel,
+                                inout CATBSTR oLocked,
+                                out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Preview Area setting parameter
+  //------------------------------------------------------
+   /**
+    * Returns or sets the Preview Area setting parameter value.
+    * <br><b>True</b> if the Preview Area setting parameter is checked.
+    */
+#pragma PROPERTY PrevArea
+    HRESULT get_PrevArea (out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_PrevArea (in boolean iValue);
+
+   /** 
+    * Locks or unlocks the Preview Area setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailed description.
+    */
+    HRESULT SetPrevAreaLock (in  boolean iLocked );
+
+   /** 
+    * Retrieves informations about the Preview Area setting parameter value.
+    * <br>Refer to @href CATIASettingController for a detailled description.
+    */
+    HRESULT GetPrevAreaInfo (inout CATBSTR AdminLevel,
+                             inout CATBSTR oLocked,
+                             out  /*IDLRETVAL*/boolean oModified);
+
+};
+
+// Interface name : CATIADMUTolSettingAtt
+#pragma ID CATIADMUTolSettingAtt "DCE:108539c4-28d9-4e3b-a7c7ca1381ea8706"
+#pragma DUAL CATIADMUTolSettingAtt
+
+// VB object name : DMUTolSettingAtt (Id used in Visual Basic)
+#pragma ID DMUTolSettingAtt "DCE:f7f9a9e7-2150-4ac6-95b39ab7d8769e21"
+#pragma ALIAS CATIADMUTolSettingAtt DMUTolSettingAtt
+
+#endif

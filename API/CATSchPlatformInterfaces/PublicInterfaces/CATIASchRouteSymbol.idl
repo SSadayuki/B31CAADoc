@@ -1,0 +1,136 @@
+#ifndef CATIASchRouteSymbol_IDL 
+#define CATIASchRouteSymbol_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2007
+    
+interface CATIASchGRRRoute;
+    
+#include "CATIABase.idl"
+
+/** 
+ * Manage a symbol placed on a route. 
+ */
+
+interface CATIASchRouteSymbol : CATIABase
+{
+  /**
+  * Get the graphical representation of a schematic route that owns this symbol.
+  * @param oGRRRoute
+  *   The graphical representation that owns this symbol.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteSymbol
+  * Dim objArg1 As SchGRRRoute
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">GetGRRRoute</font>
+  * </pre>
+  *
+  */
+  HRESULT GetGRRRoute (
+    out /*IDLRETVAL*/ CATIASchGRRRoute oGRRRoute);
+
+  /**
+  * Set the symbol's position on the route that own it.
+  * @param iSegNum
+  *   The route segment number (<= number of segments in the route).
+  * @param iSegParm
+  *   The parameter along the segment (0.<=iSegParm<=1.).
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteSymbol
+  * Dim intVar1 As Integer
+  * Dim dbVar2 As Double
+  *  ...
+  * objThisIntf.<font color="red">SetPosition</font>intVar1,dbVar2
+  * </pre>
+  *
+  */
+  HRESULT SetPosition (
+    in long iSegNum, in double iSegParm);
+
+  /**
+  * Get the symbol's position on the route that own it.
+  * @param oSegNum
+  *   The route segment number.
+  * @param oSegParm
+  *   The parameter along the segment.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteSymbol
+  * Dim intVar1 As Integer
+  * Dim dbVar2 As Double
+  *  ...
+  * objThisIntf.<font color="red">GetPosition</font>intVar1,dbVar2
+  * </pre>
+  *
+  */
+  HRESULT GetPosition (
+    inout long oSegNum, inout double oSegParm);
+
+  /**
+  * Scale the symbol.
+  * @param iDbScaleFactor
+  *   The scale factor to scale the symbol by.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteSymbol
+  * Dim dbVar1 As Double
+  *  ...
+  * objThisIntf.<font color="red">Scale</font>dbVar1
+  * </pre>
+  *
+  */
+  HRESULT Scale (
+    in double iDbScaleFactor);
+
+  /**
+  * Mirror the symbol over the route segment line on which
+  * the symbol is positioned.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteSymbol
+  *  ...
+  * objThisIntf.<font color="red">FlipOverLine</font>
+  * </pre>
+  *
+  */
+  HRESULT FlipOverLine ();
+
+  /**
+  * Mirror the symbol over the line orthogonal to the route segment
+  * line on which the symbol is positioned and going through the
+  * symbol's position point on that segment line.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteSymbol
+  *  ...
+  * objThisIntf.<font color="red">FlipOverOrthogonalLine</font>
+  * </pre>
+  *
+  */
+  HRESULT FlipOverOrthogonalLine ();
+
+};
+    
+// Interface name : CATIASchRouteSymbol
+#pragma ID CATIASchRouteSymbol "DCE:2b4e0618-2bac-4059-91d474fdc7ae29a7"
+#pragma DUAL CATIASchRouteSymbol
+    
+// VB object name : SchRouteSymbol
+#pragma ID SchRouteSymbol "DCE:f5d36c00-6efd-46b2-951200c8fb3030e8"
+#pragma ALIAS CATIASchRouteSymbol SchRouteSymbol
+    
+#endif 

@@ -1,0 +1,405 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>ComponentsCatalogsInterfaces CATICatalogPersistentQuery Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../ComponentsCatalogsInterfaces.htm" href="../ComponentsCatalogsInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "ComponentsCatalogsInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATICatalogPersistentQuery"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>ComponentsCatalogsInterfaces Framework:  CATICatalogPersistentQuery Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATICatalogPersistentQuery_77726','CATICatalogPersistentQuery','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATICatalogPersistentQuery</b>
+</p>
+<p>
+<b><i> Interface to manage a persistent query.</i></b><br>
+
+ <b>Role</b>:The persistent query is used for creating a new family of 
+ descriptions. The <script type="text/javascript"> activateLinkAnchor('CATICatalogChapter','AddPersistentQuery','CATICatalogChapter.AddPersistentQuery') </script> method enables to create an "empty" query. This method returns a pointer on this
+ interface to complete and execute the query:
+ <ul>
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','SetResolutionChapter','SetResolutionChapter') </script> </li> <p>It is the root chapter of the catalog to filter. </p>
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','SetExpression','SetExpression') </script> </li> <p>It is the expression of the query <p>
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','ResolveQuery','ResolveQuery') </script> </li> <p>It launches the filtering on the external root chapter.
+ </ul> 
+ The result, that you have as output argument of the
+ 
+<script type="text/javascript"> activateLinkAnchor('','ResolveQuery','ResolveQuery') </script> method, by the 
+<script type="text/javascript"> activateLinkAnchor('','GetGeneratedQueryResult','GetGeneratedQueryResult') </script> method or by the 
+<script type="text/javascript"> activateLinkAnchor('','GetListGeneratedDescriptions','GetListGeneratedDescriptions') </script>, are descriptions of the external catalog.  
+ <p>For each external description resolving the expression, a description is created on the
+ family which has this persistent query. The only one keyword automatically valuated on 
+ this family is the "Name" keyword.</p>
+ <p> It is possible for each persistent query of a family to set new default values on 
+ each keywords of this family. It means that the value of a keyword of a description
+ of such family can be:
+ <ul>
+ <li>The own value of the keyword, set by the 
+<script type="text/javascript"> activateLinkAnchor('CATICatalogDescription','SetValue','CATICatalogDescription.SetValue') </script> method</li> <li>if no own value, the default value set by the 
+<script type="text/javascript"> activateLinkAnchor('','SetDefaultValue','SetDefaultValue') </script>   method of this interface</li>
+ <li>otherwise, the default value set on the family by the 
+  
+<script type="text/javascript"> activateLinkAnchor('CATICatalogChapter','SetDefaultValue','CATICatalogChapter.SetDefaultValue') </script> method </li> </ul></p>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetChapter()"><b>GetChapter</b></a>()
+</td><td id='tdright'>    Returns the chapter which contain this current persistent query.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetExpression(CATUnicodeString&amp;)"><b>GetExpression</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>    Retrieves the knowledge expression defining the query.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetGeneratedQueryResult(CATICatalogQueryResult*&amp;)"><b>GetGeneratedQueryResult</b></a>(CATICatalogQueryResult*&amp;)
+</td><td id='tdright'>    Retrieves the result of the resolved query.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetListGeneratedDescriptions(CATListValCATICatalogDescription_var*&amp;)"><b>GetListGeneratedDescriptions</b></a>(CATListValCATICatalogDescription_var*&amp;)
+</td><td id='tdright'>    Retrieves the list of the resulting descriptions.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResolutionChapter(CATICatalogChapter*&amp;,int)"><b>GetResolutionChapter</b></a>(CATICatalogChapter*&amp;,int)
+</td><td id='tdright'>    Retrieves the chapter on which the query would be solved.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResolutionDate(CATTime&amp;)"><b>GetResolutionDate</b></a>(CATTime&amp;)
+</td><td id='tdright'>    Retrieves the time/date of the resulting descriptions when the query is resolved.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ResolveQuery(int,CATListValCATICatalogDescription_var*&amp;)"><b>ResolveQuery</b></a>(int,CATListValCATICatalogDescription_var*&amp;)
+</td><td id='tdright'>    Resolves the query that is defined by the knowledge expression.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDefaultValue(CATUnicodeString&amp;,int)"><b>SetDefaultValue</b></a>(CATUnicodeString&amp;,int)
+</td><td id='tdright'>    Sets keyword Default Value for resolved attribute (integer).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDefaultValue(CATUnicodeString&amp;,double)"><b>SetDefaultValue</b></a>(CATUnicodeString&amp;,double)
+</td><td id='tdright'>    Sets keyword Default Value for resolved attribute (real).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDefaultValue(CATUnicodeString&amp;,CATBoolean)"><b>SetDefaultValue</b></a>(CATUnicodeString&amp;,CATBoolean)
+</td><td id='tdright'>    Sets keyword Default Value for resolved attribute (boolean).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDefaultValue(CATUnicodeString&amp;,CATUnicodeString&amp;)"><b>SetDefaultValue</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>    Sets keyword Default Value for resolved attribute (string).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetExpression(CATUnicodeString&amp;)"><b>SetExpression</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>    Sets the knowledge expression defining the query.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetResolutionChapter(CATICatalogChapter*)"><b>SetResolutionChapter</b></a>(CATICatalogChapter*)
+</td><td id='tdright'>    Sets the chapter on which the query would be solved to the current query.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetResolutionDate(CATTime&amp;)"><b>SetResolutionDate</b></a>(CATTime&amp;)
+</td><td id='tdright'>    Sets the time/date of the resulting descriptions when the query is resolved.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetChapter"></a><a id="GetChapter()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATICatalogChapter','CATICatalogChapter*')</script>  <span class='objname'>GetChapter</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Returns the chapter which contain this current persistent query.
+   
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>       The chapter containing this query.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetExpression"></a><a id="GetExpression(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetExpression</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oExpression</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the knowledge expression defining the query.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oExpression</span></dt>
+   <dd>      The defined query expression.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetGeneratedQueryResult"></a><a id="GetGeneratedQueryResult(CATICatalogQueryResult*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetGeneratedQueryResult</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATICatalogQueryResult','CATICatalogQueryResult*&amp;')</script> <span class='param'>oQueryResult</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the result of the resolved query.
+   <br><b>Role:</b>This method retrieves the descriptions which have resolved
+   the query. The other way is to use the 
+<script type="text/javascript"> activateLinkAnchor('','GetListGeneratedDescriptions','GetListGeneratedDescriptions') </script> method   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oQueryResult</span></dt>
+   <dd>      The generated descriptions.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetListGeneratedDescriptions"></a><a id="GetListGeneratedDescriptions(CATListValCATICatalogDescription_var*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetListGeneratedDescriptions</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListValCATICatalogDescription_var','CATListValCATICatalogDescription_var*&amp;')</script> <span class='param'>oListOfGeneratedDescriptions</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the list of the resulting descriptions.
+   <br><b>Role:</b>This method retrieves the descriptions which have resolved
+   the query. The other way is to use the 
+<script type="text/javascript"> activateLinkAnchor('','GetGeneratedQueryResult','GetGeneratedQueryResult') </script> method   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oListOfGeneratedDescriptions</span></dt>
+   <dd>      The generated list of description.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResolutionChapter"></a><a id="GetResolutionChapter(CATICatalogChapter*&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetResolutionChapter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATICatalogChapter','CATICatalogChapter*&amp;')</script> <span class='param'>oChapter</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iMode</span><span class='param'>=1</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the chapter on which the query would be solved.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oChapter</span></dt>
+   <dd>      The chapter on which the query would be solved.
+   
+ </ dd>
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd>      0: search chapter only in session.</br>
+      1: default try to load chapter.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResolutionDate"></a><a id="GetResolutionDate(CATTime&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetResolutionDate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATTime','CATTime&amp;')</script> <span class='param'>oResolutionTime</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the time/date of the resulting descriptions when the query is resolved.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oResolutionTime</span></dt>
+   <dd>      The query resolved time stamp.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ResolveQuery"></a><a id="ResolveQuery(int,CATListValCATICatalogDescription_var*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ResolveQuery</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iResolveMode</span>,<script type="text/javascript"> activateLink('CATListValCATICatalogDescription_var','CATListValCATICatalogDescription_var*&amp;')</script> <span class='param'>ListOfDescriptions</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Resolves the query that is defined by the knowledge expression.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iResolveMode</span></dt>
+   <dd>      Options to output the result of the query: </br>
+           0 = Simuluation : generate the result in the output list only.</br>
+           1 = Generation  : the generated result will be output and stored 
+                             in the document.
+   
+ </ dd>
+    <dt><span class='paramitem'> ListOfDescriptions</span></dt>
+   <dd>      The output list of the generated result.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDefaultValue"></a><a id="SetDefaultValue(CATUnicodeString&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetDefaultValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>ikwdName</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>odefaultValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets keyword Default Value for resolved attribute (integer).
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ikwdName</span></dt>
+   <dd>      The name of the keyword. It is a keyword of the family which
+       contains this persistent query.
+   
+ </ dd>
+    <dt><span class='paramitem'> odefaultValue</span></dt>
+   <dd>      The default value for the keyword.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDefaultValue"></a><a id="SetDefaultValue(CATUnicodeString&amp;,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetDefaultValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>ikwdName</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>odefaultValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets keyword Default Value for resolved attribute (real).
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ikwdName</span></dt>
+   <dd>      The name of the keyword.It is a keyword of the family which
+       contains this persistent query.
+   
+ </ dd>
+    <dt><span class='paramitem'> odefaultValue</span></dt>
+   <dd>      The default value for the keyword.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDefaultValue"></a><a id="SetDefaultValue(CATUnicodeString&amp;,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetDefaultValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>ikwdName</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>odefaultValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets keyword Default Value for resolved attribute (boolean).
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ikwdName</span></dt>
+   <dd>      The name of the keyword.It is a keyword of the family which
+       contains this persistent query.
+   
+ </ dd>
+    <dt><span class='paramitem'> odefaultValue</span></dt>
+   <dd>      The default value for the keyword.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDefaultValue"></a><a id="SetDefaultValue(CATUnicodeString&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetDefaultValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>ikwdName</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>odefaultValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets keyword Default Value for resolved attribute (string).
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ikwdName</span></dt>
+   <dd>      The name of the keyword.It is a keyword of the family which
+       contains this persistent query.
+   
+ </ dd>
+    <dt><span class='paramitem'> odefaultValue</span></dt>
+   <dd>      The default value for the keyword.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetExpression"></a><a id="SetExpression(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetExpression</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iExpression</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets the knowledge expression defining the query.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iExpression</span></dt>
+   <dd>      The defined query expression.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetResolutionChapter"></a><a id="SetResolutionChapter(CATICatalogChapter*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetResolutionChapter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATICatalogChapter','CATICatalogChapter*')</script> <span class='param'>iChapter</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets the chapter on which the query would be solved to the current query.
+   <br><b>Role:</b>It is the root chapter of an another catalog.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iChapter</span></dt>
+   <dd>      The chapter on which the query would be solved.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetResolutionDate"></a><a id="SetResolutionDate(CATTime&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetResolutionDate</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATTime','CATTime&amp;')</script> <span class='param'>iResolutionTime</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets the time/date of the resulting descriptions when the query is resolved.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oResolutionTime</span></dt>
+   <dd>      The query resolved time stamp to be set.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICatalogPersistentQuery.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATCclInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

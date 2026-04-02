@@ -1,0 +1,512 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>MechanicalCommands CATIUdfFeature Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../MechanicalCommands.htm" href="../MechanicalCommands.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "MechanicalCommands";	}
+		function getCurrentObjectName() { 
+ 	return "CATIUdfFeature"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>MechanicalCommands Framework:  CATIUdfFeature Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIUdfFeature_28696','CATIUdfFeature','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIUdfFeature</b>
+</p>
+<p>
+<b><i> Interface to define a User Feature or a Power Copy reference.</i></b><br>
+
+ <b>Role:</b> This interface enables to define a user feature (or a power
+ copy) reference. 
+ <br> After the <script type="text/javascript"> activateLinkAnchor('CATIUdfFactory','CreatePowerCopy','CATIUdfFactory.CreatePowerCopy') </script> or 
+<script type="text/javascript"> activateLinkAnchor('CATIUdfFactory','CreateUserFeature','CATIUdfFactory.CreateUserFeature') </script> you can define with this interface the content of the user feature (or the power copy)
+ reference.
+ <br><br>A feature is defined by its components. So by the 
+<script type="text/javascript"> activateLinkAnchor('','SetComponents','SetComponents') </script> method you  define it. After this call, <b>and only after</b>, you can use these following methods:
+ <ul>
+ <li>About inputs:</li>
+ 
+<script type="text/javascript"> activateLinkAnchor('','GetInputsNumber','GetInputsNumber') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','GetListInputs','GetListInputs') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','GetInputRole','GetInputRole') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','SetInputRole','SetInputRole') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','GetInput','GetInput') </script> .  <li>About parameters:</li>
+ 
+<script type="text/javascript"> activateLinkAnchor('','GetInternalParameters','GetInternalParameters') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','GetParameters','GetParameters') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','AddParameter','AddParameter') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','RemoveParameter','RemoveParameter') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','GetParameterRole','GetParameterRole') </script> ,  
+<script type="text/javascript"> activateLinkAnchor('','SetParameterRole','SetParameterRole') </script> . </ul>
+ The method 
+<script type="text/javascript"> activateLinkAnchor('','VerifyComponents','VerifyComponents') </script> can be used <b>before</b> the 
+<script type="text/javascript"> activateLinkAnchor('','SetComponents','SetComponents') </script> method. If the result of the verification is OK you can call <tt>SetComponents</tt> with the same list 
+ of component. (It is certainely the best way) 
+ <br>But you can also call 
+<script type="text/javascript"> activateLinkAnchor('','VerifyComponents','VerifyComponents') </script> <b>after</b> the 
+<script type="text/javascript"> activateLinkAnchor('','SetComponents','SetComponents') </script> method.  In this case its argument is NULL. But if the result of the verification is KO, 
+ you must delete this current reference and recreate a new one. <b>It is impossible to call 
+ twice the <tt>SetComponents</tt> method. </b>
+ <br>
+ <br><b>What is a role ?</b>
+ <br>For each input, or published parameter you can set a NLS string to define a role. It is 
+ a mean to understand the <tt>role</tt> of the input or the parameter. This string 
+ appears in the instantiate dialog box, and in the edit dialog box. 
+ In the case of the parameter, the role appears also in the specifications tree under the 
+ User Feature reference and under each User Feature instances. 
+ <br><br><b>Warning</b>
+ <ol>
+ <li>During the creation step, you can use all the methods of this interface, but never modify
+  object given by the following methods: 
+<script type="text/javascript"> activateLinkAnchor('','GetReferenceComponents','GetReferenceComponents') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','GetListInputs','GetListInputs') </script>,   
+<script type="text/javascript"> activateLinkAnchor('','GetInput','GetInput') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','GetInternalParameters','GetInternalParameters') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','GetParameters','GetParameters') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','GetPreview','GetPreview') </script> </li> <li>After the creation step, you can only used the <tt>Get</tt> methods, but with 
+ the same restriction for the methods given just above. </li>
+ </ol>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AddComponents(CATPathElement*,CATListValCATBaseUnknown_var&amp;,CATUnicodeString&amp;)"><b>AddComponents</b></a>(CATPathElement*,CATListValCATBaseUnknown_var&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>   Update the list of components with the user selection.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddParameter(CATBaseUnknown_var&amp;)"><b>AddParameter</b></a>(CATBaseUnknown_var&amp;)
+</td><td id='tdright'>  Publishes a parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetInput(int,CATBaseUnknown_var&amp;)"><b>GetInput</b></a>(int,CATBaseUnknown_var&amp;)
+</td><td id='tdright'>  Retrieves one input.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetInputRole(int,CATUnicodeString&amp;)"><b>GetInputRole</b></a>(int,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the role of one input.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetInputsNumber(int&amp;)"><b>GetInputsNumber</b></a>(int&amp;)
+</td><td id='tdright'>  Retrieves inputs count.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetInternalParameters(CATListValCATBaseUnknown_var*&amp;)"><b>GetInternalParameters</b></a>(CATListValCATBaseUnknown_var*&amp;)
+</td><td id='tdright'>  Retrieves all available parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetListInputs(CATListValCATBaseUnknown_var*&amp;,CATListOfCATUnicodeString*&amp;)"><b>GetListInputs</b></a>(CATListValCATBaseUnknown_var*&amp;,CATListOfCATUnicodeString*&amp;)
+</td><td id='tdright'>  Retrieves all inputs and their role.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetParameterRole(CATBaseUnknown_var&amp;,CATUnicodeString&amp;)"><b>GetParameterRole</b></a>(CATBaseUnknown_var&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the role of one published parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetParameters(CATListValCATBaseUnknown_var*&amp;)"><b>GetParameters</b></a>(CATListValCATBaseUnknown_var*&amp;)
+</td><td id='tdright'>  Retrieves all published parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPreview(CATPixelImage*&amp;)"><b>GetPreview</b></a>(CATPixelImage*&amp;)
+</td><td id='tdright'>  Retrieves the associated pixel image as preview.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetReferenceComponents()"><b>GetReferenceComponents</b></a>()
+</td><td id='tdright'>  Retrieves all referenced components.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RemoveParameter(CATBaseUnknown_var&amp;)"><b>RemoveParameter</b></a>(CATBaseUnknown_var&amp;)
+</td><td id='tdright'>  Un-Publishes a parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetComponents(CATListValCATBaseUnknown_var*)"><b>SetComponents</b></a>(CATListValCATBaseUnknown_var*)
+</td><td id='tdright'>  Sets a list of components.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetInputRole(int,CATUnicodeString&amp;)"><b>SetInputRole</b></a>(int,CATUnicodeString&amp;)
+</td><td id='tdright'>  Modifies the role of one input.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetParameterRole(CATBaseUnknown_var&amp;,CATUnicodeString&amp;)"><b>SetParameterRole</b></a>(CATBaseUnknown_var&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Modifies the role of one published parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPreview(CATPixelImage*)"><b>SetPreview</b></a>(CATPixelImage*)
+</td><td id='tdright'>  Sets a pixel image as preview.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#VerifyComponents(CATListValCATBaseUnknown_var*,CATUnicodeString&amp;)"><b>VerifyComponents</b></a>(CATListValCATBaseUnknown_var*,CATUnicodeString&amp;)
+</td><td id='tdright'>  Checks the validity of a list of components.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AddComponents"></a><a id="AddComponents(CATPathElement*,CATListValCATBaseUnknown_var&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AddComponents</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPathElement','CATPathElement*')</script> <span class='param'>iSelection</span>,<script type="text/javascript"> activateLink('CATListValCATBaseUnknown_var','CATListValCATBaseUnknown_var&amp;')</script> <span class='param'>ioComponents</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oMessage</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Update the list of components with the user selection.
+<br><b>Role</b>:
+ This method enables to update the elements to add the the components
+ list definition. It checks if the element canbe selected for the selection
+ It's mainly used for interactive purpose.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSelection</span></dt>
+   <dd>   The selection of the user.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioComponents</span></dt>
+   <dd>   The components list that must be updated. This list is prefilled with the
+   current components definition. Indeed an element can be added only if a
+   another is already in the component list. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oMessage</span></dt>
+   <dd>   NLS Message to explain why the element cannot be added.
+ <br>An error is returned if the element cannot be selected
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddParameter"></a><a id="AddParameter(CATBaseUnknown_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AddParameter</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iParamToPublish</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Publishes a parameter.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParamToPublish</span></dt>
+   <dd>   This parameter should be in the list given by 
+<script type="text/javascript"> activateLinkAnchor('','GetInternalParameters','GetInternalParameters') </script>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetInput"></a><a id="GetInput(int,CATBaseUnknown_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetInput</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPos</span>,<script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>oInputValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves one input.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPos</span></dt>
+   <dd>   input position, from 1 to 
+<script type="text/javascript"> activateLinkAnchor('','GetInputsNumber','GetInputsNumber') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> oInputValue</span></dt>
+   <dd>   The iPos input.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetInputRole"></a><a id="GetInputRole(int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetInputRole</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPos</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oRole</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the role of one input.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPos</span></dt>
+   <dd>   input position, from 1 to 
+<script type="text/javascript"> activateLinkAnchor('','GetInputsNumber','GetInputsNumber') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> oRole</span></dt>
+   <dd>   The role of the iPos input.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetInputsNumber"></a><a id="GetInputsNumber(int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetInputsNumber</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>oInputCount</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves inputs count.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oInputCount</span></dt>
+   <dd>   Count of inputs.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetInternalParameters"></a><a id="GetInternalParameters(CATListValCATBaseUnknown_var*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetInternalParameters</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListValCATBaseUnknown_var','CATListValCATBaseUnknown_var*&amp;')</script> <span class='param'>oParamList</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all available parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oParamList</span></dt>
+   <dd>   liste of available parameters
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetListInputs"></a><a id="GetListInputs(CATListValCATBaseUnknown_var*&amp;,CATListOfCATUnicodeString*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetListInputs</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListValCATBaseUnknown_var','CATListValCATBaseUnknown_var*&amp;')</script> <span class='param'>oInputList</span>,<script type="text/javascript"> activateLink('CATListOfCATUnicodeString','CATListOfCATUnicodeString*&amp;')</script> <span class='param'>oInputRoleList</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all inputs and their role.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oInputList</span></dt>
+   <dd>   List of all inputs.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oInputRoleList</span></dt>
+   <dd>   list of the role of all inputs.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetParameterRole"></a><a id="GetParameterRole(CATBaseUnknown_var&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetParameterRole</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iSpec</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oRole</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the role of one published parameter. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSpec</span></dt>
+   <dd>   A published parameter. iSpec must be in the list returned by the 
+<script type="text/javascript"> activateLinkAnchor('','GetParameters','GetParameters') </script>   method.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oRole</span></dt>
+   <dd>   The role of the iSpec parameter
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetParameters"></a><a id="GetParameters(CATListValCATBaseUnknown_var*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetParameters</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListValCATBaseUnknown_var','CATListValCATBaseUnknown_var*&amp;')</script> <span class='param'>oPublishedParamList</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all published parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oPublishedParamList</span></dt>
+   <dd>   List of published parameters. 
+   <br>A parameter is published thanks to the 
+   
+<script type="text/javascript"> activateLinkAnchor('','AddParameter','AddParameter') </script> method.   <br>This list is a sub-list of the list given by 
+<script type="text/javascript"> activateLinkAnchor('','GetInternalParameters','GetInternalParameters') </script>. 
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPreview"></a><a id="GetPreview(CATPixelImage*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetPreview</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPixelImage','CATPixelImage*&amp;')</script> <span class='param'>oImage</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the associated pixel image as preview.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oImage</span></dt>
+   <dd>   A pixel image with 130*110 size.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetReferenceComponents"></a><a id="GetReferenceComponents()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)*')</script>  <span class='objname'>GetReferenceComponents</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all referenced components.
+ <br><b>Role:</b>These features are the components selecting during de creation step.
+ <br><b>Warning</b>:The content of the list is not necessary the same as the list 
+ given to 
+<script type="text/javascript"> activateLinkAnchor('','SetComponents','SetComponents') </script>, and the order can also be modified. 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    List of components. The list is NULL while the 
+<script type="text/javascript"> activateLinkAnchor('','SetComponents','SetComponents') </script> method is not called.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="RemoveParameter"></a><a id="RemoveParameter(CATBaseUnknown_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>RemoveParameter</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iParamToUnpublish</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Un-Publishes a parameter.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParamToUnpublish</span></dt>
+   <dd>   This parameter should be in the list given by 
+<script type="text/javascript"> activateLinkAnchor('','GetInternalParameters','GetInternalParameters') </script>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetComponents"></a><a id="SetComponents(CATListValCATBaseUnknown_var*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetComponents</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListValCATBaseUnknown_var','CATListValCATBaseUnknown_var*')</script> <span class='param'>iListe</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets a list of components.
+ <br><b>Role:</b> Define the content of the reference.
+ <br><b>Warning</b> You can call this method only once. see 
+<script type="text/javascript"> activateLinkAnchor('','VerifyComponents','VerifyComponents') </script>  
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iListe</span></dt>
+   <dd>   new list of feature to include in the Power Copy or User Feature reference
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetInputRole"></a><a id="SetInputRole(int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetInputRole</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPos</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iRole</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Modifies the role of one input.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPos</span></dt>
+   <dd>   input position, from 1 to 
+<script type="text/javascript"> activateLinkAnchor('','GetInputsNumber','GetInputsNumber') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> iRole</span></dt>
+   <dd>  The role of the iPos input.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetParameterRole"></a><a id="SetParameterRole(CATBaseUnknown_var&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetParameterRole</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iSpec</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iRole</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Modifies the role of one published parameter. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSpec</span></dt>
+   <dd>   A published parameter. iSpec must be in the list returned by the 
+<script type="text/javascript"> activateLinkAnchor('','GetParameters','GetParameters') </script>   method.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRole</span></dt>
+   <dd>   The role of the iSpec parameter
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPreview"></a><a id="SetPreview(CATPixelImage*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetPreview</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPixelImage','CATPixelImage*')</script> <span class='param'>iImage</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets a pixel image as preview.
+ <br><b>Role</b>:This pixelimage will be embedded and used for preview in catalog. These
+ catalog are <tt>.catalog</tt> files.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iImage</span></dt>
+   <dd>   A pixel image with 130*110 size.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="VerifyComponents"></a><a id="VerifyComponents(CATListValCATBaseUnknown_var*,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>VerifyComponents</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATListValCATBaseUnknown_var','CATListValCATBaseUnknown_var*')</script> <span class='param'>iComponents</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oMessage</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Checks the validity of a list of components.
+<br><b>Role</b>:
+ This method verifies that the instantiation will be OK with these components.
+ If the result is OK, you can call the 
+<script type="text/javascript"> activateLinkAnchor('','SetComponents','SetComponents') </script> with the same list. <br>If you call this method after the 
+<script type="text/javascript"> activateLinkAnchor('','SetComponents','SetComponents') </script> , iComponent is NULL, but if the result if KO, you must delete the reference and recreate an another one.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iComponents</span></dt>
+   <dd>   List of components to check, if NULL, we take the components already selected.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oMessage</span></dt>
+   <dd>   NLS Message to explain the fail.
+ <br>An error is returned if you try to include a link to a sub element which is not in the
+ selection, or if you try to include a feature without implementing Replace interfaces.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIUdfFeature.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATUdfInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

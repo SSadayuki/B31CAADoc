@@ -1,0 +1,20 @@
+#
+# SHARED LIBRARY
+#
+# Enovia V5
+BUILT_OBJECT_TYPE= NONE
+
+LINK_WITH =  AD0XXBAS JS0GROUP
+#
+OS = AIX
+# 
+OS = HP-UX
+#
+OS = IRIX
+#
+OS = SunOS
+
+OS = Windows_NT
+
+
+

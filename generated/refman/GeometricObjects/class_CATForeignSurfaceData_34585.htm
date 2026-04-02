@@ -1,0 +1,960 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GeometricObjects CATForeignSurfaceData Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GeometricObjects.htm" href="../GeometricObjects.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GeometricObjects";	}
+		function getCurrentObjectName() { 
+ 	return "CATForeignSurfaceData"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>GeometricObjects Framework: CATForeignSurfaceData <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATForeignSurfaceData_34585','CATForeignSurfaceData','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can derive this class.</b></p>
+<hr/>
+<p>
+ public class <b>CATForeignSurfaceData</b>
+</p>
+<p>
+<b><i> Class for the definition of data for foreign surfaces.</i></b><br>
+
+ A foreign surface is introduced into CGM by filling the CATIForeignSurface object data
+ with a CATForeignSurfaceData. Then, it is automatically integrated into CGM, and
+ can be used as any CATSurface by the operators and the topology.
+ <br>To create your own surface class, you have to derive this CATForeignSurfaceData
+ class, and overload at least the mandatory methods that are associated with.
+ The pure virtual methods you must overload for your own object are:
+ <ul>
+		<li><tt>GetLimits, GetInternalMaxLimits</tt> and <tt>GetMaxLimits</tt> 
+ 		return the current and maximum limitation respectively, <tt>SetLimits</tt> 
+		defines a current limitation.</li>
+		<li><tt>Extrapolate</tt> must extend the MaxLimits of this surface.</li>
+		<li><tt>GetKnotVector</tt> retrieves the nodal representation if 
+		your surface has several patches.</li>
+		<li><tt>IsConfused</tt> tests is the transformation of your surface 
+		is globally coincident with another surface.</li>
+		<li><tt>IsPeriodicU</tt>, <tt>IsPeriodicV</tt> test whether the surface is periodic along U and V.</li>
+ </ul>
+ As a surface is a bi-parameterized geometric element,
+ it may be 
+ represented by three CATMathFunctionXY (<tt>(FX(x,y), FY(x,y), FZ(x,y))</tt>), 
+ that are retrieved through the
+ <tt>GetGlobalEquation</tt> method. <tt>(x,y)</tt> are the parameters of a point on
+ the surface. These parameters can also be denoted throughout <tt>(U,V)</tt>,
+ and they are handled
+ with the <tt>CATSurParam</tt> class. 
+ <br>Surfaces can have several patches in each direction,
+ that are located with a patch number in the first direction <tt>iPatchU</tt> and
+ a patch number in the second direction <tt>iPatchV</tt>. Hence, you can use
+ a local parameter on a given patch, or a global parameter, that takes in account the
+ whole surface. Notice that the patch numbers are not necessarily
+ positive, but their values are consecutive. If your surfaces have several patches, 
+ you must use the nodal vector
+ representation, and these nodal vectors must not be periodic.
+ <br> 
+ <tt>CATSurLimits</tt> is a class allowing
+ the surface to be restricted to a part of it. 
+ These limitations 
+ define the area where the surface may currently be evaluated.
+ <br>Each type of surface is responsible for the mapping (called Evaluation) between the (U,V) parameters
+ and their corresponding coordinates in the 3D space . No assumption can be made about
+ this mapping by a developper who uses these objects, except that it is C2 continuous
+ (at least twice differentiable).
+ <br>
+ For this reason, the developper who wants
+ to create new types of surfaces has to write the evaluation methods for his new class. 
+ Now, the evaluators are based on the evaluation of the corresponding CATMathFunctionXY. 
+ If your new surface requests a new type of CATMathFunctionXY, 
+ you must write the evaluators for
+ these new CATMathFunctionsXY.
+ <dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIForeignSurface','','CATIForeignSurface') </script>, <script type="text/javascript"> activateLinkAnchor('CATSurface','','CATSurface') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATForeignSurfaceData()"><b>CATForeignSurfaceData</b></a>()
+</td><td id='tdright'>   Default constructor
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATForeignSurfaceData()"><b>~CATForeignSurfaceData</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CreateLocalEquation(CATLONG32,CATLONG32,CATMathFunctionXY*&amp;,CATMathFunctionXY*&amp;,CATMathFunctionXY*&amp;)"><b>CreateLocalEquation</b></a>(CATLONG32,CATLONG32,CATMathFunctionXY*&amp;,CATMathFunctionXY*&amp;,CATMathFunctionXY*&amp;)
+</td><td id='tdright'>  Retrieves the mathematical equation associated with a patch of
+ a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CreateOffset(CATGeoFactory*,double&amp;,CATSurLimits&amp;,CATMathTransformation2D*&amp;)"><b>CreateOffset</b></a>(CATGeoFactory*,double&amp;,CATSurLimits&amp;,CATMathTransformation2D*&amp;)
+</td><td id='tdright'>  Creates a new surface, offsetted with regards to a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EvalFirstDeriv(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;)"><b>EvalFirstDeriv</b></a>(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;)
+</td><td id='tdright'>  Retrieves the first derivatives on a point of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EvalLocal(CATSurParam&amp;,CATSurEvalCommand&amp;,CATSurEvalLocal&amp;)"><b>EvalLocal</b></a>(CATSurParam&amp;,CATSurEvalCommand&amp;,CATSurEvalLocal&amp;)
+</td><td id='tdright'>  Retrieves multiple evalutions at a given point of <tt>this</tt> CATSurface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EvalMultiple(CATSurLimits&amp;,CATLONG32,CATLONG32,CATSurEvalCommand&amp;,CATSurEvalResult&amp;)"><b>EvalMultiple</b></a>(CATSurLimits&amp;,CATLONG32,CATLONG32,CATSurEvalCommand&amp;,CATSurEvalResult&amp;)
+</td><td id='tdright'>  Retrieves multiple evaluations on a grid of points of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EvalPoint(CATSurParam&amp;,CATMathPoint&amp;)"><b>EvalPoint</b></a>(CATSurParam&amp;,CATMathPoint&amp;)
+</td><td id='tdright'>  Returns the mathematical point associated with a CATSurParam.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EvalSecondDeriv(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;)"><b>EvalSecondDeriv</b></a>(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;)
+</td><td id='tdright'>  Retrieves the second derivatives on a point of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EvalThirdDeriv(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;)"><b>EvalThirdDeriv</b></a>(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;)
+</td><td id='tdright'>  Retrieves the third derivatives on a point  of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ExtractIsoParametricCurve(CATIsoParameter,CATSurParam&amp;,CATGeoFactory*)"><b>ExtractIsoParametricCurve</b></a>(CATIsoParameter,CATSurParam&amp;,CATGeoFactory*)
+</td><td id='tdright'>  Creates a new curve along an isoparametric curve of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Extrapolate(CATMathVector2D&amp;,CATMathVector2D*)"><b>Extrapolate</b></a>(CATMathVector2D&amp;,CATMathVector2D*)
+</td><td id='tdright'>  Changes the maximum limitations of this surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBox(CATSurLimits&amp;,CATMathBox&amp;)"><b>GetBox</b></a>(CATSurLimits&amp;,CATMathBox&amp;)
+</td><td id='tdright'>  Returns the smallest box surrounding a portion of a foreign surface, with regards to
+ the provided CATSurlimits.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetInternalMaxLimits(CATLONG32,CATLONG32,CATSurLimits&amp;)"><b>GetInternalMaxLimits</b></a>(CATLONG32,CATLONG32,CATSurLimits&amp;)
+</td><td id='tdright'>  Returns the maximum limitations of an internal patch of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetKnotVectorU()"><b>GetKnotVectorU</b></a>()
+</td><td id='tdright'>  Returns a pointer to the first nodal vector of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetKnotVectorV()"><b>GetKnotVectorV</b></a>()
+</td><td id='tdright'>  Returns a pointer to the second nodal vector of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLimits(CATSurLimits&amp;)"><b>GetLimits</b></a>(CATSurLimits&amp;)
+</td><td id='tdright'>  Returns the current limitations of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMathCurve(CATIsoParameter,CATSurParam&amp;)"><b>GetMathCurve</b></a>(CATIsoParameter,CATSurParam&amp;)
+</td><td id='tdright'>  Returns a pointer to the mathematical representation of an isoparametric
+ curve of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMaxLimits(CATSurLimits&amp;)"><b>GetMaxLimits</b></a>(CATSurLimits&amp;)
+</td><td id='tdright'>  Returns the maximum limitations of a foreign surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetParam(CATMathPoint&amp;,CATSurParam&amp;)"><b>GetParam</b></a>(CATMathPoint&amp;,CATSurParam&amp;)
+</td><td id='tdright'>  Retrieves the CATSurParam on  a foreign surface corresponding to a given CATMathPoint.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetParam(CATMathPoint&amp;,CATSurParam&amp;,CATSurLimits&amp;)"><b>GetParam</b></a>(CATMathPoint&amp;,CATSurParam&amp;,CATSurLimits&amp;)
+</td><td id='tdright'>  Retrieves the CATSurParam on  a foreign surface corresponding to CATMathPoint.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetParamOnIsopar(CATMathPoint&amp;,CATIsoParameter&amp;,CATSurParam&amp;,CATSurParam&amp;,double&amp;)"><b>GetParamOnIsopar</b></a>(CATMathPoint&amp;,CATIsoParameter&amp;,CATSurParam&amp;,CATSurParam&amp;,double&amp;)
+</td><td id='tdright'>  Retrieves the parameter on an iso-parametric curve of  a foreign surface corresponding to CATMathPoint
+ <br> To write for surfaces for which <tt>GetImplicitEquation</tt>
+ returns a non-null pointer.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#HasMathCurve(CATIsoParameter,CATSurParam&amp;)"><b>HasMathCurve</b></a>(CATIsoParameter,CATSurParam&amp;)
+</td><td id='tdright'>  Tests whether an isoparametric curve of  a foreign surface has a mathematical representation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsCircular()"><b>IsCircular</b></a>()
+</td><td id='tdright'>  Checks if a foreign surface is circular in a or two directions of the parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsConfused(CATMathTransformation&amp;,CATSurface*,CATMathTransformation2D*)"><b>IsConfused</b></a>(CATMathTransformation&amp;,CATSurface*,CATMathTransformation2D*)
+</td><td id='tdright'>  Tests whether the transformation of  a foreign surface is coiencident with another curve.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsInvariant(CATMathTransformation&amp;,CATMathTransformation2D*)"><b>IsInvariant</b></a>(CATMathTransformation&amp;,CATMathTransformation2D*)
+</td><td id='tdright'>  Tests whether a foreign surface is geometrically invariant.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsLinear()"><b>IsLinear</b></a>()
+</td><td id='tdright'>  Checks if a foreign surface is linear in a or two directions of the parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsPeriodicU()"><b>IsPeriodicU</b></a>()
+</td><td id='tdright'>  Tests whether a foreign surface is periodic along the first direction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsPeriodicV()"><b>IsPeriodicV</b></a>()
+</td><td id='tdright'>  Tests whether a foreign surface is periodic along the second direction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLimits(CATSurLimits&amp;)"><b>SetLimits</b></a>(CATSurLimits&amp;)
+</td><td id='tdright'>  Modifies the current limitations of a foreign surface.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATForeignSurfaceData"></a><a id="CATForeignSurfaceData()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATForeignSurfaceData</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Default constructor
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATForeignSurfaceData"></a><a id="~CATForeignSurfaceData()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATForeignSurfaceData</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CreateLocalEquation"></a><a id="CreateLocalEquation(CATLONG32,CATLONG32,CATMathFunctionXY*&amp;,CATMathFunctionXY*&amp;,CATMathFunctionXY*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>CreateLocalEquation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iPatchU</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iPatchV</span>, const <script type="text/javascript"> activateLink('CATMathFunctionXY','CATMathFunctionXY*&amp;')</script> <span class='param'>oFx</span>, const <script type="text/javascript"> activateLink('CATMathFunctionXY','CATMathFunctionXY*&amp;')</script> <span class='param'>oFy</span>, const <script type="text/javascript"> activateLink('CATMathFunctionXY','CATMathFunctionXY*&amp;')</script> <span class='param'>oFz</span>)</span><script type="text/javascript"> activateLink('=0',' =0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the mathematical equation associated with a patch of
+ a foreign surface.
+ <br>(oFx(U,V), oFy(U,V), oFz(U,V)) is then a point of the surface patch.
+ The method creates the equations, that must not be deleted as part of the object.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPatchU</span></dt>
+   <dd> The patch number in the first direction.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPatchVm</span></dt>
+   <dd> The patch number in the second direction.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oFx</span></dt>
+   <dd> A pointer to the parametric equation of the first coordinate. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oFy</span></dt>
+   <dd> A pointer to the parametric equation of the second coordinate. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oFz</span></dt>
+   <dd> A pointer to the parametric equation of the third coordinate.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CreateOffset"></a><a id="CreateOffset(CATGeoFactory*,double&amp;,CATSurLimits&amp;,CATMathTransformation2D*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATSurface','CATSurface *')</script>  <span class='objname'>CreateOffset</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGeoFactory','CATGeoFactory*')</script> <span class='param'>iWhere</span>, const <script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>iOffset</span>, const <script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>iLimits</span>,<script type="text/javascript"> activateLink('CATMathTransformation2D','CATMathTransformation2D*&amp;')</script> <span class='param'>ioTransfo2D</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a new surface, offsetted with regards to a foreign surface.
+ <br>By default, creates a CATOffsetSurface. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWhere</span></dt>
+   <dd> A pointer to the factory for creation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOffset</span></dt>
+   <dd> The offset value.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLimits</span></dt>
+   <dd> The limitations to take into account.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioTransfo2D</span></dt>
+   <dd> The 2D-transformation defining the change of parametrization between the surface and its offset.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The created surface.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="EvalFirstDeriv"></a><a id="EvalFirstDeriv(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EvalFirstDeriv</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDU</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDV</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the first derivatives on a point of a foreign surface. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParam</span></dt>
+   <dd> The point of the surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDU</span></dt>
+   <dd> The first derivative w.r.t. to the U parameter.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDV</span></dt>
+   <dd> The first derivative w.r.t. to the V parameter.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="EvalLocal"></a><a id="EvalLocal(CATSurParam&amp;,CATSurEvalCommand&amp;,CATSurEvalLocal&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EvalLocal</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iParameter</span>, const <script type="text/javascript"> activateLink('CATSurEvalCommand','CATSurEvalCommand&amp;')</script> <span class='param'>iCommand</span>,<script type="text/javascript"> activateLink('CATSurEvalLocal','CATSurEvalLocal&amp;')</script> <span class='param'>oResult</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves multiple evalutions at a given point of <tt>this</tt> CATSurface.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParam</span></dt>
+   <dd> The point of the surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCommand</span></dt>
+   <dd> The command precising the requested evaluation types.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioResult</span></dt>
+   <dd> The resulting evaluations.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="EvalMultiple"></a><a id="EvalMultiple(CATSurLimits&amp;,CATLONG32,CATLONG32,CATSurEvalCommand&amp;,CATSurEvalResult&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EvalMultiple</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>iBox</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iCountPointsInU</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iCountPointsInV</span>, const <script type="text/javascript"> activateLink('CATSurEvalCommand','CATSurEvalCommand&amp;')</script> <span class='param'>iCommand</span>,<script type="text/javascript"> activateLink('CATSurEvalResult','CATSurEvalResult&amp;')</script> <span class='param'>oResult</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves multiple evaluations on a grid of points of a foreign surface.
+<br>The method reallocates memory if necessary.If the number of points 
+ in U or V is 1, then the evaluation
+ is done on the low part of the CATSurLimits for this(these) coordinate(s).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBox</span></dt>
+   <dd> The limits of the surface to take into account.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbOfPointsInU</span></dt>
+   <dd> The number of points to distribute among the limits on the surface 
+ first direction.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbOfPointsInV</span></dt>
+   <dd> The number of points to distribute among the limits on the surface 
+ second direction.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCommand</span></dt>
+   <dd> The command precising the requested evaluation types.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oResult</span></dt>
+   <dd> The evaluation at the given points such that the <tt>(IndexU, IndexV)</tt> point
+ evaluation is located at the <tt>3*(IndexU + iNbOfPointsInU*IndexV)</tt> place.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="EvalPoint"></a><a id="EvalPoint(CATSurParam&amp;,CATMathPoint&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EvalPoint</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>ioPoint</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the mathematical point associated with a CATSurParam.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPosition</span></dt>
+   <dd> The point of the surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioPoint</span></dt>
+   <dd> The corresponding mathematical point.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="EvalSecondDeriv"></a><a id="EvalSecondDeriv(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EvalSecondDeriv</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDU2</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDUDV</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDV2</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the second derivatives on a point of a foreign surface.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParam</span></dt>
+   <dd> The point of the surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDU2</span></dt>
+   <dd> The second derivative w.r.t. to the U parameter.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDUDV</span></dt>
+   <dd> The second derivative w.r.t. to the UV parameters.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDV2</span></dt>
+   <dd> The second derivative w.r.t. to the V parameter.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="EvalThirdDeriv"></a><a id="EvalThirdDeriv(CATSurParam&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;,CATMathVector&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EvalThirdDeriv</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iPosition</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDU3</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDU2DV</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDUDV2</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioDV3</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the third derivatives on a point  of a foreign surface. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParam</span></dt>
+   <dd> The point of the surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDU3</span></dt>
+   <dd> The third derivative w.r.t. to the U parameter.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDU2DV</span></dt>
+   <dd> The third derivative w.r.t. to the UUV parameters.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDUDV2</span></dt>
+   <dd> The third derivative w.r.t. to the UVV parameters.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDV3</span></dt>
+   <dd> The third derivative w.r.t. to the V parameter.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ExtractIsoParametricCurve"></a><a id="ExtractIsoParametricCurve(CATIsoParameter,CATSurParam&amp;,CATGeoFactory*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATCurve','CATCurve *')</script>  <span class='objname'>ExtractIsoParametricCurve</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIsoParameter','CATIsoParameter')</script> <span class='param'>iIsoParameter</span>, const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iParam</span>,<script type="text/javascript"> activateLink('CATGeoFactory','CATGeoFactory*')</script> <span class='param'>iWhere</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a new curve along an isoparametric curve of a foreign surface.
+ <br>By default, creates a PLine. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIsoParameter</span></dt>
+   <dd> The type of iso parametric curve.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iParam</span></dt>
+   <dd> The point of the surface belonging to the curve to create.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iWhere</span></dt>
+   <dd> A pointer to the factory for creation.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  A pointer to the created curve.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Extrapolate"></a><a id="Extrapolate(CATMathVector2D&amp;,CATMathVector2D*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>Extrapolate</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathVector2D','CATMathVector2D&amp;')</script> <span class='param'>iRequiredParamExtension</span>,<script type="text/javascript"> activateLink('CATMathVector2D','CATMathVector2D*')</script> <span class='param'>ioActualExtension</span><span class='param'>= NULL </span>)</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Changes the maximum limitations of this surface.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iRequiredParamExtension</span></dt>
+   <dd> The value of extension.
+<ul>
+ <li>if iRequiredParamExtension.GetX()>0, Umax is expected to increase by this value.
+ <li>if iRequiredParamExtension.GetY()<0, Vmin is expected to decrease,
+ <li>if null, no change is required in the related direction.
+ </ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioActualExtension</span></dt>
+   <dd> If NULL, no information on actual extrapolation is required.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBox"></a><a id="GetBox(CATSurLimits&amp;,CATMathBox&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetBox</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>iLimits</span>,<script type="text/javascript"> activateLink('CATMathBox','CATMathBox&amp;')</script> <span class='param'>ioBox</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the smallest box surrounding a portion of a foreign surface, with regards to
+ the provided CATSurlimits.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLimits</span></dt>
+   <dd> The limits on the surface
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioBox</span></dt>
+   <dd> The box surrounding the surface limited by <tt>iLimits</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetInternalMaxLimits"></a><a id="GetInternalMaxLimits(CATLONG32,CATLONG32,CATSurLimits&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetInternalMaxLimits</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iPatchU</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iPatchV</span>,<script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>ioLimits</span>)</span><script type="text/javascript"> activateLink('=0',' const =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum limitations of an internal patch of a foreign surface.
+<br>This does not take into account the current limitations . These maximum
+ limits can be the creation limits or the limits that are obtained by 
+ extrapolation, depending on the types of geometric objects.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPatchU</span></dt>
+   <dd> The patch number in the first direction.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPatchV</span></dt>
+   <dd> The patch number in the second direction.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioLimits</span></dt>
+   <dd> The limitations of a patch.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetKnotVectorU"></a><a id="GetKnotVectorU()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATKnotVector','const CATKnotVector *')</script>  <span class='objname'>GetKnotVectorU</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const=0','const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns a pointer to the first nodal vector of a foreign surface.
+ <br>This is used when the surface has several patches. If it always
+ has only one patch, you must return a null pointer.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the knot vector.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetKnotVectorV"></a><a id="GetKnotVectorV()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATKnotVector','const CATKnotVector *')</script>  <span class='objname'>GetKnotVectorV</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const=0','const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns a pointer to the second nodal vector of a foreign surface.
+ <br>This is used when the surface has several patches. If it always
+ has only one patch, you must return a null pointer.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the knot vector.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLimits"></a><a id="GetLimits(CATSurLimits&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetLimits</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>ioLimits</span>)</span><script type="text/javascript"> activateLink('=0',' const =0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the current limitations of a foreign surface.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioLimits</span></dt>
+   <dd> The limitations of <tt>this</tt> CATSurface.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMathCurve"></a><a id="GetMathCurve(CATIsoParameter,CATSurParam&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATMathCurve','CATMathCurve*')</script>  <span class='objname'>GetMathCurve</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIsoParameter','CATIsoParameter')</script> <span class='param'>iIsoParameter</span>, const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iLocation</span>)</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns a pointer to the mathematical representation of an isoparametric
+ curve of a foreign surface.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIsoParameter</span></dt>
+   <dd> The type of iso-parametric curve.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLocation</span></dt>
+   <dd> A point belonging to the curve.
+
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the CATMathCurve, that has to be deleted by the caller.
+ No mathematical representation by default.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMaxLimits"></a><a id="GetMaxLimits(CATSurLimits&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetMaxLimits</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>ioLimits</span>)</span><script type="text/javascript"> activateLink('=0',' const =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum limitations of a foreign surface.
+<br>This does not take into account the current limitations .
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioLimits</span></dt>
+   <dd> The maximum limitations of <tt>this</tt> CATSurface.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetParam"></a><a id="GetParam(CATMathPoint&amp;,CATSurParam&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATSurface::CATSolutionDiagnostic','CATSurface::CATSolutionDiagnostic')</script>  <span class='objname'>GetParam</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iLocation</span>,<script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>ioParam</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the CATSurParam on  a foreign surface corresponding to a given CATMathPoint.
+ <br> To write for surfaces for which </tt>GetImplicitEquation</tt>
+ returns a non-null pointer.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocation</span></dt>
+   <dd> The CATMathPoint whose coordinates are to be transformed as CATSurParam.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioParam</span></dt>
+   <dd> The first corresponding CATSurParam on the surface. 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The diagnosis of the number of parameters that can be evaluated on this point.
+ <dl><dt> NoSolution  <dd>No parameter corresponds to this point.
+     <dt> SingleSolution  <dd>Only one parameter corresponds to this point.
+     <dt> MultipleSolution<dd>Several parameters correspond to this point.
+     <dt> InfiniteSolution <dd>Infinitely many parameters correspond
+ to this point.
+</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetParam"></a><a id="GetParam(CATMathPoint&amp;,CATSurParam&amp;,CATSurLimits&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATSurface::CATSolutionDiagnostic','CATSurface::CATSolutionDiagnostic')</script>  <span class='objname'>GetParam</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iLocation</span>,<script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>ioParam</span>, const <script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>iInside</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the CATSurParam on  a foreign surface corresponding to CATMathPoint.
+ <br>Only parameters inside <tt>iInside</tt> are retrieved,
+ <br> To write for  surfaces for which </tt>GetImplicitEquation</tt>
+ returns a non-null pointer.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocation</span></dt>
+   <dd> The CATMathPoint whose coordinates are to be transformed as a CATSurParam.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioParam</span></dt>
+   <dd> The first corresponding CATSurParam on the surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInside</span></dt>
+   <dd> The CATSurLimits to take into account for trimming the CATSurface.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The diagnosis of the number of parameters that can be evaluated on this point.
+ <dl><dt> NoSolution  <dd>No parameter corresponds to this point.
+     <dt> SingleSolution  <dd>Only one parameter corresponds to this point.
+     <dt> MultipleSolution<dd>Several parameters correspond to this point.
+     <dt> InfiniteSolution <dd>Infinitely many parameters correspond
+ to this point.
+</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetParamOnIsopar"></a><a id="GetParamOnIsopar(CATMathPoint&amp;,CATIsoParameter&amp;,CATSurParam&amp;,CATSurParam&amp;,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATSurface::CATSolutionDiagnostic','CATSurface::CATSolutionDiagnostic')</script>  <span class='objname'>GetParamOnIsopar</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iPoint</span>, const <script type="text/javascript"> activateLink('CATIsoParameter','CATIsoParameter&amp;')</script> <span class='param'>iIsoparam</span>, const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iStart</span>, const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iEnd</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioLambdaOnIsopar</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the parameter on an iso-parametric curve of  a foreign surface corresponding to CATMathPoint
+ <br> To write for surfaces for which <tt>GetImplicitEquation</tt>
+ returns a non-null pointer.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPoint</span></dt>
+   <dd> The CATMathPoint whose coordinates are to be transformed as a CATSurParam.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIsoparam</span></dt>
+   <dd> The isoparametric curve on which the parameter is computed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStart</span></dt>
+   <dd> The low limitation to take into account for trimming the surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEnd</span></dt>
+   <dd> The high limitation to take into account for trimming the surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioLambdaOnIsopar</span></dt>
+   <dd> The corresponding parameter value on the isoparametric curve.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The diagnosis of the number of parameters that can be evaluated on this point.
+ <dl><dt> NoSolution  <dd>No parameter corresponds to this point.
+     <dt> SingleSolution  <dd>Only one parameter corresponds to this point.
+     <dt> MultipleSolution<dd>Several parameters correspond to this point.
+     <dt> InfiniteSolution <dd>Infinitely many parameters correspond
+ to this point.
+</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="HasMathCurve"></a><a id="HasMathCurve(CATIsoParameter,CATSurParam&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>HasMathCurve</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIsoParameter','CATIsoParameter')</script> <span class='param'>iIsoParameter</span>, const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iLocation</span>)</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether an isoparametric curve of  a foreign surface has a mathematical representation.
+ <br>Optional method. No mathematical representation by default. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIsoParameter</span></dt>
+   <dd> The type of iso-parametric curve.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLocation</span></dt>
+   <dd> A point belonging to the curve.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ <br><b>Legal values</b>:
+<dl> <dt><tt>1</tt> <dd>If an isoparametric curve of <tt>this</tt> has a mathematical representation.
+     <dt><tt>0</tt> <dd>Otherwise.</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsCircular"></a><a id="IsCircular()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIsoParameter','CATIsoParameter')</script>  <span class='objname'>IsCircular</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Checks if a foreign surface is circular in a or two directions of the parameter.
+ <br>By default, returns <tt>CATIsoParNoDir</tt>
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ <br><b>Legal values</b>:
+ <dl><dt> <tt>CATIsoParNoDir  </tt> <dd> if they is no circle on the surface
+     <dt> <tt>CATIsoParamU    </tt> <dd> if the isoparameters with U constant are circles.
+     <dt> <tt>CATIsoParamV     </tt><dd> if the isoparameters with V constant are circles.
+     <dt><tt> CATIsoPaRBothDir </tt><dd> if the isoparameters with U constant or V constant are circles.</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsConfused"></a><a id="IsConfused(CATMathTransformation&amp;,CATSurface*,CATMathTransformation2D*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>IsConfused</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathTransformation','CATMathTransformation&amp;')</script> <span class='param'>iTransfo</span>, const <script type="text/javascript"> activateLink('CATSurface','CATSurface*')</script> <span class='param'>iTSurface</span>,<script type="text/javascript"> activateLink('CATMathTransformation2D','CATMathTransformation2D*')</script> <span class='param'>ioTransfo2D</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('=0',' const =0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether the transformation of  a foreign surface is coiencident with another curve.
+<br>This method does not take into account the current limitations of 
+ the curves.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTransfo</span></dt>
+   <dd> The tested transformation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTSurface</span></dt>
+   <dd> The other surface.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioTransfo2D</span></dt>
+   <dd> The 2D-transformation defining the change of parametrization between the transformation of 
+ <tt>this</tt> and <tt>iTSurface</tt>.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ <br><b>Legal values</b>:
+<dl> <dt><tt>1</tt> <dd>If the transformation of <tt>this</tt> is geometrically the same as <tt>iTSurface</tt>.
+     <dt><tt>0</tt> <dd>Otherwise.</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsInvariant"></a><a id="IsInvariant(CATMathTransformation&amp;,CATMathTransformation2D*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>IsInvariant</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathTransformation','CATMathTransformation&amp;')</script> <span class='param'>iTransfo</span>,<script type="text/javascript"> activateLink('CATMathTransformation2D','CATMathTransformation2D*')</script> <span class='param'>ioTransfo2D</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether a foreign surface is geometrically invariant.
+<br>This method does not take into account the current limitations of 
+ the curve.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTransfo</span></dt>
+   <dd> The tested transformation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioTransfo2D</span></dt>
+   <dd> The 2D-transformation defining the change of parametrization between <tt>this</tt> and the transformation of
+ <tt>this</tt>.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ <br><b>Legal values</b>:
+<dl> <dt><tt>1</tt> <dd>If the transformation of <tt>this</tt> is geometrically the same as <tt>this</tt>.
+     <dt><tt>0</tt> <dd>Otherwise.</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsLinear"></a><a id="IsLinear()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIsoParameter','CATIsoParameter')</script>  <span class='objname'>IsLinear</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Checks if a foreign surface is linear in a or two directions of the parameter.
+ By default, returns <tt>CATIsoParNoDir</tt>
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ <br><b>Legal values</b>:
+ <dl><dt><tt> CATIsoParNoDir </tt>  <dd> if they is no linearity
+     <dt><tt> CATIsoParamU    </tt> <dd> if the isoparameters with U constant are lines
+     <dt><tt> CATIsoParamV    </tt> <dd> if the isoparameters with V constant are lines
+     <dt><tt> CATIsoParBothDir </tt><dd> if the isoparameters with U constant or V constant are lines</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsPeriodicU"></a><a id="IsPeriodicU()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>IsPeriodicU</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const=0','const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether a foreign surface is periodic along the first direction. This method has to be overloaded.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ <br><b>Legal values</b>:
+<dl><dt> 0 <dd> if it is not periodic along the U direction
+    <dt> 1 <dd> if it is periodic along the U direction</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsPeriodicV"></a><a id="IsPeriodicV()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>IsPeriodicV</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const=0','const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether a foreign surface is periodic along the second direction. This method has to be overloaded.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ <br><b>Legal values</b>:
+<dl><dt> 0 <dd> if it is not periodic along the V direction
+    <dt> 1 <dd> if it is periodic along the V direction</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLimits"></a><a id="SetLimits(CATSurLimits&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLimits</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>iNewLimits</span>)</span><script type="text/javascript"> activateLink('=0',' =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Modifies the current limitations of a foreign surface.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNewLimits</span></dt>
+   <dd> The new current limitations.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATForeignSurfaceData.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGeometricObjects</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

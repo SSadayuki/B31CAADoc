@@ -1,0 +1,110 @@
+#ifndef CATIANumericalDisplayFormat_IDL
+#define CATIANumericalDisplayFormat_IDL
+
+// COPYRIGHT Dassault Systemes 2018
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Interface to manage numerical format properties of GST, DRF and Datum Target.
+ */
+interface CATIANumericalDisplayFormat : CATIABase
+{
+    /**
+     * Retrieves or sets the precision of annotation.
+     * <br>The numerical values associated to the annotation will be displayed as per this precision.
+     */
+#pragma PROPERTY Precision
+   HRESULT get_Precision(out /*IDLRETVAL*/ long onValue);
+   HRESULT put_Precision(in long inValue);
+
+   /**
+    * Retrieves or sets the annotation separator.
+    *<br>The numerical values associated to the annotation will be displayed with this seperator.
+    *<br>The integer value of onValue/inValue corresponding to:
+    *<br>	0 	""
+    *<br>	1	  "/"
+    *<br>	2	  ":"
+    *<br>	3	  "("
+    *<br>	4	  ")"
+    *<br>	5	  "\\"
+    *<br>	6	  ","
+    *<br>	7	  "<"
+    *<br>	8	  ">"
+    *<br>	9	  "X"
+    *<br>	10	"*"
+    *<br>	11	"."
+    *<br>	12	";"
+    *<br>	13	"+"
+    *<br>	14	"["
+    *<br>	15	"]"
+    *<br>	16	"-"
+    *<br>	17	"_"
+    *<br>	18	" "
+    */
+#pragma PROPERTY Separator
+   HRESULT get_Separator(out /*IDLRETVAL*/ long onValue);
+   HRESULT put_Separator(in long inValue);
+
+   /**
+    * Retrieves or sets the annotation DisplayTrailingZero.
+    * <br>The numerical values associated to the annotation will be displayed as per this DisplayTrailingZero.
+    * <br>The integer value of onValue/inValue corresponding to:
+    * <br>0 : no display of TrailingZero.
+    * <br>1 : display the TrailingZero.
+    */
+#pragma PROPERTY DisplayTrailingZero
+   HRESULT get_DisplayTrailingZero(out /*IDLRETVAL*/ long onValue);
+   HRESULT put_DisplayTrailingZero(in long inValue);
+
+   /**
+    * Retrieves or sets the annotation DisplayLeadingZero.
+    * <br>The numerical values associated to the annotation will be displayed as per this DisplayLeadingZero.
+    * <br>The integer value of onValue/inValue corresponding to:
+    * <br>0 : no display of LeadingZero.
+    * <br>1 : display the LeadingZero.
+    */
+#pragma PROPERTY DisplayLeadingZero
+   HRESULT get_DisplayLeadingZero(out /*IDLRETVAL*/ long onValue);
+   HRESULT put_DisplayLeadingZero(in long inValue);
+
+   /**
+    * Retrieves or sets the level of factor to be displayed.
+    * <br>The numerical values associated to the annotation will be displayed as per this Display Factor.
+    */
+#pragma PROPERTY DisplayFactor
+   HRESULT get_DisplayFactor(out /*IDLRETVAL*/ long onValue);
+   HRESULT put_DisplayFactor(in long inValue);
+
+   /**
+    * Retrieves or sets the maximun level of factor available to be displayed.
+    * <br>It may vary according to the name of the format.
+    */
+#pragma PROPERTY AvilableDisplayFactor
+   HRESULT get_AvilableDisplayFactor(out /*IDLRETVAL*/ long onValue);
+
+   /**
+    * Retrieves or sets the format name.
+    * <br>The numerical values associated to the annotation will be displayed as per this format.
+    */
+#pragma PROPERTY FormatName
+   HRESULT get_FormatName(inout /*IDLRETVAL*/ CATBSTR ostrFormatName);
+   HRESULT put_FormatName(in CATBSTR  istrFormatName);
+
+};
+
+// Interface name : CATIANumericalDisplayFormat
+#pragma ID CATIANumericalDisplayFormat "DCE:8f0854db-65a4-4804-b785431994f5808a"
+#pragma DUAL CATIANumericalDisplayFormat
+
+// VB object name : NumericalDisplayFormat (Id used in Visual Basic)
+#pragma ID NumericalDisplayFormat "DCE:8f0854db-65a4-4804-b785431994f5808b"
+#pragma ALIAS CATIANumericalDisplayFormat NumericalDisplayFormat
+
+#endif

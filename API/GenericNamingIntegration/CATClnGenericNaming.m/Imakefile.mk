@@ -1,0 +1,29 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+#if os MOBILE
+BUILD=NO
+#endif
+
+OS = COMMON
+
+COMMON_LINK_WITH=SI0BREPA SI0REPER SI0REPOR SI0TOPAC\
+	    GN0GRAPH GN0NAME\
+	    AD0XXBAS AC0SPBAS\
+        Collections\
+	    JS0CORBA JS0ERROR\
+        JS0SCBAK JS0STR\
+        CATClnBase CATClnSpecs CATMathStream\
+        CATGngFeatures
+
+#ifdef (CATIAR214)
+LINK_WITH=$(COMMON_LINK_WITH)  ObjectModelerSystem
+#else
+LINK_WITH=$(COMMON_LINK_WITH)
+#endif
+
+
+
+
+
+
+

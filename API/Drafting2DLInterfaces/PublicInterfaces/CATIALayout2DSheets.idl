@@ -1,0 +1,158 @@
+// COPYRIGHT DASSAULT SYSTEMES 2005
+#ifndef CATIALayout2DSheets_IDL
+#define CATIALayout2DSheets_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIALayout2DSheet.idl"
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+ /**
+  * A collection of all the Layout sheets 2DL currently managed by the LayoutRoot.
+  */
+interface CATIALayout2DSheets : CATIACollection
+{
+//----------------------------------------------------------------------------------
+ /**
+  * Creates a Layout sheet and adds it to the Layout2DSheets collection.
+  * This Layout sheet becomes the active one.
+  * @param iLayoutSheetName
+  *   The name to assign to the created Layout2DSheet object
+  * @return The created Layout sheet
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates a Layout sheet named <tt>FirstSheet</tt>
+  * and retrieved in <tt>MySheet</tt> in the Layout sheet collection of the layout root of <tt>Part</tt>
+  * supposed to be in the active document
+  * <pre>
+  * Dim MyLayoutRoot As Layout2DRoot
+  * Set MyLayoutRoot = CATIA.Documents.Part.GetItem("CATLayoutRoot")
+  * Dim MySheet As Layout2DSheet
+  * Set MySheet = MyLayoutRoot.Sheets.<font color="red">Add</font>("FirstSheet").
+  * </pre>
+  * </dl>
+  */
+  HRESULT Add(in CATBSTR iLayoutSheetName, out /*IDLRETVAL*/ CATIALayout2DSheet oNewLayoutSheet);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Creates a detail Layout sheet 2DL and adds it to the LayoutSheets2DL collection.
+  * This detail Layout sheet becomes the active one.
+  * @param iLayoutSheetName
+  *   The name to assign to the created detail LayoutSheet object
+  * @return The created layout sheet
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates a detail Layout sheet named <tt>FirstSheet</tt>
+  * and retrieved in <tt>MySheet</tt> in the Layout sheet collection of the layout root of <tt>Part</tt>
+  * supposed to be in the active document
+  * <pre>
+  * Dim MyLayoutRoot As Layout2DRoot
+  * Set MyLayoutRoot = CATIA.Documents.Part.GetItem("CATLayoutRoot")
+  * Dim MySheet As Layout2DSheet
+  * Set MySheet = MyLayoutRoot.Sheets.<font color="red">Add</font>("FirstSheet")
+  * </pre>
+  */
+  HRESULT AddDetail(in CATBSTR iLayoutSheetName, out /*IDLRETVAL*/ CATIALayout2DSheet oSheet);
+
+
+//----------------------------------------------------------------------------------
+ /**
+  * Returns the active Layout sheet of the Layout document.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example shows how to get the active sheet
+  * and retrieved in <tt>MySheet</tt> in the Layout sheet collection of the layout root of <tt>Part</tt>
+  * supposed to be in the active document
+  * <pre>
+  * Dim MyLayoutRoot As Layout2DRoot
+  * Set MyLayoutRoot = CATIA.Documents.Part.GetItem("CATLayoutRoot")
+  * Dim MySheet As Layout2DSheet
+  * Set MySheet =  MyLayoutRoot.Sheets.<font color="red">ActiveSheet</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ActiveSheet
+  HRESULT get_ActiveSheet(out /*IDLRETVAL*/ CATIALayout2DSheet oSheet);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Removes a Layout2Dsheet from the Layout2DSheets collection.
+  * @param iIndex
+  *   The index or the name of the Layout sheet to remove from
+  *   the collection of Layout sheets.
+  *   As a numerics, this index is the rank of the Layout sheet
+  *   in the collection.
+  *   The index of the first Layout sheet in the collection is 1, and
+  *   the index of the last Layout sheet is Count.
+  *   As a string, it is the name you assigned to the Layout sheet using
+  *   the @href CATIABase#Name property or when creating it using
+  *   the @href #Add method.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the second Layout sheet and the Layout sheet named
+  * <tt>SheetToBeRemoved</tt> in the Layout sheet collection of the layout root of <tt>Part</tt>
+  * supposed to be in the active document.
+  * <pre>
+  * Dim ThisLayoutRoot As Layout2DRoot
+  * Set ThisLayoutRoot = CATIA.ActiveDocument.Part.GetItem("CATlayoutRoot")
+  * ThisLayoutRoot.Layout2DSheets.<font color="red">Remove</font>("SheetToBeRemoved")
+  * </pre>
+  */
+  HRESULT Remove(in CATVariant iIndex);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Returns a Layout sheet using its index or its name from the Layout2DSheets collection. 
+  * @param iIndex
+  *   The index or the name of the Layout sheet to retrieve from
+  *   the collection of Layout sheets.
+  *   As a numerics, this index is the rank of the Layout sheet
+  *   in the collection.
+  *   The index of the first Layout sheet in the collection is 1, and
+  *   the index of the last Layout sheet is Count.
+  *   As a string, it is the name you assigned to the Layout sheet using
+  *   the @href CATIABase#Name property or when creating it using
+  *   the @href #Add method.
+  * @return The retrieved Layout sheet
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisLayoutSheet</tt> the third Layout sheet,
+  * and in <tt>ThatLayoutSheet</tt> the Layout sheet named
+  * <tt>MySheet</tt> in the Layout sheet collection of the layout root of <tt>Part</tt>
+  * supposed to be in the active document.
+  * <pre>
+  * Dim ThisLayoutRoot As Layout2DRoot
+  * Set ThisLayoutRoot = CATIA.ActiveDocument.Part.GetItem("CATlayoutRoot")
+  * Dim ThisLayoutSheet As Layout2DSheet
+  * Set ThisLayoutSheet = ThisLayoutRoot.Sheets.<font color="red">Item</font>(3)
+  * Dim ThatLayoutSheet As Layout2DSheet
+  * Set ThatLayoutSheet = ThisLayoutRoot.Sheets.<font color="red">Item</font>("MySheet")
+  * </pre>
+  */
+  HRESULT  Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIALayout2DSheet oLayoutSheet);
+
+//----------------------------------------------------------------------------------
+};
+
+// Interface name : CATIALayout2DSheets
+#pragma ID CATIALayout2DSheets "DCE:90da545b-669a-46fe-ae06f677d19c3171"
+#pragma DUAL CATIALayout2DSheets
+
+// VB object name : Layout2DSheets (Id used in Visual Basic)
+#pragma ID Layout2DSheets "DCE:760650fd-35df-4ae1-a4c367569d5350da"
+#pragma ALIAS CATIALayout2DSheets Layout2DSheets
+
+
+#endif

@@ -1,0 +1,185 @@
+#ifndef CATIAStiffener_IDL
+#define CATIAStiffener_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAStiffener:						   
+// Exposed interface for Mechanical stiffener
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation					Ph Baucher
+// Dec97 Modification				 	L  Lalere	
+//=================================================================
+#include "CATIASketchBasedShape.idl"
+
+interface CATIALength;
+/**
+ * Represents the stiffener shape.
+ * A stiffener is made up of a sketch used as the stiffener profile,
+ * that is extruded (offset) and that fills the nearest shape.
+ * This is a "positive" shape: it adds material to the body it
+ * belongs to.
+ */
+//-----------------------------------------------------------------
+interface CATIAStiffener : CATIASketchBasedShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//	ON THICKNESS OFFSET
+	//	-------------------------
+	//
+    /**
+     * Returns the stiffener thickness.
+     * This is half of the thickness if the stiffener is symmetrical,
+     * and the thickness otherwise.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>thickness</tt> the thickness
+     * of the <tt>firstStiffener</tt> stiffener:
+     * <pre>
+     * Set thickness = firstStiffener.<font color="red">Thickness</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY Thickness
+	HRESULT	get_Thickness ( out /*IDLRETVAL*/ CATIALength oThickness );	
+	//
+	//	ON THICKNESS TOP VALUE
+	//	-------------------------
+	//
+    /**
+     * Returns the stiffener thickness top in case of From Top stiffener.
+     * This is equal to first thickness if the stiffener is symmetrical,
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>thicknessfromtop</tt> the thickness
+     * of the <tt>firstStiffener</tt> stiffener:
+     * <pre>
+     * Set thicknessfromtop = firstStiffener.<font color="red">ThicknessFromTop</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY ThicknessFromTop
+	HRESULT	get_ThicknessFromTop ( out /*IDLRETVAL*/ CATIALength oThicknessFromTop );	
+
+        //
+        //      ON STIFFENER FROM TOP / FROM SIDE OPTION
+        //      ----------------------------------------
+        //
+    /**
+     * Returns or sets whether the stiffener is From Side or From Top.
+     * <br>
+     * <b>True</b> if the stiffener is From Top stiffener with respect to
+     * the base sketch.
+     * <b>False</b> if the stiffener is From Side stiffener with respect to
+     * the base sketch.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>FromTopFlag</tt>
+     * whether the <tt>firstStiffener</tt> stiffener is From Top,
+     * and then sets it as From Top stiffener with respect to its base sketch:
+     * <pre>
+     * Set FromTopFlag = firstStiffener.<font color="red">IsFromTop</font>
+     * firstStiffener.<font color="red">IsFromTop</font>  = True
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY IsFromTop
+        HRESULT get_IsFromTop ( out /*IDLRETVAL*/ boolean oIsFromTop );
+        HRESULT put_IsFromTop ( in boolean iIsFromTop );
+
+
+        //
+        //      ON SYMMETRIC EXTENT
+        //      --------------------------
+        //
+    /**
+     * Returns or sets whether the stiffener is symmetric.
+     * <br>
+     * <b>True</b> if the stiffener is symmetric with respect to
+     * the base sketch.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>symFlag</tt>
+     * whether the <tt>firstStiffener</tt> stiffener is symmetric,
+     * and then sets it as symmetric with respect to its base sketch:
+     * <pre>
+     * Set symFlag = firstStiffener.<font color="red">IsSymmetric</font>
+     * firstStiffener.<font color="red">IsSymmetric</font>  = True
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY IsSymmetric
+        HRESULT get_IsSymmetric ( out /*IDLRETVAL*/ boolean oIsSymmetric );
+        HRESULT put_IsSymmetric ( in boolean iIsSymmetric );
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+
+        //     ON REVERSE DEPTH
+        //     ----------------
+	//
+    /**
+     * Reverses the stiffener direction.
+     * This is useful for finding the shape to reach.
+     * <! @ample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example reverses the current direction of
+     * the <tt>firstStiffener</tt> stiffener:
+     * <pre>
+     * firstStiffener.<font color="red">ReverseDepth</font>
+     * </pre>
+     * </dl>
+     */
+	HRESULT ReverseDepth();
+
+        //     ON REVERSE THICNESS
+        //     -------------------
+	//
+    /**
+     * Reverses the stiffener thickness direction.
+     * The stiffener thickness is swapped with respect to
+     * the base sketch.
+     * <! @ample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example reverses the current direction of
+     * the <tt>firstStiffener</tt> stiffener:
+     * <pre>
+     * firstStiffener.<font color="red">ReverseThickness</font>
+     * </pre>
+     * </dl>
+     */
+	HRESULT ReverseThickness();
+};
+
+// Interface name : CATIAStiffener
+#pragma ID CATIAStiffener "DCE:9c5e3f56-5c2c-11d1-a2750000f87546fd"
+#pragma DUAL CATIAStiffener
+
+// VB object name : Stiffener (Id used in Visual Basic)
+#pragma ID Stiffener "DCE:9cacecf0-5c2c-11d1-a2750000f87546fd"
+#pragma ALIAS CATIAStiffener Stiffener
+
+
+#endif
+// CATIAStiffener_IDL

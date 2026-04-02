@@ -1,0 +1,159 @@
+#ifndef CATIAHybridShapeRollingOffset_IDL
+#define CATIAHybridShapeRollingOffset_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeRollingOffset:         
+// Exposed interface for HybridShape RollingOffset
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+
+/**
+ * The RollingOffset feature 
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeRollingOffset : CATIAHybridShape
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+
+#pragma PROPERTY Offset
+
+ /**
+ * <b>Role</b>: To get_Offset on the object. 
+ * @param oOffset 
+ *   offset value 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIALength 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+ HRESULT get_Offset ( out /*IDLRETVAL*/ CATIALength oOffset );
+
+ /**
+ * <b>Role</b>: To getOffset on the object. 
+ * @param oOffset 
+ *   offset value 
+ *   @see double 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+ HRESULT getOffset ( out /*IDLRETVAL*/ double oOffset );
+
+ /**
+ * <b>Role</b>: To put_Offset on the object. 
+ * @param iOffset 
+ *   offset value
+ *   @see double   
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+ HRESULT putOffset ( in double iOffset );
+
+
+
+#pragma PROPERTY Support
+
+ /**
+ * <b>Role</b>: To manage the support on the object. 
+ * @param iSupport
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+ HRESULT get_Support ( out /*IDLRETVAL*/ CATIAReference oSupport );
+ HRESULT put_Support ( in CATIAReference iSupport );
+
+
+ /**
+ * <b>Role</b>: To get_NbCurve on the object. 
+ * @param CurvesNb
+ *   Number of curves
+ *   @see long 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+ HRESULT getNbCurve( out /*IDLRETVAL*/ long CurvesNb);
+
+ /**
+ * <b>Role</b>: To get_Curve on the object. 
+ * @param iPos 
+ *   Position
+ *   @see long 
+ * @param oCurve
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+ HRESULT getCurve( in long iPos, out /*IDLRETVAL*/ CATIAReference oCurve);
+
+ /**
+ * <b>Role</b>: To add or remove a curve on the object. 
+ * @param iCurve
+ *   Curve to Add/Remove if not present in the list, or to remove.
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT putCurve( in CATIAReference iCurve);
+};
+
+// Interface name : CATIAHybridShapeRollingOffset
+#pragma ID CATIAHybridShapeRollingOffset "DCE:756172ac-d59a-11d4-9079000629ee40fe"
+#pragma DUAL CATIAHybridShapeRollingOffset
+
+// VB object name : HybridShapeRollingOffset (Id used in Visual Basic)
+#pragma ID HybridShapeRollingOffset "DCE:9170ffee-d59a-11d4-9079000629ee40fe"
+#pragma ALIAS CATIAHybridShapeRollingOffset HybridShapeRollingOffset
+
+
+#endif
+// CATIAHybridShapeRollingOffset_IDL

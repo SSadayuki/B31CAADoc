@@ -1,0 +1,75 @@
+#ifndef CATIAPspResource_IDL
+#define CATIAPspResource_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+#include "CATBSTR.idl"
+#include "CATIABase.idl"
+
+/**
+ * Represents the PspResource.
+ * <b>Role</b>: It is used to get application resources.
+ */
+interface CATIAPspResource : CATIABase
+{
+   
+	
+ /**
+  * Returns the value defined for a resource.
+  * @param iResourceName
+  *   Resource Name
+  * @return
+  *    Resource Value
+   *@sample
+  * <pre>
+  * Dim objThisIntf As PspResource
+  * Dim strResourceVal As String
+  *  ...
+  * strResourceVal = objThisIntf.<font color="red">GetResourceValue</font> (iResourceName)
+  * </pre>
+  *
+  */
+ 
+ HRESULT GetResourceValue(in CATBSTR	iResourceName,
+            	inout /*IDLRETVAL*/ CATBSTR		oResourceValue);
+ 
+ /**
+  * Returns the path value defined for a resource.
+  * @param iResourceName
+  *   Resource Name
+  * @return
+  *    Resource Path
+   *@sample
+  * <pre>
+  * Dim objThisIntf As PspResource
+  * Dim strResourcePath As String
+  * Dim iResourceName As String 
+  * 
+  *  ...
+  * strResourcePath = objThisIntf.<font color="red">GetResourcePath</font> (iResourceName)
+  * </pre>
+  *
+  */
+ 
+ HRESULT GetResourcePath(in CATBSTR	iResourceName,
+            	inout /*IDLRETVAL*/ CATBSTR		oResourcePath);
+ 
+ 
+};
+
+// Interface name : CATIAPspResource
+                                 
+#pragma ID CATIAPspResource "DCE:c8253478-071e-4d7a-a9f5d2dedd60aad8"                               
+#pragma DUAL CATIAPspResource
+
+// VB object name : PspResource                        
+#pragma ID PspResource         "DCE:068e9b03-2a72-40f0-82bdeb68a9dc525a"                             
+#pragma ALIAS CATIAPspResource PspResource
+
+#endif

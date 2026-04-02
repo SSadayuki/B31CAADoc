@@ -1,0 +1,78 @@
+#ifndef CATIABehaviors_IDL
+#define CATIABehaviors_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//--------------------------------------------------------------------------
+// Behaviors collection interface
+// fbq Aug.97
+//--------------------------------------------------------------------------
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAApplication;
+interface CATIABehavior;
+
+/**
+ * Represents the Behaviors collection currently managed by the application.
+ * These behaviors belong to one objet and can be reached by the GetItem method of CATIABase.
+ * For Instance onto a Part using Part.GetItem("CATGetBehaviorExtension") .
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * <pre>
+ * Set RootPart = CATIA.ActiveDocument.Part
+ * Set MyExtension = RootPart.GetItem(<font color="red">"CATGetBehaviorExtensions"</font>)
+ * Set listBehaviors = MyExtension.Behaviors
+ * </pre>
+ * </dl>
+ */
+
+interface CATIABehaviors : CATIACollection
+{
+    /**
+     * Returns a Behavior using its index or its name from the Behaviors
+     * collection. 
+     * @param iIndex
+     *   The index or the name of the Behavior to retrieve from
+     *   the collection of Behaviors.
+     *   As a numerics, this index is the rank of the Behavior
+     *   in the collection.
+     *   The index of the first Behavior in the collection is 1, and
+     *   the index of the last Behavior is Count.
+     *   As a string, it is the name you assigned to the Behavior using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved Behavior
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisBeh</tt> the fifth Behavior
+     * in the collection and in <tt>ThatBeh</tt> the Behavior
+     * named <tt>MyBeh</tt>.
+     * <pre>
+     * Dim ThisBeh As Behavior
+     * Set ThisBeh = listBehaviors.<font color="red">Item</font>(5)
+     * Dim ThatBeh As Behavior
+     * Set ThatBeh = listBehaviors.<font color="red">Item</font>("MyBeh")
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIABehavior oBehavior);
+
+};
+
+// Interface name : CATIABehaviors                
+#pragma ID CATIABehaviors "DCE:7acd9be6-3cbe-11d3-b051f06094eb7de3"
+#pragma DUAL CATIABehaviors
+
+// VB object name : Behaviors
+#pragma ID Behaviors "DCE:7acd9c2b-3cbf-11d3-b051f06094eb7de3"
+#pragma ALIAS CATIABehaviors Behaviors
+
+#endif

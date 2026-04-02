@@ -1,0 +1,18 @@
+BUILT_OBJECT_TYPE = NONE
+#
+OS = COMMON
+       
+LOCAL_CCFLAGS= -DTA3_WITH_ANGLE
+
+LINK_WITH = JS0LIB0 JS0ERROR 
+
+OS = AIX
+#
+OS = HP-UX
+#
+OS = IRIX
+#
+OS = 
+#
+OS = Windows_NT
+#

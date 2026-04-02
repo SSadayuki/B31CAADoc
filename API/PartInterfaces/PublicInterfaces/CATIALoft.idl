@@ -1,0 +1,80 @@
+#ifndef CATIALoft_IDL
+#define CATIALoft_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//=================================================================
+
+
+#include "CATIAShape.idl"
+#include "CATIAHybridShape.idl"
+
+interface CATIAReference;
+
+
+/**
+ * Loft feature.
+ * Manipulation of solid Loft feature.
+ * Allows to access data of the Loft feature created by the CATIAShapeFactory.
+ * This solid feature is created from an underlying
+ * HybridShapeLoft aggregated by the Loft.
+ * @see CATIAShapeFactory
+ */
+
+
+//-----------------------------------------------------------------
+interface CATIALoft : CATIAShape     
+{
+//=================================================================
+//=================================================================
+//           
+// CATIALoft:         
+// Exposed interface for Part Shape Loft
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+#pragma PROPERTY HybridShape
+ 
+ /**
+  * Gets the underlying HybridShapeLoft.
+  *<dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example explains how to retrieve the underlying HybridShape Loft
+  * <pre>
+  *  Dim oHybridShape as AnyObject
+  *  Set oHybridShape=oLoft.HybridShape
+  *  oHybridShape.SectionCoupling = 2
+  * </pre>
+  * </dl>
+  */
+    HRESULT get_HybridShape (out /*IDLRETVAL*/ CATIAHybridShape oHybridShapeLoft);
+
+};
+
+// Interface name : CATIALoft
+#pragma ID CATIALoft "DCE:9ff121fc-b579-11d4-a3bd00d0b7ac5e73"
+#pragma DUAL CATIALoft
+
+// VB object name : Loft (Id used in Visual Basic)
+// #pragma ID Loft "DCE:9ff121fc-b579-11d4-a3bd00d0b7ac5e73"
+#pragma ID Loft "DCE:ba8ee102-c776-11d4-a3d100d0b7ac5e73"
+#pragma ALIAS CATIALoft Loft
+
+
+#endif
+// CATIALoft_IDL
+

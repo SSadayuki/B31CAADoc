@@ -1,0 +1,28 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= NONE
+
+LINK_WITH = AC0XXLNK AD0XXBAS AD0SDBAS \
+            JS0CORBA JS0SCBAK JS03TRA  \
+            NS0S3STR \
+            KS0BINA  KS0LATE  KS0SIMPL  \
+            CO0LSTPV CO0LSTST
+
+
+
+#
+OS = AIX
+
+#
+OS = HP-UX
+
+#
+OS = IRIX
+
+#
+OS = SunOS
+
+#
+OS = Windows_NT
+

@@ -1,0 +1,9 @@
+#
+#LOAD MODULE 
+#
+BUILT_OBJECT_TYPE = LOAD MODULE
+LINK_WITH = GW0LdapWrap
+PROGRAM_NAME = ldap2portal
+
+OS = win_a
+BUILD = NO

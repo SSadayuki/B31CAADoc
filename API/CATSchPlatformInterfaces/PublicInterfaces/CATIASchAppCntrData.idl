@@ -1,0 +1,91 @@
+#ifndef CATIASchAppCntrData_IDL 
+#define CATIASchAppCntrData_IDL 
+    
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+    
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfBSTRs;
+    
+#include "CATIABase.idl"
+
+/** 
+ * Manage a schematic connector data.
+ */
+interface CATIASchAppCntrData : CATIABase
+{
+  /**
+  * Set application data.
+  * @param iLAppData 
+  *   A list of character string data.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrData
+  * Dim objArg1 As SchListOfBSTRs
+  *  ...
+  * objThisIntf.<font color="red">AppSetApplicationData</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppSetApplicationData ( 
+    in CATIASchListOfBSTRs iLAppData );
+    
+  /**
+  * Get application data.
+  * @param iLAppData 
+  *   A list of character string data.
+  * @param iLAppNlsData 
+  *   A list of character string data.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrData
+  * Dim objArg1 As SchListOfBSTRs
+  * Dim objArg2 As SchListOfBSTRs
+  *  ...
+  * objThisIntf.<font color="red">AppGetApplicationData</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT AppGetApplicationData ( 
+    inout CATIASchListOfBSTRs iLAppData, inout CATIASchListOfBSTRs iLAppNlsData );
+
+  /**
+  * Get a list valid potential application data that can be set.
+  * @param iLAppData 
+  *   A list of character string data.
+  * @param iLAppNlsData 
+  *   A list of character string data.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrData
+  * Dim objArg1 As SchListOfBSTRs
+  * Dim objArg2 As SchListOfBSTRs
+  *  ...
+  * objThisIntf.<font color="red">AppListPotentialData</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT AppListPotentialData ( 
+    inout CATIASchListOfBSTRs iLAppData, inout CATIASchListOfBSTRs iLAppNlsData );
+
+    
+};
+    
+// Interface name : CATIASchAppCntrData
+#pragma ID CATIASchAppCntrData "DCE:9a8fd808-7c57-4cc8-adc4b853be582c84"
+#pragma DUAL CATIASchAppCntrData
+    
+// VB object name : SchAppCntrData
+#pragma ID SchAppCntrData "DCE:15818bc4-82b5-472c-919c40d86886652e"
+#pragma ALIAS CATIASchAppCntrData SchAppCntrData
+    
+#endif 
+    

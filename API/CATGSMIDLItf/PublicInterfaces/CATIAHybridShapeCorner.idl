@@ -1,0 +1,324 @@
+#ifndef CATIAHybridShapeCorner_IDL
+#define CATIAHybridShapeCorner_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeCorner:         
+// Exposed interface for HybridShape Corner
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation    
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+ * Represents the hybrid shape corner feature.
+ * <b>Role</b>: To access the data of the hybrid shape corner object.
+ * This data includes:
+ * <ul>
+ * <li>Two elements</li>
+ * <li>Their orientations (same or inverse than the underlying curve)</li>
+ * <li>A support for the hybrid shape corner on support feature
+ * <li>A direction for the hybrid shape 3D corner feature
+ * <li>A radius.</li>
+ * </ul>
+ * <p>Use the @href CATIAHybridShapeFactory to create a HybridShapeCorner object.
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeCorner : CATIAHybridShape
+{
+
+/**
+ * Returns or sets the corner first reference element.
+ * <br><b>Legal values</b>: This can be a curve or a point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge or @href CATIAVertex.
+ * @sample
+ * This example retrieves the first reference element of
+ * the <code>hybShpCorner</code> hybrid shape corner in <code>firstElt</code>.
+ * <pre>
+ * Dim fisrtElt As CATIAReference
+ * fisrtElt = hybShpCorner.<font color="red">FirstElem</font>
+ * </pre>
+ */ 
+#pragma PROPERTY FirstElem
+    HRESULT get_FirstElem (out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_FirstElem (in                CATIAReference iElem) ;
+
+/**
+ * Returns or sets the corner second reference element.
+ * <br><b>Legal values</b>: This is always a curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge or @href CATIAVertex.
+ * @sample
+ * This example retrieves the second reference element of
+ * the <code>hybShpCorner</code> hybrid shape corner in <code>secondElt</code>.
+ * <pre>
+ * Dim secondElt As CATIAReference
+ * secondElt = hybShpCorner.<font color="red">SecondElem</font>
+ * </pre>
+ */ 
+#pragma PROPERTY SecondElem
+    HRESULT get_SecondElem(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_SecondElem(in                CATIAReference iElem) ;
+
+/**
+ * Returns or sets the corner support.
+ * <br><b>Legal values</b>: This can be a plane or a surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ * @sample
+ * This example sets the support of
+ * the <code>hybShpCorner</code> hybrid shape corner as
+ * the exisiting surgace <code>supportSurf</code>.
+ * <pre>
+ * hybShpCorner.<font color="red">Support</font> = supportSurf
+ * </pre>
+ */ 
+#pragma PROPERTY Support
+    HRESULT get_Support(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_Support(in                CATIAReference iElem) ;
+
+/**
+ * Returns or sets the 3D corner direction.
+ * <br><b>Legal values</b>: This can be a CATIAHybridShapeDirection.
+ * @see CATIAHybridShapeDirection 
+ * @sample
+ * This example sets the direction of
+ * the <code>hybShpCorner</code> hybrid shape 3D corner as
+ * the existing direction <code>hybShpDirection</code>.
+ * <pre>
+ * hybShpCorner.<font color="red">Direction</font> = hybShpDirection
+ * </pre>
+ */ 
+#pragma PROPERTY Direction
+    HRESULT get_Direction(out /*IDLRETVAL*/ CATIAHybridShapeDirection oElem) ;
+    HRESULT put_Direction(in                CATIAHybridShapeDirection iElem) ;
+
+
+/**
+ * Returns the corner radius.
+ * @sample
+ * This example retrieves the radius of
+ * the <code>hybShpCorner</code> hybrid shape corner in <code>radius</code>.
+ * <pre>
+ * Dim radius As CATIALength
+ * radius = hybShpCorner.<font color="red">Radius</font>
+ * </pre>
+ */ 
+#pragma PROPERTY Radius
+    HRESULT get_Radius (out /*IDLRETVAL*/  CATIALength  oRadius)  ;
+
+/**
+ * Returns or sets the orientation of the corner first reference element.
+ * The orientation specifies the corner center position.
+ * It is either the same of the inverse orientation than those of 
+ * the cross product: Normal(Support) ^ Tangent(FirstElem)
+ * <br><b>Legal values</b>: 1 if the orientation of the corner first reference element
+ * is the same than the cross product: Normal(Support) ^ Tangent(FirstElem),
+ * and -1 if it is the inverse. 
+ * @sample
+ * This example retrieves the orientation of first reference element of
+ * the <code>hybShpCorner</code> hybrid shape corner in <code>firstOrient</code>.
+ * <pre>
+ * Dim firstOrient As long
+ * firstOrient = hybShpCorner.<font color="red">FirstOrientation</font>
+ * </pre>
+ */ 
+#pragma PROPERTY FirstOrientation
+    HRESULT get_FirstOrientation (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_FirstOrientation (in                long iOrientation) ;
+
+/**
+ * Returns or sets the orientation of the corner second reference element.
+ * The orientation specifies the corner center position.
+ * It is either the same of the inverse orientation than those of 
+ * the cross product: Normal(Support) ^ Tangent(SecondElem)
+ * <br><b>Legal values</b>: 1 if the orientation of the corner second reference element
+ * is the same than the cross product: Normal(Support) ^ Tangent(SecondElem),
+ * and -1 if it is the inverse. 
+ * @sample
+ * This example sets the orientation of second reference element of
+ * the <code>hybShpCorner</code> hybrid shape corner to the inverse of the cross porduct
+ * Normal(Support) ^ Tangent(SecondElem).
+ * <pre>
+ * hybShpCorner.<font color="red">SecondOrientation</font> = -1
+ * </pre>
+ */ 
+#pragma PROPERTY SecondOrientation
+    HRESULT get_SecondOrientation(out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_SecondOrientation (in               long iOrientation) ;
+
+/**
+ * Returns or set the discrimination index of the current corner.
+ * Several resulting solutions produced by the operator can be same 
+ * oriented regarding to the input wire bodies. 
+ * In such a case, they are sorted in order to distinguish them.
+ * The Sequence FirstOrientation - SecondOrientation - DiscriminationIndex 
+ * allows you to identifie a unique one-domain solution.
+ * @sample
+ * This example set the discrimination index of
+ * the <code>hybShpCorner</code> hybrid shape corner 
+ * <pre>
+ * hybShpCorner.<font color="red">DiscriminationIndex</font> = 2
+ * </pre>
+ */ 
+#pragma PROPERTY DiscriminationIndex
+    HRESULT get_DiscriminationIndex (out /*IDLRETVAL*/ long oDiscriminationIndex) ;
+    HRESULT put_DiscriminationIndex (in                long iDiscriminationIndex) ;
+/**
+ * Returns or sets whether the corner reference curves are or should be trimmed.
+ * <br><b>Legal values</b>: <b>True</b> if the corner reference curves are or should be trimmed,
+ * and False otherwise.
+ * @sample
+ * This example sets that the corner reference curves of
+ * the <code>hybShpCorner</code> hybrid shape corner should be trimmed.
+ * <pre>
+ * hybShpCorner.<font color="red">Trim</font> = True
+ * </pre>
+ */ 
+#pragma PROPERTY Trim
+    HRESULT get_Trim(out /*IDLRETVAL*/ boolean oTrim) ;
+    HRESULT put_Trim(in                boolean iTrim) ;
+
+/**
+ * Returns or sets whether the corner reference curves are or should be trimmed.
+ * <br><b>Legal values</b>: 
+ * <b>1</b> if the corner reference curves are or should be trimmed,
+ * <b>0</b> if the corner reference curves are not or should not be trimmed,
+ * <b>2</b> if only the first corner reference curve is or should be trimmed,
+ * <b>3</b> if only the second corner reference curve is or should be trimmed,
+ * @sample
+ * This example sets that the corner reference curves of
+ * the <code>hybShpCorner</code> hybrid shape corner should be trimmed.
+ * <pre>
+ * hybShpCorner.<font color="red">TrimMode</font> = 1
+ * </pre>
+ */ 
+#pragma PROPERTY TrimMode
+    HRESULT get_TrimMode(out /*IDLRETVAL*/ long oTrim) ;
+    HRESULT put_TrimMode(in                long iTrim) ;
+
+/**
+ * Inverts the first reference element orientation used to compute the corner.
+ * @sample
+ * This example inverts the first corner reference element orientation of
+ * the <code>hybShpCorner</code>.
+ * <pre>
+ * hybShpCorner.InvertFirstOrientation
+ * </pre>
+ */ 
+    HRESULT     InvertFirstOrientation()  ;
+
+/**
+ * Inverts the second reference element orientation used to compute the corner.
+ * @sample
+ * This example inverts the second corner reference element orientation of
+ * the <code>hybShpCorner</code>.
+ * <pre>
+ * hybShpCorner.InvertSecondOrientation
+ * </pre>
+ */ 
+    HRESULT     InvertSecondOrientation()  ;
+
+  /**
+    * Return or Set the number of the beginning curve of the corner.
+	* This parameter is used to stabilize the resulting corner
+	* @sample
+	* This example set the beginning wire index of
+	* the <code>hybShpCorner</code> hybrid shape corner 
+	* <pre>
+	* hybShpCorner.<font color="red">BeginOfCorner</font> = 1
+	* </pre>
+	*/
+#pragma PROPERTY BeginOfCorner
+    HRESULT get_BeginOfCorner (out /*IDLRETVAL*/ long oNumWireBegin) ;
+    HRESULT put_BeginOfCorner (in                long iNumWireBegin) ;
+
+  /**
+  * Returns or sets the tangent orientation of the corner first reference element.
+  * compared to the corner itself
+  * @sample
+  * This example retrieves the tangent orientation of first reference element of
+  * the <code>hybShpCorner</code> hybrid shape corner in <code>firstOrient</code>.
+  * <pre>
+  * Dim firstOrient As long
+  * firstOrient = hybShpCorner.<font color="red">FirstTangentOrientation</font>
+  * </pre>
+  */
+#pragma PROPERTY FirstTangentOrientation
+    HRESULT get_FirstTangentOrientation (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_FirstTangentOrientation (in                long iOrientation) ;
+
+  /**
+  * Returns or sets the tangent orientation of the corner second reference element.
+  * compared to the corner itself
+  * @sample
+  * This example retrieves the tangent orientation of second reference element of
+  * the <code>hybShpCorner</code> hybrid shape corner in <code>secondOrient</code>.
+  * <pre>
+  * Dim secondOrient As long
+  * firstOrient = hybShpCorner.<font color="red">SecondTangentOrientation</font>
+  * </pre>
+  */
+#pragma PROPERTY SecondTangentOrientation
+    HRESULT get_SecondTangentOrientation (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_SecondTangentOrientation (in                long iOrientation) ;
+
+  /**
+  * Returns or sets the Corner Type.
+  * @sample
+  * This example retrieves the Corner Type 
+  * the <code>hybShpCorner</code> hybrid shape corner in <code>CornerType</code>.
+  * <pre>
+  * Dim lCornerType As long
+  * lCornerType = hybShpCorner.<font color="red">CornerType</font>
+  * </pre>
+  */
+#pragma PROPERTY CornerType
+    HRESULT get_CornerType (out /*IDLRETVAL*/ long oCornerType) ;
+    HRESULT put_CornerType(in                long iCornerType) ;
+
+  /**
+  * Returns or sets the On Vertex mode off/on.
+  * @sample
+  * This example retrieves the OnVertex
+  * the <code>hybShpCorner</code> hybrid shape corner in <code>OnVertex</code>.
+  * <pre>
+  * Dim bOnVertex As boolean
+  * bOnVertex = hybShpCorner.<font color="red">OnVertex</font>
+  * </pre>
+  */
+#pragma PROPERTY OnVertex
+    HRESULT get_OnVertex(out /*IDLRETVAL*/ boolean oOnVertex) ;
+    HRESULT put_OnVertex(in                boolean iOnVertex) ;
+
+};
+
+
+// Interface name : CATIAHybridShapeCorner
+#pragma ID CATIAHybridShapeCorner "DCE:8c89b24d-2d21-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeCorner
+
+// VB object name : HybridShapeCorner (Id used in Visual Basic)
+#pragma ID HybridShapeCorner "DCE:8c89b249-1732-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeCorner HybridShapeCorner
+
+#endif
+// CATIAHybridShapeCorner_IDL

@@ -1,0 +1,117 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//
+// CATIAArrBendableString.idl
+// Automation interface for the ArrBendableString element 
+//
+#ifndef CATIAArrBendableString_IDL
+#define CATIAArrBendableString_IDL
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+/**  
+ * The interface to access a CATIAArrBendableString  
+ * <p>
+ * Using this prefered syntax will enable mkdoc to document your class.
+ */
+interface CATIAArrBendableString : CATIABase 
+{
+ /**
+  * Returns the Bendable's Instance Name.
+  * <! @sample>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example shows how to retrieve the Bendable Instance Name of
+  * <tt>BendablePipe001</tt>.
+  * <pre>
+  * Dim _BendInstanceName
+  * _BendInstanceName = BendablePipe001.<font color="red">InstanceName</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT InstanceName(inout /*IDLRETVAL*/ CATBSTR oInstanceName);
+
+
+ /**
+  * Returns the cumulative number of the straight/arc segments that make up the Bendable object.
+  * <! @sample>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example shows how to number of segments of <tt>BendablePipe001</tt>.
+  * <pre>
+  * Dim NumOfBendSegments
+  * NumOfBendSegments = BendablePipe001.<font color="red">GetNumOfSegments</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT GetNumOfSegments(out /*IDLRETVAL*/ long oNumOfSegments);
+
+ /**
+  * Returns the cumulative number of the straight/arc segments that make up the Bendable object.
+  * @ param oNumOfSegments
+  * The Node Co-ordinate Data processed while calculating the NumberOfSegments 
+  * is with respect to the Node1-LocalAxis
+  * <! @sample>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example shows how to number of segments of <tt>BendablePipe001</tt>.
+  * <pre>
+  * Dim NumOfBendSegments
+  * NumOfBendSegments = BendablePipe001.<font color="red">GetNumOfSegments</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetNumOfSegmentsLocalAxis(out /*IDLRETVAL*/ long oNumOfSegments);
+
+ /**
+  * Returns the data of the segment (Point Indices, Slope angle, Rotation Angle).
+  * <! @sample>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example shows how to retrieve segment #2  of <tt>BendablePipe001</tt>.
+  * <pre>
+  * Dim SegmentData(14) As double
+  * BendablePipe001.<font color="red">GetSegmentData(2, SegmentData)</font>
+  * where the data is returned in the Array in the following format...
+  * SegmentData(0)  = Starting Point of Segment (X Coord)
+  * SegmentData(1)  = Starting Point of Segment (Y Coord)
+  * SegmentData(2)  = Starting Point of Segment (Z Coord)
+  * SegmentData(3)  = End Point of Segment (X Coord)
+  * SegmentData(4)  = End Point of Segment (Y Coord)
+  * SegmentData(5)  = End Point of Segment (Z Coord)
+  * SegmentData(6)  = Bend Point of Segment (X Coord) '//Valid only if SegmentData(9) > 0
+  * SegmentData(7)  = Bend Point of Segment (Y Coord) '//Valid only if SegmentData(9) > 0
+  * SegmentData(8)  = Bend Point of Segment (Z Coord) '//Valid only if SegmentData(9) > 0
+  * SegmentData(9)  = Bend Radius at Bend Point '//Valid only if SegmentData(9) > 0
+  * SegmentData(10) = Bend Angle at Bend Point  '//Valid only if SegmentData(9) > 0
+  * SegmentData(11) = Rotation Angle of Segment
+  * SegmentData(12) = Slope Angle of Segment
+  * SegmentData(13) = Length of linear Segment
+  * SegmentData(14) = Length of Arc Segment '//Valid only if SegmentData(9) > 0
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetSegmentData(in long iIndex, inout CATSafeArrayVariant oSegmentData);
+};
+
+// Interface name : CATIAArrBendableString
+#pragma ID CATIAArrBendableString "DCE:6e9d1194-c52e-11d3-8bca006094eb5532"
+#pragma DUAL CATIAArrBendableString
+
+// VB object name : ArrBendableString (Id used in Visual Basic)
+#pragma ID ArrBendableString "DCE:6e9d1195-c52e-11d3-8bca006094eb5532"
+#pragma ALIAS CATIAArrBendableString ArrBendableString
+
+#endif

@@ -1,0 +1,16 @@
+#
+BUILT_OBJECT_TYPE=NONE	
+#
+LINK_WITH = JS0GROUP  \
+  YP00IMPL \
+  YN000MAT \
+  YN000ANL \
+  YN000FUN \
+  Y3DYNOPE
+#
+OS = Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+#

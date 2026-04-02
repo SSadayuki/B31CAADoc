@@ -1,0 +1,71 @@
+// COPYRIGHT Dassault Systemes 2004
+//===================================================================
+//
+// CATIADMUReview.idl
+//   This automation interface allows to manage a DMUReview.
+//
+//===================================================================
+//
+//  Jan 2004  Creation: LJE
+//  Modification: SKR14:- Moved to public interfaces IR-497056
+//
+//===================================================================
+#ifndef CATIADMUReview_IDL
+#define CATIADMUReview_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIADMUReviews;
+
+/**  
+ * Represents a DMU Review.
+ */
+interface CATIADMUReview : CATIABase 
+{
+  /**
+   * Returns or sets the activation.
+   * @return
+   *    The activation
+   *    <ul>
+   *    <li>0: the DMU Review is inactivated.
+   *    <li>1: the DMU Review is activated.
+   *    </ul>
+   * @sample
+   *    This example retrieves the activation of the <tt>oDMUReview</tt> DMU Review and activates it.
+   *    <pre>
+   *    Activation = oDMUReview.<font color="red">Activation</font>
+   *    oDMUReview.<font color="red">Activation</font> = 1
+   *    </pre>
+   */
+#pragma PROPERTY Activation
+  HRESULT get_Activation (inout /*IDLRETVAL*/ long oMode);
+  HRESULT put_Activation (in long iMode);
+
+  /**
+   * Returns the DMUReviews Collection associated with the DMUReview (children).
+   * @sample
+   *    This example retrieves the <tt>cDMUReviews</tt> collection
+   *    from the <tt>oDMUReview</tt> DMU Review.
+   *    <pre>
+   *    Set cDMUReviews = oDMUReview.<font color="red">DMUReviews</font>(9)
+   *    </pre>
+   */
+#pragma PROPERTY DMUReviews
+  HRESULT get_DMUReviews (out /*IDLRETVAL*/ CATIADMUReviews oDMUReviews);
+};
+
+// Interface name : CATIADMUReview
+#pragma ID CATIADMUReview "DCE:475b7d08-fab6-404c-b6b9f4ecc08058ce"
+#pragma DUAL CATIADMUReview
+
+// VB object name : DMUReview (Id used in Visual Basic)
+#pragma ID DMUReview "DCE:314a3a76-5264-4832-a2498ea957b07eef"
+#pragma ALIAS CATIADMUReview DMUReview
+
+#endif

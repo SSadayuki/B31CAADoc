@@ -1,0 +1,131 @@
+/* -*-c++-*- */
+#ifndef CATIAHybridShapePointOnSurface_IDL
+#define CATIAHybridShapePointOnSurface_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//           
+// CATIAHybridShapePointOnSurface:         
+// Exposed interface for HybridShapePointOnSurface
+//=================================================================
+
+#include "CATIAHybridShapePoint.idl"
+#include "CATIAReference.idl"
+#include "CATIAHybridShapeDirection.idl"
+#include "CATIALength.idl"
+
+/**
+  * Represents the Point on Surface feature objects.
+  * <b>Role</b>:  Allows to access data of the point feature created with a
+  * geodesic distance in a direction to a reference point on a surface
+  * @see CATIALength 
+  * @see CATIAReference 
+  * @see CATIAHybridShapeDirection 
+  * @see CATIAHybridShapeFactory 
+  */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapePointOnSurface : CATIAHybridShapePoint
+{
+
+
+
+ /**
+ * Returns or Sets the surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ *<dl>
+ *<dt>Example</dt>:
+ *<dd>
+ * This example retrieves in <code>oSurface</code> the supporting surface for <code>PointOnSurface</code> feature.
+ * <pre>
+ * Dim oSurface As CATIAReference
+ * Set oSurface  = PointOnSurface.<font color="red">Surface</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY Surface
+ HRESULT get_Surface ( out /*IDLRETVAL*/  CATIAReference   oX);
+ HRESULT put_Surface ( in            CATIAReference   iSurface);
+
+
+
+ /**
+ * Returns or Sets the reference point.
+ * <br>  This data is not mandatory.
+ * <br>  If no point is given, the middle point on the surface is taken.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * <dl>
+ * <dt>Example</dt>:
+ * <dd>
+ * This example retrieves in <code>oPointRef</code> the reference point for <code>PointOnSurface</code> feature.
+ * <pre>
+ * Dim oPointRef As CATIAReference
+ * Set oPointRef  = PointOnSurface.<font color="red">PointRef</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY Point
+ HRESULT get_Point ( out /*IDLRETVAL*/  CATIAReference   oX);
+ HRESULT put_Point ( in           CATIAReference   iPoint);
+
+
+
+ /**
+ * Returns or Sets the direction from the reference point in which the point is computed.
+ * <dl>
+ * <dt>Example</dt>:
+ * <dd>
+ * This example retrieves in <code>oDirection</code> the direction from the 
+ *  reference point for <code>PointOnSurface</code> feature.
+ * <pre>
+ * Dim oDirection As CATIAHybridShapeDirection
+ * Set oDirection  = PointOnSurface.<font color="red">Direction</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY Direction
+ HRESULT get_Direction ( out /*IDLRETVAL*/  CATIAHybridShapeDirection   oDirection);
+ HRESULT put_Direction ( in            CATIAHybridShapeDirection   iDirection);
+
+
+
+ /**
+ * Returns  the geodesic length.
+ * <dl>
+ * <dt>Example</dt>:
+ * <dd>
+ * This example retrieves in <code>oGeodesicOffset</code> the offset (Geodesic Length) from the reference point for <code>PointOnSurface</code> feature.
+ * <pre>
+ * Dim oGeodesicOffset As CATIAReference
+ * Set oGeodesicOffset  = PointOnSurface.<font color="red">GeodesicOffset</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY Offset
+ HRESULT get_Offset ( out /*IDLRETVAL*/  CATIALength   oX);
+};
+
+
+// Interface name : CATIAHybridShapePointOnSurface
+#pragma ID CATIAHybridShapePointOnSurface "DCE:89d7664d-beab-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapePointOnSurface
+
+// VB object name : HybridShapePointOnSurface (Id used in Visual Basic)
+#pragma ID HybridShapePointOnSurface "DCE:89d7694b-8703-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapePointOnSurface HybridShapePointOnSurface
+
+
+#endif
+// CATIAHybridShapePointOnSurface_IDL
+
+

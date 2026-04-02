@@ -1,0 +1,32 @@
+#
+#OS = COMMON
+
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+
+LINK_WITH = CDMAdoc CATPinCommunication CO0LSTPV JS0XXC0 CD0WIN JS0FM DI0PANV2 \
+			CDMAServer AC0XXLNK AS0STARTUP  CATCinProductDatabaseImpl\
+			CATVisualization CATIPSInteroperability CATPrsRep AC0SPBAS \
+			CATPinLauncher CATPDMBase CATVPMBase CATCclInterfaces CATPDMBaseItfCPP \
+			CDMAMapping  XMLParserItf CATXMLBase
+   
+# System dependant variables
+#
+OS = AIX
+#
+################
+OS = HP-UX
+CXX_EXCEPTION =
+LOCAL_CCFLAGS = -DNATIVE_EXCEPTION
+#
+OS = IRIX
+LOCAL_CCFLAGS      = -DIRIX -DNATIVE_EXCEPTION
+CXX_EXCEPTION=
+LOCAL_LDFLAGS = -v
+CXX_TEMPLATE_INC   = -auto_include
+CXX_TEMPLATE_PRELK = -prelink
+CXX_TEMPLATE_INST  = -ptused
+#
+OS = SunOS
+#
+OS = Windows_NT
+SYS_LIBS = Wsock32.lib

@@ -1,0 +1,39 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH = JS0GROUP CATAutoItf CATVBAInfra
+
+OS = intel_a
+LOCAL_CCFLAGS = /GX
+
+OS = win_b
+LOCAL_CCFLAGS = /GX
+
+#ifdef CATIAV5R24
+# New options 
+OS = win_b64
+ALIASES_ON_IMPORT=VBAIntegration CATVBAInfra
+LOCAL_CCFLAGS = /GX
+#else
+# # Old options 
+OS = win_b64
+#LOCAL_CCFLAGS = /GX
+LINK_WITH = JS0GROUP CATAutoItf
+#endif
+
+OS = win_a
+LOCAL_CCFLAGS = /GX
+
+OS = SunOS
+BUILD = NO
+
+OS = AIX
+BUILD = NO
+
+OS = HP-UX
+BUILD = NO
+
+OS = IRIX
+BUILD = NO
+
+OS = Linux
+BUILD = NO

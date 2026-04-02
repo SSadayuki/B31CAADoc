@@ -1,0 +1,12 @@
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+#
+BUILD=NO
+
+OS=aix_a64
+#if (defined MK_ORBIXCPP33) && (defined MK_IBMVAVER) && (MK_IBMVAVER == 16)
+#LOCAL_SRCPATH=$(MkmkOS_Buildtime)/Orbix33/XLC16
+#BUILD=YES
+LIBRARY_NAME=ssl.so
+#endif
+

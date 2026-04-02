@@ -1,0 +1,45 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=LOAD MODULE
+
+LINK_WITH = CATBatchDll JS0GROUP
+
+#
+OS = AIX
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS =
+
+#
+OS = HP-UX
+SYS_INCPATH =   
+SYS_LIBPATH =
+SYS_LIBS =
+
+#
+OS = IRIX
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS = 
+
+LOCAL_CCFLAGS  = -float
+LOCAL_CFLAGS   = -float 
+
+
+#
+OS = SunOS
+SH_LINK_WITH = $(LINK_WITH)
+SYS_INCPATH = 
+SYS_LIBPATH = 
+LOCAL_CCFLAGS = -mt
+SYS_LIBS =  -lsocket -lnsl
+
+
+
+##OS = Windows_NT
+##LOCAL_LDFLAGS=$(SUB_WIN)
+## SYS_LIBS = netapi32.lib wsock32.lib
+
+OS = Windows_NT
+SYS_LIBS = netapi32.lib wsock32.lib

@@ -1,0 +1,70 @@
+#ifndef CATIAExpertRuleRuntime_IDL
+#define CATIAExpertRuleRuntime_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAExpertRuleBaseComponentRuntime.idl"
+
+interface CATIAExpertRule ;
+
+
+/**
+ * Represents the ExpertRuleRuntime object.
+ * 
+ */
+interface CATIAExpertRuleRuntime : CATIAExpertRuleBaseComponentRuntime
+{
+	//==================================
+    //========== Properties ============
+    //==================================
+
+
+    /**
+     * Returns or sets the priority of the rule. The priority of expert rules
+	 * indicates the order in which the rules are evaluated. Rules with
+	 * the same priority are evaluated in the order of their creation.
+     */
+#pragma PROPERTY Priority		 
+    HRESULT    get_Priority
+                (out /*IDLRETVAL*/ double oPriority); 
+    HRESULT    put_Priority
+                (in double iPriority); 
+
+
+	/**
+	* Returns the editable object corresponding to this rule.
+	* Be careful that, according to your licence, or the type of rule
+	* you're handling, you may not have the right to edit the rule.
+	*
+	* Dim aRuleEdition As ExpertRule
+	* Set aRuleEdition = aRuleRuntime.RuleEdition
+	*
+	* If not(aRuleEdition is Nothing) Then
+	*   CATIA.SystemService.Print aRuleEdition.Body
+	* End if
+	*/
+#pragma PROPERTY RuleEdition	
+    HRESULT    get_RuleEdition
+                (out /*IDLRETVAL*/ CATIAExpertRule oRuleEdition); 
+
+};
+
+// Interface name : CATIAExpertRuleRuntime
+#pragma ID CATIAExpertRuleRuntime "DCE:529c42d0-a031-11d4-9efb00d0b752954c"
+#pragma DUAL CATIAExpertRuleRuntime
+
+// VB object name : ExpertCheck (Id used in Visual Basic)
+#pragma ID ExpertRuleRuntime "DCE:64a2c900-a052-11d4-9efb00d0b752954c"
+#pragma ALIAS CATIAExpertRuleRuntime ExpertRuleRuntime
+
+#endif
+// CATIAExpertRuleRuntime_IDL
+

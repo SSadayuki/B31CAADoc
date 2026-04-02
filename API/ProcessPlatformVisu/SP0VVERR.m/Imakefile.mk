@@ -1,0 +1,43 @@
+#
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+#
+
+
+
+LINK_WITH =     JS0ERROR JS0CORBA JS0SCBAK JS0FM JS0LIB0 JS03TRA\
+                DI0PANV2\
+		AC0XXLNK\
+	  	AD0XXBAS\
+		NS0S3STR
+
+OS = AIX
+BUILD = NO
+#
+OS = HP-UX
+BUILD = NO
+#
+OS = SunOS
+BUILD = NO
+#
+OS = IRIX
+BUILD = NO
+#
+OS = Windows_NT
+BUILD = NO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+# COPYRIGHT DASSAULT SYSTEMES 2003
+#
+
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH=JS0GROUP JS0MT CATJWSApiCpp V5JsyClrInitializer
+
+OS = solaris_a
+BUILD = NO
+
+OS = HP-UX
+BUILD = NO
+
+OS = aix_a
+BUILD = NO
+
+OS = aix_a64
+BUILD = NO
+
+OS = irix_a
+BUILD = NO
+
+OS = irix_a64
+BUILD = NO
+
+OS = linux_a
+BUILD = NO
+
+OS = win_b64
+BUILD = NO

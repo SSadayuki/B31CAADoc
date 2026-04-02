@@ -1,0 +1,192 @@
+#ifndef CATIARevolution_IDL
+#define CATIARevolution_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIARevolution:						   
+// Exposed interface for Mechanical revolution
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation					Ph Baucher
+// Dec97 Modification					L  Lalere
+//=================================================================
+#include "CATIASketchBasedShape.idl"
+
+interface CATIAAngle;
+
+/**
+ * Represents the revolution-based shapes.
+ * It is the base objects for shaft and grooves.
+ * @see CATIAShaft, CATIAGroove
+ */
+
+interface CATIARevolution : CATIASketchBasedShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//
+	//	ON FIRST ANGLE
+	//	---------------
+	//
+    /**
+     * Returns the revolution first angle.
+     * This angle is computed around the revolution axis, starting from
+     * the sketch plane trace on the plane perpendicular to the revolution
+     * axis, and is counted positive clockwise when looking at this
+     * plane in the revolution axis direction.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>firstAngle</tt>
+     * the first angle of the <tt>MyRevolution</tt> revolution object:
+     * <pre>
+     * Set firstAngle = MyRevolution.<font color="red">FirstAngle</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY FirstAngle
+	HRESULT	get_FirstAngle ( out /*IDLRETVAL*/ CATIAAngle oFirstAngle );
+
+	//	ON SECOND ANGLE
+	//	--------------
+	//
+    /**
+     * Returns the revolution second angle.
+     * This angle is computed around the revolution axis, starting from
+     * the sketch plane trace on the plane perpendicular to the revolution
+     * axis, and is counted positive counterclockwise when looking at this
+     * plane in the revolution axis direction.
+     * Its default value is 0.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>secondAngle</tt>
+     * the second angle of the <tt>MyRevolution</tt> revolution object:
+     * <pre>
+     * Set secondAngle = MyRevolution.<font color="red">SecondAngle</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SecondAngle
+	HRESULT	get_SecondAngle ( out /*IDLRETVAL*/ CATIAAngle oSecondAngle );
+
+	
+#pragma PROPERTY RevoluteAxis
+/**
+ * Returns or sets the rotation axis for Revol.<br>
+ * To set the property, you can use one of the following @href CATIABoundary objects: 
+ * @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge or @href CATIARectilinearMonoDimFeatEdge. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>RevoluteAxis</code> the rotation axis for the <code>Rotate axis</code> of the Revol feature
+ * Dim RevoluteAxis As Reference
+ * Set RevoluteAxis = Rotate.<font color="red">Axis</font>
+ *</pre>
+ *</dl>	
+ */ 
+	HRESULT get_RevoluteAxis ( out /*IDLRETVAL*/  CATIAReference   oAxis);
+	HRESULT put_RevoluteAxis ( in               CATIAReference   iAxis);	
+    //
+    //  ON Thin mode
+    //  ------------
+    //
+#pragma PROPERTY IsThin
+//
+        /**
+         * Returns the Revol thin flag.<br>
+         * It returns TRUE if the Revol is a thin Revol , FALSE if not.
+         * @return oIsThin
+         *   The thin flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>thinFlag</tt> the thin flag of
+         * Revol <tt>firstRevol</tt>, and then sets it so that it will be now thin :
+         * <pre>
+         * Set thinFlag = firstRevol.<font color="red">IsThin</font>
+         * firstRevol.<font color="red">IsThin</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_IsThin ( out /*IDLRETVAL*/ boolean oIsThin);
+        //
+        HRESULT put_IsThin ( in  boolean iIsThin );
+    //
+    //  ON Neutral fiber
+    //  ----------------
+    //
+#pragma PROPERTY NeutralFiber
+//
+        /**
+         * Returns the Revol neutral fiber flag (for thin Revol only).<br>
+         * It returns TRUE if the Revol is a neutral fiber Revol , FALSE if not.
+         * @return oIsNeutralFiber
+         *   The neutral fiber flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>NeutralFiberFlag</tt> the neutral fiber flag of
+         * Revol <tt>firstRevol</tt>, and then sets it so that it will be now neutral fiber :
+         * <pre>
+         * Set NeutralFiberFlag = firstRevol.<font color="red">IsNeutralFiber</font>
+         * firstRevol.<font color="red">IsNeutralFiber</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_NeutralFiber ( out /*IDLRETVAL*/ boolean oIsNeutralFiber);
+        //
+        HRESULT put_NeutralFiber ( in  boolean iIsNeutralFiber );
+
+    //
+    //  ON Merge mode
+    //  ----------------
+    //
+#pragma PROPERTY MergeEnd
+//
+        /**
+         * Returns the Revol merge end flag (for thin Revol only).<br>
+         * It returns TRUE if merge ends is required , FALSE if not.
+         * @return oIsMergeEnd
+         *   The merge end flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>MergeEndFlag</tt> the merge end flag of
+         * Revol <tt>firstRevol</tt>, and then sets it so that merge end will be required :
+         * <pre>
+         * Set MergeEndFlag = firstRevol.<font color="red">IsMergeEnd</font>
+         * firstRevol.<font color="red">IsMergeEnd</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_MergeEnd ( out /*IDLRETVAL*/ boolean oIsMergeEnd);
+        //
+        HRESULT put_MergeEnd ( in  boolean iIsMergeEnd );
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+};
+
+// Interface name : CATIARevolution
+#pragma ID CATIARevolution "DCE:67b03c08-64f8-11d1-a27f0000f87546fd"
+#pragma DUAL CATIARevolution
+
+// VB object name : Revolution (Id used in Visual Basic)
+#pragma ID Revolution "DCE:67be8a24-64f8-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIARevolution Revolution
+
+
+#endif
+// CATIARevolution_IDL
+

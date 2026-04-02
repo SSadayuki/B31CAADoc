@@ -1,0 +1,1956 @@
+// COPYRIGHT Dassault Systemes 2003
+//===================================================================
+//
+// CATIAN4DNavigatorSettingAtt.idl
+// Automation interface for the N4DNavigatorSettingAtt element 
+//
+//===================================================================
+//
+//  Nov 2003  Creation: YRX
+//
+//===================================================================
+#ifndef CATIAN4DNavigatorSettingAtt_IDL
+#define CATIAN4DNavigatorSettingAtt_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+#include "CatSacSettingsEnum.idl"
+#include "CatDMUGroupPreviewHiddenObjectsDisplayMode.idl"
+
+/**  
+* Interface to handle the settings of the DMU Navigator workbench.
+* <br>
+* <br> The different settings are:
+* <br>
+* <br> DMUClashPreview: 
+*  <br> Display of the preview viewer when editing an interference.
+* <br>
+* <br> DMUDistancePreview:
+*  <br>  Display of the preview viewer when editing a distance.
+* <br>
+* <br> DMUGroupPreview:
+*  <br>  Display of the preview viewer when editing a group.
+* <br>
+* <br> DMUSectionPreview:
+*  <br>  Display of the preview viewer when editing a section.
+* <br>
+* <br> DMUShuttlePreview:
+*  <br>  Display of the preview viewer when editing a shuttle.
+* <br>
+* <br> DMUThicknessPreview:
+*  <br>  Display of the preview viewer for the thickness command.
+* <br>
+* <br> DMUOffsetPreview:
+*  <br>  Display of the preview viewer for the offset command.
+* <br>
+* <br> DMUSweptVolPreview:
+*  <br>  Display of the preview viewer for the swept volume command.
+* <br>
+* <br> DMUSilhouettePreview:
+*  <br>  Display of the preview viewer for the silhouette command.
+* <br>
+* <br> DMUWrappingPreview:
+*  <br>  Display of the preview viewer for the wrapping command.
+* <br>
+* <br> DMUFreeSpacePreview:
+*  <br>  Display of the preview viewer for the free space command.
+* <br>
+* <br> DMUSimplifPreview:
+*  <br>  Display of the preview viewer for the simplification command.
+* <br>
+* <br> DMUVibrationVolPreview:
+*  <br>  Display of the preview viewer for the vibration volume command.
+* <br>
+* <br> DMUCut3DPreview:
+*  <br>  Display of the preview viewer for the 3D cut command.
+* <br>
+* <br> DMUMergerPreview:
+*  <br>  Display of the preview viewer for the merger command.
+* <br>
+* <br> NumUrlName:
+*  <br>  Display of the hyperlink name.
+* <br>
+* <br> MarkerAutoUpdate:
+*  <br>  Update on product structure modifications and scenes activation.
+* <br>
+* <br> MarkerDefaultsColor:
+*  <br>  Default color of an annotation.
+* <br>
+* <br> SceneDefaultsColor:
+*  <br>  Default background color for scene environment.
+* <br>
+* <br> MarkerTextColor:
+*  <br>  Default color of a text annotation.
+* <br>
+* <br> MarkerDefaultsWeight:
+*  <br>  Default weight value of an annotation.
+* <br>
+* <br> MarkerDefaultsDashed:
+*  <br>  Default dashed value of an annotation.
+* <br>
+* <br> MarkerDefaultsSize:
+*  <br>  Default size value of an annotation.
+* <br>
+* <br> MarkerDefaultsFont:
+*  <br>  Default font of an annotation.
+* <br>
+* <br> MarkerTextDashed:
+*  <br>  Default dashed value of a text annotation.
+* <br>
+* <br> MarkerTextWeight:
+*  <br>  Default weight value of a text annotation.
+* <br>
+* <br> PublishAutoLaunchBrowser:
+*  <br>  Automatic launching of publish results in a browser.
+* <br>
+* <br> Marker2DAutoNaming:
+*  <br>  Automatically use a Part's name as the default for the creation of text annotations.
+* <br>
+* <br> Marker3DAutoNaming:
+*  <br>  Activation of the mechanism that enables to transform temporary markers into persistent 3D annotations.
+* <br>
+* <br> DMUReviewName:
+*  <br>  The desired default name for DMU Reviews
+* <br>
+* <br> ForceVoxel:
+*  <br>  Force users of the Spatial Query command to use the defined Released Accuracy.
+* <br>
+* <br> ClearanceVoxel:
+*  <br>  Definition of the Clearance value.
+* <br>
+* <br> ForceClearanceVoxel:
+*  <br>  Force users of the Spatial Query command to use the defined Clearance value.
+* <br>
+* <br> InsertMode:
+*  <br>  Mode for the Import applicative data command.
+* <br>
+* <br> DMUGroupPreviewHiddenObjectsDisplayMode:
+*  <br>  Display mode for hidden objects of a DMU Group in its preview: visualized as in main 3D viewer or visualized with customized graphic properties
+* <br>
+* <br> DMUGroupPreviewHiddenObjectsColor:
+*  <br>  Color for hidden objects in DMU Group Preview.
+* <br>
+* <br> DMUGroupPreviewHiddenObjectsOpacity:
+*  <br>  Opacity for hidden objects in DMU Group Preview.
+* <br>
+* <br> DMUGroupPreviewHiddenObjectsLowIntMode:
+*  <br>  Hidden objects are low intensified or not in DMU Group Preview.
+* <br>
+* <br> DMUGroupPreviewHiddenObjectsPickMode:
+*  <br>  Hidden objects can be picked or not in DMU Group Preview.
+*/
+
+interface CATIAN4DNavigatorSettingAtt : CATIASettingController 
+{
+    
+    
+#pragma PROPERTY DMUClashPreview
+    
+    /**
+    * Returns or sets the preview activation state for Interference (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUClashPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUClashPreview( in boolean iIsActive );
+    
+    /** 
+    * Retrieves environment informations for the DMUClashPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUClashPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *       <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *       <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUClashPreviewInfo  ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUClashPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUClashPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *  the locking operation to be performed
+    *  <b>Legal values</b>:
+    *  <br><tt>TRUE :</tt>   to lock the parameter.
+    *  <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUClashPreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+#pragma PROPERTY DMUDistancePreview
+    /**
+    * Returns or sets the preview activation state for Distance (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUDistancePreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUDistancePreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUDistancePreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUDistancePreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUDistancePreviewInfo  ( inout CATBSTR ioAdminLevel
+        , inout CATBSTR ioLocked
+        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUDistancePreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUDistancePreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *    the locking operation to be performed
+    *    <b>Legal values</b>:
+    *    <br><tt>TRUE :</tt>   to lock the parameter.
+    *    <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUDistancePreviewLock( in  boolean iLocked );
+    
+    
+    
+#pragma PROPERTY DMUGroupPreview
+    /**
+    * Returns or sets the preview activation state for Group (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUGroupPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUGroupPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUGroupPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUGroupPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUGroupPreviewInfo  ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUGroupPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUGroupPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUGroupPreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUSectionPreview
+    /**
+    * Returns or sets the preview activation state for Section (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUSectionPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUSectionPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUSectionPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUSectionPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUSectionPreviewInfo( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUSectionPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUSectionPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUSectionPreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUShuttlePreview
+    /**
+    * Returns or sets the preview activation state for Shuttle (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUShuttlePreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUShuttlePreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUShuttlePreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUShuttlePreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUShuttlePreviewInfo( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUShuttlePreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUShuttlePreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUShuttlePreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUThicknessPreview
+    /**
+    * Returns or sets the preview activation state for Thickness (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUThicknessPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUThicknessPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUThicknessPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUThicknessPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUThicknessPreviewInfo  ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUThicknessPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUThicknessPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUThicknessPreviewLock( in  boolean iLocked );
+    
+    
+    
+#pragma PROPERTY DMUOffsetPreview
+    /**
+    * Returns or sets the preview activation state for Offset (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUOffsetPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUOffsetPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUOffsetPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUOffsetPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUOffsetPreviewInfo ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUOffsetPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUOffsetPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUOffsetPreviewLock( in  boolean iLocked );
+    
+    
+    
+#pragma PROPERTY DMUSweptVolPreview
+    /**
+    * Returns or sets the preview activation state for Swept Volume (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUSweptVolPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUSweptVolPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUSweptVolPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUSweptVolPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUSweptVolPreviewInfo   ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUSweptVolPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUSweptVolPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUSweptVolPreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+#pragma PROPERTY DMUSilhouettePreview
+    /**
+    * Returns or sets the preview activation state for Silhouette (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUSilhouettePreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUSilhouettePreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUSilhouettePreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUSilhouettePreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUSilhouettePreviewInfo ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUSilhouettePreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUSilhouettePreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUSilhouettePreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUWrappingPreview
+    /**
+    * Returns or sets the preview activation state for Wrapping (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUWrappingPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUWrappingPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUWrappingPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUWrappingPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUWrappingPreviewInfo   ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUWrappingPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUWrappingPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUWrappingPreviewLock( in  boolean iLocked );
+    
+    
+    
+#pragma PROPERTY DMUFreeSpacePreview
+    /**
+    * Returns or sets the preview activation state for Free Space (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUFreeSpacePreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUFreeSpacePreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUFreeSpacePreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUFreeSpacePreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUFreeSpacePreviewInfo  ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUFreeSpacePreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUFreeSpacePreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUFreeSpacePreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUSimplifPreview
+    /**
+    * Returns or sets the preview activation state for Simplification (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUSimplifPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUSimplifPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUSimplifPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUSimplifPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUSimplifPreviewInfo( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUSimplifPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUSimplifPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUSimplifPreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+#pragma PROPERTY DMUVibrationVolPreview
+    /**
+    * Returns or sets the preview activation state for Vibration volume (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUVibrationVolPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUVibrationVolPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUVibrationVolPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUVibrationVolPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUVibrationVolPreviewInfo   ( inout CATBSTR ioAdminLevel
+                                            , inout CATBSTR ioLocked
+                                            , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUVibrationVolPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUVibrationVolPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUVibrationVolPreviewLock( in  boolean iLocked );
+    
+    
+    
+#pragma PROPERTY DMUCut3DPreview
+    /**
+    * Returns or sets the preview activation state for 3D Cut (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUCut3DPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUCut3DPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUCut3DPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUCut3DPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUCut3DPreviewInfo  ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUCut3DPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUCut3DPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUCut3DPreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUMergerPreview
+    /**
+    * Returns or sets the preview activation state for Merger (TRUE the preview window is automatically displayed, FALSE the preview window is not displayed).
+    */
+    HRESULT get_DMUMergerPreview(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_DMUMergerPreview( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUMergerPreview parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUMergerPreview parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUMergerPreviewInfo ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUMergerPreview parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUMergerPreview parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUMergerPreviewLock( in  boolean iLocked );
+    
+    
+    
+    
+#pragma PROPERTY NumUrlName
+    /**
+    * Returns or sets the name activation state for Hyperlink (TRUE the hyperlink name is displayed, FALSE the hyperlink name is not displayed).
+    */
+    HRESULT get_NumUrlName(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_NumUrlName( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the NumUrlName parameter.
+    * <br><b>Role</b>:Retrieves the state of the NumUrlName parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetNumUrlNameInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the NumUrlName parameter.
+    * <br><b>Role</b>:Locks or unlocks the NumUrlName parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetNumUrlNameLock( in  boolean iLocked );
+    
+    
+    
+    /**
+    * Returns or sets the activation of the automatic update on product structure modification (TRUE update is done automatically, FALSE update is done manually).
+    */
+#pragma PROPERTY MarkerAutoUpdate
+    HRESULT get_MarkerAutoUpdate(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_MarkerAutoUpdate( in boolean iIsActive );
+    
+    
+    /** 
+    * Retrieves environment informations for the MarkerAutoUpdate parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerAutoUpdate parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerAutoUpdateInfo ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the MarkerAutoUpdate parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerAutoUpdate parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerAutoUpdateLock( in  boolean iLocked );    
+    
+    /**
+    * Returns the scene background color (oRed, oGreen, oBlue: RGB values of the color).
+    */
+    HRESULT GetSceneDefaultsColor(out long oR, out long oG, out long oB);
+    
+    /**
+    * Sets the scene background color (iRed, iGreen, iBlue: RGB values for the desired color)
+    */
+    HRESULT SetSceneDefaultsColor(in long iR, in long iG, in long iB);
+    
+    
+    /** 
+    * Retrieves environment informations for the SceneDefaultsColor parameter.
+    * <br><b>Role</b>:Retrieves the state of the SceneDefaultsColor parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetSceneDefaultsColorInfo   ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the SceneDefaultsColor parameter.
+    * <br><b>Role</b>:Locks or unlocks the SceneDefaultsColor parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetSceneDefaultsColorLock( in  boolean iLocked );    
+
+    
+#pragma PROPERTY PublishAutoLaunchBrowser
+    /**
+    * Returns or sets the activation state of the automatic launching of the publish browser (TRUE the publish browser is automatically opened, FALSE the publish browser is not automatically opened).
+    */
+    HRESULT get_PublishAutoLaunchBrowser(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_PublishAutoLaunchBrowser( in boolean iIsActive);
+    
+    
+    /** 
+    * Retrieves environment informations for the PublishAutoLaunchBrowser parameter.
+    * <br><b>Role</b>:Retrieves the state of the PublishAutoLaunchBrowser parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetPublishAutoLaunchBrowserInfo ( inout CATBSTR ioAdminLevel
+                                            , inout CATBSTR ioLocked
+                                            , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the PublishAutoLaunchBrowser parameter.
+    * <br><b>Role</b>:Locks or unlocks the PublishAutoLaunchBrowser parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetPublishAutoLaunchBrowserLock( in  boolean iLocked );    
+    
+#pragma PROPERTY DMUReviewName
+    /**
+    * Returns or sets the default name for the DMU Reviews (oValue, the DMU Review name).
+    */
+    HRESULT get_DMUReviewName(inout /*IDLRETVAL*/ CATBSTR oValue);
+    HRESULT put_DMUReviewName( in CATBSTR iValue);
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUReviewName parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUReviewName parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUReviewNameInfo( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUReviewName parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUReviewName parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUReviewNameLock( in  boolean iLocked );
+    
+    
+    
+    
+#pragma PROPERTY ForceVoxel
+    /**
+    * Returns or sets the activation state for the use of the Released accuracy value (TRUE the released accuracy value is used, FALSE the released accuracy value is not used);
+    */
+    HRESULT get_ForceVoxel(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_ForceVoxel( in boolean iIsActive);
+    
+    
+    /** 
+    * Retrieves environment informations for the ForceVoxel parameter.
+    * <br><b>Role</b>:Retrieves the state of the ForceVoxel parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetForceVoxelInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the ForceVoxel parameter.
+    * <br><b>Role</b>:Locks or unlocks the ForceVoxel parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetForceVoxelLock( in  boolean iLocked );
+    
+    
+    /**
+    * Returns or sets the clearance value (oValue the clearance value in mm).
+    */
+#pragma PROPERTY ClearanceVoxel
+    HRESULT get_ClearanceVoxel(out /*IDLRETVAL*/ float oValue);
+    HRESULT put_ClearanceVoxel( in float iValue );
+    
+    
+    /** 
+    * Retrieves environment informations for the ClearanceVoxel parameter.
+    * <br><b>Role</b>:Retrieves the state of the ClearanceVoxel parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetClearanceVoxelInfo   ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the ClearanceVoxel parameter.
+    * <br><b>Role</b>:Locks or unlocks the ClearanceVoxel parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetClearanceVoxelLock( in  boolean iLocked );
+    
+    
+    
+#pragma PROPERTY ForceClearanceVoxel
+    /**
+    * Returns or sets the activation state for the use of the clearance value (TRUE the clearance value is used, FALSE the clearance value is not used);
+    */
+    HRESULT get_ForceClearanceVoxel(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_ForceClearanceVoxel( in boolean iIsActive);
+    
+    
+    /** 
+    * Retrieves environment informations for the ForceClearanceVoxel parameter.
+    * <br><b>Role</b>:Retrieves the state of the ForceClearanceVoxel parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetForceClearanceVoxelInfo  ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the ForceClearanceVoxel parameter.
+    * <br><b>Role</b>:Locks or unlocks the ForceClearanceVoxel parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetForceClearanceVoxelLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY InsertMode
+    /**
+    * Returns or sets the mode for the Import Applicative Data command (CatSacSettingsEnumNoInsert no import of applicative data, CatSacSettingsEnumAutomatic the import of applicative is automatic, CatSacSettingsEnumUserPrompt the user can select the applicative data to import).
+    */
+    HRESULT get_InsertMode(out /*IDLRETVAL*/ CatSacSettingsEnum oMode);
+    HRESULT put_InsertMode( in CatSacSettingsEnum iMode);
+    
+    
+    /** 
+    * Retrieves environment informations for the InsertMode parameter.
+    * <br><b>Role</b>:Retrieves the state of the InsertMode parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetInsertModeInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the InsertMode parameter.
+    * <br><b>Role</b>:Locks or unlocks the InsertMode parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *    the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetInsertModeLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY InsertLevel
+    /**
+    * Returns or sets the level for the Import Applicative Data command (True : at highest review level, False : in current review).
+    */
+    HRESULT get_InsertLevel(out /*IDLRETVAL*/ boolean oLevel);
+    HRESULT put_InsertLevel( in boolean iLevel);
+    
+    
+    /** 
+    * Retrieves environment informations for the InsertLevel parameter.
+    * <br><b>Role</b>:Retrieves the state of the InsertLevel parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetInsertLevelInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the InsertMode parameter.
+    * <br><b>Role</b>:Locks or unlocks the InsertMode parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *    the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetInsertLevelLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUGroupPreviewHiddenObjectsDisplayMode
+    /**
+    * Returns or sets the mode for the display of hidden objects in DMU Group Preview.
+    */
+    HRESULT get_DMUGroupPreviewHiddenObjectsDisplayMode(out /*IDLRETVAL*/ CatDMUGroupPreviewHiddenObjectsDisplayMode oMode);
+    HRESULT put_DMUGroupPreviewHiddenObjectsDisplayMode( in CatDMUGroupPreviewHiddenObjectsDisplayMode iMode);
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUGroupPreviewHiddenObjectsDisplayMode parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUGroupPreviewHiddenObjectsDisplayMode parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUGroupPreviewHiddenObjectsDisplayModeInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUGroupPreviewHiddenObjectsDisplayMode parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUGroupPreviewHiddenObjectsDisplayMode parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *    the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUGroupPreviewHiddenObjectsDisplayModeLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+    /**
+    * Returns the color for the display of hidden objects in DMU Group Preview.
+    */
+    HRESULT GetDMUGroupPreviewHiddenObjectsColor(out long oRed, out long oGreen, out long oBlue);
+    
+    
+    /**
+    * Sets the color for the display of hidden objects in DMU Group Preview.
+    */
+    HRESULT SetDMUGroupPreviewHiddenObjectsColor(in long iRed, in long iGreen, in long iBlue);
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUGroupPreviewHiddenObjectsColor parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUGroupPreviewHiddenObjectsColor parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUGroupPreviewHiddenObjectsColorInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUGroupPreviewHiddenObjectsColor parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUGroupPreviewHiddenObjectsColor parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *    the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUGroupPreviewHiddenObjectsColorLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUGroupPreviewHiddenObjectsOpacity
+    /**
+    * Returns or sets the opacity for the display of hidden objects in DMU Group Preview.
+    */
+    HRESULT get_DMUGroupPreviewHiddenObjectsOpacity(out /*IDLRETVAL*/ long oValue);
+    HRESULT put_DMUGroupPreviewHiddenObjectsOpacity( in long iValue);
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUGroupPreviewHiddenObjectsOpacity parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUGroupPreviewHiddenObjectsOpacity parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUGroupPreviewHiddenObjectsOpacityInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUGroupPreviewHiddenObjectsOpacity parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUGroupPreviewHiddenObjectsOpacity parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *    the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUGroupPreviewHiddenObjectsOpacityLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUGroupPreviewHiddenObjectsLowInt
+    /**
+    * Returns or sets the Low Intensity mode for the display of hidden objects in DMU Group Preview.
+    */
+    HRESULT get_DMUGroupPreviewHiddenObjectsLowInt(out /*IDLRETVAL*/ boolean oIsLowInt);
+    HRESULT put_DMUGroupPreviewHiddenObjectsLowInt( in boolean iIsLowInt);
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUGroupPreviewHiddenObjectsLowInt parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUGroupPreviewHiddenObjectsLowInt parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUGroupPreviewHiddenObjectsLowIntInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUGroupPreviewHiddenObjectsLowInt parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUGroupPreviewHiddenObjectsLowInt parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *    the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUGroupPreviewHiddenObjectsLowIntLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY DMUGroupPreviewHiddenObjectsPick
+    /**
+    * Returns or sets the pick mode for the display of hidden objects in DMU Group Preview.
+    */
+    HRESULT get_DMUGroupPreviewHiddenObjectsPick(out /*IDLRETVAL*/ boolean oIsPickable);
+    HRESULT put_DMUGroupPreviewHiddenObjectsPick( in boolean iIsPickable);
+    
+    
+    /** 
+    * Retrieves environment informations for the DMUGroupPreviewHiddenObjectsPick parameter.
+    * <br><b>Role</b>:Retrieves the state of the DMUGroupPreviewHiddenObjectsPick parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetDMUGroupPreviewHiddenObjectsPickInfo   ( inout CATBSTR ioAdminLevel
+                                , inout CATBSTR ioLocked
+                                , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+    * Locks or unlocks the DMUGroupPreviewHiddenObjectsPick parameter.
+    * <br><b>Role</b>:Locks or unlocks the DMUGroupPreviewHiddenObjectsPick parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *    the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetDMUGroupPreviewHiddenObjectsPickLock( in  boolean iLocked );
+
+	/**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerDefaultsColor
+    * Returns the default color of an annotation (oRed, oGreen, oBlue: RGB values of the color).
+    */
+    HRESULT GetMarkerDefaultsColor(out long oRed, out long oGreen, out long oBlue);
+    
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerDefaultsColor
+    * Sets the default color of an annotation (iRed, iGreen, iBlue: RGB values for the desired color)
+    */
+    HRESULT SetMarkerDefaultsColor(in long iRed, in long iGreen, in long iBlue);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerDefaultsColorInfo
+    * Retrieves environment informations for the MarkerDefaultsColor parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerDefaultsColor parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerDefaultsColorInfo  ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerDefaultsColorLock
+    * Locks or unlocks the MarkerDefaultsColor parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerDefaultsColor parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerDefaultsColorLock( in  boolean iLocked );
+
+	/**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerTextColor2DInfo
+    * Returns the default color of a text annotation (oRed, oGreen, oBlue: RGB values of the color).
+    */
+    HRESULT GetMarkerTextColor(out long oRed, out long oGreen, out long oBlue);
+    
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerTextColor2D
+    * Sets the default color of a text annotation (iRed, iGreen, iBlue: RGB values for the desired color).
+    */
+    HRESULT SetMarkerTextColor(in long iRed, in long iGreen, in long iBlue);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerTextColor2DInfo
+    * Retrieves environment informations for the MarkerTextColor parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerTextColor parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerTextColorInfo  ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerTextColor2DLock
+    * Locks or unlocks the MarkerTextColor parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerTextColor parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerTextColorLock( in  boolean iLocked );
+    
+    
+    
+    
+#pragma PROPERTY MarkerDefaultsWeight
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#get_MarkerDefaultsWeight
+	* This method will be replaced by @href CATIAMarkerSettingAtt#put_MarkerDefaultsWeight
+    * Returns or sets the default weight value of an annotation (oValue the weight value).
+    */
+    HRESULT get_MarkerDefaultsWeight(out /*IDLRETVAL*/ long oValue);
+    HRESULT put_MarkerDefaultsWeight( in long iValue);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerDefaultsWeightInfo
+    * Retrieves environment informations for the MarkerDefaultsWeight parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerDefaultsWeight parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerDefaultsWeightInfo ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerDefaultsWeightLock
+    * Locks or unlocks the MarkerDefaultsWeight parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerDefaultsColor parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerDefaultsWeightLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY MarkerDefaultsDashed
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#get_MarkerDefaultsDashed
+	* This method will be replaced by @href CATIAMarkerSettingAtt#put_MarkerDefaultsDashed
+    * Returns or sets the default dashed value of an annotation (oValue the dashed value).
+    */
+    HRESULT get_MarkerDefaultsDashed(out /*IDLRETVAL*/ long oValue);
+    HRESULT put_MarkerDefaultsDashed( in long iValue);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerDefaultsDashedInfo
+    * Retrieves environment informations for the MarkerDefaultsDashed parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerDefaultsDashed parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerDefaultsDashedInfo ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerDefaultsDashedLock
+    * Locks or unlocks the MarkerDefaultsDashed parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerDefaultsDashed parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerDefaultsDashedLock( in  boolean iLocked );
+    
+    
+    
+#pragma PROPERTY MarkerDefaultsSize
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#get_MarkerTextDefaultsSize2D
+	* This method will be replaced by @href CATIAMarkerSettingAtt#put_MarkerTextDefaultsSize2D
+    * Returns or sets the default size value of an annotation (oValue the size value)..
+    */
+    HRESULT get_MarkerDefaultsSize(out /*IDLRETVAL*/ long oValue);
+    HRESULT put_MarkerDefaultsSize( in long iValue);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAmarkerSettingAtt#GetMarkerTextDefaultsSize2DInfo
+    * Retrieves environment informations for the MarkerDefaultsSize parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerDefaultsSize parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerDefaultsSizeInfo   ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerTextDefaultsSize2DLock
+    * Locks or unlocks the MarkerDefaultsSize parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerDefaultsSize parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerDefaultsSizeLock( in  boolean iLocked );
+    
+    
+#pragma PROPERTY MarkerDefaultsFont
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#get_MarkerTextDefaultsFont2D
+	* This method will be replaced by @href CATIAMarkerSettingAtt#put_MarkerTextDefaultsFont2D
+    * Returns or sets the default font of an annotation (oValue the font name).
+    */
+    HRESULT get_MarkerDefaultsFont(inout /*IDLRETVAL*/ CATBSTR oValue);
+    HRESULT put_MarkerDefaultsFont( in CATBSTR iValue);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerDefaultsFont2DInfo
+    * Retrieves environment informations for the MarkerDefaultsFont parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerDefaultsFont parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerDefaultsFontInfo   ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerDefaultsFont2DLock
+    * Locks or unlocks the MarkerDefaultsFont parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerDefaultsSize parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerDefaultsFontLock( in  boolean iLocked );
+    
+    
+#pragma PROPERTY MarkerTextDashed
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#get_MarkerTextDashed2D
+	* This method will be replaced by @href CATIAMarkerSettingAtt#put_MarkerTextDashed2D
+    * Returns or sets the default dashed value of a text annotation (oValue the dashed value).
+    */
+    HRESULT get_MarkerTextDashed(out /*IDLRETVAL*/ long oValue);
+    HRESULT put_MarkerTextDashed( in long iValue);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerTextDashed2DInfo
+    * Retrieves environment informations for the MarkerTextDashed parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerTextDashed parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerTextDashedInfo ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerTextDashed2DLock
+    * Locks or unlocks the MarkerTextDashed parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerTextDashed parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerTextDashedLock( in  boolean iLocked );
+    
+    
+    
+    
+    
+#pragma PROPERTY MarkerTextWeight
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#get_MarkerTextWeight2D
+	* This method will be replaced by @href CATIAMarkerSettingAtt#put_MarkerTextWeight2D
+    * Returns or sets the default weight value of a text annotation (oValue the weight value).
+    */
+    HRESULT get_MarkerTextWeight(out /*IDLRETVAL*/ long oValue);
+    HRESULT put_MarkerTextWeight( in long iValue);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarkerTextWeight2DInfo
+    * Retrieves environment informations for the MarkerTextWeight parameter.
+    * <br><b>Role</b>:Retrieves the state of the MarkerTextWeight parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarkerTextWeightInfo ( inout CATBSTR ioAdminLevel
+                                    , inout CATBSTR ioLocked
+                                    , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarkerTextWeight2DLock
+    * Locks or unlocks the MarkerTextWeight parameter.
+    * <br><b>Role</b>:Locks or unlocks the MarkerTextWeight parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarkerTextWeightLock( in  boolean iLocked );
+
+	    
+#pragma PROPERTY Marker2DAutoNaming
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#get_Marker2DAutoNaming
+	* This method will be replaced by @href CATIAMarkerSettingAtt#put_Marker2DAutoNaming
+    * Returns or sets the activation state for 2D annotations automatic naming (TRUE naming is automatic, FALSE the naming is not automatic).
+    */
+    HRESULT get_Marker2DAutoNaming(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_Marker2DAutoNaming( in boolean iIsActive);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarker2DAutoNamingInfo
+    * Retrieves environment informations for the Marker2DAutoNaming parameter.
+    * <br><b>Role</b>:Retrieves the state of the Marker2DAutoNaming parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarker2DAutoNamingInfo   ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarker2DAutoNamingLock
+    * Locks or unlocks the Marker2DAutoNaming parameter.
+    * <br><b>Role</b>:Locks or unlocks the Marker2DAutoNaming parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarker2DAutoNamingLock( in  boolean iLocked );
+    
+    
+    
+#pragma PROPERTY Marker3DAutoNaming
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#get_Marker3DAutoNaming
+	* This method will be replaced by @href CATIAMarkerSettingAtt#put_Marker3DAutoNaming
+    * Returns or sets the activation state for 3D annotations automatic naming (TRUE naming is automatic, FALSE the naming is not automatic).
+    */
+    HRESULT get_Marker3DAutoNaming(out /*IDLRETVAL*/ boolean oIsActive);
+    HRESULT put_Marker3DAutoNaming( in boolean iIsActive);
+    
+    
+    /** 
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#GetMarker3DAutoNamingInfo
+    * Retrieves environment informations for the Marker3DAutoNaming parameter.
+    * <br><b>Role</b>:Retrieves the state of the Marker3DAutoNaming parameter 
+    * in the current environment. 
+    * @param ioAdminLevel
+    *   <br>If the parameter is locked, AdminLevel gives the administration
+    *       level that imposes the value of the parameter.
+    *   <br>If the parameter is not locked, AdminLevel gives the administration
+    *       level that will give the value of the parameter after a reset.
+    * @param ioLocked
+    *      Indicates if the parameter has been locked.
+    * @return 
+    *      Indicates if the parameter has been explicitly modified or remain
+    *      to the administrated value.
+    */
+    HRESULT GetMarker3DAutoNamingInfo   ( inout CATBSTR ioAdminLevel
+                                        , inout CATBSTR ioLocked
+                                        , out /*IDLRETVAL*/ boolean oModified );
+    
+    /**
+	* @deprecated R17
+	* This method will be replaced by @href CATIAMarkerSettingAtt#SetMarker3DAutoNamingLock
+    * Locks or unlocks the Marker3DAutoNaming parameter.
+    * <br><b>Role</b>:Locks or unlocks the Marker3DAutoNaming parameter if it is possible
+    * in the current administrative context. In user mode this method will always
+    * return E_FAIL.
+    * @param iLocked
+    *   the locking operation to be performed
+    *   <b>Legal values</b>:
+    *   <br><tt>TRUE :</tt>   to lock the parameter.
+    *   <br><tt>FALSE:</tt>   to unlock the parameter.
+    */
+    HRESULT SetMarker3DAutoNamingLock( in  boolean iLocked );
+
+};
+
+// Interface name : CATIAN4DNavigatorSettingAtt
+#pragma ID CATIAN4DNavigatorSettingAtt "DCE:2353b86b-9a84-4336-bd082bdbded48060"
+#pragma DUAL CATIAN4DNavigatorSettingAtt
+
+// VB object name : N4DNavigatorSettingAtt (Id used in Visual Basic)
+#pragma ID N4DNavigatorSettingAtt "DCE:d5260d7b-3647-486d-8de69f9786b5a5e5"
+#pragma ALIAS CATIAN4DNavigatorSettingAtt N4DNavigatorSettingAtt
+
+#endif

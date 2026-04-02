@@ -1,0 +1,141 @@
+/* -*-c++-*- */
+#ifndef CATIAHybridShapePointCoord_IDL
+#define CATIAHybridShapePointCoord_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//           
+// CATIAHybridShapePointCoord:         
+// Exposed interface for HybridShapePointCoord
+//           
+// Janvier 2000 Creation
+//=================================================================
+#include "CATIAHybridShapePoint.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Point defined by coordinates. 
+ * <b>Role</b>:  To access data of the point feature created with its cartesian coordinates.
+ * @see CATIALength 
+ * @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */
+
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapePointCoord : CATIAHybridShapePoint
+{
+    
+
+/**
+ * Returns X coordinate of the point.
+ * <dl>
+ * <dt>Example</dt>:
+ * <dd>
+ * This example retrieves in <code>oX</code> the X coordinate for the <code>PointCoord</code> hybrid shape feature.
+ * <pre>
+ * Dim oX As CATIALength
+ * Set oX = PointCoord.<font color="red">X</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY X
+ HRESULT get_X ( out /*IDLRETVAL*/  CATIALength   oX);
+
+
+/**
+ * Returns Y coordinate of the point.
+ *<dl>
+ *<dt>Example</dt>:
+ *<dd>
+ * This example retrieves in <code>oY</code> the Y coordinate for the <code>PointCoord</code> hybrid shape feature.
+ * <pre>
+ * Dim oY As CATIALength
+ * Set oY = PointCoord.<font color="red">Y</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY Y
+ HRESULT get_Y ( out /*IDLRETVAL*/  CATIALength   oY);
+
+
+/**
+ * Returns Z coordinate of the point.
+ *<dl>
+ *<dt>Example</dt>:
+ *<dd>
+ * This example retrieves in <code>oZ</code> the Z coordinate for the <code>PointCoord</code> hybrid shape feature.
+ * <pre>
+ * Dim oZ As CATIALength
+ * Set oZ = PointCoord.<font color="red">Z</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY Z 
+ HRESULT get_Z ( out /*IDLRETVAL*/  CATIALength   oZ);
+
+
+/**
+ * Returns or Sets the reference point for PointCoord feature.
+ *<br>This data is not mandatory, if element is null, the origin point is taken.
+ *<br>When an element is given, X, Y and Z are measured starting from this point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ *<dl>
+ *<dt>Example</dt>:
+ *<dd>
+ * This example retrieves in <code>oPtRef</code> the reference point for <code>PointCoord</code> feature.
+ * <pre>
+ * Dim oPtRef As CATIAReference
+ * Set oPtRef  = PointCoord.<font color="red">PtRef</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY PtRef
+ HRESULT get_PtRef ( out /*IDLRETVAL*/  CATIAReference   oPtRef);
+ HRESULT put_PtRef ( in                 CATIAReference   iPtRef);
+
+/**
+ * Returns or Sets the reference Axis System for PointCoord feature.
+ *<br>This data is not mandatory, if element is null, the absolute axis system is taken.
+ *<br>When an element is given, X, Y and Z are considered in this Axis system.
+ *<br>If reference point is not specified, X,Y and Z are measured from origin of this axis system. *<dl>
+ *<dt>Example</dt>:
+ *<dd>
+ * This example retrieves in <code>oRefAxis</code> the reference Axis System for <code>PointCoord</code> feature.
+ * <pre>
+ * Dim oRefAxis As CATIAReference
+ * Set oRefAxis  = PointCoord.<font color="red">RefAxisSystem</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY RefAxisSystem
+ HRESULT get_RefAxisSystem ( out /*IDLRETVAL*/  CATIAReference   oRefAxis);
+ HRESULT put_RefAxisSystem ( in                 CATIAReference   iRefAxis);
+
+};
+
+
+// Interface name : CATIAHybridShapePointCoord
+#pragma ID CATIAHybridShapePointCoord "DCE:89d7663f-57c8-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapePointCoord
+
+// VB object name : HybridShapePointCoord (Id used in Visual Basic)
+#pragma ID HybridShapePointCoord "DCE:89d7693d-25cf-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapePointCoord HybridShapePointCoord
+
+
+#endif
+// CATIAHybridShapePointCoord_IDL
+
+
+

@@ -1,0 +1,132 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GeometricObjects CATIForeignSurface Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GeometricObjects.htm" href="../GeometricObjects.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GeometricObjects";	}
+		function getCurrentObjectName() { 
+ 	return "CATIForeignSurface"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>GeometricObjects Framework:  CATIForeignSurface Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIForeignSurface_31772','CATIForeignSurface','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIForeignSurface</b>
+</p>
+<p>
+<b><i> Interface representing the  foreign bi-parameterized
+ geometric elements.</i></b><br>
+ 
+ <br>A foreign surface is introduced into CGM by filling the CATIForeignSurface object data
+ with a CATForeignSurfaceData. Then, it is automatically integrated into CGM, and
+ can be used as any CATSurface by the operators and the topology.
+ To create your own surface type, you have to derive the CATForeignSurfaceData
+ class, and re-write the methods that are associated with.
+ <br> A CATIForeignSurface object is create through the method 
+<tt>CATGeoFactory::CreateForeignSurface</tt> and deleted with the <tt>Remove</tt> method.
+ <dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATForeignSurfaceData','','CATForeignSurfaceData') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Extrapolate(CATMathVector2D&amp;,CATMathVector2D*)"><b>Extrapolate</b></a>(CATMathVector2D&amp;,CATMathVector2D*)
+</td><td id='tdright'>  Changes the maximum limitations of <tt>this</tt> CATIForeignSurface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetData()"><b>GetData</b></a>()
+</td><td id='tdright'>  Retrieves a pointer to the data of <tt>this</tt> CATIForeignSurface.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Extrapolate"></a><a id="Extrapolate(CATMathVector2D&amp;,CATMathVector2D*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>Extrapolate</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathVector2D','CATMathVector2D&amp;')</script> <span class='param'>iRequiredParamExtension</span>,<script type="text/javascript"> activateLink('CATMathVector2D','CATMathVector2D*')</script> <span class='param'>ioActualExtension</span><span class='param'>= NULL </span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Changes the maximum limitations of <tt>this</tt> CATIForeignSurface.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iRequiredParamExtension</span></dt>
+   <dd> The value of the extension.
+ <ul>
+ <li>if <tt>iRequiredParamExtension.GetX() > 0</tt>, Umax is expected to increase by this value,
+ <li>if <tt>iRequiredParamExtension.GetY() < 0 </tt>, Vmin is expected to decrease,
+ <li>if null, no change is required in the related direction.
+ </ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioActualExtension</span></dt>
+   <dd> If <tt>ioActualExtension</tt> is NULL, no information on actual extrapolation is required.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetData"></a><a id="GetData()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATForeignSurfaceData','CATForeignSurfaceData *')</script>  <span class='objname'>GetData</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves a pointer to the data of <tt>this</tt> CATIForeignSurface.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  A pointer to the data. As part of the CATIForeignSurface, it must not be deleted.
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIForeignSurface.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMGeometricInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

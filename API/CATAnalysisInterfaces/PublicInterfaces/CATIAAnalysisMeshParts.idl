@@ -1,0 +1,80 @@
+#ifndef CATIAAnalysisMeshParts_IDL
+#define CATIAAnalysisMeshParts_IDL
+/*IDLREP*/
+//===================================================================
+// COPYRIGHT Dassault Systemes 2003
+//===================================================================
+//
+// CATIAAnalysisMeshParts.idl
+// Exposed interface for Collection Management
+//
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATIAAnalysisMeshPart.idl"
+
+/**  
+ * The collection of analysis meshparts. 
+ */
+interface CATIAAnalysisMeshParts : CATIACollection  
+{
+/** 
+ * Creates a new meshpart and adds it to the meshpart collection.<br>
+ * The meshpart will be created linked to the AnalysisMeshManager object.
+ * @param iType under the form : oStartUpName@oCatalogName?oClientId (For User defined Startups).
+ * The type of mesh part to create.
+ * @return The created meshpart
+*/
+    HRESULT     Add
+                ( in	CATBSTR				             iType,
+             	  out  /*IDLRETVAL*/ CATIAAnalysisMeshPart oMeshPart );
+/**
+ * Returns a meshpart using its index or its name from the meshpart
+ * collection.
+ * @param iIndex
+ *   The index or the name of the meshpart to retrieve from
+ *   the collection of meshparts.
+ *   As a numeric, this index is the rank of the meshpart
+ *   in the collection. The index of the first meshpart in the collection is 1,
+ *   and the index of the last meshpart is Count.
+ *   As a string, it is the name you assigned to the meshpart using
+ *   the @href CATIABase#Name property.
+ * @return The retrieved meshpart.
+ * </pre>
+ */
+
+    HRESULT     Item
+                ( in                CATVariant           iIndex,
+                  out /*IDLRETVAL*/ CATIAAnalysisMeshPart    oMeshpart );
+
+/**
+ * Removes a meshpart using its index or its name from the meshpart collection.
+ * @param iIndex
+ *   The index or the name of the meshpart to retrieve from
+ *   the collection of meshpart.
+ *   As a numeric, this index is the rank of the meshpart
+ *   in the collection. The index of the first meshpart in the collection is 1,
+ *   and the index of the last meshpart is Count.
+ *   As a string, it is the name you assigned to the meshpart using
+ *   the @href CATIABase#Name property.
+ */
+
+	HRESULT Remove(in CATVariant iIndex);
+
+
+
+};
+
+// Interface name : CATIAAnalysisMeshParts
+#pragma ID CATIAAnalysisMeshParts "DCE:b96e4dba-277f-4182-869927ca6b022288"
+#pragma DUAL CATIAAnalysisMeshParts
+
+// VB object name : AnalysisMeshParts (Id used in Visual Basic)
+#pragma ID AnalysisMeshParts "DCE:4936c4a3-2473-4faf-9d89f0b4eb659998"
+#pragma ALIAS CATIAAnalysisMeshParts AnalysisMeshParts
+
+#endif

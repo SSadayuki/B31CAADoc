@@ -1,0 +1,194 @@
+#ifndef CATIAThickness_IDL
+#define CATIAThickness_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAThickness:						   
+// Exposed interface for Mechanical thickness
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation					Ph Baucher
+// Dec97 Modification					 L Lalere
+//=================================================================
+#include "CATIADressUpShape.idl"
+
+interface CATIALength;
+interface CATIAReferences;
+interface CATIAReference;
+
+/**
+ * Represents the thickness shape.
+ * The thickness shape is made up of a collection of faces to process
+ * and an offset parameter.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAThickness : CATIADressUpShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//	ON OFFSET
+	//	---------
+	//
+    /**
+     * Returns the thickness offset.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>offset</tt> the offset of
+     * the thickness <tt>firstThickness</tt>:
+     * <pre>
+     * Set offset = firstThickness.<font color="red">Offset</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Offset
+	HRESULT	get_Offset
+				( out /*IDLRETVAL*/ CATIALength oOffset );
+
+
+	//
+	//	ON FACES TO THICKEN
+	//	-------------------
+	//
+    /**
+     * Returns the collection of faces to be thickened.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>list</tt> the list of faces of
+     * the thickness <tt>firstThickness</tt>:
+     * <pre>
+     * Set list = firstThickness.<font color="red">FacesToThicken</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FacesToThicken
+	HRESULT	get_FacesToThicken
+				( out /*IDLRETVAL*/ CATIAReferences oFacesToThicken );
+
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+	//	ADD A FACE TO THICKEN
+	//	---------------------
+	//
+    /**
+     * Adds a new face to be thickened. 
+     * @param iFaceToThicken
+     *   The new face to process<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new face <tt>face</tt>
+     * to thicken for the thickness <tt>firstThickness</tt>:
+     * <pre>
+     * call firstThickness.<font color="red">AddFaceToThicken</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	AddFaceToThicken
+				( in CATIAReference iFaceToThicken );
+	//
+	//	WITHDRAW A FACE TO THICKEN
+	//	--------------------------
+	//
+    /**
+     * Withdraws an existing thickened face.
+     * @param iFaceToWithdraw
+     *   The face to withdraw<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the existing <tt>face</tt> thickened
+     * face from the thickness <tt>firstThickness</tt>:
+     * <pre>
+     * call firstThickness.<font color="red">WithdrawFaceToThicken</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	WithdrawFaceToThicken
+				( in CATIAReference iFaceToWithdraw );
+	//
+	//	ADD A FACE TO THICKEN WITH A DIFFERENT OFFSET VALUE
+	//	---------------------------------------------------
+	//
+    /**
+     * Adds a new face to thicken with a different offset value. 
+     * @param iFaceToThicken
+     *   The new face to process<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new face <tt>face</tt>
+     * to thicken with a different offset value
+     * for the thickness <tt>firstThickness</tt>:
+     * <pre>
+     * call firstThickness.<font color="red">AddFaceWithDifferentThickness</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	AddFaceWithDifferentThickness
+				( in CATIAReference iFaceToThicken );
+	//
+	//	REMOVE A FACE TO THICKEN WITH A DIFFERENT OFFSET VALUE  
+	//	------------------------------------------------------
+	//
+    /**
+     * Removes an existing thickened face.
+     * @param iFaceToRemove
+     *   The face to remove<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example removes the existing <tt>face</tt> thickened
+     * face from the thickness <tt>firstThickness</tt>:
+     * <pre>
+     * call firstThickness.<font color="red">RemoveFaceWithDifferentThickness</font>(face)</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	RemoveFaceWithDifferentThickness
+				( in CATIAReference iFaceToRemove );
+
+    /**
+     * Set support of Thickness feature.
+	 */
+	HRESULT	  SetVolumeSupport  (in CATIAReference iVolumeSupport);
+};
+
+// Interface name : CATIAThickness
+#pragma ID CATIAThickness "DCE:f8e0d0ad-65a1-11d1-a27f0000f87546fd"
+#pragma DUAL CATIAThickness
+
+// VB object name : Thickness (Id used in Visual Basic)
+#pragma ID Thickness "DCE:f90f4e88-65a1-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIAThickness Thickness
+
+
+#endif
+// CATIAThickness_IDL
+

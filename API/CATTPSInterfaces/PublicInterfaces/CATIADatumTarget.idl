@@ -1,0 +1,136 @@
+#ifndef CATIADatumTarget_IDL
+#define CATIADatumTarget_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIAUserSurface;
+
+/**
+ * Interface for Datum Target TPS (datum entity).
+ * TPS for Technological Product Specifications.
+ */
+interface CATIADatumTarget : CATIABase
+{
+    /**
+     * Retrieves Label.
+     */
+  #pragma PROPERTY Label
+   HRESULT get_Label (inout /*IDLRETVAL*/ CATBSTR oLabel);
+   HRESULT put_Label (in CATBSTR iLabel);
+    /**
+     * Retrieves simple datum, the target belongs to.
+     */
+  #pragma PROPERTY Datum
+   HRESULT get_Datum (out /*IDLRETVAL*/ CATIABase oDatum);
+
+   /**
+     * Sets the form of the target area.
+     *  @param iAreaForm
+     *   Form of the target area.
+     *   Legal values are:-
+     *   Point,
+     *   Circular,
+     *   Rectangular.
+     *  @return HRESULT
+     *   S_OK:- the Area Form has been correctly set.
+     *   E_FAIL or E_NOIMPL : Area Form cannot be set.
+     */
+    HRESULT SetAreaForm (in CATBSTR iAreaForm);
+
+    /**
+     * Gets the form of the target area.
+     *  @param oAreaForm
+     *   Form of the target area.
+     *   Legal values are:-
+     *   Point,
+     *   Circular,
+     *   Rectangular.
+     *  @return HRESULT
+     *   S_OK:- the Area Form has been correctly retrieved.
+     *   E_FAIL or E_NOIMPL : Area Form cannot be retrieved.
+     */
+    HRESULT GetAreaForm (inout CATBSTR oAreaForm); 
+
+     /**
+     * Sets the size of the circular area.
+     *  @param iAreaSize
+     *   Size of the Circular target area.
+     *  @return HRESULT
+     *   S_OK:- the Area Size has been correctly set.
+     *   E_FAIL or E_NOIMPL : Area Size cannot be set.
+     */
+    HRESULT SetCircularAreaSize (in double iAreaSize);
+
+    /**
+     * Gets the size of the circular area.
+     *  @param oAreaSize
+     *   Size of the Circular target area.
+     *  @return HRESULT
+     *   S_OK:- the Area Size has been correctly retrieved.
+     *   E_FAIL or E_NOIMPL : Area Size cannot be retrieved.
+     */
+    HRESULT GetCircularAreaSize (out double oAreaSize) ;
+
+     /**
+     * Sets the size of the rectangular area.
+     *  @param iLength
+     *   Length of the Rectangular target area.
+     *  @param iWidth
+     *   Width of the Rectangular target area.
+     *  @return HRESULT
+     *   S_OK:- the Area Size has been correctly set.
+     *   E_FAIL or E_NOIMPL : Area Size cannot be set.
+     */
+    HRESULT SetRectangularAreaSize (in double iLength, in double iWidth);
+
+    /**
+     * Gets the size of the rectangular area.
+     *  @param oLength
+     *   Length of the Rectangular target area.
+     *  @param oWidth
+     *   Width of the Rectangular target area.
+     *  @return HRESULT
+     *   S_OK:- the Area Size has been correctly retrieved.
+     *   E_FAIL or E_NOIMPL : Area Size cannot be retrieved.
+     */
+    HRESULT GetRectangularAreaSize (out double oLength, out double oWidth) ; 
+
+    /**
+     * Sets the movable Direction TTRS.
+     *  @param ispDirectionTTRS
+     *   Movable Direction TTRS
+     *  If the ipDirectionTTRS is NULL_var, the 
+     *   direction TTRS inside the model is removed.
+     *  @return HRESULT
+     *   S_OK:- the movable direction has been correctly set.
+     *   E_FAIL or E_NOIMPL : movable direction cannot be set.
+     */
+    HRESULT SetMovableDirectionTTRS(in CATIAUserSurface ipDirectionTTRS);
+
+    /**
+     * Gets the movable Direction TTRS.
+     *  @param ospDirectionTTRS
+     *   Movable Direction TTRS
+     *  @return HRESULT
+     *   S_OK:- the movable direction has been correctly retrieved.
+     *   E_FAIL or E_NOIMPL : movable direction cannot be retrieved.
+     */
+    HRESULT GetMovableDirectionTTRS(out CATIAUserSurface opDirectionTTRS);
+};
+
+// Interface name : CATIADatumTarget
+#pragma ID CATIADatumTarget "DCE:cf8b8c6a-2f89-11d6-be8a0002b341dd3a"
+#pragma DUAL CATIADatumTarget
+
+// VB object name : DatumTarget (Id used in Visual Basic)
+#pragma ID DatumTarget "DCE:cf8b8c6b-2f89-11d6-be8a0002b341dd3a"
+#pragma ALIAS CATIADatumTarget DatumTarget
+
+#endif

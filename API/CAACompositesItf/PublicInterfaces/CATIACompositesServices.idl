@@ -1,0 +1,101 @@
+//=============================================================================
+// COPYRIGHT Dassault Systemes 2019
+//=============================================================================
+// CATIACompositesServices
+//   Interface for retrieving composites type in part
+//=============================================================================
+// Usage notes:
+//   Interface to identify composites objects (derivating from hybridBody)   
+//=============================================================================
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#ifndef _CATIACompositesServices_IDL_
+#define _CATIACompositesServices_IDL_
+/*IDLREP*/
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATIACpdEnumDefs.idl"
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/**
+ * Represents CATIACompositesServices  that allow to query composites entity.
+ * <b>Role</b>: On any object recovers is it his a composites object or not and provides its type if yes. 
+ * <dl>
+ * <dt>Example:</dt>
+ * <dd>
+ * This VBScript example illustrates how to <code>GetCompositesType</code> if any , on objects in CATIA Part.
+ * </dd> 
+ * <dd>
+ * <pre>
+* ' -------------------------------------------------------------------
+* ' CATIA Composites 
+* ' VBScript example to identify composites object type
+* ' ------------------------------------------------------------------
+* Sub CATMain()
+*    Const UNKNOWN       = 0 
+*    Const STACKING      = 1 
+*    Const PLYGROUP      = 2 
+*    Const SEQUENCE      = 3
+*    Const CUTPIECEGROUP = 4
+*    Const PLY           = 5
+*    Const CORE          = 6
+*    Const CUTPIECE      = 7
+*    ' Part 
+*    Set myPart = CATIA.ActiveDocument.Part
+* 
+*    ' Get Service Object by querying on part - extension of CATIA Base 
+*    Set myCompServObj = myPart.<font color="red">GetItem("CATCompositesServices")</font>
+*    
+*    ' Hybrid Bodies
+*    Set myHBodies = myPart.HybridBodies
+*    
+*    ' Get Part Hybrid Bodies Count
+*    HBCount = myHBodies.Count
+*   
+*    StckCnt = 0
+*    For N = 1 To PartHBCount
+*       ' Iterate through all Hybrid Bodies in Part one by one and retrieve its type
+*         Set myObject = myHBodies.Item(N)
+*         myCompServObj.<font color="red">GetCompositesType</font> myObject, myType
+*         If myType = STACKING Then
+*    		     ' ==> Stacking Composites feature type is recovered  among hybridshapes under part 
+*    		    ObjCompositesStacking =  myObject
+*    		    ' ....
+*    		Exit For 
+*    	End if 
+*    Next 
+*    Mggbox "Stacking="& ObjCompositesStacking.Name 
+* End Sub
+* </pre>
+* </dd>
+* </dl>
+*/
+interface CATIACompositesServices : CATIABase
+{
+    /**
+    * Retrieves "Composites Type" of an 3D object.
+    * @param iObject
+    *   Object whose type is to be retrieved.
+    * @param oCompositesType
+    *   Composites Type of input object.
+    * @see CATCompositesTypeEnum
+    */
+    HRESULT GetCompositesType(in CATVariant iObject, out CATCompositesTypeEnum  oCompositesType);
+};
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Interface : CATIACompositesServices
+#pragma ID CATIACompositesServices "DCE:726C8B16-A5C6-4CDB-83FB981FCFA4E860"
+#pragma DUAL CATIACompositesServices
+// VB object name : CompositesServices (Id used in Visual Basic)
+#pragma ID CompositesServices "DCE:B465155B-AE3A-47B4-A3E8231735116CDD"
+#pragma ALIAS CATIACompositesServices CompositesServices
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#endif // _CATIACompositesServices_IDL_

@@ -1,0 +1,108 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+#ifndef CATIADrawingLeaders_IDL
+#define CATIADrawingLeaders_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIADrawingLeader.idl"
+#include "CATIACollection.idl"
+#include "CATBaseDispatch.idl"
+
+ /**
+  * A collection of all the drawing leaders currently managed by a
+  * drawing view of drawing sheet in a drawing document.
+  */
+interface CATIADrawingLeaders : CATIACollection
+{
+ /**
+  * Creates a drawing leader and adds it to the DrawingLeaders collection.
+  * @param iHeadPointX,iHeadPointY
+  *   The x and y coordinates of head side of drawing leader
+  * @return The created drawing leader
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates a drawing leader
+  * and retrieved in <tt>MyLeader</tt> in the drawing text collection
+  * of the <tt>MyText</tt> drawing text.
+  * This text belongs to the drawing text collection of the drawing view
+  * <pre>
+  * Dim MyTexts As DrawingTexts
+  * Set MyTexts = MySheet.Views.<font color="red">ActiveView</font>
+  * Dim MyText As DrawingText
+  * Set MyText = MyTexts.<font color="red">Item</font>(1)
+  * Dim MyLeader As DrawingLeader
+  * Set MyLeader = MyText.Leaders.<font color="red">Add</font>(20., 50)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Add(in double iHeadPointX, in double iHeadPointY,
+              out /*IDLRETVAL*/ CATIADrawingLeader oNewDrawingLeader);
+
+
+ /**
+  * Removes a drawing leader from the DrawingLeaders collection.
+  * @param iIndex
+  *   The index of the drawing leader to remove from
+  *   the collection of drawing leaders.
+  *   As a numerics, this index is the rank of the drawing leader
+  *   in the collection.
+  *   The index of the first drawing leader in the collection is 1, and
+  *   the index of the last drawing leader is Count.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing leader 
+  * in the drawing leader collection of the active view
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * MyView.DrawingLeaders.<font color="red">Remove</font>(3)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Remove(in long iIndex);
+
+/**
+  * Returns a drawing leader using its index from the DrawingLeaders collection.
+  * @param iIndex
+  *   The index of the drawing leader to retrieve from the collection of drawing arows.
+  *   As a numerics, this index is the rank of the drawing leader in the collection.
+  *   The index of the first drawing leader in the collection is 1, and
+  *   the index of the last drawing leader is Count.
+  * @return The retrieved drawing view
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisDrawingLeader</tt> the second drawing leader,
+  * in the drawing view collection of the active view
+  * in the active sheet, in the active document supposed to be a drawing document.
+  * <pre>
+  * Dim MyView  As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * Dim ThisDrawingLeader As DrawingLeader
+  * Set ThisDrawingLeader = MyView.Leaders.<font color="red">Item</font>(2)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Item(in long iIndex, out /*IDLRETVAL*/ CATIADrawingLeader oItem);
+			
+};
+
+// Interface name : CATIADrawingLeaders
+#pragma ID CATIADrawingLeaders "DCE:59FE66E3-2C53-11d6-BE91000347C379C9"
+#pragma DUAL CATIADrawingLeaders
+
+// VB object name : DrawingLeaders
+#pragma ID DrawingLeaders "DCE:59FE66E4-2C53-11d6-BE91000347C379C9"
+#pragma ALIAS CATIADrawingLeaders DrawingLeaders
+
+#endif
+

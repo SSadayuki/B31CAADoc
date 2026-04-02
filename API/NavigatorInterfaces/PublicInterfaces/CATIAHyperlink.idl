@@ -1,0 +1,97 @@
+// COPYRIGHT DASSAULT SYSTEMES 2006
+//===================================================================
+//
+// CATIAHyperlinks.idl
+//   This automation interface allows the manage Hyperlink information.
+//
+//===================================================================
+//
+//  Jan 2006  Creation: SLW
+//
+//===================================================================
+#ifndef CatHyperlinkType_IDL
+#define CatHyperlinkType_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+
+#include "CATVariant.idl"
+#include "CATBSTR.idl"
+
+
+/**  
+*Represents a hyperlink marker.
+*/
+interface CATIAHyperlink : CATIABase
+{
+	/**
+	* Adds a url to an Hyperlink.
+	* @param iUrl
+	*    The URL to be added to the Hyperlink.
+	* @sample
+	*    This example links <tt>TheUrl</tt> to the <tt>NewHyperlink</tt> Hyperlink.
+	*    <pre>
+	*    NewHyperlink.<font color="red">AddUrl</font>(TheUrl)
+	*    </pre>
+	*/
+	HRESULT AddUrl (in CATBSTR iUrl);
+
+	/**
+	* Returns the number of Url which are linked to the Hyperlink.
+	* @sample
+	*    This example reads the number of Url in the Hyperlink <tt>NewHyperlink </tt>.
+	*    <pre>
+	*    Dim number As Integer
+	*    number = NewHyperlink.<font color="red">CountObject</font>
+	*    </pre>
+	*/
+	HRESULT CountObject (out /*IDLRETVAL*/ long oNbItems);
+
+	/**
+	* Returns an Url which is linked to the Hyperlink using its index.
+	* @param iIndex
+	*    The index of the Url in the Hyperlink.
+	*    The index of the first object is 1, and
+	*    the index of the last object is CountObject.
+	* @return
+	*    The retrieved Url
+	* @sample
+	*    This example retrieves in <tt>ThisUrl</tt> the ninth object
+	*    from the <tt>NewHyperlink </tt> Hyperlink.
+	*    <pre>
+	*    Dim ThisUrl As String
+	*    Set ThisUrl = NewHyperlink.<font color="red">ItemObject</font>(9)
+	*    </pre>
+	*/
+	HRESULT ItemObject (in CATVariant iIndex, inout /*IDLRETVAL*/ CATBSTR oURL);
+
+	/**
+	* Removes an Url which is linked to the Hyperlink using its index.
+	* @param iIndex
+	*    The index of the object in the Hyperlink.
+	*    The index of the first object is 1, and
+	*    the index of the last object is CountObject.
+	* @sample
+	*    This example removes the ninth Url
+	*    from the <tt>NewHyperlink </tt> Hyperlink.
+	*    <pre>
+	*    NewHyperlink.<font color="red">RemoveObject</font>(9)
+	*    </pre>
+	*/
+	HRESULT RemoveObject (in CATVariant iIndex);
+};
+
+// Interface name : CATIAHyperlink
+#pragma ID CATIAHyperlink "DCE:1e1e6a3c-afb7-413f-94df64dddc2e5bf8"
+#pragma DUAL CATIAHyperlink
+
+// VB object name : Hyperlink (Id used in Visual Basic)
+#pragma ID Hyperlink "DCE:04bba788-e1d1-4574-8b1f2f103830a4d8"
+#pragma ALIAS CATIAHyperlink Hyperlink
+
+#endif

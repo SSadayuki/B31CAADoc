@@ -1,0 +1,5 @@
+#
+BUILT_OBJECT_TYPE = NONE
+#
+OS = COMMON
+

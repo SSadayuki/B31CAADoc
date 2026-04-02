@@ -1,0 +1,83 @@
+#ifndef CATIASchematicExtension_IDL 
+#define CATIASchematicExtension_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+interface  CATIASchListOfObjects;
+    
+#include "CatSchIDLExtensionType.idl"
+#include "CatSchIDLExtensionType.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage schematic extensions.
+  */
+
+interface CATIASchematicExtension : CATIABase
+{
+  /**
+  * Adds a Schematic extension to an application object.
+  * @param iAppObjToBeExtended
+  *   The application object to be extended.
+  * @param iExtensionType
+  *   The extension type.
+  * @param iLGRR
+  *   If iLGRR is not NULL, then its members will be linked to the extension as graphics
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchematicExtension
+  * Dim objArg1 As AnyObject
+  *
+  * Dim objArg3 As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">AddExtension</font>objArg1,CatSchIDLExtensionType_Enum,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT AddExtension ( 
+    in CATIABase iAppObjToBeExtended, 
+    in CatSchIDLExtensionType iExtensionType, 
+    in CATIASchListOfObjects iLGRR );
+    
+  /**
+  * Removes a Schematic extension to an application object.
+  * @param iAppExtendedObj
+  *   The application object to be have its extension removed.
+  * @param iExtensionType
+  *   The extension type.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchematicExtension
+  * Dim objArg1 As AnyObject
+  *
+  *  ...
+  * objThisIntf.<font color="red">RemoveExtension</font>objArg1,CatSchIDLExtensionType_Enum
+  * </pre>
+  *    
+  */
+  HRESULT RemoveExtension ( 
+    in CATIABase iAppExtendedObj, 
+    in CatSchIDLExtensionType iExtensionType );
+    
+};
+    
+// Interface name : CATIASchematicExtension
+#pragma ID CATIASchematicExtension "DCE:d198fb5f-f9a4-445a-a61062e49f046a1d"
+#pragma DUAL CATIASchematicExtension
+    
+// VB object name : SchematicExtension
+#pragma ID SchematicExtension "DCE:ddfc4a0c-ce62-42d7-beb3d180d4abb8bc"
+#pragma ALIAS CATIASchematicExtension SchematicExtension
+    
+#endif 
+    

@@ -1,0 +1,60 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAConflicts.idl
+//   This automation interface allows to manage CATIAConflict collection.
+//
+//===================================================================
+#ifndef CATIAConflicts_IDL
+#define CATIAConflicts_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIAConflict.idl"
+#include "CATIAProduct.idl"
+#include "CATVariant.idl"
+
+/**  
+ * A collection of all Conflict objects currently detected by a Clash object.
+ */
+interface CATIAConflicts : CATIACollection
+{
+  /**
+   * @nodoc
+   */
+  HRESULT SendToDB();
+
+  /**
+   * Returns a Conflict object using its index from the Conflicts collection.
+   * @param iIndex
+   *    The index of the Conflict object to retrieve from the collection of Conflicts.
+   *    As a numerics, this index is the rank of the Conflict in the collection.
+   *    The index of the first Conflict in the collection is 1, and
+   *    the index of the last Conflict is Count.
+   * @sample
+   *    This example retrieves in <tt>ThisConflict</tt> the ninth Conflict
+   *    from the <tt>TheConflicts</tt> collection. 
+   *    <pre>
+   *    Dim ThisConflict As Conflict
+   *    Set ThisConflict = TheConflicts.<font color="red">Item</font>(9)
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAConflict oConflict);
+
+};
+
+// Interface name : CATIAConflicts
+#pragma ID CATIAConflicts "DCE:fb64bbdc-45f0-11d4-9468006094eb3826"
+#pragma DUAL CATIAConflicts
+
+// VB object name : Conflicts (Id used in Visual Basic)
+#pragma ID Conflicts "DCE:fbef0440-45f0-11d4-9468006094eb3826"
+#pragma ALIAS CATIAConflicts Conflicts
+
+#endif

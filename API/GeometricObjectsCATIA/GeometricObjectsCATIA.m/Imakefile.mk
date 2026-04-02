@@ -1,0 +1,43 @@
+#
+BUILT_OBJECT_TYPE = NONE
+INCLUDED_MODULES = YP000PR4 YP001PR4 YP002PR4 YP00FACT YP0SOLCR
+COMDYN_MODULE = V4SysCOMD                   
+#
+OS = COMMON
+#
+LINK_WITH = YP00IMPL\
+  JS0CORBA \
+  JS03TRA \
+  AC0CATPL \
+  YN000MAT \
+  NS0S3STR \
+  AD0XXBAS \
+  JS0ERROR \
+  CO0LSTPV \
+  CATV4Geometry \
+  CATCdbEntity \
+  CATV4Maths \
+  CATV4gUtilities \
+  CATV4Procedural \
+  CATV4Topology \
+  V4SysB \
+  V4SysENV \
+  V4SysUTIL \
+            AC0XXLNK  \
+  YN000M2D \
+  YN000FUN \
+  JS0SCBAK \
+  CATGeomEva \
+  CATCGMGeoMath \
+  CATMathStream \
+  BftierV5
+#
+OS = HP-UX
+#
+OS = IRIX
+SYS_LIBS =  -lftn
+#
+OS = SunOS
+#
+OS = Windows_NT
+

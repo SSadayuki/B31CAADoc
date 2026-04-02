@@ -1,0 +1,43 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+ObjectModelerBaseUUID \
+ObjectModelerSDMUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+INCLUDED_MODULES = AD0SDBAS
+
+LINK_WITH=$(LINK_WITH_FOR_IID) CATOmx AC0XXLNK AD0XXBAS \
+            JS0CORBA JS0SCBAK JS0STR   JS0SETT JS0ERROR JS03TRA  \
+            NS0S3STR \
+            KS0SIMPL KS0LATE  KS0BINA  KS0STEP \
+            CO0LSTPV CO0LSTST CO0RCINT
+
+LOCAL_CKMFLAGS= -gLate 
+
+# for tracing :
+# LOCAL_CCFLAGS= -DTRACE_ON
+
+
+#
+OS = AIX
+
+#
+OS = HP-UX
+
+#
+OS = IRIX
+
+#
+# ByPass pour bug du compilo SUN (19/12/96) :
+# il faut toujours compiler en -g
+OS = SunOS
+#LOCAL_CCFLAGS=-g (JML -> le 28/03/97)
+
+
+#
+OS = Windows_NT

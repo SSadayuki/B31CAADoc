@@ -1,0 +1,109 @@
+#ifndef CATIAManufacturingHole_IDL
+#define CATIAManufacturingHole_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//								   
+// CATIAManufacturingHole:						   
+// Exposed interface for ManufacturingHole
+//								   
+//=================================================================
+// Sep. 98 Creation                                        O.PERIOU     
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+
+interface CATIALength;
+
+/**
+ * Hole Feature in Machining domain.
+ */
+interface CATIAManufacturingHole : CATIABase
+{
+
+#pragma PROPERTY Diameter
+//
+        /**
+         * Returns the hole diameter.
+         * @return oDiameter
+         *    A CATIALength object controlling the hole diameter
+         *   (@see CATIALength for more information)
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>holeDiam</tt> the diameter of
+         * hole <tt>firstHole</tt>:
+         * <pre>
+         * Set holeDiam = firstHole.Diameter
+         *</pre>
+         * </dl>
+         */
+	HRESULT	get_Diameter ( out /*IDLRETVAL*/ CATIALength oDiameter );	
+
+
+#pragma PROPERTY Depth
+//
+        /**
+         * Returns the hole depth.
+         * @return oDepth
+         *    A CATIALength object controlling the hole depth
+         *   (@see CATIALength for more information)
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>holeDepth</tt> the depth of
+         * hole <tt>firstHole</tt>:
+         * <pre>
+         * Set holeDepth = firstHole.Depth
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_Depth ( out /*IDLRETVAL*/ CATIALength oDepth );
+
+// Method GetOrigin
+
+         /**
+         * Returns the origin point which the hole is anchored to.<br>
+         * @return 3 doubles: X, Y, Z - Hole origin point coordinates
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>X, Y, Z</tt> the origin coordinates of
+         * hole <tt>firstHole</tt>:
+         * <pre>
+         * call firstHole.<font color="red">GetOrigin</font>(X,Y,Z)
+         *</pre>
+         * </dl>
+         */
+	HRESULT	GetOrigin ( out  double oX, out double oY, out double oZ );
+
+// Method GetDirection
+
+        /**
+         * Returns the hole direction with absolute coordinates.<br>
+         * @return 3 doubles: X, Y, Z - direction coordinates
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>X, Y, Z</tt> the direction coordinates
+         * of hole <tt>firstHole</tt>:
+         * <pre>
+         * call firstHole.<font color="red">GetDirection</font>(X,Y,Z)
+         *</pre>
+         * </dl>
+         */
+	HRESULT	GetDirection ( out  double oX, out double oY, out double oZ );
+};
+
+// Interface name : CATIAManufacturingHole
+#pragma ID CATIAManufacturingHole "DCE:56c89fe2-538c-11d2-8dc5006094b92b60"
+#pragma DUAL CATIAManufacturingHole
+
+// VB object name : ManufacturingHole (Id used in Visual Basic)
+#pragma ID ManufacturingHole "DCE:dc504c78-6fe3-11d2-8dd7006094b92b60"
+#pragma ALIAS CATIAManufacturingHole ManufacturingHole
+
+#endif // CATIAManufacturingHole_IDL
+

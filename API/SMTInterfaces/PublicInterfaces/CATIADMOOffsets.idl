@@ -1,0 +1,179 @@
+// COPYRIGHT Dassault Systemes 2002
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#ifndef CATIADMOOffsets_IDL
+#define CATIADMOOffsets_IDL
+/*IDLREP*/
+
+#include "CATIAV5Level.h"
+
+#include "CATIACollection.idl"
+#include "CATIADMOOffset.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#ifdef CATIAV5R9
+#include "CATIAGroup.idl"
+#include "CATIADocument.idl"
+#endif
+
+
+interface CATIAProduct;
+
+/**  
+ * Interface to access a CATIADMOOffsets and compute Offsets
+ */
+interface CATIADMOOffsets : CATIACollection 
+{
+
+/**
+ * Compute a offset on the selected products.
+ * @param GroupOfSelectedProducts
+ *   The selected products on which you want to perform the offset.
+ * @param iOffset
+ *   Offset value.
+ * @param iUseConstraints
+ *   Do we use normals constraints or not ?
+ * @param iConstraints
+ *   Constraints array.
+ * @return 
+ *   OffsetDocument: Document containing the result.
+ */
+
+      HRESULT ComputeAnOffset(in CATIAGroup GroupOfSelectedProducts, 
+	  in double iOffset, in long iUseConstraints,
+	  in CATSafeArrayVariant iConstraints,
+	  out /*IDLRETVAL*/ CATIADocument OffsetDocument);
+
+
+/**
+ * Compute an offset on the selected products, according to a reference product.
+ * @param iGroupOfSelectedProducts
+ *   The selected products on which you want to perform the offset.
+ * @param iReferenceProduct
+ *   The reference product.
+ * @param iOffset
+ *   Offset value.
+ * @param iUseConstraints
+ *   Do we use normals constraints or not ?
+ * @param iConstraints
+ *   Constraints array.
+ * @return 
+ *   OffsetDocument: Document containing the result.
+ */
+
+      HRESULT ComputeAnOffsetWithAReference(in CATIAGroup iGroupOfSelectedProducts, 
+	  in CATIAProduct iReferenceProduct, in double iOffset, in long iUseConstraints,
+	  in CATSafeArrayVariant iConstraints,
+	  out /*IDLRETVAL*/ CATIADocument OffsetDocument);
+
+
+/**
+ * Compute an offset on the selected products, according to some vectors
+ * @param GroupOfSelectedProducts
+ *   The selected products on which you want to perform the offset.
+ * @param iOffsetVectors
+ *   Vectors taken into account for the computation
+ * @param iOffsetValues
+ *   Offset values.
+ * @return 
+ *   OffsetDocument: Document containing the result.
+ */
+
+      HRESULT ComputeAnOffsetFromVectors(in CATIAGroup GroupOfSelectedProducts, 
+      in CATSafeArrayVariant iOffsetVectors, in CATSafeArrayVariant iOffsetValues,
+      out /*IDLRETVAL*/ CATIADocument OffsetDocument);
+
+
+/**
+ * Compute an offset on the selected products, according to some vectors and a reference product.
+ * @param iGroupOfSelectedProducts
+ *   The selected products on which you want to perform the offset.
+ * @param iReferenceProduct
+ *   The reference product.
+ * @param iOffsetVectors
+ *   Vectors taken into account for the computation
+ * @param iOffsetValues
+ *   Offset values.
+ * @return 
+ *   OffsetDocument: Document containing the result.
+ */
+
+      HRESULT ComputeAnOffsetFromVectorsWithAReference(in CATIAGroup iGroupOfSelectedProducts, 
+	  in CATIAProduct iReferenceProduct, in CATSafeArrayVariant iOffsetVectors, 
+	  in CATSafeArrayVariant iOffsetValues, out /*IDLRETVAL*/ CATIADocument OffsetDocument);
+
+
+/**
+ * Returns the name of the associated shape.
+ */
+
+		HRESULT OffsetShapeName(out /*IDLRETVAL*/ CATBSTR Name);
+
+
+/**
+ * Cleans up.
+ */
+
+		HRESULT CleanUp();
+
+	
+	/**
+	* Creates a new Offset and adds it to the DMOOffsets collection.
+	* <b>This function is deprecated.</b>
+	* @return The created offset
+	* <! @sample >
+	* <dt><b>Example:</b>
+	* <dd>
+	* The following example creates an offset <tt>newOffset</tt>
+	* in the Offset collection.
+	* <pre>
+	* Set newOffset = DMOOffsets.<font color="red">Add</font>
+	* </pre>	
+	*/
+
+	  HRESULT Add	(	in CATIAProduct iProductToOffset, 
+						in double iOffset1, 
+						in long iUseConstraints,
+						in CATSafeArrayVariant iConstraints,						
+						in CATBSTR iShapeName, 
+						in long iActivatedShape, 
+						in long iDefaultShape, 
+						out /*IDLRETVAL*/ CATIADMOOffset oOffset );	
+
+	/**
+	* Creates a new Offset from a set of vectors, and adds it to the DMOOffsets collection.
+	* <b>This function is deprecated.</b>
+	* @return The created offset
+	* <! @sample >
+	* <dt><b>Example:</b>
+	* <dd>
+	* The following example creates an offset <tt>newOffset</tt>
+	* in the Offset collection.
+	* <pre>
+	* Set newOffset = DMOOffsets.<font color="red">Add</font>
+	* </pre>	
+	*/
+
+	  HRESULT AddOffsetFromVectors	(	in CATIAProduct iProductToOffset, 
+						in CATSafeArrayVariant iOffsetVectors,		
+						in CATSafeArrayVariant iOffsetValues,						
+						in CATBSTR iShapeName, 
+						in long iActivatedShape, 
+						in long iDefaultShape, 
+						out /*IDLRETVAL*/ CATIADMOOffset oOffset );	
+
+};
+
+// Interface name : CATIADMOOffsets
+#pragma ID CATIADMOOffsets "DCE:8bc55ced-2f06-0000-0280030b35000000"
+#pragma DUAL CATIADMOOffsets
+
+// VB object name : DMOOffsets (Id used in Visual Basic)
+#pragma ID DMOOffsets "DCE:8bc55d2a-75bb-0000-0280030b35000000"
+#pragma ALIAS CATIADMOOffsets DMOOffsets
+
+#endif

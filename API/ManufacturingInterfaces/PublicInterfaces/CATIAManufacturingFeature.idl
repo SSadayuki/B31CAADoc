@@ -1,0 +1,52 @@
+// COPYRIGHT DASSAULT SYSTEMES 2003
+//=================================================================
+#ifndef CATIAManufacturingFeature_IDL
+#define CATIAManufacturingFeature_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATIAParameter.idl"
+
+/**
+ * ManufacturingFeature defines a set of methods to access a Manufacturing Feature.
+ */
+
+interface CATIAManufacturingFeature : CATIABase
+{
+
+// Method GetAGeometricAttribute
+
+         /**
+         * Retrieve a geometry attribute of a Manufacturing Feature from its name.  
+         * @param iAttribute
+         *   The identifier of the attribute to be read
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the attribute 'MfgHoleExtension' of the
+         * manufacturing feature <tt>mfgFeature</tt>:
+         * <pre>
+         * call mfgFeature.<font color="red">GetAGeometricAttribute</font>('MfgHoleExtension' ,ExtentParm)
+         *</pre>
+         * </dl>
+         */
+
+     HRESULT	GetAGeometricAttribute(in CATBSTR iAttribut,out  /*IDLRETVAL*/ CATIAParameter oAttributCke);
+
+};
+
+// Interface name : CATIAManufacturingFeature
+#pragma ID CATIAManufacturingFeature "DCE:c91bf750-5220-11d2-804700805fc75483"
+#pragma DUAL CATIAManufacturingFeature
+
+// VB object name : Constraint (Id used in Visual Basic)
+#pragma ID ManufacturingFeature "DCE:9ebe724a-6fe3-11d2-8dd7006094b92b60"
+#pragma ALIAS CATIAManufacturingFeature ManufacturingFeature
+
+
+#endif // CATIAManufacturingFeature_IDL
+

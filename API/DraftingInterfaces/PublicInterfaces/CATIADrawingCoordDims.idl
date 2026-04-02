@@ -1,0 +1,80 @@
+// COPYRIGHT DASSAULT SYSTEMES 2016
+#ifndef CATIADrawingCoordDims_IDL
+#define CATIADrawingCoordDims_IDL
+/*IDLREP*/
+
+#include "CATIACollection.idl"
+#include "CATIADrawingCoordDim.idl"
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+ /**
+  * A collection of all the drawing Coordinate Dimension currently managed by a
+  * drawing view of drawing sheet in a drawing document.
+  */
+interface CATIADrawingCoordDims : CATIACollection
+{
+  /**
+  * Removes a drawing CoordDim from the drawing CoordDims collection.
+  * @param iIndex
+  *   The index of the drawing CoordDim to remove from
+  *   the collection of drawing CoordDims.
+  *   As a numerics, this index is the rank of the drawing text
+  *   in the collection.
+  *   The index of the first drawing CoordDim in the collection is 1, and
+  *   the index of the last drawing CoordDim is Count.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing CoordDim 
+  * from the drawing CoordDim collection of the active view
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * MyView.CoordDims.<font color="red">Remove</font>(3)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Remove(in long iIndex);
+
+  /**
+  * Returns a drawing CoordDim using its index from the drawing CoordDims collection.
+  * @param iIndex
+  *   The index of the drawing CoordDim to retrieve from the collection of drawing CoordDims.
+  *   As a numerics, this index is the rank of the drawing CoordDim in the collection.
+  *   The index of the first drawing CoordDim in the collection is 1, and
+  *   the index of the last drawing CoordDim is Count.
+  * @return The retrieved drawing CoordDim
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisDrawingCoordDim</tt> the second drawing CoordDim,
+  * in the drawing CoordDim collection of the active view
+  * in the active sheet, in the active document supposed to be a drawing document.
+  * <pre>
+  * Dim MyView  As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * Dim ThisDrawingCoordDim As DrawingCoordDim
+  * Set ThisDrawingCoordDim = MyView.CoordDims.<font color="red">Item</font>(2)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Item(in long iIndex, out /*IDLRETVAL*/ CATIADrawingCoordDim oItem);
+
+};
+
+// Interface name : CATIADrawingCoordDims
+#pragma ID CATIADrawingCoordDims "DCE:6fb56155-93e7-4590-a4867e8f84230721"                                      
+#pragma DUAL CATIADrawingCoordDims
+
+// VB object name : DrawingCoordDims (Id used in Visual Basic)
+#pragma ID DrawingCoordDims "DCE:8a9b0f83-2e47-4ccc-afcbfadcc174c7e4"                                 
+#pragma ALIAS CATIADrawingCoordDims DrawingCoordDims
+
+#endif

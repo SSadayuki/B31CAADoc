@@ -1,0 +1,22 @@
+#
+BUILT_OBJECT_TYPE = LOAD MODULE
+#
+
+LINK_WITH =
+
+OS = SunOS
+LOCAL_LDFLAGS=-norunpath -z lazyload
+FORTRAN_LIBS=
+SUNMATH_LIBS=
+
+OS = intel_a
+BUILD=NO
+
+OS = win_a
+BUILD=NO
+
+OS = win_b
+BUILD=NO
+
+OS = win_b64
+BUILD=NO

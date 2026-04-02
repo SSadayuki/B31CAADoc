@@ -1,0 +1,250 @@
+#ifndef CATIAManufacturingMachinableArea_IDL
+#define CATIAManufacturingMachinableArea_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//
+// CATIAManufacturingMachinableArea:
+// Exposed interface for ManufacturingMachinableFeature
+//
+//=================================================================
+// Aug. 01 Creation                                        C.PETIT
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingMachinableFeat.idl"
+#include "CATIAManufacturingMachinableGeom.idl"
+#include "CATIAProduct.idl"
+
+/**
+ * Machinable Area in Manufacturing.
+ * It is a manufacturing feature pointing design features through one or
+ * several machinable geometry. This manufacturing feature could be a target
+ * for a manufacturing activity.
+ * @see CATIAManufacturingMachinableGeom, CATIAManufacturingActivity
+ */
+interface CATIAManufacturingMachinableArea : CATIAManufacturingMachinableFeat
+{
+
+#pragma PROPERTY Freezed
+//
+        /**
+         * Returns the manufacturing machinable area freezed state.
+         * @return oFreezed
+         *   The manufacturing machinable area freezed state
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>bFreezed</tt> the freezed state of
+         * manufacturing machinable area <tt>firstMachArea</tt>:
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim bFreezed As boolean
+         * Set bFreezed = firstMachArea.<font color="red">Freezed</font>
+         * </pre>
+         */
+    HRESULT get_Freezed ( out /*IDLRETVAL*/ boolean oFreezed );
+
+        /**
+         * Set the manufacturing machinable area freezed state.
+         * @param iFreezed
+         *   The manufacturing machinable area freezed state
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example set the freezed state of
+         * manufacturing machinable area <tt>firstMachArea</tt>:
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim bFreezed As boolean
+         * Set bFreezed = FALSE
+         * firstMachArea.<font color="red">Freezed</font> = bFreezed
+         * </pre>
+         */
+    HRESULT put_Freezed ( in                boolean iFreezed );
+
+#pragma PROPERTY VisibleInMfgView
+//
+        /**
+         * Returns the manufacturing machinable area visibility state.
+         * @return oVisibleInMfgView
+         *   The manufacturing machinable area visibility state
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>bVisibleInMfgView</tt> the visible state in
+         * the Manufacturing View of manufacturing machinable area <tt>firstMachArea</tt>:
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim bVisibleInMfgView As boolean
+         * Set bVisibleInMfgView = firstMachArea.<font color="red">VisibleInMfgView</font>
+         * </pre>
+         */
+    HRESULT get_VisibleInMfgView ( out /*IDLRETVAL*/ boolean oVisibleInMfgView );
+
+        /**
+         * Set the manufacturing machinable area visibility state.
+         * @param iVisibleInMfgView
+         *   The manufacturing machinable area visibility state
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example set the visible state in the Manufacturing View of
+         * manufacturing machinable area <tt>firstMachArea</tt>:
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim bVisibleInMfgView As boolean
+         * Set bVisibleInMfgView = FALSE
+         * firstMachArea.<font color="red">VisibleInMfgView</font> = bVisibleInMfgView
+         * </pre>
+         */
+    HRESULT put_VisibleInMfgView ( in                boolean iVisibleInMfgView );
+
+        /**
+         * Returns the machinable geometry list count.
+         * @param oMachinableGeometryCount
+         *   The number of machinable geometry connected to this feature
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the machinable geometry list count of 
+         * the manufacturing machinable area <tt>firstMachArea</tt> in <tt>MachinableGeometryListSize</tt>.
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim MachinableGeometryListSize As Long
+         * Set MachinableGeometryListSize = firstMachArea.<font color="red">MachinableGeometryCount</font>
+         * </pre>
+         * </dl>
+         */
+    HRESULT MachinableGeometryCount ( out /*IDLRETVAL*/ long oMachinableGeometryCount );
+
+        /**
+         * Retrieves the machinable geometry list.
+         * @param oListOfMachinableGeometry
+         *   The retrieved list.
+         *   <br>
+         *   The array must be previously initialized
+         *   using the @href #MachinableGeometryCount method.
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the machinable geometry list of 
+         * the manufacturing machinable area <tt>firstMachArea</tt> in <tt>MachinableGeometryList</tt>.
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim MachinableGeometryListSize As Long
+         * Set MachinableGeometryListSize = firstMachArea.MachinableGeometryCount
+         * If MachinableGeometryListSize > 0 Then
+         *   Dim MachinableGeometryList() As Variant
+         *   Redim MachinableGeometryList(MachinableGeometryListSize-1)
+         *   Call firstMachArea.<font color="red">ListMachinableGeometry</font>(MachinableGeometryList)
+         * End If
+         * </pre>
+         * </dl>
+         */
+    HRESULT ListMachinableGeometry ( inout CATSafeArrayVariant oListOfMachinableGeometry );
+
+        /**
+         * Adds a machinable geometry to the list.
+         * @param iMachinableGeometry
+         *   The machinable geometry to affect
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example adds the machinable geometry <tt>MachGeomToAdd</tt> to 
+         * the manufacturing machinable area <tt>firstMachArea</tt>.
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim MachGeomToAdd As ManufacturingMachinableGeometry
+         * Set MachGeomToAdd = ...
+         * Call firstMachArea.<font color="red">AddMachinableGeometry</font>( MachGeomToAdd )
+         * </pre>
+         * </dl>
+         */
+    HRESULT AddMachinableGeometry ( in CATIAManufacturingMachinableFeat iMachinableGeometry );
+
+        /**
+         * Removes a machinable geometry from the list.
+         * @param iMachinableGeometry
+         *   The machinable geometry to remove
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example removes the machinable geometry <tt>MachGeomToRemove</tt> to 
+         * the manufacturing machinable area <tt>firstMachArea</tt>.
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim MachGeomToRemove As ManufacturingMachinableGeometry
+         * Set MachGeomToRemove = ...
+         * Call firstMachArea.<font color="red">RemoveMachinableGeometry</font>( MachGeomToRemove )
+         * </pre>
+         * </dl>
+         */
+    HRESULT RemoveMachinableGeometry ( in CATIAManufacturingMachinableFeat iMachinableGeometry );
+
+        /**
+         * Returns the manufacturing activity connected list count.
+         * @param oManufacturingActivityConnectedCount
+         *   The number of manufacturing activity pointing this feature
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the manufacturing activity connected list count of 
+         * the manufacturing machinable area <tt>firstMachArea</tt> in <tt>ManufacturingActivityConnectedListSize</tt>.
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim ManufacturingActivityConnectedListSize As Long
+         * Set ManufacturingActivityConnectedListSize = firstMachArea.<font color="red">ManufacturingActivityConnectedCount</font>
+         * </pre>
+         * </dl>
+         */
+    HRESULT ManufacturingActivityConnectedCount ( out /*IDLRETVAL*/ long oManufacturingActivityConnectedCount );
+
+        /**
+         * Retrieves the manufacturing activity connected list.
+         * @param oListOfManufacturingActivityConnected
+         *   The retrieved list.
+         *   <br>
+         *   The array must be previously initialized
+         *   using the @href #ManufacturingActivityConnectedCount method.
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the manufacturing activity connected list of 
+         * the manufacturing machinable area <tt>firstMachArea</tt> in <tt>ManufacturingActivityConnectedList</tt>.
+         * <pre>
+         * Dim firstMachArea As ManufacturingMachinableArea
+         * Set firstMachArea = ...
+         * Dim ManufacturingActivityConnectedListSize As Long
+         * Set ManufacturingActivityConnectedListSize = firstMachArea.ManufacturingActivityConnectedCount
+         * If ManufacturingActivityConnectedListSize > 0 Then
+         *   Dim ManufacturingActivityConnectedList() As Variant
+         *   Redim ManufacturingActivityConnectedList(ManufacturingActivityConnectedListSize-1)
+         *   Call firstMachArea.<font color="red">ListManufacturingActivityConnected</font>(ManufacturingActivityConnectedList)
+         * End If
+         * </pre>
+         * </dl>
+         */
+    HRESULT ListManufacturingActivityConnected ( inout CATSafeArrayVariant oListOfManufacturingActivityConnected );
+
+};
+
+// Interface name : CATIAManufacturingMachinableArea
+#pragma ID CATIAManufacturingMachinableArea "DCE:109aa0e0-90a7-11d5-9f0f0002b31ea50f"
+#pragma DUAL CATIAManufacturingMachinableArea
+
+// VB object name : ManufacturingCompoundFeature (Id used in Visual Basic)
+#pragma ID ManufacturingMachinableArea "DCE:113b98dc-c24f-11d5-9f1c0002b31ea50f"
+#pragma ALIAS CATIAManufacturingMachinableArea ManufacturingMachinableArea
+
+#endif // CATIAManufacturingMachinableArea_IDL

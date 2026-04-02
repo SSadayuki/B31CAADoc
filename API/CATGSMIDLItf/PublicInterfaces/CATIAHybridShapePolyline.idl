@@ -1,0 +1,245 @@
+#ifndef CATIAHybridShapePolyline_IDL
+#define CATIAHybridShapePolyline_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//           
+// CATIAHybridShapePolyline:         
+// Exposed interface for HybridShape Polyline
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// June2002 Creation       
+//=================================================================
+
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+
+/**
+ * Represents the hybrid shape polyline curve object.
+ * <b>Role</b>: To access or set the data of the hybrid shape polyline object.
+ * This data includes:
+ * <ul>
+ * <li>Elements</li>
+ * <li>Radius</li>
+ * <li>Closure</li>
+ * </ul>
+ * <p>Use the @href CATIAHybridShapeFactory object to create a HybridShapePolyline object.
+ */
+
+//-----------------------------------------------------------------
+
+interface CATIAHybridShapePolyline : CATIAHybridShape
+{
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+ *							Properties
+ *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+ */
+
+/*----------------------------------------------------------------
+ *							NumberOfElements Property
+ *----------------------------------------------------------------
+ */ 
+
+/**
+  * Returns the number of elements of the polyline.
+  *   @param NumberOfElements
+  *     Number of elements in the polyline.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the number of elements in the polyline
+  * of the <code>HybShpPolyline</code> hybrid shape polyline.
+  * <pre>
+  * Dim HybShpPolNoOfEle As  long
+  * HybShpPolNoOfEle = HybShpPolyline.<font color="red">NumberOfElements</font>
+  * </pre>
+  * </dl>
+  */
+
+#pragma PROPERTY NumberOfElements
+
+  HRESULT get_NumberOfElements  (out /*IDLRETVAL*/ long  oNoOfElements); 
+    
+/*----------------------------------------------------------------
+ *							Closure Property
+ *----------------------------------------------------------------
+ */
+
+/**
+  * Returns or sets the flag to decide closure of the polyline.
+  *   @param Closure (For get_Closure)
+  *     Returns  or sets the closure property
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the closure property of the polyline
+  * of the <code>HybShpPolyline</code> hybrid shape polyline.
+  * <pre>
+  * Dim HybShpPolClosure As  boolean
+  * HybShpPolClosure = HybShpPolyline.<font color="red">Closure</font>
+  * </pre>
+  * </dl>
+  */
+
+#pragma PROPERTY Closure
+
+  HRESULT get_Closure (out  /*IDLRETVAL*/ boolean oClosure); 
+  HRESULT put_Closure (in                 boolean iClosure);
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+ *							Methods
+ *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+ */
+
+/*----------------------------------------------------------------
+ *							InsertElement Method
+ *----------------------------------------------------------------
+ */
+
+/**
+  * Inserts the element at a specified position in the polyline.
+  *   @param iPoint 
+  *     Reference of the point object to be inserted.
+  *   @param iPosition
+  *     Position at which the element should be inserted.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example inserts the element in the polyline
+  * of the <code>HybShpPolyline</code> hybrid shape polyline.
+  * <pre>
+  * HybShpPolyline.<font color="red">InsertElement PointReference,1 </font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT InsertElement (in CATIAReference  iPoint, in  long  iPosition);
+
+/*----------------------------------------------------------------
+ *							ReplaceElement Method
+ *----------------------------------------------------------------
+ */
+
+/**
+  * Replaces the element at a specified position in the polyline.
+  *   @param iPoint 
+  *     Reference of the point object that will replace the old element.
+  *   @param iPosition
+  *     Position at which the element should be inserted.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example replaces the element in the polyline
+  * of the <code>HybShpPolyline</code> hybrid shape polyline.
+  * <pre>
+  * HybShpPolyline.<font color="red">ReplaceElement PointReference, 1 </font>
+  * </pre>
+  * </dl>
+  */
+
+	HRESULT ReplaceElement  (in CATIAReference  iPoint, in  long  iPosition);
+
+/*----------------------------------------------------------------
+ *							RemoveElement Method
+ *----------------------------------------------------------------
+ */
+
+/**
+  * Removes the element at a specified position in the polyline.
+  *   @param iPosition 
+  *     Position from which the element should be should be removed.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example removes the element in the polyline
+  * of the <code>HybShpPolyline</code> hybrid shape polyline.
+  * <pre>
+  * HybShpPolyline.<font color="red">RemoveElement 1 </font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT RemoveElement (in long  iPosition);
+
+/*----------------------------------------------------------------
+ *							SetRadius Method
+ *----------------------------------------------------------------
+ */    
+
+/**
+  * Sets the radius at specified position of the polyline.
+  *   @param iPosition
+  *     Position at which radius should be set 
+  *   @param iRadius 
+  *     Value of the radius to be set.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the radius at the specific position of the polyline
+  * of the <code>HybShpPolyline</code> hybrid shape polyline.
+  * <pre>
+  * HybShpPolyline.<font color="red">SetRadius 1, 10</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT SetRadius (in long  iPosition,  in  double  iRadius);
+
+/*----------------------------------------------------------------
+ *							GetElement Method
+ *----------------------------------------------------------------
+ */
+
+/**
+  * Returns the element of the polyline.
+  *   @param iPosition
+  *     Position at which the element is to be retrieved.
+  *   @param oElement
+  *     Reference to the element.
+  *   @param ioRadius
+  *     Length to the radius.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the element and radius of the polyline
+  * at specified position of the <code>HybShpPolyline</code> hybrid shape polyline.
+  * <pre>
+  * Dim HybShpPolylineElement As Reference
+  * Dim HybShpPolylineRadius As Reference
+  * HybShpPolyline.<font color="red">GetElement 1, HybShpPolylineElement,HybShpPolylineRadius</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT GetElement  (in long  iPosition,  out CATIAReference  oElement, out CATIALength oRadius);
+	
+};
+
+// Interface name : CATIAHybridShapePolyline
+
+#pragma ID CATIAHybridShapePolyline "DCE:3d239be8-8513-11d6-81be00065bdcb61f"
+#pragma DUAL CATIAHybridShapePolyline
+
+// VB object name : HybridShapePolyline (Id used in Visual Basic)
+
+#pragma ID HybridShapePolyline "DCE:47ba6da2-8513-11d6-81be00065bdcb61f"
+#pragma ALIAS CATIAHybridShapePolyline HybridShapePolyline
+
+#endif
+
+// CATIAHybridShapePolyline_IDL

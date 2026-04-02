@@ -1,0 +1,7 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH=JS0GROUP CATObjectSpecsModeler CATAssemblyInterfaces AS0SEL CATConstraintModeler CATPDMBaseItfCPP AD0XXBAS CATConstraintModelerItf \
+CATMechanicalModeler \
+CATMecModInterfaces \
+MF0DimInt
+

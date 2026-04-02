@@ -1,0 +1,192 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAIKManager_IDL
+#define SWKIAIKManager_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//    get_Manikin
+//    AddConstraint
+//    get_NumberOfConstraints
+//    GetConstraint
+//    AddConstraintFrom
+//    RemoveConstraint
+//    RemoveAllConstraints
+//    Resolve
+//    get_Behavior
+//    put_Behavior
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 13/02/01
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- System
+#include "CATIABase.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIAManikin;
+interface SWKIAIKConstraint;
+interface SWKIABodyElement;
+
+
+/**
+  * This interface represents the IK manager of the manikin.
+  * The methods on this interface allow to move the manikin in
+  * inverse kinematics.
+  **/
+interface SWKIAIKManager : CATIABase
+{
+ // ===========================================================================
+ //  get_Manikin
+ //  -----------
+ //
+    /**
+      * Returns the manikin which owns this IK manager.
+      **/
+#pragma PROPERTY Manikin
+    HRESULT get_Manikin(out /*IDLRETVAL*/ SWKIAManikin poManikin);
+
+
+ // ===========================================================================
+ //  AddConstraint
+ //  -------------
+ //
+    /**
+      * Add a constraint with the given end effector.
+      *
+      * @param piEndEffector The short name of the last segment
+      * (the end of the chain, i.e. the end effector).
+      *
+      * @param poConstraint The constraint created.
+      **/
+    HRESULT AddConstraint(in CATBSTR piEndEffector,
+                          out /*IDLRETVAL*/ SWKIAIKConstraint poConstraint);
+
+
+ // ===========================================================================
+ //  get_NumberOfConstraints
+ //  -----------------------
+ //
+    /**
+      * Returns the total number of constraints on the manikin.
+      **/
+#pragma PROPERTY NumberOfConstraints
+    HRESULT get_NumberOfConstraints(out /*IDLRETVAL*/ long poNumberOfConstraints);
+
+
+ // ===========================================================================
+ //  GetConstraint
+ //  --------------
+ //
+    /**
+      * Returns the constraint at index piIndex.
+      * First element is at index <code>0</code>.
+      **/
+    HRESULT GetConstraint(in long piIndex, out /*IDLRETVAL*/ SWKIAIKConstraint poConstraint);
+
+ // ===========================================================================
+ //  AddConstraintFrom
+ //  ----------------
+ //
+    /**
+      * Add a new constraint identical to the one given.
+      *
+      * @param piConstraintFrom The constraint to copy.
+      * @param poCreatedConstraint The new constraint
+      **/
+    HRESULT AddConstraintFrom(in SWKIAIKConstraint piConstraintFrom,
+                              inout SWKIAIKConstraint poCreatedConstraint);
+
+
+ // ===========================================================================
+ //  RemoveConstraint
+ //  ----------------
+ //
+    /**
+      * Remove the given constraint.
+      *
+      * @param piConstraintToRemove The constraint to remove.
+      **/
+    HRESULT RemoveConstraint(in SWKIAIKConstraint piConstraintToRemove);
+
+
+ // ===========================================================================
+ //  RemoveAllConstraints
+ //  --------------------
+ //
+    /**
+      * Remove all existing constraints on the manikin.
+      **/
+    HRESULT RemoveAllConstraints();
+
+
+ // ===========================================================================
+ //  Resolve
+ //  -------
+ //
+    /**
+      * Launch the IK solver to minimize the potential functions of <br>
+      * the constraints (i&#x2e;e&#x2e; reach all defined targets). <br>
+      * Will resolve the constraints for this manikin only.
+      **/
+    HRESULT Resolve();
+
+ // ===========================================================================
+ //  get_Behavior
+ //  put_Behavior
+ //  ------------
+ //
+    /**
+      * Returns or sets the IK behaviors for this manikin.
+      *
+      * The string in this property is the concatenation of the
+      * current IK behaviors, like
+      * "<font color=green>Thoracic/Lumbar/Balance</font>".
+      **/
+
+#pragma PROPERTY Behavior
+    HRESULT get_Behavior(inout /*IDLRETVAL*/ CATBSTR pioBehavior);
+    HRESULT put_Behavior(in CATBSTR piBehavior);
+};
+
+
+// Interface name : SWKIAIKManager
+#pragma ID SWKIAIKManager "DCE:d71f69e0-01c4-11d5-aab40050043e955d"
+#pragma DUAL SWKIAIKManager
+
+// VB object name : SWIKManager (Id used in Visual Basic)
+#pragma ID SWKIKManager "DCE:db7f9fd0-01c5-11d5-aab40050043e955d"
+#pragma ALIAS SWKIAIKManager SWKIKManager
+
+#endif

@@ -1,0 +1,44 @@
+#ifndef CATIADatumSimple_IDL
+#define CATIADatumSimple_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIAAnnotations;
+
+/**
+ * Interface for Simple Datum TPS (datum entity).
+ * TPS for Technological Product Specifications.
+ */
+interface CATIADatumSimple : CATIABase
+{
+    /**
+     * Retrieves or sets Label.
+     */
+  #pragma PROPERTY Label
+   HRESULT get_Label (inout /*IDLRETVAL*/ CATBSTR oLabel);
+   HRESULT put_Label (in CATBSTR iLabel);
+
+    /**
+     * Retrieves a CATITPSList to read the list of datum target.
+     * All objects of the list adhere to CATITPSDatumTarget.
+     */
+  #pragma PROPERTY Targets
+    HRESULT get_Targets ( out /*IDLRETVAL*/ CATIAAnnotations oTargets );
+};
+
+// Interface name : CATIADatumSimple
+#pragma ID CATIADatumSimple "DCE:7371564c-2f87-11d6-be8a0002b341dd3a"
+#pragma DUAL CATIADatumSimple
+
+// VB object name : DatumSimple (Id used in Visual Basic)
+#pragma ID DatumSimple "DCE:7371564d-2f87-11d6-be8a0002b341dd3a"
+#pragma ALIAS CATIADatumSimple DatumSimple
+
+#endif

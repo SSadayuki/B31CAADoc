@@ -1,0 +1,333 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>MecModInterfaces CATIMfBRepFactory Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../MecModInterfaces.htm" href="../MecModInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "MecModInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIMfBRepFactory"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>MecModInterfaces Framework:  CATIMfBRepFactory Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIMfBRepFactory_29784','CATIMfBRepFactory','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIMfBRepFactory</b>
+</p>
+<p>
+<b><i> Interface to create BRep features.</i></b><br>
+
+ <b>Role</b>:
+ A BRep feature can be created from symbolic information:
+ the source shape feature <tt>iPrint</tt>, 
+ a key word <tt>iKey</tt> and, if needed, 
+ a profile element <tt>iProfileElement</tt> of a sketch.
+ <br>For example, the face BRep feature associated with the lateral face of Pad.3 
+ extruded from Line.7 is created with 
+ <tt>iPrint=Pad.3</tt>, 
+ <tt>iKey=MfKeyExtrudedFrom</tt>,
+ <tt>iProfileElement=Line.7</tt>.
+ <br>Another example, the face BRep feature associated with the top face of Pad.6 is created with
+ <tt>iPrint=Pad.6</tt>,
+ <tt>iKey=MfKeyTop</tt>,
+ <tt>iProfileElement=NULL_var</tt>.
+ <br>The edge BRep feature is specified with symbolic information related to its two adjacent faces.
+ <br>The vertex BRep feature is specified with symbolic information related to all its adjacent faces.
+ <br><b>Legal values</b>: Key words are:
+ <ul><li><tt>MfKeyNone</tt>,
+ <li><tt>MfKeyTop</tt> available for pad, pocket, rib, slot, stiffener,
+ <li><tt>MfKeyBottom</tt> available for pad, pocket, rib, slot, stiffener,
+ <li><tt>MfKeyExtrudedFrom</tt> available for pad, pocket, rib, slot, stiffener, shaft, groove,
+ <li><tt>MfKeyStart</tt> available for shaft, groove,
+ <li><tt>MfKeyEnd</tt> available for shaft, groove,
+ <li><tt>MfKeyOutsideThickness</tt> available for shell,
+ <li><tt>MfKeyInsideThickness</tt> available for shell.</ul>
+ <dl  class='desclist'>
+  <dt class='example'><b> Example: </b></dt>
+  <dd> <pre class="code"> <pre>
+ +-----------+-----------------------------------------------------------+
+ ! Output    !                       Input                               !   
+ +-----------+-----------------+------------------------+----------------+
+ ! BRep type ! print           ! key                    !  profil        !   
+ +===========+=================+========================+================+
+ ! Face      ! Pad.1           ! MfKeyTop               !  NULL          !  
+ !           +-----------------+------------------------+----------------+
+ !           ! Pad.1           ! MfKeyTop               !  NULL          !  
+ !           +-----------------+------------------------+----------------+
+ !           ! Pad.1           ! MfKeyExtrudedFrom      !  Line.1        !
+ !           +-----------------+------------------------+----------------+
+ !           ! Revol.1         ! MfKeyExtrudedFrom      !  Line.1        !
+ !           +-----------------+------------------------+----------------+
+ !           ! Revol.1         ! MfKeyEnd               !  Line.1        !
+ !           +-----------------+------------------------+----------------+
+ !           ! Revol.1         ! MfKeyStart             !  Line.1        !
+ !           +-----------------+------------------------+----------------+
+ !           ! Sweep.1         ! MfKeyExtrudedFrom      !  Line.1        !
+ !           ! Sweep.1         ! MfKeyExtrudedFrom      !  Line.2        !
+ !           +-----------------+------------------------+----------------+   
+ !           ! Fillet.1        ! MfKeyNone              !  NULL          !
+ !           ! Edge.1          ! MfKeyNone              !  NULL          !
+ !           +-----------------+------------------------+----------------+
+ !           ! Draft.1         ! MfKeyNone              !  NULL          !
+ !           ! Face.1          ! MfKeyNone              !  NULL          !
+ !           +-----------------+------------------------+----------------+
+ !           ! Fillet.1        ! MfKeyNone              !  NULL          !
+ !           ! Face.1          ! MfKeyNone              !  NULL          !
+ !           ! Face.2          ! MfKeyNone              !  NULL          !
+ !           +-----------------+------------------------+----------------+
+ !           ! Fillet.1        ! MfKeyNone              !  NULL          !
+ !           ! Face.1          ! MfKeyNone              !  NULL          !
+ !           ! Face.2          ! MfKeyNone              !  NULL          !
+ !           ! FaceToRemove.3  ! MfKeyNone              !  NULL          !
+ !           +-----------------+------------------------+----------------+         
+ !           ! Shell.1         ! MfKeyNone              !  NULL          !
+ !           ! face.1          ! MfKeyInsideThickness   !  NULL          !
+ !           +-----------------+------------------------+----------------+
+ !           ! Shell.1         ! MfKeyNone              !  NULL          !
+ !           ! face.1          ! MfKeyOutsideThickness  !  NULL          !
+ +-----------+-----------------+------------------------+----------------+
+ ! Edge      ! Pad.1           ! MfKeyTop               !  NULL          !  
+ !           ! Pad.1           ! MfKeyExtrudedFrom      !  Line.1        !  
+ !           +-----------------+------------------------+----------------+
+ !           ! Pad.1           ! MfKeyBottom            !  NULL          !  
+ !           ! Pad.2           ! MfKeyExtrudedFrom      !  Line.3        !  
+ +-----------+-----------------+------------------------+----------------+
+ ! Vertex    ! Pad.1           ! MfKeyTop               !  NULL          !  
+ !           ! Pad.1           ! MfKeyExtrudedFrom      !  Line.3        !  
+ !           ! Pad.1           ! MfKeyExtrudedFrom      !  Line.4        !  
+ !           +-----------------+------------------------+----------------+
+ !           ! Pad.1           ! MfKeyTop               !  NULL          !  
+ !           ! Pad.2           ! MfKeyBottom            !  NULL          !  
+ !           ! Pad.3           ! MfKeyExtrudedFrom      !  Line.4        !  
+ +-----------+-----------------+------------------------+----------------+
+ </pre>
+ 
+ </pre></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIFeaturize','','CATIFeaturize') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CreateMfFBRep(CATLISTV(CATISpecObject_var)&amp;,CATListOfCATUnicodeString&amp;,CATLISTV(CATISpecObject_var)&amp;,CATISpecObject_var&amp;,CATIContainer_var&amp;)"><b>CreateMfFBRep</b></a>(CATLISTV(CATISpecObject_var)&amp;,CATListOfCATUnicodeString&amp;,CATLISTV(CATISpecObject_var)&amp;,CATISpecObject_var&amp;,CATIContainer_var&amp;)
+</td><td id='tdright'>  Creates a face, edge or vertex functional BRep feature from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CreateMfIntersectionEdge(CATIBRepAccess_var&amp;,CATMfFeaturizeMode,CATBaseUnknown_var&amp;)"><b>CreateMfIntersectionEdge</b></a>(CATIBRepAccess_var&amp;,CATMfFeaturizeMode,CATBaseUnknown_var&amp;)
+</td><td id='tdright'>  Creates an intersection edge BRep Feature.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CreateMfPointOnEdge(CATISpecObject_var&amp;,double,CATIContainer_var&amp;)"><b>CreateMfPointOnEdge</b></a>(CATISpecObject_var&amp;,double,CATIContainer_var&amp;)
+</td><td id='tdright'>  Creates a point on edge BRep feature.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CreateMfPointOnEdge(CATISpecObject_var&amp;,CATMathPoint&amp;,CATIContainer_var&amp;)"><b>CreateMfPointOnEdge</b></a>(CATISpecObject_var&amp;,CATMathPoint&amp;,CATIContainer_var&amp;)
+</td><td id='tdright'>  Creates a point on edge BRep feature.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CreateMfRBRep(CATLISTV(CATISpecObject_var)&amp;,CATListOfCATUnicodeString&amp;,CATLISTV(CATISpecObject_var)&amp;,CATISpecObject_var&amp;,CATIContainer_var&amp;)"><b>CreateMfRBRep</b></a>(CATLISTV(CATISpecObject_var)&amp;,CATListOfCATUnicodeString&amp;,CATLISTV(CATISpecObject_var)&amp;,CATISpecObject_var&amp;,CATIContainer_var&amp;)
+</td><td id='tdright'>  Creates a face, edge or vertex relimited BRep feature from symbolic information.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CreateMfFBRep"></a><a id="CreateMfFBRep(CATLISTV(CATISpecObject_var)&amp;,CATListOfCATUnicodeString&amp;,CATLISTV(CATISpecObject_var)&amp;,CATISpecObject_var&amp;,CATIContainer_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIMfBRep','CATIMfBRep_var')</script>  <span class='objname'>CreateMfFBRep</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>iPrint</span>,<script type="text/javascript"> activateLink('CATListOfCATUnicodeString','CATListOfCATUnicodeString&amp;')</script> <span class='param'>iKeys</span>,<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>iProfileElements</span>, const <script type="text/javascript"> activateLink('CATISpecObject_var','CATISpecObject_var&amp;')</script> <span class='param'>iSupport</span>, const <script type="text/javascript"> activateLink('CATIContainer_var','CATIContainer_var&amp;')</script> <span class='param'>iWorkCont</span><span class='param'>=NULL_var</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a face, edge or vertex functional BRep feature from symbolic information.
+ <br><b>Note:</b>The three first list must have the same size.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPrint</span></dt>
+   <dd> List of source shape features.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKeys</span></dt>
+   <dd> List of key words.
+ <br><b>Legal values</b>:
+ <tt>MfKeyTop</tt>, <tt>MfKeyBottom</tt>, <tt>MfKeyStart</tt>, <tt>MfKeyEnd</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElements</span></dt>
+   <dd> List of profile elements.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSupport</span></dt>
+   <dd> Support.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iWorkCont</span></dt>
+   <dd> BRep feature is created in <tt>iWorkCont</tt> container.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CreateMfIntersectionEdge"></a><a id="CreateMfIntersectionEdge(CATIBRepAccess_var&amp;,CATMfFeaturizeMode,CATBaseUnknown_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIMfBRep','CATIMfBRep_var')</script>  <span class='objname'>CreateMfIntersectionEdge</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIBRepAccess_var','CATIBRepAccess_var&amp;')</script> <span class='param'>iSelectingObject</span>, const <script type="text/javascript"> activateLink('CATMfFeaturizeMode','CATMfFeaturizeMode')</script> <span class='param'>imode</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>isupport</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates an intersection edge BRep Feature.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSelectingObject</span></dt>
+   <dd> The possible values are: <ul>
+ <li> NULL_var for an empty intersection edge which afterwards must be set with appropriate attributes using 
+<script type="text/javascript"> activateLinkAnchor('CATIMfIntersectionEdge','','CATIMfIntersectionEdge') </script> services.</li> <li> a selecting object corresponding to an edge, and this kind of creation is then equivalent to 
+<script type="text/javascript"> activateLinkAnchor('CATIFeaturize','FeaturizeR','CATIFeaturize.FeaturizeR') </script>.</li></ul> 
+ </ dd>
+    <dt><span class='paramitem'> imode</span></dt>
+   <dd> Featurization mode, which should be, at least:<ul>
+ <li><tt>MfFeaturizeIntersection</tt></li>
+ <li><tt>MfFeaturizeC1Intersection</tt></li> 
+ <li><tt>MfFeaturizeC1Intersection|MfFeaturizeSubElement</tt></li></ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> isupport</span></dt>
+   <dd> The explicit support, e.g. the feature of resolution
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The 
+<script type="text/javascript"> activateLinkAnchor('CATIMfIntersectionEdge','','CATIMfIntersectionEdge') </script> BRep Feature.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CreateMfPointOnEdge"></a><a id="CreateMfPointOnEdge(CATISpecObject_var&amp;,double,CATIContainer_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIMfPointOnEdge','CATIMfPointOnEdge_var')</script>  <span class='objname'>CreateMfPointOnEdge</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATISpecObject_var','CATISpecObject_var&amp;')</script> <span class='param'>iEdge</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iRatio</span>, const <script type="text/javascript"> activateLink('CATIContainer_var','CATIContainer_var&amp;')</script> <span class='param'>iWorkCont</span><span class='param'>=NULL_var</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a point on edge BRep feature.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdge</span></dt>
+   <dd> Edge BRep feature.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRatio</span></dt>
+   <dd> Ratio.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iWorkCont</span></dt>
+   <dd> BRep feature is created in <tt>iWorkCont</tt> container.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CreateMfPointOnEdge"></a><a id="CreateMfPointOnEdge(CATISpecObject_var&amp;,CATMathPoint&amp;,CATIContainer_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIMfPointOnEdge','CATIMfPointOnEdge_var')</script>  <span class='objname'>CreateMfPointOnEdge</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATISpecObject_var','CATISpecObject_var&amp;')</script> <span class='param'>iEdge</span>, const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iPoint</span>, const <script type="text/javascript"> activateLink('CATIContainer_var','CATIContainer_var&amp;')</script> <span class='param'>iWorkCont</span><span class='param'>=NULL_var</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a point on edge BRep feature.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdge</span></dt>
+   <dd> Edge BRep feature.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPoint</span></dt>
+   <dd> Point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iWorkCont</span></dt>
+   <dd> BRep feature is created in <tt>iWorkCont</tt> container.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CreateMfRBRep"></a><a id="CreateMfRBRep(CATLISTV(CATISpecObject_var)&amp;,CATListOfCATUnicodeString&amp;,CATLISTV(CATISpecObject_var)&amp;,CATISpecObject_var&amp;,CATIContainer_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIMfBRep','CATIMfBRep_var')</script>  <span class='objname'>CreateMfRBRep</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>iPrint</span>,<script type="text/javascript"> activateLink('CATListOfCATUnicodeString','CATListOfCATUnicodeString&amp;')</script> <span class='param'>iKeys</span>,<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>iElementsDeProfil</span>, const <script type="text/javascript"> activateLink('CATISpecObject_var','CATISpecObject_var&amp;')</script> <span class='param'>iSupport</span>, const <script type="text/javascript"> activateLink('CATIContainer_var','CATIContainer_var&amp;')</script> <span class='param'>iWorkCont</span><span class='param'>=NULL_var</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a face, edge or vertex relimited BRep feature from symbolic information.
+ <br><b>Note:</b>The three first list must have the same size.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPrint</span></dt>
+   <dd> List of source shape features.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKeys</span></dt>
+   <dd> List of key words.
+ <br><b>Legal values</b>:
+ <tt>MfKeyTop</tt>, <tt>MfKeyBottom</tt>, <tt>MfKeyStart</tt>, <tt>MfKeyEnd</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iElementsDeProfil</span></dt>
+   <dd> List of profile elements.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSupport</span></dt>
+   <dd> Support.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iWorkCont</span></dt>
+   <dd> BRep feature is created in <tt>iWorkCont</tt> container.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIMfBRepFactory.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATMecModInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

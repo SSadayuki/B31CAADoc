@@ -1,0 +1,113 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIADrawingTables_IDL
+#define CATIADrawingTables_IDL
+/*IDLREP*/
+
+#include "CATIADrawingTable.idl"
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+ /**
+  * A collection of all the drawing tables currently managed by a
+  * drawing view of drawing sheet in a drawing document.
+  */
+interface CATIADrawingTables : CATIACollection 
+{
+
+ /**
+  * Creates a drawing table and adds it to the DrawingTables collection.
+  * @param iPositionX,iPositionY
+  *   The drawing table x and y coordinates, expressed in millimeters,
+  *   with respect to the drawing view coordinate system
+  * @param iNumberOfRow,iNumberOfColumn
+  *   The drawing table number of rows and columns
+  * @param iRowHeight,iColumnWidth
+  *   The row height and the column width
+  * @return The created drawing table
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates an empty drawing table
+  * and retrieves it in <tt>MyTable</tt> in the drawing table collection of
+  * the active view <tt>MyView</tt> of the drawing sheet <tt>MySheet<tt>.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView = MySheet.Views.<font color="red">ActiveView</font>
+  * Dim MyTable As DrawingTable
+  * Set MyTable = MyView.Tables.<font color="red">Add</font>(100., 100., 2, 2, 20., 50.)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Add(in double iPositionX, in double iPositionY,
+			  in long iNumberOfRow , in long iNumberOfColumn,
+			  in double iRowHeight, in double iColumnWidth,
+			  out /*IDLRETVAL*/ CATIADrawingTable oNewDrawingTable);
+
+ /**
+  * Removes a drawing table from the DrawingTables collection.
+  * @param iIndex
+  *   The index of the drawing table to remove from
+  *   the collection of drawing tables.
+  *   As a numerics, this index is the rank of the drawing table
+  *   in the collection.
+  *   The index of the first drawing table in the collection is 1, and
+  *   the index of the last drawing table is Count.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing table
+  * in the drawing table collection of the active view
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView  = MySheet.Views.<font color="red">ActiveView</font>
+  * MyView.DrawingTables.<font color="red">Remove</font>(3)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Remove(in long iIndex);
+
+ /**
+  * Returns a drawing table using its index from the DrawingTables collection.
+  * @param iIndex
+  *   The index of the drawing table to retrieve from the collection of drawing tables.
+  *   As a numerics, this index is the rank of the drawing table in the collection.
+  *   The index of the first drawing table in the collection is 1, and
+  *   the index of the last drawing table is Count.
+  * @return The retrieved drawing table
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisDrawingTable</tt> the second drawing table,
+  * in the drawing view collection of the active view
+  * in the active sheet, in the active document supposed to be a drawing document.
+  * <pre>
+  * Dim MyView  As DrawingView
+  * Set MyView  = MySheet.Views.<font color="red">ActiveView</font>
+  * Dim ThisDrawingTable As DrawingTable
+  * Set ThisDrawingTable = MyView.Tables.<font color="red">Item</font>(2)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Item(in long iIndex, out /*IDLRETVAL*/ CATIADrawingTable oItem);
+
+};
+
+// Interface name : CATIADrawingTables
+#pragma ID CATIADrawingTables "DCE:a41a6810-7772-11d5-ab51001083fff45a"
+#pragma DUAL CATIADrawingTables
+
+// VB object name : DrawingTables (Id used in Visual Basic)
+#pragma ID DrawingTables "DCE:a41a6811-7772-11d5-ab51001083fff45a"
+#pragma ALIAS CATIADrawingTables DrawingTables
+
+#endif
+

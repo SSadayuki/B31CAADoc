@@ -1,0 +1,151 @@
+#ifndef CATIAStrMemberExtremity_IDL
+#define CATIAStrMemberExtremity_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIAStructuralObject
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+//
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 09/12/97
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIADocument;
+interface CATIAParameter;
+interface CATIAReference;
+interface CATIAStrCutback;
+
+#include "CATIAStrObject.idl"
+#include "CATSafeArray.idl"
+#include "CATIAStrServices.idl"
+#include "CATIAHybridShapePoint.idl"
+
+        /**
+         * Represents an extremity of a member object.
+         * One is called the start extremity and the other the end extremity.
+         */
+
+interface CATIAStrMemberExtremity : CATIABase
+{
+
+	/**
+	* Returns the point defining the extremity. This point belongs 
+	* to the support object.
+	*/
+
+#pragma PROPERTY Point
+
+	HRESULT get_Point(out /*IDLRETVAL*/ CATIAHybridShapePoint oPoint);
+
+	/**
+	* Returns or sets the input object defining the extremity.
+	* 
+	* The input object may not belong to the support object.
+	*/
+
+#pragma PROPERTY Input
+
+	HRESULT get_Input(out /*IDLRETVAL*/ CATIAReference oOutput);
+
+	HRESULT put_Input(in CATIAReference iInput);
+
+	/**
+	* Returns the cutback object. 
+	*/
+
+#pragma PROPERTY Cutback
+
+	HRESULT get_Cutback(out /*IDLRETVAL*/ CATIAStrCutback oOutput);
+
+	/**
+	* Returns the offset parameter defined on this extremity. 
+	* This parameter can be null. 
+	*/
+
+#pragma PROPERTY Offset
+
+	HRESULT get_Offset(out /*IDLRETVAL*/ CATIAParameter oParameter);
+
+	/**
+	* Adds an offset on the extremity.
+	* This method has to be used when the extremity has no offset already defined,
+	* else you will get an error.
+	*/
+
+	HRESULT AddOffset(in double iOffset);
+
+	/** 
+	* Resets the defined cutback object.
+	*/
+
+	HRESULT ResetCutback();
+
+	/** 
+	* Modifies the coordinates of the extremity defined by a point.
+	*
+	* @param iCoordinates
+	*	The coordinates to modify the extremity 
+	*/ 
+
+	HRESULT SetExtremityFromCoordinates(in CATSafeArrayVariant iCoordinates);
+
+	/** 
+	* Returns the angle cut for a member extremity.
+	*
+	*/
+
+#pragma PROPERTY AngleCut
+
+	HRESULT get_AngleCut(out /*IDLRETVAL*/ double oAngleCut);
+  
+	/** 
+	* Retrieves the coordinates of the extremity.
+	*
+	* @param oCoordinates
+	*	The coordinates of the the extremity 
+	*/ 
+
+	HRESULT GetCoordinates(inout CATSafeArrayVariant oCoordinates);
+
+};
+
+#pragma ID CATIAStrMemberExtremity "DCE:2f16b828-9055-11d4-94c200108379318c"
+#pragma DUAL CATIAStrMemberExtremity
+
+#pragma ID StrMemberExtremity "DCE:303bf966-9055-11d4-94c200108379318c"
+#pragma ALIAS CATIAStrMemberExtremity StrMemberExtremity
+
+#endif

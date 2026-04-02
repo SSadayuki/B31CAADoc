@@ -1,0 +1,113 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAAnnotatedViews.idl
+//   This automation interface allows to manage a AnnotatedView collection.
+//
+//===================================================================
+//
+//  Jul 2000  Creation: LJE
+//
+//===================================================================
+#ifndef CATIAAnnotatedViews_IDL
+#define CATIAAnnotatedViews_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIAAnnotatedView.idl"
+#include "CATIAViewpoint3D.idl"
+#include "CATVariant.idl"
+
+/**  
+ * A collection of AnnotatedView objects.
+ * <p>The method @href CATIAProduct#GetTechnologicalObject <tt>("AnnotatedViews")</tt> on the root product retrieves this collection.
+ */
+interface CATIAAnnotatedViews : CATIACollection
+{
+  /**
+   * Creates an annotated view using the current viewpoint and adds it to the AnnotatedView collection.
+   * @return
+   *    The created AnnotatedView
+   * @sample
+   *    This example creates a new AnnotatedView in the <tt>TheAnnotatedViews</tt> collection.
+   *    <pre>
+   *    Dim NewAnnotatedView As AnnotatedView
+   *    Set NewAnnotatedView = TheAnnotatedViews.<font color="red">Add</font>
+   *    </pre>
+   */
+  HRESULT Add(out /*IDLRETVAL*/ CATIAAnnotatedView oAnnotatedView);
+
+  /**
+   * Creates an annotated view using a given viewpoint and adds it to the AnnotatedView collection.
+   * @param iViewpoint
+   *    The viewpoint.
+   * @return
+   *    The created AnnotatedView
+   * @sample
+   *    This example creates a new AnnotatedView in the <tt>TheAnnotatedViews</tt> collection using a 
+   *    <tt>AViewpoint</tt> viewpoint object.
+   *    <pre>
+   *    Dim NewAnnotatedView As AnnotatedView
+   *    Set NewAnnotatedView = TheAnnotatedViews.<font color="red">AddFromViewpoint</font>(AViewpoint)
+   *    </pre>
+   */
+  HRESULT AddFromViewpoint(in CATIAViewpoint3D iViewpoint, out /*IDLRETVAL*/ CATIAAnnotatedView oAnnotatedView);
+
+  /**
+   * Returns an annotated view using its index or its name from the AnnotatedViews collection.
+   * @param iIndex
+   *    The index or the name of the AnnotatedView to retrieve from the collection of AnnotatedViews.
+   *    As a numerics, this index is the rank of the AnnotatedView in the collection.
+   *    The index of the first AnnotatedView in the collection is 1, and
+   *    the index of the last AnnotatedView is Count.
+   *    As a string, it is the name you assigned to the AnnotatedView.
+   * @return
+   *    The retrieved AnnotatedView
+   * @sample
+   *    This example retrieves in <tt>ThisAnnotatedView</tt> the ninth AnnotatedView,
+   *    and in <tt>ThatAnnotatedView</tt> the AnnotatedView named
+   *    <tt>AnnotatedView3</tt> from the <tt>TheAnnotatedViews</tt> collection. 
+   *    <pre>
+   *    Dim ThisAnnotatedView As AnnotatedView
+   *    Set ThisAnnotatedView = TheAnnotatedViews.<font color="red">Item</font>(9)
+   *    Dim ThatAnnotatedView As AnnotatedView
+   *    Set ThatAnnotatedView = TheAnnotatedViews.<font color="red">Item</font>("AnnotatedView3")
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAAnnotatedView oAnnotatedView);
+
+  /**
+   * Removes an annotated view from the AnnotatedViews collection.
+   * @param iIndex
+   *    The index or the name of the AnnotatedView to retrieve from he collection of AnnotatedViews.
+   *    As a numerics, this index is the rank of the AnnotatedView in the collection.
+   *    The index of the first AnnotatedView in the collection is 1, and
+   *    the index of the last AnnotatedView is Count.
+   *    As a string, it is the name you assigned to the AnnotatedView.
+   * @sample
+   *    The following example removes the tenth AnnotatedView and the AnnotatedView named
+   *    <tt>AnnotatedView2</tt> from the <tt>TheAnnotatedViews</tt> collection.
+   *    <pre>
+   *    TheAnnotatedViews.<font color="red">Remove</font>(10)
+   *    TheAnnotatedViews.<font color="red">Remove</font>("AnnotatedView2")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAAnnotatedViews
+#pragma ID CATIAAnnotatedViews "DCE:82ee6f06-5179-11d4-9469006094eb3826"
+#pragma DUAL CATIAAnnotatedViews
+
+// VB object name : AnnotatedViews (Id used in Visual Basic)
+#pragma ID AnnotatedViews "DCE:85dfd61e-5179-11d4-9469006094eb3826"
+#pragma ALIAS CATIAAnnotatedViews AnnotatedViews
+
+#endif

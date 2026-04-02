@@ -1,0 +1,239 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>TopologicalOperators CATRemoveFace Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../TopologicalOperators.htm" href="../TopologicalOperators.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "TopologicalOperators";	}
+		function getCurrentObjectName() { 
+ 	return "CATRemoveFace"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>TopologicalOperators Framework:  CATRemoveFace Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATRemoveFace_31633','CATRemoveFace','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATRemoveFace</b>
+</p>
+<p>
+<b><i> Class defining a topological operator which removes a set of faces from a volume or a skin.</i></b><br>
+<br>
+ This operator does not change the dimension of the body: a volume remains a volume,
+ a skin remains a skin.<br>
+ Unlike in the Part Design interactive command, the specified faces to be removed are 
+ not propagated, so that in your application, you should either provide a consistent set of faces
+ or propagate the faces. The operation completes when the body can be closed by extrapolation 
+ of the faces which were adjacent to the ones removed but this extrapolation should not generate any 
+ tangency configuration.<br>
+ To use this operator, you must:
+ <ul>
+ <li>Create it with the CATCreateRemoveFace global function
+ <li>Tune it with appropriate options, using the <tt>SetXxx</tt> or <tt>Append</tt> methods.
+ <li>Run it
+ <li>Get the result with the <tt>GetResult</tt> method. If you do not want 
+ to keep the resulting body, use the <script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory, after the operator deletion.
+ <li>Delete with the usual C++ <tt>delete</tt> operator after use.
+ </ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Append(CATLISTP(CATFace)&amp;)"><b>Append</b></a>(CATLISTP(CATFace)&amp;)
+</td><td id='tdright'>  Appends a list of faces to be removed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AppendLimiting(CATFace*,CATBody*,CATOrientation)"><b>AppendLimiting</b></a>(CATFace*,CATBody*,CATOrientation)
+</td><td id='tdright'>  Restricts the removal of a face to a portion delimited by a single-face skin.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetAllTrickyFaces(CATLISTP(CATFace)&amp;,CATListOfInt&amp;)"><b>GetAllTrickyFaces</b></a>(CATLISTP(CATFace)&amp;,CATListOfInt&amp;)
+</td><td id='tdright'>  Returns the complete list of faces when the operation 
+ cannot complete.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResult()"><b>GetResult</b></a>()
+</td><td id='tdright'>  Returns the pointer to the resulting body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFreezeMode(CATBodyFreezeMode)"><b>SetFreezeMode</b></a>(CATBodyFreezeMode)
+</td><td id='tdright'>  Defines the "Freeze" mode of the resulting body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTwistDetection(short)"><b>SetTwistDetection</b></a>(short)
+</td><td id='tdright'>  Enables or disables twist detection.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Append"></a><a id="Append(CATLISTP(CATFace)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Append</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLISTP(CATFace)','CATLISTP(CATFace)&amp;')</script> <span class='param'>iFacesToRemove</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Appends a list of faces to be removed.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFacesToRemove</span></dt>
+   <dd> The list of pointers to faces to remove.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AppendLimiting"></a><a id="AppendLimiting(CATFace*,CATBody*,CATOrientation)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AppendLimiting</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFaceToRelimit</span>,<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iLimitingBody</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation')</script> <span class='param'>iOri</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Restricts the removal of a face to a portion delimited by a single-face skin.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFaceToRemove</span></dt>
+   <dd> The face to be removed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLimitingBody</span></dt>
+   <dd> The limiting body.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOri</span></dt>
+   <dd> The orientation defining the portion of the face to be removed.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetAllTrickyFaces"></a><a id="GetAllTrickyFaces(CATLISTP(CATFace)&amp;,CATListOfInt&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetAllTrickyFaces</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTP(CATFace)','CATLISTP(CATFace)&amp;')</script> <span class='param'>oAllTrickyFaces</span>,<script type="text/javascript"> activateLink('CATListOfInt','CATListOfInt&amp;')</script> <span class='param'>oAllDiag</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the complete list of faces when the operation 
+ cannot complete. This method is mainly used by the interactive command to help the end-user
+ determine why the operator cannot complete. When the operation completes, this list is empty.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oAllTrickyFaces</span></dt>
+   <dd> The list of faces intended to be removed, but not removed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oAllDiag</span></dt>
+   <dd> The list of diagnosis.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResult"></a><a id="GetResult()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody*')</script>  <span class='objname'>GetResult</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the pointer to the resulting body.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the resulting body, <tt>NULL</tt> if the operation failed. 
+ If you do not want to keep the resulting body, 
+ use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory, after the operator deletion.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> operator.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFreezeMode"></a><a id="SetFreezeMode(CATBodyFreezeMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFreezeMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBodyFreezeMode','CATBodyFreezeMode')</script> <span class='param'>iOnOrOff</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the "Freeze" mode of the resulting body.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOnOrOff</span></dt>
+   <dd> The "Freeze" mode of the resulting body. 
+ <ul>
+ <li>CATBodyFreezeOff: the resulting body can be modified. 
+ <li>CATBodyFreezeOn: the resulting body cannot be modified. Any cell to be modified will have
+ to be duplicated.
+ </ul>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTwistDetection"></a><a id="SetTwistDetection(short)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTwistDetection</span><span class = 'signature'>(<script type="text/javascript"> activateLink('short','short')</script> <span class='param'>iTwistDetection</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Enables or disables twist detection.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTwistDetection</span></dt>
+   <dd> <dl>
+ <dt><tt>0</tt></dt><dd> Twist detection is disabled : result body may lie on twisted surfaces.
+ This mode is used by default at the creation of the operator.</dd>
+ <dt><tt>1</tt></dt><dd> Twist detection is enabled : face removal fails if at least one of the extrapolated surfaces is twisted.</dd>
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATRemoveFace.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATTopologicalOperators</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

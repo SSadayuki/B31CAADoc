@@ -1,0 +1,55 @@
+#ifndef CATIAMaterialDocument_IDL
+#define CATIAMaterialDocument_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIAMaterialDocument:                           
+// Exposed interface for Material Document
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun02 Creation					A. Schmitt
+//=================================================================
+#include "CATIADocument.idl"
+#include "CATIAMaterialFamilies.idl"
+
+/**
+ * Represents the Document object for materials.
+ * When a MaterialDocument object is created, a MaterialFamily object
+ * is created.
+ * A Material object is also created inside this MaterialFamily object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAMaterialDocument : CATIADocument
+{
+#pragma PROPERTY Families
+ /**
+  * Returns the Family collection object from the current material document.
+  */
+  HRESULT get_Families(out /*IDLRETVAL*/ CATIAMaterialFamilies cFamilies);
+};
+
+// Interface Name : CATIAMaterialDocument
+#pragma ID CATIAMaterialDocument "DCE:112b5590-7792-11d6-80560030f113d1bf"
+#pragma DUAL CATIAMaterialDocument
+ 
+// VB Object Name : MaterialDocument
+#pragma ID MaterialDocument "DCE:4c3d2d10-7792-11d6-80560030f113d1bf"
+#pragma ALIAS CATIAMaterialDocument MaterialDocument
+
+#endif
+// CATIAMaterialDocument_IDL
+
+
+

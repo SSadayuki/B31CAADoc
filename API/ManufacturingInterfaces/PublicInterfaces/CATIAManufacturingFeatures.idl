@@ -1,0 +1,76 @@
+#ifndef CATIAManufacturingFeatures_IDL
+#define CATIAManufacturingFeatures_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAManufacturingFeatures:                           
+// Exposed interface for ManufacturingFeatures collection
+//                                   
+//=================================================================
+// Sep 98 Creation                                       E. Chauveau
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATBSTR.idl"
+#include "CATIAManufacturingFeature.idl"
+
+/**
+ * Collection of Manufacturing Features.
+ * @see CATIAManufacturingFeature
+ */
+interface CATIAManufacturingFeatures : CATIACollection
+{
+
+// Method Add
+ 
+  /**
+  * Create and Add a Manufacturing Feature of a specified type to the Collection.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example creates and adds in <tt>Features</tt> the manufacturing feature 
+  * <tt>Feature</tt> of type : <tt>type</tt>
+  * <pre>
+  * Set Feature = Features.<font color="red">Add</font>(Type)
+  *</pre>
+  * </dl>
+  */
+
+     HRESULT Add (in CATBSTR iType, out /*IDLRETVAL*/ CATIAManufacturingFeature oManufacturingFeature);
+
+// Method Item
+
+  /**
+  * Retrieve the Manufacturing Feature of a the specified index from the Collection.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves from <tt>Feature</tt> the manufacturing feature 
+  * <tt>Feature</tt> from index : <tt>Index</tt>
+  * <pre>
+  * Set Feature = Features.<font color="red">Item</font>(Index)
+  *</pre>
+  * </dl>
+  */
+
+     HRESULT     Item (in CATVariant iIndex , out /*IDLRETVAL*/ CATIAManufacturingFeature oManufacturingFeature);
+};
+
+// Interface name : CATIAManufacturingFeatures
+#pragma ID CATIAManufacturingFeatures "DCE:f8843150-522b-11d2-804700805fc75483"
+#pragma DUAL CATIAManufacturingFeatures
+
+// VB object name : ManufacturingFeatures (Id used in Visual Basic)
+#pragma ID ManufacturingFeatures "DCE:c0516fac-6fe3-11d2-8dd7006094b92b60"
+#pragma ALIAS CATIAManufacturingFeatures ManufacturingFeatures
+
+
+#endif
+// CATIAManufacturingFeatures_IDL
+

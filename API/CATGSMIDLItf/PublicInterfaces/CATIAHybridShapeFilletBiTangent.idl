@@ -1,0 +1,244 @@
+#ifndef CATIAHybridShapeFilletBiTangent_IDL
+#define CATIAHybridShapeFilletBiTangent_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeFilletBiTangent:         
+// Exposed interface for HybridShape FilletExplicit
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Fev 2003 Creation    
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+#include "CATIAHybridShapeIntegratedLaw.idl"
+
+/**
+ * Fillet Bi-Tangent feature.
+ * <b>Role</b>: Manipulation of Fillet Bi-Tangent feature
+ * Allows to access data of the Fillet Bi-Tangent feature created by using two
+ * support surfaces, their orientation, a radius, and options
+ * (supports trimming and fillet extremities type)
+ * @see CATIAHybridShapeFactory
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeFilletBiTangent : CATIAHybridShape
+{
+   
+
+/**
+ * Returns or Sets the first support surface feature.
+ */ 
+#pragma PROPERTY FirstElem
+    HRESULT get_FirstElem (out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_FirstElem (in                CATIAReference iElem)  ;
+
+/**
+ * Returns or sets the Second support surface feature. 
+ */ 
+#pragma PROPERTY SecondElem
+    HRESULT get_SecondElem(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_SecondElem(in                CATIAReference iElem)  ;
+
+
+/**
+ * Returns  fillet radius in a CATIALength. 
+ */ 
+#pragma PROPERTY Radius
+    HRESULT get_Radius (out /*IDLRETVAL*/  CATIALength    oRadius)  ;
+
+
+/**
+ * Returns or Sets fillet radius value. 
+ */ 
+#pragma PROPERTY RadiusValue
+ HRESULT get_RadiusValue ( out /*IDLRETVAL*/ double   oX);
+ HRESULT put_RadiusValue ( in               double   iX);
+
+
+/**
+ * Returns or  Setsthe first orientation used to specify fillet center position.
+ * <br> Orientation is same or inverse than the normal to the first surface support
+ */ 
+#pragma PROPERTY FirstOrientation
+    HRESULT get_FirstOrientation    (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_FirstOrientation (in long  iOrientation)  ;
+
+
+/**
+ * Returns or Sets the Second orientation used to specify fillet center position.
+ * <br>Orientation is same or inverse than the normal to the Second surface support<BR>    
+ */ 
+#pragma PROPERTY SecondOrientation
+    HRESULT get_SecondOrientation(out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_SecondOrientation (in long iOrientation)  ;
+
+/**
+ * Inverts first orientation used to specify fillet center position.
+ */ 
+    HRESULT InvertFirstOrientation()  ;
+
+/**
+ *  Inverts second orientation used to specify fillet center position.
+ */ 
+    HRESULT InvertSecondOrientation()  ;
+
+/**
+ * Returns or Sets whether support surfaces are trimmed or not.
+ * Possible values of SupportsTrimMode = 0 : No trim of fillet supports.
+ *                                     = 1 : Trim of both fillet supports.
+ *                                     = 2 : Trim of fillet support 1.
+ *                                     = 3 : Trim of fillet support 2.
+ */ 
+#pragma PROPERTY SupportsTrimMode
+    HRESULT get_SupportsTrimMode(out /*IDLRETVAL*/ long oTrimMode) ;
+    HRESULT put_SupportsTrimMode(in long iTrimMode)  ;
+
+/**
+ * Returns or Sets fillet ribbon relimitation mode (or fillet extremities mode).
+ * <br>Fillet extremities mode : 
+ * <br> - CATGSMSmooth  (0)
+ * <br> - CATGSMStraight(1)
+ * <br> - CATGSMMaximum (2)
+ * <br> - CATGSMMinimum (3)
+ */ 
+
+#pragma PROPERTY RibbonRelimitationMode
+    HRESULT get_RibbonRelimitationMode(out /*IDLRETVAL*/ long oRelimitationMode) ;
+    HRESULT put_RibbonRelimitationMode(in long iRelimitationMode)  ;
+
+/**
+ * Returns or Sets  the spine feature. 
+ */ 
+#pragma PROPERTY Spine
+    HRESULT get_Spine(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_Spine(in                CATIAReference iElem)  ;
+
+/**
+ * Returns or Sets the Hold Curve feature. 
+ */ 
+#pragma PROPERTY HoldCurve
+    HRESULT get_HoldCurve(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_HoldCurve(in                CATIAReference iElem)  ;
+
+/**
+ * Gets the face to keep for fillet operation.
+ *   @param oFace
+ *      The face to keep for fillet operation.
+ *   @param iPos
+ *      Position of the face to be retrieved.
+ */ 
+    HRESULT GetFaceToKeep(in long iPos, out /*IDLRETVAL*/ CATIAReference oFace);
+
+/**
+ * Append a new face to keep.
+ *   @param iFace
+ */ 
+    HRESULT AppendNewFaceToKeep(in CATIAReference iFace);
+
+/**
+ * Remove a face to keep.
+ *   @param iFace
+ */ 
+    HRESULT RemoveFaceToKeep(in CATIAReference iFace);
+
+/**
+ * Remove all the faces to keep.
+ */ 
+    HRESULT RemoveAllFacesToKeep();
+
+/**
+ * Gets or sets Law first relimiter for variable shape fillet with law management.
+ * <br>Relimiters must be point on spine.
+ * <br>The input law  will be mapped between first and second relimiters.
+ * This example retrieves in <code>HybLaw</code> the first law relimiter
+ * for the <code>Fillet</code> hybrid shape feature.
+ * <pre>
+ * Dim HybLaw As Reference
+ * HybLaw = Fillet.<font color="red">FirstLawRelimiter</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY FirstLawRelimiter
+    HRESULT get_FirstLawRelimiter(out /*IDLRETVAL*/ CATIAReference oFirstLaw);
+    HRESULT put_FirstLawRelimiter(in                CATIAReference iFirstLaw);
+
+/**
+ * Gets or sets Law second relimiter for variable shape fillet with law management.
+ * <br>Relimiters must be point on spine.
+ * <br>The input law  will be mapped between first and second relimiters.
+ * This example retrieves in <code>HybLaw</code> the second law relimiter
+ * for the <code>Fillet</code> hybrid shape feature.
+ * <pre>
+ * Dim HybLaw As Reference
+ * HybLaw = Fillet.<font color="red">SecondLawRelimiter</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY SecondLawRelimiter
+    HRESULT get_SecondLawRelimiter(out /*IDLRETVAL*/ CATIAReference oSecondLaw);
+    HRESULT put_SecondLawRelimiter(in                CATIAReference iSecondLaw);
+/**
+ * Gets or sets Integrated Law to manage Variable Shape Fillet with law.
+ *   @param oILaw
+ *        Integrated law
+ * This example retrieves in <code>HybridIntegratedLaw</code> the IntegratedLaw
+ * for the <code>Fillet</code> hybrid shape feature.
+ * <pre>
+ * Dim HybridIntegratedLaw
+ * Set HybridIntegratedLaw = Fillet.<font color="red">IntegratedLaw</font>
+ * </pre>
+ */ 
+#pragma PROPERTY IntegratedLaw
+    HRESULT get_IntegratedLaw(out /*IDLRETVAL*/ CATIAHybridShapeIntegratedLaw oIntegratedLaw);
+    HRESULT put_IntegratedLaw(in                CATIAHybridShapeIntegratedLaw iIntegratedLaw);
+
+/**
+ * Returns or Sets fillet radius type.
+ * <br>Fillet radius type : 
+ * <br> - CATGSMRadiusDefault    (0)
+ * <br> - CATGSMRadiusChordLength(1)
+ */ 
+#pragma PROPERTY RadiusType
+    HRESULT get_RadiusType(out /*IDLRETVAL*/ long oRadiusType);
+    HRESULT put_RadiusType(in long iRadiusType);
+
+/**
+ * Returns or Sets fillet section type.
+ * <br>Fillet radius type : 
+ * <br> - CATGSMCircularSection(0)
+ * <br> - CATGSMConicalSection (1)
+ */ 
+#pragma PROPERTY SectionType
+    HRESULT get_SectionType(out /*IDLRETVAL*/ long oSectionType);
+    HRESULT put_SectionType(in long iSectionType);
+
+/**
+ * Returns or Sets parameter for conical section. 
+ */ 
+#pragma PROPERTY ConicalSectionParameter
+ HRESULT get_ConicalSectionParameter ( out /*IDLRETVAL*/ double   oX);
+ HRESULT put_ConicalSectionParameter ( in               double   iX);
+
+};
+
+// Interface name : CATIAHybridShapeFilletBiTangent
+#pragma ID CATIAHybridShapeFilletBiTangent "DCE:b957ee23-25b0-4410-bcb65f54bca35828"
+#pragma DUAL CATIAHybridShapeFilletBiTangent
+
+// VB object name : HybridShapeFilletBiTangent (Id used in Visual Basic)
+#pragma ID HybridShapeFilletBiTangent "DCE:93837679-0c68-409f-bb46af0ab12d1975"
+#pragma ALIAS CATIAHybridShapeFilletBiTangent HybridShapeFilletBiTangent
+#endif

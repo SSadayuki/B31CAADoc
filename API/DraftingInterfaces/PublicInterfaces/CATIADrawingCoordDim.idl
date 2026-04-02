@@ -1,0 +1,133 @@
+// COPYRIGHT DASSAULT SYSTEMES 2016
+#ifndef CATIADrawingCoordDim_IDL
+#define CATIADrawingCoordDim_IDL
+/*IDLREP*/
+
+#include "CATIABase.idl"
+
+interface CATIADrawingTextProperties;
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+ /** 
+  * Represents a drawing Coordinate Dimension in a drawing view.
+  */
+interface CATIADrawingCoordDim : CATIABase
+{
+  /**
+  * Returns or sets the x coordinate of the drawing coordinate dimension.
+  * It is expressed with respect to the current view coordinate system.
+  * This coordinate, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>X</tt> the x coordinate of the 
+  * <tt>MyCoordDim</tt> drawing coordinate dimension.
+  * <pre>
+  * X = MyCoordDim.<font color="red">x</font>
+  * </pre>
+  * </dl>
+  */
+  #pragma PROPERTY x	 
+    HRESULT get_x(out /*IDLRETVAL*/ double oxposition);
+    HRESULT put_x(in  double oxposition);
+
+  //------------------------------------------------------------------------------
+  /**
+  * Returns or sets the y coordinate of the drawing coordinate dimension.
+  * It is expressed with respect to the current view coordinate system.
+  * This coordinate, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the y coordinate of the
+  * <tt>MyCoordDim</tt> drawing coordinate dimension to 5 inches.
+  * You need first to convert the 5 inches into millmeters.
+  * <pre>
+  * NewYCoordinate = 5*25.4/1000
+  * MyCoordDim.<font color="red">y</font> = NewYCoordinate
+  * </pre>
+  * </dl>
+  */
+  #pragma PROPERTY y	 
+    HRESULT get_y(out /*IDLRETVAL*/ double oyposition);
+    HRESULT put_y(in double iyposition);
+
+  //------------------------------------------------------------------------------
+  /**
+  * Returns or sets the angle of the drawing coordinate dimension.
+  * The angle is measured between the axis system of the drawing view and the
+  * local axis system of the drawing coordinate dimension.
+  * The angle is measured in radians and is counted counterclockwise.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the angle of the <tt>MyCoordDim</tt> drawing Text to 90
+  * degrees clockwise.
+  * You first need to compute the angle in degrees and set the
+  * minus sign to indicate the rotation is clockwise.
+  * <pre>
+  * Angle90Clockwise = -90
+  * MyCoordDim.<font color="red">Angle</font> = Angle90Clockwise
+  * </pre>
+  * </dl>
+  */
+  #pragma PROPERTY Angle	 
+    HRESULT get_Angle(out /*IDLRETVAL*/ double oAngle);
+    HRESULT put_Angle(in double iAngle); 
+
+  /**
+  * Returns the value of the drawing coordinate dimension.
+  * @param oType
+  *  oType (0: 2D coordinate dimension, 1: 3D coordinate dimension).
+  * @param oX
+  *  X value.
+  * @param oY
+  *  Y value.
+  * @param oZ
+  *  Z value (=0. if 2D coordinate dimension).
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the type, x, y and z of the <tt>MyCoordDim</tt> drawing CoordDim
+  * <pre>
+  * MyCoordDim.<font color="red">GetCoordValues(oType, oX, oY, oZ)</font> 
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetCoordValues(inout long oType, inout double oX, inout double oY, inout double oZ);
+
+  /**
+  * Returns the text properties of the drawing coordinate dimension.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>TextProperties</tt> the text properties of
+  * the <tt>MyCoordDim</tt> drawing coordinate dimension..
+  * <pre>
+  * Dim TextProperties As DrawingTextProperties
+  * Set TextProperties = MyCoordDim.<font color="red">TextProperties</font>
+  * </pre>
+  * </dl>
+  */
+  #pragma PROPERTY TextProperties
+    HRESULT get_TextProperties(out /*IDLRETVAL*/ CATIADrawingTextProperties oTextProperties);
+
+};
+
+#pragma ID CATIADrawingCoordDim "DCE:b2d5706a-f68a-455f-a5853f8ad125ef10"
+#pragma DUAL CATIADrawingCoordDim
+
+// Visual Basic name
+#pragma ID DrawingCoordDim "DCE:078eee62-6b39-49b9-bb56d236bc1e6340"
+#pragma ALIAS CATIADrawingCoordDim DrawingCoordDim
+
+#endif

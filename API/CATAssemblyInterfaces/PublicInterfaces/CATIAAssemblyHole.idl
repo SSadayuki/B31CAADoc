@@ -1,0 +1,317 @@
+#ifndef CATIAAssemblyHole_IDL
+#define CATIAAssemblyHole_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAAssemblyHole:						   
+// Exposed interface for AssemblyHole
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep. 2000 Creation					                 CRX
+//=================================================================
+#include "CATIAAssemblyFeature.idl"
+#include "CATHoleDefs.idl"
+#include "CATSafeArray.idl"
+
+interface CATIASketch;
+interface CATIAProduct;
+interface CATIALimit;
+interface CATIALength;
+interface CATIAAngle;
+interface CATIAReference;
+
+/**
+ * Represents the AssemblyHole object.
+ */
+interface CATIAAssemblyHole : CATIAAssemblyFeature
+{
+	  //		================
+	  //		== PROPERTIES ==
+	  //		================
+
+    /**
+     * Returns or sets the hole type.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example saves in <tt>holeType</tt> the type of
+     * the hole <tt>assemblyHole</tt>, and then sets it so that it will now be 
+     * a tapered hole.
+     * <pre>
+     * Set holeType = assemblyHole.<font color="red">Type</font>
+     * assemblyHole.<font color="red">Type</font> = catTaperedHole 
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Type
+    HRESULT	get_Type ( out /*IDLRETVAL*/ CatHoleType oType );
+    HRESULT	put_Type ( in CatHoleType iType );
+
+    /**
+     * Returns the hole diameter.
+     * <br>
+     * It is returned as a @href CATIALength object.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>holeDiam</tt> the diameter of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim holeDiam As Length
+     * Set holeDiam = assemblyHole.<font color="red">Diameter</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Diameter
+    HRESULT	get_Diameter ( out /*IDLRETVAL*/ CATIALength oDiameter );	
+
+    /**
+     * Returns the hole head diameter.
+     * <br>
+     * This property is valid when the hole type is Counterbored or Counterdrilled.
+     * The hole head diameter is returned as a @href CATIALength object.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>holeHeadDiam</tt> the head diameter of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim holeHeadDiam As Length
+     * Set holeHeadDiam = assemblyHole.<font color="red">HeadDiameter</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY HeadDiameter
+    HRESULT	get_HeadDiameter ( out /*IDLRETVAL*/ CATIALength oHeadDiameter );
+
+    /**
+     * Returns the hole head depth.
+     * <br>
+     * This property is valid when the hole type is Counterbored, Counterdrilled or Countersunk.
+     * The hole head depth is returned as a @href CATIALength object.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>holeHeadDepth</tt> the head depth of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim holeHeadDepth As Length
+     * Set holeHeadDepth = assemblyHole.<font color="red">HeadDepth</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY HeadDepth
+    HRESULT	get_HeadDepth ( out /*IDLRETVAL*/ CATIALength oHeadDepth );
+
+    /**
+     * Returns the hole head angle.
+     * <br>
+     * This property is valid when the hole type is Tapered, Counterdrilled or Countersunk.
+     * The hole head angle is returned as a @href CATIAAngle object.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>holeHeadAngle</tt> the head angle of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim holeHeadAngle As Angle
+     * Set holeHeadAngle = assemblyHole.<font color="red">HeadAngle</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY HeadAngle
+    HRESULT	get_HeadAngle ( out /*IDLRETVAL*/ CATIAAngle oHeadAngle );
+
+    /**
+     * Returns or sets the hole anchor mode.
+     * <br>
+     * This property is valid when the hole type is Counterbored or Counterdrilled.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example saves in <tt>holeAnchorMode</tt> the anchor mode of
+     * the hole <tt>assemblyHole</tt> and sets it so that the anchor mode will now be
+     * set to the middle of its head.
+     * <pre>
+     * Dim holeAnchorMode
+     * Set holeAnchorMode = assemblyHole.<font color="red">AnchorMode</font>
+     * assemblyHole.<font color="red">AnchorMode</font> = catMiddlePointHoleAnchor
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY AnchorMode
+    HRESULT	get_AnchorMode ( out /*IDLRETVAL*/ CatHoleAnchorMode oMode );
+    HRESULT	put_AnchorMode ( in CatHoleAnchorMode iMode );
+
+    /**
+     * Returns or sets the hole bottom type.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example saves in <tt>holeBottomType</tt> the bottom type of
+     * the hole <tt>assemblyHole</tt> and sets it so that the bottom will now be
+     * a V-like one.
+     * <pre>
+     * Dim holeBottomType
+     * Set holeBottomType = assemblyHole.<font color="red">BottomType</font>
+     * assemblyHole.<font color="red">BottomType</font> = catVHoleBottom
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY BottomType
+    HRESULT	get_BottomType ( out /*IDLRETVAL*/ CatHoleBottomType oBottomType );
+    HRESULT	put_BottomType ( in CatHoleBottomType iBottomType );
+
+    /**
+     * Returns the hole bottom angle.
+     * <br>
+     * This property is valid when the hole bottom type is VBottom.
+     * The hole bottom angle is returned as a @href CATIAAngle object.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>holeBottomAngle</tt> the bottom angle of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim holeBottomAngle As Angle
+     * Set holeBottomAngle = assemblyHole.<font color="red">BottomAngle</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY BottomAngle
+    HRESULT	get_BottomAngle	( out /*IDLRETVAL*/ CATIAAngle oBottomAngle );
+
+    /**
+     * Returns the hole bottom limit.
+     * <br>
+     * This limit manages the way the hole is ended.
+     * It is returned as a @href CATIALimit object.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>limit</tt> the bottom limit of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim limit As Limit
+     * Set limit = assemblyHole.<font color="red">BottomLimit</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY BottomLimit
+    HRESULT	get_BottomLimit ( out /*IDLRETVAL*/ CATIALimit oLimit );
+
+    /**
+     * Returns the hole positioning sketch.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>sketch</tt> the positioning sketch of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim sketch As Sketch
+     * Set sketch = assemblyHole.<font color="red">Sketch</font>
+     * </pre>
+     */
+#pragma PROPERTY Sketch
+    HRESULT get_Sketch ( out /*IDLRETVAL*/ CATIASketch oSketch );
+
+    /**
+     * Returns the component containing the hole positioning sketch.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>skComp</tt> the component 
+     * that contains the positioning sketch of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim skComp As Product
+     * Set skComp = assemblyHole.<font color="red">SketchComponent</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SketchComponent
+    HRESULT get_SketchComponent ( out /*IDLRETVAL*/ CATIAProduct oSketchComp );
+
+    //
+	  //		================
+	  //		==   METHODS  ==
+	  //		================
+
+    /**
+     * Retrieves the origin point to which the hole is anchored.
+     * <br>
+     * This point belongs to a plane tangent to the hole.
+     * The coordinates are expressed in millimeter according to the absolute coordinate system.
+     * @param ioOrigin
+     *   The hole origin point coordinates, as a  safe array made up of three doubles: X, Y, Z
+     * <br>
+     *   The array must be previously initialized.
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>coordArray</tt> the coordinates of
+     * the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim coordArray(2)
+     * Call assemblyHole.<font color="red">GetOrigin</font> coordArray
+     * Set x = coordArray[0]
+     * Set y = coordArray[1]
+     * Set z = coordArray[2]
+     * </pre>
+     * </dl>
+     */
+    HRESULT	GetOrigin ( inout CATSafeArrayVariant ioOrigin );	
+
+   /**
+     * Retrieves the hole direction vector components.
+     * <br>
+     * These components are expressed in millimeter according to the absolute coordinate system.
+     * @param ioDirection
+     *   The direction vector components, as a  safe array made up of three doubles: X, Y, Z
+     * <br>
+     *   The array must be previously initialized.
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>dirArray</tt> the direction vector
+     * components of the hole <tt>assemblyHole</tt>.
+     * <pre>
+     * Dim dirArray(2)
+     * Call assemblyHole.<font color="red">GetDirection</font>(dirArray)
+     * Set x = dirArray[0]
+     * Set y = dirArray[1]
+     * Set z = dirArray[2]
+     * </pre>
+     * </dl>
+     */
+    HRESULT	GetDirection ( inout CATSafeArrayVariant ioDirection );
+
+    /**
+     * Sets the hole axis direction.
+     * @param iLine
+     *   The hole axis direction, as a reference to a line or an edge.
+     * @param iLineComp
+     *   The component containing the axis direction
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example sets the axis direction of
+     * the hole <tt>assemblyHole</tt> with the <tt>dirRef</tt> line
+     * of the component <tt>dirComp</tt>.
+     * <pre>
+     * assemblyHole.<font color="red">SetDirection</font> dirRef, dirComp
+     * </pre>
+     * </dl>
+     */
+    HRESULT	SetDirection ( in CATIAReference iLine, in CATIAProduct iLineComp);
+
+};
+
+// Interface name : CATIAAssemblyHole
+#pragma ID CATIAAssemblyHole "DCE:960d9d4a-a370-11d4-a38800d0b7ac57a4"
+#pragma DUAL CATIAAssemblyHole
+
+// VB object name : AssemblyHole (Id used in Visual Basic)
+#pragma ID AssemblyHole "DCE:969320fa-a370-11d4-a38800d0b7ac57a4"
+#pragma ALIAS CATIAAssemblyHole AssemblyHole
+
+
+#endif // CATIAAssemblyHole_IDL
+

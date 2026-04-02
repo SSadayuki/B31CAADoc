@@ -1,0 +1,82 @@
+// COPYRIGHT Dassault Systemes 2007
+//=============================================================================
+// CATIASfmObject
+//   Define the CATIASfmObject interface for managing the category
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Feb. 2007  Creation                                                S. QUINCI
+//=============================================================================
+#ifndef CATIASfmObject_IDL
+#define CATIASfmObject_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+
+/**
+ * Interface to manage the category of a SfmObject.
+ * <b>Role</b>: To manage SfmObject's category.
+ */
+interface CATIASfmObject : CATIABase
+{
+  /**
+  * Returns or sets the category.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Category</code> the supporting curve for the <code>SfmObject</code> feature.
+  * <pre>
+  * Category = SfmObject.<font color="red">Category</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY Category
+  HRESULT get_Category(inout /*IDLRETVAL*/ CATBSTR oCategory);
+  HRESULT put_Category(in CATBSTR iCategory);
+
+  /**
+  * Returns or sets the material.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Material</code> the informations for the <code>SfmMaterialProperties</code> feature.
+  * <pre>
+  * SfmMaterialProperties.<font color="red">Material</font> Material
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY Material
+  HRESULT get_Material(inout /*IDLRETVAL*/ CATBSTR oMaterial);
+  HRESULT put_Material(in CATBSTR iMaterial);
+
+  /**
+  * Returns or sets the grade.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Grade</code> the informations for the <code>SfmMaterialProperties</code> feature.
+  * <pre>
+  * SfmMaterialProperties.<font color="red">Grade</font> Grade
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY Grade
+  HRESULT get_Grade(inout /*IDLRETVAL*/ CATBSTR oGrade);
+  HRESULT put_Grade(in CATBSTR iGrade);
+};
+
+// Interface name : CATIASfmObject
+#pragma ID CATIASfmObject "DCE:414ad1b7-13b6-44d6-8a744b7fff41aba8"
+#pragma DUAL CATIASfmObject
+
+// VB object name : SfmObject (Id used in Visual Basic)
+#pragma ID SfmObject "DCE:6ddd4712-1235-4198-bcf4f0699b8ff425"
+#pragma ALIAS CATIASfmObject SfmObject
+
+#endif

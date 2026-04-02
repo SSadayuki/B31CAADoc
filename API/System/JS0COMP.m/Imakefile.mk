@@ -1,0 +1,18 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=NONE
+
+LINK_WITH = JS0GROUP
+#
+OS = AIX
+
+#
+OS = HP-UX
+
+#
+OS = IRIX
+LOCAL_LD_FLAGS = -no_unresolved
+
+#
+OS = SunOS

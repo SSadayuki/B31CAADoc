@@ -1,0 +1,313 @@
+#ifndef CATIAHybridShapeExtrude_IDL
+#define CATIAHybridShapeExtrude_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeExtrude:         
+// Exposed interface for HybridShape Extrude
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+ * The Extrude feature : an Extrude is made up of a face to process and one Extrude parameter.
+ * <b>Role</b>: To access the data of the hybrid shape extrude feature object.
+ * <p>  LICENSING INFORMATION: Creation of volume result requires GSO License
+ * <br> if GSO License is not granted , settting of Volume context has not effect 
+ * <br> 
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeExtrude : CATIAHybridShape
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+// ON Extrude
+#pragma PROPERTY BeginOffset
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get_BeginOffset on the object. For surface extrude, if limit type is upto, this offset value is not used.
+ * In case of Volume Extrude, if the up-to element is specified, this will act as offset value from the upto element.
+ * @param oExtrude 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIALength 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_BeginOffset (out /*IDLRETVAL*/ CATIALength oExtrude );
+
+
+#pragma PROPERTY EndOffset
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get_EndOffset on the object. For surface extrude, if limit type is upto, this offset value is not used.
+ * In case of Volume Extrude, if the up-to element is specified, this will act as offset value from the upto element.
+ * @param oExtrude 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIALength 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_EndOffset (out /*IDLRETVAL*/ CATIALength oExtrude );
+
+
+
+// ON Direction
+#pragma PROPERTY Direction
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get_Direction on the object. 
+ * @param oDir 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAHybridShapeDirection 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_Direction ( out /*IDLRETVAL*/ CATIAHybridShapeDirection oDir);
+
+
+
+
+
+ /**
+ * <b>Role</b>: To put_Direction on the object. 
+ * @param iDir 
+ *   @see CATIAHybridShapeDirection 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_Direction ( in                CATIAHybridShapeDirection iDir);
+
+
+// ON FACE TO Extrude
+#pragma PROPERTY ExtrudedObject
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get_ExtrudedObject on the object. 
+ * @param oFaceToExtrude 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_ExtrudedObject ( out /*IDLRETVAL*/ CATIAReference oFaceToExtrude );
+
+
+
+
+
+ /**
+ * <b>Role</b>: To put_ExtrudedObject on the object. 
+ * @param iOFaceToExtrude 
+ *   @see CATIAReference<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIABoundary. 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_ExtrudedObject ( in                CATIAReference oFaceToExtrude );
+
+  #pragma PROPERTY Context
+ /**
+  * Returns or sets the context on Extrude feature.
+  * <br><b>Legal values</b>:
+  * <ul>
+  * <li><b>0</b> This option creates surface of extrusion.</li>
+  * <li><b>1</b> This option creates volume of extrusion.</li>
+  * </ul>
+  * <br> Note: Setting volume result requires GSO License. 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oContext</code> the context
+  * for the <code>Extrude1</code> hybrid shape feature.
+  * <pre>
+  * Dim oContext
+  * Set oContext = Extrude1.<font color="red">Context</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT get_Context ( out /*IDLRETVAL*/ long oContext );
+  HRESULT put_Context ( in                long iContext );
+ /**
+  * Gets or sets  orientation of the extrude.
+  *   Orientation = TRUE  : The natural orientation  is taken.
+  *               = FALSE : The opposite orientation is taken
+  * This example retrieves in <code>IsInverted</code> orientation of the extrude
+  * for the <code>Extrude</code> hybrid shape feature.
+  * <pre>
+  * Dim IsInverted As boolean
+  * IsInverted = Extrude.<font color="red">Orientation</font>
+  * </pre>
+  * </dl>
+  */
+
+#pragma PROPERTY Orientation
+  HRESULT put_Orientation (in 	              boolean iOrientation);
+  HRESULT get_Orientation (out	/*IDLRETVAL*/ boolean oOrientation);
+
+ /**
+  * Returns or sets the First limit type.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>Unknown Limit type.</dd>
+  * <dt>1</dt>
+  * <dd>Limit type is Dimension. It implies that limit is defined by length</dd>
+  * <dt>2</dt>
+  * <dd>Limit type is UptoElement. It implies that limit is defined by a geometrical element</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oLim1Type</code> the first limit type
+  * for the <code>Extrude</code> hybrid shape feature.
+  * <pre>
+  * Dim oLim1Type
+  * Set oLim1Type = Extrude.<font color="red">FirstLimitType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY FirstLimitType
+  HRESULT get_FirstLimitType ( out /*IDLRETVAL*/ long oLim1Type);
+  HRESULT put_FirstLimitType ( in                long iLim1Type);
+
+ /**
+  * Returns or sets the Second limit type.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>Unknown Limit type.</dd>
+  * <dt>1</dt>
+  * <dd>Limit type is Dimension. It implies that limit is defined by length</dd>
+  * <dt>2</dt>
+  * <dd>Limit type is UptoElement. It implies that limit is defined by a geometrical element</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oLim2Type</code> the second limit type
+  * for the <code>Extrude</code> hybrid shape feature.
+  * <pre>
+  * Dim oLim2Type
+  * Set oLim2Type = Extrude.<font color="red">SecondLimitType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY SecondLimitType
+  HRESULT get_SecondLimitType ( out /*IDLRETVAL*/ long oLim2Type);
+  HRESULT put_SecondLimitType ( in                long iLim2Type);
+
+ /**
+  * Returns or sets the First up-to element used to limit extrusion. 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>Lim1Elem</code> the First up-to element
+  * for the <code>Extrude</code> hybrid shape feature.
+  * <pre>
+  * Dim Lim1Elem As Reference 
+  * Set Lim1Elem = Extrude.<font color="red">FirstUptoElement</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY FirstUptoElement
+  HRESULT get_FirstUptoElement ( out /*IDLRETVAL*/ CATIAReference oLim1Elem);
+  HRESULT put_FirstUptoElement ( in                CATIAReference iLim1Elem);
+
+ /**
+  * Returns or sets the Second up-to element used to limit extrusion.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>Lim2Elem</code> the Second up-to element
+  * for the <code>Extrude</code> hybrid shape feature.
+  * <pre>
+  * Dim Lim2Elem As Reference 
+  * Set Lim2Elem = Extrude.<font color="red">SecondUptoElement</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY SecondUptoElement
+  HRESULT get_SecondUptoElement ( out /*IDLRETVAL*/ CATIAReference oLim2Elem);
+	HRESULT put_SecondUptoElement ( in                CATIAReference iLim2Elem);
+
+	/**
+	* Returns or Sets the Symmetrical Extension of Extrude (Limit 2 = -Limit 1).
+	*   @param iSym
+	*       Symetry flag  
+	*/
+#pragma PROPERTY SymmetricalExtension
+	HRESULT get_SymmetricalExtension(out /*IDLRETVAL*/ boolean oSym);
+	HRESULT put_SymmetricalExtension(in                boolean iSym);
+
+};
+
+
+// Interface name : CATIAHybridShapeExtrude
+#pragma ID CATIAHybridShapeExtrude "DCE:89640425-ae4a-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeExtrude
+
+
+// VB object name : HybridShapeExtrude (Id used in Visual Basic)
+#pragma ID HybridShapeExtrude "DCE:89640429-da6f-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeExtrude HybridShapeExtrude
+
+
+#endif
+// CATIAHybridShapeExtrude_IDL
+

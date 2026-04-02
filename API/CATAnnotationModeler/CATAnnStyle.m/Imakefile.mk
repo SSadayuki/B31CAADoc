@@ -1,0 +1,6 @@
+#
+# Imakefile de DRWSTYLE
+#
+
+BUILT_OBJECT_TYPE=NONE
+

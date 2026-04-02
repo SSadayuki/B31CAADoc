@@ -1,0 +1,191 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIANavigatorWorkbench.idl
+//   This automation interface allows to access Groups
+//
+//===================================================================
+//
+//  May 2000  Creation: LJE
+//
+//===================================================================
+#ifndef CATIANavigatorWorkbench_IDL
+#define CATIANavigatorWorkbench_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAWorkbench.idl"
+
+#include "CATIAGroups.idl"
+#include "CATIAAnnotatedViews.idl"
+#include "CATIAMarker3Ds.idl"
+#include "CATIADMUDataFlow.idl"
+#include "CATIAHyperlinks.idl"
+//#include "CatAnnotatedViewCmdOption.idl"
+
+/**  
+ * The object to manage all DMU Navigator entities.
+ * <p>This version allows to manage groups and annotated views.
+ */
+interface CATIANavigatorWorkbench : CATIAWorkbench
+{
+  /**
+   * Returns the Groups collection.
+   * <p>WARNING: this method will be DEPRECATED in the next release. It is recommended to use the method
+   * <tt>GetTechnologicalObject("Groups")</tt> on the root product, to retrieve the <tt>Groups</tt> collection.
+   * @sample
+   *    This example retrieves the Groups collection of the active document.
+   *    <pre>
+   *    Dim TheNavigatorWorkbench As Workbench
+   *    Set TheNavigatorWorkbench = CATIA.ActiveDocument.GetWorkbench ( "NavigatorWorkbench" )
+   *    Dim TheGroupsList As Groups
+   *    Set TheGroupsList = TheNavigatorWorkbench.<font color="red">Groups</font>
+   *    </pre>
+   */
+#pragma PROPERTY Groups
+  HRESULT get_Groups (out /*IDLRETVAL*/ CATIAGroups oGroups);
+
+  /**
+   * Returns the AnnotatedViews collection.
+   * <p>WARNING: this method will be DEPRECATED in the next release. It is recommended to use the method
+   * <tt>GetTechnologicalObject("AnnotatedViews")</tt> on the root product, to retrieve the <tt>AnnotatedViews</tt> collection.
+   * @sample
+   *    This example retrieves the AnnotatedViews collection of the active document.
+   *    <pre>
+   *    Dim TheNavigatorWorkbench As Workbench
+   *    Set TheNavigatorWorkbench = CATIA.ActiveDocument.GetWorkbench ( "NavigatorWorkbench" )
+   *    Dim TheAnnotatedViewsList As AnnotatedViews
+   *    Set TheAnnotatedViewsList = TheNavigatorWorkbench.<font color="red">AnnotatedViews</font>
+   *    </pre>
+   */
+#pragma PROPERTY AnnotatedViews
+  HRESULT get_AnnotatedViews (out /*IDLRETVAL*/ CATIAAnnotatedViews oAnnotatedViews);
+
+  /**
+   * Applies the annotated view to the current viewer.
+   * @param iAnnotatedView
+   *    The annotated view to apply.
+   * @sample
+   *    This example applies the view of the <tt>NewAnnotatedView</tt> AnnotatedView.
+   *    <pre>
+   *    TheNavigatorWorkbench.<font color="red">View</font>(NewAnnotatedView)
+   *    </pre>
+   */
+  HRESULT View (in CATIAAnnotatedView iAnnotatedView);
+
+  /**
+   * Applies the annotated view to the current viewer.
+   * @param iAnnotatedView
+   *    The annotated view to apply.
+   * @param iViewOptions
+   *    The option to launch the annotated view command, possible values are
+   *    <ul>
+   *    <li>CatAnnotatedViewCmdOption_NoToolbar   : No Toolbar for annotation creation
+   *    <li>CatAnnotatedViewCmdOption_NoAnimation : No Animation when applying the view
+   *    </ul>
+   * @sample
+   *    This example applies the view of the <tt>NewAnnotatedView</tt> AnnotatedView.
+   *    <pre>
+   *    TheNavigatorWorkbench.<font color="red">View,CatAnnotatedViewCmdOption_NoAnimation+CatAnnotatedViewCmdOption_NoToolbar</font>(NewAnnotatedView)
+   *    </pre>
+   */
+  HRESULT AdvancedView (in CATIAAnnotatedView iAnnotatedView, in short iViewOption);
+
+  /**
+   * Returns the Marker3Ds collection.
+   * <p>WARNING: this method will be DEPRECATED in the next release. It is recommended to use the method
+   * <tt>GetTechnologicalObject("Marker3Ds")</tt> on the root product, to retrieve the <tt>Marker3Ds</tt> collection.
+   * @sample
+   *    This example retrieves the Marker3Ds collection of the active document.
+   *    <pre>
+   *    Dim TheNavigatorWorkbench As Workbench
+   *    Set TheNavigatorWorkbench = CATIA.ActiveDocument.GetWorkbench ( "NavigatorWorkbench" )
+   *    Dim TheMarker3DsList As AnnotatedViews
+   *    Set TheMarker3DsList = TheNavigatorWorkbench.<font color="red">Marker3Ds</font>
+   *    </pre>
+   */
+#pragma PROPERTY Marker3Ds
+  HRESULT get_Marker3Ds (out /*IDLRETVAL*/ CATIAMarker3Ds oMarker3Ds);
+  
+  /** @nodoc */
+  HRESULT DMUStart (in CATBSTR iName);
+  
+  /** @nodoc */
+  HRESULT DMUStop (in CATBSTR iName);
+
+  /**
+   * Returns the DMU DataFlow object.
+   */
+#pragma PROPERTY DMUDataFlow
+  HRESULT get_DMUDataFlow (out /*IDLRETVAL*/ CATIADMUDataFlow oDMUDataFlow);
+
+  /**
+   * Returns the order of an object.
+   * @param iObject
+   *    The object whose rank has to be returned.
+   * @param oCurrentRank
+   *    The current rank of the object (from 1 to n the number of objects in the collection).
+   * @sample
+   *    This example creates an annotated view <tt>NewAnnotatedView</tt> and returns its position.
+   *    <pre>
+   *    Dim TheNavigatorWorkbench As Workbench
+   *    Set TheNavigatorWorkbench = CATIA.ActiveDocument.GetWorkbench ( "NavigatorWorkbench" )
+   *    
+   *    Dim NewAnnotatedView As AnnotatedView
+   *    Set NewAnnotatedView = TheAnnotatedViews.<font color="red">Add</font>
+   *    
+   *    Dim iOrder As Integer
+   *    iOrder = TheNavigatorWorkbench.GetOrder(NewAnnotatedView)
+   *    </pre>
+   */
+  HRESULT GetOrder (in CATBaseDispatch iObject, out /*IDLRETVAL*/ long oCurrentRank);
+
+  /**
+   * Sets the order of an object.
+   * @param iObject
+   *    The object whose rank has to be modified.
+   * @param iNewRank
+   *    The new rank of the object (from 1 to n the number of objects in the collection).
+   * @sample
+   *    This example creates an annotated view <tt>NewAnnotatedView</tt> and move it to the first position.
+   *    <pre>
+   *    Dim TheNavigatorWorkbench As Workbench
+   *    Set TheNavigatorWorkbench = CATIA.ActiveDocument.GetWorkbench ( "NavigatorWorkbench" )
+   *    
+   *    Dim NewAnnotatedView As AnnotatedView
+   *    Set NewAnnotatedView = TheAnnotatedViews.<font color="red">Add</font>
+   *    TheNavigatorWorkbench.SetOrder NewAnnotatedView, 1
+   *    </pre>
+   */
+  HRESULT SetOrder (in CATBaseDispatch iObject, in long iNewRank);
+
+  /**
+   * Returns the Hyperlinks collection.
+   * <p>WARNING: this method will be DEPRECATED in the next release. It is recommended to use the method
+   * <tt>GetTechnologicalObject("Hyperlinks")</tt> on the root product, to retrieve the <tt>Hyperlinks</tt> collection.
+   * @sample
+   *    This example retrieves the Hyperlinks collection of the active document.
+   *    <pre>
+   *    Dim TheNavigatorWorkbench As Workbench
+   *    Set TheNavigatorWorkbench = CATIA.ActiveDocument.GetWorkbench ( "NavigatorWorkbench" )
+   *    Dim HyperlinksList As Hyperlinks
+   *    Set HyperlinksList = TheNavigatorWorkbench.<font color="red">Hyperlinks</font>
+   *    </pre>
+   */
+#pragma PROPERTY Hyperlinks
+  HRESULT get_Hyperlinks (out /*IDLRETVAL*/ CATIAHyperlinks oHyperlinks);
+};
+
+// Interface name : CATIANavigatorWorkbench
+#pragma ID CATIANavigatorWorkbench "DCE:d66d7dae-325f-11d4-9465006094eb3826"
+#pragma DUAL CATIANavigatorWorkbench
+
+// VB object name : NavigatorWorkbench (Id used in Visual Basic)
+#pragma ID NavigatorWorkbench "DCE:039b2d1c-3260-11d4-9465006094eb3826"
+#pragma ALIAS CATIANavigatorWorkbench NavigatorWorkbench
+
+#endif

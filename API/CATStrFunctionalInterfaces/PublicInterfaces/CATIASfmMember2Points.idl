@@ -1,0 +1,126 @@
+// COPYRIGHT Dassault Systemes 2007
+//=============================================================================
+// CATIASfmMember2Points
+//   Define the CATIASfmMember2Points interface for managing SfmMember2Points
+//   attributes
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar. 2007  Creation                                                S. QUINCI
+//=============================================================================
+#ifndef CATIASfmMember2Points_IDL
+#define CATIASfmMember2Points_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASfmMember.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+
+/**
+ * Interface to manage Member created with one curve and a reference surface.
+ * <b>Role</b>: To manage member created with one curve and a reference surface.
+ */
+interface CATIASfmMember2Points : CATIASfmMember
+{
+  /**
+  * Returns or sets the point.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAVertex.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Point</code> the supporting curve for the <code>SfmMember2Points</code> feature.
+  * <pre>
+  * Dim Point As Reference
+  * Set Point = SfmMember2Points.<font color="red">StartPointSpec</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY StartPointSpec
+  HRESULT get_StartPointSpec(out /*IDLRETVAL*/ CATIAReference oPoint);
+  HRESULT put_StartPointSpec(in CATIAReference iPoint);
+
+  #pragma PROPERTY EndPointSpec
+  HRESULT get_EndPointSpec(out /*IDLRETVAL*/ CATIAReference oPoint);
+  HRESULT put_EndPointSpec(in CATIAReference iPoint);
+
+  /**
+  * Returns or sets the point on curve information: curve, ratio or length mode, offset and orientation.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Curve</code> the supporting curve for the <code>SfmMember2Points</code> feature.
+  * <pre>
+  * Dim Curve As Reference
+  * Set Curve = SfmMember2Points.<font color="red">StartPointOnCrvCurve</font>
+  * </pre>
+  * </dl>
+  */
+  #pragma PROPERTY StartPointOnCrvCurve
+  HRESULT get_StartPointOnCrvCurve(out /*IDLRETVAL*/ CATIAReference oCurve);
+  HRESULT put_StartPointOnCrvCurve(in CATIAReference iCurve);
+
+  #pragma PROPERTY StartPointOnCrvMode
+  HRESULT get_StartPointOnCrvMode(out /*IDLRETVAL*/ boolean oMode);
+  HRESULT put_StartPointOnCrvMode(in boolean oCurve);
+
+  #pragma PROPERTY StartPointOnCrvOffset
+  HRESULT get_StartPointOnCrvOffset(out /*IDLRETVAL*/ double oOffset);
+  HRESULT put_StartPointOnCrvOffset(in double iOffset);
+
+  #pragma PROPERTY StartPointOnCrvOffsetParam
+  HRESULT get_StartPointOnCrvOffsetParam(out /*IDLRETVAL*/ CATIALength oOffset);
+
+  #pragma PROPERTY StartPointOnCrvOrientation
+  HRESULT get_StartPointOnCrvOrientation(out /*IDLRETVAL*/ long oOrientation);
+  HRESULT put_StartPointOnCrvOrientation(in long iOrientation);
+
+  #pragma PROPERTY EndPointOnCrvCurve
+  HRESULT get_EndPointOnCrvCurve(out /*IDLRETVAL*/ CATIAReference oCurve);
+  HRESULT put_EndPointOnCrvCurve(in CATIAReference iCurve);
+
+  #pragma PROPERTY EndPointOnCrvMode
+  HRESULT get_EndPointOnCrvMode(out /*IDLRETVAL*/ boolean oMode);
+  HRESULT put_EndPointOnCrvMode(in boolean oCurve);
+
+  #pragma PROPERTY EndPointOnCrvOffset
+  HRESULT get_EndPointOnCrvOffset(out /*IDLRETVAL*/ double oOffset);
+  HRESULT put_EndPointOnCrvOffset(in double iOffset);
+
+  #pragma PROPERTY EndPointOnCrvOffsetParam
+  HRESULT get_EndPointOnCrvOffsetParam(out /*IDLRETVAL*/ CATIALength oOffset);
+
+  #pragma PROPERTY EndPointOnCrvOrientation
+  HRESULT get_EndPointOnCrvOrientation(out /*IDLRETVAL*/ long oOrientation);
+  HRESULT put_EndPointOnCrvOrientation(in long iOrientation);
+
+  /**
+  * Inverts the orientation of the offset for an extremity point.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example inverts the orientation of the start point on curve extremity of the <code>SfmMember2Points</code> feature.
+  * <pre>
+  * SfmMember2Points.<font color="red">InvertStartPointOnCrvOrientation</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT InvertStartPointOnCrvOrientation();
+  HRESULT InvertEndPointOnCrvOrientation();
+};
+
+// Interface name : CATIASfmMember2Points
+#pragma ID CATIASfmMember2Points "DCE:7620bdb9-9cad-4aa7-8f0308b1e3b761bd"
+#pragma DUAL CATIASfmMember2Points
+
+// VB object name : SfmMember2Points (Id used in Visual Basic)
+#pragma ID SfmMember2Points "DCE:0d079409-f54d-42eb-be283b139786e65a"
+#pragma ALIAS CATIASfmMember2Points SfmMember2Points
+
+#endif

@@ -1,0 +1,247 @@
+
+//===================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//
+//===================================================================
+//
+// CATIAShot.idl
+// Automation interface for the Shot element 
+//
+//===================================================================
+
+
+
+#ifndef CATIAShot_IDL
+#define CATIAShot_IDL
+
+
+
+/*IDLREP*/
+
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+
+
+    /**
+     * The interface to access a CATIAShot.
+     * <b>Role:</b> A CATIAShot (or shot) is the base element that @href 
+     * CATIASampled objects are composed of.  For example, when considering a 
+     * @href CATIATrack, each recorded position is a shot.
+     */
+
+
+interface CATIAShot : CATIABase
+{
+    
+
+    /**
+      * Retrieves the duration (in terms of distance) associated to a shot.  
+      * The duration of a shot is the amount of time needed to travel from 
+      * the previous shot to the current shot. 
+      * However, this method retrieves the distance of the current shot
+      * from that of the previous shot. It is left for the user to calculate
+      * the Time using distance/speed Formula.
+      *
+      * 
+      * Some key things to note are:
+      * <ul>
+      *     <li> The first shot should have a duration of zero.
+      *     <li> The value of the duration is a positive real number.  Hence,
+      *          0.454 & 1345 are legal while -18 is not.
+      * </ul>
+      * @param oTime
+      *    The duration (distance) of a shot.
+      */
+
+    HRESULT GetDuration (out /*IDLRETVAL*/ double oDuration);
+
+
+    /**
+      * Sets the duration (in terms of distance) associated to a shot.  
+      * The duration of a shot is the amount of time needed to travel from 
+      * the previous shot to the current shot. 
+      * However, this method sets the distance of the current shot
+      * from that of the previous shot. It is left for the user to calculate
+      * the distance that needs to be set for the shot using the Time*Speed Formula.
+      *
+      * 
+      * Some key things to note are:
+      * <ul>
+      *     <li> The first shot should have a duration of zero.
+      *     <li> The value of the duration is a positive real number.  Hence,
+      *          0.454 & 1345 are legal while -18 is not.
+      * </ul>
+      * @param oTime
+      *    The duration (distance) of a shot.
+      */
+
+    HRESULT SetDuration (in double iDuration);
+
+
+    // We shall not document this method since it always returns 1
+    /**
+     * @nodoc
+     */
+    HRESULT GetNbDataBlocks (out /*IDLRETVAL*/ short oNb);
+
+
+    /**
+     * Retrieves the data related to the shot.
+     * <b>Role:</b> To get the numerical information related to the shot.  For 
+     * example, for a @href CATIATrack, each shot corresponds to a position that 
+     * is used when evaluating a defined trajectory.  Please note that these values
+     * are relative to the position of object, specifically to where the object
+     * started from.
+     * @param iIndex
+     *    A shot can have more than one piece of data associated to it.  The value
+     *    value of iIndex refers to which specific data item to retrieve.  The
+     *    legal values of iIndex correspond to the rank of the data item (that is
+     *    the 0 for the first item, 1 for the second item).
+     * @return An array of associated values to the shot.
+     */
+    HRESULT GetDatas (in short iIndex, inout CATSafeArrayVariant oPosition);
+
+
+    /**
+     * Set the data related to the shot.
+     * <b>Role:</b> To set the numerical information related to the shot.  For 
+     * example, for a @href CATIATrack, each shot corresponds to a position that 
+     * is used when evaluating a defined trajectory.
+     * @param iPosition
+     *    An array of associated values to the shot.  Please note that these values
+     *    are relative to the position of object, specifically to where the object
+     *    started from.
+     */
+    HRESULT SetDatas (in CATSafeArrayVariant iPosition);
+
+
+    /**
+     * Appends to the data related to the shot.
+     * <b>Role:</b> In certain cases, a shot contains more than one data item.  The 
+     * SetDatas method is used to store the first data item.  This method is
+     * then used to specify any additional data items.
+     * @param iPosition
+     *    An array of associated values to the shot.  Please note that these values
+     *    are relative to the position of object, specifically to where the object
+     *    started from.
+     */
+
+    HRESULT AppendDatas (in CATSafeArrayVariant iPosition);
+
+
+    /**
+     * Retrieves the data related to the shot.
+     * <b>Role:</b> To get the numerical information related to the shot.  For 
+     * example, for a @href CATIATrack, each shot corresponds to a position that 
+     * is used when evaluating a defined trajectory.  Please note that these values
+     * are absolute (relative to the world coordinate system), specifically to where 
+     * the object started from.
+     * @param iIndex
+     *    A shot can have more than one piece of data associated to it.  The value
+     *    of iIndex refers to which specific data item to retrieve.  The
+     *    legal values of iIndex correspond to the rank of the data item (that is
+     *    the 0 for the first item, 1 for the second item).
+     * @return An array of associated values to the shot.
+     */
+
+    HRESULT GetAbsDatas (in short iIndex, inout CATSafeArrayVariant oPosition);
+
+
+    /**
+     * Set the data related to the shot.
+     * <b>Role:</b> To set the numerical information related to the shot.  For 
+     * example, for a @href CATIATrack, each shot corresponds to a position that 
+     * is used when evaluating a defined trajectory.  
+     * @param iPosition
+     *    An array of associated values to the shot.  Please note that these values
+     *    are absolute (relative to the world coordinate system), specifically to 
+     *    where the object started from.
+     */
+
+    HRESULT SetAbsDatas (in CATSafeArrayVariant iPosition);
+
+
+    /**
+     * Appends to the data related to the shot.
+     * <b>Role:</b> In certain cases, a shot contains more than one data item.  The 
+     * SetDatas method is used to store the first data item.  This method is
+     * then used to specify any additional data items
+     * @param iPosition
+     *    An array of associated values to the shot.  Please note that these values
+     *    are absolute (relative to the world coordinate system), specifically to 
+     *    where the object started from.
+     */
+
+    HRESULT AppendAbsDatas (in CATSafeArrayVariant iPosition);
+
+
+    /**
+      * Retrieves all the data associated to the part.
+      */
+    HRESULT GetTechnologicalDatas (inout CATSafeArrayVariant oDatas);
+
+    /**
+      * Sets all the data associated to the part.
+      */
+    HRESULT SetTechnologicalDatas (in CATSafeArrayVariant iDatas);
+
+
+    // Deprecated. Use Get/Set/AppendDatas
+
+    /**
+     * @nodoc
+     */
+    HRESULT GetPosition(inout CATSafeArrayVariant oPosition);
+
+    /**
+     * @nodoc
+     */
+    HRESULT SetPosition(in CATSafeArrayVariant iPosition);
+
+
+    // Deprecated. Use Get/Set/AppendAbsDatas
+
+    /**
+     * @nodoc
+     */
+    HRESULT GetAbsPosition(inout CATSafeArrayVariant oPosition);
+
+    /**
+     * @nodoc
+     */
+    HRESULT SetAbsPosition(in CATSafeArrayVariant iPosition);
+
+
+    // Deprecated. Use Get/SetTechnologicalDatas
+
+    /**
+     * @nodoc
+     */
+    HRESULT GetExtraDatas(inout CATSafeArrayVariant oDatas);
+
+    /**
+     * @nodoc
+     */
+    HRESULT SetExtraDatas(in CATSafeArrayVariant iDatas);
+};
+
+
+// Interface name : CATIAShot
+#pragma ID CATIAShot "DCE:cf005ad8-f693-11d4-9f0700508b67522f"
+#pragma DUAL CATIAShot
+
+
+// VB object name : Shot (Id used in Visual Basic)
+#pragma ID Shot "DCE:cf005ad9-f693-11d4-9f0700508b67522f"
+#pragma ALIAS CATIAShot Shot
+
+
+#endif

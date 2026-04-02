@@ -1,0 +1,184 @@
+//=============================================================================
+// COPYRIGHT Dassault Systemes 2013
+//=============================================================================
+// CATIASfmStiffenerOnFreeEdge
+//   Interface for managing Stiffener on Free Edge
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Oct  Creation                                                Bhupendra MITHE
+//=============================================================================
+
+#ifndef CATIASfmStiffenerOnFreeEdge_IDL
+#define CATIASfmStiffenerOnFreeEdge_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASfmProfile.idl"
+#include "CATIAReference.idl"
+#include "CATIASfmWelds.idl"
+#include "CATIALength.idl"
+
+/**
+* Interface to manage different attributes of Stiffener on free edge.
+* <b>Role</b>: Provides access to Structural Functional Modeler's Stiffener on free edge.
+*/
+
+interface CATIASfmStiffenerOnFreeEdge : CATIASfmProfile
+{
+  /**
+  * Returns the molded surface.
+  * @param oMoldedSurface [out]
+  *      The retrieved Molded Surface.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves <code>MoldedSurface</code> the molded surface of the <code>SfmStiffenerOnFreeEdge</code> feature.
+  * <pre>
+  * Dim MoldedSurface As Reference
+  * Set MoldedSurface = SfmStiffenerOnFreeEdge.<font color="red">GetMoldedSurface</font>
+  * </pre>
+  * </dl> 
+  */ 
+  HRESULT GetMoldedSurface(out /*IDLRETVAL*/ CATIAReference oMoldedSurface);
+
+  /**
+  * Returns the Free Edge.
+  * @param oFreeEdge [out]
+  *      The retrieved Free Edge.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>FreeEdge</code> the Free Edge of the <code>SfmStiffenerOnFreeEdge</code> feature.
+  * <pre>
+  * Dim FreeEdge As Reference
+  * Set FreeEdge = SfmStiffenerOnFreeEdge.<font color="red">GetFreeEdge</font>
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetFreeEdge(out /*IDLRETVAL*/ CATIAReference oFreeEdge);
+
+  /**
+  * Sets the Free Edge.
+  * @param iFreeEdge [in]
+  *      The input Free Edge.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example sets <code>FreeEdge</code> the Free Edge of the <code>SfmStiffenerOnFreeEdge</code> feature.
+  * <pre>
+  * Dim FreeEdge As Reference
+  * Set FreeEdge = SfmStiffenerOnFreeEdge.<font color="red">SetFreeEdge</font>
+  * </pre>
+  * </dl> 
+  */
+  HRESULT SetFreeEdge(in CATIAReference iFreeEdge);
+  
+  /**
+  * Returns or sets the SFE's Free Edge offset.
+  * @param oOffset [out]
+  *      The retrieved Free Edge offset.
+  * @param iOffset [in]
+  *      The input Free Edge offset.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Offset</code> the Free Edge offset of the <code>SfmStiffenerOnFreeEdge</code> feature.
+  * <pre>
+  * Dim Offset As Double
+  * Set Offset = SfmStiffenerOnFreeEdge.<font color="red">FreeEdgeOffset</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY FreeEdgeOffset
+  HRESULT get_FreeEdgeOffset(out /*IDLRETVAL*/ double oOffset);
+  HRESULT put_FreeEdgeOffset(in double iOffset);
+
+  /**
+  * Returns or sets the SFE's section angle.
+  * @param oAngle [out]
+  *      The retrieved angle of the section of SFE.
+  * @param iAngle [in]
+  *      The retrieved angle of the section of SFE.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Angle</code> the angle of the section of <code>SfmStiffenerOnFreeEdge</code> feature.
+  * <pre>
+  * Dim Angle As Double
+  * Set Angle = SfmStiffenerOnFreeEdge.<font color="red">SectionAngle</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY SectionAngle
+  HRESULT get_SectionAngle(out /*IDLRETVAL*/ double oSectionAngle);
+  HRESULT put_SectionAngle(in double iAngle);
+
+  /**
+  * Returns or sets the side orientation.
+  * @param oOrientation [out]
+  *      The retrieved Side Orientation of SFE.
+  * @param iOrientation [in]
+  *      The input Side Orientation of SFE.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves side orientation of the Stiffener.
+  * <pre>
+  * Dim Orient As Long
+  * Orient = SfmStiffenerOnFreeEdge.<font color="red">SideOrientation</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY SideOrientation
+  HRESULT get_SideOrientation(out /*IDLRETVAL*/ long oOrientation);
+  HRESULT put_SideOrientation(in long iOrientation);
+
+  /**
+  * Gets Welds feature on operated SFE.
+  * @param iOperatingEle [in]
+  *     Operating element of the weld features.
+  * @param oWelds [out]
+  *      The retrieved Weld features.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets welds features of Split SFE.
+  * <pre>
+  * Dim Welds As SfmWelds
+  * Set Welds = SplitSFE.<font color="red">GetWelds</font>(Nothing)
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetWelds(in CATIAReference iOperatingEle, out /*IDLRETVAL*/ CATIASfmWelds oWelds);
+  
+};
+
+// Interface name : CATIASfmStiffenerOnFreeEdge
+#pragma ID CATIASfmStiffenerOnFreeEdge "DCE:48CD4B64-9D93-45B5-A5DFAABF95455F75"
+#pragma DUAL CATIASfmStiffenerOnFreeEdge
+
+// VB object name : SfmStiffenerOnFreeEdge (Id used in Visual Basic)
+#pragma ID SfmStiffenerOnFreeEdge "DCE:4A159B20-3831-46EE-B585EA363A5FBF34"
+#pragma ALIAS CATIASfmStiffenerOnFreeEdge SfmStiffenerOnFreeEdge
+
+#endif

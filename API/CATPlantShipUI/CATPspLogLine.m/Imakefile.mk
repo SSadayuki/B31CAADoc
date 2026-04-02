@@ -1,0 +1,11 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH = AC0SPBAS AD0XXBAS CD0FRAME CD0WIN DI0PANV2 DI0STATE JS0GROUP JS0FM \
+			ON0PROP YN000MFL CK0PARAM\
+		    CATSktAssistant  CATVisualization KnowledgeInterfacesUUID \ 
+		    CATEsuUtil AC0ITEMS CATCclInterfaces Search CATLifToolkit \
+            CATProductStructure1 CATPspRename CATPspUtilities CATPspUUID CATDMUBase AECReviewItf
+
+SH_LINK_WITH= $(LINK_WITH)
+
+

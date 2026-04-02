@@ -1,0 +1,53 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIAProcessDocument_IDL
+#define CATIAProcessDocument_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIADocument.idl"
+
+/**  
+ * This interface is used to access the PPRDocument and to add a new library.  
+ */
+interface CATIAProcessDocument : CATIADocument 
+{
+
+/**
+* Retrieves the interface which manages the PPRDocument.
+* @return
+*    The PPRDocument corresponding to the current Process document.
+*/
+#pragma PROPERTY PPRDocument
+	HRESULT get_PPRDocument(out /*IDLRETVAL*/ CATBaseDispatch oPPRDoc);
+
+/**
+ * Adds a new library to the current Process document. 
+ * @param iFileName
+ * The name of the library to be added. 
+ */
+	HRESULT AddLibrary( in CATBSTR iFileName) ;
+
+/**
+* Retrieves the interface which manages the 3D state positions.
+* @return
+*    The DNBIA3DStatePositionManagement corresponding to the current Process document.
+*/
+#pragma PROPERTY DNB3DStatePositionManagement
+	HRESULT get_DNB3DStatePositionManagement(out /*IDLRETVAL*/ CATBaseDispatch oPositionMgt);
+
+};
+
+// Interface name : CATIAProcessDocument
+#pragma ID CATIAProcessDocument "DCE:933e0a47-1c47-11d5-859e0000863e1bbb"
+#pragma DUAL CATIAProcessDocument
+
+// VB object name : ProcessDocument (Id used in Visual Basic)
+#pragma ID ProcessDocument "DCE:933e0a48-1c47-11d5-859e0000863e1bbb"
+#pragma ALIAS CATIAProcessDocument ProcessDocument
+
+#endif

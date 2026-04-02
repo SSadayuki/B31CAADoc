@@ -1,0 +1,30 @@
+# COPYRIGHT DASSAULT SYSTEMES 1999
+#
+# SHARED LIBRARY 
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY 
+ 
+# DO NOT EDIT :: THE CAA2 WIZARDS WILL ADD CODE HERE
+WIZARD_LINK_MODULES = \
+JS0GROUP CATObjectSpecsModeler CATClnSpecs CATClnBase \
+CATObjectModelerBase AC0SPBAS \
+AS0STARTUP \
+CATLiteralFeatures \
+CATEsuUtil \
+CATArrangementItf CATClnRou RouRoutable CATArrProductServices \
+# END WIZARD EDITION ZONE
+
+LINK_WITH = $(WIZARD_LINK_MODULES) \
+	CATMathematics ObjectModelerBaseUUID
+
+# System dependant variables
+#
+OS = AIX
+#
+OS = HP-UX
+#
+OS = IRIX
+#
+OS = SunOS
+#
+OS = Windows_NT

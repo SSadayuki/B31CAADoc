@@ -1,0 +1,53 @@
+#ifndef CATIAAnalysisGlobalSensor_IDL
+#define CATIAAnalysisGlobalSensor_IDL
+/*IDLREP*/
+
+//
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//
+//                                   
+// CATIAAnalysisGlobalSensor:                           
+// Exposed interface for Analysis Global Sensor
+//                                   
+//
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIAAnalysisSensor.idl"
+
+/**
+ * Represent the  analysis global sensor. <br>
+ * This object is a kind of AnalysisSensor based on analysis feature global results.
+ * For example, extract the Energy value of a solution.
+ */ 
+
+interface CATIAAnalysisGlobalSensor : CATIAAnalysisSensor
+{
+
+/**
+ * Sets the Physical type  and sub physical type that will be computed by the sensor.
+ * @param iTypeBSTR The physical type identifier.
+ * @param iSubTypeBSTR The "sub" physical type identifier.
+ */
+  HRESULT SetIdentifier (in CATBSTR iTypeBSTR,in CATBSTR iSubTypeBSTR); 
+
+/**
+ * Retreives the Physical type  and sub physical type that will be computed by the sensor.
+ * @param oTypeBSTR The physical type identifier.
+ * @param oSubTypeBSTR The "sub" physical type identifier.
+ */
+  HRESULT GetIdentifier (inout CATBSTR oTypeBSTR,inout CATBSTR oSubTypeBSTR); 
+
+};
+
+// Interface name : CATIAAnalysisGlobalSensor
+#pragma ID CATIAAnalysisGlobalSensor "DCE:FA7BA283-5361-445b-97C4E4063B5E0D50"
+#pragma DUAL CATIAAnalysisGlobalSensor
+
+// VB object name : AnalysisGlobalSensor (Id used in Visual Basic)
+#pragma ID AnalysisGlobalSensor "DCE:FD738E6B-80BD-4f33-BAF2479617814E31"
+#pragma ALIAS CATIAAnalysisGlobalSensor AnalysisGlobalSensor
+
+#endif
+// CATIAAnalysisGlobalSensor_IDL

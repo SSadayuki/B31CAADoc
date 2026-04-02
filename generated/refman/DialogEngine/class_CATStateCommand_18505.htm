@@ -1,0 +1,1394 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>DialogEngine CATStateCommand Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../DialogEngine.htm" href="../DialogEngine.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "DialogEngine";	}
+		function getCurrentObjectName() { 
+ 	return "CATStateCommand"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>DialogEngine Framework: CATStateCommand <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATStateCommand_18505','CATStateCommand','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can derive this class.</b></p>
+<hr/>
+<p>
+ public class <b>CATStateCommand</b>
+</p>
+<p>
+<b><i> Base class for a State Command.</i></b><br>
+
+ <b>Role</b>: A State Command is a command modeled as a state machine.
+ It is a graph made of states linked between them using incoming and
+ outgoing transitions. 
+ The states are composed of dialog agents which let the end user input the
+ requested parameters. 
+ Conditions may be associated with states and transitions in order to 
+ guide the progression according to the user inputs. Actions are linked
+ to states and transition to execute the know-how of the command.
+ <br>
+ To create a State Command, derive the <tt>CATStateCommand</tt> class and 
+ override the methods:
+ <ul>
+ <li><script type="text/javascript"> activateLinkAnchor('CATCommand','Activate','CATCommand.Activate') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('CATCommand','Desactivate','CATCommand.Desactivate') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('CATCommand','Cancel','CATCommand.Cancel') </script> </li> </ul>
+ if needed to manage the activation cycle and above all
+ <ul>
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','BuildGraph','BuildGraph') </script> </li> called once before the first 
+<script type="text/javascript"> activateLinkAnchor('CATCommand','Activate','CATCommand.Activate') </script> method
+ </ul>
+ in order to build the state chart.
+ <p>
+ <b>Life cycle</b>
+ <p>
+ In general, a main State Command is allocated by the command header
+ and is deallocated by the internal focus mechanism.
+ <br>A main State Command ends when:
+ <ul>
+ <li>another exclusive command is activated:
+ the State Command is cancelled by the focus manager.</li>
+ <li>the NULL state is reached:
+ the State Command cancels itself.</li>
+ <li>the Cancel state is reached:
+ same as the NULL state, but a global Undo is executed.</li>
+ <li>the 
+<script type="text/javascript"> activateLinkAnchor('CATCommand','RequestDelayedDestruction','CATCommand.RequestDelayedDestruction') </script> method is called: a good State Command prefers to use transitions towards the NULL state.</li>
+ </ul>
+ <p>
+ <b>Error Management during execution</b>
+ <p>
+ Exceptions thrown during condition evaluation or action execution must be caught
+ by the condition methods or the action methods.
+ <br>Nevertheless, if DialogEngine catches one, the main State Command is desactivated
+ while a default error dialog box displays information about the error.
+ Then the main State Command resumes after the error dialog box is closed.
+ 
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATDialogState','','CATDialogState') </script>, <script type="text/javascript"> activateLinkAnchor('CATDialogTransition','','CATDialogTransition') </script>, <script type="text/javascript"> activateLinkAnchor('CATStateCondition','','CATStateCondition') </script>, <script type="text/javascript"> activateLinkAnchor('CATDiaAction','','CATDiaAction') </script>, <script type="text/javascript"> activateLinkAnchor('CATDialogAgent','','CATDialogAgent') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATStateCommand(CATString&amp;,CATDlgEngBehavior,CATCommandMode)"><b>CATStateCommand</b></a>(CATString&amp;,CATDlgEngBehavior,CATCommandMode)
+</td><td id='tdright'>  Constructs a State Command.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATStateCommand()"><b>~CATStateCommand</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Action(ActionMethod,ActionMethod,ActionMethod,void*)"><b>Action</b></a>(ActionMethod,ActionMethod,ActionMethod,void*)
+</td><td id='tdright'>  Creates an action given the addresses of the methods to execute.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddCSOClient(CATCommand*)"><b>AddCSOClient</b></a>(CATCommand*)
+</td><td id='tdright'>  Declares an agent as a CSO client.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddDialogState(CATDialogState*)"><b>AddDialogState</b></a>(CATDialogState*)
+</td><td id='tdright'>  Adds an existing state to the command.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddDialogState(CATString&amp;)"><b>AddDialogState</b></a>(CATString&amp;)
+</td><td id='tdright'>  Creates a state.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddLocalUndo(CATCommandGlobalUndo*,CATUnicodeString&amp;,CATDlgEngBehavior)"><b>AddLocalUndo</b></a>(CATCommandGlobalUndo*,CATUnicodeString&amp;,CATDlgEngBehavior)
+</td><td id='tdright'>  Adds a local Undo step.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddSDOElement(CATBaseUnknown*)"><b>AddSDOElement</b></a>(CATBaseUnknown*)
+</td><td id='tdright'>  Sets the object in the CATSDO.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddTransition(CATDialogState*,CATDialogState*)"><b>AddTransition</b></a>(CATDialogState*,CATDialogState*)
+</td><td id='tdright'>  Creates a transition given its source and target states.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddTransition(CATDialogState*,CATDialogState*,CATStateCondition*,CATDiaAction*)"><b>AddTransition</b></a>(CATDialogState*,CATDialogState*,CATStateCondition*,CATDiaAction*)
+</td><td id='tdright'>  Creates a transition given its source and target states, its condition 
+ and its action.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AndAction(CATDiaAction*,CATDiaAction*)"><b>AndAction</b></a>(CATDiaAction*,CATDiaAction*)
+</td><td id='tdright'>  Creates a composite action which combines actions using the AND operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AndCondition(CATStateCondition*,CATStateCondition*)"><b>AndCondition</b></a>(CATStateCondition*,CATStateCondition*)
+</td><td id='tdright'>  Creates a composite condition which combines conditions using the 
+ AND operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BuildGraph()"><b>BuildGraph</b></a>()
+</td><td id='tdright'>  Builds the command statechart.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Condition(ConditionMethod,void*)"><b>Condition</b></a>(ConditionMethod,void*)
+</td><td id='tdright'>  Creates a condition given the address of a method to execute.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ExecuteUndoAtEnd()"><b>ExecuteUndoAtEnd</b></a>()
+</td><td id='tdright'>  Requests to undo the State Command when it ends.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Filter(FilterMethod,void*)"><b>Filter</b></a>(FilterMethod,void*)
+</td><td id='tdright'>  Creates an agent filter given the address of a method to execute.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCancelState()"><b>GetCancelState</b></a>()
+</td><td id='tdright'>  Creates the cancel state or retrieves it if it already exists.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCurrentState()"><b>GetCurrentState</b></a>()
+</td><td id='tdright'>  Returns the current state.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetError()"><b>GetError</b></a>()
+</td><td id='tdright'>  Returns the error caught by DialogEngine during a condition evaluation or
+ an action execution.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetGlobalUndo()"><b>GetGlobalUndo</b></a>()
+</td><td id='tdright'>  Returns the undo/redo object associated with the command.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetInitialState(CATString&amp;)"><b>GetInitialState</b></a>(CATString&amp;)
+</td><td id='tdright'>  Creates the initial state or retrieves it if it already exists.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLastModifiedAgent()"><b>GetLastModifiedAgent</b></a>()
+</td><td id='tdright'>  Returns the agent which has just been modified.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLastNotification()"><b>GetLastNotification</b></a>()
+</td><td id='tdright'>  Returns the latest notification.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNextState()"><b>GetNextState</b></a>()
+</td><td id='tdright'>  Returns the pointed command state and points to the next one.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNextTransition()"><b>GetNextTransition</b></a>()
+</td><td id='tdright'>  Returns the pointed command transition and points to the next one.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#InitStateList()"><b>InitStateList</b></a>()
+</td><td id='tdright'>  Points to the first command state.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#InitTransitionList()"><b>InitTransitionList</b></a>()
+</td><td id='tdright'>  Points to the first command transition.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsLastModifiedAgent(CATCommand*)"><b>IsLastModifiedAgent</b></a>(CATCommand*)
+</td><td id='tdright'>  Tests if an agent has just been modified.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsLastModifiedAgentCondition(CATCommand*,char*)"><b>IsLastModifiedAgentCondition</b></a>(CATCommand*,char*)
+</td><td id='tdright'>  Creates a condition which checks whether an agent is the latest modified
+ agent.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsLastModifiedAgentCondition(CATCommand*,CATNotification*)"><b>IsLastModifiedAgentCondition</b></a>(CATCommand*,CATNotification*)
+</td><td id='tdright'>  Creates a condition which checks whether an agent is the latest modified
+ agent.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsOutputSetCondition(CATCommand*)"><b>IsOutputSetCondition</b></a>(CATCommand*)
+</td><td id='tdright'>  Creates a condition which checks whether an agent is valued.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsRedoMode()"><b>IsRedoMode</b></a>()
+</td><td id='tdright'>  Tests if a redo is being processed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#NotCondition(CATStateCondition*)"><b>NotCondition</b></a>(CATStateCondition*)
+</td><td id='tdright'>  Creates a composite condition which uses the NOT operator on its 
+ subcondition.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#NotCondition(ConditionMethod,void*)"><b>NotCondition</b></a>(ConditionMethod,void*)
+</td><td id='tdright'>  Creates a NOT condition given the address of a method to execute.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#OrAction(CATDiaAction*,CATDiaAction*)"><b>OrAction</b></a>(CATDiaAction*,CATDiaAction*)
+</td><td id='tdright'>  Creates a composite action which combines actions using the OR operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#OrCondition(CATStateCondition*,CATStateCondition*)"><b>OrCondition</b></a>(CATStateCondition*,CATStateCondition*)
+</td><td id='tdright'>  Creates a composite condition which combines conditions using the 
+ OR operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RemoveState(CATDialogState*)"><b>RemoveState</b></a>(CATDialogState*)
+</td><td id='tdright'>  Removes a state from a command.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RemoveTransition(CATDialogTransition*)"><b>RemoveTransition</b></a>(CATDialogTransition*)
+</td><td id='tdright'>  Removes a transition from a command.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RequestDelayedDestruction()"><b>RequestDelayedDestruction</b></a>()
+</td><td id='tdright'>  Requests the state command delayed destruction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RequestLocalUndo(int)"><b>RequestLocalUndo</b></a>(int)
+</td><td id='tdright'>  Requests to undo local steps in the State Command.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Rescue()"><b>Rescue</b></a>()
+</td><td id='tdright'>  Cleans data if an error occurs.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDebugMode(CATBoolean)"><b>SetDebugMode</b></a>(CATBoolean)
+</td><td id='tdright'>  Sets the debug mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetErrorCommand(CATCommand*)"><b>SetErrorCommand</b></a>(CATCommand*)
+</td><td id='tdright'>  Sets a specific command to manage errors.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetInitialState(CATDialogState*)"><b>SetInitialState</b></a>(CATDialogState*)
+</td><td id='tdright'>  Declares a state as the initial state.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATStateCommand"></a><a id="CATStateCommand(CATString&amp;,CATDlgEngBehavior,CATCommandMode)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATStateCommand</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iId</span>,<script type="text/javascript"> activateLink('CATDlgEngBehavior','CATDlgEngBehavior')</script> <span class='param'>iBehavior</span><span class='param'>=NULL</span>,<script type="text/javascript"> activateLink('CATCommandMode','CATCommandMode')</script> <span class='param'>iMode</span><span class='param'>=CATCommandModeExclusive</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a State Command.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iId</span></dt>
+   <dd>   The command identifier. It must be unique and is used to retrieve the 
+   undo/redo titles in the command message file.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBehavior</span></dt>
+   <dd>   The behavior of the command.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd>   The focus mode.
+   <br><b>Legal values</b>: With the default mode 
+   <tt>CATCommandModeExclusive</tt>, the command takes the focus and 
+   cancels the other commands. This mode is mandatory if the command 
+   modifies the model.
+   <br>The other possible mode is <tt>CATCommandModeShared</tt>: the command
+   only deactivates the active command and takes the focus. The previous
+   command will resume when the current command ends.
+   <br>The <tt>CATCommandModeUndefined</tt> mode is forbidden with a main
+   State Command since it needs to take the focus, but must be used for a
+   State Command used as an agent of another State Command.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATStateCommand"></a><a id="~CATStateCommand()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATStateCommand</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Action"></a><a id="Action(ActionMethod,ActionMethod,ActionMethod,void*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATDiaAction','CATDiaAction *')</script>  <span class='objname'>Action</span><span class = 'signature'>(<script type="text/javascript"> activateLink('ActionMethod','ActionMethod')</script> <span class='param'>iDo</span>,<script type="text/javascript"> activateLink('ActionMethod','ActionMethod')</script> <span class='param'>iBeforeUndo</span><span class='param'>=NULL</span>,<script type="text/javascript"> activateLink('ActionMethod','ActionMethod')</script> <span class='param'>iBeforeRedo</span><span class='param'>=NULL</span>,<script type="text/javascript"> activateLink('void','void*')</script> <span class='param'>iData</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates an action given the addresses of the methods to execute.
+ <br><b>Role</b>: These methods must be methods of the current state
+ command.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDo</span></dt>
+   <dd>   The method to execute in the normal mode.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBeforeUndo</span></dt>
+   <dd>   The method to undo what has been done in the <tt>iDo</tt> method.
+   This method is executed before the transaction undo and must not 
+   modify transactional objects.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBeforeRedo</span></dt>
+   <dd>   The method to redo what has been done in the <tt>iDo</tt> method.
+   This method is executed before the transaction redo and must not 
+   modify transactional objects.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iData</span></dt>
+   <dd>   An object that can be useful for the action.
+   This data will be given as the argument of the 
+   <tt>ActionMethod</tt> methods.
+   <br><b>Warning</b>: A copy of <tt>iData</tt> is kept. 
+   Deallocate this object only in the command destructor.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The action.
+   <br><b>Cyclic reference</b>: A pointer to the action is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddCSOClient"></a><a id="AddCSOClient(CATCommand*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddCSOClient</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommand','CATCommand*')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Declares an agent as a CSO client.
+ <br><b>Role</b>: At the beginning of the command, 
+<script type="text/javascript"> activateLinkAnchor('CATPathElementAgent','','CATPathElementAgent') </script> agents declared as CSO clients will try to get valued 
+ with the 
+<script type="text/javascript"> activateLinkAnchor('CATPathElement','','CATPathElement') </script> objects present in the CSO. <br>All the objects in the CSO must be used: if an object in the CSO can 
+ not be used to value an agent, all the valuations from the CSO are 
+ cancelled.
+ <br>This CSO client mecanism is useful to program object/action commands.
+ <br>As regards repeating commands, this mechanism only works at the first 
+ execution of the command.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAgent</span></dt>
+   <dd>   The agent to be valued from the CSO..
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddDialogState"></a><a id="AddDialogState(CATDialogState*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddDialogState</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDialogState','CATDialogState*')</script> <span class='param'>iState</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds an existing state to the command.
+ <br><b>Role</b>: Use this method only with 
+<script type="text/javascript"> activateLinkAnchor('CATPanelState','','CATPanelState') </script> states.  Otherwise, use the 
+<script type="text/javascript"> activateLinkAnchor('','AddDialogState','AddDialogState') </script> method which creates and adds the state in the same time.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iState</span></dt>
+   <dd>   The state.
+   <br><b>Cyclic reference</b>: A copy of <tt>iState</tt> is kept, and
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddDialogState"></a><a id="AddDialogState(CATString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDialogState','CATDialogState *')</script>  <span class='objname'>AddDialogState</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iId</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a state.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iId</span></dt>
+   <dd>   The resource identifier used to retrieve the state prompt in the command
+   message file.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The state.
+   <br><b>Cyclic reference</b>: A pointer to the state is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddLocalUndo"></a><a id="AddLocalUndo(CATCommandGlobalUndo*,CATUnicodeString&amp;,CATDlgEngBehavior)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddLocalUndo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommandGlobalUndo','CATCommandGlobalUndo*')</script> <span class='param'>iUndoObject</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iUndoTitle</span>,<script type="text/javascript"> activateLink('CATDlgEngBehavior','CATDlgEngBehavior')</script> <span class='param'>iUndoBehavior</span><span class='param'>=CATDlgEngWithUndoStep</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds a local Undo step.
+ <br><b>Role</b>: This method adds a local step in the Undo stack.
+ <br>When a transition is executed as a consequence of an explicit acquisition agent valuation
+     (and not as a consequence of a user action) no Undo step is stacked (whatever the agent's behavior).
+     This method enables you to explicitely add a local Undo step.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iUndoObject</span></dt>
+   <dd>   The Undo/Redo step manager for this step. No specific Undo/Redo step manager is requested
+   if there is no specific need (Undo/Redo for features is already managed).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iUndoTitle</span></dt>
+   <dd>   The title displayed in the Undo history.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iUndoBehavior</span></dt>
+   <dd>   The behavior.
+   <br><b>Legal values</b>:
+   <br><tt>CATDlgEngWithUndoStep</tt>: The step is displayed in the Undo history (default).
+   <br><tt>NULL</tt>: Reserved for internal usage.
+ <br><b>Example of usage</b>: When a selection is expected, sometimes the user uses a contextual menu
+    to create an element which will be explicitely got as an input for the selection as soon as
+    it is created. This can be done by explicitely valuating an acquisition agent with the CSO content
+    during resume of the main command.
+    By default, the Undo command then undoes both selection and creation of the element.
+    In order to enable the user to undo the selection without undoing the creation of the element,
+    this method can be used to add a local Undo step.
+ <br><b>Example of implementation</b>:
+ <pre>
+    CATPathElementAgent * curPathAgent = ...; 
+    if (curPathAgent)
+    {
+      // create explicit local undo step
+      CATCommandGlobalUndo * GlobalUndo = new CATCommandGlobalUndo;
+      if (GlobalUndo)
+      {
+        AddLocalUndo(GlobalUndo,”MyStep”);
+        GlobalUndo -> Release(); GlobalUndo = NULL;
+      }
+      // value curPathAgent
+      curPathAgent -> SetValue(...);
+      curPathAgent -> SetValuation();
+    }
+ </pre>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddSDOElement"></a><a id="AddSDOElement(CATBaseUnknown*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddSDOElement</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iObject</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the object in the CATSDO.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iObject</span></dt>
+   <dd>   This object  is set in the SDO 
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATCommandHeaderWithSDOForAgent','','CATCommandHeaderWithSDOForAgent') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddTransition"></a><a id="AddTransition(CATDialogState*,CATDialogState*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDialogTransition','CATDialogTransition *')</script>  <span class='objname'>AddTransition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDialogState','CATDialogState*')</script> <span class='param'>iSource</span>,<script type="text/javascript"> activateLink('CATDialogState','CATDialogState*')</script> <span class='param'>iTarget</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a transition given its source and target states.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSource</span></dt>
+   <dd>   The source state.
+   <br><b>Cyclic reference</b>: A copy of <tt>iSource</tt> is kept and 
+   AddRef'ed. It is Released at the end of the command before the command 
+   destructor call.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTarget</span></dt>
+   <dd>   The target state.
+   <br><b>Cyclic reference</b>: A copy of <tt>iTarget</tt> is kept and
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+   <br><b>Legal values</b>: The target state may be NULL to represent the
+   end of the command.  
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The transition.
+   <br><b>Cyclic reference</b>: A pointer to the transition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddTransition"></a><a id="AddTransition(CATDialogState*,CATDialogState*,CATStateCondition*,CATDiaAction*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDialogTransition','CATDialogTransition *')</script>  <span class='objname'>AddTransition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDialogState','CATDialogState*')</script> <span class='param'>iSource</span>,<script type="text/javascript"> activateLink('CATDialogState','CATDialogState*')</script> <span class='param'>iTarget</span>,<script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition*')</script> <span class='param'>iCondition</span>,<script type="text/javascript"> activateLink('CATDiaAction','CATDiaAction*')</script> <span class='param'>iAction</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a transition given its source and target states, its condition 
+ and its action.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSource</span></dt>
+   <dd>   The source state.
+   <br><b>Cyclic reference</b>: A copy of <tt>iSource</tt> is kept and
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTarget</span></dt>
+   <dd>   The target state.
+   <br><b>Cyclic reference</b>: A copy of <tt>iTarget</tt> is kept and
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor  call.
+   <br><b>Legal values</b>: The target state may be NULL to represent the
+   end of the command.  
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCondition</span></dt>
+   <dd>   The condition.
+   <br><b>Legal values</b>: The condition may be NULL or specified later
+   by the 
+<script type="text/javascript"> activateLinkAnchor('CATDialogTransition','SetCondition','CATDialogTransition.SetCondition') </script> method. A NULL condition    evaluates TRUE, so the transition fires at the first agent valuation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAction</span></dt>
+   <dd>   The action.
+   <br><b>Legal values</b>: The action may be NULL or specified later
+   by the 
+<script type="text/javascript"> activateLinkAnchor('CATDialogTransition','SetAction','CATDialogTransition.SetAction') </script> method. 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The transition.
+   <br><b>Cyclic reference</b>: A pointer to the transition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AndAction"></a><a id="AndAction(CATDiaAction*,CATDiaAction*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATDiaAction','CATDiaAction *')</script>  <span class='objname'>AndAction</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDiaAction','CATDiaAction*')</script> <span class='param'>iAct1</span>,<script type="text/javascript"> activateLink('CATDiaAction','CATDiaAction*')</script> <span class='param'>iAct2</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a composite action which combines actions using the AND operator.
+ <br><b>Role</b>: The <tt>iAct1</tt> action is executed first. Then the
+ <tt>iAct2</tt> action is executed whatever <tt>iAct1</tt> returned.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAct1</span></dt>
+   <dd>   The first action to execute.
+   <br><b>Cyclic reference</b>: A copy of <tt>iAct1</tt> is kept and 
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAct2</span></dt>
+   <dd>   The second action to execute.
+   <br><b>Cyclic reference</b>: A copy of <tt>iAct2</tt>is kept and
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The composite action.
+   <br><b>Cyclic reference</b>: A pointer to the action is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AndCondition"></a><a id="AndCondition(CATStateCondition*,CATStateCondition*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition *')</script>  <span class='objname'>AndCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition*')</script> <span class='param'>iCond1</span>,<script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition*')</script> <span class='param'>iCond2</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a composite condition which combines conditions using the 
+ AND operator.
+ <br><b>Role</b>: The AND condition returns TRUE if its subconditions
+ return both TRUE.
+ The <tt>iCond1</tt> condition is evaluated first. Then the <tt>iCond2</tt>
+ condition is evaluated only if <tt>iCond1</tt> returned TRUE.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCond1</span></dt>
+   <dd>   The first condition to evaluate.
+   <br><b>Cyclic reference</b>: A copy of <tt>iCond1</tt> is kept and 
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCond2</span></dt>
+   <dd>   The second condition to evaluate.
+   <br><b>Cyclic reference</b>: A copy of <tt>iCond2</tt> is kept and 
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The composite condition.
+   <br><b>Cyclic reference</b>: A pointer to the condition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BuildGraph"></a><a id="BuildGraph()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BuildGraph</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Builds the command statechart.
+ <br><b>Role</b>: Override this method to define the command graph.
+</dd>
+<dt class='dtmethod' >
+  <a id="Condition"></a><a id="Condition(ConditionMethod,void*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition *')</script>  <span class='objname'>Condition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('ConditionMethod','ConditionMethod')</script> <span class='param'>iEvaluate</span>,<script type="text/javascript"> activateLink('void','void*')</script> <span class='param'>iData</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a condition given the address of a method to execute.
+ <br><b>Role</b>: This method must be a method of the current State Command.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEvaluate</span></dt>
+   <dd>   The method to execute to evaluate the condition.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iData</span></dt>
+   <dd>   An object that can be useful for the condition.
+   This data will be given as the argument of the 
+   <tt>iEvaluate</tt> method.
+   <br><b>Warning</b>: A copy of <tt>iData</tt> is kept. 
+   Deallocate this object only in the command destructor.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The condition.
+   <br><b>Cyclic reference</b>: A pointer to the condition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ExecuteUndoAtEnd"></a><a id="ExecuteUndoAtEnd()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ExecuteUndoAtEnd</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Requests to undo the State Command when it ends.
+ <br><b>Role</b>: This method can be used:
+ <ul>
+ <li>in the 
+<script type="text/javascript"> activateLinkAnchor('','Rescue','Rescue') </script> method or in the command which is in charge of the error management
+ (defined using the 
+<script type="text/javascript"> activateLinkAnchor('','SetErrorCommand','SetErrorCommand') </script> method).</li> <li>during an action execution.</li>
+ </ul>
+ It requests a global undo at the end of the State Command.
+ <br><b>Note</b>: It is recommended to use transitions towards the
+ Cancel state rather than using this method.
+</dd>
+<dt class='dtmethod' >
+  <a id="Filter"></a><a id="Filter(FilterMethod,void*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATAcquisitionFilter','CATAcquisitionFilter *')</script>  <span class='objname'>Filter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('FilterMethod','FilterMethod')</script> <span class='param'>iMeth</span>,<script type="text/javascript"> activateLink('void','void*')</script> <span class='param'>iData</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates an agent filter given the address of a method to execute.
+ <br><b>Role</b>: This method must be a method of the current State Command.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMeth</span></dt>
+   <dd>   The method to filter the agent value.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iData</span></dt>
+   <dd>   An object that can be useful for the filter.
+   This data will be given as the argument of the 
+   <tt>iMeth</tt> method.
+   <br><b>Warning</b>: A copy of <tt>iData</tt> is kept. 
+   Deallocate this object only in the command destructor.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The filter.
+   <br><b>Cyclic reference</b>: A pointer to the filter is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ See also: 
+<script type="text/javascript"> activateLinkAnchor('CATDialogAgent','AndFilter','CATDialogAgent.AndFilter') </script>, 
+<script type="text/javascript"> activateLinkAnchor('CATDialogAgent','OrFilter','CATDialogAgent.OrFilter') </script> and 
+<script type="text/javascript"> activateLinkAnchor('CATDialogAgent','NotFilter','CATDialogAgent.NotFilter') </script> methods.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCancelState"></a><a id="GetCancelState()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDialogState','CATDialogState *')</script>  <span class='objname'>GetCancelState</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates the cancel state or retrieves it if it already exists.
+ <br><b>Role</b>: When the dialog reaches the cancel state, the command
+ ends as if it had reached the NULL state, and a global undo is executed.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The cancel state.
+   <br><b>Cyclic reference</b>: A pointer to the state is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCurrentState"></a><a id="GetCurrentState()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDialogState','CATDialogState *')</script>  <span class='objname'>GetCurrentState</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the current state.
+ <br><b>Role</b>: In a transition action, the current state is the source
+ state of the transition.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The current state.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetError"></a><a id="GetError()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATDiaError','CATDiaError *')</script>  <span class='objname'>GetError</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the error caught by DialogEngine during a condition evaluation or
+ an action execution.
+ <br><b>Role</b>: This method can be used in the 
+<script type="text/javascript"> activateLinkAnchor('','Rescue','Rescue') </script> method or in the command which is in charge of the error management
+ to get information about the error.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetGlobalUndo"></a><a id="GetGlobalUndo()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATCommandGlobalUndo','CATCommandGlobalUndo *')</script>  <span class='objname'>GetGlobalUndo</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the undo/redo object associated with the command.
+ <br><b>Role</b>: This method returns an object with methods to execute
+ when the command is undone or redone.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The undo/redo object.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetInitialState"></a><a id="GetInitialState(CATString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDialogState','CATDialogState *')</script>  <span class='objname'>GetInitialState</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iId</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates the initial state or retrieves it if it already exists.
+ <br><b>Role</b>: The initial state is the state with which the command 
+ starts. There is only one initial state.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iId</span></dt>
+   <dd>   The resource identifier used to retrieve the state prompt in the command
+   message file.
+   This identifier is useful only if the initial state doesn't already
+   exist. 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The initial state.
+   <br><b>Cyclic reference</b>: A pointer to the state is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLastModifiedAgent"></a><a id="GetLastModifiedAgent()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATCommand','CATCommand *')</script>  <span class='objname'>GetLastModifiedAgent</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the agent which has just been modified.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The agent.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLastNotification"></a><a id="GetLastNotification()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATNotification','CATNotification *')</script>  <span class='objname'>GetLastNotification</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the latest notification.
+ <br><b>Role</b>: This method only works just after the notification 
+ reception. So it cannot be used in undo/redo methods.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The notification.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNextState"></a><a id="GetNextState()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDialogState','CATDialogState *')</script>  <span class='objname'>GetNextState</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the pointed command state and points to the next one.
+ <br><b>Precondition</b>: Set the pointer to the first command state
+ using 
+<script type="text/javascript"> activateLinkAnchor('','InitStateList','InitStateList') </script> before traversing out the command state list using calls to <tt>GetNextState</tt> enclosed in a loop.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The pointed state.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNextTransition"></a><a id="GetNextTransition()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDialogTransition','CATDialogTransition *')</script>  <span class='objname'>GetNextTransition</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the pointed command transition and points to the next one.
+ <br><b>Precondition</b>: Set the pointer to the first command transition
+ using 
+<script type="text/javascript"> activateLinkAnchor('','InitTransitionList','InitTransitionList') </script> before traversing out the command  transition list using calls to <tt>GetNextTransition</tt> enclosed in a
+ loop.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The pointed transition.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="InitStateList"></a><a id="InitStateList()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>InitStateList</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Points to the first command state.
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetNextState','GetNextState') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="InitTransitionList"></a><a id="InitTransitionList()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>InitTransitionList</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Points to the first command transition.
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetNextTransition','GetNextTransition') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsLastModifiedAgent"></a><a id="IsLastModifiedAgent(CATCommand*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>IsLastModifiedAgent</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommand','CATCommand*')</script> <span class='param'>iAgent</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests if an agent has just been modified.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAgent</span></dt>
+   <dd>   The agent.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The result of the test.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsLastModifiedAgentCondition"></a><a id="IsLastModifiedAgentCondition(CATCommand*,char*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition *')</script>  <span class='objname'>IsLastModifiedAgentCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommand','CATCommand*')</script> <span class='param'>iAgent</span>, const <script type="text/javascript"> activateLink('char','char*')</script> <span class='param'>iNotifClass</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a condition which checks whether an agent is the latest modified
+ agent.
+ <br><b>Role</b>: The condition evaluates TRUE if the <tt>iAgent</tt> agent
+ has just been modified and if it was due to a notification which belongs 
+ to the <tt>iNotifClass</tt> class.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAgent</span></dt>
+   <dd>   The agent.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNotifClass</span></dt>
+   <dd>   The notification class.
+   <br><b>Legal values</b>: It can be NULL: the condition only checks if 
+   the <tt>iAgent</tt> agent has just been modified.  
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The condition.
+   <br><b>Cyclic reference</b>: A pointer to the condition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsLastModifiedAgentCondition"></a><a id="IsLastModifiedAgentCondition(CATCommand*,CATNotification*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition *')</script>  <span class='objname'>IsLastModifiedAgentCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommand','CATCommand*')</script> <span class='param'>iAgent</span>,<script type="text/javascript"> activateLink('CATNotification','CATNotification*')</script> <span class='param'>iNotif</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a condition which checks whether an agent is the latest modified
+ agent.
+ <br><b>Role</b>: The condition evaluates TRUE if the <tt>iAgent</tt> agent
+ has just been modified and if it was due to the <tt>iNotif</tt> 
+ notification.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAgent</span></dt>
+   <dd>   The agent.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNotif</span></dt>
+   <dd>   The address of a notification.
+   <br><b>Legal values</b>: It can be NULL: the condition only checks if 
+   the <tt>iAgent</tt> agent has just been modified.  
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The condition.
+   <br><b>Cyclic reference</b>: A pointer to the condition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsOutputSetCondition"></a><a id="IsOutputSetCondition(CATCommand*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition *')</script>  <span class='objname'>IsOutputSetCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommand','CATCommand*')</script> <span class='param'>iAgent</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a condition which checks whether an agent is valued.
+ <br><b>Role</b>: The condition evaluates TRUE if the <tt>iAgent</tt> agent
+ is valued.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAgent</span></dt>
+   <dd>   The agent.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The condition.
+   <br><b>Cyclic reference</b>: A pointer to the condition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsRedoMode"></a><a id="IsRedoMode()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsRedoMode</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests if a redo is being processed.
+ <br><b>Role</b>: It may be useful if a method is used as a Do and a Redo
+ method, to avoid modifying transactional objects in Redo mode.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The result of the test.
+   <br><b>Legal values</b>:1 in redo mode, 0 in normal or undo mode.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="NotCondition"></a><a id="NotCondition(CATStateCondition*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition *')</script>  <span class='objname'>NotCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition*')</script> <span class='param'>iCond</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a composite condition which uses the NOT operator on its 
+ subcondition.
+ <br><b>Role</b>: The NOT condition returns TRUE if its subcondition 
+ returns FALSE.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCond</span></dt>
+   <dd>   The subcondition.
+   <br><b>Cyclic reference</b>: A copy of <tt>iCond</tt> is kept and
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The composite condition.
+   <br><b>Cyclic reference</b>: A pointer to the condition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="NotCondition"></a><a id="NotCondition(ConditionMethod,void*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition *')</script>  <span class='objname'>NotCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('ConditionMethod','ConditionMethod')</script> <span class='param'>iEvaluate</span>,<script type="text/javascript"> activateLink('void','void*')</script> <span class='param'>iData</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a NOT condition given the address of a method to execute.
+ <br><b>Role</b>: This method must be a method of the current State Command.
+ <br>The condition returns TRUE if the method returns FALSE.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEvaluate</span></dt>
+   <dd>   The method to execute to evaluate the condition.
+   This method gives a result opposite to the condition result.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iData</span></dt>
+   <dd>   An object that can be useful for the condition.
+   This data will be given as the argument of the 
+   <tt>iEvaluate</tt> method.
+   <br><b>Warning</b>: A copy of <tt>iData</tt> is kept. 
+   Deallocate this object only in the command destructor.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The condition.
+   <br><b>Cyclic reference</b>: A pointer to the condition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="OrAction"></a><a id="OrAction(CATDiaAction*,CATDiaAction*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATDiaAction','CATDiaAction *')</script>  <span class='objname'>OrAction</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDiaAction','CATDiaAction*')</script> <span class='param'>iAct1</span>,<script type="text/javascript"> activateLink('CATDiaAction','CATDiaAction*')</script> <span class='param'>iAct2</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a composite action which combines actions using the OR operator.
+ <br><b>Role</b>: The <tt>iAct1</tt> action is executed first. Then the 
+ <tt>iAct2</tt> action is executed only if <tt>iAct1</tt> returned TRUE.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAct1</span></dt>
+   <dd>   The first action to execute.
+   <br><b>Cyclic reference</b>: A copy of <tt>iAct1</tt> is kept and 
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAct2</span></dt>
+   <dd>   The second action to execute.
+   <br><b>Cyclic reference</b>: A copy of <tt>iAct2</tt> is kept and 
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The composite action.
+   <br><b>Cyclic reference</b>: A pointer to the action is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="OrCondition"></a><a id="OrCondition(CATStateCondition*,CATStateCondition*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition *')</script>  <span class='objname'>OrCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition*')</script> <span class='param'>iCond1</span>,<script type="text/javascript"> activateLink('CATStateCondition','CATStateCondition*')</script> <span class='param'>iCond2</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a composite condition which combines conditions using the 
+ OR operator.
+ <br><b>Role</b>: The OR condition returns TRUE if one of its subconditions
+ returns TRUE.
+ The <tt>iCond1</tt> condition is evaluated first. Then the <tt>iCond2</tt>
+ condition is evaluated only if <tt>iCond1</tt> returned FALSE.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCond1</span></dt>
+   <dd>   The first condition to evaluate.
+   <br><b>Cyclic reference</b>: A copy of <tt>iCond1</tt> is kept and 
+   AddRef'ed. It is Released at the end of the command before the command
+   destructor call.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCond2</span></dt>
+   <dd>   The second condition to evaluate.
+   <br><b>Cyclic reference</b>: A copy of <tt>iCond2</tt> is kept and 
+   AddRef'ed. It is Released at the end of the command before the command 
+   destructor call.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The composite condition.
+   <br><b>Cyclic reference</b>: A pointer to the condition is kept and
+   Released at the end of the command before the command destructor call.
+   <br><b>Lifecycle rules deviation</b>: This method doesn't AddRef the 
+   returned value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="RemoveState"></a><a id="RemoveState(CATDialogState*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>RemoveState</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDialogState','CATDialogState*')</script> <span class='param'>iState</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Removes a state from a command.
+ <br><b>Role</b>: May be useful if you need to modify a graph inherited 
+ from the base class but don't use it dynamically during the dialog.
+ <br>This state must not be linked to a transition (the transition must be
+ removed first) and must not be the cancel state nor the initial state.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iState</span></dt>
+   <dd>   The state to remove.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The error return code.
+   <br><b>Legal values</b>:  
+   <ul>
+   <li>0: the state is removed successfully.</li>
+   <li>1: the state is not found.</li>
+   <li>2: the remove operation failed because the state is still useful.
+          (it is the initial or the cancel state or it is linked to a 
+          transition.</li>
+   </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="RemoveTransition"></a><a id="RemoveTransition(CATDialogTransition*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>RemoveTransition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDialogTransition','CATDialogTransition*')</script> <span class='param'>iTrans</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Removes a transition from a command.
+ <br><b>Role</b>: May be useful if you need to modify a graph inherited 
+ from the base class but don't use it dynamically during the dialog.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTrans</span></dt>
+   <dd>   The transition to remove.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The error return code.
+   <br><b>Legal values</b>:  
+   <ul>
+   <li>0: the transition is removed successfully.</li>
+   <li>1: the transition is not found.</li>
+   </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="RequestDelayedDestruction"></a><a id="RequestDelayedDestruction()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>RequestDelayedDestruction</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Requests the state command delayed destruction.
+ <br><b>Role</b>: The state command will be destroyed as soon as this will be possible.
+ This must be used only when the state command is used as an agent of another state command,
+ in this state command's destructor.
+ This must not be used inside a state command to stop its execution.
+</dd>
+<dt class='dtmethod' >
+  <a id="RequestLocalUndo"></a><a id="RequestLocalUndo(int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>RequestLocalUndo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iCount</span><span class='param'>=1</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Requests to undo local steps in the State Command.
+ <br><b>Role</b>: This method can be used:
+ <ul>
+ <li>in the 
+<script type="text/javascript"> activateLinkAnchor('','Rescue','Rescue') </script> method or in the command which is in charge of the error management
+ (defined using the 
+<script type="text/javascript"> activateLinkAnchor('','SetErrorCommand','SetErrorCommand') </script> method).</li> <li>during an action execution.</li>
+ </ul>
+ It requests to undo local steps at the end of the transition.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCount</span></dt>
+   <dd>   The number of local Undos to execute.
+   <br><b>Legal values</b>: from one (default) to the number of local undos
+   for the State Command.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Rescue"></a><a id="Rescue()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Rescue</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Cleans data if an error occurs.
+ <br><b>Role</b>: Override this method to clean data after the
+ default error dialog box is closed.
+ <br><b>Warning</b>: If the 
+<script type="text/javascript"> activateLinkAnchor('','SetErrorCommand','SetErrorCommand') </script> method is used, it is useless to override this method.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDebugMode"></a><a id="SetDebugMode(CATBoolean)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDebugMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iMode</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the debug mode.
+ <br><b>Role</b>: Activates or desactivates the State Command debug trace mode.
+ <br>When activated, information about the command and its components
+ is displayed in the standard output at different steps of its life cycle.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd>  <b>Legal values</b>:
+  <br><tt>FALSE</tt> :The trace mode is not activated.
+  <br><tt>TRUE</tt>  :The trace mode is activated.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetErrorCommand"></a><a id="SetErrorCommand(CATCommand*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetErrorCommand</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommand','CATCommand*')</script> <span class='param'>iCmd</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets a specific command to manage errors.
+ <br><b>Role</b>: This command replaces the default error dialog box displayed 
+ when an exception is caught during a condition evaluation or an action execution.
+ <br>It must be instantiated with the <tt>CATCommandModeUndefined</tt> mode
+ in the 
+<script type="text/javascript"> activateLinkAnchor('','BuildGraph','BuildGraph') </script> method of the main State Command, and the error treatment must be done in the overridden 
+<script type="text/javascript"> activateLinkAnchor('CATCommand','Activate','CATCommand.Activate') </script> method. <br>When an exception occurs, DialogEngine requires a shared focus for this command
+ and after the error treatment the State Command resumes.
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATCommand','','CATCommand') </script></dd>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCmd</span></dt>
+   <dd>   The command.
+   <br><b>Warning</b>: A pointer to the error command is kept 
+   without being AddRef'ed. Deallocate this command only at the end of
+   the main State Command.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetInitialState"></a><a id="SetInitialState(CATDialogState*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetInitialState</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDialogState','CATDialogState*')</script> <span class='param'>iState</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Declares a state as the initial state.
+ <br><b>Role</b>: May be useful if you need to modify a graph inherited 
+ from the base class but don't use it dynamically during the dialog.
+ It replaces the previous initial state but this former state still
+ belongs to the graph. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iState</span></dt>
+   <dd>   The new initial state.
+   <br><b>Cyclic reference</b>: A copy of <tt>iState</tt> is kept and
+   AddRef'ed. It is Released at the end of the command before the command 
+   destructor
+   call.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATStateCommand.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATDialogEngine</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

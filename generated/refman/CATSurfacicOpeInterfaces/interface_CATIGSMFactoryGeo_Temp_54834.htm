@@ -1,0 +1,197 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATSurfacicOpeInterfaces CATIGSMFactoryGeo_Temp Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATSurfacicOpeInterfaces.htm" href="../CATSurfacicOpeInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATSurfacicOpeInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIGSMFactoryGeo_Temp"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>CATSurfacicOpeInterfaces Framework:  CATIGSMFactoryGeo_Temp Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIGSMFactoryGeo_Temp_54834','CATIGSMFactoryGeo_Temp','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIGSMFactoryGeo_Temp</b>
+</p>
+<p>
+<b><i> Class defining the topological operator that fills  a space defined by a set of wires.</i></b><br>
+
+ The use of this factory will always invoke the sorting of input wire list algorithm
+ <br> The wires must define a closed area and be connected.
+ Continuity criteria can be precised: G0, G1 if the supporting surfaces of the wire
+ are given, G0 otherwise. The supporting surfaces must be coherent to allow the operator to
+ compute a G1 continuity.
+ If the given continuity constraints are not compatible, the fill result could not
+ not satisfy the continuity contraints.
+ if the given continuity constraints define a too scattered set of normals, the shape of
+ fill result could not be correct.It is also possible to have no result.
+
+ <br>The CATIGSMFactoryGeoFill operator creates the resulting filling skin body
+ separately from the inputs: the wires of the input bodies are not used to define the topology
+ of the resulting fill body.
+<ul>
+ <li>A CATIGSMFactoryGeoFill operator is created with the <tt>CreateTopologicalAutomaticFill</tt> global function.
+ It must be directly deleted with the usual C++ <tt>delete</tt> operator. It is is not streamable.
+<li>Options can be precised with the <tt>SetXxx</tt> methods, before
+ asking for the computation with the <tt>Run</tt> method
+<li>The result is accessed with the <tt>GetResult</tt> method. If you do not want
+ to keep the resulting body, use the <script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the geometric factory.
+ <li>The journal corresponding to the fill operation is not yet implemented.
+</ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATGSMCreateTopologicalAutomaticFillAdvanced(CATGeoFactory*,CATTopData*,CATListPtrCATBody const&amp;,CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType)"><b>CATGSMCreateTopologicalAutomaticFillAdvanced</b></a>(CATGeoFactory*,CATTopData*,CATListPtrCATBody const&amp;,CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType)
+</td><td id='tdright'>  Creates a topological operator that fills a closed area defined by a set of wires.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATGSMCreateTopologicalAutomaticFillAdvanced(CATGeoFactory*,CATTopData*,CATListPtrCATBody const&amp;,CATListPtrCATBody const&amp;,CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType)"><b>CATGSMCreateTopologicalAutomaticFillAdvanced</b></a>(CATGeoFactory*,CATTopData*,CATListPtrCATBody const&amp;,CATListPtrCATBody const&amp;,CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType)
+</td><td id='tdright'>  Creates a topological operator that fills a closed area defined by a set of wires.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATGSMCreateTopologicalAutomaticFillAdvanced"></a><a id="CATGSMCreateTopologicalAutomaticFillAdvanced(CATGeoFactory*,CATTopData*,CATListPtrCATBody const&amp;,CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIGSMAutomaticFillGeo','CATIGSMAutomaticFillGeo*')</script>  <span class='objname'>CATGSMCreateTopologicalAutomaticFillAdvanced</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGeoFactory','CATGeoFactory*')</script> <span class='param'>iFactory</span>,<script type="text/javascript"> activateLink('CATTopData','CATTopData*')</script> <span class='param'>iData</span>,<script type="text/javascript"> activateLink('CATListPtrCATBody const','CATListPtrCATBody const&amp;')</script> <span class='param'>iListOfWires</span>, const <script type="text/javascript"> activateLink('CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType','CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType')</script> <span class='param'>iFillType</span><span class='param'>= CATIGSMAutomaticFillGeo::Analytic</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a topological operator that fills a closed area defined by a set of wires.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFactory</span></dt>
+   <dd> The pointer to the factory of the geometry.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iListOfWires</span></dt>
+   <dd> The list of pointers to the wire bodies, each containing only one wire.
+ The set of wires must defined a closed area and connected.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFillType</span></dt>
+   <dd> Type of the fill to compute. iFillType can have three values.
+ CATTopologicalFill::analytic:
+ The edges of the domain to fill are isoparametric  curves of the final surfaces. The number
+ of generated faces is depending on the number of wires.
+ Use it for simple domain to fill, as rectangular area.
+ CATTopologicalFill::power
+ The area is filled with a single surface. This allows you to manage wires which describe
+ a complex topology.
+ CATTopologicalFill::autofill_level1
+ Automatically determines the most suitable method according to the input topology.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iJournal</span></dt>
+   <dd> The pointer to the journal corresponding to the operation. If <tt>NULL</tt>, the journal is not filled in.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the created operator. To <tt>delete</tt> afer use.
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATTopologicalFill','','CATTopologicalFill') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATGSMCreateTopologicalAutomaticFillAdvanced"></a><a id="CATGSMCreateTopologicalAutomaticFillAdvanced(CATGeoFactory*,CATTopData*,CATListPtrCATBody const&amp;,CATListPtrCATBody const&amp;,CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIGSMAutomaticFillGeo','CATIGSMAutomaticFillGeo*')</script>  <span class='objname'>CATGSMCreateTopologicalAutomaticFillAdvanced</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGeoFactory','CATGeoFactory*')</script> <span class='param'>iFactory</span>,<script type="text/javascript"> activateLink('CATTopData','CATTopData*')</script> <span class='param'>iData</span>,<script type="text/javascript"> activateLink('CATListPtrCATBody const','CATListPtrCATBody const&amp;')</script> <span class='param'>iListOfWires</span>,<script type="text/javascript"> activateLink('CATListPtrCATBody const','CATListPtrCATBody const&amp;')</script> <span class='param'>iListOfSupports</span>, const <script type="text/javascript"> activateLink('CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType','CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType')</script> <span class='param'>iFillType</span><span class='param'>= CATIGSMAutomaticFillGeo::Analytic</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a topological operator that fills a closed area defined by a set of wires.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFactory</span></dt>
+   <dd> The pointer to the factory of the geometry.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iListOfWires</span></dt>
+   <dd> The list of pointers to the wire bodies, each containing only one wire.
+ The set of wires must defined a closed area and be connected.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iListOfSupports</span></dt>
+   <dd> The list of pointers to the supporting bodies of the wires, thus allowing you to define G1 continuity
+ criteria.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFillType</span></dt>
+   <dd> Type of the fill to compute. iFillType can have three values.
+ CATTopologicalFill::analytic:
+ The edges of the domain to fill are isoparametric  curves of the final surfaces. The number
+ of generated faces is depending on the number of wires.
+ Use it for simple domain to fill, as rectangular area.
+ CATTopologicalFill::power
+ The area is filled with a single surface. This allows you to manage wires which describe
+ a complex topology.
+ CATTopologicalFill::autofill_level1
+ Automatically determines the most suitable method according to the input topology.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iJournal</span></dt>
+   <dd> The pointer to the journal corresponding to the operation. If <tt>NULL</tt>, the journal is not filled in.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the created operator. To <tt>delete</tt> afer use.
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIGSMFactoryGeo_Temp.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATSoiInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

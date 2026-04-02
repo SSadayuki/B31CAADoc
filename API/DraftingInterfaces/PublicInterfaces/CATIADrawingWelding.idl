@@ -1,0 +1,323 @@
+// COPYRIGHT DASSAULT SYSTEMES 1997
+#ifndef CATIADrawingWelding_IDL
+#define CATIADrawingWelding_IDL
+
+/*IDLREP*/
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+#include "CATIADrawingTextRange.idl"
+#include "CatWeldingParameters.idl"
+
+interface CATIADrawingLeaders;
+interface CATIADrawingTextProperties;
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+ /** 
+  * Represents a drawing welding in a drawing view.
+  */
+
+interface CATIADrawingWelding : CATIABase
+{
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the x coordinate of the drawing welding.
+  * It is expressed with respect to the current view coordinate system.
+  * This coordinate, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>X</tt> the x coordinate of the 
+  * <tt>MyWelding</tt> drawing welding.
+  * <pre>
+  * X = MyWelding.<font color="red">x</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY x	 
+  HRESULT get_x(out /*IDLRETVAL*/ double oxposition);
+  HRESULT put_x(in  double oxposition);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the y coordinate of the drawing welding.
+  * It is expressed with respect to the current view coordinate system.
+  * This coordinate, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the y coordinate of the
+  * <tt>MyWelding</tt> drawing welding to 5 inches.
+  * You need first to convert the 5 inches into millmeters.
+  * <pre>
+  * NewYCoordinate = 5*25.4/1000
+  * MyWelding.<font color="red">y</font> = NewYCoordinate
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY y	 
+  HRESULT get_y(out /*IDLRETVAL*/ double oyposition);
+  HRESULT put_y(in double iyposition);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the angle of the drawing text.
+  * The angle is measured between the axis system of the drawing view and the
+  * local axis system of the drawing text.
+  * The angle is measured in radians and is counted counterclockwise.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the angle of the <tt>MyText</tt> drawing Text to 90
+  * degrees clockwise.
+  * You first need to compute the angle in degrees and set the
+  * minus sign to indicate the rotation is clockwise.
+  * <pre>
+  * Angle90Clockwise = -90
+  * MyText.<font color="red">Angle</font> = Angle90Clockwise
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Angle	 
+  HRESULT get_Angle(out /*IDLRETVAL*/ double oAngle);
+  HRESULT put_Angle(in double iAngle);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the symbol of the drawing welding.
+  * @param iWeld
+  *   The field on which the symbol is applied
+  * @param oSymbol
+  *   The welding symbol 
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the symbol on the first field of the <tt>MyWelding</tt> drawing welding
+  * <pre>
+  * MyWelding.<font color="red">GetSymbol(catWeldingFieldOne,oSymbol)</font> 
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetSymbol(in CatWelding iWeld, out /*IDLRETVAL*/ CatWeldingSymbol oSymbol);
+ /**
+  * Sets the symbol of the drawing welding.
+  * @param iSymbol
+  *   The welding symbol
+  * @param iWeld
+  *   The field on which the symbol is applied
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets a symbol on the first field of the <tt>MyWelding</tt> drawing welding
+  * <pre>
+  * MyWelding.<font color="red">SetSymbol(catSquareWelding,catWeldingFieldOne)</font> 
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetSymbol(in CatWeldingSymbol iSymbol, in CatWelding iweld);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the additional symbol of the drawing welding.
+  * @param iWeld
+  *   The xxx
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets an concave additinal symbol on the <tt>MyWelding</tt> drawing welding
+  * <pre>
+  * MyWelding.<font color="red">Symbol</font> = DftConcaveSymbol
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetAdditionalSymbol(in CatWelding iWeld, 
+                              out /*IDLRETVAL*/ CatWeldAdditionalSymbol oSymbol);
+
+ /**
+  * Sets the additional symbol of the drawing welding.
+  * @param iSymbol
+  *   The welding additional symbol
+  * @param iWeld
+  *   The xxx
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets an concave additinal symbol on the <tt>MyWelding</tt> drawing welding
+  * <pre>
+  * MyWelding.<font color="red">Symbol</font> = DftConcaveSymbol
+  * </pre>
+  * </dl>
+  */ 
+
+  HRESULT SetAdditionalSymbol(in CatWeldAdditionalSymbol iSymbol, in CatWelding iweld);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the field of the drawing welding in a drawing text range.
+  * @param iField
+  *   The drawing welding field
+  * @return
+  *   The drawing text range that corresponds to the drawing welding field
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the xxx. 
+  * <pre>
+  * Dim textRange As DrawingTextRange
+  * Set textRange = MyWelding.<font color="red">GetTextRange</font> (catWeldingUp)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetTextRange(in CatWeldingField iField, 
+                       out /*IDLRETVAL*/ CATIADrawingTextRange oTextRange);
+
+  //----------------------------------------------------------------------------------
+  /**
+  * Returns the text properties of the drawing welding.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>TextProperties</tt> the text properties of
+  * the <tt>MyWelding</tt> drawing welding..
+  * <pre>
+  * Dim TextProperties As DrawingTextProperties
+  * Set TextProperties = MyWelding.<font color="red">TextProperties</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TextProperties
+  HRESULT get_TextProperties(out /*IDLRETVAL*/ CATIADrawingTextProperties oTextProperties);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Returns the drawing leader collection of the drawing welding.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>LeaderCollection</tt> the collection of
+  * leaders of the <tt>MyWelding</tt> drawing welding.
+  * <pre>
+  * Dim LeaderCollection As DrawingLeaders
+  * Set LeaderCollection = MyWelding.<font color="red">Leaders</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Leaders
+  HRESULT get_Leaders(out /*IDLRETVAL*/ CATIADrawingLeaders oLeaders);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the welding side of the drawing welding symbol.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets welding side to Up .
+  * <pre>
+  * MyWeld.<font color="red">WeldingSide</font> = catWeldingUp
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY WeldingSide 
+  HRESULT get_WeldingSide(out /*IDLRETVAL*/ CatWeldingSide oWeldingSide);
+  HRESULT put_WeldingSide(in CatWeldingSide iWeldingSide);
+
+
+  //------------------------------------------------------------------------------
+  /**
+  * Returns or sets the welding identification line Side of the drawing welding symbol.
+  * <br><b>Precondition</b>: This property is only available for ISO standard.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets welding identification line Side to Up .
+  * <pre>
+  * MyWeld.<font color="red">IdentificationLineSide</font> = catWeldingUp
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY IdentificationLineSide 
+  HRESULT get_IdentificationLineSide (out /*IDLRETVAL*/ CatWeldingSide oWeldingSide);
+  HRESULT put_IdentificationLineSide (in CatWeldingSide iWeldingSide);
+
+
+  //------------------------------------------------------------------------------
+  /**
+  * Returns or sets the welding tail of the drawing welding symbol.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example displays the welding symbol tail.
+  * <pre>
+  * MyWeld.<font color="red">WeldingTail</font> = catDftWeldingTailYES
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY WeldingTail 
+  HRESULT get_WeldingTail (out /*IDLRETVAL*/ CatDftWeldingTail oWeldingTail);
+  HRESULT put_WeldingTail (in CatDftWeldingTail iWeldingTail);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the finish symbol of the drawing welding.
+  * @param iWeld
+  *   The field on which finish symbol is applied.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the finish symbol on the first symbol of the <tt>MyWelding</tt> drawing welding
+  * <pre>
+  * MyWelding.<font color="red">GetFinishSymbol(catWeldingFieldOne,oFinishSymbol)</font> 
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetFinishSymbol (in CatWelding iWeld , out /*IDLRETVAL*/ CatDftWeldFinishSymbol oFinishSymbol);
+
+ /**
+  * Sets the finish symbol of the drawing welding.
+  * @param iFinishSymbol
+  *   The finish welding symbol
+  * @param iWeld
+  *   The field on which finish symbol will be applied.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the finish symbol on the first symbol of the <tt>MyWelding</tt> drawing welding
+  * <pre>
+  * MyWelding.<font color="red">GetFinishSymbol(catWeldingFieldOne,catDftLetterCWelding)</font> 
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetFinishSymbol (in CatDftWeldFinishSymbol iFinishSymbol, in CatWelding iWeld);
+};
+
+#pragma ID CATIADrawingWelding "DCE:dca13e58-293d-11d3-ad44006094eb80b5"
+#pragma DUAL CATIADrawingWelding
+
+// Visual Basic name
+#pragma ID DrawingWelding "DCE:ce806f06-293d-11d3-ad44006094eb80b5"
+#pragma ALIAS CATIADrawingWelding DrawingWelding
+
+#endif

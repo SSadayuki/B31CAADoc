@@ -1,0 +1,119 @@
+#ifndef CATIAPspLogicalLine_IDL
+#define CATIAPspLogicalLine_IDL
+/*IDLREP*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAPspGroup.idl"
+#include "CATIABase.idl"
+#include "CATIAPspListOfObjects.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * Represents the logical line.
+ * <b>Role</b>: To query the logical line object's from/to members.
+ */
+
+interface CATIAPspLogicalLine : CATIAPspGroup
+{
+ /**
+  * Retrieves the lists of major and minor from/to members from this line.
+  * <br>The members retrieved are all @href CATIAPspGroupable objects.
+  * @param oListFromMajor
+  *   The list of major from members
+  * @param oListFromMinor
+  *   The list of minor from members
+  * @param oListToMajor
+  *   The list of major to members
+  * @param oListToMinor
+  *   The list of minor to members
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLogicalLine  
+  * Dim objArg1 As PspListOfObjects
+  * Dim objArg2 As PspListOfObjects
+  * Dim objArg3 As PspListOfObjects
+  * Dim objArg4 As PspListOfObjects
+  * ...
+  * objThisIntf.<font color="red">GetFromTo</font> objArg1, objArg2, objArg3, objArg4
+  * </pre>
+  */
+
+
+  HRESULT GetFromTo(inout CATIAPspListOfObjects oListFromMajor,
+                    inout CATIAPspListOfObjects oListFromMinor,
+                    inout CATIAPspListOfObjects oListToMajor,
+                    inout CATIAPspListOfObjects oListToMinor
+                    );
+
+
+ /**
+  * Returns the maximum possible size of the from-to information.
+  * @return
+  *   The maximum possible size of the array to hold the information returned
+  *   by @href #GetFromToInformation
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLogicalLine  
+  * Dim intValueMaxSize As Integer
+  * ...
+  * intValueMaxSize = objThisIntf.<font color="red">GetFromToInfoArrayMaxSize</font> 
+  * </pre>
+  */
+  HRESULT GetFromToInfoArrayMaxSize (
+    out /*IDLRETVAL*/ long oMaxSizeOfValues);
+
+ /**
+  * Retrieves the from/to information of a logical line.
+  * @param oFromToLabel
+  *   The array of labels ("From" or "To")
+  * @param oFTMajor
+  *   The array of from/to major IDs
+  * @param oFTMinor
+  *   The array of from/to minor IDs
+  * @param
+  *   The size of the output arrays
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLogicalLine  
+  * Dim strFromToLabel(20) As String
+  * Dim strFromToMajor(20) As String
+  * Dim strFromToMinor(20) As String
+  * Dim intValueMaxSize As Integer
+  * intValueMaxSize = objThisIntf.<font color="red">GetFromToInfoArrayMaxSize</font>
+  * ... 
+  * '----  make sure the array size if big enough
+  * If (intValueMaxSize &le; 20)  Then
+  *    objThisIntf.<font color="red">GetFromToInformation</font> _
+  *      strFromToLabel, strFromToMajor, strFromToMinor, intValueMaxSize
+  * End If
+  *
+  * The following table can then be filled with the output arrays.
+  * 
+  *    From/To        |   F/T Major       |    F/T Minor
+  * strFromToLabel(i) | strFromToMajor(i) |  strFromToMinor(i)
+  *
+  * </pre>
+  */
+  HRESULT GetFromToInformation (
+    inout CATSafeArrayVariant oFromToLabel, 
+	  inout CATSafeArrayVariant oFTMajor,
+	  inout CATSafeArrayVariant oFTMinor,
+	  inout long oSizeOfOutput);
+
+
+};
+
+// Interface name : CATIAPspLogicalLine
+#pragma ID CATIAPspLogicalLine "DCE:454c6650-d43f-11d4-8e4800d0b7acbb09"
+#pragma DUAL CATIAPspLogicalLine
+
+// VB object name : PspLogicalLine
+#pragma ID PspLogicalLine "DCE:587bd288-d43f-11d4-8e4800d0b7acbb09"
+#pragma ALIAS CATIAPspLogicalLine PspLogicalLine
+
+#endif

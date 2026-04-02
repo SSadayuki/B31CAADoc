@@ -1,0 +1,313 @@
+#ifndef CATIAPrism_IDL
+#define CATIAPrism_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAPrism:						   
+// Exposed interface for Mechanical Prism
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation					Ph Baucher
+// Dec97 Modification					L  Lalere
+//=================================================================
+#include "CATIASketchBasedShape.idl"
+#include "CATPrismDefs.idl"
+
+#include "CATSafeArray.idl"
+
+interface CATIALimit;
+interface CATIAReference;
+
+/**
+ * Prism-based features in Part Design : base for pad or pocket.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAPrism : CATIASketchBasedShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//	ON DIRECTION TYPE
+	//	-----------------
+	//
+#pragma PROPERTY DirectionType
+//
+        /**
+         * Returns the prism direction type.
+         * @return oDirType
+         *   The direction type (see @href CatPrismExtrusionDirection for list of possible types)
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>dirType</tt> the direction type of
+         * prism <tt>firstPrism</tt>, and then sets it so that the direction
+         * will be now normal to the sketch :
+         * <pre>
+         * Set dirType = firstPrism.<font color="red">DirectionType</font>
+         * firstPrism.<font color="red">DirectionType</font> = catNormalToSketchDirection
+         *</pre>
+         * </dl>
+         */
+	HRESULT	get_DirectionType ( out /*IDLRETVAL*/ CatPrismExtrusionDirection oDirType );
+    //
+	HRESULT	put_DirectionType ( in  CatPrismExtrusionDirection iDirType );
+
+	//	ON DIRECTION ORIENTATION
+	//	------------------------
+	//
+#pragma PROPERTY DirectionOrientation
+//
+        /**
+         * Returns the prism direction orientation.
+         * @return oOrientation
+         *   The direction orientation (see @href CatPrismOrientation for list of possible types)
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>dirOrientation</tt> the direction orientation of
+         * prism <tt>firstPrism</tt>, and then sets it so that the direction will be now inversed :
+         * <pre>
+         * Set dirOrientation = firstPrism.<font color="red">DirectionOrientation</font>
+         * firstPrism.<font color="red">DirectionOrientation</font> = catInverseOrientation
+         *</pre>
+         * </dl>
+         */
+	HRESULT	get_DirectionOrientation ( out /*IDLRETVAL*/ CatPrismOrientation oOrientation );
+    //
+    HRESULT	put_DirectionOrientation ( in  CatPrismOrientation iOrientation );
+
+
+    //
+    //  ON SYMETRY
+    //  ------------
+    //
+#pragma PROPERTY IsSymmetric
+//
+        /**
+         * Returns the prism symmetry flag.<br>
+         * It returns TRUE if the prism is symmetric (from the base sketch), FALSE if not.
+         * @return oIsSymmetric
+         *   The symmetry flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>symFlag</tt> the symmetry flag of
+         * prism <tt>firstPrism</tt>, and then sets it so that it will be now symmetric (from the base sketch) :
+         * <pre>
+         * Set symFlag = firstPrism.<font color="red">IsSymmetric</font>
+         * firstPrism.<font color="red">IsSymmetric</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_IsSymmetric ( out /*IDLRETVAL*/ boolean oIsSymmetric );
+        //
+        HRESULT put_IsSymmetric ( in  boolean iIsSymmetric );
+    //
+    //  ON Thin mode
+    //  ------------
+    //
+#pragma PROPERTY IsThin
+//
+        /**
+         * Returns the prism thin flag.<br>
+         * It returns TRUE if the prism is a thin prism , FALSE if not.
+         * @return oIsThin
+         *   The thin flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>thinFlag</tt> the thin flag of
+         * prism <tt>firstPrism</tt>, and then sets it so that it will be now thin :
+         * <pre>
+         * Set thinFlag = firstPrism.<font color="red">IsThin</font>
+         * firstPrism.<font color="red">IsThin</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_IsThin ( out /*IDLRETVAL*/ boolean oIsThin);
+        //
+        HRESULT put_IsThin ( in  boolean iIsThin );
+    //
+    //  ON Neutral fiber
+    //  ----------------
+    //
+#pragma PROPERTY NeutralFiber
+//
+        /**
+         * Returns the prism neutral fiber flag (for thin prism only).<br>
+         * It returns TRUE if the prism is a neutral fiber prism , FALSE if not.
+         * @return oIsNeutralFiber
+         *   The neutral fiber flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>NeutralFiberFlag</tt> the neutral fiber flag of
+         * prism <tt>firstPrism</tt>, and then sets it so that it will be now neutral fiber :
+         * <pre>
+         * Set NeutralFiberFlag = firstPrism.<font color="red">IsNeutralFiber</font>
+         * firstPrism.<font color="red">IsNeutralFiber</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_NeutralFiber ( out /*IDLRETVAL*/ boolean oIsNeutralFiber);
+        //
+        HRESULT put_NeutralFiber ( in  boolean iIsNeutralFiber );
+
+    //
+    //  ON Merge mode
+    //  ----------------
+    //
+#pragma PROPERTY MergeEnd
+//
+        /**
+         * Returns the prism merge end flag (for thin prism only).<br>
+         * It returns TRUE if merge ends is required , FALSE if not.
+         * @return oIsMergeEnd
+         *   The merge end flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>MergeEndFlag</tt> the merge end flag of
+         * prism <tt>firstPrism</tt>, and then sets it so that merge end will be required :
+         * <pre>
+         * Set MergeEndFlag = firstPrism.<font color="red">IsMergeEnd</font>
+         * firstPrism.<font color="red">IsMergeEnd</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_MergeEnd ( out /*IDLRETVAL*/ boolean oIsMergeEnd);
+        //
+        HRESULT put_MergeEnd ( in  boolean iIsMergeEnd );
+
+	//
+	//	ON FIRST LIMIT
+	//	--------------
+	//
+#pragma PROPERTY FirstLimit
+//
+        /**
+         * Returns the first prism limit (one of the two).<br>
+         * This limit manages the way the prism is ended.
+         * @return oFirstLimit
+         *   The first limit (see @href CATIALimit for more information)
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>firstLimit</tt> the first limit of
+         * prism <tt>firstPrism</tt>:
+         * <pre>
+         * Set firstLimit = firstPrism.<font color="red">FirstLimit</font>
+         *</pre>
+         * </dl>
+         */
+	HRESULT	get_FirstLimit ( out /*IDLRETVAL*/ CATIALimit oFirstLimit );
+
+	//
+	//	ON SECOND LIMIT
+	//	---------------
+	//
+#pragma PROPERTY SecondLimit
+//
+        /**
+         * Returns the second prism limit (one of the two).<br>
+         * This limit manages the way the prism is ended.
+         * @return oSecondLimit
+         *   The second limit (see @href CATIALimit for more information)
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>secondLimit</tt> the second limit of
+         * prism <tt>firstPrism</tt>:
+         * <pre>
+         * Set secondLimit = firstPrism.<font color="red">SecondLimit</font>
+         *</pre>
+         * </dl>
+         */
+	HRESULT	get_SecondLimit ( out /*IDLRETVAL*/ CATIALimit oSecondLimit );
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+	//
+	//	ON DIRECTION
+	//	------------
+	//
+//
+        /**
+         * Returns the prism direction with absolute coordinates.<br>
+         * It needs a safe array with 3 elements : X, Y, Z direction coordinates
+		 * The array must be previously initialized
+         * @return ioDirection
+         *   The direction coordinates
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>dirArray</tt> the direction coordinates of
+         * prism <tt>firstPrism</tt>:
+         * <pre>
+		 * Dim dirArray(2)
+         * Call firstPrism.<font color="red">GetDirection</font>(dirArray)
+         * Set x = dirArray[1]
+         * Set y = dirArray[2]
+         * Set z = dirArray[3]
+         *</pre>
+         * </dl>
+         */
+	HRESULT	GetDirection ( inout  CATSafeArrayVariant ioDirection  );
+
+        /**
+         * Sets the prism associative direction.
+         * @param iLine
+         *  The support direction reference (see @href CATIAReference for more information) <br>
+         * This reference can be valuated with a reference to a line or an edge.<br>
+		 * The following @href CATIABoundary objects are supported: 
+		 * @href CATIAPlanarFace, @href CATIARectilinearTriDimFeatEdge
+		 * and @href CATIARectilinearBiDimFeatEdge.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example sets the prism direction reference of
+         * prism <tt>firstPrism</tt> with <tt>prismDirRef</tt> line :
+         * <pre>
+         * firstPrism.<font color="red">SetDirection</font> prismDirRef
+         *</pre>
+         * </dl>
+         */
+	HRESULT	SetDirection ( in  CATIAReference iLine );
+
+    //  ON INNER SIDE
+    //  -------------
+	//
+//
+        /**
+         * Reverses the prism inner side when the profile is open.
+         * This is useful for finding the shape to reach.
+         * <! @sample >
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example reverses the current inner side of
+         * prism <tt>firstPrism</tt> :
+         * <pre>
+         * firstPrism.<font color="red">ReverseInnerSide</font>
+         * </pre>
+         * </dl>
+         */
+	HRESULT ReverseInnerSide();
+};
+
+// Interface name : CATIAPrism
+#pragma ID CATIAPrism "DCE:52ebdffd-55f7-11d1-a2720000f87546fd"
+#pragma DUAL CATIAPrism
+
+// VB object name : Prism (Id used in Visual Basic)
+#pragma ID Prism "DCE:5326499a-55f7-11d1-a2720000f87546fd"
+#pragma ALIAS CATIAPrism Prism
+
+
+#endif
+// CATIAPrism_IDL
+

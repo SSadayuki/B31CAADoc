@@ -1,0 +1,352 @@
+#ifndef CATIAHybridShapeAssemble_IDL
+#define CATIAHybridShapeAssemble_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeAssemble:         
+// Exposed interface for HybridShape Assemble.
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+//#include "CATIAV5Level.h"
+
+ /**
+ * Represents the hybrid shape assemble feature object.
+ * <b>Role</b>: To access the data of the hybrid shape assemble feature object.
+ * This data includes:
+ *  <ul>
+ *	<li> A list of the assembled elements</li>
+ *	<li> Some methods to access this data </li>
+ *  </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeAssemble object.
+ * @see CATIAHybridShapeFactory 
+ */ 
+interface CATIAHybridShapeAssemble : CATIAHybridShape
+{
+/**
+ *  Returns or sets the invert mode.
+ * <br><b>Legal values</b>: 
+ * <b>True</b> the result is inverted.
+ * <b>False</b> the result is not inverted.
+ * @sample
+ * This example sets the invert mode of
+ * the <code>HybShpAssemble</code> hybrid shape assemble feature to True.
+ * <pre>
+ * HybShpAssemble.<font color="red">Invert</font> = True
+ * </pre>
+ */ 
+#pragma PROPERTY Invert
+ HRESULT get_Invert (out /*IDLRETVAL*/ boolean oInvert);
+ HRESULT put_Invert (in boolean iInvert);
+
+ /**
+ * Adds an element to the hybrid shape assemble feature object.
+ * @param iElement
+ *		The element to add to the hybrid shape assemble feature object.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace, @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * </dl>
+ * <dt><b>Examples</b>:
+ * <dd>
+ * The following example adds the <code>iElement</code> feature object to the 
+ * <code>HybridShapeAssemble</code> object.
+ * <pre>
+ * HybridShapeAssemble.<font color="red">AddElement</font> iElement
+ * </pre>
+ */ 
+   HRESULT    AddElement    (in    CATIAReference   iElement);
+
+/**
+  * Returns the size of the list of elements to assemble in the hybrid shape assemble feature object.
+  * @param oSize
+  *     Number of elements in the Assemble.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the number of elements
+  * in the <code>HybShpAssemble</code> hybrid shape assemble.
+  * <pre>
+  * Dim oSize As  long
+  * oSize = HybShpAssemble.<font color="red">GetElementsSize</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetElementsSize(out /*IDLRETVAL*/ long oSize);
+
+
+ /**
+ * Retrieves an element used by the hybrid shape assemble feature object.
+ * @param iRank
+ *		The rank of the element to read.
+ * </dl>
+ * <dt><b>Examples</b>:
+ * <dd>
+ * The following example gets the <code>oElement</code> feature object of the 
+ * <code>HybridShapeAssemble</code> object at the position <code>iRank</code>.
+ * <pre>
+ * Dim oElement As Reference
+ * Set oElement = HybridShapeAssemble.<font color="red">GetElement</font> (iRank).
+ * </pre>
+ */ 
+   HRESULT    GetElement    (in    long		iRank,
+        out  /*IDLRETVAL*/ CATIAReference   oElement);
+
+ /**
+  * Replaces the element at specified position in the hybrid shape assemble feature object.
+  * @param iPos
+  *     Position at which the element should be replaced.
+  * @param iElement 
+  *     Reference of the element to be inserted.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example replaces the element in the <code>HybShpAssemble</code> assemble feature 
+  * at specified position <code>iPos</code>
+  * <pre>
+  * HybShpAssemble.<font color="red">ReplaceElement iPos,iElement </font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT ReplaceElement(in long iPos, in CATIAReference iElement);
+
+ /**
+ * Removes an element used by the hybrid shape assemble feature object.
+ * @param iRank
+ *		The rank of the element to remove.
+ * </dl>
+ * <dt><b>Examples</b>:
+ * <dd>
+ * The following example removes the feature object from the 
+ * <code>HybridShapeAssemble</code> object at the position <code>iRank</code>.
+ * <pre>
+ * HybridShapeAssemble.<font color="red">RemoveElement</font> iRank.
+ * </pre>
+ */ 
+  HRESULT    RemoveElement (in    long   iRank);
+
+ /**
+ * Get the deviation value.
+ * @param odeviation
+ *		The deviation.
+ */ 
+  HRESULT GetDeviation(out /*IDLRETVAL*/ double odeviation);
+ /**
+ * Set the deviation value.
+ * @param ideviation
+ *		The deviation.
+ */ 
+  HRESULT SetDeviation(in double  ideviation);
+
+ /**
+ * Get the anglular tolerance mode.
+ * @param oValue
+ *		The anglular tolerance mode.
+ */ 
+  HRESULT GetAngularToleranceMode(out /*IDLRETVAL*/ boolean oValue);
+ /**
+ * Set the anglular tolerance mode.
+ * @param iValue
+ *		The anglular tolerance mode.
+ */ 
+  HRESULT SetAngularToleranceMode(in boolean  iValue);
+
+ /**
+ * Get the anglular tolerance.
+ * @param oValue
+ *		The anglular tolerance.
+ */ 
+  HRESULT GetAngularTolerance(out /*IDLRETVAL*/ double oValue);
+ /**
+ * Set the anglular tolerance.
+ * @param iValue
+ *		The anglular tolerance.
+ */ 
+  HRESULT SetAngularTolerance(in double  iValue);
+
+ /**
+ * Get the connex checker flag.
+ * @param oConnex
+ */ 
+  HRESULT GetConnex(out /*IDLRETVAL*/ boolean oConnex);
+ /**
+ * Set the connex checker flag.
+ * @param iConnex
+ */ 
+  HRESULT SetConnex(in boolean  iConnex);
+
+//#ifdef CATIAV5R10
+ /**
+ * Get the manifold checker flag.
+ * @param oManifold
+ */ 
+  HRESULT GetManifold(out /*IDLRETVAL*/ boolean oManifold);
+ /**
+ * Set the manifold checker flag.
+ * @param iManifold
+ */ 
+  HRESULT SetManifold(in boolean  iManifold);
+
+ /**
+ * Get the tangency continuity checker flag.
+ * @param oTangencyContinuity
+ */ 
+  HRESULT GetTangencyContinuity(out /*IDLRETVAL*/ boolean oTangencyContinuity);
+ /**
+ * Set the tangency continuity checker flag.
+ * @param iTangencyContinuity
+ */ 
+  HRESULT SetTangencyContinuity(in boolean  iTangencyContinuity);
+
+//#endif
+
+ /**
+ * Get the simplify flag.
+ * @param oSimplify
+ */ 
+  HRESULT GetSimplify(out /*IDLRETVAL*/ boolean oSimplify);
+ /**
+ * Set the simplify flag.
+ * @param iSimplify
+ */ 
+  HRESULT SetSimplify(in boolean  iSimplify);
+
+ /**
+ * Get the SuppressMode flag.
+ * @param oSuppressMode
+ */ 
+  HRESULT GetSuppressMode(out /*IDLRETVAL*/ boolean oSuppressMode);
+ /**
+ * Set the SuppressMode flag.
+ * @param iSuppressMode
+ */ 
+  HRESULT SetSuppressMode(in boolean  iSuppressMode);
+
+ /**
+  * Gets the propagation mode of the federation.
+  *   @param i
+  *      type of propagation (0: No, 1: All, 2: Continuity, 3:Tangency).
+  */ 
+  HRESULT GetFederationPropagation(out /*IDLRETVAL*/ long oMode);
+  
+ /**
+  * Sets the propagation mode of federation.
+  *   @param i
+  *      type of propagation (0: No, 1: All, 2: Continuity, 3:Tangency).
+  */ 
+  HRESULT SetFederationPropagation(in long iMode);
+
+ /**
+  * Retrieves an federated inits used by the hybrid shape assemble feature object.
+  * @param iRank
+  *		The rank of the element to read.
+  * @param oElement
+  *     The federated element.
+   *   @see CATIAReference
+  */ 
+  HRESULT GetFederatedElement(in long iRank, out /*IDLRETVAL*/ CATIAReference oElement);
+
+  /**
+   * Gets the number of federated inits.
+   *   @param Size
+   *      Number of elements.
+   */ 
+  HRESULT GetFederatedElementsSize(out /*IDLRETVAL*/ long oSize);
+  
+  /**
+   * Appends an init to the list of elements to federate.
+   *   @param iElement
+   *      Element to append.
+   *   @see CATIAReference
+   */ 
+  HRESULT AppendFederatedElement(in CATIAReference iElement);
+
+  /**
+   * Removes an element to the list of elements to federate.
+   *   @param iRank
+   *      Position of the element to remove.
+   */ 
+  HRESULT RemoveFederatedElement(in long iRank);
+
+ /**
+ * Adds a sub element to the hybrid shape assemble feature object.
+ * @param iSubElement
+ *		The sub element to remove to the hybrid shape assemble feature object.
+ */ 
+   HRESULT    AddSubElement    (in    CATIAReference   iSubElement);
+
+ /**
+  * Returns the size of the list of sub-elements to remove in the hybrid shape assemble feature object.
+  * @param oSize
+  *     Number of sub elements in the Assemble.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the number of sub elements
+  * in the <code>HybShpAssemble</code> hybrid shape assemble.
+  * <pre>
+  * Dim oSize As  long
+  * oSize = HybShpAssemble.<font color="red">GetSubElementsSize</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetSubElementsSize(out /*IDLRETVAL*/ long oSize);
+
+ /**
+ * Retrieves a sub element used by the hybrid shape assemble feature object.
+ * @param iRank
+ *		The rank of the subelement to read.
+ */ 
+   HRESULT    GetSubElement    (in    long		iRank,
+        out  /*IDLRETVAL*/ CATIAReference   oSubElement);
+
+ /**
+ * Removes a sub element used by the hybrid shape assemble feature object.
+ * @param iRank
+ *		The rank of the element to remove.
+ */ 
+  HRESULT    RemoveSubElement (in    long   iRank);
+
+  /**
+  * Gets the healing mode for merged cells.
+  *   @param oHeal
+  *      True  = merged cells are healed,
+  *      False = merged cells are not healed.
+  */
+  HRESULT GetHealingMode(out /*IDLRETVAL*/ boolean oHeal);
+  /**
+  * Sets the healing mode for merged cells.
+  *   @param iHeal
+  *      True  = merged cells are healed,
+  *      False = merged cells are not healed.
+  */
+  HRESULT SetHealingMode(in boolean  iHeal);
+
+};
+
+// Interface name : CATIAHybridShapeAssemble
+#pragma ID CATIAHybridShapeAssemble "DCE:8cd8dbdc-65f4-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeAssemble
+
+// VB object name : HybridShapeAssemble (Id used in Visual Basic)
+#pragma ID HybridShapeAssemble "DCE:8cd8dbe1-99a3-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeAssemble HybridShapeAssemble
+#endif
+
+
+

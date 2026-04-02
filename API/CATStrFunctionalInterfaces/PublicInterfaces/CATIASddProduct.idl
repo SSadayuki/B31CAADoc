@@ -1,0 +1,72 @@
+// COPYRIGHT Dassault Systemes 2011.
+//=============================================================================
+// CATIASddProduct
+//   Interface to Create SDD Design Unit.
+//=============================================================================
+// Usage notes:
+//   Interface for Automation Integration.
+//=============================================================================
+// Oct. 2011  Creation                                         Deshmane Rahul
+//=============================================================================
+#ifndef CATIASddProduct_IDL
+#define CATIASddProduct_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl" 
+#include "CATIAReference.idl" 
+#include "CATBSTR.idl" 
+#include "CATIAPart.idl" 
+#include "CATBaseDispatch.idl" 
+
+/**
+ * Interface to create a SDD Design Unit under a Product.
+ * <b>Role</b>:  Allows creating Design Unit under a Product.
+ */
+interface CATIASddProduct : CATIABase
+{      
+  /** 
+  * Creates the Design Unit inside a Product.
+  * @sample 
+  * <dd>
+  * This Example creates a Design Unit inside a Product from scratch.
+  * <pre>
+  * ' Create a New Product Document
+  * Dim NewProdDoc As ProductDocument
+  * Set NewProdDoc = CATIA.Documents.Add("Product")
+  * ' Get the Product from the Product Document
+  * Dim RootPrd As Product
+  * Set RootPrd = NewProdDoc.Product
+  * ' Select the Product Document and Add the product to this selection
+  * Dim SelectionObj As Selection
+  * Set SelectionObj = NewProdDoc.Selection
+  * SelectionObj.Add RootPrd
+  * ' Create a SDD product from above Product
+  * Dim SddProductObj As SddProduct
+  * Set SddProductObj = SelectionObj.FindObject("CATIASddProduct")
+  * ' Create a Design Unit under this Product
+  * Dim SddDesignUnit As Part
+  * Set SddDesignUnit = SddProductObj.<font color="red">CreateDesignUnit</font>
+  * ' Using this Part get the CustomerFactory
+  * Dim FactoryObj As SfmFactory
+  * Set FactoryObj = SddDesignUnit.GetCustomerFactory("SfmFactory")
+  * </pre>
+  * </dd> 
+  */
+  HRESULT CreateDesignUnit(out /*IDLRETVAL*/ CATIAPart oSddUnitPart); 
+};
+
+
+// Interface name : CATIASddProduct
+#pragma ID CATIASddProduct "DCE:D76F92A7-EB4C-46a5-AABA9FD1D1A9B076"                             
+#pragma DUAL CATIASddProduct
+
+// VB object name : SddProduct
+#pragma ID SddProduct "DCE:F18C73D5-A89C-435f-A641C0416FBB6779"                        
+#pragma ALIAS CATIASddProduct SddProduct
+
+#endif

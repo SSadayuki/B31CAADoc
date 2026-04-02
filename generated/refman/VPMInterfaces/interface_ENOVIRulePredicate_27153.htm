@@ -1,0 +1,185 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>VPMInterfaces ENOVIRulePredicate Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../VPMInterfaces.htm" href="../VPMInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "VPMInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "ENOVIRulePredicate"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>VPMInterfaces Framework:  ENOVIRulePredicate Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_ENOVIRulePredicate_27153','ENOVIRulePredicate','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can freely reimplement this interface.</b></p>
+<hr/>
+<p>
+ interface <b>ENOVIRulePredicate</b>
+</p>
+<p>
+<b><i> Interface to evaluate a <b>condition</b>.</i></b><br>
+
+ <p>The class implementing this interface should be:
+ <ul>
+   <li>a DataExtension</li>
+   <li>extending the type <b>ENOVRulePredImpl_xxx</b>,
+       where <b>xxx</b> is the user-exit condition referenced in
+   LCA Security DataGroups.</li>
+ </lu>
+ <p><a name=Example><b>Typical extension sample</b></a>:
+ <table bgcolor=#fefedf><tr><td><pre>
+ class myPredExtension_1 : public CATBaseUnknown
+ {
+    CATDeclareClass;
+ public:
+    myPredExtension_1();
+    ~myPredExtension_1();
+    HRESULT eval(CATBaseUnknown_var iInstance);
+    int     setNot()        { _not=1; return _not; }
+    int     isValid()       { return 1; }
+    const char * toString() { return "myPred_1"; }
+ private:
+    int _not;
+ };
+
+ <font color=red>// this user-condition can be referenced as <b>myCond_1</b> in DataGroups</font>
+
+ CATImplementClass(myPredExtension_1,
+                   DataExtension,
+                   CATBaseUnknown,
+                   ENOVRulePredImpl_myCond_1);
+
+ myPredExtension_1::myPredExtension_1() {}
+
+ myPredExtension_1::~myPredExtension_1() {}
+
+ HRESULT myPredExtension_1::eval(CATBaseUnknown_var iInstance)
+ {
+   HRESULT hr = S_OK;
+   ...
+   return hr;
+ }</pre></td></tr></table></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#eval(CATBaseUnknown_var)"><b>eval</b></a>(CATBaseUnknown_var)
+</td><td id='tdright'>  Evaluate the condition.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#isValid()"><b>isValid</b></a>()
+</td><td id='tdright'>  Returns the condition validity.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#setNot()"><b>setNot</b></a>()
+</td><td id='tdright'>  Negates the predicate.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#toString()"><b>toString</b></a>()
+</td><td id='tdright'>  Returns the condition under a string format.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="eval"></a><a id="eval(CATBaseUnknown_var)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>eval</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown_var')</script> <span class='param'>iInstance</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Evaluate the condition.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iInstance</span></dt>
+   <dd>   the instance to evaluate against the condition represented
+   by this interface.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    S_OK    if condition is <b>true</b>
+   S_FALSE if condition is <b>false</b>
+   E_FAIL  if condition is invalid, regarding the given instance
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="isValid"></a><a id="isValid()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>isValid</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the condition validity.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    0 if the condition is not valid.
+   1 if the condition is valid.
+     <br>Note: "user-exit" conditions are always valid.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="setNot"></a><a id="setNot()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>setNot</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Negates the predicate.
+ <br>This method is called at predicate build-time when the NOT
+ operator (!) is used with the condition.
+</dd>
+<dt class='dtmethod' >
+  <a id="toString"></a><a id="toString()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('char','const char *')</script>  <span class='objname'>toString</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the condition under a string format.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     the condition name.
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>ENOVIRulePredicate.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>GUIDVPMInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

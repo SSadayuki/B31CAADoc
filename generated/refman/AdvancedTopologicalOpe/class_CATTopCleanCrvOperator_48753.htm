@@ -1,0 +1,949 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>AdvancedTopologicalOpe CATTopCleanCrvOperator Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../AdvancedTopologicalOpe.htm" href="../AdvancedTopologicalOpe.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "AdvancedTopologicalOpe";	}
+		function getCurrentObjectName() { 
+ 	return "CATTopCleanCrvOperator"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>AdvancedTopologicalOpe Framework: CATTopCleanCrvOperator <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATTopCleanCrvOperator_48753','CATTopCleanCrvOperator','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATTopCleanCrvOperator</b>
+</p>
+<p>
+<b><i>  Class defining the operator to clean a wire body.</i></b><br>
+
+ <br>
+ The operator produces a wire topology that is at least (G0) continuous. More over, upon request, it can:
+<ul>
+ <li> Enhance the continuity between edges up to the continuity in curvature (G2 continuity).
+ <li> Concatenate all the edges sharing vertices that are G2 continuous.
+ <li> Allow the continuity enhancement of the wire on a shell topology support (2D cleaning mode).
+</ul>
+ The operator produces a new wire containing at most the same number of edges than the input wire.
+ The correction is controlled by the user. The operator can correct:
+ <ul>
+  <ul><li>Point discontinuities between edges, according to a point discontinuity criterion.
+    All point discontinuity gaps less than this criterion are corrected to be set to the standard G0 gap 
+ (see <script type="text/javascript"> activateLinkAnchor('CATGeoFactory','GetResolution','CATGeoFactory.GetResolution') </script> ).  <li> Tangency between edges, according to a tangency discontinuity criterion.
+    The tangency discontinuity angles less than this criterion are corrected to be set to the standard G1 angle
+ (see 
+<script type="text/javascript"> activateLinkAnchor('CATGeoFactory','GetResolution','CATGeoFactory.GetResolution') </script> ).  <li>Curvature between edges, according to a curvature vector discontinuity criterion. 
+ Let <tt>C1</tt> and <tt>C2</tt> be the curvature vectors to edges <tt>E1</tt>, <tt>E2</tt> incident to vertex <tt>V</tt>.
+ <br>Define <tt>R = |C1 - C2 | / max (|C1|,|C2|)</tt> to be the curvature vector ratio.
+ If <tt>R</tt> is greater than <tt>(1-iCurvatureRatio)/iCurvatureRatio</tt>, G2 continuity will 
+ be corrected to the standard G2 value (see 
+<script type="text/javascript"> activateLinkAnchor('CATGeoFactory','GetResolution','CATGeoFactory.GetResolution') </script> ).  <li>Small edges to delete, according to an edge length criterion, upon request.
+ </ul>
+  More over after these corrections, the operator can merge edges that are connected by vertices 
+ that are continuous in curvature.
+ <br>
+ These operations can be driven in two control modes 
+<script type="text/javascript"> activateLinkAnchor('CatTopCleanCrvPriorityMode','','CatTopCleanCrvPriorityMode') </script> : <ul>
+  <li>
+<script type="text/javascript"> activateLinkAnchor('CatTopCleanCrvPriorityMode','CatTopCleanCrvContinuity','CatTopCleanCrvPriorityMode.CatTopCleanCrvContinuity') </script> : The priority is given to continuity order achievement,    regardless of the geometric deformation.
+    Some important deformations between the input body and the result may appear.
+  <li>
+<script type="text/javascript"> activateLinkAnchor('CatTopCleanCrvPriorityMode','CatTopCleanCrvDeformation','CatTopCleanCrvPriorityMode.CatTopCleanCrvDeformation') </script> : The process is run with an additional constraint of maximum deformation around the input wire.
+    In this case, it can happen that some required continuity constraints are not reached, producing
+ an error in the <tt>Run</tt> method.
+ </ul> 
+ This operator follows the general scheme of the topological operators:
+ <ul>
+<li> Creates the operator with the <tt>CATCreateTopCleanCrvOperator</tt> global function, which defines
+ the wire to clean
+<li> Sets the cleaning parameters
+<li> Runs with the <tt>Run</tt> method. In case of maximum deformation control mode, if the operator does not find
+ any solution satisfying all the constraints, an error is thrown. 
+<li> Gets the result body by the <tt>GetResult</tt> method. 
+ The result body contains at most the same number of edges 
+ than the input one. Moreover, one can access to the maximum deformation
+ between the input body and the result. 
+<li> Deletes the operator with the usual C++ <tt>delete</tt> operator.
+</ul>
+ Remark : In case of 2D cleaning mode (on shell), the continuity at transition vertices between two
+ faces could not be enhanced beyond the continuity between both faces. Indeed, the treatment does not
+ enhance the continuity of the shell.
+ </ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATTopCleanCrvOperator(CATGeoFactory*,CATTopData*)"><b>CATTopCleanCrvOperator</b></a>(CATGeoFactory*,CATTopData*)
+</td><td id='tdright'>  Do not use.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATTopCleanCrvOperator()"><b>~CATTopCleanCrvOperator</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetC3ContinuityAndCellReduction()"><b>GetC3ContinuityAndCellReduction</b></a>()
+</td><td id='tdright'>  
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCellReduction()"><b>GetCellReduction</b></a>()
+</td><td id='tdright'>  Retrieve the current status of cell reduction defined on operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetContinuityLevel()"><b>GetContinuityLevel</b></a>()
+</td><td id='tdright'>  Retrieve the current continuity level to improve defined on operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDescendantEdge(CATEdge*,CatTopCleanCrvCellStatus&amp;,CATEdge*&amp;)"><b>GetDescendantEdge</b></a>(CATEdge*,CatTopCleanCrvCellStatus&amp;,CATEdge*&amp;)
+</td><td id='tdright'>  Retrieves the result edge corresponding to an input edge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDescendantVertex(CATVertex*,CatTopCleanCrvCellStatus&amp;,CATVertex*&amp;)"><b>GetDescendantVertex</b></a>(CATVertex*,CatTopCleanCrvCellStatus&amp;,CATVertex*&amp;)
+</td><td id='tdright'>  Retrieves the result vertex corresponding to an input vertex.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMaxDeformationLocation(CATMathSetOfPoints&amp;,CATMathSetOfPoints&amp;)"><b>GetMaxDeformationLocation</b></a>(CATMathSetOfPoints&amp;,CATMathSetOfPoints&amp;)
+</td><td id='tdright'>  Returns the 3D location on the input wire and the 3D location on the output (corrected) wire
+ corresponding to the maximum reached deformation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMaxReachedDeformation()"><b>GetMaxReachedDeformation</b></a>()
+</td><td id='tdright'>  Returns the maximum deformation between input and output wires.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetApplyMappingOfInitialVertices(int)"><b>SetApplyMappingOfInitialVertices</b></a>(int)
+</td><td id='tdright'>  Allows the activation of the mapping of the input vertices to the output vertices.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetC1ToC2Management(CATTopCleanCrvC1ToC2Management)"><b>SetC1ToC2Management</b></a>(CATTopCleanCrvC1ToC2Management)
+</td><td id='tdright'>  Defines the way to treat non-C2 edges.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetC3ContinuityAndCellReduction(CATBoolean)"><b>SetC3ContinuityAndCellReduction</b></a>(CATBoolean)
+</td><td id='tdright'>  
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCellReduction(CATBoolean)"><b>SetCellReduction</b></a>(CATBoolean)
+</td><td id='tdright'>  Reduce the number of cells after curvature correction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetConnexityGap(CATLength)"><b>SetConnexityGap</b></a>(CATLength)
+</td><td id='tdright'>  Defines the point continuity criterion for G0 correction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetConnexityMinGap(CATLength)"><b>SetConnexityMinGap</b></a>(CATLength)
+</td><td id='tdright'>  Defines the point continuity criterion below which the G0 correction is not applied.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetContinuityLevel(CATFrFContinuity)"><b>SetContinuityLevel</b></a>(CATFrFContinuity)
+</td><td id='tdright'>  Defines the highest continuity level to achieve on the wire.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCurvatureRatio(double)"><b>SetCurvatureRatio</b></a>(double)
+</td><td id='tdright'>  Defines the curvature criterion for G2 correction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetEndExtremityContinuityLevel(CATFrFContinuity)"><b>SetEndExtremityContinuityLevel</b></a>(CATFrFContinuity)
+</td><td id='tdright'>  Defines the highest continuity level at the END extremity between the input wire and the
+ result wire.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFixedCells(CATLISTP(CATCell)&amp;)"><b>SetFixedCells</b></a>(CATLISTP(CATCell)&amp;)
+</td><td id='tdright'>  Defines the set of input edges and vertices that must stay unmodified through the operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetForceFillEdgeTreatment(int)"><b>SetForceFillEdgeTreatment</b></a>(int)
+</td><td id='tdright'>  
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetForceOneEdgeImprovement(CATBoolean)"><b>SetForceOneEdgeImprovement</b></a>(CATBoolean)
+</td><td id='tdright'>  Combined with cell reduction mode, forces the operator to treat either the one-edge-wire case
+ or any one edge case situated between two unsuppressed vertices.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLocalOptimization(int)"><b>SetLocalOptimization</b></a>(int)
+</td><td id='tdright'>  
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMaxDeformation(CATLength)"><b>SetMaxDeformation</b></a>(CATLength)
+</td><td id='tdright'>  Defines the maximum deformation allowed between the output and input bodies.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMinimumEdgeLength(double,CATBoolean)"><b>SetMinimumEdgeLength</b></a>(double,CATBoolean)
+</td><td id='tdright'>  Defines the minimum size of an edge to be corrected.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetModeODT(char*,char*)"><b>SetModeODT</b></a>(char*,char*)
+</td><td id='tdright'>  This API should not be used.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPriorityMode(CatTopCleanCrvPriorityMode)"><b>SetPriorityMode</b></a>(CatTopCleanCrvPriorityMode)
+</td><td id='tdright'>  Defines the priority mode of cleaning operations.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetShell(CATBody*)"><b>SetShell</b></a>(CATBody*)
+</td><td id='tdright'>  Defines the 2D cleaning mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetShell(CATBody*,CATBoolean)"><b>SetShell</b></a>(CATBody*,CATBoolean)
+</td><td id='tdright'>  Defines the 2D cleaning mode with optional topological wire on shell " LyingOnLink " recovery.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSmartClosure()"><b>SetSmartClosure</b></a>()
+</td><td id='tdright'>  To use on Closed Wire with SetCellReduction or SetApplyMappingOfInitialVertices only.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetStartExtremityContinuityLevel(CATFrFContinuity)"><b>SetStartExtremityContinuityLevel</b></a>(CATFrFContinuity)
+</td><td id='tdright'>  Defines the highest continuity level at the START extremity between the input wire and the
+ result wire.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTangencyAngle(CATAngle)"><b>SetTangencyAngle</b></a>(CATAngle)
+</td><td id='tdright'>  Defines the tangency criteria for G1 correction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTangencyMinAngle(CATAngle)"><b>SetTangencyMinAngle</b></a>(CATAngle)
+</td><td id='tdright'>  Defines the tangency criterion below which the G1 correction is not applied.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATTopCleanCrvOperator"></a><a id="CATTopCleanCrvOperator(CATGeoFactory*,CATTopData*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATTopCleanCrvOperator</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGeoFactory','CATGeoFactory*')</script> <span class='param'>iFactory</span>,<script type="text/javascript"> activateLink('CATTopData','CATTopData*')</script> <span class='param'>iTopData</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Do not use. 
+ Constructor. 
+ Use <tt>CATCreateTopCleanCrvOperator</tt> to create an
+ <tt>CATTopCleanCrvOperator</tt>.
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATTopCleanCrvOperator"></a><a id="~CATTopCleanCrvOperator()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATTopCleanCrvOperator</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetC3ContinuityAndCellReduction"></a><a id="GetC3ContinuityAndCellReduction()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetC3ContinuityAndCellReduction</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ 
+<dl  class='desclist'>
+  <dt class='deprecated'> <b>Deprecated:</b></dt> 
+  <dd>  V5R15
+ Retrieve the current status of cell reduction defined on operator.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCellReduction"></a><a id="GetCellReduction()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetCellReduction</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieve the current status of cell reduction defined on operator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The current cell reduction status.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetContinuityLevel"></a><a id="GetContinuityLevel()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script>  <span class='objname'>GetContinuityLevel</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieve the current continuity level to improve defined on operator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The current continuity level.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDescendantEdge"></a><a id="GetDescendantEdge(CATEdge*,CatTopCleanCrvCellStatus&amp;,CATEdge*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetDescendantEdge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATEdge','CATEdge*')</script> <span class='param'>iInputEdge</span>,<script type="text/javascript"> activateLink('CatTopCleanCrvCellStatus','CatTopCleanCrvCellStatus&amp;')</script> <span class='param'>oInputEdgeStatus</span>,<script type="text/javascript"> activateLink('CATEdge','CATEdge*&amp;')</script> <span class='param'>oOutputEdge</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the result edge corresponding to an input edge.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iInputEdge</span></dt>
+   <dd> The pointer to the edge of the input wire.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oInputEdgeStatus</span></dt>
+   <dd> The status of the input edge.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oOutputEdge</span></dt>
+   <dd> The pointer to the corresponding edge in the result wire.
+ <tt>oOutputEdge</tt> is <tt>NULL</tt> if <tt>oInputEdgeStatus</tt> equals 
+ <tt>CatTopCleanCrvCellDeleted</tt>, not null otherwise.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null if <tt>iInputEdge</tt> is not an edge of the input wire or if edge descendance
+ is not available.
+ Edge descendance is not available if 
+<script type="text/javascript"> activateLinkAnchor('CATTopCleanCrvOperator','SetC3ContinuityAndCellReduction','CATTopCleanCrvOperator.SetC3ContinuityAndCellReduction') </script>  has been required.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDescendantVertex"></a><a id="GetDescendantVertex(CATVertex*,CatTopCleanCrvCellStatus&amp;,CATVertex*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetDescendantVertex</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATVertex','CATVertex*')</script> <span class='param'>iInputVertex</span>,<script type="text/javascript"> activateLink('CatTopCleanCrvCellStatus','CatTopCleanCrvCellStatus&amp;')</script> <span class='param'>oInputVertexStatus</span>,<script type="text/javascript"> activateLink('CATVertex','CATVertex*&amp;')</script> <span class='param'>oOutputVertex</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the result vertex corresponding to an input vertex.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iInputVertex</span></dt>
+   <dd> The pointer to the vertex of the input wire.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oInputVertexStatus</span></dt>
+   <dd> The status of the input vertex.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oOutputVertex</span></dt>
+   <dd> The pointer to the corresponding vertex in the result wire .
+ <tt>oOutputVertex</tt> is <tt>NULL</tt> if <tt>oInputVertexStatus</tt> equals 
+ <tt>CatTopCleanCrvCellDeleted</tt>, not null else.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null if <tt>iInputVertex</tt> is not a vertex of the input wire.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMaxDeformationLocation"></a><a id="GetMaxDeformationLocation(CATMathSetOfPoints&amp;,CATMathSetOfPoints&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetMaxDeformationLocation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMathSetOfPoints','CATMathSetOfPoints&amp;')</script> <span class='param'>oInputLocation</span>,<script type="text/javascript"> activateLink('CATMathSetOfPoints','CATMathSetOfPoints&amp;')</script> <span class='param'>oOutputLocation</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the 3D location on the input wire and the 3D location on the output (corrected) wire
+ corresponding to the maximum reached deformation. These locations are 3D points computed from
+ the curve geometry of edges. The distance between these two points corresponds to the
+ maximum reached deformation (see GetMaxReachedDeformation).
+ This method must be called after the Run method, otherwise a not null value is returned (error).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oInputLocation</span></dt>
+   <dd> Point on the input wire.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oOutputLocation</span></dt>
+   <dd> Point on the output wire.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Integer not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMaxReachedDeformation"></a><a id="GetMaxReachedDeformation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLength','CATLength')</script>  <span class='objname'>GetMaxReachedDeformation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum deformation between input and output wires.
+ <br>This method must be called after the <tt>Run</tt> method.
+ If the priority mode is <tt>CatTopCleanCrvDeformation</tt> and if the 
+ and maximum deformation that is reached is greater than the maximum authorized
+ deformation ( 
+<script type="text/javascript"> activateLinkAnchor('CATTopCleanCrvOperator','SetMaxDeformation','CATTopCleanCrvOperator.SetMaxDeformation') </script> ), a NULL body is returned by the <tt>GetResult</tt> method.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetApplyMappingOfInitialVertices"></a><a id="SetApplyMappingOfInitialVertices(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetApplyMappingOfInitialVertices</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iApplyMapping</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Allows the activation of the mapping of the input vertices to the output vertices.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iApplyMapping</span></dt>
+   <dd> If TRUE AND SetContinuityLevel(CATFrFCurvatureCont) AND SetLocalOptimization(TRUE) AND SetCellReduction(FALSE) 
+ the mapping could be activated then the quality of the wire is very similar to the quality obtained 
+ when the SetCellReduction is set to TRUE (Smoother result) but the vertices are kept. 
+ <br> After deletion of small edges the position of the remained vertices are saved with their
+ global curvilinear adimensional param (eg Pos(Vi)=Total_Length_From_The_Starting_Extremity_To_Vi/Total_Length_Of_Wire)
+ then a a global smoothing is applyied on a reduced wire and the vertices are reinserted at 
+ New_Pos(Vi)=Pos(Vi)*New_Total_Length_Of_Wire.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetC1ToC2Management"></a><a id="SetC1ToC2Management(CATTopCleanCrvC1ToC2Management)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetC1ToC2Management</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATTopCleanCrvC1ToC2Management','CATTopCleanCrvC1ToC2Management')</script> <span class='param'>iC1ToC2Managment</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the way to treat non-C2 edges.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iC1ToC2Managment</span></dt>
+   <dd> By default the value is CATTopCleanCrvDefaultC1ToC2Management
+ <dl><b>Legal values</b>:
+ <dt><tt>CATTopCleanCrvNoC1ToC2Management</tt></dt><dd> No special treatment would be applied
+ <dt><tt>CATTopCleanCrvDefaultC1ToC2Management</tt></dt><dd> Edges that need a modification 
+ and that are not C2 continuous would be C2 continous in the result.
+ <dt><tt>CATTopCleanCrvAllCurvesC1ToC2Management</tt></dt><dd> All non-C2-continuous Edges would be 
+ C2 continous in the result.
+ </dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetC3ContinuityAndCellReduction"></a><a id="SetC3ContinuityAndCellReduction(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetC3ContinuityAndCellReduction</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iC3Mode</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ 
+<dl  class='desclist'>
+  <dt class='deprecated'> <b>Deprecated:</b></dt> 
+  <dd>  V5R15
+ Activate the C3 correction and cell reduction.
+ 
+ </ dd>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iC3Mode</span></dt>
+   <dd> iC3Mode = TRUE to ask for C3 continuity correction and cell reduction of the wire.
+ The operator concatenates all the result edges sharing vertices that are C3 continuous, 
+ and creates vertices at points that are not.
+ Point, tangency and curvature continuity corrections will automatically be performed, controlled
+ by the associated continuity thresholds.
+ if C3 correction an cell reduction is required, the edge descendance informations given
+ by 
+<script type="text/javascript"> activateLinkAnchor('CATTopCleanCrvOperator','GetDescendantEdge','CATTopCleanCrvOperator.GetDescendantEdge') </script> are not available. 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCellReduction"></a><a id="SetCellReduction(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetCellReduction</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iCellReduction</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Reduce the number of cells after curvature correction.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCellReduction</span></dt>
+   <dd> iCellReduction = TRUE to concatenate all the result edges sharing vertices that are G2 continuous.
+ If is CellReduction is required it is recommanded for better stability to use it in <tt>CATFrFCurvatureCont</tt>
+ correction mode.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetConnexityGap"></a><a id="SetConnexityGap(CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetConnexityGap</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iConnexityGap</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the point continuity criterion for G0 correction.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iConnexityGap</span></dt>
+   <dd> The G0 continuity criterion, set by default to the factory resolution.
+ This applies to vertices connecting edges.
+ All point discontinuity gaps less than this criterion are corrected to be set to the standard G0 gap.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetConnexityMinGap"></a><a id="SetConnexityMinGap(CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetConnexityMinGap</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iConnexityMinGap</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the point continuity criterion below which the G0 correction is not applied.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iConnexityMinGap</span></dt>
+   <dd> The G0 continuity criterion minimum, set by default to 0.
+ If the distance between two consecutives Edges < iConnexityMinGap, then 
+ G0 correction is not applied.
+
+ Default value : 0.
+ <pre>
+            +---------------+-------------------------------+------------------> G0 Gap
+            0        iConnexityMinGap                iConnexityGap
+ Correction  :     NO                     YES                        NO </pre>
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetContinuityLevel"></a><a id="SetContinuityLevel(CATFrFContinuity)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetContinuityLevel</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script> <span class='param'>iContinuityLevel</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the highest continuity level to achieve on the wire.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iContinuityLevel</span></dt>
+   <dd> The continuity level, set by default to <tt>CATFrFTangentCont</tt> for tangency continuity.
+ <br><b>Legal values</b>:
+ <dl>
+ <dt><tt>CATFrFPointCont</tt></dt><dd> To limit the continuity correction to point continuity correction
+ <dt><tt>CATFrFTangentCont</tt></dt><dd> To limit the continuity correction to tangency continuity correction
+ <dt><tt>CATFrFCurvatureCont</tt></dt><dd> To limit the continuity correction to curvature continuity correction.
+ </dl>
+ A given continuity order can be reached only if its inferior continuity levels are also reached,
+ according to the continuity correction parameters defined by <tt>SetConnexityGap</tt>, <tt>SetTangencyAngle</tt>,
+ <tt>SetCurvatureRatio</tt>, <tt>SetConnexityMinGap</tt>,<tt>SetTangencyMinAngle</tt>.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCurvatureRatio"></a><a id="SetCurvatureRatio(double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetCurvatureRatio</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iCurvatureRatio</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the curvature criterion for G2 correction.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCurvatureRatio</span></dt>
+   <dd> The curvature ratio in <tt>]0..1]</tt>, set by default to 0.98.
+ Let <tt>C1</tt> and <tt>C2</tt> be the curvature vectors to edges <tt>E1</tt>, <tt>E2</tt> incident to vertex <tt>V</tt>.
+ Let <tt>R = |C1 - C2 | / max (|C1|,|C2|)</tt> be the curvature vector ratio.
+ If <tt>R</tt> is greater than <tt>(1-iCurvatureRatio)/iCurvatureRatio</tt>, G2 continuity will 
+ be corrected to the standard G2 value.
+ The more a vertex <tt>V</tt> is G2 continuous, the more <tt>iCurvatureRatio</tt> is near 1.
+ The less a vertex <tt>V</tt> is G2 continuous, the more <tt>iCurvatureRatio</tt> is near 0 (excluded).
+ Give a value near of 0 to try to make G2 all vertices, near 1 to only correct vertices
+ that are already quite G2. 
+ To be G2 corrected, vertex <tt>V</tt> must be G1 in the input wire, or must have been corrected 
+ in G1 by the cleaning process.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetEndExtremityContinuityLevel"></a><a id="SetEndExtremityContinuityLevel(CATFrFContinuity)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetEndExtremityContinuityLevel</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script> <span class='param'>iEndContLevel</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the highest continuity level at the END extremity between the input wire and the
+ result wire.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEndContLevel</span></dt>
+   <dd> The continuity level, set by default to <tt>CATFrFCurvatureCont</tt> for curvature continuity.
+ <br><b>Legal values</b>:
+ <dl>
+ <dt><tt>CATFrFPointCont</tt></dt><dd> To limit the continuity to point continuity
+ <dt><tt>CATFrFTangentCont</tt></dt><dd> To limit the continuity to tangency continuity
+ <dt><tt>CATFrFCurvatureCont</tt></dt><dd> To limit the continuity to curvature continuity.
+ </dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFixedCells"></a><a id="SetFixedCells(CATLISTP(CATCell)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetFixedCells</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLISTP(CATCell)','CATLISTP(CATCell)&amp;')</script> <span class='param'>iFixedCells</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the set of input edges and vertices that must stay unmodified through the operator.
+ The list only contains edges and/or vertices of the input wire. An error is send if not.
+ These cells will be reproduced as the same as they are in the input wire, and their
+ underlying geometry will not be modified.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetForceFillEdgeTreatment"></a><a id="SetForceFillEdgeTreatment(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetForceFillEdgeTreatment</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iForceFillEdgeTreatment</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ 
+<dl  class='desclist'>
+  <dt class='deprecated'> <b>Deprecated:</b></dt> 
+  <dd>  V5R15
+ do not use
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetForceOneEdgeImprovement"></a><a id="SetForceOneEdgeImprovement(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetForceOneEdgeImprovement</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iEnable</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Combined with cell reduction mode, forces the operator to treat either the one-edge-wire case
+ or any one edge case situated between two unsuppressed vertices.
+ In the case of an one-edge-wire, the result wire is by default exactly the same as the input.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEnable</span></dt>
+   <dd> By default FALSE.
+ <dl><b>Legal values</b>:
+ <tt>TRUE</tt> Forces the operator to treat one edge if cell reduction is activated : a smoothing based
+ on absolute wire length is applied.
+ <tt>FALSE</tt> If there is only one edge in the wire or for cases with one edge between two vertices,
+ nothing is done.
+ </dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLocalOptimization"></a><a id="SetLocalOptimization(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetLocalOptimization</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOptimization</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ 
+<dl  class='desclist'>
+  <dt class='deprecated'> <b>Deprecated:</b></dt> 
+  <dd>  V5R15
+ To use local optimization. ONLY AVAILABLE WITH "Deformation" OPTION
+ Local optimization means : new connections are computed to minimize the 3th derivative of 
+ the curves (3 order energy). The goal is to reduce oscillations of curvature combs.
+ The result could be close to we picture.
+ iOptimization = 1 = ON, iOptimization = 0 = OFF (default);
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMaxDeformation"></a><a id="SetMaxDeformation(CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetMaxDeformation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iMaxDeformation</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the maximum deformation allowed between the output and input bodies.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMaxDeformation</span></dt>
+   <dd> The deformation value, set by default to 0.001.
+ This parameter will be used only when working in <tt>CatTopCleanCrvDeformation</tt> priority mode.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMinimumEdgeLength"></a><a id="SetMinimumEdgeLength(double,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetMinimumEdgeLength</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iMinEdgeLength</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iAbsoluteMinEdgeLength</span><span class='param'>= TRUE</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the minimum size of an edge to be corrected.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMinimumEdgeLength</span></dt>
+   <dd> The minimum edge length to be kept, set by default to <tt>10 * Factory resolution</tt>.
+ All edges which length is less than <tt>iAbsoluteMinEdgeLength</tt> are removed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAbsoluteMinEdgeLength</span></dt>
+   <dd> <dl><b>Legal values</b>:
+ <tt>TRUE</tt> if <tt>iMinimumEdgeLength</tt> is the absolute wire length, 
+ <tt>FALSE</tt> the <tt>iMinEdgeLength</tt> is understood as a percentile of the total wire length.
+ In this case if the wire as a total length <tt>L</tt>all edges of length <tt>l</tt> are considered as small edges
+ if and only if <tt>l<=iMinEdgeLength*L</tt>.
+ </dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetModeODT"></a><a id="SetModeODT(char*,char*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetModeODT</span><span class = 'signature'>(<script type="text/javascript"> activateLink('char','char*')</script> <span class='param'>iScenarioNameStr</span>,<script type="text/javascript"> activateLink('char','char*')</script> <span class='param'>iInputFileNameStr</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ This API should not be used.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPriorityMode"></a><a id="SetPriorityMode(CatTopCleanCrvPriorityMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetPriorityMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CatTopCleanCrvPriorityMode','CatTopCleanCrvPriorityMode')</script> <span class='param'>iMode</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the priority mode of cleaning operations.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd> The mode value. By default, it is set <tt>CatTopCleanCrvContinuity</tt>.
+ <br><b>Legal values</b>:
+ <dl>
+ <dt><tt>CatTopCleanCrvContinuity</tt></dt><dd> No Limitation of the deformation.
+ <dt><tt>CatTopCleanCrvDeformation</tt></dt><dd> To limit the deformation (see also <tt>SetMaxDeformation</tt>).
+ </dl>
+ <b>Note</b> : For a better quality result it is recommanded to use the <tt>CatTopCleanCrvDeformation</tt> 
+ and not the default mode.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetShell"></a><a id="SetShell(CATBody*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetShell</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iShellBody</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the 2D cleaning mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iShellBody</span></dt>
+   <dd> The shell body on which the wire is cleaned.
+ The topological wire on shell " LyingOnLink " must exist. That is a warranty the
+ wire edges to clean are geometrically represented on the <tt>iShellBody</tt> faces.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null if <tt>iShellBody</tt> is a NULL pointer.
+ <br> An error is thrown if <tt>iShellBody</tt> is not made of a single shell.
+ <br> An error is thrown if the wire on shell " LyingOnLink " does not exist.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetShell"></a><a id="SetShell(CATBody*,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetShell</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iShellBody</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iLyingOnLinkRecovery</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the 2D cleaning mode with optional topological wire on shell " LyingOnLink " recovery.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iShellBody</span></dt>
+   <dd> The shell body on which the wire is cleaned.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLyingOnLinkRecovery</span></dt>
+   <dd> On TRUE, enables the recovery of the topological wire on shell " LyingOnLink " if absent.
+ In this case, the wire edges to clean must be geometrically represented on the
+ <tt>iShellBody</tt> faces.
+ On FALSE, the topological wire on shell " LyingOnLink " must exist.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null if <tt>iShellBody</tt> is a NULL pointer.
+ <br> An error is thrown if <tt>iShellBody</tt> is not made of a single shell.
+ <br> An error is thrown if the wire edges are not geometrically represented on the
+ <tt>iShellBody</tt> faces when recovery option is enabled (TRUE).
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSmartClosure"></a><a id="SetSmartClosure()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetSmartClosure</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ To use on Closed Wire with SetCellReduction or SetApplyMappingOfInitialVertices only.
+ This allow the CATTopCleanCrvOperator to	modify where is the Closure Vertex of the wire.
+ Note : by default the operator does not change where is the closure vertex.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iVertex</span></dt>
+   <dd> <dl><b>Legal values</b>:
+ <tt>NULL</tt> (Default) the operator automatically choose a closure vertex with the following preferences.
+ <dt></dt><dd> If SetShell is used (2D Clean) the closure vertex will be at a transition     between two faces.
+ <dt></dt><dd> the closure vertex will be at a vertex that will not be G0 after clean.
+ <dt></dt><dd> the closure vertex will be at a vertex that will not be G1 after clean.
+ <dt></dt><dd> the closure vertex will be at a vertex that will not be G2 after clean.
+ </dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetStartExtremityContinuityLevel"></a><a id="SetStartExtremityContinuityLevel(CATFrFContinuity)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetStartExtremityContinuityLevel</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script> <span class='param'>iStartContLevel</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the highest continuity level at the START extremity between the input wire and the
+ result wire.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iStartContLevel</span></dt>
+   <dd> The continuity level, set by default to <tt>CATFrFCurvatureCont</tt> for curvature continuity.
+ <br><b>Legal values</b>:
+ <dl>
+ <dt><tt>CATFrFPointCont</tt></dt><dd> To limit the continuity to point continuity
+ <dt><tt>CATFrFTangentCont</tt></dt><dd> To limit the continuity to tangency continuity
+ <dt><tt>CATFrFCurvatureCont</tt></dt><dd> To limit the continuity to curvature continuity.
+ </dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTangencyAngle"></a><a id="SetTangencyAngle(CATAngle)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetTangencyAngle</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATAngle','CATAngle')</script> <span class='param'>iTangencyAngle</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the tangency criteria for G1 correction.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTangencyAngle</span></dt>
+   <dd> The tangence angle in <b>degrees</b>, set by default to 0.5 degree.
+ <tt>iTangencyAngle</tt> is the upper value under which a tangency correction (G1) will be performed.
+ Let <tt>T1</tt> and <tt>T2</tt> be the tangents to the edges <tt>E1</tt>, <tt>E2</tt> incident to vertex <tt>V</tt>.
+ If <tt>|T1-T2|</tt> is less than <tt>iTangencyAngle</tt>, it will be corrected to the standard G1 value.
+ To be G1 corrected, vertex <tt>V</tt> must be G0 in the input wire, 
+ or must have been corrected in G0 by the cleaning process.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Not null in case of error.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTangencyMinAngle"></a><a id="SetTangencyMinAngle(CATAngle)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetTangencyMinAngle</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATAngle','CATAngle')</script> <span class='param'>iTangencyMinAngle</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the tangency criterion below which the G1 correction is not applied.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTangencyMinAngle</span></dt>
+   <dd> The tangence angle minimum in <b>degrees</b>, set by default to 0 degree.
+ If |T1,T2| < iTangencyMinAngle, then G1 correction is not applied.
+
+ <pre>
+        +---------------+-------------------------------+------------------> G1 Gap
+        0         iTangencyMinAngle                iTangencyAngle
+ Correction  :     NO                     YES                        NO      </pre>
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATTopCleanCrvOperator.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATAdvancedTopologicalOpe</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

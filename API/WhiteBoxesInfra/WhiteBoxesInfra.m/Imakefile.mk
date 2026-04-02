@@ -1,0 +1,34 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+INCLUDED_MODULES=WBxInfraUtilities 
+
+#ifdef CATIAR201
+LOCAL_CCFLAGS_ASSERT=-DNOT_CDS_ASSERT $(MKMK_DEBUG:+"-DCDS_ASSERT")
+LOCAL_CCFLAGS=$(LOCAL_CCFLAGS_ASSERT)
+#endif
+
+LINK_WITH_COMMON = \
+  JS0GROUP \
+  KnowledgeItf \
+  CATWBx \
+  CATCDSUtilities
+
+#ifdef CATIAR201
+LINK_WITH = \
+  $(LINK_WITH_COMMON) \
+  CATSysTS \
+  CATMathStream \
+  CATMagnitude
+#else
+LINK_WITH = \
+  $(LINK_WITH_COMMON)\
+  CATLiteralFeatures
+#endif
+                  
+#
+OS = Windows_NT
+#
+OPTIMIZATION_CPP=/O2

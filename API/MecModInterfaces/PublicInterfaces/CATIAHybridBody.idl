@@ -1,0 +1,173 @@
+#ifndef CATIAHybridBody_IDL
+#define CATIAHybridBody_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAHybridBody:                           
+// Exposed interface for GSM Body
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Apr99 Creation                                        JM Gautier	 
+// Oct99 Ajout Sketches (RI)						P Fages/JM Gautier	 
+//=================================================================
+
+#include "CATIABase.idl"
+
+interface CATIABodies;
+interface CATIAHybridBodies;
+interface CATIAGeometricElements;
+interface CATIAHybridShapes;
+interface CATIAHybridShape;
+interface CATIASketches;
+
+/**
+ * The object is a hybrid body.
+ * The hybrid body manages a set of geometric elements, a set of hybrid shapes,
+ * a set of bodies and a set of hybrid bodies.
+ *<br>
+ * It belongs to the @href CATIAHybridBodies collection of a @href CATIAPart or @ref CATIABody 
+ * or @href CATIAHybridBody object.
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridBody : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+
+#pragma PROPERTY GeometricElements
+    
+    /**
+    * Returns the list of geometrical elements included in the hybrid body.
+	* @return oGeometricElements
+    *   The list of geometric elements in the hybrid body (@see CATIAGeometricElements<br>
+    *   for more information).
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>geometricElements</tt> the list of<br> 
+	* geometrical elements in the Hybrid body <tt>hybridBody</tt>:
+    * <pre>
+	* Dim geometricElements As GeometricElements
+    * Set geometricElements = hybridBody.<b>GeometricElements</b>
+    * </pre>
+    * </dl>
+    */
+    HRESULT get_GeometricElements ( out /*IDLRETVAL*/ CATIAGeometricElements oGeometricElements );
+
+#pragma PROPERTY HybridShapes
+    
+	/**
+	* Returns the list of hybrid shapes included in the hybrid body.
+	* @return oHybridShapes
+    *   The list of hybrid shapes in the hybrid body (@see CATIAHybridShapes<br>
+    *   for more information).
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>hybridShapes</tt> the list of <br> 
+	* hybrid shapes in the hybrid body <tt>hybridBody</tt>:
+    * <pre>
+	* Dim hybridShapes As HybridShapes
+    * Set hybridShapes = hybridBody.<b>HybridShapes</b>
+    * </pre>
+    * </dl>
+    */
+    HRESULT get_HybridShapes ( out /*IDLRETVAL*/ CATIAHybridShapes oHybridShapes );
+
+#pragma PROPERTY Bodies
+    /**
+    * Returns the hybrid body's Bodies collection.
+    * <! sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>bodyColl</tt> the collection
+    * of bodies of the hybrid body <tt>hybridBody</tt> :
+    * <pre>
+    * Set bodyColl = hybridBody.<font color="red">Bodies</font>
+    *</pre>
+    * </dl>
+    */
+    HRESULT    get_Bodies  ( out  /*IDLRETVAL*/ CATIABodies  oBodies );
+
+#pragma PROPERTY HybridBodies
+    /**
+    * Returns the hybrid body's HybridBodies collection.
+    * <! sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>hybridBodyColl</tt> the collection
+    * of hybrid bodies of the hybrid body <tt>hybridBody</tt> :
+    * <pre>
+    * Set hybridBodyColl = hybridBody.<font color="red">HybridBodies</font>
+    *</pre>
+    * </dl>
+    */
+    HRESULT    get_HybridBodies  ( out  /*IDLRETVAL*/ CATIAHybridBodies  oHybridBodies );
+
+
+    //
+    //    ON CONTAINED SKETCHES
+    //    =====================
+    //
+    /**
+     * Returns the hybrid body's Sketches collection.
+     * These sketches are those inside the hybrid body at all levels.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>skColl</tt> the collection
+     * of sketches of a hybrid body :
+     * <pre>
+     * Set skColl = hybridBody.<font color="red">HybridSketches</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY HybridSketches
+    HRESULT    get_HybridSketches ( out    /*IDLRETVAL*/  CATIASketches  oSketches );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+	/**
+	* Appends a hybrid shape to the hybrid body.
+	* @param iHybriShape
+	*   The hybrid shape to append.
+	* <! @sample >
+	* </dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example appends the hybrid shape <tt>hybridShape</tt>
+	* to the hybrid body <tt>hybridBody</tt>:
+	* <pre>
+	* hybridBody.AppendHybridShape (hybridShape)
+	* </pre>
+	* </dl>
+	*/
+    HRESULT   AppendHybridShape (in CATIAHybridShape iHybridShape);
+ 	
+};
+
+// Interface name : CATIAHybridBody
+
+#pragma ID CATIAHybridBody "DCE:49ec1846-e827-11d2-9265006094b9a462"
+#pragma DUAL CATIAHybridBody
+
+// VB object name : HybridBody (Id used in Visual Basic)
+
+#pragma ID HybridBody "DCE:09c85176-e82c-11d2-9265006094b9a462"
+#pragma ALIAS CATIAHybridBody HybridBody
+
+#endif
+// CATIAHybridBody_IDL
+

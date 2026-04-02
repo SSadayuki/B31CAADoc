@@ -1,0 +1,26 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+DELIVERABLE=NO
+
+LINK_WITH =
+
+OS = SunOS
+BUILD=NO
+
+OS = intel_a
+BUILD=NO
+
+OS = win_b
+BUILD=NO
+
+OS = win_b64
+BUILD=NO
+
+OS = IRIX
+BUILD=NO
+
+OS= win_a
+BUILD=NO
+
+OS= hpux_b
+#BUILD=NO

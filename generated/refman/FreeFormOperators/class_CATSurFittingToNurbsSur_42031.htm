@@ -1,0 +1,396 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>FreeFormOperators CATSurFittingToNurbsSur Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../FreeFormOperators.htm" href="../FreeFormOperators.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "FreeFormOperators";	}
+		function getCurrentObjectName() { 
+ 	return "CATSurFittingToNurbsSur"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>FreeFormOperators Framework: CATSurFittingToNurbsSur <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATSurFittingToNurbsSur_42031','CATSurFittingToNurbsSur','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATSurFittingToNurbsSur</b>
+</p>
+<p>
+<b><i> Class defining a geometric operator that computes a (possibly approximated) NURBS representation of a CATSurface.</i></b><br>
+
+ <br>If a surface has no corresponding NURBS representation, the operator uses a fitting operation to
+ compute the best approximating NURBS representation. Hence, a maximum deviation must be given as input of 
+ the operator. 
+ <ul>
+ <li>An input CATNurbsSurface is directly output: 
+ the <tt>GetResult</tt> method outputs the same pointer.
+ <li>Some canonic surfaces will be transformed into rational 
+ CATNurbsSurface. However, setting <tt>iRationalAllowed = 0</tt> at the operator creation 
+ or using the <script type="text/javascript"> activateLinkAnchor('CATCrvFittingToNurbsCrv','SetRationalAllowed','CATCrvFittingToNurbsCrv.SetRationalAllowed') </script> method,  will force the fitting into a non rational surface (default is <tt>iRationalAllowed = 1</tt>).
+ </ul>
+ The CATSurFittingToNurbsSur operator follows the global frame of the geometric operators: 
+<ul>
+ <li>A CATSurFittingToNurbsSur operator is created with the <tt>CATCreateSurFittingToNurbsSur</tt> global function 
+ and must be directly deleted with the usual C++ <tt>delete</tt> operator after use.
+ It is is not streamable. 
+<li>In case of <tt>BASIC</tt>
+ mode, the operation is automatically performed at the operator creation. 
+ In case of <tt>ADVANCED</tt>
+ mode, options can be precised with the <tt>SetXxx</tt> methods, before
+ asking for the computation with the <tt>Run</tt> method. 
+<li>In both cases, the result is accessed with the <tt>Getxxx</tt> methods. 
+ If a surface does not need to be converted because it already is of the required type, the same pointer 
+ is returned. In this case, using the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method on the result surface will remove the input surface, because they are the same.
+</ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#~CATSurFittingToNurbsSur()"><b>~CATSurFittingToNurbsSur</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#ComputeNewParameter(CATSurParam&amp;)"><b>ComputeNewParameter</b></a>(CATSurParam&amp;)
+</td><td id='tdright'>  Maps a parameter on the initial surface to the corresponding parameter on the computed NURBS representation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ForbidPeriodicity()"><b>ForbidPeriodicity</b></a>()
+</td><td id='tdright'>  Declares that the result NURBS must not be periodic.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ForceFitting()"><b>ForceFitting</b></a>()
+</td><td id='tdright'>  Forces the computation of an approximation even if the input surface already match the fitting criteria.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDiagnosis()"><b>GetDiagnosis</b></a>()
+</td><td id='tdright'>   Returns a diagnosis about the fitting process.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMaxDeviation()"><b>GetMaxDeviation</b></a>()
+</td><td id='tdright'>  Returns the maximum deviation computed for the result surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNurbsSurface()"><b>GetNurbsSurface</b></a>()
+</td><td id='tdright'>  Returns the result CATNurbsSurface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ImposeSameParametrization()"><b>ImposeSameParametrization</b></a>()
+</td><td id='tdright'>  Declares that the result surface must have the same parameterization than the input surface to fit.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsExactTransformation()"><b>IsExactTransformation</b></a>()
+</td><td id='tdright'>  Returns whether the transformation between the input and output surfaces is exact.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetInternalMinLength(double)"><b>SetInternalMinLength</b></a>(double)
+</td><td id='tdright'>  Defines the minimal length of an internal arc of the result surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMaxDegreeU(CATLONG32)"><b>SetMaxDegreeU</b></a>(CATLONG32)
+</td><td id='tdright'>  Defines the maximum degree of the result NURBS representation in the first direction of the surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMaxDegreeV(CATLONG32)"><b>SetMaxDegreeV</b></a>(CATLONG32)
+</td><td id='tdright'>  Defines the maximum degree of the result NURBS representation in the second direction of the surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMaxSegmentsU(CATLONG32)"><b>SetMaxSegmentsU</b></a>(CATLONG32)
+</td><td id='tdright'>  Defines the maximum number of arcs of the result NURBS representation in the first direction of the surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMaxSegmentsV(CATLONG32)"><b>SetMaxSegmentsV</b></a>(CATLONG32)
+</td><td id='tdright'>  Defines the maximum number of arcs of the result NURBS representation in the second direction of the surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRationalAllowed(CATLONG32)"><b>SetRationalAllowed</b></a>(CATLONG32)
+</td><td id='tdright'>  Defines whether the result NURBS representation can be rational.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSideContinuity(int,int)"><b>SetSideContinuity</b></a>(int,int)
+</td><td id='tdright'>  Specifies a continuity constraint along the borders of the surface.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="~CATSurFittingToNurbsSur"></a><a id="~CATSurFittingToNurbsSur()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATSurFittingToNurbsSur</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="ComputeNewParameter"></a><a id="ComputeNewParameter(CATSurParam&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATSurParam','CATSurParam')</script>  <span class='objname'>ComputeNewParameter</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurParam','CATSurParam&amp;')</script> <span class='param'>iParamOnSurface</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Maps a parameter on the initial surface to the corresponding parameter on the computed NURBS representation.
+ <br> To call after the operator ran.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParamOnSurface</span></dt>
+   <dd> The parameter on the initial surface.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The parameter on the computed NURBS representation.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ForbidPeriodicity"></a><a id="ForbidPeriodicity()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ForbidPeriodicity</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Declares that the result NURBS must not be periodic.
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+</dd>
+<dt class='dtmethod' >
+  <a id="ForceFitting"></a><a id="ForceFitting()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ForceFitting</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Forces the computation of an approximation even if the input surface already match the fitting criteria.
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDiagnosis"></a><a id="GetDiagnosis()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetDiagnosis</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Returns a diagnosis about the fitting process.
+ <br>To call after the <tt>Run</tt> method.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  1 if a correct result could not be computed because it would have produced small patches
+ 0 otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMaxDeviation"></a><a id="GetMaxDeviation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('double','double')</script>  <span class='objname'>GetMaxDeviation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum deviation computed for the result surface.
+ <br> To call after the operator ran.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The maximum deviation value.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNurbsSurface"></a><a id="GetNurbsSurface()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATNurbsSurface','CATNurbsSurface *')</script>  <span class='objname'>GetNurbsSurface</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the result CATNurbsSurface.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the created CATNurbsSurface. Use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> if you do not want to keep it in the geometric factory.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ImposeSameParametrization"></a><a id="ImposeSameParametrization()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ImposeSameParametrization</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Declares that the result surface must have the same parameterization than the input surface to fit.
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+</dd>
+<dt class='dtmethod' >
+  <a id="IsExactTransformation"></a><a id="IsExactTransformation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>IsExactTransformation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns whether the transformation between the input and output surfaces is exact.
+ <br> To call after the operator ran.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <tt>1</tt> if the transformation is exact, <tt>0</tt> otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetInternalMinLength"></a><a id="SetInternalMinLength(double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetInternalMinLength</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iInternalMinLength</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the minimal length of an internal arc of the result surface.
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iInternalMinLength</span></dt>
+   <dd> The minimum length value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMaxDegreeU"></a><a id="SetMaxDegreeU(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetMaxDegreeU</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iMaxDegree</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the maximum degree of the result NURBS representation in the first direction of the surface.
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMaxDegree</span></dt>
+   <dd> The degree maximum value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMaxDegreeV"></a><a id="SetMaxDegreeV(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetMaxDegreeV</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iMaxDegree</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the maximum degree of the result NURBS representation in the second direction of the surface.
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMaxDegree</span></dt>
+   <dd> The degree maximum value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMaxSegmentsU"></a><a id="SetMaxSegmentsU(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetMaxSegmentsU</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iMaxArcs</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the maximum number of arcs of the result NURBS representation in the first direction of the surface. 
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMaxArcs</span></dt>
+   <dd> The maximum number of arcs. If <tt>SetMaxDegreeU</tt> and <tt>SetMaxArcsV</tt> are both used, 
+ the operator tries to get as few arcs as possible, even with a larger number of arcs with
+ <tt>iMaxDegree</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMaxSegmentsV"></a><a id="SetMaxSegmentsV(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetMaxSegmentsV</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iMaxArcs</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the maximum number of arcs of the result NURBS representation in the second direction of the surface. 
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMaxArcs</span></dt>
+   <dd> The maximum number of arcs. If <tt>SetMaxDegreeV</tt> and <tt>SetMaxArcsV</tt> are both used, 
+ the operator tries to get as few arcs as possible, even with a larger number of arcs with
+ <tt>iMaxDegree</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRationalAllowed"></a><a id="SetRationalAllowed(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRationalAllowed</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iAllowRational</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines whether the result NURBS representation can be rational.
+ <br>To call in <tt>ADVANCED</tt> mode before the <tt>Run</tt> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAllowRational</span></dt>
+   <dd> <tt>1</tt> if the result surface can be rational (default value when the method is not called), 
+ <tt>0</tt> if the result surface must not be rational.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSideContinuity"></a><a id="SetSideContinuity(int,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSideContinuity</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSideContinuityU</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSideContinuityV</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Specifies a continuity constraint along the borders of the surface.
+ <ul>
+ <li> 0 for C0 (default)
+ <li> 1 for C1
+ <li> 2 for C2
+ </ul>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSideContinuityU</span></dt>
+   <dd> The continuity along U. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSideContinuityV</span></dt>
+   <dd> The continuity along V.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATSurFittingToNurbsSur.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATFreeFormOperators</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

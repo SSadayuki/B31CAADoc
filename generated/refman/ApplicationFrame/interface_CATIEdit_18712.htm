@@ -1,0 +1,164 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>ApplicationFrame CATIEdit Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../ApplicationFrame.htm" href="../ApplicationFrame.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "ApplicationFrame";	}
+		function getCurrentObjectName() { 
+ 	return "CATIEdit"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>ApplicationFrame Framework:  CATIEdit Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIEdit_18712','CATIEdit','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can reimplement this interface by deriving the supplied <a href="../ApplicationFrame/class_CATExtIEdit_18781.htm">CATExtIEdit</a> adapter class.</b></p>
+<hr/>
+<p>
+ interface <b>CATIEdit</b>
+</p>
+<p>
+<b><i> Interface implemented by CATIA objects to react to double clicking.</i></b><br>
+
+ <b>Role:</b> A double clic on a pad in the part design 
+ workshop pops up the definition dialog, and the invocation
+ of the contextual menu on a pad makes the item "Definition ..."
+ available under the "Object Pad.1" submenu). 
+ <br>
+ This is possible because the Pad object implements CATIEdit.
+ When double-clicked on, or activated from the "Definition ..."
+ contextual item, a CATIA object implementing CATIEdit is callbacked
+ on its <script type="text/javascript"> activateLinkAnchor('','Activate','Activate') </script> method and is then expected to start a 
+<script type="text/javascript"> activateLinkAnchor('CATCommand','','CATCommand') </script>.
+ <br>
+ Note that before being activated via 
+<script type="text/javascript"> activateLinkAnchor('','Activate','Activate') </script>, the ui-activation manager ui-activates the first ui-activable object ( 
+<script type="text/javascript"> activateLinkAnchor('CATIUIActivate','','CATIUIActivate') </script> ) in the immediate hierarchy of this feature.
+ <br> 
+ <b>Important notice</b>: Using the 
+<script type="text/javascript"> activateLinkAnchor('CATExtIEdit','','CATExtIEdit') </script> as a base class when implementing <tt>CATIEdit</tt> is mandatroy. 
+ <p><b>BOA information</b>: this interface can be implemented
+ using the BOA (Basic Object Adapter).
+ To know more about the BOA, refer to the CAA Encyclopedia home page. 
+ Click Middleware at the bottom left, then click the Object Modeler tab page.
+ Several articles deal with the BOA.</p>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Activate(CATPathElement*)"><b>Activate</b></a>(CATPathElement*)
+</td><td id='tdright'>  Returns the command to launch to edit the object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPanelItem(CATDialog*,CATString&amp;)"><b>GetPanelItem</b></a>(CATDialog*,CATString&amp;)
+</td><td id='tdright'>  Returns a <tt>CATDlgFrame</tt> widget representing the current feature.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Activate"></a><a id="Activate(CATPathElement*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATCommand','CATCommand *')</script>  <span class='objname'>Activate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPathElement','CATPathElement*')</script> <span class='param'>iPath</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the command to launch to edit the object.
+ <br><b>Role:</b>
+ Called by the ui-activation manager, see 
+<script type="text/javascript"> activateLinkAnchor('CATIUIActivate','','CATIUIActivate') </script>, when the user double-clics on the feature, or selects the
+ "Definition .." sub-item on the feature's contextual menu.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPath</span></dt>
+   <dd>   A <tt>CATPathElement</tt> to the current feature object
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    Returning the instanciated command, if any, is a good choice
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATPathElement','','CATPathElement') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPanelItem"></a><a id="GetPanelItem(CATDialog*,CATString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDlgFrame','CATDlgFrame *')</script>  <span class='objname'>GetPanelItem</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDialog','CATDialog*')</script> <span class='param'>iParent</span>, const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iTitle</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns a <tt>CATDlgFrame</tt> widget representing the current feature. 
+ <br><b>Role:</b> During a multi-selection of feature objects
+ implementing the CATIEdit interface, it is thus possible for a 
+ command to build a compound dialog containing each selected feature's 
+ editing widget.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParent</span></dt>
+   <dd>   The widget that the returned CATDlgFrame must parented to.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTitle</span></dt>
+   <dd>   The title that the returned widget must have.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    A new <tt>CATPathElement</tt>, child of <tt>iParent</tt> with the title 
+ <tt>iTitle</tt>.
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATDlgFrame','','CATDlgFrame') </script></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIEdit.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATApplicationFrame</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

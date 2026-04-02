@@ -1,0 +1,132 @@
+/* -*-c++-*- */
+#ifndef CATIAAnalyze_IDL
+#define CATIAAnalyze_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+// VNC : GetWetArea Doc update changes mm3 to mm2
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// Interface CATIAAnalyze:
+// 
+// This interface is the Mass idl Interface for journaling
+//
+
+#include "CATSafeArray.idl"
+#include "CATIABase.idl"
+   /**
+    * Represents the analysis object associated with a product. 	
+    */
+
+interface CATIAAnalyze : CATIABase    
+{
+    //
+    // Gets the product mass value
+    /**
+     * Returns the product mass value.
+     * @sample
+     * This example retrieves <tt>MassValue</tt> from <br> 
+     * the <tt>Analyze</tt> object associated with <tt>myProduct</tt>:
+     * <pre>
+     * MassValue = myProduct.Analyze.<font color="red">Mass</font>
+     * </pre>
+     */
+#pragma PROPERTY Mass
+  HRESULT get_Mass(out /*IDLRETVAL*/ double oMass);
+    //
+    // Gets the product volume value .
+    /** 
+     * Returns the product volume value.
+     * @sample
+     * This example retrieves <tt>VolumeValue</tt> from <br> 
+     * the <tt>Analyze</tt> object associated with <tt>myProduct</tt>:
+     * <pre>
+     * VolumeValue = myProduct.Analyze.<font color="red">Volume</font>
+     * </pre>
+     */   
+#pragma PROPERTY Volume
+  HRESULT get_Volume(out /*IDLRETVAL*/ double oVolume);
+    //
+    // Gets product wet area value.
+    /**
+     * Returns the product wet area (outer volume).
+	 * <p><br>Note:</br>
+	 * This method uses <b>mm2</b> instead of default Catia V5 unit.
+     * @sample
+     * This example retrieves <tt>WetAreaValue</tt> from <br> 
+     * the <tt>Analyze</tt> object associated with <tt>myProduct</tt>:
+     * <pre>
+     * WetAreaValue = myProduct.Analyze.<font color="red">WetArea</font>
+     * </pre>
+     */   
+#pragma PROPERTY WetArea
+  HRESULT get_WetArea(out /*IDLRETVAL*/ double oWetArea);
+    //
+    // Gets gravity center coordinates of product
+    /**
+     * Returns the gravity center coordinates of product.
+     * @param Coordinates
+     *   The array storing the three gravity center coordinates.
+     *   This array must be previously initialized.
+     * @sample
+     * This example retrieves the gravity center coordinates in
+     * <tt>oGravityCenterCoordinatesArray</tt> from  
+     * the <tt>Analyze</tt> object associated with <tt>myProduct</tt>:
+     * <pre>
+     * ' Coordinates array initialization
+     * Dim oGravityCenterCoordinatesArray ( 2 ) 
+     * ' Get value in array
+     * Myproduct.Analyze.GetGravityCenter oGravityCenterCoordinatesArray
+     * </pre>
+     */ 
+  HRESULT GetGravityCenter(inout CATSafeArrayVariant oGravityCenterCoordinatesArray);
+    //
+    // Gets inertia matrix array of product
+    /**
+     * Returns the inertia matrix array of product.
+     * @param oInertiaMatrixArray
+     *   The array storing successively the three columns of inertia matrix.
+     *   This array must be previously initialized.
+     * @sample
+     * This example retrieves the inertia matrix components in
+     * <tt>oInertiaMatrixArray</tt> from 
+     * the <tt>Analyze</tt> object associated with <tt>myProduct</tt>:
+     * <pre>
+     * ' Components array initialization
+     * Dim oInertiaMatrixArray ( 8 ) 
+     * ' Get value in array
+     * Myproduct.Analyze.GetInertia oInertiaMatrixArray
+     * ' oInertiaMatrixArray ( 0 ) is the Ixx component
+     * ' oInertiaMatrixArray ( 1 ) is the Ixy component
+     * ' oInertiaMatrixArray ( 2 ) is the Ixz component
+     * ' oInertiaMatrixArray ( 3 ) is the Iyx component
+     * ' oInertiaMatrixArray ( 4 ) is the Iyy component
+     * ' oInertiaMatrixArray ( 5 ) is the Iyz component
+     * ' oInertiaMatrixArray ( 6 ) is the Izx component
+     * ' oInertiaMatrixArray ( 7 ) is the Izy component
+     * ' oInertiaMatrixArray ( 8 ) is the Izz component
+     * </pre>
+     */ 
+  HRESULT GetInertia(inout CATSafeArrayVariant oInertiaMatrixArray);
+
+};
+
+// Interface name : CATIAAnalyze
+#pragma ID CATIAAnalyze "DCE:1aab6ed4-ba82-11d1-a5e700a0c95af74c"
+#pragma DUAL CATIAAnalyze
+
+// VB object name : Analyze 
+#pragma ID Analyze "DCE:6eef8bc4-ba82-11d1-a5e700a0c95af74c"
+#pragma ALIAS CATIAAnalyze Analyze 
+
+
+#endif
+
+
+
+
+

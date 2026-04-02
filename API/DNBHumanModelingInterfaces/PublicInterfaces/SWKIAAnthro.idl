@@ -1,0 +1,264 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAAnthro_IDL
+#define SWKIAAnthro_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  SWKIAManikinPart
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_NumberOfVariables
+//   GetVariableAtIndex
+//   GetVariableFromUsNumber
+//
+//   get_Gender
+//   put_Gender
+//
+//   get_Population
+//   put_Population
+//
+//   get_ConstructionType
+//   put_ConstructionType
+//
+//   get_PopulationAccommodation
+//   put_PopulationAccommodation
+//
+//   get_LimitBound
+//   put_LimitBound
+//
+//   get_InterpolationMethod
+//   put_InterpolationMethod
+//
+//   get_ValueType
+//   put_ValueType
+//
+//   Update
+//   Reset
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 03/02/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIAManikinPart.idl"
+#include "SWKPostureSpec.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIAAnthroVariable;
+
+
+
+/**
+  *  This interface manages the anthropometry of the manikin. It provides
+  *  access to the anthropometry data (variables, sex...)
+  **/
+interface SWKIAAnthro : SWKIAManikinPart
+{
+ // ===========================================================================
+ //  get_Gender
+ //  ----------
+ //  put_Gender
+ //  ----------
+ //
+    /**
+      * Returns or sets the gender of the manikin.
+      **/
+#pragma PROPERTY Gender
+    HRESULT get_Gender(inout /*IDLRETVAL*/ CATBSTR pioGender);
+    HRESULT put_Gender(in CATBSTR piGender);
+
+
+ // ===========================================================================
+ //  get_Population
+ //  --------------
+ //  put_Population
+ //  --------------
+ //
+    /**
+      * Return or sets the Population of the manikin.
+      *
+      * The population provided must be one of the
+      * default populations
+      * ("American", "Canadian", "French", "Japanese", "Korean", "German" or "Chinese (Taiwan)"),
+      * or an external population defined by the user.
+      * Please note that no user-defined population should bear the
+      * name of one of the default populations.
+      **/
+#pragma PROPERTY Population
+    HRESULT get_Population(inout /*IDLRETVAL*/ CATBSTR pioPopulation);
+    HRESULT put_Population(in CATBSTR piPopulation);
+
+
+ // ===========================================================================
+ //  get_ConstructionType
+ //  --------------------
+ //  put_ConstructionType
+ //  --------------------
+ //
+    /**
+      * Return or sets the construction type of the manikin.
+      * This property can take the following two values:
+      * "Standing" and "Sitting".
+      * <br>
+      * If the construction is set to <code>"Standing"</code>,<br>
+      * then the manikin is constructed as of type 'standing'.<br>
+      * If the construction is set to <code>"Sitting"</code>,<br>
+      * then the manikin is constructed as of type 'sitting'.<br>
+      * <br>
+      * The chosen construction type influences the way the manikin's hips,<br>
+      * thighs and knees are constructed to reflect the changes in those body<br>
+      * parts when a human changes from a standing to a sitting posture.
+      **/
+#pragma PROPERTY ConstructionType
+    HRESULT get_ConstructionType(inout /*IDLRETVAL*/ CATBSTR pioConstructionType);
+    HRESULT put_ConstructionType(in CATBSTR piConstructionType);
+
+
+ // ===========================================================================
+ //  get_PopulationAccommodation
+ //  ---------------------------
+ //  put_PopulationAccommodation
+ //  ---------------------------
+ //
+    /**
+      * Returns or sets the population accommodation.
+      * The population accommodation is used in the multi-normal<br>
+      * algorithm, to calculate the limits of the automatic variables<br>
+      * when a user-defined anthropometry is entered.<br>
+      * The greater the population accommodation is, the wider the limits<br>
+      * on the automatic variables will be.
+      *
+      * The value of this property must le within the range [0.0, 100.0].
+      **/
+#pragma PROPERTY PopulationAccommodation
+    HRESULT get_PopulationAccommodation(out /*IDLRETVAL*/ double poAccomodation);
+    HRESULT put_PopulationAccommodation(in double piAccomodation);
+
+
+ // ===========================================================================
+ //  get_LimitBound
+ //  --------------
+ //  put_LimitBound
+ //  --------------
+ //
+    /**
+      * Returns or sets the population accommodation, in terms of a limit bound.<br>
+      * The population accommodation is used in the multi-normal<br>
+      * algorithm, to calculate the limits of the automatic variables<br>
+      * when a user-defined anthropometry is entered.<br>
+      * The greater the population accommodation is, the wider the limits<br>
+      * on the automatic variables will be.
+      *
+      * The value of this property must le within the range [0.0, 4.0].
+      **/
+#pragma PROPERTY LimitBound
+    HRESULT get_LimitBound(out /*IDLRETVAL*/ double poLimitBound);
+    HRESULT put_LimitBound(in double piLimitBound);
+
+
+ // ===========================================================================
+ //  get_InterpolationMethod
+ //  -----------------------
+ //  put_InterpolationMethod
+ //  -----------------------
+ //
+    /**
+      * Returns or sets the interpolation. The interpolation is an algorithm<br>
+      * that restricts the values entered by the user to a certain minimum
+      * and maximum value.
+      *
+      * Valid values are "None" or "Multinormal".
+      **/
+#pragma PROPERTY InterpolationMethod
+    HRESULT get_InterpolationMethod(inout /*IDLRETVAL*/ CATBSTR pioInterpolation);
+    HRESULT put_InterpolationMethod(in CATBSTR piInterpolation);
+
+
+ // ===========================================================================
+ //  get_NumberOfVariables
+ //  ---------------------
+ //  
+    /**
+      * Returns the number of variables contained in this anthropometry.
+      **/
+#pragma PROPERTY NumberOfVariables
+    HRESULT get_NumberOfVariables(out /*IDLRETVAL*/ long poNbVariables);
+
+
+ // ===========================================================================
+ //  GetVariableAtIndex
+ //  ------------------
+ //  
+    /**
+      * Returns the variable at the specified index.
+      *
+      * @param piIndex The index of the variable to retrieve.
+      **/
+    HRESULT GetVariableAtIndex(in long piIndex, out /*IDLRETVAL*/ SWKIAAnthroVariable poVariable);
+
+
+ // ===========================================================================
+ //  GetVariableFromUsNumber
+ //  -----------------------
+ //  
+    /**
+      * Returns the variable from a specified us number.
+      *
+      * @param piRefNumber The reference number of the variable to retrieve
+      * (ex.: 3 for us3, 100 for us100, etc).
+      **/
+    HRESULT GetVariableFromUsNumber(in long piRefNumber, out /*IDLRETVAL*/ SWKIAAnthroVariable poVariable);
+
+
+ // ===========================================================================
+ //  Reset
+ //  -----
+ //
+    /**
+      * Reset the anthtropometry.
+      * This method resets each variable back to the automatic mode,
+      * and then updates the anthropometry.
+      **/
+    HRESULT Reset();
+};
+
+
+// Interface name : SWKIAAnthro
+#pragma ID SWKIAAnthro "DCE:b9906e58-1d33-11d4-80a7005004d3fe74"
+#pragma DUAL SWKIAAnthro
+
+
+// VB object name : SWAnthro (Id used in Visual Basic)
+#pragma ID SWKAnthro "DCE:c5fa8cfa-1d33-11d4-80a7005004d3fe74"
+#pragma ALIAS SWKIAAnthro SWKAnthro
+
+#endif

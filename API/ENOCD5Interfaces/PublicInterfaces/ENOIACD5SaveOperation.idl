@@ -1,0 +1,144 @@
+// COPYRIGHT Dassault Systemes 2013
+//===================================================================
+//
+// ENOIACD5SaveItems.idl
+// Automation interface for the ENOIACD5SaveItems element 
+//
+//===================================================================
+
+#ifndef ENOIACD5SaveOperation_IDL
+#define ENOIACD5SaveOperation_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+interface CATIABase;
+interface IDispatch;
+interface ENOIACD5SaveItems;
+
+/**
+ * Represents a Save Operation Object.
+ * <br>Various properties which are applicable for the complete save operation can be set using this.
+ * <br>Also, end-user may either run the Save operation as per customization done so far or open the Advanced Save panel to finalize customization and run the Save manually.
+ *
+ * @sample
+ * The following example indicates how to create a ENOVIA V6 Save Operation.
+ * <pre>
+ * <font color="blue">Dim</font> oCD5Engine <font color="blue">As</font> CD5EngineV6R2014x
+ * <font color="blue">Set</font> oCD5Engine = CATIA.GetItem("CD5EngineV6R2014x")
+ * <font color="blue">Dim</font> oSaveOperation <font color="blue">As</font> CD5SaveOperation
+ * <font color="blue">Set</font> oSaveOperation = oCD5Engine.CreateSaveOperation(CD5SaveOperation_Session)
+ * </pre>
+ * @see ENOIACD5SaveItems
+ */
+
+interface ENOIACD5SaveOperation : CATIABase
+{
+
+    /**
+    * Returns (gets) or sets the value of the Save option "Create Version".
+    * The default value is picked from the LCO/GCO.
+    *
+    * @sample
+    * The following example sets the Create Version option to True.
+    * <pre>
+    * oSaveOperation.<font color="red">CreateVersion</font> = True
+    * </pre>
+    */
+#pragma PROPERTY CreateVersion
+    HRESULT get_CreateVersion ( out /*IDLRETVAL*/ boolean oCreateVersion );
+    HRESULT put_CreateVersion ( in boolean iCreateVersion );
+
+    /**
+    * Returns (gets) or sets the value of the Save option "Retain Lock".
+    * The default value is picked from the LCO/GCO.
+    *
+    * @sample
+    * The following example sets the Retain Lock option to True.
+    * <pre>
+    * oSaveOperation.<font color="red">RetainLock</font> = True
+    * </pre>
+    */
+#pragma PROPERTY RetainLock
+    HRESULT get_RetainLock ( out /*IDLRETVAL*/ boolean oRetainLock );
+    HRESULT put_RetainLock ( in boolean iRetainLock );
+
+    /**
+    * Returns (gets) or sets the value of the Save Comment.
+    *
+    * @sample
+    * The following example sets the Save Comment to "ABC".
+    * <pre>
+    * oSaveOperation.<font color="red">Comment</font> = "ABC"
+    * </pre>
+    */
+#pragma PROPERTY Comment
+    HRESULT get_Comment ( inout /*IDLRETVAL*/ CATBSTR oComment );
+    HRESULT put_Comment ( in CATBSTR iComment);
+
+    /**
+    * Returns (gets) or sets the value of the Save option "Allow Disk Save".
+    *
+    * @sample
+    * The following example sets the Allow Disk Save option to True.
+    * <pre>
+    * oSaveOperation.<font color="red">AllowDiskSave</font> = True
+    * </pre>
+    */
+#pragma PROPERTY AllowDiskSave 
+    HRESULT get_AllowDiskSave ( out /*IDLRETVAL*/ boolean oAllowDiskSave );
+    HRESULT put_AllowDiskSave ( in boolean iAllowDiskSave);
+
+    /**
+    * Returns (gets) the collection of all the items in the scope of the Save.
+    *
+    * @sample
+    * The following example gets all the items in the scope of the Save.
+    * <pre>
+    * <font color="blue">Dim</font> oSaveItems <font color="blue">As</font> CD5SaveItems
+    * <font color="blue">Set</font> oSaveItems = oSaveOperation.<font color="red">Items</font>
+    * </pre>
+    */
+#pragma PROPERTY Items 
+    HRESULT get_Items ( out /*IDLRETVAL*/ ENOIACD5SaveItems oSaveItems );
+
+    /**
+    * Shows the Save dialog as per the cusomization done so far.
+    *
+    * @sample
+    * The following example shows the Save panel as per the cusomization done so far.
+    * <pre>
+    * oSaveOperation.<font color="red">ShowPanel</font>
+    * </pre>
+    */
+    HRESULT ShowPanel();
+
+    /**
+    * Runs the Save as per the cusomization done so far.
+    *
+    * @sample
+    * The following example executes the Save operation as per the customization done so far. 
+    * <pre>
+    * oSaveOperation.<font color="red">Run</font>
+    * </pre>
+    */
+    HRESULT Run();
+
+};
+
+
+// Interface name : ENOIACD5SaveOperation
+#pragma ID ENOIACD5SaveOperation "DCE:C89392B0-2C7B-4597-B8A4E9BE05015162"
+#pragma DUAL ENOIACD5SaveOperation
+
+// VB object name : CD5SaveOperation (Id used in Visual Basic)
+#pragma ID CD5SaveOperation "DCE:CB32632B-168A-4ade-8088D9542D5ADF8B"
+#pragma ALIAS ENOIACD5SaveOperation CD5SaveOperation
+
+
+#endif

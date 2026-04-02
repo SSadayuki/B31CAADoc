@@ -1,0 +1,45 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+INCLUDED_MODULES = JS0X2DRV
+
+LINK_WITH = JS0XXC0
+
+CATIA_LSTCOMDYN=NO
+
+SYS_LIBS =
+
+OS = AIX
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS = -lXm -lXt -lXmu -lX11 
+
+OS = HP-UX
+SYS_INCPATH =   
+SYS_LIBS = -lXm -lXt -lX11                                                     
+SYS_LIBPATH =  
+
+OS = IRIX
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS = -lXm -lXt  -lX11
+LOCAL_CCFLAGS = 
+LOCAL_CFLAGS = 
+
+OS = SunOS
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS =  -lXt -lsocket -ldl -lnsl
+LOCAL_CCFLAGS = 
+LOCAL_CFLAGS = 
+
+OS = Windows_NT
+BUILD=NO
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS = wsock32.lib
+LOCAL_CCFLAGS = /D_CATNoWarningPromotion_  
+LOCAL_CFLAGS = /D_CATNoWarningPromotion_ 
+
+

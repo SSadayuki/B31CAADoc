@@ -1,0 +1,166 @@
+#ifndef CATIASchGRR_IDL 
+#define CATIASchGRR_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchAppConnectable;
+interface  CATIASchAppConnector;
+interface  CATIASchGRR;
+interface  CATIASchListOfBSTRs;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the graphical representation of a schematic object.
+  */
+
+interface CATIASchGRR : CATIABase
+{
+  /**
+  * Get the schematic object that owns this graphic representation.
+  * @param oGRROwner
+  *   A schematic object that owns this graphic representation.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRR
+  * Dim objArg1 As SchAppConnectable
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">GetSchObjOwner</font>
+  * </pre>
+  *    
+  */
+  HRESULT GetSchObjOwner ( 
+    out /*IDLRETVAL*/ CATIASchAppConnectable oGRROwner );
+    
+  /**
+  * Get current name of the GRR. 
+  * @param oGRRName
+  *   The name of this GRR. A component can be associated with more than one GRRs.
+  *   Each GRR is identified by a specific name. Valid names are specified 
+  *   by the application when building the component. Every component should have
+  *   a GRR named "Primary". The GRR by this name is used in the catalog.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRR
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">GetGRRName</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT GetGRRName ( 
+    inout CATBSTR oGRRName );
+    
+  /**
+  * Set current name of the GRR. 
+  * @param iGRRName
+  *   The name of this GRR to be set. 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRR
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">SetGRRName</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT SetGRRName ( 
+    in CATBSTR iGRRName );
+    
+  /**
+  * Get the schematic objects that own this connector graphic representation.
+  * @param oCntrOwner.
+  *   A schematic connector that owns this connector graphic representation.
+  * @param oGRROwner
+  *   A component or route graphic representation that owns this
+  *   connector graphic representation.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRR
+  * Dim objArg1 As SchAppConnector
+  * Dim objArg2 As SchGRR
+  *  ...
+  * objThisIntf.<font color="red">GetSchCntrOwners</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT GetSchCntrOwners ( 
+    inout CATIASchAppConnector oCntrOwner, 
+    inout CATIASchGRR oGRROwner );
+    
+  /**
+  * Get a list of graphical objects that connects
+  * to this graphic representation.
+  * @param iGRROwner
+  *   A CATISchAppConnectable that owns this graphic representation. In
+  *   the case of GRRCntr (this object), iGRROwner is the owner
+  *   <b>of the owner</b> of this graphic.
+  * @param oLCntrClassFilter
+  *   A list of all the class types for filtering the output application
+  *   objects list.
+  * @param oLCntbleGRRs
+  *   A list of GRRs connected to this GRR.
+  *   (members are CATISchGRR interface pointers). 
+  * @param oLCntbles
+  *   A list of application objects connected to this object.
+  *   (members are CATISchAppConnectable interface pointers). 
+  * @param oLCntrsOnThisObj
+  *   A list of connectors on this object through which 
+  *   the connection is made.
+  *   (members are CATISchAppConnector interface pointers).
+  * @param oLCntrsOnConnected
+  *   A list of connectors on the connected objects through which 
+  *   the connection is made.
+  *   (members are CATISchAppConnector interface pointers).
+  *   Members in this list corresponds to those in oLCntrsOnThisObj in
+  *   making the corresponding connections.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRR
+  * Dim objArg1 As SchAppConnectable
+  * Dim objArg2 As SchListOfBSTRs
+  * Dim objArg3 As SchListOfObjects
+  * Dim objArg4 As SchListOfObjects
+  * Dim objArg5 As SchListOfObjects
+  * Dim objArg6 As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">ListConnectedGRRs</font>objArg1,objArg2,objArg3,objArg4,objArg5,objArg6
+  * </pre>
+  *    
+  */
+  HRESULT ListConnectedGRRs ( 
+    in CATIASchAppConnectable iGRROwner, 
+    in CATIASchListOfBSTRs iLCntbleClassFilter, 
+    inout CATIASchListOfObjects oLCntbleGRRs, 
+    inout CATIASchListOfObjects oLCntbles, 
+    inout CATIASchListOfObjects oLCntrsOnThisObj, 
+    inout CATIASchListOfObjects oLCntrsOnConnected );
+    
+};
+    
+// Interface name : CATIASchGRR
+#pragma ID CATIASchGRR "DCE:dc66af6f-7071-483d-9de61730fe6ea410"
+#pragma DUAL CATIASchGRR
+    
+// VB object name : SchGRR
+#pragma ID SchGRR "DCE:1d291a4a-4fe8-4d82-b15b65ab6883a848"
+#pragma ALIAS CATIASchGRR SchGRR
+    
+#endif 
+    

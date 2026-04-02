@@ -1,0 +1,22 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=LOAD MODULE
+
+LINK_WITH = CATPolDaemon CATVisVR CATVisualization JS0CORBA JS0MT YN000MAT CATFlockOfBirdsDaemon
+
+OS = AIX
+
+OS = HP-UX
+
+OS = IRIX
+
+OS = SunOS
+SYS_LIBS = -lsocket -lnsl -lXt
+
+OS = Windows_NT
+SYS_LIBS = vfw32.lib wsock32.lib winmm.lib
+
+OS = intel_a 
+LOCAL_CCFLAGS = -D_WNT40I_SOURCE
+LOCAL_CFLAGS  = -D_WNT40I_SOURCE

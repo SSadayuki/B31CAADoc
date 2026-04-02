@@ -1,0 +1,83 @@
+#ifndef CATIAManufacturingProgram2_IDL
+#define CATIAManufacturingProgram2_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//								   
+// CATIAManufacturingProgram:						   
+// Exposed interface for ManufacturingProgram
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation					E. Chauveau
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingActivity.idl"
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATIAManufacturingOperation.idl"
+#include "CATIAManufacturingActivity.idl"
+#include "CATIAMfgActivities.idl"
+#include "CATIAExpertReportObjects.idl"
+
+/**
+ * A ManufacturingProgram for a Manufacturing Document.
+ */
+interface CATIAManufacturingProgram2 : CATIABase
+{
+
+	/**
+	* Create and Insert a Manufacturing Operation of a specified type before the existing operation.<br>
+	* if AutoSequence is set to 1, the new operation will be sequenced in the Program. <br>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>The following example creates, inserts and sequences in <tt>firstProgram</tt> the manufacturing operation
+	* <tt>ManufacturingOperation</tt> of type : <tt>type</tt>
+	* <pre>
+	* Set ManufacturingOperation = firstProgram.<font color="red">AppendOperationBefore</font>(operation,Type,1)
+	*</pre>
+	* </dl>
+	*/
+	HRESULT AppendOperationBefore(in CATIAManufacturingOperation iManufacturingOperation, in CATBSTR type, in short AutoSequence, out /*IDLRETVAL*/ CATIAManufacturingOperation oManufacturingOperation);
+
+	/**
+	* Create and Insert a Manufacturing Operation of a specified type after the existing operation.<br>
+	* if AutoSequence is set to 1, the new operation will be sequenced in the Program. <br>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>The following example creates, inserts and sequences in <tt>firstProgram</tt> the manufacturing operation
+	* <tt>ManufacturingOperation</tt> of type : <tt>type</tt>
+	* <pre>
+	* Set ManufacturingOperation = firstProgram.<font color="red">AppendOperationAfter</font>(operation,Type,1)
+	*</pre>
+	* </dl>
+	*/
+	HRESULT AppendOperationAfter(in CATIAManufacturingOperation iManufacturingOperation, in CATBSTR type, in short AutoSequence, out /*IDLRETVAL*/ CATIAManufacturingOperation oManufacturingOperation);
+
+
+
+};
+
+// Interface name : CATIAManufacturingProgram2
+#pragma ID CATIAManufacturingProgram2 "DCE:60D70F5F-212C-47DB-A7D71237E5AB4686"
+#pragma DUAL CATIAManufacturingProgram2
+
+// VB object name : ManufacturingProgram2 (Id used in Visual Basic)
+#pragma ID ManufacturingProgram2 "DCE:5F8B575F-E290-40A5-A742455E79E36CEA"
+#pragma ALIAS CATIAManufacturingProgram2 ManufacturingProgram2
+
+#endif // CATIAManufacturingProgram2_IDL
+
+
+
+
+
+

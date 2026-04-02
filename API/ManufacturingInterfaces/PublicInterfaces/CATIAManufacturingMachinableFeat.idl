@@ -1,0 +1,116 @@
+#ifndef CATIAManufacturingMachinableFeat_IDL
+#define CATIAManufacturingMachinableFeat_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//								   
+// CATIAManufacturingMachinableFeat:						   
+// Exposed interface for ManufacturingMachinableFeature
+//								   
+//=================================================================
+// Oct 01 Creation					C.PETIT
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingFeature.idl"
+
+/**
+ * Machinable Feature in Manufacturing.
+ * It is the base object for machinable geometry and machinable area
+ * @see CATIAManufacturingMachinableArea, CATIAManufacturingMachinableGeom
+ */
+interface CATIAManufacturingMachinableFeat : CATIAManufacturingFeature
+{
+
+#pragma PROPERTY FeatType
+//
+        /**
+         * Returns the manufacturing machinable feature type.
+         * @return oFeatType
+         *   The manufacturing machinable feature type
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>tFeatType</tt> the type of
+         * manufacturing machinable feature <tt>firstMachFeat</tt>:
+         * <pre>
+         * Dim firstMachFeat As ManufacturingMachinableFeature
+		 * Set firstMachFeat = ...
+         * Dim tFeatType As CATBSTR
+         * Set tFeatType = firstMachFeat.<font color="red">FeatType</font>
+         * </pre>
+         */
+    HRESULT	get_FeatType ( inout /*IDLRETVAL*/ CATBSTR oFeatType );
+
+        /**
+         * Set the manufacturing machinable feature type.
+         * @param iFeatType
+         *   The manufacturing machinable feature type
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example set the type of
+         * manufacturing machinable feature <tt>firstMachFeat</tt>:
+         * <pre>
+         * Dim firstMachFeat As ManufacturingMachinableFeature
+		 * Set firstMachFeat = ...
+         * Dim tFeatType As CATBSTR
+         * Set tFeatType = "Hole"
+         * firstMachFeat.<font color="red">FeatType</font> = tFeatType
+         * </pre>
+         */
+    HRESULT put_FeatType ( in                CATBSTR iFeatType );
+
+
+#pragma PROPERTY FeatRemark
+//
+        /**
+         * Returns the manufacturing machinable feature remark.
+         * @return oFeatRemark
+         *   The manufacturing machinable feature remark
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>tFeatRemark</tt> the remark of
+         * manufacturing machinable feature <tt>firstMachFeat</tt>:
+         * <pre>
+         * Dim firstMachFeat As ManufacturingMachinableFeature
+		 * Set firstMachFeat = ...
+         * Dim tFeatRemark As CATBSTR
+         * Set tFeatRemark = firstMachFeat.<font color="red">FeatRemark</font>
+         * </pre>
+         */
+    HRESULT	get_FeatRemark ( inout /*IDLRETVAL*/ CATBSTR oFeatRemark );
+
+        /**
+         * Set the manufacturing machinable feature remark.
+         * @param oFeatRemark
+         *   The manufacturing machinable feature remark
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example set the remark of
+         * manufacturing machinable feature <tt>firstMachFeat</tt>:
+         * <pre>
+         * Dim firstMachFeat As ManufacturingMachinableFeature
+		 * Set firstMachFeat = ...
+         * Dim tFeatRemark As CATBSTR
+         * Set tFeatRemark = "Diam = 30mm"
+         * firstMachFeat.<font color="red">FeatRemark</font> = tFeatRemark
+         * </pre>
+         */
+    HRESULT put_FeatRemark ( in                CATBSTR iFeatRemark );
+
+};
+
+// Interface name : CATIAManufacturingMachinableFeat
+#pragma ID CATIAManufacturingMachinableFeat "DCE:6dce23cc-c237-11d5-9f1c0002b31ea50f"
+#pragma DUAL CATIAManufacturingMachinableFeat
+
+// VB object name : ManufacturingMachinableFeature (Id used in Visual Basic)
+#pragma ID ManufacturingMachinableFeature "DCE:7bdb3b2c-c237-11d5-9f1c0002b31ea50f"
+#pragma ALIAS CATIAManufacturingMachinableFeat ManufacturingMachinableFeature
+
+
+#endif // CATIAManufacturingMachinableFeat_IDL

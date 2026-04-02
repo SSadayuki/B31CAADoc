@@ -1,0 +1,89 @@
+
+#ifndef CATIADraftingPrintBehavior_IDL
+#define CATIADraftingPrintBehavior_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999 
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAPageSetup.idl"
+
+
+/**
+ * Represents the page setup for the drawing documents.
+ * The page setup is the object that stores data which defines how your
+ * documents and images are actually printed on paper. 
+ * This data includes namely the paper size, the orientation,
+ * the bottom, top, right, and left margins, the zoom factor, the banner,
+ * the printing quality, the choice of the best orientation, and the choice
+ * to fit either the drawing sheet format or the printer format.
+ */
+interface CATIADraftingPageSetup : CATIAPageSetup
+{
+//------------------------------------------------------------------------------
+ /**
+  * Activates or deactivates the choice of the best orientation.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example requests the best orientation to be chosen for <tt>MySheet</tt>.
+  * <pre>
+  * MySheet.DrawingPageSetUp.<font color="red">ChooseBestOrientation</font> = TRUE
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ChooseBestOrientation
+  HRESULT get_ChooseBestOrientation(out /*IDLRETVAL*/ boolean oBestOrientationOn);
+  HRESULT put_ChooseBestOrientation(in                boolean iBestOrientationOn);
+
+//------------------------------------------------------------------------------
+ /**
+  * Fits the format of the print to the printer format.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example turns this calculation on.
+  * <pre>
+  * MySheet.DrawingPageSetUp.<font color="red">FitToPrinterFormat</font> = TRUE
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY FitToPrinterFormat
+  HRESULT get_FitToPrinterFormat(out /*IDLRETVAL*/ boolean oFitToPrinterFormatOn);
+  HRESULT put_FitToPrinterFormat(in                boolean iFitToPrinterFormatOn);
+  
+//------------------------------------------------------------------------------
+ /**
+  * Fits the format of the print to the sheet format.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example turns this calculation on.
+  * <pre>
+  * MySheet.DrawingPageSetUp.<font color="red">FitToSheetFormat</font> = TRUE
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY FitToSheetFormat
+  HRESULT get_FitToSheetFormat(out /*IDLRETVAL*/ boolean oFitToSheetFormatOn);
+  HRESULT put_FitToSheetFormat(in                boolean iFitToSheetFormatOn);
+};
+
+
+#pragma ID CATIADraftingPageSetup "DCE:79fb72d7-28ce-11d5-90740004ac96ef3c"
+#pragma DUAL CATIADraftingPageSetup
+
+// Visual Basic name
+#pragma ID DraftingPageSetup "DCE:eaecfa47-28d8-11d5-90740004ac96ef3c"
+#pragma ALIAS CATIADraftingPageSetup DraftingPageSetup
+
+#endif
+

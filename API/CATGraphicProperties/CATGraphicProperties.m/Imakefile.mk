@@ -1,0 +1,25 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+CATVisUUID \
+ObjectModelerBaseUUID InteractiveInterfacesUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# 
+#
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+INCLUDED_MODULES = CATGraphicProperties
+
+LINK_WITH=$(LINK_WITH_FOR_IID)  \
+VE0BASE \
+CATViz \
+VE0MDL \
+JS0CORBA \
+AD0XXBAS \
+CATInteractiveInterfaces \
+
+
+
+
+

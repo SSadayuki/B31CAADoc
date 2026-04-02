@@ -1,0 +1,130 @@
+#ifndef CATIAAssemblySplit_IDL
+#define CATIAAssemblySplit_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAAssemblySplit:						   
+// Exposed interface for AssemblySplit
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep. 2000 Creation					                 CRX
+//=================================================================
+#include "CATIAAssemblyFeature.idl"
+#include "CATSplitDefs.idl"
+
+interface CATIAReference;
+interface CATIAProduct;
+
+/**
+ * Represents the AssemblySplit object.
+ */
+interface CATIAAssemblySplit : CATIAAssemblyFeature
+{
+	  //		================
+	  //		== PROPERTIES ==
+	  //		================
+    /**
+     * Returns or sets the splitting side.
+     * The splitting side is the side of the split object
+     * kept after the split, with respect to the splitting element.
+     * A positive side refers to the split object side shown by
+     * the splitting element normal vector.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>sptSide</tt> the splitting side
+     * of the assembly split <tt>assemblySplit</tt>, and then sets it to
+     * <tt>catPositiveSide</tt>:
+     * <pre>
+     * Set sptSide = assemblySplit.<font color="red">SplittingSide</font>
+     * assemblySplit.<font color="red">SplittingSide</font> = catPositiveSide
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SplittingSide
+    HRESULT get_SplittingSide ( out /*IDLRETVAL*/ CatSplitSide oSplittingSide );
+    HRESULT put_SplittingSide ( in CatSplitSide iSplittingSide );
+
+    /**
+     * Returns the splitting element.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>sptElement</tt> the splitting element
+     * of the assembly split <tt>assemblySplit</tt>:
+     * <pre>
+     * Dim sptElement As Reference
+     * Set sptElement = assemblySplit.<font color="red">SplittingElement</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SplittingElement
+    HRESULT get_SplittingElement ( out /*IDLRETVAL*/ CATIAReference oSurface );
+
+    /**
+     * Returns the component containing the splitting element.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>sptComponent</tt> the splitting component
+     * containing the splitting element of the assembly split <tt>assemblySplit</tt>:
+     * <pre>
+     * Dim sptComponent As Product
+     * Set sptComponent = assemblySplit.<font color="red">SplittingComponent</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SplittingComponent
+    HRESULT get_SplittingComponent ( out /*IDLRETVAL*/ CATIAProduct oSplittingElemComp );
+
+    //
+	  //		================
+	  //		==   METHODS  ==
+	  //		================
+
+    /**
+     * Replaces the splitting element by a new one.
+     * @param iSplittingElement
+     *   The new face or plane that will split the current body
+     * @param iSplittingElemComp
+     *   The component that contains the new splitting element
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example replaces the existing splitting element of the
+     * assembly split <tt>assemblySplit</tt> by <tt>sptElem</tt> contained in 
+     * the <tt>sptComponent</tt> splitting component
+     * <pre>
+     * assemblySplit.<font color="red">ModifySplittingElement</font>(sptElem, _
+     *                                      sptComponent)
+     * </pre>
+     * </dl>
+	   */
+  HRESULT ModifySplittingElement ( in CATIAReference iSplittingElement, 
+                    in CATIAProduct iSplittingElemComp );
+
+
+};
+
+// Interface name : CATIAAssemblySplit
+#pragma ID CATIAAssemblySplit "DCE:9466bf38-9871-11d4-934a006094eb72e6"
+#pragma DUAL CATIAAssemblySplit
+
+// VB object name : AssemblySplit (Id used in Visual Basic)
+#pragma ID AssemblySplit "DCE:a907b7ee-9871-11d4-934a006094eb72e6"
+#pragma ALIAS CATIAAssemblySplit AssemblySplit
+
+
+#endif // CATIAAssemblySplit_IDL
+

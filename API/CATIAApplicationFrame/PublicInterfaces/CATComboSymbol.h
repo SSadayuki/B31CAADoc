@@ -1,0 +1,97 @@
+#ifndef CATComboSymbol_H
+#define CATComboSymbol_H
+
+// Copyright Dassault Systemes 1996
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+#include "VE0GEDIT.h"
+
+#include "CATDlgFrame.h"
+#include "CATDlgCombo.h"
+#include "CATUnicodeString.h"
+
+class CATVisComboSymbol;
+
+/** 
+* Class to create a combo to choose a symbol point.
+* <b>Role</b>:This class constructs a combo to select a symbol among 9 types:
+* <ol>
+* <li>Cross</li>
+* <li>Plus</li>
+* <li>Circle</li>
+* <li>Double Circle</li>
+* <li>Middle Dot</li>
+* <li>Full Square</li>
+* <li>Star</li>
+* <li>Dot</li>
+* <li>Small Dot</li>
+* </ol>
+* <br>When a symbol is selected, a <tt>CATDlgComboSelectNotification</tt> notification is sent,
+* and you can retrieves the index of the symbol thanks to the @href #GetSelect
+* @see CATComboColor, CATComboWeight,CATComboDashed
+*/
+class ExportedByVE0GEDIT CATComboSymbol : public CATDlgFrame
+{
+ 
+//------------------------------------------------------------------------------
+public:
+
+  /** 
+  * Constructs a combo to choose a symbol point.
+  * @param iParent
+  * The dialog's parent.
+  * @param iDialogObjectName
+  * The name of the dialog object. 
+  * @param iStyle
+  * Internal usage. Set NULL the legal value.
+  * @param iSymbolInit
+  *  The index of the first symbol displayed. The value ranges from 1 to 9, and the
+  *  default value is 1 (a cross). 
+  * @param iAutoComboAvailable
+  * Internal usage, set 0 as the default value.
+  */
+  CATComboSymbol( CATDialog*        iParent,
+                  const CATString&  iDialogObjectName,
+                  CATDlgStyle       iStyle = NULL,
+                  const unsigned    iSymbolInit = 1,
+				          unsigned int      iAutoComboAvailable = 0);
+
+  virtual ~CATComboSymbol();
+
+  /**
+  * Retrieves the symbol's index choosen.
+  * <br><b>Role</b>: When a symbol is choosen , a 
+  * <tt>CATDlgComboSelectNotification</tt> notification is sent, and you 
+  * can retrieve the selected color using this method.
+  * @return 
+  * Index of the symbol.This value ranges from 1 to 9.
+  */
+  unsigned int GetSelect();
+
+  /** @nodoc */
+  unsigned int GetSelectedSymbol(unsigned int& symbol);
+  
+  /**
+  * Sets the index's symbol.
+  * @param iSymbol
+  * Index of the symbol.This value ranges from 1 to 9. 
+  */
+  void SetSelect(const unsigned int iSymbol);
+ 
+  /** @nodoc */
+  CATDlgCombo* GetCombo();
+
+//------------------------------------------------------------------------------
+private:
+
+  void Selected (CATCommand *, CATNotification *, CATCommandClientData);
+  void Drop     (CATCommand *, CATNotification *, CATCommandClientData);
+
+  CATVisComboSymbol* _pVisComboSymbol;
+};
+
+#endif

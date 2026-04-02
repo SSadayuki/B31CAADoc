@@ -1,0 +1,105 @@
+#ifndef CATIASchAppMultiImageMaster_IDL 
+#define CATIASchAppMultiImageMaster_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004    
+    
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+interface CATIADocument;
+interface CATIASchAppConnectable;
+interface CATIASchListOfObjects;
+interface CATIASchListOfBSTRs;
+
+ /** 
+  * Interface to manage the master object in the Multi-Image-Object concept.
+  */
+
+interface CATIASchAppMultiImageMaster : CATIABase
+{
+  /**
+  * List the images of this master object.
+	* @param iLFilter
+  *   A list of image class names for filtering (can be NULL).
+	* @param oLUKImages
+	*   A list of image pointers (a list of CATIASchAppMultiImage pointers).
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppMultiImageMaster
+  * Dim objLFilter As SchListOfBSTRs
+  * Dim objLImages As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">AppListImages</font> objLFilter,objLImages
+  * </pre>
+  *    
+  */
+  HRESULT AppListImages (
+    in CATIASchListOfBSTRs iLFilter,
+    inout CATIASchListOfObjects oLImages);
+
+  /**
+  * Check if OK to create an image of this master object.
+  * @param iImageDoc
+  *   Pointer to the document the image is in.
+	* @param oBYes
+  *   TRUE if this object is valid to be the master of a MIO relationship. 
+	* @param oNLSFileName
+  *   File name for the NLS messages.
+	* @param oNLSFileKeyToMessage
+  *   Message key to the application specific diagnostics.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppMultiImageMaster
+  * Dim objImageDoc As Document
+  * Dim bYes As boolean
+  * Dim strFileName As String
+  * Dim strFileKeyToMsg As String
+  *  ...
+  * objThisIntf.<font color="red">AppIsOKToCreateImage</font> objImageDoc,bYes,strFileName,strFileKeyToMsg
+  * </pre>
+  *    
+  */
+  HRESULT AppIsOKToCreateImage (
+    in CATIADocument iImageDoc,
+    inout boolean oBYes,
+    inout CATBSTR oNLSFileName,
+    inout CATBSTR oNLSFileKeyToMessage);
+
+  /**
+  * Add an image for this master object.
+	* @param iImage
+  *   Pointer to the image to link this master to.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppMultiImageMaster
+  * Dim objImage As SchAppConnectable
+  *  ...
+  * objThisIntf.<font color="red">AppAddImage</font> objImage
+  * </pre>
+  *
+
+  */
+  HRESULT AppAddImage (
+    in CATIASchAppConnectable iImage);
+
+};
+    
+// Interface name : CATIASchAppMultiImageMaster
+#pragma ID CATIASchAppMultiImageMaster "DCE:7b6778e2-d676-45cc-a68610dafd966fa2"
+#pragma DUAL CATIASchAppMultiImageMaster
+    
+// VB object name : SchAppMultiImageMaster
+#pragma ID SchAppMultiImageMaster "DCE:06b70ef7-9d30-4a8c-b48bae5144bbc765"
+#pragma ALIAS CATIASchAppMultiImageMaster SchAppMultiImageMaster
+    
+#endif 

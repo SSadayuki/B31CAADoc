@@ -1,0 +1,24 @@
+#ifndef CATV4IV5V4ErrorFeatureCreationEnum_H
+#define CATV4IV5V4ErrorFeatureCreationEnum_H
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2003
+//--------------------------------------------------------------------------
+// CATV4IV5V4ErrorFeatureCreationEnum Enum
+//--------------------------------------------------------------------------
+
+    /**
+     * The error feature's creation mode during Save As Model.
+     * @param NeverCreateErrorFeatures
+     *   The error feature is never created.
+     * @param CreateAnErrorFeatureAfterUserAgreement
+     *   The error feature is created when the save is partial and after user agreement.
+	 * @param AlwaysCreateErrorFeatures
+     *   The error feature is always created when the save is partial.
+	 * @see CATIV4IV4WritingSettingAtt
+     */
+enum CATV4IV5V4ErrorFeatureCreationEnum{NeverCreateErrorFeatures, CreateAnErrorFeatureAfterUserAgreement,AlwaysCreateErrorFeatures };
+#endif

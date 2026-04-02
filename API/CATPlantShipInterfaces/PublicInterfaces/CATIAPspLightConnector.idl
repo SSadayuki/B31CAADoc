@@ -1,0 +1,174 @@
+#ifndef CATIAPspLightConnector_IDL
+#define CATIAPspLightConnector_IDL
+
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+interface CATIAPspListOfDoubles;
+
+
+#include "CATIAProduct.idl"
+#include "CATSafeArray.idl"
+
+#include "CATIABase.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the light connector.
+ * <b>Role</b>: To access light connector data.
+ */
+
+interface CATIAPspLightConnector : CATIABase
+{
+
+ /**
+  * Returns  the position of the connector.
+  * @param iRelAxis
+  *   the relative axis object (Nothing means relative to parent)
+  * @param oOrigin
+  *   Origin point position-three double values stand for x,y,z
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightConnector
+  * Dim objArg1 As Product
+  * Dim objArg2 As PspListOfDoubles
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">GetOrigin</font> (objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT GetOrigin ( in CATIAProduct	iRelAxis,
+                      out /*IDLRETVAL*/ CATIAPspListOfDoubles oOrigin );
+
+
+ /**
+  * Sets the position of the connector.
+  * @param iRelAxis
+  *   the relative axis object (Nothing means relative to parent)
+  *
+  * @param iDb3Position
+  *   absolute X-Y-Z coordinates of the current position of 
+  *   the connector to be set
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightConnector
+  * Dim objArg1 As  Product
+  * Dim dbVar2(3) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetOrigin</font> objArg1, dbVar2
+  * </pre>
+  *    
+  */
+  HRESULT SetOrigin ( in CATIAProduct	iRelAxis,
+                      in CATSafeArrayVariant iDb3Position );
+
+
+
+ /**
+  * Returns the position of the connector.
+  * @param iRelAxis
+  *   the relative axis object (Nothing means relative to parent)
+  * @param oAlignmentDirection
+  *   Three double values stand for X,Y,Z components of the alignment vector
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightConnector
+  * Dim objArg1 As Product
+  * Dim objArg2 As PspListOfDoubles
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">GetAlignmentVector</font> (objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT GetAlignmentVector  ( in CATIAProduct	iRelAxis,
+                      out /*IDLRETVAL*/ CATIAPspListOfDoubles oAlignmentDirection );
+
+ /**
+  * Sets the alignment direction of the connector.
+  * @param iRelAxis
+  *   the relative axis object (Nothing means relative to parent)
+  *
+  * @param iAlignmentDirection
+  *   Three double values stand for X,Y,Z component of the Alignment vector 
+  *   
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightConnector
+  * Dim objArg1 As  Product
+  * Dim dbVar2(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetAlignmentVector</font> objArg1, dbVar2
+  * </pre>
+  *    
+  */
+  HRESULT SetAlignmentVector ( in CATIAProduct	iRelAxis,
+                      in CATSafeArrayVariant iAlignmentDirection );
+
+
+
+ /**
+  * Returns the Orientation Direction of the connector.
+  * @param iRelAxis
+  *   the relative axis object (Nothing means relative to parent)
+  * @param oAlignmentDirection
+  *   Three double values stand for X,Y,Z components of the alignment vector
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightConnector
+  * Dim objArg1 As Product
+  * Dim objArg2 As PspListOfDoubles
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">GetOrientationVector</font> (objArg1)
+  * </pre>
+  *    
+  */ 
+
+  HRESULT GetOrientationVector  ( in CATIAProduct	iRelAxis,
+                      out /*IDLRETVAL*/ CATIAPspListOfDoubles oOrientationDirection );
+
+ /**
+  * Sets the Orientation Direction of the connector.
+  * @param iRelAxis
+  *   the relative axis object (Nothing means relative to parent)
+  *
+  * @param iAlignmentDirection
+  *   Three double values stand for X,Y,Z component of the Alignment vector 
+  *   
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightConnector
+  * Dim objArg1 As  Product
+  * Dim dbVar2(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetAlignmentVector</font> objArg1, dbVar2
+  * </pre>
+  *    
+  */
+  HRESULT SetOrientationVector ( in CATIAProduct	iRelAxis,
+                      in CATSafeArrayVariant  iOrientationDirection);
+
+	         
+};
+
+// Interface name : CATIAPspLightConnector
+#pragma ID CATIAPspLightConnector "DCE:1ddbfa08-ff41-4bda-a61fae8faba8fa3a"
+#pragma DUAL CATIAPspLightConnector
+
+// VB object name : PspLightConnector
+#pragma ID PspLightConnector         "DCE:a043990c-0544-4176-875fbc4a4a990893"
+#pragma ALIAS CATIAPspLightConnector PspLightConnector
+
+#endif

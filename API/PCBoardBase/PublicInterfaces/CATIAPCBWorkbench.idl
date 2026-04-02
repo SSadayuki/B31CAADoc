@@ -1,0 +1,112 @@
+#ifndef CATIAPCBWorkbench_IDL
+#define CATIAPCBWorkbench_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+//--------------------------------------------------------------------------
+// Document object
+// gha Oct.99
+//
+//--------------------------------------------------------------------------
+
+#include "CATBaseDispatch.idl"
+#include "CATIAWorkbench.idl"	
+#include "CATIAProduct.idl"	
+#include "CATBSTR.idl"
+
+
+interface CATIADocument;
+
+/**  
+  * Interface to access  Circuit Board Design workbench object.
+  */
+
+
+
+interface CATIAPCBWorkbench : CATIAWorkbench
+{
+
+ /**
+  * Allows to create a Board.
+  *  
+  * @param iRoot 
+  * Root product of the Part to extend
+  * @param oBoard 
+  * The board created
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+  
+  HRESULT CreateBoard(in CATBaseDispatch iRoot,out /*IDLRETVAL*/ CATBaseDispatch oBoard );
+
+ /**
+  * Allows to create a Component.
+  *  
+  * @param iRoot 
+  * Root product of the Part to extend
+  * @param iElecPackageNumber
+  * The package number used to valuate the component attribute
+  * @param iElecPartNumber
+  * The part number used to valuate the part number of the component
+  * @param iElecType 
+  * The Type of the component to create : ELECTRICAL or MECHANICAL
+  * @param oComponent 
+  * The Component created
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */  
+  HRESULT CreateComponent(in CATBaseDispatch  iRoot,in CATBSTR iElecPackageNumber,in CATBSTR iElecPartNumber,in CATBSTR iElecType,out /*IDLRETVAL*/ CATBaseDispatch oComponent );     
+
+ /**
+  *  Allows to get the root product of a document.
+  *
+  * @param doc
+  * The document to scan
+  * @param oRoot
+  * The root product of the document scanned
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+  HRESULT GetRootProduct(in CATIADocument doc, out /*IDLRETVAL*/ CATBaseDispatch oRoot );
+
+/**
+  * Allows to create a panel.
+  *  
+  * @param iRoot 
+  * Root product of the Part to extend
+  * @param oPanel 
+  * The panel created
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+  HRESULT CreatePanel(in CATBaseDispatch  iRoot,out /*IDLRETVAL*/ CATBaseDispatch oPanel );     
+
+//----------------------------------------------------------------------------------
+};
+
+// Interface name : CATIAPCBWorkbench
+#pragma ID CATIAPCBWorkbench "DCE:913ef589-cb7a-0000-0280030bbd000000"
+#pragma DUAL CATIAPCBWorkbench
+ 
+// VB object name : PCBWorkbench
+#pragma ID PCBWorkbench "DCE:913ef935-c6e7-0000-0280030bbd000000"
+#pragma ALIAS CATIAPCBWorkbench PCBWorkbench
+
+#endif

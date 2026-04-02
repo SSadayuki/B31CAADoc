@@ -1,0 +1,83 @@
+#ifndef CATIAStrObject_IDL
+#define CATIAStrObject_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 11/12/97
+//  But   : Creation
+//
+// ****************************************************************************
+interface CATIAParameter;
+
+#include "CATIABase.idl"
+#include "CATIAProduct.idl"
+
+/**
+ * Represents a structure object.
+ */
+
+interface CATIAStrObject : CATIAProduct
+{
+    /**
+     * Returns the type of the structure object.
+     *  
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the type of the
+     * <tt>StructureMember</tt> object.
+     * <pre>
+     * Dim oType As Parameter
+     * Set oType = StructureMember.<font color="red">Type</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY Type
+  HRESULT get_Type(out /*IDLRETVAL*/ CATIAParameter oParameter);
+
+};
+
+// Interface name : CATIAStrObject
+#pragma ID CATIAStrObject "DCE:80c49773-54c9-0280-020c320000000000"
+#pragma DUAL CATIAStrObject
+
+#pragma ID StrObject "DCE:80c497b5-fe81-0280-020c320000000000"
+#pragma ALIAS CATIAStrObject StrObject
+
+#endif

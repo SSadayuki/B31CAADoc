@@ -1,0 +1,111 @@
+#ifndef CATIAManufacturingToolCorrector_IDL
+#define CATIAManufacturingToolCorrector_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//=================================================================
+//								   
+// CATIAManufacturingToolCorrector:						   
+// Exposed interface for ManufacturingToolCorrector
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jan 2001 Creation				                    K. Bouharb
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Manufacturing tool corrector.
+ */
+interface CATIAManufacturingToolCorrector : CATIABase
+{
+
+#pragma PROPERTY Point
+ 
+  /**
+  * Gives the corrector type point.<br>
+  * oPoint  : Type point (Ex: P1, ..., P9) <br>
+  * Returns HRESULT.<br>
+  */
+	HRESULT get_Point (inout /*IDLRETVAL*/ CATBSTR oPoint);
+
+
+#pragma PROPERTY Number
+ 
+  /**
+  * Gives the corrector number.<br>
+  * Returns HRESULT.<br>
+  */
+	HRESULT get_Number (out /*IDLRETVAL*/ short oNumber);
+
+
+#pragma PROPERTY LengthNumber
+ 
+  /**
+  * Gives the corrector length number.<br>
+  * Returns HRESULT.<br>
+  */
+	HRESULT get_LengthNumber (out /*IDLRETVAL*/ short oLengthNumber);
+
+
+#pragma PROPERTY RadiusNumber
+ 
+  /**
+  * Gives the corrector radius number.<br>
+  * Returns HRESULT.<br>
+  */
+	HRESULT get_RadiusNumber (out /*IDLRETVAL*/ short oRadiusNumber);
+
+
+#pragma PROPERTY Diameter
+ 
+  /**
+  * Gives the corrector diameter tool diameter.<br>
+  * Returns HRESULT.<br>
+  */
+	HRESULT get_Diameter (out /*IDLRETVAL*/ double oDiameter);
+
+
+  /**
+  * Gives the corrector values.<br>
+  * oPoint  : Type point (Ex: P1, ..., P9) <br>
+  * oNumber : Corrector Number <br>
+  * oLengthNumber : Corrector Length Number <br>
+  * oRadiusNumber : Corrector Radius Number <br>
+  * oDiameter     : Tool Diameter where corrector applyes (if non fixed corrector)<br>
+  * Returns HRESULT.<br>
+  */
+	HRESULT GetValues (inout CATBSTR oPoint, out short oNumber, out short oLengthNumber,
+						out short oRadiusNumber, out double oDiameter);
+  /**
+  * Defines the corrector values.<br>
+  * iPoint  : Type point (Ex: P1, ..., P9) <br>
+  * iNumber : Corrector Number <br>
+  * iLengthNumber : Corrector Length Number <br>
+  * iRadiusNumber : Corrector Radius Number <br>
+  * iDiameter     : Tool Diameter where corrector applyes (if non fixed corrector)<br>
+  * Returns HRESULT.<br>
+  */
+	HRESULT SetValues (in CATBSTR oPoint, in short oNumber, in short oLengthNumber,
+						in short oRadiusNumber, in double oDiameter);
+};
+
+
+// Interface name : CATIAManufacturingToolCorrector
+#pragma ID CATIAManufacturingToolCorrector "DCE:0f940662-7e6d-11d4-94640004ac963be8"
+#pragma DUAL CATIAManufacturingToolCorrector
+
+// VB object name : ManufacturingToolCorrector (Id used in Visual Basic)
+#pragma ID ManufacturingToolCorrector "DCE:23501d58-7e6d-11d4-94640004ac963be8"
+#pragma ALIAS CATIAManufacturingToolCorrector ManufacturingToolCorrector
+
+#endif // CATIAManufacturingToolCorrector_IDL

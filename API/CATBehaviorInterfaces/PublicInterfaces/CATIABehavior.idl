@@ -1,0 +1,188 @@
+#ifndef CATIABehavior_IDL
+#define CATIABehavior_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//--------------------------------------------------------------------------
+// Application Object
+// drl nov.99
+//--------------------------------------------------------------------------
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIABehaviors; 
+
+/**
+ * Represents a behavior.
+ * <b>Role</b>: A behavior is a set of tasks performed on a technological object. It can be V5 command, CAA command, VBA command,
+ * external application or behavior defined into the BKT product.
+ * A behavior contains a set of variables: the inputs entered by the user and the outputs produced by the behavior.
+ * This interface manipulates the characteristics of a behavior: children behaviors, inputs/outputs and activity.
+ */
+
+interface CATIABehavior : CATIABase
+{
+    /**
+     * Returns the collection of children behaviors.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>BehCollection</tt> the collection of
+     * Behaviors currently managed by a <tt>Behavior</tt> Beh.
+     * <pre>
+     * Dim BehCollection As Behaviors
+     * Set BehCollection = Beh.<font color="red">Behaviors</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Behaviors
+    HRESULT get_Behaviors(out /*IDLRETVAL*/ CATIABehaviors oBehaviors);
+
+    /**
+     * Tests if the behavior's input is set or not.
+	 * @param pName
+	 *	the name of the input
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example tests the existence of the value of
+	 * the published CATIAParameter Nb_Cylinder
+     * currently managed by a <tt>Behavior</tt> Beh.
+     * <pre>
+     * if (Beh.<font color="red">TestInput("Nb_Cylinder")</font>)
+     * </pre>
+     * </dl>
+     */
+    HRESULT TestInput(in CATBSTR pName , out /*IDLRETVAL*/ long iExist);
+
+
+    /**
+     * Returns the value of one available input of the behavior.
+	 * @param pName
+	 *	the name of the input
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+	 * <dd>
+     * This example retrieves in <tt>BehParameter</tt> 
+	 * the published input CATIAParameter Nb_Cylinder
+     * currently managed by a <tt>Behavior</tt> Beh.
+     * <pre>
+     * Dim BehParameter as Parameter
+     * Set BehParameter = Beh.<font color="red">GetInput("Nb_Cylinder")</font>
+     * </pre>
+	 * </dl>
+     */
+    HRESULT GetInput(in CATBSTR pName , out /*IDLRETVAL*/ CATIABase oValue);
+
+    /**
+     * Tests if the behavior's output is set or not.
+	 * @param pName
+	 *	the name of the output
+     * <! @sample >
+	 * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example tests the existence of the value of 
+	 * the published CATIAParameter Power
+     * currently managed by a <tt>Behavior</tt> Beh.
+     * <pre>
+     * if (Beh.<font color="red">TestOutput("Power")</font>)
+     * </pre>
+     * </dl>
+     */
+    HRESULT TestOutput(in CATBSTR pName , out /*IDLRETVAL*/ long iExist);
+
+    /**
+     * Returns the value of one available output of the behavior.
+	 * @param pName
+	 *	the name of the output
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>BehPower</tt> 
+	 * the published output CATIAParameter Power
+     * currently managed by a <tt>Behavior</tt> Beh.
+     * <pre>
+     * Dim BehPower as Parameter
+     * Set BehPower = Beh.<font color="red">GetOutput("Power")</font>
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT GetOutput(in CATBSTR pName , out /*IDLRETVAL*/ CATIABase oValue);
+
+   /**
+     * Valuates an available output of the behavior. 
+	 * The behavior must be in operating state, otherwise it fails.
+	 * <br> 
+	 * It can be applicable from a CATIABehaviorVBScript Execution for instance.
+	 * @param pName
+	 *	the name of the output
+	 * @param oValue
+	 *	the value of the output
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example assigns to the published CATIAParameter Power of a <tt>Behavior</tt> Beh.
+	 * the value of <tt>BehPower</tt> 
+     * <pre>
+     * Dim BehPower as Parameter
+	 * ...
+     * Beh.<font color="red">PutOutput "Power", BehPower</font>
+     * </pre>
+     * </dl>
+     */
+    HRESULT PutOutput(in CATBSTR pName , in CATIABase oValue);
+
+
+
+   /**
+     * Activates a behavior. 
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example activates a <tt>Behavior</tt> Beh.
+     * <pre>
+     * Beh.<font color="red">Activate </font>
+     * </pre>
+     * </dl>
+     */
+    HRESULT    Activate ();    
+
+   /**
+     * Deactivates a behavior. 
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example deactivates a <tt>Behavior</tt> Beh.
+     * <pre>
+     * Beh.<font color="red">Deactivate </font>
+     * </pre>
+     * </dl>
+     */
+    HRESULT    Deactivate ();    
+};
+
+
+// Interface name : CATIABehavior
+#pragma ID CATIABehavior "DCE:fcbdcaae-2946-11d3-b051f06094eb7de3"
+#pragma DUAL CATIABehavior
+
+// VB object name : 
+#pragma ID Behavior "DCE:0d9bc828-2947-11d3-b051f06094eb7de3"
+#pragma ALIAS CATIABehavior Behavior
+
+#endif
+

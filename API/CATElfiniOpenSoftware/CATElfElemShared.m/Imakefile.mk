@@ -1,0 +1,30 @@
+#---------------------------------------
+BUILT_OBJECT_TYPE= SHARED LIBRARY
+
+OS = COMMON
+
+LINK_WITH = CATELFMathKernel
+
+
+IMPACT_ON_IMPORT = YES
+
+OS = AIX
+LOCAL_FFLAGS=-qnosave
+SYS_LIBS = -lxlf -lxlf90 -lxlfpad
+
+OS = SunOS
+LOCAL_FFLAGS=-stackvar
+SYS_LIBS = -lF77
+OPTIMIZATION_FORTRAN = -O4
+
+OS = intel_a
+OPTIMIZATION_FORTRAN = /O3 /arch:SSE2
+LOCAL_POST_FFLAGS= /Qauto
+
+OS = intel_a64
+OPTIMIZATION_FORTRAN = /OPTIMIZE:4
+LOCAL_FFLAGS=/Qunroll:8
+
+OS = win_b64
+LOCAL_POST_FFLAGS= /Qauto 
+

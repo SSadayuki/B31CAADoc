@@ -1,0 +1,91 @@
+#ifndef CATIAPspClass_IDL
+#define CATIAPspClass_IDL
+/*IDLREP*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+
+interface  CATIAPspListOfBSTRs;
+
+
+#include "CATBSTR.idl"
+#include "CATIABase.idl"
+
+/**
+ * Represent Interface to list the start up object classes of an application.
+ * <b>Role</b>: Application object classes.
+ */
+
+interface CATIAPspClass : CATIABase
+{
+ 
+  
+/**
+  * Returns a List of start-up physical object classes.
+  *
+   *@sample
+  * <pre>
+  * Dim objThisIntf As PspClass
+  * Dim objArg1 As PspListOfBSTRs
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">StartupPhysicals</font>
+  * </pre>
+  *
+  */
+ #pragma PROPERTY StartUpPhysicals
+ HRESULT get_StartUpPhysicals(
+    out /*IDLRETVAL*/ CATIAPspListOfBSTRs	oListPhysicals);
+
+/**
+  * Returns a List of start-up Function object classes.
+  *
+  *@sample
+  * <pre>
+  * Dim objThisIntf As PspClass
+  * Dim objArg1 As PspListOfBSTRs
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">StartupFunctions</font>
+  * </pre>
+  *
+  */
+ 
+ #pragma PROPERTY StartUpFunctions				
+  HRESULT get_StartUpFunctions(
+    out /*IDLRETVAL*/ CATIAPspListOfBSTRs	oListFunctions);
+
+ /**
+  * Returns a List of start-up Connector object classes.
+  *
+  *@sample
+  * <pre>
+  * Dim objThisIntf As PspClass
+  * Dim objArg1 As PspListOfBSTRs
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">StartUpConnectors</font>
+  * </pre>
+  *
+  */
+
+#pragma PROPERTY StartUpConnectors
+  HRESULT get_StartUpConnectors(
+    out /*IDLRETVAL*/ CATIAPspListOfBSTRs	oListConnectors);
+
+    
+
+};
+
+// Interface name : CATIAPspClass
+                              
+#pragma ID CATIAPspClass "DCE:652a65e9-677e-46c0-b80dafd55ef8e641"
+#pragma DUAL CATIAPspClass
+
+// VB object name : PspClass
+#pragma ID PspClass      "DCE:9bc97ed2-9063-42e9-aa69325c651e9eea"                             
+#pragma ALIAS CATIAPspClass PspClass
+
+#endif

@@ -1,0 +1,4 @@
+BUILT_OBJECT_TYPE = RUNTIME DATA 
+#if defined(CATIAV5R27)
+BUILD=NO
+#endif

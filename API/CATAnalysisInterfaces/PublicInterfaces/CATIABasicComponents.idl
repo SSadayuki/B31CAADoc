@@ -1,0 +1,57 @@
+#ifndef CATIABasicComponents_IDL
+#define CATIABasicComponents_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+// CATIABasicComponents:                           
+// Exposed interface for Collection Managment
+//=================================================================
+
+#include "CATIACollection.idl"
+#include "CATIABasicComponent.idl"
+
+interface CATIABasicComponent;
+
+/**  
+ * The collection of Basic Components defining and analysis object.
+ * These components are agregated by another basic component,
+ * an entity or a set.
+ */
+//-----------------------------------------------------------------
+
+interface CATIABasicComponents : CATIACollection
+{
+
+/**
+ * Returns an Basic Component using its index or its name from the Basic Components
+ * collection.
+ * @param iIndex
+ *   The index or the name of the Basic Component to retrieve from
+ *   the collection of Basic Component.
+ *   As a numerics, this index is the rank of the Basic Component.
+ *   in the collection.
+ *   The index of the first Basic Component in the collection is 1, and
+ *   the index of the last Basic Component is Count.
+ *   As a string, it is the name you assigned to the Basic Component using
+ *   the @href CATIABase#Name property.
+ * @return The retrieved Basic Component
+ */
+
+	HRESULT Item( in CATVariant iVariant, out /*IDLRETVAL*/ CATIABasicComponent oItem);
+
+};
+
+// Interface name : CATIABasicComponents
+#pragma ID CATIABasicComponents "DCE:d0291ff8-1587-448f-ab283bfae1fc2462"
+#pragma DUAL CATIABasicComponents
+
+// VB object name : BasicComponents (Id used in Visual Basic)
+#pragma ID BasicComponents "DCE:d0291ff9-1587-448f-ab283bfae1fc2462"
+#pragma ALIAS CATIABasicComponents BasicComponents
+
+#endif

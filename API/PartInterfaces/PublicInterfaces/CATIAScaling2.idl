@@ -1,0 +1,114 @@
+#ifndef CATIAScaling2_IDL
+#define CATIAScaling2_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2001
+
+
+//=================================================================
+//           
+// CATIAScaling2:         
+// Exposed interface for Scaling
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Aout 99 Creation 
+//=================================================================
+#include "CATIAShape.idl"
+#include "CATIAReference.idl"
+#include "CATIARealParam.idl"
+
+
+/**
+ * Represents the Scaling2 feature object. 
+ * This solid feature is created from  an underlying HybridShapeScaling 
+ * aggregated by the Scaling.
+ *
+ * <b>Role</b>: To access the data of the feature object.
+ * This data includes: 
+ * <ul>
+ * <li> The element to be transformed using the Scaling2</li>
+ * <li> The reference element for the Scaling2 which is a point or a plane</li>
+ * <li> The ratio and its value </li>
+ *</ul> 
+ * Use the CATIAShapeFactory to create Part object.
+ * @see CATIAShapeFactory
+ */
+//-----------------------------------------------------------------
+
+interface CATIAScaling2 : CATIAShape
+{
+
+ /**
+ * @nodoc
+ * Deprecated R11
+ */ 
+#pragma PROPERTY ElemToScale
+ HRESULT get_ElemToScale ( out /*IDLRETVAL*/ CATIAReference   oX);
+ HRESULT put_ElemToScale ( in               CATIAReference   iX);
+
+
+
+ /**
+ * Returns or sets the reference element.This element can be a point or a plane.<br>
+ * To set the property, you can use one of the following @href CATIABoundary objects: 
+ * @href CATIAPlanarFace or @href CATIAVertex.  
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>RefElem</code> the reference element for the <code>Scaling2</code> hybrid shape feature.
+ *<pre>
+ * Dim RefElem As Reference
+ * Set RefElem = Scaling2.<font color="red">Center</font>
+ *</pre>
+ *</dl> 
+ */ 
+#pragma PROPERTY Center  
+ HRESULT get_Center ( out /*IDLRETVAL*/  CATIAReference   oX);
+ HRESULT put_Center ( in               CATIAReference   iX);
+
+
+
+ /**
+ * Returns the scaling ratio.
+ */ 
+#pragma PROPERTY Ratio
+ HRESULT get_Ratio ( out /*IDLRETVAL*/  CATIARealParam   oX);
+
+
+ /**
+ * Returns or sets the scaling ratio value.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>Value</code> the ratio value for the <code>Scaling</code> hybrid shape feature.
+ *<pre>
+ * Dim Value As double
+ * Set Value = Scaling2.<font color="red">RatioValue</font>
+ *</pre>
+ *</dl> 
+ */ 
+#pragma PROPERTY RatioValue
+ HRESULT get_RatioValue ( out /*IDLRETVAL*/  double   oX);
+ HRESULT put_RatioValue ( in               double   iX);
+};
+
+// Interface name : CATIAScaling2
+#pragma ID CATIAScaling2 "DCE:b76feab0-fd99-11d4-9fa500508b130a6d"
+#pragma DUAL CATIAScaling2
+
+// VB object name : Scaling2 (Id used in Visual Basic)
+#pragma ID Scaling2 "DCE:b96cc420-fd99-11d4-9fa500508b130a6d"
+#pragma ALIAS CATIAScaling2 Scaling2
+
+
+#endif
+// CATIAScaling2_IDL
+

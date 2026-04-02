@@ -1,0 +1,282 @@
+#ifndef CATIAVarRadEdgeFillet_IDL
+#define CATIAVarRadEdgeFillet_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAVarRadEdgeFillet:                           
+// Exposed interface for Mechanical Fillet along (ribbons of) Edges
+//    with a radius varying along the ribbons
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification                                     L Lalere
+//=================================================================
+#include "CATIAEdgeFillet.idl"
+#include "CATFilletDefs.idl"
+
+interface CATIALength;
+interface CATIAReference;
+interface CATIAReferences;
+interface CATIAConstRadEdgeFillet;
+
+/**
+ * Represents the edge fillet shape with a variable radius.
+ * The resulting shape is made up of
+ * edges fillets controlled by couples of radius/vertex.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAVarRadEdgeFillet : CATIAEdgeFillet
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON EDGES TO FILLET
+    //    ------------------
+    //
+    /**
+     * Returns the collection of edges to be filleted.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>edges</tt>
+     * the edges to fillet of
+     * variable radius edge fillet<tt>firstVarEdgeFillet</tt>:
+     * <pre>
+     * Set edges = firstVarEdgeFillet.<font color="red">EdgesToFillet</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY EdgesToFillet
+    HRESULT    get_EdgesToFillet ( out /*IDLRETVAL*/ CATIAReferences oEdgesToFillet );
+
+    //    ON FILLET VARIATION MODE
+    //    ------------------------
+    //
+    /**
+     * Returns or sets the edge fillet radius variation mode.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>mode</tt> the radius variation
+     * mode of the variable radius edge fillet<tt>firstVarEdgeFillet</tt>,
+     * and then sets it to <tt>CATLinearFilletVariation</tt>
+     * so that the radius variation is linear between two control vertices:
+     * <pre>
+     * mode = firstVarEdgeFillet.<font color="red">FilletVariation</font>
+     * firstVarEdgeFillet.<font color="red">FilletVariation</font> = CATLinearFilletVariation
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FilletVariation
+    HRESULT    get_FilletVariation ( out /*IDLRETVAL*/ CatFilletVariation oVariation );
+    HRESULT    put_FilletVariation ( in                CatFilletVariation iVariation );
+
+    //
+    //    ON IMPOSED VERTICES
+    //    -------------------
+    //
+    /**
+     * Returns the collection of vertices where a radius has been imposed.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>vertices</tt>
+     * the collection of imposed vertices of the
+     * variable radius edge fillet<tt>firstVarEdgeFillet</tt>:
+     * <pre>
+     * Set vertices = firstVarEdgeFillet.<font color="red">ImposedVertices</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ImposedVertices
+    HRESULT    get_ImposedVertices ( out /*IDLRETVAL*/ CATIAReferences oImposedVertices );
+
+   /**
+    * Returns or set the spine for circle bitangency fillet.
+	* @param iSpin
+	*   The spine to be used for a circle bitangency fillet
+    */
+#pragma PROPERTY FilletSpine
+    HRESULT get_FilletSpine( out /*IDLRETVAL*/ CATIAReference oSpine);
+    HRESULT put_FilletSpine( in CATIAReference iSpine);
+
+   /**
+    * Returns or set the fillet bitangency type.
+	* @param iType
+	*   The type used to perform the fillet :
+	*   catSphereBitangencyType or catCircleBitangencyType  
+    */
+#pragma PROPERTY BitangencyType
+    HRESULT get_BitangencyType( out /*IDLRETVAL*/ CatFilletBitangencyType oType);
+    HRESULT put_BitangencyType( in CatFilletBitangencyType iType);
+
+
+
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+
+    //    RETRIEVE THE RADIUS OF AN IMPOSED VERTEX 
+    //    ----------------------------------------
+    //
+    /**
+     * Returns the fillet radius on an imposed vertex.
+     * @param iImposedVertex
+     *   The vertex where to retrieve the fillet radius
+     * @return  The fillet radius
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>radius</tt>
+     * the fillet radius of the
+     * variable radius edge fillet <tt>firstVarEdgeFillet</tt>
+     * at the vertex <tt>vertex</tt>:
+     * <pre>
+     * Set radius = firstVarEdgeFillet.<font color="red">ImposedVertexRadius</font>(vertex)
+     * </pre>
+     * </dl>
+     */
+    HRESULT    ImposedVertexRadius ( in                CATIAReference iImposedVertex,
+                                     out /*IDLRETVAL*/ CATIALength    oImposedVertexRadius);
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+    //    ADD AN EDGE TO FILLET
+    //    ---------------------
+    //
+    /**
+     * Adds a new edge to the variable radius edge fillet.
+     * @param iEdge
+     *   The edge to be filleted<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIATriDimFeatEdge.
+     * @param iRadius
+     *   The radius to impose along the edge.
+     *   This radius is imposed at both end points of the edge.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new edge <tt>edge</tt>
+     * to be filleted to the
+     * variable radius edge fillet <tt>firstVarEdgeFillet</tt>:
+     * <pre>
+     * call firstVarEdgeFillet.<font color="red">AddEdgeToFillet</font>(edge, 5.)
+     * </pre>
+     * </dl>
+     */
+    HRESULT    AddEdgeToFillet ( in CATIAReference iEdge, in double iRadius);
+
+    //
+    //    WITHDRAW AN EDGE TO FILLET
+    //    --------------------------
+    //
+    /**
+     * Withdraws an edge from the variable radius edge fillet.
+     * @param iEdge
+     *   The edge to be withdrawn<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIATriDimFeatEdge.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the edge <tt>edge</tt>
+     * from those to be filleted of the
+     * variable radius edge fillet <tt>firstVarEdgeFillet</tt>:
+     * <pre>
+     * call firstVarEdgeFillet.<font color="red">WithdrawEdgeToFillet</font>(edge)
+     * </pre>
+     * </dl>
+     */
+    HRESULT    WithdrawEdgeToFillet ( in CATIAReference iEdge);
+
+    //
+    //    ADD AN IMPOSED VERTEX - RADIUS COUPLE
+    //    -------------------------------------
+    //
+    /**
+     * Adds a new control couple.
+     * A control couple is made up of a vertex and a radius.
+     * @param iVertex
+     *   The vertex where to impose the radius
+     * @param iRadius
+     *   The radius to impose at the given vertex
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds a new control couple (vertex, radius) to
+     * the variable radius edge fillet <tt>firstVarEdgeFillet</tt> set
+     * with the vertex <tt>vertex</tt> and a radius of 50.
+     * <pre>
+     * call firstVarEdgeFillet.<font color="red">AddImposedVertex</font>(vertex, 50.)
+     * </pre>
+     * </dl>
+     */
+    HRESULT    AddImposedVertex ( in CATIAReference iVertex, in double iRadius ) ;
+    //
+    //    WITHDRAW AN IMPOSED VERTEX - RADIUS COUPLE
+    //    ------------------------------------------
+    //
+    /**
+     * Withdraws a control couple.
+     * @param iVertex
+     *   The vertex where the radius is imposed
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the imposed radius on the vertex
+     * <tt>vertex</tt> for the variable radius edge fillet
+     * <tt>firstVarEdgeFillet</tt>:
+     * <pre>
+     * call firstVarEdgeFillet.<font color="red">WithdrawImposedVertex</font>(vertex)
+     * </pre>
+     * </dl>
+     */
+    HRESULT    WithdrawImposedVertex ( in CATIAReference iVertex) ;
+
+   /**
+    * Returns or set the sharp edge removal mode for variable edge fillet.
+	* @param iMode
+	*   The mode to be used for variable edge fillet
+    */
+#pragma PROPERTY SharpEdgeRemovalMode
+    HRESULT get_SharpEdgeRemovalMode(out /*IDLRETVAL*/ short oMode);
+    HRESULT put_SharpEdgeRemovalMode(in                short iMode);
+
+   /**
+    * Changes the type of EdgeFillet to constant EdgeFillet and return it.
+    * @param opConstFillet
+    *   The opConstFillet is the variable edge fillet
+    */
+    HRESULT SwitchToConstFilletType(out /*IDLRETVAL*/ CATIAConstRadEdgeFillet opConstFillet);
+
+};
+
+// Interface name : CATIAVarRadEdgeFillet
+#pragma ID CATIAVarRadEdgeFillet "DCE:a6bcaaa3-610b-11d1-a27d0000f87546fd"
+#pragma DUAL CATIAVarRadEdgeFillet
+
+// VB object name : VarRadEdgeFillet (Id used in Visual Basic)
+#pragma ID VarRadEdgeFillet "DCE:a6e06de9-610b-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIAVarRadEdgeFillet VarRadEdgeFillet
+
+
+#endif
+// CATIAVarRadEdgeFillet_IDL
+

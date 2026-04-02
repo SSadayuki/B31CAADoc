@@ -1,0 +1,311 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>TopologicalOperatorsLight CATTopSkin Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../TopologicalOperatorsLight.htm" href="../TopologicalOperatorsLight.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "TopologicalOperatorsLight";	}
+		function getCurrentObjectName() { 
+ 	return "CATTopSkin"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>TopologicalOperatorsLight Framework: CATTopSkin <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATTopSkin_37150','CATTopSkin','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATTopSkin</b>
+</p>
+<p>
+<b><i>  Class representing the operator that creates a skin body from one surface.</i></b><br>
+ 
+ The resulting body has one face in a shell domain, and can be build from
+ <ul><li>the surface boundaries
+ <li>a list of curves defining a closed loop on the surface
+ <li>the intersection of a plane and a canonical box.
+ </ul>
+ Moreover, the operator allows the faces to have inside loops (holes).
+ <br>To use the CATTopSkin:
+ <ul><li>Create it the <tt>CATCreateTopSkin</tt> global function. 
+ <li>If needed, tune some parameters with the <tt>SetXxx</tt> methods. In particular, closure or internal
+ loops can be described at this time.
+ <li> <tt>Run</tt> the operator
+ <li>Retrieve the created body (frozen by default) with the <tt>GetResult</tt> method. 
+ <li>Delete with the usual C++ <tt>delete</tt> operator after use.</ul>
+ If the surface is closed, the operator creates a shell with 2 or 4 faces.</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#~CATTopSkin()"><b>~CATTopSkin</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AddInternalLoop(int,CATPCurve**,CATCrvLimits*)"><b>AddInternalLoop</b></a>(int,CATPCurve**,CATCrvLimits*)
+</td><td id='tdright'>  
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddInternalLoop(int,CATPCurve**,CATCrvLimits*,short*)"><b>AddInternalLoop</b></a>(int,CATPCurve**,CATCrvLimits*,short*)
+</td><td id='tdright'>  
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ForceSkinClosureInU()"><b>ForceSkinClosureInU</b></a>()
+</td><td id='tdright'>  Asks for the closure of the skin in the first surface direction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ForceSkinClosureInV()"><b>ForceSkinClosureInV</b></a>()
+</td><td id='tdright'>  Asks for the closure of the skin in the second surface direction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLimits(CATSurLimits&amp;)"><b>GetLimits</b></a>(CATSurLimits&amp;)
+</td><td id='tdright'>   Retrieves the limits on the surface taken into account by <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetShell()"><b>GetShell</b></a>()
+</td><td id='tdright'>  Returns the pointer to the shell of the resulting skin body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>   Runs <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetInternalLoop(int,CATPCurve**,CATCrvLimits*,short*)"><b>SetInternalLoop</b></a>(int,CATPCurve**,CATCrvLimits*,short*)
+</td><td id='tdright'>  Defines an internal loop in the face of a skin body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLimits(CATSurLimits&amp;)"><b>SetLimits</b></a>(CATSurLimits&amp;)
+</td><td id='tdright'>   Defines limits on the surface to be taken into account by <tt>this</tt> operator.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="~CATTopSkin"></a><a id="~CATTopSkin()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATTopSkin</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AddInternalLoop"></a><a id="AddInternalLoop(int,CATPCurve**,CATCrvLimits*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddInternalLoop</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbPcurves</span>,<script type="text/javascript"> activateLink('CATPCurve','CATPCurve**')</script> <span class='param'>iPcurves</span>,<script type="text/javascript"> activateLink('CATCrvLimits','CATCrvLimits*')</script> <span class='param'>iLimits</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ 
+<dl  class='desclist'>
+  <dt class='deprecated'> <b>Deprecated:</b></dt> 
+  <dd>  V5R20
+ Use 
+SetInternalLoop instead Defines an internal loop in the face of a skin body.
+ 
+ </ dd>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbPcurves</span></dt>
+   <dd> The number of curves to build the internal loop.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPcurves</span></dt>
+   <dd> The array <tt>[iNbPcurves]</tt> of pointers to the curves on the surface used to define the skin.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLimits</span></dt>
+   <dd> The array <tt>[iNbPcurves]</tt> of the limits for each curve.
+ These specifications must insure that the end of
+ one curve is the beginning of the following.
+ Every created edge is positively oriented in the loop.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddInternalLoop"></a><a id="AddInternalLoop(int,CATPCurve**,CATCrvLimits*,short*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddInternalLoop</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbPcurves</span>,<script type="text/javascript"> activateLink('CATPCurve','CATPCurve**')</script> <span class='param'>iPcurves</span>,<script type="text/javascript"> activateLink('CATCrvLimits','CATCrvLimits*')</script> <span class='param'>iLimits</span>,<script type="text/javascript"> activateLink('short','short*')</script> <span class='param'>iOrientations</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ 
+<dl  class='desclist'>
+  <dt class='deprecated'> <b>Deprecated:</b></dt> 
+  <dd>  V5R20
+ Use 
+SetInternalLoop instead Defines an internal loop in the face of a skin body.
+ 
+ </ dd>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbPcurves</span></dt>
+   <dd> The number of curves to build the internal loop.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPcurves</span></dt>
+   <dd> The array <tt>[iNbPcurves]</tt> of pointers to the curves on the surface used to define the skin.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLimits</span></dt>
+   <dd> The array <tt>[iNbPcurves]</tt> of the limits for each curve.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientations</span></dt>
+   <dd> The array <tt>[iNbPcurves]</tt> of the relative orientation for each curve.
+ <br><b>Legal values</b>:
+ <dl><dt><tt>1</tt></dt><dd>The curve is used in is original orientation.
+ <dt><tt>-1</tt></dt><dd>The curve is used with an opposite orientation.
+ </dl>
+ Combine with <tt>iLimits</tt>, these specifications must insure that the end of
+ one curve (possibly reversed) is the beginning of the following.
+ Every created edge is positively oriented in the loop.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ForceSkinClosureInU"></a><a id="ForceSkinClosureInU()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ForceSkinClosureInU</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for the closure of the skin in the first surface direction.
+ <br> The geometry must be compatible with this closure.
+</dd>
+<dt class='dtmethod' >
+  <a id="ForceSkinClosureInV"></a><a id="ForceSkinClosureInV()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ForceSkinClosureInV</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for the closure of the skin in the second surface direction.
+ <br> The geometry must be compatible with this closure.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLimits"></a><a id="GetLimits(CATSurLimits&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetLimits</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>iSurLim</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Retrieves the limits on the surface taken into account by <tt>this</tt> operator. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioSurLim</span></dt>
+   <dd> The surface limits taken into account.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetShell"></a><a id="GetShell()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATShell','CATShell*')</script>  <span class='objname'>GetShell</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const=0','const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the pointer to the shell of the resulting skin body.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the shell of the resulting skin body. Remember that the whole body is retrieved with
+ the <tt>GetResult</tt> method, and you must manage its deletion if you do not want to keep it.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Runs <tt>this</tt> operator.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetInternalLoop"></a><a id="SetInternalLoop(int,CATPCurve**,CATCrvLimits*,short*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetInternalLoop</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbPcurves</span>,<script type="text/javascript"> activateLink('CATPCurve','CATPCurve**')</script> <span class='param'>iPcurves</span>,<script type="text/javascript"> activateLink('CATCrvLimits','CATCrvLimits*')</script> <span class='param'>iLimits</span>,<script type="text/javascript"> activateLink('short','short*')</script> <span class='param'>iOrientations</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines an internal loop in the face of a skin body. To be called before <tt>Run</tt>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbPcurves</span></dt>
+   <dd> The number of curves to build the internal loop.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPcurves</span></dt>
+   <dd> The array <tt>[iNbPcurves]</tt> of pointers to the curves on the surface used to define the skin.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLimits</span></dt>
+   <dd> The array <tt>[iNbPcurves]</tt> of the limits for each curve.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientations</span></dt>
+   <dd> The array <tt>[iNbPcurves]</tt> of the relative orientation for each curve.
+ <br><b>Legal values</b>:
+ <dl><dt><tt>1</tt></dt><dd>The curve is used in is original orientation.
+ <dt><tt>-1</tt></dt><dd>The curve is used with an opposite orientation.
+ </dl>
+ Combine with <tt>iLimits</tt>, these specifications must insure that the end of
+ one curve (possibly reversed) is the beginning of the following.
+ Every created edge is positively oriented in the loop.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLimits"></a><a id="SetLimits(CATSurLimits&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLimits</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>ioSurLim</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Defines limits on the surface to be taken into account by <tt>this</tt> operator. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSurLim</span></dt>
+   <dd> The surface limits to take into account.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATTopSkin.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATTopologicalOperatorsLight</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

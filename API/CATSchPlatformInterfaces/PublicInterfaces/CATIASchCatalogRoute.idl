@@ -1,0 +1,61 @@
+#ifndef CATIASchCatalogRoute_IDL 
+#define CATIASchCatalogRoute_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchRoute;
+interface  CATIASchGRR;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic route catalog.
+  */
+
+interface CATIASchCatalogRoute : CATIABase
+{
+  /**
+  * Check to see if it is OK to be dropped to the current document.
+  * @param oBYes
+  *   If TRUE, then it is OK to be dropped.
+  * @param oRouteRef
+  *   Route reference.
+  * @param oPointedToGRR
+  *   Graphical representation of a route pointed-to by the catalog component
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCatalogRoute
+  * Dim bVar1 As boolean
+  * Dim objArg2 As SchRoute
+  * Dim objArg3 As SchGRR
+  *  ...
+  * objThisIntf.<font color="red">QueryDropAbility</font>bVar1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT QueryDropAbility ( 
+    inout boolean oBYes, 
+    inout CATIASchRoute oRouteRef, 
+    inout CATIASchGRR oPointedToGRR );
+    
+};
+    
+// Interface name : CATIASchCatalogRoute
+#pragma ID CATIASchCatalogRoute "DCE:eaa0c928-8843-4df9-940d3d971d191642"
+#pragma DUAL CATIASchCatalogRoute
+    
+// VB object name : SchCatalogRoute
+#pragma ID SchCatalogRoute "DCE:436a1880-469a-4601-9d0b24466e13d9f1"
+#pragma ALIAS CATIASchCatalogRoute SchCatalogRoute
+    
+#endif 
+    

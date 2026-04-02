@@ -1,0 +1,264 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATMecModUseItf CATIMmiUseFeaturize Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATMecModUseItf.htm" href="../CATMecModUseItf.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATMecModUseItf";	}
+		function getCurrentObjectName() { 
+ 	return "CATIMmiUseFeaturize"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>CATMecModUseItf Framework:  CATIMmiUseFeaturize Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIMmiUseFeaturize_31696','CATIMmiUseFeaturize','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIMmiUseFeaturize</b>
+</p>
+<p>
+<b><i> Interface to create a BRep feature from a selecting object or to duplicate a BRep feature.</i></b><br>
+
+ <b>Role</b>: All methods of this interface work with the following set of attribute:
+ <ul><li>If a method is called on a selecting object, it creates a BRep feature.
+ <li>If a method is called on a BRep feature, it returns the BRep feature itself or
+ a copy of this BRep feature, depending on the <tt>iMode</tt> parameter.</ul>
+
+ Duplication of the BRep feature is controlled by the following values:
+ <ul><li><tt>MfNoDuplicateFeature</tt>, which is the default value, and 
+ <li><tt>MfDuplicateFeature</tt>.</ul>
+
+ There are 2 ways to define the support, either through a mode, or a support:
+ <ul><li>Support definition of the BRep feature is also controlled by the following <tt>iMode</tt> values:
+ <ul><li><tt>MfInitialFeatureSupport</tt>, which is the default value for functional BRep features, 
+ <li><tt>MfSelectingFeatureSupport</tt>, which is the default value for relimited BRep features, and 
+ <li><tt>MfLastFeatureSupport</tt>.</ul>
+
+ <li>On the other hand, a <tt>CATIMmiMechanicalFeature</tt> can be specified as the support of the BRep feature.
+ <ul><li>The functional BRep feature points to this specified object. <li>The relimited BRep feature points to 
+ the <tt>ResultOUT</tt> of this specified object.</ul>
+
+ <br>When the specified support is a <tt>ResultOUT</tt>, 
+ the BRep feature points to the attribute that contains this <tt>ResultOUT</tt>.
+ 
+ <br>Some Part Design features such as fillet or draft angle have a special behavior. 
+ The support becomes the <tt>ResultIN</tt> of the design feature in order to manage 
+ delete, deactive, reorder, cut and paste.
+
+ The specified support also can be a spec attribute that holds a feature.</ul>
+
+ <br>The <tt>iMode</tt> value <ul><li><tt>MfTemporaryBody</tt>, which is the default value,
+ creates a BRep feature 
+ that is a handle on a shape feature. Such a BRep feature requires the shape feature to provide 
+ its own geometrical description.
+ <li><tt>MfPermanentBody</tt> creates an independant BRep feature that behaves like a
+ curve or surface feature. Such a feature can be used as an input to other operators.</ul>
+
+ <br>These values can be combined together according to the following syntax:
+ <tt>CATMfFeaturizeMode iMode = MfNoDuplicateFeature | MfPermanentBody | MfLastFeatureSupport;</tt>.
+
+ <br>Anyway, the application has to aggregate the BRep feature in the structure so that 
+ it is involved in data management processes: delete, cut, copy, paste, update.</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Featurize(CATIMmiUseMfBRep_var&amp;,CATMmrLimitationType)"><b>Featurize</b></a>(CATIMmiUseMfBRep_var&amp;,CATMmrLimitationType)
+</td><td id='tdright'>  Creates a BRep feature.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Featurize(CATIMmiUseMfBRep_var&amp;,CATBaseUnknown_var&amp;)"><b>Featurize</b></a>(CATIMmiUseMfBRep_var&amp;,CATBaseUnknown_var&amp;)
+</td><td id='tdright'>  Creates a BRep feature.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Featurize(CATIMmiUseMfBRep_var&amp;,CATMfFeaturizeMode,CATMmrLimitationType)"><b>Featurize</b></a>(CATIMmiUseMfBRep_var&amp;,CATMfFeaturizeMode,CATMmrLimitationType)
+</td><td id='tdright'>  Creates a BRep feature.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Featurize(CATIMmiUseMfBRep_var&amp;,CATMfFeaturizeMode,CATBaseUnknown_var&amp;)"><b>Featurize</b></a>(CATIMmiUseMfBRep_var&amp;,CATMfFeaturizeMode,CATBaseUnknown_var&amp;)
+</td><td id='tdright'>  Creates a BRep feature.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Featurize"></a><a id="Featurize(CATIMmiUseMfBRep_var&amp;,CATMmrLimitationType)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Featurize</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiUseMfBRep_var','CATIMmiUseMfBRep_var&amp;')</script> <span class='param'>oBRepFeature</span>,<script type="text/javascript"> activateLink('CATMmrLimitationType','CATMmrLimitationType')</script> <span class='param'>iType</span><span class='param'>= CATMmrDefaultLimitationType</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a BRep feature. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oBRepFeature</span></dt>
+   <dd> [out]  The created <tt>CATIMmiUseMfBRep</tt> feature.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iType</span></dt>
+   <dd> [in]  The type of relimitation. If CATMmrDefaultLimitationType, the type of relimitation will be taken from the featurized object.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <dl>
+   <dt><tt>S_OK</tt>          <dd>The feature is successfully created.
+   <dt><tt>E_FAIL</tt>        <dd>An error occured.
+   </dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Featurize"></a><a id="Featurize(CATIMmiUseMfBRep_var&amp;,CATBaseUnknown_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Featurize</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiUseMfBRep_var','CATIMmiUseMfBRep_var&amp;')</script> <span class='param'>oBRepFeature</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iSupport</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a BRep feature. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oBRepFeature</span></dt>
+   <dd> [out]  The created <tt>CATIMmiUseMfBRep</tt> feature.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSupport</span></dt>
+   <dd> The explicit support.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <dl>
+   <dt><tt>S_OK</tt>          <dd>The feature is successfully created.
+   <dt><tt>E_FAIL</tt>        <dd>An error occured.
+   </dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Featurize"></a><a id="Featurize(CATIMmiUseMfBRep_var&amp;,CATMfFeaturizeMode,CATMmrLimitationType)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Featurize</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiUseMfBRep_var','CATIMmiUseMfBRep_var&amp;')</script> <span class='param'>oBRepFeature</span>, const <script type="text/javascript"> activateLink('CATMfFeaturizeMode','CATMfFeaturizeMode')</script> <span class='param'>iMode</span>,<script type="text/javascript"> activateLink('CATMmrLimitationType','CATMmrLimitationType')</script> <span class='param'>iType</span><span class='param'>= CATMmrDefaultLimitationType</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a BRep feature. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oBRepFeature</span></dt>
+   <dd> [out]  The created <tt>CATIMmiUseMfBRep</tt> feature.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd> The creation mode.
+ <br><b>Legal values</b>:
+ <ul><li><tt>MfNoDuplicateFeature</tt>,
+ <li><tt>MfDuplicateFeature</tt>,
+ <li><tt>MfInitialFeatureSupport</tt>,
+ <li><tt>MfSelectingFeatureSupport</tt>,
+ <li><tt>MfLastFeatureSupport</tt>,
+ <li><tt>MfTemporaryBody</tt>,
+ <li><tt>MfPermanentBody</tt>,
+ <li><tt>MfFeaturizeIntersection</tt>,
+ <li><tt>MfFeaturizeC1Intersection</tt>.</ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iType</span></dt>
+   <dd> [in]  The type of relimitation. . If CATMmrDefaultLimitationType, the type of relimitation will be taken from the featurized object. 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <dl>
+   <dt><tt>S_OK</tt>          <dd>The feature is successfully created.
+   <dt><tt>E_FAIL</tt>        <dd>An error occured.
+   </dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Featurize"></a><a id="Featurize(CATIMmiUseMfBRep_var&amp;,CATMfFeaturizeMode,CATBaseUnknown_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Featurize</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiUseMfBRep_var','CATIMmiUseMfBRep_var&amp;')</script> <span class='param'>oBRepFeature</span>, const <script type="text/javascript"> activateLink('CATMfFeaturizeMode','CATMfFeaturizeMode')</script> <span class='param'>iMode</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iSupport</span><span class='param'>= NULL_var</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a BRep feature. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oBRepFeature</span></dt>
+   <dd> [out]  The created <tt>CATIMmiUseMfBRep</tt> feature.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd> The creation mode.
+ <br><b>Legal values</b>:
+ <ul><li><tt>MfNoDuplicateFeature</tt>,
+ <li><tt>MfDuplicateFeature</tt>,
+ <li><tt>MfInitialFeatureSupport</tt>,
+ <li><tt>MfSelectingFeatureSupport</tt>,
+ <li><tt>MfLastFeatureSupport</tt>,
+ <li><tt>MfTemporaryBody</tt>,
+ <li><tt>MfPermanentBody</tt>,
+ <li><tt>MfFeaturizeIntersection</tt>,
+ <li><tt>MfFeaturizeC1Intersection</tt>.</ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSupport</span></dt>
+   <dd> The explicit support.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <dl>
+   <dt><tt>S_OK</tt>          <dd>The feature is successfully created.
+   <dt><tt>E_FAIL</tt>        <dd>An error occured.
+   </dl>
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIMmiUseFeaturize.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATMecModUseItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

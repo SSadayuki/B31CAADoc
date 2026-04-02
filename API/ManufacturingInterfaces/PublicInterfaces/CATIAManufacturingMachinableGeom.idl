@@ -1,0 +1,448 @@
+#ifndef CATIAManufacturingMachinableGeom_IDL
+#define CATIAManufacturingMachinableGeom_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//
+// CATIAManufacturingMachinableGeom:
+// Exposed interface for ManufacturingMachinableFeature
+//
+//=================================================================
+// Aug. 01 Creation                                        C.PETIT
+// 02/10/23 AddPointedGeometryNotify
+//          AddPointedGeometryWithNoDuplicatedCheckNotify C.Vasseur 
+//                          C.PETIT
+// July 2003 GetOrigin() GetDirection() GetAssociatedTPSCount() GetAssociatedTPS() 
+//			 GetAllAssociatedTPSCount() GetAllAssociatedTPS() 
+//			 GetFeatureParameterCount() GetFeatureParameters  MJL
+//  11/25/03 GetAllAssociatedTPSCount() GetAllAssociatedTPS()
+//           GetFeatureParameterCount() GetFeatureParameters() in nodoc   PHD
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingMachinableFeat.idl"
+#include "CATSafeArray.idl"
+#include "CATIAProduct.idl"
+
+//*******************************
+interface CATIAHole;
+//*******************************
+/**
+ * Represents the machinable geometry object.
+ * It is the low-level component of a machinable area.
+ * @see CATIAManufacturingMachinableArea
+ */
+interface CATIAManufacturingMachinableGeom : CATIAManufacturingMachinableFeat
+{
+
+        /**
+         * Returns or sets the shared state of a ManufacturingMachinableGeometry object.
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>bState</tt> the shared state of
+         * manufacturing machinable geometry <tt>firstMachGeom</tt>
+		 * and then sets it to TRUE:
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim bState As boolean
+         * Set bState = firstMachGeom.<font color="red">Shared</font>
+         * bState = TRUE
+         * firstMachGeom.<font color="red">Shared</font> = bState
+         * </pre>
+         */
+#pragma PROPERTY Shared
+    HRESULT get_Shared ( out /*IDLRETVAL*/ boolean oShared );
+    HRESULT put_Shared ( in                boolean iShared );
+
+        /**
+         * Returns the pointed geometry list count.
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the pointed geometry list count of 
+         * the manufacturing machinable geometry <tt>firstMachGeom</tt> in <tt>PointedGeometryListSize</tt>.
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim PointedGeometryListSize As Long
+         * Set PointedGeometryListSize = firstMachGeom.<font color="red">PointedGeometryCount</font>
+         * </pre>
+         * </dl>
+         */
+    HRESULT PointedGeometryCount ( out /*IDLRETVAL*/ long oPointedGeometryCount );
+
+        /**
+         * Retrieves a pointed geometry and its product.
+         * @param iIndex
+		 *   The index of the pointed geometry and product
+         * @param oGeometry
+		 *   The retrieved geometry
+         * @param oProduct
+		 *   The product of the retrieved geometry
+         * @param oNbShapes
+		 *   The number of shapes of the retrieved geometry
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the pointed geometry lists of 
+         * the manufacturing machinable geometry <tt>firstMachGeom</tt> in <tt>PointedGeometryList</tt>
+         * and in <tt>PointedProductsList</tt>.
+         * The arrays must be previously initialized
+         * using the @href #PointedGeometryCount method.
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim PointedGeometryListSize As Long
+         * Set PointedGeometryListSize = firstMachGeom.PointedGeometryCount
+         * If (PointedGeometryListSize > 0) Then
+		 *   Dim I As Long
+		 *   For I = 0 To PointedGeometryListSize-1
+         *     Dim PointedGeometryList() As Variant
+         *     Dim PointedProductsList() As Variant
+		 *     Dim NbShapes As Long
+         *     Redim PointedGeometryList(PointedGeometryListSize-1)
+         *     Redim PointedProductsList(PointedGeometryListSize-1)
+         *     Call firstMachGeom.<font color="red">ListPointedGeometry</font>(I, PointedGeometryList, PointedProductsList, NbShapes)
+		 *   End For
+         * End If
+         * </pre>
+         * </dl>
+         */
+    HRESULT ListPointedGeometry ( in long iIndex, out CATIABase oGeometry, out CATIAProduct oProduct, out long oNbShapes );
+
+        /**
+         * Retrieves the pointed shape list.
+         * @param iIndex
+		 *   The index of the pointed geometry and product
+         * @param oShapes
+         *   The retrieved shape list.
+         *   <br>
+         *   The array must be previously initialized
+         *   using the @href #ListPointedGeometry method.
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the pointed shape list of 
+         * the manufacturing machinable geometry <tt>firstMachGeom</tt> in <tt>PointedShapesList</tt>.
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim PointedGeometryListSize As Long
+         * Set PointedGeometryListSize = firstMachGeom.PointedGeometryCount
+         * If (PointedGeometryListSize > 0) Then
+		 *   Dim I As Long
+		 *   For I = 0 To PointedGeometryListSize-1
+         *     Dim PointedGeometryList() As Variant
+         *     Dim PointedProductsList() As Variant
+		 *     Dim NbShapes As Long
+         *     Redim PointedGeometryList(PointedGeometryListSize-1)
+         *     Redim PointedProductsList(PointedGeometryListSize-1)
+         *     Call firstMachGeom.ListPointedGeometry(I, PointedGeometryList, PointedProductsList, NbShapes)
+		 *     If (NbShapes > 0) Then
+		 *       Dim PointedShapesList() As Variant
+		 *       Redim PointedShapesList(NbShapes-1)
+         *       Call firstMachGeom.<font color="red">ListShapesOfPointedGeometry</font>(I, PointedShapesList)
+		 *     End If
+		 *   End For
+         * End If
+         * </pre>
+         * </dl>
+         */
+    HRESULT ListShapesOfPointedGeometry ( in long iIndex, out CATSafeArrayVariant oShapes );
+
+        /**
+         * Adds a geometry to the pointed geometry list.
+         * @param iGeometry
+         *   The geometry to add
+         * @param iProduct
+         *   The product where the geometry to add is located
+         * @param iShapes
+         *   The list of shapes (body copied and pasted with links) where the geometry is to be added
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example adds the geometry <tt>GeomToAdd</tt> of the product <tt>ProdOfGeomToAdd</tt> to 
+         * the pointed geometry list of the manufacturing machinable geometry <tt>firstMachGeom</tt>.
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim GeomToAdd As Shape
+         * Dim ProdOfGeomToAdd As Product
+         * Set GeomToAdd = ...
+         * Set ProdOfGeomToAdd = ...
+		 * Dim ShapesList() As Variant
+		 * Redim ShapesList(0) ' Create an empty list of shapes
+         * Call firstMachGeom.<font color="red">AddPointedGeometry</font>( GeomToAdd, ProdOfGeomToAdd, ShapesList )
+         * </pre>
+         * </dl>
+         */
+    HRESULT AddPointedGeometry ( in CATIABase iGeometry, in CATIAProduct iProduct, in CATSafeArrayVariant iShapes );
+
+
+        /**
+         * Adds a geometry to the pointed geometry list with no check on already referenced geometry.
+         * @param iGeometry
+         *   The geometry to add
+         * @param iProduct
+         *   The product where the geometry to add is located
+         * @param iShapes
+         *   The list of shapes (body copied and pasted with links) where the geometry is to be added
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example adds the geometry <tt>GeomToAdd</tt> of the product <tt>ProdOfGeomToAdd</tt> to 
+         * the pointed geometry list of the manufacturing machinable geometry <tt>firstMachGeom</tt>.
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim GeomToAdd As Shape
+         * Dim ProdOfGeomToAdd As Product
+         * Set GeomToAdd = ...
+         * Set ProdOfGeomToAdd = ...
+		 * Dim ShapesList() As Variant
+		 * Redim ShapesList(0) ' Create an empty list of shapes
+         * Call firstMachGeom.<font color="red">AddPointedGeometryWithNoDuplicatedCheck</font>( GeomToAdd, ProdOfGeomToAdd, ShapesList )
+         * </pre>
+         * </dl>
+         */
+    HRESULT AddPointedGeometryWithNoDuplicatedCheck ( in CATIABase iGeometry, in CATIAProduct iProduct, in CATSafeArrayVariant iShapes );
+
+        /**
+         * Removes a geometry from the pointed geometry list.
+         * @param  iIndex
+         *   The index of the geometry to remove
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example removes the third geometry from the pointed geometry list 
+         * of the manufacturing machinable geometry <tt>firstMachGeom</tt>:
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Call firstMachGeom.<font color="red">RemovePointedGeometry</font>( 3 )
+         * </pre>
+         * </dl>
+         */
+    HRESULT RemovePointedGeometry ( in long iIndex );
+
+        /**
+         * Adds a geometry to the pointed geometry list (manage notification).
+         * @param iGeometry
+         *   The geometry to add
+         * @param iProduct
+         *   The product where the geometry to add is located
+         * @param iShapes
+         *   The list of shapes (body copied and pasted with links) where the geometry is to be added
+         * @param iNotify
+         *   A flag to request whether to send a notification to update the model
+		 *   <br><b>Legal values</b>:
+		 *   <table>
+		 *     <tr><td><b>0</b></td>   <td>No notification is sent and the model is not updated</td></tr>
+		 *     <tr><td><b>1</b></td>   <td>A notification is sent and the model is updated</td></tr>
+		 *   </table>
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example adds the geometry <tt>GeomToAdd</tt> of the product <tt>ProdOfGeomToAdd</tt> to 
+         * the pointed geometry list of the manufacturing machinable geometry <tt>firstMachGeom</tt>.
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim GeomToAdd As Shape
+         * Dim ProdOfGeomToAdd As Product
+         * Set GeomToAdd = ...
+         * Set ProdOfGeomToAdd = ...
+		 * Dim ShapesList() As Variant
+		 * Redim ShapesList(0) ' Create an empty list of shapes
+         * Call firstMachGeom.<font color="red">AddPointedGeometryNotify</font>( GeomToAdd, ProdOfGeomToAdd, ShapesList, 0 )
+         * </pre>
+         * </dl>
+         */
+    HRESULT AddPointedGeometryNotify ( in CATIABase iGeometry, in CATIAProduct iProduct, in CATSafeArrayVariant iShapes, in short iNotify );
+
+
+        /**
+         * Adds a geometry to the pointed geometry list with no check on an already referenced geometry.
+         * @param iGeometry
+         *   The geometry to add
+         * @param iProduct
+         *   The product where the geometry to add is located
+         * @param iShapes
+         *   The list of shapes (body copied and pasted with links) where the geometry is to be added
+         * @param iNotify
+         *   A flag to request whether to send a notification to update the model
+		 *   <br><b>Legal values</b>:
+		 *   <table>
+		 *     <tr><td><b>0</b></td>   <td>No notification is sent and the model is not updated</td></tr>
+		 *     <tr><td><b>1</b></td>   <td>A notification is sent and the model is updated</td></tr>
+		 *   </table>
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example adds the geometry <tt>GeomToAdd</tt> of the product <tt>ProdOfGeomToAdd</tt> to 
+         * the pointed geometry list of the manufacturing machinable geometry <tt>firstMachGeom</tt>:
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim GeomToAdd As Shape
+         * Dim ProdOfGeomToAdd As Product
+         * Set GeomToAdd = ...
+         * Set ProdOfGeomToAdd = ...
+		 * Dim ShapesList() As Variant
+		 * Redim ShapesList(0) ' Create an empty list of shapes
+         * Call firstMachGeom.<font color="red">AddPointedGeometryWithNoDuplicatedCheckNotify</font>( GeomToAdd, ProdOfGeomToAdd, ShapesList, 0 )
+         * </pre>
+         * </dl>
+         */
+    HRESULT AddPointedGeometryWithNoDuplicatedCheckNotify ( in CATIABase iGeometry, in CATIAProduct iProduct, in CATSafeArrayVariant iShapes, in short iNotify  );
+
+		/**
+         * Retrieves the origin of a pointed geometry under a ManufacturingMachinableGeometry object. 
+         * <br><b>Note</b>: Currently valid only for AxialUDF and DesignHole features. 
+		 * @param oX,oY,oZ
+         *   The coordinates of the origin
+         * @param IndexOfPointedGeom
+         *   The index of the pointed geometry
+		 *   <br><b>Note</b>: Check that the index you are passing in less than or equal to the
+		 *   pointed geometry count retrieved using the @href #PointedGeometryCount method.
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the coordinates of the origin of the third geometry
+		 * under the manufacturing machinable geometry <tt>firstMachGeom</tt>:
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+		 * Dim oX As Double
+		 * Dim oY As Double
+		 * Dim oZ As Double
+         * Call firstMachGeom.<font color="red">GetOrigin</font>( oX, oY, oZ, 3)
+         * </pre>
+         * </dl>
+         */
+	HRESULT	GetOrigin ( out  double oX, out double oY, out double oZ, in long IndexOfPointedGeom );
+	
+		/**
+         * Retrieves the direction of a pointed geometry under a ManufacturingMachinableGeometry object. 
+         * <br><b>Note</b>: Currently valid only for AxialUDF and DesignHole features. 
+		 * @param oX,oY,oZ
+         *   The components of the direction
+         * @param IndexOfPointedGeom
+         *   The index of the pointed geometry
+		 *   <br><b>Note</b>: Check that the index you are passing in less than or equal to the
+		 *   pointed geometry count retrieved using the @href #PointedGeometryCount method.
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the components of the direction of the third geometry
+		 * under the manufacturing machinable geometry <tt>firstMachGeom</tt>:
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+		 * Dim oX As Double
+		 * Dim oY As Double
+		 * Dim oZ As Double
+         * Call firstMachGeom.<font color="red">GetDirection</font>( oX, oY, oZ, 3)
+         * </pre>
+         * </dl>
+         */
+	
+	HRESULT	GetDirection ( out  double oX, out double oY, out double oZ, in long IndexOfPointedGeom );
+	
+		/**
+         * Returns the number of Annotation objects attached to a pointed geometry under a ManufacturingMachinableGeometry object.
+		 * @param IndexOfPointedGeom
+		 *   The index of the pointed geometry
+		 *   <br><b>Note</b>: Check that the index you are passing in less than or equal to the
+		 *   pointed geometry count retrieved using the @href #PointedGeometryCount method.
+		 * @param oAnnotationsListCount
+         *   The number of Annotation objects
+         * <!-- @sample -->
+         * </dl>
+          * <dt><b>Example:</b>
+         * <dd>The following example retrieves the number of Annotation objects attached to the third geometry
+		 * under the manufacturing machinable geometry <tt>firstMachGeom</tt> in <tt>AssociatedTPSCount</tt>:
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim AssociatedTPSCount As Long
+         * AssociatedTPSCount = PointedGeometryListSize = firstMachGeom.<font color="red">GetAssociatedTPSCount</font>( 3 )
+         * </pre>
+         * </dl>
+         */
+	HRESULT GetAssociatedTPSCount(in long IndexOfPointedGeom, out /*IDLRETVAL*/ long oAnnotationsListCount);
+	
+		/**
+         * Retrieves the Annotation object lists associated with a ManufacturingMachinableGeometry object.
+         * @param IndexOfPointedGeom
+		 *   The index of the pointed geometry among those associated with the ManufacturingMachinableGeometry object
+         * @param oAnnotationsList
+         *   The retrieved list Annotation objects.
+         *   <br>
+         *   The array must be previously initialized
+         *   using the @href #GetAssociatedTPSCount method.
+         * <!-- @sample -->
+         * </dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example retrieves the Annotation object list of the third pointed geometry under
+         * the manufacturing machinable geometry <tt>firstMachGeom</tt> in <tt>AnnotationList</tt>:
+         * <pre>
+         * Dim firstMachGeom As ManufacturingMachinableGeometry
+         * Set firstMachGeom = ...
+         * Dim AssociatedTPSCount As Long
+         * AssociatedTPSCount = firstMachGeom.GetAssociatedTPSCount (2)
+         * If (AssociatedTPSCount > 0) Then
+		 *   Dim I As Long
+		 *
+         *   Dim AnnotationList() As Variant
+         *   Redim AnnotationList(AssociatedTPSCount-1)
+         *   Call firstMachGeom.<font color="red">GetAssociatedTPS</font>(2, AnnotationList)
+		 *  
+         * End If
+         * </pre>
+         * </dl>
+         */
+	HRESULT GetAssociatedTPS(in long IndexOfPointedGeom, inout CATSafeArrayVariant oAnnotationsList);
+	
+	/**
+	* @nodoc
+	*/
+	HRESULT GetAllAssociatedTPSCount(out /*IDLRETVAL*/ long oAnnotationsListCount);
+
+	/**
+	* @nodoc
+	*/
+	HRESULT GetAllAssociatedTPS(inout CATSafeArrayVariant oAnnotationsList);
+		
+	/**
+	* @nodoc
+	*/
+	HRESULT GetFeatureParameterCount(in CATIABase iGeometry, out /*IDLRETVAL*/ long oParamCount);
+	
+	/**
+	* @nodoc
+	*/
+	HRESULT GetFeatureParameters(in CATIABase iGeometry, inout CATSafeArrayVariant oParamList);
+	
+
+	
+
+};
+
+// Interface name : CATIAManufacturingMachinableGeom
+#pragma ID CATIAManufacturingMachinableGeom "DCE:e77965cc-c22f-11d5-9f1c0002b31ea50f"
+#pragma DUAL CATIAManufacturingMachinableGeom
+
+// VB object name : ManufacturingCompoundFeature (Id used in Visual Basic)
+#pragma ID ManufacturingMachinableGeometry "DCE:018f172c-c230-11d5-9f1c0002b31ea50f"
+#pragma ALIAS CATIAManufacturingMachinableGeom ManufacturingMachinableGeometry
+
+#endif // CATIAManufacturingMachinableGeom_IDL
+//CATIAParameters
+

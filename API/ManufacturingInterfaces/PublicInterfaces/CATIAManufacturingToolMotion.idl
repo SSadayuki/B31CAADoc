@@ -1,0 +1,220 @@
+#ifndef CATIAManufacturingToolMotion_IDL
+#define CATIAManufacturingToolMotion_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//								   
+// CATIAManufacturingToolMotion:						   
+// Exposed interface for ManufacturingToolMotion
+//								   
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATIAParameter.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * A ManufacturingToolMotion for a Manufacturing Document.
+ */
+interface CATIAManufacturingToolMotion : CATIABase
+{
+
+// Method GetAttribute
+ 
+  /**
+  * Retrieve by is name the attribute of a Manufacturing ToolMotion.<br>
+  * Each attribute is a CKE object.
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>Diameter</tt> the attribute 
+  * <tt>MfgDiameter</tt> of the Manufacturing ToolMotion <tt>firstToolmotion</tt>
+  * <pre>
+  * Set Diameter = firstToolmotion.<font color="red">GetAttribute</font>(MfgDiameter)
+  *</pre>
+  * </dl>
+  */
+  HRESULT GetAttribute(in CATBSTR iAttribut,out  /*IDLRETVAL*/ CATIAParameter oAttributCke);
+
+
+// Method SetGeometry
+ 
+  /**
+  * @nodoc
+  */
+  HRESULT	SetGeometry(in CATBSTR iGeometryType,in CATIABase iReference, 
+                        in CATIABase iProduct, in short iPosition);
+
+// Method GetType
+ 
+  /**
+  * Retrieves the type of a Manufacturing ToolMotion.<br>
+  * @param oType
+  *   <b>Legal values</b>: oType can be:
+  *   <dl>
+  *     <dt><tt>"MfgSeqMotionPoint"</tt><dd>
+  *     <dt><tt>"MfgSeqMotionPosition"</tt><dd>
+  *     <dt><tt>"MfgSeqMotionDelta"</tt><dd>
+  *   </dl>
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>ThisType</tt> the type
+  * of the Manufacturing Toolmotion <tt>firstToolMotion</tt>
+  * <pre>
+  * dim ThisType as CATBSTR
+  * Set ThisType = firstToolMotion.<font color="red">GetType</font>
+  *</pre>
+  * </dl>
+  */
+  HRESULT GetType (inout  /*IDLRETVAL*/ CATBSTR oType);
+
+// Method SetPPWord
+ 
+  /**
+  * Adds a line containing iMessage to a Manufacturing PP Word ToolMotion.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example adds the line <tt>Message</tt> to the content
+  * of the Manufacturing PPWord Toolmotion <tt>firstToolmotion</tt>
+  * <pre>
+  * firstToolmotion.<font color="red">SetPPWord</font>("Message")
+  *</pre>
+  * </dl>
+  */
+  HRESULT SetPPWord(in CATBSTR iMessage);
+
+// Method GetPPWord
+ 
+  /**
+  * Retrieves the content of a Manufacturing PP Word ToolMotion.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>Message</tt> the content
+  * of the Manufacturing PPWord Toolmotion <tt>firstToolmotion</tt>
+  * <pre>
+  * dim Message as CATBSTR
+  * Message = firstToolmotion.<font color="red">GetPPWord</font>
+  *</pre>
+  * </dl>
+  */
+  HRESULT GetPPWord (inout  /*IDLRETVAL*/ CATBSTR oMessage);
+
+// Method SetPointCoordinates
+
+  /**
+  * Defines coordinates on the ToolMotion.<br>
+  * If the type of the ToolMotion is not MfgSeqMotionPoint, nothing is done.<br>
+  * These coordinates are expressed in the current axis system.<br>
+  * Coordinates units are millimeters.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example sets coordinates on a
+  * Manufacturing Point To Point Toolmotion <tt>submotion1</tt>
+  * <pre>
+  * dim XCoord as double
+  * dim YCoord as double
+  * dim ZCoord as double
+  * XCoord = 10.0
+  * YCoord = 20.0
+  * ZCoord = 5.0
+  * Call SubMotion1.<font color="red">SetGotoPtPointCoordinates</font>(XCoord, YCoord, ZCoord)
+  *</pre>
+  * </dl>
+  */
+  HRESULT SetGotoPtPointCoordinates(in double iX, in double iY, in double iZ);
+
+  // Method GetPointCoordinates
+ 
+  /**
+  * Retrieves coordinates on the ToolMotion.<br>
+  * If the type of the ToolMotion is not MfgSeqMotionPoint, nothing is done.<br>
+  * These coordinates are expressed in the current axis system.<br>
+  * Coordinates units are millimeters.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example gets coordinates on a
+  * Manufacturing Point To Point Toolmotion <tt>submotion1</tt>
+  * <pre>
+  * dim XCoord as double
+  * dim YCoord as double
+  * dim ZCoord as double
+  * Call SubMotion1.<font color="red">GetGotoPtPointCoordinates</font>(XCoord, YCoord, ZCoord)
+  *</pre>
+  * </dl>
+  */
+  HRESULT GetGotoPtPointCoordinates(out double oX, out double oY, out double oZ);
+
+// Method SetFeedrate
+ 
+  /**
+  * Defines the feedrate of a Manufacturing Point to point ToolMotion.<br>
+  * If the ToolMotion is not a Manufacturing Point to point, nothing is done.<br>
+  * @param iFeedrateType
+  *   <b>Legal values</b>: iFeedrateType can be:
+  *   <dl>
+  *     <dt><tt>"RAPID"</tt><dd>
+  *     <dt><tt>"LOCAL"</tt><dd>
+  *     <dt><tt>"NONE"</tt><dd>
+  *   </dl>
+  * @param oFeedrate
+  *   Feedrate value. (expressed in MKS units : m/s if linear feedrate, or m/turn if angular feedrate)<br>
+  *   Feedrate value is taken into account only if iFeedrateType is "LOCAL"
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example sets a local feedrate on a
+  * Manufacturing Point To Point Toolmotion <tt>submotion1</tt>
+  * <pre>
+  * dim FeedVal as double
+  * dim FeedType as CATBSTR
+  * FeedVal = 169.0
+  * FeedType="LOCAL"
+  * Call SubMotion1.<font color="red">SetFeedrate</font>(FeedVal, FeedType)
+  *</pre>
+  * </dl>
+  */
+  HRESULT SetFeedrate(in double iFeedrate, in CATBSTR iFeedrateType);
+
+// Method GetFeedrate
+ 
+  /**
+  * Retrieves the Feedrate of a Manufacturing Point to point ToolMotion.<br>
+  * If the ToolMotion is not a Manufacturing Point to point, nothing is done.<br>
+  * @param oFeedrateType
+  *   <b>Legal values</b>: oFeedrateType can be:
+  *   <dl>
+  *     <dt><tt>"RAPID"</tt><dd>
+  *     <dt><tt>"LOCAL"</tt><dd>
+  *     <dt><tt>"NONE"</tt><dd>
+  *   </dl>
+  * @param oFeedrate
+  *   Feedrate value. (expressed in MKS units : m/s if linear feedrate, or m/turn if angular feedrate)<br>
+  *   Feedrate value has a meaning only if oFeedrateType is "LOCAL"
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example gets the feedrate type of a
+  * Manufacturing Point To Point Toolmotion <tt>submotion1</tt>
+  * <pre>
+  * dim FeedVal as double
+  * dim FeedType as CATBSTR
+  * FeedType=SubMotion1.<font color="red">GetFeedrate</font>(FeedVal)
+  *</pre>
+  * </dl>
+  */
+  HRESULT GetFeedrate(out double oFeedrate, inout /*IDLRETVAL*/ CATBSTR oFeedrateType);
+
+};
+
+// Interface name : CATIAManufacturingToolMotion
+#pragma ID CATIAManufacturingToolMotion "DCE:399293bd-4648-4912-bf2e919140eb1dec"
+#pragma DUAL CATIAManufacturingToolMotion
+
+// VB object name : ManufacturingToolMotion (Id used in Visual Basic)
+#pragma ID ManufacturingToolMotion "DCE:d69cf32c-4a58-4b81-9c40010a31cdaded"
+#pragma ALIAS CATIAManufacturingToolMotion ManufacturingToolMotion
+
+#endif // CATIAManufacturingToolMotion_IDL

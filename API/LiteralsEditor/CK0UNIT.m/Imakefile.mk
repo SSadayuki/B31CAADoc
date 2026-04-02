@@ -1,0 +1,23 @@
+#
+# SHARED LIBRARY          
+#
+BUILT_OBJECT_TYPE= NONE
+
+PROGRAM_NAME=CK0UNIT
+
+LINK_WITH =	CK0FEAT OM0EDPRO \
+		JS0GROUP  JS0FM\
+		AC0SPBAS CATFileMenu\
+		ObjectModeler  \
+		NS0SI18N  \
+		Collections \
+		DI0PANV2 DI0STATE \
+		ON0GREXT ON0MAIN ON0PROP \
+		YP00IMPL JS0LOGRP CD0FRAME CATDlgStandard \
+		CATKnowledgeModeler  CATLiteralFeatures
+
+#
+
+
+
+

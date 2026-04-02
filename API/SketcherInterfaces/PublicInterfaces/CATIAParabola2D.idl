@@ -1,0 +1,92 @@
+#ifndef CATIAParabola2D_IDL
+#define CATIAParabola2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACurve2D.idl"
+#include "CATSafeArray.idl"
+
+/** 
+ *   Class defining an parabola in 2D Space.
+ */
+
+interface CATIAParabola2D : CATIACurve2D
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+        //
+
+        //
+#pragma PROPERTY FocalDistance
+        /**
+        *       Returns the focal distance of the parabola in 2D space
+        *       @param oFocal
+        *       The focal distance of the parabola
+        */
+        HRESULT get_FocalDistance ( out  /*IDLRETVAL*/ double  oFocal);
+        //
+	//		=============
+	//		== METHODS ==
+	//		=============
+        //
+        /**
+        *       Modifies the caracteristics of the parabola
+        *       @param iCenterX
+        *       The X Coordinate of the parabola center
+        *       @param iCenterY
+        *       The Y Coordinate of the parabola center
+        *       @param iAxisX
+        *       The X coordinate of the axis vector direction
+        *       @param iAxisY
+        *       The Y coordinate of the axis vector direction
+        *       @param iFocalDistance
+        *       The focal distance of the parabola
+        */
+        HRESULT SetData (in     double    iCenterX,
+                         in     double    iCenterY,
+                         in     double    iAxisX,
+                         in     double    iAxisY,
+                         in     double    iFocalDistance);
+
+        //
+        /**
+        *       Returns the center of the parabola in 2D space
+        *       @param oCenter[0]
+        *       The X Coordinate of the center point of the parabola
+        *       @param oCenter[1]
+        *       The Y Coordinate of the center point of the parabola
+        */
+        HRESULT GetCenter ( inout  CATSafeArrayVariant  oCenter);
+        //
+
+        /**
+        *       Returns the axis vector direction of the parabola in 2D space
+        *       @param oAxis[0]
+        *       The X coordinate of the axis vector direction
+        *       @param oAxis[1]
+        *       The Y coordinate of the axis vector direction
+        */
+        HRESULT GetAxis ( inout  CATSafeArrayVariant  oAxis);
+
+
+};
+
+// Interface name : CATIAParabola2D
+#pragma ID CATIAParabola2D "DCE:80ec7806-0752-0000-0280030ba6000000"
+#pragma DUAL CATIAParabola2D
+
+// VB object name : Parabola2D (Id used in Visual Basic)
+#pragma ID Parabola2D "DCE:80ec780d-2236-0000-0280030ba6000000"
+#pragma ALIAS CATIAParabola2D Parabola2D
+
+
+#endif
+// CATIAParabola2D_IDL
+

@@ -1,0 +1,23 @@
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+#
+LINK_WITH =  CORBAServerInfraUUID GW0EXIT JS0GROUP
+
+#
+OS = AIX
+
+#
+OS = IRIX
+
+#
+OS = HP-UX
+
+#
+OS = Windows_NT
+
+#
+OS = alpha_a
+BUILD = NO
+
+#
+OS = win_a

@@ -1,0 +1,647 @@
+#ifndef CATIARenderingShooting_IDL
+#define CATIARenderingShooting_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIARenderingShooting:                           
+// Exposed interface for Rendering Shooting object
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jul02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATIACamera3D.idl"
+#include "CATIARenderingLight.idl"
+#include "CATIARenderingEnvironment.idl"
+
+/**
+ * Represents a Material object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIARenderingShooting : CATIABase
+{
+/**
+ * Returns or sets the active camera for shooting.
+ * A shooting can only have one active camera at a time.
+ */
+#pragma PROPERTY ActiveCamera
+  HRESULT  get_ActiveCamera ( out /*IDLRETVAL*/ CATIACamera3D oActiveCamera);
+  HRESULT  put_ActiveCamera ( in	CATIACamera3D iActiveCamera);
+
+/**
+ * Returns the number of active light for the shooting.
+ */
+  HRESULT  CountActiveLights ( out /*IDLRETVAL*/ short oActiveLightsNumber);
+
+/**
+ * Returns the active light of the shooting using its index.
+ */
+  HRESULT  GetActiveLight ( in short iIndex, out /*IDLRETVAL*/ CATIARenderingLight oActiveLight);
+
+/**
+ * Adds a new active light to the shooting active lights list.
+ */
+  HRESULT  AddActiveLight(in CATIARenderingLight iActiveLight);
+
+/**
+ * Removes a light from the shootings active lights list.
+ */
+  HRESULT  RemoveActiveLight(in short iIndex);
+
+/**
+ * Returns or sets the active environment for shooting.
+ * <br>
+ * A shooting can have one or zero active environment at a time.
+ */
+#pragma PROPERTY ActiveEnvironment
+  HRESULT  get_ActiveEnvironment ( out /*IDLRETVAL*/ CATIARenderingEnvironment oActiveEnvironment);
+  HRESULT  put_ActiveEnvironment ( in	CATIARenderingEnvironment iActiveEnvironment);
+
+/**
+ * Returns or sets the image width for shooting.
+ * <br>
+ * The image width ranges from <code>10</code> to <code>8000</code> pixels.
+ */
+#pragma PROPERTY ImageWidth
+  HRESULT  get_ImageWidth ( out /*IDLRETVAL*/ short oImageWidth);
+  HRESULT  put_ImageWidth ( in	short iImageWidth);
+
+/**
+ * Returns or sets the image height for shooting.
+ * <br>
+ * The image height ranges from <code>10</code> to <code>8000</code> pixels.
+ */
+#pragma PROPERTY ImageHeight
+  HRESULT  get_ImageHeight ( out /*IDLRETVAL*/ short oImageHeight);
+  HRESULT  put_ImageHeight ( in	short iImageHeight);
+
+/**
+ * Returns or sets the image height for shooting.
+ * <br>
+ * Sets the image ratio to a standard predefined value.
+ * The image size keeps the same height and the image
+ * length is recalculated.
+ * <ul> Possible predefined ratio.
+ *   <li.> 0    no predefined ratio
+ *   <li>  1    0.708333 (A4) </li>
+ *   <li>  2    1.0      (6 x 6) </li>
+ *   <li>  3    1.25     (Standard) </li>
+ *   <li>  4    1.333333 (4 / 3) </li>
+ *   <li>  5    1.5      (24 x 36) </li>
+ *   <li>  6    1.687331 (16 mm.) </li>
+ *   <li>  7    1.777777 (16 / 9) </li>
+ *   <li>  8    1.855072 (HDTV) </li>
+ *   <li>  9    2.2      (Panavision) </li>
+ *   <li> 10    3.0      (Panorama) </li>
+ *   <li> 11    1.32     (CCD 1/2") </li>
+ *   <li> 12    1.333333 (CCD 1/4") </li>
+ *   </ul>
+ */
+#pragma PROPERTY ImagePredefinedRatio
+  HRESULT  get_ImagePredefinedRatio ( out /*IDLRETVAL*/ short oImagePredefinedRatio);
+  HRESULT  put_ImagePredefinedRatio ( in	short iImagePredefinedRatio);
+
+/**
+ * Returns or sets the image output location.
+ * <ul> Output types
+ *   <li>  1    On screen </li>
+ *   <li>  2    On disk </li>
+ *   </ul>
+ */
+#pragma PROPERTY ImageOutputType
+  HRESULT  get_ImageOutputType ( out /*IDLRETVAL*/ short oImageOutputType);
+  HRESULT  put_ImageOutputType ( in	short iImageOutputType);
+
+/**
+ * Returns or sets the output directory for image.
+ * <br>
+ * This is the place where rendered images are saved.
+ */
+#pragma PROPERTY ImageOutputDirectory
+  HRESULT  get_ImageOutputDirectory ( inout /*IDLRETVAL*/ CATBSTR oImageOutputDirectory);
+  HRESULT  put_ImageOutputDirectory ( in	CATBSTR iImageOutputDirectory);
+
+/**
+ * Returns or sets the output name for image (extension excluded).
+ * <br>
+ * This is the name of saved files (with no extension).
+ */
+#pragma PROPERTY ImageOutputName
+  HRESULT  get_ImageOutputName ( inout /*IDLRETVAL*/ CATBSTR oImageOutputName);
+  HRESULT  put_ImageOutputName ( in	CATBSTR iImageOutputName);
+
+/**
+ * Returns or sets the file type used for saved image.
+ * <ul> Possible format types
+ *   <li>  1    TIFF True Color (*.tif) </li>
+ *   <li>  2    TIFF True Color Packbits (*.tif) </li>
+ *   <li>  3    SGI Format (*.rgb) </li>
+ *   <li>  4    Windows Bitmap (*.bmp) </li>
+ *   <li>  5    JPEG Fair Quality (*.jpg) </li>
+ *   <li>  6    JPEG Medium Quality (*.jpg) </li>
+ *   <li>  7    JPEG High Quality (*.jpg) </li>
+ *   <li>  8    Apple Macintosh Format (*.pic) </li>
+ *   <li>  9    Adobe Photoshop Format (*.psd) </li>
+ *   <li>  10   Portable Network Graphics (*.png) </li>
+ *   <li>  11   Truevision Targa (*.tga) </li>
+ *   </ul>
+ */
+#pragma PROPERTY ImageOutputFormat
+  HRESULT  get_ImageOutputFormat ( out /*IDLRETVAL*/ short oImageOutputFormat);
+  HRESULT  put_ImageOutputFormat ( in	short iImageOutputFormat);
+
+/**
+ * Returns or sets the the raytracing status for shooting.
+ * <br>
+ * The raytracing status can be:
+ *   <li> 1: Raytracing is active  </li>
+ *   <li> 0: Raytracing is deactivated </li>
+ */
+#pragma PROPERTY RaytracingStatus
+  HRESULT  get_RaytracingStatus ( out /*IDLRETVAL*/ short oRaytracingStatus);
+  HRESULT  put_RaytracingStatus ( in	short iRaytracingStatus);
+
+/**
+ * Returns or sets the maximum number of reflections levels to 
+ * take into account for image computation.
+ * <br>
+ * This number ranges from <code>0</code> to <code>9</code> levels.
+ */
+#pragma PROPERTY ReflectionsCount
+  HRESULT  get_ReflectionsCount ( out /*IDLRETVAL*/ short oReflectionsCount);
+  HRESULT  put_ReflectionsCount ( in	short iReflectionsCount);
+
+/**
+ * Returns or sets the maximum number of refractions levels to 
+ * take into account for image computation.
+ * <br>
+ * This number ranges from <code>0</code> to <code>9</code> levels.
+ */
+#pragma PROPERTY RefractionsCount
+  HRESULT  get_RefractionsCount ( out /*IDLRETVAL*/ short oRefractionsCount);
+  HRESULT  put_RefractionsCount ( in	short iRefractionsCount);
+
+/**
+ * Returns or sets the maximum number of rebounds levels to 
+ * take into account for image computation.
+ * <br>
+ * This number ranges from <code>0</code> to <code>18</code> levels.
+ */
+#pragma PROPERTY ReboundsCount
+  HRESULT  get_ReboundsCount ( out /*IDLRETVAL*/ short oReboundsCount);
+  HRESULT  put_ReboundsCount ( in	short iReboundsCount);
+
+/**
+ * Returns or sets the textures status of shooting. 
+ * This status defines if textures are taken into account for image computation.
+ * <br>
+ * The texture status can be:
+ *   <li> 1: Textures are taking into account  </li>
+ *   <li> 0: Textures are ignored </li>
+ */
+#pragma PROPERTY TexturesStatus
+  HRESULT  get_TexturesStatus ( out /*IDLRETVAL*/ short oTexturesStatus);
+  HRESULT  put_TexturesStatus ( in	short iTexturesStatus);
+
+/**
+ * Returns or sets the shadows status of shooting. 
+ * This status defines if shadows are calculated or not.
+ * <br>
+ * The shadows status can be:
+ *   <li> 1: Shadows on  </li>
+ *   <li> 0: Shadows off </li>
+ */
+#pragma PROPERTY ShadowsStatus
+  HRESULT  get_ShadowsStatus ( out /*IDLRETVAL*/ short oShadowsStatus);
+  HRESULT  put_ShadowsStatus ( in	short iShadowsStatus);
+
+/**
+ * Returns or sets the antialiasing minimum sample number for image computation.
+ * <br>
+ * This value ranges from <code>0/code> to <code>5/code>.
+ * <br>
+ * Minimum samples value sets the minimum number of rays casted for 1,4 or 16 pixels.
+ * <ul> The possible minimum sample number are: 
+ *   <li> 0 : 1 ray casted for a 4x4 pixel square </li>
+ *   <li> 1 : 1 ray casted for a 2x2 pixel square </li>
+ *   <li> 2 : 1 ray casted per pixel </li>
+ *   <li> 3 : 4 rays casted per pixel </li>
+ *   <li> 4 : 16 rays casted per pixel </li>
+ *   <li> 5 : 64 rays casted per pixel </li>
+ */
+#pragma PROPERTY AntialiasingMinSample
+  HRESULT  get_AntialiasingMinSample ( out /*IDLRETVAL*/ short oAntialiasingMinSample);
+  HRESULT  put_AntialiasingMinSample ( in	short iAntialiasingMinSample);
+
+/**
+ * Returns or sets the antialiasing maximum sample number for image computation.
+ * <br>
+ * This value ranges from <code>0/code> to <code>5/code>.
+ * <br>
+ * Maximum samples value sets the minimum number of rays casted for 1,4 or 16 pixels.
+ * <ul> The possible maximum sample number are: 
+ *   <li> 0 : 1 ray casted for a 4x4 pixel square </li>
+ *   <li> 1 : 1 ray casted for a 2x2 pixel square </li>
+ *   <li> 2 : 1 ray casted per pixel </li>
+ *   <li> 3 : 4 rays casted per pixel </li>
+ *   <li> 4 : 16 rays casted per pixel </li>
+ *   <li> 5 : 64 rays casted per pixel </li>
+ */
+#pragma PROPERTY AntialiasingMaxSample
+  HRESULT  get_AntialiasingMaxSample ( out /*IDLRETVAL*/ short oAntialiasingMaxSample);
+  HRESULT  put_AntialiasingMaxSample ( in	short iAntialiasingMaxSample);
+
+/**
+ * Returns or sets the antialiasing contrast threshold value.
+ * <br>
+ * This value ranges from <code>0.</code> to <code>100.</code>%.
+ * Contrast value sets the contrast threshold for adaptative 
+ * oversampling, that is, the maximum contrast threshold between 
+ * pixels, below which no oversampling will be done. 
+ * <br>
+ * If the contrast of any RGB component between the currently 
+ * calculated pixel and heighboring pixels weighted by their sum
+ * is greater than this threshold, the pixel is oversampled.
+ */
+#pragma PROPERTY AntialiasingContrast
+  HRESULT  get_AntialiasingContrast ( out /*IDLRETVAL*/ short oAntialiasingContrast);
+  HRESULT  put_AntialiasingContrast ( in	short iAntialiasingContrast);
+
+/**
+ * Returns or sets the caustic status of shooting. 
+ * <br>
+ * This status defines if caustics are calculated or not.
+ * <br>
+ * The caustic status can be:
+ *   <li> 1: Caustics are enabled  </li>
+ *   <li> 0: Caustics are disabled </li>
+ */
+#pragma PROPERTY CausticStatus
+  HRESULT  get_CausticStatus ( out /*IDLRETVAL*/ short oCausticStatus);
+  HRESULT  put_CausticStatus ( in	short iCausticStatus);
+
+/**
+ * Returns or sets the number of photons to use when estimating
+ * radiance for caustics.
+ */
+#pragma PROPERTY CausticAccuracy
+  HRESULT  get_CausticAccuracy ( out /*IDLRETVAL*/ short oCausticAccuracy);
+  HRESULT  put_CausticAccuracy ( in	short iCausticAccuracy);
+
+/**
+ * Returns or sets the maximum distance in which photons for
+ * caustics are located.
+ * <br>
+ * If the value is 0.0 an estimate based on the scene extent will be used.
+ */
+#pragma PROPERTY CausticRadius
+  HRESULT  get_CausticRadius ( out /*IDLRETVAL*/ double oCausticRadius);
+  HRESULT  put_CausticRadius ( in	double iCausticRadius);
+
+/**
+ * Returns or sets the global illumination status of shooting. 
+ * <br>
+ * This status defines if global illumination is used or not.
+ * <br>
+ * The global illumination status can be:
+ *   <li> 1: Global illumination is enabled  </li>
+ *   <li> 0: Global illumination is disabled </li>
+ */
+#pragma PROPERTY GlobalIlluminationStatus
+  HRESULT  get_GlobalIlluminationStatus ( out /*IDLRETVAL*/ short oGlobalIlluminationStatus);
+  HRESULT  put_GlobalIlluminationStatus ( in	short iGlobalIlluminationStatus);
+
+/**
+ * Returns or sets the number of photons to use when estimating
+ * radiance for global illumination.
+ */
+#pragma PROPERTY GlobalIlluminationAccuracy
+  HRESULT  get_GlobalIlluminationAccuracy ( out /*IDLRETVAL*/ short oGlobalIlluminationAccuracy);
+  HRESULT  put_GlobalIlluminationAccuracy ( in	short iGlobalIlluminationAccuracy);
+
+/**
+ * Returns or sets the maximum distance in which photons for
+ * global illumination are located.
+ * <br>
+ * If the value is 0.0 an estimate based on the scene extent will be used.
+ */
+#pragma PROPERTY GlobalIlluminationRadius
+  HRESULT  get_GlobalIlluminationRadius ( out /*IDLRETVAL*/ double oGlobalIlluminationRadius);
+  HRESULT  put_GlobalIlluminationRadius ( in	double iGlobalIlluminationRadius);
+
+/**
+ * Returns or sets the final gathering status of shooting. 
+ * <br>
+ * This status defines if final gathering is activated or not.
+ * <br>
+ * The final gathering status can be:
+ *   <li> 1: Final gathering is enabled </li>
+ *   <li> 0: Final gathering is disabled </li>
+ */
+#pragma PROPERTY FinalGatheringStatus
+  HRESULT  get_FinalGatheringStatus ( out /*IDLRETVAL*/ short oFinalGatheringStatus);
+  HRESULT  put_FinalGatheringStatus ( in	short iFinalGatheringStatus);
+
+/**
+ * Returns or sets the number of rays shot in each final gather.
+ */
+#pragma PROPERTY FinalGatheringAccuracy
+  HRESULT  get_FinalGatheringAccuracy ( out /*IDLRETVAL*/ short oFinalGatheringAccuracy);
+  HRESULT  put_FinalGatheringAccuracy ( in	short iFinalGatheringAccuracy);
+
+/**
+ * Returns or sets the minimum distance in which a final gather
+ * result can be used.
+ * <br>
+ * If the value is 0.0 it will be set to 10% of maximum distance.
+ */
+#pragma PROPERTY FinalGatheringMinRadius
+  HRESULT  get_FinalGatheringMinRadius ( out /*IDLRETVAL*/ double oFinalGatheringMinRadius);
+  HRESULT  put_FinalGatheringMinRadius ( in	double iFinalGatheringMinRadius);
+
+/**
+ * Returns or sets the maximum distance in which a final gather
+ * result can be used.
+ * <br>
+ * If the value is 0.0 an estimate based on the scene extent will be used.
+ */
+#pragma PROPERTY FinalGatheringMaxRadius
+  HRESULT  get_FinalGatheringMaxRadius ( out /*IDLRETVAL*/ double oFinalGatheringMaxRadius);
+  HRESULT  put_FinalGatheringMaxRadius ( in	double iFinalGatheringMaxRadius);
+
+/**
+ * Returns or sets amount of ambient used for indirect illumination 
+ * (final gathering or global illumination).
+ * <br>
+ * The ambient factor can be:
+ *   <li> 1: Ambient is taken into account </li>
+ *   <li> 0: No ambient used </li>
+ */
+#pragma PROPERTY AmbientFactor 
+  HRESULT  get_AmbientFactor ( out /*IDLRETVAL*/ short oAmbientFactor);
+  HRESULT  put_AmbientFactor ( in	short iAmbientFactor);
+
+/**
+ * Returns or sets the depth of field status of shooting. 
+ * This status defines if depth of field effect is activated or not.
+ * <br>
+ * The depth of field status can be:
+ *   <li> 1: Depth of field is active </li>
+ *   <li> 0: Depth of field is deactivated </li>
+ */
+#pragma PROPERTY DepthOfFieldStatus
+  HRESULT  get_DepthOfFieldStatus ( out /*IDLRETVAL*/ short oDepthOfFieldStatus);
+  HRESULT  put_DepthOfFieldStatus ( in	short iDepthOfFieldStatus);
+
+/**
+ * Returns or sets the depth of field radius of confusion.
+ * <br>
+ * The radius of confusion ranges from <code>1.0</code> to <code>10.0</code>%.
+ */
+#pragma PROPERTY DepthOfFieldRadius
+  HRESULT  get_DepthOfFieldRadius ( out /*IDLRETVAL*/ double oDepthOfFieldRadius);
+  HRESULT  put_DepthOfFieldRadius ( in	double iDepthOfFieldRadius);
+
+/**
+ * Returns or sets the glow status of shooting. 
+ * This status defines if the glow effect is activated or not.
+ * <br>
+ * The glow status can be:
+ *   <li> 1: Glow is active </li>
+ *   <li> 0: Glow is deactivated </li>
+ */
+#pragma PROPERTY GlowStatus
+  HRESULT  get_GlowStatus ( out /*IDLRETVAL*/ short oGlowStatus);
+  HRESULT  put_GlowStatus ( in	short iGlowStatus);
+
+/**
+ * Returns or sets the glow color threshold.
+ * <br>
+ * The color threshold ranges from <code>0.5</code> to <code>1.5</code>%.
+ */
+#pragma PROPERTY GlowThreshold
+  HRESULT  get_GlowThreshold ( out /*IDLRETVAL*/ double oGlowThreshold);
+  HRESULT  put_GlowThreshold ( in	double iGlowThreshold);
+
+/**
+ * Returns or sets the glow filter size in percentage of image size.
+ * <br>
+ * The filter size ranges from <code>0.1</code> to <code>1.0</code>%.
+ */
+#pragma PROPERTY GlowSize
+  HRESULT  get_GlowSize ( out /*IDLRETVAL*/ double oGlowSize);
+  HRESULT  put_GlowSize ( in	double iGlowSize);
+
+/**
+ * Returns or sets the glow intensity factor.
+ * <br>
+ * The glow intensity factor ranges from <code>1.0</code> to <code>10.0</code>%.
+ */
+#pragma PROPERTY GlowIntensity
+  HRESULT  get_GlowIntensity ( out /*IDLRETVAL*/ double oGlowIntensity);
+  HRESULT  put_GlowIntensity ( in	double iGlowIntensity);
+
+/**
+ * Returns or sets the glow flare factor.
+ * <br>
+ * The flare factor ranges from <code>0.0</code> to <code>1.0</code>%.
+ */
+#pragma PROPERTY GlowFlareFactor
+  HRESULT  get_GlowFlareFactor ( out /*IDLRETVAL*/ double oGlowFlareFactor);
+  HRESULT  put_GlowFlareFactor ( in	double iGlowFlareFactor);
+
+/**
+ * Returns or sets the glow flare diffusion.
+ * <br>
+ * The flare diffusion value ranges from <code>0.0</code> to <code>1.0</code>%.
+ */
+#pragma PROPERTY GlowFlareDiffusion
+  HRESULT  get_GlowFlareDiffusion ( out /*IDLRETVAL*/ double oGlowFlareDiffusion);
+  HRESULT  put_GlowFlareDiffusion ( in	double iGlowFlareDiffusion);
+
+/**
+ * Returns or sets the glow radial lines size.
+ * <br>
+ * The lines size ranges from <code>0.0</code> (none) to <code>1.0</code> (max length).
+ */
+#pragma PROPERTY GlowRadialLineSize
+  HRESULT  get_GlowRadialLineSize ( out /*IDLRETVAL*/ double oGlowRadialLineSize);
+  HRESULT  put_GlowRadialLineSize ( in	double iGlowRadialLineSize);
+
+/**
+ * Returns or sets the glow star effect.
+ * <br>
+ * The effect coefficient ranges from <code>0.0</code> (random star) to <code>1.0</code> (cross).
+ */
+#pragma PROPERTY GlowStarEffect
+  HRESULT  get_GlowStarEffect ( out /*IDLRETVAL*/ double oGlowStarEffect);
+  HRESULT  put_GlowStarEffect ( in	double iGlowStarEffect);
+
+/**
+ * Returns or sets the cartoon status of shooting.
+ * <br> 
+ * This status defines if the cartoon rendering is activated or not.
+ * <br>
+ * The cartoon effect status can be:
+ *   <li> 1: Cartoon status is active </li>
+ *   <li> 0: Cartoon status is deactivated </li>
+ */
+#pragma PROPERTY CartoonStatus
+  HRESULT  get_CartoonStatus ( out /*IDLRETVAL*/ short oCartoonStatus);
+  HRESULT  put_CartoonStatus ( in	short iCartoonStatus);
+
+/**
+ * Returns or sets the cartoon contour thickness.
+ * <br>
+ * The line thickness is given as image size percentage.
+ * <br>
+ * The line thickness ranges from <code>0.0</code> (none) to <code>100.0</code>.
+ */
+#pragma PROPERTY CartoonContourThickness
+  HRESULT  get_CartoonContourThickness ( out /*IDLRETVAL*/ double oCartoonContourThickness);
+  HRESULT  put_CartoonContourThickness ( in	double iCartoonContourThickness);
+
+/**
+ * Returns or sets the cartoon shading status of shooting.
+ * <br> 
+ * This status defines if the cartoon shading is activated or not.
+ * <br>
+ * If shading is deactivated, only contours are rendered.
+ * <br>
+ * The cartoon shading effect status can be:
+ *   <li> 1: Shading status is active </li>
+ *   <li> 0: Shading status is deactivated </li>
+ */
+#pragma PROPERTY CartoonShadingStatus
+  HRESULT  get_CartoonShadingStatus ( out /*IDLRETVAL*/ short oCartoonShadingStatus);
+  HRESULT  put_CartoonShadingStatus ( in	short iCartoonShadingStatus);
+
+/**
+ * Returns or sets the cartoon stroke status of shooting. 
+ * <br>
+ * This status defines if the cartoon stroke effect (ink pen effect) is activated or not.
+ * <br>
+ * The stroke status can be:
+ *   <li> 1: Stroke status is active </li>
+ *   <li> 0: Stroke status is deactivated </li>
+ */
+#pragma PROPERTY CartoonStrokeStatus
+  HRESULT  get_CartoonStrokeStatus ( out /*IDLRETVAL*/ short oCartoonStrokeStatus);
+  HRESULT  put_CartoonStrokeStatus ( in	short iCartoonStrokeStatus);
+
+// TO COMPLETE
+//    SetActiveStatus            Set status (TRUE=active FALSE=inactive)
+//    GetActiveStatus            Get status (TRUE=active FALSE=inactive)
+///**
+// * Returns or sets the animation status for shooting calculation.
+// * The animation status can be:
+// *   <li> 1: Animation is active </li>
+// *   <li> 0: Animation is deactivated </li>
+// */
+//#pragma PROPERTY AnimationStatus
+//  HRESULT  get_AnimationStatus ( out /*IDLRETVAL*/ short oAnimationStatus);
+//  HRESULT  put_AnimationStatus ( in	short iAnimationStatus);
+//
+///**
+// * Returns or sets the output file format for animations.
+// * The output format can be:
+// *   <li> 1: Frame sequence </li>
+// *   <li> 2: MPEG </li>
+// *   <li> 3: AVI </li>
+// *   <li> 4: MOV (QuickTime) </li>
+// *   <li> 5: MOVIE (SGI) </li> 
+// */
+//#pragma PROPERTY AnimationOutputFormat
+//  HRESULT  get_AnimationOutputFormat ( out /*IDLRETVAL*/ short oOutputFormat);
+//  HRESULT  put_AnimationOutputFormat ( in	short iOutputFormat);
+//
+///**
+// * Returns or sets the animation frequency for shooting calculation (in frame per seconds)
+// * This value ranges from <code>1</code> to <code>100</code> images per seconds.
+// * N.B. This parameter is useless if no animation is referenced
+// * by the shooting. 
+// */
+//#pragma PROPERTY AnimationFrequency
+//  HRESULT  get_AnimationFrequency ( out /*IDLRETVAL*/ short oAnimationFrequency);
+//  HRESULT  put_AnimationFrequency ( in	short iAnimationFrequency);
+//
+///**
+// * Returns or sets the animation duration (in seconds)
+// * Modification of this parameter will affect the total number of frames of the animation.
+// * N.B. This parameter is useless if no animation is referenced
+// * by the shooting. 
+// */
+//#pragma PROPERTY AnimationDuration
+//  HRESULT  get_AnimationDuration ( out /*IDLRETVAL*/ short oDuration);
+//  HRESULT  put_AnimationDuration ( in	short iDuration);
+//
+///**
+// * Returns or sets the start frame number for animation computation.
+// * This value ranges from <code>1</code> to <code>9999</code>.
+// * N.B. This parameter is useless if no animation is referenced
+// * by the shooting. 
+//*/
+//#pragma PROPERTY AnimationStartFrame
+//  HRESULT  get_AnimationStartFrame ( out /*IDLRETVAL*/ short oStartFrame);
+//  HRESULT  put_AnimationStartFrame ( in	short iStartFrame);
+//
+///**
+// * Returns or sets the end frame number for animation computation.
+// * This value ranges from <code>1</code> to <code>9999</code>.
+// * N.B. This parameter is useless if no animation is referenced
+// * by the shooting. 
+// */
+//#pragma PROPERTY AnimationEndFrame
+//  HRESULT  get_AnimationEndFrame ( out /*IDLRETVAL*/ short oEndFrame);
+//  HRESULT  put_AnimationEndFrame ( in	short iEndFrame);
+//
+///**
+// * Returns or sets the frame step number for animation computation.
+// * This value ranges from <code>1</code> to <code>9999</code>.
+// * N.B. This parameter is useless if no animation is referenced
+// * by the shooting. 
+// */
+//#pragma PROPERTY AnimationFrameStep
+//  HRESULT  get_AnimationFrameStep ( out /*IDLRETVAL*/ short oFrameStep);
+//  HRESULT  put_AnimationFrameStep ( in	short iFrameStep);
+//
+/**
+ * Render the shooting
+ *<br>
+ * Caution: Product involved in rendering calculation should not be closed
+ * before the end of computation. If product is closed, calculation is interrupted.
+ */
+  HRESULT  Render ();
+
+};
+
+// Interface Name : CATIARenderingShooting
+#pragma ID CATIARenderingShooting "DCE:a51f06a0-999a-11d6-805e0030f113d1bf"
+#pragma DUAL CATIARenderingShooting
+ 
+// VB Object Name : RenderingShooting
+#pragma ID RenderingShooting "DCE:ae3ded20-999a-11d6-805e0030f113d1bf"
+#pragma ALIAS CATIARenderingShooting RenderingShooting
+
+#endif
+// CATIARenderingShooting_IDL
+
+
+
+
+
+
+

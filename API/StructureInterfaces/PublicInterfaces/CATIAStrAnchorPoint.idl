@@ -1,0 +1,86 @@
+#ifndef CATIAStrAnchorPoint_IDL
+#define CATIAStrAnchorPoint_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIAStrAnchorPoint
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+//
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 09/12/97
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIAStrAnchorPoint;
+interface CATIADocument;
+interface CATIAParameter;
+
+#include "CATIAStrObject.idl"
+#include "CATSafeArray.idl"
+#include "CATIAStrServices.idl"
+
+  /**
+   * Represents an anchor point. 
+   * An anchor point is a point used to place the section on the support in the 
+   * design model.
+   */
+
+interface CATIAStrAnchorPoint : CATIABase
+{
+
+	/**
+	* Retrieves the coordinates of the anchor point. These coordinates are expressed in the
+    * section local coordinate system. 
+    * @param oCoord
+    *   The 2D coordinates of the anchor point.
+    * @sample
+    * <pre>
+	* Dim coord(1)
+    * anchor_1.<font color="red">GetCoordinates</font>(coord)
+    * </pre>
+	*/
+
+	HRESULT GetCoordinates(inout CATSafeArrayVariant oCoord);
+
+};
+
+// Interface name : CATIAStrAnchorPoint
+#pragma ID CATIAStrAnchorPoint "DCE:88b073a4-9395-11d4-94c300108379318c"
+#pragma DUAL CATIAStrAnchorPoint
+
+#pragma ID StrAnchorPoint "DCE:8906484c-9395-11d4-94c300108379318c"
+#pragma ALIAS CATIAStrAnchorPoint StrAnchorPoint
+
+#endif

@@ -1,0 +1,110 @@
+#ifndef CATIAHybridShapePlaneAngle_IDL
+#define CATIAHybridShapePlaneAngle_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapePlaneAngle:         
+// Exposed interface for HybridShape PlaneAngle
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation
+//=================================================================
+#include "CATIAHybridShapePlane.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+
+/**
+ * Represents the hybrid shape plane angle feature object.
+ * <b>Role</b>: To access the data of the hybrid shape plane angle feature object,
+ * created with an angle to another plane.
+ * This data includes:
+ * <ul>
+ * <li>The rotation axis</li>
+ * <li>The rotation angle</li>
+ * <li>The reference plane </li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapePlaneAngle object.
+ * @see CATIAHybridShapeFactory
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapePlaneAngle : CATIAHybridShapePlane
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+
+/**
+ * Returns or sets the rotation axis.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge or @href CATIARectilinearMonoDimFeatEdge.
+ */ 
+#pragma PROPERTY RevolAxis
+ HRESULT get_RevolAxis ( out /*IDLRETVAL*/ CATIAReference   oAxis);
+ HRESULT put_RevolAxis ( in             CATIAReference   iAxis);
+
+/**
+ * Returns or sets the reference plane.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAPlanarFace.
+ */ 
+#pragma PROPERTY Plane
+ HRESULT get_Plane ( out /*IDLRETVAL*/  CATIAReference   oPlane);
+ HRESULT put_Plane ( in           CATIAReference   iPlane);
+
+/**
+ * Returns the rotation angle.
+ */ 
+#pragma PROPERTY Angle
+ HRESULT get_Angle ( out /*IDLRETVAL*/  CATIAAngle   oAngle);
+
+/**
+ * Returns or sets the plane orientation.
+ * <br><b>Role</b>: The orientation allows you to invert the plane from the reference plane.
+ * <br><b>Legal values</b>:
+ * the orientation is 1 if the plane orientation is not inverted, and -1 otherwise.
+ */ 
+#pragma PROPERTY Orientation
+ HRESULT get_Orientation (out /*IDLRETVAL*/  long       oOrientation);
+ HRESULT put_Orientation (in       long       iOrientation);
+
+/**
+ * Gets or sets the projection mode status.
+ *      ProjectionMode = TRUE           : Rotation axis will be projected on to reference plane.
+ *                     = FALSE(default) : Rotation axis will be as it is.
+ * This example retrieves in <code>ProjMode</code> the projection mode status 
+ * for the <code>PlaneAngle</code> hybrid shape feature.
+ * <pre>
+ * Dim ProjMode As boolean
+ * ProjMode = PlaneAngle.<font color="red">ProjectionMode</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY ProjectionMode
+ HRESULT get_ProjectionMode (out /*IDLRETVAL*/ boolean oProjectionMode);
+ HRESULT put_ProjectionMode (in         boolean iProjectionMode);
+
+};
+
+// Interface name : CATIAHybridShapePlaneAngle
+#pragma ID CATIAHybridShapePlaneAngle "DCE:89d7661a-9109-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapePlaneAngle
+
+// VB object name : HybridShapePlaneAngle (Id used in Visual Basic)
+#pragma ID HybridShapePlaneAngle "DCE:89d76918-5a4c-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapePlaneAngle HybridShapePlaneAngle
+
+#endif

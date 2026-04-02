@@ -1,0 +1,22 @@
+#BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+#if defined (CATIAV5R23) || defined (CATIAR213)
+
+BUILT_OBJECT_TYPE = NONE
+OS = COMMON
+LINK_WITH = 
+
+#else
+
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+BUILD=NO
+
+#endif
+
+#
+OS = Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+#

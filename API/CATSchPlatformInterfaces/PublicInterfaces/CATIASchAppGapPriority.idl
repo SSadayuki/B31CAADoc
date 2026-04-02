@@ -1,0 +1,57 @@
+#ifndef CATIASchAppGapPriority_IDL 
+#define CATIASchAppGapPriority_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchRoute;
+    
+#include "CatSchIDLGapPriority.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the graphical representation of a route.
+  */
+
+interface CATIASchAppGapPriority : CATIABase
+{
+  /**
+  * Identify which of 2 intersecting routes should be gapped.
+  * @param iTheOtherRoute
+  *   The route intersecting This route.
+  * @param oPriority
+  *   Gap Priority.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppGapPriority
+  * Dim objArg1 As SchRoute
+  *
+  *  ...
+  * objThisIntf.<font color="red">AppChooseGapPriority</font>objArg1,CatSchIDLGapPriority_Enum
+  * </pre>
+  *    
+  */
+  HRESULT AppChooseGapPriority ( 
+    in CATIASchRoute iTheOtherRoute, 
+    inout CatSchIDLGapPriority oPriority );
+    
+};
+    
+// Interface name : CATIASchAppGapPriority
+#pragma ID CATIASchAppGapPriority "DCE:37875beb-df78-4e54-83ba73d6fcab6752"
+#pragma DUAL CATIASchAppGapPriority
+    
+// VB object name : SchAppGapPriority
+#pragma ID SchAppGapPriority "DCE:aa65ea89-561f-4898-85d76158f0f783ee"
+#pragma ALIAS CATIASchAppGapPriority SchAppGapPriority
+    
+#endif 
+    

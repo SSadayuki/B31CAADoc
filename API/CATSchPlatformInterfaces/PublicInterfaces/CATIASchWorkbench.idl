@@ -1,0 +1,54 @@
+#ifndef CATIASchWorkbench_IDL
+#define CATIASchWorkbench_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+interface CATBaseDispatch;
+
+#include "CATIAWorkbench.idl"
+
+/**
+ * Represents a workbench on a schematic document.
+ * <b>Role</b>:A workbench is a set of commands that can be used to create, modify
+ * and edit the objects making up the document.
+ * @see CATIADocument
+ */
+interface CATIASchWorkbench : CATIAWorkbench
+{
+ /**
+  * This method returns an interface handle to an object.
+  * @param iInterfaceName
+  *   interface name to search for ("CATIAxxxx")
+  * @param iObject
+  *   The object to search for the required interface.
+  * @param oInterfaceFound
+  *   interface handle found
+  * @sample
+  * The following example retrieves a <code>CATIAInterfaceNameToFind</code> handle to the
+  * <code>CATIAxxxx_iObject</code> in <code>interfaceFound</code> using the Schematics workbench object
+  * <code>schWorkbench</code>.
+  * <pre>
+  * Dim interfaceFound As AnyObject
+  * Set interfaceFound = CATIASchWorkbench.<font color="red">FindInterface</font>("InterfaceNameToFind",CATIAProduct_iObject)
+  * </pre>
+  */
+  HRESULT FindInterface (in CATBSTR iInterfaceName, in CATBaseDispatch iObject, out /*IDLRETVAL*/ CATBaseDispatch oInterfaceFound);
+
+};
+
+// Interface name : CATIASchWorkbench
+#pragma ID CATIASchWorkbench "DCE:03657d60-c8ac-11d4-8e3e00d0b7acbb09"
+#pragma DUAL CATIASchWorkbench
+
+// VB object name : SchWorkbench
+#pragma ID SchWorkbench "DCE:162e647a-c8ac-11d4-8e3e00d0b7acbb09"
+#pragma ALIAS CATIASchWorkbench SchWorkbench
+
+#endif

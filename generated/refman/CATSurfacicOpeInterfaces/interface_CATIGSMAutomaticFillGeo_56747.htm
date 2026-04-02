@@ -1,0 +1,392 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATSurfacicOpeInterfaces CATIGSMAutomaticFillGeo Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATSurfacicOpeInterfaces.htm" href="../CATSurfacicOpeInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATSurfacicOpeInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIGSMAutomaticFillGeo"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>CATSurfacicOpeInterfaces Framework:  CATIGSMAutomaticFillGeo Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIGSMAutomaticFillGeo_56747','CATIGSMAutomaticFillGeo','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIGSMAutomaticFillGeo</b>
+</p>
+<p>
+<b><i> Class defining the topological operator that fills  a space defined by a set of wires.</i></b><br>
+
+ <br> The wires must define a closed area and be connected.
+ Continuity criteria can be precised: G0, G1 if the supporting surfaces of the wire
+ are given, G0 otherwise. The supporting surfaces must be coherent to allow the operator to
+ compute a G1 continuity.
+ If the given continuity constraints are not compatible, the fill result could not
+ not satisfy the continuity contraints. 
+ if the given continuity constraints define a too scattered set of normals, the shape of
+ fill result could not be correct.It is also possible to have no result.  
+ 
+ <br>The CATIGSMAutomaticFillGeoFill operator creates the resulting filling skin body
+ separately from the inputs: the wires of the input bodies are not used to define the topology
+ of the resulting fill body.  
+<ul>
+ <li>A CATIGSMAutomaticFillGeoFill operator is created with the <tt>CreateTopologicalAutomaticFill</tt> global function.
+ It must be directly deleted with the usual C++ <tt>delete</tt> operator. It is is not streamable. 
+<li>Options can be precised with the <tt>SetXxx</tt> methods, before
+ asking for the computation with the <tt>Run</tt> method 
+<li>The result is accessed with the <tt>GetResult</tt> method. If you do not want 
+ to keep the resulting body, use the <script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory.
+ <li>The journal corresponding to the fill operation is not yet implemented.
+</ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AddInnerWires(CATListPtrCATBody const&amp;,CATListPtrCATBody const&amp;,CATListOfInt&amp;)"><b>AddInnerWires</b></a>(CATListPtrCATBody const&amp;,CATListPtrCATBody const&amp;,CATListOfInt&amp;)
+</td><td id='tdright'>   Sets one inner wire.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddPassingCurve(CATBody*,double)"><b>AddPassingCurve</b></a>(CATBody*,double)
+</td><td id='tdright'>   Sets a  passing curve.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddPassingPoint(CATBody*,double)"><b>AddPassingPoint</b></a>(CATBody*,double)
+</td><td id='tdright'>   Sets a  passing point.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetFillType()"><b>GetFillType</b></a>()
+</td><td id='tdright'>  Returns the fill type.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetG0MaxAccuracy()"><b>GetG0MaxAccuracy</b></a>()
+</td><td id='tdright'>  Returns  the maximum admissible continuity gap on the result.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetG0MaxDeviation()"><b>GetG0MaxDeviation</b></a>()
+</td><td id='tdright'>  Returns the maximum continuity gap on the result.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetG0MaxDeviation(CATEdge*,CATMathPoint*)"><b>GetG0MaxDeviation</b></a>(CATEdge*,CATMathPoint*)
+</td><td id='tdright'>  Returns the maximum continuity gap regards to a particular edge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetG1MaxDeviation()"><b>GetG1MaxDeviation</b></a>()
+</td><td id='tdright'>  Returns the maximum  tangency gap (in radians) on the result.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetG1MaxDeviation(CATEdge*,CATMathPoint*)"><b>GetG1MaxDeviation</b></a>(CATEdge*,CATMathPoint*)
+</td><td id='tdright'>  Returns the maximum  tangency gap (in radians) regards to a particular edge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResult()"><b>GetResult</b></a>()
+</td><td id='tdright'>  Returns the result of <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#OrientationByFirstEdge()"><b>OrientationByFirstEdge</b></a>()
+</td><td id='tdright'>  Defines the orientation of the fill face.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> operator (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFlatFaceMode(CATLONG32)"><b>SetFlatFaceMode</b></a>(CATLONG32)
+</td><td id='tdright'>  Activates the flat face mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetGapTolerance(double)"><b>SetGapTolerance</b></a>(double)
+</td><td id='tdright'>  Sets the tolerance maximum.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPassingCurves(CATListPtrCATBody const&amp;)"><b>SetPassingCurves</b></a>(CATListPtrCATBody const&amp;)
+</td><td id='tdright'>   Sets a list of passing curves.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPassingPoints(CATListPtrCATBody const&amp;)"><b>SetPassingPoints</b></a>(CATListPtrCATBody const&amp;)
+</td><td id='tdright'>   Sets a list of passing points.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTransitionContinuity(CATLONG32,CATLONG32)"><b>SetTransitionContinuity</b></a>(CATLONG32,CATLONG32)
+</td><td id='tdright'>  Defines the continuity criteria to take into account for a given wire (<tt>ADVANCED mode</tt>).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#UsingCommonSupport()"><b>UsingCommonSupport</b></a>()
+</td><td id='tdright'>   Using common support of input wire if exist.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+<nav id = 'idxnav'> <table class = 'fill' id='idxtab' ><tbody>					<tr><th colspan = '2'>Enumerated Type Index</th></tr> 
+ <tr><td  id='tdleft'> 
+    <a href="#CATGSMAutomaticFillGeoType"><b>CATGSMAutomaticFillGeoType</b></a>
+</td><td id='tdrigth'>   Types for automatic fill.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AddInnerWires"></a><a id="AddInnerWires(CATListPtrCATBody const&amp;,CATListPtrCATBody const&amp;,CATListOfInt&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AddInnerWires</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListPtrCATBody const','CATListPtrCATBody const&amp;')</script> <span class='param'>iListOfWires</span>,<script type="text/javascript"> activateLink('CATListPtrCATBody const','CATListPtrCATBody const&amp;')</script> <span class='param'>iListOfSupports</span>,<script type="text/javascript"> activateLink('CATListOfInt','CATListOfInt&amp;')</script> <span class='param'>iListOfInnerTransitionContinuity</span>)</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Sets one inner wire. An inner wire is an inner boundary of the fill result. 
+ <br>To set N inner wires,the method AddInnerWires must be called N times. 
+ 
+<dl  class='desclist'>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddPassingCurve"></a><a id="AddPassingCurve(CATBody*,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AddPassingCurve</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iWire</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iTolerance</span><span class='param'>=0.0</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Sets a  passing curve. The resulting fill surface must pass by this passing curve.
+ Note: The resulting fill surface must pass by this passing curve regarding a tolerance value.   
+ <br> but : 
+ <br> - the passing curve does not belong to the resulting topology. 
+ <br> - In particular a passing curve is not a boundary of the fill surface.  
+ 
+<dl  class='desclist'>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddPassingPoint"></a><a id="AddPassingPoint(CATBody*,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AddPassingPoint</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iVertex</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iTolerance</span><span class='param'>=0.0 </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Sets a  passing point. 
+ Note: The fill result must pass through this point regarding a tolerance value.   
+ 
+<dl  class='desclist'>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetFillType"></a><a id="GetFillType()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType','CATIGSMAutomaticFillGeo::CATGSMAutomaticFillGeoType')</script>  <span class='objname'>GetFillType</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the fill type.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <br> Analytic :
+    The edges of the domain to fill are isoparametric  curves of the final surfaces.
+    The numberof generated faces is depending on the number of wires.
+	Best practices : Use it for simple domain to fill, as rectangular area.
+    <br>Useful in automatic mode to know which solution was chosen.
+ <br>PowerFill :  
+    The aera is filled with a single surface.
+    This allows you to manage wires which describe a complex topology
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetG0MaxAccuracy"></a><a id="GetG0MaxAccuracy()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('double','double')</script>  <span class='objname'>GetG0MaxAccuracy</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns  the maximum admissible continuity gap on the result.
+ <br>This value is computed by taking into account some incompatibilities in the input model 
+ Hence, it can be larger than the factory resolution.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetG0MaxDeviation"></a><a id="GetG0MaxDeviation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('double','double')</script>  <span class='objname'>GetG0MaxDeviation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum continuity gap on the result.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetG0MaxDeviation"></a><a id="GetG0MaxDeviation(CATEdge*,CATMathPoint*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('double','double')</script>  <span class='objname'>GetG0MaxDeviation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATEdge','CATEdge*')</script> <span class='param'>iEdge</span>,<script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint*')</script> <span class='param'>ioMaxPoint</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum continuity gap regards to a particular edge. 
+ <br>If ioMaxPoint is not null, then it will be filled with the coordinates
+ where maximum has been reached.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetG1MaxDeviation"></a><a id="GetG1MaxDeviation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATAngle','CATAngle')</script>  <span class='objname'>GetG1MaxDeviation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum  tangency gap (in radians) on the result.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetG1MaxDeviation"></a><a id="GetG1MaxDeviation(CATEdge*,CATMathPoint*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATAngle','CATAngle')</script>  <span class='objname'>GetG1MaxDeviation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATEdge','CATEdge*')</script> <span class='param'>iEdge</span>,<script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint*')</script> <span class='param'>ioMaxPoint</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum  tangency gap (in radians) regards to a particular edge.
+ <br>If ioMaxPoint is not null, then it will be filled with the coordinates
+ where maximum has been reached.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResult"></a><a id="GetResult()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody *')</script>  <span class='objname'>GetResult</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the result of <tt>this</tt> operator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the created body. You must delete it with the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script>  method if you do not want to keep it. Note: in case of multiple <tt>Run</tt>s, the operator
+ deletes the intermediate bodies.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="OrientationByFirstEdge"></a><a id="OrientationByFirstEdge()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>OrientationByFirstEdge</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the orientation of the fill face. 
+ <br>The fill face is oriented according to the orientation of the first
+ edge in the first wire.
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> operator (<tt>ADVANCED</tt> mode).
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFlatFaceMode"></a><a id="SetFlatFaceMode(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetFlatFaceMode</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iMode</span><span class='param'>= 1</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Activates the flat face mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd> The flat mode.
+ <br><b>Legal values</b>: 
+ <dl><dt>1</dt><dd> to activate the flat face mode: in this case, it creates a planar face if the hole
+ to fill is flat.
+ <dt>0</dt><dd> to deactivate the flat face mode.
+</dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetGapTolerance"></a><a id="SetGapTolerance(double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetGapTolerance</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iTolerance</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the tolerance maximum. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'>  iTolerance</span></dt>
+   <dd> the required maximum  tolerance on the result surface
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPassingCurves"></a><a id="SetPassingCurves(CATListPtrCATBody const&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetPassingCurves</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListPtrCATBody const','CATListPtrCATBody const&amp;')</script> <span class='param'>iListOfWires</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Sets a list of passing curves. The resulting fill surface must pass by the passing curves,
+ but the passing curves do not belong to the resulting topology. In particular a passing curve
+ is not a boundary of the fill surface.  
+ 
+<dl  class='desclist'>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPassingPoints"></a><a id="SetPassingPoints(CATListPtrCATBody const&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetPassingPoints</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListPtrCATBody const','CATListPtrCATBody const&amp;')</script> <span class='param'>iListOfVertices</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Sets a list of passing points. The fill result must pass  through this points.   
+ 
+<dl  class='desclist'>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTransitionContinuity"></a><a id="SetTransitionContinuity(CATLONG32,CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetTransitionContinuity</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iWhichWire</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iTransitionContinuity</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the continuity criteria to take into account for a given wire (<tt>ADVANCED mode</tt>).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWhichWire</span></dt>
+   <dd> The rank (beginning at 1) of the input wire.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTransitionContinuity</span></dt>
+   <dd> The continuity criteria
+ <br><b>Legal values</b>: <tt>0</tt> for G0 continuity (default mode), <tt>1</tt> for G1 continuity.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="UsingCommonSupport"></a><a id="UsingCommonSupport()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>UsingCommonSupport</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Using common support of input wire if exist. 
+ <br> If  all the wires are lying on the same support ,  this support is used  to compute the filled surface.  
+  Therefore, if  there is no passing point ,  no  inner curve  and no passing curve, 
+  the filled surface  is a piece of this support.
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+ <h2  class='title2'>Enumerated Types</h2> <br><dl>
+<dt class='dt1'><a id="CATGSMAutomaticFillGeoType"/>CATGSMAutomaticFillGeoType</dt>
+  <dd class='dd1'>
+
+enum <b>CATGSMAutomaticFillGeoType</b> {<pre class='light'>
+  Auto,
+  Analytic,
+  PowerFill
+</pre>}
+  Types for automatic fill. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> Auto</span></dt>
+   <dd>   use as input of the Automatic fill, it gives the operator free to define best solution 
+ 
+ </ dd>
+    <dt><span class='paramitem'> Analytic</span></dt>
+   <dd>   will generate an Analytic fill in any case if used as Input 
+  Return information on type of fill use by operator if the  resulting fill is analytic 
+ 
+ </ dd>
+    <dt><span class='paramitem'> PowerFill</span></dt>
+   <dd>   will generate an Power Fill  any case if used as Input  
+  Return information on type of fill use by operator if the  resulting fill is powerFill
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIGSMAutomaticFillGeo.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATSoiInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

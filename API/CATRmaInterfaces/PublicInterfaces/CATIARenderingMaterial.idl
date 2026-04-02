@@ -1,0 +1,662 @@
+#ifndef CATIARenderingMaterial_IDL
+#define CATIARenderingMaterial_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIARenderingMaterial.idl
+// Automation interface for the RenderingMaterial object 
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun02 Creation					A. Schmitt
+// Avr03 Update						BMB
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * Represents an RenderingMaterial object.
+ * This object is used to manage the Rendering properties of a material.
+ */
+
+interface CATIARenderingMaterial : CATIABase 
+{
+
+//-------------------------------------------------------------------
+//  A/ Lighting properties
+// ------------------------------------------------------------------
+
+/**
+ * Returns or sets the mapping type of a material.
+ * <ul> Possible types are:
+ *   <li>  0: Planar mapping </li>
+ *   <li>  1: Spherical mapping </li>
+ *   <li>  2: Cylindrical mapping </li>
+ *   <li>  3: Cubical mapping </li>
+ *   <li>  4: Auto mapping </li>
+ *   <li>  5: Manual mapping </li>
+ * </ul>
+ */
+#pragma PROPERTY MappingType
+  HRESULT  get_MappingType ( out /*IDLRETVAL*/ short oMappingType);
+  HRESULT  put_MappingType ( in short iMappingType);
+
+/**
+ * Returns or sets the preview size of a material.
+ * Preview size value is 0.1mm minimum.
+ */
+#pragma PROPERTY PreviewSize
+  HRESULT  get_PreviewSize ( out /*IDLRETVAL*/ double oMappingType);
+  HRESULT  put_PreviewSize ( in double iMappingType);
+
+/**
+ * Returns or sets the adaptive coeffcient of a material.
+ * Adaptive coeffcient value is between 1 an 8.
+ */
+#pragma PROPERTY AdaptiveCoeff
+  HRESULT  get_AdaptiveCoeff ( out /*IDLRETVAL*/ short oMappingType);
+  HRESULT  put_AdaptiveCoeff ( in short iMappingType);
+
+/**
+ * Returns or sets the ambient coefficient of a material.
+ * Ambient coefficient value is between 0 to 1.
+ */
+#pragma PROPERTY AmbientCoefficient
+  HRESULT  get_AmbientCoefficient ( out /*IDLRETVAL*/ double oAmbientCoefficient);
+  HRESULT  put_AmbientCoefficient ( in	double iAmbientCoefficient);
+
+/**
+ * Returns or sets the diffuse coefficient of a material.
+ * Diffuse coefficient value is between 0 to 1.
+ */
+#pragma PROPERTY DiffuseCoefficient
+  HRESULT  get_DiffuseCoefficient ( out /*IDLRETVAL*/ double oDiffuseCoefficient);
+  HRESULT  put_DiffuseCoefficient ( in	double iDiffuseCoefficient);
+
+/**
+ * Returns or sets the specular coefficient of a material.
+ * Specular coefficient value is between 0 to 1.
+ */
+#pragma PROPERTY SpecularCoefficient
+  HRESULT  get_SpecularCoefficient ( out /*IDLRETVAL*/ double oSpecularCoefficient);
+  HRESULT  put_SpecularCoefficient ( in double iSpecularCoefficient);
+
+/**
+ * Returns or sets the specular exponent of a material.
+ * Specular exponent value is between 0 to 1.
+ */
+#pragma PROPERTY SpecularExponent
+  HRESULT  get_SpecularExponent ( out /*IDLRETVAL*/ double oSpecularExponent);
+  HRESULT  put_SpecularExponent ( in double iSpecularExponent);
+
+/**
+ * Returns or sets the transparency coefficient of a material.
+ * Transparency coefficient value is between 0 to 1.
+ */
+#pragma PROPERTY TransparencyCoefficient
+  HRESULT  get_TransparencyCoefficient ( out /*IDLRETVAL*/ double oTransparencyCoefficient);
+  HRESULT  put_TransparencyCoefficient ( in	double iTransparencyCoefficient);
+
+/**
+ * Returns or sets the refraction coefficient of a material.
+ * Refraction coefficient value is between 1 to 2.
+ */
+#pragma PROPERTY RefractionCoefficient
+  HRESULT  get_RefractionCoefficient ( out /*IDLRETVAL*/ double oRefractionCoefficient);
+  HRESULT  put_RefractionCoefficient ( in double iRefractionCoefficient);
+
+/**
+ * Returns or sets the reflectivity coefficient of a material.
+ * Reflectivity coefficient value is between 0 to 1.
+ */
+#pragma PROPERTY ReflectivityCoefficient
+  HRESULT  get_ReflectivityCoefficient ( out /*IDLRETVAL*/ double oReflectivityCoefficient);
+  HRESULT  put_ReflectivityCoefficient ( in double iReflectivityCoefficient);
+
+/**
+ * Returns or sets the environment image pathname of a material.
+ */
+#pragma PROPERTY EnvironmentImage
+  HRESULT  get_EnvironmentImage ( inout /*IDLRETVAL*/ CATBSTR oEnvironmentImage);
+  HRESULT  put_EnvironmentImage ( in CATBSTR iEnvironmentImage);
+
+/**
+ * Returns or sets the non-linear reflection mode of a material.
+ * <ul> Possible reflection mode values are:
+ *   <li>  0: CHROMA reflection mode </li>
+ *   <li>  1: PAINT reflection mode </li>
+ *   <li>  2: MATTE_METAL reflection mode </li>
+ *   <li>  3: BRIGHT_PLASTIC reflection mode </li>
+ *   <li>  4: CUSTOM reflection mode </li>
+ * </ul>
+ */
+#pragma PROPERTY ReflectionMode
+  HRESULT  get_ReflectionMode ( out /*IDLRETVAL*/ short oReflectionMode);
+  HRESULT  put_ReflectionMode ( in short iReflectionMode);
+
+/**
+ * Returns or sets the non-linear reflection height of a material.
+ * Non-linear reflection height value is between 0 to 1.
+ * N.B. Parameter use for CUSTOM reflection mode only.
+ */
+#pragma PROPERTY ReflectionHeight
+  HRESULT  get_ReflectionHeight ( out /*IDLRETVAL*/ double oReflectionHeight);
+  HRESULT  put_ReflectionHeight ( in double iReflectionHeight);
+
+/**
+ * Returns or sets the non-linear reflection length of a material.
+ * Non-linear reflection length value is between 0 to 1.
+ * N.B. Parameter use for CUSTOM reflection mode only.
+ */
+#pragma PROPERTY ReflectionLength
+  HRESULT  get_ReflectionLength ( out /*IDLRETVAL*/ double oReflectionLength);
+  HRESULT  put_ReflectionLength ( in double iReflectionLength);
+
+
+// --------------------------------------
+// B/ Texture properties
+// --------------------------------------
+/**
+ * Returns or sets the texture type of a material.
+ * The possible values for this type can be:
+ * <ul> Possible reflection mode values are:
+ *   <li>  0: NO texture </li>
+ *   <li>  1: IMAGE texture </li>
+ *   <li>  2: MARBLE texture </li>
+ *   <li>  3: VEIN texture </li>
+ *   <li>  4: ALTERNATE VEIN texture </li>
+ *   <li>  5: ROCK texture </li>
+ *   <li>  6: CHESSBOARD texture </li>
+ * </ul>
+ */
+#pragma PROPERTY TextureType
+  HRESULT  get_TextureType ( out /*IDLRETVAL*/ short oTextureType);
+  HRESULT  put_TextureType ( in short iTextureType);
+
+/**
+ * Returns or sets the texture bump.
+ * Image texture bump value is between -10 to 10.
+ */
+#pragma PROPERTY Bump
+  HRESULT  get_Bump ( out /*IDLRETVAL*/ double oBump);
+  HRESULT  put_Bump ( in double iBump);
+ 
+// 
+// B/ 1) Image Texture properties
+//   
+#pragma PROPERTY TextureImage
+/**
+ * Returns or sets the texture image pathname of a material.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+  HRESULT  get_TextureImage ( inout /*IDLRETVAL*/ CATBSTR oTextureImage);
+  HRESULT  put_TextureImage ( in CATBSTR iTextureImage);
+
+/**
+ * Returns or sets the texture flip status along U axis.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY FlipU
+  HRESULT  get_FlipU ( out /*IDLRETVAL*/ boolean oFlipU);
+  HRESULT  put_FlipU ( in boolean iFlipU);
+
+/**
+ * Returns or sets the texture flip status along V axis.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY FlipV
+  HRESULT  get_FlipV ( out /*IDLRETVAL*/ boolean oFlipV );
+  HRESULT  put_FlipV ( in boolean iFlipV);
+
+/**
+ * Returns or sets the texture repeat status along U axis.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY RepeatU
+  HRESULT  get_RepeatU ( out /*IDLRETVAL*/ boolean oRepeatU);
+  HRESULT  put_RepeatU ( in boolean iRepeatU);
+
+/**
+ * Returns or sets the texture repeat status along V axis.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY RepeatV
+  HRESULT  get_RepeatV ( out /*IDLRETVAL*/ boolean oRepeatV );
+  HRESULT  put_RepeatV ( in boolean iRepeatV);
+
+/**
+ * Returns or sets the texture scale along U axis.
+ * U scale value is between 0 to 100.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY ScaleU
+  HRESULT  get_ScaleU ( out /*IDLRETVAL*/ double oScaleU);
+  HRESULT  put_ScaleU ( in double iScaleU);
+
+/**
+ * Returns or sets the texture scale along V axis.
+ * V scale value is between 0 to 100.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY ScaleV
+  HRESULT  get_ScaleV ( out /*IDLRETVAL*/ double oScaleV);
+  HRESULT  put_ScaleV ( in double iScaleV);
+
+/**
+ * Returns or sets the texture position along U axis.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY PositionU
+  HRESULT  get_PositionU ( out /*IDLRETVAL*/ double oPositionU);
+  HRESULT  put_PositionU ( in double iPositionU);
+
+/**
+ * Returns or sets the texture position along V axis.
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY PositionV
+  HRESULT  get_PositionV ( out /*IDLRETVAL*/ double oPositionV);
+  HRESULT  put_PositionV ( in double iPositionV);
+
+/**
+ * Returns or sets the texture orientation.
+ * Orientation value should be between -360 to +360 degrees
+ * N.B. Parameter use for IMAGE texture type only
+ */
+#pragma PROPERTY Orientation
+  HRESULT  get_Orientation ( out /*IDLRETVAL*/ double oOrientation);
+  HRESULT  put_Orientation ( in double iOrientation);
+
+// 
+// B/ 2) 3D Texture properties
+//
+/**
+ * Returns or sets the 3d texture color number.
+ * Possible color numbers are:
+ *  - From 2 to 5 for marble, vein and chessboard texture types
+ *  - From 1 to 5 for alternate vein texture types
+ * N.B. Parameter useless for ROCK textures (color number is fixed) and IMAGE texture
+ */
+#pragma PROPERTY ColorNumber
+  HRESULT  get_ColorNumber ( out /*IDLRETVAL*/ short oColorNumber);
+  HRESULT  put_ColorNumber ( in short iColorNumber);
+
+/**
+ * Returns or sets the 3d texture complexity.
+ * Complexity value is between 0 to 10.
+ * N.B. Parameter use for MARBLE and ROCK texture types only.
+ */
+#pragma PROPERTY TextureComplexity
+  HRESULT  get_TextureComplexity ( out /*IDLRETVAL*/ short oTextureComplexity);
+  HRESULT  put_TextureComplexity ( in short iTextureComplexity);
+
+/**
+ * Returns or sets the 3d texture amplitude coefficient.
+ * Amplitude value is between 0 to 1.
+ * N.B. Parameter use for MARBLE and ROCK texture type only.
+ */
+#pragma PROPERTY TextureAmplitude
+  HRESULT  get_TextureAmplitude ( out /*IDLRETVAL*/ double oTextureAmplitude);
+  HRESULT  put_TextureAmplitude ( in double iTextureAmplitude);
+
+/**
+ * Returns or sets the 3d texture vein amplitude coefficient.
+ * Amplitude value is between 0 to 10.
+ * N.B. Parameter use for VEIN and ALTERNATE VEIN texture types only.
+ */
+#pragma PROPERTY TextureVeinAmplitude
+  HRESULT  get_TextureVeinAmplitude ( out /*IDLRETVAL*/ double oTextureVeinAmplitude);
+  HRESULT  put_TextureVeinAmplitude ( in double iTextureVeinAmplitude);
+
+/**
+ * Returns or sets the 3d texture perturbation coefficient.
+ * Perturbation value is between 1 to 10.
+ * N.B. Parameter use for VEIN, ALTERNATE VEIN and ROCK texture types only.
+ */
+#pragma PROPERTY TexturePerturbation
+  HRESULT  get_TexturePerturbation ( out /*IDLRETVAL*/ double oTexturePerturbation);
+  HRESULT  put_TexturePerturbation ( in double iTexturePerturbation);
+
+/**
+ * Returns or sets the 3d texture gain coefficient.
+ * Gain value is between 0 to 2.
+ * N.B. Parameter use for ROCK texture type only.
+ */
+#pragma PROPERTY TextureGain
+  HRESULT  get_TextureGain ( out /*IDLRETVAL*/ double oTextureGain);
+  HRESULT  put_TextureGain ( in double iTextureGain);
+
+/**
+ * Returns or sets the 3d texture turbulence status.
+ * N.B. Parameter use for ROCK texture type only.
+ */
+#pragma PROPERTY TextureTurbulence
+  HRESULT  get_TextureTurbulence ( out /*IDLRETVAL*/ boolean oTextureTurbulence);
+  HRESULT  put_TextureTurbulence ( in boolean iTextureTurbulence);
+
+/**
+ * Returns or sets the width of the tile of a chessboard texture.
+ * Width value is between 0 to 100.
+ * N.B. Parameter use for CHESSBOARD texture type only.
+ */
+#pragma PROPERTY ChessboardTileWidth
+  HRESULT  get_ChessboardTileWidth ( out /*IDLRETVAL*/ double oChessboardTileWidth);
+  HRESULT  put_ChessboardTileWidth ( in double iChessboardTileWidth);
+
+/**
+ * Returns or sets the height of the tile of a chessboard texture.
+ * Height value is between 0 to 100.
+ * N.B. Parameter use for CHESSBOARD texture type only.
+ */
+#pragma PROPERTY ChessboardTileHeight
+  HRESULT  get_ChessboardTileHeight ( out /*IDLRETVAL*/ double oChessboardTileHeight);
+  HRESULT  put_ChessboardTileHeight ( in double iChessboardTileHeight);
+
+/**
+ * Returns or sets the offset coefficient for a chessboard texture.
+ * It indicates the offset between each line of the chessboard texture.
+ * Offset value is between 0 to 0.5.
+ * N.B. Parameter use for CHESSBOARD texture type only.
+ */
+#pragma PROPERTY ChessboardOffset
+  HRESULT  get_ChessboardOffset ( out /*IDLRETVAL*/ double oChessboardOffset);
+  HRESULT  put_ChessboardOffset ( in double iChessboardOffset);
+
+/**
+ * Returns or sets the width of the join of a chessboard texture.
+ * Width value is between 0 to 100.
+ * N.B. Parameter use for CHESSBOARD texture type only.
+ */
+#pragma PROPERTY ChessboardJointWidth
+  HRESULT  get_ChessboardJointWidth ( out /*IDLRETVAL*/ double oChessboardJointWidth);
+  HRESULT  put_ChessboardJointWidth ( in double iChessboardJointWidth);
+
+/**
+ * Returns or sets the height of the join of a chessboard texture.
+ * Height value is between 0 to 100.
+ * N.B. Parameter use for CHESSBOARD texture type only.
+ */
+#pragma PROPERTY ChessboardJointHeight
+  HRESULT  get_ChessboardJointHeight ( out /*IDLRETVAL*/ double oChessboardJointHeight);
+  HRESULT  put_ChessboardJointHeight ( in double iChessboardJointHeight);
+
+  //
+  //		================
+  //		==   METHODS  ==
+  //		================
+
+/**
+ * Returns the ambient color of a material.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @return the color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  GetAmbientColor ( inout CATSafeArrayVariant oAmbientColor);
+
+/**
+ * Sets the ambient color of a material.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @param oAmbientColor
+ *   The color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  PutAmbientColor ( in	CATSafeArrayVariant	iAmbientColor);
+
+/**
+ * Returns the diffuse color of a material.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @return the color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  GetDiffuseColor ( inout CATSafeArrayVariant oDiffuseColor);
+
+/**
+ * Sets the diffuse color of a material.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @param oDiffuseColor
+ *   The color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  PutDiffuseColor ( in	CATSafeArrayVariant	iDiffuseColor);
+
+/**
+ * Returns the specular color of a material.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @return the color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  GetSpecularColor ( inout CATSafeArrayVariant oSpecularColor);
+
+/**
+ * Sets the specular color of a material.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @param oSpecularColor
+ *   The color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  PutSpecularColor ( in CATSafeArrayVariant iSpecularColor);
+
+/**
+ * Returns the transparent color of a material.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @param oTransparencyColor
+ *   The color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  GetTransparencyColor ( inout CATSafeArrayVariant oTransparencyColor);
+
+/**
+ * Sets the transparent color of a material.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @param iTransparencyColor
+ *   The color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  PutTransparencyColor ( in CATSafeArrayVariant  iTransparencyColor);
+
+/**
+ * Returns one color of a 3d texture.
+ * The color to access is identified with its index.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255).
+ * <br>
+ * @param iColorIndex
+ *   The index of the color to access
+ * <br>
+ * @return the color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ * N.B. Parameter useless for image textures.
+ */
+  HRESULT  Get3DTextureColor ( in short iColorIndex, inout CATSafeArrayVariant o3DTextureColor);
+
+/**
+ * Sets one color of a 3d texture.
+ * The color to access is identified with its index.
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @param iColorIndex
+ *   The index of the color to access.
+ * <br>
+ * @param i3DTextureColor
+ *   The color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The r, g, b values ranges from 0 to 255.
+ * <br>
+ *   The array must be previously initialized.
+ * N.B. Parameter useless for image textures.
+ */
+  HRESULT  Put3DTextureColor ( in short iColorIndex, in CATSafeArrayVariant i3DTextureColor);
+
+/**
+ * Returns one color coefficient of a 3d texture.
+ * The color to access is identified with its index.
+ * <br>
+ * @param iColorIndex
+ *   The index of the color to access.
+ * <br>
+ * @return the color coefficient.
+ * <br>
+ *   If the color is enable, the color coefficient value should range from 0 to 1.
+ * <br>
+ *   If color is disable, the color coefficient is equal to -1.
+ * <br>
+ * N.B. Parameter useless for rock, chessboard and image textures.
+ */
+  HRESULT  Get3DTextureColorCoefficient ( in short iColorIndex, out double o3DTextureColorCoefficient);
+
+/**
+ * Sets one color coefficient of a 3d texture.
+ * The color to access is identified with its index.
+ * <br>
+ * @param iColorIndex
+ *   The index of the color to access.
+ * <br>
+ * @param i3DTextureColorCoefficient.
+ *   The color coefficient.
+ * <br>
+ *   If color is enable, the color coefficient value should range from 0 to 1.
+ * <br>
+ *   If color is disable, the color coefficient should be equal to -1.
+ * <br>
+ * N.B. Parameter useless for rock, chessboard and image textures.
+ */
+  HRESULT  Put3DTextureColorCoefficient ( in short iColorIndex, in double i3DTextureColorCoefficient);
+
+/**
+ * Returns the scale of a texture.
+ * The scale is expressed with 3 coefficients (scale along X, Y and Z axis)
+ * The scale values must be &gt; 0 and &le; 100.
+ * N.B. Parameter useless for IMAGE textures. 
+ * (use get_ScaleU, set_ScaleU, get_ScaleV, set_ScaleV methods for IMAGE type)
+ * <br>
+ * @return the scale as a safe array made up of three doubles: scaleX, scaleY, scaleZ.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  Get3DTextureScale (inout CATSafeArrayVariant o3DTextureScale);
+
+/**
+ * Sets the scale of a texture.
+ * The scale is expressed with 3 coefficients (scale along X, Y and Z axis).
+ * The scale values must be &gt; 0 and &le; 100.
+ * N.B. Parameter useless for IMAGE textures 
+ * (use get_ScaleU, set_ScaleU, get_ScaleV, set_ScaleV methods for IMAGE type).
+ * <br>
+ * @param i3DTextureScale
+ *   The scale as a safe array made up of three doubles: scaleX, scaleY, scaleZ.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  Put3DTextureScale (in CATSafeArrayVariant i3DTextureScale);
+
+/**
+ * Returns the position of a texture.
+ * The position is expressed with 3 coefficients (position along X, Y and Z axis).
+ * The position values must be between -100 and 100.
+ * N.B. Parameter useless for IMAGE textures 
+ * (use PositionU, PositionV  methods for IMAGE type).
+ * <br>
+ * @return the position as a safe array made up of three doubles: positionX, positionY, positionZ.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  Get3DTexturePosition (inout CATSafeArrayVariant o3DTexturePosition);
+
+/**
+ * Sets the position of a texture.
+ * The position is expressed with 3 coefficients (position along X, Y and Z axis).
+ * The position values must be between -100 and 100.
+ * N.B. Parameter useless for IMAGE textures 
+ * (use PositionU, PositionV  methods for IMAGE type).
+ * <br>
+ * @param i3DTexturePosition
+ *   The position as a safe array made up of three doubles: positionX, positionY, positionZ.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  Put3DTexturePosition (in CATSafeArrayVariant i3DTexturePosition);
+
+/**
+ * Returns the orientation of a texture.
+ * The orientation is expressed with 3 coefficients (orientation around X, Y and Z axis).
+ * The orientation values must be between -360 and 360 degrees.
+ * N.B. Parameter useless for IMAGE textures 
+ * (use get_Orientation, set_Orientation methods for IMAGE type).
+ * <br>
+ * @return the orientation as a safe array made up of three doubles: rotationX, rotationY, rotationZ.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  Get3DTextureOrientation (inout CATSafeArrayVariant o3DTextureOrientation);
+
+/**
+ * Sets the orientation of a texture.
+ * The orientation is expressed with 3 coefficients (orientation around X, Y and Z axis).
+ * The orientation values must be between -360 and 360 degrees.
+ * N.B. Parameter useless for IMAGE textures 
+ * (use get_Orientation, set_Orientation methods for IMAGE type).
+ * <br>
+ * @param i3DTextureOrientation
+ *   The orientation as a safe array made up of three doubles: rotationX, rotationY, rotationZ.
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  Put3DTextureOrientation (in CATSafeArrayVariant i3DTextureOrientation);
+
+
+};
+// Interface name : CATIARenderingMaterial
+#pragma ID CATIARenderingMaterial "DCE:01ed7170-7161-11d6-80540030f113d1bf"
+#pragma DUAL CATIARenderingMaterial
+
+// VB object name : RenderingMaterial (Id used in Visual Basic)
+                                  
+#pragma ID RenderingMaterial "DCE:ca483c60-7168-11d6-80540030f113d1bf"
+#pragma ALIAS CATIARenderingMaterial RenderingMaterial
+
+#endif

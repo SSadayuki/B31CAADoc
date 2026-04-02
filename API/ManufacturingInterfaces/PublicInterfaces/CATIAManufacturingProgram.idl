@@ -1,0 +1,350 @@
+#ifndef CATIAManufacturingProgram_IDL
+#define CATIAManufacturingProgram_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//								   
+// CATIAManufacturingProgram:						   
+// Exposed interface for ManufacturingProgram
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation					E. Chauveau
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingActivity.idl"
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATIAManufacturingOperation.idl"
+#include "CATIAManufacturingActivity.idl"
+#include "CATIAMfgActivities.idl"
+#include "CATIAExpertReportObjects.idl"
+
+/**
+ * A ManufacturingProgram for a Manufacturing Document.
+ */
+interface CATIAManufacturingProgram : CATIAManufacturingActivity
+{
+
+#pragma PROPERTY Comment
+ 
+  /**
+  * Return the Default Comment of a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the comment <tt>ProgramComment</tt> of to the manufacturing Program <tt>CurrentProgram</tt>
+  * <pre>
+  * Set CurrentProgram.<font color="red">Comment</font>= "ProgramComment"
+  *</pre>
+  * </dl>
+  */
+        HRESULT get_Comment (inout /*IDLRETVAL*/ CATBSTR oComment);
+ 
+  /**
+  * Modify the Default Comment of a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example modify the comment <tt>ProgramComment</tt> of to the manufacturing Program <tt>CurrentProgram</tt>
+  * <pre>
+  * call CurrentProgram.<font color="red">Comment</font>(ProgramComment)
+  *</pre>
+  * </dl>
+  */
+        HRESULT put_Comment (in CATBSTR iComment);
+
+#pragma PROPERTY Activities
+
+  /**
+  * Give the List of Activities linked to a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the list of Activities <tt>ActivitiesList</tt> linked to the manufacturing Program <tt>CurrentProgram</tt>
+  * <pre>
+  * Set ActivitiesList = CurrentProgram.Activities
+  *</pre>
+  * </dl>
+  */
+HRESULT get_Activities(out /*IDLRETVAL*/ CATIAMfgActivities oActivities); 
+
+// Method InsertOperation
+ 
+  /**
+  * Insert an existing Manufacturing Operation to a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example inserts in <tt>firstProgram</tt> the manufacturing operation 
+  * <tt>ExistingOperation</tt> after <tt>ReferenceOperation</tt>:
+  * <pre>
+  * call firstProgram.<font color="red">InsertOperation</font>(ReferenceOperation,ExistingOperation)
+  *</pre>
+  * </dl>
+  */
+
+
+  HRESULT InsertOperation (in CATIAManufacturingOperation iReferenceOperation,
+                           in CATIAManufacturingOperation iManufacturingOperation);  
+
+// Method MoveOperation
+ 
+  /**
+  * Move an existing Manufacturing Operation to a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example moves in <tt>firstProgram</tt> the manufacturing operation 
+  * <tt>MovedOperation</tt> after the manufacturing operation<tt>ExistingOperation</tt>:
+  * <pre>
+  * call firstProgram.<font color="red">MoveOperation</font>(ExistingOperation, MovedOperation)
+  *</pre>
+  * </dl>
+  */
+
+
+  HRESULT MoveOperation (in CATIAManufacturingActivity iReferenceOperation,
+                         in CATIAManufacturingActivity iManufacturingOperation);  
+
+// Method AppendOperation
+ 
+  /**
+  * Create and Insert a Manufacturing Operation of a specified type to a Manufacturing Program.<br>
+  * if AutoSequence is set to 1, the new operation will be sequenced in the Program. <br> 
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example creates, inserts and sequences in <tt>firstProgram</tt> the manufacturing operation 
+  * <tt>ManufacturingOperation</tt> of type : <tt>type</tt>
+  * <pre>
+  * Set ManufacturingOperation = firstProgram.<font color="red">AppendOperation</font>(Type,1)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT AppendOperation (in CATBSTR type, in short AutoSequence,
+                           out /*IDLRETVAL*/ CATIAManufacturingOperation   oManufacturingOperation);  
+
+// Method AddToolChange
+
+  /**
+  * Add a Tool Change Operation to a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example create, inserts and sequences in <tt>firstProgram</tt> a Tool Change Instruction with specified tool<tt>MyTool</tt> of specified type <tt>ToolType</tt>in specified catalog<tt>ToolCatalog</tt>
+  * <pre>
+  * Set ToolChange1 = firstProgram.<font color="red">AddToolChange</font>(MyTool,ToolType,ToolCatalog,Num)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT AddToolChange (in CATBSTR iToolName, in CATBSTR iToolType, in CATBSTR iToolCatalog, in short iNumSyntaxe,
+		out /*IDLRETVAL*/ CATIAManufacturingActivity oMfgToolChange);
+
+// Method AddToolChange
+
+  /**
+  * Add a Tool Change Operation to a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example create, inserts and sequences in <tt>firstProgram</tt> a Tool Change Instruction with specified tool<tt>MyTool</tt> of specified type <tt>ToolType</tt>in specified catalog<tt>ToolCatalog</tt>
+  * <pre>
+  * Set ToolChange1 = firstProgram.<font color="red">AddToolChangeMultipleFeeds</font>(MyTool,ToolType,ToolCatalog,NumFSData,Num)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT AddToolChangeMultipleFeeds (in CATBSTR iToolName, in CATBSTR iToolType, in CATBSTR iToolCatalog, 
+									  in short iNumFSData, in short iNumSyntaxe, 
+									  out /*IDLRETVAL*/ CATIAManufacturingActivity oMfgToolChange);
+
+// Method AddGotoPoint
+
+  /**
+  * Add a Goto Point Operation to a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example create, inserts and sequences in Program <tt>firstProgram</tt> a PTP point instruction GOTO1 to the Point wich alias is<tt>MyPoint</tt>
+  * <pre>
+  * Set GOTO1 = firstProgram.<font color="red">AddGotoPoint</font>(MyPoint)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT AddGotoPoint (in CATBSTR iPointName,
+		out /*IDLRETVAL*/ CATIAManufacturingActivity oMfgGotoPoint);
+
+// Method AddPPInstruction
+
+  /**
+  * Add a PP Instruction to a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example create, inserts and sequences in Program <tt>firstProgram</tt> a PP Instruction PPWORD1 with text<tt>PPWORD</tt>
+  * <pre>
+  * Set PPWORD1 = firstProgram.<font color="red">AddPPInstruction</font>(PPWORD)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT AddPPInstruction (in CATBSTR iPPInstruction,
+		out /*IDLRETVAL*/ CATIAManufacturingActivity oMfgPPInstruction);
+// Method AddRotabl
+
+  /**
+  * Add a Table Head Rotation instruction to a Manufacturing Program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example create, inserts and sequences in Program <tt>firstProgram</tt> a Rotabl ROTABL1 with argument<tt>MODE</tt> and angle<tt>ANGLE1</tt>
+  * <pre>
+  * Set ROTABL1 = firstProgram.<font color="red">AddRotabl</font>(MODE,ANGLE1)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT AddRotabl (in CATBSTR iRotabl,in CATBSTR iSens,in double ival,
+		out /*IDLRETVAL*/ CATIAManufacturingActivity oMfgRotabl);
+
+// Method AddGotoPointfromCoordinates
+
+  /**
+  * Add a Goto Point Operation to a Manufacturing Program.<br>
+  * <pre>
+  * The coordinates you give as input for this method have to be expressed into
+  * the 'Absolute Axis System' not in the 'Machining Axis System' of the Part Operation.
+  *</pre>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example create, inserts and sequences in Program <tt>firstProgram</tt> a PTP point instruction GOTO1 to the Point wich coordinates are<tt>X,Y,Z</tt>
+  * <pre>
+  * Set GOTO1 = firstProgram.<font color="red">AddGotoPointfromCoordinates</font>(X,Y,Z)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT AddGotoPointfromCoordinates (in double iX,in double iY,in double iZ,
+		out /*IDLRETVAL*/ CATIAManufacturingActivity oMfgGotoPoint);
+
+// Method OrderAndCreateMOfromReport
+  /**
+  * Create a list of Operation in a Manufacturing Program, of a specified type.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example create in Program <tt>firstProgram</tt> a liste of Operation <tt>ListeMo</tt> with type <tt>Drilling</tt> from a CATIAExpertReportSucceedCollection <tt>ReportSucceed</tt> with Rotabl of Axis <tt>A</tt> and sens <tt>CLW</tt>. 
+  * <pre>
+  * Set ListeMO = firstProgram.<font color="red">OrderAndCreateMOfromReport</font>(ReportSucceed,Drilling)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT OrderAndCreateMOfromReport (in CATIAExpertReportObjects iReportSucceed ,in CATBSTR iTypeMo,in CATBSTR iAxeRotabl,in CATBSTR iSensRotation,out /*IDLRETVAL*/ CATIAMfgActivities oListeMfgActivity);
+//
+// Method CreateMOfromReport
+  /**
+  * Create a list of Operation in a Manufacturing Program, of a specified type.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example create in Program <tt>firstProgram</tt> a liste of Operation <tt>ListeMo</tt> with type <tt>Drilling</tt> from a CATIAExpertReportSucceedCollection <tt>ReportSucceed</tt>. 
+  * <pre>
+  * Set ListeMO = firstProgram.<font color="red">CreateMOfromReport</font>(ReportSucceed,Drilling)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT CreateMOfromReport (in CATIAExpertReportObjects iReportSucceed ,in CATBSTR iTypeMo,out /*IDLRETVAL*/ CATIAMfgActivities oListeMfgActivity);
+
+// Method CompletewithPolarStrategy
+
+  /**
+  * Complete a list of Operation in a Manufacturing Program in Polar Mode.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example complete in Program <tt>firstProgram</tt> a liste of Operation <tt>ListeMo</tt> with Reference Axis <tt>A</tt> and sens <tt>CLW</tt>
+  * <pre>
+  * Call firstProgram.<font color="red">CompletewithPolarStrategy</font>(ListeMo,A,CLW)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT CompletewithPolarStrategy (in CATIAMfgActivities iListeMfgActivity,in CATBSTR iAxeRef,in CATBSTR iSensRotation);
+
+// Method GetTableCurrentAbsolutePosition
+
+  /**
+  * Get the current absolute position of the Machine Table.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example gets in Program <tt>firstProgram</tt> the current Machine Table absolute position <tt>Angle</tt> from the Manufacturing activity reference <tt>iActivityRef</tt>
+  * <pre>
+  * Angle = firstProgram.<font color="red">GetTableCurrentAbsolutePosition</font>(iActivityRef)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT GetTableCurrentAbsolutePosition (in CATIAManufacturingActivity iActivityRef,out /*IDLRETVAL*/ double oAngle);
+
+// Method GetOutputFile
+
+  /**
+  * Get the output file (APT or ISO) associated to the program (if associated during computation).<br>
+  * <dl>
+  * </dl>
+  */
+
+  HRESULT GetNCOutputFile (inout /*IDLRETVAL*/ CATBSTR oOutputFile);
+
+  
+  // Method AssociateOutputCode
+  /** 
+  * Method is used for associate APT file to V4 program
+  * iFileName = path for APT file....
+  * Call on V4 ManufacturingProgram
+  **/ 
+
+  HRESULT AssociateOutputCode (in CATBSTR iFileName);
+
+ 
+  // Method LockActivitesWithinProgram,UnlockActivitesWithinProgram
+  /** 
+  * Method is used for Locking and Unloking all activity in program 
+  * Call on ManufacturingProgram on which Lock and Unlock want
+  **/ 
+
+
+  HRESULT LockActivitesWithinProgram();
+  
+  HRESULT UnlockActivitesWithinProgram();
+
+  // Method ImportNCOutputOnProgram
+  /** 
+  * Import an NC File on a program.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example imports in a Program <tt>firstProgram</tt> an NC File of type <tt>TYPE</tt> available in the file path <tt>PATH</tt> using the PP <tt>PPNAME</tt> if required.
+  * <pre>
+  * Call firstProgram.<font color="red">ImportNCOutputOnProgram</font>(TYPE,PATH,PPNAME)
+  *</pre>
+  * </dl>
+  **/ 
+  HRESULT ImportNCOutputOnProgram (in CATBSTR iType, in CATBSTR iNCOutputFile, in CATBSTR iPPName);
+
+};
+
+// Interface name : CATIAManufacturingProgram
+#pragma ID CATIAManufacturingProgram "DCE:aaf46d2e-52e9-11d2-804700805fc75483"
+#pragma DUAL CATIAManufacturingProgram
+
+// VB object name : ManufacturingProgram (Id used in Visual Basic)
+#pragma ID ManufacturingProgram "DCE:08ad736a-6fdd-11d2-8dd7006094b92b60"
+#pragma ALIAS CATIAManufacturingProgram ManufacturingProgram
+
+#endif // CATIAManufacturingProgram_IDL
+
+
+
+
+
+

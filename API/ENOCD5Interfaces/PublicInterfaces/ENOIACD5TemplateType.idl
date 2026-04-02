@@ -1,0 +1,93 @@
+// COPYRIGHT Dassault Systemes 2013
+//===================================================================
+//
+// ENOIACD5TemplateType.idl
+// Automation interface for the ENOIACD5TemplateType element 
+//
+//===================================================================
+
+#ifndef ENOIACD5TemplateType_IDL
+#define ENOIACD5TemplateType_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+interface CATIABase;
+interface IDispatch;
+interface ENOIACD5Templates;
+
+/**
+ * Represents a Template Type.
+ * <br>Properties on the object helps the users to get various templates and there possible ENOVIA Types.
+ *
+ * @sample
+ * The following example indicates how to retrieve the template type.
+ * <pre>
+ * <font color="blue">Dim</font> oTemplateType <font color="blue">As</font> ENOIACD5TemplateType
+ * <font color="blue">Set</font> oTemplateType = oTemplateTypes.Item(<font color="red">1</font>)
+ * </pre>
+ * @see ENOIACD5TemplateTypes
+ */
+
+interface ENOIACD5TemplateType : CATIABase
+{
+	/**
+    * Returns (gets) the name of the Template Type.
+    *
+    * @sample
+    * The following example gets the name of the Template Type.
+    * <pre>
+	* <font color="blue">Dim</font> oName <font color="blue">As</font> CATBSTR
+    * oName = oTemplateType.<font color="red">TemplateTypeName</font> 
+    * </pre>
+    */   
+#pragma PROPERTY TemplateTypeName
+    HRESULT get_TemplateTypeName (inout /*IDLRETVAL*/ CATBSTR oName);
+
+    /**
+    * Returns (gets) the list of Templates from a Template type.
+    *
+    * @sample
+    * The following example gets Templates.
+	* <pre>
+	* <font color="blue">Dim</font> oTemplates <font color="blue">As</font> ENOIACD5Templates
+	* <font color="blue">Set</font> oTemplates = oTemplateType.<font color="red">Templates</font> 
+    * </pre>
+    */
+#pragma PROPERTY Templates
+    HRESULT get_Templates (out /*IDLRETVAL*/ ENOIACD5Templates oValue);
+    
+
+    /**
+    * Returns (gets) the possible Types from a Template type.
+    *
+    * @sample
+    * The following example gets Possible ENOVIA Types from a Template type.
+    * <pre>
+	* <font color="blue">Dim</font> oPossibleTypes <font color="blue">As</font> Array
+	* oPossibleTypes = oTemplateType.<font color="red">PossibleTypes</font> 
+    * </pre>
+    */
+#pragma PROPERTY PossibleTypes 
+    HRESULT get_PossibleTypes ( out /*IDLRETVAL*/ CATSafeArrayVariant oPossibleTypes);
+
+};
+
+
+// Interface name : ENOIACD5SaveItem
+#pragma ID ENOIACD5TemplateType "DCE:C4AD608B-18DE-4a56-B0175F1E19058285"
+#pragma DUAL ENOIACD5TemplateType
+
+// VB object name : CD5TemplateType (Id used in Visual Basic)
+#pragma ID CD5TemplateType "DCE:436CDE2F-0677-4268-BEF31D866E2A2205"
+#pragma ALIAS ENOIACD5TemplateType CD5TemplateType
+
+
+#endif
+

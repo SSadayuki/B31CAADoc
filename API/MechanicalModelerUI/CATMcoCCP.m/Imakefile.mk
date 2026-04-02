@@ -1,0 +1,9 @@
+#
+# CATMcoCCP
+#
+
+BUILT_OBJECT_TYPE=NONE
+
+LINK_WITH= 
+
+

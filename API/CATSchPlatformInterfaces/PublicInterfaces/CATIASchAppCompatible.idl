@@ -1,0 +1,128 @@
+#ifndef CATIASchAppCompatible_IDL 
+#define CATIASchAppCompatible_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Provide application rules of how to connect objects.
+  */
+
+interface CATIASchAppCompatible : CATIABase
+{
+  /**
+  * Query whether a route of the input class type
+  * can be connected to "this" object (the target, which
+  * can be a route or a component).
+  * This method is used when routing a route.
+  * @param iRouteCntrClassType
+  *   Class type of a schematic route connector.
+  * @param oLOKCntrs
+  *   A list of compatible and available connectors on this object. 
+  *   (members are CATISchAppConnector interface pointers)
+  * @param oBYes
+  *   If TRUE, the object is OK to be connected to a route.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCompatible
+  * Dim strVar1 As String
+  * Dim objArg2 As SchListOfObjects
+  * Dim bVar3 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppIsTargetOKForRoute</font>strVar1,objArg2,bVar3
+  * </pre>
+  *    
+  */
+  HRESULT AppIsTargetOKForRoute ( 
+    in CATBSTR iRouteCntrClassType, 
+    inout CATIASchListOfObjects oLOKCntrs, 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether a component (source) is compatible to be connected to "this" object 
+  * (the target, which can be a route or a component).
+  * This method is used when placing a component to be connected to another object.
+  * @param iLCompSourceCntrs
+  *   A list of connectors on the source component. The target (to be connected)
+  *   is "this" component.
+  * @param oLOKCntrs
+  *   A list of compatible and available connectors on "this" component (the target)
+  *   to be connected to the source component (the input source).
+  *   (members are CATISchAppConnector interface pointers)
+  * @param oBYes
+  *   If TRUE, the object is OK to be connected to a route.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCompatible
+  * Dim objArg1 As SchListOfObjects
+  * Dim objArg2 As SchListOfObjects
+  * Dim bVar3 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppIsTargetOKForPlace</font>objArg1,objArg2,bVar3
+  * </pre>
+  *    
+  */
+  HRESULT AppIsTargetOKForPlace ( 
+    in CATIASchListOfObjects iLCompSourceCntrs, 
+    inout CATIASchListOfObjects oLTargetCntrs, 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether a component (source) is compatible to be inserted into this route.
+  * This method is used when inserting a component into a route.
+  * This mehtod should only be implemented on a route object. For a component
+  * object, the method should simply returns oBYes=FALSE.
+  * @param iLCompSourceCntrs
+  *   A list of connectors on the source component. The target (to be connected)
+  *   is "this" route.
+  * @param oLSourceCntrs
+  *   A list of compatible and available connectors on the source component (the input)
+  *   that can be connected to the target ("this" route)
+  *   (members are CATISchAppConnector interface pointers)
+  * @param oBYes
+  *   If TRUE, the object is OK to be connected to a route.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCompatible
+  * Dim objArg1 As SchListOfObjects
+  * Dim objArg2 As SchListOfObjects
+  * Dim bVar3 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppIsTargetOKForInsert</font>objArg1,objArg2,bVar3
+  * </pre>
+  *    
+  */
+  HRESULT AppIsTargetOKForInsert ( 
+    in CATIASchListOfObjects iLCompSourceCntrs, 
+    inout CATIASchListOfObjects oLSourceCntrs, 
+    inout boolean oBYes );
+    
+};
+    
+// Interface name : CATIASchAppCompatible
+#pragma ID CATIASchAppCompatible "DCE:fea441ca-ff07-4e8c-a4e2afdbbfc6f8e6"
+#pragma DUAL CATIASchAppCompatible
+    
+// VB object name : SchAppCompatible
+#pragma ID SchAppCompatible "DCE:75567365-2261-4522-ac6b5ea5e286238a"
+#pragma ALIAS CATIASchAppCompatible SchAppCompatible
+    
+#endif 
+    

@@ -1,0 +1,56 @@
+#ifndef CATIANonSemanticDimension_IDL
+#define CATIANonSemanticDimension_IDL
+
+// COPYRIGHT Dassault Systemes 2003
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+
+interface CATIADrawingDimension;
+interface CATIADimensionLimit;
+
+/**
+* Interface Managing Non Semantic Dimension.
+*/
+
+interface CATIANonSemanticDimension : CATIABase 
+{
+  /**
+  * Retrieves Drafting Dimension.
+  * @param oDim
+  *   The Drafting Dimension.
+  */
+  HRESULT Get2dAnnot (out /*IDLRETVAL*/ CATIADrawingDimension oDim);
+  /**
+  * Checks if the Dimension has a Dimension Limit.
+  * @param oHasDimLim
+  * <ul>
+  * <li>TRUE: Dimension Limit exists</li>
+  * <li>FALSE: Dimension Limit does not exist</li>
+  * </ul>
+  */
+  HRESULT HasDimensionLimit (out /*IDLRETVAL*/ boolean oHasDimLim);
+
+  /**
+  * Gets the Dimension on the DimensionLimit interface.
+  * @param oDimLim
+  *   The Dimension Limits.
+
+  */
+  HRESULT DimensionLimit (out /*IDLRETVAL*/ CATIADimensionLimit oDimLim);
+
+};
+
+// Interface name : CATIANonSemanticDimension
+#pragma ID CATIANonSemanticDimension "DCE:ea5b9eab-7f12-466b-bb4845de475e8abc"
+#pragma DUAL CATIANonSemanticDimension
+
+// VB object name : NonSemanticDimension (Id used in Visual Basic)
+#pragma ID NonSemanticDimension "DCE:0a4c866b-cfd3-42de-91714a0db099c9e5"
+#pragma ALIAS CATIANonSemanticDimension NonSemanticDimension
+
+#endif

@@ -1,0 +1,46 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+INCLUDED_MODULES = JS0MT
+
+LINK_WITH = 
+
+SYS_LIBS =
+
+OS = AIX
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS = -lpthreads
+
+OS = HP-UX
+SYS_INCPATH = 
+#if os hpux_a
+SYS_LIBS = -lc_r -ldce
+#else
+SYS_LIBS= -lpthread
+#endif
+SYS_LIBPATH =
+
+OS = IRIX
+SYS_INCPATH =
+SYS_LIBPATH = 
+SYS_LIBS = -lpthread
+LOCAL_CCFLAGS = -DCATPTHREADS
+LOCAL_CFLAGS = 
+
+OS = SunOS
+LOCAL_LDFLAGS = -lpthread -lsocket
+LOCAL_CCFLAGS = -mt
+# Remove the default Fortran libs
+FORTRAN_LIBS = 
+
+OS = Linux
+LOCAL_LDFLAGS = -lpthread
+
+OS = Windows_NT
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS = wsock32.lib
+LOCAL_CCFLAGS =
+LOCAL_CFLAGS =

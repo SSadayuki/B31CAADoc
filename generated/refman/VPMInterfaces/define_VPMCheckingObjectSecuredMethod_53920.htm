@@ -1,0 +1,95 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>VPMInterfaces VPMInterfaces Framework:VPMCheckingObjectSecuredMethod   Macro   </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../VPMInterfaces.htm" href="../VPMInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "VPMInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "VPMCheckingObjectSecuredMethod"; } 
+	function getCurrentType() { 
+ 	return "define"; }  
+ </script><h1 class='title1'>VPMInterfaces Framework:VPMCheckingObjectSecuredMethod   Macro   </h1></header><main id='main'> 
+ 
+<section id='maindesc'><section id='objdef'><dl>
+<dt class='dt1'>
+
+Macro VPMCheckingObjectSecuredMethod (iPtr,iMeth,oHres)
+
+</dt>
+<dd class='dd1'> 
+<b><i> Controls Access to the <b>secured</b> method of an object.</i></b><br>
+
+ <p><b>Role</b>: This macro controls access to an object's method.
+
+ <p><b>Precondition</b>:<ul>
+    <li><i>iPtr</i> must be a pointer on a <tt>CATBaseUnknown</tt> object.</li>
+    <li><i>iPtr</i> must be a VPMObject (tie to <script type="text/javascript"> activateLinkAnchor('CATIVpmFactoryObject','','CATIVpmFactoryObject') </script> )</li> </ul>
+
+ <p><b>Usage</b>:<ul>
+    <li>It must be used at the beginning of the method</li>
+    <li>The (class,iMethod) must be declared using
+        <a href=ENOVRegisterClassMethod.htm>ENOVRegisterClassMethod</a> macro,
+        with <a href=ENOVSecurityType.htm>ENOVSecSECURED</a> characteristic
+        (<i>class</i> being one of the classes of iPtr's classes hierarchy).</li>
+ </ul>
+ <b>Example</b>:
+ <table bgcolor=#fefedf><tr><td><pre>
+ void myFactory::DeleteAGivenObject(CATIVpmFactoryObject *iObj)
+ {
+   HRESULT hr = S_OK;
+   VPMCheckingObjectSecuredMethod(iObj,Delete,&amp;hr);
+   if (<a href=VPM_ACCESS_GRANTED.htm>VPM_ACCESS_GRANTED</a>(hr)) {
+      <font color=red><i>// OK! Let's continue ...</i></font>
+   }
+ }</pre></td></tr></table>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPtr</span></dt>
+   <dd>    A pointer on the object to check.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMeth</span></dt>
+   <dd>    The object's method name.
+    <br>Warning! It must be non-quoted string (symbol, e.g: <tt>Create</tt>)
+ 
+ </ dd>
+    <dt><span class='paramitem'> oHres</span></dt>
+   <dd>    A pointer on the HRESULT code.
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('VPMCheckingGlobalMethod','','VPMCheckingGlobalMethod') </script>, <script type="text/javascript"> activateLinkAnchor('VPMGenericFactorySecuredMethod','','VPMGenericFactorySecuredMethod') </script>, <script type="text/javascript"> activateLinkAnchor('VPMSecuredMethod','','VPMSecuredMethod') </script>, <script type="text/javascript"> activateLinkAnchor('VPM_ACCESS_GRANTED','','VPM_ACCESS_GRANTED') </script>, <script type="text/javascript"> activateLinkAnchor('VPM_ACCESS_DENIED','','VPM_ACCESS_DENIED') </script></dd>
+</dl>
+</dd>
+</dl></section></section>
+<hr/>
+ This object is included in the file: <b>VPMSecurity.h</b><br>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

@@ -1,0 +1,139 @@
+#ifndef CATIAHybridShapeBump_IDL
+#define CATIAHybridShapeBump_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2001
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//=================================================================
+//           
+// CATIAHybridShapeBump:         
+// Exposed interface for HybridShape Bump
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// JMZ : Fevrier 01 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+
+/**
+ * The Bump feature : an Bump is made up of a body to process
+ * and some Bump parameters.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeBump : CATIAHybridShape
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+
+
+/**
+ * Returns or sets the element to Bump. 
+ */ 
+#pragma PROPERTY BodyToBump
+
+ HRESULT get_BodyToBump (out /*IDLRETVAL*/ CATIAReference   oBodyToBump);
+ HRESULT put_BodyToBump (in     CATIAReference   iBodyToBump);
+
+/**
+ * Returns or sets the limit curve.
+ */ 
+#pragma PROPERTY LimitCurve
+
+ HRESULT get_LimitCurve (out /*IDLRETVAL*/ CATIAReference   oLimitCurve);
+ HRESULT put_LimitCurve (in     CATIAReference   iLimitCurve);
+
+
+/**
+ * Returns or sets the Deformation Center.
+  */ 
+#pragma PROPERTY DeformationCenter
+
+ HRESULT get_DeformationCenter (out /*IDLRETVAL*/ CATIAReference   oDeformationCenter);
+ HRESULT put_DeformationCenter (in     CATIAReference   iDeformationCenter);
+
+ 
+/**
+ * Returns or sets the Deformation Direction.
+ */ 
+#pragma PROPERTY DeformationDir
+
+ HRESULT get_DeformationDir (out /*IDLRETVAL*/ CATIAReference   oDeformationDir);
+ HRESULT put_DeformationDir (in     CATIAReference   iDeformationDir);
+
+
+ /**
+ * Returns the translate distance (CATIA Parameter).
+ * <br> Note: Distance value is seted or retrieve trough a Literaql parameter 
+ * <br> Parameters are value are given in  the Part Unit 
+ * <br> Example : 
+ *   	if Part Unit for dimensions  is mm:  for  1 mmm, oDefDist.Value will return 1.000 
+ */		
+#pragma PROPERTY DeformationDist 
+ HRESULT get_DeformationDist ( out /*IDLRETVAL*/  CATIALength   oDefDist);
+ HRESULT put_DeformationDist ( in  CATIALength   iDefDist);
+
+/**
+ * Returns or sets the Deformation distance (double) .  
+ * <br> Note: Distance value is expressed in MKS = Meters 
+ * <br> Example to set up 1mm , use .001  
+
+ */ 
+#pragma PROPERTY DeformationDistValue
+ HRESULT get_DeformationDistValue ( out /*IDLRETVAL*/  double   oDefDistVal);
+ HRESULT put_DeformationDistValue ( in               double   iDefDistVal);
+
+// Additionnal parameter 
+/**
+ * Returns or sets the continuity type .. 
+ * <br><b>Legal values</b>: the continuity type is either
+ * <pre>
+ * PointContinuity      =0
+ * TangentContinuity    =1 
+ * CurvatureContinuity  =2
+ * </pre>
+ */ 
+#pragma PROPERTY ContinuityType
+    HRESULT get_ContinuityType ( out /*IDLRETVAL*/ long          oContinuity);
+    HRESULT put_ContinuityType ( in                long          iContinuity);
+
+/**
+ * Returns or sets the limit curve.
+ */ 
+#pragma PROPERTY ProjectionDir
+
+ HRESULT get_ProjectionDir (out /*IDLRETVAL*/ CATIAReference   oProjectionDir);
+ HRESULT put_ProjectionDir (in     CATIAReference   iProjectionDir);
+
+
+/**
+ * Returns or sets the tensuion center parameter.
+ */
+#pragma PROPERTY CenterTension  
+ HRESULT get_CenterTension ( out /*IDLRETVAL*/  CATIARealParam   oCenterTension);
+ HRESULT put_CenterTension( in  CATIARealParam   iCenterTension);
+
+};
+
+
+// Interface name : CATIAHybridShapeBump
+#pragma ID   CATIAHybridShapeBump "DCE:06022001-1961-0001-0280020e70000000"
+#pragma DUAL CATIAHybridShapeBump
+
+// VB object name : HybridShapeBump (Id used in Visual Basic)
+#pragma ID    HybridShapeBump "DCE:06022001-1961-0002-0280020e70000000"
+#pragma ALIAS CATIAHybridShapeBump HybridShapeBump
+
+
+#endif
+// CATIAHybridShapeBump_IDL
+

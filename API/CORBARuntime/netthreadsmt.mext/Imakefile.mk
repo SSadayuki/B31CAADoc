@@ -1,0 +1,15 @@
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+#
+BUILD=NO
+
+#ifdef MK_ORBIXCPP33
+LOCAL_SRCPATH=$(MkmkOS_Buildtime)/Orbix33
+
+OS = hpux_b
+BUILD=YES
+
+#else
+BUILD=NO
+#endif
+

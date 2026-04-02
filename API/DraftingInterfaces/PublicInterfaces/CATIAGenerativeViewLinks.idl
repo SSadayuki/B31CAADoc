@@ -1,0 +1,119 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+#ifndef CATIAGenerativeViewLinks_IDL
+#define CATIAGenerativeViewLinks_IDL
+
+/*IDLREP*/
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+ /**
+  * Represents the generative links of a drawing view.
+  * <p>
+  * The generative links of a drawing view is an object that manages
+  * the way the generative view points at the 3D document.
+  */
+
+interface CATIAGenerativeViewLinks : CATBaseDispatch
+{
+ /**
+  * Adds a link to the drawing view.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds a link to the Part document <tt>MyPartDocument</tt>
+  * to the <tt>MyView</tt> drawing view.
+  * <pre>
+  * Dim viewLinks As DrawingViewGenerativeLinks
+  * Set viewLinks = MyView.GenerativeLinks
+  * viewLinks.<font color="red">AddLink</font>(MyPartDocument)
+  * </pre>
+  * </dl>
+  */
+	HRESULT AddLink( in CATIABase iLink );
+
+ /**
+  * Returns the first link of the drawing view.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the first link of the <tt>MyView</tt> drawing view.
+  * <pre>
+  * Dim viewLinks As DrawingViewGenerativeLinks
+  * Set viewLinks = MyView.GenerativeLinks
+  * Dim firstLink As AnyObject
+  * Set firstLink = MyView.<font color="red">FirstLink</font>()
+  * </pre>
+  * </dl>
+  */
+	HRESULT FirstLink( out /*IDLRETVAL*/ CATIABase oLink );
+
+ /**
+  * Returns the next link of the drawing view.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the next link of the <tt>MyView</tt> drawing view.
+  * <pre>
+  * Dim viewLinks As DrawingViewGenerativeLinks
+  * Set viewLinks = MyView.GenerativeLinks
+  * Dim nextLink As AnyObject
+  * nextLink = viewLinks.<font color="red">NextLink</font>()
+  * </pre>
+  * </dl>
+  */
+	HRESULT NextLink( out /*IDLRETVAL*/ CATIABase oLink );
+
+ /**
+  * Removes all links of the drawing view.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves all links of the <tt>MyView</tt> drawing view.
+  * <pre>
+  * Dim viewLinks As DrawingViewGenerativeLinks
+  * Set viewLinks = MyView.GenerativeLinks
+  * viewLinks.<font color="red">RemoveAllLinks</font>()
+  * </pre>
+  * </dl>
+  */
+	HRESULT RemoveAllLinks();
+ 
+ /**
+  * Copies the links of the drawing view.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example copies the  links of the <tt>MyView</tt> drawing view
+  * to the <tt>MyLinks</tt> object.
+  * <pre>
+  * Dim viewLinks As DrawingViewGenerativeLinks
+  * Set viewLinks = MyView.GenerativeLinks
+  * Dim MyLinks As DrawingViewGenerativeLinks
+  * viewLinks.<font color="red">CopyLinksTo</font>(MyLinks)
+  * </pre>
+  * </dl>
+  */
+	HRESULT CopyLinksTo(in CATIAGenerativeViewLinks iLinks);
+};
+
+#pragma ID CATIAGenerativeViewLinks "DCE:65918dae-4e7b-11d4-94b900108379817d"
+#pragma DUAL CATIAGenerativeViewLinks
+
+// Visual Basic name
+
+#pragma ID DrawingViewGenerativeLinks "DCE:c0e32310-62f6-11d4-9f6500508b62a654"
+#pragma ALIAS CATIAGenerativeViewLinks DrawingViewGenerativeLinks
+
+#endif
+

@@ -1,0 +1,109 @@
+#ifndef CATIAStrFoundations_IDL
+#define CATIAStrFoundations_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIACollection
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 16/01/98
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIADocument;
+interface CATIAStrFoundation;
+interface CATIAStrSection;
+
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+#include "CATIACollection.idl"
+#include "CATIAStrServices.idl"
+
+    /**
+     * A collection of the Foundation objects contained in a given
+     * Product object of a ProductDocument object.
+     * A Product object aggregates zero or one Foundations collection.
+     * This collection is retrieved using the @href CATIAProduct#GetTechnologicalObject
+     * method of the product. 
+     * @sample
+     * The following example retrieves the Foundation collection from the
+     * <tt>oProduct</tt> Product.
+     * <pre>
+     * Dim oFoundations as AnyObject
+     * Set oFoundations = oProduct.GetTechnologicalObject("StructureFoundations")
+     * </pre>
+     */
+
+interface CATIAStrFoundations : CATIACollection
+{
+
+    /**
+     * Returns a Foundation from its index in the Foundations collection. 
+     * @param iIndex
+     *   The index of the Foundation to retrieve in the collection of Foundations.
+     *   This index can either be the rank of the Foundation in the collection
+     *   or the name you assign to the Foundation.
+     *   As a numerics, this index is the rank of the Foundation 
+     *   in the collection.
+     *   The index of the first Foundation in the collection is 1, and
+     *   the index of the last Foundation is Count.
+     *   As a string, it is the name you assigned to the Foundation using
+     *   the @href CATIABase#Name property 
+     * @return The retrieved Foundation
+     * @sample
+     * The following example returns in <tt>ThisFoundation</tt> the third Foundation,
+     * and in <tt>ThatFoundation</tt> the Foundation named
+     * <tt>Column_1</tt> in the <tt>Assembly_1</tt> Foundation collection.
+     * <pre>
+     * Dim ThisFoundation As Foundation
+     * Set ThisFoundation = Assembly_1.<font color="red">Item</font>(3)
+     * Dim ThatFoundation As Foundation
+     * Set ThatFoundation = Assembly.<font color="red">Item</font>("Column_1")
+     * </pre>
+     */
+
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAStrFoundation oFoundation);
+
+};
+
+// Interface name : CATIAStrFoundations
+#pragma ID CATIAStrFoundations "DCE:145037f8-21c8-11d5-94cc00108379318c"
+#pragma DUAL CATIAStrFoundations
+
+// VB object name : StrFoundations   
+#pragma ID StrFoundations "DCE:14b45abc-21c8-11d5-94cc00108379318c"
+#pragma ALIAS CATIAStrFoundations StrFoundations
+
+#endif

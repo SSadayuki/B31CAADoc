@@ -1,0 +1,122 @@
+#ifndef CATIASchAppClass_IDL 
+#define CATIASchAppClass_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfBSTRs;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the class hierarchy of an application model.
+  */
+
+interface CATIASchAppClass : CATIABase
+{
+  /**
+  * Provide the application class names for the base component classes.
+  * @param oLBaseCompClasses
+  *   Class names of application base component classes.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppClass
+  * Dim objArg1 As SchListOfBSTRs
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">AppGetComponentBaseClass</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppGetComponentBaseClass ( 
+    out /*IDLRETVAL*/ CATIASchListOfBSTRs oLBaseCompClasses );
+    
+  /**
+  * Provide the application class name for Schematic Route class.
+  * @param oRouteClassName
+  *   Class name of application class.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppClass
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">AppGetRouteBaseClass</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppGetRouteBaseClass ( 
+    inout CATBSTR oRouteClassName );
+    
+  /**
+  * Provide the application class name for Schematic Group class.
+  * @param oGroupClassName
+  *   Class name of application class.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppClass
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">AppGetGroupBaseClass</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppGetGroupBaseClass ( 
+    inout CATBSTR oGroupClassName );
+    
+  /**
+  * Provide the application class name for Schematic Zone class.
+  * @param oZoneClassName
+  *   Class name of application class.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppClass
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">AppGetZoneBaseClass</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppGetZoneBaseClass ( 
+    inout CATBSTR oZoneClassName );
+    
+  /**
+  * List the valid application route types allowed to be created.
+  * @param oLValidRouteTypes
+  *   A list of route class types allowed.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppClass
+  * Dim objArg1 As SchListOfBSTRs
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">AppListValidRouteTypes</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppListValidRouteTypes ( 
+    out /*IDLRETVAL*/ CATIASchListOfBSTRs oLValidRouteTypes );
+    
+};
+    
+// Interface name : CATIASchAppClass
+#pragma ID CATIASchAppClass "DCE:01f2e970-df36-4208-87aed7796d8acdcd"
+#pragma DUAL CATIASchAppClass
+    
+// VB object name : SchAppClass
+#pragma ID SchAppClass "DCE:aa8095cb-a540-43c0-a21893eef805d47b"
+#pragma ALIAS CATIASchAppClass SchAppClass
+    
+#endif 
+    

@@ -1,0 +1,157 @@
+
+#ifndef CATIAHybridShapeCircleCenterAxis_IDL
+#define CATIAHybridShapeCircleCenterAxis_IDL
+/*IDLREP*/
+
+// COPYRIGHT Dassault Systemes 2003
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//===================================================================
+//
+// CATIAHybridShapeCircleCenterAxis
+// Automation interface for the HybridShapeCircleCenterAxis element 
+//
+// 2003 Creation
+//===================================================================
+
+#include "CATIAHybridShapeCircle.idl"
+
+/**  
+ * Represents the hybrid shape circle object defined using a point and axis/line.
+ * <b>Role</b>: To access the data of the hybrid shape circle center axis object.
+ * <p>This data includes:
+ * <ul>
+ * <li>Point</li>
+ * <li>Axis/Line </li>
+ * <li>Value of radius/diameter </li>
+ * <li>Diameter Mode </li>
+ * <li>Projection Mode </li>
+ * </ul>
+ * <p>Use the CATIAHybridShapeFactory to create a HybridShapeCircleCenterAxis object.
+ * @see CATIAHybridShapeFactory#AddNewCircleCenterAxis
+ */
+interface CATIAHybridShapeCircleCenterAxis : CATIAHybridShapeCircle 
+{
+  //        ==============
+  //        = PROPERTIES =
+  //        ==============
+ /**
+  * Returns or sets the Point of the circle.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>CirclePoint</code> the point used for
+  * center computation from <code>HybShpCircle</code> hybrid shape circle center axis feature
+  * <pre>
+  * Dim CirclePoint As Reference 
+  * Set CirclePoint = HybShpCircle.<font color="red">Point</font>
+  * </pre>
+  * </dl>
+  */ 
+
+#pragma PROPERTY Point
+ HRESULT get_Point (out /*IDLRETVAL*/ CATIAReference   oPt);
+ HRESULT put_Point (in                CATIAReference   iPt);
+
+
+ /**
+  * Returns or sets the Axis of the circle.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>CircleAxis</code> the Axis of plane in which circle is lying
+  * from <code>HybShpCircle</code> hybrid shape circle center axis feature
+  * <pre>
+  * Dim CircleAxis As Reference 
+  * Set CircleAxis = HybShpCircle.<font color="red">Axis</font>
+  * </pre>
+  * </dl>
+  */ 
+
+#pragma PROPERTY Axis
+ HRESULT get_Axis (out /*IDLRETVAL*/ CATIAReference   oAxis);
+ HRESULT put_Axis (in                CATIAReference   iAxis);
+
+ /**
+  *  Returns or sets the DiameterMode.
+  * <br><b>Legal values</b>: <b>True</b> implies diameter
+  * <b>False</b> implies radius (default).
+  *  When DiameterMode is changed, Radius/Diameter value, which is stored will not be modified.
+  *  @sample
+  *  This example sets that the DiameterMode of
+  *  the <code>HybShpCircle</code> hybrid shape circle center axis feature
+  *  <pre>
+  *  HybShpCircle.<font color="red">DiameterMode</font> = True
+  *  </pre>
+  */ 
+
+#pragma PROPERTY DiameterMode
+ HRESULT get_DiameterMode (out /*IDLRETVAL*/ boolean oDiameterMode);
+ HRESULT put_DiameterMode (in         boolean iDiameterMode);
+
+ /**
+  *  Returns or sets the ProjectionMode.
+  * <br><b>Legal values</b>: <b>True</b> (default) implies point will be projected on to axis/line
+  * <b>False</b> implies that point will be center of the circle.
+  *  @sample
+  *  This example sets that the ProjectionMode of
+  *  the <code>HybShpCircle</code> hybrid shape circle center axis feature
+  *  <pre>
+  *  HybShpCircle.<font color="red">ProjectionMode</font> = True
+  *  </pre>
+  */ 
+
+#pragma PROPERTY ProjectionMode
+ HRESULT get_ProjectionMode (out /*IDLRETVAL*/ boolean oProjectionMode);
+ HRESULT put_ProjectionMode (in         boolean iProjectionMode);
+
+ /**
+  * Returns the circle radius.
+  * It is expressed as a @href CATIALength literal. Succeeds only if DiameterMode is set to False.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpCircleRadius</code> the radius
+  * of the <code>HybShpCircle</code> hybrid shape circle center axis feature
+  * <pre>
+  * Dim HybShpCircleRadius As Length
+  * HybShpCircleRadius = HybShpCircle.<font color="red">Radius</font>
+  * </pre>
+  * </dl>
+  */
+
+#pragma PROPERTY Radius
+ HRESULT get_Radius (out /*IDLRETVAL*/ CATIALength oRadius);
+
+ /**
+  * Returns the circle diameter.
+  * It is expressed as a @href CATIALength literal. Succeeds only if DiameterMode is set to True.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpCircleDiameter</code> the diameter
+  * of the <code>HybShpCircle</code> hybrid shape circle center axis feature
+  * <pre>
+  * Dim HybShpCircleDiameter As Length
+  * HybShpCircleDiameter = HybShpCircle.<font color="red">Diameter</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Diameter
+ HRESULT get_Diameter (out /*IDLRETVAL*/ CATIALength oDiameter);
+};
+
+// Interface name : CATIAHybridShapeCircleCenterAxis
+#pragma ID CATIAHybridShapeCircleCenterAxis "DCE:1c9d9bba-2ea2-4153-8fb39246ada644f6"
+#pragma DUAL CATIAHybridShapeCircleCenterAxis
+
+// VB object name : HybridShapeCircleCenterAxis (Id used in Visual Basic)
+#pragma ID HybridShapeCircleCenterAxis "DCE:fa198588-c8f0-48c0-be9033b6344600a3"
+#pragma ALIAS CATIAHybridShapeCircleCenterAxis HybridShapeCircleCenterAxis
+
+#endif
+// CATIAHybridShapeCircleCenterAxis_IDL

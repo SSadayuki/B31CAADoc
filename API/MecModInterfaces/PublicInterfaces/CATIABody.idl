@@ -1,0 +1,201 @@
+#ifndef CATIABody_IDL
+#define CATIABody_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIABody:                           
+// Exposed interface for Body
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                        Ph Baucher
+// Dec97 Modification / Inheritance			  L Lalere
+// Apr99 Ajout HybridBodies					JM Gautier		
+//=================================================================
+
+#include "CATIABase.idl"
+
+interface CATIAShapes;
+interface CATIASketches;
+interface CATIAHybridBodies;
+interface CATIAHybridShape;
+interface CATIAHybridShapes;
+interface CATIAOrderedGeometricalSets;
+
+/**
+ * The object that manages a sequence of shapes, a set of sketches,
+ * a set of hybrid bodies, a set of ordered geometrical sets and a set of hybrid shapes. 
+ *<br>
+ * It belongs to the @href CATIABodies collection of a @href CATIAPart  
+ * or @href CATIAHybridBody object.
+ */
+//-----------------------------------------------------------------
+interface CATIABody : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON CONTAINED SHAPES
+    //    ===================
+    //
+    /**
+     * Returns the body's Shapes collection.
+     * These shapes make up the sequence of shapes that will produce an
+     * intermediate result for the part,
+     * or the final result in the case of the main body.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>shapColl</tt> the collection
+     * of shapes managed by the main body of the <tt>partDoc</tt>
+     * part document:
+     * <pre>
+	 * Dim body As Body
+     * Set body = partDoc.Part.Bodies.MainBody
+     * Set shapColl = body.<font color="red">Shapes</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY Shapes
+    HRESULT    get_Shapes ( out /*IDLRETVAL*/ CATIAShapes oShapes );
+
+    //
+    //    ON CONTAINED SKETCHES
+    //    =====================
+    //
+    /**
+     * Returns the body's Sketches collection.
+     * These sketches are those inside the body at all levels.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>skColl</tt> the collection
+     * of sketches of the main body of <tt>partDoc</tt>
+     * part document:
+     * <pre>
+ 	 * Dim body As Body
+     * Set body = partDoc.Part.Bodies.MainBody
+     * Set skColl = body.<font color="red">Sketches</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY Sketches
+    HRESULT    get_Sketches ( out    /*IDLRETVAL*/  CATIASketches  oSketches );
+
+    //
+    //    ON CONTAINED HYBRID BODIES
+    //    ==========================
+    //
+    /**
+     * Returns the body's HybridBodies collection.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>hybridBodyColl</tt> the collection
+	 * of hybrid bodies of the main body of <tt>partDoc</tt>
+     * part document:
+     * <pre>
+	 * Dim body As Body
+     * Set body = partDoc.Part.Bodies.MainBody
+     * Set hybridBodyColl = body.<font color="red">HybridBodies</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY HybridBodies
+    HRESULT get_HybridBodies ( out  /*IDLRETVAL*/ CATIAHybridBodies  oHybridBodies );
+
+    /**
+     * Returns True if the body is involved in a boolean operation, else returns False.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>operated</tt> True if the body <tt>body1</tt>belongs to a 
+	 * boolean operation.
+     * <pre>
+     * operated = body1.<font color="red">InBooleanOperation</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY InBooleanOperation
+    HRESULT get_InBooleanOperation ( out  /*IDLRETVAL*/ boolean  oInBooleanOperation );
+
+	/**
+	* Returns the list of hybrid shapes included in the body.
+	* @return oHybridShapes
+    *   The list of hybrid shapes in the body (@see CATIAHybridShapes<br>
+    *   for more information).
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>HybridShapes1</tt> the list of <br> 
+	* hybrid shapes in the body <tt>Body1</tt>:
+    * <pre>
+	* Dim HybridShapes1 As HybridShapes
+    * Set HybridShapes1 = Body1.<b>HybridShapes</b>
+    * </pre>
+    * </dl>
+    */
+
+#pragma PROPERTY HybridShapes
+    HRESULT get_HybridShapes ( out /*IDLRETVAL*/ CATIAHybridShapes oHybridShapes );
+
+    /**
+    * Returns the body's OrderedGeometricalSets collection.
+    * <! sample >
+    * <dl>
+    * <dt>ometricalSetColl = Body1.<font color="red">OrderedGeometricalSets</font>
+    *</pre><b>Example:</b>
+    * <dd>The following example returns in <tt>OrderedGeometricalSetColl</tt> the collection
+    * of  ordered geometrical set of the body <tt>Body1</tt> :
+    * <pre>
+    * Set OrderedGe
+    * </dl>
+    */
+#pragma PROPERTY OrderedGeometricalSets
+    HRESULT    get_OrderedGeometricalSets  ( out  /*IDLRETVAL*/ CATIAOrderedGeometricalSets oOrderedGeometricalSets );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+	/**
+	* Insert a hybrid shape to the body.
+	* @param iHybriShape
+	*   The hybrid shape to insert.
+	* <! @sample >
+	* </dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example inserts the hybrid shape <tt>HybridShape1</tt>
+	* to the body <tt>Body1</tt>:
+	* <pre>
+	* Body1.InsertHybridShape (HybridShape1)
+	* </pre>
+	* </dl>
+	*/
+    HRESULT InsertHybridShape (in CATIAHybridShape iHybridShape);
+ 	
+};
+
+// Interface name : CATIABody
+#pragma ID CATIABody "DCE:f5303b8f-39ad-11d1-a26c0000f87546fd"
+#pragma DUAL CATIABody
+
+// VB object name : Body (Id used in Visual Basic)
+#pragma ID Body "DCE:ff582ff0-39ad-11d1-a26c0000f87546fd"
+#pragma ALIAS CATIABody Body
+
+
+#endif
+// CATIABody_IDL
+

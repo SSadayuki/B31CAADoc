@@ -1,0 +1,30 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=NONE
+
+LINK_WITH = JS0CORBA JS03TRA \
+            InfItf JS0INF JS0DSPA JS0CTYP JS03TRA
+
+#
+#OS = AIX
+#BUILD = NO
+
+#
+#OS = HP-UX
+#BUILD = NO
+
+
+#
+#OS = IRIX
+#BUILD = NO
+
+
+#
+#OS = SunOS
+#BUILD = NO
+
+
+#
+#OS = Windows_NT
+

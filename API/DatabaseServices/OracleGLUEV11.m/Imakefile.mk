@@ -1,0 +1,45 @@
+#
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+
+#
+
+#
+OS = AIX
+BUILD=NO
+
+#
+OS = HP-UX
+BUILD=NO
+
+
+#
+OS = IRIX
+BUILD=NO
+
+#
+OS = SunOS
+BUILD=YES
+LINK_WITH= JS0CORBA clntsh11
+LOCAL_CCFLAGS=  -D_oracle_XA
+
+
+OS = alpha_a
+BUILD=NO
+
+OS = intel_a
+BUILD=NO
+
+OS = intel_a64
+BUILD=NO
+  
+OS = win_a
+BUILD=NO
+
+OS = win_b64
+BUILD=NO
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+# COPYRIGHT DASSAULT SYSTEMES 2001
+#
+ 
+#ifdef CATIAV5R27
+BUILT_OBJECT_TYPE=JAVA
+
+TYPE = COMMON
+
+#ifdef CATIAV5R28
+LINK_WITH = CATJDialog CATJSystem CATJdgTheme CATJsyTransaction
+#else
+LINK_WITH = CATJDialog CATJSystem CATJdgTheme
+#endif
+
+LOCAL_JAVA_FLAGS=-J-ms16m -J-mx96m
+
+CLR = NO
+#else
+BUILT_OBJECT_TYPE=JAVA
+
+TYPE = COMMON
+
+LINK_WITH = CATJDialog CATJSystem CATJdgTheme
+
+LOCAL_JAVA_FLAGS=-J-ms16m -J-mx96m
+
+CLR = YES
+#endif
+
+
+#Build with java target level 1.7 for R26 and above but below R28
+#if defined(CATIAV5R26) && !defined(CATIAV5R28)
+_MK_TRGOPTS_FORTOOLS = 1.7
+#endif
+

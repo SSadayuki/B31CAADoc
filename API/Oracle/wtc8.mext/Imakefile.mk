@@ -1,0 +1,27 @@
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+
+DELIVERABLE = NO
+
+OS = AIX
+BUILD=NO
+
+OS = IRIX
+BUILD=YES
+
+OS = hpux_a
+BUILD=NO
+
+OS = hpux_b
+BUILD=YES
+
+OS = SunOS
+BUILD = YES
+
+OS = alpha_a
+BUILD=NO
+
+OS = intel_a
+BUILD=NO
+
+OS = win_b64
+BUILD=NO

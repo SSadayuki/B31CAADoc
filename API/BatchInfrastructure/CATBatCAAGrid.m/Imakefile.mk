@@ -1,0 +1,6 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH = JS0GROUP BatchInfrastructureUUID CATBatchUtils CATSysMultiThreading JS0FM CATSysMainThreadMQ CATComServices

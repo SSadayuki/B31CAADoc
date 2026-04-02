@@ -1,0 +1,48 @@
+BUILT_OBJECT_TYPE=NONE
+
+#
+OS = COMMON
+LINK_WITH = \
+  JS0CORBA \
+  AC0XXLNK \
+  AD0XXBAS \
+  YN000M2D \
+  YN000MAT \
+  YN000MFL \
+  YN000FUN \
+  CO0LSTPV \
+  CO0HTAB \
+  YP00SWEP \
+  BOOERROR \
+  YP00IMPL \
+  YP00TRST \
+  Ribbon \
+  YI00IMPL \
+  TopoOperError \
+  Y300IINT \
+  Y30C1XMM \
+  BOOPER \
+  BOOLEAN \
+  Primitives \
+  Transfo \
+  Extrude \ 
+  BO0SWEEP \
+  FrFTopologicalOpe
+#
+# For debug purposes
+#
+LOCAL_CCFLAGS=-DSWEEPTRACEON
+LOCAL_CCFLAGS=-DCGMTRACEON
+
+OS = AIX
+OS = IRIX
+OS = HP-UX
+OPTIMIZATION_CPP= +O1
+OS = SunOS
+#
+OS = Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+#

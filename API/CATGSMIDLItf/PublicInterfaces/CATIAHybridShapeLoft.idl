@@ -1,0 +1,579 @@
+#ifndef CATIAHybridShapeLoft_IDL
+#define CATIAHybridShapeLoft_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeLoft:         
+// Exposed interface for HybridShape LoftExplicit
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+
+/**
+ * Represents the hybrid shape loft surface feature object.
+ * <b>Role</b>: To access the data of the hybrid shape loft surface feature object.
+ * <br>This data includes:
+ * <ul>
+ * <li>The spine</li>
+ * <li>The tangent surfaces to the start and end sections</li>
+ * <li>Guide curves, sections, and couplings</li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeLoft object.
+ * <p>  LICENSING INFORMATION: Creation of volume result requires GSO License
+ * <br> if GSO License is not granted , settting of Volume context has not effect 
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeLoft object.
+ * @see CATIAHybridShapeFactory */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeLoft : CATIAHybridShape
+{
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+/**
+ * Sets the spine to the lofted surface.
+ *   @param iSpine
+ *     The curve to be added as a spine.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ */ 
+   HRESULT SetSpine    (in  CATIAReference  iSpine );
+
+/**
+ * Sets a tangent surface to the start section from the lofted surface.
+ *   @param iTangentSection
+ *      The tangent surface to be added. The start curve section must lay on the surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ */ 
+   HRESULT SetStartSectionTangent (in  CATIAReference  iTangentSection );
+
+/**
+ * Sets a tangent surface to the end section from the lofted surface.
+ *   @param iTangentSection
+ *     The tangent surface to be added. The end curve section must lay on the surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ */ 
+   HRESULT SetEndSectionTangent (in  CATIAReference  iTangentSection );
+
+/**
+ * Sets a face to the start section from the lofted surface.
+ *   @param iFace
+ *      The face to close the loft (Part design only).
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ */ 
+   HRESULT SetStartFaceForClosing (in  CATIAReference  iFace );
+
+/**
+ * Sets a face to the end section from the lofted surface.
+ *   @param iFace
+ *      The face to close the loft (Part design only).
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ */ 
+   HRESULT SetEndFaceForClosing (in  CATIAReference  iFace );
+
+/**
+ * Adds a guide curve to the lofted surface.
+ *   @param iGuide
+ *     The guide curve to be added<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ */ 
+   HRESULT AddGuide    (in  CATIAReference  iGuide );
+
+/**
+ * Adds a guide curve and a tangent surface to the lofted surface.
+ *   @param iGuide
+ *     The guide curve to be added<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ *   @param iTangent
+ *     The tangent surface to be added.
+ *     The guide curve must be layed on the tangent<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ */ 
+   HRESULT AddGuideWithTangent  (in  CATIAReference  iGuide, in CATIAReference iTangent);
+
+/**
+ * Retrieves a loft section. 
+ * @param iCrv
+ *   Reference to the curve
+ * @param iOri
+ *   Orientation
+ * @param iPoint 
+ *   Reference to the Closing Point 
+ */ 
+  HRESULT  AddSectionToLoft (in CATIAReference  iCrv, in  long  iOri, in  CATIAReference  iPoint);
+
+
+/**
+ * Removes a guide curve from the lofted surface.
+ *   @param iGuide
+ *     The guide curve to be removed<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ */ 
+   HRESULT RemoveGuide    (in  CATIAReference  iGuide );
+
+/**
+ * Removes a loft section from the lofted surface.
+ * @param iSection 
+ *   The loft section to remove<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ */ 
+   HRESULT RemoveSection   (in  CATIAReference  iSection );
+
+
+/**
+ * Retrieves a loft section information. 
+ * @param iRank
+ *   The index of the section
+ * @param oCrv
+ *   The reference to the curve
+ * @param oOri
+ *   The orientation value
+ * @param oPoint
+ *   The reference to the point
+ */ 
+  HRESULT GetSectionFromLoft  (in long  iRank,  out CATIAReference oCrv, out long oOri, out CATIAReference oPoint);
+
+
+/**
+ * Inserts a coupling to the loft.
+ * @param iPosition 
+ *   The position of the coupling in the list of couplings.
+ *   If 0 is specified, the coupling is inserted at the end of the list.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ */ 
+	HRESULT InsertCoupling(in long iPosition);
+
+/**
+ * Inserts a coupling point to a coupling of the lofted surface.
+ * @param iCouplingIndex 
+ *   The index of the coupling in the list of coupling where the point wil be inserted.
+ * @param iPosition 
+ *   The position of the coupling point in the list of coupling points.
+ *   If 0 is specified, the coupling point is inserted at the end of the list.
+ * @param iPoint
+ *   The point to be inserted. The point must be layed on the section with the same position.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * ScVertex.
+ */ 
+	HRESULT InsertCouplingPoint(in long iCouplingIndex, in long iPosition
+			 , in  CATIAReference iPoint);
+
+/**
+ * Returns or sets the type of coupling between sections of the loft.
+ * <br><b>Legal values</b>:
+ * <dl>
+ * <dt>1</dt>
+ * <dd>The curves will be coupled according to the curvilinear abscissa ratio</dd>
+ * <dt>2</dt>
+ * <dd>if each curve has the same number of tangency 
+ * discontinuity points, then these points will be coupled,
+ * otherwise an error message is displayed</dd>
+ * <dt>3</dt>
+ * <dd>if each curve has the same number 
+ * of tangency and curvature discontinuity points,
+ * then tangency discontinuity points will be coupled,
+ * and after curvature discontinuity points will be coupled,
+ * otherwise an error message is displayed</dd>
+ * <dt>4</dt>
+ * <dd>if each curve has the same number of vertices, 
+ * then these points will be coupled,
+ * otherwise an error message is displayed</dd>
+ * </dl>
+ */
+#pragma PROPERTY SectionCoupling
+    HRESULT get_SectionCoupling (out /*IDLRETVAL*/ long oCoupling);
+    HRESULT put_SectionCoupling (in long iCoupling);
+
+
+/**
+ * Returns or sets the relimitation type between sections of the loft.
+ * <br>NOT YET IMPLEMENTED.
+ * <br><b>Legal values</b>:
+ * <dl>
+ * <dt>1</dt>
+ * <dd>The loft will be swept along the spine, then relimited by the start section and the end section</dd>
+ * <dt>2</dt>
+ * <dd>The loft will be swept along the spine.
+ *   <ul>
+ *     <li>If the spine is a user spine, then the loft is limited by the spine extremities</li>
+ *     <li>If the spine is a computed spine, then the loft is limited:
+ *     <ul>
+ *       <li>By the start section and the end section, if there is no guide</li>
+ *       <li>By the guides extremities, if there are guides</li>
+ *     </li>
+ *     </ul>
+ *   </ul>
+ * </dd>
+ * <dt>3</dt>
+ * <dd>The loft will be swept along the spine, then relimited by the first section,  
+ *   <ul>
+ *     <li>If the spine is a user spine, then the loft is limited by the spine extremity opposite to the first section</li>
+ *     <li>If the spine is a computed spine, then the loft is limited:
+ *       <ul>
+ *          <li>By the last section, if there is no guide</li>
+ *          <li>By the guides extremities opposite to the first section, if there are guides</li>
+ *       </ul>
+ *     </li>
+ *   </ul>
+ * </dd>
+ * <dt>4</dt>
+ * <dd>The loft will be swept along the spine, then relimited by the last section,  
+ *   <ul>
+ *     <li>If the spine is a user spine, then the loft is limited by the spine extremity opposite to the last section</li>
+ *     <li>If the spine is a computed spine, then the loft is limited:
+ *       <ul>
+ *          <li>By the first section, if there is no guide</li>
+ *          <li>By the guides extremities opposite to the last section, if there are guides</li>
+ *       </ul>
+ *     </li>
+ *    </ul>
+ *  </dd>
+ *  </dl>  
+ */
+#pragma PROPERTY Relimitation
+    HRESULT get_Relimitation (out /*IDLRETVAL*/ long oRelimitation);
+    HRESULT put_Relimitation (in long iRelimitation);
+
+
+/**
+ * Returns or sets whether canonical surfaces of the lofted surface are detected.
+ * <br><b>Legal values</b>:
+ * <dl>
+ * <dt>0</dt>
+ * <dd>No detection of canonical surface is performed</dd>
+ * <dt>1</dt>
+ * <dd>Detection of planar surfaces only is performed</dd>
+ * <dt>2</dt>
+ * <dd>Detection of canonical surfaces is performed</dd>
+ * </dl>
+ */
+#pragma PROPERTY CanonicalDetection
+	HRESULT get_CanonicalDetection(out /*IDLRETVAL*/ long oDetection);
+	HRESULT put_CanonicalDetection(in long iDetection);
+
+
+/**
+ * Returns or sets whether the tangent surface to the start section of the lofted surface is computed.
+ * <br><b>Legal values</b>:
+ * <dl>
+ * <dt>1</dt>
+ * <dd>The tangent to the start section is computed</dd>
+ * <dt>2</dt>
+ * <dd>The tangent to the start section is not computed</dd>
+ * </dl>
+ */
+#pragma PROPERTY CompStartSectionTangent
+    HRESULT get_CompStartSectionTangent (out /*IDLRETVAL*/ long oComputedTangent);
+    HRESULT put_CompStartSectionTangent (in long iComputedTangent);
+
+/**
+ * Returns or sets whether the tangent surface to the end section of the lofted surface is computed.
+ * <br><b>Legal values</b>:
+ * <dl>
+ * <dt>1</dt>
+ * <dd>The tangent to the end section is computed</dd>
+ * <dt>2</dt>
+ * <dd>The tangent to the end section is not computed</dd>
+ * </dl>
+ */
+#pragma PROPERTY CompEndSectionTangent
+    HRESULT get_CompEndSectionTangent (out /*IDLRETVAL*/ long oComputedTangent);
+    HRESULT put_CompEndSectionTangent (in long iComputedTangent);
+
+/**
+ * Returns or sets whether a deviation is allowed or not during lofting operation in order to smooth it.
+ * <br><b>Legal values</b>:
+ * <dl>
+ * <dt>TRUE</dt>
+ * <dd>The deviation value is used during the lofting operation</dd>
+ * <dt>FALSE</dt>
+ * <dd>The deviation value is not used during the lofting operation</dd>
+ * </dl>
+ */
+#pragma PROPERTY SmoothDeviationActivity
+    HRESULT get_SmoothDeviationActivity (out /*IDLRETVAL*/ boolean oSmoothDeviationActivity);
+    HRESULT put_SmoothDeviationActivity (in boolean iSmoothDeviationActivity);
+
+/**
+ * Returns or sets the deviation value (length) 
+ * allowed during lofting operation in order to smooth it.
+ */
+#pragma PROPERTY SmoothDeviation
+    HRESULT get_SmoothDeviation (out /*IDLRETVAL*/ double oSmoothDeviation);
+    HRESULT put_SmoothDeviation (in double iSmoothDeviation);
+
+/**
+ * Returns or sets whether a angular threshold is allowed or not during lofting operation in order to smooth it.
+ * <br><b>Legal values</b>:
+ * <dl>
+ * <dt>TRUE</dt>
+ * <dd>The angular threshold value is used during the lofting operation</dd>
+ * <dt>FALSE</dt>
+ * <dd>The angular threshold value is not used during the lofting operation</dd>
+ * </dl>
+ */
+#pragma PROPERTY SmoothAngleThresholdActivity
+    HRESULT get_SmoothAngleThresholdActivity (out /*IDLRETVAL*/ boolean oSmoothAngleThresholdActivity);
+    HRESULT put_SmoothAngleThresholdActivity (in boolean iSmoothAngleThresholdActivity);
+
+/**
+ * Returns or sets the angular threshold under which discontinuities (moving frame,
+ * tangency net on reference surface) will be smoothed.
+ */
+#pragma PROPERTY SmoothAngleThreshold
+    HRESULT get_SmoothAngleThreshold (out /*IDLRETVAL*/ double oSmoothAngleThreshold);
+    HRESULT put_SmoothAngleThreshold (in double iSmoothAngleThreshold);
+
+#pragma PROPERTY Context
+ /**
+  * Returns or sets the context on Loft feature. 
+  * <br><b>Legal values</b>:
+  * <ul>
+  * <li><b>0</b> This option creates Lofted surface.</li>
+  * <li><b>1</b> This option creates Lofted volume.</li>
+  * </ul>
+  * <br> Note: Setting volume result requires GSO License. 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oContext</code> the context
+  * for the <code>Loft</code> hybrid shape feature.
+  * <pre>
+  * Dim oContext
+  * Set oContext = Loft.<font color="red">Context</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT get_Context ( out /*IDLRETVAL*/ long oContext );
+  HRESULT put_Context ( in                long iContext );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+ /**
+  * Gets the start and end section tangents of the lofted surface.
+  *   @param oStartSectionTangent
+  *      tangent surface at start section.
+  *   @param oEndSectionTangent
+  *      tangent surface at end section.
+  */
+  HRESULT GetStartAndEndSectionTangent( out CATIAReference oStartSectionTangent,
+                                        out CATIAReference oEndSectionTangent );
+ /**
+  * Gets start and end faces if the tangent is a computed tangent surface to the 
+  *   start section or end section, from the lofted surface.
+  * The section must have been set as a face. 
+  *   @param oStartFace
+  *      start face used to close the loft.  
+  *   @param oEndFace
+  *      end face used to close the loft.
+  */
+  HRESULT GetFacesForClosing(out CATIAReference oStartFace,out CATIAReference oEndFace);
+
+ /**
+  * Gets the spine of the lofted surface.
+  *   @param oSpineType
+  *      type of spine = 1 : User defined spine.
+  *                    = 2 : Automatically computed spine.
+  *   @param oSpine
+  *      curve used as a spine, if the spine is user defined one.
+  */
+  HRESULT GetSpine( out long oSpineType, out CATIAReference oSpine);
+
+ /**
+  * Modifies the curve of a guide from the lofted surface.
+  *   @param iGuide
+  *      guide curve to be replaced.
+  *   @param iNewGuide
+  *      new guide curve, will replace iGuide.
+  */
+  HRESULT ModifyGuideCurve( in CATIAReference iGuide,in CATIAReference iNewGuide );
+
+ /**
+  * Modifies the orientation of the curve of a section from the lofted surface.
+  *   @param iSection
+  *      section curve to be modified.
+  *   @param iOrient
+  *      orientation of the section curve =  1 : same orientation.
+  *                                       = -1 : inverted orientation.
+  *                                       =  2 : ko orientation.
+  */
+  HRESULT ModifySectionOrient(in CATIAReference iSection,in long iOrient);
+
+ /**
+  * Removes face used to close the lofted surface. 
+  *   @param iSection 
+  *       section curve.
+  */
+  HRESULT RemoveFaceForClosing(in CATIAReference iSection);
+
+ /**
+  * Removes a tangent surface of a guide from the lofted surface.
+  *   @param iGuide
+  *      guide curve of the guide from which the tangent will be removed.
+  */
+  HRESULT RemoveGuideTangent(in CATIAReference iGuide);
+
+ /**
+  * Removes a closing point of a section from the lofted surface.
+  * The curve section must be closed curve. 
+  *   @param iSection
+  *      section curve of the section from which the point will be removed.
+  */
+  HRESULT RemoveSectionPoint(in CATIAReference iSection);
+
+ /**
+  * Removes the tangent surface of a section from the lofted surface.
+  * The section must be the start section or the end section of the loft. 
+  *   @param iSection
+  *      section curve of the section from which the tangent will be removed.
+  */
+  HRESULT RemoveSectionTangent(in CATIAReference iSection);
+
+ /**
+  * Gets informations about the guide at a specified position in the list  of the lofted surface.
+  *   @param iPos
+  *      position of the guide in the list where the information is retrieved.
+  *   @param oGuide
+  *      the guide curve.
+  *   @param oGuideTangent
+  *      the tangent corresponding to the guide curve.
+  */
+  HRESULT GetGuide( in long iPos,
+                    out CATIAReference oGuide, 
+				    out CATIAReference oGuideTangent);
+ /**
+  * Returns the number of guides in the loft object.
+  * @param oSize
+  *     Number of guides in the loft.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the number of guides
+  * in the <code>hybShpLoft</code> hybrid shape Loft.
+  * <pre>
+  * Dim oSize As  long
+  * oSize = hybShpLoft.<font color="red">GetNbOfGuides</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetNbOfGuides(out /*IDLRETVAL*/ long oSize);
+
+ /**
+  * Modifies the curve of section from the lofted surface.
+  *   @param iSection
+  *      section curve to be replaced.
+  *   @param iNewSection
+  *      section will replace iSection, can be a curve or a face
+  *   @param oCurveSection
+  *      if iSection is a face, oCurveSection is the boundary of the face.
+  *      oCurveSection is used as section curve.
+  *      if Part design, the face is used to close the Loft.
+  *   @param oClosingPoint
+  *      if iSection is a closed curve, oClosingPoint is a new closing point
+  *      of iSection.
+  *      if iSection is a face, oClosingPoint is a new closing point the boundary
+  *      of iSection.
+  *   @param oPtDiag
+  *      Information on closing point = 0 : No closing point has been created nor retrieved. 
+  *                                   = 1 : A closing point has been created as a vertex.
+  *                                   = 2 : A closing point has been created as an extremum.
+  *                                   = 3 : A closing point has been retrieved as an extremum.
+  */
+  HRESULT ModifySectionCurve( in  CATIAReference iSection,
+                              in  CATIAReference iNewSection,
+							  out CATIAReference oCurveSection,
+							  out CATIAReference oClosingPoint,
+							  out long oPtDiag );
+ /**
+  * Gets or sets the boolean operation for closed lofted surface.
+  * TO BE USED ONLY for Part Loft (closed loft).
+  *      BooleanOperation = 1 : No boolean operation.
+  *                       = 2 : Union  boolean operation.
+  *                       = 3 : Removal boolean operation.
+  * This example retrieves in <code>BoolOp</code> the type of boolean operation 
+  * for the <code>Loft</code> hybrid shape feature.
+  * <pre>
+  * Dim BoolOp
+  * BoolOp = Loft.<font color="red">BooleanOperation</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY BooleanOperation
+    HRESULT get_BooleanOperation (out /*IDLRETVAL*/ long oBool);
+    HRESULT put_BooleanOperation (in long iBool);
+
+ /**
+ * Inserts a loft section. 
+ * @param iType
+ *	 iType if set to true section is added After and iType if set to false section is added Before iSectionRef
+ * @param iCrv
+ *   Reference to the curve
+ * @param iOri
+ *   Orientation
+ * @param iPoint 
+ *   Reference to the Closing Point 
+ * @param iSectionRef
+ *	iSectionRef is the section before and after which section is added. 
+ */ 
+	HRESULT  InsertSectionToLoft (in boolean iType,in CATIAReference  iCrv, in  long  iOri, in  CATIAReference  iPoint,in CATIAReference iSectionRef);
+	
+
+  /**
+   * Gets or sets the optional area law for multi-sections element definition. The law is a length law.
+   */
+#pragma PROPERTY AreaLaw
+   HRESULT get_AreaLaw(out /*IDLRETVAL*/ CATIAReference opIAElem);
+   HRESULT put_AreaLaw(in CATIAReference ipIAElem);
+
+  /**
+   * Gets or sets the tolerance applied to area law. The value is in mm.
+   */
+#pragma PROPERTY AreaLawTolerance
+   HRESULT get_AreaLawTolerance(out /*IDLRETVAL*/ double opIAElem);
+   HRESULT put_AreaLawTolerance(in double ipIAElem);
+
+  /**
+   * Gets the tolerance parameter applied to area law.
+   */
+   HRESULT GetAreaLawToleranceParameter(out /*IDLRETVAL*/ CATIALength opIAElem);
+
+};
+
+// Interface name : CATIAHybridShapeLoft
+#pragma ID CATIAHybridShapeLoft "DCE:8cd8dac4-103d-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeLoft
+
+// VB object name : HybridShapeLoft (Id used in Visual Basic)
+#pragma ID HybridShapeLoft "DCE:8cd8dac9-0607-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeLoft HybridShapeLoft
+
+#endif

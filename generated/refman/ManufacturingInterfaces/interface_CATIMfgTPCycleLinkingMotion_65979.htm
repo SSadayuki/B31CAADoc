@@ -1,0 +1,908 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>ManufacturingInterfaces CATIMfgTPCycleLinkingMotion Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../ManufacturingInterfaces.htm" href="../ManufacturingInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "ManufacturingInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIMfgTPCycleLinkingMotion"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>ManufacturingInterfaces Framework:  CATIMfgTPCycleLinkingMotion Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIMfgTPCycleLinkingMotion_65979','CATIMfgTPCycleLinkingMotion','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIMfgTPCycleLinkingMotion</b>
+</p>
+<p>
+<b><i> Interface to manage linking motions between cycle location points.</i></b><br>
+
+ This interface is available on <script type="text/javascript"> activateLinkAnchor('CATIMfgToolPathCycle','','CATIMfgToolPathCycle') </script> object.<br> A linking motion has an index which is the number of relative cycle location point.<br>
+ The linking motion index 'i' describes the linking traject between the cycle location point index 'i' and
+ the cycle location point index 'i+1'.<br>
+ The linking motion index '0' describes the approach traject to the first cycle location point.<br>
+ The linking motion index 'N' with 'N' equal to the last cycle location point number is the retract traject
+  from the last location point.<br>
+ A linking motion can be composed of several 'polylines' (linear motions), 'circle arcs' (circular motions) and
+  syntaxes.<br>
+ If the linking motion index 'i' exists, it means that, in APT file, current CYCLE/ statement has to be stopped 
+  on cycle location point index 'i', that the linking motion has to be generated (with GOTO/,... statements) and
+  a new CYCLE/ statement has to be generated on cycle location point index 'i+1'.<br> 
+
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIMfgToolPathCycle','','CATIMfgToolPathCycle') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AddACircleArcSubMotion(int,CATUnicodeString&amp;,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATMathVector&amp;,CATMathPoint&amp;,double)"><b>AddACircleArcSubMotion</b></a>(int,CATUnicodeString&amp;,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATMathVector&amp;,CATMathPoint&amp;,double)
+</td><td id='tdright'>    Adds a sub-motion describing a "Circle Arc" (circular motion).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddAPPCommandSubMotion(int,CATUnicodeString&amp;,int)"><b>AddAPPCommandSubMotion</b></a>(int,CATUnicodeString&amp;,int)
+</td><td id='tdright'>    Adds a sub-motion describing a "PP command".
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddAPolylineSubMotion(int,CATUnicodeString&amp;,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)"><b>AddAPolylineSubMotion</b></a>(int,CATUnicodeString&amp;,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)
+</td><td id='tdright'>    Adds a sub-motion describing a "Polyline" (set of linear motions).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddAUserSyntaxSubMotion(int,CATUnicodeString&amp;)"><b>AddAUserSyntaxSubMotion</b></a>(int,CATUnicodeString&amp;)
+</td><td id='tdright'>    Adds a sub-motion describing a "user syntax".
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddToolAxisInSubMotion(CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)"><b>AddToolAxisInSubMotion</b></a>(CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)
+</td><td id='tdright'>    Adds tool axis on each point for a "Polyline" or a "Circle arc" for 5 Axis machining.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AreThereLinkingMotions()"><b>AreThereLinkingMotions</b></a>()
+</td><td id='tdright'>    Retrieves if at least a location point owns linking sub-motions.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCircleArcCharacteristics(int,int,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATMathVector&amp;,CATMathPoint&amp;,double&amp;)"><b>GetCircleArcCharacteristics</b></a>(int,int,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATMathVector&amp;,CATMathPoint&amp;,double&amp;)
+</td><td id='tdright'>    Retrieves the characteristics of a "circle arc" sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCommandEvaluation(int,int,CATListValCATUnicodeString&amp;)"><b>GetCommandEvaluation</b></a>(int,int,CATListValCATUnicodeString&amp;)
+</td><td id='tdright'>    Evaluates syntax relative to a "PP command" sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfSubMotions(int,int&amp;)"><b>GetNumberOfSubMotions</b></a>(int,int&amp;)
+</td><td id='tdright'>    Retrieves the number of linking sub-motions for a location point.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPPCommandCharacteristics(int,int,CATUnicodeString&amp;,int&amp;)"><b>GetPPCommandCharacteristics</b></a>(int,int,CATUnicodeString&amp;,int&amp;)
+</td><td id='tdright'>    Retrieves the characteristics of a "PP command" sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPolylineCharacteristics(int,int,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)"><b>GetPolylineCharacteristics</b></a>(int,int,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)
+</td><td id='tdright'>    Retrieves the characteristics of a "polyline" sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSpecificFeedrate(int,int,CATIMfgToolPathFeedrate_var&amp;)"><b>GetSpecificFeedrate</b></a>(int,int,CATIMfgToolPathFeedrate_var&amp;)
+</td><td id='tdright'>    Retrieves the local feedrate stored on a sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSubMotionType(int,int,int&amp;)"><b>GetSubMotionType</b></a>(int,int,int&amp;)
+</td><td id='tdright'>    Retrieves the type of a sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSymbolicFeedrate(int,int,CATUnicodeString&amp;,double&amp;)"><b>GetSymbolicFeedrate</b></a>(int,int,CATUnicodeString&amp;,double&amp;)
+</td><td id='tdright'>    Retrieves the feedrate stored on a sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetToolAxis(int,int,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)"><b>GetToolAxis</b></a>(int,int,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)
+</td><td id='tdright'>    Retrieves the tool axis stored on a sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetUserSyntaxCharacteristics(int,int,CATUnicodeString&amp;)"><b>GetUserSyntaxCharacteristics</b></a>(int,int,CATUnicodeString&amp;)
+</td><td id='tdright'>    Retrieves the characteristics of a "User syntax" sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRatioOnFeedrate(int,int,double)"><b>SetRatioOnFeedrate</b></a>(int,int,double)
+</td><td id='tdright'>    Sets a ratio on the feedrate of a sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSpecificFeedrate(int,int,CATIMfgToolPathFeedrate_var&amp;)"><b>SetSpecificFeedrate</b></a>(int,int,CATIMfgToolPathFeedrate_var&amp;)
+</td><td id='tdright'>    Sets a local feedrate on a sub-motion.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSymbolicFeedrate(int,int,CATUnicodeString&amp;)"><b>SetSymbolicFeedrate</b></a>(int,int,CATUnicodeString&amp;)
+</td><td id='tdright'>    Sets a symbolic feedrate on a sub-motion.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+<nav id = 'idxnav'> <table class = 'fill' id='idxtab' ><tbody>					<tr><th colspan = '2'>Enumerated Type Index</th></tr> 
+ <tr><td  id='tdleft'> 
+    <a href="#SubMotionType"><b>SubMotionType</b></a>
+</td><td id='tdrigth'>    The type of sub-motion.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AddACircleArcSubMotion"></a><a id="AddACircleArcSubMotion(int,CATUnicodeString&amp;,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATMathVector&amp;,CATMathPoint&amp;,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>AddACircleArcSubMotion</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iTrajectType</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iFeedrateType</span>, const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iX</span>, const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iY</span>, const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iZ</span>, const <script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>iNormal</span>, const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iCenter</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iRadius</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Adds a sub-motion describing a "Circle Arc" (circular motion).
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iTrajectType</span></dt>
+   <dd>      The type of traject
+      <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachTraject" : approach traject </li>
+      <li>"TPMachiningTraject" : machining traject </li>
+      <li>"TPRetractTraject" : retract traject </li>
+      <li>"TPLinkingTraject" : linking traject </li>
+      <li>"TPBetweenPathTraject" : traject between path </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iFeedrateType</span></dt>
+   <dd>      The type of feedrate
+       <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachFeedrate" : approach feedrate
+      <li>"TPMachiningFeedrate": machining feedrate
+      <li>"TPRetractFeedrate" : retract feedrate
+      <li>"TPRapidFeedrate" : rapid feedrate
+      <li>"TPFinishingFeedrate" : finishing feedrate
+      <li>"TPChamferingFeedrate" : chamfering feedrate
+      <li>"TPPlungeFeedrate" : plunge feedrate
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iX,iY,iZ</span></dt>
+   <dd>     The coordinates of tip points (discretization of the circle arc)
+   
+ </ dd>
+    <dt><span class='paramitem'> iNormal</span></dt>
+   <dd>     The oriented normal to the plane containing the circle arc
+   
+ </ dd>
+    <dt><span class='paramitem'> iCenter</span></dt>
+   <dd>     The center of the circle arc
+    
+ </ dd>
+    <dt><span class='paramitem'> iRadius</span></dt>
+   <dd>     The radius of the circle arc.
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddAPPCommandSubMotion"></a><a id="AddAPPCommandSubMotion(int,CATUnicodeString&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>AddAPPCommandSubMotion</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iPPCommand</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSequenceNumber</span><span class='param'>= 1</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Adds a sub-motion describing a "PP command".
+   A PP Syntax is a "NC Command" described in PP Table and evaluated from it during generation of APT file.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iPPCommand</span></dt>
+   <dd>      The name of "NC Command"
+   
+ </ dd>
+    <dt><span class='paramitem'> iSequenceNumber</span></dt>
+   <dd>      The number of sequence in the PP Table
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddAPolylineSubMotion"></a><a id="AddAPolylineSubMotion(int,CATUnicodeString&amp;,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>AddAPolylineSubMotion</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iTrajectType</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iFeedrateType</span>, const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iX</span>, const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iY</span>, const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iZ</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Adds a sub-motion describing a "Polyline" (set of linear motions).
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iTrajectType</span></dt>
+   <dd>      The type of traject
+      <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachTraject" : approach traject </li>
+      <li>"TPMachiningTraject" : machining traject </li>
+      <li>"TPRetractTraject" : retract traject </li>
+      <li>"TPLinkingTraject" : linking traject </li>
+      <li>"TPBetweenPathTraject" : traject between path </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iFeedrateType</span></dt>
+   <dd>      The type of feedrate
+       <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachFeedrate" : approach feedrate
+      <li>"TPMachiningFeedrate": machining feedrate
+      <li>"TPRetractFeedrate" : retract feedrate
+      <li>"TPRapidFeedrate" : rapid feedrate
+      <li>"TPFinishingFeedrate" : finishing feedrate
+      <li>"TPChamferingFeedrate" : chamfering feedrate
+      <li>"TPPlungeFeedrate" : plunge feedrate
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iX,iY,iZ</span></dt>
+   <dd>     The coordinates of tip points
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddAUserSyntaxSubMotion"></a><a id="AddAUserSyntaxSubMotion(int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>AddAUserSyntaxSubMotion</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iUserSyntax</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Adds a sub-motion describing a "user syntax".
+   A user syntax is a string generated as it is in APT file.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iUserSyntax</span></dt>
+   <dd>      The user syntax
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddToolAxisInSubMotion"></a><a id="AddToolAxisInSubMotion(CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>AddToolAxisInSubMotion</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iX</span>, const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iY</span>, const <script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>iZ</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Adds tool axis on each point for a "Polyline" or a "Circle arc" for 5 Axis machining.
+   This method should be called just after "AddAPolylineSubMotion" or "AddACircleArcSubMotion" in 5 Axis Machining.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX,iY,iZ</span></dt>
+   <dd>      The tool axis values
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AreThereLinkingMotions"></a><a id="AreThereLinkingMotions()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>AreThereLinkingMotions</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves if at least a location point owns linking sub-motions.
+   
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  	   The return code
+      <br><b>Legal values</b>:
+      <ul>
+      <li> 0 : no location point owns linking sub-motions </li>
+      <li> >0 : at least one location point owns one or several linking sub-motions </li>
+      </ul>
+
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCircleArcCharacteristics"></a><a id="GetCircleArcCharacteristics(int,int,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATMathVector&amp;,CATMathPoint&amp;,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetCircleArcCharacteristics</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oTrajectType</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oX</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oY</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oZ</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>oNormal</span>,<script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>oCenter</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>oRadius</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the characteristics of a "circle arc" sub-motion.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+    
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>      The index of sub-motion (must be a "circle arc" one)
+   
+ </ dd>
+    <dt><span class='paramitem'> oTrajectType</span></dt>
+   <dd>      The type of traject
+      <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachTraject" : approach traject </li>
+      <li>"TPMachiningTraject" : machining traject </li>
+      <li>"TPRetractTraject" : retract traject </li>
+      <li>"TPLinkingTraject" : linking traject </li>
+      <li>"TPBetweenPathTraject" : traject between path </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> oFeedrateType</span></dt>
+   <dd>      The type of feedrate
+       <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachFeedrate" : approach feedrate
+      <li>"TPMachiningFeedrate": machining feedrate
+      <li>"TPRetractFeedrate" : retract feedrate
+      <li>"TPRapidFeedrate" : rapid feedrate
+      <li>"TPFinishingFeedrate" : finishing feedrate
+      <li>"TPChamferingFeedrate" : chamfering feedrate
+      <li>"TPPlungeFeedrate" : plunge feedrate
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> oX,oY,oZ</span></dt>
+   <dd>     The coordinates of tip points
+   
+ </ dd>
+    <dt><span class='paramitem'> oNormal</span></dt>
+   <dd>     The oriented normal to the plane containing the circle arc
+   
+ </ dd>
+    <dt><span class='paramitem'> oCenter</span></dt>
+   <dd>     The center of the circle arc
+    
+ </ dd>
+    <dt><span class='paramitem'> oRadius</span></dt>
+   <dd>     The radius of the circle arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCommandEvaluation"></a><a id="GetCommandEvaluation(int,int,CATListValCATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetCommandEvaluation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATListValCATUnicodeString','CATListValCATUnicodeString&amp;')</script> <span class='param'>oSyntax</span>)</span><script type="text/javascript"> activateLink('=0',' =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Evaluates syntax relative to a "PP command" sub-motion.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>     The index of sub-motion (must be a "PP command" one)
+   
+ </ dd>
+    <dt><span class='paramitem'> oSyntax</span></dt>
+   <dd>	 The value of syntax 
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfSubMotions"></a><a id="GetNumberOfSubMotions(int,int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetNumberOfSubMotions</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>oNumberOfMotions</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the number of linking sub-motions for a location point.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> oNumberOfMotions</span></dt>
+   <dd>      The number of linking sub-motions
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPPCommandCharacteristics"></a><a id="GetPPCommandCharacteristics(int,int,CATUnicodeString&amp;,int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetPPCommandCharacteristics</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oPPCommand</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>oSequenceNumber</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the characteristics of a "PP command" sub-motion.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>     The index of sub-motion (must be a "PP command" one)
+   
+ </ dd>
+    <dt><span class='paramitem'> oPPCommand</span></dt>
+   <dd>      The name of "NC Command"
+   
+ </ dd>
+    <dt><span class='paramitem'> oSequenceNumber</span></dt>
+   <dd>      The number of sequence in the PP Table
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPolylineCharacteristics"></a><a id="GetPolylineCharacteristics(int,int,CATUnicodeString&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetPolylineCharacteristics</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oTrajectType</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oX</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oY</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oZ</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the characteristics of a "polyline" sub-motion.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+    
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>      The index of sub-motion (must be a "polyline" one)
+   
+ </ dd>
+    <dt><span class='paramitem'> oTrajectType</span></dt>
+   <dd>      The type of traject
+      <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachTraject" : approach traject </li>
+      <li>"TPMachiningTraject" : machining traject </li>
+      <li>"TPRetractTraject" : retract traject </li>
+      <li>"TPLinkingTraject" : linking traject </li>
+      <li>"TPBetweenPathTraject" : traject between path </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> oFeedrateType</span></dt>
+   <dd>      The type of feedrate
+       <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachFeedrate" : approach feedrate
+      <li>"TPMachiningFeedrate": machining feedrate
+      <li>"TPRetractFeedrate" : retract feedrate
+      <li>"TPRapidFeedrate" : rapid feedrate
+      <li>"TPFinishingFeedrate" : finishing feedrate
+      <li>"TPChamferingFeedrate" : chamfering feedrate
+      <li>"TPPlungeFeedrate" : plunge feedrate
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> oX,oY,oZ</span></dt>
+   <dd>     The coordinates of tip points
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSpecificFeedrate"></a><a id="GetSpecificFeedrate(int,int,CATIMfgToolPathFeedrate_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetSpecificFeedrate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATIMfgToolPathFeedrate_var','CATIMfgToolPathFeedrate_var&amp;')</script> <span class='param'>oFeedrate</span>)</span><script type="text/javascript"> activateLink('=0',' =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the local feedrate stored on a sub-motion.
+   The sub-motion must be a "Polyline" or a "Circle Arc".
+   The feedrate must be a local one.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>	   The number of sub-motion
+   
+ </ dd>
+    <dt><span class='paramitem'> oFeedrate</span></dt>
+   <dd>	   The feedrate
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  	   The return code
+      <br><b>Legal values</b>:
+      <ul>
+      <li>FALSE : the feedrate is a not a local one (use "GetSymbolicFeedrate" method) </li>
+      </ul>
+
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSubMotionType"></a><a id="GetSubMotionType(int,int,int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetSubMotionType</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>oMotionType</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the type of a sub-motion.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+    
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>      The index of sub-motion
+    
+ </ dd>
+    <dt><span class='paramitem'> oMotionType</span></dt>
+   <dd>      The type of sub-motion
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSymbolicFeedrate"></a><a id="GetSymbolicFeedrate(int,int,CATUnicodeString&amp;,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetSymbolicFeedrate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oFeedrate</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>oRatio</span>)</span><script type="text/javascript"> activateLink('=0',' =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the feedrate stored on a sub-motion.
+   The sub-motion must be a "Polyline" or a "Circle Arc".
+   The feedrate must not be a local one.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>	   The number of sub-motion
+   
+ </ dd>
+    <dt><span class='paramitem'> oFeedrate</span></dt>
+   <dd>	   The feedrate
+      <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachFeedrate" : approach feedrate
+      <li>"TPMachiningFeedrate": machining feedrate
+      <li>"TPRetractFeedrate" : retract feedrate
+      <li>"TPRapidFeedrate" : rapid feedrate
+      <li>"TPFinishingFeedrate" : finishing feedrate
+      <li>"TPChamferingFeedrate" : chamfering feedrate
+      <li>"TPPlungeFeedrate" : plunge feedrate
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> oRatio</span></dt>
+   <dd>	   The ratio value
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  	   The return code
+      <br><b>Legal values</b>:
+      <ul>
+      <li>FALSE : the feedrate is a local one (use "GetSpecificFeedrate" method)
+      </ul>
+
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetToolAxis"></a><a id="GetToolAxis(int,int,CATListOfDouble&amp;,CATListOfDouble&amp;,CATListOfDouble&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetToolAxis</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oX</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oY</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oZ</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the tool axis stored on a sub-motion.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>     The index of sub-motion (must be a "polyline" or a "circle" one)
+   
+ </ dd>
+    <dt><span class='paramitem'> oX,oY,oZ</span></dt>
+   <dd>     The tool axis values
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  	   The return code
+      <br><b>Legal values</b>:
+      <ul>
+      <li> FALSE : no tool axis stored for the sub-motion</li>
+      </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetUserSyntaxCharacteristics"></a><a id="GetUserSyntaxCharacteristics(int,int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>GetUserSyntaxCharacteristics</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oUserSyntax</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Retrieves the characteristics of a "User syntax" sub-motion.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>     The index of sub-motion (must be a "user syntax" one)
+   
+ </ dd>
+    <dt><span class='paramitem'> oUserSyntax</span></dt>
+   <dd>      The user syntax
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRatioOnFeedrate"></a><a id="SetRatioOnFeedrate(int,int,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>SetRatioOnFeedrate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iRatio</span>)</span><script type="text/javascript"> activateLink('=0',' =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets a ratio on the feedrate of a sub-motion.
+   The sub-motion must be a "Polyline" or a "Circle Arc".
+   The feedrate must be a symbolic one.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>	   The number of sub-motion
+   
+ </ dd>
+    <dt><span class='paramitem'> iRatio</span></dt>
+   <dd>	   The ratio to apply to the symbolic feedrate
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSpecificFeedrate"></a><a id="SetSpecificFeedrate(int,int,CATIMfgToolPathFeedrate_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>SetSpecificFeedrate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>,<script type="text/javascript"> activateLink('CATIMfgToolPathFeedrate_var','CATIMfgToolPathFeedrate_var&amp;')</script> <span class='param'>iFeedrate</span>)</span><script type="text/javascript"> activateLink('=0',' =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets a local feedrate on a sub-motion.
+   The sub-motion must be a "Polyline" or a "Circle Arc".
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>	   The number of sub-motion
+   
+ </ dd>
+    <dt><span class='paramitem'> iFeedrate</span></dt>
+   <dd>	   The local feedrate
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSymbolicFeedrate"></a><a id="SetSymbolicFeedrate(int,int,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>SetSymbolicFeedrate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLocationPoint</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSubMotion</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iFeedrateType</span>)</span><script type="text/javascript"> activateLink('=0',' =0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Sets a symbolic feedrate on a sub-motion.
+   The sub-motion must be a "Polyline" or a "Circle Arc".
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocationPoint</span></dt>
+   <dd>      The index of location point
+      <br><b>Legal values</b>:
+      <ul>
+      <li>0 : approach traject to the first location point </li>
+      <li>last location point index : retract traject from the last location point</li>
+      <li>i : linking traject from the location point index i to the location point index i+1 </li>
+      </ul>
+   
+ </ dd>
+    <dt><span class='paramitem'> iSubMotion</span></dt>
+   <dd>	   The number of sub-motion
+   
+ </ dd>
+    <dt><span class='paramitem'> iFeedrateType</span></dt>
+   <dd>      The type of feedrate
+       <br><b>Legal values</b>:
+      <ul>
+      <li>"TPApproachFeedrate" : approach feedrate
+      <li>"TPMachiningFeedrate": machining feedrate
+      <li>"TPRetractFeedrate" : retract feedrate
+      <li>"TPRapidFeedrate" : rapid feedrate
+      <li>"TPFinishingFeedrate" : finishing feedrate
+      <li>"TPChamferingFeedrate" : chamfering feedrate
+      <li>"TPPlungeFeedrate" : plunge feedrate
+      </ul>
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+ <h2  class='title2'>Enumerated Types</h2> <br><dl>
+<dt class='dt1'><a id="SubMotionType"/>SubMotionType</dt>
+  <dd class='dd1'>
+
+enum <b>SubMotionType</b> {<pre class='light'>
+  PolyLine,
+  Circle,
+  PPCommand,
+  UserSyntax
+</pre>}
+   The type of sub-motion.
+      <br><b>Legal values</b>:
+      <ul>
+      <li>Polyline : sub-motion describing a "polyline" (Set of linear motions)</li>
+      <li>Circle : sub-motion describing a "circle arc" (circular motion)  </li>
+      <li>PPCommand : sub-motion describing a "PP command" </li>
+      <li>UserSyntax : sub-motion describing a "user syntax" </li>
+      </ul>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIMfgTPCycleLinkingMotion.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>MfgItfEnv</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

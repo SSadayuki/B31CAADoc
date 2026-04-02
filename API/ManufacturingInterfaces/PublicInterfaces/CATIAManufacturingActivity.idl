@@ -1,0 +1,384 @@
+#ifndef CATIAManufacturingActivity_IDL
+#define CATIAManufacturingActivity_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//								   
+// CATIAManufacturingActivity:						   
+// Exposed interface for ManufacturingActivity
+//								   
+//=================================================================
+// Oct 98 Creation				              E. Chauveau
+// 07/15/03  V5R13 added the "active" property			PHD
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAActivity.idl"
+#include "CATIAParameter.idl"
+#include "CATIAManufacturingTool.idl"
+#include "CATIAManufacturingToolAssembly.idl"
+#include "CATIAManufacturingMachinableArea.idl"
+
+#include "CATSafeArray.idl"
+
+interface CATIAManufacturingPrecedences;
+
+/**
+ * ManufacturingActivity defines a set of methods and mainly adds some specific 
+ * methods and services in Manufacturing on ProcessPlan Activities. 
+ *
+ * Some methods have to be used carefully, they can have no meanly on a specific 
+ * Activity. This methods allows to support operation from other domain either then 
+ * Manufacturing.
+ */ 
+
+interface CATIAManufacturingActivity : CATIAActivity
+{
+    /**
+     * This property returns the interface which manages 
+     * the precedences on the operation. 
+     * These collection defines the list of precedences for a manufacturing Activity.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>precedences</tt> the interface  
+     * that manage the precedences for the <tt>myActivity</tt> Activity :
+     * <pre>
+     * ...
+     * Set myActivity  = ... 
+     * Set precedences = myActivity.<font color="red">Precedences</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY Precedences
+  HRESULT    get_Precedences ( out /*IDLRETVAL*/ CATIAManufacturingPrecedences oPrecedences );
+
+//#pragma PROPERTY Type
+ 
+  /**
+  * Return the type of a Manufacturing Activity.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the type <tt>ActivityType</tt> of to the manufacturing activity <tt>CurrentActivity</tt>
+  * <pre>
+  * Set ActivityType = CurrentActivity.Type
+  *</pre>
+  * </dl>
+  */
+//  HRESULT get_Type(inout /*IDLRETVAL*/ CATBSTR oType);
+
+
+#pragma PROPERTY Tool
+ 
+  /**
+  * Retreive the Tool of a Manufacturing Activity.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>CurTool</tt> the manufacturing tool 
+  * of Manufacturing Activity <tt>firstActivity</tt>
+  * <pre>
+  * Set CurTool = firstActivity.<font color="red">GetTool</font>
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT       get_Tool(out  /*IDLRETVAL*/ CATIAManufacturingTool oMfgTool);
+
+
+#pragma PROPERTY ToolAssembly
+ 
+  /**
+  * Retreive the ToolAssembly of a Manufacturing Activity.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>CurrAssembly</tt> the manufacturing tool assembly 
+  * of the manufacturing activity <tt>CurrActivity</tt>
+  * <pre>
+  * Set CurrAssembly = CurrActivity.<font color="red">ToolAssembly</font>
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT       get_ToolAssembly(out  /*IDLRETVAL*/ CATIAManufacturingToolAssembly oMfgToolAssembly);
+
+
+// Method GetAttribute
+ 
+  /**
+  * Retreive the Attribute of a Manufacturing Activity.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>RapidFeed</tt> the attribute 
+  * <tt>MfgRapidFeed</tt> of Manufacturing Activity <tt>firstActivity</tt>
+  * <pre>
+  * Set RapidFeed = firstActivity.<font color="red">GetAttribute</font>(MfgRapidFeed)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT       GetAttribute(in CATBSTR iAttribut,out  /*IDLRETVAL*/ CATIAParameter oAttributCke);
+
+
+#pragma PROPERTY NumberOfStrategyAttributes
+// Property NumberOfStrategyAttributes
+   /**
+    * This property returns the number of Strategy attributes of a Manufacturing Activity.
+    */  
+	HRESULT get_NumberOfStrategyAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method GetListOfStrategyAttributes
+  /**
+  * Retrieve the list of Strategy attributes of a Manufacturing Activity.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>oListOfAttributes</tt> the list of Strategy 
+  * attributes of the Manufacturing Activity <tt>myActivity</tt>
+  * <pre>
+  * call myActivity.<font color="red">GetListOfStrategyAttributes</font>(oListOfAttributes)
+  *</pre>
+  * </dl>
+  */
+	HRESULT GetListOfStrategyAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+#pragma PROPERTY NumberOfFeedrateAttributes
+// Property NumberOfFeedrateAttributes
+   /**
+    * This property returns the number of Feedrate attributes of a Manufacturing Activity.
+    */  
+	HRESULT get_NumberOfFeedrateAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method GetListOfFeedrateAttributes
+  /**
+  * Retrieve the list of Feedrate attributes of a Manufacturing Activity.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>oListOfAttributes</tt> the list of feedrate 
+  * attributes of the Manufacturing Activity <tt>myActivity</tt>
+  * <pre>
+  * call myActivity.<font color="red">GetListOfFeedrateAttributes</font>(oListOfAttributes)
+  *</pre>
+  * </dl>
+  */
+	HRESULT GetListOfFeedrateAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+#pragma PROPERTY NumberOfGeomAttributes
+// Property NumberOfGeomAttributes
+     /**
+     * This property returns the number of Geometry attributes of a Manufacturing Activity.
+     */  
+	HRESULT get_NumberOfGeomAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method GetListOfGeomAttributes
+  /**
+  * Retrieve the list of Geometry attributes of a Manufacturing Activity.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>oListOfAttributes</tt> the list of Geometry 
+  * attributes of the Manufacturing Activity <tt>myActivity</tt>
+  * <pre>
+  * call myActivity.<font color="red">GetListOfGeomAttributes</font>(oListOfAttributes)
+  *</pre>
+  * </dl>
+  */
+	HRESULT GetListOfGeomAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+
+#pragma PROPERTY Representation
+// Property Representation
+     /**
+     * This property returns the path of the representation file for a manufacturing Activity.
+     */  
+	HRESULT get_Representation (inout /*IDLRETVAL*/ CATBSTR Representation);
+    /**
+     * This property sets the path of the representation file for a manufacturing Activity.
+     */  
+	HRESULT put_Representation (in CATBSTR Representation);
+
+// Method GetAttributeNLSName
+ 
+  /**
+  * Retrieve the NLS name from the attribute name of a Manufacturing Activity.<br>
+  */
+	HRESULT GetAttributeNLSName (in CATBSTR iAttributName , inout /*IDLRETVAL*/ CATBSTR oNLSName);
+
+
+#pragma PROPERTY MachiningTime
+// Method GetMachiningTime
+ 
+  /**
+  * Retreive the milling time of a Manufacturing Activity.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>theMachiningTime</tt> the time when
+  * the tool meets the workpiece (in minutes).
+  * <pre>
+  * theMachiningTime = firstActivity.<font color="red">MachiningTime</font>
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT get_MachiningTime(out /*IDLRETVAL*/ double aTime);
+
+
+#pragma PROPERTY TotalTime
+// Method GetTotalTime
+ 
+  /**
+  * Retreive the total Time of a Manufacturing Activity.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>theTotalTime</tt> the total time
+  * of the activity firstActivity (in minutes).
+  * <pre>
+  * theTotalTime = firstActivity.<font color="red">TotalTime</font>
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT get_TotalTime(out /*IDLRETVAL*/ double aTime);
+
+// Method GetToolAxis
+ 
+  /**
+  * Retreives the ToolAxis coordinates of a Manufacturing Activity.<br>
+  */
+
+  HRESULT GetToolAxis(out double oXAxis,out double oYAxis, out double oZAxis);
+
+// Method SetToolAxis
+ 
+  /**
+  * Defines the ToolAxis coordinates of a Manufacturing Activity.<br>
+  */
+
+  HRESULT SetToolAxis(in double iXAxis, in double iYAxis,in double iZAxis);
+
+
+#pragma PROPERTY VideoResult
+// Method GetVideoResult
+ 
+  /**
+  * Retreive the video result path of a Manufacturing Activity. The path is empty if no video result.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>theVideoResult</tt> the video result
+  * of the activity firstActivity (in minutes).
+  * <pre>
+  * theVideoResult = firstActivity.<font color="red">VideoResult</font>
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT get_VideoResult (inout /*IDLRETVAL*/ CATBSTR VideoResult);
+
+#pragma PROPERTY MachinableFeature
+
+  /**
+  * Retrieve the machinable area of a Manufacturing Activity.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>theMAF</tt> the machinable area
+  * of the activity <tt>firstActivity</tt>.
+  * <pre>
+  * Dim firstActivity As ManufacturingActivity
+  * Set firstActivity = ...
+  * Dim theMAF As ManufacturingMachinableArea
+  * Set theMAF = firstActivity.<font color="red">MachinableArea</font>
+  *</pre>
+  * </dl>
+  */
+  HRESULT get_MachinableFeature (out /*IDLRETVAL*/ CATIAManufacturingMachinableArea oMachArea);
+
+  /**
+  * Set the machinable area of a Manufacturing Activity.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example set the machinable area <tt>theMAF</tt> 
+  * of the activity <tt>firstActivity</tt>.
+  * <pre>
+  * Dim firstActivity As ManufacturingActivity
+  * Set firstActivity = ...
+  * Dim theMAF As ManufacturingMachinableArea
+  * Set theMAF = ...
+  * firstActivity.<font color="red">MachinableArea</font> = theMAF
+  *</pre>
+  * </dl>
+  */
+  HRESULT put_MachinableFeature (in                CATIAManufacturingMachinableArea iMachArea);
+
+// Method GetMachiningDirection
+ 
+  /**
+  * Retreives the Machining Direction coordinates of a Manufacturing Operation.<br>
+  */
+
+  HRESULT GetMachiningDirection(out double oXAxis,out double oYAxis, out double oZAxis);
+
+// Method SetMachiningDirection
+ 
+  /**
+  * Defines the Machining Direction coordinates of a Manufacturing Operation.<br>
+  */
+
+  HRESULT SetMachiningDirection(in double iXAxis, in double iYAxis,in double iZAxis);
+
+
+#pragma PROPERTY Active
+//
+        /**
+         * Returns the activation state of the activity.
+         * @return oActive
+         *   The activation state of the activity
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>bActive</tt> the activation state of
+         * the activity <tt>firstActivity</tt>:
+         * <pre>
+         * Dim firstActivity As ManufacturingActivity
+         * Set firstActivity = ...
+         * Dim bActive As boolean
+         * Set bActive = firstActivity.<font color="red">Active</font>
+         * </pre>
+         */
+    HRESULT get_Active ( out /*IDLRETVAL*/ boolean oActive );
+
+        /**
+         * Sets the activation state of the activity.
+         * @param iActive
+         *   The activation state of the activity
+         * <!-- @sample -->
+         * <dt><b>Example:</b>
+         * <dd>The following example sets the activation state of the activity <tt>firstActivity</tt>:
+         * <pre>
+         * Dim firstActivity As ManufacturingActivity
+         * Set firstActivity = ...
+         * Dim bActive As boolean
+         * Set bActive = FALSE
+         * firstActivity.<font color="red">Active</font> = bActive
+         * </pre>
+         */
+    HRESULT put_Active ( in                boolean iActive);
+
+
+
+};
+
+// Interface name : CATIAManufacturingActivity
+#pragma ID CATIAManufacturingActivity "DCE:af2382fa-fbb2-11d2-9ee30004ac963be8"
+#pragma DUAL CATIAManufacturingActivity
+
+// VB object name : ManufacturingActivity (Id used in Visual Basic)
+#pragma ID ManufacturingActivity "DCE:bf854b60-fbb2-11d2-9ee30004ac963be8"
+#pragma ALIAS CATIAManufacturingActivity ManufacturingActivity
+
+
+#endif // CATIAManufacturingActivity_IDL
+

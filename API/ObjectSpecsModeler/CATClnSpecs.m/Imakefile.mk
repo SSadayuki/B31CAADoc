@@ -1,0 +1,30 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+#if os Windows
+CXX_WARNINGPROMOTE=CATOsmWarningPromote.h
+#endif
+#if os MOBILE 
+BUILD=NO
+#endif
+
+#if os Windows
+LOCAL_CCFLAGS=/D"OSM_FR_CATIA=$(ADL_FR_CATIA)"
+#else
+LOCAL_CCFLAGS=-D"OSM_FR_CATIA=$(ADL_FR_CATIA)"
+#endif
+
+INCLUDED_MODULES=AC0SPCHECK
+
+#ifdef (CATIAR206)
+SPECIFIC=
+#else
+SPECIFIC=CATIAEntity CATObjectModelerCATIA
+#endif
+
+LINK_WITH=$(SPECIFIC) @ObjectModelerCollection AD0XXBAS AC0XXLNK CATClnBase AC0SPBAS CATOsmLink AC0SPCHECK ObjectModelerSystem
+
+#if os Linux
+LOCAL_POST_CCFLAGS=-fvisibility=default
+#endif
+
+

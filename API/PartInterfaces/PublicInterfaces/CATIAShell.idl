@@ -1,0 +1,218 @@
+#ifndef CATIAShell_IDL
+#define CATIAShell_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAShell:						   
+// Exposed interface for Mechanical shell
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation					Ph Baucher
+// Dec97 Modification					 L Lalere
+//=================================================================
+#include "CATIADressUpShape.idl"
+
+interface CATIALength;
+interface CATIAReferences;
+interface CATIAReference;
+
+/**
+ * Represents the shell shape.
+ * A shell shape is made up of a list of faces to process
+ * and two thickness parameters.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAShell : CATIADressUpShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//	ON INTERNAL THICKNESS
+	//	---------------------
+	//
+    /**
+     * Returns the shell internal thickness.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>intThick</tt>
+     * the internal thickness of the shell <tt>firstShell</tt>:
+     * <pre>
+     * Set intThick = firstShell.<font color="red">InternalThickness</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY InternalThickness
+	HRESULT	get_InternalThickness
+				( out /*IDLRETVAL*/ CATIALength oInternalThickness );
+
+
+	//	ON EXTERNAL THICKNESS
+	//	---------------------
+	//
+    /**
+     * Returns the shell external thickness. 
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>extThick</tt>
+     * the external thickness of the shell <tt>firstShell</tt>:
+     * <pre>
+     * Set extThick = firstShell.<font color="red">ExternalThickness</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ExternalThickness
+	HRESULT	get_ExternalThickness
+				( out /*IDLRETVAL*/ CATIALength oExternalThickness );
+
+
+	//
+	//	ON FACES TO REMOVE
+	//	------------------
+	//
+    /**
+     * Returns the collection of faces to be removed by the shell process.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>list</tt> the faces
+     * to be removed from the shell <tt>firstShell</tt>:
+     * <pre>
+     * Set list = firstShell.<font color="red">FacesToRemove</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FacesToRemove
+	HRESULT	get_FacesToRemove
+				( out /*IDLRETVAL*/ CATIAReferences oFacesToRemove );
+
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+	//	ADD A FACE TO REMOVE
+	//	--------------------
+	//
+    /**
+     * Adds a new face to those to be removed by the shell process. 
+     * @param iFaceToRemove
+     *   The face to be removed<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new <tt>face</tt> face
+     * to be removed in the shell <tt>firstShell</tt>:
+     * <pre>
+     * call firstShell.<font color="red">AddFaceToRemove</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	AddFaceToRemove
+				( in CATIAReference iFaceToRemove );
+
+	//
+	//	WITHDRAW A FACE TO REMOVE
+	//	-------------------------
+	//
+    /**
+     * Withdraws an existing face from those to be removed
+     * by the shell process. 
+     * @param iFaceToWithdraw
+     *   The face to be withdrawn from the shell<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example removes the <tt>face</tt> face from the list of
+     * faces in the shell <tt>firstShell</tt>:
+     * <pre>
+     * call firstShell.<font color="red">WithdrawFaceToRemove</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	WithdrawFaceToRemove
+				( in CATIAReference iFaceToWithdraw );
+	//
+	//	ADD A FACE WITH DIFFERENT THICKNESS
+	//	----------------------------------- 
+	//
+    /**
+     * Adds a new face to be thicken with different offset values. 
+     * @param iFaceToThicken
+     *   The face to be thicken with different offset values<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new <tt>face</tt> face
+     * to be thicken with different offset values 
+     * in the shell <tt>firstShell</tt>:
+     * <pre>
+     * call firstShell.<font color="red">AddFaceWithDifferentThickness</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	AddFaceWithDifferentThickness
+				( in CATIAReference iFaceToThicken );
+
+	//
+	//	REMOVE A FACE WITH DIFFERENT THICKNESS
+	//	--------------------------------------
+	//
+    /**
+     * Removes an existing face from those to be thicken with different 
+     * offset values by the shell process. 
+     * @param iFaceToRemove
+     *   The face to be removed from the shell specifications<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example removes the <tt>face</tt> face from the list
+     * of faces in the shell <tt>firstShell</tt>:
+     * <pre>
+     * call firstShell.<font color="red">RemoveFaceWithDifferentThickness</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	RemoveFaceWithDifferentThickness
+				( in CATIAReference iFaceToRemove );
+
+	/**
+	* Set the Support Volume of the faces to modify during Shell operation.
+	*/
+	HRESULT SetVolumeSupport(in CATIAReference iVolumeSupport);
+};
+
+// Interface name : CATIAShell
+#pragma ID CATIAShell "DCE:b81cb029-65a0-11d1-a27f0000f87546fd"
+#pragma DUAL CATIAShell
+
+// VB object name : Shell (Id used in Visual Basic)
+#pragma ID Shell "DCE:b84406f6-65a0-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIAShell Shell
+
+
+#endif
+// CATIAShell_IDL
+

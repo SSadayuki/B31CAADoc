@@ -1,0 +1,504 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATGSMUseItf CATIGSMUseMultiSelManager Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATGSMUseItf.htm" href="../CATGSMUseItf.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATGSMUseItf";	}
+		function getCurrentObjectName() { 
+ 	return "CATIGSMUseMultiSelManager"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>CATGSMUseItf Framework:  CATIGSMUseMultiSelManager Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIGSMUseMultiSelManager_39775','CATIGSMUseMultiSelManager','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIGSMUseMultiSelManager</b>
+</p>
+<p>
+<b><i> Interface required on component manager for multiselection in GSD UI.</i></b><br>
+   
+ <p>Role :</p>
+ <br>Allows to handle GSD MultiSelection at creation or edition transactions 
+ 
+ <pre> 
+   //1- How to retrieve the interface ; 
+   //------------------------------------------------------------------------------------
+   #include "CATGSMCreateMultiSelManager.h" //  Define the component managing MultiSelection 
+   #include "CATIGSMUseMultiSelManager.h"         //  Interface implemented by the component
+  .... 
+   
+    HRESULT rc = S_OK;
+    CATIGSMUseMultiSelManager *piMSMgr = NULL; 
+    rc = CATGSMCreateMultiSelManager ( *&piMSMgr);
+   
+   if (SUCCEEDED(rc) && NULL != piMSMgr) {
+                  ...... 
+      }       
+ </pre></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CheckMultiSelCoherency(CATBaseUnknown_var,CATIEdit_var&amp;,CATIMmiMechanicalFeature_var&amp;)"><b>CheckMultiSelCoherency</b></a>(CATBaseUnknown_var,CATIEdit_var&amp;,CATIMmiMechanicalFeature_var&amp;)
+</td><td id='tdright'>  Check the MultiOutput Coherency.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ConvertVirtFeatsToRealFeats(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>ConvertVirtFeatsToRealFeats</b></a>(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Changes the state of the multisel features  during multisel transaction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Declare(CATIMmiMechanicalFeature_var&amp;)"><b>Declare</b></a>(CATIMmiMechanicalFeature_var&amp;)
+</td><td id='tdright'>  Asks to the multisel feature to instanciate the multisel feature with a new Input.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Declare(CATIMmiMechanicalFeature_var&amp;,int)"><b>Declare</b></a>(CATIMmiMechanicalFeature_var&amp;,int)
+</td><td id='tdright'>  Asks to the multisel feature to instanciate the multisel feature with a new Input at indice nB.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DestroyRealFeatsEntries(CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>DestroyRealFeatsEntries</b></a>(CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Delete the state of multisel features that it has been removed during multisel transaction 
+ <br> Some feature previously instanciated do not correspond to a valid multisel results, then need to be removed  
+ <br> WARNING : dead features need to be remove immediately after (info in temporary structure is cleaned) 
+   
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DuplicateObjectsMS(CATIMmiMechanicalFeature_var,CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>DuplicateObjectsMS</b></a>(CATIMmiMechanicalFeature_var,CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Duplicate features under multisel.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetImpactedFeatures(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>GetImpactedFeatures</b></a>(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Gets the state of MultiSel for pre-visualisation (for two multiSel input).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMSList(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,int)"><b>GetMSList</b></a>(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,int)
+</td><td id='tdright'>  Gets the Multisel Inputs List  at index iNb (iNb =1 or 2).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetRealFeaturesList(CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>GetRealFeaturesList</b></a>(CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Gets list of all real multisel features.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ImpactAll(void)"><b>ImpactAll</b></a>(void)
+</td><td id='tdright'>  Asks to the multisel feature to consider that all input are impacted by a modification
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#InitializeMS(CATIGSMUseFactory_var,CATIMmiMechanicalFeature_var,CATIMmiMechanicalFeature_var,CATIMmiMechanicalFeature_var&amp;)"><b>InitializeMS</b></a>(CATIGSMUseFactory_var,CATIMmiMechanicalFeature_var,CATIMmiMechanicalFeature_var,CATIMmiMechanicalFeature_var&amp;)
+</td><td id='tdright'>  Initialize MultiSel for creation or edit.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#InstanciateObjectMS(CATIMmiMechanicalFeature_var)"><b>InstanciateObjectMS</b></a>(CATIMmiMechanicalFeature_var)
+</td><td id='tdright'>  Instanciate MS at computing.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Remove(CATIMmiMechanicalFeature_var&amp;,int)"><b>Remove</b></a>(CATIMmiMechanicalFeature_var&amp;,int)
+</td><td id='tdright'>  Asks to the multisel feature to remove  an input ( nB = num of the input).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RemoveAll(int)"><b>RemoveAll</b></a>(int)
+</td><td id='tdright'>  Asks to the multisel feature to remove  all  input specs ( nB = num of the input).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Replace(CATIMmiMechanicalFeature_var&amp;,CATIMmiMechanicalFeature_var&amp;,int)"><b>Replace</b></a>(CATIMmiMechanicalFeature_var&amp;,CATIMmiMechanicalFeature_var&amp;,int)
+</td><td id='tdright'>  Asks to the multisel feature to replace an input ( nB = num of the input).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ValidateMS()"><b>ValidateMS</b></a>()
+</td><td id='tdright'>  Validate MultiSel , finalized all interactive actions related multisel 
+   
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ValidateManipulations(CATRawCollint*,CATRawCollint*)"><b>ValidateManipulations</b></a>(CATRawCollint*,CATRawCollint*)
+</td><td id='tdright'>  Validates the states the multisel feature during multisel transaction after duplication or Instanciation.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CheckMultiSelCoherency"></a><a id="CheckMultiSelCoherency(CATBaseUnknown_var,CATIEdit_var&amp;,CATIMmiMechanicalFeature_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>CheckMultiSelCoherency</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown_var')</script> <span class='param'>EditedSpec</span>,<script type="text/javascript"> activateLink('CATIEdit_var','CATIEdit_var&amp;')</script> <span class='param'>spIEdit</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>spSpec</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Check the MultiOutput Coherency. 
+ <br> Used in the implementation of CATIEdit.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> EditSpec</span></dt>
+   <dd>        Spec to edit 
+   
+ </ dd>
+    <dt><span class='paramitem'> spEdit</span></dt>
+   <dd>       Interface on CATIEdit 
+   
+ </ dd>
+    <dt><span class='paramitem'> spSpec</span></dt>
+   <dd>       Spec object
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ConvertVirtFeatsToRealFeats"></a><a id="ConvertVirtFeatsToRealFeats(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ConvertVirtFeatsToRealFeats</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oList1</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oList2</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Changes the state of the multisel features  during multisel transaction. 
+ <br> Asks internally to the multisel object to consider that virtual feature results (not already instanciate) become reals (instanciated)
+ <br> WARNING Instanciation needs to be done immmediatly after (state in temporary structure is updated) 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oList1</span></dt>
+   <dd>      Number of declare input that are tagged as Virtual for multisel input 1 
+   
+ </ dd>
+    <dt><span class='paramitem'> oList2</span></dt>
+   <dd>      Number of declare input that are tagged as Virtual for multisel input 2 
+  
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> CATIGSMUseultiSelManager</dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Declare"></a><a id="Declare(CATIMmiMechanicalFeature_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Declare</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>iSpec</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks to the multisel feature to instanciate the multisel feature with a new Input. 
+ <br> [Use with single input multisel]  
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSpec</span></dt>
+   <dd>       New multisel input
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Declare"></a><a id="Declare(CATIMmiMechanicalFeature_var&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Declare</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>iSpec</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>nB</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks to the multisel feature to instanciate the multisel feature with a new Input at indice nB.
+ <br> [Use with double input multisel] 
+ <br> Note: Only 2 (nB <=2 ) differents inputs are handle yet 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSpec</span></dt>
+   <dd>       New multisel input 
+   
+ </ dd>
+    <dt><span class='paramitem'> inB</span></dt>
+   <dd>       number of the multisel input ( 1 or 2)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DestroyRealFeatsEntries"></a><a id="DestroyRealFeatsEntries(CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>DestroyRealFeatsEntries</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oListOfDeadRealFeats</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Delete the state of multisel features that it has been removed during multisel transaction 
+ <br> Some feature previously instanciated do not correspond to a valid multisel results, then need to be removed  
+ <br> WARNING : dead features need to be remove immediately after (info in temporary structure is cleaned) 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oListOfDeadRealFeats</span></dt>
+   <dd>       List of "dead" features
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DuplicateObjectsMS"></a><a id="DuplicateObjectsMS(CATIMmiMechanicalFeature_var,CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>DuplicateObjectsMS</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature','CATIMmiMechanicalFeature_var')</script> <span class='param'>ispSpecMatrix</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>iList1</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>iList2</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Duplicate features under multisel. 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ispMultiSel</span></dt>
+   <dd>       MultiSel object
+   
+ </ dd>
+    <dt><span class='paramitem'> ispSpecMatrix</span></dt>
+   <dd>       Template for instanciate objects 
+   
+ </ dd>
+    <dt><span class='paramitem'> iList1</span></dt>
+   <dd>       List of multisel features, first multisel input 
+   
+ </ dd>
+    <dt><span class='paramitem'> iList2</span></dt>
+   <dd>       List of multisel features, second  multisel input
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetImpactedFeatures"></a><a id="GetImpactedFeatures(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetImpactedFeatures</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oRealFeats</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oListVirtual1</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oListVirtual2</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the state of MultiSel for pre-visualisation (for two multiSel input).
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oRealFeats</span></dt>
+   <dd>      List of already instanciated feature (need just to be updae) 
+   
+ </ dd>
+    <dt><span class='paramitem'> oListVirtual1</span></dt>
+   <dd>      List of multisel input virtual for multisel Input 1 , No feature result (real) yet.
+   
+ </ dd>
+    <dt><span class='paramitem'> oListVirtual2</span></dt>
+   <dd>      List of multisel input virtual for multisel Input 2 , No feature result (real) yet.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMSList"></a><a id="GetMSList(CATLISTV(CATIMmiMechanicalFeature_var)&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMSList</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oList</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>nB</span><span class='param'>=1</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the Multisel Inputs List  at index iNb (iNb =1 or 2). 
+ <br> To be used in multiSel Manager CATIGSMUsemultiSelManager with DuplicateObjectsMS method 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oSize</span></dt>
+   <dd>       Number of declare input featured
+   
+ </ dd>
+    <dt><span class='paramitem'> iNb</span></dt>
+   <dd>       number of the multisel input considered  ( 1 or 2)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetRealFeaturesList"></a><a id="GetRealFeaturesList(CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetRealFeaturesList</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oRealFeats</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets list of all real multisel features.  
+ <br> use in GetResult / GetRealFeaturesList
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oRealFeats</span></dt>
+   <dd>       List of real features
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ImpactAll"></a><a id="ImpactAll(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ImpactAll</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks to the multisel feature to consider that all input are impacted by a modification
+</dd>
+<dt class='dtmethod' >
+  <a id="InitializeMS"></a><a id="InitializeMS(CATIGSMUseFactory_var,CATIMmiMechanicalFeature_var,CATIMmiMechanicalFeature_var,CATIMmiMechanicalFeature_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>InitializeMS</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIGSMUseFactory','CATIGSMUseFactory_var')</script> <span class='param'>ispFact</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature','CATIMmiMechanicalFeature_var')</script> <span class='param'>ispSpecOnMS</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature','CATIMmiMechanicalFeature_var')</script> <span class='param'>ispMatrixFeature</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>ospMultiSel</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Initialize MultiSel for creation or edit. 
+ <br>case 1 - iSpecOnMS = NULL_var => Creation of MultiSel with the Factory
+ <br>case 2 - iSpecOnMS != NULL_var => Case MonoSel ,only Initialisation of MultiSel Mode in Edit Mode
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ispFact</span></dt>
+   <dd>        Factory Shape Design
+   
+ </ dd>
+    <dt><span class='paramitem'> ispSpecOnMS</span></dt>
+   <dd>      Init MS from a current instance of a multisel object
+	
+ </ dd>
+    <dt><span class='paramitem'> ispMatrixFeature</span></dt>
+   <dd>		Matrix feature created before the MultiSel feature
+   
+ </ dd>
+    <dt><span class='paramitem'> ospMultiSel</span></dt>
+   <dd>       MultiSel object (private geometrical Set) initialized or re-initialized
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="InstanciateObjectMS"></a><a id="InstanciateObjectMS(CATIMmiMechanicalFeature_var)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>InstanciateObjectMS</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature','CATIMmiMechanicalFeature_var')</script> <span class='param'>SpecMatrix</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Instanciate MS at computing.
+ <br> perform duplication from Spec matrix, encapsulate DuplicateObjectsMS en query to list of inputs in 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ispMultiSel</span></dt>
+   <dd>       MultiSel object
+   
+ </ dd>
+    <dt><span class='paramitem'> ispSpecMatrix</span></dt>
+   <dd>       Template for instanciate objects
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Remove"></a><a id="Remove(CATIMmiMechanicalFeature_var&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Remove</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>iSpec</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>nB</span><span class='param'>= 1</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks to the multisel feature to remove  an input ( nB = num of the input).
+ <br> Ex : Spec input is remove, one instance of the feature in multisel is removed      * <br> [single/double input multisel]  
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSpec</span></dt>
+   <dd>       multisel input to remove 
+   
+ </ dd>
+    <dt><span class='paramitem'> inB</span></dt>
+   <dd>       number of the multisel input ( 1 or 2)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="RemoveAll"></a><a id="RemoveAll(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>RemoveAll</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>nB</span><span class='param'>=1</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks to the multisel feature to remove  all  input specs ( nB = num of the input).
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> inB</span></dt>
+   <dd>       number of the multisel input ( 1 or 2)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Replace"></a><a id="Replace(CATIMmiMechanicalFeature_var&amp;,CATIMmiMechanicalFeature_var&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Replace</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>iSpecInit</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>iSpecNew</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>nB</span><span class='param'>= 1</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks to the multisel feature to replace an input ( nB = num of the input).
+ <br> Ex : SpecNew is replace by SpecInit in Nb input field 
+ <br> [single/double input multisel]  
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSpecInit</span></dt>
+   <dd>        multisel input to be replace  
+   
+ </ dd>
+    <dt><span class='paramitem'> iSpecNew</span></dt>
+   <dd>        multisel input new 
+   
+ </ dd>
+    <dt><span class='paramitem'> inB</span></dt>
+   <dd>       number of the multisel input ( 1 or 2)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ValidateMS"></a><a id="ValidateMS()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ValidateMS</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Validate MultiSel , finalized all interactive actions related multisel 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ispMultiSel</span></dt>
+   <dd>       MultiSel object (private geometrical Set) validation :
+      <br> Check and terminate Multiselection transaction
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ValidateManipulations"></a><a id="ValidateManipulations(CATRawCollint*,CATRawCollint*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ValidateManipulations</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATRawCollint','CATRawCollint*')</script> <span class='param'>newIndices</span>,<script type="text/javascript"> activateLink('CATRawCollint','CATRawCollint*')</script> <span class='param'>newStates</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Validates the states the multisel feature during multisel transaction after duplication or Instanciation. 
+ <br> Verify internally impact of MultiSel inputs on multisel result features (Update/State) 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNewIndices</span></dt>
+   <dd>      oNewIndices 
+   
+ </ dd>
+    <dt><span class='paramitem'> oNewStates</span></dt>
+   <dd>      oNewStates
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIGSMUseMultiSelManager.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGSMUseItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

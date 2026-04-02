@@ -1,0 +1,106 @@
+#ifndef CATIAArrangementItemReservations_IDL
+#define CATIAArrangementItemReservations_IDL
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAArrangementItemReservations.idl
+// Automation interface for the ArrangementItemReservations element 
+//
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+interface CATIAMove;
+interface CATIAArrangementItemReservation;
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+/**  
+ * A collection object for ArrangementItemReservation objects.
+ * <b> Role: </b> Use this collection object to manage (create, retrieve and remove) ArrangementItemReservation objects.
+ */
+interface CATIAArrangementItemReservations : CATIACollection 
+{
+
+  /**
+   * Creates an ArrangementItemReservation and adds it to the collection.
+   *
+   * @param iRelAxis
+   *   Relative Axis to be considered.
+   * @param iPosition
+   *   Position information for the ItemReservation (rotation and location).
+   * @param iXMin
+   *   Minium X Coordinate of the bounding box on the Item Reservation.
+   * @param iYMin
+   *   Minium Y Coordinate of the bounding box on the Item Reservation.
+   * @param iZMin
+   *   Minium Z Coordinate of the bounding box on the Item Reservation.
+   * @param iXMax
+   *   Maximum X Coordinate of the bounding box on the Item Reservation.
+   * @param iYMax
+   *   Maximum Y Coordinate of the bounding box on the Item Reservation.
+   * @param iZMax
+   *   Maximum Z Coordinate of the bounding box on the Item Reservation.
+   * @return
+   *   Returns the newly created ArrangementItemReservation object and adds it to the collection.
+   */
+
+  HRESULT AddItemReservation(in CATIAMove           iRelAxis,
+                             in CATSafeArrayVariant iPosition,
+                             in double              iXMin,
+                             in double              iYMin,
+                             in double              iZMin,
+                             in double              iXMax,
+                             in double              iYMax,
+                             in double              iZMax,
+                             out /*IDLRETVAL*/ CATIAArrangementItemReservation oArrItemReservation);
+
+
+  /**
+   * Returns the specified ArrangementItemReservation item of the collection.
+   * @param iIndex
+   *   The index or the name of the ArrangementItemReservation to retrieve from this collection.
+   *   <dl>
+   *   <dt> To retrieve a specific object by number, use the rank of the ArrangementItemReservation in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To retrieve a specific ArrangementItemReservation by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   * @return
+   *    The retrieved ArrangementItemReservation object.
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAArrangementItemReservation oArrItemReservation);
+
+  /**
+   * Removes the specified ArrangementItemReservation object from the collection.
+   * @param iIndex
+   *   The index or the name of the ArrangementItemReservation to remove from this collection.
+   *   <dl>
+   *   <dt> To remove a specific object by number, use the rank of the ArrangementItemReservation in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To remove a specific ArrangementItemReservation by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   */
+   HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAArrangementItemReservations
+#pragma ID CATIAArrangementItemReservations "DCE:40081979-b984-11d4-8def00d0b7acadba"
+#pragma DUAL CATIAArrangementItemReservations
+
+// VB object name : ArrangementItemReservations (Id used in Visual Basic)
+#pragma ID ArrangementItemReservations "DCE:4008197a-b984-11d4-8def00d0b7acadba"
+#pragma ALIAS CATIAArrangementItemReservations ArrangementItemReservations
+
+#endif

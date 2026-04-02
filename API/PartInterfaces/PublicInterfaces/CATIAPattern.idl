@@ -1,0 +1,130 @@
+#ifndef CATIAPattern_IDL
+#define CATIAPattern_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAPattern:                           
+// Exposed interface for Pattern
+//                                   
+//=================================================================
+// Usage notes:
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification                                     L Lalere
+//=================================================================
+#include "CATIATransformationShape.idl"
+
+interface CATIABase;
+interface CATIAAngle;
+
+/**
+ * Represents the pattern shape.
+ * It is the base object for rectangular and circular patterns.
+ * A pattern shape is a set of copies of the same shape.
+ * The copy is done according to linear and angular repartitions.
+ * @see CATIACircPattern, CATIARectPattern, CATIARepartition, CATIALinearRepartition, CATIAAngularRepartition
+ */
+
+//-----------------------------------------------------------------
+interface CATIAPattern : CATIATransformationShape
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON ITEM TO COPY
+    //    ---------------
+    //
+    /**
+     * Returns or sets the shape to be copied.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>shape</tt> the copied shape
+     * of the pattern <tt>firstPattern</tt>, and then sets it to <tt>pad1</tt>:
+     * <pre>
+     * Set shape = firstPattern.<font color="red">ItemToCopy</font>
+     * firstPattern.<font color="red">ItemToCopy</font> = pad1
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY ItemToCopy
+    HRESULT    get_ItemToCopy ( out /*IDLRETVAL*/ CATIABase oToCopy );
+    HRESULT    put_ItemToCopy ( in                CATIABase iToCopy );
+
+    //
+    //    ON ROTATION ANGLE
+    //    ------------------
+    //
+    /**
+     * Returns the pattern global rotation angle.
+     * The rotation is applied to the whole pattern, but not to the shapes
+     * themselves.
+     * The shape to be copied is used as the rotation center.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>globAng</tt> the rotation of
+     * pattern <tt>firstPattern</tt>:
+     * <pre>
+     * Set globAng = firstPattern.<font color="red">RotationAngle</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY RotationAngle
+    HRESULT    get_RotationAngle ( out /*IDLRETVAL*/ CATIAAngle oRotationAngle );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+
+
+    //
+    //    SITE MANAGMENT
+    //    ------------------
+    //		
+
+    /**
+     * Allows user to activate an instance of the pattern.
+     * @param iPosU
+     *   The position of the instance in the U direction
+	 * @param iPosV
+     *   The position of the instance in the V direction
+	 */
+    HRESULT ActivatePosition ( in  long iPosU, in long iPosV);
+
+    /**
+     * Allows user to desactivate an instance of the pattern.
+     * @param iPosU
+     *   The position of the instance in the U direction
+	 * @param iPosV
+     *   The position of the instance in the V direction
+	 */
+    HRESULT DesactivatePosition ( in long iPosU, in long iPosV);
+
+
+
+
+};
+
+// Interface name : CATIAPattern
+#pragma ID CATIAPattern "DCE:dbc34b1d-669b-11d1-a27f0000f87546fd"
+#pragma DUAL CATIAPattern
+
+// VB object name : Pattern (Id used in Visual Basic)
+#pragma ID Pattern "DCE:dbef669e-669b-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIAPattern Pattern
+
+
+#endif
+// CATIAPattern_IDL
+

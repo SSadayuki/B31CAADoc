@@ -1,0 +1,10 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= SHARED LIBRARY
+
+LINK_WITH = JS0FM JS0GROUP AD0XXBAS DI0PANV2 \
+            OM0EDPRO CATDlgStandard  CATEnoviaV5AdapterBase CATEnoviaV5AttrMap\
+            AS0STARTUP \
+						 
+

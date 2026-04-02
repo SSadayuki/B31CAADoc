@@ -1,0 +1,105 @@
+// COPYRIGHT Dassault Systemes 2007
+//=============================================================================
+// CATIASfmMemberPlane2Curves
+//   Define the CATIASfmMemberPlane2Curves interface for managing
+//   SfmMemberPlane2Curves attributes
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar. 2007  Creation                                                S. QUINCI
+//=============================================================================
+#ifndef CATIASfmMemberPlane2Curves_IDL
+#define CATIASfmMemberPlane2Curves_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASfmMember.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Interface to manage a Member created with two curves and a plane.
+ * <b>Role</b>: To manage member created with two curves and a plane.
+ */
+interface CATIASfmMemberPlane2Curves : CATIASfmMember
+{
+  /**
+  * Returns or sets the intersecting plane.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Plane</code> the intersecting plane for the <code>SfmMemberPlane2Curves</code> feature.
+  * <pre>
+  * Dim Plane As Reference
+  * Set Plane = SfmMemberPlane2Curves.<font color="red">Plane</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY Plane
+  HRESULT get_Plane(out /*IDLRETVAL*/ CATIAReference iPlane);
+  HRESULT put_Plane(in CATIAReference oPlane);
+
+  /**
+  * Returns or sets the first and second curve.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Curve</code> the first curve for the <code>SfmMemberPlane2Curves</code> feature.
+  * <pre>
+  * Dim Curve As Reference
+  * Set Curve = SfmMemberPlane2Curves.<font color="red">FirstCurve</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY FirstCurve
+  HRESULT get_FirstCurve(out /*IDLRETVAL*/ CATIAReference iCurve);
+  HRESULT put_FirstCurve(in CATIAReference oCurve);
+
+  #pragma PROPERTY SecondCurve
+  HRESULT get_SecondCurve(out /*IDLRETVAL*/ CATIAReference iCurve);
+  HRESULT put_SecondCurve(in CATIAReference oCurve);
+  /**
+  * Returns or sets the first Member.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Member</code> the first Member for the <code>SfmMemberPlane2Curves</code> feature.
+  * <pre>
+  * Dim Member1 As Reference
+  * Set Member1 = SfmMemberPlane2Curves.<font color="red">FirstMember</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY FirstMember
+  HRESULT put_FirstMember(in CATIAReference iFirstMember);
+  HRESULT get_FirstMember(out /*IDLRETVAL*/ CATIAReference oFirstMember);
+  /**
+  * Returns or sets the Second Member.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Member</code> the Second Member for the <code>SfmMemberPlane2Curves</code> feature.
+  * <pre>
+  * Dim Member2 As Reference
+  * Set Member2 = SfmMemberPlane2Curves.<font color="red">SecondMember</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY SecondMember
+  HRESULT put_SecondMember(in CATIAReference iSecondMember);
+  HRESULT get_SecondMember(out /*IDLRETVAL*/ CATIAReference oSecondMember);
+};
+
+// Interface name : CATIASfmMemberPlane2Curves
+#pragma ID CATIASfmMemberPlane2Curves "DCE:8dbc379a-c5c8-44c6-b8c25e23a65ee656"
+#pragma DUAL CATIASfmMemberPlane2Curves
+
+// VB object name : SfmMemberPlane2Curves (Id used in Visual Basic)
+#pragma ID SfmMemberPlane2Curves "DCE:c8164dad-c0cd-47ec-acfe19fd37dd2f85"
+#pragma ALIAS CATIASfmMemberPlane2Curves SfmMemberPlane2Curves
+
+#endif

@@ -1,0 +1,271 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMModelInterfaces CATVertexIterator Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMModelInterfaces.htm" href="../GMModelInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMModelInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATVertexIterator"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>GMModelInterfaces Framework: CATVertexIterator <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATVertexIterator_29647','CATVertexIterator','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATVertexIterator</b>
+</p>
+<p>
+<b><i> Class defining an iterator that recursively scans (inside the context 
+ of a specified body) the cells that bound a vertex.</i></b><br>
+
+  <br>  The input vertex must belong to the specified Body. 
+    The returned bounded cells belong to the specified body.
+<br>
+ This means that this class performs a radial iteration around the vertex,
+    each call to the <tt>Next</tt> method returning a new cell 
+   (whatever its dimension) that can be :
+ <ul>
+     <li> an edge (bounded by the vertex)
+     <li> a face (bounded by a domain VertexInFace)
+     <li> a face (bounded by an edge that is itself bounded by the vertex)
+ </ul>
+ For instance: the iterator on the 
+    corner of a cube returns by iteration six cells (of the same shell):
+         Edge1, Face1, Edge2, Face2, Edge3, Face3.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATVertexIterator(CATTopData*)"><b>CATVertexIterator</b></a>(CATTopData*)
+</td><td id='tdright'>  Default constructor.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATVertexIterator(CATVertexIterator&amp;)"><b>CATVertexIterator</b></a>(CATVertexIterator&amp;)
+</td><td id='tdright'>  Copy constructor.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATVertexIterator()"><b>~CATVertexIterator</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Duplicate()"><b>Duplicate</b></a>()
+</td><td id='tdright'>  Duplicates <tt>this</tt> CATVertexIterator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBody()"><b>GetBody</b></a>()
+</td><td id='tdright'>  Returns a pointer to the body inside which <tt>this</tt> iterator iterates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetVertex()"><b>GetVertex</b></a>()
+</td><td id='tdright'>  Returns a pointer to the vertex around which <tt>this</tt> iterator iterates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Next(CATSide*,CATDomain**)"><b>Next</b></a>(CATSide*,CATDomain**)
+</td><td id='tdright'>  Skips to the next cell of <tt>this</tt> iterator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Reset()"><b>Reset</b></a>()
+</td><td id='tdright'>  Initializes the iterator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetVertex(CATVertex*,CATBody*)"><b>SetVertex</b></a>(CATVertex*,CATBody*)
+</td><td id='tdright'>  Defines <tt>this</tt> vertex iterator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator=(CATVertexIterator&amp;)"><b>operator=</b></a>(CATVertexIterator&amp;)
+</td><td id='tdright'>  Assignment operator.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATVertexIterator"></a><a id="CATVertexIterator(CATTopData*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATVertexIterator</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATTopData','CATTopData*')</script> <span class='param'>iData</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Default constructor.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTopData</span></dt>
+   <dd> The object defining the CATSoftwareConfiguration and the CATCGMJournalList.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATVertexIterator"></a><a id="CATVertexIterator(CATVertexIterator&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATVertexIterator</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATVertexIterator','CATVertexIterator&amp;')</script> <span class='param'>iToCopy</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Copy constructor.
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATVertexIterator"></a><a id="~CATVertexIterator()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATVertexIterator</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Duplicate"></a><a id="Duplicate()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATVertexIterator','CATVertexIterator*')</script>  <span class='objname'>Duplicate</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Duplicates <tt>this</tt> CATVertexIterator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  A pointer to the duplicated iterator.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBody"></a><a id="GetBody()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody*')</script>  <span class='objname'>GetBody</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns a pointer to the body inside which <tt>this</tt> iterator iterates.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the body.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetVertex"></a><a id="GetVertex()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATVertex','CATVertex*')</script>  <span class='objname'>GetVertex</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns a pointer to the vertex around which <tt>this</tt> iterator iterates.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the vertex.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Next"></a><a id="Next(CATSide*,CATDomain**)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATCell','CATCell*')</script>  <span class='objname'>Next</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATSide','CATSide*')</script> <span class='param'>ioSide</span><span class='param'>=NULL</span>,<script type="text/javascript"> activateLink('CATDomain','CATDomain**')</script> <span class='param'>ioDomain</span><span class='param'>=NULL </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Skips to the next cell of <tt>this</tt> iterator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioSide</span></dt>
+   <dd> The side attribute of </tt>this</tt> with regards to the returned cell.
+ If <tt>NULL</tt>, this attribute is not returned.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioDomain</span></dt>
+   <dd> The pointer to the domain to which the returned cell belongs to.
+ If <tt>NULL</tt>, this argument is not output.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the next cell of the iterator. <tt>NULL</tt> after the last cell.
+ <br>Sample:
+<pre>CATVertexIterator iter;
+ iter.SetVertex(AVertex, InsideThisBody);
+ iter.Reset();
+ // to only retrieve the next cell
+ CATCell * nextcell=iter.Next(NULL,NULL);
+ // to retrieve the cell and more information
+ CATSide side;
+ CATDomain * domain;
+ nextcell=iter.Next(&side,&domain);
+ </pre>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Reset"></a><a id="Reset()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Reset</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Initializes the iterator.
+ <br> Allows you to run again the iterations.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetVertex"></a><a id="SetVertex(CATVertex*,CATBody*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetVertex</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATVertex','CATVertex*')</script> <span class='param'>iVertex</span>,<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iBody</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines <tt>this</tt> vertex iterator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iVertex</span></dt>
+   <dd> The pointer to the vertex around which the iteration is done. <tt>iVertex</tt>
+ must belong to <tt>iBody</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBody</span></dt>
+   <dd> The pointer to the body inside which the iteration is done. As cells can be shared
+ by several bodies, this argument precises the context of the iteration.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator="></a><a id="operator=(CATVertexIterator&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATVertexIterator','CATVertexIterator&')</script>  <span class='objname'>operator=</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATVertexIterator','CATVertexIterator&amp;')</script> <span class='param'>iToCopy</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Assignment operator.
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATVertexIterator.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMModelInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

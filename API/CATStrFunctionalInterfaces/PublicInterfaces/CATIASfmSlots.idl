@@ -1,0 +1,125 @@
+// COPYRIGHT Dassault Systemes 2011.
+//=============================================================================
+// CATIASfmSlots
+//    Interface to Create, Access and Remove Slot.
+//=============================================================================
+// Usage notes:
+//   Interface for Automation Integration.
+//=============================================================================
+// Sept. 2011  Creation                                         Deshmane Rahul
+//=============================================================================
+#ifndef CATIASfmSlots_IDL
+#define CATIASfmSlots_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl" 
+#include "CATIAReference.idl" 
+#include "CATBSTR.idl" 
+#include "CATIASfmConnectionParameters.idl"
+#include "CATIASfmSlot.idl"
+
+/**
+ * Interface to create, remove and access existing slot.
+ * <b>Role</b>:  Allows creating,removing and accessing slot object.
+ * @see CATIASfmSlots, CATIASfmSuperPlate, CATIASfmProfile, CATIASfmConnectionParameters
+ */
+interface CATIASfmSlots : CATIACollection
+{
+  /**
+  * Creates a New Slot.
+  * @param iPenetratedElement [in]
+  *     Object on which slot will be created(Plate/Profile).
+  * @param iPenetratingObject [in]
+  *      Object using which slot will be created(Profile).
+  * @param iSlotName [in]
+  *      Slot Name.
+  * @param iListParameters [in]
+  *      List of UDF parameters.
+  * @param oSfmSlot [out]
+  *      Created Slot.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example creates a new Slot on Plate.
+  * <pre>
+  * Dim PenetratedRef, PenetratingRef As Reference
+  * Set PenetratedRef = PartObj.CreateReferenceFromObject(SfmSuperPlateObj)
+  * Set PenetratingRef = PartObj.CreateReferenceFromObject(SfmSuperStiffenerObj)
+  * Dim SlotFactory As SfmOperationFactory
+  * Set SlotFactory = PartObj.GetCustomerFactory("SfmOperationFactory")
+  * Dim oListSlotParams As SfmConnectionParameters
+  * Dim oListSlotPramNames() As Variant
+  * SlotFactory.GetSlotParameters SfmSuperStiffenerObj, "Tee_Slot_thru_Plate", oListSlotParams, oListSlotPramNames
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim NewSlot As SfmSlot
+  * Set NewSlot = SlotsonPlate.<font color="red">AddSlot(PenetratedRef, PenetratedRef, "Tee_Slot_thru_Plate", oListSlotParams, oListSlotPramNames)</font>
+  * </pre>
+  * </dl> 
+  */ 
+HRESULT AddSlot(in CATIAReference iPenetratedElement, in CATIAReference iPenetratingObject,
+                in CATBSTR iSlotName, in CATIASfmConnectionParameters iListParameters,
+                out /*IDLRETVAL*/CATIASfmSlot oSfmSlot);
+  /**
+  * Gets existing Slot.
+  * @param iIndex [in]
+  *     Index of the Slot to be retrieved.  
+  * @param oSfmSlot [out]
+  *      The retrieved slot.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets existing slot on a Plate.
+  * <pre>
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim CntSlotsOnPlate As Long
+  * CntSlotsOnPlate = SlotsonPlate.Count
+  * Dim SlotObj As SfmSlot
+  * For i = 1 To CntSlotsOnPlate
+  * Set SlotObj = SlotsonPlate.<font color="red">Item(i)</font>
+  * Next
+  * </pre>
+  * </dl> 
+  */ 
+HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/CATIASfmSlot oSfmSlot);
+/**
+* Removes Existing Slot.
+* @param iSfmSlot [in]
+*     Slot to be removed.  
+* @return
+* <code>S_OK</code> if everything ran ok
+*<dl>
+*<dt>Example</dt>:
+*<dd>
+* This example removes existing slot on a Plate.
+* <pre>
+* Dim SlotsonPlate As SfmSlots
+* Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+* Dim SlotObj As SfmSlot
+* Set SlotObj = SlotsonPlate.Item(1)
+* SlotsonPlate.<font color="red">RemoveSlot(SlotObj)</font>
+* </pre>
+* </dl> 
+*/ 
+HRESULT RemoveSlot(in CATIASfmSlot iSfmSlot);
+};
+
+// Interface name : CATIASfmSlots
+#pragma ID CATIASfmSlots "DCE:A21BC77D-B5EF-40fd-BDF3394BBE0AA9F6"                                   
+#pragma DUAL CATIASfmSlots
+
+// VB object name : SfmOpening
+#pragma ID SfmSlots "DCE:9A9F5028-5A07-4adb-AB505E9446EB3EB2"                              
+#pragma ALIAS CATIASfmSlots SfmSlots
+
+#endif

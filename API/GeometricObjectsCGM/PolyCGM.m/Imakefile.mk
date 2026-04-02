@@ -1,0 +1,15 @@
+#if defined(CATIAV5R19) || defined(CATIAR206)
+BUILT_OBJECT_TYPE=NONE
+#else
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+BUILD=NO
+#endif
+
+OS=COMMON
+#
+OS=Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP=/O2
+#endif
+#

@@ -1,0 +1,86 @@
+#ifndef CATIAResource_IDL
+#define CATIAResource_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/**
+ * The object that represents a resource. <br>
+ * It also allows to get the real resource object.
+ */
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATVariant.idl"
+#include "CATIAItems.idl"
+
+interface CATIAActivities ;
+interface CATIAResources ;
+interface CATIAActivity;
+interface CATIAOutputs;
+interface CATIAResourceCollection;
+
+interface CATIAResource : CATIABase
+{
+
+/**
+ * This method returns the IDL Interface for the specified interface 
+ * identifier.<br>
+ * @param iInterfaceName
+ * The name of the interface to query. 
+ * @param oObject
+ * The pointer to the queried interface.
+ */
+
+    HRESULT	GetObject(in CATBSTR iInterfaceName,out /*IDLRETVAL*/ CATIABase oObject) ;
+
+/** 
+* This property returns the interface which manages the children TSA of the given resource/system.
+*/    
+#pragma PROPERTY ChildrenTSAs
+    HRESULT   get_ChildrenTSAs(out /*IDLRETVAL*/ CATIAActivities oChildren) ;
+
+/**
+* This property returns the interface which manages the items or input products/components assigned to the given resource/system
+*/ 
+#pragma PROPERTY InputProducts
+    HRESULT	  get_InputProducts(out /*IDLRETVAL*/ CATIAItems oInputProducts);
+
+/**
+* This property returns the interface which manages the output products/components of the given resource/system
+*/
+#pragma PROPERTY OutputProducts
+    HRESULT   get_OutputProducts(out /*IDLRETVAL*/ CATIAOutputs oOutputProducts);
+
+/** 
+* This property returns the interface which manages the downstream product flow hierarchy on the given resource.
+* This returns the collection of resources which are "Next" to the given resource in the resource product flow links
+*/  
+#pragma PROPERTY NextResources
+    HRESULT   get_NextResources(out /*IDLRETVAL*/ CATIAResourceCollection oNextPRF) ;
+
+/** 
+* This property returns the interface which manages the upstream product flow hierarchy on the given resource.
+* This returns the collection of resources which are "Previous" to the given resource in the resource product flow links
+*/
+#pragma PROPERTY PreviousResources
+    HRESULT   get_PreviousResources(out /*IDLRETVAL*/ CATIAResourceCollection oPreviousPRF) ;
+
+};
+
+// Interface name : CATIAResource
+#pragma ID CATIAResource "DCE:87369723-a44e-0000-0280030e1c000000"
+#pragma DUAL CATIAResource
+
+// VB object name : Resource
+#pragma ID Resource "DCE:87369ebe-c9fa-0000-0280030e1c000000"
+#pragma ALIAS CATIAResource Resource
+
+#endif
+
+

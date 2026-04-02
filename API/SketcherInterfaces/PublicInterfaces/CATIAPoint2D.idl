@@ -1,0 +1,59 @@
+#ifndef CATIAPoint2D_IDL
+#define CATIAPoint2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAGeometry2D.idl"
+#include "CATSafeArray.idl"
+
+/**
+ *  Class defining a point in 2D Space.
+ */
+
+interface CATIAPoint2D : CATIAGeometry2D
+{
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+
+        //
+        /**
+        *       Modifies the coordinates of the point                                
+        *       @param iX              
+        *       The X Coordinate of the point
+        *       @param iY              
+        *       The Y Coordinate of the point
+        */
+        HRESULT SetData (in     double    iX, 
+                         in     double    iY);
+						         /**
+        *       Returns the coordinates of the point                                
+        *       @param oPoint[0]       
+        *       The X Coordinate of the point
+        *       @param oPoint[1]       
+        *       The Y Coordinate of the point
+        */
+        HRESULT GetCoordinates (inout CATSafeArrayVariant oPoint);
+
+
+};
+
+// Interface name : CATIAPoint2D
+#pragma ID CATIAPoint2D "DCE:6ed8ac55-6b19-11d1-a2800000f87546fd"
+#pragma DUAL CATIAPoint2D
+
+// VB object name : Point2D (Id used in Visual Basic)
+#pragma ID Point2D "DCE:6ef5488d-6b19-11d1-a2800000f87546fd"
+#pragma ALIAS CATIAPoint2D Point2D
+
+
+#endif
+// CATIAPoint2D_IDL
+

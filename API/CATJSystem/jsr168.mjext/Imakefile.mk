@@ -1,0 +1,9 @@
+#
+# JSR168 API
+# For WPS building
+# Part of IBM WebSphere Portal
+#
+BUILT_OBJECT_TYPE=JAVA
+TYPE = COMMON
+LINK_WITH=
+DELIVERABLE=NO

@@ -1,0 +1,188 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIALineOfSight_IDL
+#define SWKIALineOfSight_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  SWKIABodyElement
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_NbDOFs
+//   GetDOF
+//
+//   get_Length
+//
+//   SetPosition
+//   ApplyPosition
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 02/02/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIABodyElement.idl"
+//
+// --- System
+#include "CATSafeArray.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIADOF;
+
+
+/**
+  *  This interface deals with a line of sight of a manikin.
+  **/
+interface SWKIALineOfSight : SWKIABodyElement
+{
+ // ===========================================================================
+ //  get_NbDOFs
+ //  ----------
+ //
+    /**
+      * Returns the number of degrees of freedom on the current line of sight.
+      * This property will always be equal to 2.
+      * The two  degrees of freedom on a line of sight are the
+      * up/down movement and the lateral right/lateral left movement.
+      **/
+#pragma PROPERTY NbDOFs
+    HRESULT get_NbDOFs(out /*IDLRETVAL*/ long poNbDOFs);
+
+
+ // ===========================================================================
+ //  GetDOF
+ //  ------
+ //
+    /**
+      * Returns a specific degree of freedom of the line of sight.
+      * A line of sight always has exactly two degrees of freedom.
+      * and these are numbered 0 and 1.
+      *
+      *  @param piDOFNumber  The index of the DOF to retrieve.
+      *  This parameter must be either 0 or 1.
+      **/
+    HRESULT GetDOF(in long piDOFNumber, out /*IDLRETVAL*/ SWKIADOF poDOF);
+
+
+ // ===========================================================================
+ //  get_Length
+ //  ----------
+ //
+    /**
+      * Returns the length of the line of sight, in centimeters.<br>
+      * If the the value returned is -1.0, then it means that this
+      * line of sight has infinite length.
+      **/
+#pragma PROPERTY Length
+    HRESULT get_Length(out /*IDLRETVAL*/ double poLength);
+
+    /**  
+      * Sets a new absolute position for the line of sight.
+      *
+      * @param piNewPosition
+      *   The new position to place the line of sight.<br>
+      *   This array must contain 12 numbers, and msut be initialized
+      *   using the four columns of a transformation matrix.
+      *
+      *   The first nine components represent the rotation matrix.<br>
+      *   The last three components represent the translation vector.<br>
+      *
+      * @sample
+      * This example sets the line of sight to a 45-degree rotation around
+      * the x axis and at a (10, 20, 30) translation from the origin.<br>
+      *
+      * <pre>
+      * Dim myPosition(11)
+      * 'Rotation (45 degrees around the x axis)
+      * myPosition(0)  = 1.000
+      * myPosition(1)  = 0
+      * myPosition(2)  = 0
+      * myPosition(3)  = 0
+      * myPosition(4)  = 0.707
+      * myPosition(5)  = 0.707
+      * myPosition(6)  = 0
+      * myPosition(7)  = -0.707
+      * myPosition(8)  = 0.707
+      * 'Translation vector (10,20,30)
+      * myPosition(9)  = 10.000
+      * myPosition(10) = 20.000
+      * myPosition(11) = 30.000
+      * myManikin.Body.GetItem("LLHeEye").SetPosition myPosition
+      * </pre>
+      **/ 
+    HRESULT SetPosition(in CATSafeArrayVariant piNewPosition);
+
+    /**  
+      * Applies a new relative position for the line of sight.
+      *
+      * @param piPositionIncrement
+      *   The new position to combine with the line of sight's current position.<br>
+      *   This array must contain 12 numbers, and msut be initialized
+      *   using the four columns of a transformation matrix.
+      *
+      *   The first nine components represent the rotation matrix.<br>
+      *   The last three components represent the translation vector.<br>
+      *
+      * @sample
+      * This example sets the segment to a 45-degree rotation around
+      * the x axis and at a (10, 20, 30) translation from the origin.<br>
+      *
+      * <pre>
+      * Dim myPosition(11)
+      * 'Rotation (45 degrees around the x axis)
+      * myPosition(0)  = 1.000
+      * myPosition(1)  = 0
+      * myPosition(2)  = 0
+      * myPosition(3)  = 0
+      * myPosition(4)  = 0.707
+      * myPosition(5)  = 0.707
+      * myPosition(6)  = 0
+      * myPosition(7)  = -0.707
+      * myPosition(8)  = 0.707
+      * 'Translation vector (10,20,30)
+      * myPosition(9)  = 10.000
+      * myPosition(10) = 20.000
+      * myPosition(11) = 30.000
+      * myManikin.Body.GetItem("LLHeEye").ApplyPosition myPosition
+      * </pre>
+      **/ 
+    HRESULT ApplyPosition(in CATSafeArrayVariant piPositionIncrement);
+};
+
+// Interface name : SWKIALineOfSight
+#pragma ID SWKIALineOfSight "DCE:748819e8-d9a7-11d3-8097005004d3fe74"
+#pragma DUAL SWKIALineOfSight
+
+// VB object name : SWLineOfSight (Id used in Visual Basic)
+#pragma ID SWKLineOfSight "DCE:748819e9-d9a7-11d3-8097005004d3fe74"
+#pragma ALIAS SWKIALineOfSight SWKLineOfSight
+
+#endif

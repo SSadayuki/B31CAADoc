@@ -1,0 +1,185 @@
+// COPYRIGHT Dassault Systemes 2007
+//=============================================================================
+// CATIASfmStiffener
+//   Define the CATIASfmStiffener interface for managing SfmStiffener attributes
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar. 2007  Creation                                                S. QUINCI
+//=============================================================================
+#ifndef CATIASfmStiffener_IDL
+#define CATIASfmStiffener_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASfmProfile.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+#include "CATIASfmWelds.idl"
+
+/**
+ * Interface to manage the structure frame modeling Stiffener object
+ * <b>Role</b>:  Allows accessing and setting of Stiffener's data.
+ * @see CATIASfmFactory
+ */
+interface CATIASfmStiffener : CATIASfmProfile
+{
+  /**
+  * Returns or sets the web support.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>WebSupport</code> the web support of the <code>SfmStiffener</code> feature.
+  * <pre>
+  * Dim WebSupport As Reference
+  * Set WebSupport = SfmStiffener.<font color="red">WebSupport</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY WebSupport
+  HRESULT get_WebSupport(out /*IDLRETVAL*/ CATIAReference oWebSupport);
+  HRESULT put_WebSupport(in CATIAReference iWebSupport);
+
+  /**
+  * Returns or sets the Stiffener's web support offset.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Offset</code> the web support offset of the <code>SfmStiffener</code> feature.
+  * <pre>
+  * Dim Offset As Double
+  * Set Offset = SfmStiffener.<font color="red">WebSupportOffset</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY WebSupportOffset
+  HRESULT get_WebSupportOffset(out /*IDLRETVAL*/ double oOffset);
+  HRESULT put_WebSupportOffset(in double iOffset);
+
+  #pragma PROPERTY WebSupportOffsetParam
+  HRESULT get_WebSupportOffsetParam(out /*IDLRETVAL*/ CATIALength oParam);
+
+  /**
+  * Returns or sets the molded surface.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>MoldedSurface</code> the molded surface of the <code>SfmStiffener</code> feature.
+  * <pre>
+  * Dim MoldedSurface As Reference
+  * Set MoldedSurface = SfmStiffener.<font color="red">GetMoldedSurface</font>
+  * </pre>
+  * </dl> 
+  */ 
+  HRESULT GetMoldedSurface(out /*IDLRETVAL*/ CATIAReference oMoldedSurface);
+
+  /**
+  * Returns or sets the side orientation.
+  *    iOrientation value can be selected from
+  * InvertOrientation           =   -1,
+  * UnknownOrientation          =    0,
+  * SameOrientation             =    1, 
+  * GlobalOrientation(Xp)       =    2,  
+  * GlobalOrientation(Xm)       =    3,  
+  * GlobalOrientation(Yp)       =    4,  
+  * GlobalOrientation(Ym)       =    5,  
+  * GlobalOrientation(Zp)       =    6, 
+  * GlobalOrientation(Zm)       =    7,  
+  * GlobalOrientation_Inside    =    8,  [SameOrientation ]
+  * GlobalOrientation_Outside   =    9,  [InvertOrientation ] 
+  * GlobalOrientation_LInboard  =    10  [Toward  center  line]
+  * GlobalOrientation_LOutboard =    11  [Opposite  of  previous  one ]
+  * GlobalOrientation_TInboard  =    12  [Toward  midship ]
+  * GlobalOrientation_TOutboard =    13  [Opposite  of  previous  one]
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves side orientation of the Stiffener.
+  * <pre>
+  * Dim Orient As Long
+  * Orient = SfmStiffener.<font color="red">SideOrientation</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY SideOrientation
+  HRESULT get_SideOrientation(out /*IDLRETVAL*/ long oOrientation);
+  HRESULT put_SideOrientation(in long iOrientation);
+
+  /**
+  * Returns or sets the section orientation.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves section orientation of the Stiffener.
+  * <pre>
+  * Dim Orient As Long
+  * Orient = SfmStiffener.<font color="red">SectionOrientation</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY SectionOrientation
+  HRESULT get_SectionOrientation(out /*IDLRETVAL*/ long oOrientation);
+  HRESULT put_SectionOrientation(in long iOrientation);
+
+  /**
+  * Returns or sets the angle mode.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>AngleMode</code> the angle mode of the <code>SfmStiffener</code> feature.
+  * <pre>
+  * Dim AngleMode As Integer
+  * Set AngleMode = SfmStiffener.<font color="red">AngleMode</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY AngleMode
+  HRESULT get_AngleMode(out /*IDLRETVAL*/ long oAngleMode);
+  HRESULT put_AngleMode(in long iAngleMode);
+
+  /**
+  * Gets the status about the validity of the angle mode regarding the nature of the
+  * web support (curve or surface).
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>IsAngleModeValid</code> the angle mode of the <code>SfmStiffener</code> feature.
+  * <pre>
+  * Dim IsAngleModeValid As Bool
+  * Set IsAngleModeValid = SfmStiffener.<font color="red">IsAngleModeValid</font>
+  * </pre>
+  * </dl> 
+  */ 
+  HRESULT IsAngleModeValid(in long iAngleMode, out /*IDLRETVAL*/ boolean oIsAngleModeValid);
+
+  /**
+  * Returns the weld features on the Existing Stiffener.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the number of weld features on the Existing Stiffener.
+  * <pre>
+  * Dim OperatedStiffenerObject  As SfmStiffenerObject
+  * Dim Welds As SfmWelds
+  * Set Welds = OperatedStiffenerObject.GetWelds(Nothing)
+  * </pre>
+  * </dl> 
+  */  
+  HRESULT GetWelds(in CATIAReference iOperatingEle, out /*IDLRETVAL*/ CATIASfmWelds oWelds);
+
+};
+
+// Interface name : CATIASfmStiffener
+#pragma ID CATIASfmStiffener "DCE:e3109ab4-0197-4827-acc738121b265a66"
+#pragma DUAL CATIASfmStiffener
+
+// VB object name : SfmStiffener (Id used in Visual Basic)
+#pragma ID SfmStiffener "DCE:d374bb7b-739f-47a7-89aaa75eb8e39a3b"
+#pragma ALIAS CATIASfmStiffener SfmStiffener
+
+#endif

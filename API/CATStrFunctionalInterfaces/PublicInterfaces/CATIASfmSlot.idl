@@ -1,0 +1,203 @@
+// COPYRIGHT Dassault Systemes 2011
+//=============================================================================
+// CATIASfmSlot
+//   Interface for Managing Slot Attributes
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Jul. 2011  Creation                                                R. DESHMANE
+//=============================================================================
+#ifndef CATIASfmSlot_IDL
+#define CATIASfmSlot_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATIASfmConnectionParameters.idl"
+#include "CATIASfmReferences.idl"
+#include "CATIAReference.idl"
+#include "CATIASfmConnectionParameters.idl"
+#include "CATBSTR.idl"
+/**
+ * Interface to Get and Set inputs to existing Slot. 
+ * <b>Role</b>:  Allows managing (mainly retreiving parameters)Slots.
+ * @see CATIASfmProfile,CATIASfmSuperPlate,CATIASfmSlots,CATIASfmConnectionParameters
+ */
+interface CATIASfmSlot : CATIABase
+{
+  /**
+  * Gets the Penetrating Element used in the creation of the Slot.
+  * @param oPenetratingObject [out]
+  *      The retrieved element(Profile).
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets the Master Object.
+  * <pre>
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim SlotObj As SfmSlot
+  * Set SlotObj = SlotsonPlate.Item(1)
+  * Dim oPenetratingRef As Reference
+  * Set oPenetratingRef = SlotObj.<font color="red">GetMasterObject</font>
+  * </pre>
+  * </dl> 
+  */ 
+  HRESULT GetMasterObject(out /*IDLRETVAL*/CATIAReference oPenetratingObject);
+  /**
+  * Gets the Penetrated Element used in the creation of the Slot.
+  * @param oPenetratedObject [out]
+  *      The retrieved element(Plate/Profile).
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets the Slave Object.
+  * <pre>
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim SlotObj As SfmSlot
+  * Set SlotObj = SlotsonPlate.Item(1)
+  * Dim oPenetratedRef As Reference
+  * Set oPenetratedRef = SlotObj.<font color="red">GetSlaveObject</font>
+  * </pre>
+  * </dl> 
+  */ 
+  HRESULT GetSlaveObject(out /*IDLRETVAL*/CATIAReference oPenetratedObject);
+  /**
+  * Sets/Replaces the Penetrated Element used in the creation of the Slot.
+  * @param iSlaveObject [in]
+  *      The retrieved element(Plate/Profile).
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example sets the Slave Object.
+  * <pre>
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim SlotObj As SfmSlot
+  * Set SlotObj = SlotsonPlate.Item(1)
+  * Dim oPenetratedRef As Reference
+  * Set oPenetratedRef = PartObj.CreateReferenceFromObject(SfmNewPlateObj)
+  * SlotObj.<font color="red">SetSlaveObject(oPenetratedRef)</font>
+  * </pre>
+  * </dl> 
+  */ 
+  HRESULT SetSlaveObject(in CATIAReference iSlaveObject);
+  /**
+  * Gets the name of the UDF used for creating the slot.
+  * @param oUDFName [in]
+  *      Name of the UDF.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example gives the name of the UDF used in creating the slot.
+  * <pre>
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim SlotObj As SfmSlot
+  * Set SlotObj = SlotsonPlate.Item(1)
+  * Dim UDFName As String
+  * UDFName = SlotObj.<font color="red">GetCntnDetailName</font>
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetCntnDetailName(inout /*IDLRETVAL*/CATBSTR oUDFName);
+  /**
+  * Gets the Information on Existing Slot.
+  * @param oListOfSlotParameters [out]
+  *      List of SfmConnectionParameters.
+  * @param oListOfParameterNames [out]
+  *      List of Parameter Names set.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This retrieves the Parameter List and Parameter Names and checks values assigned to these parameters.
+  * <pre>
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim SlotObj As SfmSlot
+  * Set SlotObj = SlotsonPlate.Item(1)
+  * Dim oListSlotParams As SfmConnectionParameters
+  * Dim ListOfParamNames() As Variant
+  * SlotObj.<font color="red">GetCntnDetailParameters</font>oListSlotParams,ListOfParamNames
+  * Dim UDFParam As Parameter
+  * ParamCount = oListSlotParams.Count
+  * Dim Value As String
+  * For i = 1 To ParamCount
+  *  Set UDFParam = oListSlotParams.Item(i)  
+  *  Value = UDFParam.ValueAsString
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetCntnDetailParameters(out CATIASfmConnectionParameters oListOfSlotParameters,out CATSafeArrayVariant oListOfParameterNames);
+  /**
+  * Gets thelocation of existing slot.
+  * @param oCoordinate [out]
+  *      The Coordinates.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * The example retrieves slot Coordinates defined on start end.
+  * <pre>
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim SlotObj As SfmSlot
+  * Set SlotObj = SlotsonPlate.Item(1)
+  * Dim Coord() As Variant
+  * Dim x,y,z as Double
+  * Coord() = SlotObj.<font color="red">GetConnectionCoordinate</font>
+  * x = Coord(0)
+  * y = Coord(1)
+  * z = Coord(2)
+  * </pre>
+  * </dl> 
+  */ 
+ HRESULT GetConnectionCoordinate(out /*IDLRETVAL*/CATSafeArrayVariant oCoordinate);
+   /**
+  * Updates the Connection Set.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * The example Updates the Connection Set.
+  * <pre>
+  * Dim SlotsonPlate As SfmSlots
+  * Set SlotsonPlate = SfmSuperPlateObj.GetSlotsOnPlate
+  * Dim SlotObj As SfmSlot
+  * Set SlotObj = SlotsonPlate.Item(1)
+  * SlotObj.<font color="red">UpdateConnectionsSet</font>
+  * </pre>
+  * </dl> 
+  */ 
+ HRESULT UpdateConnectionsSet();
+
+};
+
+// Interface name : CATIASfmSlot
+#pragma ID CATIASfmSlot "DCE:640C3FE0-D6D7-42ab-B20B72B966E0A31E"                                    
+#pragma DUAL CATIASfmSlot
+
+// VB object name : SfmStiffener (Id used in Visual Basic)
+#pragma ID SfmSlot "DCE:A1531283-0B4B-4cc9-B39779D7E3CAD9D1"                               
+#pragma ALIAS CATIASfmSlot SfmSlot
+
+#endif

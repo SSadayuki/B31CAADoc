@@ -1,0 +1,83 @@
+
+#ifndef CATIAShapes_IDL
+#define CATIAShapes_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAShapes:						   
+// Exposed interface for Mechanical shapes collection
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation					Ph Baucher
+// Dec97 Modification					 L Lalere
+// Feb98 COM compliance					 L Lalere
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAShape;
+interface CATIABoundary;
+
+//-----------------------------------------------------------------
+/**
+ * The collection of the shapes making up a body.
+ */
+interface CATIAShapes : CATIACollection
+{
+    /**
+     * Returns a shape using its index or its name from the Shapes collection.
+     * @param iIndex
+     *   The index or the name of the shape to retrieve from
+     *   the collection of shapes.
+     *   As a numerics, this index is the rank of the shape
+     *   in the collection.
+     *   The index of the first shape in the collection is 1, and
+     *   the index of the last shape is @href CATIACollection#Count.
+     *   As a string, it is the name you assigned to the shape using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved shape
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisShape</tt> the third shape,
+     * and in <tt>ThatShape</tt> the shape named
+     * <tt>MyShape</tt> in the shape collection of the active document,
+     * supposed to be a part document.
+     * <pre>
+     * Set ThisShape = CATIA.ActiveDocument.Shapes.<font color="red">Item</font>(3)
+     * Set ThatShape = CATIA.ActiveDocument.Shapes.<font color="red">Item</font>("MyShape")
+     * </pre>
+     */
+	HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ CATIAShape oShape );
+    /**
+     * Returns a boundary using its label.
+     * @param iLabel
+     *   Identification of the @href CATIABoundary object.
+	 *   See @href CATIAReference#DisplayName.
+     * @return The retrieved boundary
+     */
+	HRESULT GetBoundary (in CATBSTR iLabel, out /*IDLRETVAL*/ CATIABoundary oBoundary);
+};
+
+// Interface name : CATIAShapes
+#pragma ID CATIAShapes "DCE:4865577d-3ff7-11d1-a26c0000f87546fd"
+#pragma DUAL CATIAShapes
+
+// VB object name : Shapes (Id used in Visual Basic)
+#pragma ID Shapes "DCE:48a81955-3ff7-11d1-a26c0000f87546fd"
+#pragma ALIAS CATIAShapes Shapes
+
+
+#endif
+// CATIAShapes_IDL

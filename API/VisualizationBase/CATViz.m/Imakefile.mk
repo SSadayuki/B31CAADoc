@@ -1,0 +1,34 @@
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+INCLUDED_MODULES = CATVizBase CATVrcExport VE0PIX VE0FONT VE0HLR VE0LOD CATVizSpaceDevice CATVisDSFX CATVisDSFXParser
+
+LINK_WITH= CATVizIterators CATLightXml CATMathStream CATVizLOD JS0MRSHL JS0CORBA JS0SCBAK JS03TRA JS0STR JS0LIB0 JS0ERROR JS0FM JS0CATLM CATSysMultiThreading CATSysAllocator JS0GROUP YN000MAT CATSysTS  CATMMediaPixelImage 
+
+OS = aix_a
+LOCAL_CCFLAGS = -qfloat=hsflt 
+SYS_LIBS = -lXm -lXt -lXi -lX11
+
+OS = aix_a64
+LOCAL_CCFLAGS = -qfloat=hsflt 
+SYS_LIBS = -lXm -lXt -lXi -lX11
+
+OS = HP-UX
+SYS_LIBS = -lXm -lXt -lXi -lX11
+
+OS = IRIX
+LINK_WITH= CATVizIterators CATLightXml JS0MRSHL JS0CORBA JS0SCBAK JS03TRA JS0STR JS0LIB0 JS0ERROR JS0FM JS0CATLM CATSysMultiThreading CATSysAllocator JS0GROUP YN000MAT CATVisShader CATSysTS
+SYS_LIBS = -lXsgivc -lXm -lXt -lX11 -lXext
+LOCAL_CCFLAGS  = -float
+LOCAL_CFLAGS   = -float
+
+OS = SunOS
+SYS_LIBS = -lXm -lXt -lXi -lX11
+
+OS = Windows_NT
+LINK_WITH= Nvapi3 CATVizIterators CATLightXml JS0MRSHL JS0CORBA JS0SCBAK JS03TRA JS0STR JS0LIB0 JS0ERROR JS0FM JS0CATLM CATSysMultiThreading CATSysAllocator JS0GROUP YN000MAT CATVisShader CATSysTS CATMMediaPixelImage
+SYS_LIBS = rpcrt4.lib vfw32.lib wsock32.lib winmm.lib version.lib setupapi.lib
+
+OS = win_b64
+LINK_WITH= Nvapi3 CATVizIterators CATLightXml JS0MRSHL JS0CORBA JS0SCBAK JS03TRA JS0STR JS0LIB0 JS0ERROR JS0FM JS0CATLM CATSysMultiThreading CATSysAllocator JS0GROUP YN000MAT CATVisShader CATSysTS  CATMMediaPixelImage
+SYS_LIBS = rpcrt4.lib vfw32.lib wsock32.lib winmm.lib version.lib setupapi.lib
+

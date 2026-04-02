@@ -1,0 +1,770 @@
+/* -*-c++-*- */
+#ifndef CATIAProduct_IDL
+#define CATIAProduct_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// Interface CATIAProduct:
+// 
+// This interface is the Product idl Interface for journaling
+// A product has the ability to have components (ie products aggregated in it)
+//  These components are retrieved through the CATIAProducts interface
+// A product can either be a product instance (ie aggregated in a product) or a 
+//  product reference (from which instances will be created)
+// In a real prototype-intsance models, all "objects" are instances. 
+//  In the Product Structure Model, we differenciate between the products
+//  as components of a product (called instances) and the products which
+//  which are not componets but which we be used to define the instances
+//  (called reference products). Several instances of a product can be built
+//  from the same reference product (eg: the four wheels of a car are four 
+//  product instances sharing the same reference product)
+// Both product instances and product references are products, thus there is only one
+//  interface to describe them. 
+// Some methods are only relevant for product references (eg get_PartNumber) 
+// and other for product instances (eg get_Reference) 
+// This interface is the product Interface
+//
+//-----------------------------------------------------------------------------
+// Creation by ngy - December 97
+//-----------------------------------------------------------------------------//
+
+// base type
+#include "CATIABase.idl"
+
+// enums and co
+#include "CATBSTR.idl"
+#include "CatProductSource.idl"
+#include "CatFileType.idl"
+#include "CATSafeArray.idl"
+#include "CatRepType.idl"
+#include "CatWorkModeType.idl"
+
+// Java dependency
+#include "CATIAParameters.idl"
+
+// useless includes
+#include "CATIAPublications.idl"
+#include "CATIAMove.idl"
+#include "CATIAPosition.idl"
+#include "CATIAAnalyze.idl"
+
+// good forward
+interface CATIAProducts;
+interface CATIACollection;
+interface CATIAReference;
+interface CATIARelations;
+
+
+#ifdef _WINDOWS_SOURCE
+interface IDispatch;
+#endif
+
+   /**
+    * Represents the product.
+    * The product is the object that helps you model your real products
+    * by building a tree structure whose nodes are product objects. Each
+    * of them may contain other product objects gathered in a product
+    * collection. The terminal product objects in the tree structure have
+    * no aggregated product collection.
+    * Even if all products are located somewhere in the product tree
+    * structure, some of them can be used as reference products to create
+    * other products named components, which are instances of the
+    * reference product. For example, the left front wheel
+    * in a car can be used as reference to create the other wheels.
+    * Be careful: some properties and methods are dedicated to reference
+    * objects only, and some others are for components only.
+    * This is clearly stated for each property or method concerned. 
+    */
+interface CATIAProduct : CATIABase    
+{
+
+  // Gets Products object (collection of Products durectly aggregated within 
+  // the Product)
+    /**
+     * Returns the collection of products contained in the current product.
+     * @sample
+     * This example retrieves in <tt>EngineChildren</tt> the collection of
+     * products contained in the <tt>Engine</tt> product.
+     * <pre>
+     * Dim EngineChildren As Products
+     * Set EngineChildren = Engine.<font color="red">Products</font>
+     * </pre>
+     */
+#pragma PROPERTY Products
+  HRESULT get_Products(out /*IDLRETVAL*/ CATIAProducts oProducts);
+
+	/**
+	 * Returns the collection of publications managed by the product.
+	 */
+#pragma PROPERTY Publications
+	HRESULT get_Publications( out /*IDLRETVAL*/ CATIAPublications oPublications );
+
+// Here follows the Multi Representation management
+// Adds a representation (model ,VRML... document or solide element) to the Product
+// with a specific behavior 
+    /**
+     * Adds a representation to the product with a specific behavior.
+     * A representation is the object that gives a geometric shape and allows
+     * the visualization of the product. It can be 
+     * a CATIA V4
+     * model, a VRML file, or any other type of document that can be displayed.
+     * <p><b>Note:</b>
+	 * The possible behavior supported are : 3D, 2D and text.
+	 * The representation can also be added within a context or not.
+     * A representation on a product is optional, but many representation with 
+	 * different behavior (or the same) is supported
+     * @param iShapePathName
+     *   The path name where the representation can be found
+	 * @param iShapeName
+     *   The name that is given to the representation
+	 *   This name is a user free choice
+	 * @param iRepBehavior
+     *   The behavior of the added representation.
+	 *   It can take the values catRep3D if the representation is a 3D one,
+     *   catRep2D if the representation is a 2D one,
+     *   or catRepText if the representation is a text one.
+	 * @param iContext
+     *   A condition to specify if the added representation can be
+	 *   displayed with the representation of other products.
+     * @sample
+     * This example adds the <tt>e:\Models\Engine.model</tt> as
+     * a 3D representation to the <tt>Engine</tt> product within an assembly context.
+     * <pre>
+     * Engine.<font color="red">AddShapeRepresentation</font>("e:\Models\Engine.model","MyShape",catRep3D,TRUE)
+     * </pre>
+     */
+  HRESULT AddShapeRepresentation (in CATBSTR iShapePathName,in CATBSTR iShapeName
+			, in CatRepType iRepBehavior, in boolean iContext);
+
+// Removes a Representation from the Product 
+    /**
+     * Removes a specific representation from the product.
+	 * A representation is the object that gives a geometric shape and allows
+     * the visualization of the product.. It can be
+     * a CATIA V4
+     * model, a VRML file, or any other type of document that can be displayed.
+     * <p><b>Note:</b>
+     * This representation is optional.
+	 * @param iShapeName
+     *   The name of the representation of the product.
+	 * @param iRepBehavior
+     *   The behavior of the representation.
+	 *   It can take the values catRep3D if the representation is a 3D one,
+     *   catRep2D if the representation is a 2D one,
+     *   or catRepText if the representation is a text one.
+	 * @param iContext
+     *   A condition to specify if the representation is
+	 *   displayed with the representation of other products.
+     * @sample
+     * This example removes the 3D representation named "PART" of the
+     * <tt>Engine</tt> product.
+     * <pre>
+     * Engine.<font color="red">RemoveMasterShapeRepresentation</font>
+	 *("PART",catRep3D,TRUE)
+     * </pre>
+     */
+  HRESULT RemoveShapeRepresentation (in CATBSTR iShapeName
+			, in CatRepType iRepBehavior, in boolean iContext);
+
+// Tests if the product has a Representation of the given name with a given behavior
+    /**
+     * Returns whether the product has a representation of the given name with a given behavior.
+     * <br>
+     * <b>True</b> if the product has such a representation. 
+	 * @param iShapeName
+     *   The name of the representation of the product.
+	 * @param iRepBehavior
+     *   The behavior of the representation.
+	 *   It can take the values catRep3D if the representation is a 3D one,
+     *   catRep2D if the representation is a 2D one,
+     *   or catRepText if the representation is a text one.
+	 * @param iContext
+     *   A condition to specify if the representation is
+	 *   displayed with the representation of other products.
+     * @sample
+     * This example retrieves in <tt>HasRep</tt> whether the
+     * <tt>Engine</tt> product has a master shape representation.
+     * <pre>
+     * HasRep = Engine.<font color="red">HasRepresentation</font>("PART",catRep3D,TRUE)
+     * </pre>
+     */
+  HRESULT HasShapeRepresentation ( in CATBSTR iShapeName
+			, in CatRepType iRepBehavior, in boolean iContext, out  /*IDLRETVAL*/ boolean oHasAShape);
+  
+// Returns the asked Representation if it exists
+    /**
+     * Retrieves the product's  representation with the given parameters.
+     * @param iLoadIfNecessary
+     *   Parameter to set to True if the master shape representation
+     *   should be loaded to determine if it exists, or to False otherwise.
+	 * @param iShapeName
+     *   The name of the representation of the product.
+	 * @param iRepBehavior
+     *   The behavior of the representation.
+	 *   It can take the values catRep3D if the representation is a 3D one,
+     *   catRep2D if the representation is a 2D one,
+     *   or catRepText if the representation is a text one.
+	 * @param iContext
+     *   A condition to specify if the representation is
+	 *   displayed with the representation of other products.
+     * @sample
+     * This example retrieves in <tt>MSRep</tt> the 
+     * <tt>Engine</tt> product's  3D representation named "PART".
+     * <pre>
+     * Dim MSRep As Object
+     * Set MSRep = Engine.<font color="red">GetMasterShapeRepresentation</font>(True,"PART",catRep3D,TRUE)
+     * </pre>
+     */
+  HRESULT GetShapeRepresentation ( in boolean  iLoadIfNecessary, in CATBSTR iShapeName
+	  		 , in CatRepType iRepBehavior, in boolean iContext
+		     ,out  /*IDLRETVAL*/ CATBaseDispatch oMasterShapeRep);
+
+// This method is specific to the 3D representation which can be displayed in an assembly context  
+// Adds a master shape Representation (model ,VRML... document or solide element) to the Product 
+    /**
+     * Adds the master shape representation to the product.
+     * The master shape representation is the object that gives a geometric
+     * shape and allows
+     * the visualization of the product. It can be
+     * a CATIA V4
+     * model, a VRML file, or any other type of document that can be displayed.
+	 * In a multi representation  context, the master shape representation is the most 
+	 * meaningful representation of the product according to the user.
+	 * This is the default shape for the multi representation.
+     * <p><b>Note:</b>
+     * This master shape representation is optional.
+     * @param iShapePathName
+     *   The path name where the master shape representation can be found
+     * @sample
+     * This example adds the <tt>e:\Models\Engine.model</tt> as
+     * the master shape representation to the <tt>Engine</tt> product.
+     * <pre>
+     * Engine.<font color="red">AddMasterShapeRepresentation</font>("e:\Models\Engine.model")
+     * </pre>
+     */
+  HRESULT AddMasterShapeRepresentation (in CATBSTR iShapePathName);
+
+// This method is specific to the 3D representation which can be displayed in an assembly context  
+// Removes the master shape Representation from the Product 
+    /**
+     * Removes the master shape representation from the product.
+     * The master shape representation is the object that gives a geometric
+     * shape and allows
+     * the visualization of the product. It can be
+     * a CATIA V4
+     * model, a VRML file, or any other type of document that can be displayed.
+	 * In a multi representation  context, the master shape representation is the most 
+	 * meaningful representation of the product according to the user.
+	 * This is the default shape for the multi representation.
+     * <p><b>Note:</b>
+     * This master shape representation is optional.
+     * @sample
+     * This example removes the master shape representation of the
+     * <tt>Engine</tt> product.
+     * <pre>
+     * Engine.<font color="red">RemoveMasterShapeRepresentation</font>()
+     * </pre>
+     */
+  HRESULT RemoveMasterShapeRepresentation ();
+
+// This method is specific to the 3D representation which can be displayed in an assembly context  
+// Tests if the product has a shape Representation
+    /**
+     * Returns whether the product has a master shape representation.
+     * <br>
+     * <b>True</b> if the product has a master shape representation. 
+     * @sample
+     * This example retrieves in <tt>HasMSRep</tt> whether the
+     * <tt>Engine</tt> product has a master shape representation.
+     * <pre>
+     * HasMSRep = Engine.<font color="red">HasAMasterShapeRepresentation</font>()
+     * </pre>
+     */
+  HRESULT HasAMasterShapeRepresentation ( out  /*IDLRETVAL*/ boolean oHasAShape);
+  
+// This method is specific to the 3D representation which can be displayed in an assembly context  
+// Returns the MasterShapeRepresentation if it exists
+    /**
+     * Retrieves the product's master shape representation.
+     * @param iLoadIfNecessary
+     *   Parameter to set to True if the master shape representation
+     *   should be loaded to determine if it exists, or to False otherwise.
+     * @sample
+     * This example retrieves in <tt>MSRep</tt> the 
+     * <tt>Engine</tt> product's master shape representation.
+     * <pre>
+     * Dim MSRep As Object
+     * Set MSRep = Engine.<font color="red">GetMasterShapeRepresentation</font>(True)
+     * </pre>
+     */
+  HRESULT GetMasterShapeRepresentation ( in boolean  iLoadIfNecessary
+			     ,out  /*IDLRETVAL*/ CATBaseDispatch oMasterShapeRep);
+
+// This method is specific to the 3D representation which can be displayed in an assembly context  
+// Returns the MasterShapeRepresentation PathName if the shape exists
+    /**
+     * Retrieves the product's master shape representation pathname.
+     * @sample
+     * This example retrieves in <tt>MSRep</tt> the 
+     * <tt>Engine</tt> product's master shape representation.
+     * <pre>
+     * Set MSRepPath = Engine.<font color="red">GetMasterShapeRepresentationPathName</font>
+     * </pre>
+     */
+  HRESULT GetMasterShapeRepresentationPathName ( inout /*IDLRETVAL*/ CATBSTR oMasterShapeRepPathName);
+
+//
+//
+// Part Number is a property of a reference Product
+    /**
+     * Returns or sets the product's part number.
+     * <br>
+     * <tt>PartNumber</tt> is valid for reference products only.
+     * @sample
+     * This example sets the
+     * <tt>Engine</tt> product's part number to <tt>A120-253X-7</tt>.
+     * <pre>
+     * Engine.<font color="red">PartNumber</font>("A120-253X-7")
+     * </pre>
+     */
+#pragma PROPERTY PartNumber
+  HRESULT get_PartNumber (inout /*IDLRETVAL*/ CATBSTR oPartNumber);
+  HRESULT put_PartNumber (in CATBSTR iPartNumber);
+
+//
+// Revision is a property of a reference Product
+    /**
+     * Returns or sets the product's revision number.
+     * <br>
+     * <tt>Revision</tt> is valid for reference products only.
+     * @sample
+     * This example sets the
+     * <tt>Engine</tt> product's revision number to <tt>3A</tt>.
+     * <pre>
+     * Engine.<font color="red">Revision</font>("3A")
+     * </pre>
+     */
+#pragma PROPERTY Revision  
+  HRESULT get_Revision (inout /*IDLRETVAL*/ CATBSTR oRevision);
+  HRESULT put_Revision (in CATBSTR iRevision);
+//
+// Definition is a property of a reference Product
+    /**
+     * Returns or sets the product's definition.
+     * <br>
+     * <tt>Definition</tt> is valid for reference products only.
+     * @sample
+     * This example retrieves the definition of the
+     * <tt>Engine</tt> product in <tt>EngineDef</tt>.
+     * <pre>
+     * EngineDef = Engine.<font color="red">Definition</font>
+     * </pre>
+     */
+#pragma PROPERTY Definition  
+  HRESULT get_Definition (inout /*IDLRETVAL*/ CATBSTR oDefinition);
+  HRESULT put_Definition (in CATBSTR iDefinition);
+
+//
+//  Nomenclature is a property of a reference Product
+    /**
+     * Returns or sets the product's nomenclature.
+     * <br>
+     * <tt>Nomenclature</tt> is valid for reference products only.
+     * <br>
+     * According to the STEP AP203, the nomenclature is "a name by which
+     * the part is commonly known within an organization".
+     * @sample
+     * This example retrieves the nomenclature the
+     * <tt>Engine</tt> product in <tt>EngineNom</tt>.
+     * <pre>
+     * EngineNom = Engine.<font color="red">Nomenclature</font>
+     * </pre>
+     */
+#pragma PROPERTY Nomenclature
+  HRESULT get_Nomenclature (inout /*IDLRETVAL*/ CATBSTR oNomenclature);
+  HRESULT put_Nomenclature (in CATBSTR iNomenclature);
+//
+//  Source is a property of a reference Product
+    /**
+     * Returns or sets the product's source.
+     * <br>
+     * <tt>Source</tt> is valid for reference products only.
+     * <br>
+     * According to the STEP AP203, the source is the "design organization's
+     * plan for obtaining the product".
+     * The source can take the values catProductMade if the product is made
+     * internally, catProductBought if it is purchased from a vendor,
+     * or catProductUnknown if its origin is not determined.
+     * @sample
+     * This example sets the source for the
+     * <tt>Engine</tt> product to <tt>catProductMade</tt>.
+     * <pre>
+     * Engine.<font color="red">Source</font>(catProductMade)
+     * </pre>
+     */
+#pragma PROPERTY Source
+  HRESULT get_Source (inout /*IDLRETVAL*/ CatProductSource oSource);
+  HRESULT put_Source (in CatProductSource iSource);
+
+//
+//  Description is a property of a reference Product
+    /**
+     * Returns or sets the product's description for a reference product.
+     * <br>
+     * <tt>DescriptionRef</tt> is valid for reference products only.
+     * <br>
+     * The description is a comment assigned to the reference product to help
+     * describe  or qualify it.
+     * @sample
+     * This example sets the description for the
+     * <tt>Engine</tt> product.
+     * <pre>
+     * Desc = "This is the Engine reference product description"
+     * Engine.<font color="red">DescriptionRef</font>(Desc)
+     * </pre>
+     */
+#pragma PROPERTY DescriptionRef
+  HRESULT get_DescriptionRef (inout /*IDLRETVAL*/ CATBSTR oDescriptionRef);
+  HRESULT put_DescriptionRef (in CATBSTR iDescriptionRef);
+//
+//  DescriptionInst is a property of an instance of Product
+    /**
+     * Returns or sets the product's description for a component product.
+     * <br>
+     * <tt>DescriptionInst</tt> is valid for component products only.
+     * <br>
+     * The description is a comment assigned to the component product to help
+     * describe  or qualify it.
+     * @sample
+     * This example sets the description for the
+     * <tt>EngineComp</tt> product.
+     * <pre>
+     * Desc = "This is the Engine component product description"
+     * EngineComp.<font color="red">DescriptionInst</font>(Desc)
+     * </pre>
+     */
+#pragma PROPERTY DescriptionInst
+  HRESULT get_DescriptionInst (inout /*IDLRETVAL*/ CATBSTR oDescriptionInst);
+  HRESULT put_DescriptionInst (in CATBSTR iDescriptionInst);
+
+    /**
+     * Returns the product's constraints.
+     * The constraint collection of a product gathers the constraints
+     * this product should respect to be positioned in the space.
+     * @sample
+     * This example retrieves the constraint collection for the
+     * <tt>Engine</tt> product.
+     * <pre>
+     * Dim EngineConstraints As Collection
+     * Set EngineConstraints = Engine.<font color="red">Constraints</font>
+     * </pre>
+     */
+//#pragma PROPERTY Connections
+  HRESULT Connections (  in                CATBSTR         iConnectionsType
+                       , out /*IDLRETVAL*/ CATIACollection oConnections);
+  
+    /**
+     * Returns the product's move object.
+     * The move object is aggregated by the product object
+     * and itself aggregates a movable object
+     * to which you can apply a move transformation
+     * by means of an isometry matrix. It moves your product
+     * master shape representation according to this isometry.
+     * @sample
+     * This example retrieves the move object for the
+     * <tt>Engine</tt> product.
+     * <pre>
+     * Dim EngineMoveObject As Move
+     * Set EngineMoveObject = Engine.<font color="red">Move</font>
+     * </pre>
+     */
+#pragma PROPERTY Move
+  HRESULT get_Move(out /*IDLRETVAL*/ CATIAMove oMove);
+
+    /**
+     * Returns the product's position object.
+     * The position object is the object aggregated by the product object that
+     * holds the position of the master shape representation in the space.
+     * @sample
+     * This example retrieves the position object for the
+     * <tt>Engine</tt> product.
+     * <pre>
+     * Dim EnginePositionObject As Position
+     * Set EnginePositionObject = Engine.<font color="red">Position</font>
+     * </pre>
+     */
+#pragma PROPERTY Position
+  HRESULT get_Position(out /*IDLRETVAL*/ CATIAPosition oPosition); 
+ 
+  // Gets Product Analysis(Mass, inertia,...)  
+    /**
+     * Returns the Analyze object associated to the current product.
+     * @sample
+     * This example retrieves in <tt>EngineAnalysis</tt> the Analyze object of
+     * the <tt>Engine</tt> product.
+     * <pre>
+     * Dim EngineAnalysis As Analyze
+     * Set EngineAnalysis = Engine.<font color="red">Analyze</font>
+     * </pre>
+     */
+#pragma PROPERTY Analyze
+  HRESULT get_Analyze(out /*IDLRETVAL*/ CATIAAnalyze oAnalyze);
+              
+//  Affichage de la BOM sous standard HTML, Text ou Motif
+    /**
+     * Extracts the product's contents as a bill of materials (BOM).
+	 * The bill of material displays, for every sub-assembly in the product,
+	 * the one level depth components and some of their properties.
+	 * <br>
+	 * @param iFileType
+     *   Set this parameter to <tt>catFileTypeHTML</tt> to save to the html format.
+	 * <br>
+     *   Set this parameter to <tt>catFileTypeTXT</tt> to save to the text format.
+	 * <br>
+	 *   The <tt>catFileTypeMotif</tt> should not be used.
+     * @param iFile
+     *   File where the bill of material will be saved
+     */
+  HRESULT ExtractBOM (in CatFileType iFileType, in CATBSTR iFile);
+
+    //
+    //  Updates of the whole Product
+    //  ----------------------------
+    /**
+     * Updates the product.
+     * This update is performed with respect to the part making the product
+     * or to the product's representation. It takes into account the 
+     * components of the product at any level
+     * @sample 
+     * The following example updates the root product:
+     * <pre>
+     * Dim RootProduct As Product
+     * Set Rootproduct = productDoc.Product
+     * Rootproduct.<font color="red">Update</font>
+     * </pre>
+     */
+    HRESULT    Update();
+	
+	/**
+	 * Returns the Reference Product of this instance.
+	 */
+#pragma PROPERTY ReferenceProduct
+	HRESULT get_ReferenceProduct(out /*IDLRETVAL*/ CATIAProduct oReferenceProduct);
+
+    //
+    //    ON PARAMETERS
+    //    -------------
+    //
+    /**
+     * Returns the collection object containing the product parameters.
+     * All the parameters that are aggregated in the different
+     * objects of the product might be accessed through that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>params</tt> the parameters
+     * of the <tt>productRoot</tt> product from the <tt>productDoc</tt> product document:
+     * <pre>
+     * Set productRoot = productDoc.Product
+     * Set params = productRoot.<font color="red">Parameters</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Parameters
+  HRESULT get_Parameters(out /*IDLRETVAL*/ CATIAParameters oReferenceProduct);
+
+    //
+    //    Get the user reference properties
+    //    ---------------------------------
+    //
+    /**
+     * Returns the collection object containing the product properties.
+     * All the user defined properties that are created in the reference product
+     * might be accessed through that collection.
+	 * <br>
+	 * Only available on reference products.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>UserProps</tt> the properties
+     * of the <tt>productRoot</tt> product from the <tt>productDoc</tt> product document:
+     * <pre>
+     * Set productRoot = productDoc.Product
+     * Set UserProps = productRoot.<font color="red">UserRefProperties</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY UserRefProperties
+  HRESULT get_UserRefProperties(out /*IDLRETVAL*/ CATIAParameters oRefProperties);
+
+    //
+    //    ON RELATIONS
+    //    ------------
+    //
+    /**
+     * Returns the collection object containing the product relations.
+     * All the relations that are used to valuate
+     * the parameters of the product might be accessed thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>rels</tt> the relations
+     * of the <tt>productRoot</tt> product from the <tt>productDoc</tt> product document:
+     * <pre>
+     * Set productRoot = productDoc.Product
+     * Set rels = productRoot.<font color="red">Relations</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY Relations
+  HRESULT get_Relations(out /*IDLRETVAL*/ CATIARelations oReferenceProduct);
+
+#ifdef _WINDOWS_SOURCE
+  // Attaching OLE objects to the Product
+    /**
+     * @nodoc
+     */
+  HRESULT GetLinkToExternalObject ( in                 CATBSTR   iObjectGuid
+				   ,in                 boolean   iCreateIfNecessary
+				   ,out /*IDLRETVAL*/ IDispatch oObj);
+#endif
+  
+  // Create a Reference from label ( GenericNaming )
+    /**
+     * Creates a reference from a name.
+     * A reference is an object that can stand for any geometrical object.
+     * Creating references is necessary for adding constraints between two
+     * components using Brep elements of the representations of these
+     * components.
+     * @param iLabel
+     *   The path of the Brep element to use in the constraint.
+     *   This path is passed as a character string comprising the component
+     *   path from the root product to the component concerned, concatenated
+     *   to the Brep element path in the product's representation.
+     *   Components are separated using "/", and the product path is separated
+     *   from the Brep using "/!". For separating parameter from product path use "\".
+     * @return The created reference
+     * @sample
+     * This example creates a reference from the path of a Brep element 
+     * in the <tt>Prod2</tt> product located below the <tt>Root</tt> root 
+     * product. The face is located in the <tt>Pad.1</tt> pad and limited by the
+     * <tt>Circle.1</tt> circle.
+     * <pre>
+     * Dim Ref As Reference
+     * Ref = Prod2.<font color="red">CreateReferenceFromName</font>("Root/Prod2/!Face:(Brp:(Pad.1:0(Brp:(Circle.1))):None())")
+     * </pre>
+     */
+  HRESULT CreateReferenceFromName( in CATBSTR iLabel, out /*IDLRETVAL*/  CATIAReference oRef);
+  
+
+    /** 
+     * Applies a new working mode.
+	 * @param newMode
+	 *           The new working mode.
+	 */
+  HRESULT ApplyWorkMode(in CatWorkModeType newMode);
+
+    /**
+     * Activate default shape.
+	 */
+  HRESULT ActivateDefaultShape();
+
+    /**
+	 * Deactivate default shape. 
+	 */
+  HRESULT DesactivateDefaultShape();
+  
+    /**
+     * Activate one shape.
+	 * @param ShapeName
+	 *           The name of the shape.
+	 */
+  HRESULT ActivateShape(in CATBSTR ShapeName);
+
+    /**
+	 * Deactivate one shape. 
+	 * @param ShapeName
+	 *           The name of the shape.
+	 */
+  HRESULT DesactivateShape(in CATBSTR ShapeName);
+
+    /** 
+     * Returns the number of Shapes
+	 * @return oNbShapes
+	 *           The number of Shapes.
+	 */
+  HRESULT GetNumberOfShapes(out /*IDLRETVAL*/ short oNbShapes);
+
+    /** 
+     * List the name of all shapes.
+	 * @return olistshape
+	 *           The list of the names 
+	 * The tab olistshape has to be allocated with a size given by GetNumberOfShapes.
+	 */
+  HRESULT GetAllShapesNames(inout CATSafeArrayVariant olistshape);
+  
+    /**
+     * Returns the name of the active shape.
+	 * @return oShapeName
+	 *           The name of the active shape.
+	 */
+  HRESULT GetActiveShapeName(inout /*IDLRETVAL*/ CATBSTR oShapeName);
+
+    /**
+     * Returns the default shape.
+	 * @return oShapeName
+	 *           The name of the default shape.
+	 */
+  HRESULT GetDefaultShapeName(inout /*IDLRETVAL*/ CATBSTR oShapeName);
+
+    /**
+     * Returns the path name of a shape for a given shape name.
+     * @param iShapeName
+     *   The name of the shape.
+	 * @return oShapePathName
+	 *           The path name of the shape.
+	 */
+  HRESULT GetShapePathName(in CATBSTR iShapeName, inout /*IDLRETVAL*/ CATBSTR oShapePathName);
+    
+	/**
+     * Returns the product's applicative data which type is the given parameter.
+     * The data returned can be either a collection or a simple object.
+     * @param iApplicationType
+     *   The type of applicative data searched.
+     * @sample
+     * This example retrieves the constraints for the
+     * <tt>Engine</tt> product.
+     * <pre>
+     * Dim EngineConstraints As Collection
+     * Set EngineConstraints = Engine.<font color="red">GetTechnologicalObject</font>("Constraints")
+     * </pre>
+     */
+  HRESULT GetTechnologicalObject (  in CATBSTR iApplicationType
+, out /*IDLRETVAL*/ CATBaseDispatch oApplicativeObj);
+  
+
+};
+
+// Interface name : CATIAProduct
+#pragma ID CATIAProduct "DCE:180c7aa4-5b43-11d1-a124080009dca4ae"
+#pragma DUAL CATIAProduct
+
+// VB object name : Product 
+#pragma ID Product "DCE:223a64e6-5b43-11d1-a124080009dca4ae"
+#pragma ALIAS CATIAProduct Product 
+
+
+#endif
+
+
+
+
+
+
+

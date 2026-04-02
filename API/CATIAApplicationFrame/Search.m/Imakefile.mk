@@ -1,0 +1,11 @@
+#
+# Imakefile to build a load
+#
+
+BUILT_OBJECT_TYPE= NONE
+
+OS = IRIX
+
+LOCAL_CCFLAGS = -G0
+LOCAL_LDFLAGS =  -G0
+

@@ -1,0 +1,188 @@
+#ifndef CATIAHybridShapeExtract_IDL
+#define CATIAHybridShapeExtract_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeExtract:         
+//   Exposed interface for HybridShape Extract
+//   To use to extract a part of a surface or solide skin        
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+/**
+ * Represents the hybrid shape extract feature object.
+ * <b>Role</b>: To access the data of the hybrid shape extract feature object.
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeExtract object.
+ * @see CATIAHybridShapeFactory#AddNewExtract
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeExtract : CATIAHybridShape
+{
+ /**
+  * Returns or sets the sub element used as init for the propagation. 
+  * @see CATIAHybridShapeFactory 
+  */ 
+#pragma PROPERTY Elem
+ HRESULT  get_Elem (out /*IDLRETVAL*/ CATIAReference   oElem);
+ HRESULT  put_Elem (in     CATIAReference   iElem);
+
+ /**
+  * Returns or sets the type of propagation for the extract. 
+  * <br>The propagation types for the extract can have the following values: 
+  * <ul> 
+  *    <li>1 for extraction propagation in point continuity</li>
+  *    <li>2 for extraction propagation in tangent continuity</li>
+  *    <li>3 for extraction without propagation</li>
+  * </ul>
+  */ 
+#pragma PROPERTY PropagationType
+ HRESULT  get_PropagationType (out /*IDLRETVAL*/ long oTypePropag );
+ HRESULT  put_PropagationType (in long iTypePropag);
+
+
+ /**
+  * Returns or sets the support for the extract. 
+  */ 
+#pragma PROPERTY Support
+  HRESULT  get_Support (out /*IDLRETVAL*/ CATIAReference   oSupport);
+  HRESULT  put_Support (in     CATIAReference   iSupport);
+
+ /**
+  * Returns or sets the ComplementaryExtract checked/unchecked for the extract. 
+  */ 
+#pragma PROPERTY ComplementaryExtract
+HRESULT  get_ComplementaryExtract (out /*IDLRETVAL*/ boolean oComplementaire);
+HRESULT  put_ComplementaryExtract (in     boolean   iComplementaire);
+
+ /**
+  * Returns or sets the IsFederated flag checked/unchecked for the extract. 
+  */ 
+#pragma PROPERTY IsFederated
+HRESULT  get_IsFederated (out /*IDLRETVAL*/ boolean   oIsFederated);
+HRESULT  put_IsFederated (in     boolean  iIsFederated);
+
+/**
+ * Returns or sets the CurvatureThreshold.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the CurvatureThreshold of 
+ * the <code>hybShpExtract</code> in <code>CurvatureThH</code>.
+ * <pre>
+ * Dim CurvatureThH as double
+ * CurvatureThH = hybShpExtract.CurvatureThreshold
+ * </pre>
+ */ 
+#pragma PROPERTY CurvatureThreshold
+ HRESULT get_CurvatureThreshold ( out /*IDLRETVAL*/ double oCrvtreThsld );
+ HRESULT put_CurvatureThreshold ( in                double iCrvtreThsld );
+
+
+/**
+ * Returns or sets the CurvatureThresholdActivity.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the CurvatureThresholdActivity of 
+ * the <code>hybShpExtract</code> in <code>CurvatureActivity </code>.
+ * <pre>
+ * Dim CurvatureActivity as boolean 
+ * CurvatureActivity = hybShpExtract.CurvatureThresholdActivity 
+ * </pre>
+ */ 
+#pragma PROPERTY CurvatureThresholdActivity
+ HRESULT get_CurvatureThresholdActivity ( out /*IDLRETVAL*/ boolean oCrvtreThsldActivity );
+ HRESULT put_CurvatureThresholdActivity ( in                boolean iCrvtreThsldActivity );
+
+
+/**
+ * Returns or sets the DistanceThreshold.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the DistanceThreshold of 
+ * the <code>hybShpExtract</code> in <code>DistanceThH</code>.
+ * <pre>
+ * Dim DistanceThH as double
+ * DistanceThH = hybShpExtract.DistanceThreshold
+ * </pre>
+ */ 
+#pragma PROPERTY DistanceThreshold
+ HRESULT get_DistanceThreshold ( out /*IDLRETVAL*/ double oDistreThsld );
+ HRESULT put_DistanceThreshold ( in                double iDistreThsld );
+
+
+/**
+ * Returns or sets the DistanceThresholdActivity.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the DistanceThresholdActivity of 
+ * the <code>hybShpExtract</code> in <code>DistanceActivity </code>.
+ * <pre>
+ * Dim DistanceActivity as boolean 
+ * DistanceActivity = hybShpExtract.DistanceThresholdActivity 
+ * </pre>
+ */ 
+#pragma PROPERTY DistanceThresholdActivity
+ HRESULT get_DistanceThresholdActivity ( out /*IDLRETVAL*/ boolean oDistreThsldActivity );
+ HRESULT put_DistanceThresholdActivity ( in                boolean iDistreThsldActivity );
+
+
+/**
+ * Returns or sets the AngularThreshold.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the AngularThreshold of 
+ * the <code>hybShpExtract</code> in <code>AngularThH</code>.
+ * <pre>
+ * Dim AngularThH as double
+ * AngularThH = hybShpExtract.AngularThreshold
+ * </pre>
+ */ 
+#pragma PROPERTY AngularThreshold
+ HRESULT get_AngularThreshold ( out /*IDLRETVAL*/ double oAngtreThsld );
+ HRESULT put_AngularThreshold ( in                double iAngtreThsld );
+
+
+/**
+ * Returns or sets the AngularThresholdActivity.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the AngularThresholdActivity of 
+ * the <code>hybShpExtract</code> in <code>AngularActivity </code>.
+ * <pre>
+ * Dim AngularActivity as boolean 
+ * AngularActivity = hybShpExtract.AngularThresholdActivity 
+ * </pre>
+ */ 
+#pragma PROPERTY AngularThresholdActivity
+ HRESULT get_AngularThresholdActivity ( out /*IDLRETVAL*/ boolean oAngtreThsldActivity );
+ HRESULT put_AngularThresholdActivity ( in                boolean iAngtreThsldActivity );
+
+};
+
+
+// Interface name : CATIAHybridShapeExtract
+#pragma ID CATIAHybridShapeExtract "DCE:8ccf2fdc-e8cc-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeExtract
+
+// VB object name : HybridShapeExtract (Id used in Visual Basic)
+#pragma ID HybridShapeExtract "DCE:8ccf2fe5-0383-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeExtract HybridShapeExtract
+
+#endif
+// CATIAHybridShapeExtract_IDL
+

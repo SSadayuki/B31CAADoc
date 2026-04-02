@@ -1,0 +1,56 @@
+// COPYRIGHT Dassault Systemes 2001
+//===================================================================
+#ifndef CATIASimulationWorkbench_IDL
+#define CATIASimulationWorkbench_IDL
+//===================================================================
+// CATIASimulationWorkbench.idl
+//   This automation interface for the access Simulation utilities 
+//===================================================================
+/*IDLREP*/
+
+/**
+ * @CAA2Level L0
+ * @CAA2Usage U3
+ */
+
+#include "CATIAWorkbench.idl"
+
+#include "CATIASIMPlayer.idl"
+
+/**  
+ * The interface to access Simulation utilities.
+ * <p>This version allows to manage the Simulation Player
+ */
+interface CATIASimulationWorkbench : CATIAWorkbench 
+{
+
+  /** @nodoc */ 
+  /**
+   * Return the SimulationPlayer utility.
+   * @return
+   *    The SimulationPlayer utility associated to the active document
+   * <! @sample >
+   *    <dt><b>Example:</b>
+   *    <dd>
+   *    This example retrieves the Player of the active document.
+   *    <pre>
+   *    Dim TheSimulationWorkbench As Workbench
+   *    Set TheSimulationWorkbench = CATIA.ActiveDocument.GetWorkbench ( "SimulationWorkbench" )
+   *    Dim TheSimulationPlayer As SimulationPlayer
+   *    Set TheSimulationPlayer = TheSimulationWorkbench.<font color="red">SimulationPlayer</font>
+   *    </pre>
+   */
+#pragma PROPERTY SimulationPlayer
+   HRESULT get_SimulationPlayer (out /*IDLRETVAL*/ CATIASIMPlayer oPlayer);
+
+};
+
+// Interface name : CATIASimulationWorkbench
+#pragma ID CATIASimulationWorkbench "DCE:a683dcd2-f070-11d4-a39700d0b7ac7abe"
+#pragma DUAL CATIASimulationWorkbench
+
+// VB object name : SimulationWorkbench (Id used in Visual Basic)
+#pragma ID SimulationWorkbench "DCE:a683dcd3-f070-11d4-a39700d0b7ac7abe"
+#pragma ALIAS CATIASimulationWorkbench SimulationWorkbench
+
+#endif

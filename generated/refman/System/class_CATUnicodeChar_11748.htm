@@ -1,0 +1,750 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>System CATUnicodeChar Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../System.htm" href="../System.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "System";	}
+		function getCurrentObjectName() { 
+ 	return "CATUnicodeChar"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>System Framework: CATUnicodeChar <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATUnicodeChar_11748','CATUnicodeChar','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATUnicodeChar</b>
+</p>
+<p>
+<b><i>  Class to use for language meaningful character.</i></b><br>
+ 
+ <b>Role</b>:
+ CATUnicodeChar can be used whenever a character is needed, and that is either seen, entered, or manipulated by the 
+ end user. In this way, the client application is shielded from implementation details regarding language, locale,
+ bytecoding of characters, and so forth. Client applications thus become portable since they can handle character
+ strings expressed in any language.
+ <p>
+ When NLS support is not required, you can use instead the <script type="text/javascript"> activateLinkAnchor('CATChar','','CATChar') </script> class from the System framework. It does support only ISO 646, so that to supress all the problems that arise with NLS complexity. You should never use the 
+ raw char type.
+ <p>
+ <b>Note</b>: Among the methods to manipulate instances of this class, you will find below some references to the
+ Unicode and UTF-8 standards. See 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> for precisions. <p><b>Note</b>: You will find also below some references to the SBCS and MBCS acronym, see 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> for precisions.
+ <p><b>CAUTION</b>: The methods manipulating the "char" type of the C language (or "char*", see 
+ 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeChar','BuildFromChar','CATUnicodeChar.BuildFromChar') </script> ) should rarely be used. They may be used: <ul>
+ <li>combined with the use of Unix MOTIF services</li>
+ <li>to display debug traces on the stdout</li>
+ </ul>
+ The best way to manipulate strings is to use the Unicode encoding, the "char" type of the C language has many
+ limitations.
+ <br>Suppose, for example, you call 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeChar','BuildFromChar','CATUnicodeChar.BuildFromChar') </script> on Windows, and, during the execution, the given "char*" contains one byte, B1 in hexa, followed by the NULL byte which ends the string. Then, 
+ 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeChar','BuildFromChar','CATUnicodeChar.BuildFromChar') </script> will behave the following way: <ul>
+ <li>if the General\"Settings for the current user" field in the "Control Panel"\"Regional Options" window is set to
+ English, the built CATUnicodeChar will contain the "PLUS-MINUS SIGN" character</li>
+ <li>if it set on Japanese, the built CATUnicodeChar will contain the "HALFWIDTH KATAKANA LETTER A" character:
+ the B1 code belongs to the range of one-byte code representations</li>
+ <li>if it set on Korean, the built CATUnicodeChar will contain the "QUESTION MARK" character, which is the default
+ character. Actually, the B1 code belongs to the range of two-bytes code representations</li>
+ </ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATUnicodeChar()"><b>CATUnicodeChar</b></a>()
+</td><td id='tdright'>  Constructs an empty Unicode character instance.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATUnicodeChar(char)"><b>CATUnicodeChar</b></a>(char)
+</td><td id='tdright'>  Constructs a CATUnicodeChar instance from a byte.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATUnicodeChar(CATUnicodeChar&amp;)"><b>CATUnicodeChar</b></a>(CATUnicodeChar&amp;)
+</td><td id='tdright'>   Copy constructor.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATUnicodeChar()"><b>~CATUnicodeChar</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#BuildFromChar(char*)"><b>BuildFromChar</b></a>(char*)
+</td><td id='tdright'>  Builds a CATUnicodeChar instance from a character in a localized encoding.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BuildFromUC2Bytes(CATUC2Bytes&amp;)"><b>BuildFromUC2Bytes</b></a>(CATUC2Bytes&amp;)
+</td><td id='tdright'>  Builds a character from a CATUC2Bytes.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ConvertToChar()"><b>ConvertToChar</b></a>()
+</td><td id='tdright'>  Converts the current character into a character in the thread locale localized encoding.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ConvertToUC2Bytes()"><b>ConvertToUC2Bytes</b></a>()
+</td><td id='tdright'>  Converts the current character into a CATUC2Bytes.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsAlnum()"><b>IsAlnum</b></a>()
+</td><td id='tdright'>  Determines if the current character is an alphanumeric character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsAlpha()"><b>IsAlpha</b></a>()
+</td><td id='tdright'>  Determines if the current character is an alphabetic character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsCntrl()"><b>IsCntrl</b></a>()
+</td><td id='tdright'>  Determines if the current character is a control character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsDigit()"><b>IsDigit</b></a>()
+</td><td id='tdright'>  Determines if the current character is a digit character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsGraph()"><b>IsGraph</b></a>()
+</td><td id='tdright'>  Determines if the current character is a graphic character for printing.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsLower()"><b>IsLower</b></a>()
+</td><td id='tdright'>  Determines if the current character is a lowercase character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsPrint()"><b>IsPrint</b></a>()
+</td><td id='tdright'>  Determines if the current character is a print character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsPunct()"><b>IsPunct</b></a>()
+</td><td id='tdright'>  Determines if the current character is a punctuation character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsSpace()"><b>IsSpace</b></a>()
+</td><td id='tdright'>  Determines if the current character is a space character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsUpper()"><b>IsUpper</b></a>()
+</td><td id='tdright'>  Determines if the current character is a uppercase character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsXDigit()"><b>IsXDigit</b></a>()
+</td><td id='tdright'>  Determines if the current character is a hexadecimal digit character.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ToLower()"><b>ToLower</b></a>()
+</td><td id='tdright'>  Converts the current character, supposed to be a upper case one to lower case.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ToUpper()"><b>ToUpper</b></a>()
+</td><td id='tdright'>  Converts the current character, supposed to be a lower case one to upper case.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator !=(CATUnicodeChar&amp;)"><b>operator !=</b></a>(CATUnicodeChar&amp;)
+</td><td id='tdright'>  Inequality operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator &gt;(CATUnicodeChar&amp;)"><b>operator &gt;</b></a>(CATUnicodeChar&amp;)
+</td><td id='tdright'>  Greater-than operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator &gt;=(CATUnicodeChar&amp;)"><b>operator &gt;=</b></a>(CATUnicodeChar&amp;)
+</td><td id='tdright'>  Greater-than or equal operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator &lt;(CATUnicodeChar&amp;)"><b>operator &lt;</b></a>(CATUnicodeChar&amp;)
+</td><td id='tdright'>  Less-than operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator &lt;=(CATUnicodeChar&amp;)"><b>operator &lt;=</b></a>(CATUnicodeChar&amp;)
+</td><td id='tdright'>  Less-than or equal operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator ==(CATUnicodeChar&amp;)"><b>operator ==</b></a>(CATUnicodeChar&amp;)
+</td><td id='tdright'>  Equality operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator char()"><b>operator char</b></a>()
+</td><td id='tdright'>  Cast to char.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator=(char)"><b>operator=</b></a>(char)
+</td><td id='tdright'>  Assignment operator from a byte.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator=(char*)"><b>operator=</b></a>(char*)
+</td><td id='tdright'>  Assignment operator from a character in a localized encoding.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator=(CATUnicodeChar&amp;)"><b>operator=</b></a>(CATUnicodeChar&amp;)
+</td><td id='tdright'>  Assignment operator from a CATUnicodeChar instance.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATUnicodeChar"></a><a id="CATUnicodeChar()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATUnicodeChar</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs an empty Unicode character instance.
+</dd>
+<dt class='dtmethod' >
+  <a id="CATUnicodeChar"></a><a id="CATUnicodeChar(char)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATUnicodeChar</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('char','char')</script> <span class='param'>iByte</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a CATUnicodeChar instance from a byte.
+ <br><b>Role</b>: Constructs a CATUnicodeChar instance from a byte, supposing the thread code page is a 
+ SBCS code page. If, in the thread code page, the given byte does not correspond to any character coded
+ representation, the instance will be filled with the default character (QUESTION MARK).
+ <br><b>CAUTION</b>: This method, which manipulates the "char" type of the C language should rarely be used (see
+ above).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iByte</span></dt>
+   <dd>    The byte, corresponding to a coded representation in the thread code page.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATUnicodeChar"></a><a id="CATUnicodeChar(CATUnicodeChar&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATUnicodeChar</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&amp;')</script> <span class='param'>iChar</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Copy constructor. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iChar</span></dt>
+   <dd>    The Unicode character to copy
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATUnicodeChar"></a><a id="~CATUnicodeChar()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATUnicodeChar</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="BuildFromChar"></a><a id="BuildFromChar(char*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>BuildFromChar</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('char','char*')</script> <span class='param'>iCodedRepresentation</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Builds a CATUnicodeChar instance from a character in a localized encoding.
+ <br><b>Role</b>: Builds a CATUnicodeChar instance from a character in a localized encoding. The character code page,
+ which must be equal to the thread code page, may be either a SBCS or a MBCS code page. If, in the thread code page,
+ the given byte(s) do(es) not correspond to any character coded representation, the instance will be filled with the 
+ default character (QUESTION MARK).
+ <br><b>CAUTION</b>: This method, which manipulates the "char*" type of the C language should rarely be used (see
+ above).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCodedRepresentation</span></dt>
+   <dd>    Character in the thread locale localized encoding.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BuildFromUC2Bytes"></a><a id="BuildFromUC2Bytes(CATUC2Bytes&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BuildFromUC2Bytes</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUC2Bytes','CATUC2Bytes&amp;')</script> <span class='param'>iCharacter</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Builds a character from a CATUC2Bytes.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacter</span></dt>
+   <dd>   The CATUC2Bytes character.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ConvertToChar"></a><a id="ConvertToChar()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('char','const char *')</script>  <span class='objname'>ConvertToChar</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Converts the current character into a character in the thread locale localized encoding.
+ <br><b>Role</b>: Converts the current character into a character in the thread locale localized encoding. 
+ The character must belong the character set of the thread locale code page. If the character does not belong to the
+ character set of the thread locale code page, the default character coded representation is returned.
+ <br><b>CAUTION</b>: This method, which manipulates the "char*" type of the C language should rarely be used (see
+ above).
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     Character in the thread locale localized encoding.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ConvertToUC2Bytes"></a><a id="ConvertToUC2Bytes()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATUC2Bytes','const CATUC2Bytes')</script>  <span class='objname'>ConvertToUC2Bytes</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Converts the current character into a CATUC2Bytes.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The CATUC2Bytes character.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsAlnum"></a><a id="IsAlnum()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsAlnum</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is an alphanumeric character. 
+ <br><b>Role</b>: Determines if the current character is an alphanumeric character. This service takes into account
+ the current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is an alphanumeric character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsAlpha"></a><a id="IsAlpha()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsAlpha</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is an alphabetic character. 
+ <br><b>Role</b>: Determines if the current character is an alphabetic character. This service takes into account the 
+ current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is an alphabetic character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsCntrl"></a><a id="IsCntrl()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsCntrl</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a control character. 
+ <br><b>Role</b>: Determines if the current character is a control character. This service takes into account the
+ current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a control character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsDigit"></a><a id="IsDigit()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsDigit</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a digit character. 
+ <br><b>Role</b>: Determines if the current character is a digit character. This service takes into account the 
+ current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a digit character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsGraph"></a><a id="IsGraph()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsGraph</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a graphic character for printing. 
+ <br><b>Role</b>: Determines if the current character is a graphic character for printing. A graphic character is a
+ character which is neither the space character nor a control character. This service takes into account the current
+ locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a graphic character for printing, 
+   or <tt>0: No</tt> otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsLower"></a><a id="IsLower()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsLower</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a lowercase character. 
+ <br><b>Role</b>: Determines if the current character is a lowercase character. This service takes into account the 
+ current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a lowercase character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsPrint"></a><a id="IsPrint()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsPrint</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a print character. 
+ <br><b>Role</b>: Determines if the current character is a print character. This service takes into account the 
+ current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a print character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsPunct"></a><a id="IsPunct()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsPunct</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a punctuation character. 
+ <br><b>Role</b>: Determines if the current character is a punctuation character. This service takes into account the 
+ current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a punctuation character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsSpace"></a><a id="IsSpace()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsSpace</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a space character. 
+ <br><b>Role</b>: Determines if the current character is a space character. This service takes into account the 
+ current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a space character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsUpper"></a><a id="IsUpper()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsUpper</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a uppercase character. 
+ <br><b>Role</b>: Determines if the current character is a uppercase character. This service takes into account the 
+ current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a uppercase character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsXDigit"></a><a id="IsXDigit()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsXDigit</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Determines if the current character is a hexadecimal digit character. 
+ <br><b>Role</b>: Determines if the current character is a hexadecimal digit character. This service takes into
+ account the current locale. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>1: Yes</tt> if the current
+   character is a hexadecimal digit character, or <tt>0: No</tt> 
+   otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ToLower"></a><a id="ToLower()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ToLower</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Converts the current character, supposed to be a upper case one to lower case.
+</dd>
+<dt class='dtmethod' >
+  <a id="ToUpper"></a><a id="ToUpper()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ToUpper</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Converts the current character, supposed to be a lower case one to upper case.
+</dd>
+<dt class='dtmethod' >
+  <a id="operator !="></a><a id="operator !=(CATUnicodeChar&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>operator !=</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&amp;')</script> <span class='param'>iCharacter</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Inequality operator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacter</span></dt>
+   <dd>   The character to compare to the current one
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>0: False</tt> 
+   the condition is not fullfilled, or <tt>Other: True</tt> 
+   if the condition is fullfilled.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator &gt;"></a><a id="operator &gt;(CATUnicodeChar&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>operator &gt;</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&amp;')</script> <span class='param'>iCharacter</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Greater-than operator.
+ For the comparison, the current locale is taken into account.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacter</span></dt>
+   <dd>   The character to compare to the current one
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>0: False</tt> 
+   the condition is not fullfilled, or <tt>Other: True</tt> 
+   if the condition is fullfilled.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator &gt;="></a><a id="operator &gt;=(CATUnicodeChar&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>operator &gt;=</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&amp;')</script> <span class='param'>iCharacter</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Greater-than or equal operator.
+ For the comparison, the current locale is taken into account.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacter</span></dt>
+   <dd>   The character to compare to the current one
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>0: False</tt> 
+   the condition is not fullfilled, or <tt>Other: True</tt> 
+   if the condition is fullfilled.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator &lt;"></a><a id="operator &lt;(CATUnicodeChar&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>operator &lt;</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&amp;')</script> <span class='param'>iCharacter</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Less-than operator.
+ For the comparison, the current locale is taken into account.
+ This service calls the C strcoll service, which, for
+ the comparison, compares collation weights computed for
+ each character.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacter</span></dt>
+   <dd>   The character to compare to the current one
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>0: False</tt> 
+   the condition is not fullfilled, or <tt>Other: True</tt> 
+   if the condition is fullfilled.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator &lt;="></a><a id="operator &lt;=(CATUnicodeChar&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>operator &lt;=</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&amp;')</script> <span class='param'>iCharacter</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Less-than or equal operator.
+ For the comparison, the current locale is taken into account.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacter</span></dt>
+   <dd>   The character to compare to the current one
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>0: False</tt> 
+   the condition is not fullfilled, or <tt>Other: True</tt> 
+   if the condition is fullfilled.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator =="></a><a id="operator ==(CATUnicodeChar&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>operator ==</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&amp;')</script> <span class='param'>iCharacter</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Equality operator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacter</span></dt>
+   <dd>   The character to compare to the current one
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     boolean
+   <br><b>Legal values</b>: <tt>0: False</tt> 
+   the condition is not fullfilled, or <tt>Other: True</tt> 
+   if the condition is fullfilled.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator char"></a><a id="operator char()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>operator char</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Cast to char.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The character
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator="></a><a id="operator=(char)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&')</script>  <span class='objname'>operator=</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('char','char')</script> <span class='param'>iByte</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Assignment operator from a byte.
+ <br><b>Role</b>: This operator assigns a byte to the current instance. This operator supposes:
+ <ul>
+ <li>the thread code page is a SBCS code page</li>
+ <li>iByte corresponds to a coded representation in the thread code page</li>
+ </ul>
+ If, in the thread code page,the given byte does not correspond to any character coded representation, the instance
+ will be filled with the default character (QUESTION MARK).
+ <br><b>CAUTION</b>: This method, which manipulates the "char" type of the C language should rarely be used (see
+ above).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iByte</span></dt>
+   <dd>   The byte, corresponding to a coded representation in the thread code page.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator="></a><a id="operator=(char*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&')</script>  <span class='objname'>operator=</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('char','char*')</script> <span class='param'>iCodedRepresentation</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Assignment operator from a character in a localized encoding.
+ <br><b>Role</b>: Assigns a coded representation, supposed to belong to the thread code page, to the current instance.
+ If, in the thread code page, the given byte(s) do(es) not correspond to any character coded representation, the
+ instance will be filled with the default character (QUESTION MARK).
+ <br><b>CAUTION</b>: This method, which manipulates the "char*" type of the C language should rarely be used (see
+ above).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCodedRepresentation</span></dt>
+   <dd>   Character in the thread locale localized encoding.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator="></a><a id="operator=(CATUnicodeChar&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&')</script>  <span class='objname'>operator=</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeChar','CATUnicodeChar&amp;')</script> <span class='param'>iCharacter</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Assignment operator from a CATUnicodeChar instance.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacter</span></dt>
+   <dd>   The provided character
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATUnicodeChar.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>JS0GROUP</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

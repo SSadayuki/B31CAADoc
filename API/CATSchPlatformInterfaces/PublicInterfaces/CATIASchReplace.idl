@@ -1,0 +1,63 @@
+#ifndef CATIASchReplace_IDL 
+#define CATIASchReplace_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+    
+interface  CATIASchGRRComp;
+interface  CATIASchComponent;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage existing schematic component instances.
+  */
+
+interface CATIASchReplace : CATIABase
+{
+  /**
+  * Replace an existing component with this component.
+  * @param iGRRToBePlaced
+  *   Pointer to the component graphical representation of this component to be placed.
+  *   if NULL the first representation found will be used.
+  * @param iSchCompToBeRemoved
+  *   Pointer to the existing component to be replaced by this component.
+  * @param oNewComponent
+  *   Interface pointer to the new component instance placed.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchReplace
+  * Dim objArg1 As SchGRRComp
+  * Dim objArg2 As SchComponent
+  * Dim objArg3 As SchComponent
+  *  ...
+  * Set objArg3 = objThisIntf.<font color="red">Replace</font>(objArg1,objArg2)
+  * </pre>
+  *    
+  */
+  HRESULT Replace ( 
+    in CATIASchGRRComp iGRRToBePlaced, 
+    in CATIASchComponent iSchCompToBeRemoved, 
+    out /*IDLRETVAL*/ CATIASchComponent oNewComponent );
+    
+};
+    
+// Interface name : CATIASchReplace
+#pragma ID CATIASchReplace "DCE:ac884ea3-05ba-460b-9dd10d51bd599cb4"
+#pragma DUAL CATIASchReplace
+    
+// VB object name : SchReplace
+#pragma ID SchReplace "DCE:c1eed10e-3c13-4003-83b63ef5bbcb01ba"
+#pragma ALIAS CATIASchReplace SchReplace
+    
+#endif 
+    

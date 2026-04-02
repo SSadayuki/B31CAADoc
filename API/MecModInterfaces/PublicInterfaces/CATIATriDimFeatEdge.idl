@@ -1,0 +1,64 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIATriDimFeatEdge_IDL
+#define CATIATriDimFeatEdge_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// TriDimFeatEdge Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIAEdge.idl"
+#include "CATBSTR.idl"
+
+/**
+ * 1-D boundary belonging to a feature whose topological result is three dimensional.
+ * <b>Role</b>: 
+ * This @href CATIABoundary object may be, for example, the edge of a Pad.</br> 
+ * You will create a TriDimFeatEdge object using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it
+ * to the operator (such as @href CATIAShapeFactory#AddNewEdgeFilletWithConstantRadius ).</br> 
+ * The lifetime of a TriDimFeatEdge object is limited, see @href CATIABoundary.</br> 
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example asks the end user to select an edge, and creates an edge fillet on this edge:
+ * <pre>
+ * Dim InputObjectType(0)
+ * Set Document = CATIA.ActiveDocument
+ * Set Selection = Document.Selection
+ * 'We propose to the user that he select an edge
+ * InputObjectType(0)="TriDimFeatEdge"
+ * Status=Selection.SelectElement2(InputObjectType,"Select an edge",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set EdgeFillet = ShapeFactory.AddNewEdgeFilletWithConstantRadius(Selection.Item(1).Value,1,5.0)
+ * EdgeFillet.EdgePropagation = 1
+ * Document.Part.Update 
+ * </pre>
+ * </dl>
+ */ 
+
+interface CATIATriDimFeatEdge : CATIAEdge
+{
+
+};
+
+// Interface Name : CATIATriDimFeatEdge
+
+#pragma ID CATIATriDimFeatEdge "DCE:2f8cd2f0-1be1-11d6-80600010b5d44ab2"
+#pragma DUAL CATIATriDimFeatEdge
+
+// VB Object Name : TriDimFeatEdge
+#pragma ID TriDimFeatEdge "DCE:b9318480-1be7-11d6-80600010b5d44ab2"
+#pragma ALIAS CATIATriDimFeatEdge TriDimFeatEdge
+
+#endif
+//#endif
+

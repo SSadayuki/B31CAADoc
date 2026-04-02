@@ -1,0 +1,16 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+ComponentsCatalogsUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+
+LINK_WITH=$(LINK_WITH_FOR_IID) \
+  JS0GROUP  CATApplicationFrame
+
+#useless linkwith JS0FM CATInteractiveInterfaces AD0XXBAS

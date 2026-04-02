@@ -1,0 +1,90 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>TopologicalOperatorsLight TopologicalOperatorsLight Framework:CATCreateTopGeodesicDistanceTool   Global Function  </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../TopologicalOperatorsLight.htm" href="../TopologicalOperatorsLight.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "TopologicalOperatorsLight";	}
+		function getCurrentObjectName() { 
+ 	return "CATCreateTopGeodesicDistanceTool"; } 
+	function getCurrentType() { 
+ 	return "global function"; }  
+ </script><h1 class='title1'>TopologicalOperatorsLight Framework:CATCreateTopGeodesicDistanceTool   Global Function  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+
+<br><section id='objdef'><dl><dt class='dt1'><span class = 'method'><script type="text/javascript"> activateLink('CATDistanceTool',' CATDistanceTool *')</script>  <span class='objname'>CATCreateTopGeodesicDistanceTool</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGeoFactory','CATGeoFactory*')</script> <span class='param'>iGeoFactory</span>,<script type="text/javascript"> activateLink('CATTopData','CATTopData*')</script> <span class='param'>iData</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation')</script> <span class='param'>iOrientation</span>,<script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw*')</script> <span class='param'>iDistance</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='dd1'>
+ Constructs the object for the geodesic computation.
+ This class is to be used when you wan to create a parallel curve onto a suppport.
+ It does not create directly a curve onto 
+ a support. To do this, you must:
+ <ol>
+ <li>Specify the parameters of the offset distance by using CATDistanceTool. This parameters are: 
+ <ul>
+ <li> the parallelism mode: euclidian or geodesic 
+ <li> the side on which the wire is offset, it is computed from the support normal and the wire tangent: Side = Normal^Tangent 
+ <li> the law which defines the distance evolution along the wire.
+ </ul>
+ and they are specified as the arguments of CATCreateTopGeodesicDistanceTool.
+ <li>Specify the type of relimitation: sharp or round and the support on which the wire is offset.
+ This is done by creating the CATExtrapolParallelTool object. 
+ <li>Create and run the CATTopParallel operator.
+ </ol>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iGeoFactory</span></dt>
+   <dd> The pointer to geometry factory.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iData</span></dt>
+   <dd> The pointer to the CATTopData.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd> The side on which the parallel is computed.
+ The cross product between the shell normal and the wire tangent define the
+ left side.
+ <br><b>Legal values </b>: <tt>CATOrientationPositive</tt> for the left side,
+ <tt>CATOrientationNegative</tt> for the right side.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDistance</span></dt>
+   <dd> The pointer to the law defining the parallel offset.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  [out, delete] The pointer to the created operator. To be deleted afer use.
+ </ dd>
+</dl>
+</dd></dl>
+</section></section'>
+<hr/>
+ This object is included in the file: <b>CATCreateTopGeodesicDistanceTool.h</b><br>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

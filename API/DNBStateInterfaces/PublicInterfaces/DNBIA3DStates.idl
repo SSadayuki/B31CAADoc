@@ -1,0 +1,96 @@
+#ifndef DNBIA3DStates_IDL
+#define DNBIA3DStates_IDL
+
+/*IDLREP*/
+/* -*-idl-*- */
+
+// COPYRIGHT Dassault Systemes 2007
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "DNBIA3DState.idl"
+
+interface CATIAItem;
+
+/**
+* Interface representing the collection of 3D State objects.
+*
+* <br><b>Role</b>: Provides access to 3D State objects
+* <p>
+*
+Sample code to use the interface
+
+Sub CATMain()
+    Dim procDoc As ProcessDocument
+    Set procDoc = DELMIA.ActiveDocument
+
+    Dim stateMgt As DNB3DStateManagement
+    Set stateMgt = procDoc.DNB3DStateManagement
+
+    Dim list3DStates as DNB3DStates
+    Set list3DStates = stateMgt.ListAll3DStates
+    
+	stateCount = list3DStates.Count
+		
+	For Index = 1 to stateCount
+		Dim my3DState As DNB3DState
+		Set my3DState = list3DStates.Item(Index)		
+	Next
+
+End Sub
+*/
+interface DNBIA3DStates : CATIACollection
+{
+	/**
+	* Returns the 3D state object.
+	* @param iIndex
+	*   The index to the item to be returned
+	* @return
+	*   The 3D State object
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example returns the first item from the collection 3D states
+	* <pre>
+	* Dim list3DStates as DNB3DStates
+	* Set list3DStates = positionMgt.ListAll3DStates
+	* Dim my3DState As DNB3DState
+	* Set my3DState = list3DStates.Item(1)
+	* </pre>
+	* </dl>
+	*/
+	HRESULT  Item( in CATVariant iIndex, out /*IDLRETVAL*/ DNBIA3DState oState);
+
+	/**
+	* Returns the number of 3D State objects in the collection.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example fetches the Number of 3D states in the collection
+	* <pre>
+	* Dim list3DStates as DNB3DStates
+    * Set list3DStates = stateMgt.ListAll3DStates  
+	* stateCount = list3DStates.StatesCount
+	* </pre>
+	* </dl>
+	*/
+#pragma PROPERTY StatesCount
+	HRESULT get_StatesCount(out /*IDLRETVAL*/ long oNbItems);
+
+};
+
+#pragma ID DNBIA3DStates "DCE:1DC87D59-C3EB-4611-B2360CF874DFA9BE"                        
+#pragma DUAL DNBIA3DStates
+
+#pragma ID DNB3DStates "DCE:BEB6DB90-AE9F-4ac8-8A6E46114F0348FF"
+#pragma ALIAS DNBIA3DStates DNB3DStates
+
+#endif
+

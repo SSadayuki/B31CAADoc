@@ -1,0 +1,254 @@
+#ifndef DNBIA3DStateManagement_IDL
+#define DNBIA3DStateManagement_IDL
+
+/*IDLREP*/
+/* -*-idl-*- */
+
+// COPYRIGHT Dassault Systemes 2007
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+#include "DNBIA3DState.idl"
+
+interface DNBIA3DStates;
+interface CATIAActivity;
+
+/**
+* Interface representing the 3D State Management in the CATDocument.
+*
+* <br><b>Role</b>: Provides access the C++ interfaces DNBIState, DNBIStateMgt
+* to create and manage the 3D States.
+* <p>
+*
+Sample code to use the interface
+
+Sub CATMain()
+    Dim procDoc As ProcessDocument
+    Set procDoc = DELMIA.ActiveDocument
+
+    Dim stateMgt As DNB3DStateManagement
+    Set stateMgt = procDoc.DNB3DStateManagement
+
+    Dim list3DStates as DNB3DStates
+    Set list3DStates = stateMgt.ListAll3DStates
+    
+	stateCount = list3DStates.Count
+		
+	For Index = 1 to stateCount
+		Dim my3DState As DNB3DState
+		Set my3DState = list3DStates.Item(Index)		
+	Next
+
+End Sub
+*/
+interface DNBIA3DStateManagement : CATIABase
+{
+    /** 
+     *  Creates a 3D State object
+     *  @param iStateName
+     *    The name of the 3D State to be created.
+	 *  @param iObject
+	 *    The object(Resource/MA/Product..)on which the state is to be created
+     *  @param iListDefn
+	 *    The definition list(an existing 3D State/3D Position) on which the 
+	 *    new state is to be created
+	 *  @return oState
+     *    The 3D State object created.
+	 * <dl>
+	 * <dt><b>Example:</b>
+	 * <dd>
+	 * For example, Creating a 3D State with the name "My NewState" on the already existing 
+	 * 3D State "My State".
+	 * <pre>
+	 * Dim MySelectedProduct
+     * Dim MySelectedState as DNB3DState
+	 * Dim MyNewState1 as DNB3DState
+     * defnArray[0] = MySelectedState
+     * Set MyNewState1 = stateManagement.Create3DState(“My NewState”,MySelectedProduct,defnArray)
+ 	 * </pre>
+	 * </dd>
+	 * </dl>
+     */
+	HRESULT Create3DState ( in CATBSTR iStateName, 
+		                    in CATBaseDispatch iObject, 
+						    in CATSafeArrayVariant iListDefn, 
+						    out /*IDLRETVAL*/ DNBIA3DState oState );
+    
+	/** 
+	*  Deletes the specified state object
+	*  @param iState
+	*    The 3D State object to be deleted.
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim MySelectedProduct
+    * Dim MySelectedState as DNB3DState
+	* stateManagement.Delete3DState(MySelectedState)
+	* </pre>
+	* </dd>
+	* </dl>     
+	*/
+	HRESULT Delete3DState ( in DNBIA3DState iState );
+	
+	/** 
+	*  Returns the list of all 3D State objects in the process document
+	*  @return oListStates
+	*    The list of all 3D States in the current document.
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim My3DStates as DNB3DStates
+	* set My3DStates = stateManagement.ListAll3DStates
+	* statesCount = My3DStates.Count
+	* </pre>
+	* </dd>
+	* </dl>    
+	*/
+	HRESULT ListAll3DStates (  out /*IDLRETVAL*/ DNBIA3DStates oListStates );
+	
+	/** 
+	*  Returns the number of 3D State objects in the process document
+	*  @return numberOfStates
+	*    The number of 3D States in the current document.
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* stateCount = stateManagement.GetNumberOf3DStates
+	* </pre>
+	* </dd>
+	* </dl>    
+	*/
+	HRESULT GetNumberOf3DStates ( out /*IDLRETVAL*/ long numberOfStates );
+
+	/** 
+	*  Returns the list of all 3D State objects on a given object(Resource/MA/Product..)
+	*  @param iObject
+	*    The object(Resource/MA/Product..), whose states are to be listed.
+	*  @return oListStates
+	*    The list of all 3D States created on iObject.
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim statesArray() as AnyObject
+	* Dim statesCount
+	* statesCount = stateManagement.GetNumberOf3DStatesOnObject(MySelectedProduct)
+	* Redim statesArray(statesCount)
+	* stateManagement.ListAll3DStatesOnObject(MySelectedProduct,statesArray)
+	* </pre>
+	* </dd>
+	* </dl>    
+	*/
+	HRESULT ListAll3DStatesOnObject (  in CATBaseDispatch iObj, inout CATSafeArrayVariant oListStates );
+
+	/** 
+	*  Returns the number of 3D State objects on a given object(Resource/MA/Product..)
+	*  @param iObject
+	*    The object(Resource/MA/Product..), whose states are to be listed.
+	*  @return numberOfStates
+	*    The number of 3D States created on iObjec.
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* stateCount = stateManagement.GetNumberOf3DStatesOnObject(MySelectedProduct)
+	* </pre>
+	* </dd>
+	* </dl>    
+	*/
+	HRESULT GetNumberOf3DStatesOnObject (  in CATBaseDispatch iObj, out /*IDLRETVAL*/ long numberOfStates );
+
+	/** 
+	*  Returns the 3D State object given its name and the object(Resource/MA/Product..)
+	*  on which the state is created.
+	*  @param iObject
+	*    The object(Resource/MA/Product..), on which the state is created.
+	*  @param iStateName
+	*    The name of the 3D State.
+	*  @return oState
+	*    The 3D States object.
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim MySelectedProduct
+	* Dim state as DNB3DState
+	* Set state = stateManagement.GetState(MySelectedProduct, “My State1”)
+	* </pre>
+	* </dd>
+	* </dl>    
+	*/
+	HRESULT Get3DState(in CATBaseDispatch iObject, in CATBSTR iStateName, out /*IDLRETVAL*/ DNBIA3DState oState);
+
+	/** 
+	*  Returns the list of 3D states assigned to the given activity, based 
+	*  on the condition on which the activity has been assigned to the 3D state.
+	*  @param iProcess
+	*    The activity whose states are to be listed.
+	*  @param iConditionType
+	*    The type of assignment that has been made i.e., the condition on which
+	*    the state(s) have been assigned to the given activity.
+	*    iConditionType could be one of "Begin Condition", "End Condition", "3D Context" or "All"
+	*  @return oStates
+	*    The list of 3D States that have been assigned to the given activity.
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim activitiesArray() as AnyObject
+	* Dim numActs
+	* numActs = stateManagement.GetNumberof3DStatesInActivity(MySelectedActivity)
+	* ReDim activitiesArray(numActs)
+	* stateManagement.List3DStatesInActivity MySelectedActivity, “Begin Condition”,activitiesArray
+	* </pre>
+	* </dd>
+	* </dl>    
+	*/
+	HRESULT List3DStatesInActivity (in CATIAActivity iProcess,
+									in CATBSTR iConditionType,
+									inout CATSafeArrayVariant oStates);
+
+	/** 
+	*  Returns the number of 3D states assigned to the given activity, based 
+	*  on the condition on which the activity has been assigned to the 3D state.
+	*  @param iProcess
+	*    The activity whose states are to be listed.
+	*  @param iConditionType
+	*    The type of assignment that has been made i.e., the condition on which
+	*    the state(s) have been assigned to the given activity.
+	*    iConditionType could be one of "Begin Condition", "End Condition", "3D Context" or "All"
+	*  @return oNumStates
+	*    The number of 3D States that have been assigned to the given activity.
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim MySelectedActivity
+	* NumStates = stateManagement.GetNumberof3DStatesInActivity(MySelectedActivity, “Begin Condition”)
+	* </pre>
+	* </dd>
+	* </dl>    
+	*/
+	HRESULT GetNumberof3DStatesInActivity  (in CATIAActivity iProcess,
+											in CATBSTR iConditionType,
+											out /*IDLRETVAL*/ long oNumStates );
+
+};
+
+#pragma ID DNBIA3DStateManagement "DCE:943459AA-635B-4ff3-89FE2A398B5CD481"
+#pragma DUAL DNBIA3DStateManagement
+
+#pragma ID DNB3DStateManagement "DCE:6306A7F2-9E52-49bc-ABFEC81408B249B0"
+#pragma ALIAS DNBIA3DStateManagement DNB3DStateManagement
+
+#endif
+

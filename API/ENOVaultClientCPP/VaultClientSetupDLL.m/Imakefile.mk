@@ -1,0 +1,20 @@
+# COPYRIGHT DASSAULT SYSTEMES 2003
+#
+# LOAD MODULE for VaultClientSetupDLL.m
+#
+
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+
+LINK_WITH = JS0GROUP ENOVIVaultClientAPP VaultClientServices CommonSetupDLLA
+
+OS = Windows_NT
+SYS_LIBS = Ws2_32.lib
+
+OS = win_b64
+#BUILD=NO
+
+OS = aix_a64
+#BUILD=NO
+
+OS = irix_a64
+BUILD=NO

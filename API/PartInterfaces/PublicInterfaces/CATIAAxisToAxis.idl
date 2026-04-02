@@ -1,0 +1,79 @@
+#ifndef CATIAAxisToAxis_IDL
+#define CATIAAxisToAxis_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+//=================================================================                                   
+// CATIAAxisToAxis:                           
+// Exposed interface for translation
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+//=============================================================================
+// Dec. 2006 - Creation                                                     TRK
+//=============================================================================
+//
+#include "CATIAShape.idl"
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+* Represents the hybrid shape AxisToAxis feature object. 
+* This solid feature is 
+* created from an underlying HybridShapeAxisToAxis aggregated by the AxisToAxis.
+* <b>Role</b>: To access the data of the hybrid shape AxisToAxis feature object.
+* This data includes:
+*<ul>
+*<li> The element to AxisToAxis </li>
+*<li> Origin for the AxisToAxis </li>
+*<li> Plane for the AxisToAxis </li>
+*<li> Direction for the AxisToAxis </li>
+*<li> XRatio Value for the AxisToAxis </li>
+*<li> YRatio Value for the AxisToAxis </li>
+*<li> ZRatio Value for the AxisToAxis </li>
+*<li> The translation distance and its value </li>
+*</ul>
+* Use the CATIAHybridShapeFactory to create HybridShapeFeature object.
+* @see CATIAHybridShapeFactory
+*/
+//-------------------------------------------------------------------------------
+interface CATIAAxisToAxis : CATIAShape
+{
+
+#pragma PROPERTY HybridShape
+
+  /**
+  * Gets the underlying HybridShapeAxisToAxis.
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example explains how to retrieve the underlying HybridShape AxisToAxis
+  * <pre>
+  *  Dim oHybridShape as AnyObject
+  *  Set oHybridShape=oAxisToAxis.HybridShape
+  *  oHybridShape.ElemToAxisToAxis = reference1
+  * </pre>
+  * </dl>
+  */
+  HRESULT get_HybridShape (out /*IDLRETVAL*/ CATIAHybridShape oHybridShapeAxisToAxis);
+
+};
+
+#pragma ID CATIAAxisToAxis "DCE:367A4A87-0B70-4aec-B2EBCE1D91CA3283"
+#pragma DUAL CATIAAxisToAxis
+
+// VB object name AxisToAxis: (Id used in Visual Basic)
+#pragma ID AxisToAxis  "DCE:E9E4D055-E3C3-40fa-AB07EA675F789B2C"
+#pragma ALIAS CATIAAxisToAxis AxisToAxis
+
+
+#endif
+// CATIAAxisToAxis_IDL
+

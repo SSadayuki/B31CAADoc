@@ -1,0 +1,93 @@
+#ifndef CATIARoughness_IDL
+#define CATIARoughness_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIATPSParallelOnScreen;
+
+/**
+ * Interface to manage Roughness TPS.
+ * TPS for Technological Product Specifications.
+ */
+interface CATIARoughness : CATIABase 
+{
+    /**
+     * Retrieves or sets roughness obtention mode.
+     */
+  #pragma PROPERTY Obtention
+   HRESULT get_Obtention (out /*IDLRETVAL*/ short oObtention);
+   HRESULT put_Obtention (in short iObtention);
+
+    /**
+     * Retrieves or sets roughness applicability.
+     */
+  #pragma PROPERTY Applicability
+    HRESULT get_Applicability (out /*IDLRETVAL*/ short oApplicability);
+    HRESULT put_Applicability (in short iApplicability);
+
+    /**
+     * Retrieves roughness field.
+     * <pre>
+     * <r>                                     Field 4
+     * <r>                     Field 1     ------------------
+     * <r>                                /         (Field 9)
+     * <r>                     Field 2   /
+     * <r>                              / (Field 8)  Field 5
+     * <r>                         \   /
+     * <r>               Field 3    \ /    Field 7   Field 6
+     * <r>
+     * <r> Pour le champs 7 les lettres autorisees sont :
+     * <r> M, C, R, P, X, = ,L (symbole perpendicularite de la DSES)
+     * </pre>
+     *   @param iIndex
+     *     Field index, from 1 to 9 from V5R13 (Fields 8 and 9 added).
+     *                  from 1 to 7 before V5R13
+     *   @param oField
+     *     The contain of the iIndex field.
+     */
+    HRESULT Field (in short iIndex, inout /*IDLRETVAL*/ CATBSTR oField);
+
+    /**
+     * Set roughness field.
+     * <pre>
+     * <r>                                     Field 4
+     * <r>                     Field 1     ------------------
+     * <r>                                /         (Field 9)
+     * <r>                     Field 2   /
+     * <r>                              / (Field 8)  Field 5
+     * <r>                         \   /
+     * <r>               Field 3    \ /    Field 7   Field 6
+     * <r>
+     * <r> Pour le champs 7 les lettres autorisees sont :
+     * <r> M, C, R, P, X, = ,L (symbole perpendicularite de la DSES)
+     * </pre>
+     *   @param iIndex
+     *     Field index, from 1 to 9 from V5R13 (Fields 8 and 9 added).
+     *                  from 1 to 7 before V5R13
+     *   @param iField
+     *     The contain of the iIndex field.
+     */
+    HRESULT SetField (in short iIndex, in CATBSTR iField);
+
+     /**
+    * Gets the annotation on TPSParallelOnScreen interface.
+    */
+    HRESULT  TPSParallelOnScreen (out /*IDLRETVAL*/ CATIATPSParallelOnScreen  oTPSParallelOnScreen);
+};
+
+// Interface name : CATIARoughness
+#pragma ID CATIARoughness "DCE:ff71873a-303a-11d6-be8b0002b341dd3a"
+#pragma DUAL CATIARoughness
+
+// VB object name : Roughness (Id used in Visual Basic)
+#pragma ID Roughness "DCE:ff71873b-303a-11d6-be8b0002b341dd3a"
+#pragma ALIAS CATIARoughness Roughness
+
+#endif

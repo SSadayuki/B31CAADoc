@@ -1,0 +1,165 @@
+#ifndef CATIAShots_IDL
+#define CATIAShots_IDL
+
+/*IDLREP*/
+
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//===================================================================
+// CATIAShots.idl
+// Automation interface for the Shots element 
+//===================================================================
+
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+
+    /**  
+     * The collection of all shot objects contained in the current 
+     * sampled.
+     */
+
+interface CATIAShots : CATIACollection 
+{
+    /**
+     * Creates a new shot and adds it to the Shots collection.
+     * @return The created shot
+     *
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example creates a shot <tt>newShot</tt>
+     * in the Shots collection.
+     * <pre>
+     * Dim newShot
+     * Set newShot = Shots.<font color="red">CreateShot</font>
+     * </pre>
+     */
+
+    HRESULT CreateShot (out /*IDLRETVAL*/ CATBaseDispatch oNewShot);
+
+
+    /**
+     * Creates a new shot of a specific type and adds it to the Shots 
+     * collection.
+     * @param iType
+     *    Specifies the type of the shot to be created.  The legal values
+     *    are FITShotPoints, FITShotDouble, FITShotSimple and FITShotGeneric.
+     *    These different types correspond to the need of creating different
+     *    shots for different types of objects.
+     * @return The created Shot
+     *
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example creates a shot <tt>shot</tt>
+     * in the Shots collection.
+     * <pre>
+     * Set newShots = Shots.<font color="red">CreateShot (FITSHOTDouble)</font>
+     * </pre>
+     */
+
+    HRESULT CreateSpecificShot(in CATBSTR iType, out /*IDLRETVAL*/ CATBaseDispatch oNewShot);
+
+
+    /**
+     * Adds a shot to the end of the shots collection.
+     * @param iShot
+     *    The shot to be added
+     * 
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example adds a shot (called <tt>myShot</tt> to the 
+     * shots collection.
+     * <pre>
+     * Shots.<font color="red">Append (myShot)</font>
+     * </pre>
+     */
+
+    HRESULT Append (in CATBaseDispatch iShot);
+
+
+    /**
+     * Adds a shot to a specific location to the shots collection.
+     * @param iIndex
+     *    The value of the location of an already existing shot.  Then when
+     *    inserting a new shot, it will be placed after it.  It is a positive
+     *    integer, with the range of 1 to the value of the last shot.
+     * @param iShot
+     *    The shot to be added
+     * 
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example inserts a shot after the second shot.
+     * <pre>
+     * Shots.<font color="red">InsertAfter (2, myShot)</font>
+     * </pre>
+     */
+
+    HRESULT InsertAfter (in short iIndex, in CATBaseDispatch iShot);
+
+
+    /**
+     * Returns a shot using its index from the colection.
+     * @param iIndex
+     *      The index of the item to retrieve from the collection of shots.
+     *      Numerically, the index value corresponds to the rank of the shot in
+     *      the collection (ie. the first is 1, second is 2, ...).
+     * @return The retrieved Shot
+     *
+     * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example retrieves the second shot from the Shots collection.
+     *
+     * <pre>
+     * Dim myShot
+     * Set myShot = myShots.<font color="red">Item</font> (2)
+     * </pre>
+     */
+
+    HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ CATBaseDispatch oShot);
+
+
+    /**
+     * Removes a shot from the collection.
+     * @param iIndex
+     *      The index of the shot to remove from the collection of the shots.
+     *      Numerically, the index value corresponds to the rank of the shot in
+     *      the collection (ie. the first is 1, second is 2, ...).
+     *
+     * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example removes the third shot from the Shots collection 
+     * of the active document.
+     *
+     * <pre>
+     * Shots.<font color="red">Remove</font> (3)
+     * </pre>
+     */
+
+    HRESULT Remove (in CATVariant iIndex);
+};
+
+
+// Interface name : CATIAShots
+#pragma ID CATIAShots "DCE:133a2278-f693-11d4-9f0700508b67522f"
+#pragma DUAL CATIAShots
+
+
+// VB object name : Shots (Id used in Visual Basic)
+#pragma ID Shots "DCE:133a2279-f693-11d4-9f0700508b67522f"
+#pragma ALIAS CATIAShots Shots
+
+
+#endif

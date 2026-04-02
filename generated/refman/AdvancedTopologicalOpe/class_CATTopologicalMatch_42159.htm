@@ -1,0 +1,564 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>AdvancedTopologicalOpe CATTopologicalMatch Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../AdvancedTopologicalOpe.htm" href="../AdvancedTopologicalOpe.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "AdvancedTopologicalOpe";	}
+		function getCurrentObjectName() { 
+ 	return "CATTopologicalMatch"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>AdvancedTopologicalOpe Framework: CATTopologicalMatch <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATTopologicalMatch_42159','CATTopologicalMatch','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATTopologicalMatch</b>
+</p>
+<p>
+<b><i> Class defining the topological operator that matches parts of skin boundaries.</i></b><br>
+
+ <br>The skins must be composed of one face, which boundaries are on the surface boundaries.
+ The matching operation is done with respect to continuity criteria along the
+ boundaries. If the G0 continuity is imposed on a boundary, the control points of this boundary
+ are taken into account. If the G1 continuity is imposed, the first rank (on the boundary) and
+ second rank of control points are taken into account. If the G2 continuity is imposed, 
+ three ranks of control points are taken into account. It is possible to optimize 
+ the modifications of these ranks (<tt>SetOptimization</tt>), as well as diffuse the modifications
+ on the whole surface (<tt>SetDiffusion</tt>).
+ The CATTopologicalMatch operator can be used in two different match configurations:
+ <ul>
+   <li>The matching operator deforms the selected boundary edges of the first skin, to be 
+ coincident with boundary edges of other skins, with respect to a given continuity criteria
+ ("multiple sides matching"). 
+   <li>The matching operator deforms both skins that must match along a given edge 
+ ("both" matching).
+ </ul>
+ The operator follows the use frame of all operator. It satisfies to the smart mechanism: the
+ input bodies are not modified. New one are created, possibly sharing data with the input ones.
+<ul>
+ A CATTopologicalMatch operator is created with the <tt>CATCreateTopologicalMatch</tt> global function 
+ for the multiple sides matching
+ and the <tt>CATCreateTopologicalMatchBoth</tt> global function for the both matching; it must be
+ directly deleted with the usual C++ <tt>delete</tt> operator after use.
+ It is is not streamable. 
+<li>In case of <tt>BASIC</tt>
+ mode, the operation is automatically performed at the operator creation. 
+ In case of <tt>ADVANCED</tt>
+ mode, options can be precised with the <tt>SetXxx</tt> methods, before
+ asking for the computation with the <tt>Run</tt> method. The advanced mode also allows you to
+ run the same operator with additional continuity constraints.
+<li>In both cases, the result is accessed with the <tt>GetResult</tt> method. If you do not want 
+ to keep the resulting body, use the <script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory.
+</ul>
+
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetConnectionContinuity(CATLONG32)"><b>GetConnectionContinuity</b></a>(CATLONG32)
+</td><td id='tdright'>  Returns the continuity criteria for <tt>this</tt> matching operation (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDiffusion(CATLONG32)"><b>GetDiffusion</b></a>(CATLONG32)
+</td><td id='tdright'>   Returns the level of diffusion of the deformation on the whole surface (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetGlobalCurvatureParameter(CATLONG32,double&amp;)"><b>GetGlobalCurvatureParameter</b></a>(CATLONG32,double&amp;)
+</td><td id='tdright'>  Retrieves the stiffness on the matching zone in case of both matching and <tt>ADVANCED</tt> mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetGlobalTangentParameter(CATLONG32,double&amp;)"><b>GetGlobalTangentParameter</b></a>(CATLONG32,double&amp;)
+</td><td id='tdright'>  Retrieves the stiffness on the matching zone in case of both matching and <tt>ADVANCED</tt> mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMatchFactor(CATFrFContinuity)"><b>GetMatchFactor</b></a>(CATFrFContinuity)
+</td><td id='tdright'>  Returns the match factor.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetOppositeSideContinuity(CATLONG32,CATLONG32)"><b>GetOppositeSideContinuity</b></a>(CATLONG32,CATLONG32)
+</td><td id='tdright'>  Returns the continuity criteria on the boundaries that are not part of the boundaries to match (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResult(CATLONG32)"><b>GetResult</b></a>(CATLONG32)
+</td><td id='tdright'>  Returns the result of <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ReverseRelativeWireOrientation()"><b>ReverseRelativeWireOrientation</b></a>()
+</td><td id='tdright'>  Asks for reversing the default relative orientation of the wires to match (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ReverseTransitionOrientation(CATLONG32)"><b>ReverseTransitionOrientation</b></a>(CATLONG32)
+</td><td id='tdright'>  Asks for reversing the default transition between the surface to match (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> operator (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetConnectionContinuity(CATLONG32,CATFrFContinuity)"><b>SetConnectionContinuity</b></a>(CATLONG32,CATFrFContinuity)
+</td><td id='tdright'>  Defines the continuity criteria for <tt>this</tt> matching operation (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDefaultRelativeWireOrientation()"><b>SetDefaultRelativeWireOrientation</b></a>()
+</td><td id='tdright'>  Asks for the default choice of the relative orientation of the wires to match (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDefaultTransitionOrientation()"><b>SetDefaultTransitionOrientation</b></a>()
+</td><td id='tdright'>  Asks for the default choice of the transition between the surface to match (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDiffusion(CATLONG32,CATLONG32)"><b>SetDiffusion</b></a>(CATLONG32,CATLONG32)
+</td><td id='tdright'>  Defines the diffusion of the deformation on the whole surface (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetGlobalCurvatureParameter(CATLONG32,double)"><b>SetGlobalCurvatureParameter</b></a>(CATLONG32,double)
+</td><td id='tdright'>  Defines a stiffness on the matching zone in case of both matching and <tt>ADVANCED</tt> mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetGlobalTangentParameter(CATLONG32,double)"><b>SetGlobalTangentParameter</b></a>(CATLONG32,double)
+</td><td id='tdright'>  Defines a stiffness on the matching zone in case of both matching and <tt>ADVANCED</tt> mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMatchFactor(CATFrFContinuity,double)"><b>SetMatchFactor</b></a>(CATFrFContinuity,double)
+</td><td id='tdright'>  Sets the match factor in case of both matching and <tt>ADVANCED</tt> mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetOppositeSideContinuity(CATLONG32,CATLONG32,CATFrFContinuity)"><b>SetOppositeSideContinuity</b></a>(CATLONG32,CATLONG32,CATFrFContinuity)
+</td><td id='tdright'>  Defines a continuity criteria on the boundaries that are not part of the boundaries to match (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetOptimization(CATLONG32)"><b>SetOptimization</b></a>(CATLONG32)
+</td><td id='tdright'>  Asks fot the optimization of the local deformation (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#UseTheLastRunResult()"><b>UseTheLastRunResult</b></a>()
+</td><td id='tdright'>  Defines a new matching operation (<tt>ADVANCED</tt> mode).
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetConnectionContinuity"></a><a id="GetConnectionContinuity(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script>  <span class='objname'>GetConnectionContinuity</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iWireIndex</span>)</span><script type="text/javascript"> activateLink('const=0','const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the continuity criteria for <tt>this</tt> matching operation (<tt>ADVANCED</tt> mode).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWireIndex</span></dt>
+   <dd> The index (beginning at 0) of the wire on which the continuity criteria is defined.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The type of continuity for <tt>iWireIndex</tt>.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDiffusion"></a><a id="GetDiffusion(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetDiffusion</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>)</span><script type="text/javascript"> activateLink('0',' const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Returns the level of diffusion of the deformation on the whole surface (<tt>ADVANCED</tt> mode).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The diffusion.
+ <br><b>Legal values</b></tt>: 0 for only deform the control points impacted by the continuity criteria, 1 to diffuse
+ the modifiations on the whole surface.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetGlobalCurvatureParameter"></a><a id="GetGlobalCurvatureParameter(CATLONG32,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetGlobalCurvatureParameter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioCurvatureRatio</span>)</span><script type="text/javascript"> activateLink('0',' const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the stiffness on the matching zone in case of both matching and <tt>ADVANCED</tt> mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioCurvatureRatio</span></dt>
+   <dd> The global curvature parameter ratio. Can be used for connection continuity greater or equal to G2.
+ <br><b>Legal values</b>: <tt>0. <= iCurvatureRatio <= 1.</tt>. Set by default to <tt>1.</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetGlobalTangentParameter"></a><a id="GetGlobalTangentParameter(CATLONG32,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetGlobalTangentParameter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioTangentRatio</span>)</span><script type="text/javascript"> activateLink('0',' const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the stiffness on the matching zone in case of both matching and <tt>ADVANCED</tt> mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioTangentRatio</span></dt>
+   <dd> The global tangent parameter. Can be used for connection continuity greater or equal to G1.
+ <br><b>Legal values</b>: <tt>0. <= iTangentRatio <= 1.</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMatchFactor"></a><a id="GetMatchFactor(CATFrFContinuity)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('double','double')</script>  <span class='objname'>GetMatchFactor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script> <span class='param'>iContinuity</span>)</span><script type="text/javascript"> activateLink('0',' const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the match factor.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The relative influence of each surface.
+ <br><b>Legal values</b>: <tt>0 <= iFactor <= 1 </tt>, <tt>0<= iFactor <=0.5 </tt> to enhance the influence
+ the first surface, <tt>0<= iFactor <=0.5 </tt> to enhance the influence of the second surface.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetOppositeSideContinuity"></a><a id="GetOppositeSideContinuity(CATLONG32,CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script>  <span class='objname'>GetOppositeSideContinuity</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iWireIndex</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>)</span><script type="text/javascript"> activateLink('const=0','const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the continuity criteria on the boundaries that are not part of the boundaries to match (<tt>ADVANCED</tt> mode).
+ <br>In case of conflict with the connection continuity, the priority is given to the connection
+ continuity.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWireIndex</span></dt>
+   <dd> The index (beginning at 0) of the wire to match. The continuity  will be defined on the opposite wire.
+ Remember that the only works on faces with four edges defined on the surface coundaries.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The type of continuity for <tt>iWireIndex</tt>. Set to <tt>CATFrFPointCont</tt> (G0 continuity), in default mode.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResult"></a><a id="GetResult(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody *')</script>  <span class='objname'>GetResult</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>)</span><script type="text/javascript"> activateLink('0',' const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the result of <tt>this</tt> operator.
+ <br>The bodies are created by the operator. 
+ You must delete them with the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script>  method if you do not want to keep them.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the created body corresponding to the deformation of the <tt>iSkinIndex</tt> surface.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ReverseRelativeWireOrientation"></a><a id="ReverseRelativeWireOrientation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ReverseRelativeWireOrientation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for reversing the default relative orientation of the wires to match (<tt>ADVANCED</tt> mode).
+ <br> This can used to manualy manage the twist.
+</dd>
+<dt class='dtmethod' >
+  <a id="ReverseTransitionOrientation"></a><a id="ReverseTransitionOrientation(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ReverseTransitionOrientation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for reversing the default transition between the surface to match (<tt>ADVANCED</tt> mode).
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> operator (<tt>ADVANCED</tt> mode).
+</dd>
+<dt class='dtmethod' >
+  <a id="SetConnectionContinuity"></a><a id="SetConnectionContinuity(CATLONG32,CATFrFContinuity)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetConnectionContinuity</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iWireIndex</span>,<script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script> <span class='param'>iContinuity</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the continuity criteria for <tt>this</tt> matching operation (<tt>ADVANCED</tt> mode).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWireIndex</span></dt>
+   <dd> The index (beginning at 0) of the wire on which the continuity criteria is defined.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iContinuity</span></dt>
+   <dd> The type of continuity for <tt>iWireIndex</tt>. Set to <tt>CATFrFPointCont</tt> (G0 continuity), in default mode.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDefaultRelativeWireOrientation"></a><a id="SetDefaultRelativeWireOrientation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDefaultRelativeWireOrientation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for the default choice of the relative orientation of the wires to match (<tt>ADVANCED</tt> mode).
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDefaultTransitionOrientation"></a><a id="SetDefaultTransitionOrientation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDefaultTransitionOrientation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for the default choice of the transition between the surface to match (<tt>ADVANCED</tt> mode).
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDiffusion"></a><a id="SetDiffusion(CATLONG32,CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDiffusion</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iDiffusion</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the diffusion of the deformation on the whole surface (<tt>ADVANCED</tt> mode).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDiffusion</span></dt>
+   <dd> The diffusion.
+ <br><b>Legal values</b></tt>: 0 for only deform the control points impacted by the continuity criteria
+ (default value), 1 to diffuse the modifiations on the whole surface.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetGlobalCurvatureParameter"></a><a id="SetGlobalCurvatureParameter(CATLONG32,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetGlobalCurvatureParameter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iCurvatureRatio</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a stiffness on the matching zone in case of both matching and <tt>ADVANCED</tt> mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCurvatureRatio</span></dt>
+   <dd> The global curvature parameter ratio. Can be used for connection continuity greater or equal to G2.
+ <br><b>Legal values</b>: <tt>0. <= iCurvatureRatio <= 1.</tt>. Set by default to <tt>1.</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetGlobalTangentParameter"></a><a id="SetGlobalTangentParameter(CATLONG32,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetGlobalTangentParameter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iTangentRatio</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a stiffness on the matching zone in case of both matching and <tt>ADVANCED</tt> mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTangentRatio</span></dt>
+   <dd> The global tangent parameter ratio. Can be used for connection continuity greater or equal to G1.
+ <br><b>Legal values</b>: <tt>0. <= iTangentRatio <= 1.</tt>. Set by default to <tt>1.</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMatchFactor"></a><a id="SetMatchFactor(CATFrFContinuity,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetMatchFactor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script> <span class='param'>iContinuity</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iFactor</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the match factor in case of both matching and <tt>ADVANCED</tt> mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iContinuity</span></dt>
+   <dd> The continuity order on the boundary
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFactor</span></dt>
+   <dd> The relative influence of each surface.
+ <br><b>Legal values</b>: <tt>0 <= iFactor <= 1 </tt>, <tt>0<= iFactor <=0.5 </tt> to enhance the influence
+ the first surface, <tt>0<= iFactor <=0.5 </tt> to enhance the influence of the second surface. 
+ Set to <tt>0.5</tt> by default.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetOppositeSideContinuity"></a><a id="SetOppositeSideContinuity(CATLONG32,CATLONG32,CATFrFContinuity)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetOppositeSideContinuity</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iWireIndex</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSkinIndex</span>,<script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script> <span class='param'>iContinuity</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a continuity criteria on the boundaries that are not part of the boundaries to match (<tt>ADVANCED</tt> mode).
+ <br>In case of conflict with the connection continuity, the priority is given to the connection
+ continuity.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWireIndex</span></dt>
+   <dd> The index (beginning at 0) of the wire to match. The continuity  will be defined on the opposite wire.
+ Remember that the only works on faces with four edges defined on the surface coundaries.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSkinIndex</span></dt>
+   <dd> The index of the input surface.
+ <br><b>Legal values</b>:
+ <ul><li>In case of multiple sides matching, only the first skin is modified, such that <tt>iSkinIndex=0</tt>.
+ <li>In case of both matching,<tt>iSkinIndex=0</tt> is set for the first input skin,
+ <tt>iSkinIndex=1</tt> is set for the second one.
+ </ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iContinuity</span></dt>
+   <dd> The type of continuity for <tt>iWireIndex</tt>. Set to <tt>CATFrFPointCont</tt> (G0 continuity), in default mode.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetOptimization"></a><a id="SetOptimization(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetOptimization</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iOptimization</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks fot the optimization of the local deformation (<tt>ADVANCED</tt> mode).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOptimization</span></dt>
+   <dd> The optimization is set with 1  (default mode) and unset with 0.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="UseTheLastRunResult"></a><a id="UseTheLastRunResult()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>UseTheLastRunResult</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a new matching operation (<tt>ADVANCED</tt> mode).
+ <br>The result of the preceeding <tt>Run</tt> is set for the next run. This allows you to refine the continuity 
+ criteria of the matching. Use the <tt>Setxxx</tt> methods to tune the criteria, and <tt>Run</tt> again
+ the operator. New resulting bodies are created.
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATTopologicalMatch.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATAdvancedTopologicalOpe</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

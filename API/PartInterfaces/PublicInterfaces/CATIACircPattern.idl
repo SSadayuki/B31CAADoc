@@ -1,0 +1,368 @@
+#ifndef CATIACircPattern_IDL
+#define CATIACircPattern_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIACircPattern:                           
+// Exposed interface for CircPattern
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification				  	  L Lalere
+//=================================================================
+#include "CATIAPattern.idl"
+#include "CATSafeArray.idl"
+#include "CATPatternDefs.idl"
+
+interface CATIAReference;
+interface CATIALinearRepartition;
+interface CATIAAngularRepartition;
+interface CATIAIntParam;
+
+/**
+ * Represents the circular pattern.
+ * The shape is duplicated along concentric circles to build crowns.
+ * A linear repartition object defines the duplication along radial
+ * directions, thus determining the number of crowns.
+ * An angular repartition object defines the duplication on the crowns.
+ * @see CATIALinearRepartition, CATIAAngularRepartition
+ */
+
+//-----------------------------------------------------------------
+interface CATIACircPattern : CATIAPattern
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON ROW IN RADIAL DIRECTION (anchor point)
+    //    ------------------------------------------
+    //
+   /**
+    * Returns the position of the shape to be copied along the
+    * radial direction.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>RadialDirPos</tt> the
+    * position of the shape to be copied along the
+    * radial direction.
+    * <pre>
+    * Set RadialDirPos = firstPattern.<font color="red">RadialDirectionRow</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY RadialDirectionRow
+    HRESULT get_RadialDirectionRow ( out /*IDLRETVAL*/ CATIAIntParam oRadialRow );
+ 
+    //
+    //    ON ROW IN ANGULAR DIRECTION (anchor point)
+    //    ------------------------------------------
+    //
+   /**
+    * Returns the position of the shape to be copied along the
+    * angular direction.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>AngularDirPos</tt> the
+    * position of the shape to be copied along the angular direction.
+    * <pre>
+    * Set AngularDirPos = firstPattern.<font color="red">AngularDirectionRow</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY AngularDirectionRow
+    HRESULT get_AngularDirectionRow ( out /*IDLRETVAL*/ CATIAIntParam oAngularRow );
+
+    //
+    //    ON RADIAL ALIGNMENT
+    //    --------------------
+    //
+   /**
+    * Returns or sets whether the copied shapes
+    * should be rotated or radial aligned
+    * with respect to the original one. 
+    * <br>
+    * <b>True</b> if the copied shapes are rotated.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>alignedR</tt>
+    * the radial alignment of the
+    * circular pattern <tt>firstPattern</tt>,
+    * and then sets it to <tt>False</tt>:
+    * <pre>
+    * Set alignedR = firstPattern.<font color="red">RadialAlignment</font>
+    * firstPattern.<font color="red">RadialAlignment</font> = False
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY RadialAlignment
+    HRESULT get_RadialAlignment ( out /*IDLRETVAL*/ boolean oIsAligned );
+    HRESULT put_RadialAlignment ( in                boolean iIsAligned );
+
+    //
+    //    ON ORIENTATION FOR ROTATION AXIS
+    //    --------------------------------
+    //
+   /**
+    * Returns or sets whether the shapes are copied clockwise
+    * on the crowns with respect to the rotation axis direction.
+    * <br>
+    * <b>True</b> if the shapes are copied counterclockwise
+    * when the rotation axis direction goes towards you when
+    * you look at the crown.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>alignedAxis</tt>
+    * whether the circular pattern <tt>firstPattern</tt> is built
+    * clockwise, and then sets it to <tt>True</tt>:
+    * <pre>
+    * alignedAxis = firstPattern.<font color="red">RotationOrientation</font>
+    * firstPattern.<font color="red">RotationOrientation</font> = True
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY RotationOrientation
+    HRESULT get_RotationOrientation ( out /*IDLRETVAL*/ boolean oIsAligned );
+    HRESULT put_RotationOrientation ( in boolean iIsAligned );
+
+    //
+    //    ON RADIAL REPARTITION
+    //    ---------------------
+    //
+   /**
+    * Returns the radial repartition.
+    * The radial repartition is the repartition along a radius.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>repartR</tt>
+    * the radial repartition of the
+    * circular pattern <tt>firstPattern</tt>:
+    * <pre>
+    * Set repartR = firstPattern.<font color="red">RadialRepartition</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY RadialRepartition
+    HRESULT get_RadialRepartition ( out /*IDLRETVAL*/ CATIALinearRepartition oOnRadialRepartition );
+
+    //
+    //    ON ANGULAR REPARTITION
+    //    ----------------------
+    //
+   /**
+    * Returns the angular repartition.
+    * The angular repartition is the repartition on a crown.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>repartA</tt>
+    * the angular repartition of the
+    * circular pattern <tt>firstPattern</tt>:
+    * <pre>
+    * Set repartA = firstPattern.<font color="red">AngularRepartition</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY AngularRepartition
+    HRESULT get_AngularRepartition ( out /*IDLRETVAL*/ CATIAAngularRepartition oAngularRepartition );
+
+    //
+    //    ON CIRCULAR PATTERN PARAMETERS
+    //    ------------------------------
+    //
+    /**
+     * Returns or sets the circular pattern parameters required to define the pattern.
+     * These parameters are used when reading the CATIAAngularRepartition properties.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>parameters</tt> the circular pattern parameters
+     * of the <tt>firstPattern</tt> circular pattern,
+     * and then sets it to <tt>catCompleteCrown</tt>,
+     * so that only the number of instances is used to define the Pattern:
+     * <pre>
+     * Set parameters = firstPattern.<font color="red">CircularPatternParameters</font>
+     * Set firstPattern.<font color="red">CircularPatternParameters</font> = catCompleteCrown
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY CircularPatternParameters
+    HRESULT    get_CircularPatternParameters ( out /*IDLRETVAL*/ CatCircularPatternParameters oParameters ) ;
+    HRESULT    put_CircularPatternParameters ( in                CatCircularPatternParameters iParameters ) ;
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+    //
+    //    ON ROTATION CENTER
+    //    ------------------
+    //
+//
+//
+   /**
+    * Returns the rotation center if the user defined it.
+	* Returns E_FAIL if no rotation center has been defined
+    * The rotation center is returned as an array containing
+    * the rotation center coordinates.
+    * Assume this array is <tt>oRotationCenter</tt>. It contains:
+    * <dl>
+    * <dt><tt>oRotationCenter[0],oRotationCenter[1],oRotationCenter[2]</tt>
+    * <dd>The X, Y, and Z rotation center coordinates
+    * </dl>
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>centerArray</tt>
+    * the rotation center
+    * coordinates of the circular pattern <tt>firstPattern</tt>,
+    * and saves them in variables:
+    * <pre>
+    * Call firstPattern.<font color="red">GetRotationCenter</font>(centerArray)
+    * x = centerArray[0]
+    * y = centerArray[1]
+    * z = centerArray[2]
+    * </pre>
+    * </dl>
+    */
+    HRESULT GetRotationCenter ( inout  CATSafeArrayVariant ioRotationCenter );
+
+   /**
+    * Sets the rotation center.
+    * @param iRotationCenter
+    *   The rotation center
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the rotation center of the circular pattern
+    * <tt>firstPattern</tt> with <tt>point1Ref</tt> point:
+    * <pre>
+    * firstPattern.<font color="red">SetRotationCenter</font> point1Ref
+    *</pre>
+    * </dl>
+    */
+    HRESULT SetRotationCenter ( in     CATIAReference      iRotationCenter );
+
+    //
+    //    ON ROTATION AXIS
+    //    ----------------
+    //
+//
+   /**
+    * Returns the rotation axis.
+    * The rotation axis is returned as an array containing
+    * the rotation axis vector components.
+    * Assume this array is <tt>oRotationAxis</tt>. It contains:
+    * <dl>
+    * <dt><tt>oRotationAxis[0],oRotationAxis[1],oRotationAxis[2]</tt>
+    * <dd>The X, Y, and Z rotation axis vector components
+    * </dl>
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>axisArray</tt> the rotation axis
+    * components of the circular pattern <tt>firstPattern</tt>:
+    * <pre>
+    * Call firstPattern.<font color="red">GetRotationAxis</font>(axisArray)
+    * Set x = axisArray[0]
+    * Set y = axisArray[1]
+    * Set z = axisArray[2]
+    * </pre>
+    * </dl>
+    */
+    HRESULT GetRotationAxis ( inout  CATSafeArrayVariant ioRotationAxis );
+
+   /**
+    * Sets the rotation axis.
+    * @param iRotationAxis
+    *   The rotation axis.
+    *   It is passed as reference and can
+    *   be valuated with a line, an edge or a plane reference: in this
+    *   case the plane normal is taken into account.<br>
+    * The following @href CATIABoundary objects are supported: 
+    * @href CATIAPlanarFace, @href CATIACylindricalFace  @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the rotation axis of the circular pattern
+    * <tt>firstPattern</tt> with the <tt>refLine1</tt> reference:
+    * <pre>
+    * firstPattern.<font color="red">SetRotationAxis</font> refLine1
+    * </pre>
+    * </dl>
+    */
+    HRESULT SetRotationAxis ( in     CATIAReference      iRotationAxis );
+
+/**
+	* This method is deprecated
+    * Sets the UnequalStep.
+    * @param iInstanceNumber
+    *   The Instance Number
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example creates the number of pattern spacing objects in pattern object
+    *</pre>
+    * </dl>
+    */
+	HRESULT SetUnequalStep(in long iInstanceNumber);
+
+	/**
+    * Sets the InstanceAngularSpacing.
+    * @param iInstanceNumber
+    *   The Instance Number
+	* @param iAngularSpacing
+    *   The Angular Spacing
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the InstanceAngularSpacing of the circular pattern
+    *</pre>
+    * </dl>
+    */
+	HRESULT SetInstanceAngularSpacing(in long iInstanceNumber, in double iAngularSpacing);
+
+	/**
+    * Sets the Instance Number.
+    * @param iInstanceNumber
+    *   The Instance Number
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example modifies the instance number for unequal angular spacing
+    *</pre>
+    * </dl>
+    */
+	HRESULT SetUnequalInstanceNumber(in long iInstanceNumber);
+
+
+};
+
+// Interface name : CATIACircPattern
+#pragma ID CATIACircPattern "DCE:5f2e8a03-669c-11d1-a27f0000f87546fd"
+#pragma DUAL CATIACircPattern
+
+// VB object name : CircPattern (Id used in Visual Basic)
+#pragma ID CircPattern "DCE:5f537e76-669c-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIACircPattern CircPattern
+
+
+#endif
+// CATIACircPattern_IDL
+

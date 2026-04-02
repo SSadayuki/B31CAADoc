@@ -1,0 +1,428 @@
+#ifndef CATIAAnnotation_IDL
+#define CATIAAnnotation_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAText;
+interface CATIADimension3D;
+interface CATIAFlagNote;
+interface CATIARoughness;
+interface CATIANoa;
+interface CATIAToleranceZone;
+interface CATIAToleranceUnitBasisValue;
+interface CATIADefaultAnnotation;
+interface CATIAMaterialCondition;
+interface CATIADimensionLimit;
+interface CATIATangentPlane;
+interface CATIATolerancePerUnitBasisRestrictiveValue;
+interface CATIAShiftedProfileTolerance;
+interface CATIAParticularTolElem;
+interface CATIAReferenceFrame;
+interface CATIADatumSimple;
+interface CATIADatumTarget;
+interface CATIAFreeState;
+interface CATIADimensionPattern;
+interface CATIACompositeTolerance;
+interface CATIAProjectedToleranceZone;
+interface CATIAEnvelopCondition;
+interface CATIAControledRadius;
+interface CATIAAssociatedRefFrame;
+interface CATIATPSView;
+interface CATIANumericalDisplayFormat;
+
+/**
+ * Interface for the Technological Product Specification (TPS) objects.
+ * Leaf entity in the Design Pattern Composite.
+ * TPS modeler enables definition of specification related to surfaces.
+ */
+interface CATIAAnnotation : CATIABase
+{
+    /**
+     * Get the Type.
+     * @param oType
+     *   The Type.
+     *
+     * List of types available ordered by SuperType:
+     * SuperType = "FTA_NonSemantic"
+     *  Type = "FTA_Text"
+     *  Type = "FTA_FlagNote"
+     *  Type = "FTA_Roughness"
+     *  Type = "FTA_Weld"
+     *  Type = "FTA_Noa"
+     *  Type = "FTA_NonSemanticDatum"
+     *  Type = "FTA_NonSemanticTarget"
+     *  Type = "FTA_NonSemanticGDT"
+     *  Type = "FTA_NonSemanticDimension"
+     *
+     * SuperType = "FTA_Form"
+     *  Type = "FTA_Flatness"
+     *  Type = "FTA_Straightness"
+     *  Type = "FTA_Circularity"
+     *  Type = "FTA_Cylindricity"
+     *  Type = "FTA_ProfileOfAnyLine"
+     *  Type = "FTA_ProfileOfASurface"
+     *  Type = "FTA_PatternTruePos"
+     *
+     * SuperType = "FTA_Dimension"
+     *  Type = "FTA_LinearDimension"
+     *  Type = "FTA_AngularDimension"
+     *  Type = "FTA_SecondLinearDimension"
+     *  Type = "FTA_ChamferDimension"
+     *  Type = "FTA_BasicDimension"
+     *
+     * SuperType = "FTA_Position"
+     *  Type = "FTA_TruePosition"
+     *  Type = "FTA_Concentricity"
+     *  Type = "FTA_Symmetry"
+     *  Type = "FTA_PositionOfAnyLine"
+     *  Type = "FTA_PositionOfASurface"
+     *
+     * SuperType = "FTA_Datum"
+     *  Type = "FTA_DatumSimple"
+     *  Type = "FTA_DatumTarget"
+     *  Type = "FTA_DatumSystem"
+     *  Type = "FTA_ReferenceFrame"
+     *
+     * SuperType = "FTA_Orientation"
+     *  Type = "FTA_Parallelism"
+     *  Type = "FTA_Perpendicularity"
+     *  Type = "FTA_Angularity"
+     *
+     * SuperType = "FTA_RunOut"
+     *  Type = "FTA_TotalRunOut"
+     *  Type = "FTA_CircularRunOut"
+     */
+  #pragma PROPERTY Type
+   HRESULT get_Type (inout /*IDLRETVAL*/ CATBSTR oType);
+    /**
+     * Get the Super Type.
+     * @param oSuperType
+     *   The Super Type.
+     *
+     * The list of SuperType available:
+     *  "FTA_NonSemantic"
+     *  "FTA_Form"
+     *  "FTA_Dimension"
+     *  "FTA_Position"
+     *  "FTA_Datum"
+     *  "FTA_Orientation"
+     *  "FTA_RunOut"
+     */
+  #pragma PROPERTY SuperType
+   HRESULT get_SuperType (inout /*IDLRETVAL*/ CATBSTR oSuperType);
+    /**
+     * Get the TPS Status.
+     * @param oStatus
+     *   The Status.
+     */
+  #pragma PROPERTY TPSStatus
+   HRESULT get_TPSStatus (inout /*IDLRETVAL*/ CATBSTR oStatus);
+
+    /**
+     * method get_Z will never be exposed
+     *
+     * Set the offset of the annotation
+     * @param iZ
+     *   The offset.
+     */
+  #pragma PROPERTY Z
+   HRESULT put_Z (in double iZ);
+
+    /**
+     * method GetXY will never be exposed
+     *
+     * Set TPS coordinates in the view
+     * @param oX
+     *   The X coordinate.
+     * @param oY
+     *   The Y coordinate.
+     */
+     HRESULT SetXY (in double iX, in double iY);
+
+    /**
+     * Move the annotation in another view.
+     * @param iView
+     *   The destination view.
+     */
+     HRESULT TransfertToView (in CATIATPSView iView);
+
+    /**
+     * To refresh the 3D visualization.
+     */
+    HRESULT ModifyVisu ();
+
+    /**
+     * Add a leader.
+     */
+    HRESULT AddLeader ();
+
+    /**
+     * Apply a color to referenced geometry.
+     */
+    HRESULT ApplyReferencedGeomColor (in long iReleatedR, in long iReleatedG, 
+                                      in long iReleatedB);
+
+    /**
+     * Apply the initial color to referenced geometry.
+     */
+    HRESULT ApplyReferencedInitColor ( );
+
+    /**
+     * Get the annotation on the Text interface.
+     * @param oText
+     *   The annotation Text.
+     */
+    HRESULT Text (out /*IDLRETVAL*/ CATIAText oText);
+
+    /**
+     * Get the 3D Dimension on the 3D Dimension interface.
+     * @param oDim
+     *   The 3D Dimension.
+     */
+    HRESULT Dimension3D (out /*IDLRETVAL*/ CATIADimension3D oDim);
+
+    /**
+     * Get the annotation on the FlagNote interface.
+     * @param oFlagNote
+     *   The annotation Flag Note.
+     */
+    HRESULT FlagNote (out /*IDLRETVAL*/ CATIAFlagNote oFlagNote);
+
+    /**
+     * Get the annotation on the Roughness interface.
+     */
+    HRESULT Roughness (out /*IDLRETVAL*/ CATIARoughness oRoughness);
+
+    /**
+     * Get the annotation on the Noa interface.
+     */
+    HRESULT Noa (out /*IDLRETVAL*/ CATIANoa oNoa);
+
+    /**
+     * Get the annotation on the ReferenceFrame interface.
+     */
+    HRESULT ReferenceFrame (out /*IDLRETVAL*/ CATIAReferenceFrame oRefFrame);
+
+    /**
+     * Get the annotation on the DatumSimple interface.
+     */
+    HRESULT DatumSimple (out /*IDLRETVAL*/ CATIADatumSimple oDatSimple);
+
+    /**
+     * Get the annotation on the DatumTarget interface.
+     */
+    HRESULT DatumTarget (out /*IDLRETVAL*/ CATIADatumTarget oDatTarget);
+
+    /**
+     * Is the a Tolerance Zone.
+     */
+    HRESULT IsAToleranceZone (out /*IDLRETVAL*/ boolean oIsATolZone);
+
+    /**
+     * Get the annotation on the ToleranceZone interface.
+     */
+    HRESULT ToleranceZone (out /*IDLRETVAL*/ CATIAToleranceZone oTolZone);
+
+    /**
+     * To know if the Annotation is a Tolerance Unit Basis Value.
+     */
+    HRESULT IsAToleranceUnitBasisValue(
+                                     out /*IDLRETVAL*/ boolean oIsATolUnitBas);
+
+    /**
+     * Get the annotation on the ToleranceUnitBasisValue interface.
+     */
+    HRESULT ToleranceUnitBasisValue(
+                   out /*IDLRETVAL*/ CATIAToleranceUnitBasisValue oTolUnitBas);
+
+    /**
+     * To know if the Annotation is a Default Annotation.
+     */
+    HRESULT IsADefaultAnnotation (out /*IDLRETVAL*/ boolean oIsADefAnnot);
+
+    /**
+     * Get the annotation on the DefaultAnnotation interface.
+     */
+    HRESULT DefaultAnnotation(
+                           out /*IDLRETVAL*/ CATIADefaultAnnotation oDefAnnot);
+
+    /**
+     * To know if the Annotation has a Material Condition.
+     */
+    HRESULT HasAMaterialCondition (out /*IDLRETVAL*/ boolean oHasMatCond);
+
+    /**
+     * Get the annotation on the MaterialCondition interface.
+     */
+    HRESULT MaterialCondition(
+                            out /*IDLRETVAL*/ CATIAMaterialCondition oMatCond);
+
+    /**
+     * To know if the Annotation has a Dimension Limit.
+     */
+    HRESULT HasDimensionLimit (out /*IDLRETVAL*/ boolean oHasDimLim);
+
+    /**
+     * Get the annotation on the DimensionLimit interface.
+     */
+    HRESULT DimensionLimit (out /*IDLRETVAL*/ CATIADimensionLimit oDimLim);
+
+    /**
+     * To know if the Annotation is a Tangent Plane.
+     */
+    HRESULT IsATangentPlane (out /*IDLRETVAL*/ boolean oIsATangentPlane);
+
+    /**
+     * Get the annotation on the TangentPlane interface.
+     */
+    HRESULT TangentPlane (out /*IDLRETVAL*/ CATIATangentPlane oTangentPlane);
+
+    /**
+     * To know if the Annotation has a Tolerance Per Unit Basis Restricted Value.
+     */
+    HRESULT HasATolerancePerUnitBasisRestrictiveValue(
+                                        out /*IDLRETVAL*/ boolean oHasATolRes);
+
+    /**
+     * Get the annotation on the TolerancePerUnitBasisRestrictiveValue interface.
+     */
+    HRESULT TolerancePerUnitBasisRestrictiveValue(
+         out /*IDLRETVAL*/ CATIATolerancePerUnitBasisRestrictiveValue oTolRes);
+
+    /**
+     * To know if the Annotation is a Shifted Profile Tolerance.
+     */
+    HRESULT IsAShiftedProfileTolerance(
+                                    out /*IDLRETVAL*/ boolean oIsAShiftProTol);
+
+    /**
+     * Get the annotation on the ShiftedProfileTolerance interface.
+     */
+    HRESULT ShiftedProfileTolerance(
+                  out /*IDLRETVAL*/ CATIAShiftedProfileTolerance oShiftProTol);
+
+    /**
+     * To know if the Annotation has a Particuler Element.
+     */
+    HRESULT HasAParticularTolElem (out /*IDLRETVAL*/ boolean oHasAParTolElem);
+
+    /**
+     * Get the annotation on the ParticularTolElem interface.
+     */
+    HRESULT ParticularTolElem(
+                         out /*IDLRETVAL*/ CATIAParticularTolElem oParTolElem);
+
+    /**
+     * To know if the Annotation has a Free State.
+     */
+    HRESULT HasAFreeState (out /*IDLRETVAL*/ boolean oHasAFreeState);
+
+    /**
+     * Get the annotation on the FreeState interface.
+     */
+    HRESULT FreeState (out /*IDLRETVAL*/ CATIAFreeState oFreeState);
+
+    /**
+     * To know if the Annotation is a Dimension Pattern.
+     */
+    HRESULT IsADimensionPattern (out /*IDLRETVAL*/ boolean oIsADimPatt);
+
+    /**
+     * Get the annotation on the DimensionPattern interface.
+     */
+    HRESULT DimensionPattern(out /*IDLRETVAL*/ CATIADimensionPattern oDimPatt);
+
+    /**
+     * To know if the Annotation is a composite Tolerance.
+     */
+    HRESULT IsACompositeTolerance (out /*IDLRETVAL*/ boolean oIsACompTol);
+
+    /**
+     * Get the annotation on the CompositeTolerance interface.
+     */
+    HRESULT CompositeTolerance(
+                           out /*IDLRETVAL*/ CATIACompositeTolerance oCompTol);
+
+    /**
+     * To know if the Annotation is a Projected Zone.
+     */
+    HRESULT IsAProjectedToleranceZone(
+                                    out /*IDLRETVAL*/ boolean oIsAProjTolZone);
+
+    /**
+     * Get the annotation on the ProjectedToleranceZone interface.
+     */
+    HRESULT ProjectedToleranceZone(
+                   out /*IDLRETVAL*/ CATIAProjectedToleranceZone oProjTolZone);
+
+    /**
+     * To know if the Annotation has an Envelop Condition.
+     */
+    HRESULT HasAnEnvelopCondition (out /*IDLRETVAL*/ boolean oHasEnvCond);
+
+    /**
+     * Get the annotation on the EnvelopCondition interface.
+     */
+    HRESULT EnvelopCondition(out /*IDLRETVAL*/ CATIAEnvelopCondition oEnvCond);
+
+    /**
+     * To know if the Annotation has a Controled Radius.
+     */
+    HRESULT HasAControledRadius (out /*IDLRETVAL*/ boolean oHasConRad);
+
+    /**
+     * Get the annotation on the ControledRadius interface.
+     */
+    HRESULT ControledRadius (out /*IDLRETVAL*/ CATIAControledRadius oEnvCond);
+
+    /**
+     * To know if the Annotation is an Associated Reference Frame.
+     */
+
+    HRESULT IsAnAssociatedRefFrame (out /*IDLRETVAL*/ boolean oIsAnAssRefFra);
+    /**
+     * Get the annotation on the AssociatedRefFrame interface.
+     */
+
+    HRESULT AssociatedRefFrame(
+                         out /*IDLRETVAL*/ CATIAAssociatedRefFrame oAssRefFra);
+
+    /**
+     * Count the geometry on which the Annotation is applied to.
+     */
+    HRESULT GetSurfacesCount (out /*IDLRETVAL*/ double oInstanceCount);
+
+    /**
+     * Get the geometry on which the Annotation is applied to.
+     */
+    HRESULT GetSurfaces (inout CATSafeArrayVariant oSafeArray);
+
+    /**
+    * Checks if the Annotation has a Numerical Display Format.
+    */
+    HRESULT HasANumericalDisplayFormat(out /*IDLRETVAL*/ boolean oHasANumForm);
+
+    /**
+    * Gets the annotation on the NumericalDisplayFormat interface.
+    */
+    HRESULT NumericalDisplayFormat(out /*IDLRETVAL*/ CATIANumericalDisplayFormat oNumForm);
+
+};
+
+// Interface name : CATIAAnnotation
+#pragma ID CATIAAnnotation "DCE:b72306c6-a0ce-11d3-9c940008c725d79e"
+#pragma DUAL CATIAAnnotation
+
+// VB object name : Annotation
+#pragma ID Annotation "DCE:b72306c6-a0ce-11d3-9c940008c725d79f"
+#pragma ALIAS CATIAAnnotation Annotation
+
+#endif

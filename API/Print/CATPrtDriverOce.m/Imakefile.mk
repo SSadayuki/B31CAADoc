@@ -1,0 +1,37 @@
+# PG0GOC : Driver V4 OCE
+
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+OS = AIX
+LINK_WITH = CATPrt CATPrtDriverCATIAV4 JS0GROUP v4Drv
+SYS_LIBS = -lxlf -lxlf90 -lxlfpad
+
+OS = IRIX
+LINK_WITH = CATPrt CATPrtDriverCATIAV4 JS0GROUP v4Drv
+SYS_LIBS = -lftn 
+
+
+OS = HP-UX
+LINK_WITH = CATPrt CATPrtDriverCATIAV4 JS0GROUP v4Drv
+#if os hpux_a
+SYS_LIBS = -lf
+#else
+SYS_LIBS= -lF90
+#endif
+
+OS = hpux_b64 
+LINK_WITH = CATPrt CATPrtDriverCATIAV4 JS0GROUP v4Drv
+#if os hpux_a
+SYS_LIBS = -lf
+#else
+SYS_LIBS= -lF90 -lcps 
+#endif
+
+OS = SunOS
+LINK_WITH = CATPrt CATPrtDriverCATIAV4 JS0GROUP v4Drv
+SYS_LIBS = -lF77 -lM77
+
+OS = Windows_NT
+BUILD=NO
+
+

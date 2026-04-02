@@ -1,0 +1,733 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMModelInterfaces CATEdge Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMModelInterfaces.htm" href="../GMModelInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMModelInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATEdge"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>GMModelInterfaces Framework:  CATEdge Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATEdge_19697','CATEdge','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATEdge</b>
+</p>
+<p>
+<b><i> Interface representing a topological edge.</i></b><br>
+ 
+ <br> An edge is a topological cell which geometry is an edge-curve. It 
+ is bounded by vertices. 
+ <br> Edges can be used in the following ways:
+ <ul>
+ <li> to bound a face (edge must be put in one of the face loops)
+ <li> to bound a volume (edge must be put in one of the volume wires)
+ <li> as a piece of a wire in 3D space (edge must be put in a wire, and that
+      wire must be directly referred by a body).
+ </ul>
+ <br> In order to be valid, the vertices of the edge must be different.
+ An edge is oriented with regards to the
+ underlying edge-curve:
+ <dl><dt><tt>CATOrientationNegative</tt><dd> The start
+ vertex is the one with the larger parameter, and the end vertex is the
+ one with the smaller parameter.
+     <dt><tt>CATOrientationPositive</tt><dd> The start
+ vertex is the one with the smaller parameter, and the end vertex is the
+ one with the larger parameter.
+     <dt><tt>CATOrientationUnknown</tt><dd> The cell orientation is not
+ defined.</dl>
+ <br>A CATEdge is created with the <script type="text/javascript"> activateLinkAnchor('CATBody','CreateCell','CATBody.CreateCell') </script> or 
+<script type="text/javascript"> activateLinkAnchor('CATBody','CreateEdge','CATBody.CreateEdge') </script> methods and deleted with the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#EvalTangent(CATCrvParam&amp;,CATMathVector&amp;,CATBoolean)"><b>EvalTangent</b></a>(CATCrvParam&amp;,CATMathVector&amp;,CATBoolean)
+</td><td id='tdright'>  Computes the tangent vector to <tt>this</tt> CATEdge at a given parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Get2DBoundingBox(CATFace*)"><b>Get2DBoundingBox</b></a>(CATFace*)
+</td><td id='tdright'>  Returns the 2D bounding box of <tt>this</tt> CATEdge on the surface of the bounded face.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCurve(CATOrientation*)"><b>GetCurve</b></a>(CATOrientation*)
+</td><td id='tdright'>  Returns the geometric edge-curve of <tt>this</tt> CATEdge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetGeometryOnFace(CATFace*,CATSide,CATOrientation*,CATCrvParam*,CATCrvParam*)"><b>GetGeometryOnFace</b></a>(CATFace*,CATSide,CATOrientation*,CATCrvParam*,CATCrvParam*)
+</td><td id='tdright'>  Returns the geometry of <tt>this</tt> CATEdge with respect to an underlying CATFace.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetGlobalSharpness(CATTopData&amp;,CATFace*,CATFace*,CATTopSharpness&amp;,CATOrientation*,CATShell*,CATBoolean,CATBoolean,CATBoolean*,CATAngle)"><b>GetGlobalSharpness</b></a>(CATTopData&amp;,CATFace*,CATFace*,CATTopSharpness&amp;,CATOrientation*,CATShell*,CATBoolean,CATBoolean,CATBoolean*,CATAngle)
+</td><td id='tdright'>  Retrieves the global sharpness of <tt>this</tt> CATEdge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetJunctionStatus()"><b>GetJunctionStatus</b></a>()
+</td><td id='tdright'>  Reads the edge junction status.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLocalSharpness(CATTopData&amp;,CATCrvParam&amp;,CATFace*,CATFace*,CATTopSharpness&amp;,CATOrientation*,CATShell*,CATAngle)"><b>GetLocalSharpness</b></a>(CATTopData&amp;,CATCrvParam&amp;,CATFace*,CATFace*,CATTopSharpness&amp;,CATOrientation*,CATShell*,CATAngle)
+</td><td id='tdright'>  Computes the sharpness angle of <tt>this</tt> CATEdge at a given parameter 
+ on the edge curve.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNextInLoop(CATSide,CATFace*,CATEdge**,CATSide*)"><b>GetNextInLoop</b></a>(CATSide,CATFace*,CATEdge**,CATSide*)
+</td><td id='tdright'>  Retrieves the CATEdge which is right after <tt>this</tt> in its loop.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPreviousInLoop(CATSide,CATFace*,CATEdge**,CATSide*)"><b>GetPreviousInLoop</b></a>(CATSide,CATFace*,CATEdge**,CATSide*)
+</td><td id='tdright'>  Retrieves the CATEdge which is right before <tt>this</tt> CATEdge in its loop.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSideOnFace(CATFace*)"><b>GetSideOnFace</b></a>(CATFace*)
+</td><td id='tdright'>  Returns the matter side of <tt>this</tt> CATEdge with respect to a CATFace.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetVertices(CATVertex**,CATVertex**)"><b>GetVertices</b></a>(CATVertex**,CATVertex**)
+</td><td id='tdright'>  Returns the start and end vertices of <tt>this</tt> CATEdge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetVerticesParamsOnEdgeCurve(CATCrvParam*,CATCrvParam*)"><b>GetVerticesParamsOnEdgeCurve</b></a>(CATCrvParam*,CATCrvParam*)
+</td><td id='tdright'>  Retrieves the start and end point curve parameters of <tt>this</tt> CATEdge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetVerticesPointsOnEdgeCurve(CATPointOnEdgeCurve**,CATPointOnEdgeCurve**)"><b>GetVerticesPointsOnEdgeCurve</b></a>(CATPointOnEdgeCurve**,CATPointOnEdgeCurve**)
+</td><td id='tdright'>  Retrieves the start and end points on edge curve of <tt>this</tt> CATEdge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCurve(CATEdgeCurve*,CATOrientation)"><b>SetCurve</b></a>(CATEdgeCurve*,CATOrientation)
+</td><td id='tdright'>  Sets the geometric edge-curve of <tt>this</tt> CATEdge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetGeometryOnFace(CATFace*,CATSide,CATPCurve*,CATPointOnEdgeCurve*,CATPointOnEdgeCurve*)"><b>SetGeometryOnFace</b></a>(CATFace*,CATSide,CATPCurve*,CATPointOnEdgeCurve*,CATPointOnEdgeCurve*)
+</td><td id='tdright'>  Sets the geometry of <tt>this</tt> CATEdge with respect to an underying face.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetGlobalSharpness(CATTopData&amp;,CATFace*,CATFace*,CATGeoContinuity,CATGeoConvexity,CATShell*,CATAngle,CATBoolean,CATBoolean)"><b>SetGlobalSharpness</b></a>(CATTopData&amp;,CATFace*,CATFace*,CATGeoContinuity,CATGeoConvexity,CATShell*,CATAngle,CATBoolean,CATBoolean)
+</td><td id='tdright'>  Defines the global sharpness of <tt>this</tt> CATEdge on the edge curve.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetJunctionStatus(CATTopData&amp;,CATTopJunctionEdgeStatus)"><b>SetJunctionStatus</b></a>(CATTopData&amp;,CATTopJunctionEdgeStatus)
+</td><td id='tdright'>  Flags the edge junction status (No effect before V5R8)
+ 
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSideOnFace(CATFace*,CATSide)"><b>SetSideOnFace</b></a>(CATFace*,CATSide)
+</td><td id='tdright'>  Sets the matter side of <tt>this</tt> CATEdge with respect to a CATFace.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="EvalTangent"></a><a id="EvalTangent(CATCrvParam&amp;,CATMathVector&amp;,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>EvalTangent</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATCrvParam','CATCrvParam&amp;')</script> <span class='param'>iParamOnEdgeCurve</span>,<script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>ioTangentVector</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iTgtNormalization</span><span class='param'>=TRUE</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Computes the tangent vector to <tt>this</tt> CATEdge at a given parameter.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParamOnEdgeCurve</span></dt>
+   <dd> The parameter where to compute the tangent.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioTangentVector</span></dt>
+   <dd> The computed vector.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTgtNormalization</span></dt>
+   <dd> The mode of normalization.
+ <br><b>Legal values</b>:
+ <dl><dt><tt> TRUE </tt></dt><dd>if <tt>ioTangentVector</tt> must be  normalized.
+     <dt><tt> FALSE </tt></dt><dd> otherwise.</dl> 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The diagnosis of the evaluation.
+ <br><b>Legal values</b>:
+ <dl><dt><tt> TRUE </tt></dt><dd>if vector is non-zero
+     <dt><tt> FALSE </tt></dt><dd> otherwise.</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Get2DBoundingBox"></a><a id="Get2DBoundingBox(CATFace*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATSurLimits','const CATSurLimits *')</script>  <span class='objname'>Get2DBoundingBox</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iBoundedFace</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the 2D bounding box of <tt>this</tt> CATEdge on the surface of the bounded face. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBoundedFace</span></dt>
+   <dd> The pointer to a face bounded by <tt>this</tt>.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The computed bounding box.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCurve"></a><a id="GetCurve(CATOrientation*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATEdgeCurve','CATEdgeCurve *')</script>  <span class='objname'>GetCurve</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATOrientation','CATOrientation*')</script> <span class='param'>ioOrientation</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the geometric edge-curve of <tt>this</tt> CATEdge.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioOrientation</span></dt>
+   <dd> A pointer to the relative orientation with regards to the edge-curve.
+ If <tt>NULL</tt>, the orientation is not filled out.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the geometry of <tt>this</tt> CATEdge.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetGeometryOnFace"></a><a id="GetGeometryOnFace(CATFace*,CATSide,CATOrientation*,CATCrvParam*,CATCrvParam*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATPCurve','CATPCurve *')</script>  <span class='objname'>GetGeometryOnFace</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iBoundedFace</span>,<script type="text/javascript"> activateLink('CATSide','CATSide')</script> <span class='param'>iSide</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation*')</script> <span class='param'>ioOrientation</span><span class='param'>=NULL</span>,<script type="text/javascript"> activateLink('CATCrvParam','CATCrvParam*')</script> <span class='param'>ioStartParam</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('CATCrvParam','CATCrvParam*')</script> <span class='param'>ioEndParam</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the geometry of <tt>this</tt> CATEdge with respect to an underlying CATFace.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBoundedFace</span></dt>
+   <dd> The pointer to a face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSide</span></dt>
+   <dd> The matter side of <tt>this</tt> while bounding <tt>iBoundedFace</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioOrientation</span></dt>
+   <dd> The orientation of <tt>this</tt> edge with regards to its geometry (a CATPCurve).
+ If <tt>NULL</tt>, this is not filled out.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioStartParam</span></dt>
+   <dd> The start limitation of the CATPCurve, always with regards to its own 
+ orientation: <tt>ioStartParam < ioEndParam</tt>.
+ If <tt>NULL</tt>, this is not filled out.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioEndParam</span></dt>
+   <dd> The end limitation of the CATPCurve.
+ If <tt>NULL</tt>, this is not filled out.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the geometry as a CATPCurve.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetGlobalSharpness"></a><a id="GetGlobalSharpness(CATTopData&amp;,CATFace*,CATFace*,CATTopSharpness&amp;,CATOrientation*,CATShell*,CATBoolean,CATBoolean,CATBoolean*,CATAngle)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetGlobalSharpness</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATTopData','CATTopData&amp;')</script> <span class='param'>iTopData</span>,<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFace1</span>,<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFace2</span>,<script type="text/javascript"> activateLink('CATTopSharpness','CATTopSharpness&amp;')</script> <span class='param'>oSharpness</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation*')</script> <span class='param'>oOrientation</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('CATShell','CATShell*')</script> <span class='param'>iShellOwningTheTwoFaces</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iComputeConvexity</span><span class='param'>= TRUE</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iForceGeometricEvaluation</span><span class='param'>= FALSE</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean*')</script> <span class='param'>oStoredSharpness</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('CATAngle','CATAngle')</script> <span class='param'>iMinSharpAngle</span><span class='param'>= CATTopSharpAngle</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the global sharpness of <tt>this</tt> CATEdge.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTopData</span></dt>
+   <dd> The object defining the CATSoftwareConfiguration. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFace1</span></dt>
+   <dd> The pointer to the one face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFace2</span></dt>
+   <dd> The pointer to another face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioSharpness</span></dt>
+   <dd> The sharpness related to 2 faces <tt>iFace1</tt> and <tt>iFace2</tt>
+ bounded by the edge. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oOrientation</span></dt>
+   <dd>  If no reference shell has been provided, and if the 2 faces have
+ reversed orientations along the edge, then the first face will be used
+ as a reference for the outer side. In this case, <tt>oOrientation</tt> 
+ indicates that second face has to be reversed or not.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iShellOwningTheTwoFaces</span></dt>
+   <dd> The pointer to a shell that owns the two faces.
+ If <tt>NULL</tt>, the faces are supposed to belong to only one shell.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iComputeConvexity</span></dt>
+   <dd> Whether the convexity is computed for Sharp edges.
+ If FALSE, <tt>iShellOwningTheTwoFaces</tt> can be set to NULL.
+ <br><b>Legal values</b>:
+ <dl><dt><tt> TRUE </tt></dt><dd>the convexity is computed if the edge is Sharp.
+     <dt><tt> FALSE </tt></dt><dd>the convexity is not computed.</dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iForceGeometricEvaluation</span></dt>
+   <dd> If TRUE, a geometric evaluation is performed even if a value
+ stored (with <tt>SetGlobalSharpness</tt>) if it exists.
+ <br><b>Legal values</b>:
+ <dl><dt><tt> TRUE </tt></dt><dd>
+     <dt><tt> FALSE </tt></dt><dd></dl>   
+ 
+ </ dd>
+    <dt><span class='paramitem'> oStoredSharpness</span></dt>
+   <dd> The way the sharpness has been filled out (stored or computed).
+ <br><b>Legal values</b>:
+ <dl><dt><tt> TRUE </tt></dt><dd>if <tt>SetLocalSharpness</tt> has been previously applied.
+     <dt><tt> FALSE </tt></dt><dd> geometric evaluation of sharpness.</dl> 
+ If <tt>NULL</tt>, this argument is not filled out.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMinSharpAngle</span></dt>
+   <dd> Minimum (resp. maximum) angle value in rad for which the edge
+ is declared Sharp (resp. Smooth).
+ 
+ </ dd>
+</dl></dd>
+  <dt class='throw'> <b>Throws:</b> </dt>
+  <dd>  If no geometry evaluation could be properly performed.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetJunctionStatus"></a><a id="GetJunctionStatus()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATTopJunctionEdgeStatus','CATTopJunctionEdgeStatus')</script>  <span class='objname'>GetJunctionStatus</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Reads the edge junction status. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The junction status of <tt>this</tt> CATEdge.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLocalSharpness"></a><a id="GetLocalSharpness(CATTopData&amp;,CATCrvParam&amp;,CATFace*,CATFace*,CATTopSharpness&amp;,CATOrientation*,CATShell*,CATAngle)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATAngle','CATAngle')</script>  <span class='objname'>GetLocalSharpness</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATTopData','CATTopData&amp;')</script> <span class='param'>iTopData</span>, const <script type="text/javascript"> activateLink('CATCrvParam','CATCrvParam&amp;')</script> <span class='param'>iParamOnEdgeCurve</span>,<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFace1</span>,<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFace2</span>,<script type="text/javascript"> activateLink('CATTopSharpness','CATTopSharpness&amp;')</script> <span class='param'>oSharpness</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation*')</script> <span class='param'>oOrientation</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('CATShell','CATShell*')</script> <span class='param'>iShellOwningTheTwoFaces</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('CATAngle','CATAngle')</script> <span class='param'>iMinSharpAngle</span><span class='param'>= CATTopSharpAngle</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Computes the sharpness angle of <tt>this</tt> CATEdge at a given parameter 
+ on the edge curve.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTopData</span></dt>
+   <dd> The object defining the CATSoftwareConfiguration.  
+ 
+ </ dd>
+    <dt><span class='paramitem'> iParamOnEdgeCurve</span></dt>
+   <dd> The parameter where to compute the tangent.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFace1</span></dt>
+   <dd> The pointer to the one face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFace2</span></dt>
+   <dd> The pointer to another face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioSharpness</span></dt>
+   <dd> The sharpness related to 2 faces <tt>iFace1</tt> and <tt>iFace2</tt>
+ bounded by the edge. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oOrientation</span></dt>
+   <dd>  If no reference shell has been provided, and if the 2 faces have
+ reversed orientations along the edge, then the first face will be used
+ as a reference for the outer side. In this case, <tt>oOrientation</tt> 
+ indicates that second face has to be reversed or not.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iShellOwningTheTwoFaces</span></dt>
+   <dd> The pointer to a shell that owns the two faces.
+ If <tt>NULL</tt>, the faces are supposed to belong to only one shell.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMinSharpAngle</span></dt>
+   <dd> Minimum (resp. maximum) angle value in rad for which the edge
+ is declared Sharp (resp. Smooth).
+ 
+ </ dd>
+</dl></dd>
+  <dt class='throw'> <b>Throws:</b> </dt>
+  <dd>  If the edge bounds one of the faces twice (closed faces case).
+ An other method with matter side specification will be available soon.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNextInLoop"></a><a id="GetNextInLoop(CATSide,CATFace*,CATEdge**,CATSide*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetNextInLoop</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATSide','CATSide')</script> <span class='param'>iSideVsFace</span>,<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iBoundedFace</span>,<script type="text/javascript"> activateLink('CATEdge','CATEdge**')</script> <span class='param'>oNextEdge</span>,<script type="text/javascript"> activateLink('CATSide','CATSide*')</script> <span class='param'>oSide</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the CATEdge which is right after <tt>this</tt> in its loop.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSideVsFace</span></dt>
+   <dd> The matter side of <tt>this</tt> while bounding <tt>iBoundedFace</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBoundedFace</span></dt>
+   <dd> The pointer to a face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNextEdge</span></dt>
+   <dd> The next edge in the loop.
+ If the edge loop is  closed, this method skips over the 
+ loop closure. If the
+ loop is open, the method, applied to the end edge, returns a <tt>NULL</tt> pointer.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oSide</span></dt>
+   <dd> The matter side of <tt>oNextEdge</tt> while bounding <tt>iBoundedFace</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPreviousInLoop"></a><a id="GetPreviousInLoop(CATSide,CATFace*,CATEdge**,CATSide*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetPreviousInLoop</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATSide','CATSide')</script> <span class='param'>iSideVsFace</span>,<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iBoundedFace</span>,<script type="text/javascript"> activateLink('CATEdge','CATEdge**')</script> <span class='param'>oPrevEdge</span>,<script type="text/javascript"> activateLink('CATSide','CATSide*')</script> <span class='param'>oSide</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the CATEdge which is right before <tt>this</tt> CATEdge in its loop.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSideVsFace</span></dt>
+   <dd> The matter side of <tt>this</tt> while bounding <tt>iBoundedFace</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBoundedFace</span></dt>
+   <dd> The pointer to a face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oPrevEdge</span></dt>
+   <dd> The previous edge in the loop.
+ If the edge loop is  closed, this method skips over the 
+ loop closure. If the
+ loop is open, the method, applied to the end edge, returns a <tt>NULL</tt> pointer.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oSide</span></dt>
+   <dd> The matter side of <tt>oPrevEdge</tt> while bounding <tt>iBoundedFace</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSideOnFace"></a><a id="GetSideOnFace(CATFace*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATSide','CATSide')</script>  <span class='objname'>GetSideOnFace</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iBoundedFace</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the matter side of <tt>this</tt> CATEdge with respect to a CATFace. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBoundedFace</span></dt>
+   <dd> The pointer to a face bounded by <tt>this</tt>.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The matter side of <tt>this</tt> while bounding <tt>iBoundedFace</tt>.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetVertices"></a><a id="GetVertices(CATVertex**,CATVertex**)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetVertices</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATVertex','CATVertex**')</script> <span class='param'>oStartVertex</span>,<script type="text/javascript"> activateLink('CATVertex','CATVertex**')</script> <span class='param'>oEndVertex</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the start and end vertices of <tt>this</tt> CATEdge.
+ <br>Sample: To only retrieve the start vertex:
+ <pre>CATVertex * Start;
+ PointerToAnEdge->GetVertices(&Start,NULL);</pre>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oStartVertex</span></dt>
+   <dd> The start vertex. If <tt>NULL</tt>, this argument is not filled out.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oEndVertex</span></dt>
+   <dd> The end vertex. If <tt>NULL</tt>, this argument is not filled out.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetVerticesParamsOnEdgeCurve"></a><a id="GetVerticesParamsOnEdgeCurve(CATCrvParam*,CATCrvParam*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetVerticesParamsOnEdgeCurve</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCrvParam','CATCrvParam*')</script> <span class='param'>oStartParam</span>,<script type="text/javascript"> activateLink('CATCrvParam','CATCrvParam*')</script> <span class='param'>oEndParam</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the start and end point curve parameters of <tt>this</tt> CATEdge. 
+ <br>They match the
+ start and end vertices (e.g. if the underlying edge-curve is reversed, the
+ start parameter is larger than the end parameter).
+ <br>Sample: To only retrieve the CATCrvParam corresponding to the end vertex:
+ <pre>CATCrvParam End;
+ PointerToAnEdge->GetVerticesParamsOnEdgeCurve(NULL,&End);</pre>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oStartParam</span></dt>
+   <dd> The CATCrvParam corresponding to the start vertex.
+ If <tt>NULL</tt>, this argument is not filled out.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oEndParam</span></dt>
+   <dd> The CATCrvParam corresponding to the end vertex.
+ If <tt>NULL</tt>, this argument is not filled out.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetVerticesPointsOnEdgeCurve"></a><a id="GetVerticesPointsOnEdgeCurve(CATPointOnEdgeCurve**,CATPointOnEdgeCurve**)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetVerticesPointsOnEdgeCurve</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPointOnEdgeCurve','CATPointOnEdgeCurve**')</script> <span class='param'>oStartPoec</span>,<script type="text/javascript"> activateLink('CATPointOnEdgeCurve','CATPointOnEdgeCurve**')</script> <span class='param'>oEndPoec</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the start and end points on edge curve of <tt>this</tt> CATEdge.
+ <br>Theses match the start and end vertices.
+ <br>Sample: To only retrieve the CATPointOnEdgeCurve corresponding to the end vertex:
+ <pre>CATPointOnEdgeCurve * End;
+ PointerToAnEdge->GetVerticesPointsOnEdgeCurve(NULL,&End);</pre>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oStartPoec</span></dt>
+   <dd> The CATPointOnEdgeCurve corresponding to the start vertex.
+ If <tt>NULL</tt>, this argument is not filled out.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oEndPoec</span></dt>
+   <dd> The CATPointOnEdgeCurve corresponding to the end vertex.
+ If <tt>NULL</tt>, this argument is not filled out.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCurve"></a><a id="SetCurve(CATEdgeCurve*,CATOrientation)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCurve</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATEdgeCurve','CATEdgeCurve*')</script> <span class='param'>iCurve</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation')</script> <span class='param'>iOrientation</span><span class='param'>=CATOrientationPositive</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the geometric edge-curve of <tt>this</tt> CATEdge. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCurve</span></dt>
+   <dd> The pointer to the geometry of <tt>this</tt> edge.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd> The relative orientation of <tt>this</tt> and its geometry.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetGeometryOnFace"></a><a id="SetGeometryOnFace(CATFace*,CATSide,CATPCurve*,CATPointOnEdgeCurve*,CATPointOnEdgeCurve*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetGeometryOnFace</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iBoundedFace</span>,<script type="text/javascript"> activateLink('CATSide','CATSide')</script> <span class='param'>iSide</span>,<script type="text/javascript"> activateLink('CATPCurve','CATPCurve*')</script> <span class='param'>iPCurve</span>,<script type="text/javascript"> activateLink('CATPointOnEdgeCurve','CATPointOnEdgeCurve*')</script> <span class='param'>iStartVertexGeometry</span><span class='param'>=NULL</span>,<script type="text/javascript"> activateLink('CATPointOnEdgeCurve','CATPointOnEdgeCurve*')</script> <span class='param'>iEndVertexGeometry</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the geometry of <tt>this</tt> CATEdge with respect to an underying face.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBoundedFace</span></dt>
+   <dd> The pointer to a face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSide</span></dt>
+   <dd> The matter side of <tt>this</tt> while bounding <tt>iBoundedFace</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPCurve</span></dt>
+   <dd> The pointer to the geometry of <tt>this</tt> on <tt>iBoundedFace</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStartVertexGeometry</span></dt>
+   <dd> The pointer to the geometry of the start vertex bounding <tt>this</tt>
+ If <tt>NULL</tt>, this is not taken into account.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEndVertexGeometry</span></dt>
+   <dd> The pointer to the geometry of the end vertex bounding <tt>this</tt>
+ If <tt>NULL</tt>, this is not taken into account.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetGlobalSharpness"></a><a id="SetGlobalSharpness(CATTopData&amp;,CATFace*,CATFace*,CATGeoContinuity,CATGeoConvexity,CATShell*,CATAngle,CATBoolean,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>SetGlobalSharpness</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATTopData','CATTopData&amp;')</script> <span class='param'>iTopData</span>,<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFace1</span>,<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFace2</span>, const <script type="text/javascript"> activateLink('CATGeoContinuity','CATGeoContinuity')</script> <span class='param'>iSharpness</span>, const <script type="text/javascript"> activateLink('CATGeoConvexity','CATGeoConvexity')</script> <span class='param'>iConcavity</span><span class='param'>= CATUnknownConvexity</span>,<script type="text/javascript"> activateLink('CATShell','CATShell*')</script> <span class='param'>iShellOwningTheTwoFaces</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('CATAngle','CATAngle')</script> <span class='param'>iMinSharpAngle</span><span class='param'>= CATTopSharpAngle</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iCheckBeforeSet</span><span class='param'>= TRUE</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iForceGeometricEvaluation</span><span class='param'>= FALSE</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the global sharpness of <tt>this</tt> CATEdge on the edge curve.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTopData</span></dt>
+   <dd> The object defining the CATSoftwareConfiguration. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFace1</span></dt>
+   <dd> The pointer to the one face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFace2</span></dt>
+   <dd> The pointer to another face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSharpness</span></dt>
+   <dd> The tangential continuity.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iConcavity</span></dt>
+   <dd> The curvature.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iShellOwningTheTwoFaces</span></dt>
+   <dd> The pointer to a shell that owns the two faces.
+ If <tt>NULL</tt>, the faces are supposed to belong to only one shell.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMinSharpAngle</span></dt>
+   <dd> Minimum (resp. maximum) angle value in rad for which the edge
+ is declared Sharp (resp. Smooth).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCheckBeforeSet</span></dt>
+   <dd> If TRUE, <tt>GetGlobalSharpness</tt> is called and its result compared with <tt>iMinSharpAngle</tt>.
+ The sharpness is stored only if no incoherence was detected.
+ <br><b>Legal values</b>:
+ <dl><dt><tt> TRUE </tt></dt><dd>
+     <dt><tt> FALSE </tt></dt><dd></dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iForceGeometricEvaluation</span></dt>
+   <dd> If TRUE, a geometric evaluation is performed during <tt>GetGlobalSharpness</tt> even if a value
+ stored (with <tt>SetGlobalSharpness</tt>) exists.
+ <br><b>Legal values</b>:
+ <dl><dt><tt> TRUE </tt></dt><dd>
+     <dt><tt> FALSE </tt></dt><dd></dl>   
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Whether the sharpness has been stored or not.
+ <br><b>Legal values</b>:
+ <dl><dt><tt> TRUE </tt></dt><dd>
+     <dt><tt> FALSE </tt></dt><dd></dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetJunctionStatus"></a><a id="SetJunctionStatus(CATTopData&amp;,CATTopJunctionEdgeStatus)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetJunctionStatus</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATTopData','CATTopData&amp;')</script> <span class='param'>iTopData</span>,<script type="text/javascript"> activateLink('CATTopJunctionEdgeStatus','CATTopJunctionEdgeStatus')</script> <span class='param'>iFlag</span><span class='param'>= CatTopJunction</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Flags the edge junction status (No effect before V5R8)
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTopData</span></dt>
+   <dd> The object defining the CATSoftwareConfiguration. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFlag</span></dt>
+   <dd> <dl><dt><tt>CatTopUndefined</tt></dt><dd>
+     <dt><tt>CatTopJunction</tt></dt><dd>
+     <dt><tt>CatTopFunctional</tt></dt><dd>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSideOnFace"></a><a id="SetSideOnFace(CATFace*,CATSide)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSideOnFace</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iBoundedFace</span>,<script type="text/javascript"> activateLink('CATSide','CATSide')</script> <span class='param'>iSide</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the matter side of <tt>this</tt> CATEdge with respect to a CATFace.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBoundedFace</span></dt>
+   <dd> The pointer to a face bounded by <tt>this</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSide</span></dt>
+   <dd> The matter side of <tt>this</tt> while bounding <tt>iBoundedFace</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATEdge.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMModelInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

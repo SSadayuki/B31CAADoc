@@ -1,0 +1,302 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIASection.idl
+//   This automation interface allows the query of Section data.
+//
+//===================================================================
+#ifndef CATIASection_IDL
+#define CATIASection_IDL
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R5
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATIAGroup.idl"
+#include "CATIAAnnotatedViews.idl"
+#include "CATIAMarker3Ds.idl"
+#include "CatSectionType.idl"
+#include "CATSafeArray.idl"
+#include "CATIADocument.idl"
+#include "CatSectionBehavior.idl"
+
+/**  
+ * Represents the Section object.
+ * The Section object is a specification of a sectioning display and computationwith a
+ * section plane, section slice or section box.
+ */
+interface CATIASection : CATIABase
+{
+  /**
+   * Retrieves the position of the section.
+   * <p>The position of the section is made of a coordinate system whose origin is the center of the section,
+   * and X and Y axes lie on the section. It is retrieved in an array of the X, Y, Z axes components and the origin
+   * components with respect to the absolute coordinate system.
+   * @param oComponents
+   *    The position of the section
+   *    <ul>
+   *    <li>oComponents( 0) is the X component of the X-axis
+   *    <li>oComponents( 1) is the Y component of the X-axis
+   *    <li>oComponents( 2) is the Z component of the X-axis
+   *    <li>oComponents( 3) is the X component of the Y-axis
+   *    <li>oComponents( 4) is the Y component of the Y-axis
+   *    <li>oComponents( 5) is the Z component of the Y-axis
+   *    <li>oComponents( 6) is the X component of the Z-axis
+   *    <li>oComponents( 7) is the Y component of the Z-axis
+   *    <li>oComponents( 8) is the Z component of the Z-axis
+   *    <li>oComponents( 9) is the X component of the origin
+   *    <li>oComponents(10) is the Y component of the origin
+   *    <li>oComponents(11) is the Z component of the origin
+   *    </ul>
+   * @sample
+   *    This example retrieves the position of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim Components (11)
+   *    NewSection.<font color="red">GetPosition</font> Components
+   *    </pre>
+   */
+  HRESULT GetPosition (inout CATSafeArrayVariant oComponents);
+
+  /**
+   * Sets the position of the section.
+   * @param oComponents
+   *    The position of the section with respect to the absolute coordinate system
+   *    <ul>
+   *    <li>iComponents( 0) is the X component of the X-axis
+   *    <li>iComponents( 1) is the Y component of the X-axis
+   *    <li>iComponents( 2) is the Z component of the X-axis
+   *    <li>iComponents( 3) is the X component of the Y-axis
+   *    <li>iComponents( 4) is the Y component of the Y-axis
+   *    <li>iComponents( 5) is the Z component of the Y-axis
+   *    <li>iComponents( 6) is the X component of the Z-axis
+   *    <li>iComponents( 7) is the Y component of the Z-axis
+   *    <li>iComponents( 8) is the Z component of the Z-axis
+   *    <li>iComponents( 9) is the X component of the origin
+   *    <li>iComponents(10) is the Y component of the origin
+   *    <li>iComponents(11) is the Z component of the origin
+   *    </ul>
+   * @sample
+   *    This example sets the position of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim MatrixPos (11) As Double
+   *    MatrixPos( 0) = 1.0
+   *    MatrixPos( 1) = 0.0
+   *    MatrixPos( 2) = 0.0
+   *    MatrixPos( 3) = 0.0
+   *    MatrixPos( 4) = 1.0
+   *    MatrixPos( 5) = 0.0
+   *    MatrixPos( 6) = 0.0
+   *    MatrixPos( 7) = 0.0
+   *    MatrixPos( 8) = 1.0
+   *    MatrixPos( 9) = 1000.0
+   *    MatrixPos(10) = 0.0
+   *    MatrixPos(11) = 0.0
+   *    NewSection.<font color="red">SetPosition</font> MatrixPos
+   *    </pre>
+   */
+  HRESULT SetPosition (in CATSafeArrayVariant iComponents);
+
+  /**
+   * Returns or sets the height of the section.
+   * <p>The height value must be greater than 0.
+   * @sample
+   *    The first example retrieves the height of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim SectionHeight As double
+   *    SectionHeight = NewSection.<font color="red">Height</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the height value of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    NewSection.<font color="red">Height</font> = 100.
+   *    </pre>
+   */
+#pragma PROPERTY Height
+  HRESULT get_Height (out /*IDLRETVAL*/ double oHeight);
+  HRESULT put_Height (in double iHeight);
+
+  /**
+   * Returns or sets the width of the section.
+   * <p>The width value must be greater than 0.
+   * @sample
+   *    The first example retrieves the width of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim SectionWidth As double
+   *    SectionWidth = NewSection.<font color="red">Width</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the width value of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    NewSection.<font color="red">Width</font> = 100.
+   *    </pre>
+   */
+#pragma PROPERTY Width
+  HRESULT get_Width (out /*IDLRETVAL*/ double oWidth);
+  HRESULT put_Width (in double iWidth);
+
+  /**
+   * Returns or sets the thickness of the section.
+   * <p>The thickness value must be greater than 0.
+   * @sample
+   *    The first example retrieves the thickness of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim SectionThickness As double
+   *    SectionThickness = NewSection.<font color="red">Thickness</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the thickness value of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    NewSection.<font color="red">Thickness</font> = 100.
+   *    </pre>
+   */
+#pragma PROPERTY Thickness
+  HRESULT get_Thickness (out /*IDLRETVAL*/ double oThickness);
+  HRESULT put_Thickness (in double iThickness);
+
+  /**
+   * Returns or sets the cutting mode of the section.
+   * <p>The cutting mode value is 1 for clipping or 0 without clipping.
+   * @sample
+   *    The first example retrieves the cutting mode of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim SectionMode As Integer
+   *    SectionMode = NewSection.<font color="red">CutMode</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the cutting mode of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    NewSection.<font color="red">CutMode</font> = 1
+   *    </pre>
+   */
+#pragma PROPERTY CutMode
+  HRESULT get_CutMode (out /*IDLRETVAL*/ long oMode);
+  HRESULT put_CutMode (in long iMode);
+
+  /**
+   * Returns or sets the type of the section.
+   * <p>The type value are defined in @href CatSectionType.
+   * @sample
+   *    The first example retrieves the type of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim SectionType As CatSectionType
+   *    SectionType = NewSection.<font color="red">Type</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the type of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    NewSection.<font color="red">Type</font> = catSectionTypeSlice
+   *    </pre>
+   */
+#pragma PROPERTY Type
+  HRESULT get_Type (out /*IDLRETVAL*/ CatSectionType oType);
+  HRESULT put_Type (in CatSectionType iType);
+
+  /**
+   * Returns or sets the sectionned group.
+   * <p>By default, it is the all leaves group.
+   * @sample
+   *    The first example retrieves the group of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim AGroup As Group
+   *    AGroup = NewSection.<font color="red">Group</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the group of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim AGroup As Group
+   *    NewSection.<font color="red">Group</font> = AGroup
+   *    </pre>
+   */
+#pragma PROPERTY Group
+  HRESULT get_Group (out /*IDLRETVAL*/ CATIAGroup oGroup);
+  HRESULT put_Group (in CATIAGroup iGroup);
+
+  /**
+   * Indicates whether the section is empty.
+   * <p>The indicator value is 0 if the section is empty or 1 if the section comprise at least one segment.
+   * @sample
+   *    This example retrieves the information on <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim Indicator
+   *    Indicator = NewSection.<font color="red">IsEmpty</font>
+   *    </pre>
+   */
+  HRESULT IsEmpty (out /*IDLRETVAL*/ long oIndicator);
+
+  /**
+   * Exports the sections curves of the section in a document.
+   * @return
+   *    The document
+   * @sample
+   *    This example exports the section curves of <tt>NewSection</tt> Section in <tt>PartDoc</tt> document.
+   *    <pre>
+   *    Dim PartDoc As Document
+   *    PartDoc = NewSection.<font color="red">Export</font>
+   *    </pre>
+   */
+  HRESULT Export (out /*IDLRETVAL*/ CATIADocument oDocument);
+
+  /**
+   * Returns the AnnotatedViews collection of the section.
+   * @sample
+   *    This example retrieves the AnnotatedViews collection of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim TheAnnotatedViewsList As AnnotatedViews
+   *    Set TheAnnotatedViewsList = NewSection.<font color="red">AnnotatedViews</font>
+   *    </pre>
+   */
+#pragma PROPERTY AnnotatedViews
+  HRESULT get_AnnotatedViews (out /*IDLRETVAL*/ CATIAAnnotatedViews oAnnotatedViews);
+
+  /**
+   * Returns the Marker3Ds collection of the section.
+   * @sample
+   *    This example retrieves the Marker3Ds collection of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim TheMarker3DsList As Marker3Ds
+   *    Set TheMarker3DsList = NewSection.<font color="red">Marker3Ds</font>
+   *    </pre>
+   */
+#pragma PROPERTY Marker3Ds
+  HRESULT get_Marker3Ds (out /*IDLRETVAL*/ CATIAMarker3Ds oMarker3Ds);
+
+  /**
+   * Returns or sets the general behavior of the section: 
+   * Freeze, Automatic update, manual update
+   * <p>The behavior value are defined in @href CatSectionBehavior.
+   * @sample
+   *    The first example retrieves the behavior of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    Dim SectionBehavior As CatSectionBehavior
+   *    Behavior = NewSection.<font color="red">Behavior</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the behavior of <tt>NewSection</tt> Section.
+   *    <pre>
+   *    NewSection.<font color="red">Behavior</font> = catSectionBehaviorAutomatic
+   *    </pre>
+   */
+#pragma PROPERTY Behavior
+  HRESULT get_Behavior (out /*IDLRETVAL*/ CatSectionBehavior oBehavior);
+  HRESULT put_Behavior (in CatSectionBehavior iBehavior);
+
+
+};
+
+// Interface name : CATIASection
+#pragma ID CATIASection "DCE:9771a6e4-45f0-11d4-9468006094eb3826"
+#pragma DUAL CATIASection
+
+// VB object name : Section (Id used in Visual Basic)
+#pragma ID Section "DCE:a69fdff0-45f0-11d4-9468006094eb3826"
+#pragma ALIAS CATIASection Section
+
+#endif
+#endif

@@ -1,0 +1,74 @@
+/* -*-c++-*- */
+#ifndef CATIAAssemblyConvertor_IDL
+#define CATIAAssemblyConvertor_IDL
+/*IDLREP*/
+//-----------------------------------------------------------------------------
+// COPYRIGHT DASSAULT SYSTEMES 1997  
+//-----------------------------------------------------------------------------
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// Interface CATIAAssemblyConvertor
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAProduct;    
+
+    /**
+	* Product conversion object.
+	* The AssemblyConvertor is the object that allows saving an assembly 
+	* to a specified format.
+	* Two objects exist from now on : <tt>BillOfMaterial</tt>, which creates a bill of material
+	* (every sub-assembly is represented, with all the one level depth components), 
+	* and <tt>ListingReport</tt>, which creates a listing report (shows the product 
+	* structure as it appears in the graph)
+	*/
+interface CATIAAssemblyConvertor : CATIABase    
+{
+
+    /**
+     * Extracts the product's contents as a specified format.
+	 * Saves it in a txt, html or xls file (depends of the object).
+	 *
+     * @param iFileType
+	 *    Type of the resulting file : <tt>TXT</tt> (for text file),
+	 *    <tt>HTML</tt> (for html file), <tt>XLS</tt> (for xls file)
+	 *    or <tt>MOTIF</tt> (do not use).
+     * @param iFile
+	 *    Path of the resulting file 
+     * @param iProduct
+	 *    Product that will be converted
+     */
+  HRESULT Print (in CATBSTR iFileType, in CATBSTR iFile, in CATIAProduct iProduct);
+
+	/**
+	 * Defines the properties that will be used in the print method.
+	 * @param ilistProps
+	 *   list of properties to display
+	 */
+  HRESULT SetCurrentFormat (in CATSafeArrayVariant ilistProps);
+
+	/**
+	 * Defines the secondary properties that will be used in the print method.
+	 * @param ilistProps
+	 *   secondary list of properties to display
+     * </pre>
+	 */
+  HRESULT SetSecondaryFormat (in CATSafeArrayVariant ilistProps);
+
+};
+
+// Interface name : CATIAAssemblyConvertor
+#pragma ID CATIAAssemblyConvertor "DCE:50c18f38-40fc-11d3-9315006094eb72e6"
+#pragma DUAL CATIAAssemblyConvertor
+
+// VB object name : AssemblyConvertor 
+#pragma ID AssemblyConvertor "DCE:4dfb9234-40fd-11d3-9315006094eb72e6"
+#pragma ALIAS CATIAAssemblyConvertor AssemblyConvertor 
+
+
+#endif

@@ -1,0 +1,148 @@
+// COPYRIGHT DASSAULT SYSTEMES 1997
+#ifndef CATIADrawingViews_IDL
+#define CATIADrawingViews_IDL
+/*IDLREP*/
+
+#include "CATIADrawingView.idl"
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+ /**
+  * A collection of all the drawing views currently managed by a
+  * drawing sheet in a drawing document.
+  * <br><b>Warning</b>: This interface is not available with 2D Layout for 3D Design.
+  */
+interface CATIADrawingViews : CATIACollection
+{
+ /**
+  * Creates a drawing view and adds it to the drawing view collection.
+  * This drawing view becomes the active one.
+  * <br><b>Warning</b>: This method is not available with 2D Layout for 3D Design.
+  * @param iDrawingViewName
+  *   The name to assign to the created drawing view
+  * @return The created drawing view
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates a drawing view named <tt>LeftView</tt>
+  * and retrieved in <tt>MyView</tt>
+  * in the drawing view collection of the <tt>MySheet</tt> drawing sheet.
+  * This sheet belongs to 
+  * the drawing sheet collection of the drawing document named
+  * <tt>CATDrawing1</tt>.
+  * <pre>
+  * Dim MyDrawingDoc As Document
+  * Set MyDrawingDoc = CATIA.Documents.Item("CATDrawing1")
+  * Dim MySheet As DrawingSheet
+  * Set MySheet = MyDrawingDoc.Sheets.<font color="red">Item</font>("FirstSheet")
+  * Dim MyView As DrawingView
+  * Set MyView = MySheet.Views.<font color="red">Add</font>("LeftView")
+  * </pre>
+  * </dl>
+  */
+
+HRESULT Add(in CATBSTR iDrawingViewName, out /*IDLRETVAL*/ CATIADrawingView oNewDrawingView);
+
+/**
+  * Returns the active drawing view of the active drawing sheet.
+  * <br><b>Warning</b>: This method is not available with 2D Layout for 3D Design.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example retrieves in <tt>ViewToWorkIn</tt>
+  * the active drawing view
+  * in the DrawingSheets collection of the document named <tt>CATDrawing1</tt>
+  * <pre>
+  * Dim MyDrawingDoc As Document
+  * Set MyDrawingDoc = CATIA.Documents.Item("CATDrawing1")
+  * Dim ViewToWorkIn As DrawingView
+  * Set ViewToWorkIn = MyDrawingDoc.Sheets.ActiveSheet.DrawingViews.<font color="red">ActiveView</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ActiveView
+  HRESULT get_ActiveView(out /*IDLRETVAL*/ CATIADrawingView oView);
+
+
+ /**
+  * Removes a drawing view from the DrawingViews collection.
+  * <br><b>Warning</b>: This method is not available with 2D Layout for 3D Design and 
+  * it's forbidden and not possible to delete main view and background view contained in this collection.
+  * @param iIndex
+  *   The index or the name of the drawing view to remove from
+  *   the collection of drawing views.
+  *   As a numerics, this index is the rank of the drawing view
+  *   in the collection.
+  *   The index of the first drawing view in the collection is 1, and
+  *   the index of the last drawing view is Count.
+  *   As a string, it is the name you assigned to the drawing view using
+  *   the @href CATIABase#Name property or when creating it using
+  *   the @href #Add method.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing view and the drawing view
+  * named <tt>TopView</tt> in the drawing view collection of the active sheet
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MySheet As DrawingSheet
+  * Set MySheet = CATIA.ActiveDocument.Sheets.ActiveSheet
+  * MySheet.ActiveViews.<font color="red">Remove</font>(3)
+  * MySheet.ActiveViews.<font color="red">Remove</font>("TopView")
+  * </pre>
+  * </dl>
+  */
+HRESULT Remove(in CATVariant iIndex);
+
+/**
+  * Returns a drawing view using its index or its name from the DrawingViews collection.
+  * <br><b>Warning</b>: This method is not available with 2D Layout for 3D Design.
+  * @param iIndex
+  *   The index or the name of the drawing view to retrieve from
+  *   the collection of drawing views.
+  *   As a numerics, this index is the rank of the drawing view
+  *   in the collection.
+  *   The index of the first drawing view in the collection is 1, and
+  *   the index of the last drawing view is Count.
+  *   As a string, it is the name you assigned to the drawing view using
+  *   the @href CATIABase#Name property or when creating it using
+  *   the @href #Add method.
+  * @return The retrieved drawing view
+  * @sample
+  * This example retrieves in <tt>ThisDrawingView</tt> the second drawing view,
+  * and in <tt>ThatDrawingView</tt> the drawing view named
+  * <tt>MyView</tt> in the drawing view collection of the active sheet
+  * in the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MySheet As DrawingSheet
+  * Set MySheet = CATIA.ActiveDocument.Sheets.ActiveSheet
+  * Dim ThisDrawingView As DrawingView
+  * Set ThisDrawingView = MySheet.Views.ActiveView.<font color="red">Item</font>(2)
+  * Dim ThatDrawingView As DrawingView
+  * Set ThatDrawingView = MySheet.Views.ActiveView.<font color="red">Item</font>("MyView")
+  * </pre>
+  */
+
+HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIADrawingView oItem);
+			
+};
+
+// Interface name : CATIADrawingViews
+#pragma ID CATIADrawingViews "DCE:84071960-3348-11d1-ac6f0060975414db"
+#pragma DUAL CATIADrawingViews
+
+// VB object name : DrawingViews
+#pragma ID DrawingViews "DCE:8ceefd20-3348-11d1-ac6f0060975414db"
+#pragma ALIAS CATIADrawingViews DrawingViews
+
+
+#endif
+

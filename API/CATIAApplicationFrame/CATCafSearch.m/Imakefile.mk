@@ -1,0 +1,11 @@
+#
+# Imakefile to build a load
+#
+BUILT_OBJECT_TYPE=NONE
+INCLUDED_MODULES = Search
+
+# LINK_WITH= JS0ERROR JS0CORBA JS0FM JS0SCBAK JS03TRA JS0STR CO0LSTPV DI0PANV2 \
+#            VE0MDL VE0BASE ApplicationFrame NS0S3STR  \
+#            AD0XXBAS AC0XXLNK CAPPFRM InfItf  \
+#            CATLayersAndFilters
+

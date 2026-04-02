@@ -1,0 +1,66 @@
+// COPYRIGHT Dassault Systemes 2013
+//===================================================================
+//
+// ENOIACD5TemplateTypes.idl
+// Automation interface for the ENOIACD5TemplateTypes element 
+//
+//===================================================================
+
+#ifndef ENOIACD5TemplateTypes_IDL
+#define ENOIACD5TemplateTypes_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+interface CATIADocument;
+interface IDispatch;
+interface ENOIACD5TemplateType;
+
+/**
+ * Represents a List of all Template types.
+ *
+ * @sample
+ * The following example indicates how to retrieve List of all Template types.
+ * <pre>
+ * <font color="blue">Dim</font> oCD5Engine <font color="blue">As</font> CD5EngineV6R2015
+ * <font color="blue">Set</font> oCD5Engine = CATIA.GetItem("CD5EngineV6R2015")
+ * <font color="blue">Dim</font> oTemplateTypes <font color="blue">As</font> ENOIACD5TemplateTypes
+ * <font color="blue">Set</font> oTemplateTypes = oCD5Engine.TemplateTypes
+ * </pre>
+ * @see ENOIACD5EngineV6R2015
+ */
+interface ENOIACD5TemplateTypes : CATIACollection 
+{
+
+    /**
+    * Returns (gets) an item from the list of items.
+    *
+    * @sample
+    * The following example gets a Template Type at index 1.
+    * <pre>
+	* <font color="blue">Dim</font> oTemplateType <font color="blue">As</font> ENOIACD5TemplateType
+    * <font color="blue">Set</font> oTemplateType = oTemplateTypes.<font color="red">Item</font>(1)
+    * </pre> 
+    */
+
+    HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ ENOIACD5TemplateType TemplateType);
+
+};
+
+// Interface name : ENOIACD5TemplateTypes
+#pragma ID ENOIACD5TemplateTypes "DCE:7D922AA3-F019-43e1-B08143EB5C1D89BA"
+#pragma DUAL ENOIACD5TemplateTypes
+
+// VB object name : CD5TemplateTypes (Id used in Visual Basic)
+#pragma ID CD5TemplateTypes "DCE:2F4300DA-6585-40ad-BF70392AF110B852"
+#pragma ALIAS ENOIACD5TemplateTypes CD5TemplateTypes
+
+#endif
+
+  

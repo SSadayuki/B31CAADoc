@@ -1,0 +1,97 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=============================================================================
+// CATIAStrNibblingFeature
+//   Interface for Accessing Methods on Nibbled Feature
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Nov. 2010  Creation                                           Rahul DESHMANE
+//=============================================================================
+#ifndef CATIAStrNibblingFeature_IDL
+#define CATIAStrNibblingFeature_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+interface CATIADocument;
+interface CATIAStrMember;
+interface CATIAStrSection;
+interface CATIAStrPlate;
+interface CATIAStrSection;
+interface CATIAStrFoundation;
+
+#include "CATIABase.idl"
+#include "CATIAParameter.idl"
+#include "CATIAReference.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * Represents a Nibbling Feature.
+ * Type, SubType and Extrapolation Offset can be defined for this nibbling feature.
+ */
+
+
+interface CATIAStrNibblingFeature : CATIABase
+{
+  /**
+	* Returns or Sets Nibbling Type on Current Nibbling.   
+  * @sample
+  * <pre>
+  *  Dim NibblingFeature As StrNibblingFeature
+  *  Set NibblingFeature = FeatureFactory.AddNibbling(List, "Remove")
+  *  Dim NibbType As String
+  *  NibbType = NibblingFeature1.<font color="red">Type</font>
+  *  'Set the Type
+  *  NibblingFeature1.<font color="red">Type</font> ="LongPoint"
+  * </pre>
+	*/
+# pragma PROPERTY Type
+HRESULT get_Type(inout /*IDLRETVAL*/CATBSTR oNibblingType);
+HRESULT put_Type(in CATBSTR iNibblingType);
+  /**
+	* Returns or Sets Nibbling SubType on Current Nibbling.   
+  * @sample
+  * <pre>
+  *  Dim NibblingFeature As StrNibblingFeature
+  *  Set NibblingFeature = FeatureFactory.AddNibbling(List, "Remove")
+  *  Dim NibbSubType As String
+  *  NibbSubType = NibblingFeature1.<font color="red">SubType</font>
+  * 'Set the SubType
+  *  NibblingFeature1.<font color="red">SubType</font> ="ButtButt"
+  * </pre>
+	*/
+# pragma PROPERTY SubType
+  HRESULT get_SubType(inout /*IDLRETVAL*/CATBSTR oNibblingSubType);
+  HRESULT put_SubType(in CATBSTR iNibblingSubType);
+  /**
+	* Sets the Extrapolation offset value on Current Nibbling Feature.  
+	* @param iOffsetForExtrapolate [in]
+  *   Default Value:"5mm"
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  *  This example Applies Extrapolation offset. 
+  * <pre>
+  *  Dim NibblingFeature As StrNibblingFeature
+  *  Set NibblingFeature = FeatureFactory.AddNibbling(List, "Remove")
+  *  NibblingFeature.<font color="red">GetOffsetForExtrapolate("0mm")</font>
+  * </pre>
+	*/
+  HRESULT GetOffsetForExtrapolate(in CATBSTR iOffsetForExtrapolate);
+};
+
+// Interface name : CATIAStrNibblingFeature
+#pragma ID CATIAStrNibblingFeature "DCE:9218541C-CD39-4808-A666742524677E27"                                    
+#pragma DUAL CATIAStrNibblingFeature
+
+// VB object name : StrFeatureFactory   
+#pragma ID StrNibblingFeature "DCE:B932CB99-F8E8-4939-A75EBEBB378EA785"                              
+#pragma ALIAS CATIAStrNibblingFeature StrNibblingFeature
+
+#endif

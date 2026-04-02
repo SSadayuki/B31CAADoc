@@ -1,0 +1,82 @@
+#ifndef CATIAResources_IDL
+#define CATIAResources_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "DNBResourceAssignmentType.h"
+
+interface CATIAActivity;    
+interface CATIAResource;
+
+/**
+ * The collection of resources related to the current activity.
+ */
+
+interface CATIAResources : CATIACollection
+{
+
+/**
+ * This method returns the idl object Resource for the specified resource
+ * identifier.
+ * @param iIndex
+ * The resource identifier
+ * @return oResource
+ * The idl resource
+ */
+  HRESULT     Item( in CATVariant iIndex, out /*IDLRETVAL*/ CATIAResource oResource);
+
+/**
+* This method add the specified item in the current list
+* @param iItem
+* The item to add
+* @return oitem
+* The item
+*/
+
+  HRESULT     Add( in CATIAResource iResource,  out /*IDLRETVAL*/ CATIAResource oResource);
+
+    /**
+    * This method Assigns/Adds the specified resource with the specified assignment type
+    * @param iResource
+    * The resource to be assigned
+    * @param iAssignmentType
+    * Type of the Assignment (Resource to the Process). Only the following four types
+    * are supported at the moment:
+    *   Process_Uses_Resource, Process_Runs_On_Resource,
+    *   Process_Attaches_Resource, Process_Detaches_Resource
+    * @return oResource
+    * The resource when Add succeeds, unchanged otherwise
+    */
+    HRESULT     AddByAssignmentType( in CATIAResource iResource, in DNBResourceAssignmentType iAssignmentType, out /*IDLRETVAL*/ CATIAResource oResource);
+
+    /**
+    * This method Unassigns/Removes the specified resource if the assignement exists and
+    * is of the given type
+    * @param iResource
+    * The resource to be Unassigned
+    * @param iAssignmentType
+    * Type of the Assignment (Resource to the Process) to be removed
+    * @return oResource
+    * The resource when Remove succeeds, unchanged otherwise
+    */
+    HRESULT     RemoveByAssignmentType( in CATIAResource iResource, in DNBResourceAssignmentType iAssignmentType, out /*IDLRETVAL*/ CATIAResource oResource);
+};
+
+// Interface name : CATIAResources
+#pragma ID CATIAResources "DCE:8735aba0-3a9c-0000-0280030e1c000000"
+#pragma DUAL CATIAResources
+
+// VB object name : Resources
+#pragma ID Resources "DCE:8735ac51-0312-0000-0280030e1c000000"
+#pragma ALIAS CATIAResources Resources
+
+
+#endif

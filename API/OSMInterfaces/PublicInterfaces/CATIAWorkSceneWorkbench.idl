@@ -1,0 +1,58 @@
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//===================================================================
+//
+// CATIAWorkSceneWorkBench.idl
+//   This Automation interface accesses the SceneWorkBench.
+//
+//===================================================================
+//
+//  Jan 2000  Creation: OBE
+//
+//===================================================================
+#ifndef CATIAWorkSceneWorkbench_IDL
+#define CATIAWorkSceneWorkbench_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAWorkbench.idl"
+
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+interface CATIAWorkScenes; 
+
+/**  
+ * Represent the access point to scenes management.
+ */
+interface CATIAWorkSceneWorkbench : CATIAWorkbench 
+{
+  /**
+   * Returns the Scenes collection.
+   * @sample 
+   *    This example retrieves the WorkScenes collection of the active document.
+   *    <pre>
+   *    Dim TheWorkSceneWorkbench As Workbench
+   *    Set TheWorkSceneWorkbench = CATIA.ActiveDocument.GetWorkbench ( "SceneWorkbench" )
+   *    Dim TheScenesList As WorkScenes
+   *    Set TheScenesList = TheWorkSceneWorkbench.<font color="red">WorkScenes</font>
+   *    </pre>
+   */
+#pragma PROPERTY WorkScenes
+  HRESULT   get_WorkScenes (out /*IDLRETVAL*/    CATIAWorkScenes  oScene);
+};
+
+// Interface name : CATIAWorkSceneWorkbench
+#pragma ID CATIAWorkSceneWorkbench "DCE:96986332-cf57-11d3-876d006094eb3996"
+#pragma DUAL CATIAWorkSceneWorkbench
+
+// VB object name : SceneWorkbench (Id used in Visual Basic)
+#pragma ID SceneWorkbench "DCE:96986333-cf57-11d3-876d006094eb3996"
+#pragma ALIAS CATIAWorkSceneWorkbench SceneWorkbench
+
+#endif
+
+
+

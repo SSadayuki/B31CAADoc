@@ -1,0 +1,143 @@
+#ifndef CATIAHybridShapeThickness_IDL 
+#define CATIAHybridShapeThickness_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2002
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeThickness:         
+// Exposed interface for HybridShape Thickness
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// June 2002 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+
+/**
+* Represents the hybrid shape Thickness feature object.
+* <b>Role</b>: To access the data of the thickness on an hybrid shape feature object.
+* This data includes:
+* <ul>
+* <li> The thickness orientation </li>
+* <li> The thickness1 value </li>
+* <li> The thickness2 value </li>
+* </ul>
+*/
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeThickness : CATIAHybridShape
+{
+	//  ================
+	//  == PROPERTIES ==
+	//  ================
+
+	//
+	/**
+	* Returns the first thickness value.<br>
+	* <dl>
+	* <dt><b>Example</b>:
+	* <dd>
+	* This example retrieves in <code>ThickVal1</code> the first thickness value for the <code>Thick</code> hybrid shape feature.
+	* <pre>
+	* Dim ThickVal1 As Length
+	* Set ThickVal1 = Thick.<font color="red">Thickness1Value</font>
+	* </pre>
+	* </dl>
+	*/  
+#pragma PROPERTY Thickness1Value
+	HRESULT get_Thickness1Value ( out /*IDLRETVAL*/ CATIALength oThickness1 );
+
+
+	//
+	/**
+	* Returns the second thickness value.<br>
+	* <dl>
+	* <dt><b>Example</b>:
+	* <dd>
+	* This example retrieves in <code>ThickVal2</code> the second thickness value for the <code>Thick</code> hybrid shape feature.
+	* <pre>
+	* Dim ThickVal2 As Length
+	* Set ThickVal2 = Thick.<font color="red">Thickness2Value</font>
+	* </pre>
+	* </dl>
+	*/ 
+#pragma PROPERTY Thickness2Value
+	HRESULT get_Thickness2Value ( out /*IDLRETVAL*/ CATIALength oThickness2 );
+
+
+	/**
+	* Returns or sets the orientation.<br>
+	* <b>Role</b>:<br>
+	*  Orientation = 1 means that the first thickness is measured with the normal of the support
+	*  Orientation = -1 means that the first thickness is measured with the inverted normal of the support
+	* <dl>
+	* <dt><b>Example</b>:
+	* <dd>
+	* This example retrieves in <code>Orient</code> the orientation for the <code>Thickness1</code> hybrid shape feature.
+	*<pre>
+	* Dim Orient As long
+	* Set Orient = Thickness1.<font color="red">Orientation</font>
+	* </pre>
+	* </dl> 
+	*/
+#pragma PROPERTY Orientation 
+	HRESULT get_Orientation (out /*IDLRETVAL*/  long       oOrientation);
+	HRESULT put_Orientation (in     long       iOrientation);
+	
+
+	/**
+	* Returns or sets the first thickness value in mm.<br>
+	* <dl>
+	* <dt><b>Example</b>:
+	* This example retrieves in <code>ThickVal1</code> the first thickness value for the <code>Thick</code> hybrid shape feature.
+	*<pre>
+	* Dim ThickVal1 As double
+	* Set ThickVal1 = Thick.<font color="red">Thickness1</font>
+	*</pre>
+	*</dl>	
+	*/
+#pragma PROPERTY Thickness1
+	HRESULT get_Thickness1 ( out /*IDLRETVAL*/ double oThickness1 );
+	HRESULT put_Thickness1  (in double iThickness1);
+
+
+	/**
+	* Returns or sets the second thickness value in mm.<br>
+	* <dl>
+	* <dt><b>Example</b>:
+	* This example retrieves in <code>ThickVal2</code> the second thickness value for the <code>Thick</code> hybrid shape feature.
+	*<pre>
+	* Dim ThickVal2 As double
+	* Set ThickVal2 = Thick.<font color="red">Thickness2</font>
+	*</pre>
+	*</dl>	
+	*/
+#pragma PROPERTY Thickness2
+	HRESULT get_Thickness2 ( out /*IDLRETVAL*/ double oThickness2 );
+	HRESULT put_Thickness2   (in double iThickness2);
+};
+
+
+// Interface name : CATIAHybridThickness
+#pragma ID CATIAHybridShapeThickness "DCE:A0E2E9CF-be44-0000-0280020a3a000000"
+#pragma DUAL CATIAHybridShapeThickness
+
+// VB object name : HybridShapeThickness (Id used in Visual Basic)
+#pragma ID HybridShapeThickness "DCE:A0E2EAF2-0987-0000-0280020a3a000000"
+#pragma ALIAS CATIAHybridShapeThickness HybridShapeThickness
+
+#endif
+// CATIAHybridShapeThickness_IDL

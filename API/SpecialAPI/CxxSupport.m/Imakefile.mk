@@ -1,0 +1,67 @@
+#
+BUILT_OBJECT_TYPE = BUILDTIME DATA
+#
+
+#if os Windows
+#if (defined MK_MSCVER)
+#if (MK_MSCVER == 1500) 
+COMPILER = VC_9
+#define HAS_COMPILER
+#elif (MK_MSCVER == 1600) 
+COMPILER = VC_10
+#define HAS_COMPILER
+#elif (MK_MSCVER == 1700)
+COMPILER = VC_11
+#define HAS_COMPILER
+#elif (MK_MSCVER == 1800)
+COMPILER = VC_12
+#define HAS_COMPILER
+#elif (MK_MSCVER >= 1900 && MK_MSCVER < 2000)
+COMPILER = VC_14
+#define HAS_COMPILER
+#endif
+#endif
+#elif UNIX
+#if (defined MK_GNUCVER) && (MK_GNUCVER == 40102)
+COMPILER = GCC_41
+#define HAS_COMPILER
+#elif (defined MK_GNUCVER) && (MK_GNUCVER == 40407)
+COMPILER = GCC_44
+#define HAS_COMPILER
+#elif (defined MK_GNUCVER) && (MK_GNUCVER == 40902)
+COMPILER = GCC_49
+#define HAS_COMPILER
+#elif (defined MK_IBMVAVER) && (MK_IBMVAVER == 11)
+COMPILER = XLC_11
+#define HAS_COMPILER
+#elif (defined MK_IBMVAVER) && (MK_IBMVAVER == 12)
+COMPILER = XLC_12
+#define HAS_COMPILER
+#elif (defined MK_IBMVAVER) && (MK_IBMVAVER == 16)
+COMPILER = XLC_16
+#define HAS_COMPILER
+#elif (defined MK_FORTEVER) && (MK_FORTEVER < 1200)
+COMPILER = SUNS_11
+#define HAS_COMPILER
+#elif (defined MK_FORTEVER) && (MK_FORTEVER >= 1200)
+COMPILER = SUNS_12
+#define HAS_COMPILER
+#elif Darwin
+COMPILER = CLANG_5
+#define HAS_COMPILER
+#endif
+#elif MOBILE
+#BUILD=NO
+COMPILER = GCC_
+#endif
+
+#if (defined HAS_COMPILER)
+BTV_ROOT_SRCPATH = $(MkmkOS_Buildtime)_$(COMPILER)
+#else
+BTV_ROOT_SRCPATH = Other
+#endif
+
+BTV_COPY_EXTENSION = *.h
+BTV_ROOT_ITF_COPY = @PublicInterfaces
+BTV_PRESERVE_ITF_TIMESTAMP = YES
+#

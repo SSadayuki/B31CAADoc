@@ -1,0 +1,100 @@
+#ifndef CATIAMaterials_IDL
+#define CATIAMaterials_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIAMaterials:                           
+// Exposed interface for Material collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIACollection.idl"
+#include "CATIAMaterial.idl"
+#include "CATVariant.idl"
+
+/**
+ * A collection of all the Material objects.
+ * This collection is currently managed by a @href CATIAMaterialFamily object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAMaterials : CATIACollection
+{
+    /**
+     * Returns a material from its index in the Material collection.
+     * @param iIndex
+     *   The index of the material to retrieve in the collection of materials.
+     *   Compared with other collections, you cannot use the name of the
+     *   material as argument.
+     * @return The retrieved material
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example returns in <tt>MyMaterial</tt> the sixth
+     * material in a material collection.
+     * <pre>
+     * Dim MyMaterial As Material
+     * Set MyMaterial = Materials.<font color="red">Item</font>(6)
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAMaterial oMaterial);
+
+    /**
+     * Adds a new material to the material collection.
+     */
+    HRESULT Add(out /*IDLRETVAL*/ CATIAMaterial oMaterial);
+
+    /**
+     * Removes a material from the materials collection.
+     */
+    HRESULT Remove(in CATVariant iIndex);
+
+	/**
+     * Returns a material from its index in the sorted Material collection.
+	 * @param iIndex
+     *   The index of the material to retrieve in the sorted collection of materials.
+     *   Compared with other collections, you cannot use the name of the
+     *   material as argument.
+	 * @param iMode
+     *   The sorted mode of material collection
+	 *<br>
+	 * <ul> Possible mode values are:
+	 *   <li>  0: Alphabetical order </li>
+	 *   <li>  1: Inverse alphabetical order </li>
+	 * </ul>
+     * @return The retrieved material
+     */
+    HRESULT SortedItem(in CATVariant iIndex, in short iMode, out /*IDLRETVAL*/ CATIAMaterial oMaterial);
+};
+
+// Interface Name : CATIAMaterials
+#pragma ID CATIAMaterials "DCE:aa941ca0-77a7-11d6-80560030f113d1bf"
+#pragma DUAL CATIAMaterials
+ 
+// VB Object Name : Materials
+#pragma ID Materials "DCE:cd5c3630-77a7-11d6-80560030f113d1bf"
+#pragma ALIAS CATIAMaterials Materials
+
+#endif
+// CATIAMaterials_IDL
+
+
+
+
+
+
+

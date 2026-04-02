@@ -1,0 +1,96 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=============================================================================
+// CATIASfmReferences
+//   Interface for Sfd Object's Reference collection
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Nov. 2010  Creation                                          Rahul DESHMANE
+//=============================================================================
+#ifndef CATIASfmReferences_IDL
+#define CATIASfmReferences_IDL
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIACollection.idl"
+#include "CATIAReference.idl"
+#include "CATVariant.idl"
+
+/**
+* A Collection of U and V Reference elements for Standard Opening.
+*/
+
+interface CATIASfmReferences : CATIACollection
+{  
+  /**  
+  *  Adds a reference in the collection.
+  *  @param iReference [in]  
+  *      Reference.  
+  *  @return  
+  *      <code>S_OK</code> if everything ran ok.  
+  *<dd>
+  * This example Adds one U Reference to the list of SfmReferences.
+  * <pre>
+  * Dim Uref1 As Reference
+  * Set Uref1 = Part1.FindObjectByName("CROSS.95")
+  * 'Add one U Reference to the list
+  * Dim UrefList As SfmReferences
+  *  UrefList.<font color="red">Add</font> Uref1
+  * </pre>
+  * </dl> 
+  */  
+  HRESULT Add(in CATIAReference iReference);
+
+  /**  
+  *  Retrieves a Reference from the collection of SfmReferences.
+  *  @param  iIndex [in] 
+  *      The  index of the parameter  
+  *  @param  oParm [out] 
+  *      The parameter  
+  *  @return 
+  *      Error code
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example retrieves 'i'th Reference from a list of References
+  * <pre>
+  *  Dim ListofRef As SfmReferences
+  *  Set Ref1 = ListofRef.<font color="red">Item</font>(i)
+  * </pre>
+  * </dl> 
+  */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAReference oReference);
+
+  /**  
+  *  Clears the contents of existing list of SfmReferences.
+  *  @return 
+  *      Error code
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example clears the contents of a list.
+  * <pre>
+  *  Dim ListofRef As SfmReferences
+  *  Dim Uref1 as Reference
+  *  ListofRef.Add Uref1
+  *  ListofRef.<font color="red">ClearList</font>
+  * </pre>
+  * </dl> 
+  */
+
+  HRESULT ClearList();
+};
+
+// Interface name : CATIASfmReferences
+#pragma ID CATIASfmReferences "DCE:A0AB69B8-E8F0-4517-8D31742659499A08"      
+
+#pragma DUAL CATIASfmReferences
+
+// VB object name : SfmReferences
+#pragma ID SfmReferences "DCE:E7F95906-E940-4c2c-89850E289EABE70D"    
+#pragma ALIAS CATIASfmReferences SfmReferences
+
+#endif

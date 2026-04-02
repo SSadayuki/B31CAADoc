@@ -1,0 +1,525 @@
+#ifndef CATIAHybridShapeTrim_IDL
+#define CATIAHybridShapeTrim_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeTrim:         
+// Exposed interface for HybridShape Trim
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation     
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+/**
+ * Represents the hybrid shape trim object.
+ * <b>Role</b>: To access the data of the hybrid shape trim object.
+ * This data includes:
+ * <ul>
+ * <li>The first element (surface or curve) to be trimmed</li>
+ * <li>The second element (surface or curve) to be trimmed</li> 
+ * <li>The orientation corresponding to the first element</li>
+ * <li>The orientation corresponding to the second element</li>
+ * </ul>
+ * Use the CATIAHybridShapeFactory to create a HybridShapeTrim object.
+ * @see CATIAHybridShapeFactory
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeTrim : CATIAHybridShape
+{
+/**
+ * @deprecated V5R17 CATIAHybridShapeTrim#GetElem
+ * Returns or sets  the first element to be trimmed.
+ * @sample
+ * This example retrieves in <code>Surface1</code> the first element to be trimmed 
+ * for the <code>hybTrim</code> hybrid shape feature.
+ * <pre>
+ * Dim Surface1 As Reference
+ * Set Surface1 = hybTrim.<font color="red">FirstElem</font>
+ * </pre>
+ */ 
+#pragma PROPERTY FirstElem
+    HRESULT  get_FirstElem (out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT  put_FirstElem (in                CATIAReference iElem) ;
+
+/**
+ * @deprecated V5R17 CATIAHybridShapeTrim#GetElem
+ * Returns or sets the second element to be trimmed.
+ * @sample
+ * This example retrieves in <code>Surface2</code> the second element to be trimmed 
+ * for the <code>hybTrim</code> hybrid shape trim object.
+ * <pre>
+ * Dim Surface2 As Reference
+ * Set Surface2 = hybTrim.<font color="red">SecondElem</font>
+ * </pre>
+ */ 
+#pragma PROPERTY SecondElem
+    HRESULT  get_SecondElem(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT  put_SecondElem(in                CATIAReference iElem) ;
+
+/**
+ * @deprecated V5R17 CATIAHybridShapeTrim#GetPreviousOrientation
+ * Returns or sets the first orientation used to compute the trim.
+ * <br>
+ * <b>Role</b>: 
+ * The orientation specifies the kept parts of the first element to be trimmed. 
+ * <ul> 
+ *  <li>When trimming surfaces: 
+ *   <ul>
+ *    <li>If orientation value is 1: kept parts are specified by the "natural" normal
+ *        to the second object</li> 
+ *    <li>If orientation value is -1: kept parts are specified by the inverse of
+ *        the "natural" normal to the second object</li>
+ *   </ul>
+ *  </li>
+ *  <li>When trimming curves:
+ *   <ul>  
+ *    <li>If orientation value is 1: kept parts are from the beginning of the curve
+ *        to the first intersection, and, if there is one, from the second to the
+ *        third intersection and so on until the end of the curve</li> 
+ *    <li>If orientation value is -1: kept parts are from the first intersection
+ *        to the second (if there is one), and, if there is one, from the third to
+ *        the fourth and so on until the end of the curve.</li> 
+ *   </ul>
+ *  </li>
+ * </ul> 
+ * @sample
+ * This example retrieves in <code>firstOrient</code> the orientation of
+ * the first element used by the <code>hybTrim</code> hybrid shape feature.
+ *<pre>
+ * Dim firstOrient As long
+ * Set firstOrient = hybTrim.<font color="red">FirstOrientation</font>
+ *</pre>
+ */ 
+#pragma PROPERTY FirstOrientation
+    HRESULT  get_FirstOrientation (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT  put_FirstOrientation (in                long iOrientation) ;
+
+/**
+ * @deprecated V5R17 CATIAHybridShapeTrim#GetPreviousOrientation
+ * Returns or sets the second orientation used to compute the trim.
+ * <br>
+ * <b>Role</b>:
+ * The orientation specifies the kept parts of the second element to be trimmed. 
+ * <ul> 
+ *  <li>When trimming surfaces: 
+ *   <ul>
+ *    <li>If orientation value is 1: kept parts are specified by the "natural" normal
+ *        to the first object</li> 
+ *    <li>If orientation value is -1: kept parts are specified by the inverse of
+ *        the "natural" normal to the first object</li>
+ *   </ul>
+ *  </li>
+ *  <li>When trimming curves:
+ *   <ul>  
+ *    <li>If orientation value is 1: kept parts are from the beginning of the curve
+ *        to the first intersection, and, if there is one, from the second to the
+ *        third intersection and so on until the end of the curve</li> 
+ *    <li>If orientation value is -1: kept parts are from the first intersection
+ *        to the second (if there is one), and, if there is one, from the third to
+ *        the fourth and so on until the end of the curve.</li> 
+ *   </ul>
+ *  </li>
+ * </ul> 
+ * @sample
+ * This example retrieves in <code>secondOrient</code> the orientation of
+ * the second element used by the <code>hybTrim</code> hybrid shape trim object.
+ *<pre>
+ * Dim secondOrient As long
+ * Set secondOrient = hybTrim.<font color="red">SecondOrientation</font>
+ *</pre>
+ */ 
+#pragma PROPERTY SecondOrientation
+    HRESULT  get_SecondOrientation(out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT  put_SecondOrientation(in                long iOrientation) ;
+
+/**
+ * @deprecated V5R17 CATIAHybridShapeTrim#SetPreviousOrientation
+ * Inverts the first orientation used to compute the trim. 
+ * @sample
+ * This example inverts the first orientation to compute
+ * the <code>hybTrim</code> hybrid shape trim object.
+ *<pre>
+ * hybTrim.<font color="red">InvertFirstOrientation</font>
+ *</pre>
+ */ 
+    HRESULT     InvertFirstOrientation()  ;
+
+
+/**
+ * @deprecated V5R17 CATIAHybridShapeTrim#SetPreviousOrientation
+ * Inverts the second orientation used to compute the trim. 
+ * This example inverts the first orientation to compute
+ * the <code>hybTrim</code> hybrid shape trim object.
+ *<pre>
+ * hybTrim.<font color="red">InvertSecondOrientation</font>
+ *</pre>
+ */ 
+    HRESULT     InvertSecondOrientation()  ;
+
+/**
+ * Returns or sets whether the simplification of the resulting topology is or should be activated.
+ * <br><b>Legal values</b>: True to activate the simplification,
+ * and False otherwise.
+ * @sample 
+ * This example activates the simplification of the resulting topology of
+ * the <code>hybTrim</code> hybrid shape trim object.
+ * <pre>
+ *  hybTrim.Simplify = True
+ * </pre>
+ */ 
+#pragma PROPERTY Simplify
+    HRESULT get_Simplify(out /*IDLRETVAL*/ boolean oSimplify) ;
+    HRESULT put_Simplify(in                boolean iSimplify) ;
+
+/**
+ * Returns or sets the support element.
+ * <br>This support element may not exist.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ * @sample
+ * This example retrieves in <code>supportElement</code> the support element
+ * of the <code>hybTrim</code> hybrid shape trim object.
+ * <pre>
+ * Dim supportElement As Reference
+ * Set supportElement = hybTrim.<font color="red">Support</font>
+ * </pre>
+ */ 
+#pragma PROPERTY Support
+    HRESULT get_Support (out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_Support (in                CATIAReference iElem) ;
+
+/**
+ * Adds an element to specifications. This element will be kept.
+ * @param iElement
+ *   Element to keep.  
+ */ 
+    HRESULT AddElementToKeep(in CATIAReference iElement);
+/**
+ * Adds an element to specifications. This element will be removed.
+ * @param iElement
+ *   Element to remove.  
+ */ 
+    HRESULT AddElementToRemove(in CATIAReference iElement);
+/**
+ * Gets the kept feature at a given index.
+ *   @param oElem
+ *      Kept feature 
+ *   @param iRank
+ *      Index of one of the kept features  
+ */
+    HRESULT GetKeptElem(in long iRank, out /*IDLRETVAL*/ CATIAReference oElem);
+/**
+ * Gets the number of elements to keep.
+ *   @param oNbElementsToKeep
+ *      Number of elements to keep
+ */
+    HRESULT GetNbElementsToKeep(out /*IDLRETVAL*/ long oNbElementsToKeep);
+
+/**
+ * Gets the number of elements to remove.
+ *   @param oNbElementsToRemove
+ *      Number of elements to remove
+ */
+    HRESULT GetNbElementsToRemove(out /*IDLRETVAL*/ long oNbElementsToRemove);
+/**
+ * Gets the removed feature at a given index.
+ *   @param oElem
+ *      Removed feature 
+ *   @param iRank
+ *      Index of one of the removed features  
+ */
+    HRESULT GetRemovedElem(in long iRank, out /*IDLRETVAL*/ CATIAReference oElem);
+/**
+ * Removes an element from specifications.
+ * @param iRank
+ *   Index of the kept element.
+ */ 
+    HRESULT RemoveElementToKeep(in long iRank);
+
+/**
+ * Removes an element from specifications.
+ * @param iRank
+ *   Index of the removed element.
+ */ 
+    HRESULT RemoveElementToRemove(in long iRank);
+/**
+ * Gets or sets the automatic extrapolation mode status.
+ *      AutomaticExtrapolationMode = TRUE  : Automatic extrapolation mode is on.
+ *                                 = FALSE : Automatic extrapolation mode is off.
+ * This example retrieves in <code>AutoExtrapolMode</code> the automatic extrapolation mode status 
+ * for the <code>Trim</code> hybrid shape feature.
+ * <pre>
+ * Dim AutoExtrapolMode As boolean
+ * AutoExtrapolMode = Trim.<font color="red">AutomaticExtrapolationMode</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY AutomaticExtrapolationMode
+    HRESULT get_AutomaticExtrapolationMode (out /*IDLRETVAL*/ boolean oMode);
+    HRESULT put_AutomaticExtrapolationMode (in                boolean iMode);
+/**
+ * Gets or sets Intersection computation mode.
+ *      IntersectionComputation = TRUE  : Intersection is computed.
+ *                              = FALSE : Intersection is not computed.
+ * This example retrieves in <code>Intersection</code> the Intersection computation mode 
+ * for the <code>Trim</code> hybrid shape feature.
+ * <pre>
+ * Dim Intersection As boolean
+ * Intersection = Trim.<font color="red">IntersectionComputation</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY IntersectionComputation
+    HRESULT get_IntersectionComputation(out /*IDLRETVAL*/ boolean oMode);
+    HRESULT put_IntersectionComputation(in                boolean iMode);
+
+
+/**
+ * Gets the number of elements: couple(element, index of portion to keep on element).
+ *   @param oNbElem
+ *      Number of elements  
+ */
+    HRESULT GetNbElem(out /*IDLRETVAL*/ long NbElem);
+
+ /**
+ * Gets the trimmed feature at a given index.  
+ *   @param iRank
+ *      Index of one of the trimmed features  
+ *   @param oElem
+ *      trimmed feature 
+ */
+    HRESULT GetElem(in long iRank, out /*IDLRETVAL*/ CATIAReference oElem);
+
+ /**
+ * Modifies the trimmed feature at a given index.  
+ * Use AddElem method to specify a new trimmed element
+ *   @param iRank
+ *      Index of one of the trimmed features  
+ *   @param iElem
+ *      trimmed feature 
+ */
+    HRESULT SetElem(in long iRank, in CATIAReference iElem);
+ 
+ /**
+ * Gets Orientation used to compute the feature, referring to the previous trimmed element.
+ *   @param iRank 
+ *      index (of one of the trimmed features) - 1
+ *      iRank must be greater than 1 and lower than the number of elements - 1 
+ *   @param oOrientation  
+ *      Orientation
+ */
+    HRESULT  GetPreviousOrientation(in long iRank, out /*IDLRETVAL*/ long oOrientation) ;
+ 
+ /**
+ * Gets Orientation used to compute the feature, referring to the next trimmed element.
+ *   @param iRank 
+ *      index (of one of the trimmed features) - 1
+ *      iRank must be greater than 1 and lower than the number of elements - 1 
+ *   @param oOrientation  
+ *      Orientation
+ */
+    HRESULT  GetNextOrientation(in long iRank, out /*IDLRETVAL*/ long oOrientation) ;
+ 
+ /**
+ * Sets the orientation used to compute the feature, referring to the previous trimmed element.
+ *   @param iRank 
+ *      index (of one of the trimmed features) - 1
+ *      iRank must be greater than 1 and lower than the number of elements - 1 
+ *   @param iOrientation  
+ *      Orientation
+ */
+    HRESULT SetPreviousOrientation(in long iRank, in long iOrientation)  ;
+
+ /**
+ * Sets the orientation used to compute the feature, referring to the next trimmed element.
+ *   @param iRank 
+ *      index (of one of the trimmed features) - 1
+ *      iRank must be greater than 1 and lower than the number of elements - 1 
+ *   @param iOrientation  
+ *      Orientation
+ */
+    HRESULT SetNextOrientation(in long iRank, in long iOrientation)  ;
+
+/**
+ * Gets or sets Trim mode.
+ *      Mode = 1 : Standard.
+ *           = 2 : Pieces.
+ * This example retrieves in <code>Mode</code> the mode
+ * for the <code>Trim</code> hybrid shape feature.
+ * <pre>
+ * Dim Mode As long
+ * Mode = Trim.<font color="red">Mode</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY Mode
+    HRESULT get_Mode(out /*IDLRETVAL*/ long oMode);
+    HRESULT put_Mode(in                long iMode);
+ 
+ /**
+ * Gets a portion to keep number, giving the index of the element.
+ * Used for trim pieces of wires
+ *   @param oPortionNumber
+ *      Index of portion to keep on the element
+ *   @param iRank
+ *      Index of the trimmed element
+ */
+	HRESULT  GetPortionToKeep(in long iRank, out /*IDLRETVAL*/ long oPortionNumber) ;
+ /**
+ * Sets a portion to keep number in Pieces mode.
+ * Used for trim pieces of wires
+ *   @param iRank
+ *      Index of the trimmed element
+ *   @param iPortionNumber
+ *      Index of portion to keep on the element
+ */
+	HRESULT SetPortionToKeep(in long iRank, in long iPortionNumber)  ;
+
+  /**
+  * Gets the number of cutters of a piece.
+  * Used for trim pieces of shells only
+  *   @param oNbCutters
+  *      Number of cutters (except in case of multiple intersection between shells)  
+  */
+  HRESULT GetPieceNbCutters(in long iRank, out /*IDLRETVAL*/ long oNbCutters);
+
+  /**
+  * Gets piece Cutting element and its orientation.
+  * Used for trim pieces of shells only
+  *   @param iRank
+  *      Index of the trimmed element (piece)
+  *   @param oCutterElemIdx
+  *     index is the index of input shell
+  *     except in case of multiple intersection between shells
+  *     where Index=IndexInputShell+NbInputShells*(1-iw) 
+  *     (whith iw=1... : wire index in case of multiple intersection)
+  *   @param oCutterElem
+  *      cutter element
+  *   @param oOrientation
+  *      cutter element orientation
+  *      
+  */
+  HRESULT GetPieceCutter(in long iRank, in long iCutterIndex, out long oCutterElemIdx,out long oOrientation);
+
+  /**
+  * Add piece Cutting element and its orientation.
+  * Used for trim pieces of shells only
+  *   @param iRank
+  *      Index of the trimmed element (piece)
+  *   @param iCutterElemIdx
+  *     index is the index of input shell
+  *     except in case of multiple intersection between shells
+  *     where Index=IndexInputShell+NbInputShells*(1-iw) 
+  *     (whith iw=1... : wire index in case of multiple intersection)
+  *   @param iOrientation
+  *      cutter element orientation
+  *      
+  */
+  HRESULT AddPieceCutter(in long iRank, in long iCutterElem,in long iOrientation);
+
+  /**
+  * Remove piece Cutting element and its orientation.
+  * Used for trim pieces of shells only
+  *   @param iRank
+  *      Index of the trimmed element (piece)
+  *   @param iCutterIndex
+  *      Index in cutters list  
+  */
+  HRESULT RemovePieceCutter(in long iRank, in long iCutterIndex);
+
+  /**
+  * Gets the discrimination index.
+  * Used for the trim pieces of shells only
+  *   @param iRank
+  *    Index of the trimmed element (piece)
+  *   @param oIndex
+  *    Discrimination Index
+  *    Used to discrimine pieces when cutters orientations are not enough
+  */
+  HRESULT GetPieceDiscriminationIndex(in long iRank, out long oIndex);
+
+  /**
+  * Sets the discrimination index.
+  * Used for the trim pieces of shells only
+  *   @param iRank
+  *    Index of the trimmed element (piece)
+  *   @param iIndex
+  *    Discrimination Index
+  *    Used to discrimine pieces when cutters orientations are not enough
+  */
+  HRESULT SetPieceDiscriminationIndex(in long iRank, in long iIndex);
+
+ /**
+ * Gets or Sets keep all pieces mode.
+ * Used for the trim pieces of shells only
+ *      KeepAllPieces=TRUE : all the pieces are kept during update,
+ *      KeepAllPieces=FALSE : only chosen pieces are kept during update (default).
+ * This example retrieves in <code>KeepAllPieces</code> the Keep All Pieces mode 
+ * for the <code>Trim</code> hybrid shape feature.
+ * <pre>
+ * Dim bKeepAllPieces As boolean
+ * bKeepAllPieces = Trim.<font color="red">KeepAllPieces</font>
+ * </pre>
+ * </dl>
+ */ 
+  #pragma PROPERTY KeepAllPieces
+    HRESULT get_KeepAllPieces(out /*IDLRETVAL*/ boolean oMode);
+    HRESULT put_KeepAllPieces(in                boolean iMode);
+
+/**
+ * Gets or sets connected mode.
+ *      Connex = TRUE  : the check of connexity is enable.
+ *      Connex = FALSE : the check of connexity is disable.
+ * This example retrieves in <code>Connex</code> the connected mode 
+ * for the <code>Trim</code> hybrid shape feature.
+ * <pre>
+ * Dim Connex As boolean
+ * Connex = Trim.<font color="red">Connex</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY Connex
+    HRESULT get_Connex(out /*IDLRETVAL*/ boolean oMode);
+    HRESULT put_Connex(in                boolean iMode);
+
+/**
+ * Gets or sets manifold mode.
+ *      Manifold = TRUE  : the check of manifold is enable.
+ *      Manifold = FALSE : the check of manifold is disable.
+ * This example retrieves in <code>Manifold</code> the manifold mode 
+ * for the <code>Trim</code> hybrid shape feature.
+ * <pre>
+ * Dim Manifold As boolean
+ * Connex = Trim.<font color="red">Manifold</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY Manifold
+    HRESULT get_Manifold(out /*IDLRETVAL*/ boolean oMode);
+    HRESULT put_Manifold(in                boolean iMode);
+};
+
+
+// Interface name : CATIAHybridShapeTrim
+#pragma ID CATIAHybridShapeTrim "DCE:8c89b25c-2c3e-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeTrim
+
+// VB object name : HybridShapeTrim (Id used in Visual Basic)
+#pragma ID HybridShapeTrim "DCE:8c89b260-5554-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeTrim HybridShapeTrim
+
+#endif
+// CATIAHybridShapeTrim_IDL
+

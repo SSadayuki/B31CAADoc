@@ -1,0 +1,171 @@
+#ifndef CATIATritangentFillet_IDL
+#define CATIATritangentFillet_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIATritangentFillet:                           
+// Exposed interface for Mechanical Fillet tangent to 3 Faces
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification                                     L Lalere
+//=================================================================
+#include "CATIAFillet.idl"
+
+interface CATIAReference;
+
+/**
+ * The Tritangent Fillet feature : a fillet is built between 3 faces,<br>
+ * 2 faces will be relimited, the third one ("face to remove") will<br>
+ * be used for fillet tangency ; this face will disappear within the resulting shape.
+ */
+
+//-----------------------------------------------------------------
+interface CATIATritangentFillet : CATIAFillet
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON FIRST FACE (to fillet)
+    //    -------------
+    //
+#pragma PROPERTY FirstFace
+//
+    /**
+     * Returns the first face limiting the tritangent fillet.
+     * @return oFirstFace
+     *   The limiting face (@see CATIAReference for more information)
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>face1</tt> the first limiting face of<br>
+     * tritangent fillet <tt>firstTritangentFillet</tt>:
+     * <pre>
+     * Set face1 = firstTritangentFillet.<b>FirstFace</b>
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_FirstFace ( out /*IDLRETVAL*/  CATIAReference oFirstFace );
+
+    /**
+     * Sets the first face limiting the tritangent fillet.
+     * @param iFirstFace
+     *   The limiting face (@see CATIAReference for more information)<br>
+     * To set the property, you can use the following @href CATIABoundary object: 
+     * @href CATIAFace.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example sets the first limiting face of<br>
+     * tritangent fillet <tt>firstTritangentFillet</tt> to CATIAReference element <tt>face1</tt> :
+     * <pre>
+     * Set firstTritangentFillet.<b>FirstFace</b>=face1
+     * </pre>
+     * </dl>
+     */
+    HRESULT    put_FirstFace ( in                 CATIAReference iFirstFace );
+ 
+    //
+    //    ON SECOND FACE (to fillet)
+    //    --------------
+    //
+#pragma PROPERTY SecondFace
+//
+    /**
+     * Returns the second face limiting the tritangent fillet.
+     * @return oSecondFace
+     *   The limiting face (@see CATIAReference for more information)
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>face2</tt> the second limiting face of<br>
+     * tritangent fillet <tt>firstTritangentFillet</tt>:
+     * <pre>
+     * Set face2 = firstTritangentFillet.<b>SecondFace</b>
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_SecondFace ( out /*IDLRETVAL*/ CATIAReference oSecondFace );
+
+    /**
+     * Sets the second face limiting the tritangent fillet.
+     * @param iSecondFace
+     *   The limiting face (@see CATIAReference for more information)<br>
+     * To set the property, you can use the following @href CATIABoundary object: 
+     * @href CATIAFace.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example sets the second limiting face of<br>
+     * tritangent fillet <tt>firstTritangentFillet</tt> to CATIAReference element <tt>face2</tt> :
+     * <pre>
+     * Set firstTritangentFillet.<b>SecondFace</b>=face2
+     * </pre>
+     * </dl>
+     */
+    HRESULT    put_SecondFace ( in                CATIAReference iSecondFace );
+
+    //
+    //    ON FACE (to remove)
+    //    --------------
+    //
+#pragma PROPERTY FaceToRemove
+//
+    /**
+     * Returns the face to be removed by the tritangent fillet.
+     * @return oFaceToRemove
+     *   The face to be removed by the fillet (@see CATIAReference for more information)
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>removedFace</tt> the face to be removed of<br>
+     * tritangent fillet <tt>firstTritangentFillet</tt>:
+     * <pre>
+     * Set removedFace = firstTritangentFillet.<b>FaceToRemove</b>
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_FaceToRemove ( out /*IDLRETVAL*/ CATIAReference oFaceToRemove );
+
+    /**
+     * Sets the face to be removed by the tritangent fillet.
+     * @param iFaceToRemove
+     *   The face to be removed by the fillet (@see CATIAReference for more information)<br>
+     * To set the property, you can use the following @href CATIABoundary object: 
+     * @href CATIAFace.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example sets the face to be removed of<br>
+     * tritangent fillet <tt>firstTritangentFillet</tt> to CATIAReference element <tt>removedFace</tt>:
+     * <pre>
+     * Set firstTritangentFillet.<b>FaceToRemove</b> = removedFace
+     * </pre>
+     * </dl>
+     */
+    HRESULT    put_FaceToRemove ( in                CATIAReference iFaceToRemove );
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+};
+
+// Interface name : CATIATritangentFillet
+#pragma ID CATIATritangentFillet "DCE:6d7b62a8-610a-11d1-a27d0000f87546fd"
+#pragma DUAL CATIATritangentFillet
+
+// VB object name : TritangentFillet (Id used in Visual Basic)
+#pragma ID TritangentFillet "DCE:6da18848-610a-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIATritangentFillet TritangentFillet
+
+
+#endif
+// CATIATritangentFillet_IDL
+

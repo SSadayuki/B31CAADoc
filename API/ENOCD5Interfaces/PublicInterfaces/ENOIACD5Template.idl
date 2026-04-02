@@ -1,0 +1,104 @@
+// COPYRIGHT Dassault Systemes 2013
+//===================================================================
+//
+// ENOIACD5Template.idl
+// Automation interface for the ENOIACD5Template element 
+//
+//===================================================================
+
+#ifndef ENOIACD5Template_IDL
+#define ENOIACD5Template_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+interface CATIABase;
+interface IDispatch;
+
+/**
+ * Represents a Template.
+ * <br>Various properties on the object helps to perform operations on the template.
+ *
+ * @sample
+ * The following example indicates how to retrieve the template.
+ * <pre>
+ * <font color="blue">Dim</font> oTemplate <font color="blue">As</font> ENOIACD5Template
+ * <font color="blue">Set</font> oTemplate = oTemplates.Item(<font color="red">1</font>)
+ * </pre>
+ * @see ENOIACD5Templates
+ */
+
+interface ENOIACD5Template : CATIABase
+{
+
+	/**
+    * Returns (gets) the name of the Template.
+    *
+    * @sample
+    * The following example gets the name of the Template.
+    * <pre>
+	* <font color="blue">Dim</font> oName <font color="blue">As</font> CATBSTR
+    * oName = oTemplate.<font color="red">TemplateName</font> 
+    * </pre>
+    */   
+#pragma PROPERTY TemplateName
+    HRESULT get_TemplateName (inout /*IDLRETVAL*/ CATBSTR oName);
+
+	/**
+    * Returns (gets) the type of the Template.
+    *
+    * @sample
+    * The following example gets the type of the Template.
+    * <pre>
+	* <font color="blue">Dim</font> oType <font color="blue">As</font> CATBSTR
+    * oType = oTemplate.<font color="red">TemplateType</font> 
+    * </pre>
+    */   
+#pragma PROPERTY TemplateType
+    HRESULT get_TemplateType (inout /*IDLRETVAL*/ CATBSTR oType);
+
+	/**
+    * Downloads the template file to local disk. 
+    * 
+    * @param iiTargetFolder
+    * The Folder Path on local disk where the template file will be downloaded.
+    * @return
+    * Full path of the downloaded file.
+    * @exception
+    * <dl>
+    * <dt>-1782306828 : Template object is assigned more than one file.</dt>
+	* <dt>-1774688310 : Template object is not assigned any file.</dt>
+	* <dt>-1866082326 : File of same name as that of file assigned to Template object is present on download directory.</dt>
+    * </dl>
+    *
+    * @sample
+    * The following example downloads the template file to local disk <tt>oTemplate</tt>:
+    * <ul>
+    * <li>iTargetFolder : "E:\New folder".</li>
+    * </ul>
+    * <pre>
+    * <font color="blue">Dim</font> DownloadedFilePath <font color="blue">As</font> CATBSTR
+    * DownloadedFilePath = oTemplate.<font color="red">DownloadFile</font>("E:\New folder")
+    * </pre>
+    */
+	HRESULT DownloadFile (in CATBSTR iTargetFolder, inout /*IDLRETVAL*/ CATBSTR oFilePath);
+
+};
+
+
+// Interface name : ENOIACD5Template
+#pragma ID ENOIACD5Template "DCE:4EB3E786-7FF8-4c58-965D7159958B124F"
+#pragma DUAL ENOIACD5Template
+
+// VB object name : CD5Template (Id used in Visual Basic)
+#pragma ID CD5Template "DCE:93BF9BFA-7D67-443e-949B806FC6671753"
+#pragma ALIAS ENOIACD5Template CD5Template
+
+
+#endif

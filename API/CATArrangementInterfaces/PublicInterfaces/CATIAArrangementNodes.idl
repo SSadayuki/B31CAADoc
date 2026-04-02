@@ -1,0 +1,55 @@
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAArrangementNodes.idl
+// Automation interface for the ArrangementNodes element 
+//
+#ifndef CATIAArrangementNodes_IDL
+#define CATIAArrangementNodes_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAArrangementNode;
+
+/**  
+ * A Collection object for ArrangementNode objects. 
+ * Use this object to access individual ArrangementNode objects of an ArrangementRun,
+ * ArrangementPathway and ArrangementBoundary.
+ */
+interface CATIAArrangementNodes : CATIACollection 
+{
+
+  /**
+   * Returns the specified ArrangementNode item of the collection.
+   * @param iIndex
+   *   The index or the name of the ArrangementNode to retrieve from this collection.
+   *   <dl>
+   *   <dt> To retrieve a specific object by number, use the rank of the ArrangementNode in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To retrieve a specific ArrangementNode by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   * @return
+   *    The retrieved ArrangementNode object.
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAArrangementNode oArrNode);
+
+};
+
+// Interface name : CATIAArrangementNodes
+#pragma ID CATIAArrangementNodes "DCE:21447a12-c484-11d4-8df300d0b7acadba"
+#pragma DUAL CATIAArrangementNodes
+
+// VB object name : ArrangementNodes (Id used in Visual Basic)
+#pragma ID ArrangementNodes "DCE:21447a13-c484-11d4-8df300d0b7acadba"
+#pragma ALIAS CATIAArrangementNodes ArrangementNodes
+
+#endif

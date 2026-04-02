@@ -1,0 +1,9 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= SHARED LIBRARY
+
+LINK_WITH = AC0XXLNK  CATV4IntegrationBase \
+	    JS0GROUP CATObjectModelerCATIA  \
+	    CATOmaBinaryFormat	\
+	    JS0ERROR	\ # CATSysBatchMode

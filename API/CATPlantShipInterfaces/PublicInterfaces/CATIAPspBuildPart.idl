@@ -1,0 +1,136 @@
+#ifndef CATIAPspBuildPart_IDL
+#define CATIAPspBuildPart_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+
+
+#include "CATIAPspListOfBSTRs.idl"
+
+#include "CATIAProduct.idl"
+
+#include "CATIABase.idl"
+
+/**
+ * Represents Interface to create and modify a part.
+ * <b>Role</b>: To build and define a part.
+ */
+
+interface CATIAPspBuildPart : CATIABase
+{
+ /**
+  * Create a new part.
+  * @param iPartType
+  *   Part class type.
+  * @param iPartNumber
+  *   Part number.
+  * @return
+  *   Retruns Reference Product pointer in new CATPart document.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspBuildPart
+  * Dim iuPartType As CATBSTR
+  * Dim uPartNumber As CATBSTR
+  * Dim oNewRefPart As Product
+  *  ...
+  * Set oNewRefPart = objThisIntf.<font color="red">NewPart</font> (iuPartType, uPartNumber)
+  * </pre>
+  *    
+  */
+  HRESULT NewPart ( in CATBSTR	iuPartType,
+                    in CATBSTR	uPartNumber,
+                    out /*IDLRETVAL*/ CATIAProduct oNewRefPart );
+
+
+ /**
+  * Returns the part after changing the part type of an existing part.
+  * @param iReferencePart
+  *   Reference Product in CATPart document to modify.
+  * @param iPartType
+  *   New part class type.
+  * @param iPartNumber
+  *   New Part number.  
+  * @return
+  *   New reference Product in CATPart document
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspBuildPart
+  * Dim iRefPart As   Product
+  * Dim iuPartType As CATBSTR
+  * Dim uPartNumber As CATBSTR
+  * Dim oNewRefPart As Product
+  *  ...
+  * Set oNewRefPart= objThisIntf.<font color="red">ChagePartType</font> (iRefPart, iuPartType, uPartNumber )
+  * </pre>
+  *    
+  */
+  HRESULT ChangePartType ( in  CATIAProduct iRefPart,
+                          in CATBSTR	iuPartType,
+                          in CATBSTR	uPartNumber,
+                          out /*IDLRETVAL*/ CATIAProduct oNewRefPart );
+
+	
+ /**  
+  * Sets the part parametric attribute names.
+  * @param iRefPart 
+  *   Reference Product in new CATPart document.
+  * @param iLAttributeNames
+  *   List of parametric attribute names.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspBuildPart
+  * Dim iRefPart As Product
+  * Dim iLAttributeNames As PspListOfBSTRs
+  *
+  *  ...
+  * objThisIntf.<font color="red">SetPartParametricAttributes</font> iRefPart, iLAttributeNames
+  * </pre>
+  *    
+  */
+
+
+  HRESULT SetPartParametricAttributes (
+         in  CATIAProduct iRefPart,
+         in  CATIAPspListOfBSTRs iLAttributeNames);
+
+ /**  
+  * Returns the part parametric attribute names.
+  * @param iRefPart 
+  *   Reference Product in new CATPart document.
+  * @return
+  *   List of parametric attribute names.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspBuildPart
+  * Dim iRefPart As Product
+  * Dim oLAttributeNames As PspListOfBSTRs
+  *
+  *  ...
+  * Set oLAttributeNames = objThisIntf.<font color="red">ListPartParametricAttributes</font> (iRefPart)
+  * </pre>
+  *    
+  */
+  HRESULT ListPartParametricAttributes (
+         in  CATIAProduct iRefPart,
+         out /*IDLRETVAL*/ CATIAPspListOfBSTRs oLAttributeNames);
+        
+};
+
+// Interface name : CATIAPspBuildPart
+#pragma ID CATIAPspBuildPart "DCE:eba6a72e-594f-4b3f-9b7cf95632770f1f"
+#pragma DUAL CATIAPspBuildPart
+
+// VB object name : PspBuildPart
+#pragma ID PspBuildPart      "DCE:7177c91d-0621-4369-8f2b5b3934989c46"
+#pragma ALIAS CATIAPspBuildPart PspBuildPart
+
+#endif

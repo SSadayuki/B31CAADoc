@@ -1,0 +1,93 @@
+#ifndef CATIASchCntrGraphic_IDL 
+#define CATIASchCntrGraphic_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchGRR;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the graphical representation of a schematic connector.
+  */
+
+interface CATIASchCntrGraphic : CATIABase
+{
+  /**
+  * Add a graphical primitive to a connector.
+  * @param iGRRToAdd
+  *   The connector graphical primitive to be added to the connector.
+  * @param iGRR
+  *   The component or route graphical representation that points to 
+  *   the connector graphical primitive.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrGraphic
+  * Dim objArg1 As SchGRR
+  * Dim objArg2 As SchGRR
+  *  ...
+  * objThisIntf.<font color="red">AddGraphicalPrimitive</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT AddGraphicalPrimitive ( 
+    in CATIASchGRR iGRRToAdd, 
+    in CATIASchGRR iGRR );
+    
+  /**
+  * Remove a graphical primitive from a connector.
+  * @param iGRRToRemove
+  *   The connector graphical primitive to be removed from the connector.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrGraphic
+  * Dim objArg1 As SchGRR
+  *  ...
+  * objThisIntf.<font color="red">RemoveGraphicalPrimitive</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT RemoveGraphicalPrimitive ( 
+    in CATIASchGRR iGRRToRemove );
+    
+  /**
+  * List all graphical primitives of a connector.
+  * @param oLGRR
+  *   A list of graphical primitives
+  *   (members are CATISchGRR interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrGraphic
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListGraphicalPrimitives</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListGraphicalPrimitives ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLGRR );
+    
+};
+    
+// Interface name : CATIASchCntrGraphic
+#pragma ID CATIASchCntrGraphic "DCE:95ed2293-9895-4cb0-8ef7cf10fdf0a167"
+#pragma DUAL CATIASchCntrGraphic
+    
+// VB object name : SchCntrGraphic
+#pragma ID SchCntrGraphic "DCE:8633cf89-cc5a-4dbe-8c3c3ba32c53580d"
+#pragma ALIAS CATIASchCntrGraphic SchCntrGraphic
+    
+#endif 
+    

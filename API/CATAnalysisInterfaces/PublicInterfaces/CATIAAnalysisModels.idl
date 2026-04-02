@@ -1,0 +1,71 @@
+#ifndef CATIAAnalysisModels_IDL
+#define CATIAAnalysisModels_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAAnalysisModels.idl
+// Automation interface for the AnalysisModels collection 
+//
+//===================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAAnalysisModel;
+
+/**  
+ * The collection of analysis models making an analysis document.
+ * As of today this collection is made of a single analysis model.
+ */
+interface CATIAAnalysisModels : CATIACollection 
+{
+	//		=============
+	//		== METHODS ==
+	//		=============
+
+/**
+ * Returns an analysis model using its index or its name from the analysis model
+ * collection.
+ * @param iIndex
+ *   The index or the name of the analysis model to retrieve from
+ *   the collection of analysis model.
+ *   As a numerics, this index is the rank of the analysis model
+ *   in the collection.
+ *   The index of the first analysis model in the collection is 1, and
+ *   the index of the last analysis model is Count.
+ *   As a string, it is the name you assigned to the analysis model using
+ *   the @href CATIABase#Name property.
+ * @return The retrieved analysis model
+ * <! @sample >
+ * <dt><b>Example:</b>
+ * <dd>
+ * The following example retrieves the first analysis model in 
+ * the analysis model collection of the <tt> AnalysisManager</tt> object.
+ * <pre>
+ * Dim AnalysisDocument As Document
+ * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+ * Dim RootAnalysis As AnalysisManager
+ * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+ * Dim analysisModels As AnalysisModels
+ * Set analysisModels = RootAnalysis.<font color="red">AnalysisModels</font>
+ * Dim analysisModel As AnalysisModel
+ * Set AnalysisModel = analysisModel.<font color="red">Item(1)</font>
+ * </pre>
+
+ */
+    HRESULT     Item (in CATVariant iIndex ,out /*IDLRETVAL*/ CATIAAnalysisModel oModel);
+};
+
+// Interface name : CATIAAnalysisModels
+#pragma ID CATIAAnalysisModels "DCE:c34d7802-58bd-11d4-9ef900508b6a3154"
+#pragma DUAL CATIAAnalysisModels
+
+// VB object name : CATIAAnalysisModels (Id used in Visual Basic)
+#pragma ID AnalysisModels "DCE:c34d7803-58bd-11d4-9ef900508b6a3154"
+#pragma ALIAS CATIAAnalysisModels AnalysisModels
+
+#endif

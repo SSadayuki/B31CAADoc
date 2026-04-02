@@ -1,0 +1,23 @@
+#for SRC_LINK_WITH in fw CATCDSDebug.tst
+ALLOW_STATIC_LINK=YES 
+
+#
+BUILT_OBJECT_TYPE = NONE
+#
+LINK_WITH = \
+  JS0GROUP \
+  CATMathematics \
+  CATCDSUtilities \
+  SolverUtilities \
+  GeometricDecomposition \
+  RelativeRepresentation
+
+LOCAL_CCFLAGS_ASSERT=-DNOT_CDS_ASSERT $(MKMK_DEBUG:+"-DCDS_ASSERT")
+
+#if os Windows
+LOCAL_CCFLAGS=-D_HAS_EXCEPTIONS=0 $(LOCAL_CCFLAGS_ASSERT)
+#elif os Linux
+LOCAL_CCFLAGS=-std=c++0x -DCPP11_AVALAIBLE $(LOCAL_CCFLAGS_ASSERT)
+#else
+LOCAL_CCFLAGS=$(LOCAL_CCFLAGS_ASSERT)
+#endif

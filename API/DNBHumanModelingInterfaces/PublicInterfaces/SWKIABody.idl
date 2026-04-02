@@ -1,0 +1,564 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIABody_IDL
+#define SWKIABody_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//    SWKIABodyElement
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//    get_CenterOfGravity
+//    get_NumberOfSegments
+//    GetSegment
+//    get_Memo
+//    put_Memo
+//    get_SegmentsDisplayed
+//    put_SegmentsDisplayed
+//    get_EllipsesDisplayed
+//    put_EllipsesDisplayed
+//    get_SkinDisplayed
+//    put_SkinDisplayed
+//    get_CenterOfGravityDisplayed
+//    put_CenterOfGravityDisplayed
+//    get_ReferentialDisplayed
+//    put_ReferentialDisplayed
+//    get_LineOfSightDisplayed
+//    put_LineOfSightDisplayed
+//    get_PeripheralConeDisplayed
+//    put_PeripheralConeDisplayed
+//    get_CentralConeDisplayed
+//    put_CentralConeDisplayed
+//    get_ConeTypeFlat
+//    SetConeTypeFlat
+//    get_ConeTypeSpherical
+//    SetConeTypeSpherical
+//    get_ConeTypeBoundings
+//    SetConeTypeBoundings
+//    get_ConeTypeBoundedCone
+//    SetConeTypeBoundedCone
+//    get_SkinResolution
+//    put_SkinResolution
+//    get_Referential
+//    put_Referential
+//    SetPosture
+//    SetToBestPosture
+//    ResetPosture
+//      SwapPosture
+//      ResetPrefAngles
+//      SwapPrefAngles
+//      ResetAngularLimitations
+//      SwapAngularLimitations
+//    LockPosture
+//      ResetAttaches
+//      ResetIKOffsets
+//    IsBalanced
+//    SetPosition
+//    ApplyPosition
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 26/01/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIABodyElement.idl"
+#include "SWKPostureSpec.idl"
+//
+// --- System
+#include "CATSafeArray.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIACenterOfGravity;
+interface SWKIASegment;
+
+
+
+/**
+  *  This interface represents the body of the manikin.
+  *  It provides access to the manikin structure.
+  **/
+interface SWKIABody : SWKIABodyElement
+{
+ // ===========================================================================
+ // get_CenterOfGravity
+ // -------------------
+ //
+    /**
+      * Returns the center of gravity of the current manikin.
+      **/
+#pragma PROPERTY CenterOfGravity
+    HRESULT get_CenterOfGravity(out /*IDLRETVAL*/ SWKIACenterOfGravity poCenterOfGravity);
+
+
+ // ===========================================================================
+ //  get_NumberOfSegments
+ //  --------------------
+ //  
+    /**
+      * Returns the number of segments of the body.
+      **/
+#pragma PROPERTY NumberOfSegments
+    HRESULT get_NumberOfSegments(out /*IDLRETVAL*/ long poNbSegments);
+
+
+ // ===========================================================================
+ //  GetSegment
+ //  ----------
+ //
+    /**
+      * Returns a specific segment of the body, based on an index.<br>
+      *
+      * @param piIndex  The index of the segment to retrieve.<br>
+      * The first segment is at index 0.<br>
+      * The value of this parameter should not be higher than the
+      * number of segments on the body, minus 1.
+      **/
+    HRESULT GetSegment(in long piIndex, out /*IDLRETVAL*/ SWKIASegment poSegment);
+
+
+ // ===========================================================================
+ //  get_Memo
+ //  --------
+ //  put_Memo
+ //  --------
+ //
+    /**
+      * Returns or records miscellaneous user-added comments about the posture.
+      **/
+#pragma PROPERTY Memo
+    HRESULT get_Memo(inout /*IDLRETVAL*/ CATBSTR oText);
+    HRESULT put_Memo(in CATBSTR piText);
+
+
+ // ===========================================================================
+ //  get_SegmentsDisplayed
+ //  ---------------------
+ //  put_SegmentsDisplayed
+ //  ---------------------
+ //
+    /**
+      * Returns or sets the display of the segments.
+      **/
+#pragma PROPERTY SegmentsDisplayed
+    HRESULT get_SegmentsDisplayed(out /*IDLRETVAL*/ boolean poFlag);
+    HRESULT put_SegmentsDisplayed(in boolean piFlag);
+
+
+ // ===========================================================================
+ //  get_EllipsesDisplayed
+ //  ---------------------
+ //  put_EllipsesDisplayed
+ //  ---------------------
+ //
+    /**
+      * Returns or sets the display of the manikin ellipses.
+      **/
+#pragma PROPERTY EllipsesDisplayed
+    HRESULT get_EllipsesDisplayed(out /*IDLRETVAL*/ boolean poFlag);
+    HRESULT put_EllipsesDisplayed(in boolean piFlag);
+
+
+ // ===========================================================================
+ //  get_SkinDisplayed
+ //  -----------------
+ //  put_SkinDisplayed
+ //  -----------------
+ //
+    /**
+      * Returns or sets the display of the manikin surfaces (skin).
+      **/
+#pragma PROPERTY SkinDisplayed
+    HRESULT get_SkinDisplayed(out /*IDLRETVAL*/ boolean poFlag);
+    HRESULT put_SkinDisplayed(in boolean piFlag);
+
+
+ // ===========================================================================
+ //  get_CenterOfGravityDisplayed
+ //  ----------------------------
+ //  put_CenterOfGravityDisplayed
+ //  ----------------------------
+ //
+    /**
+      * Returns or sets the display of the center of gravity.
+      **/
+#pragma PROPERTY CenterOfGravityDisplayed
+    HRESULT get_CenterOfGravityDisplayed(out /*IDLRETVAL*/ boolean poFlag);
+    HRESULT put_CenterOfGravityDisplayed(in boolean piFlag);
+
+
+ // ===========================================================================
+ //  get_ReferentialDisplayed
+ //  ----------------------------
+ //  put_ReferentialDisplayed
+ //  ----------------------------
+ //
+    /**
+      * Returns or sets the display of the referential.
+      **/
+#pragma PROPERTY ReferentialDisplayed
+    HRESULT get_ReferentialDisplayed(out /*IDLRETVAL*/ boolean poFlag);
+    HRESULT put_ReferentialDisplayed(in boolean piFlag);
+
+
+ // ===========================================================================
+ //  get_LineOfSightDisplayed
+ //  ------------------------
+ //  put_LineOfSightDisplayed
+ //  ------------------------
+ //
+    /**
+      * Returns or sets the display of the active line of sight.
+      **/
+#pragma PROPERTY LineOfSightDisplayed
+    HRESULT get_LineOfSightDisplayed(out /*IDLRETVAL*/ boolean poFlag);
+    HRESULT put_LineOfSightDisplayed(in boolean piFlag);
+
+ // ===========================================================================
+ //  get_PeripheralConeDisplayed
+ //  ---------------------------
+ //  put_PeripheralConeDisplayed
+ //  ---------------------------
+ //
+    /**
+      * Returns or sets the peripheral cone display of the active line of sight.
+      **/
+#pragma PROPERTY PeripheralConeDisplayed
+    HRESULT get_PeripheralConeDisplayed(out /*IDLRETVAL*/ boolean poFlag);
+    HRESULT put_PeripheralConeDisplayed(in boolean piFlag);
+
+ // ===========================================================================
+ //  get_CentralConeDisplayed
+ //  ------------------------
+ //  put_CentralConeDisplayed
+ //  ------------------------
+ //
+    /**
+      * Returns or sets the central cone display of the active line of sight.
+      **/
+#pragma PROPERTY CentralConeDisplayed
+    HRESULT get_CentralConeDisplayed(out /*IDLRETVAL*/ boolean poFlag);
+    HRESULT put_CentralConeDisplayed(in boolean piFlag);
+
+ // ===========================================================================
+ //  get_ConeTypeFlat
+ //  ----------------
+ //  SetConeTypeFlat
+ //  ---------------
+ //
+    /**
+      * Returns or sets the cone type display to flat for the peripheral and central cone.
+      **/
+#pragma PROPERTY ConeTypeFlat
+    HRESULT get_ConeTypeFlat(out /*IDLRETVAL*/ boolean poFlag);
+
+    HRESULT SetConeTypeFlat();
+
+ // ===========================================================================
+ //  get_ConeTypeSpherical
+ //  ---------------------
+ //  SetConeTypeSpherical
+ //  --------------------
+ //
+    /**
+      * Returns or sets the cone type display to spherical for the peripheral and central cone.
+      **/
+#pragma PROPERTY ConeTypeSpherical
+    HRESULT get_ConeTypeSpherical(out /*IDLRETVAL*/ boolean poFlag);
+
+    HRESULT SetConeTypeSpherical();
+
+ // ===========================================================================
+ //  get_ConeTypeBoundings
+ //  ---------------------
+ //  SetConeTypeBoundings
+ //  --------------------
+ //
+    /**
+      * Returns or sets the cone type display to boundings for the peripheral and central cone.
+      **/
+#pragma PROPERTY ConeTypeBoundings
+    HRESULT get_ConeTypeBoundings(out /*IDLRETVAL*/ boolean poFlag);
+
+    HRESULT SetConeTypeBoundings();
+
+ // ===========================================================================
+ //  get_ConeTypeBoundedCone
+ //  -----------------------
+ //  SetConeTypeBoundedCone
+ //  ----------------------
+ //
+    /**
+      * Returns or sets the cone type display to bounded cone for the peripheral and central cone.
+      **/
+#pragma PROPERTY ConeTypeBoundedCone
+    HRESULT get_ConeTypeBoundedCone(out /*IDLRETVAL*/ boolean poFlag);
+
+    HRESULT SetConeTypeBoundedCone();
+
+ // ===========================================================================
+ //  get_SkinResolution
+ //  ------------------
+ //  put_SkinResolution
+ //  ------------------
+ //
+    /**
+      * Returns or sets the manikin skin resolution.<br>
+      * The valid values range from 4 to 128.
+      **/
+#pragma PROPERTY SkinResolution
+    HRESULT get_SkinResolution(out /*IDLRETVAL*/ long poResolution);
+    HRESULT put_SkinResolution(in long piResolution);
+
+
+ // ===========================================================================
+ //  get_Referential
+ //  ---------------
+ //  put_Referential
+ //  ---------------
+ //
+    /**
+      * Returns or sets the referential of the manikin.
+      * Possible values are "HPoint", "EyePoint", "LeftFoot",
+      * "RightFoot", "LowestFoot", "BetweenFeet" and "Crotch".
+      * If this manikin is a forearm model, than the possible
+      * values are either "LeftHand" or "RightHand".
+      * @sample
+      * myManikin.Body.Referential = "<font color=green>LowestFoot</font>"
+      **/
+#pragma PROPERTY Referential
+    HRESULT get_Referential(inout /*IDLRETVAL*/ CATBSTR pioCurrentRef);
+    HRESULT put_Referential(in CATBSTR piNewRef);
+
+ // ===========================================================================
+ // SetPosture
+ // ----------
+ //
+    /**
+      * Set the manikin to a specific predefined posture.<br>
+      * Predefined postures include "Stand", "Sit", "Reach"<br>
+      * and "Kneel".
+      * @see SWKPostureSpec
+      * @param piKeepReferential keeps the referential after the change of the posture
+      **/
+    HRESULT SetPosture(in SWKPostureSpec piPostureSpec, in boolean piKeepReferential);
+
+ // ===========================================================================
+ // SetToBestPosture
+ // ----------------
+ //
+    /**
+      * Set the manikin to the posture that will provide it its maximum score.<br>
+      * When the manikin is in that posture, then the output of property<br>
+      * PosturalScore will be the same as that of property MaxPosturalScore.
+      **/
+    HRESULT SetToBestPosture();
+
+ // ===========================================================================
+ // ResetPosture
+ // ------------
+ //
+    /**
+      * Set the manikin to the default (standing) posture.
+      **/
+    HRESULT ResetPosture();
+
+// ===========================================================================
+ //  SwapPosture
+ //  -----------
+ //
+    /**
+      * Swap the posture with the equivalent segment, on the other side
+      * of the manikin. For instance, the right leg takes the posture of
+      * the left leg, and vice versa.
+      **/
+    HRESULT SwapPosture();
+
+ // ===========================================================================
+ //  ResetPrefAngles
+ //  -----------
+ //
+    /**
+      * Reset the pref angles of the body.
+      **/
+    HRESULT ResetPrefAngles(in long piDOFId);
+
+ // ===========================================================================
+ //  SwapPrefAngles
+ //  -----------
+ //
+    /**
+      * Swap the preferred angles of the body.
+      **/
+    HRESULT SwapPrefAngles(in long piDOFId);
+    
+ // ===========================================================================
+ //  ResetAngularLimitations
+ //  -----------
+ //
+    /**
+      * Resets the angular limitations depending on the param piReset:
+      * 0 -> 2 OR 3 OR 4 depending of the first encountered.
+      * 1 -> 2 AND 3 AND 4
+      * 2 -> Unlock the value
+      * 3 -> Restore the angular limitations if it is "No Limits"
+      * 4 -> Set back the angular limitations to their default value (50.0%)
+      **/
+    HRESULT ResetAngularLimitations(in long piDOFId, in long piReset);
+    
+ // ===========================================================================
+ //  SwapAngularLimitations
+ //  -----------
+ //
+    /**
+      * Swap the angular limitations of the body.
+      **/
+    HRESULT SwapAngularLimitations(in long piDOFId);
+            
+ // ===========================================================================
+ //  LockPosture
+ //  -----------
+ //
+    /**
+      * Lock the body in the given dof
+      **/
+    HRESULT LockPosture(in long piDOFId);
+
+ // ===========================================================================
+ //  ResetAttaches
+ //  -----------
+ //
+    /**
+      * Reset the attaches of the body.
+      **/
+    HRESULT ResetAttaches();
+
+ // ===========================================================================
+ //  ResetIKOffsets
+ //  -----------
+ //
+    /**
+      * Reset the offsets of the body.
+      **/
+    HRESULT ResetIKOffsets();
+         
+ // ===========================================================================
+ // IsBalanced
+ // ----------
+ //
+    /**
+      * @return True if the manikin is well-balaned, False otherwise.<br>
+      * Being well balanced means that the center of gravity of the manikin<br>
+      * falls inside its basis of support, given the manikin's current posture.
+      **/
+    HRESULT IsBalanced(out /*IDLRETVAL*/ boolean poBalanced); 
+
+    /**  
+      * Sets a new absolute manikin position.
+      *
+      * @param piNewPosition
+      *   The new position to place the manikin.<br>
+      *   This array must contain 12 numbers, and msut be initialized
+      *   using the four columns of a transformation matrix.
+      *
+      *   The first nine components represent the rotation matrix.<br>
+      *   The last three components represent the translation vector.<br>
+      *
+      * @sample
+      * This example sets the manikin to a 45-degree rotation around
+      * the x axis and at a (10, 20, 30) translation from the origin.<br>
+      *
+      * <pre>
+      * Dim myPosition(11)
+      * 'Rotation (45 degrees around the x axis)
+      * myPosition(0)  = 1.000
+      * myPosition(1)  = 0
+      * myPosition(2)  = 0
+      * myPosition(3)  = 0
+      * myPosition(4)  = 0.707
+      * myPosition(5)  = 0.707
+      * myPosition(6)  = 0
+      * myPosition(7)  = -0.707
+      * myPosition(8)  = 0.707
+      * 'Translation vector (10,20,30)
+      * myPosition(9)  = 10.000
+      * myPosition(10) = 20.000
+      * myPosition(11) = 30.000
+      * myManikin.Body.SetPosition myPosition
+      * </pre>
+      **/ 
+    HRESULT SetPosition(in CATSafeArrayVariant piNewPosition);
+
+    /**  
+      * Sets a new relative manikin position.
+      *
+      * @param piPositionIncrement
+      *   The new position to combine with the manikin's current position.<br>
+      *   This array must contain 12 numbers, and msut be initialized
+      *   using the four columns of a transformation matrix.
+      *
+      *   The first nine components represent the rotation matrix.<br>
+      *   The last three components represent the translation vector.<br>
+      *
+      * @sample
+      * This example sets the manikin to a 45-degree rotation around
+      * the x axis and at a (10, 20, 30) translation from the origin.<br>
+      *
+      * <pre>
+      * Dim myPosition(11)
+      * 'Rotation (45 degrees around the x axis)
+      * myPosition(0)  = 1.000
+      * myPosition(1)  = 0
+      * myPosition(2)  = 0
+      * myPosition(3)  = 0
+      * myPosition(4)  = 0.707
+      * myPosition(5)  = 0.707
+      * myPosition(6)  = 0
+      * myPosition(7)  = -0.707
+      * myPosition(8)  = 0.707
+      * 'Translation vector (10,20,30)
+      * myPosition(9)  = 10.000
+      * myPosition(10) = 20.000
+      * myPosition(11) = 30.000
+      * myManikin.Body.ApplyPosition myPosition
+      * </pre>
+      **/ 
+    HRESULT ApplyPosition(in CATSafeArrayVariant piPositionIncrement);
+};
+
+// Interface name : SWKIABody
+#pragma ID SWKIABody "DCE:5d576972-d404-11d3-8092005004d3fe74"
+#pragma DUAL SWKIABody
+
+// VB object name : SWBody (Id used in Visual Basic)
+#pragma ID SWKBody "DCE:5d576973-d404-11d3-8092005004d3fe74"
+#pragma ALIAS SWKIABody SWKBody
+
+#endif

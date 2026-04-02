@@ -1,0 +1,65 @@
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAOptimizationConstraint.idl
+// Automation interface for the OptimizationConstraint element 
+//
+//===================================================================
+//
+// Usage notes:
+//
+//===================================================================
+//
+//===================================================================
+#ifndef CATIAOptimizationConstraint_IDL
+#define CATIAOptimizationConstraint_IDL
+/*IDLREP*/
+
+#include "CATIACheck.idl"
+
+interface CATIARealParam;
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/**  
+ * Represents an optimization constraint.
+ * <p>
+ * @see CATIAOptimizationConstraints
+ */
+interface CATIAOptimizationConstraint : CATIACheck
+{
+	/**
+	* Returns the constraint satisfaction. 
+	*/
+#pragma PROPERTY Satisfaction
+	HRESULT	get_Satisfaction(inout /*IDLRETVAL*/ boolean oSatisfaction);
+
+	/**
+	* Returns the parameter containing the distance to constraint satisfaction.
+	*/
+#pragma PROPERTY DistanceToSatisfaction
+	HRESULT get_DistanceToSatisfaction(inout /*IDLRETVAL*/ CATIARealParam oDistance);
+
+	/**
+	* Returns or sets the constraint precision.
+	* Only for equality constraints.<br>
+	* The constraint precision allows the system to know when an equality constraint can be declared as satisfied
+	* (when : distance to satisfaction &lt; precision).
+	*/
+#pragma PROPERTY Precision
+	HRESULT get_Precision(inout /*IDLRETVAL*/ double oPrecision);
+	HRESULT put_Precision(in double iPrecision);
+};
+
+// Interface name : CATIAOptimizationConstraint
+#pragma ID CATIAOptimizationConstraint "DCE:72e2b246-ba26-11d4-a38d00d0b7ac63be"
+#pragma DUAL CATIAOptimizationConstraint
+
+// VB object name : OptimizationConstraint (Id used in Visual Basic)
+#pragma ID OptimizationConstraint "DCE:72e2b247-ba26-11d4-a38d00d0b7ac63be"
+#pragma ALIAS CATIAOptimizationConstraint OptimizationConstraint
+
+#endif

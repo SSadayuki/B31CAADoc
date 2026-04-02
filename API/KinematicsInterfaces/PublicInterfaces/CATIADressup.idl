@@ -1,0 +1,155 @@
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//===================================================================
+//
+// CATIADressup.idl
+// Automation interface for the Dressup entity
+//
+//===================================================================
+//
+// Usage notes:
+//   
+//
+//===================================================================
+//
+//  June 2005  Creation: Code created by Robert Karakozian
+//===================================================================
+#ifndef CATIADressup_IDL
+#define CATIADressup_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATIAMechanism.idl"
+#include "CATIAProduct.idl"
+#include "CATIAProducts.idl" 
+
+  /** 
+    * Interface to access the Dressup object.
+    */	
+
+interface CATIADressup : CATIABase
+{
+
+#pragma PROPERTY Mechanism
+   /** 
+     * Returns the mechanism on which a dressup is applied.
+     * This property is read only.
+     * @return
+     *    The dressup's mechanism
+     * <! @sample >
+     *  <dt><b>Example:</b>
+     *  <dd>
+     *  This example sets in <tt>Meca</tt> the mechanism of <tt>MyDressup</tt>.
+     *  <pre>
+     *  Dim Meca As Mechanism
+     *  Set Meca = MyDressup.<font color="red">Mechanism</font>
+     *  </pre>
+     */
+HRESULT get_Mechanism(out /*IDLRETVAL*/ CATIAMechanism oMechanism);
+
+#pragma PROPERTY Context
+   /** 
+     * Returns the context product on which the mechanism is defined.
+     * This property is read only.
+     * @return
+     *    The dressup mechanism's context
+     * <! @sample >
+     *    <dt><b>Example:</b>
+     *    <dd>
+     *    This example sets in <tt>MecaContext</tt> the context product of <tt>MyDressup</tt>.
+     *    <pre>
+     *    Dim MecaContext As Product
+     *    Set MecaContext = MyDressup.<font color="red">Context</font>
+     *    </pre>
+     */
+HRESULT get_Context(out /*IDLRETVAL*/ CATIAProduct oContext);
+
+   /** 
+     * Attaches a given product to a link of the mechanism pointed by the dressup.
+     * @param iLink
+     *    The link (Product) on which the attachment should be done. 
+	 *    It should be a product that belongs to the mechanism pointed by the dressup, 
+	 *    otherwise the method will fail.
+     * @param iAttachedProd
+     *    The Product that will be attached to the link. This product should not be a product  
+	 *    that is already attached by another link, otherwise the method will fail.
+     * @return
+     *    Nothing
+     * <! @sample >
+     *    <dt><b>Example:</b>
+     *    <dd>
+     *    This example attaches inside <tt>MyDressup</tt>, <tt>Link1</tt> as mechanism's part to <tt>Product1</tt>.
+     *    <pre>
+     *    Dim Link1 As Product
+     *    Dim Product1 As Product
+	 *    ...
+     *    MyDressup.<font color="red">Attach</font>(Link1,Product1)
+     *    </pre>
+     */
+HRESULT Attach (in CATIAProduct iLink, in CATIAProduct iAttachedProd);
+
+   /** 
+     * Detaches an attached product from its link.
+     * @param iAttachedProd
+     *    The Product that will be detached. It should be a product that is currently 
+	 *    attached in the dressup, otherwise the method will fail.
+     * @return
+     *    Nothing
+     * <! @sample >
+     *    <dt><b>Example:</b> 
+     *    <dd>
+     *    This example detaches <tt>Product1</tt> previously attached to a mechanism's part
+	 *    inside <tt>MyDressup</tt>.  
+     *    <pre>
+     *    Dim Product1 As Product
+	 *    ...
+     *    MyDressup.<font color="red">Detach</font>(Product1)
+     *    </pre>
+     */
+HRESULT Detach (in CATIAProduct iAttachedProd);
+
+
+   /** 
+     * Returns the list of products attached to a given link.
+     * @param iLink
+     * The Product on which the returned product list is attached to.
+     * @return
+     *    The Product list that is attached to iLink.
+     * <! @sample >
+     *    <dt><b>Example:</b>
+     *    <dd>
+     *    The following example loops for all the products attached to <tt>Link1</tt>. 
+     *    <pre>
+	 *    Dim ListAttached1 as Product
+	 *    ListAttached1 = MyDressup.<font color="red">ListAttached</font>(Link1)
+	 *    Dim Maxi as Integer
+	 *    Set Maxi = ubound(ListAttached1)
+	 *    Dim Prod_i as Product
+	 *    For i = 0  To  Maxi
+	 *       Set Prod_i = ListAttached1(i)
+	 *       ..
+	 *    Next
+     *    </pre>
+     */
+
+HRESULT  ListAttached (in CATIAProduct iLink , out /*IDLRETVAL*/ CATSafeArrayVariant oProductLists);
+
+};
+
+// Interface name : CATIADressup
+#pragma ID CATIADressup "DCE:4dbe14b2-74e3-4915-9f56977c10e5b403"
+#pragma DUAL CATIADressup
+
+
+// VBScript object name : Dressup
+
+#pragma ID Dressup      "DCE:80abcf73-58ec-40a4-9dd56d2fb9dbdb42"
+#pragma ALIAS CATIADressup Dressup 
+
+#endif 
+

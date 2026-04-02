@@ -1,0 +1,207 @@
+#ifndef CATIAHybridShapeSphere_IDL
+#define CATIAHybridShapeSphere_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2001
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//           
+// CATIAHybridShapeSphere:         
+// Exposed interface for HybridShape Sphere
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+
+#include "CATIAHybridShape.idl"
+#include "CATIAAngle.idl"
+#include "CATIAReference.idl"
+#include "CATIAHybridShapeDirection.idl"
+#include "CATIALength.idl"
+
+
+/**
+ * Represents the hybrid shape sphere feature object.
+ * <b>Role</b>: To access the data of the hybrid shape sphere  explicit feature object.
+ * <br> The Sphere feature : a Sphere is made up of 4 angles parameters.
+ * @see CATIAHybridShapeFactory
+ */
+interface CATIAHybridShapeSphere : CATIAHybridShape
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+
+// On Center 
+ /**
+  * Returns or sets the sphere center.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAVertex.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpSphereCenter</code> the center
+  * of the <code>HybShpSphere</code> hybrid shape sphere.
+  * <pre>
+  * Dim HybShpSphereCenter As Reference
+  * HybShpSphereCenter = HybShpSphere.<font color="red">Center</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Center
+ HRESULT get_Center (out /*IDLRETVAL*/ CATIAReference   oPt);
+ HRESULT put_Center (in                CATIAReference   iPt);
+
+// ON Sphere
+ /**
+ * Returns BeginParallelAngle on the object. 
+ * @param oAngle 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+#pragma PROPERTY BeginParallelAngle
+ HRESULT get_BeginParallelAngle (out /*IDLRETVAL*/ CATIAAngle oAngle1 );
+
+
+ /**
+ * Returns EndParallelAngle on the object. 
+ * @param oAngle 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+#pragma PROPERTY EndParallelAngle
+ HRESULT get_EndParallelAngle (out /*IDLRETVAL*/ CATIAAngle oAngle2 );
+
+/**
+ * Returns BeginMeridianAngle on the object. 
+ * @param oAngle 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+#pragma PROPERTY BeginMeridianAngle
+ HRESULT get_BeginMeridianAngle (out /*IDLRETVAL*/ CATIAAngle oAngle3 );
+
+
+
+
+
+
+
+ /**
+ * Returns EndMeridianAngle on the object. 
+ * @param oAngle 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+#pragma PROPERTY EndMeridianAngle
+ HRESULT get_EndMeridianAngle (out /*IDLRETVAL*/ CATIAAngle oAngle4 );
+
+
+
+// ON Axis
+ /**
+ * Returns or sets axis on the object. 
+ * @param oDir 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */ 
+#pragma PROPERTY Axis
+ HRESULT get_Axis ( out /*IDLRETVAL*/ CATIAReference oDir);
+ HRESULT put_Axis ( in                CATIAReference iDir);
+
+// On Radius
+
+ /**
+ * <b>Role</b>: Get sphere radius.
+ * @param oRadius 
+ *   Sphere radius
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIALength 
+ * @see CATIAHybridShapeFactory 
+ */ 
+#pragma PROPERTY Radius
+    HRESULT get_Radius (out /*IDLRETVAL*/  CATIALength  oRadius)  ;
+
+
+/**
+ * Returns whether the sphere is created as a whole sphere or not.
+ * <br><b>Legal values</b>: 0 for a sphere with angles and 1 for a whole sphere.
+ * @sample
+ * </dl> 
+ */
+#pragma PROPERTY Limitation
+    HRESULT put_Limitation (in                long iLimitationType); 
+    HRESULT get_Limitation ( out /*IDLRETVAL*/   long oLimitation);
+
+/**
+ * Sets  BeginParallelAngle on the object. 
+ * @param iAngle 
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+  HRESULT SetBeginParallelAngle ( in     double iAngle);
+
+/**
+ * Sets  EndParallelAngle on the object. 
+ * @param iAngle 
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+  HRESULT SetEndParallelAngle ( in     double iAngle);
+
+/**
+ * Sets  BeginMeridianAngle on the object. 
+ * @param iAngle 
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+  HRESULT SetBeginMeridianAngle ( in     double iAngle);
+
+/**
+ * Sets  EndMeridianAngle on the object. 
+ * @param iAngle 
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+  HRESULT SetEndMeridianAngle ( in     double iAngle);
+
+/**
+ * Sets  Radius on the object. 
+ * @param iAngle 
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+
+  HRESULT SetRadius ( in     double iRadius);
+
+};
+
+
+// Interface name : CATIAHybridShapeSphere
+#pragma ID CATIAHybridShapeSphere "DCE:97514538-c285-0000-0280020c4e000000"
+#pragma DUAL CATIAHybridShapeSphere
+
+
+// VB object name : HybridShapeSphere (Id used in Visual Basic)
+#pragma ID HybridShapeSphere "DCE:97514a56-de54-0000-0280020c4e000000"
+#pragma ALIAS CATIAHybridShapeSphere HybridShapeSphere
+
+
+#endif
+// CATIAHybridShapeRevol_IDL

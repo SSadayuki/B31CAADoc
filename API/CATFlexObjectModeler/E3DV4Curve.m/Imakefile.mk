@@ -1,0 +1,46 @@
+#
+IMPACT_ON_IMPORT = YES
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+#
+COMDYN_MODULE = V4SysCOMD
+#
+DUMMY_LINK_WITH = CATV4System CATV4Maths CATV4Geometry
+#
+OS = COMMON
+LINK_WITH = $(DUMMY_LINK_WITH)
+#
+OS = AIX
+SYS_LIBS = -lxlf -lxlf90 -lxlfpad
+LOCAL_CCFLAGS = -D_AIX_SOURCE
+#
+OS = IRIX
+LINK_WITH = $(COMDYN_MODULE) $(DUMMY_LINK_WITH)
+SYS_LIBS = -lftn
+LOCAL_CCFLAGS = -exceptions -D_IRIX_SOURCE
+LOCAL_LDFLAGS = -exceptions
+#
+OS = HP-UX
+# -lf is for HP 10 -lF90 for HP11
+#if os hpux_a
+SYS_LIBS = -lf
+#else
+SYS_LIBS = -lF90
+#endif
+LOCAL_CCFLAGS = -D_HPUX_SOURCE -D_REENTRANT
+#
+OS = hpux_b64 
+# -lf is for HP 10 -lF90 for HP11 -lcps 
+#if os hpux_a
+SYS_LIBS = -lf
+#else
+SYS_LIBS = -lF90 -lcps 
+#endif
+LOCAL_CCFLAGS = -D_HPUX_SOURCE -D_REENTRANT
+#
+OS = SunOS
+SYS_LIBS = -lF77
+#
+OS = Windows_NT
+#BUILD = NO
+SYS_LIBS = 

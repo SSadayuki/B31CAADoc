@@ -1,0 +1,122 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAGroups.idl
+//   This automation interface allows to manage a group collection.
+//
+//===================================================================
+//
+//  May 2000  Creation: LJE
+//
+//===================================================================
+#ifndef CATIAGroups_IDL
+#define CATIAGroups_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIAGroup.idl"
+#include "CATVariant.idl"
+
+
+/**  
+ * A collection of all groups currently managed by the application.
+ * <p>The method @href CATIAProduct#GetTechnologicalObject <tt>("Groups")</tt> on the root product retrieves this collection.
+ */
+interface CATIAGroups : CATIACollection
+{
+  /**
+   * Creates an empty Group and adds it to the Groups Collection.
+   * @return
+   *    The created group
+   * @sample
+   *    This example creates a new group in the <tt>TheGroups</tt> collection.
+   *    <pre>
+   *    Dim NewGroup As Group
+   *    Set NewGroup = TheGroups.<font color="red">Add</font>
+   *    </pre>
+   */
+  HRESULT Add(out /*IDLRETVAL*/ CATIAGroup oGroup);
+
+  /**
+   * Creates a Group containing all products in the selection and adds it to the Groups Collection.
+   * @return
+   *    The created group
+   * @sample
+   *    This example creates a new group containing all products in the selection
+   *    in the <tt>TheGroups</tt> collection.
+   *    <pre>
+   *    Dim NewGroup As Group
+   *    Set NewGroup = TheGroups.<font color="red">AddFromSel</font>
+   *    </pre>
+   */
+  HRESULT AddFromSel(out /*IDLRETVAL*/ CATIAGroup oGroup);
+
+  /**
+   * Returns a group which contains all the terminal nodes of the current root product.
+   * @sample
+   *    This example retrieves the group in the <tt>TheGroups</tt> collection.
+   *    <pre>
+   *    Dim AllLeavesGroup As Group
+   *    Set AllLeavesGroup = TheGroups.<font color="red">AllLeaves</font>
+   *    </pre>
+   */
+  HRESULT AllLeaves(out /*IDLRETVAL*/ CATIAGroup oGroup);
+
+  /**
+   * Returns a group using its index or its name from the Groups collection.
+   * @param iIndex
+   *    The index or the name of the Group to retrieve from the collection of groups.
+   *    As a numerics, this index is the rank of the Group in the collection.
+   *    The index of the first Group in the collection is 1, and
+   *    the index of the last Group is Count.
+   *    As a string, it is the name you assigned to the Group.
+   * @return
+   *    The retrieved Group
+   * @sample
+   *    This example retrieves in <tt>ThisGroup</tt> the ninth Group,
+   *    and in <tt>ThatGroup</tt> the Group named
+   *    <tt>Group3</tt> from the <tt>TheGroups</tt> collection. 
+   *    <pre>
+   *    Dim ThisGroup As Group
+   *    Set ThisGroup = TheGroups.<font color="red">Item</font>(9)
+   *    Dim ThatGroup As Group
+   *    Set ThatGroup = TheGroups.<font color="red">Item</font>("Group3")
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAGroup oGroup);
+
+  /**
+   * Removes a group from the Groups collection.
+   * @param iIndex
+   *    The index or the name of the Group to retrieve from he collection of groups.
+   *    As a numerics, this index is the rank of the Group in the collection.
+   *    The index of the first Group in the collection is 1, and
+   *    the index of the last Group is Count.
+   *    As a string, it is the name you assigned to the Group.
+   * @sample
+   *    The following example removes the tenth Group and the Group named
+   *    <tt>Group2</tt> from the <tt>TheGroups</tt> collection.
+   *    <pre>
+   *    TheGroups.<font color="red">Remove</font>(10)
+   *    TheGroups.<font color="red">Remove</font>("Group2")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAGroups
+#pragma ID CATIAGroups "DCE:2e157296-3260-11d4-9465006094eb3826"
+#pragma DUAL CATIAGroups
+
+// VB object name : Groups (Id used in Visual Basic)
+#pragma ID Groups "DCE:2ebeb98c-3260-11d4-9465006094eb3826"
+#pragma ALIAS CATIAGroups Groups
+
+#endif

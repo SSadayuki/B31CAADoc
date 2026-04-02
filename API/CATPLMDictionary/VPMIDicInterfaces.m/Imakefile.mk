@@ -1,0 +1,17 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+VPMIDicInterfaces
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+OS = COMMON
+
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+
+LINK_WITH=$(LINK_WITH_FOR_IID) \ 
+		JS0GROUP \
+            ENODicBase
+
+#VPMItf
+

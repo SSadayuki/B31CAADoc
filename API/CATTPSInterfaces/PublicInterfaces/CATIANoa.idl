@@ -1,0 +1,120 @@
+#ifndef CATIANoa_IDL
+#define CATIANoa_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+
+interface CATIADrawingComponent;
+interface CATIATPSParallelOnScreen;
+
+/**
+ * Interface for the TPS Noa object.
+ */
+interface CATIANoa : CATIABase 
+{
+    /**
+     * Retrieves or sets Text Representation.
+     *   @param oText
+     *     Returned text for graphical representation.
+     */
+  #pragma PROPERTY Text
+   HRESULT get_Text( inout /*IDLRETVAL*/ CATBSTR oText );
+   HRESULT put_Text( in CATBSTR iText );
+
+    /**
+     * Retrieves or sets Flag Text.
+     *   @param oText
+     *     Returned text for NOA hidden text.
+     */
+  #pragma PROPERTY FlagText
+    HRESULT get_FlagText( inout /*IDLRETVAL*/ CATBSTR oText );
+    HRESULT put_FlagText (in CATBSTR iText);
+
+    /**
+     * Retrieves URL.
+     *  @param iIndex
+     *   Index of URL.
+     *  @param oUrl
+     *   URL
+     */
+    HRESULT URL (in CATVariant iIndex, inout /*IDLRETVAL*/ CATBSTR oUrl );
+
+    /**
+     * Sets an URL.
+     *  @param iUrl
+     *   URL to Set
+     */
+    HRESULT AddURL( in CATBSTR iUrl );
+
+    /**
+     * Removes an URL.
+     *  @param iIndex
+     *   position of the URL to remove.
+     */
+    HRESULT RemoveURL(in CATVariant iIndex);
+
+    /**
+     * Modifies an URL.
+     *  @param iUrl
+     *   URL to Set.
+     *  @param iIndex
+     *   index of the URL to modify.
+     */
+    HRESULT ModifyURL(inout CATBSTR iUrl, in CATVariant iIndex );
+
+    /**
+	   * @deprecated V5-6R2017
+	   * This method is replaced by @href CATIANoa#GetNbrURL2
+     */
+    HRESULT /*IDLHIDDEN*/ GetNbrURL (out CATVariant oNumberOfURL);
+
+    /**
+     * Gets the number of URL.
+     *  @param oNumberOfURL
+     *   returns param oNumberOfURL.
+     */
+    HRESULT GetNbrURL2( out /*IDLRETVAL*/ long oNumberOfURL );
+
+    /**
+     *  Gets  the  number  of  modifiable  texts  included in the ditto which represents this NOA.
+     *  @param oCount
+     *    returns the number of modifiable text included into the ditto which represents this NOA.
+     */
+    HRESULT GetModifiableTextsCount( out  /*IDLRETVAL*/long  oCount );
+
+   /**
+     *  Gets by  index a  modifiable Text included in the ditto which represents this NOA.
+     *  @param iIndex
+     *    Index of the modifiable text.
+     *  @param oText
+     *    returns a CATIADrawingText
+     */
+   HRESULT  GetModifiableText( in  CATVariant  iIndex,  out  /*IDLRETVAL*/  CATIABase  oText );
+
+    /**
+     * Gets the ditto as a DrawingComponent of the Noa entity.
+     */
+    HRESULT GetDitto (out /*IDLRETVAL*/ CATIADrawingComponent oDitto);
+
+   /**
+    * Gets the annotation on TPSParallelOnScreen interface.
+    */
+    HRESULT  TPSParallelOnScreen( out /*IDLRETVAL*/ CATIATPSParallelOnScreen  oTPSParallelOnScreen );
+};
+
+// Interface name : CATIANoa
+#pragma ID CATIANoa "DCE:a33f6bea-260d-11d6-be890002b341dd3a"
+#pragma DUAL CATIANoa
+
+// VB object name : Noa (Id used in Visual Basic)
+#pragma ID Noa "DCE:a33f6beb-260d-11d6-be890002b341dd3a"
+#pragma ALIAS CATIANoa Noa
+
+#endif

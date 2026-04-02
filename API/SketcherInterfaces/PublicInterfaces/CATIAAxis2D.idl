@@ -1,0 +1,62 @@
+#ifndef CATIAAxis2D_IDL
+#define CATIAAxis2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATSafeArray.idl"
+#include "CATIAGeometry2D.idl"
+
+interface CATIALine2D;
+interface CATIAPoint2D;
+/** 
+ *   Interface defining a coordinate system in the 2D Space.
+ */
+
+interface CATIAAxis2D : CATIAGeometry2D
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+        //
+/**
+ * Returns the 2D coordinate system horizontal axis.
+ */
+#pragma PROPERTY HorizontalReference
+    //
+    HRESULT    get_HorizontalReference
+                ( out /*IDLRETVAL*/        CATIALine2D           oHorizontal );
+    //
+/**
+ * Returns the 2D coordinate system vertical axis.
+ */
+ #pragma PROPERTY VerticalReference
+    //
+    HRESULT    get_VerticalReference
+                ( out /*IDLRETVAL*/        CATIALine2D           oVertical );
+
+/**
+ * Returns the 2D coordinate system origin.
+ */
+#pragma PROPERTY Origin
+    //
+    HRESULT    get_Origin
+                ( out /*IDLRETVAL*/        CATIAPoint2D           oOrigin );
+
+};
+
+// Interface name : CATIAAxis2D
+#pragma ID CATIAAxis2D "DCE:81e35dcd-0fa5-0000-0280030d3b000000"
+#pragma DUAL CATIAAxis2D
+
+// VB object name : Axis2D (Id used in Visual Basic)
+#pragma ID Axis2D "DCE:81e35dd7-70be-0000-0280030d3b000000"
+#pragma ALIAS CATIAAxis2D Axis2D
+
+
+#endif

@@ -1,0 +1,98 @@
+#ifndef CATIAHybridShapeTransfer_IDL
+#define CATIAHybridShapeTransfer_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeTransfer:         
+// Exposed interface for HybridShape Transfer
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Apr 06 : Creation   
+//=================================================================
+
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape Transfer feature object.
+ * <b>Role</b>: To access the data of the hybrid shape Transfer feature object.
+ * This data includes:
+ * <ul>
+ * <li>The element to transfer</li>
+ * <li>The surface to unfold</li>
+ * <li>The unfolded surface</li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeTransfer object.
+ * @see CATIAHybridShapeFactory
+ */
+interface CATIAHybridShapeTransfer : CATIAHybridShape
+{
+
+/**
+ * Returns or sets the element to transfer.
+ */ 
+#pragma PROPERTY ElementToTransfer  
+ HRESULT get_ElementToTransfer(out /*IDLRETVAL*/ CATIAReference oElem);
+ HRESULT put_ElementToTransfer(in CATIAReference iElem);
+
+/**
+ * Returns or sets the surface to unfold.
+ */ 
+#pragma PROPERTY SurfaceToUnfold  
+ HRESULT get_SurfaceToUnfold(out /*IDLRETVAL*/ CATIAReference oElem);
+ HRESULT put_SurfaceToUnfold(in CATIAReference iElem);
+
+/**
+ * Returns or sets the unfolded surface.
+ */ 
+#pragma PROPERTY UnfoldedSurface
+ HRESULT get_UnfoldedSurface(out /*IDLRETVAL*/ CATIAReference oElem);
+ HRESULT put_UnfoldedSurface(in CATIAReference iElem);
+
+/**
+ * Returns or sets the type of transfer.
+ * <ul>
+ * <li>0= The type of surface is not defined </li>
+ * <li>1= The type of transfer is folded to unfolded </li>
+ * <li>2= The type of surface is unfolded to folded </li>
+ * </ul> 
+ */
+#pragma PROPERTY TypeOfTransfer
+    HRESULT get_TypeOfTransfer (out /*IDLRETVAL*/ long oType);
+    HRESULT put_TypeOfTransfer (in                long iType);
+
+/**
+ * Returns or sets the type of unfold to take into account during transfer.
+ * <ul>
+ * <li>0= The type is undefined </li>
+ * <li>1= The surface to unfold is ruled, </li>
+ * <li>2= the surface to unfold is all </li>
+ * </ul> 
+ */
+#pragma PROPERTY UnfoldType 
+    HRESULT get_UnfoldType (out /*IDLRETVAL*/ long oType);
+    HRESULT put_UnfoldType (in                long iType);
+};
+
+// Interface name : CATIAHybridShapeTransfer
+#pragma ID CATIAHybridShapeTransfer "DCE:915fdae2-42d1-4e1d-8e82effd9072518a"
+#pragma DUAL CATIAHybridShapeTransfer
+
+// VB object name : HybridShapeTransfer (Id used in Visual Basic)
+#pragma ID HybridShapeTransfer "DCE:487a9039-223a-48be-ba8777c0d0f07043"								  
+#pragma ALIAS CATIAHybridShapeTransfer HybridShapeTransfer
+
+#endif

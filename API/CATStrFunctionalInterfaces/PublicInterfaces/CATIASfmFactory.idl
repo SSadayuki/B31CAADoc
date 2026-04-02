@@ -1,0 +1,377 @@
+// COPYRIGHT Dassault Systemes 2007
+//=============================================================================
+// CATIASfmFactory
+//   Interface for creating Structure Functional Modeler Objects
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Feb. 2007  Creation                                                S. QUINCI
+//=============================================================================
+#ifndef CATIASfmFactory_IDL
+#define CATIASfmFactory_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+#include "CATIAFactory.idl"
+#include "CATBSTR.idl"
+#include "CATIAReference.idl"
+#include "CATIASfmManager.idl"
+#include "CATIASfmSuperPlate.idl"
+#include "CATIASfmStiffener.idl"
+#include "CATIASfmMemberCurve.idl"
+#include "CATIASfmMember2Points.idl"
+#include "CATIASfmMemberPointLength.idl"
+#include "CATIASfmMemberPointUpToLimit.idl"
+#include "CATIASfmMemberSurfSurf.idl"
+#include "CATIASfmMember.idl"
+#include "CATIASfmMemberPlane2Curves.idl"
+#include "CATIASfmStiffenerOnFreeEdge.idl"
+/**
+ * Interface to create Structure Functional Modeler Objects.
+ * <b>Role</b>: To create the structure object such as SuperPlate, Stiffener, StiffenerOnFreeEdge, Beam, Opening and Connection.
+ */
+interface CATIASfmFactory : CATIAFactory
+{
+  ////////////////////////////////////////////////////////////////////////////
+  //                            S E R V I C E S                             //
+  ////////////////////////////////////////////////////////////////////////////
+  /**
+  * Retrieved the services manager.
+  * <br><b>Role</b>: Allows getting the services manager.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmManager
+  */
+  HRESULT GetManager(out /*IDLRETVAL*/ CATIASfmManager oSfmManager);
+
+
+  ////////////////////////////////////////////////////////////////////////////
+  //                        S U P E R  P L A T E S                          //
+  ////////////////////////////////////////////////////////////////////////////
+
+  /**
+  * Creates a SuperPlate.
+  * <br><b>Role</b>: Allows creating a SuperPlate in the regular limit mode (split mode).
+  * @param iCategory [in]
+  *   Category.
+  * @param iSupport [in]
+  *   Support surface.
+  * @param iDestination [in]
+  *   SuperPlate's destination.
+  * @param oSuperPlate [out]
+  *   SuperPlate.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmSuperPlate
+  */
+  HRESULT AddSuperPlate(in CATBSTR iCategory, in CATIAReference iSupport, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmSuperPlate oSuperPlate);
+
+   /**
+  * Creates an advanced SuperPlate.
+  * <br><b>Role</b>: Allows creating an advanced SuperPlate, ie with the concave limit mode.
+  * @param iCategory [in]
+  *   Category.
+  * @param iSupport [in]
+  *   Support surface.
+  * @param iDestination [in]
+  *   SuperPlate's destination.
+  * @param oSuperPlate [out]
+  *   SuperPlate.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmSuperPlate
+  */
+  HRESULT AddAdvSuperPlate(in CATBSTR iCategory, in CATIAReference iSupport, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmSuperPlate oSuperPlate);
+
+
+  ////////////////////////////////////////////////////////////////////////////
+  //                     S U P E R  S T I F F E N E R                       //
+  ////////////////////////////////////////////////////////////////////////////
+
+  /**
+  * Creates a SuperStiffener.
+  * <br><b>Role</b>: Allows creating a SuperStiffener in the normal to plate mode with the WebSideLeft anchor point.
+  * @param iCategory [in]
+  *   Category.
+  * @param iSectionName [in]
+  *   Section name.
+  * @param iSuperPlate [in]
+  *   SuperPlate to be stiffened.
+  * @param oSuperStiffener [out]
+  *   SuperStiffener.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmStiffener
+  */
+  HRESULT AddSuperStiffener(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIASfmSuperPlate iSuperPlate, in CATIAReference iWebSupport, out /*IDLRETVAL*/ CATIASfmStiffener oSuperStiffener);
+
+
+  ////////////////////////////////////////////////////////////////////////////
+  //                              M E M B E R S                             //
+  ////////////////////////////////////////////////////////////////////////////
+
+  /**
+  * Creates a SuperMember on a curve.
+  * <br><b>Role</b>: Allows creating a member on a curve.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iCurve [in]
+  *   Curve.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMemberCurve
+  */
+  HRESULT AddMemberCrv(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iCurve, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMemberCurve oMember);
+
+  /**
+  * Creates a SuperMember on a curve and on a reference surface.
+  * <br><b>Role</b>: Allows creating a member on a curve, perpendicular to a reference surface.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iCurve [in]
+  *   Curve.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @param iReference [in]
+  *   Surface on which the curve must lay down.
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMemberCurve
+  */
+  HRESULT AddMemberCrvOnRef(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iCurve, in CATIAReference iReference, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMemberCurve oMember);
+
+  /**
+  * Creates a straight SuperMember defined by a point, a direction and a length.
+  * <br><b>Role</b>: Allows creating a member defined by a point, a direction and a length.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iPoint [in]
+  *   Point.
+  * @param iDirection [in]
+  *   Direction element: it can be a line or a plane.
+  * @param iLength [in]
+  *   Length.
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMemberPointLength
+  */
+  HRESULT AddMemberPtLength(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iPoint, in CATIAReference iDirection, in double iLength, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMemberPointLength oMember);
+
+  /**
+  * Creates a straight member defined by a point, a direction and a limit.
+  * <br><b>Role</b>: Allows creating a member defined by a point, a direction and a limit.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iPoint [in]
+  *   Point.
+  * @param iDirection [in]
+  *   Direction element: it can be a line or a plane.
+  * @param iLimit [in]
+  *   Limit: it can be any kind of geometric element.
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMemberPointUpToLimit
+  */
+  HRESULT AddMemberPtUpToLimit(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iPoint, in CATIAReference iDirection, in CATIAReference iLimit, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMemberPointUpToLimit oMember);
+
+  /**
+  * Creates a straight SuperMember between two points.
+  * <br><b>Role</b>: Allows creating a member between two points.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iPoint1 [in]
+  *   Point.
+  * @param iPoint2 [in]
+  *   Point.
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMember2Points
+  */
+  HRESULT AddMemberPtPt(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iPoint1, in CATIAReference iPoint2, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMember2Points oMember);
+
+  /**
+  * Creates a straight SuperMember between a point and a point on curve.
+  * <br><b>Role</b>: Allows creating a member between a point and a point on curve.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iPoint1 [in]
+  *   Point.
+  * @param iCurve2 [in]
+  *   Curve.
+  * @param iRatioMode2 [in]
+  *   If true then Ratio, if false then Length mode for the point on curve.
+  * @param iOffset2 [in]
+  *   Offset.
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMember2Points
+  */
+  HRESULT AddMemberPtPtOnCrv(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iPoint1, in CATIAReference iCurve2, in boolean iRatioMode2, in double iOffset2, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMember2Points oMember);
+
+  /**
+  * Creates a straight SuperMember between a point on curve and a point.
+  * <br><b>Role</b>: Allows creating a member between a point on curve and a point.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iCurve1 [in]
+  *   Curve.
+  * @param iRatioMode1 [in]
+  *   If true then Ratio, if false then Length mode for the point on curve.
+  * @param iOffset1 [in]
+  *   Offset.
+  * @param iPoint2 [in]
+  *   Point.
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMember2Points
+  */
+  HRESULT AddMemberPtOnCrvPt(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iCurve1, in boolean iRatioMode1, in double iOffset1, in CATIAReference iPoint2, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMember2Points oMember);
+
+  /**
+  * Creates a straight SuperMember between two points on curve.
+  * <br><b>Role</b>: Allows creating a member between two points on curve.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iCurve1 [in]
+  *   Curve.
+  * @param iRatioMode1 [in]
+  *   If true then Ratio, if false then Length mode for the point on curve.
+  * @param iOffset1 [in]
+  *   Offset.
+  * @param iCurve2 [in]
+  *   Curve.
+  * @param iRatioMode2 [in]
+  *   If true then Ratio, if false then Length mode for the point on curve.
+  * @param iOffset2 [in]
+  *   Offset.
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMember2Points
+  */
+  HRESULT AddMemberPtOnCrvPtOnCrv(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iCurve1, in boolean iRatioMode1, in double iOffset1, in CATIAReference iCurve2, in boolean iRatioMode2, in double iOffset2, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMember2Points oMember);
+
+  /**
+  * Creates a SuperMember by the intersection of two surfaces.
+  * <br><b>Role</b>: Allows creating a member by the intersection of two surfaces.
+  * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iSurface1 [in]
+  *   First surface.
+  * @param iSurface2 [in]
+  *   Second surface.
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMemberSurfSurf
+  */
+  HRESULT AddMemberSurfSurf(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIAReference iSurface1, in CATIAReference iSurface2, in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMemberSurfSurf oMember);
+ 
+  /**
+  * Creates a Member between two existing members using Plane.
+   * @param iCategory [in]
+  *   Member's category.
+  * @param iSectionName [in]
+  *   Name of the section.
+  * @param iMember1 [in]
+  *   First Member.
+  * @param iMember1 [in]
+  *   Second Member.
+  * @param iRefPlane [in]
+  *   Plane
+  * @param iDestination [in]
+  *   Member's destination.
+  * @param oMember [out]
+  *   Member.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmMemberPlane2Members
+  */
+  HRESULT AddMemberBeamsAndPlane(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIASfmMember iMember1, in CATIASfmMember iMember2, in CATIAReference iRefPlane,in CATIAReference iDestination, out /*IDLRETVAL*/ CATIASfmMemberPlane2Curves oMember);
+
+  /**
+  * Creates a SuperStiffener on Free Edge.
+  * <br><b>Role</b>: Allows creating a SuperStiffener on Free Edge in the normal to plate mode with the WebSideLeft anchor point.
+  * @param iCategory [in]
+  *   Category.
+  * @param iSectionName [in]
+  *   Section name.
+  * @param iSuperPlate [in]
+  *   SuperPlate to be stiffened.
+  * @param iFreeEdge [in]
+  *   Support to be used for creating SFE.
+  * @param oSuperStiffenerOnFreeEdge [out]
+  *   SuperStiffener on free edge.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * @see CATIASfmStiffenerOnFreeEdge
+  */
+  HRESULT AddSuperStiffenerOnFreeEdge(in CATBSTR iCategory, in CATBSTR iSectionName, in CATIASfmSuperPlate iSuperPlate, in CATIAReference iFreeEdge, out /*IDLRETVAL*/ CATIASfmStiffenerOnFreeEdge oSuperStiffenerOnFreeEdge);
+};
+
+// Interface name : CATIASfmFactory
+#pragma ID CATIASfmFactory "DCE:8056494e-5b6a-40a0-8b14de58041577f5"
+#pragma DUAL CATIASfmFactory
+
+// VB object name : SfmFactory (Id used in Visual Basic)
+#pragma ID SfmFactory "DCE:4089d972-6739-4e54-b68bbdfeea4f2564"
+#pragma ALIAS CATIASfmFactory SfmFactory
+
+#endif

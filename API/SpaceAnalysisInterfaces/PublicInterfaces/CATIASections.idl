@@ -1,0 +1,110 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIASections.idl
+//   This automation interface allows to manage CATIASection collection.
+//
+//===================================================================
+#ifndef CATIASections_IDL
+#define CATIASections_IDL
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R5
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIASection.idl"
+#include "CATIAGroup.idl"
+#include "CATVariant.idl"
+
+/**  
+ * A collection of all Section objects currently managed by the application.
+ * <p>The method <tt>GetTechnologicalObject("Sections")</tt> on the root product, allows you to retrieve this collection.
+ */
+interface CATIASections : CATIACollection
+{
+  /**
+   * Creates a Section object which takes all products of the documents into account
+   * and adds it to the Sections collection.
+   * @return
+   *    The created Section
+   * @sample
+   *    This example creates a new Section in the <tt>TheSections</tt> collection.
+   *    <pre>
+   *    Dim NewSection As Section
+   *    Set NewSection = TheSections.<font color="red">Add</font>
+   *    </pre>
+   */
+  HRESULT Add(out /*IDLRETVAL*/ CATIASection oSection);
+
+  /**
+   * Creates a Section object which takes all products in the selection into account
+   * and adds it to the Sections collection.
+   * @return
+   *    The created Section
+   * @sample
+   *    This example creates a new Section in the <tt>TheSections</tt> collection.
+   *    <pre>
+   *    Dim NewSection As Section
+   *    Set NewSection = TheSections.<font color="red">AddFromSel</font>
+   *    </pre>
+   */
+  HRESULT AddFromSel(out /*IDLRETVAL*/ CATIASection oSection);
+
+  /**
+   * Returns a Section object using its index or its name from the Sections collection.
+   * @param iIndex
+   *    The index or the name of the Section to retrieve from the collection of Sections.
+   *    As a numerics, this index is the rank of the Section in the collection.
+   *    The index of the first Section in the collection is 1, and
+   *    the index of the last Section is Count.
+   *    As a string, it is the name you assigned to the Section.
+   * @sample
+   *    This example retrieves in <tt>ThisSection</tt> the ninth Section,
+   *    and in <tt>ThatSection</tt> the Section named
+   *    <tt>Section Of MyProduct</tt> from the <tt>TheSections</tt> collection. 
+   *    <pre>
+   *    Dim ThisSection As Section
+   *    Set ThisSection = TheSections.<font color="red">Item</font>(9)
+   *    Dim ThatSection As Section
+   *    Set ThatSection = TheSections.<font color="red">Item</font>("Section Of MyProduct")
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIASection oSection);
+
+  /**
+   * Removes a Section object from the Sections collection.
+   * @param iIndex
+   *    The index or the name of the Section to remove from the collection of Sections.
+   *    As a numerics, this index is the rank of the Section in the collection.
+   *    The index of the first Section in the collection is 1, and
+   *    the index of the last Section is Count.
+   *    As a string, it is the name you assigned to the Section.
+   * @sample
+   *    The following example removes the tenth Section and the Section named
+   *    <tt>Section Of MyProduct</tt> from the <tt>TheSections</tt> collection.
+   *    <pre>
+   *    TheSections.<font color="red">Remove</font>(10)
+   *    TheSections.<font color="red">Remove</font>("Section Of MyProduct")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIASections
+#pragma ID CATIASections "DCE:52bd836a-45f0-11d4-9468006094eb3826"
+#pragma DUAL CATIASections
+
+// VB object name : Sections (Id used in Visual Basic)
+#pragma ID Sections "DCE:7d2253ba-45f0-11d4-9468006094eb3826"
+#pragma ALIAS CATIASections Sections
+
+#endif
+#endif

@@ -1,0 +1,276 @@
+/* -*-c++-*- */
+#ifndef CATIAHybridShapeLineBiTangent_IDL
+#define CATIAHybridShapeLineBiTangent_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//           
+// CATIAHybridShapeLineBiTangent         
+// Exposed interface for HybridShapeLineBiTangent
+//           
+// Janvier 2000 Creation
+//=================================================================
+#include "CATIAHybridShapeLine.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Line tangent to a curve. 
+ * <b>Role</b>: To access data of the line feature created to
+ *  be tangent to two entities
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeLineBiTangent : CATIAHybridShapeLine
+{
+
+
+
+
+
+ /**
+ * Returns or Sets the first tangency curve lying on the support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge or @href CATIABiDimFeatEdge.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oCurve</code> the first tangency curve    
+ * for the <code>LineBiTangent</code> hybrid shape feature.
+ * <pre>
+ * Dim oCurve As Reference
+ * Set oCurve = LineBiTangent.<font color="red">Curve1</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Curve1
+ HRESULT get_Curve1 ( out /*IDLRETVAL*/  CATIAReference   oCurve);
+ HRESULT put_Curve1 ( in           CATIAReference   iCurve);
+
+
+
+
+ /**
+ * Returns or Sets the second tangency element (point, curve) lying on the support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge or @href CATIAVertex.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oElement</code> the second tangency Element (point, curve)    
+ * for the <code>LineBiTangent</code> hybrid shape feature.
+ * <pre>
+ * Dim oElement As Reference
+ * Set oElement = LineBiTangent.<font color="red">Element2</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Element2
+ HRESULT get_Element2 ( out /*IDLRETVAL*/  CATIAReference   oElement);
+ HRESULT put_Element2 ( in           CATIAReference   iElement);
+
+
+
+ /**
+ * Returns or Sets the supporting surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oSurface</code> the surface 
+ * for the <code>LineBiTangent</code> hybrid shape feature.
+ * <pre>
+ * Dim oSurface As Reference 
+ * Set oSurface = LineBiTangent.<font color="red">Surface</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Support
+ HRESULT get_Support ( out /*IDLRETVAL*/  CATIAReference   oSurface);
+ HRESULT put_Support ( in           CATIAReference   iSurface);
+
+
+ /**
+  * Returns  a sequence which identifies a solution among all possibilities. 
+  * <ul> 
+  * <li>val1 =  Solution number (from 1 to n).</li>
+  * </ul> 
+  *
+  * <li>val2 =   oOriTgt1 </li>
+  *     <br>  This orientation allows to compute just the results that are tangent
+  *           to a specific region of the first curve.
+  *     <br>  It can take 3 values: 
+  * <ul> 
+  * <li>   +1 : the result has the same orientation as the curve, </li>
+  * <li>   -1 : the result has the opposite orientation of the curve,  </li>
+  * <li>    0 : no orientation is specified.  </li>
+  * </ul> 
+  *
+  * <li>val3 =  oOriCvt1 </li>
+  *      <br> This orientation allows to compute just the results that are tangent
+  *      to a specific side of the first curve. 
+  *      <br>It can take 3 values: 
+  * <ul> 
+  * <li>    +1 : curvature direction of curve and cross product of support normal and result direction 
+  *				are in the same direction,  </li>
+  * <li>    -1 : curvature direction of curve and cross product of support normal and result direction
+  *				are in opposite directions,  </li>
+  * <li>     0 : no orientation is specified.  </li>
+  * </ul> 
+  *
+  * <li>val4 =   oOriTgt2 </li>
+  *     <br> In case of curve/curve bitangent line, this orientation allows to compute just the results that are tangent
+  *      to a specific region of the second curve .
+  *     <br>  It can take 3 values: 
+  * <ul> 
+  * <li>  +1 : the result has the same orientation as the curve, </li>
+  * <li>  -1 : the result has the opposite orientation of the curve, </li>
+  * <li>   0 : no orientation is specified. </li>
+  * </ul> 
+  *
+  * <li>val5 = oOriCvt2 </li>
+  *     <br>  In case of curve/curve bitangent line this orientation allows to compute just the results that are tangent
+  *      to a specific side of the second curve.
+  *     <br> It can take 3 values: 
+  * <ul> 
+  * <li>  +1 : curvature direction of curve and cross product of support normal and result direction 
+  *				are in the same direction,</li>
+  * <li>  -1 : curvature direction of curve and cross product of support normal and result direction
+  *			are in opposite directions, </li>
+  * <li>   0  : no orientation is specified.</li>
+  * </ul> 
+  * </ul> 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+ * This example retrieves in <code>vakl1,val2,val3,val4,val5</code> parameters for solutions  
+ * for the <code>LineBiTangent</code> hybrid shape feature.
+ * <pre>
+ * Dim oVal1 As long
+ * Dim oVal2 As long
+ * Dim oVal3 As long
+ * Dim oVal4 As long
+ * Dim oVal5 As long
+ * LineBiTangent.<font color="red">GetChoiceNo(ovla1, oVal2, oVal3, oVal4, oVal5) </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT GetChoiceNo (out long val1, out long val2, out long val3, out long val4, out long val5);
+
+ /**
+  *  Sets a sequence which identifies a solution among all possibilities. 
+  * <ul> 
+  * <li>val1 =  Solution number (from 1 to n).</li>
+  * </ul>
+  *
+  * <li>val2 =   oOriTgt1 </li>
+  *     <br>  This orientation allows to compute just the results that are tangent
+  *           to a specific region of the first curve.
+  *     <br>  It can take 3 values: 
+  * <ul> 
+  * <li>   +1 : the result has the same orientation as the curve, </li>
+  * <li>   -1 : the result has the opposite orientation of the curve,  </li>
+  * <li>    0 : no orientation is specified.  </li>
+  * </ul> 
+  *
+  * <li>val3 =  oOriCvt1 </li>
+  *      <br> This orientation allows to compute just the results that are tangent
+  *      to a specific side of the first curve. 
+  *      <br>It can take 3 values: 
+  * <ul> 
+  * <li>    +1 : curvature direction of curve and cross product of support normal and result direction 
+  *				are in the same direction,  </li>
+  * <li>    -1 : curvature direction of curve and cross product of support normal and result direction
+  *				are in opposite directions,  </li>
+  * <li>     0 : no orientation is specified.  </li>
+  * </ul> 
+  *
+  * <li>val4 =   oOriTgt2 </li>
+  *     <br> In case of curve/curve bitangent line, this orientation allows to compute just the results that are tangent
+  *      to a specific region of the second curve .
+  *     <br>  It can take 3 values: 
+  * <ul> 
+  * <li>  +1 : the result has the same orientation as the curve, </li>
+  * <li>  -1 : the result has the opposite orientation of the curve, </li>
+  *  <li>   0 : no orientation is specified. </li>
+  * </ul> 
+  *
+  * <li>val5 = oOriCvt2 </li>
+  *     <br>  In case of curve/curve bitangent line this orientation allows to compute just the results that are tangent
+  *      to a specific side of the second curve.
+  *     <br> It can take 3 values: 
+  * <ul> 
+  * <li>  +1 : curvature direction of curve and cross product of support normal and result direction 
+  *				are in the same direction,</li>
+  * <li>  -1 : curvature direction of curve and cross product of support normal and result direction
+  *			are in opposite directions, </li>
+  * <li>   0  : no orientation is specified.</li>
+  * </ul> 
+  * </ul> 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>vakl1,val2,val3,val4,val5</code> parameters for solutions  
+  * for the <code>LineBiTangent</code> hybrid shape feature.
+  * <pre>
+  * Dim iVal1 As long
+  * Dim iVal2 As long
+  * Dim iVal3 As long
+  * Dim iVal4 As long
+  * Dim iVal5 As long
+  * ival1 = 1 
+  * ival2 = 0 
+  * ival3 = 0 
+  * ival4 = 0 
+  * ival5 = 0 
+  * LineBiTangent.<font color="red">SetChoiceNo(ivla1, iVal2, iVal3, iVal4, iVal5) </font>
+  * </pre>
+  * </dl>
+  */ 
+ HRESULT SetChoiceNo (in long val1, in long val2, in long val3, in long val4, in long val5);
+ //  ================
+ //  == METHODS ==
+ //  ================
+ /**
+ * Gets the length type
+ * Default is 0.
+ *   @param oType
+ *   The length type = 0 : length               - the line is limited by its extremities
+ *                   = 1 : infinite             - the line is infinite
+ *                   = 2 : infinite start point - the line is infinite on the side of the start point
+ *                   = 3 : infinite end point   - the line is infinite on the side of the end point
+ */
+ HRESULT GetLengthType (out /*IDLRETVAL*/  long  oType);
+ /**
+ * Sets the length type
+ * Default is 0.
+ *   @param iType
+ *   The length type = 0 : length               - the line is limited by its extremities
+ *                   = 1 : infinite             - the line is infinite
+ *                   = 2 : infinite start point - the line is infinite on the side of the start point
+ *                   = 3 : infinite end point   - the line is infinite on the side of the end point
+ */
+ HRESULT SetLengthType(in long iType);
+};
+
+
+// Interface name : CATIAHybridShapeLineBiTangent
+#pragma ID CATIAHybridShapeLineBiTangent "DCE:e989e914-ec76-11d4-ab2f001083ffc223"
+#pragma DUAL CATIAHybridShapeLineBiTangent
+
+// VB object name : HybridShapeLineBiTangent (Id used in Visual Basic)
+#pragma ID HybridShapeLineBiTangent "DCE:e9e6e4ca-ec76-11d4-ab2f001083ffc223"
+#pragma ALIAS CATIAHybridShapeLineBiTangent HybridShapeLineBiTangent
+#endif
+
+
+// CATIAHybridShapeLineBiTangent_IDL         

@@ -1,0 +1,196 @@
+// COPYRIGHT Dassault Systemes 2007
+//=============================================================================
+// CATIASfmManager
+//   Define the CATIASfmManager interface for services
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Feb. 2007  Creation                                                S. QUINCI
+//=============================================================================
+#ifndef CATIASfmManager_IDL
+#define CATIASfmManager_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATIAReferences.idl"
+#include "CATIASfmWelds.idl"
+
+/**
+ * Services about Structure Functional Modeler applications: SFD and SDD.
+ * <b>Role</b>: To manage some services.
+ */
+interface CATIASfmManager : CATIABase
+{
+  ////////////////////////////////////////////////////////////////////////////
+  //                        R E S O U R C E S  I N I T                      //
+  ////////////////////////////////////////////////////////////////////////////
+  /**
+  * Initialize environment (PRM resources).
+  * <br><b>Role</b>: Allows initializing environment (PRM resources).
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  */
+  HRESULT InitResources();
+
+  /**
+  * Add the Hull feature according to the PRM resources.
+  * <br><b>Role</b>: Allows adding the Hull feature according to the PRM resources.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  */
+  HRESULT AddHull();
+
+  /**
+  * Synchronize PlaneSystems according with the PRM resources.
+  * <br><b>Role</b>: Allows synchronizing the PlaneSystems with the PRM resources.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  */
+  HRESULT SynchronizePlanes();
+
+  /**
+  * Synchronize PlaneSystems according with the PRM resources.
+  * <br><b>Role</b>: Allows synchronizing the PlaneSystems with the PRM resources.
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  */
+  HRESULT SynchronizeHull();
+
+
+  ////////////////////////////////////////////////////////////////////////////
+  //                           S F M  O B J E C T S                         //
+  ////////////////////////////////////////////////////////////////////////////
+  /**
+  * Returns the list of PlaneSystems in the part.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>PlaneSystems</code> the list of PlaneSystems objects.
+  * <pre>
+  * Dim PlaneSystems As References
+  * SfmManager.<font color="red">GetPlaneSystems</font> PlaneSystems
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetPlaneSystems(out /*IDLRETVAL*/ CATIAReferences oPlaneSystems);
+
+  /**
+  * Returns a reference plane in the specific PlaneSystems.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>RefPlane</code> the reference planes contained into the 1st PlaneSystem,
+  * and which has CROSS.12 as a name.
+  * <pre>
+  * Dim RefPlane As Reference
+  * SfmManager.<font color="red">GetReferencePlane</font> 1, "CROSS.12", RefPlane
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetReferencePlane(in CATVariant iPlaneSystemIndex, in CATVariant iPlaneIndex, out /*IDLRETVAL*/ CATIAReference oReferencePlane);
+
+  /**
+  * Returns the Hull feature in the part.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Hull</code> the Hull object.
+  * <pre>
+  * Dim Hull As Reference
+  * SfmManager.<font color="red">GetHull</font> Hull
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetHull(out /*IDLRETVAL*/ CATIAReference oHull);
+
+  /**
+  * Returns the list of SuperPlates in the part.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>SuperPlates</code> the list of SuperPlates objects.
+  * <pre>
+  * Dim SuperPlates As References
+  * SfmManager.<font color="red">GetSuperPlates</font> SuperPlates
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetSuperPlates(out /*IDLRETVAL*/ CATIAReferences oSuperPlates);
+
+  /**
+  * Returns the list of SuperStiffeners in the part.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>SuperStiffeners</code> the list of SuperStiffeners objects.
+  * <pre>
+  * Dim SuperStiffeners As References
+  * SfmManager.<font color="red">GetSuperStiffeners</font> SuperStiffeners
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetSuperStiffeners(out /*IDLRETVAL*/ CATIAReferences oSuperStiffeners);
+
+  /**
+  * Returns the list of SuperStiffenersOnFreeEdge in the part.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>SuperStiffenersOnFreeEdge</code> the list of SuperStiffenersOnFreeEdge objects.
+  * <pre>
+  * Dim SuperStiffenersOnFreeEdge As References
+  * SfmManager.<font color="red">GetSuperStiffenersOnFreeEdge</font> SuperStiffenersOnFreeEdge
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetSuperStiffenersOnFreeEdge(out /*IDLRETVAL*/ CATIAReferences oSuperStiffenersOnFreeEdge);
+
+  /**
+  * Returns the list of SuperMembers in the part.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>SuperMembers</code> the list of SuperMembers objects.
+  * <pre>
+  * Dim SuperMembers As References
+  * SfmManager.<font color="red">GetSuperMembers</font> SuperMembers
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetSuperMembers(out /*IDLRETVAL*/ CATIAReferences oSuperMembers);
+
+  /**
+  * Gets all UC1 Weld features in Part.
+  * @param oWelds [out]
+  *      The retrieved UC1 Weld features.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets welds features in Part.
+  * <pre>
+  * Dim Welds As SfmWelds
+  * Set Welds = ManagerObj.<font color="red">GetWelds</font>(Nothing)
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetAllUC1Welds( out /*IDLRETVAL*/ CATIASfmWelds oWelds);
+
+};
+
+// Interface name : CATIASfmManager
+#pragma ID CATIASfmManager "DCE:ce5eb22b-dd98-434c-adaa3644087ceecf"
+#pragma DUAL CATIASfmManager
+
+// VB object name : SfmManager (Id used in Visual Basic)
+#pragma ID SfmManager "DCE:11a500c4-51ad-4d7f-9110945bb56f0dcc"
+#pragma ALIAS CATIASfmManager SfmManager
+
+#endif

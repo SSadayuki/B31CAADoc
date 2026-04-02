@@ -1,0 +1,144 @@
+// COPYRIGHT Dassault Systemes 2012
+//===================================================================
+//
+// ENOIACD5EngineV6R2014x.idl
+// Automation interface for the CD5EngineV6R2014x element 
+//
+//===================================================================
+//
+// Usage notes:
+//     Dim oTheseCD5Engine As CD5Engine
+//     Set oTheseCD5Engine = CATIA.GetItem("CD5EngineV6R2014x") 
+//
+//===================================================================
+
+#ifndef ENOIACD5EngineV6R2014x_IDL
+#define ENOIACD5EngineV6R2014x_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "ENOIACD5Engine.idl"
+interface ENOIACD5ID;
+interface ENOIACD5Structure;
+interface CATIABase;
+interface IDispatch;
+interface CATIADocument;
+interface ENOIACD5SaveOperation;
+
+/**
+* Scope of the Save Operation.
+* It is used by the CreateSaveOperation function.
+* @param CD5SaveOperation_ActiveDocument
+*   Active document is considered in save scope.
+* @param CD5SaveOperation_CurrentEditor
+*   Current editor is considered in save scope.
+* @param CD5SaveOperation_Session
+*   All documents in session are considered in save scope.
+*/
+
+enum CD5SaveOperation_Scope {
+    CD5SaveOperation_ActiveDocument,
+    CD5SaveOperation_CurrentEditor,
+    CD5SaveOperation_Session
+};
+
+/**
+ * Represents the ENOVIA V6 Integration Engine, that is to say the entry point to the CATIA/ENOVIA V6 Integration.
+ * <br>It allows end user to realize ENOVIA V6 Integration operations such as Connection, Disconnection, Open, Save...
+ * <br>Note that all operations performed from this interface are the same as operations available in the  
+ * ENOVIA V6 menu in CATIA, unless most of them are executed without panel.
+ *
+ * @sample
+ * The following example indicates how to retrieve the ENOVIA V6 Integration Engine.
+ * <pre>
+ * <font color="blue">Dim</font> oCD5Engine <font color="blue">As</font> CD5EngineV6R2014x
+ * <font color="blue">Set</font> oCD5Engine = CATIA.GetItem(<font color="red">"CD5EngineV6R2014x"</font>)
+ * </pre>
+ */
+
+interface ENOIACD5EngineV6R2014x : ENOIACD5Engine
+{
+
+    /**
+    * Gets the Autoname Series for an input type. It requires ENOVIA V6 connection.
+    * 
+    * @param iType
+    * The ENOVIA type of the Object ("CATIA Embedded Component"...).
+    * @return
+    * The array of Autoname Series.
+    * @exception
+    * <dl>
+    * <dt>-1697450280 : CATIA is not connected to ENOVIA V6.</dt>
+    * </dl>
+    *
+    * @sample
+    * The following example gets autoname series for CATIA Embedded Component:
+    * <pre>
+    * <font color="blue">Dim</font> AutonameSeries <font color="blue">As</font> CATSafeArrayVariant
+    * AutonameSeries = oCD5Engine.<font color="blue">GetAutonameSeries</font>("CATIA Embedded Component")
+    * </pre>
+    */
+    HRESULT GetAutonameSeries ( in CATBSTR iType, out /*IDLRETVAL*/ CATSafeArrayVariant oAutonameSeries);
+
+   /**
+    * Generates and gets the Autonames for the given series. It requires ENOVIA V6 connection.
+    * 
+    * @param iAutonameSeries
+    * The Autoname Series for which we want to generate Autonames.
+    * @param iCount
+    * The number of Autonames to be generated.
+    * @return
+    * The array of generated Autonames.
+    * @exception
+    * <dl>
+    * <dt>-1697450280 : CATIA is not connected to ENOVIA V6.</dt>
+    * </dl>
+    *
+    * @sample
+    * The following example generates and gets 1 Autoname for series "A Size":
+    * <pre>
+    * <font color="blue">Dim</font> Autoname <font color="blue">As</font> CATBSTR
+    * Autoname = oCD5Engine.<font color="blue">GenerateAutoname</font>("A Size", 1)(0)
+    * </pre>
+    */
+    HRESULT GenerateAutoname ( in CATBSTR iAutonameSeries, in short iCount, out /*IDLRETVAL*/ CATSafeArrayVariant oAutonameSeries);
+
+   /**
+    * Creates the basic Save Operation object. It requires ENOVIA V6 connection.
+    * 
+    * @param iScope
+    * The scope of the Save Operation.
+    * @return
+    * The created Save Operation.
+    * @exception
+    * <dl>
+    * <dt>-1697450280 : CATIA is not connected to ENOVIA V6.</dt>
+    * </dl>
+    *
+    * @sample
+    * The following example creates a Save Operation with the whole session as scope on CD5Engine <tt>oCD5Engine</tt>:
+    * <pre>
+    * <font color="blue">Dim</font> SaveOperation <font color="blue">As</font> CD5SaveOperation
+    * <font color="blue">Set</font> SaveOperation = oCD5Engine.<font color="blue">CreateSaveOperation</font>(CD5SaveOperation_Session)
+    * </pre>
+    */
+
+    HRESULT CreateSaveOperation(in CD5SaveOperation_Scope iScope, out /*IDLRETVAL*/ ENOIACD5SaveOperation oSaveOperation);
+
+};
+
+// Interface name : ENOIACD5EngineV6R2014x
+#pragma ID ENOIACD5EngineV6R2014x "DCE:A3D7AAE1-3F02-4C7E-85467F9CA4F33A4B"
+#pragma DUAL ENOIACD5EngineV6R2014x
+
+// VB object name : CD5Engine (Id used in Visual Basic)
+#pragma ID CD5EngineV6R2014x "DCE:A30E9EDF-9D61-4713-AE685FB3E6E9210C"
+#pragma ALIAS ENOIACD5EngineV6R2014x CD5EngineV6R2014x 
+
+#endif

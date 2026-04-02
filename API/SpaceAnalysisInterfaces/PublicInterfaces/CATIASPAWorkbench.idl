@@ -1,0 +1,147 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIASPAWorkbench.idl
+//   This automation interface allows to access Inertias
+//
+//===================================================================
+#ifndef CATIASPAWorkbench_IDL
+#define CATIASPAWorkbench_IDL
+
+#include "CATIAV5Level.h"
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAWorkbench.idl"
+
+#ifdef CATIAV5R10
+#include "CATIAMeasurable.idl"
+#include "CATIAReference.idl"
+#endif
+#include "CATIAInertias.idl"
+#include "CATIAClashes.idl"
+#include "CATIASections.idl"
+#include "CATIADistances.idl"
+
+/**  
+ * The object to manage all Space Analysis objects.
+ * <p>This version allows you to manage inertia data, clashes, distances and sections.
+ */
+interface CATIASPAWorkbench : CATIAWorkbench
+{
+#ifdef CATIAV5R10
+  /**
+   * Returns the Measurable object.
+   * <p>WARNING: this method will only work for Mono-Instantiated parts, It is recommended to use the method
+   * <tt>GetMeasurableInContext</tt> for measuring Multi-Instantiated parts.
+   * @sample
+   *    This example get the Measurable from the SPAWorkBench.
+   *    <pre>
+   *    Dim referenceObject As referenceObject
+   *    Set referenceObject = "GetReference"
+   *    Dim TheSPAWorkbench As Workbench
+   *    Set TheSPAWorkbench = CATIA.ActiveDocument.GetWorkbench ( "SPAWorkbench" )
+   *    Dim TheMeasurable As Measurable
+   *    Set TheMeasurable = TheSPAWorkbench.<font color="red">GetMeasurable(referenceObject)</font>
+   *    </pre>
+   */
+  HRESULT GetMeasurable (in CATIAReference iMeasuredItem, out /*IDLRETVAL*/ CATIAMeasurable oMeasurable);    
+
+  /**
+  * Returns the Measurable object with respect to the provided context (ProductInstance).
+  * @sample
+  *    This example get the Measurable from the SPAWorkBench.
+  *    <pre>
+  *    Dim referenceObject As referenceObject
+  *    Set referenceObject = "GetReference"
+  *    Dim ProductInstances As VPMInstance
+  *    Set ProductInstances = "GetProductInstance"
+  *    Dim TheSPAWorkbench As Workbench
+  *    Set TheSPAWorkbench = CATIA.ActiveDocument.GetWorkbench ( "SPAWorkbench" )
+  *    Dim TheMeasurable As Measurable
+  *    Set TheMeasurable = TheSPAWorkbench.<font color="red">GetMeasurableInContext(referenceObject,ProductInstances)</font>
+  *    </pre>
+  */
+  HRESULT GetMeasurableInContext (in CATIAReference iMeasuredItem,in CATIABase iProductInstance, out /*IDLRETVAL*/ CATIAMeasurable oMeasurable);
+#endif
+  /**
+   * Returns the Inertias collection.
+   * <p>WARNING: this method will be DEPRECATED in the next release. It is recommended to use the method
+   * <tt>GetTechnologicalObject("Inertia")</tt> on the product to analyze, to retrieve an <tt>Inertia</tt> object.
+   * @sample
+   *    This example retrieves the Inertias collection of the active document.
+   *    <pre>
+   *    Dim TheSPAWorkbench As Workbench
+   *    Set TheSPAWorkbench = CATIA.ActiveDocument.GetWorkbench ( "SPAWorkbench" )
+   *    Dim TheInertiasList As Inertias
+   *    Set TheInertiasList = TheSPAWorkbench.<font color="red">Inertias</font>
+   *    </pre>
+   */
+#pragma PROPERTY Inertias
+  HRESULT get_Inertias (out /*IDLRETVAL*/ CATIAInertias oInertias);
+
+  /**
+   * Returns the Clashes collection.
+   * <p>WARNING: this method will be DEPRECATED in the next release. It is recommended to use the method
+   * <tt>GetTechnologicalObject("Clashes")</tt> on the root product, to retrieve the <tt>Clashes</tt> collection.
+   * @sample
+   *    This example retrieves the Clashes collection of the active document.
+   *    <pre>
+   *    Dim TheSPAWorkbench As Workbench
+   *    Set TheSPAWorkbench = CATIA.ActiveDocument.GetWorkbench ( "SPAWorkbench" )
+   *    Dim TheClashesList As Clashes
+   *    Set TheClashesList = TheSPAWorkbench.<font color="red">Clashes</font>
+   *    </pre>
+   */
+#ifdef CATIAV5R5
+#pragma PROPERTY Clashes
+  HRESULT get_Clashes (out /*IDLRETVAL*/ CATIAClashes oClashes);
+
+  /**
+   * Returns the Sections collection.
+   * <p>WARNING: this method will be DEPRECATED in the next release. It is recommended to use the method
+   * <tt>GetTechnologicalObject("Sections")</tt> on the root product, to retrieve the <tt>Sections</tt> collection.
+   * @sample
+   *    This example retrieves the Sections collection of the active document.
+   *    <pre>
+   *    Dim TheSPAWorkbench As Workbench
+   *    Set TheSPAWorkbench = CATIA.ActiveDocument.GetWorkbench ( "SPAWorkbench" )
+   *    Dim TheSectionsList As Sections
+   *    Set TheSectionsList = TheSPAWorkbench.<font color="red">Sections</font>
+   *    </pre>
+   */
+#pragma PROPERTY Sections
+  HRESULT get_Sections (out /*IDLRETVAL*/ CATIASections oSections);
+
+  /**
+   * Returns the Distances collection.
+   * <p>WARNING: this method will be DEPRECATED in the next release. It is recommended to use the method
+   * <tt>GetTechnologicalObject("Distances")</tt> on the root product, to retrieve the <tt>Distances</tt> collection.
+   * @sample
+   *    This example retrieves the Distances collection of the active document.
+   *    <pre>
+   *    Dim TheSPAWorkbench As Workbench
+   *    Set TheSPAWorkbench = CATIA.ActiveDocument.GetWorkbench ( "SPAWorkbench" )
+   *    Dim TheDistancesList As Distances
+   *    Set TheDistancesList = TheSPAWorkbench.<font color="red">Distances</font>
+   *    </pre>
+   */
+#pragma PROPERTY Distances
+  HRESULT get_Distances (out /*IDLRETVAL*/ CATIADistances oDistances);
+#endif
+
+};
+
+// Interface name : CATIASPAWorkbench
+#pragma ID CATIASPAWorkbench "DCE:851b4544-21a2-11d4-9463006094eb3826"
+#pragma DUAL CATIASPAWorkbench
+
+// VB object name : SPAWorkbench (Id used in Visual Basic)
+#pragma ID SPAWorkbench "DCE:c9700aae-21a2-11d4-9463006094eb3826"
+#pragma ALIAS CATIASPAWorkbench SPAWorkbench
+
+#endif

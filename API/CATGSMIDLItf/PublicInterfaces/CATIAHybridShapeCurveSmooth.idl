@@ -1,0 +1,434 @@
+#ifndef CATIAHybridShapeCurveSmooth_IDL
+#define CATIAHybridShapeCurveSmooth_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//           
+// CATIAHybridShapeCurveSmooth:         
+// Exposed interface for HybridShape Curve Smooth
+//           
+//=================================================================
+
+#include "CATIAHybridShape.idl"
+#include "CATIAHybridShapeDirection.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+
+/**
+ * Represents the hybrid shape curve smoothing operation feature.
+ * <b>Role</b>: To access the data of the curve smoothing operation.of the hybrid shape curve parameter object.
+ * This data includes:
+ * <ul>
+ * <li>The curve to smooth </li>
+ * <li>The support (if exist ) </li>
+ * <li>The tangent tolerance value (threshold) </li>
+ * <li>The curvature  tolerance value (threshold) </li>
+ * <li>The info if curvature threshold is activated </li>
+ * <li>The maximum deviation accepted </li>
+ * <li>The info if maxcimum deviation is activated </li>
+ * <li>The fixed points </li>
+ * <li>The fixed segments </li>
+ * <li>The info if topology simplification is activated </li>
+ * </ul>
+ * <p>Use the @href CATIAHybridShapeFactory#AddNewCurveSmooth to create a HybridShapeCurveSmooth object.
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeCurveSmooth : CATIAHybridShape
+{
+ //Properties
+/**
+ * Returns or sets the curve to smooth.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the curve to smooth object of 
+ * the <code>hybShpCurveSmooth</code> in <code>Curve</code>.
+ * <pre>
+ * Dim Curve as CATIAReference 
+ * Curve  = hybShpCurvePar.CurveToSmooth 
+ * </pre>
+ */ 
+#pragma PROPERTY CurveToSmooth
+ HRESULT get_CurveToSmooth ( out /*IDLRETVAL*/ CATIAReference opIACurveToSmooth );
+ HRESULT put_CurveToSmooth ( in                CATIAReference ipIACurveToSmooth );
+
+/**
+ * Returns or sets the support of the curve.
+ * <br> if Suppport ==  nothing no support associated to the curve
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the support of curve to smooth object of 
+ * the <code>hybShpCurveSmooth</code> in <code>Support</code>.
+ * <pre>
+ * Dim Support  as CATIAReference 
+ * Support   = ybShpCurveSmooth.Support 
+ * </pre>
+ * 
+ */ 
+#pragma PROPERTY Support
+ HRESULT get_Support ( out /*IDLRETVAL*/ CATIAReference opIASupport );
+ HRESULT put_Support ( in                CATIAReference ipIASupport );
+
+/**
+ * Returns  the TangencyThreshold.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the curve to smooth object of 
+ * the <code>hybShpCurveSmooth</code> in <code>AngleThH</code>.
+ * <pre>
+ * Dim Curve as CATIAAngle  
+ * AngleThH  = ybShpCurveSmooth.TangencyThreshold 
+ * </pre>
+ */ 
+#pragma PROPERTY TangencyThreshold
+ HRESULT get_TangencyThreshold ( out /*IDLRETVAL*/ CATIAAngle opIATangencyThreshold );
+
+/**
+ * Returns or sets the CurvatureThreshold.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the CurvatureThreshold of 
+ * the <code>hybShpCurveSmooth</code> in <code>CurvatureThH</code>.
+ * <pre>
+ * Dim CurvatureThH as double
+ * CurvatureThH = hybShpCurvePar.CurvatureThreshold
+ * </pre>
+ */ 
+#pragma PROPERTY CurvatureThreshold
+ HRESULT get_CurvatureThreshold ( out /*IDLRETVAL*/ double oCrvtreThsld );
+ HRESULT put_CurvatureThreshold ( in                double iCrvtreThsld );
+
+/**
+ * Returns or sets the CurvatureThresholdActivity.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the CurvatureThresholdActivity of 
+ * the <code>hybShpCurveSmooth</code> in <code>CurvatureActivity </code>.
+ * <pre>
+ * Dim CurvatureActivity as boolean 
+ * CurvatureActivity = hybShpCurvePar.CurvatureThresholdActivity 
+ * </pre>
+ */ 
+#pragma PROPERTY CurvatureThresholdActivity
+ HRESULT get_CurvatureThresholdActivity ( out /*IDLRETVAL*/ boolean oCrvtreThsldActivity );
+ HRESULT put_CurvatureThresholdActivity ( in                boolean iCrvtreThsldActivity );
+
+/**
+ * Returns the MaximumDeviation.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the MaximumDeviation of 
+ * the <code>hybShpCurveSmooth</code> in <code>MaximumDeviationVal</code>.
+ * <pre>
+ * Dim MaximumDeviationVal as CATIALength
+ * MaximumDeviationVal  = hybShpCurvePar.MaximumDeviation 
+ * </pre>
+ */ 
+#pragma PROPERTY MaximumDeviation
+ HRESULT get_MaximumDeviation ( out /*IDLRETVAL*/ CATIALength opIAMaxDeviation );
+
+/**
+ * Returns or sets the MaximumDeviationActivity.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the MaximumDeviationActivity of 
+ * the <code>hybShpCurveSmooth</code> in <code>MaxActivity </code>.
+ * <pre>
+ * Dim MaxActivity as boolean
+ * MaxActivity  = hybShpCurvePar.MaximumDeviationActivity
+ * </pre>
+ */ 
+#pragma PROPERTY MaximumDeviationActivity
+ HRESULT get_MaximumDeviationActivity ( out /*IDLRETVAL*/ boolean oMaxDevActivity );
+ HRESULT put_MaximumDeviationActivity ( in                boolean iMaxDevActivity );
+
+/**
+ * Returns or sets the TopologySimplificationActivity.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves the TopologySimplificationActivity of 
+ * the <code>hybShpCurveSmooth</code> in <code>TopSimplifyAct</code>.
+ * <pre>
+ * Dim TopSimplifyAct as boolean 
+ * TopSimplifyAct  = hybShpCurvePar.TogologySimplificationActivity 
+ * </pre>
+ */ 
+#pragma PROPERTY TopologySimplificationActivity
+ HRESULT get_TopologySimplificationActivity ( out /*IDLRETVAL*/ boolean oTopoSimplActivity );
+ HRESULT put_TopologySimplificationActivity ( in                boolean iTopoSimplActivity );
+
+/**
+  * Returns or sets the correction mode (threshold, point, tangency or curvature) applied to
+  * the smoothed curve. 
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>CATGSMCSCorrectionMode_Threshold. no continuity </dd>
+  * <dt>1</dt>
+  * <dd>CATGSMCSCorrectionMode_Point. continuity in point (C0).</dd>
+  * <dt>2</dt>
+  * <dd>CATGSMCSCorrectionMode_Tangency. continuity in tangency (C1).</dd>
+  * <dt>3</dt>
+  * <dd>CATGSMCSCorrectionMode_Curvature. continuity in curvature (C2).</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oMode</code> the correction mode
+  * for the <code>hybShpCurveSmooth</code> hybrid shape feature.
+  * <pre>
+  * oMode = hybShpCurveSmooth.<font color="red">CorrectionMode</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY CorrectionMode
+    HRESULT get_CorrectionMode (out /*IDLRETVAL*/ long oMode);
+    HRESULT put_CorrectionMode (in long iMode);
+
+/**
+  * Returns or sets the continuity condition (curvature, tangency or point) applied to
+  * the smoothed curve with regard to the input curve at the start extremity of the input curve.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>CATGSMContinuity_Point. continuity in point (C0). </dd>
+  * <dt>1</dt>
+  * <dd>CATGSMContinuity_Tangency. continuity in tangency (C1).</dd>
+  * <dt>2</dt>
+  * <dd>CATGSMContinuity_Curvature. continuity in curvature (C2).</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oContinuity</code> the continuity at the start extremity
+  * for the <code>hybShpCurveSmooth</code> hybrid shape feature.
+  * <pre>
+  * oContinuity = hybShpCurveSmooth.<font color="red">StartExtremityContinuity</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY StartExtremityContinuity
+    HRESULT get_StartExtremityContinuity (out /*IDLRETVAL*/ long oContinuity);
+    HRESULT put_StartExtremityContinuity (in long iContinuity);
+
+/**
+  * Returns or sets the continuity condition (curvature, tangency or point) applied to
+  * the smoothed curve with regard to the input curve at the end extremity of the input curve.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>CATGSMContinuity_Point. continuity in point (C0). </dd>
+  * <dt>1</dt>
+  * <dd>CATGSMContinuity_Tangency. continuity in tangency (C1).</dd>
+  * <dt>2</dt>
+  * <dd>CATGSMContinuity_Curvature. continuity in curvature (C2).</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oContinuity</code> the continuity at the end extremity
+  * for the <code>hybShpCurveSmooth</code> hybrid shape feature.
+  * <pre>
+  * oContinuity = hybShpCurveSmooth.<font color="red">EndExtremityContinuity</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY EndExtremityContinuity
+    HRESULT get_EndExtremityContinuity (out /*IDLRETVAL*/ long oContinuity);
+    HRESULT put_EndExtremityContinuity (in long iContinuity);
+
+ //Methods
+ // ---------------------------------------------------------
+ // Set methods to be integrated in pragma 
+ // ---------------------------------------------------------
+/**
+ * Sets the tangency threshold.
+ * @param iTangencyThreshold
+ *   The tangency threshold
+ */
+ HRESULT SetTangencyThreshold ( in  double iTangencyThreshold );
+
+/**
+ * Sets the maximum deviation.
+ * @param iMaxDeviation
+ *   The maximium deviation
+ */
+ HRESULT SetMaximumDeviation ( in  double iMaxDeviation );
+
+ // --------------------------------------------------------------
+ // Frozen Curves
+ // --------------------------------------------------------------
+ /**
+  * Adds a frozen curve to the hybrid shape curve smooth feature object.
+  * @param iCurve
+  *		The curve to be added to the hybrid shape curve smooth feature object.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * The following example adds the <code>iCurve</code> curve to the 
+  * <code>hybShpCurveSmooth</code> object.
+  * <pre>
+  * hybShpCurveSmooth.<font color="red">AddFrozenCurveSegment</font> iCurve
+  * </pre>
+  */ 
+
+ HRESULT AddFrozenCurveSegment  (in CATIAReference  iCurve);
+
+ /**
+  * Returns the number of frozen curve segments in the curve smooth object.
+  * @param oSize
+  *     Number of frozen curve segments in the curve smooth.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the number of frozen curve segments.
+  * in the <code>hybShpCurveSmooth</code> hybrid shape curve smooth.
+  * <pre>
+  * Dim oSize As  long
+  * oSize = hybShpCurveSmooth.<font color="red">GetFrozenCurveSegmentsSize</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetFrozenCurveSegmentsSize(out /*IDLRETVAL*/ long oSize);
+
+ /**
+  * Retrieves the Frozen Curve Segment at specified position in the hybrid shape curve smooth object.
+  * @param iPos
+  *		The position of the Frozen Curve Segment to retrieve.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * The following example gets the <code>oCurve</code> Frozen Curve Segment of the 
+  * <code>hybShpCurveSmooth</code> object at the position <code>iPos</code>.
+  * <pre>
+  * Dim oCurve As Reference
+  * Set oCurve = hybShpCurveSmooth.<font color="red">GetFrozenCurveSegment</font> (iPos).
+  * </pre>
+  */
+  HRESULT GetFrozenCurveSegment(in long iPos, out /*IDLRETVAL*/ CATIAReference  oCurve);
+
+ /**
+  * Removes Frozen Curve Segment from the list of Forzen curves in hybrid shape curve smooth object.
+  * @param iCurve
+  *		The Frozen Curve Segment to remove.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * The following example removes the Frozen Curve Segment from the 
+  * <code>hybShpCurveSmooth</code> object.
+  * <pre>
+  * hybShpCurveSmooth.<font color="red">RemoveFrozenCurveSegment</font> iCurve.
+  * </pre>
+  */ 
+  HRESULT RemoveFrozenCurveSegment(in CATIAReference iCurve);
+
+ /**
+  * Removes all Frozen Curve Segment of the hybrid shape curve smooth object.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * The following example removes all Frozen Curve Segments of the <code>hybShpCurveSmooth</code> object.
+  * <pre>
+  * hybShpCurveSmooth.<font color="red">RemoveAllFrozenCurveSegments</font>
+  * </pre>
+  */ 
+  HRESULT RemoveAllFrozenCurveSegments();
+
+  // --------------------------------------------------------------
+ // Frozen Points
+ // --------------------------------------------------------------
+ /**
+  * Adds a frozen points to the hybrid shape curve smooth feature object.
+  * @param iPoint
+  *		The frozen point to be added to the hybrid shape curve smooth feature object.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * The following example adds the <code>iPoint</code> frozen point to the 
+  * <code>hybShpCurveSmooth</code> object.
+  * <pre>
+  * hybShpCurveSmooth.<font color="red">AddFrozenPoint</font> iPoint
+  * </pre>
+  */ 
+
+ HRESULT AddFrozenPoint  (in CATIAReference  iPoint);
+
+ /**
+  * Returns the number of Frozen Points in the curve smooth object.
+  * @param oSize
+  *     Number of Frozen Points in the curve smooth.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves the number of Frozen Points.
+  * in the <code>hybShpCurveSmooth</code> hybrid shape curve smooth.
+  * <pre>
+  * Dim oSize As  long
+  * oSize = hybShpCurveSmooth.<font color="red">GetFrozenPointsSize</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetFrozenPointsSize(out /*IDLRETVAL*/ long oSize);
+
+ /**
+  * Retrieves the Frozen Point at specified position in the hybrid shape curve smooth object.
+  * @param iPos
+  *		The position of the Frozen Point to retrieve.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * The following example gets the <code>oPoint</code> Frozen Point of the 
+  * <code>hybShpCurveSmooth</code> object at the position <code>iPos</code>.
+  * <pre>
+  * Dim oPoint As Reference
+  * Set oPoint = hybShpCurveSmooth.<font color="red">GetFrozenPoint</font> (iPos).
+  * </pre>
+  */
+  HRESULT GetFrozenPoint(in long iPos, out /*IDLRETVAL*/ CATIAReference  oPoint);
+
+ /**
+  * Removes Frozen Point from the list of frozen points in hybrid shape curve smooth object.
+  * @param iPoint
+  *		The Frozen Point to remove.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * The following example removes the Frozen Point from the 
+  * <code>hybShpCurveSmooth</code> object.
+  * <pre>
+  * hybShpCurveSmooth.<font color="red">RemoveFrozenPoint</font> iPoint.
+  * </pre>
+  */ 
+  HRESULT RemoveFrozenPoint(in CATIAReference iPoint);
+
+ /**
+  * Removes all Frozen Points of the hybrid shape curve smooth object.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * The following example removes all Frozen Points of the <code>hybShpCurveSmooth</code> object.
+  * <pre>
+  * hybShpCurveSmooth.<font color="red">RemoveAllFrozenPoints</font>
+  * </pre>
+  */ 
+  HRESULT RemoveAllFrozenPoints();
+
+};
+
+// Interface name : CATIAHybridShapeCurveSmooth
+#pragma ID CATIAHybridShapeCurveSmooth "DCE:7029B284-8FD6-11d6-A2F400065BDD6075"
+#pragma DUAL CATIAHybridShapeCurveSmooth
+
+// VB object name : HybridShapeCurveSmooth (Id used in Visual Basic)
+#pragma ID HybridShapeCurveSmooth "DCE:7029B285-8FD6-11d6-A2F400065BDD6075"
+#pragma ALIAS CATIAHybridShapeCurveSmooth HybridShapeCurveSmooth
+
+
+#endif
+// CATIAHybridShapeCurveSmooth_IDL

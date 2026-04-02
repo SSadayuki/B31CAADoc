@@ -1,0 +1,179 @@
+#ifndef CATIARenderingEnvironmentWall_IDL
+#define CATIARenderingEnvironmentWall_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIARenderingEnvironmentWall:                           
+// Exposed interface for Rendering Wall Environment object
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jul02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIABase.idl"
+
+/**
+ * Represents a Environment object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIARenderingEnvironmentWall : CATIABase
+{
+/**
+ * Returns or sets the environment wall active status.
+ * A wall is visible only when it is active.
+ * <ul>  The active status can be:
+ *   <li> 1: wall is visible </li>
+ *   <li> 0: wall is invisible</li>
+ * </ul>
+ */
+#pragma PROPERTY ActiveStatus
+  HRESULT  get_ActiveStatus ( out /*IDLRETVAL*/ short oActiveStatus);
+  HRESULT  put_ActiveStatus ( in	short iActiveStatus);
+
+/**
+ * Returns or sets the wall shadow status. 
+ * A wall may or may not be affected by lights depending on this status.
+ * <ul>  The shadows status can be:
+ *   <li> 1: wall is affected by active lights and can bear shadows </li>
+ *   <li> 0: wall is not affected by active lights and is always seen</li>
+ * </ul>
+ */
+#pragma PROPERTY ShadowsStatus
+  HRESULT  get_ShadowsStatus ( out /*IDLRETVAL*/ short oShadowsStatus);
+  HRESULT  put_ShadowsStatus ( in	short iShadowsStatus);
+
+/**
+ * Returns or sets the wall texture name.
+ * To remove the texture, use an empty string.
+ */
+#pragma PROPERTY Texture
+  HRESULT  get_Texture(inout /*IDLRETVAL*/ CATBSTR oTextureName);
+  HRESULT  put_Texture(in CATBSTR iTextureName);
+
+/**
+ * Returns or sets the texture automatic scaling status.
+ * If status is automatic scaling, the texture fit is
+ * locked when the environment size is modified.
+ * <ul> The scaling status can be:
+ *   <li> 1: automatic scaling is on </li>
+ *   <li> 0: automatic scaling is off </li>
+ * </ul>
+ */
+#pragma PROPERTY AutoScaleStatus
+  HRESULT  get_AutoScaleStatus ( out /*IDLRETVAL*/ short oAutoScaleStatus);
+  HRESULT  put_AutoScaleStatus ( in	short iAutoScaleStatus);
+
+/**
+ * If a texture is mapped on the wall, scale automatically the 
+ * texture to fit inside the wall.
+ */
+  HRESULT  FitAllInWall ();
+
+/**
+ * Returns or sets the texture scaling link status.
+ * If scales are linked, modifying one scale will
+ * update the other keeping the ratio between 
+ * U and V constant.
+ * <ul> The link status can be:
+ *   <li> 1: U and V scales are linked </li>
+ *   <li> 0: U and V scales are not linked </li>
+ * </ul>
+ */
+#pragma PROPERTY LinkedScaleStatus
+  HRESULT  get_LinkedScaleStatus ( out /*IDLRETVAL*/ short oLinkedScaleStatus);
+  HRESULT  put_LinkedScaleStatus ( in	short iLinkedScaleStatus);
+
+/**
+ * Returns or sets the texture scale along the U axis.
+ * The scale value should be > 0.
+ * Note that the modification of this parameter is useless if automatic scaling is enabled.
+ */
+#pragma PROPERTY ScaleU
+  HRESULT  get_ScaleU ( out /*IDLRETVAL*/ double oScaleU);
+  HRESULT  put_ScaleU ( in	double iScaleU);
+
+/**
+ * Returns or sets the texture scale along the V axis.
+ * The scale value should be > 0.
+ * Note that the modification of this parameter is useless if automatic scaling is enabled.
+ */
+#pragma PROPERTY ScaleV
+  HRESULT  get_ScaleV ( out /*IDLRETVAL*/ double oScaleV);
+  HRESULT  put_ScaleV ( in	double iScaleV);
+
+/**
+ * Returns or sets the texture offset along the U axis.
+ * Note that this parameter is useless if automatic scaling is enabled.
+ */
+#pragma PROPERTY TranslationU
+  HRESULT  get_TranslationU ( out /*IDLRETVAL*/ double oTranslationU);
+  HRESULT  put_TranslationU ( in	double iTranslationU);
+
+/**
+ * Returns or sets the texture offset along the V axis.
+ * Note that this parameter is useless if automatic scaling is enabled.
+ */
+#pragma PROPERTY TranslationV
+  HRESULT  get_TranslationV ( out /*IDLRETVAL*/ double oTranslationV);
+  HRESULT  put_TranslationV ( in	double iTranslationV);
+
+/**
+ * Returns or sets the texture rotation angle (in degrees).
+ * The rotation values must be between -360 and 360 degrees.
+ */
+#pragma PROPERTY Rotation
+  HRESULT  get_Rotation ( out /*IDLRETVAL*/ double oRotation);
+  HRESULT  put_Rotation ( in	double iRotation);
+
+/**
+ * Returns or sets texture orientation status along the U axis.
+ * <ul> The flip status can be:
+ *   <li> 1: texture is flipped along the U axis </li>
+ *   <li> 0: texture is not flipped along the U axis </li>
+ * </ul>
+ */
+#pragma PROPERTY FlipUStatus
+  HRESULT  get_FlipUStatus ( out /*IDLRETVAL*/ short oFlipUStatus);
+  HRESULT  put_FlipUStatus ( in	short iFlipUStatus);
+
+/**
+ * Returns or sets texture orientation status along the V axis.
+ * <ul> The flip status can be:
+ *   <li> 1: texture is flipped along the V axis </li>
+ *   <li> 0: texture is not flipped along the V axis </li>
+ * </ul>
+ */
+#pragma PROPERTY FlipVStatus
+  HRESULT  get_FlipVStatus ( out /*IDLRETVAL*/ short oFlipVStatus);
+  HRESULT  put_FlipVStatus ( in	short iFlipVStatus);
+};
+
+// Interface Name : CATIARenderingEnvironmentWall
+#pragma ID CATIARenderingEnvironmentWall "DCE:a3203203-291c-0000-0280030ef3000000"
+#pragma DUAL CATIARenderingEnvironmentWall
+ 
+// VB Object Name : RenderingEnvironmentWall
+#pragma ID RenderingEnvironmentWall "DCE:a3203456-a476-0000-0280030ef3000000"
+#pragma ALIAS CATIARenderingEnvironmentWall RenderingEnvironmentWall
+
+#endif
+// CATIARenderingEnvironmentWall_IDL
+
+
+
+
+
+
+

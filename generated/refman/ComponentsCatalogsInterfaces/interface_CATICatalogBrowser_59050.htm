@@ -1,0 +1,531 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>ComponentsCatalogsInterfaces CATICatalogBrowser Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../ComponentsCatalogsInterfaces.htm" href="../ComponentsCatalogsInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "ComponentsCatalogsInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATICatalogBrowser"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>ComponentsCatalogsInterfaces Framework:  CATICatalogBrowser Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATICatalogBrowser_59050','CATICatalogBrowser','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATICatalogBrowser</b>
+</p>
+<p>
+<b><i> Interface to manipulate the Catalog Browser.</i></b><br>
+
+ <b>Role:</b> The Catalog Browser is a Dialog box to browse and 
+ instantiate component in context. 
+ <pr>The <script type="text/javascript"> activateLinkAnchor('CATICatalogBrowserFactory','','CATICatalogBrowserFactory') </script> interface enables to create and display  an instance of this Dialog box.</p>
+ <p>This catalog browser will be created inside a 
+<script type="text/javascript"> activateLinkAnchor('CATCommand','','CATCommand') </script>. After the creation, you must retrieve the window of the Dialob box, thanks
+ to the 
+<script type="text/javascript"> activateLinkAnchor('','GetFatherWindow','GetFatherWindow') </script>, and sets as parent for this window the command which has instantiate it. It enables to your command to receive the notifications sent by 
+ the Catalog Browser:
+ <ul>
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','GetOKNotification','GetOKNotification') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('','GetCloseNotification','GetCloseNotification') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('','GetCancelNotification','GetCancelNotification') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('','GetSelectDescriptionNotification','GetSelectDescriptionNotification') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('','GetChangeChapterNotification','GetChangeChapterNotification') </script> </li> </ul>
+ and in case of Dialog box closing use the 
+<script type="text/javascript"> activateLinkAnchor('','CloseBrowser','CloseBrowser') </script> to close it.</p> <p>On the catalog browser you can impose to the end user a type of behavior:
+ <ul>
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','AuthorizeInstantiation','AuthorizeInstantiation') </script> </li> <br>To authorize or not instantiation by contextual menu or double click on descriptions
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','AuthorizeDragDrop','AuthorizeDragDrop') </script> </li> <br>To authorize or not instantiation by drag and drop. 
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','AuthorizeChangeCatalog','AuthorizeChangeCatalog') </script> </li> <br>To authorize or not catalog change 
+ <li>
+<script type="text/javascript"> activateLinkAnchor('','SetCurrentCatalogDocId','SetCurrentCatalogDocId') </script> </li> <br>Propose a default Catalog path at the beginning
+ </ul></p>
+ <p>The last part concerning the catalog browser is the filtering. You can retrieve the end user filter or
+ impose it a filtering. There are two kinds of filter:
+ <ul>
+ <li>The internal filter: you impose it to the end user on a chapter, the end
+ user cannot change it.</li>
+ <li>The end user filter: those enter by the end user in the Filter editor, or
+ by the 
+<script type="text/javascript"> activateLinkAnchor('','SetCurrentQuery','SetCurrentQuery') </script> method you can set a end user filter</li> </ul>
+ The filter applied to a chapter is the internal filter and the end user filter.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AuthorizeChangeCatalog(int)"><b>AuthorizeChangeCatalog</b></a>(int)
+</td><td id='tdright'>  Authorizes or not user to change of current catalog.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AuthorizeDragDrop(int)"><b>AuthorizeDragDrop</b></a>(int)
+</td><td id='tdright'>  Authorizes the instantiation with drag&drop.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AuthorizeInstantiation(int)"><b>AuthorizeInstantiation</b></a>(int)
+</td><td id='tdright'>  Authorizes the instantiation with double click or the contextual menu.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BuildCurrentChapterString(CATListOfCATUnicodeString*&amp;)"><b>BuildCurrentChapterString</b></a>(CATListOfCATUnicodeString*&amp;)
+</td><td id='tdright'>  Builds a CATUnicodeString to store the current chapter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CloseBrowser()"><b>CloseBrowser</b></a>()
+</td><td id='tdright'>  Closes the current browser.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCancelNotification(CATNotification*&amp;)"><b>GetCancelNotification</b></a>(CATNotification*&amp;)
+</td><td id='tdright'>  Retrieves the notification on the "Cancel" button.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetChangeChapterNotification(CATNotification*&amp;)"><b>GetChangeChapterNotification</b></a>(CATNotification*&amp;)
+</td><td id='tdright'>  Retrieves the notification when a modification on the current chapter has be done.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCloseNotification(CATNotification*&amp;)"><b>GetCloseNotification</b></a>(CATNotification*&amp;)
+</td><td id='tdright'>  Retrieves the notification when the browser is closed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCurrentCatalogDocId(CATIDocId**)"><b>GetCurrentCatalogDocId</b></a>(CATIDocId**)
+</td><td id='tdright'>  Retrieves the current catalog.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCurrentCatalogPath(CATUnicodeString&amp;)"><b>GetCurrentCatalogPath</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCurrentQueryResult(CATICatalogQueryResult*&amp;)"><b>GetCurrentQueryResult</b></a>(CATICatalogQueryResult*&amp;)
+</td><td id='tdright'>  Retrieves the current query result.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetFatherWindow(CATDlgDialog*&amp;)"><b>GetFatherWindow</b></a>(CATDlgDialog*&amp;)
+</td><td id='tdright'>  Retrieves the window to add notification.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetOKNotification(CATNotification*&amp;)"><b>GetOKNotification</b></a>(CATNotification*&amp;)
+</td><td id='tdright'>  Retrieves the notification on the "OK" button (a final description need to be selected).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSelectDescriptionNotification(CATNotification*&amp;)"><b>GetSelectDescriptionNotification</b></a>(CATNotification*&amp;)
+</td><td id='tdright'>  Retrieves a notification on the selected description.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSelectedDescription(CATICatalogDescription*&amp;)"><b>GetSelectedDescription</b></a>(CATICatalogDescription*&amp;)
+</td><td id='tdright'>  Retrieves the selected description.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#OKActivationMode(int)"><b>OKActivationMode</b></a>(int)
+</td><td id='tdright'>  Activates OK button only for end chapters, not for sub-chapters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCurrentCatalogDocId(CATIDocId*)"><b>SetCurrentCatalogDocId</b></a>(CATIDocId*)
+</td><td id='tdright'>  Sets the current catalog.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCurrentCatalogPath(CATUnicodeString)"><b>SetCurrentCatalogPath</b></a>(CATUnicodeString)
+</td><td id='tdright'>  
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCurrentChapter(CATICatalogChapter*,int)"><b>SetCurrentChapter</b></a>(CATICatalogChapter*,int)
+</td><td id='tdright'>   Sets the chapter to activate in the browser.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCurrentChapter(CATListOfCATUnicodeString*)"><b>SetCurrentChapter</b></a>(CATListOfCATUnicodeString*)
+</td><td id='tdright'>  Sets a current sub-chapter in the catalog browser.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCurrentQuery(CATUnicodeString&amp;,int)"><b>SetCurrentQuery</b></a>(CATUnicodeString&amp;,int)
+</td><td id='tdright'>  Sets the current query result.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSelectedDescription(CATICatalogDescription*)"><b>SetSelectedDescription</b></a>(CATICatalogDescription*)
+</td><td id='tdright'>  Sets the selected description as the current in the browser.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AuthorizeChangeCatalog"></a><a id="AuthorizeChangeCatalog(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AuthorizeChangeCatalog</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iEnable</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Authorizes or not user to change of current catalog. 
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEnable</span></dt>
+   <dd>      0: OK available only for description in end chapters. File Selection Box Icon is Disable.<br>
+      1: OK available for all description, default mode.  File Selection Box Icon is Enable.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AuthorizeDragDrop"></a><a id="AuthorizeDragDrop(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AuthorizeDragDrop</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iEnable</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Authorizes the instantiation with drag&drop.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEnable</span></dt>
+   <dd>      If iEnable is 1 then the functionality drag&drop is enable.
+      Else 0 and the functionality is disable.
+      <br>Attention, the Drag and Drop is only possible if the current command is the Select
+       command. So if the catalog browser is launched from a command which is exclusive,
+       or shared, the instantiation by drag and drop is unavailable.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AuthorizeInstantiation"></a><a id="AuthorizeInstantiation(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AuthorizeInstantiation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iEnable</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Authorizes the instantiation with double click or the contextual menu.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEnable</span></dt>
+   <dd>      1: instantiation enable, 0: instantiation disable
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BuildCurrentChapterString"></a><a id="BuildCurrentChapterString(CATListOfCATUnicodeString*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>BuildCurrentChapterString</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListOfCATUnicodeString','CATListOfCATUnicodeString*&amp;')</script> <span class='param'>oListpath</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Builds a CATUnicodeString to store the current chapter.<br>
+ <br><b>Role</b>:This method is usefull if you want to be able to reopen Catalog browser with
+ same chapter. You need to store catalog path (with GetCurrentCatalogDocId) and
+ chapter path (with BuildCurrentChapterString).<br>
+ To restore current catalog and chapter, you need to call 
+<script type="text/javascript"> activateLinkAnchor('','SetCurrentCatalogDocId','SetCurrentCatalogDocId') </script> and after 
+<script type="text/javascript"> activateLinkAnchor('','SetCurrentChapter','SetCurrentChapter') </script>.   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> listpath</span></dt>
+   <dd>      A list of string to store and to use in SetCurrentChapter method.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CloseBrowser"></a><a id="CloseBrowser()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>CloseBrowser</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Closes the current browser.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCancelNotification"></a><a id="GetCancelNotification(CATNotification*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetCancelNotification</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATNotification','CATNotification*&amp;')</script> <span class='param'>oNotif</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the notification on the "Cancel" button.
+ Available only if browser is built with mode OKCancel
+   The notification which must be send when the user select the "Cancel" button
+</dd>
+<dt class='dtmethod' >
+  <a id="GetChangeChapterNotification"></a><a id="GetChangeChapterNotification(CATNotification*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetChangeChapterNotification</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATNotification','CATNotification*&amp;')</script> <span class='param'>oNotif</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the notification when a modification on the current chapter has be done.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNotif</span></dt>
+   <dd>      The notification which must be send when the user change the current chapter.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCloseNotification"></a><a id="GetCloseNotification(CATNotification*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetCloseNotification</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATNotification','CATNotification*&amp;')</script> <span class='param'>oNotif</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the notification when the browser is closed.
+ Available only if browser is built with mode Close
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNotif</span></dt>
+   <dd>      The notification which must be send when the user close the panel.
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>       Error code of function.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCurrentCatalogDocId"></a><a id="GetCurrentCatalogDocId(CATIDocId**)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetCurrentCatalogDocId</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDocId','CATIDocId**')</script> <span class='param'>oDocId</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the current catalog.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oDocId</span></dt>
+   <dd>      The current Catalog docid
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCurrentCatalogPath"></a><a id="GetCurrentCatalogPath(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetCurrentCatalogPath</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iName</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ 
+<dl  class='desclist'>
+  <dt class='deprecated'> <b>Deprecated:</b></dt> 
+  <dd>  V5R15
+ use GetCurrentCatalogDocId
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCurrentQueryResult"></a><a id="GetCurrentQueryResult(CATICatalogQueryResult*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetCurrentQueryResult</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATICatalogQueryResult','CATICatalogQueryResult*&amp;')</script> <span class='param'>oQueryresult</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the current query result.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oQueryresult</span></dt>
+   <dd> [out, CATBaseUnknown#Release]      The current query result which is displayed.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetFatherWindow"></a><a id="GetFatherWindow(CATDlgDialog*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetFatherWindow</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDlgDialog','CATDlgDialog*&amp;')</script> <span class='param'>oWindow</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the window to add notification.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oWindow</span></dt>
+   <dd>      The current CATDlgDialog of browser.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetOKNotification"></a><a id="GetOKNotification(CATNotification*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetOKNotification</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATNotification','CATNotification*&amp;')</script> <span class='param'>oNotif</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the notification on the "OK" button (a final description need to be selected).
+ Available only if browser is built with mode OKCancel
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNotif</span></dt>
+   <dd>      The notification which must be send when the user select the "OK" button.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSelectDescriptionNotification"></a><a id="GetSelectDescriptionNotification(CATNotification*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetSelectDescriptionNotification</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATNotification','CATNotification*&amp;')</script> <span class='param'>oNotif</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves a notification on the selected description.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNotif</span></dt>
+   <dd>      The notification which must be send when the user select a description (in the case of end-chapter only).
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSelectedDescription"></a><a id="GetSelectedDescription(CATICatalogDescription*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetSelectedDescription</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATICatalogDescription','CATICatalogDescription*&amp;')</script> <span class='param'>oDesc</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the selected description.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oDesc</span></dt>
+   <dd> [out, CATBaseUnknown#Release]      The selected description.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="OKActivationMode"></a><a id="OKActivationMode(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>OKActivationMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iEnable</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Activates OK button only for end chapters, not for sub-chapters.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEnable</span></dt>
+   <dd>      1: OK available for all description, default mode <br>
+      0: OK available only for description in end chapters.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCurrentCatalogDocId"></a><a id="SetCurrentCatalogDocId(CATIDocId*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetCurrentCatalogDocId</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDocId','CATIDocId*')</script> <span class='param'>iDocId</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the current catalog.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oDocId</span></dt>
+   <dd>      The current Catalog docid
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCurrentCatalogPath"></a><a id="SetCurrentCatalogPath(CATUnicodeString)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetCurrentCatalogPath</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script> <span class='param'>iName</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ 
+<dl  class='desclist'>
+  <dt class='deprecated'> <b>Deprecated:</b></dt> 
+  <dd>  V5R15
+ use SetCurrentCatalogDocId
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCurrentChapter"></a><a id="SetCurrentChapter(CATICatalogChapter*,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetCurrentChapter</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATICatalogChapter','CATICatalogChapter*')</script> <span class='param'>iChapter</span>, const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSendevent</span><span class='param'>=0</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Sets the chapter to activate in the browser.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iChapter</span></dt>
+   <dd>      The chapter to activate. It must be a chapter of the current CATICatalogQueryResult.
+   
+ </ dd>
+    <dt><span class='paramitem'> iSendevent</span></dt>
+   <dd>      Send a event for updating the browser.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCurrentChapter"></a><a id="SetCurrentChapter(CATListOfCATUnicodeString*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetCurrentChapter</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATListOfCATUnicodeString','CATListOfCATUnicodeString*')</script> <span class='param'>iListpath</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets a current sub-chapter in the catalog browser.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> Chapter</span></dt>
+   <dd>      The list of string describing the current chapter.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCurrentQuery"></a><a id="SetCurrentQuery(CATUnicodeString&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetCurrentQuery</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iQuery</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iUserquery</span><span class='param'>=1</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the current query result.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iQuery</span></dt>
+   <dd>      Add your own query
+   
+ </ dd>
+    <dt><span class='paramitem'> iUserquery</span></dt>
+   <dd>      A user query is displayed in the browser, user can modify it.
+      An internal quey allow you to hide some descriptions.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSelectedDescription"></a><a id="SetSelectedDescription(CATICatalogDescription*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetSelectedDescription</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATICatalogDescription','CATICatalogDescription*')</script> <span class='param'>iDesc</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the selected description as the current in the browser.
+   
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDesc</span></dt>
+   <dd>      The selected description.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICatalogBrowser.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATCclInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

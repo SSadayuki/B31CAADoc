@@ -1,0 +1,9 @@
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+BUILD = NO
+
+OS = intel_a
+BUILD = YES
+
+OS = win_b
+BUILD = YES
+

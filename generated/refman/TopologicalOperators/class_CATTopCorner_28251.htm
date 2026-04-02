@@ -1,0 +1,515 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>TopologicalOperators CATTopCorner Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../TopologicalOperators.htm" href="../TopologicalOperators.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "TopologicalOperators";	}
+		function getCurrentObjectName() { 
+ 	return "CATTopCorner"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>TopologicalOperators Framework: CATTopCorner <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATTopCorner_28251','CATTopCorner','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATTopCorner</b>
+</p>
+<p>
+<b><i> Class representing the operator that computes a round corner between two wire bodies.</i></b><br>
+
+ <br>There is no unique solution to the corner computation: the input wires
+ cut the corner in two portions. These two portions can be retrieved together, or one can choose
+ the portion to keep (<tt>CATCircleMode</tt>).
+ Moreover, when choosing  the <tt>Direct</tt> or <tt>Complementary</tt> modes, the operator
+ can assemble the computed corner
+ on the input wires on demand (<tt>SetSupportTrimmingMode</tt>).
+ <br>The center of the corner is defined at the intersection of the parallels
+ to the input wires. Once given a wire on a shell, there are two parallel
+ to a wire: one on each side. The side defines the orientation of the
+ parallel:
+ <ul>
+ <li>The cross product of the normal to the shell and the tangent to the wire is positive
+ side (+1)
+ <li>The opposite of the cross product of the normal to the shell and the tangent 
+ to the wire is the negative side (-1).
+ </ul> 
+ <br>The CATTopCorner operator satisfies the smart mechanism: the
+ input bodies are not modified. A new resulting body is created, 
+ possibly sharing data with the input bodies.
+ It follows the global frame of the topological operators, except that it can return several 
+ bodies, corresponding to the multiple solution it found.
+<ul>
+ <li>A CATTopCorner operator is created with the <tt>CATCreateTopCorner</tt> global method.
+ It must be directly <tt>delete</tt>d after use. It is not streamable. 
+<li>Options can be precised with the <tt>SetXxx</tt> methods, before
+ asking for the computation with the <tt>Run</tt> method. 
+<li>The result is accessed with 
+ <ul><li>the <tt>GetResult</tt> method: all the computed corners are put in the same resulting body.
+     <li>the iterator on the solutions (<tt>BeginningCorner</tt>, <tt>NextCorner</tt>, <tt>GetCorner</tt>):
+ each solution corner is put in a different body.
+ </ul> 
+ If you do not want 
+ to keep the resulting bodies, use the <script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove them from the  geometric factory, after the operator deletion.
+</ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#~CATTopCorner()"><b>~CATTopCorner</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#BeginningCorner()"><b>BeginningCorner</b></a>()
+</td><td id='tdright'>  Initializes the iterator of the resulting corners.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCenterRadius(CATMathPoint&amp;,double&amp;)"><b>GetCenterRadius</b></a>(CATMathPoint&amp;,double&amp;)
+</td><td id='tdright'>  Returns the definition of the current corner.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCircleMode(CATCircleMode&amp;,double&amp;,double&amp;)"><b>GetCircleMode</b></a>(CATCircleMode&amp;,double&amp;,double&amp;)
+</td><td id='tdright'>  Retrieves the relimitation mode of <tt>this</tt> corner operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCorner(CATCGMJournalList*)"><b>GetCorner</b></a>(CATCGMJournalList*)
+</td><td id='tdright'>  Creates the current corner.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCurOrients(CATOrientation&amp;,CATOrientation&amp;,CATOrientation&amp;)"><b>GetCurOrients</b></a>(CATOrientation&amp;,CATOrientation&amp;,CATOrientation&amp;)
+</td><td id='tdright'>  Retrieves the orientation of the parallels used to compute the center
+ of the corner.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDirection(CATMathDirection&amp;,CATBoolean&amp;)"><b>GetDirection</b></a>(CATMathDirection&amp;,CATBoolean&amp;)
+</td><td id='tdright'>  Get the direction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfCorners()"><b>GetNumberOfCorners</b></a>()
+</td><td id='tdright'>  Returns the number of computed corners.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetOffsetOrientation(int&amp;,int&amp;,int&amp;)"><b>GetOffsetOrientation</b></a>(int&amp;,int&amp;,int&amp;)
+</td><td id='tdright'>  Retrieves the defined orientations to take for the parallels to the input wires.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResult()"><b>GetResult</b></a>()
+</td><td id='tdright'>  Returns all the computed corners in a single body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSupportTrimmingSideAndMode(CATLONG32&amp;,CATLONG32&amp;)"><b>GetSupportTrimmingSideAndMode</b></a>(CATLONG32&amp;,CATLONG32&amp;)
+</td><td id='tdright'>  Returns whether the input wires can be assembled in the resulting body, and how they can be assembled.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#NextCorner()"><b>NextCorner</b></a>()
+</td><td id='tdright'>  Skips to the next solution corner of <tt>this</tt> CATTopCorner operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCircleMode(CATCircleMode,double,double)"><b>SetCircleMode</b></a>(CATCircleMode,double,double)
+</td><td id='tdright'>  Defines the relimition mode of <tt>this</tt> corner operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDirection(CATMathDirection&amp;)"><b>SetDirection</b></a>(CATMathDirection&amp;)
+</td><td id='tdright'>  Set the direction .
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetOffsetOrientation(int,int,int)"><b>SetOffsetOrientation</b></a>(int,int,int)
+</td><td id='tdright'>  Defines the orientations to take for the parallels to the input wires.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSupportTrimmingSideAndMode(CATLONG32,CATLONG32)"><b>SetSupportTrimmingSideAndMode</b></a>(CATLONG32,CATLONG32)
+</td><td id='tdright'>  Defines whether the input wires can be assembled in the resulting body, and how they can be assembled.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="~CATTopCorner"></a><a id="~CATTopCorner()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATTopCorner</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="BeginningCorner"></a><a id="BeginningCorner()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BeginningCorner</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Initializes the iterator of the resulting corners.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCenterRadius"></a><a id="GetCenterRadius(CATMathPoint&amp;,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetCenterRadius</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>ioCenter</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioRadius</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the definition of the current corner.
+ <br>To be called after the <tt>GetCorner</tt> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioCenter</span></dt>
+   <dd> The center of the current corner.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioRadius</span></dt>
+   <dd> The radius value of the current corner.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCircleMode"></a><a id="GetCircleMode(CATCircleMode&amp;,double&amp;,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetCircleMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCircleMode','CATCircleMode&amp;')</script> <span class='param'>ioCircleMode</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioStart</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioEnd</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the relimitation mode of <tt>this</tt> corner operator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioCircleMode</span></dt>
+   <dd> The relimitation mode.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioStart</span></dt>
+   <dd> The value is not touched.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioEnd</span></dt>
+   <dd> The value is not touched.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCorner"></a><a id="GetCorner(CATCGMJournalList*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody *')</script>  <span class='objname'>GetCorner</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCGMJournalList','CATCGMJournalList*')</script> <span class='param'>iCurrentJournal</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates the current corner.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCurrentJournal</span></dt>
+   <dd> The pointer to the journal corresponding to the creation of the current corner.
+ If <tt>NULL</tt>, the journal is not written.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the created body. If you do not want to keep it,
+ use the @CATICGMContainer#Remove method to remove it from the geometric factory, after the deletion
+ of <tt>this</tt> operator.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCurOrients"></a><a id="GetCurOrients(CATOrientation&amp;,CATOrientation&amp;,CATOrientation&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetCurOrients</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATOrientation','CATOrientation&amp;')</script> <span class='param'>ioOr1</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation&amp;')</script> <span class='param'>ioOr2</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation&amp;')</script> <span class='param'>ioOr3</span>)</span><script type="text/javascript"> activateLink('0',' const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the orientation of the parallels used to compute the center
+ of the corner.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioOr1</span></dt>
+   <dd> The orientation of the parallel to the first wire.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioOr2</span></dt>
+   <dd> The orientation of the parallel to the second wire.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioOr3</span></dt>
+   <dd> The orientation of the parallel to the third wire, only in case of
+ tritangent corner.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDirection"></a><a id="GetDirection(CATMathDirection&amp;,CATBoolean&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetDirection</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMathDirection','CATMathDirection&amp;')</script> <span class='param'>oDirectionFor3DCorner</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean&amp;')</script> <span class='param'>oAutomaticModeForDirection</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the direction.
+ To be used only in case of 3D corner definition (by default a direction will be automatically calculated)
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oDirectionFor3DCorner</span></dt>
+   <dd> The computed direction.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oAutomaticModeForDirection</span></dt>
+   <dd> Returns whether the direction has been computed.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfCorners"></a><a id="GetNumberOfCorners()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetNumberOfCorners</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the number of computed corners.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The number of corners.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetOffsetOrientation"></a><a id="GetOffsetOrientation(int&amp;,int&amp;,int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetOffsetOrientation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>ioOrientCrv1</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>ioOrientCrv2</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>ioOrientCrv3</span>)</span><script type="text/javascript"> activateLink('const=0',' const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the defined orientations to take for the parallels to the input wires.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioOrientCrv1</span></dt>
+   <dd> The orientation of the parallel to the first wire. If <tt>0</tt>, 
+ the two sides parallels are computed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioOrientCrv2</span></dt>
+   <dd> The orientation of the parallel to the second wire. If <tt>0</tt>, 
+ the two sides parallels are computed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioOrientCrv3</span></dt>
+   <dd> The orientation of the parallel to the third wire. If <tt>0</tt>, 
+ the two sides parallels are computed. In case of tritangent corner only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResult"></a><a id="GetResult()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody*')</script>  <span class='objname'>GetResult</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns all the computed corners in a single body.
+ <br>In this case, <tt>GetNumberOfCorners</tt> and <tt>GetResult()->GetNumberOfDomain()</tt> can be different.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the resulting body. If you do not want to keep it, use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the geometric factory after the <tt>delet</tt>ion</tt> of <tt>this</tt> operator.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSupportTrimmingSideAndMode"></a><a id="GetSupportTrimmingSideAndMode(CATLONG32&amp;,CATLONG32&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetSupportTrimmingSideAndMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>oTrimmingSide</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>oTrimmingMode</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns whether the input wires can be assembled in the resulting body, and how they can be assembled.
+ In this case, the iterator cannot be used.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oTrimmingSide</span></dt>
+   <dd> The assembly side.
+ <br><b>Legal values</b>:
+ <tt>0</tt> if the assembly can be done for all input wires,
+ <tt>1</tt> if the assembly can be done just for the first input wire,
+ <tt>2</tt> if the assembly can be done just for the last input wire.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oTrimmingMode</span></dt>
+   <dd> The assembly mode.
+ <br><b>Legal values</b>:
+ <tt>1</tt> if the assembly must be done, <tt>0</tt> otherwise.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <tt>0</tt> if the assembly is compatible with the relimitation mode, <tt>1</tt> otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="NextCorner"></a><a id="NextCorner()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>NextCorner</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Skips to the next solution corner of <tt>this</tt> CATTopCorner operator.
+<br>After <tt>BeginningCorner</tt>, it skips to the first solution. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The existence of the next solution.
+ <br><b>Legal values</b>:
+ <dl><dt><tt>TRUE</tt> <dd>if there is a solution
+    <dt><tt>FALSE</tt> <dd>no more solution.</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> operator.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCircleMode"></a><a id="SetCircleMode(CATCircleMode,double,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetCircleMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCircleMode','CATCircleMode')</script> <span class='param'>iCircleMode</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iStart</span><span class='param'>=0.0</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iEnd</span><span class='param'>=0.0</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the relimition mode of <tt>this</tt> corner operator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCircleMode</span></dt>
+   <dd> The relimitation mode of the corner. Do not use the <tt>Angular</tt>
+ value.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStart</span></dt>
+   <dd> Not to be used.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEnd</span></dt>
+   <dd> Not to be used.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <tt>0</tt> if the relimitation mode is compatible with the assembly mode, <tt>1</tt> otherwise.
+ In this last case, the <tt>Direct</tt> mode must be set.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDirection"></a><a id="SetDirection(CATMathDirection&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDirection</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathDirection','CATMathDirection&amp;')</script> <span class='param'>iDirectionFor3DCorner</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Set the direction .
+ To be used only in case of 3D corner definition (by default a direction will be automatically calculated)
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDirectionFor3DCorner</span></dt>
+   <dd> This is the direction of the cylinder which will be the support of the 3D corner.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetOffsetOrientation"></a><a id="SetOffsetOrientation(int,int,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetOffsetOrientation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOrientCrv1</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOrientCrv2</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOrientCrv3</span><span class='param'>=0</span>)</span><script type="text/javascript"> activateLink('=0',' =0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the orientations to take for the parallels to the input wires.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOrientCrv1</span></dt>
+   <dd> The orientation of the parallel to the first wire. If <tt>0</tt>, 
+ the two sides parallels are computed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientCrv2</span></dt>
+   <dd> The orientation of the parallel to the second wire. If <tt>0</tt>, 
+ the two sides parallels are computed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientCrv3</span></dt>
+   <dd> The orientation of the parallel to the third wire. If <tt>0</tt>, 
+ the two sides parallels are computed. In case of tritangent corner only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSupportTrimmingSideAndMode"></a><a id="SetSupportTrimmingSideAndMode(CATLONG32,CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SetSupportTrimmingSideAndMode</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iTrimmingSide</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iTrimmingMode</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines whether the input wires can be assembled in the resulting body, and how they can be assembled.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTrimmingSide</span></dt>
+   <dd> The assembly side
+ <br><b>Legal values</b>: 
+ <tt>0</tt> if the assembly can be done for all input wires,
+ <tt>1</tt> if the assembly can be done just for the first input wire,
+ <tt>2</tt> if the assembly can be done just for the last input wire.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTrimmingMode</span></dt>
+   <dd> The assembly mode.
+ <br><b>Legal values</b>:
+ <tt>1</tt> if the assembly must be done, <tt>0</tt> otherwise.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <br><b>Legal values</b>:
+ <tt>1</tt> if the assembly must be done, <tt>0</tt> otherwise.
+ In this last case, <tt>CATCircleMode</tt> must changed to <tt>Direct</tt>.
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATTopCorner.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATTopologicalOperators</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

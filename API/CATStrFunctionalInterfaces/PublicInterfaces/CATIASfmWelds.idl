@@ -1,0 +1,68 @@
+//=============================================================================
+// COPYRIGHT Dassault Systemes 2013
+//=============================================================================
+// CATIASfmSplitPlate
+//   Interface for managing welds.
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar  Creation                                                Bhupendra MITHE
+//=============================================================================
+
+#ifndef CATIASfmWelds_IDL
+#define CATIASfmWelds_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASfmWeld.idl"
+#include "CATVariant.idl"
+#include "CATIACollection.idl"
+
+/**
+* Interface to manage the Structure Functional Modeler Weld object's collection.
+* <b>Role</b>:  Provides access to Weld objects as a collection.
+*/
+
+interface CATIASfmWelds : CATIACollection
+{
+  /**
+  * Gets Weld Feature.
+  * @param iIndex [in]
+  *     Index of the Weld Feature to be retrieved.  
+  * @param oSfmWeld [out]
+  *      The retrieved Weld Feature.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets Weld Feature.
+  * <pre>
+  * Dim Welds As SfmWelds
+  * Set Welds = Split_Plate.GetWelds(Nothing)
+  * Dim j As Integer
+  * For j = 1 To Welds.Count
+  * Dim EachWeld As SfmWeld
+  * Set EachWeld = Welds.<font color="red">Item</font>(j)
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIASfmWeld oSfmWeld);
+};
+
+// Interface name : CATIASfmWelds
+#pragma ID CATIASfmWelds "DCE:5D1415B7-A152-45d5-8250F29B4CBD0A99"
+#pragma DUAL CATIASfmWelds
+
+// VB object name : SfmWelds 
+#pragma ID SfmWelds "DCE:48037EE5-A8C2-4ac8-A573AB3F875C972C"
+#pragma ALIAS CATIASfmWelds SfmWelds
+
+#endif
+

@@ -1,0 +1,512 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>XMLParser CATISAXDocumentHandler Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../XMLParser.htm" href="../XMLParser.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "XMLParser";	}
+		function getCurrentObjectName() { 
+ 	return "CATISAXDocumentHandler"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>XMLParser Framework:  CATISAXDocumentHandler Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATISAXDocumentHandler_30725','CATISAXDocumentHandler','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can freely reimplement this interface.</b></p>
+<hr/>
+<p>
+ interface <b>CATISAXDocumentHandler</b>
+</p>
+<p>
+<b><i> Interface to receive notification of general document events.</i></b><br>
+
+
+ <p>This is the main interface that most SAX applications
+ implement: if the application needs to be informed of basic parsing 
+ events, it implements this interface and registers an instance with 
+ the SAX parser using the <script type="text/javascript"> activateLinkAnchor('CATISAXParser','SetDocumentHandler','CATISAXParser.SetDocumentHandler') </script> method.  The parser  uses the instance to report basic document-related events like
+ the start and end of elements and character data.</p>
+
+ <p>The order of events in this interface is very important, and
+ mirrors the order of information in the document itself.  For
+ example, all of an element content (character data, processing
+ instructions, and/or subelements) will appear, in order, between
+ the 
+<script type="text/javascript"> activateLinkAnchor('','StartElement','StartElement') </script> event and the corresponding 
+<script type="text/javascript"> activateLinkAnchor('','EndElement','EndElement') </script> event.</p>
+ <p>Application writers who do not want to implement the entire
+ interface can derive a class from 
+<script type="text/javascript"> activateLinkAnchor('CATSAXHandlerBase','','CATSAXHandlerBase') </script>, which implements the default functionality; parser writers can instantiate
+ 
+<script type="text/javascript"> activateLinkAnchor('CATSAXHandlerBase','','CATSAXHandlerBase') </script> to obtain a default handler.  The application can find the location of any document event using the 
+<script type="text/javascript"> activateLinkAnchor('CATISAXLocator','','CATISAXLocator') </script> interface supplied by the 
+<script type="text/javascript"> activateLinkAnchor('CATISAXParser','','CATISAXParser') </script> through the 
+<script type="text/javascript"> activateLinkAnchor('','SetDocumentLocator','SetDocumentLocator') </script> method.</p>
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATISAXParser','SetDocumentHandler','CATISAXParser.SetDocumentHandler') </script>, <script type="text/javascript"> activateLinkAnchor('CATISAXLocator','','CATISAXLocator') </script>, <script type="text/javascript"> activateLinkAnchor('CATSAXHandlerBase','','CATSAXHandlerBase') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Characters(CATUnicodeString&amp;)"><b>Characters</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Receives notification of character data.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EndDocument()"><b>EndDocument</b></a>()
+</td><td id='tdright'>  Receives notification of the end of a document.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EndElement(CATUnicodeString&amp;)"><b>EndElement</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Receives notification of the end of an element.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IgnorableWhiteSpace(CATUnicodeString&amp;)"><b>IgnorableWhiteSpace</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Receives notification of ignorable whitespace in element content.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ProcessingInstruction(CATUnicodeString&amp;,CATUnicodeString&amp;)"><b>ProcessingInstruction</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Receives notification of a processing instruction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDocumentLocator(CATISAXLocator_var&amp;)"><b>SetDocumentLocator</b></a>(CATISAXLocator_var&amp;)
+</td><td id='tdright'>  Receives an object for locating the origin of SAX document events.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#StartDocument()"><b>StartDocument</b></a>()
+</td><td id='tdright'>  Receives notification of the beginning of a document.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#StartElement(CATUnicodeString&amp;,CATISAXAttributeList_var&amp;)"><b>StartElement</b></a>(CATUnicodeString&amp;,CATISAXAttributeList_var&amp;)
+</td><td id='tdright'>  Receives notification of the beginning of an element.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Characters"></a><a id="Characters(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Characters</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iCharacters</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receives notification of character data.
+
+ <p>The 
+<script type="text/javascript"> activateLinkAnchor('CATISAXParser','','CATISAXParser') </script> will call this method to report each chunk of character data.  SAX parsers may return all contiguous character
+ data in a single chunk, or they may split it into several
+ chunks; however, all of the characters in any single event
+ must come from the same external entity, so that the 
+<script type="text/javascript"> activateLinkAnchor('CATISAXLocator','','CATISAXLocator') </script> provides useful information.</p>
+
+ <p>Note that some parsers will report whitespace using the
+ 
+<script type="text/javascript"> activateLinkAnchor('','IgnorableWhiteSpace','IgnorableWhiteSpace') </script> method rather than this one (validating parsers must do so).</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacters</span></dt>
+   <dd>  The characters from the XML document.
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXException','','CATSAXException') </script> </td>        <td class="errtd">XMLParserERR_2000</td>
+        <td class="errtd">The method can raise a CATSAXException</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXParseException','','CATSAXParseException') </script> </td>        <td class="errtd">XMLParserERR_2002</td>
+        <td class="errtd">The method can raise a CATSAXParseException</td>
+     </tr>
+   </table>
+ </dd>
+ 
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','IgnorableWhiteSpace','IgnorableWhiteSpace') </script>, <script type="text/javascript"> activateLinkAnchor('CATISAXLocator','','CATISAXLocator') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="EndDocument"></a><a id="EndDocument()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>EndDocument</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receives notification of the end of a document.
+
+ <p>The SAX parser will invoke this method only once, and it will
+ be the last method invoked during the parse.  The parser shall
+ not invoke this method until it has either abandoned parsing
+ (because of an unrecoverable error) or reached the end of
+ input.</p>
+
+ <dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXException','','CATSAXException') </script> </td>        <td class="errtd">XMLParserERR_2000</td>
+        <td class="errtd">The method can raise a CATSAXException</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXParseException','','CATSAXParseException') </script> </td>        <td class="errtd">XMLParserERR_2002</td>
+        <td class="errtd">The method can raise a CATSAXParseException</td>
+     </tr>
+   </table>
+ </dd>
+ </dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="EndElement"></a><a id="EndElement(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>EndElement</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iName</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receives notification of the end of an element.
+
+ <p>The SAX parser will invoke this method at the end of every
+ element in the XML document; there will be a corresponding
+ 
+<script type="text/javascript"> activateLinkAnchor('','StartElement','StartElement') </script> event for every 
+<script type="text/javascript"> activateLinkAnchor('','EndElement','EndElement') </script> event (even when the element is empty).</p>
+
+ <p>If the element name has a namespace prefix, the prefix will
+ still be attached to the name.</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iName</span></dt>
+   <dd> The element type name
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXException','','CATSAXException') </script> </td>        <td class="errtd">XMLParserERR_2000</td>
+        <td class="errtd">The method can raise a CATSAXException</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXParseException','','CATSAXParseException') </script> </td>        <td class="errtd">XMLParserERR_2002</td>
+        <td class="errtd">The method can raise a CATSAXParseException</td>
+     </tr>
+   </table>
+ </dd>
+ 
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IgnorableWhiteSpace"></a><a id="IgnorableWhiteSpace(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>IgnorableWhiteSpace</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iCharacters</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receives notification of ignorable whitespace in element content.
+
+ <p>Validating Parsers must use this method to report each chunk
+ of ignorable whitespace (see the W3C XML 1.0 recommendation,
+ section 2.10): non-validating parsers may also use this method
+ if they are capable of parsing and using content models.</p>
+
+ <p>SAX parsers may return all contiguous whitespace in a single
+ chunk, or they may split it into several chunks; however, all of
+ the characters in any single event must come from the same
+ external entity, so that the 
+<script type="text/javascript"> activateLinkAnchor('CATISAXLocator','','CATISAXLocator') </script> provides useful information.</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCharacters</span></dt>
+   <dd>  The characters from the XML document.
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXException','','CATSAXException') </script> </td>        <td class="errtd">XMLParserERR_2000</td>
+        <td class="errtd">The method can raise a CATSAXException</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXParseException','','CATSAXParseException') </script> </td>        <td class="errtd">XMLParserERR_2002</td>
+        <td class="errtd">The method can raise a CATSAXParseException</td>
+     </tr>
+   </table>
+ </dd>
+ 
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','Characters','Characters') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ProcessingInstruction"></a><a id="ProcessingInstruction(CATUnicodeString&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ProcessingInstruction</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iTarget</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iData</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receives notification of a processing instruction.
+
+ <p>The 
+<script type="text/javascript"> activateLinkAnchor('CATISAXParser','','CATISAXParser') </script> will invoke this method once for each processing instruction found: note that processing instructions may occur
+ before or after the main document element.</p>
+
+ <p>A SAX parser should never report an XML declaration (XML 1.0,
+ section 2.8) or a text declaration (XML 1.0, section 4.3.1)
+ using this method.</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTarget</span></dt>
+   <dd> The processing instruction target.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iData</span></dt>
+   <dd>  The processing instruction data (can be an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> if no processing instruction data was given).
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXException','','CATSAXException') </script> </td>        <td class="errtd">XMLParserERR_2000</td>
+        <td class="errtd">The method can raise a CATSAXException</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXParseException','','CATSAXParseException') </script> </td>        <td class="errtd">XMLParserERR_2002</td>
+        <td class="errtd">The method can raise a CATSAXParseException</td>
+     </tr>
+   </table>
+ </dd>
+ 
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDocumentLocator"></a><a id="SetDocumentLocator(CATISAXLocator_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetDocumentLocator</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATISAXLocator_var','CATISAXLocator_var&amp;')</script> <span class='param'>iLocator</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receives an object for locating the origin of SAX document events.
+
+ <p>SAX parsers are strongly encouraged (though not absolutely
+ required) to supply a locator: if it does so, it must supply
+ the locator to the application by invoking this method before
+ invoking any of the other methods in the 
+<script type="text/javascript"> activateLinkAnchor('CATISAXDocumentHandler','','CATISAXDocumentHandler') </script> interface.</p>
+
+ <p>The locator allows the application to determine the end
+ position of any document-related event, even if the parser is
+ not reporting an error.  Typically, the application will
+ use this information for reporting its own errors (such as
+ character content that does not match an application's
+ business rules).  The information returned by the locator
+ is probably not sufficient for use with a search engine.</p>
+
+ <p>Note that the locator will return correct information only
+ during the invocation of the events in this interface.  The
+ application should not attempt to use it at any other time.</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocator</span></dt>
+   <dd> An object that can return the location of any SAX document event.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATISAXLocator','','CATISAXLocator') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="StartDocument"></a><a id="StartDocument()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>StartDocument</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receives notification of the beginning of a document.
+
+ <p>The SAX parser will invoke this method only once, before any
+ other methods in this interface or in 
+<script type="text/javascript"> activateLinkAnchor('CATISAXDTDHandler','','CATISAXDTDHandler') </script> (except for 
+<script type="text/javascript"> activateLinkAnchor('','SetDocumentLocator','SetDocumentLocator') </script> ).</p>
+ <dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXException','','CATSAXException') </script> </td>        <td class="errtd">XMLParserERR_2000</td>
+        <td class="errtd">The method can raise a CATSAXException</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXParseException','','CATSAXParseException') </script> </td>        <td class="errtd">XMLParserERR_2002</td>
+        <td class="errtd">The method can raise a CATSAXParseException</td>
+     </tr>
+   </table>
+ </dd>
+ </dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="StartElement"></a><a id="StartElement(CATUnicodeString&amp;,CATISAXAttributeList_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>StartElement</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iName</span>, const <script type="text/javascript"> activateLink('CATISAXAttributeList_var','CATISAXAttributeList_var&amp;')</script> <span class='param'>iAttributes</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receives notification of the beginning of an element.
+
+ <p>The 
+<script type="text/javascript"> activateLinkAnchor('CATISAXParser','','CATISAXParser') </script> will invoke this method at the beginning of every element in the XML document; there will be a 
+ corresponding 
+<script type="text/javascript"> activateLinkAnchor('','EndElement','EndElement') </script> event for every 
+<script type="text/javascript"> activateLinkAnchor('','StartElement','StartElement') </script> event (even when the element is empty).</p>
+ 
+ <p>All of the element content will be
+ reported, in order, before the corresponding 
+<script type="text/javascript"> activateLinkAnchor('','EndElement','EndElement') </script> event 
+.</p>
+ <p>If the element name has a namespace prefix, the prefix will
+ still be attached.  Note that the attribute list provided will
+ contain only attributes with explicit values (specified or
+ defaulted): #IMPLIED attributes will be omitted.</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iName</span></dt>
+   <dd>  The element type name.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAttributes</span></dt>
+   <dd>  The attributes attached to the element, if any.
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXException','','CATSAXException') </script> </td>        <td class="errtd">XMLParserERR_2000</td>
+        <td class="errtd">The method can raise a CATSAXException</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATSAXParseException','','CATSAXParseException') </script> </td>        <td class="errtd">XMLParserERR_2002</td>
+        <td class="errtd">The method can raise a CATSAXParseException</td>
+     </tr>
+   </table>
+ </dd>
+ 
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATISAXAttributeList','','CATISAXAttributeList') </script>, <script type="text/javascript"> activateLinkAnchor('','EndElement','EndElement') </script></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATISAXDocumentHandler.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATXMLParserItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

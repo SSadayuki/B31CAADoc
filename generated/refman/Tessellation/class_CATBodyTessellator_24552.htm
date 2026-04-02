@@ -1,0 +1,359 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>Tessellation CATBodyTessellator Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../Tessellation.htm" href="../Tessellation.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "Tessellation";	}
+		function getCurrentObjectName() { 
+ 	return "CATBodyTessellator"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>Tessellation Framework: CATBodyTessellator <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATBodyTessellator_24552','CATBodyTessellator','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATBodyTessellator</b>
+</p>
+<p>
+<b><i> Class defining a Tessellation operator on a body.</i></b><br>
+
+ <br> This operator computes a discretized geometry on the skin of a body, as triangles and bars.
+ The extremities of the bars are called points. Three parameters tune the tessellation result:
+ <dl>
+ <dt> Sag </dt><dd> Defines the maximum distance between a bar and the object to tessellate
+ <dt> Step </dt><dd> Defines the maximum length of a bar. If not defined, the step is infinite 
+ (this parameter is unused)
+ <dt> Angle </dt><dd> Defines the maximum angle between the normals at each bar end. 
+ The minimum accepted value for Angle is PI/16.
+ </dl>
+ The Tessellation operator follows the scheme of all the CGM operators:
+ <ul>
+ <li> Create an operator instance,
+ <li> Run,
+ <li> Recover the results by the means of iterators,
+ <li> Delete the operator instance. The deletion of the operator leads to the deletion
+ of the iterators and the arrays of results.
+ </ul></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATBodyTessellator(CATBody*,double,double)"><b>CATBodyTessellator</b></a>(CATBody*,double,double)
+</td><td id='tdright'>  Constructs a CATBodyTessellator with an infinite step.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATBodyTessellator()"><b>~CATBodyTessellator</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetEdge(CATEdge*,CATTessEdgeIter**)"><b>GetEdge</b></a>(CATEdge*,CATTessEdgeIter**)
+</td><td id='tdright'>  Retrieves the tessellation point numbers on an edge relative to an adjacent face point.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetEdge(CATEdge*,CATLONG32&amp;,float**)"><b>GetEdge</b></a>(CATEdge*,CATLONG32&amp;,float**)
+</td><td id='tdright'>  Retrieves the result (in floats) associated with a topological edge of the input body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetEdge(CATEdge*,CATLONG32&amp;,double**)"><b>GetEdge</b></a>(CATEdge*,CATLONG32&amp;,double**)
+</td><td id='tdright'>  Retrieves the results (in doubles) associated with a topological edge of the input body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetEdge(CATEdge*,CATMathSetOfPointsND**,CATMathSetOfPointsND**)"><b>GetEdge</b></a>(CATEdge*,CATMathSetOfPointsND**,CATMathSetOfPointsND**)
+</td><td id='tdright'>  Retrieves the results associated with a topological edge of the input body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetFace(CATFace*,CATBoolean&amp;,CATTessPointIter**,CATTessStripeIter**,CATTessFanIter**,CATTessPolyIter**,CATTessTrianIter**,short*)"><b>GetFace</b></a>(CATFace*,CATBoolean&amp;,CATTessPointIter**,CATTessStripeIter**,CATTessFanIter**,CATTessPolyIter**,CATTessTrianIter**,short*)
+</td><td id='tdright'>  Retrieves the results associated with a topological face of the input body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetVertex(CATVertex*,CATMathPoint*)"><b>GetVertex</b></a>(CATVertex*,CATMathPoint*)
+</td><td id='tdright'>  Retrieves the result associated with a topological vertex of the input body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> CATBodyTessellator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetStep(double)"><b>SetStep</b></a>(double)
+</td><td id='tdright'>  Defines a finite step for <tt>this</tt> CATBodyTessellator.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATBodyTessellator"></a><a id="CATBodyTessellator(CATBody*,double,double)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATBodyTessellator</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iBody</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iSag</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iAngle</span><span class='param'>=CATPIBY4</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a CATBodyTessellator with an infinite step.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBody</span></dt>
+   <dd> The body to tessellate.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSag</span></dt>
+   <dd> The Sag value.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAngle</span></dt>
+   <dd> The Angle value in radian. PI/16 < Angle < PI
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATBodyTessellator"></a><a id="~CATBodyTessellator()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATBodyTessellator</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetEdge"></a><a id="GetEdge(CATEdge*,CATTessEdgeIter**)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetEdge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATEdge','CATEdge*')</script> <span class='param'>iEdge</span>,<script type="text/javascript"> activateLink('CATTessEdgeIter','CATTessEdgeIter**')</script> <span class='param'>oEdgeIter</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the tessellation point numbers on an edge relative to an adjacent face point.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdge</span></dt>
+   <dd> The pointer to an edge of the input body.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oEdgeIter</span></dt>
+   <dd> The pointer to the created CATTessEdgeIterator.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetEdge"></a><a id="GetEdge(CATEdge*,CATLONG32&amp;,float**)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetEdge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATEdge','CATEdge*')</script> <span class='param'>iEdge</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>oNumberOfPoints</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>oPointData</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the result (in floats) associated with a topological edge of the input body.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdge</span></dt>
+   <dd> The pointer to an edge of the input body.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNumberOfPoints</span></dt>
+   <dd> The number of points of the resulting tessellation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oPointData</span></dt>
+   <dd> The array of the resulting points. This array is allocated by the <tt>GetEdge</tt>
+ method. The j-th coordinate of the i-th point is
+ <tt>oPointData[3*(i-1)+j-1]</tt>.
+ of the resulting tessellation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetEdge"></a><a id="GetEdge(CATEdge*,CATLONG32&amp;,double**)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetEdge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATEdge','CATEdge*')</script> <span class='param'>iEdge</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>oNumberOfPoints</span>,<script type="text/javascript"> activateLink('double','double**')</script> <span class='param'>oPointData</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the results (in doubles) associated with a topological edge of the input body.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdge</span></dt>
+   <dd> The pointer to an edge of the input body.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNumberOfPoints</span></dt>
+   <dd> The number of points of the resulting tessellation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oPointData</span></dt>
+   <dd> The array of the resulting points. This array is allocated by the <tt>GetEdge</tt>
+ method. The j-th coordinate of the i-th point is
+ <tt>oPointData[3*(i-1)+j-1]</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetEdge"></a><a id="GetEdge(CATEdge*,CATMathSetOfPointsND**,CATMathSetOfPointsND**)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetEdge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATEdge','CATEdge*')</script> <span class='param'>iEdge</span>,<script type="text/javascript"> activateLink('CATMathSetOfPointsND','CATMathSetOfPointsND**')</script> <span class='param'>oMathPoints</span>,<script type="text/javascript"> activateLink('CATMathSetOfPointsND','CATMathSetOfPointsND**')</script> <span class='param'>oCrvParams</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the results associated with a topological edge of the input body.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdge</span></dt>
+   <dd> The pointer to an edge of the input body.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oMathPoints</span></dt>
+   <dd> The pointer to the created CATMathSetOfPointsND. This set contains the points (as 3 Cartesian coordinates)
+ of the resulting tessellation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCrvParams</span></dt>
+   <dd> The pointer to the created CATMathSetOfPointsND. This set contains the points (as a CATCrvParam on the
+ underlying edge curve)
+ of the resulting tessellation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetFace"></a><a id="GetFace(CATFace*,CATBoolean&amp;,CATTessPointIter**,CATTessStripeIter**,CATTessFanIter**,CATTessPolyIter**,CATTessTrianIter**,short*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetFace</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFace</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean&amp;')</script> <span class='param'>oPlane</span>,<script type="text/javascript"> activateLink('CATTessPointIter','CATTessPointIter**')</script> <span class='param'>oPoints</span>,<script type="text/javascript"> activateLink('CATTessStripeIter','CATTessStripeIter**')</script> <span class='param'>oStrips</span>,<script type="text/javascript"> activateLink('CATTessFanIter','CATTessFanIter**')</script> <span class='param'>oFans</span>,<script type="text/javascript"> activateLink('CATTessPolyIter','CATTessPolyIter**')</script> <span class='param'>oPolygons</span>,<script type="text/javascript"> activateLink('CATTessTrianIter','CATTessTrianIter**')</script> <span class='param'>oTriangles</span>,<script type="text/javascript"> activateLink('short','short*')</script> <span class='param'>oSide</span><span class='param'>=(short *) 0</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the results associated with a topological face of the input body.
+ <br> All the output iterators are allocated by the <tt>GetFace</tt> method,
+ and are deleted when the operator is deleted. 
+ <br><b>Note</b>: The results do not necessarily contain all types of tessellation
+ objects for a single body. You can have no isolated triangles or no triangle strips
+ in a tessellated body. For a example, for a degenerated face with a small width, 
+ the result can be made up of two vertices. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFace</span></dt>
+   <dd> The pointer to a face of the input body.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oPlane</span></dt>
+   <dd> Retrieves <tt>1</tt> if the face is planar, <tt>0</tt> otherwise.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oPoints</span></dt>
+   <dd> The pointer to the created CATTessPointIter, to retrieve the computed points. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oStrips</span></dt>
+   <dd> The pointer to the created CATTessStripeIter, to retrieve the computed triangle strips. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oFans</span></dt>
+   <dd> The pointer to the created CATTessFanIter, to retrieve the computed triangle fans. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oPolygons</span></dt>
+   <dd> The pointer to the created CATTessPolyIter, to retrieve the computed polygons. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oTriangles</span></dt>
+   <dd> The pointer to the created CATTessTrianIter, to retrieve the isolated triangles. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oSide</span></dt>
+   <dd> The face orientation.
+ <br><b>Legal values</b>: <tt>1</tt> if the face orientation is outwards, <tt>-1</tt> if it is inwards.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetVertex"></a><a id="GetVertex(CATVertex*,CATMathPoint*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetVertex</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATVertex','CATVertex*')</script> <span class='param'>iVertex</span>,<script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint*')</script> <span class='param'>oMathPoint</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the result associated with a topological vertex of the input body.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iVertex</span></dt>
+   <dd> The pointer to a vertex of the input body.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oMathPoint</span></dt>
+   <dd> The corresponding CATMathPoint.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> CATBodyTessellator.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetStep"></a><a id="SetStep(double)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetStep</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iStep</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a finite step for <tt>this</tt> CATBodyTessellator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iStep</span></dt>
+   <dd> The Step value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATBodyTessellator.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATTessellation</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

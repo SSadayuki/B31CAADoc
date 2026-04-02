@@ -1,0 +1,16 @@
+BUILT_OBJECT_TYPE = LOAD MODULE
+ENCODING_KEY = System
+PROGRAM_NAME = DSLicTarget
+SRC_LINK_WITH = DSLicTargetM DSLicTargetArch
+LINK_WITH = JS0DSLUTILS 
+
+OS = Windows_NT
+STATIC_LIBS=YES
+
+OS = SunOS
+FORTRAN_LIBS=
+SUNMATH_LIBS=
+
+OS = Darwin
+LOCAL_LDFLAGS=-lIOKit
+SYS_LIBS=-framework CoreServices -framework CoreFoundation -framework IOKit

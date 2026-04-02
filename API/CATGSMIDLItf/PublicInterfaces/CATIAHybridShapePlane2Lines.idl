@@ -1,0 +1,134 @@
+#ifndef CATIAHybridShapePlane2Lines_IDL
+#define CATIAHybridShapePlane2Lines_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapePlane2Lines:         
+// Exposed interface for HybridShape Plane2Lines
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation
+//=================================================================
+#include "CATIAHybridShapePlane.idl"
+interface CATIAReference;
+
+/**
+ * plane defined by two lines.  
+ * <b>Role</b>: Allows to access data of the plane feature passing though two lines.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapePlane2Lines : CATIAHybridShapePlane
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+#pragma PROPERTY First
+
+ /**
+ * <b>Role</b>: Get the first line.
+ * @param oLine1
+ *   first line.
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_First ( out /*IDLRETVAL*/  CATIAReference   oLine1);
+
+
+
+
+
+ /**
+ * <b>Role</b>: Set the first line.
+ * @param iLine1
+ *   first line.
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_First ( in           CATIAReference   iLine1);
+
+#pragma PROPERTY Second
+
+
+
+
+
+ /**
+ * <b>Role</b>: Get the second line.
+ * @param oLine2
+ *   second line.
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_Second ( out /*IDLRETVAL*/  CATIAReference   oLine2);
+
+
+
+
+
+ /**
+ * <b>Role</b>: Set the second line.
+ * @param iLine2
+ *   second line.
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_Second ( in           CATIAReference   iLine2);
+
+ /**
+ * if ForbidNonCoplanarLines = TRUE, both lines have to be on the same plane.
+ * if ForbidNonCoplanarLines = FALSE, both lines can be non coplanar.
+ */
+
+#pragma PROPERTY ForbidNonCoplanarLines
+
+ HRESULT put_ForbidNonCoplanarLines(in           boolean iCoplanarLines);
+ HRESULT get_ForbidNonCoplanarLines(out /*IDLRETVAL*/ boolean oCoplanarLines);
+  
+};
+
+
+
+
+
+// Interface name : CATIAHybridShapePlane2Lines
+#pragma ID CATIAHybridShapePlane2Lines "DCE:89d76611-e9c8-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapePlane2Lines
+
+// VB object name : HybridShapePlane2Lines (Id used in Visual Basic)
+#pragma ID HybridShapePlane2Lines "DCE:89d7690f-9267-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapePlane2Lines HybridShapePlane2Lines
+
+
+#endif
+
+

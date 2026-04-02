@@ -1,0 +1,69 @@
+#ifndef CATIAOutputs_IDL
+#define CATIAOutputs_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAItem;
+
+/**
+ * The collection of outputs related to the current activity.
+ */
+
+interface CATIAOutputs : CATIACollection
+{
+
+/**
+ * This method can be used to assign a given product as an output
+ * @param iOutput
+ * The output to add
+ * @return oProduct
+ * The assigned product
+ */
+ HRESULT    Add( in CATIAItem iOutput,  out /*IDLRETVAL*/ CATIAItem oProduct);
+
+/**
+ * This method can be used to unassign an output product from a process
+ * @param iProduct
+ * The product to remove
+ * @return oProduct
+ * The item
+ */
+ HRESULT    Remove( in CATIAItem iOutput, out /*IDLRETVAL*/ CATIAItem oProduct);
+
+/**
+ * This method returns the no. of products / features that are assigned to a process as output.
+ * @return oNbOutputs
+ * No. of Outputss that are assigned to the activity.
+ */
+ HRESULT    Count(out /*IDLRETVAL*/ long oNbOutputs);
+
+/**
+ * This method can be used to get the associated output product. 
+ * @param iIndex
+ * The item identifier (can be the index or the name)
+ * @return oProduct
+ * The indexed product/MA that is assigned to the process.
+ */
+ HRESULT    Item( in CATVariant iIndex, out /*IDLRETVAL*/ CATIAItem oProduct);
+
+};
+
+// Interface name : CATIAOutputs
+#pragma ID CATIAOutputs "DCE:e8419e89-6630-4d54-bc351bf59e2231b1"
+#pragma DUAL CATIAOutputs
+
+// VB object name : Outputs
+#pragma ID Outputs "DCE:5a6f9360-60f3-4c49-841ed4087078aad8"
+#pragma ALIAS CATIAOutputs Outputs
+
+
+#endif

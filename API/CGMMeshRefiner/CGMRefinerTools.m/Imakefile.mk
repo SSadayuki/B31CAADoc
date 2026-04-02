@@ -1,0 +1,20 @@
+# COPYRIGHT DASSAULT SYSTEMES 2007, ALL RIGHTS RESERVED.
+#======================================================================
+# Imakefile for module CGMRefinerTools.m
+#======================================================================
+#
+# May 2007 Creation ndo
+#======================================================================
+#
+# NONE 
+#
+
+BUILT_OBJECT_TYPE=NONE 
+
+#
+OS = Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+#

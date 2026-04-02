@@ -1,0 +1,114 @@
+// COPYRIGHT DASSAULT SYSTEMES 2016
+#ifndef CATIADrawingGDTs_IDL
+#define CATIADrawingGDTs_IDL
+/*IDLREP*/
+
+#include "CATIACollection.idl"
+#include "CATIADrawingGDT.idl"
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+ /**
+  * A collection of all the drawing GDTs currently managed by a
+  * drawing view of drawing sheet in a drawing document.
+  */
+interface CATIADrawingGDTs : CATIACollection
+{
+  /**
+  * Creates a drawing GDT and adds it to the drawing GDTs collection.
+  * This drawing GDT becomes the active one.
+  * @param iPositionLeaderX, iPositionLeaderY
+  *   The drawing leader of the GDT x and y coordinates, expressed in millimeters,
+  *   and expressed with respect to the view coordinate system
+  * @param iPositionX, iPositionY
+  *   The drawing GDT x and y coordinates, expressed in millimeters,
+  *   and expressed with respect to the view coordinate system
+  * @param iGDTSymbol
+  *   The symbol to use in the first row.
+  *   @see CATIADrawingGDT::GetToleranceType
+  * @param iText
+  *   The text of the iGDTSymbol
+  * @ return The created drawing GDT
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates a drawing GDT, 
+  * retrieved in <tt>MyGDT</tt>, in the <tt>MyView</tt> drawing view.
+  * This view belongs to the drawing view collection of the drawing sheet.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView = MySheet.Views.ActiveView
+  * Dim MyGDT As DrawingGDT
+  * Set MyGDT = 
+  *    MyView.GDTs.<font color="red">Add</font>(0., 0., 0., 0., 1, "text")
+  * </pre>
+  * </dl>
+  */
+  HRESULT Add(in double iPositionLeaderX, in double iPositionLeaderY, in double iPositionX, in double iPositionY, in long iGDTSymbol, in CATBSTR iText,
+                            out /*IDLRETVAL*/ CATIADrawingGDT oNewDrawingGDT);
+
+  /**
+  * Removes a drawing GDT from the drawing GDTs collection.
+  * @param iIndex
+  *   The index of the drawing GDT to remove from
+  *   the collection of drawing GDTs.
+  *   As a numerics, this index is the rank of the drawing text
+  *   in the collection.
+  *   The index of the first drawing GDT in the collection is 1, and
+  *   the index of the last drawing GDT is Count.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing GDT 
+  * from the drawing GDT collection of the active view
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * MyView.GDTs.<font color="red">Remove</font>(3)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Remove(in long iIndex);
+
+  /**
+  * Returns a drawing GDT using its index from the drawing GDTs collection.
+  * @param iIndex
+  *   The index of the drawing GDT to retrieve from the collection of drawing GDTs.
+  *   As a numerics, this index is the rank of the drawing GDT in the collection.
+  *   The index of the first drawing GDT in the collection is 1, and
+  *   the index of the last drawing GDT is Count.
+  * @return The retrieved drawing GDT
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisDrawingGDT</tt> the second drawing GDT,
+  * in the drawing GDT collection of the active view
+  * in the active sheet, in the active document supposed to be a drawing document.
+  * <pre>
+  * Dim MyView  As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * Dim ThisDrawingGDT As DrawingGDT
+  * Set ThisDrawingGDT = MyView.GDTs.<font color="red">Item</font>(2)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Item(in long iIndex, out /*IDLRETVAL*/ CATIADrawingGDT oItem);
+
+};
+
+// Interface name : CATIADrawingGDTs
+#pragma ID CATIADrawingGDTs "DCE:cd240cdd-c660-4cc1-a49665a7685f3709"
+#pragma DUAL CATIADrawingGDTs
+
+// VB object name : DrawingGDTs (Id used in Visual Basic)
+#pragma ID DrawingGDTs "DCE:3e67b08c-8a91-4945-862e5787529a4422"
+#pragma ALIAS CATIADrawingGDTs DrawingGDTs
+
+#endif

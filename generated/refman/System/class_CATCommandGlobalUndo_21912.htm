@@ -1,0 +1,375 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>System CATCommandGlobalUndo Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../System.htm" href="../System.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "System";	}
+		function getCurrentObjectName() { 
+ 	return "CATCommandGlobalUndo"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>System Framework: CATCommandGlobalUndo <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATCommandGlobalUndo_21912','CATCommandGlobalUndo','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can derive this class.</b></p>
+<hr/>
+<p>
+ public class <b>CATCommandGlobalUndo</b>
+</p>
+<p>
+<b><i> Base class to create an undo/redo object for a command.</i></b><br>
+
+ <b>Role</b>: This class provides methods to undo/redo the command global 
+ effects.
+ CNext records instances of this class in a command history that enables 
+ the end user to undo the previous command. So, each instance of this class
+ is created at the end of a command and is kept after the command deletion.  
+ <br>To create such an undo/redo object, you can derive this class and 
+ override the methods:
+ <ul>
+ <li><script type="text/javascript"> activateLinkAnchor('','BeforeUndo','BeforeUndo') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('','AfterUndo','AfterUndo') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('','BeforeRedo','BeforeRedo') </script> </li> <li>
+<script type="text/javascript"> activateLinkAnchor('','AfterRedo','AfterRedo') </script> </li> </ul>
+ or instantiate a <tt>CATCommandGlobalUndo</tt> object and give as 
+ arguments the addresses of methods to execute to undo/redo the command.  
+ <br>Moreover, this undo/redo object must only undo/redo the objects that
+ are not transactional, that is to say that don't belong to a model which 
+ implements the CATIUndoTransaction interface, because such a model undoes 
+ and redoes its objects itself.
+ That's the reason why you can specify methods to be called before or after
+ the transactional model undo/redo.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATCommandGlobalUndo()"><b>CATCommandGlobalUndo</b></a>()
+</td><td id='tdright'>  Constructs an empty undo/redo object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATCommandGlobalUndo(CATGlobalUndoMethod,CATGlobalUndoMethod,void*,CATGlobalUndoMethod)"><b>CATCommandGlobalUndo</b></a>(CATGlobalUndoMethod,CATGlobalUndoMethod,void*,CATGlobalUndoMethod)
+</td><td id='tdright'>  Constructs an undo/redo object using undo/redo method addresses.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATCommandGlobalUndo()"><b>~CATCommandGlobalUndo</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AfterRedo()"><b>AfterRedo</b></a>()
+</td><td id='tdright'>  Redoes the command effects after the transactional redo.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AfterUndo()"><b>AfterUndo</b></a>()
+</td><td id='tdright'>  Undoes the command effects after the transactional undo.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BeforeRedo()"><b>BeforeRedo</b></a>()
+</td><td id='tdright'>  Redoes the command effects before the transactional undo.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BeforeUndo()"><b>BeforeUndo</b></a>()
+</td><td id='tdright'>  Undoes the command effects before the transactional undo.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAfterRedoMeth(CATGlobalUndoMethod)"><b>SetAfterRedoMeth</b></a>(CATGlobalUndoMethod)
+</td><td id='tdright'>  Sets the method to redo the command effects after the transactional redo.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAfterUndoMeth(CATGlobalUndoMethod)"><b>SetAfterUndoMeth</b></a>(CATGlobalUndoMethod)
+</td><td id='tdright'>  Sets the method to undo the command effects after the transactional undo.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetBeforeRedoMeth(CATGlobalUndoMethod)"><b>SetBeforeRedoMeth</b></a>(CATGlobalUndoMethod)
+</td><td id='tdright'>  Sets the method to redo the command effects before the transactional redo.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetBeforeUndoMeth(CATGlobalUndoMethod)"><b>SetBeforeUndoMeth</b></a>(CATGlobalUndoMethod)
+</td><td id='tdright'>  Sets the method to undo the command effects before the transactional undo.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetData(void*)"><b>SetData</b></a>(void*)
+</td><td id='tdright'>  Sets data which may be useful to undo/redo the command effects.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDeallocateMeth(CATGlobalUndoMethod)"><b>SetDeallocateMeth</b></a>(CATGlobalUndoMethod)
+</td><td id='tdright'>  Sets the method to deallocate the data given with the SetData method.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATCommandGlobalUndo"></a><a id="CATCommandGlobalUndo()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATCommandGlobalUndo</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs an empty undo/redo object.
+</dd>
+<dt class='dtmethod' >
+  <a id="CATCommandGlobalUndo"></a><a id="CATCommandGlobalUndo(CATGlobalUndoMethod,CATGlobalUndoMethod,void*,CATGlobalUndoMethod)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATCommandGlobalUndo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGlobalUndoMethod','CATGlobalUndoMethod')</script> <span class='param'>iBeforeUndoMeth</span>,<script type="text/javascript"> activateLink('CATGlobalUndoMethod','CATGlobalUndoMethod')</script> <span class='param'>iBeforeRedoMeth</span>,<script type="text/javascript"> activateLink('void','void*')</script> <span class='param'>iData</span>,<script type="text/javascript"> activateLink('CATGlobalUndoMethod','CATGlobalUndoMethod')</script> <span class='param'>iDeallocateMeth</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs an undo/redo object using undo/redo method addresses.
+ <br><b>Role</b>: The addresses of the methods to execute to undo or redo 
+ the command effects are given as arguments. These methods must be static 
+ methods of the command, because the command is deleted after its 
+ completion, whereas the undo/redo methods may be called a long time after.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBeforeUndoMeth</span></dt>
+   <dd>   The method to undo the command effects before the transactional undo.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBeforeRedoMeth</span></dt>
+   <dd>   The method to redo the command effect before the transactional redo.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iData</span></dt>
+   <dd>   An object that can be useful for the command undo/redo methods.
+   <br><b>Cyclic reference</b>: A copy of <tt>iData</tt> is kept. This 
+   object will be deallocated by the <tt>iDeallocateMeth</tt> method given
+   as the fourth argument. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDeallocateMeth</span></dt>
+   <dd>   The method to deallocate the <tt>iData</tt> object passed as the third 
+   argument.
+   This method is called when the undo/redo object is removed from the 
+   command history.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATCommandGlobalUndo"></a><a id="~CATCommandGlobalUndo()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATCommandGlobalUndo</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AfterRedo"></a><a id="AfterRedo()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AfterRedo</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Redoes the command effects after the transactional redo.
+ <br><b>Role</b>: Redefine this method when deriving <tt>
+ CATCommandGlobalUndo</tt>.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    An HRESULT.
+   But it is not taken into account. Whatever the method returns, the 
+   dialog goes on.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AfterUndo"></a><a id="AfterUndo()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AfterUndo</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Undoes the command effects after the transactional undo.
+ <br><b>Role</b>: Redefine this method when deriving <tt>
+ CATCommandGlobalUndo</tt>.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    An HRESULT.
+   But it is not taken into account. Whatever the method returns, the 
+   dialog goes on.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BeforeRedo"></a><a id="BeforeRedo()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>BeforeRedo</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Redoes the command effects before the transactional undo.
+ <br><b>Role</b>: Redefine this method when deriving <tt>
+ CATCommandGlobalUndo</tt>.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    An HRESULT.
+   But it is not taken into account. Whatever the method returns, the 
+   dialog goes on.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BeforeUndo"></a><a id="BeforeUndo()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>BeforeUndo</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Undoes the command effects before the transactional undo.
+ <br><b>Role</b>: Redefine this method when deriving <tt>
+ CATCommandGlobalUndo</tt>.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    An HRESULT.
+   But it is not taken into account. Whatever the method returns, the 
+   dialog goes on.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAfterRedoMeth"></a><a id="SetAfterRedoMeth(CATGlobalUndoMethod)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAfterRedoMeth</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGlobalUndoMethod','CATGlobalUndoMethod')</script> <span class='param'>iMeth</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the method to redo the command effects after the transactional redo.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMeth</span></dt>
+   <dd>   The method which redoes the command effects.
+   It must be a command's static method because the command is deleted 
+   after its completion.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAfterUndoMeth"></a><a id="SetAfterUndoMeth(CATGlobalUndoMethod)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAfterUndoMeth</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGlobalUndoMethod','CATGlobalUndoMethod')</script> <span class='param'>iMeth</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the method to undo the command effects after the transactional undo.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMeth</span></dt>
+   <dd>   The method which undoes the command effects.
+   It must be a command's static method because the command is deleted 
+   after its completion.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetBeforeRedoMeth"></a><a id="SetBeforeRedoMeth(CATGlobalUndoMethod)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetBeforeRedoMeth</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGlobalUndoMethod','CATGlobalUndoMethod')</script> <span class='param'>iMeth</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the method to redo the command effects before the transactional redo.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMeth</span></dt>
+   <dd>   The method which redoes the command effects.
+   It must be a command's static method because the command is deleted 
+   after its completion.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetBeforeUndoMeth"></a><a id="SetBeforeUndoMeth(CATGlobalUndoMethod)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetBeforeUndoMeth</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGlobalUndoMethod','CATGlobalUndoMethod')</script> <span class='param'>iMeth</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the method to undo the command effects before the transactional undo.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMeth</span></dt>
+   <dd>   The method which undoes the command effects.
+   It must be a command's static method because the command is deleted 
+   after its completion.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetData"></a><a id="SetData(void*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetData</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void*')</script> <span class='param'>iData</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets data which may be useful to undo/redo the command effects.
+ <br><b>Role</b>: This data will be given as the argument of the 
+ <tt>CATGlobalUndoMethod</tt> methods.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iData</span></dt>
+   <dd>   An object that can be useful for the command undo and redo methods.
+   <br><b>Cyclic reference</b>: A copy of <tt>iData</tt> is kept. This 
+   object will be deallocated by the method given by the 
+   
+<script type="text/javascript"> activateLinkAnchor('','SetDeallocateMeth','SetDeallocateMeth') </script> method.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDeallocateMeth"></a><a id="SetDeallocateMeth(CATGlobalUndoMethod)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDeallocateMeth</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGlobalUndoMethod','CATGlobalUndoMethod')</script> <span class='param'>iMeth</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the method to deallocate the data given with the SetData method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMeth</span></dt>
+   <dd>   The method which deallocates the data.
+   It must be a command's static method because the command is deleted 
+   after its completion.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATCommandGlobalUndo.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>JS0FM</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

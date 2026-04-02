@@ -1,0 +1,233 @@
+// COPYRIGHT Dassault Systemes 2005
+//===================================================================
+//
+// DNBIAMfgAssembly.idl
+// Automation interface for the Manufacturing Assemblyclass
+//
+//===================================================================
+//
+// Usage notes:
+//   This Interface represents a MfgAssembly.
+//   It's mainly a wrapper for the DNBIMfgassembly interface
+//
+//===================================================================
+//
+//  Aug 2005  Creation, Highlight PRP020 of V5R16
+//  Mod PLK 17-JAN-2008 Moved from L0 to L1 level
+//  Mod WUL 18-feb-2009 Only api comments are updated. All the set fucntions should not do anything for the AST MA 
+//===================================================================
+
+#ifndef DNBIAMfgAssembly_IDL
+#define DNBIAMfgAssembly_IDL
+/*IDLREP*/
+
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATVariant.idl"
+#include "DNBIAMfgAssemblyType.idl"
+
+interface CATIAItem;
+
+/**  
+ * This Interface represents a Manufacturing Assembly.
+ * <b>Role</b>: It gives access to the C++ DNBIMfgAssembly interface methods
+ * Such as 
+ * <ul>
+ * <li> set and get the Name and PartNumber </li>
+ * <li> get the type @href DNBIAMfgAssemblyType </li>
+ * <li> get the assigned parts </li>
+ * <li> add and remove the assigned parts </li>
+ * </ul>
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example fetches an instance of a Manufacturing Assembly from a selected Activity
+ * <pre>
+ * Dim myActivity As Activity
+ * myActivity = <get Activity>
+ * Dim myItem As Item
+ * Set myItem = myActivity.Items.Item(1)
+ * Dim obj As <font color="red">MfgAssembly</font>
+ * Set obj = mySel.FindObject("DNBIAMfgAssembly")
+ * </pre>
+ * </dd>
+ * </dl>
+ */
+interface /* IDLHIDDEN */ DNBIAMfgAssembly : CATIABase
+{
+
+/**
+ * Returns or sets the Name of the Manufacturing Assembly. Name of the AST Manufacturing Assembly cannot be set/changed 
+  if APN license is not available.
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example fetches the Name of a Manufacturing Assembly
+ * <pre>
+ * Dim myName As String
+ * myName = obj.<font color="red">MAName</font>
+ * </pre>
+ * </dd>
+ * <dd>
+ * This example sets the Name of a Manufacturing Assembly
+ * <pre>
+ * Dim newName As String
+ * newName = "NewMAName"
+ * obj.<font color="red">MAName</font> = newName
+ * </pre>
+ * </dd>
+ * </dl>
+*/
+#pragma PROPERTY MAName
+	HRESULT get_MAName(inout /*IDLRETVAL*/ CATBSTR oMAName);
+	HRESULT put_MAName(in CATBSTR iMAName);
+
+/**
+ * Returns or sets the Part Number of the Manufacturing Assembly. Part Number of the AST MA cannot be set/changed
+ if APN license is not available..
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example fetches the Part Number of a Manufacturing Assembly
+ * <pre>
+ * Dim myPart As String
+ * myPart = obj.<font color="red">MAPartNumber</font>
+ * </pre>
+ * </dd>
+ * <dd>
+ * This example sets the Part Number of a Manufacturing Assembly
+ * <pre>
+ * Dim newPartNbr As String
+ * newPartNbr = "NewMAPartNumber"
+ * obj.<font color="red">MAPartNumber</font> = newPartNbr
+ * </dd>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY MAPartNumber
+	HRESULT get_MAPartNumber(inout /*IDLRETVAL*/ CATBSTR oMAPartNumber);
+	HRESULT put_MAPartNumber(in CATBSTR iMAPartNumber);
+
+/**
+ * Returns the Type of the Manufacturing Assembly.
+ * It will be either a manufacturingAssembly or a manufacturingKit
+ * defined in @href DNBIAMfgAssemblyType
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example fetches the Type of a Manufacturing Assembly
+ * <pre>
+ * Dim MAtype As String
+ * If obj.<font color="red">MAType</font> = manufacturingAssembly Then
+ *   MAtype = "Manufacturing Assembly"
+ * Else
+ *   MAtype = "Manufacturing Kit"
+ * End If
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY MAType
+	HRESULT get_MAType(out /*IDLRETVAL*/ DNBIAMfgAssemblyType oMAType);
+
+/**
+ * Returns the number of assigned Parts (can be fetched via @href #Item ).
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example fetches the Number of assigned Parts of a Manufacturing Assembly
+ * <pre>
+ * Dim Number As Long
+ * Number = obj.<font color="red">Count</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY Count
+	HRESULT get_Count(out /*IDLRETVAL*/ long oNbItems);
+
+/**
+ * Returns one assigned Part (Product, Resource or other MA/MK) of the Manufacturing Assembly.
+ * @param iIndex
+ *   The index to the item to be returned
+ * @return
+ *   The assigned item
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example cycles through the list of assigned Parts of a Manufacturing Assembly
+ * <pre>
+ * Dim j As Long
+ * For j = 1 To obj.Count
+ *   Dim it As Item
+ *   Set it = obj.<font color="red">Item</font>(j)
+ *   Dim ItemName As String
+ *   ItemName = it.Name
+ * Next
+ * </pre>
+ * </dl>
+*/
+	HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAItem oItem);
+
+/**
+ * Assignes a part (Product, Resource or other MA/MK) to the Manufacturing Assembly. No part can be assigned to AST MA 
+ if APN license is not available.
+ * @param iItem
+ *   The item to be assigned
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example adds a product to the assigned Parts of a Manufacturing Assembly
+ * <pre>
+ * Dim myProducts As PPRProducts
+ * Set myProducts = DELMIA.ActiveDocument.PPRDocument.Products
+ * Dim Part As Item
+ * Set Part = myProducts.Item(2)
+ * obj.<font color="red">AddPart</font>(Part)
+ * </pre>
+ * </dl>
+ */
+	HRESULT AddPart(in CATIAItem iItem);
+/**
+ * Removes a part (Product, Resource or other MA/MK) from the Manufacturing Assembly. No part can be removed from AST MA 
+ if APN license is not available.
+ * @param iItem
+ *   The item to be removed
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example removes a product from the assigned Parts of a Manufacturing Assembly
+ * <pre>
+ * Dim myProducts As PPRProducts
+ * Set myProducts = DELMIA.ActiveDocument.PPRDocument.Products
+ * Dim Part As Item
+ * Set Part = myProducts.Item(2)
+ * obj.<font color="red">RemovePart</font>(Part)
+ * </pre>
+ * </dl>
+ */
+	HRESULT RemovePart(in CATIAItem iItem);
+};
+
+// Interface name : DNBIAMfgAssembly
+#pragma ID DNBIAMfgAssembly "DCE:ad0926a6-4778-4c7c-a5016029b10bb15e"
+#pragma DUAL DNBIAMfgAssembly
+
+// VB object name : MfgAssembly (Id used in Visual Basic)
+#pragma ID MfgAssembly "DCE:ad0926a7-4778-4c7c-a5016029b10bb15e"
+#pragma ALIAS DNBIAMfgAssembly MfgAssembly
+
+#endif // DNBIAMfgAssembly_IDL
+

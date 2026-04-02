@@ -1,0 +1,17 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+CATIAApplicationFrameUUID \
+CDMAInteroperabilityUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+INCLUDED_MODULES = CDMASettings
+
+LINK_WITH=$(LINK_WITH_FOR_IID)	AD0XXBAS Collections\
+								DI0PANV2 JS0FM  \
+								CATDlgStandard \
+								OM0EDPRO CDMA_PS_MAPPING CATCinServer CATInteractiveInterfaces CATPDMBase CDMAFileImpl CDMAFBDIMappingImpl \

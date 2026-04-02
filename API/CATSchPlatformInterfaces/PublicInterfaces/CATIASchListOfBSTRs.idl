@@ -1,0 +1,95 @@
+#ifndef CATIASchListOfBSTRS_IDL
+#define CATIASchListOfBSTRS_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+
+#include "CATIABase.idl"
+
+ /** 
+  * Represents a non-persistant list of character strings to be used with Schematic IDLs.
+  */
+
+interface CATIASchListOfBSTRs : CATIABase
+{
+    /**
+     * Returns the number of character strings in the list.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in  <tt>NumberOfStrings</tt> the number of character strings
+     * currently gathered in <tt>MyList</tt>.
+     * <pre>
+     * NumberOfStrings = MyList.<font color="red">Count</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Count
+  HRESULT get_Count (out /*IDLRETVAL*/ long oNbItems);
+
+    /**
+     * Returns a character string from its index in the list.
+     * @param iIndex
+     *   The index of the first character string in the collection is 1, and
+     *   the index of the last character string is Count.	 
+     * @return the retrieved string.
+     *
+     * @sample
+     * The following example returns in the third character string in the list.
+     * <pre>
+     * Dim MyStr As String
+	 * Dim MyList As SchListOfBSTRs
+     * Set MyStr = SchListOfBSTRs.<font color="red">Item</font>(2)
+     * </pre>
+     */
+  HRESULT Item (in long iIndex,  inout /*IDLRETVAL*/ CATBSTR oBSTR);
+
+    /**
+     * Adds a character string to the end of the list.
+     * @param iBSTR
+     *   The character string to be added to the list.
+     *
+     * @sample
+     * The following example appends a string to the list.
+     * <pre>
+	 * Dim MyList As SchListOfBSTRs
+     * MyList.<font color="red">Append</font>("MyString")
+     * </pre>
+     */
+  HRESULT Append (in CATBSTR iBSTR);
+
+    /**
+     * Remove a character string from the list by specifying its position in the list.
+     * @param iIndex
+     *   The position of the character string to be removed in the list.
+     *
+     * @sample
+     * The following example removes the second entry in the list. Please note that the
+	 * list index starts with 1.
+     * <pre>
+	 * Dim MyList As SchListOfBSTRs
+     * MyList.<font color="red">Remove</font>(1)
+     * </pre>
+     */
+
+  HRESULT RemoveByIndex (in long iIndex);
+
+};
+
+// Interface name : CATIASchListOfBSTRs
+#pragma ID CATIASchListOfBSTRs "DCE:1507514b-824a-46d6-a8fd862b537daf5d"
+#pragma DUAL CATIASchListOfBSTRs
+
+// VB object name : SchListOfBSTRs
+#pragma ID SchListOfBSTRs "DCE:09b485e4-7e44-4ee9-b6105bc799177c97"
+#pragma ALIAS CATIASchListOfBSTRs SchListOfBSTRs
+
+#endif

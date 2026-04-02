@@ -1,0 +1,97 @@
+#ifndef CATIASchListOfDoubles_IDL
+#define CATIASchListOfDoubles_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+
+#include "CATIABase.idl"
+
+ /** 
+  * Represents a list of DOUBLEs to be used with Schematic IDLs.
+  */
+
+interface CATIASchListOfDoubles : CATIABase
+{
+    /**
+     * Returns the number of doubles in the list.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in  <tt>NumberOfdoubles</tt> the number of doubles
+     * currently gathered in <tt>MyList</tt>.
+     * <pre>
+     * NumberOfdoubles = MyList.<font color="red">Count</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Count
+  HRESULT get_Count (out /*IDLRETVAL*/ long oNbItems);
+
+    /**
+     * Returns a double from its index in the list.
+     * @param iIndex
+     *   The index of the first double in the collection is 1, and
+     *   the index of the last double is Count.
+     * @return the retrieved double.
+     *
+     * @sample
+     * The following example returns in the third double in the list.
+     * <pre>
+     * Dim MyDouble As double
+	 * Dim MyList As SchListOfDoubles
+     * Set MyDouble = SchListOfDoubles.<font color="red">Item</font>(2)
+     * </pre>
+     */
+  HRESULT Item (in long iIndex,  out /*IDLRETVAL*/ double oDouble);
+
+    /**
+     * Adds a double to the end of the list.
+     * @param iDouble
+     *   The double to be added to the list.
+     *
+     * @sample
+     * The following example appends an object to the list.
+     * <pre>
+     * Dim MyDouble As Double
+	 * MyDouble = 0.6789
+	 * Dim MyList As SchListOfDoubles
+     * MyList.<font color="red">Append</font>(MyDouble)
+     * </pre>
+     */
+  HRESULT Append (in double iDouble);
+
+    /**
+     * Remove a double from the list by specifying its position in the list.
+     * @param iIndex
+     *   The position of the double to be removed in the list.
+     *
+     * @sample
+     * The following example removes the second entry in the list. Please note that the
+	 * list index starts with 1.
+     * <pre>
+	 * Dim MyList As SchListOfDoubles
+     * MyList.<font color="red">Remove</font>(1)
+     * </pre>
+     */
+
+  HRESULT RemoveByIndex (in long iIndex);
+
+};
+
+// Interface name : CATIASchListOfDoubles
+#pragma ID CATIASchListOfDoubles "DCE:816b75e3-99ab-49a5-93365ce7fddcce8c"
+#pragma DUAL CATIASchListOfDoubles
+
+// VB object name : SchListOfDoubles
+#pragma ID SchListOfDoubles "DCE:a72490dd-7cc0-436e-af045ac6626358aa"
+#pragma ALIAS CATIASchListOfDoubles SchListOfDoubles
+
+#endif

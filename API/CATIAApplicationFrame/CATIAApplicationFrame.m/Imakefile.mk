@@ -1,0 +1,53 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+CATAfrUUID \
+CATIAApplicationFrameUUID \
+CATVisUUID \
+ObjectModelerBaseUUID \
+SystemUUID \
+InteractiveInterfacesUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+# Imakefile for all CATIAApplicationFrame modules
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+INCLUDED_MODULES = CAPPFRM CD0CGR CD0SHOW CD0STWIN ON0FRAME SELECT CD0NTOG \
+                   VE0GEDIT CD0VRML OM0EDPRO CD0PRINT GraphicPropertiesToolbar \
+                   VRViewTracking VRRestart CATLayersAndFilters CATCafSearch Search CATTreeOptions \
+                   CATLayersFilterSettings MultiViewWizard ViewAngleUI ViewSelectorUI ViewAligmentUI
+
+LINK_WITH=$(LINK_WITH_FOR_IID) SystemUUID JS0CORBA JS0FM JS0SCBAK JS03TRA JS0STR JS0CTYP \
+	JS0CATLM JS0LIB0 JS0ERROR JS0SETT JS0DSPA JS0LOGRP JS0MRSHL JS0FILE \
+	YN000M2D YN000MFL \
+	JS0CATLM JS0INF InfItf \
+	NS0S3STR \
+	DI0PANV2 CATDlgStandard \
+	CO0LSTPV CO0LSTST \
+	VE0BASE VE0MDL VE0LOD VE0PIX \
+	AD0XXBAS \
+	CATObjectModelerBase \
+	CD0FRAME CD0WIN CD0EDIT \
+	VE0GRPH2 CATTreeOptions \
+	DI0STATE DI0APPLI \
+	ON0MAIN ON0GRAPH YP00IMPL ON0GREXT \
+	CATVisualization CATVisPropertiesUI CATVisVR CATVisVRMonitor JS0MT CATViz \
+	CATLifSpecs \
+	CATMathStream CATCGMGeoMath \
+	CATInteractiveInterfaces InteractiveInterfacesUUID \
+	CATAutoItf CATVizGlider CATSubTree \
+	CATInfInterfaces
+
+
+OS = SunOS
+SYS_LIBS = -lsocket -lnsl
+
+OS = Windows_NT
+SYS_LIBS = vfw32.lib wsock32.lib
+LOCAL_LDFLAGS = $(SUB_CON)
+
+OS = IRIX
+
+LOCAL_CCFLAGS = -G0
+LOCAL_LDFLAGS =  -G0
+

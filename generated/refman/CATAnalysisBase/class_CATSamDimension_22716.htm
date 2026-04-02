@@ -1,0 +1,1129 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATAnalysisBase CATSamDimension Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATAnalysisBase.htm" href="../CATAnalysisBase.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATAnalysisBase";	}
+		function getCurrentObjectName() { 
+ 	return "CATSamDimension"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>CATAnalysisBase Framework: CATSamDimension <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATSamDimension_22716','CATSamDimension','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATSamDimension</b>
+</p>
+<p>
+<b><i> Dimension information of a collector characteristic.</i></b><br>
+
+ The values in a CATAnalysisCharacCollector are stored as follows :
+ <dl><dd>Values[NbPositions][NbLamina][NbSMI][NbRepeat[IndexPosition][IndexLamina][IndexSmi]][NbComponents].<br></dl>
+ However NbRepeat can be variable with the Position, Lamina and SMI number.<br>
+ Let us assume NbPositions=2, NbLamina=1, NbSMI=2 and NbComponents=2, with NbRepeat configured as follows :
+ <dl><dd>NbRepeat[P1][L1][S1]=2, NbRepeat[P1][L1][S2]=1,<br>
+     <dd>NbRepeat[P2][L1][S1]=0, NbRepeat[P2][L1][S2]=3.<br></dl>
+ The values in memory are stored as follows :
+ <dl><dd>V[P1,L1,S1,C1], V[P1,L1,S1,C2], V[P1,L1,S1,C1], V[P1,L1,S1,C2], V[P1,L1,S2,C1], V[P1,L1,S2,C2],<br>
+     <dd>V[P2,L1,S2,C1], V[P2,L1,S2,C2], V[P2,L1,S2,C1], V[P2,L1,S2,C2], V[P2,L1,S2,C1], V[P2,L1,S2,C2].<br></dl>
+   With :<br>
+      <dl><dd>V[Pi,Lj,Sk,Cl]) : the Value of the set of Position, Lamina , SMI and Component (Pi,Lj,Sk,Cl).<br>
+          <dd>Pi           : the Position index.<br>
+          <dd>Lj           : the Lamina index.<br>
+          <dd>Sk           : the SMI index.<br>
+          <dd>Cl           : the Component index.<br></dl></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATSamDimension()"><b>CATSamDimension</b></a>()
+</td><td id='tdright'>  Default constructor.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATSamDimension(CATSamDimension&amp;)"><b>CATSamDimension</b></a>(CATSamDimension&amp;)
+</td><td id='tdright'>  Copy constructor
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATSamDimension(int,int,int,int* const,CATSamValue,CATSamMathType,int)"><b>CATSamDimension</b></a>(int,int,int,int* const,CATSamValue,CATSamMathType,int)
+</td><td id='tdright'>  Creates a <b>CATSamDimension</b> object and fills it with the supplied values.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATSamDimension(int,int* const,int,int* const,int,int* const,int* const,int* const,CATSamAggregationMode* const,CATSamValue,CATSamMathType,int)"><b>CATSamDimension</b></a>(int,int* const,int,int* const,int,int* const,int* const,int* const,CATSamAggregationMode* const,CATSamValue,CATSamMathType,int)
+</td><td id='tdright'>  Creates a <b>CATSamDimension</b> object and fills it with the supplied values.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATSamDimension()"><b>~CATSamDimension</b></a>()
+</td><td id='tdright'>  Destructor.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Dump(int,int)"><b>Dump</b></a>(int,int)
+</td><td id='tdright'>  Dumps the contents of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Dump(CATListValCATUnicodeString*,int,int)"><b>Dump</b></a>(CATListValCATUnicodeString*,int,int)
+</td><td id='tdright'>  Dumps the contents of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Fill(int,int,int,int* const,CATSamValue,CATSamMathType,int)"><b>Fill</b></a>(int,int,int,int* const,CATSamValue,CATSamMathType,int)
+</td><td id='tdright'>  Fills a <b>CATSamDimension</b> object with the supplied values.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Fill(int,int* const,int,int* const,int,int* const,int* const,int* const,CATSamAggregationMode* const,CATSamValue,CATSamMathType,int)"><b>Fill</b></a>(int,int* const,int,int* const,int,int* const,int* const,int* const,CATSamAggregationMode* const,CATSamValue,CATSamMathType,int)
+</td><td id='tdright'>  Fills a <b>CATSamDimension</b> object with the supplied values.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetAggregationMode(int,int,int)"><b>GetAggregationMode</b></a>(int,int,int)
+</td><td id='tdright'>  Get the Aggregation Mode of the <b>CATSamDimension</b> object for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetComponents()"><b>GetComponents</b></a>()
+</td><td id='tdright'>  Get the Components of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLaminates()"><b>GetLaminates</b></a>()
+</td><td id='tdright'>  Get the Laminates of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbComponents()"><b>GetNbComponents</b></a>()
+</td><td id='tdright'>  Get the number of Components of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbLaminates()"><b>GetNbLaminates</b></a>()
+</td><td id='tdright'>  Return the number of Laminates of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbPositions()"><b>GetNbPositions</b></a>()
+</td><td id='tdright'>  Return the number of Positions of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbRepeat(int,int,int)"><b>GetNbRepeat</b></a>(int,int,int)
+</td><td id='tdright'>  Get the number of Repeat of the <b>CATSamDimension</b> object for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbRepeatTotal()"><b>GetNbRepeatTotal</b></a>()
+</td><td id='tdright'>  Get the whole number of Repeat of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbSMI()"><b>GetNbSMI</b></a>()
+</td><td id='tdright'>  Return the number of positions within each laminate of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbValues()"><b>GetNbValues</b></a>()
+</td><td id='tdright'>  Return the number of values of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbValues(int,int,int)"><b>GetNbValues</b></a>(int,int,int)
+</td><td id='tdright'>  Return the number of collected values for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPositions()"><b>GetPositions</b></a>()
+</td><td id='tdright'>  Get the positions of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetRepeat(int,int,int)"><b>GetRepeat</b></a>(int,int,int)
+</td><td id='tdright'>  Get the Repeat of the <b>CATSamDimension</b> object for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSMI()"><b>GetSMI</b></a>()
+</td><td id='tdright'>  Get the positions within each laminate of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSizeValues()"><b>GetSizeValues</b></a>()
+</td><td id='tdright'>  Return the size of values of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSizeValues(int,int,int)"><b>GetSizeValues</b></a>(int,int,int)
+</td><td id='tdright'>  Return the size of collected values for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetUnitaryValueSize()"><b>GetUnitaryValueSize</b></a>()
+</td><td id='tdright'>  Get the value size of a Component.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#HadNegativeRepeat()"><b>HadNegativeRepeat</b></a>()
+</td><td id='tdright'>  Obtain the Repeat configuration.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#HadVariableRepeat()"><b>HadVariableRepeat</b></a>()
+</td><td id='tdright'>  Obtain the Repeat configuration.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsAKindOf(CATString&amp;)"><b>IsAKindOf</b></a>(CATString&amp;)
+</td><td id='tdright'>  Test the type of the instance.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetNbComponents(int,int* const)"><b>SetNbComponents</b></a>(int,int* const)
+</td><td id='tdright'>  Change the number of Components of the <b>CATSamDimension</b> object with the supplied values,
+ and set the Components numbers.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetNbLaminates(int,int* const)"><b>SetNbLaminates</b></a>(int,int* const)
+</td><td id='tdright'>  Change the number of Laminates of the <b>CATSamDimension</b> object with the supplied values and set the Laminates numbers.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetNbPositions(int,int* const)"><b>SetNbPositions</b></a>(int,int* const)
+</td><td id='tdright'>  Change the number of Positions of the <b>CATSamDimension</b> object with the supplied values and set the positions numbers.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetNbRepeat(int,int,int,int,int* const,CATSamAggregationMode* const)"><b>SetNbRepeat</b></a>(int,int,int,int,int* const,CATSamAggregationMode* const)
+</td><td id='tdright'>  Change the number of Repeat of the <b>CATSamDimension</b> object for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex) with the supplied values and set the Repeat numbers.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetNbSMI(int,int* const)"><b>SetNbSMI</b></a>(int,int* const)
+</td><td id='tdright'>  Change the number of positions within each laminate of the <b>CATSamDimension</b> object with the supplied values and set the SMI numbers.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetUnitaryValueSize(int)"><b>SetUnitaryValueSize</b></a>(int)
+</td><td id='tdright'>  Change the value size of a Component.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetUnitaryValueSize(CATSamValue)"><b>SetUnitaryValueSize</b></a>(CATSamValue)
+</td><td id='tdright'>  Change the size of a single value.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ValuesAddress(void*,int,int,int,int,int)"><b>ValuesAddress</b></a>(void*,int,int,int,int,int)
+</td><td id='tdright'>  Compute the offset on Values Pointer according to the definition of the <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator =(CATSamDimension&amp;)"><b>operator =</b></a>(CATSamDimension&amp;)
+</td><td id='tdright'>  Copies the contents of another <b>CATSamDimension</b> object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator ==(CATSamDimension&amp;)"><b>operator ==</b></a>(CATSamDimension&amp;)
+</td><td id='tdright'>  Compare the contents of another <b>CATSamDimension</b> object to the current instance.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+<nav id = 'idxnav'> <table class = 'fill' id='idxtab' ><tbody>					<tr><th colspan = '2' >Data Member Index</th></tr> 
+ <tr> <td id='tdleft'> 
+    <a href="#PublicWorkPtr"><b>PublicWorkPtr</b></a>
+</td><td id='tdright'>  Give a public access to the Work field.
+</td><tr> </tbody></table></nav>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATSamDimension"></a><a id="CATSamDimension()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATSamDimension</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Default constructor.
+</dd>
+<dt class='dtmethod' >
+  <a id="CATSamDimension"></a><a id="CATSamDimension(CATSamDimension&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATSamDimension</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSamDimension','CATSamDimension&amp;')</script> <span class='param'>iDimension</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Copy constructor
+</dd>
+<dt class='dtmethod' >
+  <a id="CATSamDimension"></a><a id="CATSamDimension(int,int,int,int* const,CATSamValue,CATSamMathType,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATSamDimension</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbPositions</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaminates</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbSMI</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iNbRepeats</span>,<script type="text/javascript"> activateLink('CATSamValue','CATSamValue')</script> <span class='param'>iValueType</span>,<script type="text/javascript"> activateLink('CATSamMathType','CATSamMathType')</script> <span class='param'>iMathType</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iMathDimension</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a <b>CATSamDimension</b> object and fills it with the supplied values.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbPositions</span></dt>
+   <dd>   The number of positions.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaminates</span></dt>
+   <dd>   The number of laminates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbSMI</span></dt>
+   <dd>   The number of positions within each laminate.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbRepeats[NbGlobalPositions]</span></dt>
+   <dd>   The number of another form of repetition for each set of Position, Lamina and SMI.<br>
+   <b>WARNING ::</b> The size of the Array <b>iNbRepeats</b> must be equal to <b>NbGlobalPositions</b>.<br>
+   With <b>NbGlobalPositions</b> = iNbPositions*iNbLaminates*iNbSMI.<br>
+   iNbRepeat is valued as follow :<br>
+      <dl><dd>Nb(P0,L0,S0), Nb(P0,L0,S1), ..., Nb(P0,L0,Sk), Nb(P0,L1,S0), ......, Nb(P0,L1,Sk), ...., Nb(P0,Lj,S0), ......, Nb(P0,Lj,Sk)<br>
+          <dd>Nb(P1,L0,S0), Nb(P1,L0,S1), ..., Nb(P1,L0,Sk), Nb(P1,L1,S0), ......, Nb(P1,L1,Sk), ...., Nb(P1,Lj,S0), ......, Nb(P1,Lj,Sk)<br>
+          <dd>Nb(Pi,L0,S0), Nb(Pi,L0,S1), ..., Nb(Pi,L0,Sk), Nb(Pi,L1,S0), ......, Nb(Pi,L1,Sk), ...., Nb(Pi,Lj,S0), ......, Nb(Pi,Lj,Sk)<br></dl>
+   With :<br>
+      <dl><dd>Nb(Pi,Lj,Sk) : the repeat number of the set of Position, Lamina and SMI (Pi,Lj,Sk).<br>
+          <dd>Pi           : the Position index (between 0 and iNbPositions-1).<br>
+          <dd>Lj           : the Lamina index (between 0 and iNbLaminates-1).<br>
+          <dd>Sk           : the SMI index (between 0 and iNbSMI-1).<br></dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iValueType</span></dt>
+   <dd>   The type of value (to calculate <b>UnitaryValueSize</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMathType</span></dt>
+   <dd>   The mathematical type (to calculate <b>NbValues</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMathDimension</span></dt>
+   <dd>   The mathematical dimension (to calculate <b>NbValues</b>).
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATSamValue','','CATSamValue') </script>, <script type="text/javascript"> activateLinkAnchor('CATSamMathType','','CATSamMathType') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATSamDimension"></a><a id="CATSamDimension(int,int* const,int,int* const,int,int* const,int* const,int* const,CATSamAggregationMode* const,CATSamValue,CATSamMathType,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATSamDimension</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbPositions</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iPositionsNumber</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaminates</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iLaminatesNumber</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbSMI</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iSMI</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iNbRepeats</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iRepeatsNumber</span>, const <script type="text/javascript"> activateLink('CATSamAggregationMode*','CATSamAggregationMode* const')</script> <span class='param'>iAggregationMode</span>,<script type="text/javascript"> activateLink('CATSamValue','CATSamValue')</script> <span class='param'>iValueType</span>,<script type="text/javascript"> activateLink('CATSamMathType','CATSamMathType')</script> <span class='param'>iMathType</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iMathDimension</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a <b>CATSamDimension</b> object and fills it with the supplied values.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbPositions</span></dt>
+   <dd>   The number of positions.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPositionsNumber[<b>iNbPositions</b>]</span></dt>
+   <dd>   The positions number.<br>
+   <b>WARNING ::</b> The size of the Array <b>iPositionsNumber</b> must be equal to <b>iNbPositions</b>.<br>
+   If iPositionsNumber is NULL positions numbers are set to 0...iPositions-1.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaminates</span></dt>
+   <dd>   The number of laminates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminatesNumber[<b>iNbLamina</b>]</span></dt>
+   <dd>   The laminates number.<br>
+   <b>WARNING ::</b> The size of the Array <b>iLaminatesNumber</b> must be equal to <b>iNbLamina</b>.<br>
+   If iLaminatesNumber is NULL laminates numbers are set to 0...iNbLamina-1.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbSMI</span></dt>
+   <dd>   The number of positions within each laminate.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMI[<b>iNbSMI</b>]</span></dt>
+   <dd>   The positions number within each laminate.<br>
+   <b>WARNING ::</b> The size of the Array <b>iSMI</b> must be equal to <b>iNbSMI</b>.<br>
+   If iSMI is NULL SMI numbers are set to 0...iNbSMI-1.<br>
+   <b>WARNING ::</b> SMI numbers must match to values of the enum <b>CATSamApplyQualifier</b>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbRepeats[<b>NbGlobalPositions</b>]</span></dt>
+   <dd>   The number of another form of repetition for each set of Position, Lamina and SMI.<br>
+   <b>WARNING ::</b> The size of the Array <b>iNbRepeats</b> must be equal to <b>NbGlobalPositions</b>.<br>
+   With <b>NbGlobalPositions</b> = iNbPositions*iNbLaminates*iNbSMI.<br>
+   iNbRepeat is valued as follow :<br>
+      <dl><dd>Nb(P0,L0,S0), Nb(P0,L0,S1), ..., Nb(P0,L0,Sk), Nb(P0,L1,S0), ......, Nb(P0,L1,Sk), ...., Nb(P0,Lj,S0), ......, Nb(P0,Lj,Sk)<br>
+          <dd>Nb(P1,L0,S0), Nb(P1,L0,S1), ..., Nb(P1,L0,Sk), Nb(P1,L1,S0), ......, Nb(P1,L1,Sk), ...., Nb(P1,Lj,S0), ......, Nb(P1,Lj,Sk)<br>
+          <dd>Nb(Pi,L0,S0), Nb(Pi,L0,S1), ..., Nb(Pi,L0,Sk), Nb(Pi,L1,S0), ......, Nb(Pi,L1,Sk), ...., Nb(Pi,Lj,S0), ......, Nb(Pi,Lj,Sk)<br></dl>
+   With :<br>
+      <dl><dd>Nb(Pi,Lj,Sk) : the repeat number of the set of Position, Lamina and SMI (Pi,Lj,Sk).<br>
+          <dd>Pi           : the Position index (between 0 and iNbPositions-1).<br>
+          <dd>Lj           : the Lamina index (between 0 and iNbLaminates-1).<br>
+          <dd>Sk           : the SMI index (between 0 and iNbSMI-1).<br></dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRepeatsNumber[<b>NbRepeatTotal</b>]</span></dt>
+   <dd>   The repetion number of another form of repetition for each set of Position, Lamina and SMI.<br>
+   <b>WARNING ::</b> The size of the Array <b>iRepeatsNumber</b> must be equal to <b>NbRepeatTotal</b>.<br>
+   With <b>NbRepeatTotal</b> = iNbRepeat[0]+iNbRepeat[1]+..+iNbRepeat[<b>NbGlobalPositions-1</b>].<br>
+   iRepeatsNumber is valued as follow :<br>
+      <dl><dd>R0(P0,L0,S0), R1(P0,L0,S0), ..., Rx(P0,L0,S0), R0(P0,L0,S1), ......, Rx(P0,L0,S1), ...., R0(P0,L0,Sk), ......, Rx(P0,L0,Sk)<br>
+          <dd>R0(P0,L1,S0), R1(P0,L1,S0), ..., Rx(P0,L1,S0), R0(P0,L1,S1), ......, Rx(P0,L1,S1), ...., R0(P0,L1,Sk), ......, Rx(P0,L1,Sk)<br>
+          <dd>R0(P0,Lj,S0), R1(P0,Lj,S0), ..., Rx(P0,Lj,S0), R0(P0,Lj,S1), ......, Rx(P0,Lj,S1), ...., R0(P0,Lj,Sk), ......, Rx(P0,Lj,Sk)<br>
+          <dd>R0(P1,L0,S0), R1(P1,L0,S0), ..., Rx(P1,L0,S0), R0(P1,L0,S1), ......, Rx(P1,L0,S1), ...., R0(P1,L0,Sk), ......, Rx(P1,L0,Sk)<br>
+          <dd>R0(P1,L1,S0), R1(P1,L1,S0), ..., Rx(P1,L1,S0), R0(P1,L1,S1), ......, Rx(P1,L1,S1), ...., R0(P1,L1,Sk), ......, Rx(P1,L1,Sk)<br>
+          <dd>R0(P1,Lj,S0), R1(P1,Lj,S0), ..., Rx(P1,Lj,S0), R0(P1,Lj,S1), ......, Rx(P1,Lj,S1), ...., R0(P1,Lj,Sk), ......, Rx(P1,Lj,Sk)<br>
+          <dd>R0(Pi,L0,S0), R1(Pi,L0,S0), ..., Rx(Pi,L0,S0), R0(Pi,L0,S1), ......, Rx(Pi,L0,S1), ...., R0(Pi,L0,Sk), ......, Rx(Pi,L0,Sk)<br>
+          <dd>R0(Pi,L1,S0), R1(Pi,L1,S0), ..., Rx(Pi,L1,S0), R0(Pi,L1,S1), ......, Rx(Pi,L1,S1), ...., R0(Pi,L1,Sk), ......, Rx(Pi,L1,Sk)<br>
+          <dd>R0(Pi,Lj,S0), R1(Pi,Lj,S0), ..., Rx(Pi,Lj,S0), R0(Pi,Lj,S1), ......, Rx(Pi,Lj,S1), ...., R0(Pi,Lj,Sk), ......, Rx(Pi,Lj,Sk)<br></dl>
+   With :<br>
+      <dl><dd>Rx(Pi,Lj,Sk) : the sequential number of the Entities which contribute to the collected values.<br>
+          <dd>Pi           : the Position index (between 0 and iNbPositions-1).<br>
+          <dd>Lj           : the Lamina index (between 0 and iNbLaminates-1).<br>
+          <dd>Sk           : the SMI index (between 0 and iNbSMI-1).<br>
+          <dd><b>NB        :</b> Rx(Pi,Lj,Sk) = <b>-1</b> if collected values are combined or if their origin are unknown.<br></dl>
+   If iRepeatsNumber is NULL repeat numbers are set to <b>-1</b>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAggregationMode[<b>NbRepeatTotal</b>]</span></dt>
+   <dd>   The AggregationMode of the Characteristic values for each set of Position, Lamina and SMI.<br>
+   <b>WARNING ::</b> The size of the Array <b>iAggregationMode</b> must be equal to <b>NbRepeatTotal</b>.<br>
+   With <b>NbRepeatTotal</b> = iNbRepeat[0]+iNbRepeat[1]+..+iNbRepeat[<b>NbGlobalPositions-1</b>].<br>
+   iAggregationMode is valued as follow :<br>
+      <dl><dd>A0(P0,L0,S0), A1(P0,L0,S0), ..., Ax(P0,L0,S0), A0(P0,L0,S1), ......, Ax(P0,L0,S1), ...., A0(P0,L0,Sk), ......, Ax(P0,L0,Sk)<br>
+          <dd>A0(P0,L1,S0), A1(P0,L1,S0), ..., Ax(P0,L1,S0), A0(P0,L1,S1), ......, Ax(P0,L1,S1), ...., A0(P0,L1,Sk), ......, Ax(P0,L1,Sk)<br>
+          <dd>A0(P0,Lj,S0), A1(P0,Lj,S0), ..., Ax(P0,Lj,S0), A0(P0,Lj,S1), ......, Ax(P0,Lj,S1), ...., A0(P0,Lj,Sk), ......, Ax(P0,Lj,Sk)<br>
+          <dd>A0(P1,L0,S0), A1(P1,L0,S0), ..., Ax(P1,L0,S0), A0(P1,L0,S1), ......, Ax(P1,L0,S1), ...., A0(P1,L0,Sk), ......, Ax(P1,L0,Sk)<br>
+          <dd>A0(P1,L1,S0), A1(P1,L1,S0), ..., Ax(P1,L1,S0), A0(P1,L1,S1), ......, Ax(P1,L1,S1), ...., A0(P1,L1,Sk), ......, Ax(P1,L1,Sk)<br>
+          <dd>A0(P1,Lj,S0), A1(P1,Lj,S0), ..., Ax(P1,Lj,S0), A0(P1,Lj,S1), ......, Ax(P1,Lj,S1), ...., A0(P1,Lj,Sk), ......, Ax(P1,Lj,Sk)<br>
+          <dd>A0(Pi,L0,S0), A1(Pi,L0,S0), ..., Ax(Pi,L0,S0), A0(Pi,L0,S1), ......, Ax(Pi,L0,S1), ...., A0(Pi,L0,Sk), ......, Ax(Pi,L0,Sk)<br>
+          <dd>A0(Pi,L1,S0), A1(Pi,L1,S0), ..., Ax(Pi,L1,S0), A0(Pi,L1,S1), ......, Ax(Pi,L1,S1), ...., A0(Pi,L1,Sk), ......, Ax(Pi,L1,Sk)<br>
+          <dd>A0(Pi,Lj,S0), A1(Pi,Lj,S0), ..., Ax(Pi,Lj,S0), A0(Pi,Lj,S1), ......, Ax(Pi,Lj,S1), ...., A0(Pi,Lj,Sk), ......, Ax(Pi,Lj,Sk)<br></dl>
+   With :<br>
+      <dl><dd>Ax(Pi,Lj,Sk) : the AggregationMode of the Entities which contribute to the collected values.<br>
+          <dd>Pi           : the Position index (between 0 and iNbPositions-1).<br>
+          <dd>Lj           : the Lamina index (between 0 and iNbLaminates-1).<br>
+          <dd>Sk           : the SMI index (between 0 and iNbSMI-1).<br>
+          <dd><b>NB        :</b> Ax(Pi,Lj,Sk) = <b>CATSamAggregationModeAdd</b> if collected values are combined or if their origin are unknown.<br></dl>
+   If iAggregationMode is NULL aggregation modes are set to <b>CATSamAggregationModeAdd</b>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iValueType</span></dt>
+   <dd>   The type of value (to calculate <b>UnitaryValueSize</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMathType</span></dt>
+   <dd>   The mathematical type (to calculate <b>NbValues</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMathDimension</span></dt>
+   <dd>   The mathematical dimension (to calculate <b>NbValues</b>).
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATSamValue','','CATSamValue') </script>, <script type="text/javascript"> activateLinkAnchor('CATSamMathType','','CATSamMathType') </script>, <script type="text/javascript"> activateLinkAnchor('CATSamAggregationMode','','CATSamAggregationMode') </script>, <script type="text/javascript"> activateLinkAnchor('CATSamApplyQualifier','','CATSamApplyQualifier') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATSamDimension"></a><a id="~CATSamDimension()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATSamDimension</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Destructor.
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Dump"></a><a id="Dump(int,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Dump</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndent</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLoopSize</span><span class='param'>= 10</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Dumps the contents of the <b>CATSamDimension</b> object.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIndent</span></dt>
+   <dd>   The indentation level (one level represents 3 spaces).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLoopSize</span></dt>
+   <dd>   The size of loops.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Dump"></a><a id="Dump(CATListValCATUnicodeString*,int,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Dump</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListValCATUnicodeString','CATListValCATUnicodeString*')</script> <span class='param'>oListOfString</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndent</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLoopSize</span><span class='param'>= 10</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Dumps the contents of the <b>CATSamDimension</b> object.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oListOfString</span></dt>
+   <dd>   The List of CATUnicodeString.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndent</span></dt>
+   <dd>   The indentation level (one level represents 3 spaces).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLoopSize</span></dt>
+   <dd>   The size of loops.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Fill"></a><a id="Fill(int,int,int,int* const,CATSamValue,CATSamMathType,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Fill</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbPositions</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaminates</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbSMI</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iNbRepeats</span>,<script type="text/javascript"> activateLink('CATSamValue','CATSamValue')</script> <span class='param'>iValueType</span>,<script type="text/javascript"> activateLink('CATSamMathType','CATSamMathType')</script> <span class='param'>iMathType</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iMathDimension</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Fills a <b>CATSamDimension</b> object with the supplied values.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbPositions</span></dt>
+   <dd>   The number of positions.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaminates</span></dt>
+   <dd>   The number of laminates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbSMI</span></dt>
+   <dd>   The number of positions within each laminate.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbRepeats[NbGlobalPositions]</span></dt>
+   <dd>   The number of another form of repetition for each set of Position, Lamina and SMI.<br>
+   <b>WARNING ::</b> The size of the Array <b>iNbRepeats</b> must be equal to <b>NbGlobalPositions</b>.<br>
+   With <b>NbGlobalPositions</b> = iNbPositions*iNbLaminates*iNbSMI.<br>
+   iNbRepeat is valued as follow :<br>
+      <dl><dd>Nb(P0,L0,S0), Nb(P0,L0,S1), ..., Nb(P0,L0,Sk), Nb(P0,L1,S0), ......, Nb(P0,L1,Sk), ...., Nb(P0,Lj,S0), ......, Nb(P0,Lj,Sk)<br>
+          <dd>Nb(P1,L0,S0), Nb(P1,L0,S1), ..., Nb(P1,L0,Sk), Nb(P1,L1,S0), ......, Nb(P1,L1,Sk), ...., Nb(P1,Lj,S0), ......, Nb(P1,Lj,Sk)<br>
+          <dd>Nb(Pi,L0,S0), Nb(Pi,L0,S1), ..., Nb(Pi,L0,Sk), Nb(Pi,L1,S0), ......, Nb(Pi,L1,Sk), ...., Nb(Pi,Lj,S0), ......, Nb(Pi,Lj,Sk)<br></dl>
+   With :<br>
+      <dl><dd>Nb(Pi,Lj,Sk) : the repeat number of the set of Position, Lamina and SMI (Pi,Lj,Sk).<br>
+          <dd>Pi           : the Position index (between 0 and iNbPositions-1).<br>
+          <dd>Lj           : the Lamina index (between 0 and iNbLaminates-1).<br>
+          <dd>Sk           : the SMI index (between 0 and iNbSMI-1).<br></dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iValueType</span></dt>
+   <dd>   The type of value (to calculate <b>UnitaryValueSize</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMathType</span></dt>
+   <dd>   The mathematical type (to calculate <b>NbValues</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMathDimension</span></dt>
+   <dd>   The mathematical dimension (to calculate <b>NbValues</b>).
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATSamValue','','CATSamValue') </script>, <script type="text/javascript"> activateLinkAnchor('CATSamMathType','','CATSamMathType') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Fill"></a><a id="Fill(int,int* const,int,int* const,int,int* const,int* const,int* const,CATSamAggregationMode* const,CATSamValue,CATSamMathType,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Fill</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbPositions</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iPositionsNumber</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaminates</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iLaminatesNumber</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbSMI</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iSMI</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iNbRepeats</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iRepeatsNumber</span>, const <script type="text/javascript"> activateLink('CATSamAggregationMode*','CATSamAggregationMode* const')</script> <span class='param'>iAggregationMode</span>,<script type="text/javascript"> activateLink('CATSamValue','CATSamValue')</script> <span class='param'>iValueType</span>,<script type="text/javascript"> activateLink('CATSamMathType','CATSamMathType')</script> <span class='param'>iMathType</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iMathDimension</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Fills a <b>CATSamDimension</b> object with the supplied values.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbPositions</span></dt>
+   <dd>   The number of positions.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPositionsNumber[<b>iNbPositions</b>]</span></dt>
+   <dd>   The positions number.<br>
+   <b>WARNING ::</b> The size of the Array <b>iPositionsNumber</b> must be equal to <b>iNbPositions</b>.<br>
+   If iPositionsNumber is NULL positions numbers are set to 0...iPositions-1.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaminates</span></dt>
+   <dd>   The number of laminates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminatesNumber[<b>iNbLamina</b>]</span></dt>
+   <dd>   The laminates number.<br>
+   <b>WARNING ::</b> The size of the Array <b>iLaminatesNumber</b> must be equal to <b>iNbLamina</b>.<br>
+   If iLaminatesNumber is NULL laminates numbers are set to 0...iNbLamina-1.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbSMI</span></dt>
+   <dd>   The number of positions within each laminate.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMI[<b>iNbSMI</b>]</span></dt>
+   <dd>   The positions number within each laminate.<br>
+   <b>WARNING ::</b> The size of the Array <b>iSMI</b> must be equal to <b>iNbSMI</b>.<br>
+   If iSMI is NULL SMI numbers are set to 0...iNbSMI-1.<br>
+   <b>WARNING ::</b> SMI numbers must match to values of the enum <b>CATSamApplyQualifier</b>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbRepeats[<b>NbGlobalPositions</b>]</span></dt>
+   <dd>   The number of another form of repetition for each set of Position, Lamina and SMI.<br>
+   <b>WARNING ::</b> The size of the Array <b>iNbRepeats</b> must be equal to <b>NbGlobalPositions</b>.<br>
+   With <b>NbGlobalPositions</b> = iNbPositions*iNbLaminates*iNbSMI.<br>
+   iNbRepeat is valued as follow :<br>
+      <dl><dd>Nb(P0,L0,S0), Nb(P0,L0,S1), ..., Nb(P0,L0,Sk), Nb(P0,L1,S0), ......, Nb(P0,L1,Sk), ...., Nb(P0,Lj,S0), ......, Nb(P0,Lj,Sk)<br>
+          <dd>Nb(P1,L0,S0), Nb(P1,L0,S1), ..., Nb(P1,L0,Sk), Nb(P1,L1,S0), ......, Nb(P1,L1,Sk), ...., Nb(P1,Lj,S0), ......, Nb(P1,Lj,Sk)<br>
+          <dd>Nb(Pi,L0,S0), Nb(Pi,L0,S1), ..., Nb(Pi,L0,Sk), Nb(Pi,L1,S0), ......, Nb(Pi,L1,Sk), ...., Nb(Pi,Lj,S0), ......, Nb(Pi,Lj,Sk)<br></dl>
+   With :<br>
+      <dl><dd>Nb(Pi,Lj,Sk) : the repeat number of the set of Position, Lamina and SMI (Pi,Lj,Sk).<br>
+          <dd>Pi           : the Position index (between 0 and iNbPositions-1).<br>
+          <dd>Lj           : the Lamina index (between 0 and iNbLaminates-1).<br>
+          <dd>Sk           : the SMI index (between 0 and iNbSMI-1).<br></dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRepeatsNumber[<b>NbRepeatTotal</b>]</span></dt>
+   <dd>   The repetion number of another form of repetition for each set of Position, Lamina and SMI.<br>
+   <b>WARNING ::</b> The size of the Array <b>iRepeatsNumber</b> must be equal to <b>NbRepeatTotal</b>.<br>
+   With <b>NbRepeatTotal</b> = iNbRepeat[0]+iNbRepeat[1]+..+iNbRepeat[<b>NbGlobalPositions-1</b>].<br>
+   iRepeatsNumber is valued as follow :<br>
+      <dl><dd>R0(P0,L0,S0), R1(P0,L0,S0), ..., Rx(P0,L0,S0), R0(P0,L0,S1), ......, Rx(P0,L0,S1), ...., R0(P0,L0,Sk), ......, Rx(P0,L0,Sk)<br>
+          <dd>R0(P0,L1,S0), R1(P0,L1,S0), ..., Rx(P0,L1,S0), R0(P0,L1,S1), ......, Rx(P0,L1,S1), ...., R0(P0,L1,Sk), ......, Rx(P0,L1,Sk)<br>
+          <dd>R0(P0,Lj,S0), R1(P0,Lj,S0), ..., Rx(P0,Lj,S0), R0(P0,Lj,S1), ......, Rx(P0,Lj,S1), ...., R0(P0,Lj,Sk), ......, Rx(P0,Lj,Sk)<br>
+          <dd>R0(P1,L0,S0), R1(P1,L0,S0), ..., Rx(P1,L0,S0), R0(P1,L0,S1), ......, Rx(P1,L0,S1), ...., R0(P1,L0,Sk), ......, Rx(P1,L0,Sk)<br>
+          <dd>R0(P1,L1,S0), R1(P1,L1,S0), ..., Rx(P1,L1,S0), R0(P1,L1,S1), ......, Rx(P1,L1,S1), ...., R0(P1,L1,Sk), ......, Rx(P1,L1,Sk)<br>
+          <dd>R0(P1,Lj,S0), R1(P1,Lj,S0), ..., Rx(P1,Lj,S0), R0(P1,Lj,S1), ......, Rx(P1,Lj,S1), ...., R0(P1,Lj,Sk), ......, Rx(P1,Lj,Sk)<br>
+          <dd>R0(Pi,L0,S0), R1(Pi,L0,S0), ..., Rx(Pi,L0,S0), R0(Pi,L0,S1), ......, Rx(Pi,L0,S1), ...., R0(Pi,L0,Sk), ......, Rx(Pi,L0,Sk)<br>
+          <dd>R0(Pi,L1,S0), R1(Pi,L1,S0), ..., Rx(Pi,L1,S0), R0(Pi,L1,S1), ......, Rx(Pi,L1,S1), ...., R0(Pi,L1,Sk), ......, Rx(Pi,L1,Sk)<br>
+          <dd>R0(Pi,Lj,S0), R1(Pi,Lj,S0), ..., Rx(Pi,Lj,S0), R0(Pi,Lj,S1), ......, Rx(Pi,Lj,S1), ...., R0(Pi,Lj,Sk), ......, Rx(Pi,Lj,Sk)<br></dl>
+   With :<br>
+      <dl><dd>Rx(Pi,Lj,Sk) : the sequential number of the Entities which contribute to the collected values.<br>
+          <dd>Pi           : the Position index (between 0 and iNbPositions-1).<br>
+          <dd>Lj           : the Lamina index (between 0 and iNbLaminates-1).<br>
+          <dd>Sk           : the SMI index (between 0 and iNbSMI-1).<br>
+          <dd><b>NB        :</b> Rx(Pi,Lj,Sk) = <b>-1</b> if collected values are combined or if their origin are unknown.<br></dl>
+   If iRepeatsNumber is NULL repeat numbers are set to <b>-1</b>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAggregationMode[<b>NbRepeatTotal</b>]</span></dt>
+   <dd>   The AggregationMode of the Characteristic values for each set of Position, Lamina and SMI.<br>
+   <b>WARNING ::</b> The size of the Array <b>iAggregationMode</b> must be equal to <b>NbRepeatTotal</b>.<br>
+   With <b>NbRepeatTotal</b> = iNbRepeat[0]+iNbRepeat[1]+..+iNbRepeat[<b>NbGlobalPositions-1</b>].<br>
+   iAggregationMode is valued as follow :<br>
+      <dl><dd>A0(P0,L0,S0), A1(P0,L0,S0), ..., Ax(P0,L0,S0), A0(P0,L0,S1), ......, Ax(P0,L0,S1), ...., A0(P0,L0,Sk), ......, Ax(P0,L0,Sk)<br>
+          <dd>A0(P0,L1,S0), A1(P0,L1,S0), ..., Ax(P0,L1,S0), A0(P0,L1,S1), ......, Ax(P0,L1,S1), ...., A0(P0,L1,Sk), ......, Ax(P0,L1,Sk)<br>
+          <dd>A0(P0,Lj,S0), A1(P0,Lj,S0), ..., Ax(P0,Lj,S0), A0(P0,Lj,S1), ......, Ax(P0,Lj,S1), ...., A0(P0,Lj,Sk), ......, Ax(P0,Lj,Sk)<br>
+          <dd>A0(P1,L0,S0), A1(P1,L0,S0), ..., Ax(P1,L0,S0), A0(P1,L0,S1), ......, Ax(P1,L0,S1), ...., A0(P1,L0,Sk), ......, Ax(P1,L0,Sk)<br>
+          <dd>A0(P1,L1,S0), A1(P1,L1,S0), ..., Ax(P1,L1,S0), A0(P1,L1,S1), ......, Ax(P1,L1,S1), ...., A0(P1,L1,Sk), ......, Ax(P1,L1,Sk)<br>
+          <dd>A0(P1,Lj,S0), A1(P1,Lj,S0), ..., Ax(P1,Lj,S0), A0(P1,Lj,S1), ......, Ax(P1,Lj,S1), ...., A0(P1,Lj,Sk), ......, Ax(P1,Lj,Sk)<br>
+          <dd>A0(Pi,L0,S0), A1(Pi,L0,S0), ..., Ax(Pi,L0,S0), A0(Pi,L0,S1), ......, Ax(Pi,L0,S1), ...., A0(Pi,L0,Sk), ......, Ax(Pi,L0,Sk)<br>
+          <dd>A0(Pi,L1,S0), A1(Pi,L1,S0), ..., Ax(Pi,L1,S0), A0(Pi,L1,S1), ......, Ax(Pi,L1,S1), ...., A0(Pi,L1,Sk), ......, Ax(Pi,L1,Sk)<br>
+          <dd>A0(Pi,Lj,S0), A1(Pi,Lj,S0), ..., Ax(Pi,Lj,S0), A0(Pi,Lj,S1), ......, Ax(Pi,Lj,S1), ...., A0(Pi,Lj,Sk), ......, Ax(Pi,Lj,Sk)<br></dl>
+   With :<br>
+      <dl><dd>Ax(Pi,Lj,Sk) : the sequential number of the Entities which contribute to the collected values.<br>
+          <dd>Pi           : the Position index (between 0 and iNbPositions-1).<br>
+          <dd>Lj           : the Lamina index (between 0 and iNbLaminates-1).<br>
+          <dd>Sk           : the SMI index (between 0 and iNbSMI-1).<br>
+          <dd><b>NB        :</b> Ax(Pi,Lj,Sk) = <b>CATSamAggregationModeAdd</b> if collected values are combined or if their origin are unknown.<br></dl>
+   If iAggregationMode is NULL aggregation modes are set to <b>CATSamAggregationModeAdd</b>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iValueType</span></dt>
+   <dd>   The type of value (to calculate <b>UnitaryValueSize</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMathType</span></dt>
+   <dd>   The mathematical type (to calculate <b>NbValues</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMathDimension</span></dt>
+   <dd>   The mathematical dimension (to calculate <b>NbValues</b>).
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATSamValue','','CATSamValue') </script>, <script type="text/javascript"> activateLinkAnchor('CATSamMathType','','CATSamMathType') </script>, <script type="text/javascript"> activateLinkAnchor('CATSamAggregationMode','','CATSamAggregationMode') </script>, <script type="text/javascript"> activateLinkAnchor('CATSamApplyQualifier','','CATSamApplyQualifier') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetAggregationMode"></a><a id="GetAggregationMode(int,int,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATSamAggregationMode','const CATSamAggregationMode*')</script>  <span class='objname'>GetAggregationMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPositionIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLaminaIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSMIIndex</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the Aggregation Mode of the <b>CATSamDimension</b> object for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPositionIndex</span></dt>
+   <dd>   The Position index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminaIndex</span></dt>
+   <dd>   The Lamina index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMIIndex</span></dt>
+   <dd>   The SMI index.
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATSamAggregationMode','','CATSamAggregationMode') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetComponents"></a><a id="GetComponents()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','const int*')</script>  <span class='objname'>GetComponents</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the Components of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLaminates"></a><a id="GetLaminates()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','const int*')</script>  <span class='objname'>GetLaminates</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the Laminates of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbComponents"></a><a id="GetNbComponents()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNbComponents</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the number of Components of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbLaminates"></a><a id="GetNbLaminates()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNbLaminates</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Return the number of Laminates of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbPositions"></a><a id="GetNbPositions()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNbPositions</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Return the number of Positions of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbRepeat"></a><a id="GetNbRepeat(int,int,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNbRepeat</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPositionIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLaminaIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSMIIndex</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the number of Repeat of the <b>CATSamDimension</b> object for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPositionIndex</span></dt>
+   <dd>   The Position index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminaIndex</span></dt>
+   <dd>   The Lamina index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMIIndex</span></dt>
+   <dd>   The SMI index.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbRepeatTotal"></a><a id="GetNbRepeatTotal()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNbRepeatTotal</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the whole number of Repeat of the <b>CATSamDimension</b> object.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     The whole number of Repeat of the <b>CATSamDimension</b> object computed as folow :<br>
+    <dl><dd><b>NbRepeatTotal</b> = NbRepeat[0]+NbRepeat[1]+..+NbRepeat[<b>NbGlobalPositions-1</b>].<br>
+        <dd>with <b>NbGlobalPositions</b> = iNbPositions*iNbLaminates*iNbSMI.<br></dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbSMI"></a><a id="GetNbSMI()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNbSMI</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Return the number of positions within each laminate of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbValues"></a><a id="GetNbValues()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNbValues</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Return the number of values of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbValues"></a><a id="GetNbValues(int,int,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNbValues</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPositionIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLaminaIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSMIIndex</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Return the number of collected values for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPositionIndex</span></dt>
+   <dd>   The Position index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminaIndex</span></dt>
+   <dd>   The Lamina index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMIIndex</span></dt>
+   <dd>   The SMI index.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPositions"></a><a id="GetPositions()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','const int*')</script>  <span class='objname'>GetPositions</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the positions of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetRepeat"></a><a id="GetRepeat(int,int,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','const int*')</script>  <span class='objname'>GetRepeat</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPositionIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLaminaIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSMIIndex</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the Repeat of the <b>CATSamDimension</b> object for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPositionIndex</span></dt>
+   <dd>   The Position index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminaIndex</span></dt>
+   <dd>   The Lamina index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMIIndex</span></dt>
+   <dd>   The SMI index.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSMI"></a><a id="GetSMI()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','const int*')</script>  <span class='objname'>GetSMI</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the positions within each laminate of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSizeValues"></a><a id="GetSizeValues()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetSizeValues</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Return the size of values of the <b>CATSamDimension</b> object.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSizeValues"></a><a id="GetSizeValues(int,int,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetSizeValues</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPositionIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLaminaIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSMIIndex</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Return the size of collected values for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPositionIndex</span></dt>
+   <dd>   The Position index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminaIndex</span></dt>
+   <dd>   The Lamina index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMIIndex</span></dt>
+   <dd>   The SMI index.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetUnitaryValueSize"></a><a id="GetUnitaryValueSize()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetUnitaryValueSize</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get the value size of a Component.
+</dd>
+<dt class='dtmethod' >
+  <a id="HadNegativeRepeat"></a><a id="HadNegativeRepeat()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>HadNegativeRepeat</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Obtain the Repeat configuration.<br>
+ Return True if Contain negative NbRepeat.
+</dd>
+<dt class='dtmethod' >
+  <a id="HadVariableRepeat"></a><a id="HadVariableRepeat()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>HadVariableRepeat</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Obtain the Repeat configuration.<br>
+ Return True if Contain variable Repeat.
+</dd>
+<dt class='dtmethod' >
+  <a id="IsAKindOf"></a><a id="IsAKindOf(CATString&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>IsAKindOf</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iType</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Test the type of the instance.
+ Return True if iType = CATSamDimension
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iType</span></dt>
+   <dd>   The type to test.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetNbComponents"></a><a id="SetNbComponents(int,int* const)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetNbComponents</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbComponents</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iComponents</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Change the number of Components of the <b>CATSamDimension</b> object with the supplied values,
+ and set the Components numbers.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbComponents</span></dt>
+   <dd>   The number of Components.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iComponents[<b>iNbComponents</b>]</span></dt>
+   <dd>   The Components number.
+   <b>WARNING ::</b> The size of the Array <b>iComponents</b> must be equal to <b>iNbComponents</b>.<br>
+   If iComponents is NULL positions numbers are set to 0...iNbComponents-1.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetNbLaminates"></a><a id="SetNbLaminates(int,int* const)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetNbLaminates</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaminates</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iLaminatesNumber</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Change the number of Laminates of the <b>CATSamDimension</b> object with the supplied values and set the Laminates numbers.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbLaminates</span></dt>
+   <dd>   The number of laminates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminatesNumber[<b>iNbLamina</b>]</span></dt>
+   <dd>   The laminates number.<br>
+   <b>WARNING ::</b> The size of the Array <b>iLaminatesNumber</b> must be equal to <b>iNbLamina</b>.<br>
+   If iLaminatesNumber is NULL laminates numbers are set to 0...iNbLamina-1.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetNbPositions"></a><a id="SetNbPositions(int,int* const)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetNbPositions</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbPositions</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iPositionsNumber</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Change the number of Positions of the <b>CATSamDimension</b> object with the supplied values and set the positions numbers.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbPositions</span></dt>
+   <dd>   The number of positions.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPositionsNumber[<b>iNbPositions</b>]</span></dt>
+   <dd>   The positions number.<br>
+   <b>WARNING ::</b> The size of the Array <b>iPositionsNumber</b> must be equal to <b>iNbPositions</b>.<br>
+   If iPositionsNumber is NULL positions numbers are set to 0...iPositions-1.
+   If iPositions is NULL positions numbers are set to 0...iPositions-1.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetNbRepeat"></a><a id="SetNbRepeat(int,int,int,int,int* const,CATSamAggregationMode* const)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetNbRepeat</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPositionIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLaminaIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSMIIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbRepeats</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iRepeatsNumber</span><span class='param'>= NULL</span>, const <script type="text/javascript"> activateLink('CATSamAggregationMode*','CATSamAggregationMode* const')</script> <span class='param'>iAggregationMode</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Change the number of Repeat of the <b>CATSamDimension</b> object for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex) with the supplied values and set the Repeat numbers.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPositionIndex</span></dt>
+   <dd>   The Position number.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminaIndex</span></dt>
+   <dd>   The Lamina index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMIIndex</span></dt>
+   <dd>   The SMI number.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbRepeats</span></dt>
+   <dd>   The number of Repetition for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRepeatsNumber[<b>iNbRepeats</b>]</span></dt>
+   <dd>   The repetion numbers for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).<br>
+   <b>WARNING ::</b> The size of the Array <b>iRepeatsNumber</b> must be equal to <b>iNbRepeats</b>.<br>
+   iRepeatsNumber is valued as follow :<br>
+     <dl><dd>R0, R1, ..., Rx.<br></dl>
+   with :<br>
+     <dl><dd>Rx : the sequential number of the Entities which contribute to the collected values.<br>
+         <dd><b>NB :</b> Rx = <b>-1</b> if collected values are combined or if their origin are unknown.<br></dl>
+   If iRepeatsNumber is NULL repeat numbers are set to <b>-1</b>.<br>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAggregationMode[<b>iNbRepeats</b>]</span></dt>
+   <dd>   The AggregationMode of the Characteristic values for the set of Position, Lamina and SMI (iPositionIndex, iLaminaIndex, iSMIIndex).<br>
+   <b>WARNING ::</b> The size of the Array <b>iAggregationMode</b> must be equal to <b>iNbRepeats</b>.<br>
+   iAggregationMode is valued as follow :<br>
+     <dl><dd>A0, A1, ..., Ax.<br></dl>
+   with :<br>
+     <dl><dd>Ax : the aggregation mode of the Entities which contribute to the collected values.<br>
+         <dd><b>NB :</b> Ax = <b>CATSamAggregationModeAdd</b> if collected values are combined or if their origin are unknown.<br></dl>
+   If iAggregationMode is NULL aggregation modes are set to <b>CATSamAggregationModeAdd</b>.<br>
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATSamAggregationMode','','CATSamAggregationMode') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetNbSMI"></a><a id="SetNbSMI(int,int* const)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetNbSMI</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbSMI</span>, const <script type="text/javascript"> activateLink('int*','int* const')</script> <span class='param'>iSMI</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Change the number of positions within each laminate of the <b>CATSamDimension</b> object with the supplied values and set the SMI numbers.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbSMI</span></dt>
+   <dd>   The number of positions within each laminate.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMI[<b>iNbSMI</b>]</span></dt>
+   <dd>   The positions number within each laminate.<br>
+   <b>WARNING ::</b> The size of the Array <b>iSMI</b> must be equal to <b>iNbSMI</b>.<br>
+   If iSMI is NULL SMI numbers are set to 0...iNbSMI-1.<br>
+   <b>WARNING ::</b> SMI numbers must match to values of the enum <b>CATSamApplyQualifier</b>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetUnitaryValueSize"></a><a id="SetUnitaryValueSize(int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetUnitaryValueSize</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iUnitaryValueSize</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Change the value size of a Component.
+ and set the Components numbers.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iUnitaryValueSize</span></dt>
+   <dd>   The Size of each Component.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetUnitaryValueSize"></a><a id="SetUnitaryValueSize(CATSamValue)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetUnitaryValueSize</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATSamValue','CATSamValue')</script> <span class='param'>iValueType</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Change the size of a single value.
+ and set the Components numbers.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iValueType</span></dt>
+   <dd>   The type of value (to calculate <b>UnitaryValueSize</b>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iUnitaryValueSize</span></dt>
+   <dd>   The Size of each Component.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ValuesAddress"></a><a id="ValuesAddress(void*,int,int,int,int,int)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','const void*')</script>  <span class='objname'>ValuesAddress</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('void','void*')</script> <span class='param'>iValuePointerBase</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iPositionIndex</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLaminaIndex</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSMIIndex</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iRepeatIndex</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iComponentIndex</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('const',' const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Compute the offset on Values Pointer according to the definition of the <b>CATSamDimension</b> object.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iValuePointerBase</span></dt>
+   <dd>   The Pointer on Values.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPositionIndex</span></dt>
+   <dd>   The Position Index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLaminaIndex</span></dt>
+   <dd>   The Lamina Index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSMIIndex</span></dt>
+   <dd>   The SMI Index.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRepeatIndex</span></dt>
+   <dd>   The Repeat Index for the of Position and SMI [iPositionIndex, iSMIIndex].
+ 
+ </ dd>
+    <dt><span class='paramitem'> iComponentIndex</span></dt>
+   <dd>   The Component Index.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator ="></a><a id="operator =(CATSamDimension&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATSamDimension','CATSamDimension')</script>  <span class='objname'>operator =</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSamDimension','CATSamDimension&amp;')</script> <span class='param'>iDimension</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Copies the contents of another <b>CATSamDimension</b> object.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDimension</span></dt>
+   <dd>   The object which is to be copied.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator =="></a><a id="operator ==(CATSamDimension&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>operator ==</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSamDimension','CATSamDimension&amp;')</script> <span class='param'>iDimension</span>)</span><script type="text/javascript"> activateLink('',' ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Compare the contents of another <b>CATSamDimension</b> object to the current instance.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDimension</span></dt>
+   <dd>   The object which is to be compared.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+ <h2 class='title2'>Data Members</h2> <br><dl>
+<dt class='dtdata'><a id="PublicWorkPtr"></a>PublicWorkPtr
+
+  public int * const PublicWorkPtr</dt>
+  <dd>
+ Give a public access to the Work field.
+</dd>
+</dl><br class='brart'/>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATSamDimension.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATSAM0Explicit</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

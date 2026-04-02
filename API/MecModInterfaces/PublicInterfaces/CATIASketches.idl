@@ -1,0 +1,121 @@
+#ifndef CATIASketches_IDL
+#define CATIASketches_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIASketches:                           
+// Exposed interface for sketches collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                        Ph Baucher
+// Feb98 COM compliance					  L Lalere
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAReference;
+interface CATIASketch;
+interface CATIABoundary;
+
+
+//-----------------------------------------------------------------
+    /**
+     * The body's collection of sketches not yet used by any shape.
+     */
+interface CATIASketches : CATIACollection
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+   /**
+    * Creates a new sketch and adds it to the sketch collection.
+    * The sketch creation implies to specify a supporting plane.
+    * Once created, the sketch exists, but is empty.
+    * You must use the @href CATIASketch#OpenEdition method to begin to edit it.
+    * @param iPlane
+    *   The sketch supporting plane<br>
+    * The following @href CATIABoundary object is supported: 
+    * @href CATIAPlanarFace.
+    * @return oNewSketch
+    *   The created sketch
+    * <! @sample >
+    * <dt><b>Example:</b>
+    * <dd>
+    * This example creates the <tt>newSketch</tt> sketch on the XY plane
+    * of the <tt>myPart</tt> part:
+    * <pre>
+    * Set XYPlane = myPart.OriginElements.PlaneXY()
+    * Set newSketch = myPart.Sketches.<font color="red">Add</font>(XYPlane)
+    * </pre>
+    * </dl>
+    */
+    HRESULT     Add
+                ( in                CATIAReference            iPlane
+                , out /*IDLRETVAL*/    CATIASketch            oNewSketch
+                );
+
+  /**
+    * Returns a sketch using its index or its name from the Sketches
+    * collection.
+    * @param iIndex
+    *   The index or the name of the sketch to retrieve from
+    *   the collection of sketches.
+    *   As a numerics, this index is the rank of the sketch
+    *   in the collection.
+    *   The index of the first sketch in the collection is 1, and
+    *   the index of the last sketch is Count.
+    *   As a string, it is the name you assigned to the sketch using
+    *   the @href CATIABase#Name property.
+    * @return The retrieved sketch
+    * <! @sample >
+    * <dt><b>Example:</b>
+    * <dd>
+    * This example retrieves the last item in the collection sketches.
+    * <pre>
+    * Set lastSketch = sketchList.<font color="red">Item</font>(sketchList.Count)
+    * </pre>
+    * </dl>
+    */
+
+    HRESULT     Item
+                ( in                CATVariant             iIndex
+                , out /*IDLRETVAL*/ CATIASketch            oSketch
+                );
+    /**
+     * Returns a boundary using its label.
+     * @param iLabel
+     *   Identification of the @href CATIABoundary object.
+	 *   See @href CATIAReference#DisplayName.
+     * @return The retrieved boundary
+     */
+	HRESULT GetBoundary (in CATBSTR iLabel, out /*IDLRETVAL*/ CATIABoundary oBoundary);
+};
+
+// Interface name : CATIASketches
+#pragma ID CATIASketches "DCE:680371c6-3b2b-11d1-a26c0000f87546fd"
+#pragma DUAL CATIASketches
+
+// VB object name : Sketches (Id used in Visual Basic)
+#pragma ID Sketches "DCE:687f6c0e-3b2b-11d1-a26c0000f87546fd"
+#pragma ALIAS CATIASketches Sketches
+
+
+#endif
+// CATIASketches_IDL
+

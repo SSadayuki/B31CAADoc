@@ -1,0 +1,100 @@
+#ifndef CATIAItems_IDL
+#define CATIAItems_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "DNBItemAssignmentType.idl"
+
+interface CATIAItem;
+
+
+/**
+ * The collection of items related to the current activity.
+ */
+
+interface CATIAItems : CATIACollection
+{
+
+/**
+ * This method returns the idl object Item for the specified item
+ * identifier.
+ * @param iIndex
+ * The item identifier
+ * @return oItem
+ * The idl item
+ */
+  HRESULT     Item( in CATVariant iIndex, out /*IDLRETVAL*/ CATIAItem oItem);
+
+/**
+* This method adds the specified item in the current list
+* @param iItem
+* The item to add
+* @return oitem
+* The item
+*/
+
+  HRESULT     Add( in CATIAItem iProduct,  out /*IDLRETVAL*/ CATIAItem oProduct);
+
+  //#pragma PROPERTY Count
+  //HRESULT get_Count (out long oNbItems);
+
+/**
+* This method Assigns the specified item with the specified assignment type
+* @param iItem
+* The item to be assigned
+* @param iAssignmentType
+* Type of the Assignment (Item to the Process)
+* @return oitem
+* The item
+*/
+HRESULT     AddByAssignmentType( in CATIAItem iItem, in ItemAssignmentType iAssignmentType, out /*IDLRETVAL*/ CATIAItem oItem);
+
+/**
+* This method used to unassign the specified item (with the given assignment type) 
+* @param iItem
+* The item to be Unassigned
+* @param iAssignmentType
+* Type of the Assignment (Item to the Process) to be removed
+* @return oitem
+* The item
+*/
+HRESULT     RemoveByAssignmentType( in CATIAItem iItem, in ItemAssignmentType iAssignmentType, out /*IDLRETVAL*/ CATIAItem oItem);
+
+/**
+ * This method returns the item assocated with the activity with given Assignment Type.
+ * @param iAssignmentType
+ * Type of the Assignment between item & the activity
+ * @return oItem
+ * idl item to be returned
+*/
+HRESULT ItemByAssignmentType( in CATVariant iIndex, in ItemAssignmentType iAssignmentType, out /*IDLRETVAL*/ CATIAItem oItem);
+
+/**
+ * This method returns the Number of items that assocated with the activity with given Assignment Type.
+ * @param iAssignmentType
+ * Type of the Assignment between items & the activity
+ * @return oNbItems
+ * No. of Items that are assigned to the activity with the given assignment type.
+*/
+HRESULT CountByAssignmentType (in ItemAssignmentType iAssignmentType, out /*IDLRETVAL*/ long oNbItems);
+  
+};
+
+// Interface name : CATIAItems
+#pragma ID CATIAItems "DCE:8735a880-834b-0000-0280030e1c000000"
+#pragma DUAL CATIAItems
+
+// VB object name : Items
+#pragma ID Items "DCE:8735aa42-977c-0000-0280030e1c000000"
+#pragma ALIAS CATIAItems Items
+
+
+#endif

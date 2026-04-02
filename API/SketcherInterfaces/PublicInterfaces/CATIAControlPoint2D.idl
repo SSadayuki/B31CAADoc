@@ -1,0 +1,96 @@
+#ifndef CATIAControlPoint2D_IDL
+#define CATIAControlPoint2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAPoint2D.idl"
+#include "CATSafeArray.idl"
+
+/**
+ *  Class defining a spline control point in 2D Space.
+ */
+
+interface CATIAControlPoint2D : CATIAPoint2D
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+        //
+
+
+#pragma PROPERTY Curvature
+        /**
+        *       Returns the curvature properties of the spline control point
+        *       @param oCurvature
+        *       The curvature of the tangent determined at the control point
+        */
+    HRESULT    get_Curvature    
+                ( out  /*IDLRETVAL*/      double        oCurvature );
+
+//
+        /**
+        *       Imposes the curvature properties of the spline control point
+        *       @param iCurvature
+        *       The curvature of the tangent determined at the control point
+        */
+    HRESULT    put_Curvature    
+                ( in   double        iCurvature );
+//
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+
+        /**
+        *       Imposes the tangent properties of the spline control point
+        *       @param iTangentX
+        *       The X Coordinate of the tangent determined at the control point
+        *       @param iTangentY
+        *       The Y Coordinate of the tangent determined at the control point
+        */
+    HRESULT    SetTangent    
+                ( in   double iTangentX
+                 ,in   double iTangentY );
+        /**
+        *       Unsets the tangent properties of the spline control point
+        */
+    HRESULT    UnsetTangent    ();
+
+//
+
+        /**
+        *       Unsets the curvature properties of the spline control point
+        */
+    HRESULT    UnsetCurvature ();
+	        //
+        /**
+        *       Returns the tangent properties of the spline control point
+        *       @param oTangent[0]
+        *       The X Coordinate of the tangent determined at the control point
+        *       @param oTangent[1]
+        *       The Y Coordinate of the tangent determined at the control point
+        */
+    HRESULT    GetTangent    
+                ( inout     CATSafeArrayVariant        oTangent );
+
+
+};
+
+// Interface name : CATIAControlPoint2D
+#pragma ID CATIAControlPoint2D "DCE:80ec7432-4cb8-0000-0280030ba6000000"
+#pragma DUAL CATIAControlPoint2D
+
+// VB object name : ControlPoint2D (Id used in Visual Basic)
+#pragma ID ControlPoint2D "DCE:80ec7439-d252-0000-0280030ba6000000"
+#pragma ALIAS CATIAControlPoint2D ControlPoint2D
+
+
+#endif
+// CATIAControlPoint2D_IDL
+

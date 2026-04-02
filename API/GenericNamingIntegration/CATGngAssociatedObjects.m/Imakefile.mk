@@ -1,0 +1,36 @@
+BUILT_OBJECT_TYPE=NONE
+
+OS = COMMON
+
+COMMON_LINK_WITH = \
+  SI0BREPA\
+  SI0REPER\
+  SI0REPOR\
+  SI0TOPAC\
+  GN0GRAPH\
+  GN0NAME\
+  AD0XXBAS\
+  AC0SPBAS\
+  Collections\
+  JS0CORBA\
+  JS0ERROR\
+  CATSysTS\
+  JS0SCBAK\
+  JS0STR\
+  CATGeometricObjects \
+  CATMathStream
+
+#ifdef (CATIAR214)
+LINK_WITH=$(COMMON_LINK_WITH)  CATOmx
+#else
+LINK_WITH=$(COMMON_LINK_WITH)
+#endif
+
+
+
+
+
+
+
+
+

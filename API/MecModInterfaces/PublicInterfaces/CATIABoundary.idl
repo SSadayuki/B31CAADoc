@@ -1,0 +1,97 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIABoundary_IDL
+#define CATIABoundary_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// Boundary Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIAReference.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Topological cell, such as a face, an edge or a vertex.
+ * <b>Role</b>: 
+ * The Boundary objects are basic topological objects, such as the edge of a Pad. Some of them posess 
+ * a geometrical feature (<i>planar</i> face, <i>rectilinear</i> edge).</br>
+ * You will create a Boundary object (such as the @href CATIATriDimFeatEdge object, which is derived, indirectly, 
+ * from the Boundary object) using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it to the operator
+ * (such as @href CATIAShapeFactory#AddNewEdgeFilletWithConstantRadius ). Note that, regarding V4 sub-elements, once the
+ * data of a CATIA Version 4 Model has been copied to a .CATPart, the sub-elements of the resulting .CATPart are
+ * supported by the @href CATIABoundary object.</br> 
+ * The lifetime of a Boundary object is limited. In particular, after having call @href CATIAPart#Update ,
+ * the Boundary objects are usually no more valid.</br> 
+ * <b>See also:</b>
+ * <ul>
+ * <li>@href CATIAFace , @href CATIAPlanarFace , @href CATIACylindricalFace </li>
+ * <li>@href CATIAEdge , @href CATIATriDimFeatEdge , @href CATIARectilinearTriDimFeatEdge ,
+ * @href CATIABiDimFeatEdge , @href CATIARectilinearBiDimFeatEdge ,
+ * @href CATIAMonoDimFeatEdge , @href CATIARectilinearMonoDimFeatEdge </li>
+ * <li>@href CATIAVertex , @href CATIATriDimFeatVertexOrBiDimFeatVertex ,
+ * @href CATIANotWireBoundaryMonoDimFeatVertex, @href CATIAZeroDimFeatVertexOrWireBoundaryMonoDimFeatVertex </li>
+ * </ul>
+ * <b>Note:</b>@href CATIABoundary objects cannot be selected into the specification tree.</p>
+ * <b>Note:</b>For a @href CATIABoundary object, the object returned by the @href CATIABase#Parent property is the
+ * master shape. For example, if we have:<pre>
+ *                         Pad.2
+ *                          !
+ *                          !
+ * +                        V
+ * !                      +---+ 
+ * !                    /   / !
+ * +-- Pad.1          /   /   !
+ * !                /   / one +------+
+ * !               +---+    /       /! <--- Pad.1
+ * !               !   !  /       /  +
+ * +-- Pad.2       !   !/       /   /
+ *                 !   +------+   /
+ *                 !          ! /
+ *                 +----------+
+ * </pre>then, for the @href CATIAPlanarFace number "one", the @href CATIABase#Parent property returns the Pad.2
+ * automation object (see @href CATIAPad ).
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example asks the end user to select an edge (using the @href CATIATriDimFeatEdge object), and creates an edge fillet on this edge:
+ * <pre>
+ * Dim InputObjectType(0)
+ * Set Document = CATIA.ActiveDocument
+ * Set Selection = Document.Selection
+ * 'We propose to the user that he select an edge
+ * InputObjectType(0)="TriDimFeatEdge"
+ * Status=Selection.SelectElement2(InputObjectType,"Select an edge",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set EdgeFillet = ShapeFactory.AddNewEdgeFilletWithConstantRadius(Selection.Item(1).Value,1,5.0)
+ * EdgeFillet.EdgePropagation = 1
+ * Document.Part.Update 
+ * </pre>
+ * </dl>
+ */
+
+interface CATIABoundary : CATIAReference
+{
+
+};
+
+// Interface Name : CATIABoundary
+
+#pragma ID CATIABoundary "DCE:58b6ade0-1bae-11d6-80600010b5d44ab2"
+#pragma DUAL CATIABoundary
+
+// VB Object Name : Boundary
+#pragma ID Boundary "DCE:bf1fe1d0-1bae-11d6-80600010b5d44ab2"
+#pragma ALIAS CATIABoundary Boundary
+
+#endif
+//#endif
+

@@ -1,0 +1,107 @@
+#ifndef CATIASchInternalFlow_IDL 
+#define CATIASchInternalFlow_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+    
+interface  CATIASchListOfObjects;
+    
+#include "CatSchIDLInternalFlowType.idl"
+#include "CatSchIDLInternalFlowStatus.idl"
+#include "CatSchIDLInternalFlowStatus.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Represents the internal flow object in a schematic component.
+  */
+
+interface CATIASchInternalFlow : CATIABase
+{
+  /**
+  * Get insertion flow type.
+  * @param oEInternalFlowType
+  *   Internal flow type.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchInternalFlow
+  *
+  *  ...
+  * objThisIntf.<font color="red">GetInsertionType</font>CatSchIDLInternalFlowType_Enum
+  * </pre>
+  *    
+  */
+  HRESULT GetInsertionType ( 
+    inout CatSchIDLInternalFlowType oEInternalFlowType );
+    
+  /**
+  * Get insertion flow status.
+  * @param oEInternalFlowStatus
+  *   Internal flow status.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchInternalFlow
+  *
+  *  ...
+  * objThisIntf.<font color="red">GetStatus</font>CatSchIDLInternalFlowStatus_Enum
+  * </pre>
+  *    
+  */
+  HRESULT GetStatus ( 
+    inout CatSchIDLInternalFlowStatus oEInternalFlowStatus );
+    
+  /**
+  * Set insertion flow status.
+  * @param iEInternalFlowStatus
+  *   Internal flow status.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchInternalFlow
+  *
+  *  ...
+  * objThisIntf.<font color="red">SetStatus</font>CatSchIDLInternalFlowStatus_Enum
+  * </pre>
+  *    
+  */
+  HRESULT SetStatus ( 
+    in CatSchIDLInternalFlowStatus iEInternalFlowStatus );
+    
+  /**
+  * List all schematic connectors associated with an internal flow.
+  * @param oLSchCntrs
+  *   A list of schematic connector objects
+  *   (members are CATISchCntrLocation interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchInternalFlow
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListSchConnectors</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListSchConnectors ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLSchCntrs );
+    
+};
+    
+// Interface name : CATIASchInternalFlow
+#pragma ID CATIASchInternalFlow "DCE:8af35108-f302-4414-b63023140fd3940e"
+#pragma DUAL CATIASchInternalFlow
+    
+// VB object name : SchInternalFlow
+#pragma ID SchInternalFlow "DCE:4963c79e-1934-4ecf-b76e2e0470012d41"
+#pragma ALIAS CATIASchInternalFlow SchInternalFlow
+    
+#endif 
+    

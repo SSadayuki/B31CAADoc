@@ -1,0 +1,237 @@
+#ifndef CATIATrim_IDL
+#define CATIATrim_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIATrim:						   
+// Exposed interface for Trim Feature
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                       Ph Baucher
+//=================================================================
+#include "CATIABooleanShape.idl"
+
+interface CATIAReference;
+ 
+/**
+ * Represents the Trim, or union trim boolean operation.
+ * It is performed between a body and the current shape.
+ */
+
+interface CATIATrim : CATIABooleanShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+
+
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+        //
+        //      ADD A FACE TO REMOVE
+        //      ---------------------
+        //
+    /**
+     * Adds a new face to be Removed (if face not divided by operation). 
+     * @param iFaceToRemove
+     *   The new face to process<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new face <tt>face</tt>
+     * to Remove for the Trim <tt>firstTrim</tt>:
+     * <pre>
+     * call firstTrim.<font color="red">AddFaceToRemove</font>(face)
+     * </pre>
+     * </dl>
+     */
+        HRESULT AddFaceToRemove
+                                ( in CATIAReference iFaceToRemove );
+     /**
+     * Adds a new face to be Removed (if face is divided by operation). 
+     * @param iFaceToRemove
+     *   The new face to process<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * @param iFaceAdjacentForRemove
+     *   An adjacent face of iFaceToRemove belonging to the other operand<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new face <tt>face</tt>
+     * to Remove for the Trim <tt>firstTrim</tt>:
+     * <pre>
+     * call firstTrim.<font color="red">AddFaceToRemove</font>(face)
+     * </pre>
+     * </dl>
+     */
+        HRESULT AddFaceToRemove2
+                                ( in CATIAReference iFaceToRemove,
+                                  in CATIAReference iFaceAdjacentForRemove  );
+        //
+        //      WITHDRAW A FACE TO REMOVE
+        //      --------------------------
+        //
+    /**
+     * Withdraws an existing Removed face (if face not divided by operation).
+     * @param iFaceToWithdraw
+     *   The face to withdraw<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the existing <tt>face</tt> Removed
+     * face from the Trim <tt>firstTrim</tt>:
+     * <pre>
+     * call firstTrim.<font color="red">WithdrawFaceToRemove</font>(face)
+     * </pre>
+     * </dl>
+     */
+        HRESULT WithdrawFaceToRemove
+                                ( in CATIAReference iFaceToWithdraw );
+    /**
+     * Withdraws an existing Removed face (if face is divided by operation).
+     * @param iFaceToWithdraw
+     *   The face to withdraw<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * @param iFaceAdjacentForRemove
+     *   An adjacent face of iFaceToRemove belonging to the other operand<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the existing <tt>face</tt> Removed
+     * face from the Trim <tt>firstTrim</tt>:
+     * <pre>
+     * call firstTrim.<font color="red">WithdrawFaceToRemove</font>(face)
+     * </pre>
+     * </dl>
+     */
+        HRESULT WithdrawFaceToRemove2
+                                ( in CATIAReference iFaceToWithdraw,
+                                  in CATIAReference iFaceAdjacentForRemove );
+   	//
+        //      ADD A FACE TO KEEP
+        //      ---------------------
+        //
+    /**
+     * Adds a new face to be kept (if face is not divided by operation). 
+     * @param iFaceToKeep
+     *   The new face to process<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new face <tt>face</tt>
+     * to Keep for the Trim <tt>firstTrim</tt>:
+     * <pre>
+     * call firstTrim.<font color="red">AddFaceToKeep</font>(face)
+     * </pre>
+     * </dl>
+     */
+       HRESULT AddFaceToKeep
+                                ( in CATIAReference iFaceToKeep );  
+     /**
+     * Adds a new face to be kept (if face is divided by operation). 
+     * @param iFaceToKeep
+     *   The new face to process<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * @param iFaceAdjacentForKeep
+     *   An adjacent face of iFaceToKeep belonging to the other operand<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new face <tt>face</tt>
+     * to Keep for the Trim <tt>firstTrim</tt>:
+     * <pre>
+     * call firstTrim.<font color="red">AddFaceToKeep</font>(face)
+     * </pre>
+     * </dl>
+     */
+        HRESULT AddFaceToKeep2
+                                ( in CATIAReference iFaceToKeep,
+                                  in CATIAReference iFaceAdjacentForKeep );
+        //
+        //      WITHDRAW A FACE TO KEEP
+        //      --------------------------
+        //
+    /**
+     * Withdraws an existing Kept face (if face is not divided by operation) .
+     * @param iFaceToWithdraw
+     *   The face to withdraw<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the existing <tt>face</tt> Kept
+     * face from the Trim <tt>firstTrim</tt>:
+     * <pre>
+     * call firstTrim.<font color="red">WithdrawFaceToKeep</font>(face)
+     * </pre>
+     * </dl>
+     */
+        HRESULT WithdrawFaceToKeep
+                                ( in CATIAReference iFaceToWithdraw ); 
+    /**
+     * Withdraws an existing Kept face (if face is divided by operation).
+     * @param iFaceToWithdraw
+     *   The face to withdraw<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * @param iFaceAdjacentForKeep
+     *   An adjacent face of iFaceToKeep belonging to the other operand<br>
+	 * The following @href CATIABoundary object is supported: 
+	 * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the existing <tt>face</tt> Kept
+     * face from the Trim <tt>firstTrim</tt>:
+     * <pre>
+     * call firstTrim.<font color="red">WithdrawFaceToKeep</font>(face)
+     * </pre>
+     * </dl>
+     */
+        HRESULT WithdrawFaceToKeep2
+                                ( in CATIAReference iFaceToWithdraw,
+                                  in CATIAReference iFaceAdjacentForKeep ); 
+};
+
+// Interface name : CATIATrim
+#pragma ID CATIATrim "DCE:8502e722-b1a2-0000-0280020a0d000000"
+#pragma DUAL CATIATrim
+
+// VB object name : Trim (Id used in Visual Basic)
+#pragma ID Trim "DCE:8502edb4-c7a1-0000-0280020a0d000000"
+#pragma ALIAS CATIATrim Trim
+
+
+#endif
+// CATIATrim_IDL
+

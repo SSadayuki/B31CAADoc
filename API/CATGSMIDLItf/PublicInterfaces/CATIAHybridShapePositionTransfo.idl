@@ -1,0 +1,239 @@
+#ifndef CATIAHybridShapePositionTransfo_IDL
+#define CATIAHybridShapePositionTransfo_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapePositionTransfo:         
+// Exposed interface for HybridShape PositionTransfo
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sept 1999 : Creation   
+//=================================================================
+
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+#include "CATIAAngle.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+ * Represents the hybrid shape position transformation feature object.
+ * <b>Role</b>: To access the data of the hybrid shape position transformation feature object.
+ * This data includes:
+ * <ul>
+ * <li>The positioning mode</li>
+ * <li>The profile to be positioned</li>
+ * <li>The initila and target planes</li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapePositionTransfo object.
+ * @see CATIAHybridShapeFactory
+ */
+interface CATIAHybridShapePositionTransfo : CATIAHybridShape
+{
+
+/**
+ * Returns or sets the positioning mode. 
+ * <br><b>Legal values</b>: 
+ * <dl>
+ * <dt>CATGSMPositionMode_NoneOrPositioned</dt>
+ * <dd>No positioning</dd>
+ * <dt>CATGSMPositionMode_ExplicitSweep</dt>
+ * <dd>The explicit profile is to be moved from its initial plane to the first sweep plane</dd>
+ * <dt>CATGSMPositionMode_Develop</dt>
+ * <dd>=== DO NOT USE IN THIS VERSION ===
+ *         planar wire is to be positioned in
+ *         its initial plane; target origin corresponds to the
+ *         zero-deformation point on the support surface (target axes are
+ *         defined by the parameterization of the support surface)</dd>
+ * </dl>
+ */ 
+#pragma PROPERTY Mode  
+ HRESULT get_Mode(out /*IDLRETVAL*/ long Elem);
+ HRESULT put_Mode(in long Elem);
+
+/**
+ * Returns or sets the profile to be positioned. 
+ */ 
+#pragma PROPERTY Profile  
+ HRESULT get_Profile(out /*IDLRETVAL*/ CATIAReference Elem);
+ HRESULT put_Profile(in CATIAReference Elem);
+
+/**
+ * Returns translation coordinates if both initial and target
+ *  coordinate systems from default positions.
+ * @param iI 
+ *   The iIndex of numerical positioning coordinates in initial
+ *           (value 1 or 2) or target (value 3 or 4) coordinate system.
+ * @param oCoordinate 
+ *   The coordinate value
+ */ 
+ HRESULT GetPosCoord(in long ii, out /*IDLRETVAL*/ CATIALength oCoordinate);
+
+/**
+ * Returns angles of both initial and target coordinate systems from default positions.
+ * @param iI 
+ *   The index of numerical positioning angles in initial
+ *           (value 1) or target (value 2) axis system.
+ * @param oAngle 
+ *   The angle value.
+ */ 
+ HRESULT GetPosAngle(in long iI, out /*IDLRETVAL*/ CATIAAngle oAngle);
+
+ /**
+ * Sets translation coordinates of both initial and target coordinate systems. 
+ * @param iI 
+ *   The iIndex of numerical positioning coordinates in initial
+ *           (value 1 or 2) or target (value 3 or 4) coordinate system.
+ * @param iCoordinate 
+ *   The coordinate value
+ */ 
+ HRESULT SetPosCoord(in long iI, in  CATIALength iCoordinate);
+
+ /**
+ * Sets angles of both initial and target coordinate systems.
+ * @param iI 
+ *   The index of numerical positioning angles in initial
+ *           (value 1) or target (value 2) axis system.
+ * @param iAngle 
+ *   The angle value.
+ */ 
+ HRESULT SetPosAngle(in long iI, in  CATIAAngle iAngle);
+
+/**
+ * Returns axis inversion from previous definitions for both initial and target planes.
+ * @param iI 
+ *   The coordinate system index: 1 for initial one, 2 for target one
+ * @param oInversion 
+ *   The inversion value:
+ *   <dl>
+ *    <dt>CATGSMAxisInversionMode_None</dt>
+ *    <dd>No axis inverted</dd>
+ *    <dt>CATGSMAxisInversionMode_X</dt>
+ *    <dd>Only the X axis iq inverted</dd>
+ *    <dt>CATGSMAxisInversionMode_Y</dt>
+ *    <dd>Only the Y axis is inverted</dd>
+ *    <dt>CATGSMAxisInversionMode_Both</dt>
+ *    <dd>Both axes inverted</dd>
+ *   </dl>
+ */
+ HRESULT GetPosSwapAxes(in long ii, out /*IDLRETVAL*/ long oInversion);
+
+/**
+ * Sets axis inversion from previous definitions for both initial and target planes.
+ * @param iI 
+ *   The coordinate system index: 1 for initial one, 2 for target one
+ * @param iInversion 
+ *   The inversion value:
+ *   <dl>
+ *    <dt>CATGSMAxisInversionMode_None</dt>
+ *    <dd>No axis inverted</dd>
+ *    <dt>CATGSMAxisInversionMode_X</dt>
+ *    <dd>Only the X axis iq inverted</dd>
+ *    <dt>CATGSMAxisInversionMode_Y</dt>
+ *    <dd>Only the Y axis is inverted</dd>
+ *    <dt>CATGSMAxisInversionMode_Both</dt>
+ *    <dd>Both axes inverted</dd>
+ *   </dl>
+ */ 
+ HRESULT SetPosSwapAxes(in long ii, in long iInversion);
+
+/**
+ * Returns the points designated as the origins of the initial and target planes.
+ * @param iI 
+ *   The plane index: 1 for initial one, 2 for target one
+ * @param oElem 
+ *   The origin point
+ */ 
+ HRESULT GetPosPoint(in long ii, out /*IDLRETVAL*/ CATIAReference oElem);
+
+/**
+ * Sets the points designated as the origins of the initial and target planes.
+ * @param iI 
+ *   The plane index: 1 for initial one, 2 for target one
+ * @param iElem 
+ *   The origin point
+ */ 
+ HRESULT SetPosPoint(in long iI, in CATIAReference iElem);
+
+
+ /**
+ * Returns the positioning directions.
+ * <br>The positioning direction can be initial or target plane X-axis direction.
+ * @param iI 
+ *   The plane index: 1 for initial one, 2 for target one
+ * @param oElem 
+ *   The direction element
+ */ 
+ HRESULT GetPositionDirection(in long iI, out /*IDLRETVAL*/ CATIAHybridShapeDirection oElem);
+
+/**
+ * Sets the positioning directions.
+ * <br>The positioning direction can be initial or target plane X-axis direction.
+ * @param iI 
+ *   The plane index: 1 for initial one, 2 for target one
+ * @param iElem 
+ *   The direction element
+ */ 
+ HRESULT SetPositionDirection(in long iI, in CATIAHybridShapeDirection iElem);
+
+/**
+ * Gets the number of numerical positioning parameters : first axis direction angles.
+ *   @param oI
+ *     Number of parameters
+ */
+ HRESULT GetNbPosAngle(out /*IDLRETVAL*/long oI);
+
+/**
+ * Gets the number of numerical positioning parameters : origin planar coordinates.
+ *   @param oI
+ *      Number of parameters
+ */
+ HRESULT GetNbPosCoord(out /*IDLRETVAL*/long oI);
+
+/**
+ * Removes all numerical positioning parameters : first axis direction angles.
+ */
+ HRESULT RemoveAllPosAngle();
+
+/**
+ * Removes all numerical positioning parameters : origin planar coordinates.
+ */
+ HRESULT RemoveAllPosCoord();
+
+/**
+ * Gets or sets the computation mode of the X axis (or direction) of the initial axis system.
+ *   @param oDirCompMode
+ *      computation mode  = 0 : no X axis specified
+ *                        = 1 : the X axis is implicitly the tangent of the profile 
+ *                              at the origin(the origin then HAS to be on the profile).
+ *                        = 2 : the X axis is specified by a direction by
+ *                              SetPositionDirection(1,UserInputDirection).
+ */
+#pragma PROPERTY InitialDirectionComputationMode
+ HRESULT get_InitialDirectionComputationMode(out /*IDLRETVAL*/ long oDirCompMode);
+ HRESULT put_InitialDirectionComputationMode(in                long iDirCompMode);
+
+};
+
+// Interface name : CATIAHybridShapePositionTransfo
+#pragma ID CATIAHybridShapePositionTransfo "DCE:8d01ddcd-5dfc-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapePositionTransfo
+
+// VB object name : HybridShapePositionTransfo (Id used in Visual Basic)
+#pragma ID HybridShapePositionTransfo "DCE:8d01da2f-686b-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapePositionTransfo HybridShapePositionTransfo
+#endif

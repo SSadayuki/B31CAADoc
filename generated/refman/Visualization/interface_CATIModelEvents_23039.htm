@@ -1,0 +1,194 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>Visualization CATIModelEvents Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../Visualization.htm" href="../Visualization.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "Visualization";	}
+		function getCurrentObjectName() { 
+ 	return "CATIModelEvents"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>Visualization Framework:  CATIModelEvents Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIModelEvents_23039','CATIModelEvents','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can reimplement this interface by deriving the supplied <a href="../Visualization/class_CATExtIModelEvents_25316.htm">CATExtIModelEvents</a> adapter class.</b></p>
+<hr/>
+<p>
+ interface <b>CATIModelEvents</b>
+</p>
+<p>
+<b><i> Interface that makes components communicate with their visualization, that is their graphical
+ representations.</i></b><br>
+ 
+<br><b>Role</b>:
+ As the model world and the visualization world are independent, every action (ie that a geometry modification)
+ performed by one object or by any command should trigger
+ a visualization update (when necessary). The way to warn the visualization world is based onto
+ visualization events and a send/receive mechanism. And the management of the visualization events 
+ is done by this interface: how one object can be connected to (or disconnected from) 
+ another object, how sending 
+ a visualization event?
+<p>
+ <p><b>BOA information</b>: this interface CANNOT be implemented
+ using the BOA (Basic Object Adapter).
+ To know more about the BOA, refer to the CAA Encyclopedia home page.
+ Click Middleware at the bottom left, then click the Object Modeler tab page.
+ Several articles deal with the BOA.</p>
+ <dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATModelNotification','','CATModelNotification') </script>, <script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#ConnectTo(CATBaseUnknown*)"><b>ConnectTo</b></a>(CATBaseUnknown*)
+</td><td id='tdright'>  Connects itself with a given object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DeconnectFrom(CATBaseUnknown*)"><b>DeconnectFrom</b></a>(CATBaseUnknown*)
+</td><td id='tdright'>  Disconnects itself from a given object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Dispatch(CATNotification&amp;)"><b>Dispatch</b></a>(CATNotification&amp;)
+</td><td id='tdright'>  Sends a visualization event.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDispatcher()"><b>GetDispatcher</b></a>()
+</td><td id='tdright'>  Returns the component which allows the events' sending.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Receive(CATNotification&amp;)"><b>Receive</b></a>(CATNotification&amp;)
+</td><td id='tdright'>  Receive a visualization event.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="ConnectTo"></a><a id="ConnectTo(CATBaseUnknown*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ConnectTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iChild</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Connects itself with a given object.
+
+ <br><b>Role</b>:
+ Connection with a given object means that when this object sends a visualization
+ event (a notification) thru the 
+<script type="text/javascript"> activateLinkAnchor('','Dispatch','Dispatch') </script> method the current object is "awakened"  with the 
+<script type="text/javascript"> activateLinkAnchor('','Receive','Receive') </script> method. Finally the current object should send the received event  thru the 
+<script type="text/javascript"> activateLinkAnchor('','Dispatch','Dispatch') </script> method. And all objects that are connected to the current object will be  awakened also. This mechanism makes one event to go up to the last connected object. Usually 
+ the last connected object is the 
+<script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script> which has the ability to process the visualization event . Notice that this kind of connection is a parent-like relation 
+ between the current object(<tt>parent</tt>) and 
+ the given object(<tt>child</tt> to which it is connected).
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iChild</span></dt>
+   <dd> the given object.
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DeconnectFrom"></a><a id="DeconnectFrom(CATBaseUnknown*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DeconnectFrom</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iChild</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Disconnects itself from a given object.
+
+<br><b>Role</b>: 
+  Disconnection with a given object means that the connection is broken: not any events 
+ sent by the given object will awaken the current object.
+
+
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iChild</span></dt>
+   <dd> the given object.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Dispatch"></a><a id="Dispatch(CATNotification&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Dispatch</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATNotification','CATNotification&amp;')</script> <span class='param'>iInfo</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sends a visualization event.
+
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iInfo</span></dt>
+   <dd> the notification.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDispatcher"></a><a id="GetDispatcher()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATNotificationDispatcher','CATNotificationDispatcher *')</script>  <span class='objname'>GetDispatcher</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the component which allows the events' sending.
+</dd>
+<dt class='dtmethod' >
+  <a id="Receive"></a><a id="Receive(CATNotification&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Receive</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATNotification','CATNotification&amp;')</script> <span class='param'>info</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Receive a visualization event.
+
+<br><b>Role</b>: 
+ this method should be called when the current object is awaken by one of its children.
+ It should then forward the event (thru the 
+<script type="text/javascript"> activateLinkAnchor('','Dispatch','Dispatch') </script> method) after any possible  processing.
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIModelEvents.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATVisualization</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

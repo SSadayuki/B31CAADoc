@@ -1,0 +1,59 @@
+#ifndef CATIAKWECorrectFunction_IDL
+#define CATIAKWECorrectFunction_IDL
+/*IDLREP*/
+               
+// COPYRIGHT DASSAULT SYSTEMES 2015
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATSafeArray.idl"
+
+
+/**
+ * Represents the Knowledge correct function.
+ *
+ */
+
+//-----------------------------------------------------------------
+interface CATIAKWECorrectFunction : CATIABase
+{
+ /**
+  * Returns the list of elements of current tuple failed.
+  *
+	* @param oListElementsOfTupleFailed array of tuple elements.
+  */
+  HRESULT ListFailedElements(inout CATSafeArrayVariant oListElementsOfTupleFailed);
+
+ /**
+  * Retrieves the number of roots of facts of the rule base.
+	*
+	* @return oArraySize Number of roots of facts.
+	*/
+	HRESULT GetNumberOfListFailedElements(out /*IDLRETVAL*/  long oArraySize);
+
+  /**
+  * Retrieves the check associtade to this correct function.
+	*
+	* @return oAssociatedCheck ExpertCheck associated to this correct function.
+	*/
+	HRESULT Check(out /*IDLRETVAL*/ CATBaseDispatch oAssociatedCheck);
+
+};
+
+// Interface name : CATIAKWECorrectFunction
+#pragma ID CATIAKWECorrectFunction "DCE:a05c7f87-76f0-49f2-893e7641d1ac220a"
+#pragma DUAL CATIAKWECorrectFunction
+
+// VB object name : KWECorrectFunction (Id used in Visual Basic)
+#pragma ID KWECorrectFunction "DCE:e35274b1-f03a-469b-990ca314e480754e"
+#pragma ALIAS CATIAKWECorrectFunction KWECorrectFunction
+
+
+#endif
+// CATIAKWECorrectFunction_IDL
+

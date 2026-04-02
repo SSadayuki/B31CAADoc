@@ -1,0 +1,87 @@
+#ifndef CATIALimit_IDL
+#define CATIALimit_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIALimit:						   
+// Exposed interface for Limit
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation					Ph Baucher
+// Dec97 More flexible typing				Ph Baucher
+// Dec97 Modifications                                  LLE
+// Feb98 Update                                         M. KERN
+//=================================================================
+#include "CATIABase.idl"
+#include "CATLimitDefs.idl"
+
+interface CATIAReference;
+interface CATIALength;
+
+//-----------------------------------------------------------------
+/**
+ * Represents the limit of a prism or a hole shape.
+ * @see CATIAPrism, CATIAHole
+ */
+interface CATIALimit : CATIABase
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//	LIMIT Mode 
+	//	----------
+/** 
+ * Returns or sets the limit mode.
+ */
+#pragma PROPERTY LimitMode
+	HRESULT	get_LimitMode ( out /*IDLRETVAL*/ CatLimitMode oLimitMode );	
+	HRESULT	put_LimitMode ( in  CatLimitMode iLimitMode );	
+
+	//	DIMENSION
+	//      ---------
+/**
+ * Returns or sets the limit dimension.
+ * This property is valid for the offset limit mode only,
+ * that is when @href CatLimitMode is set to <tt>catOffsetLimit</tt> .
+ */
+#pragma PROPERTY Dimension
+	HRESULT	get_Dimension ( out /*IDLRETVAL*/ CATIALength oDimension );
+
+	//	LIMITING ELEMENT
+	//	----------------
+/**
+ * Returns or sets the limiting element.
+ * This property is valid when the limiting object is a surface or a plane,
+ * that is when @href CatLimitMode is set to <tt>catUpToSurfaceLimit</tt>
+ * and <tt>catUpToPlaneLimit</tt>.<br>
+ * To set the property, you can use the following @href CATIABoundary object: 
+ * @href CATIAFace.
+ */
+#pragma PROPERTY LimitingElement
+	HRESULT	get_LimitingElement ( out /*IDLRETVAL*/ CATIAReference oLimitingElement);
+	HRESULT	put_LimitingElement (  in CATIAReference iLimitingElement);
+};
+
+// Interface name : CATIALimit
+#pragma ID CATIALimit "DCE:6f5bfc7c-55f7-11d1-a2720000f87546fd"
+#pragma DUAL CATIALimit
+
+// VB object name : Limit (Id used in Visual Basic)
+#pragma ID Limit "DCE:6fa38308-55f7-11d1-a2720000f87546fd"
+#pragma ALIAS CATIALimit Limit
+
+
+#endif
+// CATIALimit_IDL
+

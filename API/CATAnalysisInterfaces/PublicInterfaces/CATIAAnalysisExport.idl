@@ -1,0 +1,52 @@
+#ifndef CATIAAnalysisExport_IDL
+#define CATIAAnalysisExport_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//=================================================================
+//                                   
+// CATIAAnalysisExport:                           
+// Exposed interface for Export/Import of:
+//       - Computed Loads
+//       - Displacements
+//=================================================================                                  
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+interface CATIAAnalysisManager;
+/**  
+ * The interface to access a CATIAAnalysisExport
+ */
+interface CATIAAnalysisExport : CATIABase 
+{
+/**
+ * Export computed loads/displacements as a CATAnalysisExport file.<br>
+ * @param iFullPath     The full path of the file.<br>
+ *                      (Example: “E:\tmp\ExportedLoads/CATAnalysisExport”).<br>
+ * @param iType         The type of data to be exported: "ComputedLoads" or "Displacements".<br>
+ * @param iOccurrences  The list of occurrences to be exported.<br>
+ *                   
+ * @param iManager      The analysis model for which the data will be exported.<br>
+ *                      (Only revelant for assembly of analysis.<br>)
+ */ 
+HRESULT Export ( in CATBSTR              iFullPath,
+                 in CATBSTR              iType,
+                 in CATSafeArrayVariant  iOccurrences,
+                 in CATIAAnalysisManager iManager );
+};
+
+// Interface name : CATIAAnalysisExport
+#pragma ID CATIAAnalysisExport "DCE:721f74ce-dd20-4d0b-b6b601cad756ee18"
+#pragma DUAL CATIAAnalysisExport
+
+// VB object name : AnalysisExport (Id used in Visual Basic)
+#pragma ID AnalysisExport "DCE:c6665d80-d1ad-4d27-b6fd9e8ac662019b"
+#pragma ALIAS CATIAAnalysisExport AnalysisExport
+
+#endif
+// CATIAAnalysisExport_IDL

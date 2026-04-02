@@ -1,0 +1,97 @@
+#ifndef CATIAExpertReportObject_IDL
+#define CATIAExpertReportObject_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+
+/**
+ * Represents the ExpertReportObject object.
+ */
+interface CATIAExpertReportObject : CATIABase
+{
+
+ /**
+     * Returns the validity of a check for a given tuple.
+	 *
+     * The result depends on the result of the check for a given tuple :<p>
+	 * "True" or "False" for the tuple.
+     */ 
+#pragma PROPERTY Validity	    
+    HRESULT    get_Validity
+                ( out /*IDLRETVAL*/ boolean oActivated  );
+
+
+/**
+* Returns a tuple (a collection of objects) concerned by this report object.
+*
+* <dl>
+* <dt><b>Example:</b>
+* <dd>
+* <pre>
+* Dim relations1 As Relations
+* Dim RuleBase1 As ExpertRuleBaseRuntime
+* Dim ListComponents As ExpertRuleBaseComponentRuntimes
+* Dim AComponent As ExpertRuleBaseComponentRuntime
+* Dim NupletsList As ExpertReportObjects
+* Dim ANuplet As ExpertReportObject
+* Dim anArray () as Object
+* Dim anElementArray as Object
+*
+* Set relations1 = part1.Relations
+* Set RuleBase1 = relations1.Item("RuleBase")
+* Set ListComponents = RuleBase1.RuleSet.ExpertRuleBaseComponentRuntimes
+* ' Let's get a check ..
+* Set AComponent = ListComponents.Item("CheckOnHoles")
+* ' .. and let's see what makes it true
+* Set NupletsList = AComponent.Succeeds
+* For i = 1 to AComponent.Succeeds.CountSucceed
+*   Set ANuplet = AComponent.Succeeds.SucceedItem(i)
+*   NupletSize = ANuplet.getTupleSize()
+*   ReDim anArray (NupletSize)
+*   ANuplet.<font color="red">getTuple</font>(anArray)
+*   For j = LBound(anArray) to UBound(anArray)
+*     Set anElementArray = anArray(j) ' a hole
+*
+*     ' .. some action on the element of the array
+*   Next
+* Next
+* </pre>
+* </dl>
+*
+* @param oSafeArray The collection of objects.
+*
+*/
+    HRESULT    getTuple  ( inout CATSafeArrayVariant oSafeArray);
+
+/**
+* Returns the size of the tuple concerned by this report object.
+*
+* @return Size of the tuple
+*/    
+    HRESULT    getTupleSize  ( out /*IDLRETVAL*/ long tupleSize);
+
+};
+
+// Interface name : CATIAExpertReportObject
+#pragma ID CATIAExpertReportObject "DCE:2ebc278c-61d5-11d3-9b79006094eb7eca"
+#pragma DUAL CATIAExpertReportObject
+
+// VB object name : Relation (Id used in Visual Basic)
+#pragma ID ExpertReportObject "DCE:2ebc278c-61d5-11d3-9b79006094eb7ecb"
+#pragma ALIAS CATIAExpertReportObject ExpertReportObject
+
+#endif
+// CATIAExpertReportObject_IDL
+

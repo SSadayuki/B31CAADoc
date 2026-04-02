@@ -1,0 +1,236 @@
+#ifndef CATIAAssemblyPocket_IDL
+#define CATIAAssemblyPocket_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAAssemblyPocket:						   
+// Exposed interface for AssemblyPocket
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep. 2000 Creation					                 CRX
+//=================================================================
+#include "CATIAAssemblyFeature.idl"
+#include "CATPrismDefs.idl"
+#include "CATSafeArray.idl"
+
+interface CATIASketch;
+interface CATIAProduct;
+interface CATIALimit;
+interface CATIAReference;
+
+/**
+ * Represents the AssemblyPocket object.
+ */
+interface CATIAAssemblyPocket : CATIAAssemblyFeature
+{
+	  //		================
+	  //		== PROPERTIES ==
+	  //		================
+
+    /**
+     * Returns or sets the pocket direction type.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example saves in <tt>dirType</tt> the direction type of
+     * the pocket <tt>assemblyPocket</tt>, and then sets it so that the direction
+     * will be now normal to the sketch.
+     * <pre>
+     * Dim dirType
+     * Set dirType = assemblyPocket.<font color="red">DirectionType</font>
+     * assemblyPocket.<font color="red">DirectionType</font> = catNormalToSketchDirection
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY DirectionType
+    HRESULT	get_DirectionType ( out /*IDLRETVAL*/ CatPrismExtrusionDirection oDirType );
+    HRESULT	put_DirectionType ( in  CatPrismExtrusionDirection iDirType );
+
+    /**
+     * Returns or sets the pocket direction orientation.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example saves in <tt>dirOrientation</tt> the direction orientation of
+     * the pocket <tt>assemblyPocket</tt>, and then sets it so that the direction will be now inversed.
+     * <pre>
+     * Dim dirOrientation
+     * Set dirOrientation = assemblyPocket.<font color="red">DirectionOrientation</font>
+     * assemblyPocket.<font color="red">DirectionOrientation</font> = catInverseOrientation
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY DirectionOrientation
+    HRESULT	get_DirectionOrientation ( out /*IDLRETVAL*/ CatPrismOrientation oOrientation );
+    HRESULT	put_DirectionOrientation ( in  CatPrismOrientation iOrientation );
+
+    /**
+     * Returns or sets the pocket symmetry flag.
+     * <br>
+     * <b>TRUE</b> if the pocket is symmetric with respect to the base sketch,
+     * and <b>FALSE</b> otherwise. 
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example saves in <tt>symFlag</tt> the symmetry flag of
+     * the pocket <tt>assemblyPocket</tt>, and then sets it so that it will be now symmetric
+     * with respect to the base sketch.
+     * <pre>
+     * Dim symFlag As boolean
+     * Set symFlag = assemblyPocket.<font color="red">IsSymmetric</font>
+     * assemblyPocket.<font color="red">IsSymmetric</font> = TRUE
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY IsSymmetric
+    HRESULT get_IsSymmetric ( out /*IDLRETVAL*/ boolean oIsSymmetric );
+    HRESULT put_IsSymmetric ( in  boolean iIsSymmetric );
+
+    /**
+     * Returns the first pocket limit.
+     * <br>
+     * A pocket has two limits that manage the way the pocket is ended.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>firstLimit</tt> the first limit of
+     * the pocket <tt>assemblyPocket</tt>.
+     * <pre>
+     * Dim firstLimit As Limit
+     * Set firstLimit = assemblyPocket.<font color="red">FirstLimit</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FirstLimit
+    HRESULT	get_FirstLimit ( out /*IDLRETVAL*/ CATIALimit oFirstLimit );
+
+    /**
+     * Returns the second pocket limit.
+     * <br>
+     * A pocket has two limits that manage the way the pocket is ended.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>secondLimit</tt> the second limit of
+     * the pocket <tt>assemblyPocket</tt>.
+     * <pre>
+     * Dim secondLimit As Limit
+     * Set secondLimit = assemblyPocket.<font color="red">SecondLimit</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SecondLimit
+    HRESULT	get_SecondLimit ( out /*IDLRETVAL*/ CATIALimit oSecondLimit );
+
+    /**
+     * Returns the pocket sketch.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>sketch</tt> the sketch on which
+     * the pocket <tt>assemblyPocket</tt> is built.
+     * <pre>
+     * Dim sketch As Sketch
+     * Set sketch = assemblyPocket.<font color="red">Sketch</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Sketch
+    HRESULT get_Sketch ( out /*IDLRETVAL*/ CATIASketch oSketch );
+
+    /**
+     * Returns the component containing the pocket sketch.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>skComp</tt> the component 
+     * that contains the sketch of
+     * the pocket <tt>assemblyPocket</tt> is built.
+     * <pre>
+     * Dim skComp As Product
+     * Set skComp = assemblyPocket.<font color="red">SketchComponent</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SketchComponent
+    HRESULT get_SketchComponent ( out /*IDLRETVAL*/ CATIAProduct oSketchComp );
+
+    //
+	  //		================
+	  //		==   METHODS  ==
+	  //		================
+
+    /**
+    * Retrieves the pocket direction vector components.
+    * <br>
+    * These components are expressed in millimeter according to the absolute coordinate system.
+    * @param ioDirection
+    *   The pocket direction vector components, as a  safe array made up of three doubles: X, Y, Z
+    * <br>
+    *   The array must be previously initialized.
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example retrieves in <tt>dirArray</tt> the direction vector
+    * components of the pocket <tt>assemblyPocket</tt>.
+    * <pre>
+    * Dim dirArray(2)
+    * Call assemblyPocket.<font color="red">GetDirection</font>(dirArray)
+    * Set x = dirArray[0]
+    * Set y = dirArray[1]
+    * Set z = dirArray[2]
+    * </pre>
+    * </dl>
+    */
+    HRESULT	GetDirection ( inout  CATSafeArrayVariant ioDirection  );
+
+    /**
+     * Sets the pocket associated direction.
+     * @param iLine
+     *  The pocket associated direction, as a reference to a line or an edge.
+     * @param iLineComp
+     *  The component containing the associated direction reference
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example sets the associated direction of
+     * the pocket <tt>assemblyPocket</tt> using the <tt>dirRef</tt> line
+     * of the component <tt>dirComp</tt>.
+     * <pre>
+     * assemblyPocket.<font color="red">SetDirection</font> dirRef, dirComp
+     * </pre>
+     * </dl>
+     */
+    HRESULT	SetDirection ( in  CATIAReference iLine , in CATIAProduct iLineComp);
+
+    /**
+    * Reverses the pocket inner side when the profile is open.
+    * <br>
+    * This is useful for finding the shape to reach.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example reverses the current inner side of
+    * the pocket <tt>assemblyPocket</tt>.
+    * <pre>
+    * assemblyPocket.<font color="red">ReverseInnerSide</font>
+    * </pre>
+    * </dl>
+    */
+    HRESULT ReverseInnerSide();
+
+};
+
+// Interface name : CATIAAssemblyPocket
+#pragma ID CATIAAssemblyPocket "DCE:b9f71f6e-9f87-11d4-a38800d0b7ac57a4"
+#pragma DUAL CATIAAssemblyPocket
+
+// VB object name : AssemblyPocket (Id used in Visual Basic)
+#pragma ID AssemblyPocket "DCE:c38ed58a-9f87-11d4-a38800d0b7ac57a4"
+#pragma ALIAS CATIAAssemblyPocket AssemblyPocket
+
+
+#endif // CATIAAssemblyPocket_IDL
+

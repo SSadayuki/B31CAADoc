@@ -1,0 +1,43 @@
+# 
+IMPACT_ON_IMPORT = YES
+BUILT_OBJECT_TYPE = NONE
+COMDYN_MODULE = V4SysCOMD
+DUMMY_LINK_WITH = V4SysUTIL V4SysENV V4SysB
+
+#
+OS = COMMON
+LINK_WITH = $(DUMMY_LINK_WITH)
+SYS_LIBPATH = 
+
+OS = AIX
+SYS_LIBS = -lxlf -lxlf90 -lxlfpad
+
+OS = IRIX
+LINK_WITH = $(COMDYN_MODULE) $(DUMMY_LINK_WITH)
+SYS_LIBS = -lftn
+
+OS = Windows_NT
+#if (defined MK_MSCVER) && (MK_MSCVER < 1400)
+SYS_LIBS = DFORDLL.LIB
+#else
+LINK_WITH = $(DUMMY_LINK_WITH) $(COMDYN_MODULE)
+#endif
+
+LOCAL_CCFLAGS = /D_CATNoWarningPromotion_  
+LOCAL_CFLAGS = /D_CATNoWarningPromotion_ 
+
+LOCAL_LDFLAGS = \
+/EXPORT:alpatt /EXPORT:depatt /EXPORT:meminf \
+/EXPORT:altes  /EXPORT:altver /EXPORT:dates  /EXPORT:detes \
+/EXPORT:accpil /EXPORT:depile /EXPORT:empile /EXPORT:finpil /EXPORT:inipil /EXPORT:infpil /EXPORT:lecpil /EXPORT:modpil /EXPORT:vidpil \
+/EXPORT:envfre /EXPORT:envget /EXPORT:envinq 
+
+
+OS = HP-UX
+SYS_INCPATH =
+SYS_LIBS = -lf
+
+OS = SunOS
+SYS_INCPATH = 
+SYS_LIBS = -lF77
+SYS_LIBPATH =

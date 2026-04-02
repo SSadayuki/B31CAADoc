@@ -1,0 +1,53 @@
+#ifndef CATIACATV42DMigr_idl
+#define CATIACATV42DMigr_idl
+
+/**
+ * @CAA2Level L0
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2002
+
+
+#include "CATBSTR.idl"
+#include "CATIABase.idl"
+
+
+/**
+ * @nodoc
+ * Interface to manage 2D V4V5 Migration.
+ * To Sets 3D reference for As Spec Migration.
+ * How to retrieve the interface:
+ * <pre>
+ * Dim myDrawingRoot as DrawingRoot
+ * Set  myDrawingRoot = CATIA.ActiveDocument.DrawingRoot    
+ * Dim myCATV42DMigr as CATV42DMigr
+ * Set myCATV42DMigr = myDrawingRoot.< > GetItem(“CATV42DMigr”)</font>
+ * </pre>
+*/
+interface CATIACATV42DMigr : CATIABase
+{
+	/**
+     * @nodoc
+	 * Sets 3D reference for As Spec Migration.
+	 * @param iBase
+	 * 3D used to generate Generative Views, CATIAPart ou CATIAProduct.	 
+	 */
+#pragma PROPERTY Ref3D
+	HRESULT put_Ref3D(in CATIABase iBase);
+};
+
+// Interface name : CATIACATV42DMigr
+#pragma ID CATIACATV42DMigr "DCE:05986ca4-04bd-4e7b-a01a77166a38e918"
+#pragma DUAL CATIACATV42DMigr
+
+// VB object name : ModelElement
+#pragma ID CATV42DMigr "DCE:7751c2a5-c4e2-4dbf-a544955a716ae55b"
+#pragma ALIAS CATIACATV42DMigr CATV42DMigr
+
+
+#endif // CATIACATV42DMigr_idl
+
+
+
+

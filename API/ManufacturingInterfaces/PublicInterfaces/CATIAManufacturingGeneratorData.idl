@@ -1,0 +1,122 @@
+#ifndef CATIAManufacturingGeneratorData_IDL
+#define CATIAManufacturingGeneratorData_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAManufacturingGeneratorData:                           
+// Exposed interface to associate Data to be used for the output files (APT, ...)
+//         This Data contains the output stream, ...
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIABase.idl"
+#include "CATBSTR.idl" 
+#include "CATIAManufacturingOutput.idl" 
+
+//-----------------------------------------------------------------
+/**
+ * Represents the manufacturing output stream object.
+ * This object contains the output stream generated for the output files (APT, etc.).
+ */
+interface CATIAManufacturingGeneratorData : CATIABase
+{
+    //        ===================
+    //        == OUTPUT CODE   ==
+    //        ===================
+    //
+    /**
+     * Adds an object to the output stream.
+	 * <ul>
+	 * <li>With buffer: V5R13 and next &lt;=&gt; AddObjectToGenerate</li>
+	 * <li>Without buffer: V5R12 and previous &lt;=&gt; AddObjectToGenerate</li>
+	 * <li>From buffer: Debug only</li>
+	 * </ul>
+	 * @param iObject
+	 *   The object to add
+     */
+  HRESULT    AddObjectToGenerate (in CATBaseUnknown iObject);
+    
+	/**
+     * Adds an object to the output stream within the buffer.
+	 * @param iObject
+	 *   The object to add
+	 */
+  HRESULT   AddObjectToGenerateWithBuffer (in CATBaseUnknown       iObject);
+
+	/**
+     * Adds an object to the output stream without the buffer.
+	 * @param iObject
+	 *   The object to add
+	 */
+  HRESULT   AddObjectToGenerateWithOutBuffer (in CATBaseUnknown       iObject);
+
+	/**
+     * Adds an object to the output stream from the buffer.
+	 * @param iObject
+	 *   The object to add
+	 */
+ 
+  HRESULT   AddObjectToGenerateFromBuffer (in CATBaseUnknown       iObject);
+
+    /**
+     * Retrieves the output stream.
+	 * @param oStream
+	 *   The retrieved stream
+	 */
+  HRESULT    GetOutputStream (out CATIAManufacturingOutput oStream);
+
+    /**
+     * Retrieves the FT06 stream.
+	 * @param oStream
+	 *   The retrieved stream
+     */
+  HRESULT    GetFT06Stream (out CATIAManufacturingOutput oStream);
+
+    /**
+     * Retrieves the last object to generate.
+	 * @param oObject
+	 *   The retrieved object
+	 */
+  HRESULT    GetLastObjectToGenerate (out CATBaseUnknown oObject);
+
+    /**
+     * Sets the last Activity to generate.
+	 * @param iObject
+	 *   The activity to generate
+	 */
+  HRESULT    SetLastObjectToGenerate (in CATBaseUnknown iObject);
+
+    /**
+     * Resets all modal values.
+	 */
+  HRESULT    ResetAllModalValues ();
+
+    /**
+     * Adds an object to the modal values manager only.
+	 * @param iObject
+	 *   The object to add
+	 */
+  HRESULT    AddObjectToModalValues (in CATBaseUnknown iObject);
+
+
+};
+
+// Interface Name : CATIAManufacturingGeneratorData
+#pragma ID CATIAManufacturingGeneratorData "DCE:b0d9a5a0-7ac7-11d2-b72e006094b9a308"
+#pragma DUAL CATIAManufacturingGeneratorData
+
+// VB Object Name : ManufacturingGeneratorData
+#pragma ID ManufacturingGeneratorData "DCE:c3cd770e-7ac7-11d2-b72e006094b9a308"
+#pragma ALIAS CATIAManufacturingGeneratorData ManufacturingGeneratorData
+
+#endif
+// CATIAManufacturingGeneratorData_IDL

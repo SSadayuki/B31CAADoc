@@ -1,0 +1,180 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAConflict.idl
+//   This automation interface allows the query of Conflict data.
+//
+//===================================================================
+#ifndef CATIAConflict_IDL
+#define CATIAConflict_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATIAProduct.idl"
+#include "CATSafeArray.idl"
+#include "CatConflictType.idl"
+#include "CatConflictStatus.idl"
+#include "CatConflictComparison.idl"
+
+/**  
+ * Represents the Conflict object.
+ * <p>One Conflict object exists for each couple of products that are colliding.
+ */
+interface CATIAConflict : CATIABase
+{
+  /**
+   * Returns the first product involved in the conflict.
+   * @sample
+   *    This example retrieves the first product involved in the <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim aProduct As Product
+   *    Set aProduct = NewConflict.<font color="red">FirstProduct</font>
+   *    </pre>
+   */
+#pragma PROPERTY FirstProduct
+  HRESULT get_FirstProduct (out /*IDLRETVAL*/ CATIAProduct oProduct);
+
+  /**
+   * Retrieves the coordinates of the point on the first product which realizes the penetration or minimum distance.
+   * @param oCoordinates
+   *    The coordinates of the point
+   *    <ul>
+   *    <li>oCoordinates(0) is the X coordinate
+   *    <li>oCoordinates(1) is the Y coordinate
+   *    <li>oCoordinates(2) is the Z coordinate
+   *    </ul>
+   * @sample
+   *    This example retrieves the first product involved in the <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim Coordinates (2)
+   *    NewConflict.<font color="red">GetFirstPointCoordinates</font> Coordinates
+   *    </pre>
+   */
+  HRESULT GetFirstPointCoordinates (inout CATSafeArrayVariant oCoordinates);
+
+  /**
+   * Returns the second product involved in the conflict.
+   * @sample
+   *    This example retrieves the second product involved in the <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim aProduct As Product
+   *    Set aProduct = NewConflict.<font color="red">SecondProduct</font>
+   *    </pre>
+   */
+#pragma PROPERTY SecondProduct
+  HRESULT get_SecondProduct (out /*IDLRETVAL*/ CATIAProduct oProduct);
+
+  /**
+   * Retrieves the coordinates of the point on the second product which realizes the penetration or minimum distance.
+   * @param oCoordinates
+   *    The coordinates of the point
+   *    <ul>
+   *    <li>oCoordinates(0) is the X coordinate
+   *    <li>oCoordinates(1) is the Y coordinate
+   *    <li>oCoordinates(2) is the Z coordinate
+   *    </ul>
+   * @sample
+   *    This example retrieves the coordinates in the <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim Coordinates (2)
+   *    NewConflict.<font color="red">GetSecondPointCoordinates</font> Coordinates
+   *    </pre>
+   */
+  HRESULT GetSecondPointCoordinates (inout CATSafeArrayVariant oCoordinates);
+
+  /**
+   * Returns the type of the conflict.
+   * @sample
+   *    This example retrieves the type of the <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim conflictType As CatConflictType
+   *    conflictType = NewConflict.<font color="red">Type</font>
+   *    </pre>
+   */
+#pragma PROPERTY Type
+  HRESULT get_Type (out /*IDLRETVAL*/ CatConflictType oType);
+
+  /**
+   * Returns the conflict value.
+   * <p>This value is the penetration lengh in case of a clash or the minimum distance in case of clearance violation.
+   * @sample
+   *    This example retrieves the value of the <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim conflictValue As double
+   *    conflictValue = NewConflict.<font color="red">Value</font>
+   *    </pre>
+   */
+#pragma PROPERTY Value
+  HRESULT get_Value (out /*IDLRETVAL*/ double oValue);
+
+  /**
+   * Returns or sets the status of the conflict.
+   * @sample
+   *    The first example gets the status of <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim aStatus As CatConflictStatus
+   *    aStatus = NewConflict.<font color="red">Status</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets the status of <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    NewConflict.<font color="red">Status</font> = CatConflictStatusIrrelevant
+   *    </pre>
+   */
+#pragma PROPERTY Status
+  HRESULT get_Status (out /*IDLRETVAL*/ CatConflictStatus oStatus);
+  HRESULT put_Status (in CatConflictStatus iStatus);
+
+  /**
+   * Returns the information on the comparison between the conflict and the previous one.
+   * @sample
+   *    This example retrieves the comparison information of the <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim anInfo As CatConflictComparison
+   *    anInfo = NewConflict.<font color="red">ComparisonInfo</font>
+   *    </pre>
+   */
+#pragma PROPERTY ComparisonInfo
+  HRESULT get_ComparisonInfo (out /*IDLRETVAL*/ CatConflictComparison oInfo);
+
+  /**
+   * @nodoc
+   */
+#pragma PROPERTY KeepInDB
+  HRESULT get_KeepInDB (out /*IDLRETVAL*/ long oKeep);
+  HRESULT put_KeepInDB (in long iKeep);
+
+  /**
+   * Returns or sets a comment on the conflict.
+   * @sample
+   *    The first example gets the comment of <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    Dim aComment As String
+   *    aComment = NewConflict.<font color="red">Comment</font>
+   *    </pre>
+   *    <dd>
+   *    The second example sets a comment on the <tt>NewConflict</tt> Conflict.
+   *    <pre>
+   *    NewConflict.<font color="red">Comment</font> = "OK : plastic part"
+   *    </pre>
+   */
+#pragma PROPERTY Comment
+  HRESULT get_Comment (inout /*IDLRETVAL*/ CATBSTR oString);
+  HRESULT put_Comment (in CATBSTR iString);
+};
+
+// Interface name : CATIAConflict
+#pragma ID CATIAConflict "DCE:1738ae54-45f0-11d4-9468006094eb3826"
+#pragma DUAL CATIAConflict
+
+// VB object name : Conflict (Id used in Visual Basic)
+#pragma ID Conflict "DCE:17e6b9fe-45f0-11d4-9468006094eb3826"
+#pragma ALIAS CATIAConflict Conflict
+
+#endif

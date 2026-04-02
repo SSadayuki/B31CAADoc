@@ -1,0 +1,77 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIAUnit_IDL
+#define CATIAUnit_IDL
+/*IDLREP*/
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/**  
+ * Represents CATIAUnit object.
+ * This interface allows convertion. 
+ */
+interface CATIAUnit : CATIABase 
+{
+	/**
+	 * Returns the magnitude associated to the unit.
+	 */
+#pragma PROPERTY Magnitude
+	HRESULT get_Magnitude(inout /*IDLRETVAL*/ CATBSTR oMagnitude);
+
+	/**
+	 * Returns the symbol associated to the unit.
+	 */
+#pragma PROPERTY Symbol
+	HRESULT get_Symbol(inout /*IDLRETVAL*/ CATBSTR oSymbol);
+ 
+    /**
+     * Convert the initial value in its equivalent in MKS unit.
+     * @param iValueInThisUnit
+     *   The initial value in the current unit.
+     * @param oValueInMKS
+     *   The final value in the corresponding MKS unit.
+     */
+	HRESULT ConvertToMKS(in double iValueInThisUnit, out /*IDLRETVAL*/ double oValueInMKS);
+
+    /**
+     * Convert the initial value (expressed in MKS unit) in its equivalent in the current unit.
+     * @param iValueInThisUnit
+     *   The initial value in MKS unit.
+     * @param oValueInMKS
+     *   The final value in the current unit.
+     */
+	HRESULT ConvertFromMKS(in double iValueInMKS, out /*IDLRETVAL*/ double oValueInThisUnit);
+
+    /**
+     * Convert the initial value in its equivalent in storage unit.
+     * @param iValueInThisUnit
+     *   The initial value in the current unit.
+     * @param oValueInStorageUnit
+     *   The final value in the corresponding storage unit.
+     */
+	HRESULT ConvertToStorageUnit(in double iValueInThisUnit, out /*IDLRETVAL*/ double oValueInStorageUnit);
+
+    /**
+     * Convert the initial value (expressed in storage unit) in its equivalent in the current unit.
+     * @param iValueInStorageUnit
+     *   The initial value in storage unit.
+     * @param oValueInThisUnit
+     *   The final value in the current unit.
+     */
+	HRESULT ConvertFromStorageUnit(in double iValueInStorageUnit, out /*IDLRETVAL*/ double oValueInThisUnit);
+};
+
+// Interface name : CATIAUnit
+#pragma ID CATIAUnit "DCE:dd507fe4-a8f2-11d5-a39e00d0b7ac63be"
+#pragma DUAL CATIAUnit
+
+// VB object name : Unit (Id used in Visual Basic)
+#pragma ID Unit "DCE:dd507fe5-a8f2-11d5-a39e00d0b7ac63be"
+#pragma ALIAS CATIAUnit Unit
+
+#endif

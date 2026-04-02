@@ -1,0 +1,5 @@
+#
+# NONE
+#
+BUILT_OBJECT_TYPE=NONE
+

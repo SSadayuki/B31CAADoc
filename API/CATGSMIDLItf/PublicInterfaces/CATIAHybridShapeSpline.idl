@@ -1,0 +1,390 @@
+#ifndef CATIAHybridShapeSpline_IDL
+#define CATIAHybridShapeSpline_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeSpline:         
+// Exposed interface for HybridShape Spline
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation    
+//=================================================================
+#include "CATIAHybridShape.idl"
+//#include "CATIAHybridShapeControlPoint.idl"
+#include "CATIAHybridShapeDirection.idl"
+#include "CATIAReference.idl"
+#include "CATIARealParam.idl"
+#include "CATIALength.idl"
+
+/**
+ * Represents the hybrid shape spline feature object.
+ * <b>Role</b>: To access the data of the hybrid shape spline feature object.
+ * This data includes:
+ * <ul>
+ * <li>The support surface</li>
+ * <li>The control points</li>
+ * <li>The tension at each control point</li>
+ * <li>The curvature radius at each control point</li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeAffinity object.
+ * @see CATIAHybridShapeFactory
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeSpline : CATIAHybridShape
+{
+
+/**
+ * Removes a point at the given position.
+ * @param iPos 
+ *   The position of the point to remove
+ */ 
+   HRESULT RemoveControlPoint (in    long iPos);
+
+/**
+ * Returns the number of control points.
+ * @param oNbCtrPt
+ *   The number of control points.
+ */ 
+   HRESULT GetNbControlPoint (out /*IDLRETVAL*/    long oNbCtrPt);
+
+/**
+ * Add a new point .
+ * @param iPoint 
+ *   Point element.
+ */ 
+   HRESULT AddPoint  (in  CATIAReference     ipIAPoint);
+
+/**
+ * Add a new point with explicit tangency and curvature. 
+ * @param ipIAPoint 
+ *   Point element.
+ * @param ipIADirTangency 
+ *   Tangent direction.
+ * @param iTangencyNorm 
+ *   Tension.
+ * @param iInverseTangency 
+ *   Flag to reverse tangent direction (value can be 1 or -1).
+ * @param ipIADirCurvature 
+ *   Curvature direction.
+ * @param iCurvatureRadius 
+ *   Curvature radius value.
+ */ 
+   HRESULT AddPointWithConstraintExplicit  (in  CATIAReference     ipIAPoint,
+                in  CATIAHybridShapeDirection   ipIADirTangency,
+                in  double                     iTangencyNorm,
+                in  long                       iInverseTangency,
+                in  CATIAHybridShapeDirection   ipIADirCurvature,
+                in  double                     iCurvatureRadius);
+
+/**
+ * Add a new point with tangency/curvature from a curve. 
+ * @param ipIAPoint 
+ *   Point element.
+ * @param ipIACurveCst
+ *   Curvature direction.
+ * @param iTangencyNorm  
+ *   tension factor for tangency.
+ * @param iInvertValue
+ *   Orientation for tangent 
+ * @param iCrvCstType 
+ *   Continuity type for Curve Constraint (1=Tangency , 2-= Curvature).
+ */ 
+   HRESULT AddPointWithConstraintFromCurve (in  CATIAReference    ipIAPoint,
+           in  CATIAReference ipIACurveCst,
+           in  double      iTangencyNorm,
+           in  long        iInvertValue,
+           in  long        iCrvCstType);
+
+/**
+ * Returns the ControlPoint type  at the given position. 
+ * @param iPos 
+ *   The poistion of the point to retrieve
+ * @param oCstType
+ *   Type of Control point (CstType=0 : not defined / CstType=1 : Explicit / CstType=2 : FromCurve)
+ */ 
+   HRESULT GetConstraintType    (in    long   iPos, out  /*IDLRETVAL*/ long oCstType);
+/**
+ * Returns the position of a given point. 
+ * @param ipIAPoint
+ *   Point 
+ * @param oPos 
+ *   The position of the point (=0 Point Not in Spline) 
+ */ 
+   HRESULT GetPointPosition     (in  CATIAReference ipIAPoint , out  /*IDLRETVAL*/ long oPos);
+
+/**
+ * Returns the Point   at the given position. 
+ * @param iPos 
+ *   The poistion of the point to retrieve
+ * @param opIAPoint
+ *   Type of Control point (TypeCtrPoint =1 : Explicit / TypeCtrPoint =2 : FromCurve)
+ */ 
+   HRESULT GetPoint    (in  long  iPos, out  /*IDLRETVAL*/ CATIAReference opIAPoint);
+/**
+ * Sets the Point After a given position. 
+ * @param iPos 
+ *   The position reference (0 < position < Nbpt)
+ * @param ipIAPoint
+ *   Point 
+ */ 
+   HRESULT SetPointAfter  (in   long   iPos, in CATIAReference ipIAPoint);
+
+/**
+ * Sets the Point Before a given position. 
+ * @param iPos 
+ *   The position reference (1 < position < Nbpt+1) 
+  * @param ipIAPoint
+ *   Point 
+ */ 
+   HRESULT SetPointBefore  (in    long   iPos, in CATIAReference ipIAPoint);
+
+/**
+ * Returns the Constraint of the point at iPos.
+ *<br> Available for Explicit Point Constraint type (CstType =1 from GetContraintType)
+ * @param iPos 
+ *   The position of the point to retrieve
+ * @param opIADirTangency 
+ *   Tangent direction.
+ * @param oTangencyNorm 
+ *   Tension.
+ * @param oInverseTangency 
+ *   Flag to reverse tangent direction (value can be 1 or -1).
+ * @param opIADirCurvature 
+ *   Curvature direction.
+ * @param oCurvatureRadius 
+ *   Curvature radius value.
+ */ 
+   HRESULT GetPointConstraintExplicit (in    long    iPos,
+                out  CATIAHybridShapeDirection   opIADirTangency,		
+                out  double                     oTangencyNorm,
+                out  long                       oInverseTangency,
+                out  CATIAHybridShapeDirection   opIADirCurvature,
+                out  double                     oCurvatureRadius);
+/**
+ * Sets the Constraint of the point at iPos.
+ *<br> Available for Explicit  Point Constraint type (CstType =1 from GetContraintType)
+ * @param iPos 
+ *   The position of the point to retrieve
+ * @param ipIADirTangency 
+ *   Tangent direction.
+ * @param iTangencyNorm 
+ *   Tension.
+ * @param iInverseTangency 
+ *   Flag to reverse tangent direction (value can be 1 or -1).
+ * @param ipIADirCurvature 
+ *   Curvature direction.
+ * @param iCurvatureRadius 
+ *   Curvature radius value.
+ */ 
+   HRESULT SetPointConstraintExplicit (in    long    iPos,
+                in  CATIAHybridShapeDirection   ipIADirTangency,		
+                in  double                     iTangencyNorm,
+                in  long                       iInverseTangency,
+                in  CATIAHybridShapeDirection   ipIADirCurvature,
+                in  double                     iCurvatureRadius);
+
+/**
+ * Returns the Constraint of the point at iPos.
+ *<br> Available for FromCurve Point Constraint type (CstType =2 from GetContraintType)
+ * @param iPos 
+ *   The position of the point to retrieve
+ * @param opIACurveCst
+ *   Curvature direction.
+ * @param oTangencyNorm  
+ *   tension factor for tangency.
+ * @param oInvertValue
+ *   Orientation for tangent 
+ * @param oCrvCstType 
+ *   Continuity type for Curve Constraint (1=Tangency , 2-= Curvature).
+ */ 
+   HRESULT GetPointConstraintFromCurve (in    long    iPos,
+           out  CATIAReference opIACurveCst,
+           out double       oTangencyNorm,
+           out  long        oInvertValue,
+           out  long        oCrvCstType);
+
+/**
+ * Sets the Constraint of the point at iPos.
+ *<br> Available for From Curve Point Constraint type (CstType =2 from GetContraintType)
+ * @param iPos 
+ *   The position of the point to retrieve
+* @param ipIACurveCst
+ *   Curvature direction.
+ * @param iTangencyNorm  
+ *   tension factor for tangency.
+ * @param iInvertValue
+ *   Orientation for tangent 
+ * @param iCrvCstType 
+ *   Continuity type for Curve Constraint (1=Tangency , 2-= Curvature).
+ */ 
+   HRESULT SetPointConstraintFromCurve (in	long    iPos,
+           in  CATIAReference   ipIACurveCst,
+           in  double		        iTangencyNorm,
+           in  long			        iInvertValue,
+           in  long             iCrvCstType);
+
+
+/**
+ * Sets the spline type.
+ * @param iSplineType 
+ *   The spline type
+ *   <br><b>Legal values</b>: Cubic spline (0) or WilsonFowler (1)
+ */ 
+   HRESULT SetSplineType    (in long          iSplineType);
+
+/**
+ * Activates the closing option of the spline.
+ * @param iClosingType 
+ *   The spline closing option
+ */ 
+   HRESULT SetClosing       (in long          iClosingType);
+
+/**
+ * Sets the spline support surface.
+ * <br>Have your "tangent direction" tangent to this support is recommended.
+ * @param iSupport 
+ *   The spline support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ */ 
+   HRESULT SetSupport       (in CATIAReference     iSupport);
+
+/**
+ * Returns the tension for each point of the spline.
+ * <br>The tension is the tangent norm at the given point.
+ * @param iPos 
+ *   The position of the point in the spline.
+ *   <br><b>Legal values</b>: first position is 1.
+ *    The position cannot be 0. 
+ * @param oTension 
+ *   The tension at this point 
+ */ 
+   HRESULT GetTangentNorm (in                       long                iPos,
+         out  /*IDLRETVAL*/       CATIARealParam      oTension);
+
+/**
+ * Returns the curvature radius value for each point of the spline.
+ * @param iPos 
+ *   The position of the point in the spline.
+ *   <br><b>Legal values</b>: first position is 1.
+ *    The position cannot be 0. 
+ * @param oRadius
+ *   The curvature radius value at this point
+ */ 
+   HRESULT GetCurvatureRadius (in                   long                iPos,
+          out   /*IDLRETVAL*/  CATIALength         oRadius);
+/**
+ * Gets whether the curve is closed.
+ *   @param oClosed
+ *       Closing flag
+ *<dl><dt>1</dt><dd> for a closed curve</dd>
+ *    <dt>0</dt><dd> for an open curve</dd>
+ *</dl>
+ */
+   HRESULT GetClosure(out /*IDLRETVAL*/ long oClosed);
+/**
+ * Gets the spline type.
+ *   @param oType = 0 : Cubic Type Spline.
+ *                = 1 : WilsonFowler Type Spline.
+ */
+   HRESULT GetSplineType(out /*IDLRETVAL*/ long oType);
+/**
+ * Gets the support surface.
+ *   @param oSupport
+ *      Supporting surface for spline (if exist)
+ */
+   HRESULT GetSupport(out /*IDLRETVAL*/ CATIAReference oSupport);
+/**
+ * Removes all elements in the list of points.
+ */
+   HRESULT RemoveAll();
+/**
+ * Removes the support surface.
+ */
+   HRESULT RemoveSupport();
+/**
+ * Replaces a point in the list at the given position.
+ *   @param oPoint
+ *      Point
+ *   @param iPos
+ *      Replace position
+ */
+   HRESULT ReplacePointAtPosition(in long iPos, in CATIAReference iPoint);
+/**
+ * Removes tangent Direction for the given point of the spline.
+
+ *   @param iPos
+ *      Position of point in spline
+ *                   First Position is 1
+ *                   Position 0 return E_FAIL
+ */
+   HRESULT RemoveTangentDirection(in long iPos);
+/**
+ * Removes  the Tension for the given point of the spline.
+ *   @param iPos
+ *      Position of point in spline
+ *                   First Position is 1
+ *                   Position 0 return E_FAIL
+ */
+   HRESULT RemoveTension(in long iPos);
+/**
+ * Removes Curvature Radius  Direction for the given point of the spline.
+ *   @param iPos
+ *      Position of point in spline
+ *                   First Position is 1
+ *                   Position 0 return E_FAIL
+ */
+   HRESULT RemoveCurvatureRadiusDirection(in long iPos);
+/**
+ * Removes Curvature Radius  Value for the given point of the spline.
+ *   @param iPos
+ *      Position of point in spline
+ *                   First Position is 1
+ *                   Position 0 return E_FAIL
+ */
+   HRESULT RemoveCurvatureRadiusValue(in long iPos);
+/**
+ * Inverts the orientation of the tangent direction .
+ *   @param iPos
+ *      Position of point in spline
+ *                   First Position is 1
+ *                   Position 0 return E_FAIL
+ */
+   HRESULT InvertDirection(in long iPos);
+/**
+ * Gets the orientation of the tangent direction .
+ *   @param oInvertFlag
+ *      invert flag
+ *    = 1  No Inversion
+ *    = -1 Invert
+ *   @param iPos
+ *      Position of point in spline
+ *                   First Position is 1
+ *                   Position 0 return E_FAIL
+ */
+   HRESULT GetDirectionInversion(in long iPos, out /*IDLRETVAL*/ long oInvertFlag);
+
+};
+
+// Interface name : CATIAHybridShapeSpline
+#pragma ID CATIAHybridShapeSpline "DCE:8ab043b9-60ee-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeSpline
+
+// VB object name : HybridShapeSpline (Id used in Visual Basic)
+#pragma ID HybridShapeSpline "DCE:8ab043be-6a9d-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeSpline HybridShapeSpline
+
+#endif

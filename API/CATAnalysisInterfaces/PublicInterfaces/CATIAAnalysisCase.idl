@@ -1,0 +1,109 @@
+#ifndef CATIAAnalysisCase_IDL
+#define CATIAAnalysisCase_IDL
+/*IDLREP*/
+//=================================================================
+// COPYRIGHT Dassault Systemes 2000
+//                                   
+// CATIAAnalysisCase:                           
+// Exposed interface for Analysis Case
+//                                   
+//=================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATIAAnalysisSet.idl"
+#include "CATIAAnalysisSets.idl"
+
+interface CATIAAnalysisSet;
+interface CATIAAnalysisSets;
+/**
+ * Represent the analysis case object.
+ * <b>Role:</b> Interface designed to manage <b>Analysis Case behavior</b>.<br>
+ * In the Analysis document, an <b>Analysis Case</b> is the object  
+ * dedicated to define and manage the environment data necessary to run 
+ * a computation. This environment is made of sets.
+*/
+//-----------------------------------------------------------------
+interface CATIAAnalysisCase : CATIABase
+{
+/**
+ * Returns the analysis sets collection associated to the analysis case.
+ * @return The collection of analysis sets.
+ * <! @sample >
+ * <dt><b>Example:</b>
+ * <dd>
+ * The following example retrieves the analysis sets collection <tt> ListSets</tt>
+ * <pre>
+ * Dim MyCase As AnalysisCase
+ * Dim ListSets As AnalysisSets
+ * Set ListSets = MyCase.<font color="red">AnalysisSets</font>
+ * </pre>
+
+ */
+#pragma PROPERTY AnalysisSets
+	HRESULT get_AnalysisSets(out /*IDLRETVAL*/ CATIAAnalysisSets oAnalysisSets);
+/**
+ * Creates a Solution set defined by its type in the Case.
+ * @param iSolutionType The feature type of the solution set. <br>
+ * This is a user defined type corresponding to the kind of computation.
+ * For example "StaticSet"
+ * @return oSolution The analysis set created.
+ * <! @sample >
+ * <dt><b>Example:</b>
+ * <dd>
+ * The following example create a solution set  <tt> ListSets</tt>
+ * <pre>
+ * Dim MyCase As AnalysisCase
+ * Dim Newsol As AnalysisSet
+ * Set Newsol = MyCase.<font color="red">AddSolution</font><font color="red">("StaticSet")</font>
+ * </pre>
+ */
+  HRESULT AddSolution(in                  CATBSTR           iSolutionType,
+                      out /*IDLRETVAL*/   CATIAAnalysisSet  oSolution);
+/**
+ * Launch the computation (Update) of an analysis case.
+ * This step corresponds to the "Case Solution" option of the interactive command.
+ * <! @sample >
+ * <dt><b>Example:</b>
+ * <dd>
+ * The following example launches the update of <tt> MyCase</tt>
+ * <pre>
+ * Dim MyCase As AnalysisCase
+ * MyCase.<font color="red">Compute</font>
+ * </pre>
+ */
+
+  HRESULT Compute ( );
+  
+/**
+ * Launch the computation (Update) of an analysis case.
+ * This method corresponds to the "Mesh Only" option of the interactive command.
+ * <! @sample >
+ * <dt><b>Example:</b>
+ * <dd>
+ * The following example launches the update of <tt> MyCase</tt>
+ * <pre>
+ * Dim MyCase As AnalysisCase
+ * MyCase.<font color="red">ComputeMeshOnly</font>
+ * </pre>
+ */
+
+
+  HRESULT ComputeMeshOnly ( );
+};
+
+// Interface name : CATIAAnalysisCase
+#pragma ID CATIAAnalysisCase "DCE:148cedb0-7d33-11d2-a88d00805fc71459"
+#pragma DUAL CATIAAnalysisCase
+
+// VB object name : AnalysisCase (Id used in Visual Basic)
+#pragma ID AnalysisCase "DCE:23a813ec-7d33-11d2-a88d00805fc71459"
+#pragma ALIAS CATIAAnalysisCase AnalysisCase
+
+#endif
+// CATIAAnalysisCase_IDL
+

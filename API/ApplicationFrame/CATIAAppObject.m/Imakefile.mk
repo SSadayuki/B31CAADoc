@@ -1,0 +1,31 @@
+BUILT_OBJECT_TYPE=NONE
+
+/** @c++ansi fbq 2004-08-04.09:44:11 [win_b support] **/
+OS = Windows
+LOCAL_CCFLAGS = /GX /D _ATL_NO_UUIDOF
+#SOURCES_PATH=PrivateInterfaces
+#COMPILATION_IDL=YES
+
+OS = win_b64
+#ifndef CATIAV5R24
+#COMPILATION_IDL=YES
+BUILD=NO
+#endif
+
+OS = SunOS
+BUILD = NO
+
+OS = AIX
+BUILD = NO
+
+OS = HP-UX
+BUILD = NO
+
+OS = IRIX
+BUILD = NO
+LOCAL_CCFLAGS = -G0
+LOCAL_LDFLAGS =  -G0
+
+
+OS = Linux
+BUILD = NO

@@ -1,0 +1,5 @@
+BUILT_OBJECT_TYPE=ARCHIVE
+
+#if os Windows
+CXX_WARNINGPROMOTE=CATOsmWarningPromote.h
+#endif

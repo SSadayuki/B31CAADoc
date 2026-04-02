@@ -1,0 +1,79 @@
+#ifndef CATIASchAppDeleteCheck_IDL 
+#define CATIASchAppDeleteCheck_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004   
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the deletion of a schematic object.
+  */
+
+interface CATIASchAppDeleteCheck : CATIABase
+{
+  /**
+   * Reports if a warning message should be issued before deleting
+   * the object.
+   * <br><b>Example:</b>A Logical Line with members cannot be 
+   * deleted without complications.  Its members must also be 
+   * deleted for model integrity.  A Logical Line with members 
+   * would return FALSE in this case.
+   *       
+   * @param oOK
+   *   Pointer to the CATBoolean to receive the ok.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppDeleteCheck
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppOkToDeleteWithoutWarning</font>bVar1
+  * </pre>
+  *    
+   */
+  HRESULT AppOkToDeleteWithoutWarning ( 
+    inout boolean oOk );
+    
+  /**
+   * Returns the caption and message text to be used as a warning for the delete operation.
+   *       
+   * @param oCaption
+   *   Pointer to a CATUnicode string used for the caption of the message box.
+   * @param oMessage
+   *   Pointer to a CATUnicode string used as the warning message.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppDeleteCheck
+  * Dim strVar1 As String
+  * Dim strVar2 As String
+  *  ...
+  * objThisIntf.<font color="red">AppGetDeleteWarning</font>strVar1,strVar2
+  * </pre>
+  *    
+   */
+  HRESULT AppGetDeleteWarning ( 
+    inout CATBSTR oCaption, 
+    inout CATBSTR oMessage );
+    
+};
+    
+// Interface name : CATIASchAppDeleteCheck
+#pragma ID CATIASchAppDeleteCheck "DCE:a04bfb37-4ef9-4e2d-acb9571f7f59c16b"
+#pragma DUAL CATIASchAppDeleteCheck
+    
+// VB object name : SchAppDeleteCheck
+#pragma ID SchAppDeleteCheck "DCE:b65d8ae8-bf27-44c0-8150175ee8e3e7cb"
+#pragma ALIAS CATIASchAppDeleteCheck SchAppDeleteCheck
+    
+#endif 
+    

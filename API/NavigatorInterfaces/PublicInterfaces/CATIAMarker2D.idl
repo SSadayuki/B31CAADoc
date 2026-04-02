@@ -1,0 +1,220 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAMarker2D.idl
+//   This automation interface allows the manage Marker2D information.
+//
+//===================================================================
+//
+//  Jul 2000  Creation: LJE
+//
+//===================================================================
+#ifndef CATIAMarker2D_IDL
+#define CATIAMarker2D_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATSafeArray.idl"
+#include "CatMarker2DType.idl"
+#include "CatMarkerTextOrientation.idl"
+
+/**  
+ * Represents a marker 2D in a specified annotated view.
+ */
+interface CATIAMarker2D : CATIABase
+{
+  /**
+   * Returns the type of the marker 2D.
+   * @sample
+   *    This example retrieves the type of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim type As CatMarker2DType
+   *    type = NewMarker2D.<font color="red">Type</font>
+   *    </pre>
+   */
+#pragma PROPERTY Type
+    HRESULT get_Type(out /*IDLRETVAL*/ CatMarker2DType oType);
+
+  /**
+   * Retrieves the coordinates of the positions of the Marker2D.
+   * <p> These positions depend on the type of the Marker2D :
+   *    <ul>
+   *    <li>Line: 2 positions.
+   *    <li>Arrow: 2 positions, the first being the head and the second being the tail.
+   *    <li>Rectangle: 2 positions, the first being the bottom-left corner and the second being the top-right corner.
+   *    <li>Circle: 2 positions, the first being the center and the second being a point on the circle.
+   *    <li>FreeHand: as many positions as points.
+   *    <li>Text: 1 position, the bottom-left corner.
+   *    <li>Picture: 2 positions, the first being the bottom-left corner and the second being the top-right corner.
+   *    </ul>
+   * @param oCoordinates
+   *    The coordinates of the positions expressed as an array of variants are:
+   *    <ul>
+   *    <li>oCoordinates(0) is the X coordinate of the first point
+   *    <li>oCoordinates(1) is the Y coordinate of the first point
+   *    <li>oCoordinates(2) is the X coordinate of the second point
+   *    <li>oCoordinates(3) is the Y coordinate of the second point
+   *    <li>oCoordinates(n*2-2) is the X coordinate of the n-th point
+   *    <li>oCoordinates(n*2-1) is the Y coordinate of the n-th point
+   *    </ul>
+   * @sample
+   *    This example retrieves the coordinates of the positions of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim Coordinates (3)
+   *    NewMarker2D.<font color="red">GetPositions</font> Coordinates
+   *    </pre>
+   */
+  HRESULT GetPositions (inout CATSafeArrayVariant oCoordinates);
+
+  /**
+   * Sets the coordinates of the positions of the Marker2D.
+   * <p> These positions depend on the type of the Marker2D :
+   *    <ul>
+   *    <li>Line: 2 positions.
+   *    <li>Arrow: 2 positions, the first being the head and the second being the tail.
+   *    <li>Rectangle: 2 positions, the first being the bottom-left corner and the second being the top-right corner.
+   *    <li>Circle: 2 positions, the first being the center and the second being a point on the circle.
+   *    <li>FreeHand: as many positions as points.
+   *    <li>Text: 1 position, the bottom-left corner.
+   *    <li>Picture: 2 positions, the first being the bottom-left corner and the second being the top-right corner.
+   *    </ul>
+   * @param iCoordinates
+   *    The coordinates of the positions expressed as an array of variants are:
+   *    <ul>
+   *    <li>iCoordinates(0) is the X coordinate of the first point
+   *    <li>iCoordinates(1) is the Y coordinate of the first point
+   *    <li>iCoordinates(2) is the X coordinate of the second point
+   *    <li>iCoordinates(3) is the Y coordinate of the second point
+   *    <li>oCoordinates(n*2-2) is the X coordinate of the n-th point
+   *    <li>oCoordinates(n*2-1) is the Y coordinate of the n-th point
+   *    </ul>
+   * @sample
+   *    This example sets the coordinates of the positions of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim Coordinates (3) 'To be valuated
+   *    NewMarker2D.<font color="red">SetPositions</font> Coordinates
+   *    </pre>
+   */
+  HRESULT SetPositions (in CATSafeArrayVariant iCoordinates);
+
+  /**
+   * Returns or sets the Marker2D's filling status (1 the figure is filled, 0 the figure is not filled).
+   * @sample
+   *    This example retrieves the filling status of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim status As Integer
+   *    status = NewMarker2D.<font color="red">Fill</font>
+   *    </pre>
+   */
+#pragma PROPERTY Fill
+    HRESULT get_Fill(out /*IDLRETVAL*/ long oStatus);
+    HRESULT put_Fill(in long iStatus);
+
+  /**
+   * Returns or sets the Marker2D's framing status (1 the figure is framed, 0 the figure is not framed).
+   * @sample
+   *    This example retrieves the framing status of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim status As Integer
+   *    status = NewMarker2D.<font color="red">Frame</font>
+   *    </pre>
+   */
+#pragma PROPERTY Frame
+    HRESULT get_Frame(out /*IDLRETVAL*/ long oStatus);
+    HRESULT put_Frame(in long iStatus);
+
+  /**
+   * Returns or sets the text for a text Marker2D.
+   * @sample
+   *    This example retrieves the text of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim text As String
+   *    text = NewMarker2D.<font color="red">Text</font>
+   *    </pre>
+   */
+#pragma PROPERTY Text
+    HRESULT get_Text(inout /*IDLRETVAL*/ CATBSTR oText);
+    HRESULT put_Text(in CATBSTR iText);
+
+  /**
+   * Returns or sets the text's font for a text Marker2D.
+   * @sample
+   *    This example retrieves the text's font of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim font As String
+   *    font = NewMarker2D.<font color="red">TextFont</font>
+   *    </pre>
+   */
+#pragma PROPERTY TextFont
+    HRESULT get_TextFont(inout /*IDLRETVAL*/ CATBSTR oFont);
+    HRESULT put_TextFont(in CATBSTR iFont);
+
+  /**
+   * Returns or sets the text's size for a text Marker2D.
+   * @sample
+   *    This example retrieves the text's size of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim size As Double
+   *    size = NewMarker2D.<font color="red">TextSize</font>
+   *    </pre>
+   */
+#pragma PROPERTY TextSize
+    HRESULT get_TextSize(inout /*IDLRETVAL*/ double oSize);
+    HRESULT put_TextSize(in double iSize);
+
+  /**
+   * Return or set the orientation of text.
+   * @sample
+   *    This example retrieves the orientation of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim orientation As CatMarkerTextOrientation
+   *    orientation = NewMarker2D.<font color="red">TextOrientation</font>
+   *    </pre>
+   */
+#pragma PROPERTY TextOrientation
+    HRESULT get_TextOrientation(out /*IDLRETVAL*/ CatMarkerTextOrientation oOrientation);
+    HRESULT put_TextOrientation(in CatMarkerTextOrientation iOrientation);
+
+  /**
+   * Returns or sets the path to a picture file for a picture Marker2D.
+   * @sample
+   *    This example retrieves the path to a picture file of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim path As String
+   *    path = NewMarker2D.<font color="red">Picture</font>
+   *    </pre>
+   */
+#pragma PROPERTY Picture
+    HRESULT get_Picture(inout /*IDLRETVAL*/ CATBSTR oPath);
+    HRESULT put_Picture(in CATBSTR iPath);
+
+	  /**
+   * Returns or sets the text's angle for a text Marker2D.
+   * @sample
+   *    This example retrieves the text's angle of the <tt>NewMarker2D</tt> Marker2D.
+   *    <pre>
+   *    Dim angle As Double
+   *    size = NewMarker2D.<font color="red">TextAngle</font>
+   *    </pre>
+   */
+#pragma PROPERTY TextAngle
+    HRESULT get_TextAngle(inout /*IDLRETVAL*/ double oAngle);
+    HRESULT put_TextAngle(in double iAngle);
+
+};
+
+// Interface name : CATIAMarker2D
+#pragma ID CATIAMarker2D "DCE:289d80a8-517b-11d4-9469006094eb3826"
+#pragma DUAL CATIAMarker2D
+
+// VB object name : Marker2D (Id used in Visual Basic)
+#pragma ID Marker2D "DCE:28f81a04-517b-11d4-9469006094eb3826"
+#pragma ALIAS CATIAMarker2D Marker2D
+
+#endif

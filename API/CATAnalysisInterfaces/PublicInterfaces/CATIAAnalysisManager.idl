@@ -1,0 +1,232 @@
+#ifndef CATIAAnalysisManager_IDL
+#define CATIAAnalysisManager_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAAnalysisManager:                           
+// Exposed interface for Analysis Manager
+//                                   
+//=================================================================
+#include "CATIABase.idl"
+#include "CATIAAnalysisLinkedDocuments.idl"
+#include "CATIAParameters.idl"
+#include "CATIARelations.idl"
+#include "CATIADocument.idl"
+#include "CATIAProduct.idl"
+#include "CATIAReference.idl"
+#include "CATIAAnalysisSets.idl"
+
+interface CATIAAnalysisSets;    
+interface CATIAAnalysisModels;
+interface CATIADocument;
+
+/**
+ * Represents the root object inside an analysis document.
+ * It aggregates all the objects making up an analysis document.
+ */
+//-----------------------------------------------------------------
+interface CATIAAnalysisManager : CATIABase
+{
+/**
+  * Returns the analysis model collection from the current analysis manager.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns from <tt>RootAnalysis</tt> the root analysis
+  * object of the active document, assumed to be an Analysis document, the 
+  * collection of analysis models.
+  * <pre>
+  * Dim AnalysisDocument As Document
+  * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+  * Dim RootAnalysis As AnalysisManager
+  * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+  * Dim analysisModels As AnalysisModels
+  * Set analysisModels = RootAnalysis.<font color="red">AnalysisModels</font>
+  *</pre>
+  * </dl>
+  */
+#pragma PROPERTY AnalysisModels
+	HRESULT get_AnalysisModels(out /*IDLRETVAL*/ CATIAAnalysisModels oFEMModels);
+
+/**
+  * Returns the collection containing the documents linked to analysis document.
+  * All the CATIA documents that are linked to the different
+  * objects (like AnalysisMeshPart of Analysis Entity) might be accessed thru that collection.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns in <tt>documents</tt> the linked documents
+  * of the <tt>AnalysisDocument</tt> :
+  * <pre>
+  * Dim AnalysisDocument As Document
+  * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+  * Dim RootAnalysis As AnalysisManager
+  * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+  * Dim Documents As AnalysisLinkedDocuments
+  * Set Documents = RootAnalysis.<font color="red">LinkedDocuments</font>
+  * </pre>
+  * </dl>
+  */
+
+#pragma PROPERTY LinkedDocuments
+	HRESULT get_LinkedDocuments(out /*IDLRETVAL*/ CATIAAnalysisLinkedDocuments oLinkedDocuments);
+
+    /**
+     * Returns the collection object containing the analysis parameters.
+     * All the parameters that are defined in analysis objects might be accessed thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>params</tt> the parameters
+     * of the <tt>RootAnalysis</tt> from the <tt>AnalysisDocument</tt> document:
+     * <pre>
+     * Dim AnalysisDocument As Document
+     * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+     * Dim RootAnalysis As AnalysisManager
+     * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+ 	 * Dim params As CATIAParameters
+	 * Set params = RootAnalysis.<font color="red">Parameters</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY Parameters
+	HRESULT get_Parameters(out /*IDLRETVAL*/ CATIAParameters oParameters);
+    /**
+     * Returns the collection object containing the analysis relations.
+     * All the relations that are defined in analysis objects might be accessed thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>relation</tt> the relations
+     * of the <tt>RootAnalysis</tt> from the <tt>AnalysisDocument</tt> document:
+     * <pre>
+     * Dim AnalysisDocument As Document
+     * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+     * Dim RootAnalysis As AnalysisManager
+     * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+	 * Dim relation As CATIARelations
+	 * Set relation = RootAnalysis.<font color="red">Relations</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY Relations
+	HRESULT get_Relations(out /*IDLRETVAL*/ CATIARelations oRelations);
+
+    /**
+     * Import an existing document in an analysis document .
+     * This document can of any type that implement the CATIADocument interface.
+	 * This is implemented for internal document formats. (like Part or Product documents).
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example imports an opened CATPart document 
+     * <pre>
+     * Dim AnalysisDocument As Document
+     * Dim PartDocument As Document
+     * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+     * Dim RootAnalysis As AnalysisManager
+     * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+	 * RootAnalysis.<font color="red">Import(PartDocument)</font>
+     * </pre>
+     * </dl>
+     */
+	HRESULT Import(in CATIADocument iDocumentToImport);
+
+    /**
+     * Import an existing document in an analysis document.
+	 * @deprecated V5R15 use ImportDefineFile instead.
+     * This document can of any type that implement the CATISamImportDefine interface.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example imports an CATPart document stored as FileToOpen file.
+     * <pre>
+     * FileToOpen = "e:\users\Parts\ThisIsANicePart.CATPart"
+     * Dim AnalysisDocument As Document
+     * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+     * Dim RootAnalysis As AnalysisManager
+     * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+	 * RootAnalysis.<font color="red">ImportFile(FileToOpen)</font>
+     * </pre>
+     * </dl>
+     */
+	HRESULT ImportFile(in CATBSTR iDocumentPath);
+
+
+    /**
+     * Import an existing document in an analysis document.
+     * This document can of any type that is managed by the CATISamImportDefine interface.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example imports an CATPart document stored as FileToOpen file.
+	 * This example is also use the CATAnalysisImport Object. This object allow to import Part, Product or Analysis documents.
+	 * As of today no parameters are mandatory for this object.
+     * <pre>
+	 * Dim arrayOfVariant(0)
+     * FileToOpen = "e:\users\Parts\ThisIsANicePart.CATPart"
+     * ObjectForImport = "CATAnalysisImport"
+     * Dim AnalysisDocument As Document
+     * Set AnalysisDocument = CATIA.<font color="red">ActiveDocument</font>
+     * Dim RootAnalysis As AnalysisManager
+     * Set RootAnalysis = AnalysisDocument.<font color="red">Analysis</font>
+	 * RootAnalysis.<font color="red">ImportDefineFile(FileToOpen,CATAnalysisImport,arrayOfVariant)</font>
+     * </pre>
+     * </dl>
+     */
+	HRESULT ImportDefineFile(in CATBSTR iDocumentPath,
+							 in CATBSTR iTypeLate,
+							 in CATSafeArrayVariant iValues);
+
+    /**
+     * Creates a reference from an analysis object.
+     * Use of reference allows a uniform handling of anay objects.
+     * @param iObject
+     *   The analysis object to be referenced.
+     *   It can be an <tt>AnalysisEntity</tt> or an <tt>AnalysisSet</tt>
+     * @return The reference to the object.
+     */
+    HRESULT CreateReferenceFromObject( in                CATIABase       iObject,
+									   out /*IDLRETVAL*/ CATIAReference  oRef     );
+
+	/**
+     * Creates a reference from a geometry. 
+	 * This geometry must in defined in a document rerecened in the CATIAAnalysisLinkedDocuments collection.
+	 * @param iProduct The product of the geometry to be referenced that defines the instance of the geometry.
+     * @param iGeometry The geometry to be referenced. As a reference, it can be an CATIABoundary object of a mechanical feature.
+     * @return a reference of the couple (iProduct, iGeometry).
+     */
+    HRESULT CreateReferenceFromGeometry( in                CATIAProduct    iProduct,
+									     in                CATIAReference  iGeometry,
+									     out /*IDLRETVAL*/ CATIAReference  oRef     );
+						  
+/**
+ * Returns the analysis sets collection associated with an analysis manager.
+ * This collection allows to access the Analysis Connection Manager that aggregates the Analysis Connection features.
+ * @return a collection of  CATIAAnalysisSets.
+ */
+#pragma PROPERTY AnalysisSets
+	HRESULT get_AnalysisSets(out /*IDLRETVAL*/ CATIAAnalysisSets oAnalysisSets);
+
+
+};
+
+// Interface name : CATIAAnalysisManager
+#pragma ID CATIAAnalysisManager "DCE:ee6e2c96-7ae1-11d2-a88d00805fc71459"
+#pragma DUAL CATIAAnalysisManager
+
+// VB object name : AnalysisManager (Id used in Visual Basic)
+#pragma ID AnalysisManager "DCE:fc23b216-7ae1-11d2-a88d00805fc71459"
+#pragma ALIAS CATIAAnalysisManager AnalysisManager
+
+#endif
+// CATIAAnalysisManager_IDL
+

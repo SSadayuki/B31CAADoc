@@ -1,0 +1,89 @@
+#ifndef CATIAExpertRuleSetRuntime_IDL
+#define CATIAExpertRuleSetRuntime_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATIAExpertRuleBaseComponentRuntime.idl"
+
+
+interface CATIAExpertRuleSet ;
+
+interface CATIAExpertRuleBaseComponentRuntimes ;
+
+
+/**
+ * Represents the ExpertRuleSet object in the RelationSet.
+ */
+interface CATIAExpertRuleSetRuntime : CATIAExpertRuleBaseComponentRuntime
+{
+
+	/**
+	* Returns the editable object corresponding to this ruleset.
+	* Be careful that, according to your licence, or the type of ruleset
+	* you're handling, you may not have the right to edit the ruleset.
+	*
+	* <! @sample >
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim aRuleSetEdition As ExpertRuleSet
+	* Set aRuleSetEdition = aRuleSetRuntime.RuleSetEdition
+	*
+	* If not(aRuleSetEdition is Nothing) Then
+	*   ' .. some actions
+	* End if
+	* </pre>
+	* </dl>
+	*/
+#pragma PROPERTY RuleSetEdition 
+   HRESULT    get_RuleSetEdition
+                (out /*IDLRETVAL*/ CATIAExpertRuleSet oRuleSetEdition); 
+
+	/**
+	* Returns the list of the RuleBaseComponent.
+	*/
+#pragma PROPERTY ExpertRuleBaseComponentRuntimes	 
+    HRESULT    get_ExpertRuleBaseComponentRuntimes  
+                ( inout /*IDLRETVAL*/ CATIAExpertRuleBaseComponentRuntimes oRuleCollection  );
+		  
+
+    /**
+     * Returns the Status of the ruleset: 1=OK, 0=KO.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+	 * <pre>
+	 * Dim RuleSet1 As ExpertRuleSet 
+     * Set RuleSet1	 = RuleSet.ExpertGenericRuleBaseComponentRuntimes.Item("RuleSet1")
+     * status = RuleSet1.<font color="red">Status</font> ()
+     * </pre>
+     * </dl>
+	 *
+	 * @return Status of the ruleset
+     */
+    HRESULT    Status    
+                ( out /*IDLRETVAL*/   long             oStatus );
+
+
+};
+
+// Interface name : CATIAExpertRuleSetRuntime
+#pragma ID CATIAExpertRuleSetRuntime "DCE:576f7050-bebe-11d4-9f0a00d0b7af59ef"
+#pragma DUAL CATIAExpertRuleSetRuntime
+
+// VB object name : Relation (Id used in Visual Basic)
+#pragma ID ExpertRuleSetRuntime "DCE:5ff279b0-bebe-11d4-9f0a00d0b7af59ef"
+#pragma ALIAS CATIAExpertRuleSetRuntime ExpertRuleSetRuntime
+
+#endif
+// CATIAExpertRuleSetRuntime_IDL
+

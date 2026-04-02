@@ -1,0 +1,173 @@
+#ifndef CATIASchCntrLocation_IDL 
+#define CATIASchCntrLocation_IDL 
+    
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchGRR;
+interface  CATIASchListOfDoubles;
+    
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Manage the location of a schematic connector.
+  */
+
+
+interface CATIASchCntrLocation : CATIABase
+{
+ /**
+  * Get the current position of the connector in 
+  * <b>absolute</b> coordinates.
+  * @param iGRR
+  *   Pointer to the graphical primitive or the graphical image or the
+  *   graphical primitives of the owner of the connector.
+  * @param oDb2Position
+  *   Absolute X-Y coordinates of the current position of 
+  *   the connector. 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrLocation
+  * Dim objArg1 As SchGRR
+  * Dim objArg2 As SchListOfDoubles
+  *  ...
+  * objThisIntf.<font color="red">GetPosition</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT GetPosition ( 
+    in CATIASchGRR iGRR, 
+    inout CATIASchListOfDoubles oDb2Position );
+    
+ /**
+  * Set the current position of the connector in 
+  * <b>absolute</b> coordinates. All connectors on multi-images are
+  * affected because the relative position on connect will
+  * be changed accordingly.
+  * @param iGRR
+  *   Pointer to the graphical primitive or the graphical image or the
+  *   graphical primitives of the owner of the connector.. 
+  * @param iDb2Position
+  *   absolute X-Y coordinates of the current position of 
+  *   the connector to be set.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrLocation
+  * Dim objArg1 As SchGRR
+  * Dim dbVar2(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetPosition</font>objArg1,dbVar2
+  * </pre>
+  *    
+  */
+  HRESULT SetPosition ( 
+    in CATIASchGRR iGRR, 
+    in CATSafeArrayVariant iDb2Position );
+    
+ /**
+  * Get the current position of the connector in 
+  * <b>relative</b> coordinates.
+  * @param oDb2RelativePosition
+  *   relative X-Y coordinates of the current position of 
+  *   the connector.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrLocation
+  * Dim objArg1 As SchListOfDoubles
+  *  ...
+  * objThisIntf.<font color="red">GetRelativePosition</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT GetRelativePosition ( 
+    inout CATIASchListOfDoubles oDb2RelativePosition );
+    
+ /**
+  * Set the current position of the connector in absolute coordinates.
+  * @param iDb2RelativePosition
+  *   relative X-Y coordinates of the current position of 
+  *   the connector to be set.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrLocation
+  * Dim dbVar1(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetRelativePosition</font>dbVar1
+  * </pre>
+  *    
+  */
+  HRESULT SetRelativePosition ( 
+    in CATSafeArrayVariant iDb2RelativePosition );
+    
+ /**
+  * Get the current alignment vector of the connector.
+  * @param iGRR
+  *   Pointer to the graphical primitive or the graphical image or the
+  *   graphical primitives of the owner of the connector.
+  * @param oDb2AlignVector
+  *   X-Y component of the current alignment vector of
+  *   the connector.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrLocation
+  * Dim objArg1 As SchGRR
+  * Dim objArg2 As SchListOfDoubles
+  *  ...
+  * objThisIntf.<font color="red">GetAlignVector</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT GetAlignVector ( 
+    in CATIASchGRR iGRR, 
+    inout CATIASchListOfDoubles oDb2AlignVector );
+    
+ /**
+  * Set the current alignment vector of the connector.
+  * @param iGRR
+  *   Pointer to the graphical primitive or the graphical image or the
+  *   graphical primitives of the owner of the connector.
+  * @param iDb2AlignVector
+  *   X-Y component of the current alignment vector of
+  *   the connector to be set.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrLocation
+  * Dim objArg1 As SchGRR
+  * Dim dbVar2(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetAlignVector</font>objArg1,dbVar2
+  * </pre>
+  *    
+  */
+  HRESULT SetAlignVector ( 
+    in CATIASchGRR iGRR, 
+    in CATSafeArrayVariant iDb2AlignVector );
+    
+};
+    
+// Interface name : CATIASchCntrLocation
+#pragma ID CATIASchCntrLocation "DCE:0b27d24e-af67-4d46-91b38090cb368654"
+#pragma DUAL CATIASchCntrLocation
+    
+// VB object name : SchCntrLocation
+#pragma ID SchCntrLocation "DCE:edbe5803-b974-4be9-aa46405640b819f9"
+#pragma ALIAS CATIASchCntrLocation SchCntrLocation
+    
+#endif 
+    

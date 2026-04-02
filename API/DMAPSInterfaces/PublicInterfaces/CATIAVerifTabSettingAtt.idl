@@ -1,0 +1,156 @@
+#ifndef CATIAVerifTabSettingAtt_IDL
+#define CATIAVerifTabSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+interface CATIAVerifTabSettingAtt : CATIASettingController 
+{
+
+/**
+ * Returns or sets the value to signify Whether the 'Auto Reframe' will happen during
+ * Process navigation
+ * <br><b>Role</b>: Returns or sets the value to signify Whether all the items/resources 
+ * will be  reframed during Process Navigation
+ */
+#pragma PROPERTY AutoReframeFilter
+     HRESULT get_AutoReframeFilter(out /*IDLRETVAL*/ long		oAutoReframe);
+     HRESULT put_AutoReframeFilter( in long	iAutoReframe );
+
+	 /** 
+	 * Retrieves environment informations for the "Auto Reframe" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Auto Reframe" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetAutoReframeFilterInfo	( inout					CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "Auto Reframe" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Auto Reframe" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetAutoReframeFilterLock( in  boolean iLocked );
+
+/**
+ * Returns or sets the value to signify Whether the Assigned resource will appear during
+ * Process Navigation
+ * <br><b>Role</b>: Returns or sets the value to signify Whether all the Assigned resource will appear during
+ * Process Navigation
+ */
+#pragma PROPERTY ImpliedResourceFilter
+     HRESULT get_ImpliedResourceFilter(out /*IDLRETVAL*/ long		oImplRes);
+     HRESULT put_ImpliedResourceFilter( in long	iImplRes );
+	 /** 
+	 * Retrieves environment informations for the "View Implied Resource" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "View Implied Resource" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetImpliedResourceFilterInfo	( inout					CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the Xxx parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "View Implied Resource" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetImpliedResourceFilterLock( in  boolean iLocked );
+
+/**
+ * Returns or sets the value to signify Whether all the  resources will appear during
+ * Process Navigation
+ * <br><b>Role</b>: Returns or sets the value to signify Whether all the  resources will appear during
+ * Process Navigation
+ */
+#pragma PROPERTY AllResourceFilter
+     HRESULT get_AllResourceFilter(out /*IDLRETVAL*/ long		oAllRes);
+     HRESULT put_AllResourceFilter( in long	iAllRes );
+	 /** 
+	 * Retrieves environment informations for the "View All Resources" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "View All Resources" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetAllResourceFilterInfo	( inout					CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "View All Resources" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "View All Resources" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetAllResourceFilterLock( in  boolean iLocked );
+};
+
+// Interface name : CATIAVerifTabSettingAtt
+#pragma ID CATIAVerifTabSettingAtt "DCE:a53bc2a9-a309-4614-9be329b60c274443"
+#pragma DUAL CATIAVerifTabSettingAtt
+
+// VB object name : VerifTabSettingAtt (Id used in Visual Basic)
+#pragma ID VerifTabSettingAtt "DCE:379ab337-9067-483e-b6fe69fe057e526d"
+#pragma ALIAS CATIAVerifTabSettingAtt VerifTabSettingAtt
+
+#endif

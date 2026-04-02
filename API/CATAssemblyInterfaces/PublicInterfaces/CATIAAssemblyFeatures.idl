@@ -1,0 +1,276 @@
+#ifndef CATIAAssemblyFeatures_IDL
+#define CATIAAssemblyFeatures_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//=================================================================
+//								   
+// CATIAAssemblyFeatures:						   
+// Exposed interface for AssemblyFeatures collection
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep. 2000   creation                                   CRX
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATSplitDefs.idl"
+
+interface CATIAReference;
+interface CATIABody;
+interface CATIAProduct;
+interface CATIAAssemblyFeature;
+interface CATIASketch;
+
+//-----------------------------------------------------------------
+/**
+ * A collection of all the AssemblyFeature objects of a product. 
+ * @see CATIAAssemblyFeature 
+ */
+
+interface CATIAAssemblyFeatures : CATIACollection
+{
+	  //		=============
+	  //		== METHODS ==
+	  //		=============
+	  //
+    /**
+     * Creates a new AssemblySplit object.
+     * @param iSplittingElement
+     *   The face or plane that will split the current body
+     * @param iSplittingElemComp
+     *   The component that contains the splitting element
+     * @param iSplitSide
+     *   The specification for which side of the current body should be kept
+     *   at the end of the split operation
+     * @param iComponent
+     *   The component with respect to which the AssemblySplit object to create
+     *   will be positioned
+     * @return The created @href CATIAAssemblySplit object
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <code>splitByPlane</code> AssemblySplit object in the
+     * <code>assemblyFeats</code> collection using a plane referenced as
+     * <code>splittingPlane</code> contained in the <code>splittingComp</code>
+     * component, in such a way that the material to remove be
+     * the one located in the direction of the <code>splittingPlane</code> normal vector,
+     * and positioned with respect to the <code>positioningComp</code> component.
+     * <pre>
+     * Dim splitByPlane As AssemblySplit
+     * Set splitByPlane = assemblyFeats.<font color="red">AddAssemblySplit</font>(splittingPlane,  _
+     *                                                   splittingComp,   _
+     *                                                   catPositiveSide, _
+     *                                                   positioningComp)
+     * </pre>
+     * </dl>
+     */
+     HRESULT AddAssemblySplit ( in CATIAReference iSplittingElement,
+                   in CATIAProduct iSplittingElemComp,
+                   in CatSplitSide iSplitSide,
+                   in CATIAProduct iComponent,
+                   out /*IDLRETVAL*/ CATIAAssemblyFeature oAssemblyFeature );
+
+    /**
+     * Creates a new AssemblyBoolean object by removing a body from the assembly.
+     * @param iBody
+     *   The body to remove
+     * @param iBodyComp
+     *   The component that contains the body to remove
+     * @param iComponent
+     *   The component with respect to which the AssemblyBoolean object to create
+     *   will be positioned
+     * @return The created @href CATIAAssemblyBoolean object
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <code>removeBody</code> AssemblyBoolean object in the
+     * <code>assemblyFeats</code> collection using a body referenced as
+     * <code>bodyToRemove</code> contained in the <code>bodyToRemoveComp</code>
+     * component,
+     * and positioned with respect to the <code>positioningComp</code> component.
+     * <pre>
+     * Dim removeBody As AssemblyBoolean
+     * Set removeBody = assemblyFeats.<font color="red">AddAssemblyRemove</font>(bodyToRemove,     _
+     *                                                  bodyToRemoveComp, _
+     *                                                  positioningComp)
+     * </pre>
+     * </dl>
+     */
+     HRESULT AddAssemblyRemove( in CATIABody iBody,
+							     in CATIAProduct iBodyComp,
+                   in CATIAProduct iComponent,
+                   out /*IDLRETVAL*/ CATIAAssemblyFeature oAssemblyFeature );
+
+    /**
+     * Creates a new AssemblyBoolean object by adding a body to the assembly.
+     * @param iBody
+     *   The body to add
+     * @param iBodyComp
+     *   The component that contains the body to add
+     * @param iComponent
+     *   The component with respect to which the AssemblyBoolean object to create
+     *   will be positioned
+     * @return The created @href CATIAAssemblyBoolean object
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <code>addBody</code> AssemblyBoolean object in the
+     * <code>assemblyFeats</code> collection using a body referenced as
+     * <code>bodyToAdd</code> contained in the <code>bodyToAddComp</code>
+     * component,
+     * and positioned with respect to the <code>positioningComp</code> component.
+     * <pre>
+     * Dim addBody As AssemblyBoolean
+     * Set addBody = assemblyFeats.<font color="red">AddAssemblyAdd</font>(bodyToAdd,     _
+     *                                            bodyToAddComp, _
+     *                                            positioningComp)
+     * </pre>
+     * </dl>
+     */
+  HRESULT AddAssemblyAdd( in CATIABody iBody,
+							     in CATIAProduct iBodyComp,
+                   in CATIAProduct iComponent,
+                   out /*IDLRETVAL*/ CATIAAssemblyFeature oAssemblyFeature );
+
+    /**
+     * Creates a new AssemblyPocket object.
+     * @param iSketch
+     *   The sketch defining the pocket base
+     * @param iSketchComp
+     *   The component that contains the sketch
+     * @param iDepth
+     *   The pocket depth
+     * @param iComponent
+     *   The component with respect to which the AssemblyPocket object to create
+     *   will be positioned
+     * @return The created @href CATIAAssemblyPocket object
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <code>pocket</code> AssemblyPocket object in the
+     * <code>assemblyFeats</code> collection using a sketch referenced as
+     * <code>pocketSketch</code> contained in the <code>pocketSketchComp</code>
+     * component, with a depth of 20mm,
+     * and positioned with respect to the <code>positioningComp</code> component.
+     * <pre>
+     * Dim pocket As AssemblyPocket
+     * Set pocket = assemblyFeats.<font color="red">AddAssemblyPocket</font>(pocketSketch,     _
+     *                                              pocketSketchComp, _
+     *                                              20,               _
+     *                                              positioningComp)
+     * </pre>
+     * </dl>
+     */
+  HRESULT AddAssemblyPocket( in CATIASketch iSketch,
+							     in CATIAProduct iSketchComp,
+                   in double iDepth,
+                   in CATIAProduct iComponent,
+                   out /*IDLRETVAL*/ CATIAAssemblyFeature oAssemblyFeature );
+
+    /**
+     * Creates a new AssemblyHole object.
+     * @param iSketch
+     *   The sketch defining the hole reference plane and anchor point.
+     *   <br>
+     *   This sketch must contain a single point that defines the hole axis: 
+     *   the hole axis in 3D passes through that point and is normal to the 
+     *   sketch plane.
+     * @param iSketchComp
+     *   The component that contains the sketch
+     * @param iDepth
+     *   The hole depth
+     * @param iComponent
+     *   The component with respect to which the AssemblyHole object to create
+     *   will be positioned
+     * @return The created @href CATIAAssemblyHole object
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <code>hole</code> AssemblyHole object in the
+     * <code>assemblyFeats</code> collection using a sketch referenced as
+     * <code>holeSketch</code> contained in the <code>holeSketchComp</code>
+     * component, with a depth of 60mm,
+     * and positioned with respect to the <code>positioningComp</code> component.
+     * <pre>
+     * Dim hole As AssemblyHole
+     * Set hole = assemblyFeats.<font color="red">AddAssemblyHole</font>(holeSketch,     _
+     *                                          holeSketchComp, _
+     *                                          60,             _
+     *                                          positioningComp)
+     * </pre>
+     * </dl>
+     */
+  HRESULT AddAssemblyHole( in CATIASketch iSketch,
+							     in CATIAProduct iSketchComp,
+                   in double iDepth,
+                   in CATIAProduct iComponent,
+                   out /*IDLRETVAL*/ CATIAAssemblyFeature oAssemblyFeature );
+
+    /**
+     * Returns an AssemblyFeature object using its index or its name from the AssemblyFeatures
+     * collection.
+     * @param iIndex
+     *   The index or the name of the AssemblyFeature object to retrieve from
+     *   the AssemblyFeatures collection.
+     *   As a numerics, this index is the rank of the AssemblyFeature object
+     *   in the collection.
+     *   The index of the first AssemblyFeature object in the collection is 1, and
+     *   the index of the last AssemblyFeature object is Count.
+     *   As a string, it is the name you assigned to the AssemblyFeature object using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved AssemblyFeature object
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the last item in the <tt>assemblyFeats</tt> collection. 
+     * <pre>
+     * Dim lastAssemblyFeat As AssemblyFeature
+     * Set lastAssemblyFeat = assemblyFeats.<font color="red">Item</font>(assemblyFeats.Count)
+     * </pre>
+     */
+    HRESULT Item ( in CATVariant iIndex, out /*IDLRETVAL*/ CATIAAssemblyFeature oAssemblyFeature );
+
+    /**
+     * Removes an AssemblyFeature object from the AssemblyFeatures collection.
+     * @param iIndex
+     *   The index or the name of the AssemblyFeature object to remove from the AssemblyFeatures
+     *   collection.
+     *   As a numerics, this index is the rank of the AssemblyFeature object
+     *   in the collection.
+     *   The index of the first AssemblyFeature object in the collection is 1, and
+     *   the index of the last AssemblyFeature object is Count.
+     *   As a string, it is the name you assigned to the AssemblyFeature object using
+     *   the @href CATIABase#Name property.
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example removes the last AssemblyFeature object in the <tt>assemblyFeats</tt>
+     * collection.
+     * <pre>
+     * assemblyFeats.<font color="red">Remove</font>(assemblyFeats.Count)
+     * </pre>
+     * </dl>
+     */
+    HRESULT Remove( in CATVariant iIndex );
+    
+};
+
+// Interface name : CATIAAssemblyFeatures
+#pragma ID CATIAAssemblyFeatures "DCE:504f8dfa-953f-11d4-9349006094eb72e6"
+#pragma DUAL CATIAAssemblyFeatures
+
+// VB object name : AssemblyFeatures (Id used in Visual Basic)
+#pragma ID AssemblyFeatures "DCE:076fccc0-9540-11d4-9349006094eb72e6"
+#pragma ALIAS CATIAAssemblyFeatures AssemblyFeatures
+#endif
+// CATIAAssemblyFeatures_IDL
+

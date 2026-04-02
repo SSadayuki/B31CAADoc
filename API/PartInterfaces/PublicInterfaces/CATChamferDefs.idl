@@ -1,0 +1,81 @@
+#ifndef CATChamferDefs_IDL
+#define CATChamferDefs_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATChamferDefs:						   
+// enumerations for Mechanical Chamfer
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+
+/**
+ * Chamfer definition mode.
+ * A chamfer between two faces can be defined using two lengthes,
+ * or a length and an angle.
+ * The first length, or the single length, depending on the way the
+ * chamfer is defined, is measured on the reference face from the
+ * edge to chamfer 
+ * to determine the first edge the chamfer creates on the reference face.
+ * This reference face is either the face selected or the face
+ * determined by CATIA if the edge to be chamfered was selected.
+ * The second length, or the angle, determines the second edge that the
+ * chamfer creates on the second face.
+ * @param catTwoLengthChamfer
+ * The chamfer is defined using two lengthes
+ * @param catLengthAngleChamfer
+ * The chamfer is defined using a length and an angle
+ */ 
+enum CatChamferMode	
+{
+	catTwoLengthChamfer ,
+	catLengthAngleChamfer
+};
+
+/**
+ * Chamfer propagation mode.
+ * Once running on an egde, a chamfer operation may propagate onto other 
+ * edges that extend the first one. This mode controls the chamfer ability 
+ * to do so.
+ * @param catTangencyChamfer
+ * The chamfer operation also chamfers any other edges 
+ * found at the first edge extremities, as long as they are tangent with
+ * it. This process repeats until no more tangent edges to chamfer are 
+ * found at extremities of already chamfered ones.  
+ * @param catMinimalChamfer
+ * The chamfer operation stops as soon as an edge to chamfer cuts
+ * one or the two chamfer created edges
+ */
+enum CatChamferPropagation
+{
+	catTangencyChamfer,
+	catMinimalChamfer
+};
+
+/**
+ * Chamfer orientation.
+ * Defines whether to keep the face selected or determined by CATIA
+ * as the chamfer reference face.
+ * @param catNoReverseChamfer
+ * The chamfer reference face is the face selected or determined by CATIA
+ * @param catReverseChamfer
+ * The chamfer reference face is the other face
+ */
+enum CatChamferOrientation
+{
+	catNoReverseChamfer,
+	catReverseChamfer
+};
+
+#endif
+// CATChamferDefs_IDL

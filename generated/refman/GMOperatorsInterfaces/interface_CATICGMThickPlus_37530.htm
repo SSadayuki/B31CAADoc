@@ -1,0 +1,322 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMOperatorsInterfaces CATICGMThickPlus Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMOperatorsInterfaces.htm" href="../GMOperatorsInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMOperatorsInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATICGMThickPlus"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>GMOperatorsInterfaces Framework:  CATICGMThickPlus Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATICGMThickPlus_37530','CATICGMThickPlus','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATICGMThickPlus</b>
+</p>
+<p>
+<b><i> Operator to blow or shrink the faces of a volume.</i></b><br>
+
+ Each face may have its own offset value. The offset values
+ may be negative: the body is shrunk.
+ This operator can also be used to offset a shell. In this case, it is recommended to use the
+ SetSharpBorderMode API with the optimization parameter.
+ As all the topological operators, the input objects are not modified. The resulting body is
+ a new one to retrieve by using the <tt> CATICGMThickPlus::GetResult</tt> method.
+ To use it:
+ <ul>
+ <li>Create it with the <tt> CATICGMCreateThickPlus </tt> global function.
+ <li>Tune it with appropriate options, using the <tt>SetXxx</tt> methods. 
+ <li>Run it
+ <li>Get the result in body with the <tt>GetResult</tt> method. If you do not want 
+ to keep these resulting body, use the <script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove them from the  geometric factory, after the operator deletion.
+ <li>Release the operator with the <tt>Release</tt> method after use.
+ </ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Append(CATFace*,CATLength)"><b>Append</b></a>(CATFace*,CATLength)
+</td><td id='tdright'>  Appends a face to offset.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Append(CATLISTP(CATFace)&amp;,CATLength)"><b>Append</b></a>(CATLISTP(CATFace)&amp;,CATLength)
+</td><td id='tdright'>  Appends a list of faces to offset by a common offset value.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResult()"><b>GetResult</b></a>()
+</td><td id='tdright'>  Returns the pointer to the resulting body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDefaultOffsetValue(CATLength)"><b>SetDefaultOffsetValue</b></a>(CATLength)
+</td><td id='tdright'>  Defines the default offset value for all the faces of the input body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDeviationAllowed(CATLength)"><b>SetDeviationAllowed</b></a>(CATLength)
+</td><td id='tdright'>  Sets the deviation allowed by the user.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDeviationMode(CATBoolean)"><b>SetDeviationMode</b></a>(CATBoolean)
+</td><td id='tdright'>  Sets the deviation mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetJournalTypeForFaceOffset(CATCGMJournal::Type,CATCGMJournalInfo*)"><b>SetJournalTypeForFaceOffset</b></a>(CATCGMJournal::Type,CATCGMJournalInfo*)
+</td><td id='tdright'>  Modifies the type of the journal items created during <tt>this</tt> CATICGMThickPlus operation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLocalRegularization(CATBoolean)"><b>SetLocalRegularization</b></a>(CATBoolean)
+</td><td id='tdright'>  Activates/Deactivates local regularisation treatment (which may split faces) to
+ smooth subparts of the non offsetable faces.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetOffsetMixte(CATBoolean,CATBoolean)"><b>SetOffsetMixte</b></a>(CATBoolean,CATBoolean)
+</td><td id='tdright'>  Sets the OffsetMixte options.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPropagationOff()"><b>SetPropagationOff</b></a>()
+</td><td id='tdright'>  Deactivates tangent propagation of offset values.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSharpBorderMode(short)"><b>SetSharpBorderMode</b></a>(short)
+</td><td id='tdright'>  Defines how borders are transformed in the neighborhood of sharp edges.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Append"></a><a id="Append(CATFace*,CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Append</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFace','CATFace*')</script> <span class='param'>iFaceToOffset</span>,<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iOffsetValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Appends a face to offset.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFace</span></dt>
+   <dd> The pointer to the face to offset with <tt>iOffsetValue</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOffsetValue</span></dt>
+   <dd> The offset value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Append"></a><a id="Append(CATLISTP(CATFace)&amp;,CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Append</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLISTP(CATFace)','CATLISTP(CATFace)&amp;')</script> <span class='param'>iFacesToOffset</span>,<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iOffsetValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Appends a list of faces to offset by a common offset value.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFacesToOffset</span></dt>
+   <dd> The list of pointers to faces to offset with <tt>iOffsetValue</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOffsetValue</span></dt>
+   <dd> The offset value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResult"></a><a id="GetResult()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody *')</script>  <span class='objname'>GetResult</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the pointer to the resulting body.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the resulting body, <tt>NULL</tt> if the operation failed. 
+ If you do not want to keep the resulting body, 
+ use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory, after the operator deletion.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> operator.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDefaultOffsetValue"></a><a id="SetDefaultOffsetValue(CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDefaultOffsetValue</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iOffsetValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the default offset value for all the faces of the input body.
+ <br>The <tt>Append</tt> methods can still be used after this method to
+ locally modify the default on some faces.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOffsetValue</span></dt>
+   <dd> The default offset value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDeviationAllowed"></a><a id="SetDeviationAllowed(CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDeviationAllowed</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iDeviation</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the deviation allowed by the user. <br> 
+ <b>Legal Values</b>:<br>
+	<ul>
+	<li> <tt>iDeviation</tt> : represents the value of the deviation.This
+	value must be positive.			
+	</ul>
+ <b>NOTE</b> : If you use this method, the distribution of the tolerances is
+	determined by the value containing in the file : CATFuzzyOffsetManagerConst.h
+
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDeviationMode"></a><a id="SetDeviationMode(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDeviationMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iWithDeviation</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the deviation mode. <br> 
+ <b>Legal Values</b>:<br>
+	<ul>
+	<li> <tt>iWithDeviation</tt>: If it's TRUE, then the regularisator uses the derivation value of the user.
+	If it's FALSE, then the regularisator does not use the derivation value of the user.			
+	</ul>
+ <b>NOTE</b> : By default the DeviationMode is false.
+
+</dd>
+<dt class='dtmethod' >
+  <a id="SetJournalTypeForFaceOffset"></a><a id="SetJournalTypeForFaceOffset(CATCGMJournal::Type,CATCGMJournalInfo*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetJournalTypeForFaceOffset</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCGMJournal::Type','CATCGMJournal::Type')</script> <span class='param'>iTypeForFaceCreation</span>,<script type="text/javascript"> activateLink('CATCGMJournalInfo','CATCGMJournalInfo*')</script> <span class='param'>iAdditionalInfo</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Modifies the type of the journal items created during <tt>this</tt> CATICGMThickPlus operation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTypeForFaceCreation</span></dt>
+   <dd> The item type.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAdditionalInfo</span></dt>
+   <dd> The pointer to an additional information. If <tt>NULL</tt>, no additional information is added.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLocalRegularization"></a><a id="SetLocalRegularization(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLocalRegularization</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iLocalRegul</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Activates/Deactivates local regularisation treatment (which may split faces) to
+ smooth subparts of the non offsetable faces.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocalRegul</span></dt>
+   <dd>	<ul>
+	<li><tt>TRUE</tt>:  Activates local regularisation.
+	<li><tt>FALSE</tt>: Deactivates local regularisation.
+	</ul>
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetOffsetMixte"></a><a id="SetOffsetMixte(CATBoolean,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetOffsetMixte</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iWithRegul</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iRemoveTrickyOnlyThenRegul</span><span class='param'>= FALSE</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the OffsetMixte options. <br> 
+ <b>Legal Values</b>:<br>
+	<ul>
+	<li><tt>iWithRegul</tt>: Activates the regularisation of tricky faces with a regularisation diagnosis <br>
+ <li><tt>iRemoveTrickyOnlyThenRegul</tt> : Default value: FALSE.
+ If this option is activated, it changes the behaviour of GetTrickyFaces().
+ If there are non regularisable tricky faces, the method
+ GetTrickyFaces() gives only the non regularisable tricky
+ faces. If there are not non regularisable tricky faces,
+ then GetTrickyFaces gives regularisable tricky faces that
+ fail.<br>
+	</ul>
+ <b>NOTE</b>: iRemoveTrickyOnlyThenRegul should be activated just if you use
+ CATICGMThickPlus in iterative mode with remove faces.
+
+
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPropagationOff"></a><a id="SetPropagationOff()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetPropagationOff</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Deactivates tangent propagation of offset values.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSharpBorderMode"></a><a id="SetSharpBorderMode(short)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSharpBorderMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('short','short')</script> <span class='param'>iSharpBorderOptimisation</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines how borders are transformed in the neighborhood of sharp edges.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSharpBorderOptimisation</span></dt>
+   <dd> <br><b>Legal values:</b>
+ <dl><dt>0</dt><dd>Optimization not required
+ <dt>1</dt><dd>Optimization required (Skin handled like a Volume)
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICGMThickPlus.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMOperatorsInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

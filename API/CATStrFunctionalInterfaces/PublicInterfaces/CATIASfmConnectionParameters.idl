@@ -1,0 +1,93 @@
+// COPYRIGHT Dassault Systemes 2011.
+//=============================================================================
+// CATIASfmConnectionParameters
+//   Collection Interface to Manage list of parameters on Endcuts and slots
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Jul. 2011  Creation                                         Deshmane Rahul
+//=============================================================================
+
+
+#ifndef CATIASfmConnectionParameters_IDL
+#define CATIASfmConnectionParameters_IDL
+/*IDLREP*/
+/**
+
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+#include "CATIACollection.idl"
+#include "CATBSTR.idl"
+#include "CATVariant.idl"
+#include "CATIAParameter.idl"
+
+/**
+ * Interface to get the parameters defining the UDF for Slots and Endcuts.
+ * <b>Role</b>:  To Get/Set the parameters of the UDF.
+ * @see CATIASfmSlots, CATIASfmEndcut,CATIASfmEndcutManager
+ */
+interface CATIASfmConnectionParameters: CATIACollection
+{   
+  /**  
+  *  Gets a Item from the collection list.
+  *  @param iIndex [in]  
+  *      Index of the item to be retrieved.  
+  *  @param oStdConParm [out]  
+  *      The required parameter.  
+  *  @return  
+  *      <code>S_OK</code> if everything ran ok.  
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example retrieves and manipulates existing BuiltIn EndCut parameters.
+  * <pre>
+  * Dim oStartEndCutObj As SfmEndcut
+  * Set oStartEndCutObj = StiffObj.GetEndcut(1) 
+  * Dim oStartEndCutType,oStartEndCutName As String
+  * Dim oLimitContextList As SfmReferences
+  * Dim oConnectionParamList As SfmConnectionParameters
+  * Dim oConnectionParamNames() As Variant
+  * oStartEndCutObj.GetEndcutinfo oStartEndCutType, oStartEndCutName, oLimitContextList, oConnectionParamList, oConnectionParamNames  
+  * ' Reading Parameters
+  * Dim SizeOfUDFParams As Long
+  * SizeOfUDFParams = oConnectionParamList.Count
+  * Dim UDFParam As Parameter
+  * Dim UDFParamName, UDFParamValue As String
+  * For i = 1 To SizeOfUDFParams
+  *  Set UDFParam = oConnectionParamList.Item(i)
+  *  UDFParamName = oConnectionParamNames(i - 1)
+  *  UDFParamValue = UDFParam.ValueAsString
+  * Next 
+  * ' Setting Parameters
+  * For j = 1 To SizeOfUDFParams
+  *  Set UDFParam = oConnectionParamList.Item(j)
+  * UDFParamName = oConnectionParamNames(j - 1)
+  * If (UDFParamName = "A1") Then
+  *    UDFParam.ValuateFromString ("16deg")
+  *    End If
+  * If (UDFParamName = "A2") Then
+  *     UDFParam.ValuateFromString ("16deg")
+  *     End If
+  * If (UDFParamName = "B") Then
+  *     UDFParam.ValuateFromString ("31deg")
+  *     End If
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAParameter oStdConParm);  
+};
+
+// Interface name : CATIASfmStandardContourParameters
+#pragma ID CATIASfmConnectionParameters "DCE:A7C1C6A4-9089-44fe-BCCC073EE78DEE75"   
+#pragma DUAL CATIASfmConnectionParameters
+
+// VB object name : SfmStandardContourParameters
+#pragma ID SfmConnectionParameters "DCE:C9DEE11D-6DC4-4a68-BE3D81B0547C0585"                                        
+#pragma ALIAS CATIASfmConnectionParameters SfmConnectionParameters
+
+#endif

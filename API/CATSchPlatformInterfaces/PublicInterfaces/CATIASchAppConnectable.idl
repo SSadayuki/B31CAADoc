@@ -1,0 +1,189 @@
+#ifndef CATIASchAppConnectable_IDL 
+#define CATIASchAppConnectable_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfBSTRs;
+interface  CATIASchListOfObjects;
+interface  CATIASchAppConnector;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Represents an application object that can be connected to others.
+  */
+
+interface CATIASchAppConnectable : CATIABase
+{
+  /**
+  * Find all the connectors of this application object.
+  * @param oLCntrClassFilter
+  *   A list of all the class types for filtering the output connector
+  *   list.
+  * @param oLCntrs
+  *   A list of connectors included in this connection.
+  *   (members are CATISchAppConnector interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnectable
+  * Dim objArg1 As SchListOfBSTRs
+  * Dim objArg2 As SchListOfObjects
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">AppListConnectors</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT AppListConnectors ( 
+    in CATIASchListOfBSTRs iLCntrClassFilter, 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLCntrs );
+    
+  /**
+  * Find all the application objects connected to this object through
+  * their connectors.
+  * @param oLCntrClassFilter
+  *   A list of all the class types for filtering the output application
+  *   objects list.
+  * @param oLCntbles
+  *   A list of application objects connected to this object.
+  *   (members are CATISchAppConnectable interface pointers). 
+  * @param oLCntrsOnThisObj
+  *   A list of connectors on this object through which 
+  *   the connection is made.
+  *   (members are CATISchAppConnector interface pointers).
+  * @param oLCntrsOnConnected
+  *   A list of connectors on the connected objects through which 
+  *   the connection is made.
+  *   (members are CATISchAppConnector interface pointers).
+  *   Members in this list corresponds to those in oLCntrsOnThisObj in
+  *   making the corresponding connections.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnectable
+  * Dim objArg1 As SchListOfBSTRs
+  * Dim objArg2 As SchListOfObjects
+  * Dim objArg3 As SchListOfObjects
+  * Dim objArg4 As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">AppListConnectables</font>objArg1,objArg2,objArg3,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT AppListConnectables ( 
+    in CATIASchListOfBSTRs iLCntbleClassFilter, 
+    inout CATIASchListOfObjects oLCntbles, 
+    inout CATIASchListOfObjects oLCntrsOnThisObj, 
+    inout CATIASchListOfObjects oLCntrsOnConnected );
+    
+  /**
+  * Add a connector.
+  * @param iClassType 
+  *   Class type of the connector to be added.
+  * @param oNewAppCntr
+  *   The new Application Connector object created.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnectable
+  * Dim strVar1 As String
+  * Dim objArg2 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">AppAddConnector</font>strVar1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT AppAddConnector ( 
+    in CATBSTR iClassType, 
+    inout CATIASchAppConnector oNewAppCntr );
+    
+  /**
+  * Remove a connector.
+  * @param iCntrToRemove
+  *    The application connector object to be removed 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnectable
+  * Dim objArg1 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">AppRemoveConnector</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppRemoveConnector ( 
+    in CATIASchAppConnector iCntrToRemove );
+    
+  /**
+  * List the valid application connector types allowed to be created.
+  * @param oLValidCntrTypes
+  *   A list of connector class types allowed.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnectable
+  * Dim objArg1 As SchListOfBSTRs
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">AppListValidCntrTypes</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppListValidCntrTypes ( 
+    out /*IDLRETVAL*/ CATIASchListOfBSTRs oLValidCntrTypes );
+    
+  /**
+  * Get the reference name of a connectable. It will be displayed in catalogs.
+  * @param oReferenceName
+  *   The name of the reference
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnectable
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">AppGetReferenceName</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppGetReferenceName ( 
+    inout CATBSTR oReferenceName );
+    
+  /**
+  * Set the reference name of a connectable. It will be displayed in catalogs.
+  * @param iReferenceName
+  *   The name of the reference
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnectable
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">AppSetReferenceName</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppSetReferenceName ( 
+    in CATBSTR iReferenceName );
+    
+};
+    
+// Interface name : CATIASchAppConnectable
+#pragma ID CATIASchAppConnectable "DCE:a42ef407-bb58-4ddd-aa871f564276a1d5"
+#pragma DUAL CATIASchAppConnectable
+    
+// VB object name : SchAppConnectable
+#pragma ID SchAppConnectable "DCE:4c260f74-af0d-4dcd-956b61acf56c6328"
+#pragma ALIAS CATIASchAppConnectable SchAppConnectable
+    
+#endif 
+    

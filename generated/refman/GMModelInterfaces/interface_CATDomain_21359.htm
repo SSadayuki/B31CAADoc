@@ -1,0 +1,417 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMModelInterfaces CATDomain Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMModelInterfaces.htm" href="../GMModelInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMModelInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATDomain"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>GMModelInterfaces Framework:  CATDomain Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATDomain_21359','CATDomain','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATDomain</b>
+</p>
+<p>
+<b><i> Interface representing a topological domain.</i></b><br>
+
+ <br>A 
+ domain (CATDomain) is a connected set of cells (CATCell) of same
+ dimension. Hence, a domain defines a boundary of a cell:
+<ul><li>a vertex can border:
+         <ul><li>an egde (the vertex is one of the edge extremities)
+             <li>a face ( the vertex is immersed into the face:
+ non manifold case -> <tt>CATVertexInFace</tt> domain )
+             <li>a volume or a body ( the vertex is immersed into the volume: 
+ non manifold case -> <tt>CATVertexInVolume</tt> domain) </ul>
+    <li>an edge can border:
+         <ul><li>a face ( the edge is one of the face borders
+ -> <tt>CATLoop</tt> domain)
+             <li>a face ( the edge is immersed into the face:
+ non manifold case -> <tt>CATLoop</tt> domain)
+             <li>a volume or a body( the edge is immersed into the volume: 
+ non manifold case -> <tt>CATWire</tt> domain) </ul>
+    <li>an face can border (-> <tt>CATShell</tt> domain ):
+         <ul><li>a volume ( the face is one of the volume borders)
+             <li>a volume ( the face is immersed into the volume: 
+ non manifold case) </ul>
+    <li>a <tt>CATLump</tt> is a domain of dimension 3.
+</ul>
+ Note that a vertex can not be immersed into an egde, because it would cut
+ the edge in two pieces. As the same manner, an edge (/face) or a set
+ of edges (/faces) may be immersed into a face (/volume) only if it does
+ not go right through it.<br>
+ A CATDomain is contained into an unique CATCell of higher dimension and is
+ located with regards to this cell in the following manner:
+ <dl><dt><tt>CATLocationInner</tt></dt><dd> For internal boundaries (holes 
+ into a faces or cavities into a volumes).
+     <dt><tt>CATLocationOuter</tt></dt><dd> For external boundaries.
+     <dt><tt>CATLocationFull</tt></dt><dd> All cells of the domain to
+ create are immersed into the containing cell (non-manifold topology).
+     <dt><tt>CATLocationIn3DSpace</tt></dt><dd> For creation into a body.</dl>
+ <br>A CATDomain is created with the <script type="text/javascript"> activateLinkAnchor('CATBody','CreateDomain','CATBody.CreateDomain') </script> method and deleted with the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AddCell(CATCell*,CATOrientation)"><b>AddCell</b></a>(CATCell*,CATOrientation)
+</td><td id='tdright'>  Adds a CATCell into <tt>this</tt> CATDomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCell(CATLONG32,CATOrientation*)"><b>GetCell</b></a>(CATLONG32,CATOrientation*)
+</td><td id='tdright'>  Returns the given CATCell of <tt>this</tt> CATDomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCellRank(CATCell*,CATOrientation*)"><b>GetCellRank</b></a>(CATCell*,CATOrientation*)
+</td><td id='tdright'>  Returns the rank (starting at 1) of the CATCell in <tt>this</tt> CATomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetHighDimension()"><b>GetHighDimension</b></a>()
+</td><td id='tdright'>  Returns the dimension of the unique CATCell containing <tt>this</tt> CATDomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLocation(CATTopology*)"><b>GetLocation</b></a>(CATTopology*)
+</td><td id='tdright'>  Returns the location of <tt>this</tt> CATDomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLowDimension()"><b>GetLowDimension</b></a>()
+</td><td id='tdright'>  Returns the dimension of the CATCells contained into <tt>this</tt> CATDomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNbCellUses()"><b>GetNbCellUses</b></a>()
+</td><td id='tdright'>  Returns the number of CATCells used by <tt>this</tt> CATDomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetOwningCell(CATBody*)"><b>GetOwningCell</b></a>(CATBody*)
+</td><td id='tdright'>  Returns the unique CATCell that owns <tt>this</tt> CATDomain in the context of a CATBody.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Invert()"><b>Invert</b></a>()
+</td><td id='tdright'>  Reverses the order or the orientation in <tt>this</tt> domain where the cells are defined.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsLyingOn(CATDomain*)"><b>IsLyingOn</b></a>(CATDomain*)
+</td><td id='tdright'>  Tests whether <tt>this</tt> CATDomain is lying on another one.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Owns(CATCell*,CATSide*)"><b>Owns</b></a>(CATCell*,CATSide*)
+</td><td id='tdright'>  Tests whether a CATCell belongs to <tt>this</tt> CATDomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RemoveCell(CATCell*,CATBoolean)"><b>RemoveCell</b></a>(CATCell*,CATBoolean)
+</td><td id='tdright'>  Removes a CATCell from <tt>this</tt> CATDomain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLocation(CATLocation)"><b>SetLocation</b></a>(CATLocation)
+</td><td id='tdright'>  Sets the default location of <tt>this</tt> CATDomain.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AddCell"></a><a id="AddCell(CATCell*,CATOrientation)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddCell</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCell','CATCell*')</script> <span class='param'>iCellToAdd</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation')</script> <span class='param'>iOrientation</span><span class='param'>=CATOrientationPositive </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds a CATCell into <tt>this</tt> CATDomain.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCellToAdd</span></dt>
+   <dd> The pointer to the cell to add.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd> The cell orientation, with regards to the domain orientation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCell"></a><a id="GetCell(CATLONG32,CATOrientation*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATCell','CATCell *')</script>  <span class='objname'>GetCell</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iNumCell</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation*')</script> <span class='param'>oOrientation</span><span class='param'>=NULL </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the given CATCell of <tt>this</tt> CATDomain.
+<br>The scan is not recursive.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNumCell</span></dt>
+   <dd> The cell rank (starting at 1).
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioOrientation</span></dt>
+   <dd> A pointer to the cell orientation. If <tt>NULL</tt>,
+ this argument is not filled out.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the corresponding cell.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCellRank"></a><a id="GetCellRank(CATCell*,CATOrientation*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetCellRank</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCell','CATCell*')</script> <span class='param'>iCell</span>,<script type="text/javascript"> activateLink('CATOrientation','CATOrientation*')</script> <span class='param'>ioOrientation</span><span class='param'>=NULL </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the rank (starting at 1) of the CATCell in <tt>this</tt> CATomain. .
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCell</span></dt>
+   <dd> The pointer to cell.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioOrientation</span></dt>
+   <dd> A pointer to the cell orientation. If <tt>NULL</tt>,
+ this argument is not filled out.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   The result of the search.
+ <br><b>Legal values</b>: 1 if found, 0 if not found.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetHighDimension"></a><a id="GetHighDimension()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('short','short')</script>  <span class='objname'>GetHighDimension</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the dimension of the unique CATCell containing <tt>this</tt> CATDomain. 
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The dimension. If the domain is directly referred by a CATBody, it returns 3.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLocation"></a><a id="GetLocation(CATTopology*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLocation','CATLocation')</script>  <span class='objname'>GetLocation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATTopology','CATTopology*')</script> <span class='param'>iBodyOrCell</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the location of <tt>this</tt> CATDomain.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iBodyOrCell</span></dt>
+   <dd> The pointer to the Body or Cell, <tt>this</tt> CATDomain belongs to.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The location.
+ <br><b>Legal values</b>:
+ <dl><dt><tt>CATLocationInner</tt></dt><dd> For internal boundaries (holes 
+ into a faces or cavities into a volumes).
+     <dt><tt>CATLocationOuter</tt></dt><dd> For external boundaries.
+     <dt><tt>CATLocationFull</tt></dt><dd> All cells of the domain to
+ create are immersed into the containing cell (non-manifold topology).
+     <dt><tt>CATLocationIn3DSpace</tt></dt><dd> For creation into a body.
+</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLowDimension"></a><a id="GetLowDimension()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('short','short')</script>  <span class='objname'>GetLowDimension</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the dimension of the CATCells contained into <tt>this</tt> CATDomain.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The dimension.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNbCellUses"></a><a id="GetNbCellUses()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetNbCellUses</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the number of CATCells used by <tt>this</tt> CATDomain.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The number of used cells. If one cell is 
+ used more than once within the domain, it is counted twice. The scan is
+ not recursive.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetOwningCell"></a><a id="GetOwningCell(CATBody*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATCell','CATCell *')</script>  <span class='objname'>GetOwningCell</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iInBody</span>)</span><script type="text/javascript"> activateLink('const=0',' const=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the unique CATCell that owns <tt>this</tt> CATDomain in the context of a CATBody.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iInBody</span></dt>
+   <dd> The pointer to the body in which the bounded cells are searched. Recall
+ that a same CATCell can be used by several bodies.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the found CATCell.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Invert"></a><a id="Invert()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Invert</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Reverses the order or the orientation in <tt>this</tt> domain where the cells are defined.
+<table>
+      <tr><td>Wire, Loop : </td> <td>the edge order is reversed</td></tr>
+      <tr><td>Shell      : </td> <td>the face orientations in the shell are reversed</td></tr>
+      <tr><td>otherwise : </td> <td> nothing happens</td></tr></table>
+ <br> To define a valid loop, the edges must be set counter-
+ clockwise for an outer loop and clockwise for an inner loop.
+</dd>
+<dt class='dtmethod' >
+  <a id="IsLyingOn"></a><a id="IsLyingOn(CATDomain*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATTopLyingOnDiagnostic','CATTopLyingOnDiagnostic')</script>  <span class='objname'>IsLyingOn</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDomain','CATDomain*')</script> <span class='param'>iDomain</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether <tt>this</tt> CATDomain is lying on another one.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDomain</span></dt>
+   <dd> The pointer to the other domain.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Owns"></a><a id="Owns(CATCell*,CATSide*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Owns</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCell','CATCell*')</script> <span class='param'>iCellToTest</span>,<script type="text/javascript"> activateLink('CATSide','CATSide*')</script> <span class='param'>ioSide</span><span class='param'>=NULL</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether a CATCell belongs to <tt>this</tt> CATDomain.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCellToTest</span></dt>
+   <dd> The pointer to the cell to test.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioSide</span></dt>
+   <dd> The pointer to the matter side at the boundary.
+ If <tt>NULL</tt>, this argument is not filled out.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  How many times <tt>iCell</tt> bounds <tt>this</tt>.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="RemoveCell"></a><a id="RemoveCell(CATCell*,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>RemoveCell</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCell','CATCell*')</script> <span class='param'>iCellToDetach</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iRemoveFromFactory</span><span class='param'>= FALSE </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Removes a CATCell from <tt>this</tt> CATDomain.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCellToDetach</span></dt>
+   <dd> The pointer to the cell to detach from <tt>this</tt>domain. 
+ However, the cell still remains in the CATGeoFactory in default mode.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRemoveFromFactory</span></dt>
+   <dd> The action on the detached cell <tt>iDomainToDetach</tt>.
+ Dedicated to the case where no more CATDomain refers to <tt>iCellToDetach</tt>.
+ <br><b>Legal values</b>:
+ <dl><dt><tt>FALSE</tt></dt><dd> the <tt>iCellToDetach</tt> remains in the factory
+     <dt><tt>TRUE</tt></dt><dd> the <tt>iCellToDetach</tt> is removed from the factory with RemoveDependancies management</dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLocation"></a><a id="SetLocation(CATLocation)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLocation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLocation','CATLocation')</script> <span class='param'>iLocation</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the default location of <tt>this</tt> CATDomain.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocation</span></dt>
+   <dd> The location.
+ <br><b>Legal values</b>:
+ <dl><dt><tt>CATLocationInner</tt></dt><dd> For internal boundaries (holes 
+ into a faces or cavities into a volumes).
+     <dt><tt>CATLocationOuter</tt></dt><dd> For external boundaries.
+     <dt><tt>CATLocationFull</tt></dt><dd> All cells of the domain to
+ create are immersed into the containing cell (non-manifold topology).
+     <dt><tt>CATLocationIn3DSpace</tt></dt><dd> For creation into a body.
+</dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATDomain.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMModelInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

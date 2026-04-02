@@ -1,0 +1,172 @@
+#ifndef CATIAHybridShapeFilletTriTangent_IDL
+#define CATIAHybridShapeFilletTriTangent_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeFilletTriTangent:         
+// Exposed interface for HybridShape Fillet Tri Tangent
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation    
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Fillet Tri-Tangent feature.
+ * <b>Role</b>: Manipulation of Fillet Tri-Tangent feature
+ * Allows to access data of the Fillet Tri-Tangent feature created by using three
+ * support surfaces, their orientation, and options
+ * (supports trimming and fillet extremities type)
+ * @see CATIAHybridShapeFactory
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeFilletTriTangent : CATIAHybridShape
+{
+
+/**
+ * Returns or sets the first support surface feature.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>FirstElem</code> the first support element 
+ * used by the <code>HybShpFilletTriTangent</code> hybrid shape feature.
+ * <pre>
+ * Dim FirstElem As Reference 
+ * Set FirstElem = HybShpFilletTriTangent.<font color="red">FirstElem</font>
+ * </pre>
+ * </dl>
+ */ 
+   
+#pragma PROPERTY FirstElem
+    HRESULT get_FirstElem (out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_FirstElem (in                CATIAReference iElem)  ;
+
+
+
+/**
+ * Returns or sets  the Second support surface feature. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>SecondElem</code> the Second support element 
+ * used by the <code>HybShpFilletTriTangent</code> hybrid shape feature.
+ * <pre>
+ * Dim SecondElem As Reference 
+ * Set SecondElem = HybShpFilletTriTangent.<font color="red">SecondElem</font>
+ * </pre>
+ * </dl>
+ * @param oElem 
+ *   Second support surface feature.
+ */ 
+#pragma PROPERTY SecondElem
+    HRESULT get_SecondElem(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_SecondElem(in                CATIAReference iElem)  ;
+
+
+
+
+
+ /**
+ * Returns or sets  the support surface to remove feature. 
+ */ 
+#pragma PROPERTY RemoveElem
+    HRESULT get_RemoveElem(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_RemoveElem(in                CATIAReference iElem)  ;
+
+
+
+
+
+ /**
+ * Returns or sets  the first orientation used to specify fillet center position.
+ * <br> Note; Orientation is same or inverse than the normal to the first surface support
+ */ 
+
+#pragma PROPERTY FirstOrientation
+    HRESULT get_FirstOrientation    (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_FirstOrientation (in long  iOrientation)  ;
+
+
+
+
+
+ /**
+ * Returns or sets  the Second orientation used to specify fillet center position.
+ * <br>note:  Orientation is same or inverse than the normal to the Second surface support
+ */ 
+#pragma PROPERTY SecondOrientation
+    HRESULT get_SecondOrientation(out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_SecondOrientation (in long iOrientation)  ;
+
+
+
+
+ /**
+ * Returns or sets  the third orientation used to specify fillet center position.
+ * <br>note: Orientation is same or inverse than the normal to the surface support to remove<BR>    
+ */ 
+#pragma PROPERTY RemoveOrientation
+    HRESULT get_RemoveOrientation(out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_RemoveOrientation (in long iOrientation)  ;
+
+
+ /**
+  * Returns or sets whether support surfaces are trimmed or not. 
+  * <br>Trim (1) or NoTrim(0) 
+  * <br>note: if "Trim" the 2 supports are trimmed and assembled with the fillet ribbon.
+ */ 
+#pragma PROPERTY SupportsTrimMode
+    HRESULT get_SupportsTrimMode(out /*IDLRETVAL*/ long oTrimMode) ;
+    HRESULT put_SupportsTrimMode(in long iTrimMode)  ;
+
+
+/**
+ * Returns or sets  fillet ribbon relimitation mode (or fillet extremities mode).
+ * <br>note: Smooth(0) or Straight(1) or Maximum(2) or Minimum(3)
+ */ 
+#pragma PROPERTY RibbonRelimitationMode
+    HRESULT get_RibbonRelimitationMode(out /*IDLRETVAL*/ long oRelimitationMode) ;
+    HRESULT put_RibbonRelimitationMode(in long iRelimitationMode)  ;
+
+
+/**
+ * Inverts first orientation used to specify fillet center position.
+ */ 
+    HRESULT InvertFirstOrientation()  ;
+
+
+/**
+ * Inverts second orientation used to specify fillet center position.
+ */ 
+    HRESULT InvertSecondOrientation()  ;
+
+
+/**
+ * Inverts third orientation used to specify fillet center position.
+ */ 
+    HRESULT InvertRemoveOrientation()  ;
+
+
+};
+
+// Interface name : CATIAHybridShapeFilletTriTangent
+#pragma ID CATIAHybridShapeFilletTriTangent "DCE:1cb24cfa-c543-40ef-bb77309d3dbb3f11"
+#pragma DUAL CATIAHybridShapeFilletTriTangent
+
+// VB object name : HybridShapeFilletTriTangent (Id used in Visual Basic)
+#pragma ID HybridShapeFilletTriTangent "DCE:3f8bbef9-91e5-45e2-b4a0584d3f02ee66"
+#pragma ALIAS CATIAHybridShapeFilletTriTangent HybridShapeFilletTriTangent
+
+#endif

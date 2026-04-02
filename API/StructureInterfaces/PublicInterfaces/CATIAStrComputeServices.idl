@@ -1,0 +1,141 @@
+#ifndef CATIAStrComputeServices_IDL
+#define CATIAStrComputeServices_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIAStructuralObject
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+//
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 25/04/00
+//  But   : Creation
+//
+// ****************************************************************************
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATIAStrServices.idl"
+#include "CATIAProduct.idl"
+
+	/** 
+	* Represents a structure service object. Structure service object extracts
+  * properties on structure objects.
+  * Methods of this interface are computing the mass properties of the main body (PartBody) 
+  * of each Structure Object (Member and Plate)
+	*/
+
+interface CATIAStrComputeServices : CATIABase
+{
+
+	/**
+	* Returns the length to cut for a member object.
+	*
+	* @param iProduct
+	*	The selected structure object 
+	*/
+
+	HRESULT GetLength(in CATIAProduct iProduct, out /*IDLRETVAL*/ double oLength);
+
+	/** 
+	* Returns the mass for a structure object.
+	*
+	* @param iProduct
+	*	The selected structure object 
+	*/
+	
+	HRESULT GetMass(in CATIAProduct iProduct, out /*IDLRETVAL*/ double oMass);
+
+	/**
+	* Returns the volume for a structure object.
+	*
+	* @param iProduct
+	*	The selected structure object 
+	*/
+	
+	HRESULT GetVolume(in CATIAProduct iProduct, out /*IDLRETVAL*/ double oVolume);
+	
+	/**
+	* Returns the wet area for a structure object.
+	*
+	* @param iProduct
+	*	The selected structure object 
+	*/
+
+	HRESULT GetWetArea(in CATIAProduct iProduct, out /*IDLRETVAL*/ double oWetArea);
+	
+	/** 
+	* Returns the surface for a structure object.
+	*
+	* @param iProduct
+	*	The selected structure object 
+	*/
+
+	HRESULT GetSurface(in CATIAProduct iProduct, out /*IDLRETVAL*/ double oSurface);
+
+	/** 
+	* Retreive the center of gravity for a structure object.
+	*
+	* @param iProduct
+	*	The selected structure object 
+	* @param oX
+	*	The x coordinate of the center of gravity 
+	* @param oY
+	*	The y coordinate of the center of gravity 
+	* @param oZ
+	*	The z coordinate of the center of gravity 
+	*/
+	
+	HRESULT GetCenterOfGravity(in CATIAProduct iProduct, out double oX, out double oY, out double oZ);
+	
+	/** 
+	* Returns the material name for a structure object.
+	*
+	* @param iProduct
+	*	The selected structure object 
+	* @param oName
+	*	The name of the material 
+	*/
+
+	HRESULT GetMaterialName(in CATIAProduct iProduct, inout /*IDLRETVAL*/ CATBSTR oName);
+
+};
+
+// Interface name : CATIAStrComputeServices
+#pragma ID CATIAStrComputeServices "DCE:18319816-1a81-11d4-b8140008c70fcbec"
+#pragma DUAL CATIAStrComputeServices
+
+#pragma ID StrComputeServices "DCE:6e5e7718-1a81-11d4-b8140008c70fcbec"
+#pragma ALIAS CATIAStrComputeServices StrComputeServices
+
+#endif

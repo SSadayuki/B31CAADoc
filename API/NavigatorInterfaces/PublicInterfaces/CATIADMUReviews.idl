@@ -1,0 +1,122 @@
+// COPYRIGHT Dassault Systemes 2004
+//===================================================================
+//
+// CATIADMUReviews.idl
+//   This automation interface allows to manage a DMUReview collection.
+//
+//===================================================================
+//
+//  Jan 2004  Creation: LJE
+//  Modification: SKR14:- Moved to public interfaces IR-497056
+//
+//===================================================================
+#ifndef CATIADMUReviews_IDL
+#define CATIADMUReviews_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIADMUReview.idl"
+#include "CATVariant.idl"
+#include "CATIAProduct.idl"
+
+/**
+ * A collection of all DMUReviews currently managed by the application.
+ * <p>The method @href CATIAProduct#GetTechnologicalObject <tt>("DMUReviews")</tt> retrieves this collection.
+ */
+interface CATIADMUReviews : CATIACollection 
+{
+  /**
+   * Creates a DMUReview and adds it to the DMUReviews Collection.
+   * @return
+   *    The created DMUReview
+   * @sample
+   *    This example creates a new DMUReview in the <tt>cDMUReviews</tt> collection.
+   *    <pre>
+   *    Set oDMUReview = cDMUReviews.<font color="red">Add</font>
+   *    </pre>
+   */
+  HRESULT Add(out /*IDLRETVAL*/ CATIADMUReview oDMUReview);
+
+  /**
+   * Imports Applicative data froma given product in a new DMU Review
+   * @param iProduct
+   *    The product to import applicative data from
+   * @return
+   *    The created DMUReview
+   * @sample
+   *    This example imports a new DMUReview from a product in the <tt>cDMUReviews</tt> collection.
+   *    <pre>
+   *    Set oDMUReview = cDMUReviews.<font color="red">ImportFrom</font>(iExistingProduct)
+   *    </pre>
+   */
+  HRESULT ImportFrom(in CATIAProduct iProduct, out /*IDLRETVAL*/ CATIADMUReview oDMUReview);
+
+  /**
+   * Returns the current DMUReview.
+   * @return
+   *    The current DMUReview (the collection is returned if there is no current review)
+   * @sample
+   *    This example retrieves the current <tt>oDMUReview</tt> DMU Review
+   *    from the <tt>cDMUReviews</tt> collection.
+   *    <pre>
+   *    Set oDMUReview = cDMUReviews.<font color="red">Current</font>
+   *    </pre>
+   */
+#pragma PROPERTY Current
+  HRESULT get_Current(out /*IDLRETVAL*/ CATBaseDispatch oDMUReview);
+
+  /**
+   * Returns a DMUReview using its index or its name from the DMUReviews collection.
+   * @param iIndex
+   *    The index or the name of the DMUReview to retrieve from the collection of DMUReviews.
+   *    As a numerics, this index is the rank of the DMUReview in the collection.
+   *    The index of the first DMUReview in the collection is 1, and
+   *    the index of the last DMUReview is Count.
+   *    As a string, it is the name you assigned to the DMUReview.
+   * @return
+   *    The retrieved DMUReview
+   * @sample
+   *    This example retrieves in <tt>oThisDMUReview</tt> the ninth DMUReview,
+   *    and in <tt>oThatDMUReview</tt> the DMUReview named
+   *    <tt>DMUReview3</tt> from the <tt>cDMUReviews</tt> collection. 
+   *    <pre>
+   *    Set oThisDMUReview = cDMUReviews.<font color="red">Item</font>(9)
+   *    Set oThatDMUReview = cDMUReviews.<font color="red">Item</font>("DMUReview3")
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIADMUReview oDMUReview);
+
+  /**
+   * Removes a DMUReview from the DMUReviews collection.
+   * @param iIndex
+   *    The index or the name of the DMUReview to retrieve from the collection of DMUReviews.
+   *    As a numerics, this index is the rank of the DMUReview in the collection.
+   *    The index of the first DMUReview in the collection is 1, and
+   *    the index of the last DMUReview is Count.
+   *    As a string, it is the name you assigned to the DMUReview.
+   * @sample
+   *    The following example removes the tenth DMUReview and the DMUReview named
+   *    <tt>DMUReview2</tt> from the <tt>cDMUReviews</tt> collection.
+   *    <pre>
+   *    cDMUReviews.<font color="red">Remove</font>(10)
+   *    cDMUReviews.<font color="red">Remove</font>("DMUReview2")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+};
+
+// Interface name : CATIADMUReviews
+#pragma ID CATIADMUReviews "DCE:8097f276-f07b-4afa-81a66f70b0b4382a"
+#pragma DUAL CATIADMUReviews
+
+// VB object name : DMUReviews (Id used in Visual Basic)
+#pragma ID DMUReviews "DCE:b642611d-4add-40f9-baa57de3bf8e110d"
+#pragma ALIAS CATIADMUReviews DMUReviews
+
+#endif

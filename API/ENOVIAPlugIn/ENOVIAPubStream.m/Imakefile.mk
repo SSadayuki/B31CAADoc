@@ -1,0 +1,45 @@
+#
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+#
+OS = COMMON
+
+#LINK_WITH = JS0STR NS0S3STR JS0ERROR  CO0HDICO CO0LSTPV \
+#	    CO0LSTST JS0CORBA JS0LIB0 JS0GROUP          \
+#            XMLUtils xmlxerces xmlicuuc
+
+LINK_WITH = JS0STR    \
+            NS0S3STR  \
+            XMLUtils  \
+            xmlxerces \
+            xmlicuuc
+
+#
+OS = AIX
+LOCAL_CCFLAGS = -D_AIX_SOURCE -DNATIVE_EXCEPTION
+CXX_EXCEPTION =
+
+#
+OS = HP-UX
+LOCAL_CCFLAGS = -D_HPUX_SOURCE -DNATIVE_EXCEPTION
+SYS_INCPATH =                                                        
+SYS_LIBPATH =                                                        
+CXX_EXCEPTION=
+
+#
+OS = IRIX
+LOCAL_CCFLAGS= -DIRIX -DNATIVE_EXCEPTION
+CXX_EXCEPTION=
+LOCAL_LDFLAGS = -v
+CXX_TEMPLATE_INC    = -auto_include
+CXX_TEMPLATE_PRELK  = -prelink
+CXX_TEMPLATE_INST   = -ptused
+
+#
+OS = SunOS
+LOCAL_CCFLAGS = -D_SUNOS_SOURCE -DNATIVE_EXCEPTION
+CXX_EXCEPTION = 
+
+#
+OS = Windows_NT
+LOCAL_CCFLAGS = -D_WINDOWS_SOURCE -DNATIVE_EXCEPTION
+CXX_EXCEPTION=

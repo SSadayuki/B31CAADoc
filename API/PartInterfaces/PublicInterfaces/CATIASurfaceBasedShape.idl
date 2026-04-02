@@ -1,0 +1,64 @@
+#ifndef CATIASurfaceBasedShape_IDL
+#define CATIASurfaceBasedShape_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//								   
+// CATIASurfaceBasedShape:						   
+// Exposed interface for SurfaceBased Shape
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Janv. 99 Creation                                   JL Delvordre
+//=================================================================
+#include "CATIAShape.idl"
+
+interface CATIAReference;
+
+/**
+ * Represents the shapes based on Surface.
+ * It is the base object for Split , SewSurface , CloseSurface and 
+ * ThickSurface shapes.
+ * @see CATIASplit, CATIASewing, CATIACloseSurface, CATIAThickSurface 
+ */
+interface CATIASurfaceBasedShape : CATIAShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+
+    /**
+     * Returns or sets the surface.
+     */
+#pragma PROPERTY Surface
+    HRESULT    get_Surface
+                ( out /*IDLRETVAL*/  CATIAReference       oSurface );
+    HRESULT    put_Surface
+                ( in                 CATIAReference       iSurface );
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+};
+
+// Interface Name : CATIASurfaceBasedShape
+#pragma ID CATIASurfaceBasedShape "DCE:bd3ba670-bcf8-11d2-a61000a0c9564d37"
+#pragma DUAL CATIASurfaceBasedShape
+ 
+// VB Object Name : SurfaceBasedShape
+#pragma ID SurfaceBasedShape "DCE:f79c3c30-bcf8-11d2-a61000a0c9564d37"
+#pragma ALIAS CATIASurfaceBasedShape SurfaceBasedShape
+
+#endif
+// CATIASurfaceBasedShape_IDL
+

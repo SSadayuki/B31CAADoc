@@ -1,0 +1,16 @@
+#
+#  Multimedia Framework
+#
+
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+#LINK_WITH = JS0GROUP JS0FM CATVisualization
+LINK_WITH = CATMMediaCapture JS0GROUP DI0PANV2 JS0FM JS0MT CATVisualization CATPrint CATPrt CATViz
+OS = AIX
+
+OS = HP-UX
+
+OS = IRIX
+
+OS = SunOS
+
+OS = Windows_NT

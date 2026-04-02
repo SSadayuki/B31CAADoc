@@ -1,0 +1,157 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIASegmentNode_IDL
+#define SWKIASegmentNode_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_NbChildrenSegments
+//   GetSegment
+//   get_NbChildrenNodes
+//   GetSegmentNode
+//   ResetPosture
+//   MirrorCopyPosture
+//   SwapPosture
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 03/03/14
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- System
+#include "CATIABase.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIASegment;
+
+
+/**
+  *  This interface characterizes a segment node.<br>
+  *  A segment node is a convenient way to regroup segments.
+  *  The segment nodes are the entities that appear under the
+  *  manikin in the specification tree, and that regroup segments
+  *  together (i.e. "Trunk", "Cervical", "Right Fingers").
+  **/
+interface SWKIASegmentNode : CATIABase 
+{
+ // ===========================================================================
+ //  get_NbChildrenSegments
+ //  ----------------------
+ //
+    /**
+      * Returns the number of children segments under this node.
+      **/
+#pragma PROPERTY NbChildrenSegments
+    HRESULT get_NbChildrenSegments(out /*IDLRETVAL*/ long poNbChildrenSegments);
+
+ // ===========================================================================
+ //  GetSegment
+ //  ----------
+ //
+    /**
+      * Returns a specific child of the segment node, based on an index.<br>
+      *
+      * @param piIndex  The index of the segment to retrieve.<br>
+      * The first segment is at index 0.<br>
+      * The value of this parameter should not be higher than the
+      * number of segments on this segment node, minus 1.
+      **/
+    HRESULT GetSegment(in long piIndex, out /*IDLRETVAL*/ SWKIASegment poSegment);
+
+ // ===========================================================================
+ //  get_NbChildrenNodes
+ //  -------------------
+ //
+    /**
+      * Returns the number of children segment nodes under this node.
+      **/
+#pragma PROPERTY NbChildrenNodes
+    HRESULT get_NbChildrenNodes(out /*IDLRETVAL*/ long poNbChildrenNodes);
+
+ // ===========================================================================
+ //  GetSegmentNode
+ //  --------------
+ //
+    /**
+      * Returns a specific child of the segment node, based on an index.<br>
+      *
+      * @param piIndex  The index of the segment node to retrieve.<br>
+      * The first segment is at index 0.<br>
+      * The value of this parameter should not be higher than the
+      * number of children nodes on this segment node, minus 1.
+      **/
+    HRESULT GetSegmentNode(in long piIndex, out /*IDLRETVAL*/ SWKIASegmentNode poSegmentNode);
+
+ // ===========================================================================
+ //  ResetPosture
+ //  ------------
+ //
+    /**
+      * Set the posture of all segment under this node back to their default position.
+      **/
+    HRESULT ResetPosture();
+
+
+ // ===========================================================================
+ //  MirrorCopyPosture
+ //  -----------------
+ //
+    /**
+      * Copy the posture on the equivalent segment node, on the other side
+      * of the manikin. For instance, it copies the posture from the
+      * right leg to the left leg.
+      **/
+    HRESULT MirrorCopyPosture();
+
+
+ // ===========================================================================
+ //  SwapPosture
+ //  -----------
+ //
+    /**
+      * Swap the posture with the equivalent segment node, on the other side
+      * of the manikin. For instance, the right leg takes the posture of
+      * the left leg, and vice versa.
+      **/
+    HRESULT SwapPosture();
+};
+
+// Interface name : SWKIASegmentNode
+#pragma ID SWKIASegmentNode "DCE:8c6d537c-69f4-465f-ac349aa440a50832"
+#pragma DUAL SWKIASegmentNode
+
+// VB object name : SWKSegmentNode (Id used in Visual Basic)
+#pragma ID SWKSegmentNode "DCE:5226daa1-8d19-471d-9636a803dd1c7a49"
+#pragma ALIAS SWKIASegmentNode SWKSegmentNode
+
+#endif

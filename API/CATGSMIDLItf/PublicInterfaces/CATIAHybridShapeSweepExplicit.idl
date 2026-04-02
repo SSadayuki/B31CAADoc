@@ -1,0 +1,783 @@
+#ifndef CATIAHybridShapeSweepExplicit_IDL
+#define CATIAHybridShapeSweepExplicit_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeSweepExplicit:         
+// Exposed interface for HybridShape SweepExplicit
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sept 99 : Creation   
+//=================================================================
+
+#include "CATIAHybridShapeSweep.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+
+/**
+ * Represents the hybrid shape Sweep explicit feature object.
+ * <b>Role</b>: To access the data of the hybrid shape sweep explicit feature object.
+ * <p>  LICENSING INFORMATION: Creation of volume result requires GSO License
+ * <br> if GSO License is not granted , settting of Volume context has not effect 
+ * <br> 
+ * @see CATIAHybridShapeFactory
+ */
+interface CATIAHybridShapeSweepExplicit : CATIAHybridShapeSweep
+{
+
+#pragma PROPERTY FirstGuideCrv
+
+ /**
+ * Gets  the first guide curve.
+ * @param oElem 
+ *   Guide curve.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_FirstGuideCrv(out /*IDLRETVAL*/ CATIAReference Elem);
+
+ /**
+ * Sets the first guide curve.
+ * @param iElem 
+ *   Guide curve.
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_FirstGuideCrv(in CATIAReference Elem);
+
+
+
+
+
+#pragma PROPERTY SecondGuideCrv
+
+ /**
+ * Gets  the second guide curve (optional).
+ * @param oElem 
+ *   Guide curve.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_SecondGuideCrv(out /*IDLRETVAL*/ CATIAReference Elem);
+
+ /**
+ * Sets the second guide curve (optional).
+ * @param iElem 
+ *   Guide curve.
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_SecondGuideCrv(in CATIAReference Elem);
+
+
+
+
+
+#pragma PROPERTY Profile  
+
+ /**
+ * Gets  the profile to be swept out.
+ * @param oElem 
+ *   Profile element.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_Profile(out /*IDLRETVAL*/ CATIAReference Elem);
+
+ /**
+ * Sets the profile to be swept out.
+ * @param iElem 
+ *   Profile element.
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_Profile(in CATIAReference Elem);
+
+
+
+
+
+#pragma PROPERTY PositionedProfile  
+
+ /**
+ * Returns or sets the positioning transformation associated to the
+ * explicit swept surface and which result corresponds to the 
+ * positioned profile.
+ * @param oElem 
+ *   Positioning transformation / positioned profile.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_PositionedProfile(out /*IDLRETVAL*/ CATIAReference Elem);
+ HRESULT put_PositionedProfile(in CATIAReference Elem);
+
+
+
+
+
+#pragma PROPERTY Spine  
+
+ /**
+ * Returns or sets  the spine (optional) for sweep operation.
+ * @param oElem 
+ *   Spine curve.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_Spine(out /*IDLRETVAL*/ CATIAReference Elem);
+ HRESULT put_Spine(in CATIAReference Elem);
+
+
+
+
+
+#pragma PROPERTY Reference  
+
+ /**
+ *  Returns or sets the reference surface (optional).
+ * @param oElem 
+ *   Reference surface.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ */
+ HRESULT get_Reference(out /*IDLRETVAL*/ CATIAReference Elem);
+ HRESULT put_Reference(in CATIAReference Elem);
+
+
+
+
+
+ /**
+ * Gets the angle value associated to the reference surface.
+ * @param iI 
+ *   Angle value index (1: start value, 2: end value).
+ * @param oElem 
+ *   Angle value.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT GetAngleRef(in long ii, out /*IDLRETVAL*/ CATIAAngle Elem);
+
+ /**
+ * Sets the angle value associated to the reference surface.
+ * @param iI 
+ *   Angle value index (1: start value, 2: end value).
+ * @param iElem 
+ *   Angle value.
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT SetAngleRef(in long ii, in double Elem);
+
+
+
+
+
+#pragma PROPERTY AngleLawType
+
+ /**
+ * Returns or sets the angle law type associated to the reference surface.
+ * @param oElem
+ *   Angle law type.
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_AngleLawType(out /*IDLRETVAL*/ long oElem);
+ HRESULT put_AngleLawType(in long iElem);
+
+
+
+
+
+#pragma PROPERTY AngleLawInversion
+
+ /**
+ * Returns or sets the angle law inversion information.
+ * @param oElem
+ *   Angle law inversion information.
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_AngleLawInversion(out /*IDLRETVAL*/ long oElem);
+ HRESULT put_AngleLawInversion(in long iElem);
+
+
+
+
+
+#pragma PROPERTY AngleLaw
+
+ /**
+ * Returns or sets the angle law feature associated to the reference surface.
+ * @param oElem 
+ *   Angle law element.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_AngleLaw(out /*IDLRETVAL*/ CATIAReference oElem);
+ HRESULT put_AngleLaw(in CATIAReference iElem);
+
+
+#pragma PROPERTY Mode  
+
+ /**
+ * Returns or sets positioning mode used for the profile.
+ * @param oElem 
+ * <br><b> Values : </b>
+ * <br>   =  1 - CATGSMPositionMode_NoneOrPositioned : no positioning,<BR>
+ * <br>   =  2 - CATGSMPositionMode_ExplicitSweep : the explicit profile is to
+ *         be moved from its initial plane to the first sweep plane,<BR>
+ * <br>   =  3 - CATGSMPositionMode_Develop : === DO NOT USE IN THIS CASE ===
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_Mode(out /*IDLRETVAL*/ long Elem);
+ HRESULT put_Mode(in long Elem);
+
+
+
+
+
+ /**
+ * Gets translations coordinates if both profile axis system
+ *  and first sweep plane axis system from default positions.
+ * @param iI 
+ *   Index of numerical positioning coordinates in profile
+ *           (value 1 or 2) or first sweep plane (value 3 or 4) axis system.
+ * @param oElem 
+ *   Coordinate value.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIALength 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT GetPosCoord(in long ii, out /*IDLRETVAL*/ CATIALength Elem);
+
+ /**
+ * Sets translations coordinates if both profile axis system
+ *  and first sweep plane axis system from default positions.
+ * @param iI 
+ *   Index of numerical positioning coordinates in profile
+ *           (value 1 or 2) or first sweep plane (value 3 or 4) axis system.
+ * @param iElem 
+ *   Coordinate value.
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT SetPosCoord(in long ii, in double Elem);
+
+
+
+
+
+ /**
+ * Gets angles if both profile and first sweep plane axis systems  from default positions.
+ * @param iI 
+ *   Index of numerical positioning coordinates in profile
+ *           (value 1) or first sweep plane (value 2) axis system.
+ * @param oElem 
+ *   Angle value.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAAngle 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT GetPosAngle(in long ii, out /*IDLRETVAL*/ CATIAAngle Elem);
+
+ /**
+ * Sets angles if both profile and first sweep plane axis systems
+ *  from default positions.
+ * @param iI 
+ *   Index of numerical positioning coordinates in profile
+ *           (value 1) or first sweep plane (value 2) axis system.
+ * @param iElem 
+ *   Angle value.
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT SetPosAngle(in long ii, in double Elem);
+
+
+ /**
+ * Gets axes inversion from previous definition for both profile
+ *  plane and first sweep plane.
+ * @param iI 
+ *   Axis system index (1 for profile plane, 2 for first sweep plane).
+ * @param oElem 
+ *   Inversion value:
+ * <br><b> Inversion values : </b>
+ * <br>   =  1 - CATGSMAxisInversionMode_None : no axis inverted.
+ * <br>   =  2 - CATGSMAxisInversionMode_X : only X axis inverted.
+ * <br>   =  3 - CATGSMAxisInversionMode_Y : only Y axis inverted.
+ * <br>   =  4 - CATGSMAxisInversionMode_Both : both axes inverted.
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT GetPosSwapAxes(in long ii, out /*IDLRETVAL*/ long Elem);
+
+ /**
+ * Sets  axes inversion from previous definition for both profile
+ *  plane and first sweep plane.
+ * @param iI 
+ *   Axis system index (1 for profile plane, 2 for first sweep plane).
+ * @param iElem 
+ *   Inversion value:<BR>
+ * <br><b> Inversion values : </b>
+ * <br>   =  1 - CATGSMAxisInversionMode_None : no axis inverted.
+ * <br>   =  2 - CATGSMAxisInversionMode_X : only X axis inverted.
+ * <br>   =  3 - CATGSMAxisInversionMode_Y : only Y axis inverted.
+ * <br>   =  4 - CATGSMAxisInversionMode_Both : both axes inverted.
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT SetPosSwapAxes(in long ii, in long Elem);
+
+
+
+
+
+ /**
+ * Gets  the points designated as the origins of the profile
+ *  plane and first sweep plane.
+ * @param iI 
+ *   Plane index : 1 for profile plane, 2 for first sweep plane.
+ * @param oElem 
+ *   Origin point.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT GetPosPoint(in long ii, out /*IDLRETVAL*/ CATIAReference Elem);
+
+ /**
+ * Sets the points designated as the origins of the profile
+ *  plane and first sweep plane.
+ * @param iI 
+ *   Plane index : 1 for profile plane, 2 for first sweep plane.
+ * @param iElem 
+ *   Origin point.
+ *   @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT SetPosPoint(in long ii, in CATIAReference Elem);
+
+
+
+
+
+ /**
+ * Gets  the positioning directions : profile plane or first
+ *  sweep plane X-axis direction.
+ * @param iI 
+ *   Plane index : 1 for profile plane, 2 for first sweep plane.
+ * @param oElem 
+ *   Direction element.
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT GetPosDirection(in long ii, out /*IDLRETVAL*/ CATIAReference Elem);
+
+ /**
+ * Sets the positioning directions : profile plane or first
+ *  sweep plane X-axis direction.
+ * @param iI 
+ *   Plane index : 1 for profile plane, 2 for first sweep plane.
+ * @param iElem 
+ *   Direction element.
+ *   @see CATIAReference 
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT SetPosDirection(in long ii, in CATIAReference Elem);
+
+// =============
+// PROPERTIES
+// =============
+
+ /**
+  * Returns or sets information whether sweeping operation is smoothed or not.
+  * <br> TRUE or FALSE (FALSE if not specified).
+  */ 
+#pragma PROPERTY SmoothActivity
+ HRESULT get_SmoothActivity(out /*IDLRETVAL*/ boolean  oSmooth);
+ HRESULT put_SmoothActivity(in boolean iSmooth);
+
+ /**
+  * Returns angular threshold.
+  */ 
+#pragma PROPERTY SmoothAngleThreshold
+ HRESULT get_SmoothAngleThreshold(out /*IDLRETVAL*/ CATIAAngle  opIAAngle);
+
+ /**
+  * Returns or sets information whether a deviation from guide curves is allowed or not.
+  * <br> Gives the information on performing smoothing during sweeping operation.
+  * <br>  TRUE or FALSE (FALSE if not specified).
+  */
+#pragma PROPERTY GuideDeviationActivity
+ HRESULT get_GuideDeviationActivity(out /*IDLRETVAL*/ boolean  oActivity);
+ HRESULT put_GuideDeviationActivity(in boolean iActivity);
+
+ /**
+  * Returns deviation value (length) from guide curves allowed during sweeping operation in order to smooth it.
+  */ 
+#pragma PROPERTY GuideDeviation
+ HRESULT get_GuideDeviation(out /*IDLRETVAL*/ CATIALength opIALength);
+
+// =============
+// METHODS
+// =============
+
+ /**
+  * Sets angular threshold.
+  * <br> param :  iAngle 
+  *   Numerical value.
+  */ 
+ HRESULT SetSmoothAngleThreshold(in double  iAngle);
+
+ /**
+  * Sets deviation value (length) from guide curves allowed during sweeping.
+  * operation in order to smooth it.
+  * <br> param :  iLength 
+  *   Numerical value.
+  */ 
+ HRESULT SetGuideDeviation(in double  iLength);
+
+ /**
+  * Gets  the number of guides curves.
+  * <br> param :  oNum 
+  *   Number of guide curves.
+  */ 
+ HRESULT GetNbGuide(out long oNum);
+
+ /**
+  * Removes a guide curve. 
+  */ 
+
+ HRESULT RemoveGuide();
+
+/**
+  *  Uses Sketch Axis As Default.
+  * <br> 
+  *  In case of a sketch profile, specify if the 2D sketch axis must be
+  *  used as default planar profile axis (for positioning purpose) or not.
+  *   <br> param iBoolean
+  *      TRUE if the 2D sketch axis must be used, FALSE if not.
+  */
+ HRESULT UseSketchAxisAsDefault(in boolean iBoolean);
+
+ /**
+  * Queries status wherere Sketch axis used as default or not.
+  * <br> 
+  *  In case of a sketch profile, specify if the 2D sketch axis must be
+  *  used as default planar profile axis (for positioning purpose) or not.
+  *   <br> param oBoolean
+  *      TRUE if the 2D sketch axis must be used, FALSE if not.
+  */
+ HRESULT IsSketchAxisUsedAsDefault(out boolean oBoolean);
+
+ /**
+  * Gets the fitting points : located in the profile plane, these points are used
+  * for two-guide swept surfaces to determine guide intersection locations.
+  *   <br> param opIAElem1
+  *      Fitting point associated to the first guide
+  *   <br> param opIAElem2
+  *      Fitting point associated to the second guide
+  */
+ HRESULT GetFittingPoints(out CATIAReference  opIAElemA, out CATIAReference opIAElemB);
+
+ /**
+  * Sets the fitting points.
+  * <br> Does not work with NULL_var values,  Use RemoveFittingPoints() method instead.
+  *   <br> param ipIAElem1
+  *      Fitting point associated to the first guide (must not be equal to NULL_var)
+  *   <br> param ipIAElem2
+  *      Fitting point associated to the second guide (can be equal to NULL_var)
+  */
+ HRESULT SetFittingPoints(in CATIAReference  ipIAElemA, in CATIAReference ipIAElemB);
+
+   /**
+    * Removes the fitting points.
+    */
+ HRESULT RemoveFittingPoints();
+
+ /**
+  * @deprecated V5R16 CATHybridShapeSweepExplicit#GetRelimiters
+  * Returns the elements relimiting the spine (or the default spine).
+  * <br> param :  opIAElem1 
+  *   First relimiting feature (plane or point)
+  * <br> param :  opIAElem2
+  *   Second relimiting feature (plane or point)
+  */ 
+ HRESULT GetLongitudinalRelimiters(out CATIAReference  opIAElemA, out CATIAReference opIAElemB);
+
+ /**
+  * @deprecated V5R16 CATHybridShapeSweepExplicit#SetRelimiters
+  *  Sets the elements relimiting the spine (or the default spine).
+  * <br> param :  ipIAElem1 
+  *   First relimiting feature (plane or point)
+  * <br> param :  ipIAElem2
+  *   Second relimiting feature (plane or point)
+  */ 
+ HRESULT SetLongitudinalRelimiters(in CATIAReference  ipIAElemA, in CATIAReference ipIAElemB) ;
+
+ /**
+  * Retrieves the elements relimiting the spine (or the default spine).
+  * @param opIAElem1 
+  *   The first relimiting feature (plane or point)
+  * @param opOrient1
+  *   Split direction for the first relimitation<br>
+  *   0 means that the beginning of the spine (considering its orientation) is removed, 1 means that the end of the spine is removed
+  * @param opIAElem2
+  *   The second relimiting feature (plane or point)
+  * @param opOrient2
+  *   Split direction for the second relimitation
+  */
+ HRESULT GetRelimiters(out CATIAReference  opIAElem1, out long opOrient1, out CATIAReference opIAElem2, out long opOrient2);
+
+ /**
+  *	 Sets the elements relimiting the spine (or the default spine).
+  *  @param ipIAElem1 
+  *	  The first relimiting feature (plane or point)
+  *  @param ipOrient1
+  *   Split direction for the first relimitation<br>
+  *   0 means that the beginning of the spine (considering its orientation) is removed, 1 means that the end of the spine is removed
+  *  @param ipIAElem2
+  *   The second relimiting feature (plane or point)
+  *  @param ipOrient2
+  *   Split direction for the second relimitation
+  */ 
+ HRESULT SetRelimiters(in CATIAReference  ipIAElem1, in long ipOrient1, in CATIAReference ipIAElem2, in long ipOrient2) ;
+
+ /**
+  * Returns the number of Angles.
+  * <br> param :  oAng 
+  *   Number of Angle.
+  */ 
+ HRESULT GetNbAngle(out long oAng);
+
+ /**
+  * Removes an Angle.
+  */ 
+ HRESULT RemoveAngle();
+
+ /**
+  * Gets the number of numerical positioning parameters corresponding to
+  * coordinates of the new axes systems origins.
+  * <br>param oPosCoord
+  *   Number of parameters
+  */
+ HRESULT GetNbPosCoord(out long oPosCoord);
+
+ /**
+  * Gets the number of numerical positioning parameters corresponding to
+  * angles from the default positions of the X axes.
+  * <br> param :  oPosAng 
+  *      Number of parameters
+  */
+ HRESULT GetNbPosAngle(out long oPosAng);
+
+ #pragma PROPERTY Context
+ /**
+  * Returns or sets the context on Sweep feature.
+  * <ul>
+  * <li><b>0</b> This option creates Swept surface.</li>
+  * <li><b>1</b> This option creates Swept volume.</li>
+  * </ul>
+  * <br> Note: Setting volume result requires GSO License. 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oContext</code> the context
+  * for the <code>Sweep</code> hybrid shape feature.
+  * <pre>
+  * Dim oContext
+  * Set oContext = Sweep.<font color="red">Context</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT get_Context ( out /*IDLRETVAL*/ long oContext );
+  HRESULT put_Context ( in                long iContext );
+
+/**
+  * Returns or sets positioning mode.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>CATGSMPositionMode_NoneOrPositioned. </dd>
+  * <dt>1</dt>
+  * <dd>CATGSMPositionMode_ExplicitSweep. if a positioning operation is done.</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oPosMode</code> the position mode
+  * for the <code>Sweep</code> hybrid shape feature.
+  * <pre>
+  * oPosMode = Sweep.<font color="red">PositionMode</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PositionMode
+  HRESULT get_PositionMode (out /*IDLRETVAL*/ long oPosMode);
+  HRESULT put_PositionMode (in long iPosMode);
+
+/**
+  * Returns or sets the computation mode of the X axis (or direction) of the initial axis system
+  * (on the profile). Default value
+  * is CATGSMPositionDirCompMode_None when PosDirection(OutputDirection) is not specified
+  * and CATGSMPositionDirCompMode_User if OutputDirection is specified.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>CATGSMPositionDirCompMode_None. No X axis specified. </dd>
+  * <dt>1</dt>
+  * <dd>CATGSMPositionDirCompMode_Tangent: the X axis is implicitly the tangent
+  *         of the profile at the origin (the origin then HAS to be on the profile)</dd>
+  * <dt>2</dt>
+  * <dd>CATGSMPositionDirCompMode_User: the X axis is specified by a direction via
+   *         SetPosDirection(UserInputDirection, 1)</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oDirCompMode</code> the Profile X Axis ComputationMode
+  * for the <code>Sweep</code> hybrid shape feature.
+  * <pre>
+  * oDirCompMode = Sweep.<font color="red">ProfileXAxisComputationMode</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ProfileXAxisComputationMode
+  HRESULT get_ProfileXAxisComputationMode (out /*IDLRETVAL*/ long oDirCompMode);
+  HRESULT put_ProfileXAxisComputationMode (in long iDirCompMode);
+
+/**
+ * Gets or sets the pulling direction
+ * <br>If the direction is specified, the plane normal to this direction is taken as reference surface.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>ohDir</code> the pulling direction feature  
+ * for the <code>Sweep</code> hybrid shape feature.
+ * <pre>
+ * Dim ohDir As CATIAHybridShapeDirection
+ * Set ohDir = Sweep.<font color="red">PullingDirection</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY PullingDirection
+ HRESULT get_PullingDirection ( out /*IDLRETVAL*/  CATIAHybridShapeDirection   ohDir);
+ HRESULT put_PullingDirection ( in				   CATIAHybridShapeDirection   ihDir);
+
+/**
+ * Returns or sets the projection of the guide curve onto the reference plane in order
+ * to use it as spine, in pulling direction case only.
+ * Removes Spine if GuideProjection is set to TRUE.
+ * <br><b>Legal values</b>: <b>True</b> projection is required and <b>False</b> if not
+ * @sample
+ * This example sets that the GuideProjection mode of
+ * the <code>Sweep</code> hybrid shape sweep explicit feature to True.
+ * <pre>
+ * Sweep.<font color="red">GuideProjection</font> = True
+ * </pre>
+ */ 
+#pragma PROPERTY GuideProjection
+ HRESULT get_GuideProjection (out /*IDLRETVAL*/ boolean oMode);
+ HRESULT put_GuideProjection (in boolean iMode);
+ /**
+  * Returns or sets the choice number, which corresponds to each solution
+  * of a given explicit sweep case.
+  * <br>For example: a explicit sweep with reference surface leads
+  * to four possible solutions.
+  */
+#pragma PROPERTY SolutionNo 
+ HRESULT get_SolutionNo(out /*IDLRETVAL*/ long Elem);
+ HRESULT put_SolutionNo(in long Elem);
+
+ /**
+  * Returns or sets the explicit sweep subtype.
+  * <br>Legal subtype values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Explicit profile swept surface defined with reference surface </td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Explicit profile swept surface defined with two guide curves </td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>Explicit profile swept surface defined with pulling direction </td>
+  * </tr>
+  *  </table>
+  */ 
+
+#pragma PROPERTY SubType
+ HRESULT get_SubType(out /*IDLRETVAL*/ long Elem);
+ HRESULT put_SubType(in long Elem);
+
+ /**
+ * Returns or sets whether canonical surfaces of the swept surface are detected.
+ * <br><b>Legal values</b>:
+ *  <table>
+ *     <tr> <td>0</td> <td>No detection of canonical surface is performed.</td> </tr>
+ *     <tr> <td>2</td> <td>Detection of canonical surfaces is performed.</td> </tr>
+ *  </table>
+ */
+
+#pragma PROPERTY CanonicalDetection
+ HRESULT get_CanonicalDetection(out /*IDLRETVAL*/ long oDetection);
+ HRESULT put_CanonicalDetection(in long iDetection);
+
+};
+
+// Interface name : CATIAHybridShapeSweepExplicit
+#pragma ID CATIAHybridShapeSweepExplicit "DCE:8d01de12-3dc5-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeSweepExplicit
+
+// VB object name : HybridShapeSweepExplicit (Id used in Visual Basic)
+#pragma ID HybridShapeSweepExplicit "DCE:8d01de09-fda6-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeSweepExplicit HybridShapeSweepExplicit
+
+
+#endif

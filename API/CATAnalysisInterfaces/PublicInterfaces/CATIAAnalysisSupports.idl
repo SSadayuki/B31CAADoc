@@ -1,0 +1,46 @@
+#ifndef CATIAAnalysisSupports_IDL
+#define CATIAAnalysisSupports_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAAnalysisSupports.idl
+// Automation interface for the AnalysisSupport of an analysis entity
+//
+//===================================================================
+#include "CATIACollection.idl"
+
+/**  
+ * The collection of analysis case making an Analysis.
+ */
+interface CATIAAnalysisSupports : CATIACollection 
+{
+
+/**
+ * Returns analysis support object information using its index in the collection.
+ * @param iIndex
+ *   The numeric index is the rank in the collection.
+ * The index of the first case in the collection is 1, and the index of the last is Count.
+ * @param oPositionning The positionning feature is exists. 
+ * @param oPointed The pointed object.
+ */
+
+    HRESULT  Item (in  long iIndex, out CATIABase oPositionning, out CATIABase oPointed);
+
+
+};
+
+// Interface name : CATIAAnalysisSupports
+#pragma ID CATIAAnalysisSupports "DCE:7A91506F-D03B-45e6-A2D14D6E315762DE"
+#pragma DUAL CATIAAnalysisSupports
+
+// VB object name : AnalysisSupports (Id used in Visual Basic)
+#pragma ID AnalysisSupports "DCE:249BE8BD-F2C9-4c50-BB8794FB5EFB11D3"
+#pragma ALIAS CATIAAnalysisSupports AnalysisSupports
+
+#endif

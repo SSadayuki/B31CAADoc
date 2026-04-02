@@ -1,0 +1,88 @@
+#ifndef CATIAGeometricElements_IDL
+#define CATIAGeometricElements_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAGeometricElements:						   
+// Exposed interface for GeometricElements collection
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Dec97 Creation					Ph Baucher
+// Feb98 COM Compliance					 L Lalere
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAGeometricElement;
+
+//-----------------------------------------------------------------
+/**
+ * A collection of all geometric elements contained in a part or a sketch.
+ * Geometric elements are created with the 2D factory for the sketch and with
+ * the 3D factory for the part. Geometric elements thus created are then
+ * aggregated either in the sketch or as part of the geometric element
+ * collection.
+ * @see CATIAFactory2D, CATIAHybridShapeFactory 
+ */
+interface CATIAGeometricElements : CATIACollection
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+
+
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+    /**
+     * Returns a geometric element using its index or its name from the
+     * GeometricElements collection.
+     * @param iIndex
+     *   The index or the name of the geometric element to retrieve from
+     *   the collection of geometric elements.
+     *   As a numerics, this index is the rank of the geometric element
+     *   in the collection.
+     *   The index of the first geometric element in the collection is 1, and
+     *   the index of the last geometric element is Count.
+     *   As a string, it is the name you assigned to the geometric element using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved geometric element
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the last item in the geometric element collection.
+     * <pre>
+     * Set lastCst = cstList.<font color="red">Item</font>(cstList.Count)
+     * </pre>
+     */
+	HRESULT	Item
+		( in   CATVariant   iIndex
+		, out /*IDLRETVAL*/ CATIAGeometricElement oGeometricElement
+		);
+//
+};
+
+// Interface name : CATIAGeometricElements
+#pragma ID CATIAGeometricElements "DCE:6ecec8a4-6a86-11d1-a2800000f87546fd"
+#pragma DUAL CATIAGeometricElements
+
+// VB object name : GeometricElements (Id used in Visual Basic)
+#pragma ID GeometricElements "DCE:6eeef863-6a86-11d1-a2800000f87546fd"
+#pragma ALIAS CATIAGeometricElements GeometricElements
+
+
+#endif
+// CATIAGeometricElements_IDL
+

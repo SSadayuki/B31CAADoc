@@ -1,0 +1,16 @@
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+INCLUDED_MODULES = SI0BREPA 
+#
+OS = COMMON
+
+LINK_WITH = SI0REPER  SI0TOPAC GN0GRAPH\
+	    GN0NAME AD0XXBAS\
+            Collections\
+			CATOmxBase \
+	    AC0SPBAS\
+            JS0CORBA JS0ERROR\
+            JS0SCBAK JS0STR\
+            YI00IMPL CATGeometricObjects\
+            CATCGMKernel CATGMGeometricInterfaces
+

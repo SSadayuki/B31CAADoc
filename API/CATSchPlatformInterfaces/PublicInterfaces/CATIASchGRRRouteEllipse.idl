@@ -1,0 +1,89 @@
+#ifndef CATIASchGRRRouteEllipse_IDL 
+#define CATIASchGRRRouteEllipse_IDL 
+    
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+    
+interface  CATIASchListOfDoubles;
+    
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the graphical representation of a schematic route.
+  */
+
+interface CATIASchGRRRouteEllipse : CATIABase
+{
+  /**
+  * Get the seed point of the route graphic ellipse.
+  * @param oDb2XY
+  *   X-Y coordinates of the seed point for the ellipse.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRRouteEllipse
+  * Dim objArg1 As SchListOfDoubles
+  *  ...
+  * objThisIntf.<font color="red">GetSeedPoint</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT GetSeedPoint ( 
+    inout CATIASchListOfDoubles oDb2XY );
+    
+  /**
+  * Set the seed point of the route graphic ellipse.
+  * @param iDb2EndPt
+  *   X-Y coordinates of the seed point for the ellipse.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRRouteEllipse
+  * Dim dbVar1(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetSeedPoint</font>dbVar1
+  * </pre>
+  *    
+  */
+  HRESULT SetSeedPoint ( 
+    in CATSafeArrayVariant iDb2XY );
+    
+  /**
+  * Check to see if the Seed point has been set.
+  * @param oBYes
+  *   TRUE if the seed point has been initialized.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRRouteEllipse
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">HasSeedPoint</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT HasSeedPoint ( 
+    inout boolean oBYes );
+    
+};
+    
+// Interface name : CATIASchGRRRouteEllipse
+#pragma ID CATIASchGRRRouteEllipse "DCE:438c0202-c8d0-44a3-9aab2e24df0c397d"
+#pragma DUAL CATIASchGRRRouteEllipse
+    
+// VB object name : SchGRRRouteEllipse
+#pragma ID SchGRRRouteEllipse "DCE:25c060e3-65f7-405e-9f01538f4aa17e04"
+#pragma ALIAS CATIASchGRRRouteEllipse SchGRRRouteEllipse
+    
+#endif 
+    

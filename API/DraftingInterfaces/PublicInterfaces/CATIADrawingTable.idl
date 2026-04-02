@@ -1,0 +1,788 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIADrawingTable_IDL
+#define CATIADrawingTable_IDL
+/*IDLREP*/
+
+#include "CATIABase.idl"
+
+#include "CATIADrawingText.idl"
+#include "CatTablePropertiesEnum.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+
+interface CATIADrawingLeaders;
+interface CATIADrawingTextProperties;
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+ /** 
+  * Represents a drawing table in a drawing view.
+  */
+interface CATIADrawingTable : CATIABase 
+{
+//------------------------------------------------------------------------------
+// Methodes de CATIDftAnnotation
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the x coordinate of the table.
+  * It is expressed with respect to the current view coordinate system.
+  * This coordinate, like any length, is measured in mm.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the x coordinate of the table 
+  * <tt>MyTable</tt> drawing table.
+  * <pre>
+  * X = MyTable.<font color="red">x</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY x	 
+  HRESULT get_x(out /*IDLRETVAL*/ double oPositionX);
+  HRESULT put_x(in double oPositionX);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the y coordinate of the table.
+  * It is expressed with respect to the view coordinate system.
+  * This coordinate, like any length, is measured in mm.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the y coordinate of the table
+  * <tt>MyTable</tt> drawing table to 5 inches.
+  * You need first to convert the 5 inches into mm.
+  * <pre>
+  * NewYCoordinate = 100
+  * MyTable.<font color="red">y</font> =  NewYCoordinate
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY y	 
+  HRESULT get_y(out /*IDLRETVAL*/ double oPositionY);
+  HRESULT put_y(in double iPositionY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Moves the table relatively to its original position.
+  * @param iDeltaX
+  *   The X deviation
+  * @param ideltaY
+  *   The Y deviation
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example moves the table <tt>MyTable</tt> to 20mm in X.
+  * <pre>
+  * DeltaX = 20.0
+  * DeltaY =  0.0
+  * MyTable.<font color="red">Move</font> DeltaX, DeltaY
+  * </pre>
+  * </dl>
+  */
+  HRESULT Move(in double iDeltaX, in double iDeltaY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the angle orientation of a drawing table.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the orientation of the table <tt>MyTable</tt> to vertical.
+  * <pre>
+  * PI = 3.1415926535
+  * X = MyTable.<font color="red">Angle</font> = PI/2
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Angle
+  HRESULT get_Angle(out /*IDLRETVAL*/ double oAngle);
+  HRESULT put_Angle(in double iAngle);
+
+  //------------------------------------------------------------------------------
+  /**
+  * Returns or sets the orientation reference of the drawing table.
+  * <br>0 : Sheet orientation
+  * <br>1 : View/Label/2Dcomponent orientation
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the orientation reference of <tt>MyTable</tt> drawing table to view orientation
+  * <pre>
+  * MyTable.<font color="red">OrientationReference</font> = 1
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY OrientationReference
+  HRESULT get_OrientationReference(out /*IDLRETVAL*/ long oOri);
+  HRESULT put_OrientationReference(in long iOri);
+
+//------------------------------------------------------------------------------
+ /**
+  * Rotates the table relatively to its original position.
+  * @param iDeltaAngle
+  *   The angle of rotation from the current position
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example rotates the table <tt>MyTable</tt> to 45 degrees.
+  * <pre>
+  * PI = 3.1415926535
+  * MyTable.<font color="red">Rotate</font> PI/4
+  * </pre>
+  * </dl>
+  */
+  HRESULT Rotate(in double iDeltaAngle);
+    
+//------------------------------------------------------------------------------
+// Methodes de CATIDftTable
+//------------------------------------------------------------------------------
+ /**
+  * Fills in a table cell with a string.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param iString
+  *   The Text to be set
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example fills in the cell (3,2) of the table <tt>MyTable</tt> with "Title".
+  * <pre>
+  * iRow = 3
+  * iCol = 2
+  * iString = "Title"
+  * MyTable.<font color="red">SetCellString</font> iRow, iCol, iString
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetCellString(in long iRow, in long iCol, in CATBSTR iString);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the string contained in the cell of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param oString
+  *   The string contained in the cell
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the string contained in the cell (1,4) of the table <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 1
+  * iCol = 4
+  * oString = MyTable.<font color="red">GetCellString</font>(iRow, iCol)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetCellString(in long iRow, in long iCol, inout /*IDLRETVAL*/ CATBSTR oString);
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets an object in a cell of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param iText
+  *   The Drawing Text to set in the cell
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example puts the drawing text <tt>iText</tt> in the cell (1,3)
+  * of the table <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 1
+  * iCol = 3
+  * MyTable.<font color="red">SetCellObject</font> iRow, iCol, iText
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetCellObject(in long iRow, in long iCol, in CATIADrawingText iText);
+
+//------------------------------------------------------------------------------
+ /**
+  * Retrieves the object contained in the cell of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param oText
+  *   The object contained in the cell : this object only supports font properties,
+  *   color, line spacing, Super/Sub script. Do not use position and/or orientation
+  *   properties on this object, it is useless.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the drawing text <tt>MyText</tt> of the cell (1,3)
+  * of the table <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 1
+  * iCol = 3
+  * Set MyText = MyTable.<font color="red">GetCellObject</font>(iRow, iCol)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetCellObject(in long iRow, in long iCol, out /*IDLRETVAL*/ CATIADrawingText oText);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets the pointed cell border type of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param iType
+  *   The type of border to be applied 
+  * <pre>
+  *        ----- 2 ------         --------------          --------------
+  *        |             |        |\            |         |           / |                 
+  *        |             |        |  \          |         |         /   |        
+  *        1             4        |     \ 16    |         |    32 /     |        
+  *        |             |        |        \    |         |   /         |        
+  *        |             |        |          \  |         | /           |          
+  *        ----- 8 ------         --------------          --------------  
+  * </pre>
+  *
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the cell (3,2) border type of the table <tt>MyTable</tt>
+  * to right and left. (1+4)
+  * <pre>
+  * iRow = 3
+  * iCol = 2
+  * MyTable.<font color="red">SetCellBorderType</font> iRow, iCol, 5
+  * </pre>
+  * </dl>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the cell (1,1) border type of the table <tt>MyTable</tt>
+  * to all border out line (left, top, right and bottom). (1+2+4+8 = 15)
+  * <pre>
+  * iRow = 3
+  * iCol = 2
+  * MyTable.<font color="red">SetCellBorderType</font> iRow, iCol, 15
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetCellBorderType(in long iRow, in long iCol, in /*CatTableBorderType*/long iType);
+
+//------------------------------------------------------------------------------
+ /**
+  * Retrieves the drawing text contained in the cell of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param oType
+  *   The type of the cell border
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the border type of the cell (1, 3) of the drawing table
+  * <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 1
+  * iCol = 3
+  * oType = MyTable.<font color="red">GetCellBorderType</font>(iRow, iCol)
+  * !!!! WARNING  oType is not defined as the enum does but as it is documented in the SetCellBorderType method
+  *  if oType == 15 it means border is set to left, top, right and bottom. 
+  *  if oType == 8  it means border is set to bottom. 
+  * </pre>
+  * </dl>
+  */
+	HRESULT GetCellBorderType(in long iRow, in long iCol, out /*IDLRETVAL*/ CatTableBorderType oType);
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets the pointed cell alignment of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param iAlign
+  *   The type of alignment to be applied
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the cell (3,2) alignment of the table <tt>MyTable</tt>
+  * to bottom left.
+  * <pre>
+  * iRow = 3
+  * iCol = 2
+  * MyTable.<font color="red">SetCellAlignment</font> iRow, iCol, CatTableBottomLeft
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetCellAlignment(in long iRow, in long iCol, in CatTablePosition iAlign);
+
+//------------------------------------------------------------------------------
+ /**
+  * Retrieves the alignment of the pointed cell of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param oAlign
+  *   The alignment type of the cell
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the alignment of the cell (1,3) of the table <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 1
+  * iCol = 3
+  * oAlign = MyTable.<font color="red">GetCellAlignment</font>(iRow, iCol)
+  * </pre>
+  * </dl>
+  */
+	HRESULT GetCellAlignment(in long iRow, in long iCol, out /*IDLRETVAL*/ CatTablePosition oAlign);
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets the name of a table cell.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param iName
+  *   The cell name
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the name of the cell (1,2) of the table <tt>MyTable</tt> to "Cell 2".
+  * <pre>
+  * iRow = 1
+  * iCol = 2
+  * iName = "Cell 2"
+  * MyTable.<font color="red">SetCellName</font> iRow, iCol, iName
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetCellName(in long iRow, in long iCol, in CATBSTR iName);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the name of a table cell.
+  * @param iRow
+  *   The cell row
+  * @param iCol
+  *   The cell column
+  * @param oName
+  *   The cell name
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the name of the cell (1,2) of the table <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 1
+  * iCol = 2
+  * oName = MyTable.<font color="red">GetCellName</font>(iRow, iCol)
+  * </pre>
+  * </dl>
+  */
+	HRESULT GetCellName(in long iRow, in long iCol, inout /*IDLRETVAL*/ CATBSTR oName);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the number of rows of a drawing table.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the number of rows of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * oNbRow = MyTable.<font color="red">NumberOfRows</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY NumberOfRows
+  HRESULT get_NumberOfRows(out /*IDLRETVAL*/ long oRow);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the number of columns of a drawing table.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the number of columns of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * oNbCol = MyTable.<font color="red">NumberOfColumns</font>
+  * </pre>
+  * </dl>
+  */	
+#pragma PROPERTY NumberOfColumns
+  HRESULT get_NumberOfColumns(out /*IDLRETVAL*/ long oCol);
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets the height of a row of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param iRowSize
+  *   The cell height in mm. If 0, the height is automatic (corresponds to the size of the highest cell of the row).
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the height of the row (1) of the drawing table <tt>MyTable</tt> to 20.
+  * <pre>
+  * iRow = 1
+  * iRowSize = 20
+  * MyTable.<font color="red">SetRowSize</font> iRow, iRowSize
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetRowSize(in long iRow, in double iRowSize);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the height of a row of a drawing table.
+  * @param iRow
+  *   The cell row
+  * @param oRowSize
+  *   The cell height in mm. It corresponds to the size of the highest cell of the row or at least the size set with CATIADrawingTable::SetRowsize.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the height of the row (1) of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 1
+  * oRowSize = MyTable.<font color="red">GetRowSize</font>(iRow)
+  * </pre>
+  * </dl>
+  */
+	HRESULT GetRowSize(in long iRow, out /*IDLRETVAL*/ double oRowSize);
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets the width of a column of a drawing table.
+  * @param iCol
+  *   The cell column
+  * @param iColSize
+  *   The cell width in mm. If 0, the width is automatic (corresponds to the size of the widest cell of the column).
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the width of the column (1) of the drawing table <tt>MyTable</tt> to 20.
+  * <pre>
+  * iCol = 1
+  * iColSize = 20
+  * MyTable.<font color="red">SetColumnSize</font> iCol, iColSize
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetColumnSize(in long iCol, in double iColSize);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the width of a column of a drawing table.
+  * @param iCol
+  *   The cell column
+  * @param oColSize
+  *   The cell width in mm. It corresponds to the size of the widest cell of the column or at least the size set with CATIADrawingTable::SetColumnSize.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the width of the column (1) of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * iCol = 1
+  * oColSize = MyTable.<font color="red">GetColumnSize</font>(iCol)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetColumnSize(in long iCol, out /*IDLRETVAL*/ double oColSize);
+	 
+//------------------------------------------------------------------------------
+ /**
+  * Adds a row before the indicated row.
+  * @param iRow
+  *   The row before which the new row will be inserted
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds a row beetween the first row and the second row of the
+  * drawing table <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 2
+  * MyTable.<font color="red">AddRow</font> iRow
+  * </pre>
+  * </dl>
+  */	
+  HRESULT AddRow(in long iRow);
+
+//------------------------------------------------------------------------------
+ /**
+  * Removes the indicated row.
+  * @param iRow
+  *   The row to remove
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example removes the third row of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * iRow = 3
+  * MyTable.<font color="red">RemoveRow</font> iRow
+  * </pre>
+  * </dl>
+  */
+	HRESULT RemoveRow(in long iRow);
+  
+//------------------------------------------------------------------------------
+ /**
+  * Adds a column before the indicated column.
+  * @param iCol
+  *   The column before which the new column will be inserted
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds a column after the last one of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * iCol = 0
+  * MyTable.<font color="red">AddColumn</font> iCol
+  * </pre>
+  * </dl>
+  */
+	HRESULT AddColumn(in long iCol);
+
+//------------------------------------------------------------------------------
+ /**
+  * Removes the indicated column.
+  * @param iCol
+  *   The column to remove
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example removes the first column of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * iCol = 1
+  * MyTable.<font color="red">RemoveColumn</font> iCol
+  * </pre>
+  * </dl>
+  */
+	HRESULT RemoveColumn(in long iCol);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the anchor point of a drawing table.
+  * @param iMode
+  *   The invert mode to apply
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the anchor point of the drawing table <tt>MyTable</tt> to
+  * bottom left.
+  * <pre>
+  * MyTable.<font color="red">AnchorPoint</font> = CatTableBottomLeft
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY AnchorPoint
+  HRESULT get_AnchorPoint(out /*IDLRETVAL*/ CatTablePosition oPos);
+  HRESULT put_AnchorPoint(in CatTablePosition iPos);
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets a mode of table inversion.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example swaps the columns of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * MyTable.<font color="red">InvertMode</font> CatInvertColumn
+  * </pre>
+  * </dl>
+  */
+  HRESULT InvertMode(in CatTableInvertMode iMode);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the compute mode of a drawing table. If the compute mode is
+  * set to OFF, no display of the modifications applied to a table will
+  * be computed. This allows to save much time when executing a macro.
+  * To displayed the table, set the compute mode back to ON. 
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the compute mode of the drawing table <tt>MyTable</tt> to OFF.
+  * <pre>
+  * MyTable.<font color="red">ComputeMode</font> = CatTableOFF
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ComputeMode
+  HRESULT get_ComputeMode(out /*IDLRETVAL*/ CatTableComputeMode oMode);
+  HRESULT put_ComputeMode(in CatTableComputeMode iMode);
+
+//------------------------------------------------------------------------------
+ /**
+  * Merges a group of cells.
+  * @param iFirstRow @param iFirstCol
+  *   First cell of merge
+  * @param iNbRowMerge
+  *   Number of rows to merge
+  * @param iNbColMerge
+  *   Number of columns to merge
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example merges cells from cell (2, 3) to cell (4, 5) of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * MyTable.<font color="red">MergeCells</font> 2, 3, 3, 3
+  * </pre>
+  * </dl>
+  */
+  HRESULT MergeCells(in long iFirstRow, in long iFirstCol,
+                     in long iNbRowMerge, in long iNbColMerge);
+
+//------------------------------------------------------------------------------
+ /**
+  * Unmerges a group of cells.
+  * @param iRow @param iCol
+  *   A cell of a merge
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example unmerges a group of cells of the drawing table <tt>MyTable</tt> from the cell (3, 5).
+  * <pre>
+  * MyTable.<font color="red">UnMergeCells</font> 3, 5
+  * </pre>
+  * </dl>
+  */
+  HRESULT UnMergeCells(in long iRow, in long iCol);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the merge cells.
+  * @param oListOfMergeCells @param oListOfMergeCells
+  *   List of merge cells.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the merge cells of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * nbrow = MyTable.NumberOfRows
+  * nbcol = MyTable.NumberOfColumns
+  * sizetab = nbrow*nbcol
+  * ReDim infoMerge (sizetab-1)
+  * MyTable.<font color="red">GetCellsMerge(oListOfmergeCells)</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetCellsMerge(inout CATSafeArrayVariant oListOfMergeCells);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns informations about a group of merge cells from a cell.
+  * @param iRow @param iCol
+  *   cell of merge
+  * @param iFirstRow
+  *   Row of the first cell of the group
+   @param iFirstCol
+  *   Column of the first cell of the group
+  * @param iNbRowMerge
+  *   Number of rows of the group
+  * @param iNbColMerge
+  *   Number of columns of the group
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns informations of a group of merge cells from cell (2, 3) of the drawing table <tt>MyTable</tt>.
+  * <pre>
+  * MyTable.<font color="red">GetMergeInfos</font> 2, 3, oFirstRow, oFirstCol, oNbRow, oNbCol
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetMergeInfos(in long iRow, in long iCol, out long oFirstRow, out long oFirstCol, out long oNbRow, out long oNbCol);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Returns the drawing leader collection of the drawing table.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>LeaderCollection</tt> the collection of
+  * leaders of the <tt>MyTable</tt> drawing table.
+  * <pre>
+  * Dim LeaderCollection As DrawingLeaders
+  * Set LeaderCollection = MyTable.<font color="red">Leaders</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Leaders
+  HRESULT get_Leaders(out /*IDLRETVAL*/ CATIADrawingLeaders oLeaders);
+
+  //----------------------------------------------------------------------------------
+  /**
+  * Returns the text properties of the drawing table.
+  * Allows to modify the whole table properties. 
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>TextProperties</tt> the text properties of
+  * the <tt>MyTable</tt> drawing table.
+  * <pre>
+  * Dim TextProperties As DrawingTextProperties
+  * Set TextProperties = MyTable.<font color="red">TextProperties</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TextProperties
+  HRESULT get_TextProperties(out /*IDLRETVAL*/ CATIADrawingTextProperties oTextProperties);
+
+};
+
+// Interface name : CATIADrawingTable
+#pragma ID CATIADrawingTable "DCE:a41a6812-7772-11d5-ab51001083fff45a"
+#pragma DUAL CATIADrawingTable
+
+// VB object name : DrawingTable (Id used in Visual Basic)
+#pragma ID DrawingTable "DCE:a41a6813-7772-11d5-ab51001083fff45a"
+#pragma ALIAS CATIADrawingTable DrawingTable
+
+#endif
+
+

@@ -1,0 +1,46 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+SDAI_RDBUUID \
+SystemUUID \
+VPMInterfacesUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+OS = COMMON
+
+LINK_WITH= \
+          ENODicTime \
+          VPMIDicInterfaces \
+          CATVBTXMLParser \
+          JS0GROUP
+
+##LOCAL_CCFLAGS= -D_OLD_APP_ACCESS_
+LOCAL_CCFLAGS= -D_ARRAY_ACCESS_ -D_SEARCH_FAST_APP
+##SI Probleme mettre uniquement le flag
+#LOCAL_CCFLAGS= -D_ARRAY_ACCESS_
+ 
+OS = AIX
+#BUILD=NO
+##LOCAL_CCFLAGS= -D_AIX_SOURCE 
+##like purify -> LOCAL_LDFLAGS = -qheapdebug
+#
+OS = HP-UX
+#BUILD=NO
+#
+OS = IRIX
+#BUILD=NO
+#
+OS = SunOS
+#BUILD=NO
+
+OS = Windows_NT
+
+
+
+
+
+
+
+

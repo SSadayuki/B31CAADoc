@@ -1,0 +1,268 @@
+#ifndef CATIAPspFunctional_IDL
+#define CATIAPspFunctional_IDL
+
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+#include "CATIAPspListOfBSTRs.idl"
+#include "CATIAPspListOfObjects.idl"
+#include "CatPspIDLFunctionStatus.idl"
+
+
+#include "CATIABase.idl"
+
+/**
+ * Represents Plant Ship functional object. 
+ * <b>Role</b>: To access Plant Ship Functional object information. 
+ */
+interface CATIAPspFunctional : CATIABase
+{
+/** 
+  * Checks if the functional object is specification driven or not.
+  * @return
+  *   TRUE if this object is specification driven.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional  
+  * Dim objArg1 As boolean  
+  *  ...
+  * objArg1 = objThisIntf.<font color="red">IsSpecDriven</font> 
+  * </pre>
+  *    
+  */
+  HRESULT IsSpecDriven (   
+      out /*IDLRETVAL*/ boolean oStatus );
+
+ /**
+  * Retrieves a list of all physical part types that are compatible with this function.
+  * @param iuStandard
+  *  Standard name
+  * @return
+  *  List of Compatible Part Types.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional  
+  * Dim strVar1 As CATBSTR
+  * Dim objArg2 As PspListOfBSTRs
+  * 
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">GetCompatiblePartTypes  </font> (strVar1)
+  * </pre>
+  *    
+  */
+
+
+   HRESULT GetCompatiblePartTypes (   
+      in CATBSTR iuStandard,      
+      out /*IDLRETVAL*/ CATIAPspListOfBSTRs oLCompatiblePartTypes );
+
+
+
+ /**
+  * Retrieves a list of compatible Part numbers and part types.
+  * @param iuPartType
+  *  part type
+  * @param iuStandard
+  *  Standard name
+  * @param iuCatalogName
+  *  catalog name  
+  * @param oLPartTypes
+  *  a list of part types
+  * @param oLCatalogPartNames
+  *  List of catalog part names
+  *
+  *
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional
+  * Dim strVar1 As CATBSTR
+  * Dim strVar2 As CATBSTR
+  * Dim strVar3 As CATBSTR
+  * Dim objArg4 As PspListOfBSTRs
+  * Dim objArg5 As PspListOfBSTRs
+  * 
+  * ..
+  * ..
+  * objThisIntf.<font color="red">ListCompatiblePartNumbers</font> strVar1,strVar2,strVar3,objArg4,objArg5 
+  * </pre>
+  *    
+  */
+	
+  HRESULT ListCompatiblePartNumbers ( 
+                in CATBSTR iuPartType,      
+                in CATBSTR iuStandard,      
+                in CATBSTR iuCatalogName,      
+                inout  CATIAPspListOfBSTRs oLPartTypes,
+                inout  CATIAPspListOfBSTRs oLCatalogPartNames                
+                );
+
+
+ /**
+  * Checks if the Function object is realized or not.
+  * @return
+  *   TRUE if the object is Realized
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional  
+  * Dim objArg1 As boolean  
+  *  ...
+  * objArg1 = objThisIntf.<font color="red">IsRealized</font> 
+  * </pre>
+  *    
+  */
+  HRESULT IsRealized (   
+      out /*IDLRETVAL*/ boolean oStatus );
+
+
+ /**
+  * Returns a list of all associated physical objects.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional
+  * Dim objArg1 As PspListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">Physicals</font>
+  * </pre>
+  *    
+  */
+ 
+#pragma PROPERTY Physicals
+HRESULT get_Physicals ( out /*IDLRETVAL*/ CATIAPspListOfObjects oLPspPhysicals);
+
+		
+/**
+  * Returns the part type of physical object that realizes this function.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional
+  * Dim strVar1 As CATBSTR
+  *  ...
+  * strVar1 = objThisIntf.<font color="red">PartType</font>  
+  * </pre>
+  *    
+  */
+  
+#pragma PROPERTY PartType
+  HRESULT get_PartType (inout /*IDLRETVAL*/ CATBSTR oPartType);
+  
+ /**
+  * Returns part number of physical object that realizes this function.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional
+  * Dim strVar1 As CATBSTR
+  *  ...
+  * strVar1 = objThisIntf.<font color="red">PartNumber</font>  
+  * </pre>
+  *    
+  */
+  
+#pragma PROPERTY PartNumber
+  HRESULT get_PartNumber (inout /*IDLRETVAL*/ CATBSTR oPartNumber);
+
+
+
+ /**
+  * Returns catalog part name of physical object that realizes this function.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional
+  * Dim strVar1 As CATBSTR
+  *  ...
+  * Set strVar1 = objThisIntf.<font color="red">CatalogPartName</font>  
+  * </pre>
+  *    
+  */
+  
+#pragma PROPERTY CatalogPartName
+  HRESULT get_CatalogPartName (inout /*IDLRETVAL*/ CATBSTR oCatalogPartName);
+
+ 
+/**
+  * Returns Part catalog name of physical object that realizes this function.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional
+  * Dim strVar1 As CATBSTR
+  *  ...
+  * strVar1 = objThisIntf.<font color="red">PartCatalogName</font>  
+  * </pre>
+  *    
+  */
+  
+#pragma PROPERTY PartCatalogName
+  HRESULT get_PartCatalogName (inout /*IDLRETVAL*/ CATBSTR oPartCatalogName);
+  /**
+  * Return Standard.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional
+  * Dim strVar1 As CATBSTR
+  *  ...
+  * strVar1 = objThisIntf.<font color="red">Standard</font>  
+  * </pre>
+  *    
+  */
+  
+#pragma PROPERTY Standard
+  HRESULT get_Standard (inout /*IDLRETVAL*/ CATBSTR oStandard);
+
+
+ /**
+  * Check it is OK to integrate (realize) this function with a physical part.
+  * @return
+  *   TRUE if ok to be integrated
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspFunctional  
+  * Dim objArg1 As boolean  
+  *  ...
+  * objArg1 = objThisIntf.<font color="red">IsOKToIntegrate</font> 
+  * </pre>
+  *    
+  */
+  HRESULT IsOKToIntegrate (   
+      out /*IDLRETVAL*/ boolean oStatus );
+
+
+ /**
+  * Returns function object status.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspPhysical
+  * Dim objArg1 As CatPspIDLFunctionStatus
+  *  ...
+  * objArg1 = objThisIntf.<font color="red">FunctionStatus</font>
+  * </pre>
+  *    
+  */
+#pragma PROPERTY FunctionStatus
+  HRESULT get_FunctionStatus ( out /*IDLRETVAL*/ CatPspIDLFunctionStatus oeFunctionStatus);
+
+ 	         
+};
+
+// Interface name : CATIAPspFunctional
+#pragma ID CATIAPspFunctional "DCE:c34b729f-ac96-4ad3-aa4809a60ca62a2b"
+#pragma DUAL CATIAPspFunctional
+
+// VB object name : PspFunctional
+#pragma ID PspFunctional      "DCE:d04990f7-f177-4ac4-82da9508198c4901"
+#pragma ALIAS CATIAPspFunctional PspFunctional
+
+#endif

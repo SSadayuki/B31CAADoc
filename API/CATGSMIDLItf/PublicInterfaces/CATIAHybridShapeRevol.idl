@@ -1,0 +1,319 @@
+#ifndef CATIAHybridShapeRevol_IDL
+#define CATIAHybridShapeRevol_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeRevol:         
+// Exposed interface for HybridShape Revol
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAAngle.idl"
+#include "CATIAReference.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+ * The Revol feature : an Revol is made up of a face to process  and one Revol parameter.
+ * <b>Role</b>: To access the data of the hybrid shape revol feature object. 
+ * <p>  LICENSING INFORMATION: Creation of volume result requires GSO License
+ * <br> if GSO License is not granted , settting of Volume context has not effect 
+ * <br> 
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeRevol : CATIAHybridShape
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+// ON Revol
+#pragma PROPERTY BeginAngle
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get_BeginAngle on the object. 
+ * @param oAngle 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAAngle 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_BeginAngle (out /*IDLRETVAL*/ CATIAAngle oAngle );
+
+
+#pragma PROPERTY EndAngle
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get_EndAngle on the object. 
+ * @param oAngle 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAAngle 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_EndAngle (out /*IDLRETVAL*/ CATIAAngle oAngle );
+
+
+
+// ON Direction
+#pragma PROPERTY Axis
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get_Axis on the object. 
+ * @param oDir 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_Axis ( out /*IDLRETVAL*/ CATIAReference oDir);
+
+
+
+
+
+ /**
+ * <b>Role</b>: To put_Axis on the object. 
+ * @param iDir 
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_Axis ( in                CATIAReference iDir);
+
+
+// ON FACE TO Revol
+#pragma PROPERTY Profil
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get_Profil on the object. 
+ * @param oProfil 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_Profil ( out /*IDLRETVAL*/ CATIAReference oProfil );
+
+
+
+
+
+ /**
+ * <b>Role</b>: To put_Profil on the object. 
+ * @param iOProfil 
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_Profil ( in                CATIAReference oProfil );
+
+  #pragma PROPERTY Context
+ /**
+  * Returns or sets the context on Revolve feature.
+  * <br><b>Legal values</b>:
+  * <ul>
+  * <li><b>0</b> This option creates surface of revolution.</li>
+  * <li><b>1</b> This option creates volume of revolution.</li>
+  * </ul>
+  * <br> Note: Setting volume result requires GSO License. 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oContext</code> the context
+  * for the <code>Revol</code> hybrid shape feature.
+  * <pre>
+  * Dim oContext
+  * Set oContext = Revol.<font color="red">Context</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT get_Context ( out /*IDLRETVAL*/ long oContext );
+  HRESULT put_Context ( in                long iContext );
+ /**
+  * Gets or sets  orientation of the revolution.
+  *   Orientation = TRUE  : The natural orientation of the axis is taken.
+  *               = FALSE : The opposite orientation is taken
+  * This example retrieves in <code>IsInverted</code> orientation of the revolution 
+  * for the <code>Revol</code> hybrid shape feature.
+  * <pre>
+  * Dim IsInverted As boolean
+  * IsInverted = Revol.<font color="red">Orientation</font>
+  * </pre>
+  * </dl>
+  */
+
+  #pragma PROPERTY Orientation
+  HRESULT put_Orientation (in 	              boolean iOrientation);
+  HRESULT get_Orientation (out	/*IDLRETVAL*/ boolean oOrientation);
+
+/**
+  * Returns or sets the First limit type.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>Unknown Limit type.</dd>
+  * <dt>1</dt>
+  * <dd>Limit type is Dimension. It implies that limit is defined by length</dd>
+  * <dt>2</dt>
+  * <dd>Limit type is UptoElement. It implies that limit is defined by a geometrical element</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oLim1Type</code> the first limit type
+  * for the <code>Revolve</code> hybrid shape feature.
+  * <pre>
+  * Dim oLim1Type
+  * Set oLim1Type = Revolve.<font color="red">FirstLimitType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY FirstLimitType
+  HRESULT get_FirstLimitType ( out /*IDLRETVAL*/ long oLim1Type);
+  HRESULT put_FirstLimitType ( in                long iLim1Type);
+
+ /**
+  * Returns or sets the Second limit type.
+  * <br><b>Legal values</b>:
+  * <dl>
+  * <dt>0</dt>
+  * <dd>Unknown Limit type.</dd>
+  * <dt>1</dt>
+  * <dd>Limit type is Dimension. It implies that limit is defined by length</dd>
+  * <dt>2</dt>
+  * <dd>Limit type is UptoElement. It implies that limit is defined by a geometrical element</dd>
+  * </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oLim2Type</code> the second limit type
+  * for the <code>Revolve</code> hybrid shape feature.
+  * <pre>
+  * Dim oLim2Type
+  * Set oLim2Type = Revolve<font color="red">SecondLimitType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY SecondLimitType
+  HRESULT get_SecondLimitType ( out /*IDLRETVAL*/ long oLim2Type);
+  HRESULT put_SecondLimitType ( in                long iLim2Type);
+
+ /**
+  * Returns or sets the First up-to element used to limit Revolution. 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>Lim1Elem</code> the First up-to element
+  * for the <code>Revolve</code> hybrid shape feature.
+  * <pre>
+  * Dim Lim1Elem As Reference 
+  * Set Lim1Elem = Revolve.<font color="red">FirstUptoElement</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY FirstUptoElement
+  HRESULT get_FirstUptoElement ( out /*IDLRETVAL*/ CATIAReference oLim1Elem);
+  HRESULT put_FirstUptoElement ( in                CATIAReference iLim1Elem);
+
+ /**
+  * Returns or sets the Second up-to element used to limit Revolution.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>Lim2Elem</code> the Second up-to element
+  * for the <code>Revolve</code> hybrid shape feature.
+  * <pre>
+  * Dim Lim2Elem As Reference 
+  * Set Lim2Elem = Revolve.<font color="red">SecondUptoElement</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY SecondUptoElement
+  HRESULT get_SecondUptoElement ( out /*IDLRETVAL*/ CATIAReference oLim2Elem);
+	HRESULT put_SecondUptoElement ( in                CATIAReference iLim2Elem);
+
+
+	/**
+	* Gets/Sets the first angle offset value of first upto element.
+	*   @param oAng1
+	*      first angle offset value.
+	*/
+#pragma PROPERTY BeginAngleOffset
+HRESULT get_BeginAngleOffset(out  /*IDLRETVAL*/ double oAngle1);
+HRESULT put_BeginAngleOffset(in double oAngle1);
+
+
+	/**
+	* Gets/Sets the second angle offset value of second upto element.
+	*   @param oAng2
+	*      second angle offset value.
+	*/
+#pragma PROPERTY EndAngleOffset
+HRESULT get_EndAngleOffset(out  /*IDLRETVAL*/ double oAngle2);
+HRESULT put_EndAngleOffset(in double oAngle2);
+
+};
+
+
+// Interface name : CATIAHybridShapeRevol
+#pragma ID CATIAHybridShapeRevol "DCE:8b5a2c2b-ba5c-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeRevol
+
+
+// VB object name : HybridShapeRevol (Id used in Visual Basic)
+#pragma ID HybridShapeRevol "DCE:8b5a2c3c-1bdf-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeRevol HybridShapeRevol
+
+
+#endif
+// CATIAHybridShapeRevol_IDL

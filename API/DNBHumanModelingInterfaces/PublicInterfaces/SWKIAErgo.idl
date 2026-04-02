@@ -1,0 +1,134 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAErgo_IDL
+#define SWKIAErgo_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework (2000) Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_RULA
+//   get_LiftLower
+//   get_PushPull
+//   get_Carry
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 14/06/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- System
+#include "CATIABase.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIAErgoRULA;
+interface SWKIAErgoPushPull;
+interface SWKIAErgoLiftLower;
+interface SWKIAErgoCarry;
+
+
+/**
+  *  This interface groups the properties giving access to all the ergonomic
+  *  studies that can be performed on a manikin.<br>
+  *  Its main purpose is to provide bridges to the specific ergonomic
+  *  analysis interfaces.<br>
+  **/
+interface SWKIAErgo : CATIABase
+{
+ // ===========================================================================
+ //  get_LiftLower
+ //  -------------
+ //
+    /**
+      * Returns the object for a lift/lower analysis.
+      * The Lift/Lower can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">LiftLower</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY LiftLower
+    HRESULT get_LiftLower(out /*IDLRETVAL*/ SWKIAErgoLiftLower poLiftLower);
+
+
+ // ===========================================================================
+ //  get_PushPull
+ //  ------------
+ //
+    /**
+      * Returns the object for a push/pull analysis.
+      * The Push/Pull can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">PushPull</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY PushPull
+    HRESULT get_PushPull(out /*IDLRETVAL*/ SWKIAErgoPushPull poPushPull);
+
+
+ // ===========================================================================
+ //  get_Carry
+ //  ---------
+ //
+    /**
+      * Returns the object for a carry analysis.
+      * The Carry can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">Carry</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY Carry
+    HRESULT get_Carry(out /*IDLRETVAL*/ SWKIAErgoCarry poCarry);
+
+
+ // ===========================================================================
+ // get_RULA
+ // --------
+ //
+    /**
+      * Returns the object for a RULA analysis.
+      * The RULA object can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">RULA</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY RULA
+    HRESULT get_RULA(out /*IDLRETVAL*/ SWKIAErgoRULA poRULA);
+};
+
+// Interface name : SWKIAErgo
+#pragma ID SWKIAErgo "DCE:9ebcaa50-41f1-11d4-a223000629753ac1"
+#pragma DUAL SWKIAErgo
+
+// VB object name : SWErgo (Id used in Visual Basic)
+#pragma ID SWKErgo "DCE:b3579590-41f1-11d4-a223000629753ac1"
+#pragma ALIAS SWKIAErgo SWKErgo
+
+#endif

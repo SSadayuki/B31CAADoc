@@ -1,0 +1,70 @@
+#ifndef CATIAV4MasterModel_IDL
+#define CATIAV4MasterModel_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L0
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+// Interface CATIAV4MasterModel:
+// 
+// This interface is the V4MasterModel idl Interface for Macro uses
+// Only some CATIABase methods concern a V4 Master Model: get_Parent and get_Name.
+// We have to be careful that the object CAT_1000_1 adheres to CATIABase
+// by two extensions. The first extension is CATNavigateMasterModel. It implements
+// CATIAV4MasterModel which inherites from CATIABase. The second one is CATSiDrivableV4. 
+// It implements CATIASiSiDrivableObject which also inherites from CATIABase. The second 
+// implementation doesn't implements get_Parent as it has to be done. It uses the default 
+// implementation of CATBaseObject
+//
+//-----------------------------------------------------------------------------
+// Creation by TBQ - October 03
+//-----------------------------------------------------------------------------//
+
+
+// base type
+#include "CATIABase.idl"
+#include "CATIADocument.idl"
+
+   /**
+    * Represents the V4 Master Model.
+	* The Master is the root cotainer of a V4 Model.
+    */
+interface /*IDLHIDDEN*/ CATIAV4MasterModel : CATIABase    
+{
+   /**
+    * Returns the V4 Document that contains the Master's Model.
+    * @sample
+    * This example retrieves in <tt>V4Document</tt> the document
+    * that contains the <tt>V4Master</tt>.
+    * <pre>
+    * Dim V4Document As Document
+    * Set V4Document = V4Master.<font color="red">V4DocumentModel</font>
+    * </pre>
+    */
+#pragma PROPERTY V4DocumentModel
+	HRESULT get_V4DocumentModel(out /*IDLRETVAL*/ CATIADocument oV4Model);
+
+
+};
+
+// Interface name : CATIAV4MasterModel
+#pragma ID CATIAV4MasterModel "DCE:aadcfff9-78d8-0000-02800310fe000000"
+#pragma DUAL CATIAV4MasterModel
+
+// VB object name : V4MasterModel 
+#pragma ID V4MasterModel "DCE:aadd04dc-caf7-0000-02800310fe000000"
+#pragma ALIAS CATIAV4MasterModel V4MasterModel 
+
+
+#endif
+
+
+
+
+
+
+

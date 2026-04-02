@@ -1,0 +1,600 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAErgoLiftLower_IDL
+#define SWKIAErgoLiftLower_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework (2000) Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   SaveInitialPosture
+//   SaveFinalPosture
+//
+//   get_GuideLine
+//   put_GuideLine
+//
+//   get_Coupling
+//   put_Coupling
+//
+//   get_Frequency
+//   put_Frequency
+//
+//   get_Duration
+//   put_Duration
+//
+//   get_ObjectWeight
+//   put_ObjectWeight
+//
+//   get_Population
+//   put_Population
+//
+//   get_NIOSH_ActionLimit
+//   get_NIOSH_MaximumPermLimit
+//   get_NIOSH_RWLInitial
+//   get_NIOSH_RWLFinal
+//   get_NIOSH_LIInitial
+//   get_NIOSH_LIFinal
+//   get_NIOSH_HorizontalLocationInitial
+//   get_NIOSH_HorizontalLocationFinal
+//   get_NIOSH_VerticalLocationInitial
+//   get_NIOSH_VerticalLocationFinal
+//   get_NIOSH_TravelDistance
+//   get_NIOSH_AngleOfAsymmetryInitial
+//   get_NIOSH_AngleOfAsymmetryFinal
+//   get_NIOSH_LoadConstan
+//   get_NIOSH_HorizontalMultiplierInitial
+//   get_NIOSH_HorizontalMultiplierFinal
+//   get_NIOSH_VerticalMultiplierInitial
+//   get_NIOSH_VerticalMultiplierFinal
+//   get_NIOSH_DistanceMultiplier
+//   get_NIOSH_FrequencyMultiplier
+//   get_NIOSH_AsymmetricMultiplierInitial
+//   get_NIOSH_AsymmetricMultiplierFinal
+//   get_NIOSH_CouplingMultiplierInitial
+//   get_NIOSH_CouplingMultiplierFinal
+//
+//   get_Snook_MaximumWeight
+//
+//   get_WarningMessage
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 14/06/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- System
+#include "CATIABase.idl"
+
+
+/**
+  *  This interface deals the lift/lower ergonomic analysis.
+  **/
+interface SWKIAErgoLiftLower : CATIABase
+{
+ // ===========================================================================
+ //  SaveInitialPosture
+ //  ------------------
+    /**
+      * Saves the current posture of the mankin as the initial posture
+      * for the lift/lower analysis.
+      **/
+    HRESULT SaveInitialPosture();
+
+
+ // ===========================================================================
+ //  SaveFinalPosture
+ //  ----------------
+    /**
+      * Saves the current posture of the mankin as the final posture
+      * for the lift/lower analysis.
+      **/
+    HRESULT SaveFinalPosture();
+
+
+ // ===========================================================================
+ //  get_GuideLine
+ //  -------------
+ //  put_GuideLine
+ //  -------------
+ //
+    /**
+      * Returns or sets the guideline for the lift/lower analysis.<br>
+      * The value of the parameter must be either "<font color="green">NIOSH1981</font>",
+      * "<font color="green">NIOSH1991</font>",
+      * or "<font color="green">SnookCiriello1991</font>".<br>
+      * <br>
+      * <strong>N.B.</strong>: This guideline must be set before attempting<br>
+      * to retrive any output value from the study, otherwise these outputs will<br>
+      * have invalid values.
+      **/
+#pragma PROPERTY GuideLine
+    HRESULT get_GuideLine(inout /*IDLRETVAL*/ CATBSTR pioGuideLine);
+    HRESULT put_GuideLine(in CATBSTR piGuideLine);
+
+
+ // ===========================================================================
+ //  get_Coupling
+ //  ------------
+ //  put_Coupling
+ //  ------------
+ //
+    /**
+      * Returns or sets the coupling condition for the lift/lower analysis.<br>
+      * The value of the parameter must be either "<font color="green">Good</font>",
+      * "<font color="green">Fair</font>", or "<font color="green">Poor</font>".<br>
+      * <br>
+      * <strong>N.B.</strong>: This coupling condition must be set before attempting<br>
+      * to retrive any output value from the study, if the input gudeline is<br>
+      * "<font color="green">NIOSH1991</font>".  Failure to do so will result in<br>
+      * invalid output values.
+      **/
+#pragma PROPERTY Coupling
+    HRESULT get_Coupling(inout /*IDLRETVAL*/ CATBSTR pioCoupling);
+    HRESULT put_Coupling(in CATBSTR piCoupling);
+
+
+ // ===========================================================================
+ //  get_Frequency
+ //  ------------
+ //  put_Frequency
+ //  ------------
+ //
+    /**
+      * Returns or sets the lift frequecy.<br>
+      * This frequency must be expressed in lifts per second, and must<br>
+      * be specified before attempting to retrive any output value from the study.<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY Frequency
+    HRESULT get_Frequency(out /*IDLRETVAL*/ double poFrequency);
+    HRESULT put_Frequency(in double piFrequency);
+
+
+
+ // ===========================================================================
+ //  get_Duration
+ //  ------------
+ //  put_Duration
+ //  ------------
+ //
+    /**
+      * Returns or sets the lift duration.<br>
+      * This frequency must be expressed in hours per day, cannot be greater than<br>
+      * 8.0 and must be specified before attempting to retrive any output value<br>
+      * from the study.  Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY Duration
+    HRESULT get_Duration(out /*IDLRETVAL*/ double poDuration);
+    HRESULT put_Duration(in double piDuration);
+
+
+ // ===========================================================================
+ //  get_ObjectWeight
+ //  ----------------
+ //  put_ObjectWeight
+ //  ----------------
+ //
+    /**
+      * Returns or sets the weight of the object being lifted.<br>
+      * This weight must specified at least once, if the current input guideline is
+      * "<font color="green">NIOSH1991</font>".<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY ObjectWeight
+    HRESULT get_ObjectWeight(inout /*IDLRETVAL*/ CATBSTR pioObjectWeight);
+    HRESULT put_ObjectWeight(in CATBSTR piObjectWeight);
+
+
+ // ===========================================================================
+ //  get_Population
+ //  --------------
+ //  put_Population
+ //  --------------
+ //
+    /**
+      * Returns or sets the percentage of the population that should be able to
+      * perform the lift/lower task safely.<br>
+      * This property can only take the values 50.0, 75.0 and 90.0,and must be specified
+      * <br>at least once, if the current input guideline is
+      * "<font color="green">NIOSH1991</font>".<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY Population
+    HRESULT get_Population(out /*IDLRETVAL*/ double poPopulation);
+    HRESULT put_Population(in double piPopulation);
+
+
+ // ===========================================================================
+ //  get_NIOSH_ActionLimit
+ //  ---------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1981</strong>
+      * analysis only<br>. It is the weight below which the task could<br>
+      * be considered reasonably safe.
+      **/
+#pragma PROPERTY NIOSH_ActionLimit
+    HRESULT get_NIOSH_ActionLimit(inout /*IDLRETVAL*/ CATBSTR pioActionLimit);
+
+
+ // ===========================================================================
+ //  get_NIOSH_MaximumPermLimit
+ //  --------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1981</strong>
+      *  analysis only.<br>  This value represents a weight limit, above which the<br>
+      *  task is considered dangerous and requires engineering controls.
+      **/
+#pragma PROPERTY NIOSH_MaximumPermLimit
+    HRESULT get_NIOSH_MaximumPermLimit(inout /*IDLRETVAL*/ CATBSTR pioMaximumPermLimit);
+
+
+ // ===========================================================================
+ //  get_NIOSH_RWLInitial
+ //  --------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  It represents the weight of the load that healthy workers<br>
+      * could perform over a certain period of time without risk.<br>
+      * This property gives the recommended weight at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_RWLInitial
+    HRESULT get_NIOSH_RWLInitial(inout /*IDLRETVAL*/ CATBSTR pioRWLInitial);
+
+
+ // ===========================================================================
+ //  get_NIOSH_RWLFinal
+ //  ------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  It represents the weight of the load, that healthy workers could<br>
+      * perform over a certain period of time without risk.<br>
+      * This property gives the recommended weight at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_RWLFinal
+    HRESULT get_NIOSH_RWLFinal(inout /*IDLRETVAL*/ CATBSTR pioRWLFinal);
+
+
+ // ===========================================================================
+ //  get_NIOSH_LIInitial
+ //  -------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides a relative estimate of the level of physical
+      * stress.<br>
+      * This property gives the lifting index at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_LIInitial
+    HRESULT get_NIOSH_LIInitial(inout /*IDLRETVAL*/ CATBSTR pioLIInitial);
+
+
+ // ===========================================================================
+ //  get_NIOSH_LIFinal
+ //  -----------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides a relative estimate of the level of physical
+      * stress.<br>
+      * This property gives the lifting index at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_LIFinal
+    HRESULT get_NIOSH_LIFinal(inout /*IDLRETVAL*/ CATBSTR pioLIFinal);
+
+ // ===========================================================================
+ //  get_NIOSH_HorizontalLocationInitial
+ //  -----------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the distance of the hands from the mid-point
+      * between the ankles, in in the current V5 units.<br>
+      * This property gives the horizontal location at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_HorizontalLocationInitial
+    HRESULT  get_NIOSH_HorizontalLocationInitial(inout /*IDLRETVAL*/ CATBSTR pioHorizontalLocationInitial); //ipf
+      
+ // ===========================================================================
+ //  get_NIOSH_HorizontalLocationFinal
+ //  ---------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the distance of the hands from the mid-point
+      * between the ankles, in in the current V5 units.<br>
+      * This property gives the horizontal location at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_HorizontalLocationFinal
+    HRESULT  get_NIOSH_HorizontalLocationFinal(inout /*IDLRETVAL*/ CATBSTR pioHorizontalLocationFinal);
+
+ // ===========================================================================
+ //  get_NIOSH_VerticalLocationInitial
+ //  ---------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the distance of the hands above the floor,
+      * in in the current V5 units.<br>
+      * This property gives the vertical location at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_VerticalLocationInitial
+    HRESULT  get_NIOSH_VerticalLocationInitial(inout /*IDLRETVAL*/ CATBSTR pioVerticalLocationInitial);
+
+ // ===========================================================================
+ //  get_NIOSH_VerticalLocationFinal
+ //  -------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the distance of the hands above the floor,
+      * in in the current V5 units.<br>
+      * This property gives the vertical location at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_VerticalLocationFinal
+    HRESULT  get_NIOSH_VerticalLocationFinal(inout /*IDLRETVAL*/ CATBSTR pioVerticalLocationFinal);
+
+ // ===========================================================================
+ //  get_NIOSH_TravelDistance
+ //  ------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the absolute value of the difference between 
+      * the vertical heights at the destination and origin of the lift,
+      * in in the current V5 units.<br>
+      * This property gives the travel distance<br>
+      **/
+#pragma PROPERTY NIOSH_TravelDistance
+    HRESULT  get_NIOSH_TravelDistance(inout /*IDLRETVAL*/ CATBSTR pioTravelDistance);
+
+ // ===========================================================================
+ //  get_NIOSH_AngleOfAsymmetryInitial
+ //  ---------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the angular measure of how far the object is
+      * displaced from the front (mid-sagital plane) of the worker's body at the
+      * beginning of the lift, in in the current V5 units.<br>
+      * This property gives the asymmetry angle at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_AngleOfAsymmetryInitial
+    HRESULT  get_NIOSH_AngleOfAsymmetryInitial(inout /*IDLRETVAL*/ CATBSTR pioAngleOfAsymmetryInitial);
+
+ // ===========================================================================
+ //  get_NIOSH_AngleOfAsymmetryFinal
+ //  -------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the angular measure of how far the object is
+      * displaced from the front (mid-sagital plane) of the worker's body at the
+      * ending of the lift, in in the current V5 units.<br>
+      * This property gives the asymmetry angle at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_AngleOfAsymmetryFinal
+    HRESULT  get_NIOSH_AngleOfAsymmetryFinal(inout /*IDLRETVAL*/ CATBSTR pioAngleOfAsymmetryFinal);
+
+ // ===========================================================================
+ //  get_NIOSH_LoadConstant
+ //  ----------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the load constant.<br>
+      * This property gives the load constant at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_LoadConstant
+    HRESULT  get_NIOSH_LoadConstant(inout /*IDLRETVAL*/ CATBSTR pioLoadConstant);
+
+ // ===========================================================================
+ //  get_NIOSH_HorizontalMultiplierInitial
+ //  -------------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the horizontal multiplier.<br>
+      * This property gives the horizontal multiplier at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_HorizontalMultiplierInitial
+    HRESULT  get_NIOSH_HorizontalMultiplierInitial(inout /*IDLRETVAL*/ CATBSTR pioHorizontalMultiplierInitial);
+
+ // ===========================================================================
+ //  get_NIOSH_HorizontalMultiplierFinal
+ //  -----------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the horizontal multiplier.<br>
+      * This property gives the horizontal multiplier at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_HorizontalMultiplierFinal
+    HRESULT  get_NIOSH_HorizontalMultiplierFinal(inout /*IDLRETVAL*/ CATBSTR pioHorizontalMultiplierFinal);
+
+ // ===========================================================================
+ //  get_NIOSH_VerticalMultiplierInitial
+ //  -----------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the absolute value or deviation of V (vertical location)
+      * from an optimum height of 30 inches (75 cm).<br>
+      * This property gives the vertical multiplier at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_VerticalMultiplierInitial
+    HRESULT  get_NIOSH_VerticalMultiplierInitial(inout /*IDLRETVAL*/ CATBSTR pioVerticalMultiplierInitial);
+    
+ // ===========================================================================
+ //  get_NIOSH_VerticalMultiplierFinal
+ //  ---------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the absolute value or deviation of V (vertical location)
+      * from an optimum height of 30 inches (75 cm).<br>
+      * This property gives the vertical multiplier at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_VerticalMultiplierFinal
+    HRESULT  get_NIOSH_VerticalMultiplierFinal(inout /*IDLRETVAL*/ CATBSTR pioVerticalMultiplierFinal);
+
+ // ===========================================================================
+ //  get_NIOSH_DistanceMultiplier
+ //  ----------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the distance multiplier.<br>
+      * This property gives the distance multiplier.<br>
+      **/
+#pragma PROPERTY NIOSH_DistanceMultiplier
+    HRESULT  get_NIOSH_DistanceMultiplier(inout /*IDLRETVAL*/ CATBSTR pioDistanceMultiplier);
+
+ // ===========================================================================
+ //  get_NIOSH_AsymmetricMultiplierInitial
+ //  -------------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the asymmetric multiplier.<br>
+      * This property gives the asymmetric multiplier at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_AsymmetricMultiplierInitial
+    HRESULT  get_NIOSH_AsymmetricMultiplierInitial(inout /*IDLRETVAL*/ CATBSTR pioAsymmetricMultiplierInitial);
+
+ // ===========================================================================
+ //  get_NIOSH_AsymmetricMultiplierFinal
+ //  -----------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the asymmetric multiplier.<br>
+      * This property gives the asymmetric multiplier at the destination<br>
+      * (i.e., given the final posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_AsymmetricMultiplierFinal
+    HRESULT  get_NIOSH_AsymmetricMultiplierFinal(inout /*IDLRETVAL*/ CATBSTR pioAsymmetricMultiplierFinal);
+
+ // ===========================================================================
+ //  get_NIOSH_FrequencyMultiplier
+ //  -----------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the frequency depending upon the average of
+      * lifts/min (F), the vertical location (V) of the hand at the origin, and the
+      * duration of continuous lifting.<br>
+      * This property gives the frequency multiplier.<br>
+      **/
+#pragma PROPERTY NIOSH_FrequencyMultiplier
+    HRESULT  get_NIOSH_FrequencyMultiplier(inout /*IDLRETVAL*/ CATBSTR pioFrequencyMultiplier);
+
+ // ===========================================================================
+ //  get_NIOSH_CouplingMultiplierInitial
+ //  -----------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the coupling multiplier bases ont hte coupling
+      * classification and vertical location of the lift (V).<br>
+      * This property gives the coupling multiplier at the origin<br>
+      * (i.e., given the initial posture of the manikin).
+      **/
+#pragma PROPERTY NIOSH_CouplingMultiplierInitial
+    HRESULT  get_NIOSH_CouplingMultiplierInitial(inout /*IDLRETVAL*/ CATBSTR pioCouplingMultiplierInitial);
+
+ // ===========================================================================
+ //  get_NIOSH_CouplingMultiplierFinal
+ //  ---------------------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>NIOSH 1991</strong> analysis
+      * only.<br>  This value provides the coupling multiplier bases ont hte coupling
+      * classification and vertical location of the lift (V).<br>
+      * This property gives the coupling multiplier at the destination<br>
+      * (i.e., given the final
+      **/
+#pragma PROPERTY NIOSH_CouplingMultiplierFinal
+    HRESULT  get_NIOSH_CouplingMultiplierFinal(inout /*IDLRETVAL*/ CATBSTR pioCouplingMultiplierFinal);
+
+ // ===========================================================================
+ //  get_Snook_MaximumWeight
+ //  -----------------------
+ //
+    /**
+      * This field is set to a valid value for the <strong>Snook/Ciriello 1991</strong>
+      * analysis only.<br>
+      * It is the maximum acceptable weight of the load that the selected population<br>
+      * can lift or carry with reasonable safety. 
+      **/
+#pragma PROPERTY Snook_MaximumWeight
+    HRESULT get_Snook_MaximumWeight(inout /*IDLRETVAL*/ CATBSTR pioMaximumWeight);
+
+
+ // ===========================================================================
+ //  get_WarningMessage
+ //  ------------------
+ //
+    /**
+      * Returnes an eventual warning message generated along with the study.
+      **/
+#pragma PROPERTY WarningMessage
+    HRESULT get_WarningMessage(inout /*IDLRETVAL*/ CATBSTR pioWarningMessage);
+};
+
+// Interface name : SWKIAErgoLiftLower
+#pragma ID SWKIAErgoLiftLower "DCE:a4c4fb00-4204-11d4-a223000629753ac1"
+#pragma DUAL SWKIAErgoLiftLower
+
+// VB object name : SWKErgoLiftLower (Id used in Visual Basic)
+#pragma ID SWKErgoLiftLower "DCE:ad9c0fb0-4204-11d4-a223000629753ac1"
+#pragma ALIAS SWKIAErgoLiftLower SWKErgoLiftLower
+
+#endif

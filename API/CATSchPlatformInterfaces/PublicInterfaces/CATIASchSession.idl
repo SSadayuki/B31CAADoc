@@ -1,0 +1,153 @@
+#ifndef CATIASchSession_IDL 
+#define CATIASchSession_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+interface  CATIADocument;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Represents a schematic session.
+  */
+
+interface CATIASchSession : CATIABase
+{
+  /**
+  * Create a document with Schematic context.
+  * @param iDocType
+  *   Document type, if NULL "Product" is assumed. These are the types
+  *   shown in the File+New list
+  * @param iBInteractive
+  *   If TRUE, document is created in interactive session with editor
+  * @param oNewDoc
+  *   Document created.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchSession
+  * Dim strVar1 As String
+  * Dim bVar2 As boolean
+  * Dim objArg3 As Document
+  *  ...
+  * objThisIntf.<font color="red">CreateDocument</font>strVar1,bVar2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT CreateDocument ( 
+    in CATBSTR iDocType, 
+    in boolean iBInteractive, 
+    inout CATIADocument oNewDoc );
+    
+  /**
+  * Get the schematic container (e.g. for CATISchBaseFactory implementation).
+  * @param iDoc
+  *   Document in the session to retreive the container from
+  * @param oContainer 
+  *   Schematic container
+  *   shown in the File+New list
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchSession
+  * Dim objArg1 As Document
+  * Dim objArg2 As AnyObject
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">GetSchExtContainer</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT GetSchExtContainer ( 
+    in CATIADocument iDoc, 
+    out /*IDLRETVAL*/ CATIABase oContainer );
+    
+  /**
+  * Get the current application ID.
+  * @param oApplicationID
+  *   Application ID
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchSession
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">GetCurrentApplicationID</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT GetCurrentApplicationID ( 
+    inout CATBSTR oApplicationID );
+    
+  /**
+  * Set the current application ID.
+  * @param iApplicationID
+  *   Application ID
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchSession
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">SetCurrentApplicationID</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT SetCurrentApplicationID ( 
+    in CATBSTR iApplicationID );
+    
+  /**
+  * Get the current document.
+  * @param oCurDoc
+  *   Pointer to current document.  DO NOT NEED TO RELEASE OUTPUT POINTER.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchSession
+  * Dim objArg1 As Document
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">GetCurrentDocument</font>
+  * </pre>
+  *    
+  */
+  HRESULT GetCurrentDocument ( 
+    out /*IDLRETVAL*/ CATIADocument oCurDoc );
+    
+  /**
+  * Set the current document.
+  * @param iCurDoc
+  *   Pointer to current document.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchSession
+  * Dim objArg1 As Document
+  *  ...
+  * objThisIntf.<font color="red">SetCurrentDocument</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT SetCurrentDocument ( 
+    in CATIADocument iCurDoc );
+    
+};
+    
+// Interface name : CATIASchSession
+#pragma ID CATIASchSession "DCE:c482e9b2-e1ff-4808-8af5df59e4cb2ca5"
+#pragma DUAL CATIASchSession
+    
+// VB object name : SchSession
+#pragma ID SchSession "DCE:ad9587f1-ade0-4925-91d65dcd6ddb3336"
+#pragma ALIAS CATIASchSession SchSession
+    
+#endif 
+    

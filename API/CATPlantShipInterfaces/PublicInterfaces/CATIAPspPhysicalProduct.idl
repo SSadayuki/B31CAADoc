@@ -1,0 +1,126 @@
+#ifndef CATIAPspPhysicalProduct_IDL
+#define CATIAPspPhysicalProduct_IDL
+
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+interface CATIAPspPartConnector ;
+
+#include "CATIAPspListOfObjects.idl"
+#include "CatPspIDLPartConnectorType.idl"
+
+#include "CATIABase.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the interface to manage the technological connectors on physical objects.
+ * <b>Role</b>: To manage connectors on physical objects.
+ */
+interface CATIAPspPhysicalProduct : CATIABase
+{
+ /**
+  * Returns a list of Part connectors of the object.  
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspPhsyicalProduct  
+  * Dim objArg1 As PspListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">Connectors</font> 
+  * </pre>
+  *    
+  */
+
+#pragma PROPERTY Connectors		
+  HRESULT get_Connectors ( out /*IDLRETVAL*/ CATIAPspListOfObjects oLConnectors );
+
+
+ /**
+  * Returns the added connector on the object.  
+  * @param iuClassFilter
+  *  Connector class type. If null string application default connector class will be used.
+  * @param iFaceCntr
+  *  A face connector
+  * @param ieFaceType
+  *  Face connector type
+  * @param iAlignmentCntr
+  *  An alignment connector
+  * @param ieAlignType
+  *  Alignment connector type
+  * @param iClockCntr
+  *  A clock connector
+  * @param ieClockType
+  *  A clock connector type  
+  * @return
+  *   Part connector added
+  *
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspPhsyicalProduct
+  *
+  * Dim strVar1 As CATBSTR
+  * Dim objArg2 As Reference
+  * Dim objArg3 As catPspIDLPartConnectorType
+  * Dim objArg4 As Reference
+  * Dim objArg5 As catPspIDLPartConnectorType
+  * Dim objArg6 As Reference
+  * Dim objArg7 As catPspIDLPartConnectorType
+  * Dim objArg8 As PspPartConnector
+  *  ...
+  * objArg8 = objThisIntf.<font color="red">AddConnector</font> (strVar1, objArg2,objArg3,objArg4, objArg5,objArg6,objArg7 )
+  * </pre>
+  *    
+  */
+  
+  HRESULT AddConnector ( 
+               in  CATBSTR iClassFilter,
+               in  CATIAReference	iFaceCntr, 	
+               in  CatPspIDLPartConnectorType	ieFaceType,
+               in  CATIAReference	iAlignmentCntr, 	
+               in  CatPspIDLPartConnectorType	ieAlignType,
+               in  CATIAReference	iClockCntr, 	
+               in  CatPspIDLPartConnectorType	ieClockType,               
+               out /*IDLRETVAL*/ CATIAPspPartConnector oPartCntr
+                );
+
+
+
+ /**
+  * Removes part connector.  
+  * @param iCntrToRemove
+  *   Part connector to be removed
+  *  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspPhsyicalProduct
+  *
+  * Dim objArg1 As PspPartConnector
+  *  ...
+  * objThisIntf.<font color="red">RemoveConnector</font> objArg1
+  * </pre>
+  *    
+  */
+  
+  HRESULT RemoveConnector (                         
+               in  CATIAPspPartConnector iCntrToRemove              
+                );
+
+        
+};
+
+// Interface name : CATIAPspPhysicalProduct
+#pragma ID CATIAPspPhysicalProduct "DCE:5ef8c952-6c2a-4b14-a2f86f8a52a6c148"
+#pragma DUAL CATIAPspPhysicalProduct
+
+// VB object name : PspPhsyicalProduct
+#pragma ID PspPhsyicalProduct      "DCE:5a7a463b-d781-487b-9c7802826e8823ba"
+#pragma ALIAS CATIAPspPhysicalProduct PspPhsyicalProduct
+
+#endif

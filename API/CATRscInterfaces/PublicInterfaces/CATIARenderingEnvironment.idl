@@ -1,0 +1,170 @@
+#ifndef CATIARenderingEnvironment_IDL
+#define CATIARenderingEnvironment_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIARenderingEnvironment:                           
+// Exposed interface for Rendering Environment object
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jul02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATIARenderingEnvironmentWall.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * Represents a Environment object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIARenderingEnvironment : CATIABase
+{
+/**
+ * Returns the environment type.
+ *   <ul> Possible environment types are:
+ *   <li> 1: Cubical environment </li>
+ *   <li> 2: Spherical environment </li>
+ *   <li> 3: Cylindrical environment </li>
+ *   </ul>
+ */
+  HRESULT  GetType ( out /*IDLRETVAL*/ short oType);
+
+/**
+ * Returns the environment walls.
+ * <br>
+ *   The environment wall type can be:
+ *   <li> 1: North wall (for cubical and cylindrical environments)</li>
+ *   <li> 2: South wall (for cubical and cylindrical environments)</li>
+ *   <li> 3: East wall (for cubical environments)</li>
+ *   <li> 4: West wall (for cubical environments)</li>
+ *   <li> 5: Top wall (for cubical, cylindrical and shperical environments)</li>
+ *   <li> 6: Bottom wall (for cubical, cylindrical and shperical environments)</li>
+
+ */
+  HRESULT  GetWall ( in short iType, out /*IDLRETVAL*/ CATIARenderingEnvironmentWall oWall);
+
+/**
+ * Returns the coordinates of the origin of the environment.
+ * <br>
+ * These coordinates are set as an array of 3 Variants (double type).
+ */
+  HRESULT GetOrigin (inout CATSafeArrayVariant oOrigin);
+
+/**
+ * Sets the coordinates of the origin of the environment.
+ * <br>
+ * These coordinates are set as an array of 3 Variants (double type).
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example sets the origin of the <tt>MyEnvironment</tt> environment.
+ * to the point with coordinates (10, 25, 15).
+ * <pre>
+ * MyEnvironment.<font color="red">PutOrigin</font> Array(10, 25, 15)
+ * </pre>
+ * </dl>
+ */
+  HRESULT PutOrigin (in CATSafeArrayVariant iOrigin);
+
+/**
+ * Returns the coordinates of the vertical axis vector of the environment.
+ * <br>
+ * These coordinates are set as an array of 3 Variants (double type).
+ */
+  HRESULT GetVerticalAxis (inout CATSafeArrayVariant oAxis);
+
+/**
+ * Sets the coordinates of the vertical axis vector of the environment.
+ * <br>
+ * These coordinates are set as an array of 3 Variants (double type).
+ */
+  HRESULT PutVerticalAxis (in CATSafeArrayVariant iAxis);
+
+/**
+ * Returns or sets the environment active status.
+ * <br>
+ * Only one environment can be active for a product.
+ *   The active status can be:
+ *   <li> 1: environment is activated </li>
+ *   <li> 0: environment is desactivated</li>
+ */
+#pragma PROPERTY ActiveStatus
+  HRESULT  get_ActiveStatus ( out /*IDLRETVAL*/ short oActiveStatus);
+  HRESULT  put_ActiveStatus ( in	short iActiveStatus);
+
+/**
+ * Returns or sets the spherical or cylindrical environment radius value.
+ */
+#pragma PROPERTY Radius
+  HRESULT  get_Radius ( out /*IDLRETVAL*/ double oRadius);
+  HRESULT  put_Radius ( in	double iRadius);
+
+/**
+ * Returns or sets the cubic or cylindrical environment height value.
+ */
+#pragma PROPERTY Height
+  HRESULT  get_Height ( out /*IDLRETVAL*/ double oHeight);
+  HRESULT  put_Height ( in	double iHeight);
+
+/**
+ * Returns or sets the cubic environment length value.
+ */
+#pragma PROPERTY Length
+  HRESULT  get_Length ( out /*IDLRETVAL*/ double oLength);
+  HRESULT  put_Length ( in	double iLength);
+
+/**
+ * Returns or sets the cubic environment width value.
+ */
+#pragma PROPERTY Width
+  HRESULT  get_Width ( out /*IDLRETVAL*/ double oWidth);
+  HRESULT  put_Width ( in	double iWidth);
+
+/**
+ * Returns or sets the spherical environment face number.
+ * <br>
+ * The default value for a new spherical environment is 2.
+ * <br>
+ * If face number is set to 1, a mapped texture image will covered whole environment sphere.
+ * <br>
+ * If face number is set to 2, two different texture images can be mapped for upper hemisphere and lower hemisphere.
+ * <br>
+ * N.B. This property is useless for cubical and cylindrical environments.
+ */
+#pragma PROPERTY FaceNumber
+  HRESULT  get_FaceNumber ( out /*IDLRETVAL*/ short oNumber);
+  HRESULT  put_FaceNumber ( in	short iNumber);
+
+};
+
+// Interface Name : CATIARenderingEnvironment
+#pragma ID CATIARenderingEnvironment "DCE:7d177c40-9998-11d6-805e0030f113d1bf"
+#pragma DUAL CATIARenderingEnvironment
+ 
+// VB Object Name : RenderingEnvironment
+#pragma ID RenderingEnvironment "DCE:96bda0f0-9998-11d6-805e0030f113d1bf"
+#pragma ALIAS CATIARenderingEnvironment RenderingEnvironment
+
+#endif
+// CATIARenderingEnvironment_IDL
+
+
+
+
+
+
+

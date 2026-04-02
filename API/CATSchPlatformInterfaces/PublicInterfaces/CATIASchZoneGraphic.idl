@@ -1,0 +1,88 @@
+#ifndef CATIASchZoneGraphic_IDL 
+#define CATIASchZoneGraphic_IDL 
+    
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+interface  CATIASchGRRZone;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage graphical representations of a schematic zone.
+  */
+
+interface CATIASchZoneGraphic : CATIABase
+{
+  /**
+  * Add a graphical representation to a zone.
+  * @param iGRRToAdd
+  *   The graphical representation to be added to the zone.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchZoneGraphic
+  * Dim objArg1 As SchGRRZone
+  *  ...
+  * objThisIntf.<font color="red">AddGraphicalRepresentation</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AddGraphicalRepresentation ( 
+    in CATIASchGRRZone iGRRToAdd );
+    
+  /**
+  * Remove a graphical representation from a zone.
+  * @param iGRRToRemove
+  *   The graphical representation to be removed from the zone.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchZoneGraphic
+  * Dim objArg1 As SchGRRZone
+  *  ...
+  * objThisIntf.<font color="red">RemoveGraphicalRepresentation</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT RemoveGraphicalRepresentation ( 
+    in CATIASchGRRZone iGRRToRemove );
+    
+  /**
+  * List all graphical representations of a zone.
+  * @param oLGRR
+  *   A list of graphical representations
+  *   (members are CATISchGRRZone interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchZoneGraphic
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListGraphicalRepresentations</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListGraphicalRepresentations ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLGRR );
+    
+};
+    
+// Interface name : CATIASchZoneGraphic
+#pragma ID CATIASchZoneGraphic "DCE:73784f94-b039-4236-8191d68f621f8678"
+#pragma DUAL CATIASchZoneGraphic
+    
+// VB object name : SchZoneGraphic
+#pragma ID SchZoneGraphic "DCE:4d19aa74-8860-47ca-8e1c9d3ff021d969"
+#pragma ALIAS CATIASchZoneGraphic SchZoneGraphic
+    
+#endif 
+    

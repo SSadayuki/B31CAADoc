@@ -1,0 +1,101 @@
+#ifndef CATIAStrCutback_IDL
+#define CATIAStrCutback_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+//
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 26/10/2000
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIAStrCutback;
+interface CATIADocument;
+interface CATIAStrSection;
+interface CATIAStrAnchorPoint;
+
+#include "CATIABase.idl"
+#include "CATIAAssemblyFeature.idl"
+#include "CATSafeArray.idl"
+#include "CATIAStrServices.idl"
+#include "CATIAParameter.idl"
+
+      /**
+       * Represents the cutback object.
+       * It is aggregated to an extremity of a member.
+       * It can be retrieved using the @href CATIAStrMemberExtremity object.
+       */
+
+interface CATIAStrCutback : CATIAAssemblyFeature
+{
+    /**
+     * Returns the type of the cutback object.
+     *  
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the type for the
+     * <tt>StrMember</tt> object.
+     * <pre>
+     * Type = Member.<font color="red">Type</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY Type
+  HRESULT get_Type(out /*IDLRETVAL*/ CatStrCutbackType oCutback);
+
+	/**
+	* Returns the parameter defining the offset.
+	*/
+
+#pragma PROPERTY Offset
+  HRESULT get_Offset(out /*IDLRETVAL*/ CATIAParameter oOffset);
+
+
+
+};
+
+// Interface name : CATIAStrCutback
+#pragma ID CATIAStrCutback "DCE:51967fcc-c1f7-11d4-94c400108379318c"
+#pragma DUAL CATIAStrCutback
+
+#pragma ID StrCutback "DCE:5a828c98-c1f7-11d4-94c400108379318c"
+#pragma ALIAS CATIAStrCutback StrCutback
+
+#endif

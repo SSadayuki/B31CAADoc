@@ -1,0 +1,59 @@
+#ifndef CATIAPspApplication_IDL
+#define CATIAPspApplication_IDL
+/*IDLREP*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+
+#include "CATIABase.idl"
+
+/**
+ * Represents an application.
+ * <b>Role</b>: To activate and query a Distributive System application.
+ */
+
+
+interface CATIAPspApplication : CATIABase
+{
+ 
+ /**
+  * Initializes the application environment (load feature start up objects,
+  * activate the application..).
+  * @sample
+  * <pre>
+  * Dim objPrdRoot        As Product
+  * Dim objPspWorkbench   As PspWorkbench
+  * Dim objPspApplnPip       As PspApplication
+  * Dim objPspApplnTub    As PspApplication
+  *
+  * Set objPrdRoot = CATIA.ActiveDocument.Product
+  * Set objPspWorkbench = objPrdRoot.GetTechnologicalObject ("PspWorkbench")
+  * 
+  * Set objPspApplnPip = objPspWorkbench.GetApplication(catPspIDLCATPiping)
+  * ...
+  * 
+  * objPspApplnPip.<font color="red">Initialization</font>
+  * ....
+  * Set objPspApplnTub = objPspWorkbench.GetApplication(catPspIDLCATTubing)
+  * </pre>
+  *   
+  */
+  HRESULT Initialization ();
+
+};
+
+// Interface name : CATIAPspApplication
+#pragma ID CATIAPspApplication "DCE:322ebadf-a446-4e76-86c99f23b44eeecb"
+#pragma DUAL CATIAPspApplication
+
+// VB object name : PspApplication
+#pragma ID PspApplication "DCE:5f12beed-2e46-40ff-807f5168a678a982"
+#pragma ALIAS CATIAPspApplication PspApplication
+
+#endif

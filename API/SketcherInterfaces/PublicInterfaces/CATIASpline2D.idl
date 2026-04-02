@@ -1,0 +1,92 @@
+#ifndef CATIASpline2D_IDL
+#define CATIASpline2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACurve2D.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAPoint2D;
+
+/** 
+ *   Class defining a spline in 2D Space.  A 2D spline is defined by its constituting
+ *   control points.
+ */
+
+interface CATIASpline2D : CATIACurve2D
+{
+	//		=============
+	//		== METHODS ==
+	//		=============
+
+
+        /**
+        *  Returns the control points making up the spline.
+        *  @param oCtrlPoints
+        *  The control points of the spline
+        * <dl>
+        * <dt><b>Example:</b>
+        * <dd>The following example fetches the list of control points defining the<br>
+        * spline<tt>mySpline</tt>:
+        * <pre>
+        * mySpline.GetControlPoints <b>ControlPoints</b>
+        * </pre>
+        * </dl>
+        */
+        HRESULT GetControlPoints( inout  CATSafeArrayVariant  oCtrlPoints );
+
+        //
+        //
+        /**
+        *  Inserts control points in the spline.  If a 2D point is given (and not a control<br>
+        *  point), a new control point is created and aggregated in the spline.
+        *  @param iCtrlPoint
+        *  The new point to be inserted. (@see CATIAPoint2D and CATIAControlPoint2D<br>
+        *   for more information).
+        *  @param iPosition
+        *  The position at which to insert the point.<br>
+        *  To insert a new control point as the first element, set iPosition to 0.
+        * <dl>
+        * <dt><b>Example:</b>
+        * <dd>The following example inserts a control point <tt>myCtrlPoint</tt> as the second<br>
+        * element of the spline<tt>mySpline</tt>:
+        * <pre>
+        * call mySpline.<b>InsertControlPointAfter</b> (myCtrlPoint, 1)
+        * </pre>
+        * </dl>
+        */
+
+        HRESULT InsertControlPointAfter( in CATIAPoint2D  iCtrlPoint
+                                        ,in long          iPosition);
+        //
+		//
+		/**
+		*
+		*
+		* Returns the number of Control Points of the Spline
+        *       @param oNumber
+        *       The number of control points*
+		*
+		*/
+        HRESULT GetNumberOfControlPoints(  out  /*IDLRETVAL*/ double  oNumber );
+
+};
+
+// Interface name : CATIASpline2D
+#pragma ID CATIASpline2D "DCE:80ec78f7-ef72-0000-0280030ba6000000"
+#pragma DUAL CATIASpline2D
+
+// VB object name : Spline2D (Id used in Visual Basic)
+#pragma ID Spline2D "DCE:80ec78fd-0722-0000-0280030ba6000000"
+#pragma ALIAS CATIASpline2D Spline2D
+
+
+#endif
+// CATIASpline2D_IDL
+

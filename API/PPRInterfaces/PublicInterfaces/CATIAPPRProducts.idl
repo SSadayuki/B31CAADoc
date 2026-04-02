@@ -1,0 +1,52 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIAPPRProducts_IDL
+#define CATIAPPRProducts_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAProduct ;
+
+/**  
+ * This interface is used to retrieve and add Products from and to the list of Products.  
+ */
+interface CATIAPPRProducts : CATIACollection 
+{
+
+/**
+  * Retrieves the Product corresponding to the specified index in the list of Products. 
+  * @param iIndex
+  *   The index in the Product list.
+  * @return 
+  *   The retrieved Product corresponding to the specified index.
+  */
+  HRESULT Item( in CATVariant iIndex, out /*IDLRETVAL*/ CATIAProduct oProduct);
+
+
+/**
+  * Adds the specified Product to the current list of Products.
+  * @param iProduct
+  *   The Product to be added.
+  * @return 
+  *   The added Product. 
+  */
+  HRESULT Add( in CATIAProduct iProduct,  out /*IDLRETVAL*/ CATIAProduct oProduct);
+
+};
+
+// Interface name : CATIAPPRProducts
+#pragma ID CATIAPPRProducts "DCE:33e38446-8fcf-11d4-85670000863e1bbb"
+#pragma DUAL CATIAPPRProducts
+
+// VB object name : PPRProducts (Id used in Visual Basic)
+#pragma ID PPRProducts "DCE:33e38447-8fcf-11d4-85670000863e1bbb"
+#pragma ALIAS CATIAPPRProducts PPRProducts
+
+#endif

@@ -1,0 +1,101 @@
+#ifndef CATIASchArrowDisplay_IDL 
+#define CATIASchArrowDisplay_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchGRRRoute;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the graphical representation of a schematic route.
+  */
+
+interface CATIASchArrowDisplay : CATIABase
+{
+  /**
+  * Add arrow display attributes on the route.
+  * @param iGRR
+  *   iGRR means apply only to segments of iGRR.
+  *   (if iGRR = NULL, apply to segments of all GRR's of the route,
+  *    and ignore iSegNum)
+  * @param iSegNum
+  *   iSegNum = 0 means apply to all segments of iGRR.
+  *   iSegnum > 0 means apply to only to segment number iSegNum iGRR.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchArrowDisplay
+  * Dim objArg1 As SchGRRRoute
+  * Dim intVar2 As Integer
+  *  ...
+  * objThisIntf.<font color="red">SetArrow</font>objArg1,intVar2
+  * </pre>
+  *    
+  */
+  HRESULT SetArrow ( 
+    in CATIASchGRRRoute iGRR, 
+    in long iSegNum );
+    
+  /**
+  * Remove arrow display attributes on the route.
+  * @param iGRR
+  *   iGRR means apply only to segments of iGRR.
+  *   (if iGRR = NULL, apply to segments of all GRR's of the route,
+  *    and ignore iSegNum)
+  * @param iSegNum
+  *   iSegNum = 0 means apply to all segments of iGRR.
+  *   iSegnum > 0 means apply to only to segment number iSegNum iGRR.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchArrowDisplay
+  * Dim objArg1 As SchGRRRoute
+  * Dim intVar2 As Integer
+  *  ...
+  * objThisIntf.<font color="red">UnsetArrow</font>objArg1,intVar2
+  * </pre>
+  *    
+  */
+  HRESULT UnsetArrow ( 
+    in CATIASchGRRRoute iGRR, 
+    in long iSegNum );
+    
+  /**
+  * Query whether flow arrows are shown (arrow attributes exist).
+  * @param oBYes
+  *   If TRUE,  then Flow arrows are shown     (arrow attributes exist).
+  *   If FALSE, then Flow arrows are not shown (arrow attributes do not exist).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchArrowDisplay
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">IsArrowShown</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT IsArrowShown ( 
+    inout boolean oBYes );
+    
+};
+    
+// Interface name : CATIASchArrowDisplay
+#pragma ID CATIASchArrowDisplay "DCE:7fcf4ae1-c8ad-401b-bbc9099de5e65900"
+#pragma DUAL CATIASchArrowDisplay
+    
+// VB object name : SchArrowDisplay
+#pragma ID SchArrowDisplay "DCE:ae4d0dac-7eb7-48bf-8512ef117ed96058"
+#pragma ALIAS CATIASchArrowDisplay SchArrowDisplay
+    
+#endif 
+    

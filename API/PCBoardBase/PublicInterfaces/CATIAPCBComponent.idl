@@ -1,0 +1,178 @@
+#ifndef CATIAPCBComponent_IDL
+#define CATIAPCBComponent_IDL
+
+/*IDLREP*/
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//--------------------------------------------------------------------------
+// Document object
+// gha Oct.99
+//
+//--------------------------------------------------------------------------
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"	
+#include "CATBSTR.idl"
+
+/** 
+   temporary interface to manage the characteristic of a PCB component.
+ */
+
+
+
+interface CATIAPCBComponent  : CATIABase
+{
+//----------------------------------------------------------------------------------
+  /**
+  * Allow to get and set the Package number of a component
+  * 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY PackageNumber
+  HRESULT get_PackageNumber(out /*IDLRETVAL*/  CATBSTR  oPackage);
+  HRESULT put_PackageNumber(in  CATBSTR  iPackage);
+ 
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the RESISTANCE of a component.
+  * 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY RESISTANCE
+ HRESULT get_RESISTANCE(out /*IDLRETVAL*/ CATBSTR oResistance);
+ HRESULT put_RESISTANCE(in  CATBSTR iResistance);
+
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the POWER MAX  of a component.
+  * 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+
+#pragma PROPERTY POWER_MAX
+ HRESULT get_POWER_MAX(out /*IDLRETVAL*/ CATBSTR  oPwmax);
+ HRESULT put_POWER_MAX (in  CATBSTR  iPwmax);
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the Operating power rating of a component
+  * The possible value are MECHANICAL or ELECTRICAL
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY POWEROPR
+
+ HRESULT get_POWEROPR(out /*IDLRETVAL*/  CATBSTR  oPoweropr);
+ HRESULT put_POWEROPR(in  CATBSTR  iPoweropr);
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the CAPACITANCE  Type of a component.
+  * 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY CAPACITANCE
+ HRESULT get_CAPACITANCE(out /*IDLRETVAL*/  CATBSTR   oCapacitance);
+ HRESULT put_CAPACITANCE(in  CATBSTR  iCapacitance);
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the  TOLERANCE of a component.
+  * 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY TOLERANCE
+ HRESULT get_TOLERANCE(out /*IDLRETVAL*/  CATBSTR  oTolerance);
+ HRESULT put_TOLERANCE (in  CATBSTR  iTolerance);
+
+//----------------------------------------------------------------------------------
+     /**
+  * Allow to get and set the  junction to board thermal resistance of a component.
+  * 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY THETA_JB
+ HRESULT get_THETA_JB(out /*IDLRETVAL*/  CATBSTR   oThetajb);
+ HRESULT put_THETA_JB (in  CATBSTR  iThetajb);
+
+
+ //----------------------------------------------------------------------------------
+ /**
+  * Allow to get and set the  junction to case thermal resistance of a component.
+  * 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY THETA_JC
+ HRESULT get_THETA_JC(out /*IDLRETVAL*/  CATBSTR   oThetajc);
+ HRESULT put_THETA_JC (in  CATBSTR  iThetajc);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Allow to get and set the thermal conductivity of a component.
+  * 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY THERM_COND
+ HRESULT get_THERM_COND(out /*IDLRETVAL*/  CATBSTR   oThetacond);
+ HRESULT put_THERM_COND  (in  CATBSTR  iThetacond);
+
+//-----------------------------------------------------------------------------
+
+};
+
+// Interface name : CATIAPCBComponent
+#pragma ID CATIAPCBComponent  "DCE:42d7a758-de9d-47bd-b0bb5a8aa3f35619"
+#pragma DUAL CATIAPCBComponent 
+
+
+// VB object name : PCBComponent
+#pragma ID PCBComponent "DCE:4fc3e6d4-cf87-40aa-9567c323b06ca8ff"
+#pragma ALIAS CATIAPCBComponent PCBComponent
+#endif

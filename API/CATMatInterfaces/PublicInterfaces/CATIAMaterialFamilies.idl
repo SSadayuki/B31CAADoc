@@ -1,0 +1,114 @@
+#ifndef CATIAMaterialFamilies_IDL
+#define CATIAMaterialFamilies_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIAMaterialFamilies:                           
+// Exposed interface for Material Family collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIACollection.idl"
+#include "CATIAMaterialFamily.idl"
+#include "CATVariant.idl"
+
+/**
+ * A collection of all the MaterialFamily objects.
+ * This collection is currently managed by a CATIAMaterialDocument object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAMaterialFamilies : CATIACollection
+{
+    /**
+     * Returns a material family from its index in the MaterialFamilies collection.
+     * @param iIndex
+     *   The index of the material family to retrieve in the collection of
+     *   material families.
+     *   Compared with other collections, you cannot use the name of the
+     *   material family as argument.
+     * @return The retrieved material family
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example returns in <tt>MyMaterialFamily</tt> the sixth
+     * material family in the collection.
+     * <pre>
+     * Dim MyMaterialFamily As MaterialFamily
+     * Set MyMaterialFamily = MaterialFamilies.<font color="red">Item</font>(6)
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAMaterialFamily oMaterialFamily);
+
+    /**
+     * Adds a new material family to the MaterialFamilies collection.
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following adds a material family to the collection 
+     * attached to a document.
+     * This document must be a @href CATIAMaterialDocument object.
+     * <pre>
+     * FileToOpen = "e:\users\ast\materials\Catalog.CATMaterial"
+     * Dim MyDocument As MaterialDocument
+     * Set MyDocument = Documents.<font color="red">Open</font>(FileToOpen)
+     * Dim MyMaterialFamily As MaterialFamily
+     * Set MyMaterialFamily = MyDocument.MaterialFamilies.<font color="red">Add</font>
+     * </pre>
+     */
+    HRESULT Add(out /*IDLRETVAL*/ CATIAMaterialFamily oMaterialFamily);
+
+    /**
+     * Removes a material family from the MaterialFamilies collection.
+     * @param iIndex
+     *   The index of the material family to remove.
+     *   Compared with other collections, you cannot use the name of the
+     *   material family as argument.
+	 * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example removes the second material family
+     * in the collection attached to the active document.
+     * This document must be a @href CATIAMaterialDocument object.
+     * <pre>
+     * FileToOpen = "e:\users\ast\materials\Catalog.CATMaterial"
+     * Dim MyDocument As MaterialDocument
+     * Set MyDocument = Documents.<font color="red">Open</font>(FileToOpen)
+     * MyDocument.MaterialFamilies.<font color="red">Remove</font>(2)
+     * </pre>
+     */
+    HRESULT Remove(in CATVariant iIndex);
+};
+
+// Interface Name : CATIAMaterialFamilies
+#pragma ID CATIAMaterialFamilies "DCE:dc6564b0-779b-11d6-80560030f113d1bf"
+#pragma DUAL CATIAMaterialFamilies
+ 
+// VB Object Name : MaterialFamilies
+#pragma ID MaterialFamilies "DCE:fe4fec10-779b-11d6-80560030f113d1bf"
+#pragma ALIAS CATIAMaterialFamilies MaterialFamilies
+
+#endif
+// CATIAMaterialFamilies_IDL
+
+
+
+
+
+
+

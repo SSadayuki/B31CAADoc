@@ -1,0 +1,20 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= NONE
+
+INCLUDED_MODULES =  ProcessItfCPP ProcessProIDL
+
+LINK_WITH= JS0GROUP CATObjectModelerBase
+	  	  
+
+
+
+
+
+
+
+
+
+
+

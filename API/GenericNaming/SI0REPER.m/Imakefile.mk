@@ -1,0 +1,9 @@
+#
+BUILT_OBJECT_TYPE= NONE
+#
+OS = COMMON
+
+LINK_WITH = JS0ERROR JS0CORBA\
+            Collections\
+            AD0XXBAS
+

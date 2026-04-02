@@ -1,0 +1,254 @@
+#ifndef CATIAHybridShapeHelix_IDL
+#define CATIAHybridShapeHelix_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//           
+// CATIAHybridShapeHelix:         
+// Exposed interface for HybridShape Helix
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Janvier2000 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+#include "CATIARealParam.idl"
+
+/**
+ * Represents the hybrid shape helix feature object.
+ * <b>Role</b>: Allows to access data of the Helix feature.  
+  * This data includes:
+ * <ul>
+ * <li>axis</li>
+ * <li>a starting point</li>
+ * <li>a pitch</li>
+ * <li>a height</li>
+ * <li>2 angle values</li>
+ * </ul>
+ * @see CATIAHybridShapeFactory
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeHelix : CATIAHybridShape
+{
+ /**
+ * Reads / Changes the Helix axis.
+ *   @param Axis
+ *      Helix axis.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * CATIARectlinearTriDimFeatEdge or @href CATIARectilinearBiDimFeatEdge.
+  */
+#pragma PROPERTY Axis
+ HRESULT get_Axis   (out /*IDLRETVAL*/ CATIAReference   oAxis);
+ HRESULT put_Axis   (in                CATIAReference   iAxis);
+
+
+ /**
+ * Reads / Modifies the orientation .
+ *   @param Invert
+ *      FALSE   means that there is no invertion (natural orientation). 
+ *      TRUE    to invert this orientation.
+ */
+#pragma PROPERTY InvertAxis
+ HRESULT get_InvertAxis   (out /*IDLRETVAL*/ boolean   oInvert);
+ HRESULT put_InvertAxis   (in                boolean   iInvert);
+
+ /**
+ * Reads / Changes the starting point of the Helix.
+ * The starting point must not be on the Helix axis.
+ *   @param StartingPoint
+ *      Starting point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ */
+#pragma PROPERTY StartingPoint
+ HRESULT get_StartingPoint   (out /*IDLRETVAL*/ CATIAReference   oStPt);
+ HRESULT put_StartingPoint   (in                CATIAReference   iStPt);
+
+
+ /**
+ * Reads the pitch of the Helix.
+ *   @param oPitch
+ *      Pitch.
+ */
+#pragma PROPERTY Pitch
+ HRESULT get_Pitch   (out /*IDLRETVAL*/ CATIALength   oInvert);
+
+
+
+ /**
+ * Reads the height of the Helix.
+ *   @param oHeight
+ *      Height.
+ */
+#pragma PROPERTY Height
+ HRESULT get_Height   (out /*IDLRETVAL*/ CATIALength   oHeight);
+
+
+
+ /**
+ * Reads the revolution number of the Helix.
+ *   @param oNbRevol
+ *      Revolutions.
+ */
+#pragma PROPERTY RevolNumber
+ HRESULT get_RevolNumber   (out /*IDLRETVAL*/ CATIARealParam   oNbRevol);
+
+
+
+ /**
+ * Reads / Modifies the sense of revolutions .
+ *   @param Clockwise
+ *      FALSE   means that revolutions are counter-clockwise. 
+ *      TRUE    means that revolutions are clockwise.
+ */
+#pragma PROPERTY ClockwiseRevolution
+ HRESULT get_ClockwiseRevolution   (out /*IDLRETVAL*/ boolean   oClockwiseRevolution);
+ HRESULT put_ClockwiseRevolution   (in                boolean   iClockwiseRevolution);
+
+
+
+
+ /**
+ * Reads the helix starting angle.
+ *   @param oStartingAngle
+ *      Starting angle.
+ */
+#pragma PROPERTY StartingAngle
+ HRESULT get_StartingAngle   (out /*IDLRETVAL*/ CATIAAngle   oStartingAngle);
+
+
+
+
+ /**
+ * Reads the helix taper angle.
+ *   @param oTaperAngle
+ *      Taper angle.
+ */
+#pragma PROPERTY TaperAngle
+ HRESULT get_TaperAngle   (out /*IDLRETVAL*/ CATIAAngle   oTaperAngle);
+
+
+
+
+ /**
+ * Reads / Modifies the taper angle sense of variation.
+ *   @param TaperOutward
+ *      FALSE   means that helix radius decreases. 
+ *      TRUE    means that helix radius increases.
+ */
+#pragma PROPERTY TaperOutward
+ HRESULT get_TaperOutward   (out /*IDLRETVAL*/ boolean   oTaperOutward);
+ HRESULT put_TaperOutward   (in                boolean   iTaperOutward);
+
+
+/**
+ * Sets the helix taper angle.
+ *   @param iTaperAngle
+ *      Taper angle.
+ */
+
+  HRESULT SetTaperAngle (in double  iTaperAngle);
+
+ /**
+ * Sets the helix starting angle.
+ *   @param oTaperAngle
+ *      Starting angle.
+ */
+
+  HRESULT SetStartingAngle  (in double  iStartingAngle);
+
+/**
+ * Sets the helix height.
+ *   @param iHeight
+ *      Height.
+ */
+
+  HRESULT SetHeight (in double  iHeight);
+
+/**
+ * Sets the helix pitch.
+ *   @param iPitch
+ *      Pitch.
+ */
+
+  HRESULT SetPitch  (in double  iPitch);
+
+/**
+ * Reads / Changes the Helix profile.
+ *   @param Profile
+ *      Profile for Helix.
+ */
+
+#pragma PROPERTY Profile 
+ 
+  HRESULT get_Profile (out  /*IDLRETVAL*/ CATIAReference  oProfile);
+  HRESULT put_Profile (in                 CATIAReference  iProfile);
+
+/**
+ * Reads / Changes the Helix pitch law type.
+ *   @param LawType
+ *      LawType for Helix.
+ */
+
+#pragma PROPERTY PitchLawType
+ 
+  HRESULT get_PitchLawType (out  /*IDLRETVAL*/ long oLawType);
+  HRESULT put_PitchLawType (in                 long iLawType);
+
+/**
+ * Reads the Helix pitch2.
+ *   @param Pitch2
+ *      Pitch2 for Helix.
+ */
+
+#pragma PROPERTY Pitch2
+  HRESULT get_Pitch2 (out  /*IDLRETVAL*/  CATIALength oPitch2);
+ 
+/**
+ * Changes the Helix pitch2 .
+ *   @param Pitch2
+ *      Pitch2 for Helix.
+ */
+
+  HRESULT  SetPitch2 (in double  iPitch2);
+
+/**
+ * Changes the Revolution Numbers.
+ *   @param NbRevol
+ *      Number of revolutions for Helix.
+ */
+
+  HRESULT SetRevolutionNumber (in double  iNbRevol);
+
+};
+
+
+// Interface name : CATIAHybridShapeHelix
+#pragma ID CATIAHybridShapeHelix "DCE:281bcff0-ead9-11d3-84ef0000863e1bce"
+#pragma DUAL CATIAHybridShapeHelix
+
+// VB object name : HybridShapeHelix (Id used in Visual Basic)
+#pragma ID HybridShapeHelix "DCE:4cb90810-ead9-11d3-84ef0000863e1bce"
+#pragma ALIAS CATIAHybridShapeHelix HybridShapeHelix
+
+#endif
+// CATIAHybridShapeHelix_IDL
+
+
+
+
+
+

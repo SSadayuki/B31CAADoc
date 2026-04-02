@@ -1,0 +1,98 @@
+#ifndef CATIAPspTempListFactory_IDL
+#define CATIAPspTempListFactory_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+interface CATIAPspListOfObjects;
+interface CATIAPspListOfBSTRs;
+interface CATIAPspListOfLongs;
+interface CATIAPspListOfDoubles;
+
+#include "CATIABase.idl"
+
+ /** 
+  * Create temporary (non-persistent) lists to be used in VB environment.
+  * <b>Role</b>: Create lists in VB environment.
+  */
+
+interface CATIAPspTempListFactory : CATIABase
+{
+ /**
+  * Returns a new empty list of objects.
+  * 
+  * @return a empty list of objects.
+  *
+  * @sample
+  * This example illustrates how to create a new empty list of objects.
+  * <pre>
+  * Dim PspListFact As PspTempListFactory
+  * Dim NewList As PspListOfObjects
+  * Set NewList = PspListFact.<font color="red">CreateListOfObjects</font>
+  * </pre>
+  */
+  HRESULT CreateListOfObjects (out /*IDLRETVAL*/ CATIAPspListOfObjects oLObject);
+
+ /**
+  * Returns a new empty list of strings.
+  * 
+  * @return a empty list of strings.
+  *
+  * @sample
+  * This example illustrates how to create a new empty list of strings.
+  * <pre>
+  * Dim PspListFact As PspTempListFactory
+  * Dim NewList As PspListOfBSTRs
+  * Set NewList = PspListFact.<font color="red">CreateListOfBSTRs</font>
+  * </pre>
+  */
+  HRESULT CreateListOfBSTRs (out /*IDLRETVAL*/ CATIAPspListOfBSTRs oLBSTR);
+
+ /**
+  * Returns a new empty list of doubles.
+  * 
+  * @return a empty list of doubles.
+  *
+  * @sample
+  * This example illustrates how to create a new empty list of doubles.
+  * <pre>
+  * Dim PspListFact As PspTempListFactory
+  * Dim NewList As PspListOfDoubles
+  * Set NewList = PspListFact.<font color="red">CreateListOfDoubles</font>
+  * </pre>
+  */
+  HRESULT CreateListOfDoubles (out /*IDLRETVAL*/ CATIAPspListOfDoubles oLDb);
+
+ /**
+  * Returns a new empty list of long integers.
+  * 
+  * @return a empty list of long integers.
+  *
+  * @sample
+  * This example illustrates how to create a new empty list of long integers.
+  * <pre>
+  * Dim PspListFact As PspTempListFactory
+  * Dim NewList As PspListOfLongs
+  * Set NewList = PspListFact.<font color="red">CreateListOfLongs</font>
+  * </pre>
+  */
+  HRESULT CreateListOfLongs (out /*IDLRETVAL*/ CATIAPspListOfLongs oLLong);
+
+};
+
+// Interface name : CATIAPspTempListFactory
+#pragma ID CATIAPspTempListFactory "DCE:eb0e2837-0368-457c-99f81b18d38ee9fa"                                            
+#pragma DUAL CATIAPspTempListFactory
+
+// VB object name : PspTempListFactory
+#pragma ID PspTempListFactory      "DCE:0ff8151f-c241-4ff1-a68a041dfc73f632"
+                                   
+#pragma ALIAS CATIAPspTempListFactory PspTempListFactory
+
+#endif

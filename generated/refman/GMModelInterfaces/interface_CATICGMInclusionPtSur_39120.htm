@@ -1,0 +1,269 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMModelInterfaces CATICGMInclusionPtSur Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMModelInterfaces.htm" href="../GMModelInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMModelInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATICGMInclusionPtSur"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>GMModelInterfaces Framework:  CATICGMInclusionPtSur Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATICGMInclusionPtSur_39120','CATICGMInclusionPtSur','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATICGMInclusionPtSur</b>
+</p>
+<p>
+<b><i> Class defining the operator for testing the inclusion of a point
+ in a surface.</i></b><br>
+
+ <br>The inclusion is tested within a given tolerance. The operator gets all
+ the points closed enough (at the tolerance) to the surface, spaced 
+ each other by a curvilinear distance at least equal to <tt>2*Tol</tt>.
+ This operator is optimized for low values of <tt>Tol</tt>. It differs from the
+ CATICGMDistanceMinPtSur operator, that only outputs one point realizing
+ the minimum distance without tolerance.
+<ul>
+<li>The CATICGMInclusionPtSur operator is created with the <tt>CATCGMCreateInclusion</tt> method and 
+ directly released with the <tt>Release</tt> method.
+ It is is not streamable. 
+<li>In case of <tt>BASIC</tt>
+ mode, the operation is automatically performed at the operator creation. 
+ In case of <tt>ADVANCED</tt>
+ mode, options can be precised with the <tt>SetXxx</tt> methods, before
+ asking for the computation with the <tt>Run</tt> method. The advanced mode also allows you to
+ run the same operator with different points.
+<li>In both cases, the result is accessed with a specific interator.
+</ul></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#BeginningPoint()"><b>BeginningPoint</b></a>()
+</td><td id='tdright'>  Initializes the iterator of the resulting points of <tt>this</tt> 
+ CATICGMInclusionPtSur operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDistance()"><b>GetDistance</b></a>()
+</td><td id='tdright'>  Returns the distance of a solution point and the surface.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfPoints()"><b>GetNumberOfPoints</b></a>()
+</td><td id='tdright'>  Returns the number of resulting points of <tt>this</tt> CATICGMInclusionPtCrv operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPointOnSurface()"><b>GetPointOnSurface</b></a>()
+</td><td id='tdright'>  Creates the next solution point of <tt>this</tt> CATICGMInclusionPtSur operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSignature()"><b>GetSignature</b></a>()
+</td><td id='tdright'>  Returns the signature of the solution point.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSurParam()"><b>GetSurParam</b></a>()
+</td><td id='tdright'>  Retrieves the parameter of the next solution point of <tt>this</tt> CATICGMInclusionPtSur operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#NextPoint()"><b>NextPoint</b></a>()
+</td><td id='tdright'>  Skips to the next solution point of <tt>this</tt> CATICGMInclusionPtSur operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLimits(CATSurLimits&amp;)"><b>SetLimits</b></a>(CATSurLimits&amp;)
+</td><td id='tdright'>  Defines the curve new limitations to take into account for <tt>this</tt> operator in 
+ <tt>ADVANCED</tt> mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPoint(CATPoint*)"><b>SetPoint</b></a>(CATPoint*)
+</td><td id='tdright'>  Sets a new point for <tt>this</tt> operator (<tt>ADVANCED</tt> mode).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPoint(CATMathPoint&amp;)"><b>SetPoint</b></a>(CATMathPoint&amp;)
+</td><td id='tdright'>  Sets a new point for <tt>this</tt> operator (<tt>ADVANCED</tt> mode).
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="BeginningPoint"></a><a id="BeginningPoint()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BeginningPoint</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Initializes the iterator of the resulting points of <tt>this</tt> 
+ CATICGMInclusionPtSur operator.
+ <br>By default, the initialization is performed once the operator runs,
+ and this is therefore only used to read the solutions again.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDistance"></a><a id="GetDistance()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('double','double')</script>  <span class='objname'>GetDistance</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the distance of a solution point and the surface.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The distance.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfPoints"></a><a id="GetNumberOfPoints()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetNumberOfPoints</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the number of resulting points of <tt>this</tt> CATICGMInclusionPtCrv operator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The number of solutions.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPointOnSurface"></a><a id="GetPointOnSurface()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATPointOnSurface','CATPointOnSurface *')</script>  <span class='objname'>GetPointOnSurface</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates the next solution point of <tt>this</tt> CATICGMInclusionPtSur operator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the created point on surface. A new point is created each time this method is called.
+ If you do not want to keep the created point, use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSignature"></a><a id="GetSignature()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetSignature</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the signature of the solution point.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The signature.
+ <br><b>Legal values</b>:
+ <dl><dt><tt>0</tt></dt><dd> if the point is on the surface
+ <dt><tt>-1</tt> of <tt>1</tt></dt><dd>according to the sign of the
+ dot product : <tt>(Point-Projection(Point))*NormalToSurface(Projection(Point))</tt>.
+ </dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSurParam"></a><a id="GetSurParam()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATSurParam','CATSurParam')</script>  <span class='objname'>GetSurParam</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the parameter of the next solution point of <tt>this</tt> CATICGMInclusionPtSur operator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The parameter.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="NextPoint"></a><a id="NextPoint()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>NextPoint</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Skips to the next solution point of <tt>this</tt> CATICGMInclusionPtSur operator.
+<br>After <tt>BeginningPoint</tt>, it skips to the first point. The points are
+ spaced each other by a curvilinear length at least equal to <tt>2*Tol</tt>.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The existence of the next solution.
+ <br><b>Legal values</b>:
+<dl><dt><tt>TRUE</tt> <dd>if there is a solution point
+    <dt><tt>FALSE</tt> <dd>no more solution point.</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLimits"></a><a id="SetLimits(CATSurLimits&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLimits</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATSurLimits','CATSurLimits&amp;')</script> <span class='param'>iNewLimits</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the curve new limitations to take into account for <tt>this</tt> operator in 
+ <tt>ADVANCED</tt> mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNewLimits</span></dt>
+   <dd> The new limitations on the curve.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPoint"></a><a id="SetPoint(CATPoint*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetPoint</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPoint','CATPoint*')</script> <span class='param'>iPt</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets a new point for <tt>this</tt> operator (<tt>ADVANCED</tt> mode).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPt</span></dt>
+   <dd> The pointer to the new point to take into account.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPoint"></a><a id="SetPoint(CATMathPoint&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetPoint</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iMathPt</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets a new point for <tt>this</tt> operator (<tt>ADVANCED</tt> mode).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMathPt</span></dt>
+   <dd> The new point to take into account.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICGMInclusionPtSur.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMModelInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

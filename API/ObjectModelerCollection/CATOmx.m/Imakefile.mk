@@ -1,0 +1,12 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+INCLUDED_MODULES=CATOmxKernel CATOmp CATOmxMC
+LINK_WITH=JS0GROUP CATSysAllocator CATSysTS CATOmxBase JS0MT JS0ZLIB
+
+#if os Windows
+CXX_WARNINGPROMOTE=CATOmxWarningPromote.h
+#endif
+
+#if os Linux
+SYS_LIBS=-lpthread
+#endif

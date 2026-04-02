@@ -1,0 +1,58 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIAPPRActivity_IDL
+#define CATIAPPRActivity_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAActivity.idl"
+
+interface CATIAPPRProducts ;
+interface CATIAPPRItems ;
+
+/**  
+ * The interface is used to retrieve the items and resources of the current Activity. 
+ */
+interface CATIAPPRActivity : CATIAActivity 
+{
+
+/**
+* Retrieves the list of items as Products aggregated by the Activity.
+* @return
+*    The list of items of the current Activity.
+*/
+#pragma PROPERTY PPRItems
+    HRESULT	  get_PPRItems(out /*IDLRETVAL*/ CATIAPPRProducts oItems);
+
+/**
+* Retrieves the list of resources as Products aggregated by the Activity.
+* @return
+*    The list of resources of the current Activity.
+*/
+#pragma PROPERTY PPRResources
+    HRESULT	  get_PPRResources(out /*IDLRETVAL*/ CATIAPPRProducts oResources);
+
+/**
+* Retrieves the list of items as CATIAItems aggregated by the Activity.
+* @return
+*    The list of items of the current Activity, including ASMPRODUCT and
+*    possibly FTA objects
+*/
+#pragma PROPERTY PPRItemsAndFTA
+    HRESULT	  get_PPRItemsAndFTA(out /*IDLRETVAL*/ CATIAPPRItems oItems);
+
+};
+
+// Interface name : CATIAPPRActivity
+#pragma ID CATIAPPRActivity "DCE:33e38444-8fcf-11d4-85670000863e1bbb"
+#pragma DUAL CATIAPPRActivity
+
+// VB object name : PPRActivity (Id used in Visual Basic)
+#pragma ID PPRActivity "DCE:33e38445-8fcf-11d4-85670000863e1bbb"
+#pragma ALIAS CATIAPPRActivity PPRActivity
+
+#endif

@@ -1,0 +1,169 @@
+#ifndef CATIAStrSection_IDL
+#define CATIAStrSection_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIAStrSection
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+//
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 09/12/97
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIAStrSection;
+interface CATIADocument;
+interface CATIAStrAnchorPoints;
+interface CATIAStrAnchorPoint;
+interface CATIAParameter;
+
+#include "CATIAStrObject.idl"
+#include "CATSafeArray.idl"
+#include "CATIAStrServices.idl"
+
+	/**
+        * Represents the section object.
+	* The section object is created from a part document in which a sketch has to
+	* be defined.
+	* <br>
+	* The sketch object may contain one or several contour but all of them have
+	* to be closed.
+	* <br>
+	* Predefined anchor points objects are calculated from the geometrical contour
+	* as the top bottom point, the center gravity point, etc.
+	* <br>
+	* User anchor points can be created in the sketch using the parametric geometry
+	* or not. However the names of these points have to prefixed by the string "Str"
+	* to be recognized as structure anchor points.
+	* <br>
+	* Some attributes are defined on the section object but cannot be modified.
+	* <br>
+	* A group of attributes defines the section name, the family name, and the
+	* the name of the catalog where the section comes from.
+        * <br>
+	* Another attribute called the profile type defines the type of the parametric
+	* contour used to create the section. The contour can be a Tee, an angle, a channel,
+	* a square tube, and so on. These predefined contours are useful to create a new
+	* catalog with some standard contours.
+	*/
+
+interface CATIAStrSection : CATIABase
+{
+	/**
+	* Returns the collection of anchor points.
+    * <pre>
+	* @sample
+	* Dim anchorPts As StrAnchorPoints
+    * Set anchorPts = Section_1.<font color="red">StrAnchorPoints</font>  
+    * </pre>
+	*/
+
+#pragma PROPERTY StrAnchorPoints
+
+	HRESULT get_StrAnchorPoints(out /*IDLRETVAL*/ CATIAStrAnchorPoints oAnchorPoints);
+
+	/**
+	* Returns the parameter defining the section name.
+    * @sample
+    * <pre>
+	* Dim name As Parameter
+    * Set name = Section_1.<font color="red">SectionName</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY SectionName
+
+	HRESULT get_SectionName(out /*IDLRETVAL*/ CATIAParameter oParameter);
+
+	/**
+	* Returns the parameter defining the family name. 
+    * @sample
+    * <pre>
+	* Dim name As Parameter
+    * Set name = Section_1.<font color="red">FamilyName</font>
+    * </pre>
+	*
+	*/
+
+#pragma PROPERTY FamilyName
+
+	HRESULT get_FamilyName(out /*IDLRETVAL*/ CATIAParameter oParameter);
+
+	/**
+	* Returns the parameter defining the catalog name. 
+	* @sample
+    * <pre>
+	* Dim name As Parameter
+    * Set name = Section_1.<font color="red">CatalogName</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY CatalogName
+
+	HRESULT get_CatalogName(out /*IDLRETVAL*/ CATIAParameter oParameter);
+
+	/**
+	* Returns the parameter defining the profile type of the section. 
+	* @sample
+    * <pre>
+	* Dim type As Parameter
+    * Set type = Section_1.<font color="red">ProfileType</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY ProfileType
+
+	HRESULT get_ProfileType(out /*IDLRETVAL*/ CATIAParameter oParameter);
+
+	/**
+	* Get a property value. 
+	* @sample
+    * <pre>
+	* Dim type As Parameter
+    * Set type = Section_1.<font color="red">GetProperty(CatStrArea)</font>
+    * </pre>
+	*/
+
+	HRESULT GetProperty(in CATStrSectionProperties iProperty, out double oValue);
+};
+
+// Interface name : CATIAStrSection
+#pragma ID CATIAStrSection "DCE:948c1b40-8b0e-11d4-94c200108379318c"
+#pragma DUAL CATIAStrSection
+
+#pragma ID StrSection "DCE:4b5c4992-8b11-11d4-94c200108379318c"
+#pragma ALIAS CATIAStrSection StrSection
+
+#endif

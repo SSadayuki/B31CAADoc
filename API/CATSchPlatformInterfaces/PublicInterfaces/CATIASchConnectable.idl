@@ -1,0 +1,66 @@
+#ifndef CATIASchConnectable_IDL 
+#define CATIASchConnectable_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfBSTRs;
+interface  CATIASchGRR;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Represents schematic objects that can be connected to others.
+  */
+
+interface CATIASchConnectable : CATIABase
+{
+  /**
+  * Find all the connectors of this schematic object on a specific
+  * graphical image.
+  *
+  * @param oLCntrClassFilter
+  *   A list of all the class types for filtering the output connector
+  *   list.
+  * @param iGRR
+  *   Pointer to the graphical image
+  * @param oLCntrs
+  *   A list of connectors included in this connection.
+  *   (members are CATISchAppConnector interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchConnectable
+  * Dim objArg1 As SchListOfBSTRs
+  * Dim objArg2 As SchGRR
+  * Dim objArg3 As SchListOfObjects
+  *  ...
+  * Set objArg3 = objThisIntf.<font color="red">ListConnectors</font>(objArg1,objArg2)
+  * </pre>
+  *    
+  */
+  HRESULT ListConnectors ( 
+    in CATIASchListOfBSTRs iLCntrClassFilter, 
+    in CATIASchGRR iGRR, 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLCntrs );
+    
+};
+    
+// Interface name : CATIASchConnectable
+#pragma ID CATIASchConnectable "DCE:ca497a5f-0b68-4d4c-81420c3375734c07"
+#pragma DUAL CATIASchConnectable
+    
+// VB object name : SchConnectable
+#pragma ID SchConnectable "DCE:c30c29e3-1810-47a7-af25b092bc7d7cee"
+#pragma ALIAS CATIASchConnectable SchConnectable
+    
+#endif 
+    

@@ -1,0 +1,30 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+DELIVERABLE = NO
+
+# System dependant variables
+#
+OS = AIX
+BUILD=YES  
+#
+OS = HP-UX
+BUILD=YES
+#
+OS = IRIX
+BUILD=YES
+#
+OS = SunOS
+BUILD=YES
+#
+OS = intel_a
+BUILD=YES
+#
+OS = win_b
+BUILD=YES
+#
+OS = win_b64
+BUILD=YES
+
+OS = aix_a64
+BUILD=YES
+
+

@@ -1,0 +1,126 @@
+#ifndef CATIASampleds_IDL
+#define CATIASampleds_IDL
+
+/*IDLREP*/
+
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//===================================================================
+// CATIASampleds.idl
+// Automation interface for the Sampleds element 
+//===================================================================
+
+
+#include "CATIACollection.idl"
+#include "CATIASampled.idl"
+#include "CATVariant.idl"
+
+
+    /**  
+     * The collection of all the Sampled objects currently contained in the 
+     * current document.  A @href CATIASampled object is the base type for
+     * @href CATIATrack objects.
+     * 
+     */
+
+interface CATIASampleds : CATIACollection
+{
+    /**
+     * Creates a new Sampled object and adds it to the Sampleds collection.
+     * @return The created Sampled
+     *
+     * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example creates a Sampled (called <tt>newSampled</tt>)
+     * with in the Sampleds collection.
+     *
+     * <pre>
+     * Set newSampled = Sampleds.<font color="red">Add</font>
+     * </pre>
+     */
+
+    HRESULT Add (out /*IDLRETVAL*/ CATIASampled oNewSampled);
+
+
+    /**
+     * Creates a new Sampled from the selection and adds it to the Sampleds collection.
+     * @return The created Sampled
+     *
+     * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example creates a Sampled (called <tt>newSampled</tt>)
+     * with in the Sampleds collection.
+     *
+     * <pre>
+     * Set newSampled = Sampleds.<font color="red">Add</font>
+     * </pre>
+     */
+
+    HRESULT AddFromSel (out /*IDLRETVAL*/ CATIASampled oNewSampled);
+
+
+    /**
+     * Returns a CATIASampled object using its index from the CATIASampled
+     * collection.
+     * @param iIndex
+     *      The index of the sampled to retrieve from the collection of sampleds.
+     *      Numerically, the index value corresponds to the rank of the sampled in
+     *      the collection (ie. the first is 1, second is 2, ...).
+     * @return The retrieved Sampled
+     *
+     * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example retrieves the second Sampled from the Sampleds collection
+     * of the active document.
+     *
+     * <pre>
+     * Dim newSampled as Sampled
+     * Set newSampled = Sampleds.<font color="red">Item</font> (2)
+     * </pre>
+     */
+
+    HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ CATIASampled oSampled);
+
+
+    /**
+     * Removes a CATIASampled object from the CATIASampled collection.
+     * @param iIndex
+     *      The index of the sampled to remove from the collection of sampleds.
+     *      Numerically, the index value corresponds to the rank of the sampled in
+     *      the collection (ie. the first is 1, second is 2, ...).
+     *
+     * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example removes the third Sampled from the Sampleds collection 
+     * of the active document.
+     *
+     * <pre>
+     * Sampleds.<font color="red">Remove</font> (3)
+     * </pre>
+     */
+
+    HRESULT Remove (in CATVariant iIndex);
+
+};
+
+
+// Interface name : CATIASampleds
+#pragma ID CATIASampleds "DCE:b8dde75e-a3d2-471e-9d88966fea57f6bd"
+#pragma DUAL CATIASampleds
+
+
+// VB object name : Sampleds (Id used in Visual Basic)
+#pragma ID Sampleds "DCE:74da57c8-5e94-4ec1-ba2cfe0acd22b471"
+#pragma ALIAS CATIASampleds Sampleds
+
+
+#endif

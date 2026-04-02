@@ -1,0 +1,144 @@
+// COPYRIGHT Dassault Systemes 2000
+#ifndef CATIAAnalysisSets_IDL
+#define CATIAAnalysisSets_IDL
+/*IDLREP*/
+//===================================================================
+//
+// CATIAAnalysisSets.idl
+// Automation interface for the AnalysisSets element 
+//
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATAnalysisSetType.idl"
+#include "CATVariant.idl"
+
+interface CATIAAnalysisSet;
+
+/**  
+ * The collection of analysis sets.
+ * <p>
+ */
+
+interface CATIAAnalysisSets : CATIACollection 
+{
+/**
+ * Creates a new analysis set and adds it to the analysis sets collection.<br>
+ * The analysis set will be aggregated on the Analysis Model
+ * @param iType under the form : oStartUpName@oCatalogName?oClientId (For User defined Startups).
+ * The type of the set to create.
+ * @param iSetType
+ * The category of the set for update.
+ * @return The created Analysis Set
+ *
+ * @sample
+ * This example create <tt>ThisAnalysisSet</tt> in the <tt>analysisSets</tt>analysis <br>
+ * sets collection. The set to create is supposed to be a load set defined as an input of <br>
+ * the case for the update.
+ * <pre>
+ * Dim ThisAnalysisSet As AnalysisSet
+ * Set ThisAnalysisSet = analysisSets.Add("LoadSet", 0)
+ * </pre>
+ */
+    HRESULT     Add(  in	CATBSTR				      iType, 
+                      in    CATAnalysisSetType  iSetType,
+                      out	/*IDLRETVAL*/ CATIAAnalysisSet    oSet );
+
+/**
+ * Adds an existing analysis set to the analysis sets collection.<br>
+ * @param iSet
+ * The Existing Analysis Set.
+ * @param iSetType
+ * The category of the set for update.
+ *
+ * @sample
+ * This example adds <tt>ThisAnalysisSet</tt> in the <tt>analysisSets</tt>analysis <br>
+ * sets collection. The set to add is supposed to be a restrain set defined as an input of <br>
+ * the case for the update.
+ * <pre>
+ * Dim ThisAnalysisSet As AnalysisSet
+ * ...
+ * analysisSets.AddExistingSet(ThisAnalysisSet, 0)
+ * </pre>
+ */
+	HRESULT     AddExistingSet( in  CATIAAnalysisSet    iSet, 
+							    in  CATAnalysisSetType  iSetType );
+
+ /**
+  * Returns an analysis set using its index or its name from the analysis sets collection. 
+  * @param iIndex
+  *   The index or the name of the analysis set to retrieve from
+  *   the collection of analysis sets.
+  *   As a numerics, this index is the rank of the analysis set
+  *   in the collection.
+  *   The index of the first analysis set in the collection is 1, and
+  *   the index of the last analysis set is Count.
+  *   As a string, it is the name you assigned to the analysis set using
+  *   the @href CATIABase#Name property or when creating it using
+  *   the @href #Add method.
+  * @param iSerachType
+  *   The criterion of searching the set. @href CATAnalysisSetType#CATAnalysisSetSearchType
+  * @return The retrieved analysis set
+  *
+  * @sample
+  * This example retrieves in <tt>ThisAnalysisSet</tt> the third analysis set,
+  * and in <tt>ThatAnalysisSet</tt> the analysis set named
+  * <tt>MySet</tt> in the analysis set collection of an Analysis Case of analysis model.
+  * <pre>
+  * Dim ThisAnalysisSet As AnalysisSet
+  * Set ThisAnalysisSet = analysisCase.AnalysisSets.<font color="red">Item</font>(3,1)
+  * Dim ThatAnalysisSet As AnalysisSet
+  * Set ThatAnalysisSet = analysisCase.AnalysisSets.<font color="red">Item</font>("MySet")
+  * </pre>
+  */
+     HRESULT     Item( in                CATVariant            iIndex,
+                       in  CATAnalysisSetSearchType            iSerachType,
+                       out /*IDLRETVAL*/ CATIAAnalysisSet      oSet );
+
+ /**
+  * Returns an analysis set using its type from the analysis sets collection. 
+  * @param iType
+  *   The type of the set required for the search
+  * @return The retrieved analysis set
+  *
+  * @sample
+  * This example retrieves in <tt>ThisAnalysisSet</tt> the "LoadSet" analysis set 
+  * in the analysis set collection.
+  * <pre>
+  * Dim ThisAnalysisSet As AnalysisSet
+  * Set ThisAnalysisSet = analysisCase.AnalysisSets.<font color="red">ItemByType</font>("LoadSet")
+  * </pre>
+  */
+     HRESULT     ItemByType( in	CATBSTR				             iType,
+                             out /*IDLRETVAL*/ CATIAAnalysisSet    oSet ); 
+
+/**
+ * Removes a set using its index or its name from the set collection.
+ * @param iIndex
+ *   The index or the name of the set to retrieve from
+ *   the collection of sets.
+ *   As a numeric, this index is the rank of the set
+ *   in the collection. The index of the first set in the collection is 1,
+ *   and the index of the last set is Count.
+ *   As a string, it is the name you assigned to the set using
+ *   the @href CATIABase#Name property.
+*/
+
+	HRESULT Remove(in CATVariant iIndex);
+
+
+};
+
+// Interface name : CATIAAnalysisSets
+#pragma ID CATIAAnalysisSets "DCE:d02216e4-92eb-11d4-9f0a00508b6a3154"
+#pragma DUAL CATIAAnalysisSets
+
+// VB object name : AnalysisSets (Id used in Visual Basic)
+#pragma ID AnalysisSets "DCE:d02216e5-92eb-11d4-9f0a00508b6a3154"
+#pragma ALIAS CATIAAnalysisSets AnalysisSets
+
+#endif

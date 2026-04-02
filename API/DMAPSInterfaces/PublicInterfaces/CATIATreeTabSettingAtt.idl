@@ -1,0 +1,638 @@
+#ifndef CATIATreeTabSettingAtt_IDL
+#define CATIATreeTabSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+interface CATIATreeTabSettingAtt : CATIASettingController 
+{
+
+ /**
+ * Returns or sets the value for 'Resources Folder'
+ * <br><b>Role</b>: Returns or sets the value of 'Resources Folder' to signify
+ * whether the 'Assigned Resources' are visualized in the PPR tree 
+ */
+#pragma PROPERTY ResourceFilter
+     HRESULT get_ResourceFilter(out /*IDLRETVAL*/ long	oResFilter); 
+     HRESULT put_ResourceFilter( in long	iResFilter );
+
+	 /** 
+	 * Retrieves environment informations for the 'Resource Folder' parameter.
+	 * <br><b>Role</b>:Retrieves the state of the 'Resource Folder' parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetResourceFilterInfo	( inout					CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the 'Resource Folder' parameter.
+	 * <br><b>Role</b>:Locks or unlocks the 'Resource Folder' parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetResourceFilterLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value for 'Items Folder'
+ * <br><b>Role</b>: Returns or sets the value of 'Items Folder' to signify
+ * whether the 'Assigned Items' are visualized in the PPR tree 
+ */
+#pragma PROPERTY ItemsFilter
+     HRESULT get_ItemsFilter(out /*IDLRETVAL*/ long	oItemsFilter); 
+     HRESULT put_ItemsFilter( in long	iItemsFilter );
+
+	 /** 
+	 * Retrieves environment informations for the 'Items Folder' parameter.
+	 * <br><b>Role</b>:Retrieves the state of the 'Items Folder' parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetItemsFilterInfo	( inout					CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the 'Items Folder' parameter.
+	 * <br><b>Role</b>:Locks or unlocks the 'Items Folder' parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetItemsFilterLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value for 'Items Folder (Per Relation Type)'
+ * <br><b>Role</b>: Returns or sets the value of 'Items Folder(Per Relation Type)' to signify
+ * whether the 'Assigned Items'with proper relations ( like First Processes Product)
+ * are visualized in the PPR tree 
+ */
+#pragma PROPERTY ItemsPerRelationFilter
+     HRESULT get_ItemsPerRelationFilter(out /*IDLRETVAL*/ long	oItemsRelFilter); 
+     HRESULT put_ItemsPerRelationFilter( in long	iItemsRelFilter );
+
+	 /** 
+	 * Retrieves environment informations for the 'Items Folder(Per Relation Type)' parameter.
+	 * <br><b>Role</b>:Retrieves the state of the 'Items Folder(Per Relation Type)' parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetItemsPerRelationFilterInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the 'Items Folde(Per Relation Type)r' parameter.
+	 * <br><b>Role</b>:Locks or unlocks the 'Items Folder(Per Relation Type)' parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetItemsPerRelationFilterLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value for "Attributes" option
+ * <br><b>Role</b>: Returns or sets the value of "Attributes" option to signify
+ * whether the 'User Attributes' of an Activity is visualized in the PPR tree 
+ */
+#pragma PROPERTY AttributesFilter
+     HRESULT get_AttributesFilter(out /*IDLRETVAL*/ long	oItemsRelFilter); 
+     HRESULT put_AttributesFilter( in long	iItemsRelFilter );
+
+	 /** 
+	 * Retrieves environment informations for the "Attributes" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Attributes" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetAttributesFilterInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "Attributes" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Attributes" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetAttributesFilterLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns of sets the value to signify Whether "Applicative Data" created by an application
+ * is visible in the PPR tree
+ * <br><b>Role</b>: Returns or sets the value of "Applicative Data" option to signify
+ * whether the applicative containers are visualized in the PPR tree 
+ */
+#pragma PROPERTY ApplicativeDataFilter
+     HRESULT get_ApplicativeDataFilter(out /*IDLRETVAL*/ long	ovalue); 
+     HRESULT put_ApplicativeDataFilter( in long	ivalue );
+
+	 /** 
+	 * Retrieves environment informations for the "Applicative Data" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Applicative Data" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetApplicativeDataFilterInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "Applicative Data" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Attributes" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetApplicativeDataFilterLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns of sets the value to signify Whether "Output Products" assigned to a given activity
+ * is visible in the PPR tree
+ * <br><b>Role</b>: Returns or sets the value of "Output Products Folder" option to signify
+ * whether the output products associated with an activity are visualized in the PPR tree 
+ */
+#pragma PROPERTY OutputProductFilter
+     HRESULT get_OutputProductFilter(out /*IDLRETVAL*/ long	ovalue); 
+     HRESULT put_OutputProductFilter( in long	ivalue );
+
+	 /** 
+	 * Retrieves environment informations for the "Output Products Folder" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Output Products Folder" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetOutputProductFilterInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "Output Products Folder" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Output Products Folder" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetOutputProductFilterLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value to signify Whether the logical activites are visible in the PPR tree
+ * <br><b>Role</b>: Returns or sets the value of "Logical Activities" option to signify
+ * whether the logical activites are visible in the PPR tree 
+ */
+#pragma PROPERTY LogicalActFilter
+     HRESULT get_LogicalActFilter(out /*IDLRETVAL*/ long	ovalue); 
+     HRESULT put_LogicalActFilter( in long	ivalue );
+
+	 /** 
+	 * Retrieves environment informations for the "Logical Activities" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Logical Activities" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetLogicalActFilterInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "Logical Activities" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Logical Activities" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetLogicalActFilterLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value to signify Whether the double clicking on an activity expands/collapses
+ * a given activity in the PPR tree
+ * <br><b>Role</b>: Returns or sets the value to signify Whether the double clicking on an activity expands/collapses
+ * a given activity in the PPR tree
+ */
+#pragma PROPERTY CollapseExpandFilter
+     HRESULT get_CollapseExpandFilter(out /*IDLRETVAL*/ long	ovalue); 
+     HRESULT put_CollapseExpandFilter( in long	ivalue );
+
+	 /** 
+	 * Retrieves environment informations for the "Disable Collapse/Expand" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Disable Collapse/Expand" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetCollapseExpandFilterInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "Disable Collapse/Expand" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Disable Collapse/Expand" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetCollapseExpandFilterLock( in  boolean iLocked );
+//------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value to signify whether the 3D Assigned Viewer is default viewer or not
+ * <br><b>Role</b>: Returns or sets the value to signify whether 3D Assigned Viewer is default viewer or not
+ */
+#pragma PROPERTY AssignedViewer
+     HRESULT get_AssignedViewer(out /*IDLRETVAL*/ long	ovalue); 
+     HRESULT put_AssignedViewer( in long	ivalue );
+
+	 /** 
+	 * Retrieves environment informations for the "Assigned Viewer" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Assigned Viewer" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetAssignedViewerInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "Assigned Viewer" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Assigned Viewer" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetAssignedViewerLock( in  boolean iLocked );
+
+     //------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value to signify whether the E5 Configured Name is to be displayed
+ * <br><b>Role</b>: Returns or sets the value to signify whether the E5 Configured Name is to be displayed
+ */
+#pragma PROPERTY DisplayNameMode
+     HRESULT get_DisplayNameMode(out /*IDLRETVAL*/ long	ovalue); 
+     HRESULT put_DisplayNameMode( in long	ivalue );
+
+	 /** 
+	 * Retrieves environment informations for the "Display Name Mode" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Display Name Mode" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetDisplayNameModeInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+    /**
+     * Locks or unlocks the "Display Name Mode" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Display Name Mode" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetDisplayNameModeLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value to signify whether the 3D Render Style is Parallel or Perspective 
+ * <br><b>Role</b>: Returns or sets the value to signify whether the 3D Render Style is Parallel or Perspective 
+
+ */
+#pragma PROPERTY RenderStyle
+     HRESULT get_RenderStyle(out /*IDLRETVAL*/ long	ovalue); 
+     HRESULT put_RenderStyle( in long	ivalue );
+
+	 /** 
+	 * Retrieves environment informations for the "Render Style" parameter.
+	 * <br><b>Role</b>:Retrieves the state of the "Render Style" parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetRenderStyleInfo( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the "Render Style" parameter.
+	 * <br><b>Role</b>:Locks or unlocks the "Render Style" parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetRenderStyleLock( in  boolean iLocked );
+
+//------------------------------------------------------------------------------------------
+/**
+ * Returns or sets the value for 'Display Order'
+ * <br><b>Role</b>: Returns or sets the value of 'Display Order' to signify
+ * which order the product/resource list are in the PPR tree 
+ */
+#pragma PROPERTY DisplayOrder
+     HRESULT get_DisplayOrder(out /*IDLRETVAL*/ long	oDisplayOrder); 
+     HRESULT put_DisplayOrder( in long	iDisplayOrder );
+
+	 /** 
+	 * Retrieves environment informations for the 'Display Order' parameter.
+	 * <br><b>Role</b>:Retrieves the state of the 'Display Order' parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetDisplayOrderInfo	( inout					CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the 'Display Order' parameter.
+	 * <br><b>Role</b>:Locks or unlocks the 'Display Order' parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetDisplayOrderLock( in  boolean iLocked );
+
+     /**
+     * Returns or sets the value for 'Display Order for Processes'
+     * <br><b>Role</b>: Returns or sets the value of 'Display Order for Processes' to signify
+     * which order the processes under ProcessList and ResourcesList are listed in the PPR tree.
+     *	<b>Legal values</b>:
+     *  <br><tt>1 : </tt>   manufacturing hub order
+     *  <br><tt>0 : </tt>   loaded order
+     */
+#pragma PROPERTY DisplayProcessOrder
+     HRESULT get_DisplayProcessOrder(out /*IDLRETVAL*/ long	oDisplayOrder); 
+     HRESULT put_DisplayProcessOrder( in long	iDisplayOrder );
+
+	 /** 
+	 * Retrieves environment informations for the 'Display Order for Processes' parameter.
+	 * <br><b>Role</b>:Retrieves the state of the 'Display Order for Processes' parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetDisplayProcessOrderInfo	( inout					CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the 'Display Order for Processes' parameter.
+	 * <br><b>Role</b>:Locks or unlocks the 'Display Order for Processes' parameter if it
+	 * is possible in the current administrative context. In user mode this method will
+	 * always return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetDisplayProcessOrderLock( in  boolean iLocked );
+
+     /**
+     * Returns or sets the value for 'Paste Same Instance'
+     * <br><b>Role</b>: Returns or sets the value of 'Paste Same Instance' to signify
+     * whether a same product instance in the target process document should
+     * be reused or not.
+     *	<b>Legal values</b>:
+     *  <br><tt>1 : </tt>   Always paste an instance and do not reuse existing one
+     *  <br><tt>0 : </tt>   Reuse existing instance wherever possible
+     */
+#pragma PROPERTY PasteSameInstance
+     HRESULT get_PasteSameInstance(out /*IDLRETVAL*/ long	oDisplayOrder); 
+     HRESULT put_PasteSameInstance( in long	iDisplayOrder );
+
+	 /** 
+	 * Retrieves environment information for the 'Paste Same Instance' parameter.
+	 * <br><b>Role</b>:Retrieves the state of the 'Paste Same Instance' parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *   <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetPasteSameInstanceInfo	( inout					CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+    /**
+     * Locks or unlocks the 'Paste Same Instance' parameter.
+	 * <br><b>Role</b>:Locks or unlocks the 'Paste Same Instance' parameter if it
+	 * is possible in the current administrative context. In user mode this method will
+	 * always return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetPasteSameInstanceLock( in  boolean iLocked );
+
+};
+
+
+// Interface name : CATIATreeTabSettingAtt
+#pragma ID CATIATreeTabSettingAtt "DCE:f3a9189a-d4c7-4cea-b80e8341938c1257"
+#pragma DUAL CATIATreeTabSettingAtt
+
+// VB object name : TreeTabSettingAtt (Id used in Visual Basic)
+#pragma ID TreeTabSettingAtt "DCE:18fffca9-54f7-4f7f-a7ea83c25afa1b52"
+#pragma ALIAS CATIATreeTabSettingAtt TreeTabSettingAtt
+
+#endif
+

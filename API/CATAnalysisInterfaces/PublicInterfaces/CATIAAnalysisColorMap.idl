@@ -1,0 +1,383 @@
+#ifndef CATIAAnalysisColorMap_IDL
+#define CATIAAnalysisColorMap_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2010
+//=================================================================
+//                                   
+// CATIAAnalysisColorMap:                           
+// Exposed interface for Analysis ColorMap
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct.2010		Creation           OKH
+//=================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+
+
+enum SPMDistributionMode
+{
+    SPM_LINEAR,
+    SPM_HISTOGRAM,
+	SPM_LOG
+};
+
+/**
+ * Represents the Color Map Object of the post-processing Image Object.
+ */
+ //-----------------------------------------------------------------
+interface CATIAAnalysisColorMap : CATIABase
+{
+
+
+#pragma PROPERTY ImposedMaxValue
+ /**
+ * Gets the Imposed Maximum value for the Color Map 
+ *
+ * @param oMaxValue
+ * Returns Imposed Maximum value
+ * Returned value will be in CATIA Units.
+ *
+ * This Method Returns E_FAIL if the Parent Image is not uptodate.
+ *
+ * @sample: analysisColorMap is the ColorMap Object
+ * oMaxValue = analysisColorMap.ImposedMaxValue
+ * In this example, oMaxValue is the output Imposed Maximum value for analysisColorMap.
+ */
+  HRESULT get_ImposedMaxValue( out /*IDLRETVAL*/ double oMaxValue );
+
+ 
+ /**
+ * Sets the Impsoed Maximum value for the Color Map 
+ *
+ * @param iMaxValue
+ * Maximum value to be imposed
+ * Value has to be provided in CATIA Units.
+ * 
+ * This Method Returns E_FAIL if Color Map is Discrete.
+ * This Method Returns E_FAIL if Distribution Mode is set as SPM_HISTOGRAM
+ * 
+ * @sample: analysisColorMap is the ColorMap Object
+ * analysisColorMap.ImposedMaxValue = 3e+10
+ * In this example, Imposed Maximum value is set to 3e+10 for the color map analysisColorMap.
+ */
+  HRESULT put_ImposedMaxValue( in double iMaxValue );
+
+
+#pragma PROPERTY ImposedMinValue
+ /**
+ * Gets the Imposed Minimum value for the Color Map 
+ *
+ * @param oMinValue
+ * Returns imposed minimum value
+ * Returned value will be in CATIA Units.
+ *
+ * This Method Returns E_FAIL if the Parent Image is not uptodate.
+ *
+ * @sample: analysisColorMap is the ColorMap Object
+ * oMinValue = analysisColorMap.ImposedMinValue
+ * In this example, oMinValue is the output Imposed Minimum value for analysisColorMap.
+ */
+  HRESULT get_ImposedMinValue ( out /*IDLRETVAL*/ double oMinValue);
+
+
+ /**
+ * Sets the Imposed Minimum value for the Color Map 
+ *
+ * @param iMinValue
+ * Minimum value to be imposed
+ * Value has to be provided in CATIA Units.
+ * 
+ * This Method Returns E_FAIL if Color Map is Discrete.
+ * This Method Returns E_FAIL if Distribution Mode is set as SPM_HISTOGRAM
+ * 
+ * @sample: analysisColorMap is the ColorMap Object
+ * analysisColorMap.ImposedMinValue = -5e+9
+ * In this example, Imposed minimum value is set to -5e+9 for the color map analysisColorMap.
+ */
+  HRESULT put_ImposedMinValue ( in double iMinValue);
+
+
+#pragma PROPERTY NbColors
+  /**
+ * Gets the Number of colors for the Color Map 
+ *
+ * @param oNbColors
+ * returns number of colors as output from the color map.
+ *
+ * This Method Returns E_FAIL if the Parent Image is not uptodate.
+ *
+ * @sample: analysisColorMap is the ColorMap Object
+ * oNbColors = analysisColorMap.NbColors
+ * In this example, oNbColors is the output Number of colors for analysisColorMap.
+ */
+  HRESULT get_NbColors (out /*IDLRETVAL*/ long oNbColors);
+
+
+
+  /**
+ * Sets the Number of colors for the Color Map 
+ *
+ * @param iNbColors
+ * integer that sets number of colors for the color map object
+ * 
+ * This Method Returns E_FAIL if Color Map is Discrete.
+ * 
+ * @sample: analysisColorMap is the ColorMap Object
+ * analysisColorMap.NbColors = 5
+ * In this example, Number of colors is set to 5 for the color map analysisColorMap.
+ */
+  HRESULT put_NbColors (in long iNbColors);
+
+
+
+#pragma PROPERTY SmoothMode
+ /**
+ * Gets the Smooth mode for the Color Map 
+ *
+ * @param oSmoothMode
+ * Output Boolean for the Smooth Mode
+ *
+ * True	: indicates that Smooth mode is enabled for the color map.
+ * False: indicates that Smooth mode is disabled for the color map.
+ *
+ * This Method Returns E_FAIL if the Parent Image is not uptodate.
+ *
+ * @sample: analysisColorMap is the ColorMap Object
+ * oSmoothMode = analysisColorMap.SmoothMode
+ * In this example, oSmoothMode is the output Smooth Mode for analysisColorMap.
+ */
+  HRESULT get_SmoothMode (inout /*IDLRETVAL*/ CATVariant oSmoothMode);
+
+
+  
+ /**
+ * Sets the Smooth mode for the Color Map 
+ *
+ * @param iSmoothMode
+ * The Boolean which will set the Smooth mode
+ * True	:	will enable the Smooth Mode for the color map 
+ * False:	will disable the Smooth Mode for the color map.
+ *
+ * Setting True for Smooth Mode will disable discrete mode as they are mutually exclusive.(Only if Discrete Mode is avaliable)
+ * 
+ * @sample: analysisColorMap is the ColorMap Object
+ * analysisColorMap.SmoothMode = True
+ * In this example, Smooth Mode is enabled for the color map analysisColorMap.
+ */
+  HRESULT put_SmoothMode (in CATVariant iSmoothMode);
+
+
+#pragma PROPERTY DiscreteMode
+  /**
+ * Gets the Discrete mode for the Color Map 
+ *
+ * @param oDiscreteMode
+ * Output Boolean for the Discrete Mode
+ *
+ * True	: indicates that Discrete mode is enabled for the color map.
+ * False: indicates that Discrete mode is disabled for the color map.
+ *
+ * This Method Returns E_FAIL if the Parent Image is not uptodate.
+ *
+ * @sample: analysisColorMap is the ColorMap Object
+ * oDiscreteMode = analysisColorMap.DiscreteMode
+ * In this example, oDiscreteMode is the output Discrete Mode for analysisColorMap.
+ */
+  HRESULT get_DiscreteMode (inout /*IDLRETVAL*/ CATVariant oDiscreteMode);
+
+
+
+ /**
+ * Sets the Discrete mode for the Color Map 
+ *
+ * @param iDiscreteMode
+ * The Boolean which will set the Discrete mode
+ * True	:	will enable the Discrete Mode for the color map.
+ * False:	will disable the Discrete Mode for the color map.
+ *
+ * This method will set the Mode only if discrete mode is available for the color map.
+ * 
+ * @sample: analysisColorMap is the ColorMap Object
+ * analysisColorMap.DiscreteMode = True
+ * In this example, Discrete Mode is enabled for the color map analysisColorMap.
+ */
+  HRESULT put_DiscreteMode (in CATVariant iDiscreteMode);
+
+
+#pragma PROPERTY InverseMode  
+ /**
+ * Gets the Inverse mode for the Color Map 
+ *
+ * @param oInverseMode
+ * Output Boolean for the Inverse Mode
+ *
+ * True	: indicates that Inverse mode is enabled for the color map.
+ * False: indicates that Inverse mode is disabled for the color map.
+ *
+ * This Method Returns E_FAIL if the Parent Image is not uptodate.
+ *
+ * @sample: analysisColorMap is the ColorMap Object
+ * oInverseMode = analysisColorMap.InverseMode
+ * In this example, oInverseMode is the output Inverse Mode for analysisColorMap.
+ */
+ HRESULT get_InverseMode (inout /*IDLRETVAL*/ CATVariant oInverseMode);
+ 
+ 
+ /**
+ * Sets the Inverse mode for the Color Map 
+ *
+ * @param iInverseMode
+ * The Boolean which will set the Inverse mode
+ * True	:	will enable the Inverse Mode for the color map.
+ * False:	will disable the Inverse Mode for the color map.
+ * 
+ * @sample: analysisColorMap is the ColorMap Object
+ * analysisColorMap.InverseMode = True
+ * In this example, Inverse Mode is enabled for the color map analysisColorMap.
+ */
+  HRESULT put_InverseMode (in CATVariant iInverseMode);
+
+
+
+#pragma PROPERTY DistributionMode  
+ /**
+ * Gets the Distribution Mode for the Color Map
+ *
+ * @param oDistMode
+ * Returns the Distribution Mode (ColorMap type)
+	 * SPM_LINEAR		: For Linear Distribution Mode
+	 * SPM_HISTOGRAM	: For Histogram Distribution Mode
+	 * SPM_LOG			: For Logarithmic Distribution Mode
+ *
+ * This Method Returns E_FAIL if the Parent Image is not uptodate.
+ *
+ * @sample: analysisColorMap is the ColorMap Object
+ * oDistMode = analysisColorMap.DistributionMode
+ * In this example, oDistMode is the output distribution mode for analysisColorMap.
+ */
+  HRESULT get_DistributionMode (inout /*IDLRETVAL*/ SPMDistributionMode oDistMode);
+
+
+
+
+ /**
+ * Sets the Distribution Mode for the Color Map
+ *
+ * @param iDistMode
+ * Distribution Mode (ColorMap type) to be Set.
+	 * SPM_LINEAR		: For Linear Distribution Mode	 
+	 * SPM_HISTOGRAM	: For Histogram Distribution Mode
+	 * SPM_LOG			: For Logarithmic Distribution Mode
+ *
+ * This Method Returns E_FAIL @param iDistMode is not one of the above SPMDistributionMode Enum values.
+ * This Method Returns E_FAIL if Color Map is Discrete.
+ * This Method Returns E_FAIL if Min or Max Values are Imposed and @param iDistMode is SPM_HISTOGRAM
+ * This Method Returns E_FAIL if Computed or Imposed Min Value is Negative and @param iDistMode is SPM_LOG
+ * 
+ * @sample: analysisColorMap is the ColorMap Object
+ * analysisColorMap.DistributionMode = SPM_HISTOGRAM
+ * In this example, SPM_HISTOGRAM is the distribution mode set for analysisColorMap.
+ */
+  HRESULT put_DistributionMode (in SPMDistributionMode iDistMode);
+
+
+
+
+ /**
+ * Gets the Value for the Distribution of Color Map 
+ *
+ * @param indexValue
+ * The index whose Value we get.
+ * This integer should be greater than 0 and less than NbColors.
+ * Else Method Fails.
+ *
+ * @param oModeValue
+ * Returns the value @param indexValue
+ * Returned value will be in CATIA Units.
+ *
+ * This Method Returns E_FAIL if the Parent Image is not uptodate.
+ *
+ * @sample: analysisColorMap is the ColorMap Object
+ * Set oModeValue = analysisColorMap.GetDistributionValue (3)
+ * In this example, oModeValue is the output value of the Distribution list at Index 3.
+ */
+  HRESULT GetDistributionValue    (in long indexValue, 
+									out /*IDLRETVAL*/ double oModeValue);
+
+
+
+
+ /**
+ * Sets the Value for the Distribution of Color Map 
+ *
+ * @param indexValue
+ * The index whose Value will be set.
+ * This integer should be greater than 0 and less than NbColors.
+ * Else Method Fails.
+ *
+ * @param iModeValue
+ * The Value to be set.
+ * This value should be in between Computed/Imposed Min/Max values. Else Method Fails.
+ * In addition if @param iSmootheningFlag is False, this value should be in between the immediate lower and upper values.
+ * Else Method Fails.
+ * Value has to be provided in CATIA Units.
+ *
+ * @param iSmootheningFlag
+ * if True: Does either upper or lower smoothening of values.
+ * if False: Does not smoothen values. But sets only the given index value.
+ *
+ * This Method Returns E_FAIL if Color Map is Discrete.
+ *
+ * @sample: analysisColorMap is the ColorMap Object 
+ * Example 1:
+ *
+ * Call analysisColorMap.SetDistributionValue(3, 3e+09, True)
+ *
+ * This sets the value 3e+09 at 3rd Index of the list. It will smoothen the distribution values
+ * for the color-map object analysisColorMap.
+ * Should be in between Computed/Imposed Min/Max values.
+ * 
+ * Example 2:
+ *
+ * Call analysisColorMap.SetDistributionValue(3, 10e+09, False)
+ *
+ * This sets the value 10e+09 at 3rd Index of the list. It will not smoothen the distribution
+ * for the color-map object analysisColorMap.
+ * 10e+09 should be greater than Index 2 value and lesser than Index 4 value.
+ * Should be in between Computed/Imposed Min/Max values. 
+ */
+  HRESULT SetDistributionValue     (in long indexValue, 
+									in double iModeValue,
+									in CATVariant iSmootheningFlag);
+
+
+
+ /**
+ * Updates the visualization of the color map.
+ * This method should be called after one or all previous PUT methods are called on Color Map.
+ *
+ */
+  HRESULT Update();
+
+};
+
+// Interface name : CATIAAnalysisColorMap
+#pragma ID CATIAAnalysisColorMap "DCE:5172112C-2F54-4dbd-BECC246C6F371E1B"
+#pragma DUAL CATIAAnalysisColorMap
+
+// VB object name : CATIAAnalysisColorMap (Id used in Visual Basic)
+#pragma ID AnalysisColorMap "DCE:8195B73A-F666-4f40-BE81938E2D5C2EAB"
+#pragma ALIAS CATIAAnalysisColorMap AnalysisColorMap
+
+#endif
+// CATIAAnalysisColorMap_IDL
+

@@ -1,0 +1,11 @@
+#
+BUILT_OBJECT_TYPE = NONE
+#
+LINK_WITH = \
+  JS0ERROR \
+  JS0CORBA \
+  JS0MT
+
+
+OS = Windows_NT
+#

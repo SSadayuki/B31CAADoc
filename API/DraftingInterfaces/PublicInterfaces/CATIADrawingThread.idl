@@ -1,0 +1,66 @@
+// COPYRIGHT Dassault Systemes 2004
+#ifndef CATIADrawingThread_IDL
+#define CATIADrawingThread_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+
+#include "CatThreadLinkedTo.idl"
+#include "CatThreadType.idl"
+
+/**  
+ * Represents a drawing thread in a drawing view.
+ */
+interface CATIADrawingThread : CATIABase 
+{
+  /**
+  * Specifies which kind of objects the thread is linked to.
+  * @return oLinkedType
+  *   The type of thread link
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example retrieves the <font color="red">CatThreadLinkedTo</font> in <tt>MyThread</tt>
+  * This view belongs to the drawing view collection of the drawing sheet
+  * <pre>
+  * ThreadLinkType = MyThread.<font color="red">IsLinkedTo</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT IsLinkedTo(out /*IDLRETVAL*/ CatThreadLinkedTo oLinkedType);
+
+  /**
+  * Returns or sets a CatThreadType (threaded or taped) on a thread.
+  * Be careful, this method is only available on threads which are linked to 2D circle geometry
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example sets the type Taped in <tt>MyThread</tt>
+  * <pre>
+  *  If MyThread.IsLinkedTo()=cat2DCircle Then
+  *     <font color="red">MyThread.Type = catTaped</font>
+  *   End If
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Type
+  HRESULT get_Type(out /*IDLRETVAL*/ CatThreadType oThreadType);
+  HRESULT put_Type(in CatThreadType iThreadType);
+};
+
+// Interface name : CATIADrawingThread
+#pragma ID CATIADrawingThread "DCE:c2e73d2c-8284-4061-81163112359381df"
+#pragma DUAL CATIADrawingThread
+
+// VB object name : DrawingThread (Id used in Visual Basic)
+#pragma ID DrawingThread "DCE:0150ddf2-c3c3-4e60-9a4ae520eae4c00a"
+#pragma ALIAS CATIADrawingThread DrawingThread
+
+#endif

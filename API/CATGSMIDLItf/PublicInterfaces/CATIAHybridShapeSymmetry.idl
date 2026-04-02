@@ -1,0 +1,125 @@
+#ifndef CATIAHybridShapeSymmetry_IDL
+#define CATIAHybridShapeSymmetry_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeSymmetry:         
+// Exposed interface for HybridShape Symmetry
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation    
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape symmetry feature object.
+ * <b>Role</b>: To access the data of the symmetry shape feature object.
+ * The data includes:
+ * <ul>
+ * <li> The element to be transformed </li>
+ * <li> The reference element which can be a point, a line or a plane </li>
+ * </ul>
+ * <p>LICENSING INFORMATION: Creation of volume result requires GSO License
+ * <br> if GSO License is not granted , settting of Volume context has not effect 
+ * <p>
+ * Use the CATIAHybridShapeFactory to create HybridShapeFeature object.
+ * @see CATIAHybridShapeFactory
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeSymmetry : CATIAHybridShape
+{
+
+ /**
+ * Returns or sets the element to transform.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>Elem</code> the element to transform for the <code>Symmetry</code> hybrid shape feature.
+ *<pre>
+ * Dim Elem As Reference
+ * Set Elem = Symmetry.<font color="red">ElemToSymmetry</font>
+ *</pre>
+ *</dl> 
+ */
+#pragma PROPERTY ElemToSymmetry 
+    HRESULT get_ElemToSymmetry (out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_ElemToSymmetry (in                CATIAReference iElem)  ;
+
+
+
+
+ /**
+ * Returns or sets the reference element.This element can be a point, a line or a plane.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAPlanarFace, @href CATIAEdge or @href CATIAVertex.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>Ref</code> the reference element for the <code>Symmetry</code> hybrid shape feature.
+ *<pre>
+ * Dim Ref As Reference
+ * Set Ref = Symmetry.<font color="red">Reference</font>
+ *</pre>
+ *</dl> 
+ */ 
+#pragma PROPERTY Reference
+    HRESULT get_Reference(out /*IDLRETVAL*/ CATIAReference oElem) ;
+    HRESULT put_Reference(in                CATIAReference iElem) ;
+
+ /**
+ *  Returns or sets the volume result.
+ * <br><b>Legal values</b>: <b>True</b> if the result of symmetry is required as volume
+ * (option is effective only in case of volumes, requires GSO License) and <b>False</b> if it is needed as surface .
+ * @sample
+ * This example sets that the result of
+ * the <code>hybShpSymmetry</code> hybrid shape symmetry is volume.
+ * <pre>
+ * hybShpSymmetry.<font color="red">VolumeResult</font> = True
+ * </pre>
+ */ 
+#pragma PROPERTY VolumeResult
+ HRESULT get_VolumeResult(out /*IDLRETVAL*/ boolean oType);
+ HRESULT put_VolumeResult(in boolean iType);
+
+/**
+ *  Returns or sets the creation mode(creation or modification).
+ * <br><b>Legal values</b>: <b>True</b> if the result is a creation feature 
+ * and <b>False</b> if the result is a modification feature.
+ * @sample
+ * This example sets that the mode of
+ * the <code>hybShpSymmetry</code> hybrid shape symmetry to creation
+ * <pre>
+ * hybShpSymmetry.<font color="red">CreationMode</font> = True
+ * </pre>
+ */ 
+#pragma PROPERTY CreationMode
+ HRESULT get_CreationMode(out /*IDLRETVAL*/ boolean oCreation);
+ HRESULT put_CreationMode(in boolean iCreation);
+};
+
+
+// Interface name : CATIAHybridShapeSymmetry
+#pragma ID CATIAHybridShapeSymmetry "DCE:8c0a5606-0737-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeSymmetry
+
+// VB object name : HybridShapeSymmetry (Id used in Visual Basic)
+#pragma ID HybridShapeSymmetry "DCE:8c0a560b-e8d4-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeSymmetry HybridShapeSymmetry
+
+#endif
+// CATIAHybridShapeSymmetry_IDL
+

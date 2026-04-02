@@ -1,0 +1,46 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= NONE
+
+LINK_WITH = JS0XXC0
+
+CATIA_LSTCOMDYN=NO
+
+SYS_LIBS =
+
+OS = AIX
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS = -lXm -lXt -lXmu -lX11  -ltt
+
+OS = HP-UX
+BUILD = NO
+SYS_INCPATH =   
+SYS_LIBS = -lXm -lXt -lX11 -ltt
+SYS_LIBPATH =  
+
+OS = IRIX
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS = -lXm -lXt  -lX11 -ltt
+LOCAL_CCFLAGS = 
+LOCAL_CFLAGS = 
+
+OS = SunOS
+SYS_INCPATH =
+SYS_LIBPATH =
+SYS_LIBS =  -lXt -lsocket -ldl -lnsl -ltt
+LOCAL_CCFLAGS = 
+LOCAL_CFLAGS = 
+
+OS = Windows_NT
+BUILD=NO
+LOCAL_CCFLAGS = /D_CATNoWarningPromotion_  
+LOCAL_CFLAGS = /D_CATNoWarningPromotion_ 
+
+OS = aix_a64
+BUILD=NO
+
+OS = irix_a64
+BUILD=NO

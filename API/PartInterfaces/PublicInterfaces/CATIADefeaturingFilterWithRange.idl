@@ -1,0 +1,163 @@
+#ifndef CATIADefeaturingFilterWithRange_IDL
+#define CATIADefeaturingFilterWithRange_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2014
+//=================================================================
+//                                   
+// CATIADefeaturingFilterWithRange:                           
+// Exposed interface for Defeaturing Filters using one or several range(s) of values
+//                                   
+//=================================================================
+#include "CATIADefeaturingFilter.idl"
+#include "CATBSTR.idl"
+
+interface CATIAAngle;
+interface CATIALength;
+
+/**
+ * Represents the base object for defeaturing filters which uses range(s) of values 
+ */
+
+// Use the CATMmDefeaturingFilterWithRangeExt adaptor class to implement this interface.
+
+//-----------------------------------------------------------------
+interface CATIADefeaturingFilterWithRange : CATIADefeaturingFilter
+{
+	//	MIN/MAX VALUES
+	//	------------
+	//
+  //
+  /**
+    * Returns the minimum or maximum value of the filter for the given range id, if defined and active.
+    * @param iRangeId
+    *   The identificator of the range on which the minimum/maximum should be read
+    *     - if iRangeId is empty or equal to "Default", takes the default range as defined by the filter ("RibbonRadius" for FilletFilter, "MainDiameter" for HoleFilter)
+    *     - else iRangeId should be chosen among:
+    *           * {"RibbonRadius","RibbonAngle","RibbonLength"} for FilletFilter
+    *           * {"MainDiameter"} for HoleFilter
+    *           * any defined and supported range id in case of a user-defined filter
+    * @return oValue
+    *   The filter minimum/maximum value for the specified range if defined and active
+    *   ELSE the method FAILS (to avoid this, getMinimumValueActivity/getMaximumValueActivity can be called prior to calling getMinimumValue/getMaximumValue)
+    *   Signature with double works for angles as well as for lengthes / EXPRESSED in MODEL UNIT (mm/deg)
+    *   Signatures with CATIALength or CATIAAngle must be used with care and will fail if the range nature and the expected type are incompatible
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>theMinValue</tt> the minimum value of filter <tt>myFilter</tt> for the range <tt>myRange</tt>:
+    * <pre>
+    * theMinValue = myFilter.<font color="red">getMinimumValue</font>(myRange)
+    *</pre>
+    * <dd>The following example returns in <tt>theMinAngle</tt> the minimum value as an angle of filter <tt>myFilter</tt> for the range <tt>myRange</tt>:
+    * <pre>
+    * Set theMinAngle = myFilter.<font color="red">getMinimumAngle</font>(myRange)
+    *</pre>
+    * <dd>The following example returns in <tt>theMaxLength</tt> the maximum value as a length of filter <tt>myFilter</tt> for the range <tt>myRange</tt>:
+    * <pre>
+    * Set theMaxLength = myFilter.<font color="red">getMaximumLength</font>(myRange)
+    *</pre>
+    * </dl>
+    */
+	HRESULT	getMinimumValue ( in CATBSTR iRangeId, out /*IDLRETVAL*/ double oValue );
+  HRESULT	getMinimumLength( in CATBSTR iRangeId, out /*IDLRETVAL*/ CATIALength oValue );
+  HRESULT	getMinimumAngle ( in CATBSTR iRangeId, out /*IDLRETVAL*/ CATIAAngle oValue );
+
+	HRESULT	getMaximumValue ( in CATBSTR iRangeId, out /*IDLRETVAL*/ double oValue );
+	HRESULT	getMaximumLength ( in CATBSTR iRangeId, out /*IDLRETVAL*/ CATIALength oValue );
+	HRESULT	getMaximumAngle ( in CATBSTR iRangeId, out /*IDLRETVAL*/ CATIAAngle oValue );
+
+/**
+  * Sets the minimum or maximum value of the filter for the given range id.
+  * Forces the activation of the minimum or maximum value if not the case yet.
+  * @param iRangeId
+  *   The identificator of the range on which the minimum/maximum should be read
+  *     - if iRangeId is empty or equal to "Default", takes the default range as defined by the filter ("RibbonRadius" for FilletFilter, "MainDiameter" for HoleFilter)
+  *     - else iRangeId should be chosen among:
+  *           * {"RibbonRadius","RibbonAngle","RibbonLength"} for FilletFilter
+  *           * {"MainDiameter"} for HoleFilter
+  *           * any defined and supported range id in case of a user-defined filter
+  * @param iValue
+  *   The filter minimum/maximum value for the specified range / MUST BE EXPRESSED in MODEL UNIT (mm/deg)
+  *   iValue must be consistent with the other value if defined and active
+  *       - new minimum iValue must be smaller than existing active maximum value if any 
+  *       - new maximum iValue must be larger than existing active minimum value if any 
+  *   ELSE the method FAILS
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The two following examples set <tt>theMaxValue</tt> as the maximum value of filter <tt>myFilter</tt> for the range <tt>myRange</tt>:
+  * <pre>
+  * Call myFilter.<font color="red">setMaximumValue</font>(myRange,theMaxValue)
+  * myFilter.<font color="red">setMaximumValue</font> myRange theMaxValue
+  *</pre>
+  * </dl>
+  */
+	HRESULT	setMinimumValue ( in CATBSTR iRangeId, in double iValue);
+  HRESULT	setMaximumValue ( in CATBSTR iRangeId, in double iValue);
+
+  //	MIN/MAX VALUES ACTIVITIES
+	//	------------
+	//
+  //
+  /**
+    * Returns the minimum or maximum value activity of the filter for the given range id.
+    * @param iRangeId
+    *   The identificator of the range on which the minimum/maximum should be read
+    *     - if iRangeId is empty or equal to "Default", takes the default range as defined by the filter ("RibbonRadius" for FilletFilter, "MainDiameter" for HoleFilter)
+    *     - else iRangeId should be chosen among:
+    *           * {"RibbonRadius","RibbonAngle","RibbonLength"} for FilletFilter
+    *           * {"MainDiameter"} for HoleFilter
+    *           * any defined and supported range id in case of a user-defined filter
+    * @return oValue
+    *   The filter minimum/maximum activity for the specified range
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>theMinActivity</tt> the minimum value activity of filter <tt>myFilter</tt> for the range <tt>myRange</tt>:
+    * <pre>
+    * Set theMinActivity = myFilter.<font color="red">getMinimumActivity</font>(myRange)
+    *</pre>
+    * </dl>
+    */
+	HRESULT	getMinimumActivity ( in CATBSTR iRangeId, out /*IDLRETVAL*/ boolean oActivity );
+	HRESULT	getMaximumActivity ( in CATBSTR iRangeId, out /*IDLRETVAL*/ boolean oActivity );
+
+/**
+  * Sets the defeaturing minimum or maximum value activity of the filter for the given range id.
+  * @param iRangeId
+  *   The identificator of the range on which the minimum/maximum should be read
+  *     - if iRangeId is empty or equal to "Default", takes the default range as defined by the filter ("RibbonRadius" for FilletFilter, "MainDiameter" for HoleFilter)
+  *     - else iRangeId should be chosen among:
+  *           * {"RibbonRadius","RibbonAngle","RibbonLength"} for FilletFilter
+  *           * {"MainDiameter"} for HoleFilter
+  *           * any defined and supported range id in case of a user-defined filter
+  * @param iValue
+  *   The filter minimum/maximum activity for the specified range
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The two following examples set <tt>theMaxActivity</tt> as the maximum value activity of filter <tt>myFilter</tt> for the range <tt>myRange</tt>:
+  * <pre>
+  * Call myFilter.<font color="red">setMaximumActivity</font>(myRange,theMaxActivity)
+  * myFilter.<font color="red">setMaximumActivity</font> myRange theMaxActivity
+  *</pre>
+  * </dl>
+  */
+	HRESULT	setMinimumActivity ( in CATBSTR iRangeId, in boolean iValue);
+  HRESULT	setMaximumActivity ( in CATBSTR iRangeId, in boolean iValue);
+};
+
+// Interface name : CATIADefeaturingFilterWithRange
+#pragma ID CATIADefeaturingFilterWithRange "DCE:735bcb73-b56d-4f71-9396f92b08aef165"
+#pragma DUAL CATIADefeaturingFilterWithRange
+
+// VB object name : DefeaturingFilterWithRange (Id used in Visual Basic)
+#pragma ID DefeaturingFilterWithRange "DCE:b08243fc-9a25-4d7f-a5f5680a7fec60b2"
+#pragma ALIAS CATIADefeaturingFilterWithRange DefeaturingFilterWithRange
+
+#endif
+// CATIADefeaturingFilterWithRange_IDL
+

@@ -1,0 +1,183 @@
+#ifndef CATIAIntParam_IDL
+#define CATIAIntParam_IDL
+/*IDLREP*/               
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIARealParam.idl"
+
+/**
+ * Represents the integer parameter.
+ * The following example shows how to create it: 
+ * <pre>
+ * Dim CATDocs As Documents
+ * Set CATDocs = CATIA.Documents
+ * Dim part1 As Dccument
+ * Set part1   = CATDocs.Add("CATPart") 
+ * Dim  year As IntParam
+ * Set year    = part1.Part.Parameters.CreateInteger("year", 1998)
+ * </pre>
+ */
+
+//-----------------------------------------------------------------
+interface CATIAIntParam : CATIAParameter
+{
+    //===========================
+    //======= Properties ========
+    //===========================
+    //....ON VALUE
+    /**
+     * Returns or sets the value of the integer parameter.
+     * Units are expressed in the IS unit system.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>year</tt> value to 0
+     * if its value is equal to 2000:
+     * <pre>
+     * If (year.<font color="red">Value</font> = 2000)  Then
+     *     year.<font color="red">Value</font> = 0
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Value
+    HRESULT    get_Value    
+                ( out /*IDLRETVAL*/  long            oValue );
+    HRESULT    put_Value    
+                ( in                 long            iValue );
+    /**
+     * Returns or sets the value of the lower bound that
+	 * the parameter object value can take.
+	 * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>RangeMin</tt> value to 0
+     * if its value is bigger than 0:
+     * <pre>
+     * If (Length.<font color="red">RangeMin</font> &gt; 0.0 and Length.RangeMinValidity &lt;&gt; 0)  Then
+     *     Length.<font color="red">RangeMin</font> = 0.0
+     * End If
+     * </pre>
+     * </dl>		  
+     */
+#pragma PROPERTY RangeMin
+	HRESULT	   get_RangeMin
+				( out   /*IDLRETVAL*/      long            oRangeMin );
+
+	HRESULT	   put_RangeMin	
+				( in                       long            iRangeMin );
+    /**
+     * Returns or sets the value of the upper bound that
+		 * the parameter object value can take.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>RangeMax</tt> value to 0
+     * if its value is smaller than 0:
+     * <pre>
+     * If (Length.<font color="red">RangeMax</font> &lt; 0.0 and Length.RangeMaxValidity &lt;&gt; 0)  Then
+     *     Length.<font color="red">RangeMax</font> = 0.0
+     * End If
+     * </pre>
+     * </dl>		 
+     */
+#pragma PROPERTY RangeMax
+	HRESULT	   get_RangeMax
+				( out   /*IDLRETVAL*/      long            oRangeMax );
+
+	HRESULT	   put_RangeMax	
+				( in                       long            iRangeMax );
+
+
+
+    /**
+     * Returns or sets the type of the lower bound of
+	 * the parameter.
+	 * <dl>
+	 * <dt>0<dd>the lower bound is meaningless
+	 * <dt>1<dd>the lower bound can be reached
+	 * <dt>2<dd>the lower bound cannot be reached
+	 * </dl>
+	 */
+#pragma PROPERTY RangeMinValidity
+	HRESULT	   get_RangeMinValidity
+				( out   /*IDLRETVAL*/      long oRangeMinValidity );
+
+	HRESULT	   put_RangeMinValidity
+				( in                       long iRangeMinValidity );
+
+    /**
+     * Returns or sets the type of the upper bound of
+	 * the parameter.
+	 * <dl>
+	 * <dt>0<dd>the upper bound is meaningless
+	 * <dt>1<dd>the upper bound can be reached
+	 * <dt>2<dd>the upper bound cannot be reached
+	 * </dl>
+	 */
+#pragma PROPERTY RangeMaxValidity
+	HRESULT	   get_RangeMaxValidity
+				( out   /*IDLRETVAL*/      long oRangeMaxValidity );
+
+	HRESULT	   put_RangeMaxValidity
+				( in                       long iRangeMaxValidity );
+   /**
+     * Returns an array containing the different values that the int param can take
+	 * in the case of multiple values.
+	 *
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * <pre>
+	 * Dim enumValues () as Variant
+	 * ReDim enumValues (anIntegerParameter.GetEnumerateValuesSize() - 1)
+	 * anIntegerParameter.GetEnumerateValues(enumValues)
+	 * For i = LBound(enumValues) to UBound(enumValues)
+	 *   ...
+	 * Next
+     * </pre>
+     * </dl>
+    */
+    HRESULT    GetEnumerateValues    
+                ( inout  CATSafeArrayVariant oSafeArray);
+
+	/**
+	* Returns the number of enumerate values.
+	*/
+    HRESULT    GetEnumerateValuesSize
+                ( out /*IDLRETVAL*/  long            oValue );
+   /**
+     * Sets an array containing the different values that the real param can take
+		 * in the case of multiple values.
+    */
+    HRESULT    SetEnumerateValues    
+                ( in                 CATSafeArrayVariant iSafeArray);
+
+   /**
+     * Resets the status of the object to a single value object.
+    */
+    HRESULT    SuppressEnumerateValues    ();
+};
+
+// Interface name : CATIAIntParam
+#pragma ID CATIAIntParam "DCE:5f4b2c9d-51cb-11d1-a2710000f87546fd"
+#pragma DUAL CATIAIntParam
+
+// VB object name : IntParam (Id used in Visual Basic)
+#pragma ID IntParam "DCE:5f9050cf-51cb-11d1-a2710000f87546fd"
+#pragma ALIAS CATIAIntParam IntParam
+
+
+#endif
+// CATIAIntParam_IDL
+

@@ -1,0 +1,140 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=============================================================================
+// CATIAStrCutoutFeature
+//   Interface for Modifying exsiting Cut Out Feature
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Nov.2010  Creation                                            Rahul DESHMANE
+//=============================================================================
+#ifndef CATIAStrCutoutFeature_IDL
+#define CATIAStrCutoutFeature_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+interface CATIADocument;
+interface CATIAStrMember;
+interface CATIAStrSection;
+interface CATIAStrPlate;
+interface CATIAStrSection;
+interface CATIAStrFoundation;
+interface CATIAProduct;
+
+#include "CATIABase.idl"
+#include "CATIAParameter.idl"
+#include "CATIAReference.idl"
+#include "CATIAProduct.idl"
+
+
+/**
+ * Represents a Cutout Feature.
+ * CutoutType,Direction,Surface,DeirectionElement can be redefined.
+ */
+
+
+interface CATIAStrCutoutFeature : CATIABase
+{
+  /**
+	* Returns or Sets the Contour Sketch for Current Cutout.   
+  * @sample
+  * <pre>
+  * Dim NewContour As Reference
+  * Set NewContour = rootProduct.CreateReferenceFromName("Product1/New/!Sketch.2")
+  * ExistingCutout.<font color="red">Contour</font> =NewContour
+  * </pre>
+	*/
+  
+  # pragma PROPERTY Contour
+  HRESULT get_Contour(out /*IDLRETVAL*/ CATIAReference oContour);
+  HRESULT put_Contour(in CATIAReference iContour);
+
+  /**
+	* Returns or Sets the CutoutType for Current Cutout.   
+  * @sample
+  * <pre>
+  * Dim Type As String
+  * Type = Cutout1.<font color="red">CutoutType</font>
+  * </pre>
+	*/
+
+  # pragma PROPERTY CutoutType
+  HRESULT get_CutoutType(inout /*IDLRETVAL*/CATBSTR oCutoutType);
+  HRESULT put_CutoutType(in CATBSTR iCutoutType);
+  /**
+	* Returns or Sets the Direction Vector for Current Cutout.If we are in CATStrBeforeForming mode, it gives NULL. 
+  * @sample
+  * <pre>
+  * Dim GetDir(3)
+  * GetDir(3) = Cutoutctr.<font color="red">Direction</font>
+  * Dim x, y, z As Double
+  * x = GetDir(0)
+  * y = GetDir(1)
+  * z = GetDir(2)
+  * 'For Setting Direction
+  * Dim Setdir(3) 
+  * Setdir(0) = 0.5
+  * Setdir(1) = 0.5
+  * Setdir(2) = 0.5
+  * Cutout1.Direction =Setdir
+  * </pre>
+	*/
+  # pragma PROPERTY Direction
+  HRESULT get_Direction(out /*IDLRETVAL*/ CATSafeArrayVariant oDirection);
+  HRESULT put_Direction(in CATSafeArrayVariant iDirection);
+  /**
+	* Returns or Sets the Element used for defining for Current Cutout.If we are in CATStrBeforeForming mode, it gives NULL. 
+  * @sample
+  * <pre>
+  * Dim DirOfCutOut As Reference
+  * Set DirOfCutOut = Cutout2.<font color="red">DirectionElement</font>
+  * </pre>
+	*/
+  # pragma PROPERTY DirectionElement
+  HRESULT get_DirectionElement(out /*IDLRETVAL*/ CATIAReference oDirectionElement);
+  HRESULT put_DirectionElement(in CATIAReference oDirectionElement);
+  /**
+	* Returns or Sets the Reference Surface used for defining for Current Cutout.
+  * @sample
+  * <pre>
+  * Dim SurForCutout As Reference
+  * Set SurForCutout = Cutout2.<font color="red">ReferenceSurface</font>
+  * </pre>
+	*/
+
+  # pragma PROPERTY ReferenceSurface
+  HRESULT get_ReferenceSurface(out /*IDLRETVAL*/ CATIAReference oSurface);
+  HRESULT put_ReferenceSurface(in CATIAReference iSurface);
+
+  /**
+	* Retrieves the Structure object on which the cutout is applied on.
+	* @param oObject [out]
+  *   Product
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  *  This example gives the product on which cutout is applied.
+  * <pre>
+  * Dim Prod As Product
+  * Set Prod = Cutout1.GetObject
+  * </pre>
+	*/  
+  HRESULT GetObject(out /*IDLRETVAL*/ CATIAProduct oObject); 
+};
+
+// Interface name : CATIAStrCutoutFeature
+#pragma ID CATIAStrCutoutFeature "DCE:F8ECCBE7-E0D7-4a94-BE5760573FB90CD3"   
+                                      
+#pragma DUAL CATIAStrCutoutFeature
+
+// VB object name : StrCutoutFeature   
+#pragma ID StrCutoutFeature "DCE:AB176F7A-8A2C-4c7e-89BE701F326E2C26"                                    
+#pragma ALIAS CATIAStrCutoutFeature StrCutoutFeature
+
+#endif

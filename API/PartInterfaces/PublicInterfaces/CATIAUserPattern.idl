@@ -1,0 +1,138 @@
+#ifndef CATIAUserPattern_IDL
+#define CATIAUserPattern_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAUserPattern:                           
+// Exposed interface for userPattern
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Dec98 Creation					 E Langlois
+//=================================================================
+#include "CATIAPattern.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAReference;
+interface CATIABase;
+
+/**
+ * Represents the user pattern.
+ * The shape is copied along user's positions.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAUserPattern : CATIAPattern
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //	
+    //
+    //	ON FEATURE TO LOCATE POSITIONS
+    //	------------------------------
+    //
+    /**
+     * Returns the collection of feature to locate instances.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>list</tt> the list of feature
+     * to locate instances of the Pattern <tt>firstPattern</tt>:
+     * <pre>
+     * Set list = firstPattern.<font color="red">FeatureToLocatePositions</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FeatureToLocatePositions
+	HRESULT	get_FeatureToLocatePositions
+				( out /*IDLRETVAL*/ CATIABase oFeatureToLocatePositions );
+
+
+    //	ON ANCHOR POINT
+    //	---------------
+    //
+    /**
+     * Returns the anchor point of the user pattern.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>anchor</tt> the anchor point
+     * of the Pattern <tt>firstPattern</tt>:
+     * <pre>
+     * Set anchor = firstPattern.<font color="red">AnchorPoint</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY AnchorPoint
+	HRESULT	get_AnchorPoint
+				( out /*IDLRETVAL*/ CATIABase oAnchorPoint );
+
+
+    /**
+     * Sets the anchor point of the user pattern. 
+     * @param iAnchorPoint
+     *   The new anchor point
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example sets the anchor point <tt>anchor</tt>
+     * of the Pattern <tt>firstPattern</tt>:
+     * <pre>
+     * firstPattern.<font color="red">AnchorPoint</font> = anchor
+     * </pre>
+     * </dl>
+     */
+	HRESULT	put_AnchorPoint
+				( in CATIABase iAnchorPoint );
+
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+	//	ADD A FEATURE TO LOCATE POSITIONS
+	//	---------------------------------
+	//
+    /**
+     * Adds a new feature to locate instances. 
+     * @param iFeatureToLocatePositions
+     *   The new object containing points of positioning
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new feature <tt>feature</tt>
+     * to locate instances of the Pattern <tt>firstPattern</tt>:
+     * <pre>
+     * call firstPattern.<font color="red">AddFeatureToLocatePositions</font>(object)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	AddFeatureToLocatePositions
+				( in CATIABase iFeatureToLocatePositions );
+
+
+};
+
+// Interface name : CATIAUserPattern
+#pragma ID CATIAUserPattern "DCE:fedb0681-997d-11d2-8ae80008c719428c"
+#pragma DUAL CATIAUserPattern
+
+// VB object name : UserPattern (Id used in Visual Basic)
+#pragma ID UserPattern "DCE:7679ac01-997e-11d2-8ae80008c719428c"
+#pragma ALIAS CATIAUserPattern UserPattern
+
+
+#endif
+// CATIAUserPattern_IDL
+

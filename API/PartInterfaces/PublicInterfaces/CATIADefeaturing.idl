@@ -1,0 +1,73 @@
+#ifndef CATIADefeaturing_IDL
+#define CATIADefeaturing_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2014
+//=================================================================
+//                                   
+// CATIADefeaturing:                           
+// Exposed interface for Defeaturing
+//                                   
+//=================================================================
+
+#include "CATIADressUpShape.idl"
+#include "CATBSTR.idl"
+
+interface CATIADefeaturingFilters;
+interface CATIAIntParam;
+
+/**
+ * Represents the defeaturing.
+ */
+//-----------------------------------------------------------------
+interface CATIADefeaturing : CATIADressUpShape
+{
+  //		================
+	//		== PROPERTIES ==
+	//		================
+
+  //    DEFEATURING FILTERS
+  //    -------------
+  //
+  //
+  /**
+    * Returns the filter collection of the Defeaturing.
+    * The returned object is the filter collection associated to this Defeaturing object.
+    * All changes applied to the returned collection will be automatically applied to the Defeaturing object.
+    * As a consequence there is no need to affect the collection to the defeaturing after the change to update the property.
+    * @return oFilters
+    *   The filter collection (see @href CATIADefeaturingFilters for list of possible actions)
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>myDefeaturingFiltersCollection</tt> the filter collection of the Defeaturing <tt>firstDefeaturing</tt>:
+    * <pre>
+    * Set myDefeaturingFiltersCollection = firstDefeaturing.<font color="red">Filters</font>
+    *</pre>
+    * </dl>
+    */
+  #pragma PROPERTY Filters
+  HRESULT    get_Filters ( out /*IDLRETVAL*/ CATIADefeaturingFilters oFilters );
+
+  //		================
+	//		==   METHODS  ==
+	//		================
+};
+
+// Interface name : CATIADefeaturing
+#pragma ID CATIADefeaturing "DCE:4856b8ca-4456-4f0e-afad798a10d629a9"
+#pragma DUAL CATIADefeaturing
+//
+//// VB object name : Defeaturing (Id used in Visual Basic)
+#pragma ID Defeaturing "DCE:bb91cc28-20d6-459a-a9890e3ff5f71c03"
+#pragma ALIAS CATIADefeaturing Defeaturing
+
+
+#endif
+// CATIADefeaturing_IDL
+

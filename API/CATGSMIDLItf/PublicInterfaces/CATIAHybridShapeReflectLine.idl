@@ -1,0 +1,203 @@
+#ifndef CATIAHybridShapeReflectLine_IDL
+#define CATIAHybridShapeReflectLine_IDL
+/*IDLREP*/
+
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//=================================================================
+//								   
+// CATIAHybridShapeReflectLine:						   
+// Exposed interface for HybridShape ReflectLine
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Juin2000 Creation					JOR
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+ * Represents the hybrid shape reflect line feature object.
+ * <b>Role</b>: To access the data of the hybrid shape reflect line feature object.
+ * This data includes:
+ * <ul>
+ * <li> The surface used to create the reflect line </li>
+ * <li> The direction (cylindrical)</li>
+ * <li> The origin (conical)</li>
+ * <li> The angle value</li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeReflectLine object.
+ * @see CATIAHybridShapeFactory
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeReflectLine : CATIAHybridShape
+{
+	/**
+	* Returns or sets the support surface used to create the reflectline.
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * @href CATIAFace.
+        * <dl>
+        * <dt><b>Example</b>:
+        * <dd>
+        * This example retrieves in <code>Surface</code> the support surface for the <code>RelectLine</code> hybrid shape feature.
+        * <pre>
+        * Dim Surface As Reference
+        * Set Surface = ReflectLine.<font color="red">Support</font>
+        * </pre>
+        * </dl>   
+	*/ 
+#pragma PROPERTY Support
+    HRESULT	get_Support (out /*IDLRETVAL*/ CATIAReference   oSupport);
+    HRESULT	put_Support (in                CATIAReference   iSupport);
+
+
+	/**
+	* Returns or sets the origin point used to create the conical reflectline.
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+	* @href CATIAVertex.
+		* <dl>
+		* <dt><b>Example</b>:
+		* <dd>
+		* This example retrieves in <code>Point</code> the origin point
+		* for the conical <code>ReflectLine</code> hybrid shape feature.
+		* <pre>
+		* Dim Point As Reference
+        * Set Point = ReflectLine.<font color="red">Origin</font>
+		* </pre>
+		* </dl>
+	*/
+#pragma PROPERTY Origin
+    HRESULT	get_Origin (out /*IDLRETVAL*/ CATIAReference   oOrigin);
+    HRESULT	put_Origin (in                CATIAReference   iOrigin);
+
+
+	/**
+	* Returns or sets the direction used to create the cylindrical reflectline. 
+        * <dl>
+        * <dt><b>Example</b>:
+        * <dd>
+        * This example retrieves in <code>Dir</code> the direction for the cylindrical <code>RelectLine</code> hybrid shape feature.
+        * <pre>
+        * Dim Dir As CATIAHybridShapeDirection
+        * Set Dir = ReflectLine.<font color="red">Direction</font>
+        * </pre>
+        * </dl>   
+	*/
+#pragma PROPERTY Direction 
+    HRESULT	get_Direction (out /*IDLRETVAL*/ CATIAHybridShapeDirection oDirection)  ;
+    HRESULT	put_Direction (in                CATIAHybridShapeDirection iDirection)  ;
+
+
+
+	/**
+	* Returns or sets the angle used to create the reflectline.
+        * <dl>
+        * <dt><b>Example</b>:
+        * <dd>
+        * This example retrieves in <code>Ang</code> the angle for the <code>RelectLine</code> hybrid shape feature.
+        * <pre>
+        * Dim Ang As CATIAAngle
+        * Set Ang = ReflectLine.<font color="red">Angle</font>
+        * </pre>
+        * </dl>
+	*/
+#pragma PROPERTY Angle 
+    HRESULT	get_Angle (out /*IDLRETVAL*/ CATIAAngle   oAngle);
+    HRESULT	put_Angle (in                CATIAAngle   iAngle);
+
+   /**
+    * Returns or sets the support orientation used to compute the reflect line.
+    * <br><b>Role</b>: The orientation is used to define the angle
+	* between the direction and the normal to the support
+	* of the points on the result curve.
+    * The orientation is the same than or the inverse of
+	* the result of the cross product: Normal(support) ^ Tangent(FirstReferenceCurve).
+    * <br><b>Legal values</b>: 1 for same orientation, and -1 for inverse
+    */ 
+#pragma PROPERTY OrientationSupport
+    HRESULT get_OrientationSupport (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_OrientationSupport (in                long iOrientation)  ;
+
+   /**
+    * Returns or sets the direction orientation used to compute the reflect line.
+    * <br><b>Role</b>: The orientation is used to define the angle
+	* between the direction and the normal to the support
+	* of the points on the result curve.
+    * The orientation is the same than or the inverse of
+	* the result of the cross product: Normal(support) ^ Tangent(FirstReferenceCurve).
+    * <br><b>Legal values</b>: 1 for same orientation, and -1 for inverse
+    */ 
+#pragma PROPERTY OrientationDirection
+    HRESULT get_OrientationDirection (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_OrientationDirection (in long  iOrientation)  ;
+/**
+ * Returns or sets whether the reflectline curve is or should be created with the normal
+ * to the support or the tangent plane to the support.
+ * <br><b>Role</b>: The TypeSolution indicates whether the created reflectline curve
+ * is compute with the angle between the normale to the support and the direction 
+ * or with the angle between the tangent plane to the support and the direction.
+ * <br><b>Legal values</b>: 0 for the normal and 1 for the tangent plane.
+ */
+#pragma PROPERTY TypeSolution
+    HRESULT get_TypeSolution (out /*IDLRETVAL*/ long oSolutionType);
+    HRESULT put_TypeSolution (in                long iSolutionType); 
+
+/**
+ * Returns or sets whether the reflectline curve is or should be created  
+ * with infinite light source (cylindrical) or with finite point light source (conical).
+ * <br><b>Role</b>: The SourceType indicates whether the created reflectline curve
+ * is compute with infinite light source for cylindrical type 
+ * or with finite point light source for conical type.
+ * <br><b>Legal values</b>: 0 for cylindrical and 1 for conical.
+ */
+#pragma PROPERTY SourceType
+    HRESULT get_SourceType (out /*IDLRETVAL*/ long oSourceType);
+    HRESULT put_SourceType (in                long iSourceType); 
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+/**
+ * Inverts the orientation of support. 
+ * This example inverts the support orientation 
+ * of <code>hybRefLine</code> hybrid shape reflect line object.
+ *<pre>
+ * hybRefLine.<font color="red">InvertOrientationSupport</font>
+ *</pre>
+ */ 
+ HRESULT InvertOrientationSupport();
+
+/**
+ * Inverts the orientation of direction. 
+ * This example inverts the direction orientation 
+ * of <code>hybRefLine</code> hybrid shape reflect line object.
+ *<pre>
+ * hybRefLine.<font color="red">InvertOrientationDirection</font>
+ *</pre>
+ */ 
+ HRESULT InvertOrientationDirection();
+
+};
+
+// Interface name : CATIAHybridShapeReflectLine
+#pragma ID CATIAHybridShapeReflectLine "DCE:929fec94-3411-0000-0280020b32000000"
+#pragma DUAL CATIAHybridShapeReflectLine
+
+// VB object name : HybridShapeReflectLine (Id used in Visual Basic)
+#pragma ID HybridShapeReflectLine "DCE:929ff336-f2fa-0000-0280020b32000000"
+#pragma ALIAS CATIAHybridShapeReflectLine HybridShapeReflectLine
+
+#endif
+// CATIAHybridShapeReflectLine_IDL

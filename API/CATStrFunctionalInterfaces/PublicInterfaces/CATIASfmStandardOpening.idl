@@ -1,0 +1,177 @@
+// COPYRIGHT DASSAULT SYSTEMES 2009.
+//=============================================================================
+// CATIASfmStandardContourParameters
+//   Interface to Manage Edition of Standard Openings
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Nov. 2010  Creation                                         Deshmane Rahul
+//=============================================================================
+#ifndef CATIASfmStandardOpening_IDL
+#define CATIASfmStandardOpening_IDL
+
+/*IDLREP*/
+
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIABase.idl"
+#include "CATIAReference.idl"
+#include "CATBSTR.idl"
+#include "CATIASfmStandardContourParameters.idl"
+#include "CATIASfmPositioningStrategyManager.idl"
+
+
+
+/**
+* Defines Edition Techniques for Standard Openings.
+*/
+interface CATIASfmStandardOpening : CATIABase
+{   
+  /** 
+  * Gets Contour Information for Standard Opening.
+  * @param oContourName [out]
+  *     The name of the Standard Opening contour for this opening.
+  * @param oListContourParams [out]
+  *      A list of volatile objects (accessed through CATIAParameter)
+  *      specifying Cke parameters controlling the size of this contour.
+  *      The Cke parameters are retrieved using the CATIAParameter interface.
+  *      These Cke parameters are normally persistent parameter objects in the model (if they have been stored),
+  *      but in some cases, these may be volatile parameters. 
+  *      The parameters are locked if they cannot be modified.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example retrieves the contour information for standard opening.
+  * <pre>
+  * Dim StrContourName As String
+  * Dim StrContourParams As SfmStandardContourParameters
+  * StdOpening.GetContour StrContourName, StrContourParams
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetContour (inout CATBSTR oContourName, out CATIASfmStandardContourParameters oListContourParams);
+  /** 
+  * Sets Contour Information for Standard Opening.
+  * @param iContourName [in]
+  *     The name of the Standard Opening contour for this opening.
+  * @param iListContourParams [in]
+  *      A list of volatile objects (accessed through CATIAParameter)
+  *      specifying Cke parameters controlling the size of this contour.
+  *      The Cke parameters are retrieved using the CATIAParameter interface.
+  *      These Cke parameters are normally persistent parameter objects in the model (if they have been stored),
+  *      but in some cases, these may be volatile parameters. 
+  *      The parameters are locked if they cannot be modified.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example changes the parameter values for existing opening created using "Sfm_rect" contour.
+  * <pre>
+  * ' First Get the Conotur.
+  * Dim StrContourName As String
+  * Dim StrContourParams As SfmStandardContourParameters
+  * StdOpening.GetContour StrContourName StrContourParams 
+  * ' Get The count
+  * Dim NbofParams As Long
+  * NbofParams = StrContourParams .Count
+  * ' Modify the values inside the for loop
+  * Dim ParamName As String
+  * Dim ParamValue As Parameter
+  * For i = 1 To NbofParams 
+  *  Set ParamValue = StrContourParams .Item(i)
+  *  ParamName = ParamValue.Name
+  *  If ParamName = "Sfm_Width" Then
+  *    ParamValue .ValuateFromString ("1000mm")
+  *    End If
+  *  If ParamName = "Sfm_Height" Then
+  *    ParamValue .ValuateFromString ("1000mm")
+  *     End If
+  *  If ParamName = "Sfm_CornerRadius" Then
+  *    ParamValue .ValuateFromString ("25mm")
+  *     End If
+  * Next
+  * ' Set the contour with new values
+  * StdOpening.SetContour StrContourName , StrContourParams 
+  * </pre>
+  * </dl> 
+  */
+  HRESULT SetContour (in CATBSTR iContourName,in CATIASfmStandardContourParameters iListContourParams);
+  /** 
+  * Gets the list of Position Strategy Parameters.
+  * @param oPosStrategyName [out]
+  *     The name of the Standard Opening Position Strategy for this opening.
+  * @param oListPosParams [out]
+  *   A list of the parameter group objects defining the Positioning Specification.
+  *   The number and types of objects in this list depend on the Positioning Strategy name.
+  *   @see CATIASfmStandardPosStrategyParameters#SetPosParamData for the list of
+  *   available positioning strategies and the parameter groups for each positioning strategy.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example retrieves the Position Strategy information for existing standard opening.
+  * <pre>
+  * Dim StrPosStrategyName As String
+  * Dim StrPosStrategyParams As SfmStandardPosStrategyParameters
+  * StdOpening1.GetPositioningStrategy StrPosStrategyName, StrPosStrategyParams
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetPositioningStrategy (inout CATBSTR oPosStrategyName,out CATIASfmStandardPosStrategyParameters oListPosParams);
+  /** 
+  * Sets the Position Strategy and Positin Strategy Parameters.
+  * @param iPosStrategyName [in]
+  *     The name of the Standard Opening Position Strategy for this opening.
+  * @param iListPosParams [in]
+  *   A list of the parameter group objects defining the Positioning Specification.
+  *   The number and types of objects in this list depend on the Positioning Strategy name.
+  *   @see CATIASfmStandardPosStrategyParameters#SetPosParamData for the list of
+  *   available positioning strategies and the parameter groups for each positioning strategy.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example modifies the Position Strategy Parameters for existing standard opening created using CATSfmPosOffsetOffset.
+  * <pre>
+  * 'Prepare a New List for U References. The list will now contain one element.
+  * Dim UrefListNew As SfmReferences
+  * Dim UrefNew As Reference
+  * Set UrefNew = Part1.FindObjectByName("CROSS.95")
+  * UrefListNew.Add UrefNew
+  * 'Prepare a New List for VReferences. The list will now contain one element.
+  * Dim VrefListNew As SfmReferences
+  * Dim VrefNew As Reference
+  * Set VrefNew = Part1.FindObjectByName("LONG.0")
+  * VrefListNew.Add VrefNew
+  * 'Get Position Strategy Name and Parameters
+  * Dim StrPosStrategyName As String
+  * Dim StrPosStrategyParams As SfmStandardPosStrategyParameters
+  * StdOpening1.GetPositioningStrategy StrPosStrategyName, StrPosStrategyParams
+  * 'SetPosParamData on retrieved StrPosStrategyParams. Enter new values for offset, rotation angle & reference list
+  * StrPosStrategyParams.SetPosParamData "CATSfmPosOffsetOffset", 40, UrefListNew, 25, UrefListNew, 30
+  * StdOpening1.SetPositioningStrategy StrPosStrategyName, StrPosStrategyParams
+  * Part1.Update
+  * </pre>
+  * </dl> 
+  */
+  HRESULT SetPositioningStrategy (in CATBSTR iPosStrategyName,in CATIASfmStandardPosStrategyParameters iListPosParams);
+};
+
+// Interface name : CATIASfmStandardOpening
+#pragma ID CATIASfmStandardOpening "DCE:802297ED-8E7D-4f83-958E638EA91115BB"                                        
+#pragma DUAL CATIASfmStandardOpening
+
+// VB object name : SfmOpening
+#pragma ID SfmStandardOpening "DCE:54EE2553-41FE-458e-B9F1643D6B5D7DF6"                                   
+#pragma ALIAS CATIASfmStandardOpening SfmStandardOpening
+
+#endif

@@ -1,0 +1,142 @@
+#ifndef CATIAThickSurface_IDL
+#define CATIAThickSurface_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAThickSurface:                           
+// Exposed interface for ThickSurface
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Dec98 Creation        			 JL Delvordre
+//=================================================================
+#include "CATIASurfaceBasedShape.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAReference;
+interface CATIALength;
+
+/**
+ * Represents the ThickSurface feature.
+ * It thicks surface using an offset element
+ * (such as a surface or a skin) and two offset values
+ * TopOffset and Botoffset.
+ *  TopOffset is the offset between the offset element and the
+ *  top skin of the feature. 
+ *  BotOffset is the offset between the offset element and the
+ *  bottom skin of the feature. 
+ */
+
+//-----------------------------------------------------------------
+interface CATIAThickSurface : CATIASurfaceBasedShape     
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//	ON TOP OFFSET
+	//	-------------
+	//
+    /**
+     * Returns the value of the top offset.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>topoffset</tt> the top offset
+     * of the ThickSurface <tt>firstThickSurface</tt>:
+     * <pre>
+     * Set topoffset = firstThickSurface.<font color="red">TopOffset</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY TopOffset
+	HRESULT	get_TopOffset
+				( out /*IDLRETVAL*/ CATIALength oTopOffset );
+
+	//
+	//	ON BOTTOM OFFSET
+	//	----------------
+	//
+    /**
+     * Returns the value of the bottom offset.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>botoffset</tt> the bottom 
+     * offset of the thicksurface <tt>firstThickSurface</tt>:
+     * <pre>
+     * Set botoffset = firstThickSurface.<font color="red">BotOffset</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY BotOffset
+	HRESULT	get_BotOffset
+				( out /*IDLRETVAL*/ CATIALength oBotOffset );
+
+
+	//
+	//	ON OFFSET SIDE
+	//	--------------
+	//
+    /**
+     * Returns the offset direction (defines in regards of the normal
+     * direction) .
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>offsetside</tt> the side
+     * of the ThickSurface <tt>firstThickSurface</tt>:
+     * <pre>
+     * Set offsetside = firstThickSurface.<font color="red">OffsetSide</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY OffsetSide
+	HRESULT	get_OffsetSide
+				( out /*IDLRETVAL*/ long oOffsetSide );
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+	//	CHANGE OFFSET SIDE 
+	//	-------------------
+	//
+    /**
+     * Swap the side of the offset.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example changes the side of the 
+     * ThickSurface <tt>firstThickSurface</tt>:
+     * <pre>
+     * call firstThickSurface.<font color="red">swap_OffsetSide</font>()
+     * </pre>
+     * </dl>
+     */
+	HRESULT	swap_OffsetSide
+				( );
+};
+
+// Interface name : CATIAThickSurface
+#pragma ID CATIAThickSurface "DCE:01032317-98bf-11d2-9f850008c7ca6093"
+#pragma DUAL CATIAThickSurface
+
+// VB object name : ThickSurface (Id used in Visual Basic)
+#pragma ID ThickSurface "DCE:1c3077c7-98bf-11d2-9f850008c7ca6093"
+#pragma ALIAS CATIAThickSurface ThickSurface
+
+
+#endif
+// CATIAThickSurface_IDL
+

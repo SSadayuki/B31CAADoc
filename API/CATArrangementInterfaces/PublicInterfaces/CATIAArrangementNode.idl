@@ -1,0 +1,120 @@
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAArrangementNode.idl
+// Automation interface for the ArrangementNode element 
+//
+#ifndef CATIAArrangementNode_IDL
+#define CATIAArrangementNode_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+interface CATIAMove;
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+/**  
+ * This interface provides access to a CATIAArrangementNode  object.
+ * Use this object to fetch the properties of an ArrangementNode object.
+ * <b> Role: </b>
+ * Use this object to retrieve the bend angle, bend radius and location of an ArrangementNode object.
+ */
+
+interface CATIAArrangementNode : CATIABase 
+{
+
+  /**
+   * Returns or sets the BendRadius of the current ArrangementNode.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the BendRadius of the <tt>objNode1</tt> object.
+   * <pre>
+   * Dim dblBendRadius   As Double
+   * dblBendRadius  = objNode1.<font color="red">BendRadius</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY BendRadius
+   HRESULT get_BendRadius(out /*IDLRETVAL*/ double oNodeBendRadius);
+   HRESULT put_BendRadius(in double iNodeBendRadius);
+
+  /**
+   * Returns the BendAngle of the current ArrangementNode.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the BendAngle of the <tt>objNode1</tt> object.
+   * <pre>
+   * Dim dblBendAngle   As Double
+   * dblBendBendAngle  = objNode1.<font color="red">BendAngle</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY BendAngle
+   HRESULT get_BendAngle(out /*IDLRETVAL*/ double oNodeBendAngle);
+
+  /**
+   * Returns the location of the current ArrangementNode.
+   * @param iRelAxis
+   *  The relative axis to be considered when calculating the coordinate.
+   * @param ioNodeLocation
+   *  The location of the ArrangementNode.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the location of the ArrangementNode object <tt>objNode1</tt>.
+   * <pre>
+   * Dim dblCoords(3)   As Double
+   * Dim iRelAxis       As Move
+   * 'Fetch iRelAxis from the object containing the node
+   * ...
+   * objNode1.<font color="red">GetPoint</font>(iRelAxis, dblCoords)
+   * </pre>
+   * </dl>  
+   */
+   HRESULT GetPoint(in CATIAMove iRelAxis, inout CATSafeArrayVariant ioNodeLocation);
+
+
+  /**
+   * Sets the location of the current ArrangementNode.
+   * @param iRelAxis
+   *  The relative axis to be considered when calculating the coordinate.
+   * @param ioNodeLocation
+   *  The location of the ArrangementNode.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example sets the location of the ArrangementNode object <tt>objNode1</tt>.
+   * <pre>
+   * Dim dblCoords(3)   As Double
+   * Dim iRelAxis       As Move
+   * 'Fetch iRelAxis from the object containing the node
+   * ...
+   * dblCoords(0)       = 300.0 '//X
+   * dblCoords(1)       = 500.0 '//Y
+   * dblCoords(2)       = 300.0 '//Z
+   * objNode1.<font color="red">SetPoint</font>(iRelAxis, dblCoords)
+   * </pre>
+   * </dl>  
+   */
+   HRESULT SetPoint(in CATIAMove iRelAxis, in    CATSafeArrayVariant iNodeLocation);
+};
+
+// Interface name : CATIAArrangementNode
+#pragma ID CATIAArrangementNode "DCE:56249a0c-ca04-11d4-8df300d0b7acadba"
+#pragma DUAL CATIAArrangementNode
+
+// VB object name : ArrangementNode (Id used in Visual Basic)
+#pragma ID ArrangementNode "DCE:56249a0d-ca04-11d4-8df300d0b7acadba"
+#pragma ALIAS CATIAArrangementNode ArrangementNode
+
+#endif

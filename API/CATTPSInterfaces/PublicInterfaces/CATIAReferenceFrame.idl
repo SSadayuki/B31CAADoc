@@ -1,0 +1,146 @@
+#ifndef CATIAReferenceFrame_IDL
+#define CATIAReferenceFrame_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+
+interface CATIAAnnotations;
+interface CATIAUserSurface;
+
+/**
+ * Interface designed to manage reference frame associated to a TPS.
+ * Reference frame is composed of three boxes.
+ * <pre>
+ * <r>                        Reference Frame
+ * <r>                       / 
+ * <r>                 _____|_____
+ * <r>                /           \
+ * <r>        ---------------------
+ * <r>        |   |   |Box|Box|Box|
+ * <r>        |   |   | 1 | 2 | 3 |
+ * <r>        ---------------------
+ * <pre>
+ */
+interface CATIAReferenceFrame : CATIABase 
+{
+    /**
+     * Retrieves Frame of the TPS.
+     *   @param oFirstBox
+     *   @param oSecondBox
+     *   @param oThirdBox
+     *     Texts in first, second and third boxes.
+     */
+    HRESULT Frame (inout CATBSTR oFirstBox,
+                   inout CATBSTR oSecondBox,
+                   inout CATBSTR oThirdBox);
+
+    /**
+     * Set Frame of the TPS.
+     *   @param oFirstBox
+     *   @param oSecondBox
+     *   @param oThirdBox
+     *     Texts in first, second and third boxes.
+     */
+    HRESULT SetFrame (in CATBSTR iFirstBox,
+                      in CATBSTR iSecondBox,
+                      in CATBSTR iThirdBox);
+
+#pragma PROPERTY AllDatumsSimple
+    /**
+     * Retrieves all datums simple used in Reference Frame.
+     *   @param opiListDatumsSimple
+     *     All objects of the collection
+     */
+    HRESULT get_AllDatumsSimple(
+                       out /*IDLRETVAL*/ CATIAAnnotations opiListDatumsSimple);
+
+    /**
+     * Sets the AxisSystem TTRS.
+     *  @param ipAxisSystemTTRS
+     *   AxisSystem TTRS. If it is NULL, the AxisSystem TTRS in the model
+     *   will be removed.
+     *  @return HRESULT
+     *   S_OK:- the Axis System has been correctly set.
+     *   E_FAIL or E_NOIMPL : Axis System cannot be set.
+     */
+    HRESULT SetAxisSystemTTRS (in CATIAUserSurface ipAxisSystemTTRS);
+
+    /**
+     * Gets the AxisSystem TTRS.
+     *  @param opAxisSystemTTRS
+     *   AxisSystem TTRS
+     *  @return HRESULT
+     *   S_OK:- the Axis System has been correctly retrieved.
+     *   E_FAIL or E_NOIMPL : Axis System cannot be retrieved.
+     */
+    HRESULT GetAxisSystemTTRS (out CATIAUserSurface opAxisSystemTTRS);
+
+    /**
+     * Sets the values of Degrees Of Freedom(DOF) [x,y,z,u,v,w].
+     * Is only defined when "Axis System" attribute is valued.
+     * Only for ASME 2009 (does not exist in ISO).
+     *  @param inBox
+     *   First, Second or the Third Box of the DRF on which
+     *   the Degrees Of Freedom is to be set.
+     *  @param iValue
+     *   iValue must begin by the symbol :”[“ and must end by the symbol “]”.
+     *   and between these symbols “[..]”, value must be a combination of
+     *   following legal values:
+     *   x,
+     *   y,
+     *   z,
+     *   u,
+     *   v,
+     *   w
+     *   E.G.1:- To set [x,z] as the DOF:-
+     *                  iValue = [x,z];
+     *   E.G.2:- To set [y] as the DOF:-
+     *                  iValue = [y];
+
+     *  @return HRESULT
+     *    S_OK : the Degrees Of Freedom has been correctly set.
+     *    E_FAIL or E_NOIMPL : the Degrees Of Freedom cannot be set.
+     */
+    HRESULT SetDegreesOfFreedom (in CATVariant inBox, in CATBSTR iValue);
+
+    /**
+     * Retrieves the values of Degrees Of Freedom(DOF) [x,y,z,u,v,w].
+     * Is only defined when "Axis System" attribute is valued.
+     * Only for ASME 2009 (does not exist in ISO).
+     *  @param inBox
+     *   First, Second or the Third Box of the DRF on which
+     *   the Degrees Of Freedom is to be retrieved.
+     *  @param oValue
+     *   oValue begins with the symbol :”[“ and ends by the symbol “]”.
+     *   and between these symbols “[..]”, value are a a combination of
+     *   following legal values:
+     *   x,
+     *   y,
+     *   z,
+     *   u,
+     *   v,
+     *   w
+     *  @return HRESULT
+     *    S_OK : the Degrees Of Freedom has been correctly retrieved.
+     *    E_FAIL or E_NOIMPL : the Degrees Of Freedom cannot be retrieved.
+     */
+    HRESULT GetDegreesOfFreedom (in CATVariant inBox, inout CATBSTR oValue);
+
+};
+
+// Interface name : CATIAReferenceFrame
+#pragma ID CATIAReferenceFrame "DCE:538cec1e-2f7e-11d6-be890002b341dd3a"
+#pragma DUAL CATIAReferenceFrame
+
+// VB object name : ReferenceFrame (Id used in Visual Basic)
+#pragma ID ReferenceFrame "DCE:538cec1f-2f7e-11d6-be890002b341dd3a"
+#pragma ALIAS CATIAReferenceFrame ReferenceFrame
+
+#endif

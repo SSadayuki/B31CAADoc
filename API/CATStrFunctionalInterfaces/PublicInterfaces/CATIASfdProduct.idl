@@ -1,0 +1,72 @@
+// COPYRIGHT Dassault Systemes 2011.
+//=============================================================================
+// CATIASfdProduct
+//   Interface to Create Sfd System.
+//=============================================================================
+// Usage notes:
+//   Interface for Automation Integration.
+//=============================================================================
+// Oct. 2011  Creation                                         Deshmane Rahul
+//=============================================================================
+#ifndef CATIASfdProduct_IDL
+#define CATIASfdProduct_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl" 
+#include "CATIAReference.idl" 
+#include "CATBSTR.idl" 
+#include "CATIAPart.idl" 
+#include "CATBaseDispatch.idl" 
+
+/**
+ * Interface to create a SFD Functional System under a Product.
+ * <b>Role</b>:  Allows creating Functional System under a Product.
+ */
+interface CATIASfdProduct : CATIABase
+{    
+  /** 
+  * Creates the Structure System inside a Product.
+  * @sample  
+  * <dd>
+  * This Example creates a SFD System inside a Product from scratch.
+  * <pre>
+  * ' Create a New Product Document
+  * Dim NewProdDoc As ProductDocument
+  * Set NewProdDoc = CATIA.Documents.Add("Product")
+  * ' Get the Product from the Product Document
+  * Dim RootPrd As Product
+  * Set RootPrd = NewProdDoc.Product
+  * ' Select the Product Document and Add the product to this selection
+  * Dim SelectionObj As Selection
+  * Set SelectionObj = NewProdDoc.Selection
+  * SelectionObj.Add RootPrd
+  * ' Create a SFD product from above Product
+  * Dim SfdProductObj As SfdProduct
+  * Set SfdProductObj = SelectionObj.FindObject("CATIASfdProduct")
+  * ' Create a System under this Product
+  * Dim SfdSystemPart As Part
+  * Set SfdSystemPart = SfdProductObj.<font color="red">CreateFunctionalSystem</font>
+  * ' Using this Part get the CustomerFactory
+  * Dim FactoryObj As SfmFactory
+  * Set FactoryObj = SfdSystemPart.GetCustomerFactory("SfmFactory")
+  * </pre>
+  * </dd> 
+  */
+  HRESULT CreateFunctionalSystem(out /*IDLRETVAL*/ CATIAPart oSfdSystemPart); 
+};
+
+
+// Interface name : CATIASfdProduct
+#pragma ID CATIASfdProduct "DCE:C1F5D56C-C70B-40d4-A544B550B95783DF"
+#pragma DUAL CATIASfdProduct
+
+// VB object name : SfdProduct
+#pragma ID SfdProduct "DCE:F9E3A772-89C8-4a65-9D649AEF701EDA02"                          
+#pragma ALIAS CATIASfdProduct SfdProduct
+
+#endif

@@ -1,0 +1,46 @@
+#
+BUILT_OBJECT_TYPE=NONE
+OS=COMMON
+#
+
+LINK_WITH= \
+  FrFOpeUtil \
+  FrFObjects \
+  Y30UIUTI \
+  YP00IMPL \
+  YN000MAT \
+  YN000FUN \
+  JS0ERROR \
+  JS0CORBA \
+  JS03TRA \
+  CO0LSTPV \
+  Y300IINT
+
+COMDYN=
+
+OS = AIX
+SYS_INCPATH = 
+SYS_LIBS =  -lxlf -lxlf90 -lxlfpad
+SYS_LIBPATH = 
+
+OS = HP-UX
+SYS_INCPATH =  
+SYS_LIBS = -lf 
+SYS_LIBPATH =
+
+OS = IRIX
+SYS_INCPATH = 
+SYS_LIBS = -lftn
+SYS_LIBPATH =
+
+OS = SunOS
+SYS_INCPATH = 
+SYS_LIBS = -lF77 -lM77
+SYS_LIBPATH =
+#
+OS = Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+LOCAL_FFLAGS= /I $(LOCIPATH)

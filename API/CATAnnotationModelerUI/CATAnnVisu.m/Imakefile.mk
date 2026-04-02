@@ -1,0 +1,10 @@
+
+# module IDANNVISU
+
+BUILT_OBJECT_TYPE = NONE
+
+
+
+
+
+

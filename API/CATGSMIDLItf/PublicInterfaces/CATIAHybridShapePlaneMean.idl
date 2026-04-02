@@ -1,0 +1,108 @@
+#ifndef CATIAHybridShapePlaneMean_IDL
+#define CATIAHybridShapePlaneMean_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapePlaneMean:         
+// Exposed interface for HybridShape PlaneMean
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation
+//=================================================================
+#include "CATIAHybridShapePlane.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape mean plane feature object.
+ * <b>Role</b>: To access the data of the hybrid shape mean plane feature object.
+ * This data includes:
+ * <ul>
+ * <li>The list of points</li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapePlaneMean object.
+ * @see CATIAHybridShapeFactory
+*/
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapePlaneMean : CATIAHybridShapePlane
+{
+
+/**
+ * Adds a point to the mean plane.
+ * @param iPassingPoint 
+ *   The point to add<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ */ 
+   HRESULT AddPoint   (in   CATIAReference        iPassingPoint);
+   
+/**
+ * Retrieves the point at a given position.
+ * @param iRank 
+ *   The rank of the point to retrieve
+ * @param oPassingPoint 
+ *   The point retrieved at this rank 
+ */ 
+   HRESULT GetPoint (in   long                  iRank,
+      out  CATIAReference      oPassingPoint);
+
+/**
+ * Removes a point in the list. 
+ * @param iRank 
+ *   The rank of the point to remove
+ */ 
+   HRESULT    RemoveElement (in    long             iRank);
+/**
+ * Gets the size of the list (number of points).
+ *   @param oSize 
+ *      position of point 
+ */
+   HRESULT GetSize(out /*IDLRETVAL*/ long oSize);
+
+/**
+ * Gets the position of an element in the list.
+ *   @param iPoint
+ *      point 
+ *   @param oPos
+ *      position of point 
+ */
+   HRESULT GetPos(in  CATIAReference iPoint, out /*IDLRETVAL*/ long oPos);
+
+/**
+ * Removes all elements in the list of points.
+ */
+   HRESULT RemoveAll();
+
+/**
+ * Replaces a point in the list at the given position.
+ *   @param oPoint
+ *      point 
+ *   @param iPos
+ *      position of point 
+ */
+   HRESULT ReplacePointAtPosition(in CATIAReference iPoint,in long iPos);
+
+};
+
+// Interface name : CATIAHybridShapePlaneMean
+#pragma ID CATIAHybridShapePlaneMean "DCE:89d76624-5c18-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapePlaneMean
+
+// VB object name : HybridShapePlaneMean (Id used in Visual Basic)
+#pragma ID HybridShapePlaneMean "DCE:89d76921-0390-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapePlaneMean HybridShapePlaneMean
+
+#endif

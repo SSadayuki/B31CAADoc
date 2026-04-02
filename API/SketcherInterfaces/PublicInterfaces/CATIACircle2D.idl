@@ -1,0 +1,95 @@
+#ifndef CATIACircle2D_IDL
+#define CATIACircle2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACurve2D.idl"
+#include "CATSafeArray.idl"
+#include "CATIAPoint2D.idl"
+
+/** 
+ * Class defining a circle in 2D Space.
+ */
+
+interface CATIACircle2D : CATIACurve2D
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+        //
+        //
+        //
+#pragma PROPERTY CenterPoint
+        /**
+        *       Returns the center point of the circle.
+        *       @param oCenterPoint   
+        *       The center point of the circle
+        */
+        HRESULT get_CenterPoint(out /*IDLRETVAL*/ CATIAPoint2D oCenterPoint);
+        //
+        /**
+        *       Sets the center point of the circle.
+        *       @param iCenterPoint   
+        *       The center point of the circle
+        */
+        HRESULT put_CenterPoint(in CATIAPoint2D iCenterPoint);
+		//
+#pragma PROPERTY Radius
+        //
+        /**
+        *       Returns the radius of the circle
+        *       @param oRadius
+        *       The radius of the circle
+        */
+        HRESULT get_Radius ( out  /*IDLRETVAL*/ double  oRadius );
+
+        //
+	//		=============
+	//		== METHODS ==
+	//		=============
+        //
+        /**
+        *       Modifies the caracteristics of the circle
+        *       @param iCenterX              
+        *       The X Coordinate of the circle center
+        *       @param iCenterY
+        *       The Y Coordinate of the circle center
+        *       @param iRadius
+        *       The radius of the circle
+        */
+        HRESULT SetData (in     double    iCenterX,
+                         in     double    iCenterY,
+                         in     double    iRadius);
+						         /**
+        *       Returns the center of the circle
+        *       @param oData[0]
+        *       The X Coordinate of the circle center point
+        *       @param oData[1]
+        *       The Y Coordinate of the circle center point
+		*<dt><b>Example:</b>
+		* <dd>The following example reads the coordinates of the center<br>
+		* of the circle <tt>myCircle</tt>:
+		* double center(1)
+		* myCircle.GetCenter center
+		* <pre>
+        */
+        HRESULT GetCenter ( inout   CATSafeArrayVariant  oData );
+
+};
+
+// Interface name : CATIACircle2D
+#pragma ID CATIACircle2D "DCE:80ec7321-4b09-0000-0280030ba6000000"
+#pragma DUAL CATIACircle2D
+
+// VB object name : Circle2D (Id used in Visual Basic)
+#pragma ID Circle2D "DCE:80ec7327-2209-0000-0280030ba6000000"
+#pragma ALIAS CATIACircle2D Circle2D
+
+
+#endif

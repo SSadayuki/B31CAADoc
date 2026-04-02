@@ -1,0 +1,59 @@
+#ifndef CATIASchAppGroup_IDL 
+#define CATIASchAppGroup_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage application group.
+  */
+
+interface CATIASchAppGroup : CATIABase
+{
+  /**
+  * List application zone objects.
+  * @param iClassType
+  *   Class type filter. If null, no filtering will be applied.
+  * @param oLZones
+  *  (members are CATISchAppZone interfaces pointers)
+  *   A list of zones
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppGroup
+  * Dim strVar1 As String
+  * Dim objArg2 As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">ListZones</font>strVar1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT ListZones ( 
+    in CATBSTR iClassType, 
+    inout CATIASchListOfObjects oLZones );
+    
+};
+    
+// Interface name : CATIASchAppGroup
+#pragma ID CATIASchAppGroup "DCE:9e1e350f-a11d-4635-971c2477c8b5efba"
+#pragma DUAL CATIASchAppGroup
+    
+// VB object name : SchAppGroup
+#pragma ID SchAppGroup "DCE:a23d595a-a3a5-4370-b125e690da0c72c3"
+#pragma ALIAS CATIASchAppGroup SchAppGroup
+    
+#endif 
+    

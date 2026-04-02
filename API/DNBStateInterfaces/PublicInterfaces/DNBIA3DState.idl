@@ -1,0 +1,376 @@
+#ifndef DNBIA3DState_IDL
+#define DNBIA3DState_IDL
+
+/*IDLREP*/
+/* -*-idl-*- */
+
+// COPYRIGHT Dassault Systemes 2007
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+#include "CATIAProduct.idl"
+#include "CATBaseDispatch.idl"
+#include "DNBIA3DStatePosition.idl"
+
+interface CATIAActivity;
+
+/**
+* Interface representing the 3D State object.
+*
+* <br><b>Role</b>: Represents a 3D State object and provides APIs to
+* update an existing 3D state object.
+* <p>
+*
+Sample code to use the interface
+
+Sub CATMain()
+    Dim procDoc As ProcessDocument
+    Set procDoc = DELMIA.ActiveDocument
+
+    Dim stateMgt As DNB3DStateManagement
+    Set stateMgt = procDoc.DNB3DStateManagement
+
+    Dim my3DState as DNB3DState
+    '-- "My State1" is a 3D State defined on MySelectedProdcut
+	Set my3DState = positionMgt.Get3DState(MySelectedProduct, "My State1")
+    
+	my3DState.Assign3DState(MySelectedActivity, "Begin Condition")
+
+End Sub
+*/
+
+interface DNBIA3DState : CATIABase
+{
+	/**
+	* Returns or sets the Name of the 3D State. 
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example fetches the Name of a 3D State.
+	* <pre>
+	* Dim stateName As String
+	* stateName = mySelected3DState.<font color="red">StateName</font>
+	* </pre>
+	* </dd>
+	* <dd>
+	* This example sets the Name of a 3D State.
+	* <pre>
+	* mySelected3DState.StateName = "NewStateName"
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+#pragma PROPERTY StateName
+	HRESULT get_StateName (inout /*IDLRETVAL*/ CATBSTR oStateName);
+	HRESULT put_StateName (in CATBSTR iStateName);
+
+	/**
+	* Adds the specified 3D state to the given 
+	* 3D state as a child. This input state object should be 
+	* defined inside the product hierarchy of the ‘this’ state. 
+	* Otherwise this method would return E_FAIL. 
+	* @param iState
+	*    The 3D State object to be added.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example adds a specified 3D state to a 3D State as a child.
+	* <pre>
+	* Dim myState1 As DNB3DState
+	* Dim myState2 As DNB3DState
+	* myState2 = <get the state to be added>
+	* myState1.Add3DState(myState2)
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT Add3DState (in DNBIA3DState iState);
+
+	/**
+	* Adds the specified 3D Position to the given  
+	* 3D state as a child. This input state object should be 
+	* defined inside the product hierarchy of the ‘this’ state. 
+	* Otherwise this method would return E_FAIL. 
+	* @param iPosition
+	*    The 3D position object to be added.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example adds a specified 3D position to a 3D State as a child.
+	* <pre>
+	* Dim myState1 As DNB3DState
+	* Dim myPostion As DNB3DStatePosition
+	* myPostion = <get the 3D position to be added>
+	* myState1.Add3DState(myPostion)
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT Add3DPosition (in DNBIA3DStatePosition iPosition);
+
+	/**
+	* Removes the specified 3D state from the given 
+	* 3D state’s definition list 
+	* @param iState
+	*    The 3D State object to be removed.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example removes a specified 3D state from a 3D state's definition list .
+	* <pre>
+	* Dim myState1 As DNB3DState
+	* Dim myState2 As DNB3DState
+	* myState2 = <get the 3D state to be removed>
+	* myState1.Remove3DState(myState2)
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT Remove3DState (in DNBIA3DState iState);
+
+	/**
+	* Removes the specified 3D position from the given 
+	* 3D state’s definition list 
+	* @param iPosition
+	*    The 3D position object to be removed.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example removes a specified 3D state from a 3D state's definition list .
+	* <pre>
+	* Dim myState1 As DNB3DState
+	* Dim myPostion As DNB3DStatePosition
+	* myPostion = <get the 3D position to be removed>
+	* myState1.Remove3DPosition(myPostion)
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT Remove3DPosition (in DNBIA3DStatePosition iPosition);
+
+    /**
+	* Assigns the 3D state to a specified process, based on the given condition. 
+	* <! @sample>
+	* @param iProcess
+	*    The activity to which the 3D state is to be assigned.
+	* @param iCondition
+	*    The condition on which the 3D state is assigned to the specified process.
+	*    iCondition should be one of "Begin Condition" or "End Condition" or "3D Context"
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example assigns myState to mySelectedAct as a "Begin Condition" .
+	* <pre>
+	* Dim myState As DNB3DState
+	* mySelectedAct = <get the activity to which the state has to be assigned>
+	* myState = <get the 3D state to be assigned>
+	* myState1.Assign3DState(mySelectedAct, "Begin Condition")
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+    HRESULT Assign3DState (in CATIAActivity iProcess, in CATBSTR iCondition);
+
+	/**
+	* Unassigns the 3D state from a specified process. 
+	* @param iProcess
+	*    The activity from which the 3D state is to be unassigned.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example unassigns myState from mySelectedAct.
+	* <pre>
+	* Dim myState As DNB3DState
+	* mySelectedAct = <get the activity from which the state has to be unassigned>
+	* myState = <get the 3D state to be unassigned>
+	* myState.Assign3DState(mySelectedAct)
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+    HRESULT Unassign3DState (in CATIAActivity iProcess);
+
+	/**
+	* Returns the list of all the 3D states  or 3D positions 
+	* or both, managed by the given 3D state. 
+	* @param iType
+	*    The type of children to be obtained which can be "3D State" or "3D Position" or "All".
+	*  @return oChildrenArray
+	*    The list of 3D states  or 3D positions or both, managed by the given 3D state.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example returns the list of 3D States managed by myState.
+	* <pre>
+	* Dim myState As DNB3DState
+	* Dim statesArray() 
+	* myState = <get the 3D state to whose children need to be obtained>
+	* numStates = myState.GetNumberOfChildren("3D State")
+	* Redim statesArray(numStates - 1)
+	* myState.GetChildren "3D State",statesArray
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT GetChildren (in CATBSTR iType, inout CATSafeArrayVariant oChildrenArray);
+
+	/**
+	* Returns the number of 3D states  or 3D positions 
+	* or both, managed by the given 3D state. 
+	* @param iType
+	*    The type of children to be obtained which can be "3D State" or "3D Position" or "All".
+	*  @return oNumberOfChild
+	*    The number of 3D states  or 3D positions or both, managed by the given 3D state.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example returns the number of 3D States managed by myState.
+	* <pre>
+	* Dim myState As DNB3DState
+	* Dim statesArray() 
+	* myState = <get the 3D state to whose children need to be obtained>
+	* numStates = myState.GetNumberOfChildren("3D State")
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT GetNumberOfChildren (in CATBSTR iType, out /*IDLRETVAL*/ long oNumberOfChild);
+
+	/**
+	* Returns the product/resource/MA/ASTMA on which the given state is being defined. 
+	*  @return oRelatedObj
+	*    The product/resource/MA/ASTMA on which the given state is being defined.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example returns the product/resource/MA/ASTMA on which the given state is being defined.
+	* <pre>
+	* Dim myState As DNB3DState
+	* myState = <get the 3D state to whose children need to be obtained>
+	* Set relObj = myState.GetRelatedObject
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT GetRelatedObject(out /*IDLRETVAL*/ CATBaseDispatch oRelatedObj);
+
+	/**
+	* Returns the list of activities/processes associated with the 3D State based on 
+	* the condition on which the state has been assigned.
+    * @param iConditionType
+	*    The condition on which the state has been assigned.
+	*    The condition type should be one of "Begin Condition" or "End Condition" or "3D Context" or "All".
+	*  @return oActivitiesArray
+	*    The list of activities assigned to the given 3D state based on the specified condition.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example returns the list of activities assigned to myState as a "End Condition".
+	* <pre>
+	* Dim myState As DNB3DState
+	* Dim activitiesArray()
+	* myState = <get the 3D state to whose related actvities are to be obtained>
+	* numOfActivities = myState.GetNumberofRelatedActivities("End Conditon")
+	* Redim activitiesArray(numOfActivities - 1)
+	* myState.GetRelatedActivities "End Conditon",activitiesArray
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT GetRelatedActivities (in CATBSTR iConditionType, inout CATSafeArrayVariant oActivitiesArray);
+
+	/**
+	* Returns the number of activities/processes associated with the 3D State based on 
+	* the condition on which the state has been assigned.
+    * @param iConditionType
+	*    The condition on which the state has been assigned.
+	*    The condition type should be one of "Begin Condition" or "End Condition" or "3D Context" or "All".
+	*  @return oNumActivities
+	*    The number of activities assigned to the given 3D state based on the specified condition.
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example returns the number of activities assigned to myState as a "End Condition".
+	* <pre>
+	* Dim myState As DNB3DState
+	* Dim activitiesArray()
+	* myState = <get the 3D state to whose related actvities are to be obtained>
+	* numOfActivities = myState.GetNumberofRelatedActivities("End Conditon")
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT GetNumberofRelatedActivities (in CATBSTR iConditionType, out /*IDLRETVAL*/ long oNumActivities);
+
+	/**
+	* Returns the condition type on which the 3D State has been assigned 
+	* to a specified activity.
+    * @param iRelatedActivity
+	*    The activity to which the 3D state has been assigned based on a condition.
+	*  @return oConditonName
+	*    The condition type on which the 3D State has been assigned and can have the 
+	*    value as "Begin Condition" or "End Condition" or "3D Context"
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example returns the condition on which the given activity has been assigned to the state.
+	* <pre>
+	* Dim myState As DNB3DState
+	* Dim conditionName as String
+	* Dim activitiesArray()
+	* myState = <get the 3D state to whose related actvities are to be obtained>
+	* mySelectedAct = <get the activity to which the state has been assigned>
+	* conditionName = myState.GetConditionName(iRelatedActivity)
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT GetConditionName (in CATIAActivity iRelatedActivity, inout /*IDLRETVAL*/ CATBSTR oConditonName);
+
+	/**
+	* Returns the parent for the 3D State 
+	*  @return oParent
+	*    The parent under which the 3D state has been created which could be "3D States" or 
+	*    "Mfg Positions"
+	* <! @sample>
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example returns the number of activities assigned to myState as a "End Condition".
+	* <pre>
+	* Dim myState As DNB3DState
+	* myState = <get the 3D state to whose related actvities are to be obtained>
+	* parentObj = myState.GetParent
+	* </pre>
+	* </dd>
+	* </dl>
+	*/
+	HRESULT GetParent ( out /*IDLRETVAL*/ CATBaseDispatch oParent);
+
+};
+
+#pragma ID DNBIA3DState "DCE:FDA2CB53-E01A-4473-9A666B28BE30ADC2"
+#pragma DUAL DNBIA3DState
+
+#pragma ID DNB3DState "DCE:78973DF2-CAE1-46d0-A40B87F84B4D9AA0"
+#pragma ALIAS DNBIA3DState DNB3DState
+
+#endif

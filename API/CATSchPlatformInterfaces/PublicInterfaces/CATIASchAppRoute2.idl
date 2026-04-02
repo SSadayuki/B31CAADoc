@@ -1,0 +1,53 @@
+#ifndef CATIASchAppRoute2_IDL 
+#define CATIASchAppRoute2_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchAppConnectable;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic route.
+  */
+
+interface CATIASchAppRoute2 : CATIABase
+{
+  /**
+  * Post process after creating a route instance.
+  * @param iCntbleConnectedTo
+  *   The connectable that the route is connected to this route
+  *   It is optional
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute2
+  * Dim objArg1 As SchAppConnectable
+  *  ...
+  * objThisIntf.<font color="red">AppPostRouteProcess</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppPostRouteProcess ( 
+    in CATIASchAppConnectable iCntblConnectedTo );
+    
+};
+    
+// Interface name : CATIASchAppRoute2
+#pragma ID CATIASchAppRoute2 "DCE:f22c30e4-a7b9-4c4b-a1bcf33c509c3896"
+#pragma DUAL CATIASchAppRoute2
+    
+// VB object name : SchAppRoute2
+#pragma ID SchAppRoute2 "DCE:7c5856c5-dd16-45a2-88aa8e0705a81e7c"
+#pragma ALIAS CATIASchAppRoute2 SchAppRoute2
+    
+#endif 
+    

@@ -1,0 +1,12 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+KnowHowUUID \
+SystemUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+LINK_WITH=$(LINK_WITH_FOR_IID)  JS0CORBA Rule \
+           AD0XXBAS      AC0SPBAS AS0STARTUP \
+		   MecModItfCPP CATLiteralFeatures CATKnowledgeModeler KnowledgeItf Rule KR0FFF KS0SIMPL
+# Attention : KR0FFF KS0SIMPL are only needed for IRIX

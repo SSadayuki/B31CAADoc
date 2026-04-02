@@ -1,0 +1,76 @@
+#ifndef CATIAPspLightBend_IDL
+#define CATIAPspLightBend_IDL
+
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+
+
+interface CATIAPspListOfDoubles;
+#include "CATSafeArray.idl"
+#include "CATIABase.idl"
+
+/**
+ * Represents the Light bendable object.
+ * <b>Role</b>: It is used access light bendable data.
+ */
+
+interface CATIAPspLightBend : CATIABase
+{
+
+ /**
+  * Returns the list of bend radii.
+  * @return
+  *   List of bend radius (PspListOfDoubles).
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightBend
+  *
+  * Dim objArg1 As PspListOfDoubles
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">GetBendData</font> 
+  * </pre>
+  *    
+  */
+
+  HRESULT GetBendData (            
+            out /*IDLRETVAL*/ CATIAPspListOfDoubles oListOfBendRadius );
+
+ /**
+  * Sets a list of  bend radii.
+  * @param iListOfBendRadius
+  *   List of bend radius.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspLightBend
+  * 
+  * Dim objArg1 As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetBendData</font> objArg1
+  * </pre>
+  *    
+  */
+
+  HRESULT SetBendData ( in CATSafeArrayVariant  iListOfBendRadius );
+      
+};
+
+// Interface name : CATIAPspLightBend
+
+#pragma ID CATIAPspLightBend "DCE:31f70633-ec18-402e-b3a69b976b1084b2"
+#pragma DUAL CATIAPspLightBend
+
+// VB object name : PspLightBend
+#pragma ID PspLightBend      "DCE:ccae92cf-85ea-4040-9461663a285cc9c3"
+#pragma ALIAS CATIAPspLightBend PspLightBend
+
+#endif

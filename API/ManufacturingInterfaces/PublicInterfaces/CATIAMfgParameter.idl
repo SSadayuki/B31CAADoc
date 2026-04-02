@@ -1,0 +1,80 @@
+//===================================================================
+// COPYRIGHT Dassault Systemes 2019-12-05
+//===================================================================
+
+#ifndef CATIAMfgParameter_IDL
+#define CATIAMfgParameter_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATIAParameter.idl"
+
+
+/**
+* This interface is used to handle with Enumeration Parameters for Manufacturing
+**/
+interface CATIAMfgParameter : CATIABase
+{
+	/**
+	* Get boolean value of parameter
+	* @param iName
+	*   The name of the parameter
+	* @param oValue
+	*   The boolean value
+	*/
+	HRESULT GetBoolValue(in CATBSTR iName, out boolean oValue);
+
+	/**
+	* Get integer value of parameter
+	* @param iName
+	*   The name of the parameter
+	* @param oValue
+	*   The double value
+	*/
+	HRESULT GetLongValue(in CATBSTR iName, out long oValue);
+
+	/**
+	* Get double value of parameter
+	* @param iName
+	*   The name of the parameter
+	* @param oValue
+	*   The double value
+	* @param iUnit
+	*   The unit value (default: 0)
+	*/
+	HRESULT GetDoubleValue(in CATBSTR iName, out double oValue, in long iUnit);
+
+	/**
+	* Get CATICkeParm value of parameter
+	* @param iName
+	*   The name of the parameter
+	* @param oValue
+	*   The CATICkeParm value
+	*/
+	HRESULT GetValue(in CATBSTR iName, out CATIAParameter oValue);
+
+	/**
+	* Get string value of parameter
+	* @param iName
+	*   The name of the parameter
+	* @param oValue
+	*   The string value
+	*/
+	HRESULT GetStringValue(in CATBSTR iName, inout CATBSTR oValue);
+
+};
+
+// Interface name : CATIAMfgParameter
+#pragma ID CATIAMfgParameter "DCE:0b2a11af-d55b-420a-a1d3239cd4903310"
+#pragma DUAL CATIAMfgParameter
+
+// VB object name : CATIAMfgParameterVB (Id used in Visual Basic)
+#pragma ID ManufacturingParameter "DCE:38c81bd8-b8ef-4cde-b0660c80b54cc0d1"
+#pragma ALIAS CATIAMfgParameter ManufacturingParameter
+
+#endif

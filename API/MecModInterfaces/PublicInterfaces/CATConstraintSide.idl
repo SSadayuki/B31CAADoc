@@ -1,0 +1,95 @@
+#ifndef CatConstraintSide_IDL
+#define CatConstraintSide_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CatConstraintSide:						   
+// enumeration specifying relative positionning of constrained elements
+//								   
+//=================================================================
+// Dec97 Creation                                    JJ Auffret 
+//=================================================================
+/**
+ * Constrained elements relative side.
+ * <br>
+ * When two geometrical elements are constrained, there is often a variety 
+ * of relative positions and orientations of these elements that respect 
+ * the constraint. For instance,   
+ * if a distance constraint is placed on two planes, 
+ * the second plane can lie on both sides of first plane while maintaining
+ * the requested distance: the constraint is respected, but 
+ * geometry remains unresolved. Furthermore, even if the side is fixed,
+ * second plane still can be oriented so that its normal points towards the
+ * first plane or in the opposite direction, without breaking the constraint.
+ * <br>
+ * Managing such indetermination requires control over two variables:
+ * <dl>
+ * <dt><b>Side</b>
+ *   <dd>determines, when relevant, on which side of each other constrained
+ *       elements should be positionned
+ * <dt><b>Orientation</b>
+ *   <dd>determines, when relevant, how to orient constrained elements,  
+ *       whith respect to each other.  
+ * </dl>
+ * 
+ * This enum deals with possibles options for dealing with the <b>Side</b>
+ * variable (see @href CatConstraintOrientation
+ * for possibles options for <b>Orientation</b>).  
+ * <p>
+ * This enum is based on the notion of characteristic vector. A
+ * characteristic vector is a vector which is associated with a constrained
+ * element each time it can be assimilated to a line or a plane. The vector
+ * represents the direction of the line, or the direction normal to the 
+ * plane. 
+ * 
+ * @param catCstSidePositive
+ *   First constrained element characteristic vector points towards 
+ *   second constrained element.<br>
+ *   Arithmetic sign of constraint value is ignored, only its absolute 
+ *   value is taken into account. 
+ * @param catCstSideNegative
+ *   First constrained element characteristic vector points opposite to  
+ *   second constrained element.<br>
+ *   Arithmetic sign of constraint value is ignored, only its absolute 
+ *   value is taken into account. 
+ * @param catCstSideSameAsValue
+ *   Arithmetic sign of constraint value specifies where second element 
+ *   lies with regard to first one: a positive value means in the direction
+ *   of first constrained element characteristic vector, a negative value in 
+ *   the opposite direction.
+ * @param catCstSideOppositeToValue
+ *   Arithmetic sign of constraint value specifies where second element 
+ *   lies with regard to first one: a negative value means in the direction
+ *   of first constrained element characteristic vector, a positive value in 
+ *   the opposite direction.
+ * @param catCstSideUndefined
+ *   Relative positionning of constrained elements is not defined.
+ */
+
+enum CatConstraintSide	
+{
+	catCstSidePositive, 
+	catCstSideNegative,  
+	catCstSideSameAsValue,  
+	catCstSideOppositeToValue,  
+	catCstSideUndefined  
+};
+
+#endif // CatConstraintSide_IDL 
+
+
+
+
+
+
+
+
+

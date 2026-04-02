@@ -1,0 +1,52 @@
+#ifndef CATIAPspGroupable_IDL
+#define CATIAPspGroupable_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+//#include "CATBSTR.idl"
+#include "CATIABase.idl"
+
+interface CATIAPspListOfObjects;
+ 
+/**
+ * Represent the Groupable object that can be grouped by Group object.
+ * <b>Role</b>: It is used to query the group object link to this object.
+ */
+interface CATIAPspGroupable : CATIABase
+{
+   
+/**
+  * Returns a list of Groups to which this object is a member.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspGroupable  
+  * Dim objArg1 As PspListOfObjects
+  * 
+  *  ...
+  * Set ObjArg1 = objThisIntf.<font color="red">Groups</font>
+  * </pre>
+  *    
+  */
+
+ #pragma PROPERTY Groups		
+ HRESULT get_Groups(	out /*IDLRETVAL*/ CATIAPspListOfObjects oLGroups);
+ 
+};
+
+// Interface name : CATIAPspGroupable   
+#pragma ID CATIAPspGroupable "DCE:813ede4e-f748-4fc1-9143d119526e9cc2"
+#pragma DUAL CATIAPspGroupable                        
+
+
+// VB object name : PspGroupable                        
+#pragma ID PspGroupable      "DCE:83dfaf8b-51a0-43fb-88a62ea6f51f35b6"                             
+#pragma ALIAS CATIAPspGroupable PspGroupable
+
+#endif

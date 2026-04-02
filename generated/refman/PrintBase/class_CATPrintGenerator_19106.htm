@@ -1,0 +1,2079 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>PrintBase CATPrintGenerator Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../PrintBase.htm" href="../PrintBase.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "PrintBase";	}
+		function getCurrentObjectName() { 
+ 	return "CATPrintGenerator"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>PrintBase Framework: CATPrintGenerator <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATPrintGenerator_19106','CATPrintGenerator','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can derive this class.</b></p>
+<hr/>
+<p>
+ public class <b>CATPrintGenerator</b>
+</p>
+<p>
+<b><i> Base class to write generators and usually printer drivers.</i></b><br>
+
+ <br>
+ <b>Role</b>: Derive from this class and override low-level methods to 
+ generate drawing primitives in the desired language.
+ <br>Printing is done through calls of high-level methods in user coordinates which 
+ are in turn converted in low-level methods calls in device coordinates (note that
+ the unit is always the millimeter). 
+ <br><br>For instance, when plotting at scale 5, a high-level call :
+ <br>      generator->DrawLine(0, 0, 5, 10);    // User coordinates
+ <br>will be converted in the sequence
+ <br>      generator->DrvMoveTo(0, 0);
+ <br>      generator->DrvLineTo(25, 50);        // Device coordinates
+ <br>and so one, even for more complex operations (such as text discretization).
+
+ <br><br>The following low-level methods must be overridden :
+         <script type="text/javascript"> activateLinkAnchor('','DrvBegin','DrvBegin') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvEnd','DrvEnd') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvFormFeed','DrvFormFeed') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvDefineColor','DrvDefineColor') </script>,          
+<script type="text/javascript"> activateLinkAnchor('','DrvSelectDrawColor','DrvSelectDrawColor') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvSetDrawWidth','DrvSetDrawWidth') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvMoveTo','DrvMoveTo') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvLineTo','DrvLineTo') </script>,         
+<script type="text/javascript"> activateLinkAnchor('','DrvSelectFillColor','DrvSelectFillColor') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvFillArea','DrvFillArea') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvDrawBitmap','DrvDrawBitmap') </script>. <br>Whereas the following can be overridden if needed :
+         
+<script type="text/javascript"> activateLinkAnchor('','DrvDrawPolyline','DrvDrawPolyline') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvDrawArcCircle','DrvDrawArcCircle') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvDrawArcEllipse','DrvDrawArcEllipse') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','DrvDrawPolyBezier','DrvDrawPolyBezier') </script>,          
+<script type="text/javascript"> activateLinkAnchor('','DrvSetTextAttribute','DrvSetTextAttribute') </script> and 
+<script type="text/javascript"> activateLinkAnchor('','DrvDrawText','DrvDrawText') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATPrintDevice','','CATPrintDevice') </script>, <script type="text/javascript"> activateLinkAnchor('CATPrintImage','','CATPrintImage') </script>, <script type="text/javascript"> activateLinkAnchor('CATPrintParameters','','CATPrintParameters') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATPrintGenerator(CATString&amp;)"><b>CATPrintGenerator</b></a>(CATString&amp;)
+</td><td id='tdright'>  Constructs a CATPrintGenerator of a given language.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATPrintGenerator()"><b>~CATPrintGenerator</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Begin(CATPrintParameters&amp;)"><b>Begin</b></a>(CATPrintParameters&amp;)
+</td><td id='tdright'>  Initializes generation with given parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Begin(CATPrintParameters&amp;,CATUnicodeString&amp;)"><b>Begin</b></a>(CATPrintParameters&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Initializes generation with given parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BeginClosedFigure(void)"><b>BeginClosedFigure</b></a>(void)
+</td><td id='tdright'>  Begins a closed figure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BeginDrawScissor(int,float*)"><b>BeginDrawScissor</b></a>(int,float*)
+</td><td id='tdright'>  Begins a clipping of the image from the polygon.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BeginGroup(CATUnicodeString&amp;)"><b>BeginGroup</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Begins a group of primitives.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DefineColor(int,float,float,float)"><b>DefineColor</b></a>(int,float,float,float)
+</td><td id='tdright'>  Defines a color in the palette in rgb coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawArcCircle(float,float,float,float,float,int)"><b>DrawArcCircle</b></a>(float,float,float,float,float,int)
+</td><td id='tdright'>  Draws a circle arc with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawArcEllipse(float,float,float,float,float,float,float,int)"><b>DrawArcEllipse</b></a>(float,float,float,float,float,float,float,int)
+</td><td id='tdright'>  Draws an ellipse arc with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawBitmap(float,float,int,CATPixelImage*)"><b>DrawBitmap</b></a>(float,float,int,CATPixelImage*)
+</td><td id='tdright'>  Draws a bitmap at the given position with the given orientation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawConnectingEdge(void)"><b>DrawConnectingEdge</b></a>(void)
+</td><td id='tdright'>  Draw the edge closing the closed figure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawDisjointPolyline(int,float*)"><b>DrawDisjointPolyline</b></a>(int,float*)
+</td><td id='tdright'>  Draws disjoint a polyline with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawGeometricText(float,float,CATUnicodeString&amp;)"><b>DrawGeometricText</b></a>(float,float,CATUnicodeString&amp;)
+</td><td id='tdright'>  Draws a text at given coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawLine(float,float,float,float)"><b>DrawLine</b></a>(float,float,float,float)
+</td><td id='tdright'>  Draws a line between (iX0, iY0) and (iX1, iY1) with current draw color,
+ line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawMarker(float,float,CATPrintMarkerAttribute,float)"><b>DrawMarker</b></a>(float,float,CATPrintMarkerAttribute,float)
+</td><td id='tdright'>  Draws a marker at given coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawPolyBezier(int,float*)"><b>DrawPolyBezier</b></a>(int,float*)
+</td><td id='tdright'>  Draws a polybezier curve of order 3 with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawPolyPolygon(int,int*,float*)"><b>DrawPolyPolygon</b></a>(int,int*,float*)
+</td><td id='tdright'>  Draws a polypolygon with current fill color and the using the even/odd method,
+ the edge color is the draw color if needed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawPolyQuadraticBezier(int,float*)"><b>DrawPolyQuadraticBezier</b></a>(int,float*)
+</td><td id='tdright'>  Draws a polybezier curve of order 2 with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawPolygon(int,float*)"><b>DrawPolygon</b></a>(int,float*)
+</td><td id='tdright'>  Draws a simple area with current fill color and the using the even/odd method,
+ the edge color is the draw color if needed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrawPolyline(int,float*)"><b>DrawPolyline</b></a>(int,float*)
+</td><td id='tdright'>  Draws a polyline with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvBegin(CATPrintParameters&amp;)"><b>DrvBegin</b></a>(CATPrintParameters&amp;)
+</td><td id='tdright'>  Initializes generator with print parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvBegin(CATPrintParameters&amp;,CATUnicodeString&amp;)"><b>DrvBegin</b></a>(CATPrintParameters&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Initializes generator with print parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvBeginClosedFigure(void)"><b>DrvBeginClosedFigure</b></a>(void)
+</td><td id='tdright'>  Begins a closed figure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvBeginGroup(CATUnicodeString&amp;)"><b>DrvBeginGroup</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Begins a group of primitives.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDefineColor(int,float,float,float)"><b>DrvDefineColor</b></a>(int,float,float,float)
+</td><td id='tdright'>  Defines a color in the palette in rgb coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawArcCircle(float,float,float,float,float,int)"><b>DrvDrawArcCircle</b></a>(float,float,float,float,float,int)
+</td><td id='tdright'>  Draws a circle arc in device coordinates  with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawArcEllipse(float,float,float,float,float,float,float,int)"><b>DrvDrawArcEllipse</b></a>(float,float,float,float,float,float,float,int)
+</td><td id='tdright'>  Draws an ellipse arc in device coordinates with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawBitmap(float,float,CATPixelImage*)"><b>DrvDrawBitmap</b></a>(float,float,CATPixelImage*)
+</td><td id='tdright'>  Draws a bitmap in device coordinates at the given position.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawConnectingEdge(void)"><b>DrvDrawConnectingEdge</b></a>(void)
+</td><td id='tdright'>  Draw the edge closing the closed figure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawPolyBezier(int,float*)"><b>DrvDrawPolyBezier</b></a>(int,float*)
+</td><td id='tdright'>  Draws a polybezier curve of order 3 in device coordinates with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawPolyPolygon(int,int*,float*)"><b>DrvDrawPolyPolygon</b></a>(int,int*,float*)
+</td><td id='tdright'>  Draws a polypolygon with current fill color and the using the even/odd method,
+ the edge color is the draw color if needed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawPolyQuadraticBezier(int,float*)"><b>DrvDrawPolyQuadraticBezier</b></a>(int,float*)
+</td><td id='tdright'>  Draws a polybezier curve of order 2 with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawPolygon(int,float*)"><b>DrvDrawPolygon</b></a>(int,float*)
+</td><td id='tdright'>  Draws a simple area with current fill color and the using the even/odd method,
+ the edge color is the draw color if needed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawPolyline(int,float*,int)"><b>DrvDrawPolyline</b></a>(int,float*,int)
+</td><td id='tdright'>  Draws a polyline with current draw color, line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvDrawText(float,float,CATUnicodeString&amp;)"><b>DrvDrawText</b></a>(float,float,CATUnicodeString&amp;)
+</td><td id='tdright'>  Draws text in device coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvEnd(void)"><b>DrvEnd</b></a>(void)
+</td><td id='tdright'>  Terminates generation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvEndClosedFigure(void)"><b>DrvEndClosedFigure</b></a>(void)
+</td><td id='tdright'>  Ends current closed figure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvEndGroup(void)"><b>DrvEndGroup</b></a>(void)
+</td><td id='tdright'>  Ends current group of primitives.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvFillArea(int,int*,float*)"><b>DrvFillArea</b></a>(int,int*,float*)
+</td><td id='tdright'>  Fills a polypolygon in device coordinates with current fill color.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvFormFeed(void)"><b>DrvFormFeed</b></a>(void)
+</td><td id='tdright'>  Starts a new page.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvFormFeed(CATUnicodeString&amp;)"><b>DrvFormFeed</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Starts a new page.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvLineTo(float,float)"><b>DrvLineTo</b></a>(float,float)
+</td><td id='tdright'>  Draws a line from the current pen position to (iX, iY) in device coordinates with current draw color,
+ line type and draw width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvMoveTo(float,float)"><b>DrvMoveTo</b></a>(float,float)
+</td><td id='tdright'>  Moves the pen to (iX, iY) in device coordinates without drawing.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSelectDrawColor(int)"><b>DrvSelectDrawColor</b></a>(int)
+</td><td id='tdright'>  Selects the current drawing color.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSelectFillColor(int)"><b>DrvSelectFillColor</b></a>(int)
+</td><td id='tdright'>  Selects the current filling color.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetDrawWidth(float)"><b>DrvSetDrawWidth</b></a>(float)
+</td><td id='tdright'>  Selects the current draw width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetEdgeMode(CATPrintEdgeMode)"><b>DrvSetEdgeMode</b></a>(CATPrintEdgeMode)
+</td><td id='tdright'>  Selects the current edge mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetFillMode(CATPrintFillMode)"><b>DrvSetFillMode</b></a>(CATPrintFillMode)
+</td><td id='tdright'>  Selects the current fill mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetLineCap(CATPrintLineAttribute)"><b>DrvSetLineCap</b></a>(CATPrintLineAttribute)
+</td><td id='tdright'>  Selects the current line cap style.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetLineJoin(CATPrintLineAttribute)"><b>DrvSetLineJoin</b></a>(CATPrintLineAttribute)
+</td><td id='tdright'>  Selects the current line join style.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetLineStyle(CATPrintLineAttribute,float,float*)"><b>DrvSetLineStyle</b></a>(CATPrintLineAttribute,float,float*)
+</td><td id='tdright'>  Selects the current line style.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetPolygonFillRule(CATPrintFillRule)"><b>DrvSetPolygonFillRule</b></a>(CATPrintFillRule)
+</td><td id='tdright'>  Sets the polygon filling rule.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetTextAttribute(CATPrintTextAttribute,float)"><b>DrvSetTextAttribute</b></a>(CATPrintTextAttribute,float)
+</td><td id='tdright'>  Defines text attributes.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvSetTextAttribute(CATPrintTextAttribute,CATFont*)"><b>DrvSetTextAttribute</b></a>(CATPrintTextAttribute,CATFont*)
+</td><td id='tdright'>  Defines current text font.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DrvStartNewRegion(void)"><b>DrvStartNewRegion</b></a>(void)
+</td><td id='tdright'>  Begins a new region inside the closed figure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#End(void)"><b>End</b></a>(void)
+</td><td id='tdright'>  Terminates generation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EndClosedFigure(void)"><b>EndClosedFigure</b></a>(void)
+</td><td id='tdright'>  Ends current closed figure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EndDrawScissor(void)"><b>EndDrawScissor</b></a>(void)
+</td><td id='tdright'>  Ends the clipping the image from the polygon.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#EndGroup(void)"><b>EndGroup</b></a>(void)
+</td><td id='tdright'>  Ends current group of primitives.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#FillArea(int,int*,float*)"><b>FillArea</b></a>(int,int*,float*)
+</td><td id='tdright'>  Fills a polypolygon with current fill color using the even/odd method.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#FillPolygon(int,float*)"><b>FillPolygon</b></a>(int,float*)
+</td><td id='tdright'>  Fills a simple area with current fill color using the even/odd method.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#FillRectangle(float,float,float,float)"><b>FillRectangle</b></a>(float,float,float,float)
+</td><td id='tdright'>  Fills a rectangle between (iX0, iY0) to (iX1, iY1) with current fill color.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDeviceCoordinates(float&amp;,float&amp;)"><b>GetDeviceCoordinates</b></a>(float&amp;,float&amp;)
+</td><td id='tdright'>  Converts from user coordinates to device coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLanguage(void)"><b>GetLanguage</b></a>(void)
+</td><td id='tdright'>  Returns the name of the generated language.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetOrigin(float&amp;,float&amp;)"><b>GetOrigin</b></a>(float&amp;,float&amp;)
+</td><td id='tdright'>  Returns current printing offset from the lower left corner of the sheet.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetProperties(void)"><b>GetProperties</b></a>(void)
+</td><td id='tdright'>  Override this method to provide specific properties which can be stored and
+ read by the printer manager.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPropertiesDialog(CATDialog*)"><b>GetPropertiesDialog</b></a>(CATDialog*)
+</td><td id='tdright'>  Returns dialog used to fill specific properties.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetScale(void)"><b>GetScale</b></a>(void)
+</td><td id='tdright'>   Returns current printing scale.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#LineTo(float,float)"><b>LineTo</b></a>(float,float)
+</td><td id='tdright'>  Draws a line from the current pen position to (iY, iY) with current draw color,
+ line style and line width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#MoveTo(float,float)"><b>MoveTo</b></a>(float,float)
+</td><td id='tdright'>  Moves the pen to (iX, iY) coordinates without drawing.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SelectDrawColor(int)"><b>SelectDrawColor</b></a>(int)
+</td><td id='tdright'>  Selects the current drawing color.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SelectFillColor(int)"><b>SelectFillColor</b></a>(int)
+</td><td id='tdright'>  Selects the current filling color.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDrawWidth(float)"><b>SetDrawWidth</b></a>(float)
+</td><td id='tdright'>  Selects the current draw width.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDrawingSize(float,float)"><b>SetDrawingSize</b></a>(float,float)
+</td><td id='tdright'>  Defines the size of the drawing area.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetEdgeMode(CATPrintEdgeMode)"><b>SetEdgeMode</b></a>(CATPrintEdgeMode)
+</td><td id='tdright'>  Selects the current edge mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFillMode(CATPrintFillMode)"><b>SetFillMode</b></a>(CATPrintFillMode)
+</td><td id='tdright'>  Selects the current fill mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLineCap(CATPrintLineAttribute)"><b>SetLineCap</b></a>(CATPrintLineAttribute)
+</td><td id='tdright'>  Selects the current line cap style.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLineJoin(CATPrintLineAttribute)"><b>SetLineJoin</b></a>(CATPrintLineAttribute)
+</td><td id='tdright'>  Selects the current line join style.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLineStyle(CATPrintLineAttribute,float,float*)"><b>SetLineStyle</b></a>(CATPrintLineAttribute,float,float*)
+</td><td id='tdright'>  Selects the current line style.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetOrigin(float,float)"><b>SetOrigin</b></a>(float,float)
+</td><td id='tdright'>  Defines the printing offset from the lower-left corner of the sheet.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPolygonFillRule(CATPrintFillRule)"><b>SetPolygonFillRule</b></a>(CATPrintFillRule)
+</td><td id='tdright'>  Sets the polygon filling rule.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetScale(float)"><b>SetScale</b></a>(float)
+</td><td id='tdright'>  Defines the plotting iScale.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTextAttribute(CATPrintTextAttribute,float)"><b>SetTextAttribute</b></a>(CATPrintTextAttribute,float)
+</td><td id='tdright'>  Defines current text attributes.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTextAttribute(CATPrintTextAttribute,CATFont*)"><b>SetTextAttribute</b></a>(CATPrintTextAttribute,CATFont*)
+</td><td id='tdright'>  Defines current text font.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetViewport(float,float,float,float)"><b>SetViewport</b></a>(float,float,float,float)
+</td><td id='tdright'>  Defines the plotting viewport (or clipping area) in user coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#StartNewPage(CATPrintParameters&amp;)"><b>StartNewPage</b></a>(CATPrintParameters&amp;)
+</td><td id='tdright'>  Starts a new page with (eventually) new parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#StartNewPage(CATPrintParameters&amp;,CATUnicodeString&amp;)"><b>StartNewPage</b></a>(CATPrintParameters&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Starts a new page with (eventually) new parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#StartNewRegion(void)"><b>StartNewRegion</b></a>(void)
+</td><td id='tdright'>  Begins a new region inside the closed figure.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATPrintGenerator"></a><a id="CATPrintGenerator(CATString&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATPrintGenerator</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iLanguage</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a CATPrintGenerator of a given language.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLanguage</span></dt>
+   <dd>   The generator language.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATPrintGenerator"></a><a id="~CATPrintGenerator()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATPrintGenerator</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Begin"></a><a id="Begin(CATPrintParameters&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Begin</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPrintParameters','CATPrintParameters&amp;')</script> <span class='param'>iParameters</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Initializes generation with given parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParameters</span></dt>
+   <dd>   The generator parameters.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Begin"></a><a id="Begin(CATPrintParameters&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Begin</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPrintParameters','CATPrintParameters&amp;')</script> <span class='param'>iParameters</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iPageTitle</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Initializes generation with given parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParameters</span></dt>
+   <dd>   The generator parameters.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPageTitle</span></dt>
+   <dd>   First page title.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BeginClosedFigure"></a><a id="BeginClosedFigure(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BeginClosedFigure</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Begins a closed figure.
+</dd>
+<dt class='dtmethod' >
+  <a id="BeginDrawScissor"></a><a id="BeginDrawScissor(int,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BeginDrawScissor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNpoints</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Begins a clipping of the image from the polygon.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNpoints</span></dt>
+   <dd>   The number of points in the polygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNpoints</tt> floats giving the coordinates of the points.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BeginGroup"></a><a id="BeginGroup(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>BeginGroup</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iId</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Begins a group of primitives.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iId</span></dt>
+   <dd>   The id of the group.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DefineColor"></a><a id="DefineColor(int,float,float,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DefineColor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndex</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iRed</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iGreen</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iBlue</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a color in the palette in rgb coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIndex</span></dt>
+   <dd>   The index in the color table.
+   <br><b>Legal values</b>: Between 0 and 255.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRed</span></dt>
+   <dd>    The red color in RGB coordinates.
+   <br><b>Legal values</b>: Between 0 and 1.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGreen</span></dt>
+   <dd>   The green color in RGB coordinates.
+   <br><b>Legal values</b>: Between 0 and 1.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBlue</span></dt>
+   <dd>   The blue color in RGB coordinates.
+   <br><b>Legal values</b>: Between 0 and 1.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawArcCircle"></a><a id="DrawArcCircle(float,float,float,float,float,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawArcCircle</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iRadius</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iStartAngle</span><span class='param'>= 0.f</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iEndAngle</span><span class='param'>= CAT2PI</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iFill</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a circle arc with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX0</span></dt>
+   <dd>   The center x coordinate of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY0</span></dt>
+   <dd>   The center y coordinate of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRadius</span></dt>
+   <dd>   The radius of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStartAngle</span></dt>
+   <dd>   The start angle of the arc in radians. 
+   <br><b>Legal values</b>: The default is 0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEndAngle</span></dt>
+   <dd>   The end angle of the arc in radians.
+   <br><b>Legal values</b>: The default is <tt>CAT2PI</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFill</span></dt>
+   <dd>   The filling mode of the arc.
+   <br><b>Legal values</b>: 1 to fill the arc (chord-style), 0 to draw the outline only. 0 is the
+   default.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawArcEllipse"></a><a id="DrawArcEllipse(float,float,float,float,float,float,float,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawArcEllipse</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iHradius</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iVradius</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iStartAngle</span><span class='param'>= 0.f</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iEndAngle</span><span class='param'>= CAT2PI</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iSlope</span><span class='param'>= 0.f</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iFill</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws an ellipse arc with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX0,</span></dt>
+   <dd> iY0   The center coordinates of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iHradius</span></dt>
+   <dd>   The horizontal radius.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iVradius</span></dt>
+   <dd>   The vertical radius.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStartAngle,</span></dt>
+   <dd> iEndAngle   The start and end angles of the arc (radians).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSlope</span></dt>
+   <dd>   The angle between the largest axis of the ellipse and the horizontal.
+   <br><b>Legal values</b>:  The default is 0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFill</span></dt>
+   <dd>   The filling mode of the arc.
+   <br><b>Legal values</b>: 1 to fill the arc (chord-style), 0 to draw the outline only. 0 is the
+   default.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawBitmap"></a><a id="DrawBitmap(float,float,int,CATPixelImage*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawBitmap</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOrientation</span>, const <script type="text/javascript"> activateLink('CATPixelImage','CATPixelImage*')</script> <span class='param'>iPixelImage</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a bitmap at the given position with the given orientation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinate of the lower left corner of the bitmap.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinate of the lower left corner of the bitmap.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd>   The bitmap rotation.
+   <br><b>Legal values</b>: 0->0 deg, 1->90 deg, 2->180 deg, 3->270 deg.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPixelImage</span></dt>
+   <dd>   The pointer to a CATPixelImage object.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawConnectingEdge"></a><a id="DrawConnectingEdge(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawConnectingEdge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draw the edge closing the closed figure.
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawDisjointPolyline"></a><a id="DrawDisjointPolyline(int,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawDisjointPolyline</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNpoints</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws disjoint a polyline with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNpoints</span></dt>
+   <dd>   The number of points in the polyline.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNpoints</tt> floats giving the coordinates of the points.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawGeometricText"></a><a id="DrawGeometricText(float,float,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawGeometricText</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iText</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a text at given coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinate of the anchor point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinate of the anchor point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iText</span></dt>
+   <dd>   The text to draw.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawLine"></a><a id="DrawLine(float,float,float,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawLine</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX1</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY1</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a line between (iX0, iY0) and (iX1, iY1) with current draw color,
+ line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX0</span></dt>
+   <dd>   The x coordinate of the first point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY0</span></dt>
+   <dd>   The y coordinate of the first point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iX1</span></dt>
+   <dd>   The x coordinate of the second point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY1</span></dt>
+   <dd>   The y coordinate of the second point.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawMarker"></a><a id="DrawMarker(float,float,CATPrintMarkerAttribute,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawMarker</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>,<script type="text/javascript"> activateLink('CATPrintMarkerAttribute','CATPrintMarkerAttribute')</script> <span class='param'>iMarker</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iSize</span><span class='param'>= 0.0</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a marker at given coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinate of the anchor point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinate of the anchor point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMarker</span></dt>
+   <dd>   The type of marker. See <tt>CATPrintMarkerAttribute</tt> for available marker attribute.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSize</span></dt>
+   <dd>   The size of the marker. 
+   <br><b>Legal values</b>: Defaut is 0, then uses the standard size.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawPolyBezier"></a><a id="DrawPolyBezier(int,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawPolyBezier</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNpoints</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a polybezier curve of order 3 with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNpoints</span></dt>
+   <dd>   The number of points defining the polybezier.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNpoints</tt> floats giving the coordinates of the points.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawPolyPolygon"></a><a id="DrawPolyPolygon(int,int*,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawPolyPolygon</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNoutlines</span>, const <script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iNcorners</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a polypolygon with current fill color and the using the even/odd method,
+ the edge color is the draw color if needed.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNoutlines</span></dt>
+   <dd>   The number of polygons in the polypolygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNcorners</span></dt>
+   <dd>   The array of <tt>iNOutlines</tt> integers giving the number of corners in each polygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of floats giving the coordinates of alls corners of each polygon.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawPolyQuadraticBezier"></a><a id="DrawPolyQuadraticBezier(int,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawPolyQuadraticBezier</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNpoints</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a polybezier curve of order 2 with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNpoints</span></dt>
+   <dd>   The number of points defining the polybezier.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNpoints</tt> floats giving the coordinates of the points.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawPolygon"></a><a id="DrawPolygon(int,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawPolygon</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNcorners</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a simple area with current fill color and the using the even/odd method,
+ the edge color is the draw color if needed.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNcorners</span></dt>
+   <dd>   The number of corners in the polygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNcorners</tt> floats giving the coordinates of the corners.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrawPolyline"></a><a id="DrawPolyline(int,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrawPolyline</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNpoints</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a polyline with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNpoints</span></dt>
+   <dd>   The number of points in the polyline.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNpoints</tt> floats giving the coordinates of the points.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvBegin"></a><a id="DrvBegin(CATPrintParameters&amp;)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvBegin</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPrintParameters','CATPrintParameters&amp;')</script> <span class='param'>iParameters</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Initializes generator with print parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParameters</span></dt>
+   <dd>   The generator parameters.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvBegin"></a><a id="DrvBegin(CATPrintParameters&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvBegin</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPrintParameters','CATPrintParameters&amp;')</script> <span class='param'>iParameters</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iPageTitle</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Initializes generator with print parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParameters</span></dt>
+   <dd>   The generator parameters.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPageTitle</span></dt>
+   <dd>   First page title.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvBeginClosedFigure"></a><a id="DrvBeginClosedFigure(void)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvBeginClosedFigure</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Begins a closed figure.
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvBeginGroup"></a><a id="DrvBeginGroup(CATUnicodeString&amp;)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvBeginGroup</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iId</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Begins a group of primitives.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iId</span></dt>
+   <dd>   The id of the group.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDefineColor"></a><a id="DrvDefineColor(int,float,float,float)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDefineColor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndex</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iRed</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iGreen</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iBlue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a color in the palette in rgb coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIndex</span></dt>
+   <dd>   The index in the color table.
+   <br><b>Legal values</b>: Between 0 and 255.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRed</span></dt>
+   <dd>   The red color in RGB coordinates.
+   <br><b>Legal values</b>: Between 0 and 1.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGreen</span></dt>
+   <dd>   The green color in RGB coordinates.
+   <br><b>Legal values</b>: Between 0 and 1.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iBlue</span></dt>
+   <dd>   The blue color in RGB coordinates.
+   <br><b>Legal values</b>: Between 0 and 1.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawArcCircle"></a><a id="DrvDrawArcCircle(float,float,float,float,float,int)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawArcCircle</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iRadius</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iStartAngle</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iEndAngle</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iFill</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a circle arc in device coordinates  with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX0</span></dt>
+   <dd>   The x center coordinates of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY0</span></dt>
+   <dd>   The y center coordinates of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRadius</span></dt>
+   <dd>   The radius of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStartAngle</span></dt>
+   <dd>   The start angle of the arc in radians. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEndAngle</span></dt>
+   <dd>   The end angle of the arc in radians.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFill</span></dt>
+   <dd>   The filling mode of the arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawArcEllipse"></a><a id="DrvDrawArcEllipse(float,float,float,float,float,float,float,int)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawArcEllipse</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iHradius</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iVradius</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iStartAngle</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iEndAngle</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iSlope</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iFill</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws an ellipse arc in device coordinates with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX0</span></dt>
+   <dd>   The x center coordinates of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY0</span></dt>
+   <dd>   The y center coordinates of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iHradius</span></dt>
+   <dd>   The horizontal radius.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iVradius</span></dt>
+   <dd>   The vertical radius.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStartAngle</span></dt>
+   <dd>   The start angle of the arc in radians.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEndAngle</span></dt>
+   <dd>   The end angle of the arc in radians.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSlope</span></dt>
+   <dd>   The angle between the largest axis of the ellipse and the horizontal.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFill</span></dt>
+   <dd>   The filling mode of the arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawBitmap"></a><a id="DrvDrawBitmap(float,float,CATPixelImage*)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawBitmap</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>, const <script type="text/javascript"> activateLink('CATPixelImage','CATPixelImage*')</script> <span class='param'>iPixelImage</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a bitmap in device coordinates at the given position.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinates of the lower left corner of the bitmap.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinates of the lower left corner of the bitmap.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPixelImage</span></dt>
+   <dd>   The pointer to a CATPixelImage object.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawConnectingEdge"></a><a id="DrvDrawConnectingEdge(void)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawConnectingEdge</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draw the edge closing the closed figure.
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawPolyBezier"></a><a id="DrvDrawPolyBezier(int,float*)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawPolyBezier</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNpoints</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a polybezier curve of order 3 in device coordinates with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNpoints</span></dt>
+   <dd>   The number of points defining the polybezier.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNpoints</tt> floats giving the coordinates of the points.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawPolyPolygon"></a><a id="DrvDrawPolyPolygon(int,int*,float*)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawPolyPolygon</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNoutlines</span>, const <script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iNcorners</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a polypolygon with current fill color and the using the even/odd method,
+ the edge color is the draw color if needed.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNoutlines</span></dt>
+   <dd>   The number of polygons in the polypolygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNcorners</span></dt>
+   <dd>   The array of <tt>iNOutlines</tt> integers giving the number of corners in each polygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of floats giving the coordinates of alls corners of each polygon.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawPolyQuadraticBezier"></a><a id="DrvDrawPolyQuadraticBezier(int,float*)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawPolyQuadraticBezier</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNpoints</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a polybezier curve of order 2 with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNpoints</span></dt>
+   <dd>   The number of points defining the polybezier.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNpoints</tt> floats giving the coordinates of the points.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawPolygon"></a><a id="DrvDrawPolygon(int,float*)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawPolygon</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNcorners</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a simple area with current fill color and the using the even/odd method,
+ the edge color is the draw color if needed.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNcorners</span></dt>
+   <dd>   The number of corners in the polygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNcorners</tt> floats giving the coordinates of the corners.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawPolyline"></a><a id="DrvDrawPolyline(int,float*,int)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawPolyline</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNpoints</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>, const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iDisjoint</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a polyline with current draw color, line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNpoints</span></dt>
+   <dd>   The number of points in the polyline.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNpoints</tt> floats giving the coordinates of the points.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDisjoint</span></dt>
+   <dd>   Tells if the polyline is disjoint or not
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvDrawText"></a><a id="DrvDrawText(float,float,CATUnicodeString&amp;)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvDrawText</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iText</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws text in device coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinate of the anchor point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinate of the anchor point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iText</span></dt>
+   <dd>   The text to draw.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvEnd"></a><a id="DrvEnd(void)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvEnd</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Terminates generation.
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvEndClosedFigure"></a><a id="DrvEndClosedFigure(void)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvEndClosedFigure</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Ends current closed figure.
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvEndGroup"></a><a id="DrvEndGroup(void)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvEndGroup</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Ends current group of primitives.
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvFillArea"></a><a id="DrvFillArea(int,int*,float*)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvFillArea</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNoutlines</span>, const <script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iNcorners</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Fills a polypolygon in device coordinates with current fill color.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNoutlines</span></dt>
+   <dd>   The number of polygons in the polypolygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNcorners</span></dt>
+   <dd>   The array of <tt>iNOutlines</tt> integers giving the number of corners in each polygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of floats giving the coordinates of alls corners of each polygon.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvFormFeed"></a><a id="DrvFormFeed(void)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvFormFeed</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Starts a new page.
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvFormFeed"></a><a id="DrvFormFeed(CATUnicodeString&amp;)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvFormFeed</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iPageTitle</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Starts a new page.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPageTitle</span></dt>
+   <dd>   First page title.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvLineTo"></a><a id="DrvLineTo(float,float)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvLineTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a line from the current pen position to (iX, iY) in device coordinates with current draw color,
+ line type and draw width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinate to draw to.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinate to draw to.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvMoveTo"></a><a id="DrvMoveTo(float,float)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvMoveTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Moves the pen to (iX, iY) in device coordinates without drawing.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinate to move to.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinate to move to.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSelectDrawColor"></a><a id="DrvSelectDrawColor(int)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSelectDrawColor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndex</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current drawing color.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIndex</span></dt>
+   <dd>   The index of the current drawing color.
+   <br><b>Legal values</b>: Between 0 and 255.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSelectFillColor"></a><a id="DrvSelectFillColor(int)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSelectFillColor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndex</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current filling color.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIndex</span></dt>
+   <dd>   The index of the current filling color.
+   <br><b>Legal values</b>: Between 0 and 255.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetDrawWidth"></a><a id="DrvSetDrawWidth(float)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetDrawWidth</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iWidth</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current draw width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWidth</span></dt>
+   <dd>   The current draw width.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetEdgeMode"></a><a id="DrvSetEdgeMode(CATPrintEdgeMode)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetEdgeMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintEdgeMode','CATPrintEdgeMode')</script> <span class='param'>iEdgeMode</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current edge mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdgeMode</span></dt>
+   <dd>   The current edge mode.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTEDGE_NONE</tt> for none edge, the closed primitive edges are not drawn,
+   <tt>CATPRINTEDGE_SOLID</tt> for solid edge mode, the closed primitive edges are not drawn with the draw color.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetFillMode"></a><a id="DrvSetFillMode(CATPrintFillMode)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetFillMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintFillMode','CATPrintFillMode')</script> <span class='param'>iFillMode</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current fill mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFillMode</span></dt>
+   <dd>   The current fill mode.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTFILL_EMPTY</tt> for empty fill mode, the closed primitive will not be filled,
+   <tt>CATPRINTFILL_SOLID</tt> for solid fill mode, the closed primitives will be painted with the current fill color,
+   <tt>CATPRINTFILL_PATTERN</tt> for pattern fill mode, the closed primitives will be painted with the current pattern.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetLineCap"></a><a id="DrvSetLineCap(CATPrintLineAttribute)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetLineCap</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintLineAttribute','CATPrintLineAttribute')</script> <span class='param'>iLineCap</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current line cap style.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLineCap</span></dt>
+   <dd>   The current line cap style.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTLINE_ENCAP_FLAT</tt> for flat cap style,
+   <tt>CATPRINTLINE_ENCAP_SQUARE</tt> for square cap style,
+   <tt>CATPRINTLINE_ENCAP_ROUND</tt> for round cap style.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetLineJoin"></a><a id="DrvSetLineJoin(CATPrintLineAttribute)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetLineJoin</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintLineAttribute','CATPrintLineAttribute')</script> <span class='param'>iLineJoin</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current line join style.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLineJoin</span></dt>
+   <dd>   The current line join style.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTLINE_JOIN_MITER</tt> for miter join style,
+   <tt>CATPRINTLINE_JOIN_ROUND</tt> for round join style,
+   <tt>CATPRINTLINE_JOIN_BEVEL</tt> for bevel join style.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetLineStyle"></a><a id="DrvSetLineStyle(CATPrintLineAttribute,float,float*)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetLineStyle</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintLineAttribute','CATPrintLineAttribute')</script> <span class='param'>iType</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iPatternLength</span><span class='param'>= 0.0</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iDescription</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current line style.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iType</span></dt>
+   <dd>   The current line style.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTLINE_SOLID</tt> for solid line style,
+   <tt>CATPRINTLINE_DOT</tt> for dot line style, 
+   <tt>CATPRINTLINE_DASH</tt> for dash line style,
+   <tt>CATPRINTLINE_DASHDOT</tt> for dashdot line style,
+   <tt>CATPRINTLINE_PHANTOM</tt> for phantom line style, 
+   <tt>CATPRINTLINE_USER</tt> for user line style.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPatternLength</span></dt>
+   <dd>   The length of the description for user line style. 
+   <br><b>Legal values</b>: The default is 0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDescription</span></dt>
+   <dd>   The description for user line style.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetPolygonFillRule"></a><a id="DrvSetPolygonFillRule(CATPrintFillRule)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetPolygonFillRule</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintFillRule','CATPrintFillRule')</script> <span class='param'>iFillRule</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the polygon filling rule.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFillRule</span></dt>
+   <dd>   The current polygon filling rule.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPrintFill_EvenOdd</tt> for filling parts of polygon with odd winding number
+   <tt>CATPrintFill_NonZero</tt> for filling parts of polygon with non-zero winding number
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetTextAttribute"></a><a id="DrvSetTextAttribute(CATPrintTextAttribute,float)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetTextAttribute</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintTextAttribute','CATPrintTextAttribute')</script> <span class='param'>iAttribute</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iValue</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines text attributes. Texts are drawn with current draw color.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAttribute</span></dt>
+   <dd>   See <tt>CATPrintTextAttribute</tt> for available text attributes.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iValue</span></dt>
+   <dd>   See <tt>CATPrintTextAttribute</tt> for available text values corresponding to iAttribute.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvSetTextAttribute"></a><a id="DrvSetTextAttribute(CATPrintTextAttribute,CATFont*)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvSetTextAttribute</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintTextAttribute','CATPrintTextAttribute')</script> <span class='param'>iAttribute</span>,<script type="text/javascript"> activateLink('CATFont','CATFont*')</script> <span class='param'>iFont</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines current text font.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAttribute</span></dt>
+   <dd>   <b>Legal values</b>: It must be CATPRINTTEXT_TYPEFACE.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFont</span></dt>
+   <dd>   See CATFont for more informations.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DrvStartNewRegion"></a><a id="DrvStartNewRegion(void)"></a>
+<span class = 'method'>protected virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>DrvStartNewRegion</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Begins a new region inside the closed figure.
+</dd>
+<dt class='dtmethod' >
+  <a id="End"></a><a id="End(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>End</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Terminates generation.
+</dd>
+<dt class='dtmethod' >
+  <a id="EndClosedFigure"></a><a id="EndClosedFigure(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EndClosedFigure</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Ends current closed figure.
+</dd>
+<dt class='dtmethod' >
+  <a id="EndDrawScissor"></a><a id="EndDrawScissor(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EndDrawScissor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Ends the clipping the image from the polygon.
+</dd>
+<dt class='dtmethod' >
+  <a id="EndGroup"></a><a id="EndGroup(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>EndGroup</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Ends current group of primitives.
+</dd>
+<dt class='dtmethod' >
+  <a id="FillArea"></a><a id="FillArea(int,int*,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>FillArea</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNoutlines</span>, const <script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iNcorners</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Fills a polypolygon with current fill color using the even/odd method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNoutlines</span></dt>
+   <dd>   The number of polygons in the polypolygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNcorners</span></dt>
+   <dd>   The array of <tt>iNOutlines</tt> integers giving the number of corners in each polygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of floats giving the coordinates of alls corners of each polygon.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="FillPolygon"></a><a id="FillPolygon(int,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>FillPolygon</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNcorners</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iCoord</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Fills a simple area with current fill color using the even/odd method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNcorners</span></dt>
+   <dd>   The number of corners in the polygon.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoord</span></dt>
+   <dd>   The array of 2*<tt>iNcorners</tt> floats giving the coordinates of the corners.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="FillRectangle"></a><a id="FillRectangle(float,float,float,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>FillRectangle</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX1</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY1</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Fills a rectangle between (iX0, iY0) to (iX1, iY1) with current fill color.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX0</span></dt>
+   <dd>   The x coordinate of the first point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY0</span></dt>
+   <dd>   The y coordinate of the first point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iX1</span></dt>
+   <dd>   The x coordinate of the second point.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY1</span></dt>
+   <dd>   The y coordinate of the second point.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDeviceCoordinates"></a><a id="GetDeviceCoordinates(float&amp;,float&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetDeviceCoordinates</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float&amp;')</script> <span class='param'>ioX</span>,<script type="text/javascript"> activateLink('float','float&amp;')</script> <span class='param'>ioY</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Converts from user coordinates to device coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioX</span></dt>
+   <dd>   The x device coordinate from the x user coordinate.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioY</span></dt>
+   <dd>   The y device coordinate from the y user coordinate.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLanguage"></a><a id="GetLanguage(void)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATString','const CATString&')</script>  <span class='objname'>GetLanguage</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the name of the generated language.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetOrigin"></a><a id="GetOrigin(float&amp;,float&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetOrigin</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float&amp;')</script> <span class='param'>oX0</span>,<script type="text/javascript"> activateLink('float','float&amp;')</script> <span class='param'>oY0</span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns current printing offset from the lower left corner of the sheet.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oX0</span></dt>
+   <dd>   The x offset of the sheet.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oY0</span></dt>
+   <dd>   The y offset of the sheet.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetProperties"></a><a id="GetProperties(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script>  <span class='objname'>GetProperties</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Override this method to provide specific properties which can be stored and
+ read by the printer manager.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPropertiesDialog"></a><a id="GetPropertiesDialog(CATDialog*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATDlgWindow','CATDlgWindow*')</script>  <span class='objname'>GetPropertiesDialog</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDialog','CATDialog*')</script> <span class='param'>oParent</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns dialog used to fill specific properties.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oParent</span></dt>
+   <dd>   The parent dialog.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetScale"></a><a id="GetScale(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('float','float')</script>  <span class='objname'>GetScale</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('const',' const')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Returns current printing scale.
+</dd>
+<dt class='dtmethod' >
+  <a id="LineTo"></a><a id="LineTo(float,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>LineTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws a line from the current pen position to (iY, iY) with current draw color,
+ line style and line width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinate to draw to.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinate to draw to.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="MoveTo"></a><a id="MoveTo(float,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>MoveTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Moves the pen to (iX, iY) coordinates without drawing.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x coordinate to move to.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y coordinate to move to.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SelectDrawColor"></a><a id="SelectDrawColor(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SelectDrawColor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndex</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current drawing color.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIndex</span></dt>
+   <dd>   The index of the current drawing color.
+   <br><b>Legal values</b>: Between 0 and 255.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SelectFillColor"></a><a id="SelectFillColor(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SelectFillColor</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndex</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current filling color.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIndex</span></dt>
+   <dd>   The index of the current filling color.
+   <br><b>Legal values</b>: Between 0 and 255.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDrawWidth"></a><a id="SetDrawWidth(float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDrawWidth</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iWidth</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current draw width.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWidth</span></dt>
+   <dd>   The current draw width.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDrawingSize"></a><a id="SetDrawingSize(float,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDrawingSize</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iWidth</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iHeight</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the size of the drawing area.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWidth</span></dt>
+   <dd>   The width of the drawing area.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iHeight</span></dt>
+   <dd>   The height of the drawing area.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetEdgeMode"></a><a id="SetEdgeMode(CATPrintEdgeMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetEdgeMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintEdgeMode','CATPrintEdgeMode')</script> <span class='param'>iEdgeMode</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current edge mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdgeMode</span></dt>
+   <dd>   The current edge mode.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTEDGE_NONE</tt> for none edge, the closed primitive edges are not drawn,
+   <tt>CATPRINTEDGE_SOLID</tt> for solid edge mode, the closed primitive edges are not drawn with the draw color.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFillMode"></a><a id="SetFillMode(CATPrintFillMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFillMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintFillMode','CATPrintFillMode')</script> <span class='param'>iFillMode</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current fill mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFillMode</span></dt>
+   <dd>   The current fill mode.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTFILL_EMPTY</tt> for empty fill mode, the closed primitive will not be filled,
+   <tt>CATPRINTFILL_SOLID</tt> for solid fill mode, the closed primitives will be painted with the current fill color,
+   <tt>CATPRINTFILL_PATTERN</tt> for pattern fill mode, the closed primitives will be painted with the current pattern.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLineCap"></a><a id="SetLineCap(CATPrintLineAttribute)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLineCap</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintLineAttribute','CATPrintLineAttribute')</script> <span class='param'>iLineCap</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current line cap style.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLineCap</span></dt>
+   <dd>   The current line cap style.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTLINE_ENCAP_FLAT</tt> for flat cap style,
+   <tt>CATPRINTLINE_ENCAP_SQUARE</tt> for square cap style,
+   <tt>CATPRINTLINE_ENCAP_ROUND</tt> for round cap style.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLineJoin"></a><a id="SetLineJoin(CATPrintLineAttribute)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLineJoin</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintLineAttribute','CATPrintLineAttribute')</script> <span class='param'>iLineJoin</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current line join style.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLineJoin</span></dt>
+   <dd>   The current line join style.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTLINE_JOIN_MITER</tt> for miter join style,
+   <tt>CATPRINTLINE_JOIN_ROUND</tt> for round join style,
+   <tt>CATPRINTLINE_JOIN_BEVEL</tt> for bevel join style.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLineStyle"></a><a id="SetLineStyle(CATPrintLineAttribute,float,float*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLineStyle</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintLineAttribute','CATPrintLineAttribute')</script> <span class='param'>iType</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iPatternLength</span><span class='param'>= 0.0</span>, const <script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iDescription</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Selects the current line style.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iType</span></dt>
+   <dd>   The current line style.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPRINTLINE_SOLID</tt> for solid line style,
+   <tt>CATPRINTLINE_DOT</tt> for dot line style, 
+   <tt>CATPRINTLINE_DASH</tt> for dash line style,
+   <tt>CATPRINTLINE_DASHDOT</tt> for dashdot line style,
+   <tt>CATPRINTLINE_PHANTOM</tt> for phantom line style, 
+   <tt>CATPRINTLINE_USER</tt> for user line style.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPatternLength</span></dt>
+   <dd>   The length of the description for user line style. 
+   <br><b>Legal values</b>: The default is 0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDescription</span></dt>
+   <dd>   The description for user line style.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetOrigin"></a><a id="SetOrigin(float,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetOrigin</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX0</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY0</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the printing offset from the lower-left corner of the sheet.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX0</span></dt>
+   <dd>   The x offset of the sheet.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY0</span></dt>
+   <dd>   The y offset of the sheet.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPolygonFillRule"></a><a id="SetPolygonFillRule(CATPrintFillRule)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetPolygonFillRule</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintFillRule','CATPrintFillRule')</script> <span class='param'>iFillRule</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the polygon filling rule.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFillRule</span></dt>
+   <dd>   The current polygon filling rule.
+   <br><b>Legal values</b>: It can be set to either 
+   <tt>CATPrintFill_EvenOdd</tt> for filling parts of polygon with odd winding number
+   <tt>CATPrintFill_NonZero</tt> for filling parts of polygon with non-zero winding number
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetScale"></a><a id="SetScale(float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetScale</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iScale</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the plotting iScale.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iScale</span></dt>
+   <dd>   The plotting scale.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTextAttribute"></a><a id="SetTextAttribute(CATPrintTextAttribute,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTextAttribute</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintTextAttribute','CATPrintTextAttribute')</script> <span class='param'>iAttribute</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iValue</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines current text attributes. Texts are drawn with current draw color.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAttribute</span></dt>
+   <dd>   See <tt>CATPrintTextAttribute</tt> for available text attributes.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iValue</span></dt>
+   <dd>   See <tt>CATPrintTextAttribute</tt> for available text values corresponding to iAttribute.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTextAttribute"></a><a id="SetTextAttribute(CATPrintTextAttribute,CATFont*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTextAttribute</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPrintTextAttribute','CATPrintTextAttribute')</script> <span class='param'>iAttribute</span>,<script type="text/javascript"> activateLink('CATFont','CATFont*')</script> <span class='param'>iFont</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines current text font.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAttribute</span></dt>
+   <dd>   <b>Legal values</b>: It must be CATPRINTTEXT_TYPEFACE.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFont</span></dt>
+   <dd>   See CATFont for more informations.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetViewport"></a><a id="SetViewport(float,float,float,float)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetViewport</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iX</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iY</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iWidth</span>,<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iHeight</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the plotting viewport (or clipping area) in user coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iX</span></dt>
+   <dd>   The x origin of the viewport.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iY</span></dt>
+   <dd>   The y origin of the viewport.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iWidth</span></dt>
+   <dd>   The width of the viewport.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iHeight</span></dt>
+   <dd>   The height of the viewport.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="StartNewPage"></a><a id="StartNewPage(CATPrintParameters&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>StartNewPage</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPrintParameters','CATPrintParameters&amp;')</script> <span class='param'>iParameters</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Starts a new page with (eventually) new parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParameters</span></dt>
+   <dd>   Current printing parameters.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="StartNewPage"></a><a id="StartNewPage(CATPrintParameters&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>StartNewPage</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPrintParameters','CATPrintParameters&amp;')</script> <span class='param'>iParameters</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iPageTitle</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Starts a new page with (eventually) new parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParameters</span></dt>
+   <dd>   Current printing parameters.  
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPageTitle</span></dt>
+   <dd>   New page title.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="StartNewRegion"></a><a id="StartNewRegion(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>StartNewRegion</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Begins a new region inside the closed figure.
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATPrintGenerator.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATPrintBase</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

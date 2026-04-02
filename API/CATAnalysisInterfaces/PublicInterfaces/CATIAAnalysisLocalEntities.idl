@@ -1,0 +1,83 @@
+#ifndef CATIAAnalysisLocalEntities_IDL
+#define CATIAAnalysisLocalEntities_IDL
+/*IDLREP*/
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//
+// CATIAAnalysisLocalEntities.idl
+// Automation interface for the AnalysisEntities element 
+//
+//===================================================================
+#include "CATIACollection.idl"
+#include "CATIAAnalysisLocalEntity.idl"
+
+/**  
+ * The collection of local analysis entities.
+ */
+interface CATIAAnalysisLocalEntities : CATIACollection 
+{
+/**
+ * Creates a new analysis local entity and adds it to the analysis entities collection.<br>
+ * This collection may be extracted from an analysis entity.The Analysis local entity will be created on the Analysis entity.
+ * @param iType under the form : oStartUpName@oCatalogName?oClientId (For User defined Startups).
+ * The type of the entity to create.
+ * @return The created analysis entity
+ *
+ * @sample
+ * This example create <tt>ThisAnalysisEntity</tt> in the <tt>analysisEntities</tt> collection <br>
+ * The entity to create is supposed to be a pressure defined in a load set.<br>
+ * <pre>
+ * Dim analysisEntities As CATIAAnalysisLocalEntities
+ * Dim ThisAnalysisEntity As AnalysisEntity
+ * Set ThisAnalysisEntity = analysisEntities.Add("SAMShellLocal")
+ * </pre>
+ */
+    HRESULT     Add(in CATBSTR iType, 
+                  out   /*IDLRETVAL*/ CATIAAnalysisLocalEntity oEntity );
+
+ /**
+  * Returns an analysis entity using its index or its name from the analysis entities collection. 
+  * @param iIndex
+  *   The index or the name of the analysis entity to retrieve from
+  *   the collection of analysis entities.
+  *   As a numerics, this index is the rank of the analysis entity
+  *   in the collection.
+  *   The index of the first analysis entity in the collection is 1, and
+  *   the index of the last analysis entity is Count.
+  *   As a string, it is the name you assigned to the analysis entity using
+  *   the @href CATIABase#Name property or when creating it using
+  *   the @href #Add method.
+  * @return The retrieved analysis entity
+  */
+    HRESULT     Item(in CATVariant           iIndex,
+	                 out /*IDLRETVAL*/ CATIAAnalysisLocalEntity    oEntity);
+ /**
+  * Returns an analysis local entity.
+  * @param iIndex
+  *   The index or the name of the analysis entity to retrieve from
+  *   the collection of analysis entities.
+  *   As a numerics, this index is the rank of the analysis entity
+  *   in the collection.
+  *   The index of the first analysis entity in the collection is 1, and
+  *   the index of the last analysis entity is Count.
+  *   As a string, it is the name you assigned to the analysis entity using
+  *   the @href CATIABase#Name property or when creating it using
+  *   the @href #Add method.
+  */
+    HRESULT     Remove(in CATVariant           iIndex);
+
+};
+
+// Interface name : CATIAAnalysisLocalEntities
+#pragma ID CATIAAnalysisLocalEntities "DCE:7f54fd15-9eA4-41d2-97F9fec59400D21c"
+#pragma DUAL CATIAAnalysisLocalEntities
+
+// VB object name : AnalysisEntities (Id used in Visual Basic)
+#pragma ID AnalysisLocalEntities "DCE:f3daac3a-e839-4b74-98314147590ade01"
+#pragma ALIAS CATIAAnalysisLocalEntities AnalysisLocalEntities
+
+#endif

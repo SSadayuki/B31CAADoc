@@ -1,0 +1,85 @@
+#ifndef CATIAAssemblyBoolean_IDL
+#define CATIAAssemblyBoolean_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAAssemblyBoolean:						   
+// Exposed interface for AssemblyBoolean : Remove and Add
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep. 2000 Creation					                 CRX
+//=================================================================
+#include "CATIAAssemblyFeature.idl"
+
+interface CATIABody;
+interface CATIAProduct;
+
+/**
+ * Represents the AssemblyBoolean object.
+ */
+interface CATIAAssemblyBoolean : CATIAAssemblyFeature
+{
+	  //		================
+	  //		== PROPERTIES ==
+	  //		================
+    /**
+     * Returns the operating body.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>opBody</tt> the operating body
+     * of the assembly boolean <tt>assemblyBool</tt>.
+     * <pre>
+     * Dim opBody As Body
+     * Set opBody = assemblyBool.<font color="red">Body</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Body
+  HRESULT get_Body ( out /*IDLRETVAL*/ CATIABody oBody );
+
+    /**
+     * Returns the component containing the operating body.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>opBodyComp</tt> the component
+     * that contains the operating body
+     * of the assembly boolean <tt>assemblyBool</tt>.
+     * <pre>
+     * Dim opBodyComp As Product
+     * Set opBodyComp = assemblyBool.<font color="red">BodyComponent</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY BodyComponent
+  HRESULT get_BodyComponent ( out /*IDLRETVAL*/ CATIAProduct oBodyComp );
+
+    //
+    //		================
+    //		==   METHODS  ==
+    //		================
+
+};
+
+// Interface name : CATIAAssemblyBoolean
+#pragma ID CATIAAssemblyBoolean "DCE:5f28214a-9b82-11d4-a38800d0b7ac57a4"
+#pragma DUAL CATIAAssemblyBoolean
+
+// VB object name : AssemblyBoolean (Id used in Visual Basic)
+#pragma ID AssemblyBoolean "DCE:5ff066d2-9b82-11d4-a38800d0b7ac57a4"
+#pragma ALIAS CATIAAssemblyBoolean AssemblyBoolean
+
+
+#endif // CATIAAssemblyBoolean_IDL

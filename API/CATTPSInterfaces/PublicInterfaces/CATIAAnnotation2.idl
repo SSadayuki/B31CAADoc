@@ -1,0 +1,288 @@
+#ifndef CATIAAnnotation2_IDL
+#define CATIAAnnotation2_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2010 - 2018
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAText;
+interface CATIADimension3D;
+interface CATIAFlagNote;
+interface CATIARoughness;
+interface CATIANoa;
+interface CATIAToleranceZone;
+interface CATIAToleranceUnitBasisValue;
+interface CATIADefaultAnnotation;
+interface CATIAReferenceFrame;
+interface CATIADatumSimple;
+interface CATIADatumTarget;
+interface CATIATPSView;
+interface CATIANonSemanticDimension;
+interface CATIANonSemanticDatumTarget;
+interface CATIANonSemanticGDT;
+interface CATIASemanticGDT;
+interface CATIANonSemanticDatum;
+interface CATIAWeld;
+interface CATIACoordDim;
+
+/**
+ * Interface for the Technological Product Specification (TPS) objects.
+ * Leaf entity in the Design Pattern Composite.
+ * TPS modeler enables definition of specification related to surfaces.
+ */
+interface CATIAAnnotation2 : CATIABase
+{
+  /**
+     * Gets the Type.
+     * @param oType
+     *   The Type.
+     *<br />
+     *<br /> List of types available ordered by SuperType:
+     *<br /> SuperType = "FTA_NonSemantic"
+     *<br />  Type = "FTA_Text"
+     *<br />  Type = "FTA_FlagNote"
+     *<br />  Type = "FTA_Roughness"
+     *<br />  Type = "FTA_Weld"
+     *<br />  Type = "FTA_Noa"
+     *<br />  Type = "FTA_NonSemanticDatum"
+     *<br />  Type = "FTA_NonSemanticTarget"
+     *<br />  Type = "FTA_NonSemanticGDT"
+     *<br />  Type = "FTA_NonSemanticDimension"
+     *<br />
+     *<br /> SuperType = "FTA_Form"
+     *<br />  Type = "FTA_Flatness"
+     *<br />  Type = "FTA_Straightness"
+     *<br />  Type = "FTA_Circularity"
+     *<br />  Type = "FTA_Cylindricity"
+     *<br />  Type = "FTA_ProfileOfAnyLine"
+     *<br />  Type = "FTA_ProfileOfASurface"
+     *<br />  Type = "FTA_PatternTruePos"
+     *<br />
+     *<br /> SuperType = "FTA_Dimension"
+     *<br />  Type = "FTA_LinearDimension"
+     *<br />  Type = "FTA_AngularDimension"
+     *<br />  Type = "FTA_SecondLinearDimension"
+     *<br />  Type = "FTA_ChamferDimension"
+     *<br />  Type = "FTA_BasicDimension"
+     *<br />
+     *<br /> SuperType = "FTA_Position"
+     *<br />  Type = "FTA_TruePosition"
+     *<br />  Type = "FTA_Concentricity"
+     *<br />  Type = "FTA_Symmetry"
+     *<br />  Type = "FTA_PositionOfAnyLine"
+     *<br />  Type = "FTA_PositionOfASurface"
+     *<br />
+     *<br /> SuperType = "FTA_Datum"
+     *<br />  Type = "FTA_DatumSimple"
+     *<br />  Type = "FTA_DatumTarget"
+     *<br />  Type = "FTA_DatumSystem"
+     *<br />  Type = "FTA_ReferenceFrame"
+     *<br />
+     *<br /> SuperType = "FTA_Orientation"
+     *<br />  Type = "FTA_Parallelism"
+     *<br />  Type = "FTA_Perpendicularity"
+     *<br />  Type = "FTA_Angularity"
+     *<br />
+     *<br /> SuperType = "FTA_RunOut"
+     *<br />  Type = "FTA_TotalRunOut"
+     *<br />  Type = "FTA_CircularRunOut"
+     */
+  #pragma PROPERTY Type
+   HRESULT get_Type (inout /*IDLRETVAL*/ CATBSTR oType);
+    /**
+     * Gets the Super Type.
+     * @param oSuperType
+     *   The Super Type.
+     *<br />
+     *<br /> The list of SuperType available:
+     *<br />  "FTA_NonSemantic"
+     *<br />  "FTA_Form"
+     *<br />  "FTA_Dimension"
+     *<br />  "FTA_Position"
+     *<br />  "FTA_Datum"
+     *<br />  "FTA_Orientation"
+     *<br />  "FTA_RunOut"
+     */
+  #pragma PROPERTY SuperType
+   HRESULT get_SuperType (inout /*IDLRETVAL*/ CATBSTR oSuperType);
+
+    /**
+     * Gets the TPS Status.
+     * @param oStatus
+     *   The Status.
+     */
+  #pragma PROPERTY TPSStatus
+   HRESULT get_TPSStatus (inout /*IDLRETVAL*/ CATBSTR oStatus);
+
+    /**
+     * method get_Z will never be exposed.
+     *
+     * Sets the offset of the annotation.
+     * @param iZ
+     *   The offset.
+     */
+  #pragma PROPERTY Z
+   HRESULT put_Z (in double iZ);
+
+    /**
+     * method GetXY will never be exposed.
+     *
+     * Sets TPS coordinates in the view.
+     * @param oX
+     *   The X coordinate.
+     * @param oY
+     *   The Y coordinate.
+     */
+     HRESULT SetXY (in double iX, in double iY);
+
+    /**
+     * Moves the annotation in another view.
+     * @param iView
+     *   The destination view.
+     */
+     HRESULT TransfertToView (in CATIATPSView iView);
+
+    /**
+     * To refresh the 3D visualization.
+     */
+    HRESULT ModifyVisu ();
+
+    /**
+     * Adds a leader.
+     */
+    HRESULT AddLeader ();
+
+    /**
+     * Gets the annotation on the Text interface.
+     * @param oText
+     *   The annotation Text.
+     */
+    HRESULT Text (out /*IDLRETVAL*/ CATIAText oText);
+
+    /**
+     * Gets the 3D Dimension on the 3D Dimension interface.
+     * @param oDim
+     *   The 3D Dimension.
+     */
+    HRESULT Dimension3D (out /*IDLRETVAL*/ CATIADimension3D oDim);
+
+    /**
+     * Gets the annotation on the FlagNote interface.
+     * @param oFlagNote
+     *   The annotation Flag Note.
+     */
+    HRESULT FlagNote (out /*IDLRETVAL*/ CATIAFlagNote oFlagNote);
+
+    /**
+     * Gets the annotation on the Roughness interface.
+     */
+    HRESULT Roughness (out /*IDLRETVAL*/ CATIARoughness oRoughness);
+
+    /**
+     * Gets the annotation on the Noa interface.
+     */
+    HRESULT Noa (out /*IDLRETVAL*/ CATIANoa oNoa);
+
+    /**
+     * Gets the annotation on the ReferenceFrame interface.
+     */
+    HRESULT ReferenceFrame (out /*IDLRETVAL*/ CATIAReferenceFrame oRefFrame);
+
+    /**
+     * Gets the annotation on the DatumSimple interface.
+     */
+    HRESULT DatumSimple (out /*IDLRETVAL*/ CATIADatumSimple oDatSimple);
+
+    /**
+     * Gets the annotation on the DatumTarget interface.
+     */
+    HRESULT DatumTarget (out /*IDLRETVAL*/ CATIADatumTarget oDatTarget);
+
+    /**
+     * Checks if the Annotation is a Default Annotation.
+     */
+    HRESULT IsADefaultAnnotation (out /*IDLRETVAL*/ boolean oIsADefAnnot);
+
+    /**
+     * Gets the annotation on the DefaultAnnotation interface.
+     */
+    HRESULT DefaultAnnotation(out /*IDLRETVAL*/ CATIADefaultAnnotation oDefAnnot);
+
+    /**
+     * Gets the annotation on the DatumSimple interface.
+     */
+    HRESULT NonSemanticDimension (out /*IDLRETVAL*/ CATIANonSemanticDimension oNonSemanticDim);
+
+    /**
+     * Gets the annotation on the DatumSimple interface.
+     */
+    HRESULT NonSemanticDatum (out /*IDLRETVAL*/ CATIANonSemanticDatum oNonSemanticDatum);
+
+    /**
+     * Gets the annotation on the DatumSimple interface.
+     */
+    HRESULT NonSemanticDatumTarget (out /*IDLRETVAL*/ CATIANonSemanticDatumTarget oNonSemanticDatumTarget);
+
+    /**
+     * Gets the annotation on the DatumSimple interface.
+     */
+    HRESULT NonSemanticGDT (out /*IDLRETVAL*/ CATIANonSemanticGDT oNonSemanticGDT);
+
+    /**
+     * Gets the annotation on the DatumSimple interface.
+     */
+    HRESULT SemanticGDT (out /*IDLRETVAL*/ CATIASemanticGDT oSemanticGDT);
+
+    /**
+     * Counts the geometry on which the Annotation is applied to.
+     */
+    HRESULT GetSurfacesCount (out /*IDLRETVAL*/ long oInstanceCount);
+
+    /**
+     * Gets the geometry on which the Annotation is applied to.
+     */
+    HRESULT GetSurfaces (inout CATSafeArrayVariant oSafeArray);
+
+    /**
+     * Gets the annotation on the Weld interface.
+     */
+    HRESULT Weld (out /*IDLRETVAL*/ CATIAWeld oRoughness);
+
+    /**
+     * Checks if the Annotation uses a visualization dimension for its attachment to the geometry.
+     */
+    HRESULT HasAVisualizationDimension (out /*IDLRETVAL*/ boolean oDimVisuExist);
+
+    /**
+     * Gets the dimension visualization associated with the annotation.
+     * @param oDim
+     *   The visualization Dimension oDim employed by the annotation to display its link to the geometry.
+     */
+    HRESULT VisualizationDimension (out /*IDLRETVAL*/ CATIADimension3D oDim);
+
+    /**
+     * Retrieves the FTA co coordinate dimension.
+     */
+    HRESULT Coordinatedimension (out /*IDLRETVAL*/ CATIACoordDim oCoorddim);
+
+    /**
+    * Checks if the Annotation is a Consumable Annotation.
+    */
+    HRESULT IsAConsumableAnnotation (out /*IDLRETVAL*/ boolean oIsAConsumableAnnot);
+};
+
+// Interface name : CATIAAnnotation2
+#pragma ID CATIAAnnotation2 "DCE:a0d587ce-e735-416d-bda2ed9ba718a706"
+#pragma DUAL CATIAAnnotation2
+
+// VB object name : Annotation
+#pragma ID Annotation2 "DCE:327f1467-9d2c-4923-80f9f803dce4e3ed"
+#pragma ALIAS CATIAAnnotation2 Annotation2
+
+#endif

@@ -1,0 +1,549 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAIKConstraint_IDL
+#define SWKIAIKConstraint_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//    Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//    SWKIAManikinPart
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//    get_Identifier
+//    get_Manikin
+//
+//    GetConstraintElement
+//    SetConstraintElement
+//
+//    GetTargetPoint
+//    SetTargetPoint
+//
+//    GetTargetLine
+//    SetTargetLine
+//
+//    GetTargetPlane
+//    SetTargetPlane
+//
+//    ResetTarget
+//
+//    GetEndEffector
+//    get_EndEffector
+//    put_EndEffector
+//
+//    GetStartSegment
+//    get_StartSegment
+//    put_StartSegment
+//
+//    get_UserType
+//
+//    get_Active
+//    put_Active
+//
+//    get_TransferWithTarget
+//    put_TransferWithTarget
+//  
+//    get_Priority
+//    put_Priority
+//
+//    get_RotationOffsetAngle
+//    put_RotationOffsetAngle
+//
+//    get_DistanceCriteria
+//    put_DistanceCriteria
+//
+//    get_AngleCriteria
+//    put_AngleCriteria
+//
+//    get_DistanceToTarget
+//    get_AngleToTarget
+//
+//    get_IsSuccess
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Leopoldo ORTIZ
+//  Date  : 02/09/30
+//  Goal  : Creation
+//
+//  Modified by: Jeffrey Frampton (BZJ)
+//  Date  : 05/02/17
+//  Goal  : Added reset target at paste
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIAManikinPart.idl"
+//
+// --- System
+#include "CATSafeArray.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIABodyElement;
+interface SWKIASegment;
+interface SWKIAManikin;
+//
+// --- InfInterfaces
+interface CATIAReference;
+//
+// --- ProductStructureInterfaces
+interface CATIAProduct;
+//
+
+
+/**
+  *  This interface manages the constraint of the manikin. It provides 
+  *  access to the constraints data (ID, EndEffector, StartSegment,...)
+  **/
+interface SWKIAIKConstraint : SWKIAManikinPart 
+{
+ // ===========================================================================
+ //  get_Identifier
+ //  --------------
+ //
+    /**
+      * Returns the identifier(ID) of the constraint.
+      **/
+#pragma PROPERTY Identifier
+    HRESULT get_Identifier(inout /*IDLRETVAL*/ CATBSTR pioIdentifier);
+
+
+ // ===========================================================================
+ //  GetConstraintElement
+ //  --------------------
+ //
+    /**
+      * Returns a reference to the target object of the constraint (if any).
+      **/
+    HRESULT GetConstraintElement(out /*IDLRETVAL*/ CATBaseDispatch poConstraintElement);
+
+
+ // ===========================================================================
+ //  SetConstraintElement
+ //  --------------------
+ //
+    /**
+      * Set the target object to follow.
+      * This method establishes a <strong>part relation</strong>
+      * between the end effector and an object to follow. 
+      *
+      * @param piConstraintElement A reference to the target object<br>
+      * This target object can be either a wireframe @href CATIAGeometricElement
+      * object such as a plane or a line, or a boundary
+      * representation object such as a face, a vertex or an edge.
+      * In the case of a 'Fix on' constraint, the target object must
+      * be the product (@href CATIAProduct) associated with the constraint.
+      *
+      * @param piConstraintType The type of the constraint.<br>
+      * This parameter can take the following values:
+      * "Coincidence", "Contact", "Contact2D", "Contact3D",
+      * "FixPositon", "FixOrientation", "FixPositonAndOrientation",
+      * "FixOnPositon", "FixOnOrientation" and "FixOnPositonAndOrientation".
+      **/
+    HRESULT SetConstraintElement(in CATBaseDispatch piConstraintElement,
+                                 in CATBSTR piConstraintType);
+
+ // ===========================================================================
+ //  GetTargetPoint
+ //  --------------
+ //
+    /**
+      * Get the target point coordinates.
+      * This method retrieves the target point coordinates as (x, y, z) data
+      * under an array form.
+      * 
+      * @param poTargetPtCoord The array containing target point coordinates 
+      * as x, y, z respectively, the x coordinate being the first data in the
+      * array.
+      **/
+    HRESULT GetTargetPoint(inout CATSafeArrayVariant poTargetPtCoord);
+
+ // ===========================================================================
+ //  SetTargetPoint
+ //  --------------
+ //
+    /**
+      * Set the target point to follow.
+      * This method establishes a <strong>contact constraint</strong>
+      * between the end effector and the point.
+      *
+      * @param piConstraintElement A reference to the target object<br>
+      * This target object must be the product (@href CATIAProduct)
+      * associated with the constraint.
+      *
+      * @param piCoordX The x coordinate of the point, relatively to the
+      * father object.
+      *
+      * @param piCoordY The y coordinate of the point, relatively to the
+      * father object.
+      *
+      * @param piCoordZ The z coordinate of the point, relatively to the
+      * father object.
+      **/
+    HRESULT SetTargetPoint(in CATIAReference piObject,
+                        in double piCoordX, in double piCoordY,
+                        in double piCoordZ);
+
+ // ===========================================================================
+ //  GetTargetLine
+ //  --------------
+ //
+    /**
+      * Get the target points coordinates of a line
+      * This method retrieves the origin point coordinates as (x, y, z) data
+      * and the direction value of a line.
+      * 
+      * @param poTargetLineCoord The array of 6 data containing target point 
+      * coordinates as x, y, z respectively and the x, y, z direction values
+      * for the target line.
+      **/
+    HRESULT GetTargetLine(inout CATSafeArrayVariant poTargetLineCoord);
+
+ // ===========================================================================
+ //  SetTargetLine
+ //  -------------
+ //
+    /**
+      * Set the target line to follow.
+      * This method establishes a <strong>contact</strong> or
+      * <strong>coincidence</strong> constraint between the end
+      * effector and the line.
+      *
+      * @param piConstraintElement A reference to the target object<br>
+      * This target object must be the product (@href CATIAProduct)
+      * associated with the constraint.
+      *
+      * @param piStartPointX The x coordinate of the start point of the line,
+      * relatively to the father object.
+      *
+      * @param piStartPointY The y coordinate of the start point of the line,
+      * relatively to the father object.
+      *
+      * @param piStartPointZ The z coordinate of the start point of the line,
+      * relatively to the father object.
+      *
+      * @param piEndPointX The x coordinate of the end point of the line,
+      * relatively to the father object.
+      *
+      * @param piEndPointY The y coordinate of the end point of the line,
+      * relatively to the father object.
+      *
+      * @param piEndPointZ The z coordinate of the end point of the line,
+      * relatively to the father object.
+      *
+      * @param piConstraintType The type of the constraint.<br>
+      * This parameter can take the values "Contact", "Contact2D",
+      * "Contact3D" or "Coincidence".
+      **/
+    HRESULT SetTargetLine(in CATIAReference piObject,
+                        in double piStartPointX, in double piStartPointY,
+                        in double piStartPointZ,
+                        in double piEndPointX, in double piEndPointY,
+                        in double piEndPointZ, in CATBSTR piConstraintType);
+
+ // ===========================================================================
+ //  GetTargetPlane
+ //  --------------
+ //
+    /**
+      * Get the target points coordinates of a line
+      * This method retrieves the origin point coordinates as (x, y, z) data
+      * and the direction value of a line.
+      * 
+      * @param poTargetLineCoord The array of 9 data containing origin point 
+      * coordinates as x, y, z, the first normalized direction as x, y, z 
+      * coordinates and the x, y, z ortho-normalized direction values
+      * for the target plane.
+      **/
+    HRESULT GetTargetPlane(inout CATSafeArrayVariant poTargetPlaneCoord);
+
+
+ // ===========================================================================
+ //  SetTargetPlane
+ //  --------------
+ //
+    /**
+      * Set the target plane to follow.
+      * This method establishes a <strong>contact</strong> or
+      * <strong>coincidence</strong> constraint between the end
+      * effector and the plane.
+      *
+      * @param piConstraintElement A reference to the target object<br>
+      * This target object must be the product (@href CATIAProduct)
+      * associated with the constraint.
+      *
+      * @param piOriginX The x coordinate of the origin of the plane,
+      * relatively to the father object.
+      *
+      * @param piOriginY The y coordinate of the origin of the plane,
+      * relatively to the father object.
+      *
+      * @param piOriginZ The z coordinate of the origin of the plane,
+      * relatively to the father object.
+      *
+      * @param piNormalX The x coordinate of the normal vector of the plane,
+      * relatively to the father object.
+      *
+      * @param piNormalY The y coordinate of the normal vector of the plane,
+      * relatively to the father object.
+      *
+      * @param piNormalZ The z coordinate of the normal vector of the plane,
+      * relatively to the father object.
+      *
+      * @param piConstraintType The type of the constraint.<br>
+      * This parameter can take the values "Contact", "Contact2D",
+      * "Contact3D" or "Coincidence".
+      **/
+    HRESULT SetTargetPlane(in CATIAReference piObject,
+                        in double piOriginX, in double piOriginY,
+                        in double piOriginZ,
+                        in double piNormalX, in double piNormalY,
+                        in double piNormalZ, in CATBSTR piConstraintType);
+
+
+    /**
+      * Reset the offset of the target object
+      * (i.e. set the offset to the end effector's current position).
+      **/
+    HRESULT ResetTarget();
+
+ // ===========================================================================
+ //  GetEndEffector
+ //  --------------
+ //
+    /**
+      * Returns the end effector of the IK chain of the constraint.
+      **/
+    HRESULT GetEndEffector(out /*IDLRETVAL*/ SWKIABodyElement poEndEffector);
+
+ // ===========================================================================
+ //  get_EndEffector
+ //  put_EndEffector
+ //  ---------------
+ //
+    /**
+      * Returns or sets the end effector of the IK chain of the constraint.
+      *
+      * The string in this property is the short name of the last segment
+      * (or line of sight) to be driven by this constraint
+      **/
+
+#pragma PROPERTY EndEffector
+    HRESULT get_EndEffector(inout /*IDLRETVAL*/ CATBSTR poEndEffector);
+    HRESULT put_EndEffector(in CATBSTR piEndEffector);
+
+
+ // ===========================================================================
+ //  GetStartSegment
+ //  ---------------
+ //
+    /**
+      * Returns the start segment of the IK chain of the constraint.
+      **/
+    HRESULT GetStartSegment(out /*IDLRETVAL*/ SWKIASegment poStartSegment);
+
+ // ===========================================================================
+ //  get_StartSegment
+ //  put_StartSegment
+ //  ----------------
+ //
+    /**
+      * Returns or sets the first segment of the body to be driven by this constraint.
+      **/
+#pragma PROPERTY StartSegment
+    HRESULT get_StartSegment(inout /*IDLRETVAL*/ CATBSTR poStartSegment);
+    HRESULT put_StartSegment(in CATBSTR piStartSegment);
+
+
+ // ===========================================================================
+ //  get_UserType
+ //  ------------
+ //
+    /**
+      * Returns the user type of the constraint.
+      *
+      * The user type returned will be one of the following:
+      * ("Contact", "Coincidence", "Fix", or "FixOn"),
+      **/
+#pragma PROPERTY UserType
+    HRESULT get_UserType(inout /*IDLRETVAL*/ CATBSTR pioUserType);
+
+
+ // ===========================================================================
+ //  get_Active
+ //  ----------
+ //  put_Active
+ //  ----------
+ //
+    /**
+      * Returns or sets the constraint activity.<br>
+      * A constraint being active means that the constraint is taken into<br>
+      * account during the resolution.<br>
+      * <br>
+      * If the constraint is not active,then it is ignored during the resolution.
+      **/
+#pragma PROPERTY Active
+    HRESULT get_Active(out /*IDLRETVAL*/ boolean poActive);
+    HRESULT put_Active(in boolean piActive);
+
+// BZJ
+ // ===========================================================================
+ //  get_ResetTargetAtPaste
+ //  ----------
+ //  put_ResetTargetAtPaste
+ //  ----------
+ //
+    /**
+      * Returns or sets the Transfer With Target property.
+      **/
+#pragma PROPERTY TransferWithTarget
+    HRESULT get_TransferWithTarget(out /*IDLRETVAL*/ boolean poActive);
+    HRESULT put_TransferWithTarget(in boolean piActive);
+
+ // ===========================================================================
+ //  get_Priority
+ //  ------------
+ //  put_Priority
+ //  ------------
+ //
+    /**
+      * Returns or sets the priority of the constraint.<br>
+      * When using that property, the number returned or set<br>
+      * is an integer and must be between 1 and 4 inclusive.<br>
+      * The lower the priority, the more prioritary the constraint becomes. 
+      **/
+#pragma PROPERTY Priority
+    HRESULT get_Priority(out /*IDLRETVAL*/ long poPriority);
+    HRESULT put_Priority(in long piPriority);
+
+
+ // ===========================================================================
+ //  get_Manikin
+ //  -----------
+ //
+    /**
+      * Returns the manikin which owns this IK constraint.
+      **/
+#pragma PROPERTY Manikin
+    HRESULT get_Manikin(out /*IDLRETVAL*/ SWKIAManikin poManikin);
+
+
+ // ===========================================================================
+ //  get_RotationOffsetAngle
+ //  -----------------------
+ //  put_RotationOffsetAngle
+ //  -----------------------
+ //
+    /**
+      * Returns or sets the rotation offset angle for the 3D plane constraint.<br>
+      * This rotation offset angle(rad) is used to adjust 3D plane constraint.<br>
+      * When using that property, the number returned or set<br>
+      * must be between -PI and PI inclusive.<br> 
+      **/
+#pragma PROPERTY RotationOffsetAngle
+    HRESULT get_RotationOffsetAngle(out /*IDLRETVAL*/ double poRotationOffsetAngle);
+    HRESULT put_RotationOffsetAngle(in double piRotationOffsetAngle);
+
+ // ===========================================================================
+ //  get_DistanceCriteria
+ //  --------------------
+ //  put_DistanceCriteria
+ //  --------------------
+ //
+    /**
+      * Returns or sets the distance criteria that will be used to
+      * evaluate success or failure of the constraint resolution.
+      * If, after resolution, the distance between the constraint
+      * and the target is lower than the criteria, then the constraint
+      * will be considered resolved.  This criteria must be specified
+      * in millimeters.
+      **/
+#pragma PROPERTY DistanceCriteria
+    HRESULT get_DistanceCriteria(out /*IDLRETVAL*/ double poDistanceCriteria);
+    HRESULT put_DistanceCriteria(in double piDistanceCriteria);
+
+ // ===========================================================================
+ //  get_AngleCriteria
+ //  -----------------
+ //  put_AngleCriteria
+ //  -----------------
+ //
+    /**
+      * Returns or sets the angle criteria that will be used to
+      * evaluate success or failure of the constraint resolution.
+      * If, after resolution, the agle between the constraint
+      * and the target is lower than the criteria, then the constraint
+      * will be considered resolved.  This criteria must be specified
+      * in radians.
+      **/
+#pragma PROPERTY AngleCriteria
+    HRESULT get_AngleCriteria(out /*IDLRETVAL*/ double poAngleCriteria);
+    HRESULT put_AngleCriteria(in double piAngleCriteria);
+
+ // ===========================================================================
+ //  get_DistanceToTarget
+ //  --------------------
+ //
+    /**
+      * Returns the distance (in mm) from the constraint end effector
+      * to the target.
+      **/
+#pragma PROPERTY DistanceToTarget
+    HRESULT get_DistanceToTarget(out /*IDLRETVAL*/ double poLength);
+
+ // ===========================================================================
+ //  get_AngleToTarget
+ //  -----------------
+ //
+    /**
+      * Returns the angle (in radians) from the constraint end effector
+      * to the target.
+      **/
+#pragma PROPERTY AngleToTarget
+    HRESULT get_AngleToTarget(out /*IDLRETVAL*/ double poAngle);
+
+ // ===========================================================================
+ //  get_IsSuccess
+ //  -------------
+ //
+    /**
+      * Returns whether the resolution of this constraint is a success or a
+      * failure, given the current criteria.
+      **/
+#pragma PROPERTY IsSuccess
+    HRESULT get_IsSuccess(out /*IDLRETVAL*/ boolean poSucess);
+};
+
+
+// Interface name : SWKIAIKConstraint
+#pragma ID SWKIAIKConstraint "DCE:299ab8aa-8d99-4968-82558fa2050c26eb"
+#pragma DUAL SWKIAIKConstraint
+
+
+// VB object name : IKConstraint (Id used in Visual Basic)
+#pragma ID SWKIKConstraint "DCE:99f67aba-57d5-4a30-8f80a4f3181848f1"
+#pragma ALIAS SWKIAIKConstraint SWKIKConstraint
+
+#endif

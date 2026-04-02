@@ -1,0 +1,44 @@
+#ifndef CATIAAssociatedRefFrame_IDL
+#define CATIAAssociatedRefFrame_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIAAnnotation;
+interface CATIAAnnotation2;
+
+/**
+ * Interface dedicated to manage Datum Reference Frame associated to a TPS.
+ */
+interface CATIAAssociatedRefFrame : CATIABase 
+{
+  #pragma PROPERTY ReferenceFrame
+    /**
+     * Retrieves the Datum Reference Frame associated to a TPS.
+     * Deprecated method: ReferenceFrame method is replaced by ReferenceFrame2 has. 
+     */
+  HRESULT get_ReferenceFrame (out /*IDLRETVAL*/ CATIAAnnotation oRefFrame);
+
+  #pragma PROPERTY ReferenceFrame2
+    /**
+     * Retrieves the Datum Reference Frame associated to a TPS.
+     */
+  HRESULT get_ReferenceFrame2 (out /*IDLRETVAL*/ CATIAAnnotation2 oRefFrame);
+};
+
+// Interface name : CATIAAssociatedRefFrame
+#pragma ID CATIAAssociatedRefFrame "DCE:09893dec-34bb-11d6-be8c0002b341dd3a"
+#pragma DUAL CATIAAssociatedRefFrame
+
+// VB object name : AssociatedRefFrame (Id used in Visual Basic)
+#pragma ID AssociatedRefFrame "DCE:09893ded-34bb-11d6-be8c0002b341dd3a"
+#pragma ALIAS CATIAAssociatedRefFrame AssociatedRefFrame
+
+#endif
+

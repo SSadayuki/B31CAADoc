@@ -1,0 +1,55 @@
+/* -*-c++-*- */
+#ifndef CATIARpmReport_IDL
+#define CATIARpmReport_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2001
+
+#include "CATIABase.idl"
+
+interface CATIARpmReport : CATIABase
+{
+ /**
+  * This method generates a report to an output file. The definition of 
+  * the report content is specified by an input XML file. 
+  * @param iXMLFileName
+  *   XML file name for report definition.
+  * @param iReportFileName
+  *   The file name to output the report to.
+  * @param iReportType
+  *   The report type. The following list represents acceptable values:
+  *      "Web Page (*.htm)"
+  *      "Text (*.txt)"
+  *      "Text (Tab delimited) (*.txt)"
+  *      "CSV (Comma delimited) (*.csv)"
+  *      "XML (*.xml)"
+  *      "Excel Workbook (*.xls)"
+  * @param iOutDTD
+  *   If iReportType is an XML file, then a .dtd file name is needed. Else
+  *   send in a null string.
+  */
+  HRESULT GenerateReport (in CATBSTR iXMLFileName, in CATBSTR iReportFileName,
+    in CATBSTR iReportType, in CATBSTR iOutDTDFileName);
+
+};
+
+// Interface name : CATIARpmReport
+#pragma ID CATIARpmReport "DCE:09f48294-abb3-11d5-8e5400d0b7acb59a"
+#pragma DUAL CATIARpmReport
+
+// VB object name : RpmReport
+#pragma ID RpmReport "DCE:0a9b6730-abb3-11d5-8e5400d0b7acb59a"
+#pragma ALIAS CATIARpmReport RpmReport
+
+
+
+#endif
+
+
+
+

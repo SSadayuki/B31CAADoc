@@ -1,0 +1,249 @@
+// COPYRIGHT Dassault Systemes 2013
+//===================================================================
+//
+// ENOIACD5SaveItem.idl
+// Automation interface for the ENOIACD5SaveItem element 
+//
+//===================================================================
+
+#ifndef ENOIACD5SaveItem_IDL
+#define ENOIACD5SaveItem_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+interface CATIABase;
+interface IDispatch;
+interface ENOIACD5ID;
+
+/**
+* Status of the Object.
+* It represents the status of the object in ENOVIA.
+* @param CD5SaveItem_New
+*   Status of the object is New.
+* @param CD5SaveItem_Modified
+*   Status of the object is Modified.
+* @param CD5SaveItem_Exists
+*   Status of the object is Exists.
+* @param CD5SaveItem_ECNameNotUnique
+*   Embedded Component name is not unique.
+* @param CD5SaveItem_ModifiedNotLockedByYou
+*   Document is modified but not locked by you.
+* @param CD5SaveItem_Obsolete
+*   Status of the object is Obsolete.
+* @param CD5SaveItem_UUIDConflict
+*   UUID Conflict is detected in the object.
+* @param CD5SaveItem_NotFound
+*   Document neither exists on disk nor in ENOVIA.
+*/
+
+enum CD5SaveItem_Status {
+    CD5SaveItem_New,
+    CD5SaveItem_Modified,
+    CD5SaveItem_Exists,
+    CD5SaveItem_ECNameNotUnique,
+    CD5SaveItem_ModifiedNotLockedByYou,
+    CD5SaveItem_Obsolete,
+    CD5SaveItem_UUIDConflict,
+    CD5SaveItem_NotFound
+};
+
+/**
+ * Represents a save object which user is trying to save.
+ * <br>Various properties on the object help the end-user to customize each object individually.
+ *
+ * @sample
+ * The following example indicates how to retrieve an item in the scope of a Save Operation.
+ * <pre>
+ * <font color="blue">Dim</font> oCD5Engine <font color="blue">As</font> CD5EngineV6R2014x
+ * <font color="blue">Set</font> oCD5Engine = CATIA.GetItem("CD5EngineV6R2014x")
+ * <font color="blue">Dim</font> oSaveOperation <font color="blue">As</font> CD5SaveOperation
+ * <font color="blue">Set</font> oSaveOperation = oCD5Engine.CreateSaveOperation(CD5SaveOperation_Session)
+ * <font color="blue">Dim</font> oSaveItems <font color="blue">As</font> CD5SaveItems
+ * <font color="blue">Set</font> oSaveItems = oSaveOperation.Items()
+ * <font color="blue">Dim</font> oSaveItem <font color="blue">As</font> CD5SaveItem
+ * <font color="blue">Set</font> oSaveItem = oSaveItems.Item(<font color="red">1</font>)
+ * </pre>
+ * @see ENOIACD5SaveItems
+ */
+
+interface ENOIACD5SaveItem : CATIABase
+{
+
+    /**
+    * Returns (gets) or sets the value of the ENOVIA Object Name.
+    *
+    * @sample
+    * The following example sets the Object Name.
+    * <pre>
+    * oSaveItem.<font color="red">ObjectName</font> = "MyPart"
+    * </pre>
+    */
+
+#pragma PROPERTY ObjectName
+    HRESULT get_ObjectName(inout /*IDLRETVAL*/ CATBSTR oNameBSTR);
+    HRESULT put_ObjectName(in CATBSTR iNameBSTR);
+
+    /**
+    * Returns (gets) the Save status of the item.
+    *
+    * @sample
+    * The following example gets item Status.
+    * <pre>
+    * <font color="blue">Dim</font> itemStatus <font color="blue">As</font> CD5SaveItem_Status
+    * itemStatus = oSaveItem.<font color="red">Status</font> 
+    * </pre>
+    */
+#pragma PROPERTY Status
+    HRESULT get_Status ( out /*IDLRETVAL*/ CD5SaveItem_Status oStatus );
+
+
+    /**
+    * Returns (gets) or sets whether item should be included in the Save Operation.
+    * The default value is determined by the status of the item. 
+    * Objects with status "Exists" are not selected by default.
+    *
+    * @sample
+    * The following example includes the item for the Save operation.
+    * <pre>
+    * oSaveItem.<font color="red">Included</font> = True
+    * </pre>
+    */
+
+#pragma PROPERTY Included
+    HRESULT get_Included ( inout /*IDLRETVAL*/ boolean oIncluded );
+    HRESULT put_Included ( in boolean iIncluded );
+
+    /**
+    * Returns (gets) or sets the Type of the item.
+    * The default value is picked from the GCO.
+    * To set a type user can get the list of Possible Types from PossibleTypes property
+    * @sample
+    * The following example gets the type of the item.
+    * <pre>
+    * <font color="blue">Dim</font> oType <font color="blue">As</font> CATBSTR
+    * oType = oSaveItem.<font color="red">Type</font>
+    * </pre>
+    *
+    */
+#pragma PROPERTY Type
+    HRESULT get_Type ( inout /*IDLRETVAL*/ CATBSTR oType );
+    HRESULT put_Type ( in CATBSTR iType);
+
+
+    /**
+    * Returns (gets) the possible Types for a save item.
+    *
+    * @sample
+    * The following example gets PossibleTypes from a save item.
+    * <pre>
+    * <font color="blue">Dim</font> oPossibleTypes <font color="blue">As</font> CATSafeArrayVariant
+    * oPossibleTypes = oSaveItem.<font color="red">PossibleTypes</font> 
+    * </pre>
+    */
+#pragma PROPERTY PossibleTypes 
+    HRESULT get_PossibleTypes ( out /*IDLRETVAL*/ CATSafeArrayVariant oPossibleTypes);
+
+    /**
+    * Returns (gets) the CD5ID for a save item.
+    *
+    * @sample
+    * The following example gets CD5ID from a save item.
+    * <pre>
+    * <font color="blue">Dim</font> myID <font color="blue">As</font> CD5ID
+    * <font color="blue">Set</font> myID = oSaveItem.<font color="red">CD5ID</font> 
+    * </pre>
+    */
+#pragma PROPERTY CD5ID
+    HRESULT get_CD5ID ( out /*IDLRETVAL*/ ENOIACD5ID oValue );
+
+    /**
+    * Returns (gets) the possible Derived Outputs for a save item.
+    *
+    * @sample
+    * The following example gets Possible DerivedOutputs from a save item.
+    * <pre>
+    * <font color="blue">Dim</font> oPossibleDerivedOutputs <font color="blue">As</font> CATSafeArrayVariant
+    * oPossibleDerivedOutputs = oSaveItem.<font color="red">PossibleDerivedOutputs</font> 
+    * </pre>
+    */
+
+#pragma PROPERTY PossibleDerivedOutputs
+    HRESULT get_PossibleDerivedOutputs(out /*IDLRETVAL*/ CATSafeArrayVariant oPossibleDerivedOutputs);
+
+    /**
+    * Returns (gets) or sets the Derived Outputs for a save item.
+    *
+    * @sample
+    * The following example sets Derived Outputs from a save item.
+    * <pre>
+    * <font color="blue">Dim</font> iDerivedOutputs(1) <font color="blue">As</font> CATBSTR
+    * iDerivedOutputs(0) = "cgrOutput"
+    * oSaveItem.<font color="red">DerivedOutputs</font> = iDerivedOutputs
+    * </pre>
+    */
+
+#pragma PROPERTY DerivedOutputs
+    HRESULT put_DerivedOutputs(in CATSafeArrayVariant DerivedOutputs);
+    HRESULT get_DerivedOutputs(out /*IDLRETVAL*/ CATSafeArrayVariant oDerivedOutputs);
+
+    /** 
+    * Returns or sets the target revision of the CD5SaveItem for the Save Operation.
+    * Default value is current CD5SaveItem target revision.
+    *
+    * <br>Get: will return string combining revision and version (ex: “B.3”).
+    * <br>Set: will keep the revision string only (e.g. "A", "BB"), even if combining revision and version is passed.
+    *
+    * <dl>
+    * <dt><b>Note:</b>
+    * <dd> As revision part of the string cannot contain ‘.’ character, given string may be truncated up to the first  ‘.’ character’ before being appended with appropriate version number. <br>(ex: MyItem.Revision = “AA.BB” => property is set to “AA.0”)
+    * <dd> It is advised to read the Revision property after it has been set as the current value may not match what has been set.
+    * <dd> Changing the <tt>CD5SaveOperation.CreateVersion</tt> value may affect the version part of this property.
+    *
+    * @sample
+    * The following example gets the targeted Revision for the item.
+    * <pre>
+    * <font color="blue">Dim</font> oRevision <font color="blue">As</font> CATBSTR
+    * oRevision = CD5SaveItem.<font color="red">Revision</font>
+    * </pre>
+    */
+
+#pragma PROPERTY Revision
+    HRESULT get_Revision ( inout /*IDLRETVAL*/ CATBSTR oRevision );
+    HRESULT put_Revision ( in CATBSTR iRevision);
+
+    /** 
+    * Returns the next combined revision and version string for this CD5SaveItem.
+    * <br>If next revision of the item is to be created, then <tt>CD5SaveItem.Revision</tt> may be set to this value.
+    *
+    * @sample
+    * The following example gets the NextRevision of the item.
+    * <pre>
+    * CD5SaveItem.Revision = CD5SaveItem.<font color="red">NextRevision</font>
+    * </pre>
+    */
+
+#pragma PROPERTY NextRevision
+    HRESULT get_NextRevision ( inout /*IDLRETVAL*/ CATBSTR oNextRevision );
+
+
+ 
+};
+
+
+// Interface name : ENOIACD5SaveItem
+#pragma ID ENOIACD5SaveItem "DCE:6B0C7909-424D-455e-B3767E7ECCB45755"
+#pragma DUAL ENOIACD5SaveItem
+
+// VB object name : CD5SaveItem (Id used in Visual Basic)
+#pragma ID CD5SaveItem "DCE:DDC54EC7-BCB2-4386-A0B8C2697D700FF8"
+#pragma ALIAS ENOIACD5SaveItem CD5SaveItem
+
+
+#endif

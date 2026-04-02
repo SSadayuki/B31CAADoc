@@ -1,0 +1,120 @@
+#ifndef CATIASchCompFlow_IDL 
+#define CATIASchCompFlow_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfObjects;
+interface  CATIASchInternalFlow;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the internal flow of a schematic component.
+  */
+
+interface CATIASchCompFlow : CATIABase
+{
+  /**
+  * Add an internal flow to a component.
+  * @param iLFlowCntrs
+  *   List of connectors (2) to be connected by the flow.
+  *   (members should be CATISchAppConnector interface pointer)
+  * @param oInternalFlowAdded
+  *   Internal flow object added/created
+  *   (CATISchInternalFlow interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompFlow
+  * Dim objArg1 As SchListOfObjects
+  * Dim objArg2 As SchInternalFlow
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">AddInternalFlow</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT AddInternalFlow ( 
+    in CATIASchListOfObjects iLFlowCntrs, out /*IDLRETVAL*/ CATIASchInternalFlow oInternalFlowAdded );
+    
+  /**
+  * Add an internal flow to a component. Specifying which
+  * graphical images the connector graphics are on.
+  * @param iLFlowCntrs
+  *   List of connectors (2) to be connected by the flow.
+  *   (members should be CATISchAppConnector interface pointer)
+  * @param iLOwnerImages
+  *   List of CATISchGRRComp interface pointers
+  * @param oInternalFlowAdded
+  *   Internal flow object added/created
+  *   (CATISchInternalFlow interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompFlow
+  * Dim objArg1 As SchListOfObjects
+  * Dim objArg2 As SchListOfObjects
+  * Dim objArg3 As SchInternalFlow
+  *  ...
+  * Set objArg3 = objThisIntf.<font color="red">AddInternalFlowSpecifyGRR</font>(objArg1,objArg2)
+  * </pre>
+  *    
+  */
+  HRESULT AddInternalFlowSpecifyGRR ( 
+    in CATIASchListOfObjects iLFlowCntrs, 
+    in CATIASchListOfObjects iLOwnerGRR, out /*IDLRETVAL*/ CATIASchInternalFlow oInternalFlowAdded );
+    
+  /**
+  * Remove an internal flow from a component.
+  * @param iInternalFlowToRemove
+  *   Internal flow object to be removed.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompFlow
+  * Dim objArg1 As SchInternalFlow
+  *  ...
+  * objThisIntf.<font color="red">RemoveInternalFlow</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT RemoveInternalFlow ( 
+    in CATIASchInternalFlow iInternalFlowToRemove );
+    
+  /**
+  * List all internal flow objects of a component.
+  * @param oLInternalFlow
+  *   A list of internal flow objects 
+  *   (members are CATISchInternalFlow interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompFlow
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListInternalFlows</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListInternalFlows ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLInternalFlow );
+    
+};
+    
+// Interface name : CATIASchCompFlow
+#pragma ID CATIASchCompFlow "DCE:9d4d9ceb-f5d0-48be-847409a1a6c20212"
+#pragma DUAL CATIASchCompFlow
+    
+// VB object name : SchCompFlow
+#pragma ID SchCompFlow "DCE:0ddb73d7-7648-42e6-939ba8df342e4867"
+#pragma ALIAS CATIASchCompFlow SchCompFlow
+    
+#endif 
+    

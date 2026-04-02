@@ -1,0 +1,76 @@
+//	COPYRIGHT DASSAULT SYSTEMES 2007
+#ifndef CATIASchAnnotationBreak_IDL 
+#define CATIASchAnnotationBreak_IDL 
+    
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+    
+#include "CATIABase.idl"
+
+/** 
+ * Manage an annotation break operations. 
+ */
+
+interface CATIASchAnnotationBreak : CATIABase
+{
+  /**
+  * Scale the symbol.
+  * @param iDbScaleFactor
+  *   The scale factor to scale the symbol by.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAnnotationBreak
+  * Dim dbVar1 As Double
+  *  ...
+  * objThisIntf.<font color="red">Scale</font>dbVar1
+  * </pre>
+  *
+  */
+  HRESULT Scale (
+    in double iDbScaleFactor);
+
+  /**
+  * Mirror the symbol over the route segment line that ends
+  * in the connector on which the symbol is placed.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAnnotationBreak
+  *  ...
+  * objThisIntf.<font color="red">FlipOverLine</font>
+  * </pre>
+  *
+  */
+  HRESULT FlipOverLine ();
+
+  /**
+  * Mirror the symbol over the line orthogonal to the route segment
+  * line that ends in the connector on which the symbol is placed
+  * and going through the connector's position.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAnnotationBreak
+  *  ...
+  * objThisIntf.<font color="red">FlipOverOrthogonalLine</font>
+  * </pre>
+  *
+  */
+  HRESULT FlipOverOrthogonalLine ();
+
+};
+
+// Interface name : CATIASchAnnotationBreak
+#pragma ID CATIASchAnnotationBreak  "DCE:53eff9ba-a18c-4012-80f7ee9ebf86fad7"
+#pragma DUAL CATIASchAnnotationBreak
+
+// VB object name : SchAnnotationBreak
+#pragma ID SchAnnotationBreak  "DCE:fc01ad86-dfd9-4224-a8793915ab419d6b"
+#pragma ALIAS CATIASchAnnotationBreak SchAnnotationBreak
+    
+#endif 

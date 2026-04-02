@@ -1,0 +1,106 @@
+#ifndef CATIASchGRRZone_IDL 
+#define CATIASchGRRZone_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+    
+interface  CATIASchBoundaryElem;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Manage the graphical representation of a schematic zone.
+  */
+
+
+interface CATIASchGRRZone : CATIABase
+{
+  /**
+  * Add a boundary element to the zone.
+  * @param iZoneBndy
+  *   The geometric boundary elements to be added.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRZone
+  * Dim objArg1 As SchBoundaryElem
+  *  ...
+  * objThisIntf.<font color="red">AddBoundaryElement</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AddBoundaryElement ( 
+    in CATIASchBoundaryElem iZoneBndyToAdd );
+    
+  /**
+  * Remove a boundary element to the zone.
+  * @param iZoneBndy
+  *   The geometric boundary elements to be added.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRZone
+  * Dim objArg1 As SchBoundaryElem
+  *  ...
+  * objThisIntf.<font color="red">RemoveBoundaryElement</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT RemoveBoundaryElement ( 
+    in CATIASchBoundaryElem iZoneBndyToRemove );
+    
+  /**
+  * List all boundary elements of this zone graphical representation.
+  * @param oLZoneBndy
+  *   List of geometric boundaries of this zone graphical representation
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRZone
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListBoundaryElements</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListBoundaryElements ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLZoneBndy );
+    
+  /**
+  * Check whether the boundary of this zone graphical representation is valid.
+  * @param oLZoneBndy
+  *   Set to TRUE if the boundary is a closed polygon
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRZone
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">IsBoundaryValid</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT IsBoundaryValid ( 
+    inout boolean BIsValid );
+    
+};
+    
+// Interface name : CATIASchGRRZone
+#pragma ID CATIASchGRRZone "DCE:8bc22f79-5711-4b1c-8515d0d9dcae005f"
+#pragma DUAL CATIASchGRRZone
+    
+// VB object name : SchGRRZone
+#pragma ID SchGRRZone "DCE:50353e23-8f07-470f-be3d0df3d1c57305"
+#pragma ALIAS CATIASchGRRZone SchGRRZone
+    
+#endif 
+    

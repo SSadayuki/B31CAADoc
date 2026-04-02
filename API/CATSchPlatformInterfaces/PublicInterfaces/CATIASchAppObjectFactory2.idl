@@ -1,0 +1,236 @@
+#ifndef CATIASchAppObjectFactory2_IDL 
+#define CATIASchAppObjectFactory2_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIADocument;
+interface  CATIASchAppRoute;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Application factory to create application objects.
+  */
+
+interface CATIASchAppObjectFactory2 : CATIABase
+{
+  /**
+  * Create an Application Route object with application information.
+  * @param iAppRouteClassType
+  *   Class type of the Application Route object.
+  * @param iAppInfo
+  *   Application data pointer
+  * @param oAppRoute
+  *   The new Application Route object created (CATISchAppRoute
+  *   interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppObjectFactory2
+  * Dim strVar1 As String
+  * Dim objArg2 As AnyObject
+  * Dim objArg3 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">AppCreateRouteWithInfo</font>strVar1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT AppCreateRouteWithInfo ( 
+    in CATBSTR iAppRouteClassType, 
+    in CATIABase iAppInfo, 
+    inout CATIABase oAppRoute );
+    
+  /**
+  * Create an Application Component reference.
+  * @param iAppCompClassType
+  *   Class type of the Application Component reference.
+  * @param iDoc
+  *   Pointer to a document to create the object in. If NULL, the
+  *   document associated with the current Editor will be used.
+  * @param oAppComp
+  *   The new Application Component object created (CATISchAppComponent
+  *   interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppObjectFactory2
+  * Dim strVar1 As String
+  * Dim objArg2 As Document
+  * Dim objArg3 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">AppCreateCompRef</font>strVar1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT AppCreateCompRef ( 
+    in CATBSTR iAppCompClassType, 
+    in CATIADocument iDoc, 
+    inout CATIABase oAppComp );
+    
+  /**
+  * Create an Application Route object.
+  * @param iAppRouteClassType
+  *   Class type of the Application Route object.
+  * @param iDoc
+  *   Pointer to a document to create the object in. If NULL, the
+  *   document associated with the current Editor will be used.
+  * @param iLogLineID
+  *   The logical line ID that will contain the new route.
+  *   This is an optional input. If could be NULL.
+  * @param oAppRoute
+  *   The new Application Route object created (CATISchAppRoute
+  *   interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppObjectFactory2
+  * Dim strVar1 As String
+  * Dim objArg2 As Document
+  * Dim strVar3 As String
+  * Dim objArg4 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">AppCreateRoute</font>strVar1,objArg2,strVar3,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT AppCreateRoute ( 
+    in CATBSTR iAppRouteClassType, 
+    in CATIADocument iDoc, 
+    in CATBSTR iLogLineID, 
+    inout CATIABase oAppRoute );
+    
+  /**
+  * Create an Application Route object with a specific reference.
+  * @param iAppRouteRef
+  *   Route reference to creaet the output route from
+  * @param iDoc
+  *   Pointer to a document to create the object in. If NULL, the
+  *   document associated with the current Editor will be used.
+  * @param iLogLineID
+  *   The logical line ID that will contain the new route.
+  *   This is an optional input. If could be NULL.
+  * @param oAppRoute
+  *   The new Application Route object created (CATISchAppRoute
+  *   interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppObjectFactory2
+  * Dim objArg1 As SchAppRoute
+  * Dim objArg2 As Document
+  * Dim strVar3 As String
+  * Dim objArg4 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">AppCreateRouteFromRef</font>objArg1,objArg2,strVar3,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT AppCreateRouteFromRef ( 
+    in CATIASchAppRoute iRouteReference, 
+    in CATIADocument iDoc, 
+    in CATBSTR iLogLineID, 
+    inout CATIABase oAppRoute );
+    
+  /**
+  * Create an Application Group object.
+  * @param iAppGroupClassType
+  *   Class type of the Application Group object.
+  * @param iDoc
+  *   Pointer to a document to create the object in. If NULL, the
+  *   document associated with the current Editor will be used.
+  * @param oAppGroup
+  *   The new Application Group object created (CATISchAppGroup
+  *   interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppObjectFactory2
+  * Dim strVar1 As String
+  * Dim objArg2 As Document
+  * Dim objArg3 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">AppCreateGroup</font>strVar1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT AppCreateGroup ( 
+    in CATBSTR iAppGroupClassType, 
+    in CATIADocument iDoc, 
+    inout CATIABase oAppGroup );
+    
+  /**
+  * Create an Application Zone object.
+  * @param iAppZoneClassType
+  *   Class type of the Application Zone object.
+  * @param iDoc
+  *   Pointer to a document to create the object in. If NULL, the
+  *   document associated with the current Editor will be used.
+  * @param oAppZone
+  *   The new Application Zone object created (CATISchAppZone
+  *   interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppObjectFactory2
+  * Dim strVar1 As String
+  * Dim objArg2 As Document
+  * Dim objArg3 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">AppCreateZone</font>strVar1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT AppCreateZone ( 
+    in CATBSTR iAppZoneClassType, 
+    in CATIADocument iDoc, 
+    inout CATIABase oAppZone );
+    
+  /**
+  * Create an Application Connection object.
+  * @param iAppCntnClassType
+  *   Class type of the Application Connection object.
+  * @param iDoc
+  *   Pointer to a document to create the object in. If NULL, the
+  *   document associated with the current Editor will be used.
+  * @param oAppConnection
+  *   The new Application Connection object created (CATISchAppConnection
+  *   interface pointer).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppObjectFactory2
+  * Dim strVar1 As String
+  * Dim objArg2 As Document
+  * Dim objArg3 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">AppCreateConnection</font>strVar1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT AppCreateConnection ( 
+    in CATBSTR iAppCntnClassType, 
+    in CATIADocument iDoc, 
+    inout CATIABase oAppConnection );
+    
+};
+    
+// Interface name : CATIASchAppObjectFactory2
+#pragma ID CATIASchAppObjectFactory2 "DCE:5d2ae543-20d3-41c6-872e732ebdc0ba84"
+#pragma DUAL CATIASchAppObjectFactory2
+    
+// VB object name : SchAppObjectFactory2
+#pragma ID SchAppObjectFactory2 "DCE:b116cc30-2be7-4e6c-9664c2ee4f8b3c76"
+#pragma ALIAS CATIASchAppObjectFactory2 SchAppObjectFactory2
+    
+#endif 
+    

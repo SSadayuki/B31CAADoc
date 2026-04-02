@@ -1,0 +1,1758 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>AdvancedTopologicalOpe CATFrFTopologicalSweep Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../AdvancedTopologicalOpe.htm" href="../AdvancedTopologicalOpe.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "AdvancedTopologicalOpe";	}
+		function getCurrentObjectName() { 
+ 	return "CATFrFTopologicalSweep"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>AdvancedTopologicalOpe Framework: CATFrFTopologicalSweep <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATFrFTopologicalSweep_48522','CATFrFTopologicalSweep','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATFrFTopologicalSweep</b>
+</p>
+<p>
+<b><i> Class representing the topological operator that computes swept surfaces.</i></b><br>
+
+ <br>A sweep operation is defined by:
+ <ul><li> One or several guides that are along the sweeping direction.
+ <li>One profile that is swept, or several profiles thru which the swept surface passes. 
+ In case of segment or circle profile, the profile is implicitely given.
+ <li>Optionally a spine curve, that defines the sweeping plane (also called moving frame <script type="text/javascript"> activateLinkAnchor('CATMovingFrameType','','CATMovingFrameType') </script> ). </ul>
+ This operator can create, according to the chosen options:
+ <ul>
+ <li> Unspec sweep: one profile, one guide
+ <li> BiRail sweep: one profile, two guides
+ <li> Segment sweep: Define:
+ <ul><li>A1, A2: Angle Laws
+ <li>R: Radius Law
+ <li>LG, MG, FG: Limit, Middle, Functional Guide
+ <li>R1, R2: Length Laws
+ <li>LS, MS, FS: Limit, Middle, Functional Surface
+</ul>
+ The following describes the needed inputs for each case:
+ <pre>
+          R2         R1
+ Case 1: <--*-----*----->   2 Limit Guides L1 and L2
+ ------     L2    L1        2 Length Laws  (giving values R1 and R2)
+
+
+           R2  LG  R1
+ Case 2:  <-----*----->      1 Limit Guide LG + 1 Functional Guide FG
+ ------        A \           2 Length Laws R1 and R2 + 1 Angle Law A
+                  *FG
+
+
+ Case 3:   LG    MG
+ ------     *-----*-----      1 Limit Guide LG + 1 Middle Guide MG
+
+
+           R2  LG  R1
+ Case 4:  <-----*----->      1 Limit Guide LG (PCurve)
+ ------       |---|S         2 Length Laws R1 and R2 +
+                A            1 Angle Law A (% Surface Reference)
+
+ </pre>
+ <li>Circle sweep: For the same notations as those for the segment sweep, 
+ <pre>
+ Case 1: *-----*-----*     3 Limit Guides L1 L2 and L3
+ ------  L1    L2    L3    No Laws
+
+
+
+ Case 2:  *----------*      2 Limit Guides L1 and L2
+ ------   L1    \    L2     1 Radius Law R
+                 R
+
+
+ Case 3:   F*
+ ------     |A1 *
+            |  / o           1 Middle Guide + 1 Functional Guide
+            | /A2 o          2 Angular Laws A1 and A2
+           M*------*
+
+
+ Case 4:       ---           1 Middle Guide
+ ------      | R|  |         1 Radius Law R
+            |   *   |
+             |     |
+               ---
+
+
+           A1  MG  A2
+ Case 5:  <-----*----->      1 Middle Guide MG
+ ------       |---|S         2 Angle Laws A1 and A2 (% Surface Reference)
+                R            1 Radius Law
+
+
+             o
+        L1 o   o
+ Case 6:  *     * L2        2 Limit Guides L1 and L2
+ ------  ! o   o             1 Reference Surface
+         !   o
+         !
+         ! Reference Surface
+
+ </pre>
+ <li>Conic sweep: For the same notations as those for the segment or circle 
+ sweep, 
+ <pre>
+ Case 1:                     5 Limit Guides L1 to L5
+ ------ 
+  L1   
+   *
+    o
+     o
+       * L2
+          o
+             o  L3
+                *
+                   o   L4      L5
+                       *  o  o  *
+
+ Case 2:                     4 Limit Guides L1 to L4
+ ------                      1 Slope (angle law % reference surface)
+
+  L1
+   *
+    o
+     o
+       * L2
+         o
+            o  L3
+               *
+                   o
+                        o             L4
+                               o   o  *----------------------- slope 
+                                 -     angle
+                                   -
+                                     -
+                                       - reference surface
+
+ Case 3:                     3 Limit Guides
+ ------                      2 Slopes (angle law % reference surface)
+
+  L1
+  !*
+  ! o
+  !  o
+  !    o
+  !       o
+  !          o  L2
+  !             *
+  !                o
+  !                     o         L3
+  o                            o  *----------------------- slope
+  slope                          -    angle
+ (angle + reference)               -
+                                     -
+                                       - reference surface
+
+ Case 4:                     2 Limit Guides
+ ------                      2 Slopes (angle law % reference surface)
+                             1 Rho Law
+  L1
+  !*
+  ! o
+  !  o
+  !    o
+  !       o
+  !          o
+  !             o              L2
+  !                 o   o  o  o  *----------------------- slope
+  slope                          -    angle
+ (angle + reference)               -
+                                     -
+                                       - reference surface
+
+ </pre>
+</ul>
+<br>
+ The CATFrFTopologicalSweep operator follows the global frame of the topological operators 
+ and satisfies the smart mechanism:
+ the input bodies are not modified. A new resulting body is created,
+ possibly sharing data with the input bodies.
+<ul>
+ <li>A CATFrFTopologicalSweep operator is created with the <tt>CATCreateFrFTopologicalSweep</tt> global method:
+ It must be directly <tt>delete</tt>d after use. It is not streamable.
+<li>In case of <tt>BASIC</tt>
+ mode, the operation is automatically performed at the operator creation.
+ In case of <tt>ADVANCED</tt>
+ mode, options can be precised with the <tt>SetXxx</tt> methods, before
+ asking for the computation with the <tt>Run</tt> method.
+<li>In both cases, the result is accessed with the <tt>GetResult</tt> method. If you do not want
+ to keep the resulting body, use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the geometric factory.
+</ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#~CATFrFTopologicalSweep()"><b>~CATFrFTopologicalSweep</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#ChooseOriginGuide(CATGeometry*,CATGeometry*)"><b>ChooseOriginGuide</b></a>(CATGeometry*,CATGeometry*)
+</td><td id='tdright'>  Internal use.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ForceVariableViewingDirMode()"><b>ForceVariableViewingDirMode</b></a>()
+</td><td id='tdright'>  (temporary and restricted use).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetAllProfiles(double)"><b>GetAllProfiles</b></a>(double)
+</td><td id='tdright'>  Returns the computed curves at a given section of the sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetFrame(double,CATMathAxis*&amp;)"><b>GetFrame</b></a>(double,CATMathAxis*&amp;)
+</td><td id='tdright'>  Retrieves the moving frame at a given ratio parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNonCoupledSectionVertices(CATLISTP(CATVertex)*,CATListOfInt*,CATListOfInt*,CATListOfInt*,CATListOfInt*)"><b>GetNonCoupledSectionVertices</b></a>(CATLISTP(CATVertex)*,CATListOfInt*,CATListOfInt*,CATListOfInt*,CATListOfInt*)
+</td><td id='tdright'>  Gets vertices non coupled by automatic section vertices coupling.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetProfileArea(double,double&amp;,double&amp;)"><b>GetProfileArea</b></a>(double,double&amp;,double&amp;)
+</td><td id='tdright'>  Gets the initial area for the profile evaluated in a given parameter,
+ and the final area after application of the area law (if any).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetProfileParameter(int)"><b>GetProfileParameter</b></a>(int)
+</td><td id='tdright'>  Retrieves the moving frame parameter where profile is positionned
+ (Unspec sweep, Multi profile sweep).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetProfilePosition(CATMathAxis*&amp;)"><b>GetProfilePosition</b></a>(CATMathAxis*&amp;)
+</td><td id='tdright'>  Retrieves the axes system of the profile (Sweep unspec.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResult()"><b>GetResult</b></a>()
+</td><td id='tdright'>  Returns the result of <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSpine()"><b>GetSpine</b></a>()
+</td><td id='tdright'>  Returns the spine.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetTwistedAreas(CATListOfDouble&amp;,CATListOfDouble&amp;)"><b>GetTwistedAreas</b></a>(CATListOfDouble&amp;,CATListOfDouble&amp;)
+</td><td id='tdright'>  Retrieves the limiting parameters of the twisted areas ot the wrap areas.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAnchorPoints(CATMathPoint&amp;,CATMathPoint&amp;)"><b>SetAnchorPoints</b></a>(CATMathPoint&amp;,CATMathPoint&amp;)
+</td><td id='tdright'>   Defines the anchor points for profile positionning.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAngularLaw(CATLaw*)"><b>SetAngularLaw</b></a>(CATLaw*)
+</td><td id='tdright'>  Defines an angular law to rotate the moving frame around its <tt>Z</tt> axis.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAngularLaw(CATCompositeLaw*)"><b>SetAngularLaw</b></a>(CATCompositeLaw*)
+</td><td id='tdright'>  Defines an angular law to rotate the moving frame around its <tt>Z</tt> axis.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAngularLaws(CATLaw**,int)"><b>SetAngularLaws</b></a>(CATLaw**,int)
+</td><td id='tdright'>  Defines the angular laws for defining limiting guides.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAngularLaws(CATCompositeLaw**,int)"><b>SetAngularLaws</b></a>(CATCompositeLaw**,int)
+</td><td id='tdright'>  Defines the angular laws for defining limiting guides.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAngularLawsInDegree(CATLaw**,int)"><b>SetAngularLawsInDegree</b></a>(CATLaw**,int)
+</td><td id='tdright'>  Defines the angular laws for defining limiting guides.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAreaLaw(CATLaw*)"><b>SetAreaLaw</b></a>(CATLaw*)
+</td><td id='tdright'>  Defines the area law for section deformation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAreaLaw(CATCompositeLaw*)"><b>SetAreaLaw</b></a>(CATCompositeLaw*)
+</td><td id='tdright'>  Defines the area law for section deformation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAreasToEliminate(CATLISTP(CATVertex)&amp;,CATLISTP(CATVertex)&amp;)"><b>SetAreasToEliminate</b></a>(CATLISTP(CATVertex)&amp;,CATLISTP(CATVertex)&amp;)
+</td><td id='tdright'>  Defines the vertices limiting areas to eliminate from final sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCanonicSurfacesDetection(CATBoolean)"><b>SetCanonicSurfacesDetection</b></a>(CATBoolean)
+</td><td id='tdright'>  Sets the canonic surfaces detection mode (cones/cylinders/planes).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCleanGuidesOption(int,double*,double*,double*)"><b>SetCleanGuidesOption</b></a>(int,double*,double*,double*)
+</td><td id='tdright'>  Defines clean guides option, and clean parameter values.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCleanProfilesOption(int,double*,double*,double*)"><b>SetCleanProfilesOption</b></a>(int,double*,double*,double*)
+</td><td id='tdright'>  Defines clean profiles option, and clean parameter values.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetClosureMode()"><b>SetClosureMode</b></a>()
+</td><td id='tdright'>  Asks for the body closure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetConeOption()"><b>SetConeOption</b></a>()
+</td><td id='tdright'>  Defines cone option for segment sweep computation with reference element
+ (behaves like a draft computation).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCouplingGuides(CATLISTP(CATGeometry)*)"><b>SetCouplingGuides</b></a>(CATLISTP(CATGeometry)*)
+</td><td id='tdright'>  Defines additional guides to be used only for profile sections coupling.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDowngradeSetting(CATFrFTopologicalDowngradeSetting_Type)"><b>SetDowngradeSetting</b></a>(CATFrFTopologicalDowngradeSetting_Type)
+</td><td id='tdright'>  Explicit downgrade query for one upgraded setting.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFillTwist(int,CATFrFTopologicalSweepFill_Type)"><b>SetFillTwist</b></a>(int,CATFrFTopologicalSweepFill_Type)
+</td><td id='tdright'>  Defines the twisted or removed areas filling mode
+ 
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFunctionalGuides(CATLISTP(CATGeometry)*)"><b>SetFunctionalGuides</b></a>(CATLISTP(CATGeometry)*)
+</td><td id='tdright'>  Defines the references for the (start and end) angles measurement for a segment or circle sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetGuideContinuityCondition(int,CATGeometry*,CATFrFTopologicalSweepContinuity_Type)"><b>SetGuideContinuityCondition</b></a>(int,CATGeometry*,CATFrFTopologicalSweepContinuity_Type)
+</td><td id='tdright'>  Sets the continuity constraints (for multi profiles sweep) for a guide.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLayDownRequest(double*)"><b>SetLayDownRequest</b></a>(double*)
+</td><td id='tdright'>  Asks for topological lay down to be done internally for all guides and profiles with support
+ surfaces.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLengthLaws(CATLaw**,int)"><b>SetLengthLaws</b></a>(CATLaw**,int)
+</td><td id='tdright'>  Defines the length laws for a segment sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLengthLaws(CATCompositeLaw**,int)"><b>SetLengthLaws</b></a>(CATCompositeLaw**,int)
+</td><td id='tdright'>  Defines the length laws for a segment sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLimitGuideSlopeCondition(int,CATGeometry*,CATLaw*)"><b>SetLimitGuideSlopeCondition</b></a>(int,CATGeometry*,CATLaw*)
+</td><td id='tdright'>  Defines a slope condition for a conic or a circle sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLimitGuideSlopeCondition(int,CATGeometry*,CATCompositeLaw*)"><b>SetLimitGuideSlopeCondition</b></a>(int,CATGeometry*,CATCompositeLaw*)
+</td><td id='tdright'>  Defines a slope condition for a conic or a circle sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLimitGuides(CATLISTP(CATGeometry)*)"><b>SetLimitGuides</b></a>(CATLISTP(CATGeometry)*)
+</td><td id='tdright'>  Defines the limiting guides of a segment or circle sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLimitingElements(int,CATGeometry**)"><b>SetLimitingElements</b></a>(int,CATGeometry**)
+</td><td id='tdright'>  Defines limiting elements to be used instead of one or two length laws in a segment sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMiddleGuides(CATLISTP(CATGeometry)*)"><b>SetMiddleGuides</b></a>(CATLISTP(CATGeometry)*)
+</td><td id='tdright'>  Defines the guide defining the center of the circle for a segment or circle sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMovingFrameParms(CATFrFTopologicalSweepMF_Type,CATMathDirection*,CATMathDirection*)"><b>SetMovingFrameParms</b></a>(CATFrFTopologicalSweepMF_Type,CATMathDirection*,CATMathDirection*)
+</td><td id='tdright'>  Moving frame type definition.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPlanesDetection(CATBoolean)"><b>SetPlanesDetection</b></a>(CATBoolean)
+</td><td id='tdright'>  Sets the plane detection mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetProfileAutomaticCouplingMode(CATFrFTopologicalSweepAutomaticCoupling_Type,CATBoolean,CATBoolean)"><b>SetProfileAutomaticCouplingMode</b></a>(CATFrFTopologicalSweepAutomaticCoupling_Type,CATBoolean,CATBoolean)
+</td><td id='tdright'>  Defines the profile automatic coupling mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetProfileContinuityCondition(int,CATGeometry*,CATFrFTopologicalSweepContinuity_Type)"><b>SetProfileContinuityCondition</b></a>(int,CATGeometry*,CATFrFTopologicalSweepContinuity_Type)
+</td><td id='tdright'>  Sets the continuity constraints on start and end profiles (for multi profiles sweep).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetProfileOrientation(int,CATFrFTopologicalSweepOrientation_Type)"><b>SetProfileOrientation</b></a>(int,CATFrFTopologicalSweepOrientation_Type)
+</td><td id='tdright'>  Sets the profiles orientation (for multi profiles sweep).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetProfilePosition(CATMathAxis*)"><b>SetProfilePosition</b></a>(CATMathAxis*)
+</td><td id='tdright'>  Defines the axes system of the profile.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetProfilePositionType(CATLONG32)"><b>SetProfilePositionType</b></a>(CATLONG32)
+</td><td id='tdright'>   Definition of profile positioning type for a sweep with one or two guides (Sweep unspec and birail).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetProfileScalingOption(CATLONG32)"><b>SetProfileScalingOption</b></a>(CATLONG32)
+</td><td id='tdright'>  Defines the scaling mode to apply to the profile.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPseudoUntwistModeForC0VerticesInError()"><b>SetPseudoUntwistModeForC0VerticesInError</b></a>()
+</td><td id='tdright'>  Asks for managing C0 vertices in topological computation error as pseudo-twisted areas centers.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRadiusLaw(CATLaw*)"><b>SetRadiusLaw</b></a>(CATLaw*)
+</td><td id='tdright'>  Defines the radius law of a circle sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRadiusLaw(CATCompositeLaw*)"><b>SetRadiusLaw</b></a>(CATCompositeLaw*)
+</td><td id='tdright'>  Defines the radius law of a circle sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetReferenceElement(CATGeometry*)"><b>SetReferenceElement</b></a>(CATGeometry*)
+</td><td id='tdright'>  Defines a variable viewing direction (sweep unspec).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRelimitationMode(CATFrFTopologicalSweepRelimitation_Type)"><b>SetRelimitationMode</b></a>(CATFrFTopologicalSweepRelimitation_Type)
+</td><td id='tdright'>  Sets the relimitation mode by the extremity profiles.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRhoLaw(CATLaw*)"><b>SetRhoLaw</b></a>(CATLaw*)
+</td><td id='tdright'>  Defines the rho law of a conic sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRhoLaw(CATCompositeLaw*)"><b>SetRhoLaw</b></a>(CATCompositeLaw*)
+</td><td id='tdright'>  Defines the rho law of a conic sweep.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSimplification(CATBoolean)"><b>SetSimplification</b></a>(CATBoolean)
+</td><td id='tdright'>  Sets the simplification mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSmoothAngleThreshold(double)"><b>SetSmoothAngleThreshold</b></a>(double)
+</td><td id='tdright'>  Defines the smooth angle threshold.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSmoothOption(int)"><b>SetSmoothOption</b></a>(int)
+</td><td id='tdright'>  Defines a smooth option for moving frame and comb extraction.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSolutionChoice(CATLONG32)"><b>SetSolutionChoice</b></a>(CATLONG32)
+</td><td id='tdright'>  Defines the conic, circle or segment to keep if case of ambiguous case.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSpine(CATGeometry*,CATFrFTopologicalSweepSpine_Type)"><b>SetSpine</b></a>(CATGeometry*,CATFrFTopologicalSweepSpine_Type)
+</td><td id='tdright'>  Defines the spine.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTwistDetection(int)"><b>SetTwistDetection</b></a>(int)
+</td><td id='tdright'>  Defines the twist detection mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetUntwistMode(int,double)"><b>SetUntwistMode</b></a>(int,double)
+</td><td id='tdright'>  Defines the untwist mode, in which every twisted area will be computed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetUpgradedDefaultSettings(int)"><b>SetUpgradedDefaultSettings</b></a>(int)
+</td><td id='tdright'>  Upgrade default operator settings.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetWrapDetection(int)"><b>SetWrapDetection</b></a>(int)
+</td><td id='tdright'>  Defines the wrap detection mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ValidateCaseNumber(CATLONG32)"><b>ValidateCaseNumber</b></a>(CATLONG32)
+</td><td id='tdright'>  Checks the input data according to the sweep case.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="~CATFrFTopologicalSweep"></a><a id="~CATFrFTopologicalSweep()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATFrFTopologicalSweep</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="ChooseOriginGuide"></a><a id="ChooseOriginGuide(CATGeometry*,CATGeometry*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ChooseOriginGuide</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iChosenGuide</span>,<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iReferenceElement</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Internal use.
+ Defines the guide to be used for positionning the moving axis origin.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iChosenGuide</span></dt>
+   <dd> The guide chosen (that must belong to the set of limit or functional guides).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iReferenceElement</span></dt>
+   <dd> The reference element chosen for normal computation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ForceVariableViewingDirMode"></a><a id="ForceVariableViewingDirMode()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ForceVariableViewingDirMode</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ (temporary and restricted use).
+ Manages motion axis twist with a variable (local) viewing direction.
+ To be used only with following conditions;
+ <ul>
+ <li>Standard moving frame type (CATFrFTopologicalSweepMF_Ortho).
+ <li>Unspec sweep (with profile)
+ <li>Spine with a complex 3D curve
+ </ul>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetAllProfiles"></a><a id="GetAllProfiles(double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATFrFTopologicalSweep_ListPOfCATCurve','CATFrFTopologicalSweep_ListPOfCATCurve*')</script>  <span class='objname'>GetAllProfiles</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iLambda</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the computed curves at a given section of the sweep.
+ <br>The number of the curves depends on the number of edges
+ of the initial profiles and the number of guides.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLambda</span></dt>
+   <dd> The parameter <tt>0 <= iLambda <=1 </tt> indicating where the curves are computed.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The list of the pointers to the created curves. If you do not want to keep
+ the curves, use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method. <tt>Delete</tt> the list after use.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetFrame"></a><a id="GetFrame(double,CATMathAxis*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetFrame</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iLambda</span>,<script type="text/javascript"> activateLink('CATMathAxis','CATMathAxis*&amp;')</script> <span class='param'>oFrame</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the moving frame at a given ratio parameter.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLambda</span></dt>
+   <dd> The parameter <tt>0 <= iLambda <=1 </tt> indicating where the frame is retrieved.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oFrame</span></dt>
+   <dd> The moving frame, that may or may not have been allocated before call
+  and must be deallocated after
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNonCoupledSectionVertices"></a><a id="GetNonCoupledSectionVertices(CATLISTP(CATVertex)*,CATListOfInt*,CATListOfInt*,CATListOfInt*,CATListOfInt*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetNonCoupledSectionVertices</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTP(CATVertex)','CATLISTP(CATVertex)*')</script> <span class='param'>oVertices</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('CATListOfInt','CATListOfInt*')</script> <span class='param'>oSectionNumbers</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('CATListOfInt','CATListOfInt*')</script> <span class='param'>oEdgeNumbers</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('CATListOfInt','CATListOfInt*')</script> <span class='param'>oLevels</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('CATListOfInt','CATListOfInt*')</script> <span class='param'>oDomains</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets vertices non coupled by automatic section vertices coupling.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oVertices</span></dt>
+   <dd> The list of non coupled section vertices.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oSectionNumbers</span></dt>
+   <dd> The list of section numbers for non coupled vertices.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oEdgeNumbers</span></dt>
+   <dd> The list of edge numbers for non coupled vertices (the vertex oVertices[i] is
+ between edge oEdgeNumbers[i] and edge 1+oEdgeNumbers[i])
+ 
+ </ dd>
+    <dt><span class='paramitem'> oLevels</span></dt>
+   <dd> The list of discontinuity levels for non coupled vertices
+ (1 for C0 non C1 vertices, 2 for C1 non C2 vertices) 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oDomains</span></dt>
+   <dd> The list of domain numbers for non coupled vertices
+ (internal numerotation within current level management; same domain number
+ may be given during non C1 vertices management and during non C2 vertices 
+ management)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetProfileArea"></a><a id="GetProfileArea(double,double&amp;,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetProfileArea</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iParam</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>oInitialArea</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>oFinalArea</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the initial area for the profile evaluated in a given parameter,
+ and the final area after application of the area law (if any).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParam</span></dt>
+   <dd> The parameter value in which the area is to be computed.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitialArea</span></dt>
+   <dd> The profile area before deformation with area law.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFinalArea</span></dt>
+   <dd> The profile area after deformation with area law.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetProfileParameter"></a><a id="GetProfileParameter(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('double','double')</script>  <span class='objname'>GetProfileParameter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iProfileRank</span><span class='param'>= 1</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the moving frame parameter where profile is positionned
+ (Unspec sweep, Multi profile sweep).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProfileRank</span></dt>
+   <dd> The rank (beginning at 1) of the profile.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  parameter value between 0. and 1.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetProfilePosition"></a><a id="GetProfilePosition(CATMathAxis*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetProfilePosition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMathAxis','CATMathAxis*&amp;')</script> <span class='param'>oProfileAxis</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the axes system of the profile (Sweep unspec.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oProfileAxis</span></dt>
+   <dd> The pointer to the input or computed axes system of the profile.
+ The computed axes system belongs to
+ this operator and is deleted at the operator deletion.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResult"></a><a id="GetResult()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody*')</script>  <span class='objname'>GetResult</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the result of <tt>this</tt> operator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the created body. You must delete it with the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script>  method if you do not want to keep it.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSpine"></a><a id="GetSpine()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script>  <span class='objname'>GetSpine</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the spine.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the input or computed spine. The computed (or implicit) spine belongs to
+ this operator and is deleted at the operator deletion.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetTwistedAreas"></a><a id="GetTwistedAreas(CATListOfDouble&amp;,CATListOfDouble&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetTwistedAreas</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oTwistBegin</span>,<script type="text/javascript"> activateLink('CATListOfDouble','CATListOfDouble&amp;')</script> <span class='param'>oTwistEnd</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the limiting parameters of the twisted areas ot the wrap areas.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oTwistBegin</span></dt>
+   <dd> the beginning parameters of the twisted areas.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oTwistEnd</span></dt>
+   <dd> the ending parameters of the twisted areas.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> operator.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAnchorPoints"></a><a id="SetAnchorPoints(CATMathPoint&amp;,CATMathPoint&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAnchorPoints</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iPoint1</span>, const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iPoint2</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Defines the anchor points for profile positionning.
+ <br>Moving the anchor points
+ from their initial position to intersection points between the sweeping plane 
+ and the guides, defines the 3D transformation to apply to the initial profile.
+ Anchor points should be in the profile plane for correct behaviour of
+ profile positionning software.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPoint1</span></dt>
+   <dd> The point to anchor on first guide.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPoint2</span></dt>
+   <dd> The point to anchor on second guide.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAngularLaw"></a><a id="SetAngularLaw(CATLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAngularLaw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLaw','CATLaw*')</script> <span class='param'>iAngularLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines an angular law to rotate the moving frame around its <tt>Z</tt> axis.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAngularLaw</span></dt>
+   <dd> The pointer to the angular law.
+ (historical behaviour: Angles must be given in radian for circular sweep, in degree for other types of sweep;
+ upgraded behaviour if SetUpgradedDefaultSettings() has been called: Angles always given in degree)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAngularLaw"></a><a id="SetAngularLaw(CATCompositeLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAngularLaw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw*')</script> <span class='param'>iAngularLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines an angular law to rotate the moving frame around its <tt>Z</tt> axis.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAngularLaw</span></dt>
+   <dd> The pointer to the angular law.
+ (historical behaviour: Angles must be given in radian for circular sweep, in degree for other types of sweep;
+ upgraded behaviour if SetUpgradedDefaultSettings() has been called: Angles always given in degree)
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAngularLaws"></a><a id="SetAngularLaws(CATLaw**,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAngularLaws</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLaw','CATLaw**')</script> <span class='param'>iLaws</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaws</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the angular laws for defining limiting guides.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaws</span></dt>
+   <dd> The array of the pointers to the laws.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaws</span></dt>
+   <dd> The number of laws.
+ (historical behaviour: Angles must be given in radian for circular sweep, in degree for other types of sweep;
+ upgraded behaviour if SetUpgradedDefaultSettings() has been called: Angles always given in degree)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAngularLaws"></a><a id="SetAngularLaws(CATCompositeLaw**,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAngularLaws</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw**')</script> <span class='param'>iLaws</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaws</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the angular laws for defining limiting guides.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaws</span></dt>
+   <dd> The array of the pointers to the laws.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaws</span></dt>
+   <dd> The number of laws.
+ (historical behaviour: Angles must be given in radian for circular sweep, in degree for other types of sweep;
+ upgraded behaviour if SetUpgradedDefaultSettings() has been called: Angles always given in degree)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAngularLawsInDegree"></a><a id="SetAngularLawsInDegree(CATLaw**,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAngularLawsInDegree</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLaw','CATLaw**')</script> <span class='param'>iLaws</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaws</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the angular laws for defining limiting guides.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaws</span></dt>
+   <dd> The array of the pointers to the laws.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaws</span></dt>
+   <dd> The number of laws.
+ (Angles must be given in degree, including in circular sweep case)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAreaLaw"></a><a id="SetAreaLaw(CATLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAreaLaw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLaw','CATLaw*')</script> <span class='param'>iAreaLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the area law for section deformation.
+ This option is available only with 0, 1 or 2 guides.
+ If the input sections do not fit with the area law, the surface will not
+ fit to theses sections.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAreaLaw"></a><a id="SetAreaLaw(CATCompositeLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAreaLaw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw*')</script> <span class='param'>iAreaLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the area law for section deformation.
+ This option is available only with 0, 1 or 2 guides.
+ If the input sections do not fit with the area law, the surface will not
+ fit to these sections.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAreasToEliminate"></a><a id="SetAreasToEliminate(CATLISTP(CATVertex)&amp;,CATLISTP(CATVertex)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAreasToEliminate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTP(CATVertex)','CATLISTP(CATVertex)&amp;')</script> <span class='param'>iStartVertices</span>,<script type="text/javascript"> activateLink('CATLISTP(CATVertex)','CATLISTP(CATVertex)&amp;')</script> <span class='param'>iEndVertices</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the vertices limiting areas to eliminate from final sweep.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iStartVertices</span></dt>
+   <dd> The starting vertices for each areas to eliminate.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEndVertices</span></dt>
+   <dd> The ending vertices for each area to eliminate.
+ The same number of vertices must be defined for start and end. The vertices must be located
+ on the first guide, but not necessarily logically related to it.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCanonicSurfacesDetection"></a><a id="SetCanonicSurfacesDetection(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCanonicSurfacesDetection</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iCanonicSurfacesDetection</span><span class='param'>= CATBoolean(1)</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the canonic surfaces detection mode (cones/cylinders/planes).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCanonicSurfacesDetection</span></dt>
+   <dd> The canonic surface detection mode.
+ <br><b>Legal values</b>: <tt>TRUE</tt> for replacing nurbs surfaces by canonic surfaces,
+ <tt>FALSE</tt> otherwise (default mode at the operator creation).
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCleanGuidesOption"></a><a id="SetCleanGuidesOption(int,double*,double*,double*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCleanGuidesOption</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iCleanOption</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iCleanMaxDeformation</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iCleanSmallCurvesMaxLength</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iCleanCurvatureThreshold</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines clean guides option, and clean parameter values. Pointers
+ to parameter values are to be given only when corresponding parameter
+ is redefined, otherwise, standard parameter value will be used. Pointers
+ may contain addresses of local variables that will be lost after call:
+ parameter values will be copied by this method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCleanOption</span></dt>
+   <dd> The cleaning option
+ <br><b>Legal values</b>: <tt>0</tt> no cleaning will be done
+ (default mode at operator creation),
+ <tt>1</tt> cleaning will be done.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCleanMaxDeformation</span></dt>
+   <dd> The pointer to max deformation authorized.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCleanSmallCurvesMaxLength</span></dt>
+   <dd> The pointer to maximum length of curves to be kept.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCleanCurvatureThreshold</span></dt>
+   <dd> The pointer to the curvature threshold.
+ This threshold, between 0.0 and 1.0, must not depend on factory scale.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCleanProfilesOption"></a><a id="SetCleanProfilesOption(int,double*,double*,double*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCleanProfilesOption</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iCleanOption</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iCleanMaxDeformation</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iCleanSmallCurvesMaxLength</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iCleanCurvatureThreshold</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines clean profiles option, and clean parameter values.
+ Same as for guides
+</dd>
+<dt class='dtmethod' >
+  <a id="SetClosureMode"></a><a id="SetClosureMode()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetClosureMode</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for the body closure.
+<br> To use in cases the closed and planar profiles for example.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetConeOption"></a><a id="SetConeOption()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetConeOption</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines cone option for segment sweep computation with reference element
+ (behaves like a draft computation).
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCouplingGuides"></a><a id="SetCouplingGuides(CATLISTP(CATGeometry)*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCouplingGuides</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTP(CATGeometry)','CATLISTP(CATGeometry)*')</script> <span class='param'>iCouplingGuides</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines additional guides to be used only for profile sections coupling.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCouplingGuides</span></dt>
+   <dd> The list of pointers to the coupling guides (wire bodies).
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDowngradeSetting"></a><a id="SetDowngradeSetting(CATFrFTopologicalDowngradeSetting_Type)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDowngradeSetting</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFTopologicalDowngradeSetting_Type','CATFrFTopologicalDowngradeSetting_Type')</script> <span class='param'>iSettingDowngrade</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Explicit downgrade query for one upgraded setting.
+ (must be done between SetUpgradedDefaultSettings() and other specifications definition).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSettingDowngrade</span></dt>
+   <dd> setting downgrade query
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFillTwist"></a><a id="SetFillTwist(int,CATFrFTopologicalSweepFill_Type)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFillTwist</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iFillTwistMode</span><span class='param'>= 0</span>,<script type="text/javascript"> activateLink('CATFrFTopologicalSweepFill_Type','CATFrFTopologicalSweepFill_Type')</script> <span class='param'>iFillTwistDefaultOption</span><span class='param'>= CATFrFTopologicalSweepFill_NoFill_0 </span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the twisted or removed areas filling mode
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFillTwistMode</span></dt>
+   <dd> The filling mode. If <tt>0</tt>, no fill.
+ If <tt>1</tt>, areas will be filled.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFillTwistDefaultOption</span></dt>
+   <dd> The filling default option for all areas.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFunctionalGuides"></a><a id="SetFunctionalGuides(CATLISTP(CATGeometry)*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFunctionalGuides</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTP(CATGeometry)','CATLISTP(CATGeometry)*')</script> <span class='param'>iFunctionalGuides</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the references for the (start and end) angles measurement for a segment or circle sweep.
+<br>To use according of the chosen sweep case.The sweep may not pass thru the functional guides.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFunctionalGuides</span></dt>
+   <dd> The list of pointers to the one or two reference guides.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetGuideContinuityCondition"></a><a id="SetGuideContinuityCondition(int,CATGeometry*,CATFrFTopologicalSweepContinuity_Type)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetGuideContinuityCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iRankGuide</span>,<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iReferenceElement</span>,<script type="text/javascript"> activateLink('CATFrFTopologicalSweepContinuity_Type','CATFrFTopologicalSweepContinuity_Type')</script> <span class='param'>iContinuityCondition</span><span class='param'>= CATFrFTopologicalSweepContinuity_G1 </span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the continuity constraints (for multi profiles sweep) for a guide.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iRankGuide</span></dt>
+   <dd> The rank (beginning at 1) of the guide to constraint.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iReferenceElement</span></dt>
+   <dd> The pointer to the reference element (CATPlane or skin CATBody) on which the guide
+ must lay. Each sweep moving section is tangent to a skin CATBody reference element and normal to 
+ a CATPlane reference element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iContinuityCondition</span></dt>
+   <dd> The type of continuity constraint.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLayDownRequest"></a><a id="SetLayDownRequest(double*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLayDownRequest</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iLayDownTolerance</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for topological lay down to be done internally for all guides and profiles with support
+ surfaces.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLayDownTolerance</span></dt>
+   <dd> The pointer to the lay down tolerance (maximum distance between wire to be laid down
+ and its support surface).
+ (historical behaviour: must be called if internal lay down to be done;
+ upgraded behaviour if SetUpgradedDefaultSettings() has been called: internal lay down is implicitly done)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLengthLaws"></a><a id="SetLengthLaws(CATLaw**,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLengthLaws</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLaw','CATLaw**')</script> <span class='param'>iLaws</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaws</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the length laws for a segment sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaws</span></dt>
+   <dd> The array of the pointers to the laws.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaws</span></dt>
+   <dd> The number of laws.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLengthLaws"></a><a id="SetLengthLaws(CATCompositeLaw**,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLengthLaws</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw**')</script> <span class='param'>iLaws</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbLaws</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the length laws for a segment sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaws</span></dt>
+   <dd> The array of the pointers to the laws.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbLaws</span></dt>
+   <dd> The number of laws.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLimitGuideSlopeCondition"></a><a id="SetLimitGuideSlopeCondition(int,CATGeometry*,CATLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLimitGuideSlopeCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLimitGuideRank</span>,<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iReferenceElement</span>,<script type="text/javascript"> activateLink('CATLaw','CATLaw*')</script> <span class='param'>iAngularLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a slope condition for a conic or a circle sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iGuideRank</span></dt>
+   <dd> The rank of the guide on which the slope condition applies
+ (first or last guide).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iReferenceElement</span></dt>
+   <dd> The pointer to the reference element (CATPlane or skin CATBody or wire CATBody)
+ defining the angular reference. For a null angle, conic will be tangent
+ to the plane or skin reference element, or to the line joining guide 
+ and a wire reference element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAngleLaw</span></dt>
+   <dd> The pointer to the angle law.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLimitGuideSlopeCondition"></a><a id="SetLimitGuideSlopeCondition(int,CATGeometry*,CATCompositeLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLimitGuideSlopeCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLimitGuideRank</span>,<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iReferenceElement</span>,<script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw*')</script> <span class='param'>iAngularLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a slope condition for a conic or a circle sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iGuideRank</span></dt>
+   <dd> The rank of the guide on which the slope condition applies
+ (first or last guide).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iReferenceElement</span></dt>
+   <dd> The pointer to the reference element (CATPlane or skin CATBody or wire CATBody)
+ defining the angular reference. For a null angle, conic will be tangent
+ to the plane or skin reference element, or to the line joining guide 
+ and a wire reference element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAngleLaw</span></dt>
+   <dd> The pointer to the angle law.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLimitGuides"></a><a id="SetLimitGuides(CATLISTP(CATGeometry)*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLimitGuides</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTP(CATGeometry)','CATLISTP(CATGeometry)*')</script> <span class='param'>iLimitGuides</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the limiting guides of a segment or circle sweep.
+ According to the number of guides, an appropriate build method is chosen.
+ This choice can also be explicitely given for a circle sweep
+ by the <tt>SetSolutionChoice</tt> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLimitGuides</span></dt>
+   <dd> The pointer to the list of pointers to the (wire body or curve) guides.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLimitingElements"></a><a id="SetLimitingElements(int,CATGeometry**)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetLimitingElements</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbElements</span>,<script type="text/javascript"> activateLink('CATGeometry','CATGeometry**')</script> <span class='param'>iLimitingElements</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines limiting elements to be used instead of one or two length laws in a segment sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbElements</span></dt>
+   <dd> The number of limiting elements
+ <br><b>Legal values:</b>
+ <dl><dt>0</dt><dd> If no limiting element
+ <dt>1</dt><dd> If only one limiting element instead of first length law.
+ <dt>2</dt><dd> If two limiting elements (first one may be null).
+ </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLimitingElements</span></dt>
+   <dd> The array of pointers to the limiting elements (CATPlane).
+ Null elements may be given.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMiddleGuides"></a><a id="SetMiddleGuides(CATLISTP(CATGeometry)*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetMiddleGuides</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTP(CATGeometry)','CATLISTP(CATGeometry)*')</script> <span class='param'>iMiddleGuides</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the guide defining the center of the circle for a segment or circle sweep.
+ <br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMiddleGuides</span></dt>
+   <dd> The list of pointers to the one middle guide.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMovingFrameParms"></a><a id="SetMovingFrameParms(CATFrFTopologicalSweepMF_Type,CATMathDirection*,CATMathDirection*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetMovingFrameParms</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFTopologicalSweepMF_Type','CATFrFTopologicalSweepMF_Type')</script> <span class='param'>iMFType</span>,<script type="text/javascript"> activateLink('CATMathDirection','CATMathDirection*')</script> <span class='param'>iMFViewingDir</span><span class='param'>= NULL</span>,<script type="text/javascript"> activateLink('CATMathDirection','CATMathDirection*')</script> <span class='param'>iMFDir</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Moving frame type definition.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'>   iMFViewingDir</span></dt>
+   <dd> Used as viewing direction
+   (if not provided, an automatic viewing direction will
+   be computed)
+ if type is CATFrFTopologicalSweepMF_ParallelToPlane:
+ 
+ </ dd>
+    <dt><span class='paramitem'>   iMFDir</span></dt>
+   <dd> Used as plane normal
+ Moving frame is computed using spine provided by SetSpine()
+ or first guide if no spine provided)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPlanesDetection"></a><a id="SetPlanesDetection(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetPlanesDetection</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iPlanesDetection</span><span class='param'>= CATBoolean(1)</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the plane detection mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPlanesDetection</span></dt>
+   <dd> The plane detection mode.
+ <br><b>Legal values</b>: <tt>TRUE</tt> for replacing planar surfaces by planes,
+ <tt>FALSE</tt> otherwise (default mode at the operator creation).
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetProfileAutomaticCouplingMode"></a><a id="SetProfileAutomaticCouplingMode(CATFrFTopologicalSweepAutomaticCoupling_Type,CATBoolean,CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetProfileAutomaticCouplingMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFTopologicalSweepAutomaticCoupling_Type','CATFrFTopologicalSweepAutomaticCoupling_Type')</script> <span class='param'>iCouplingType</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iForceErrorOnImpossibleCoupling</span><span class='param'>= FALSE</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iCoupleFirstVerticesOnImpossibleCoupling</span><span class='param'>= FALSE </span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the profile automatic coupling mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCouplingType</span></dt>
+   <dd> The coupling type.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iForceErrorOnImpossibleCoupling</span></dt>
+   <dd> The error management.
+ <br><b>Legal values:</b>
+ <dl><dt>FALSE</dt><dd> If the required coupling mode is not possible, the operator tries to couple
+ in a lower mode (the lowest mode is the coupling by curvilinear length).
+ <dt>TRUE</dt><dd> An error is thrown if the required coupling is not possible.
+ </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoupleFirstVerticesOnImpossibleCoupling</span></dt>
+   <dd> The coupling strategy when coupling is impossible.
+ <br><b>Legal values:</b>
+ <dl><dt>FALSE</dt><dd> If the required coupling mode is not possible, the operator tries to couple
+ in a lower mode or raises an error (according to <tt>iForceErrorOnImpossibleCoupling</tt> param)
+ <dt>TRUE</dt><dd> The first vertices with same continuity of the corresponding domains are coupled,
+ even if some vertices counts are different in these domains: vertices may be left in some domains.
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetProfileContinuityCondition"></a><a id="SetProfileContinuityCondition(int,CATGeometry*,CATFrFTopologicalSweepContinuity_Type)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetProfileContinuityCondition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iProfileRank</span>,<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iReferenceElement</span>,<script type="text/javascript"> activateLink('CATFrFTopologicalSweepContinuity_Type','CATFrFTopologicalSweepContinuity_Type')</script> <span class='param'>iContinuityCondition</span><span class='param'>= CATFrFTopologicalSweepContinuity_G1 </span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the continuity constraints on start and end profiles (for multi profiles sweep).
+ <br>The start and end profiles are not necessarily the first and last
+ profile of the list given at the operator creation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProfileRank</span></dt>
+   <dd> The rank (beginning at 1) of the profile to constraint.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iReferenceElement</span></dt>
+   <dd> The pointer to the reference element (CATPlane or skin CATBody) on which the profile
+ must lay. The sweep is tangent to a skin CATBody reference element and normal to 
+ a CATPlane reference element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iContinuityCondition</span></dt>
+   <dd> The type of continuity constraint.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetProfileOrientation"></a><a id="SetProfileOrientation(int,CATFrFTopologicalSweepOrientation_Type)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetProfileOrientation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iRankProfile</span>,<script type="text/javascript"> activateLink('CATFrFTopologicalSweepOrientation_Type','CATFrFTopologicalSweepOrientation_Type')</script> <span class='param'>iOrientation</span><span class='param'>= CATFrFTopologicalSweepOrientation_Positive </span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the profiles orientation (for multi profiles sweep).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iRankProfile</span></dt>
+   <dd> The rank (beginning at 1) of the profile.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd> The orientation of the profile:
+ <br><b>Legal values</b>: <tt>CATFrFTopologicalSweepOrientation_Positive</tt>
+ to take the natural orientation of the profile,
+ <tt>CATFrFTopologicalSweepOrientation_Negative</tt> for the opposite orientation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetProfilePosition"></a><a id="SetProfilePosition(CATMathAxis*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetProfilePosition</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMathAxis','CATMathAxis*')</script> <span class='param'>iProfileAxis</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the axes system of the profile.
+ <br>To use in case of profile position type <tt>iPositionType=1</tt>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProfileAxis</span></dt>
+   <dd> The axes system of the profile.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetProfilePositionType"></a><a id="SetProfilePositionType(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetProfilePositionType</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iPositionType</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Definition of profile positioning type for a sweep with one or two guides (Sweep unspec and birail).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPositionType</span></dt>
+   <dd> The type of profile positioning.
+ <br><b>Legal values</b>:
+ <dl>
+ <dt><tt>1</tt></dt><dd>The profile is moved according to the transformation of its
+ axes system to the axes system of the beginning of the guide.
+ It is possible to redefine the profile axis system
+ by using the <tt>SetProfilePosition</tt>.
+ If not, the axis system of the beginning of the guide is used and
+ the sweep starts at the profile location (default mode).
+ <dt><tt>2</tt></dt><dd>The sweep surface passes thru the profile: the profile axes system is
+ computed by intersecting the mean profile plane and the guide.
+ This mean profile plane must be perpendicular to the guide.
+ <dt><tt>3</tt></dt><dd>The profile axes system is automatically computed as follows:
+ <ul>
+ <li>The origin is the start point of the profile.
+ <li>The third (Z) direction is normal to the profile medium plane.
+ <li>The first (X) direction joins the start and end points of the profile and is normalized.
+ <li>The second (Y) direction is completed by the vectorial product <tt>Y = Z^X</tt>.
+ </ul>
+<pre>     ^Y
+     ! ****
+     !*    *
+     *--->X * </pre>
+ <dt><tt>4</tt></dt><dd>The sweep surface passes thru the profile. This is the same
+ as <tt>iPositionType=2</tt>, except that the mean profile plane need not 
+                     intersect guide and be perpendicular to guide.
+ <dt><tt>5</tt></dt><dd> for two guides sweeps only: same as <tt>iPositionType=2</tt>,
+ except that the extremities of the profile are not moved to the intersection with guides
+<pre>
+                     * guide points, - profile points, o profile extremities
+                     initial profile:
+                     o----*--...--*---o 
+                     current profile with iPositionType=2:
+                         *o---...---o*  (zoomed)
+                     moving profile with iPositionType=5:
+                     o----*--...--*---o   </pre>
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetProfileScalingOption"></a><a id="SetProfileScalingOption(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetProfileScalingOption</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iScalingOption</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the scaling mode to apply to the profile.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iScalingOption</span></dt>
+   <dd> The scaling option
+ <br><b>Legal values:</b>
+ <dl><dt>0</dt><dd> Inactive scaling
+ <dt>1</dt><dd> Active scaling (default mode).
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPseudoUntwistModeForC0VerticesInError"></a><a id="SetPseudoUntwistModeForC0VerticesInError()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetPseudoUntwistModeForC0VerticesInError</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Asks for managing C0 vertices in topological computation error as pseudo-twisted areas centers.
+ (untwist and fill twist tools available).
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRadiusLaw"></a><a id="SetRadiusLaw(CATLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRadiusLaw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLaw','CATLaw*')</script> <span class='param'>iLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the radius law of a circle sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaw</span></dt>
+   <dd> The pointer to the radius law.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRadiusLaw"></a><a id="SetRadiusLaw(CATCompositeLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRadiusLaw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw*')</script> <span class='param'>iLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the radius law of a circle sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaw</span></dt>
+   <dd> The pointer to the radius law.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetReferenceElement"></a><a id="SetReferenceElement(CATGeometry*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetReferenceElement</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iReferenceElement</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a variable viewing direction (sweep unspec).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iReferenceElement</span></dt>
+   <dd> The pointer to the geometry (CATSurface, skin CATBody). The current point
+ is projected onto the reference element. The viewing direction is the normal
+ to the reference element at the projected point.
+ <ul><li>In case of a plane, the
+ viewing direction is constant.
+ <li>In case of a skin body, the guide must lay on the reference element.
+ </ul>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRelimitationMode"></a><a id="SetRelimitationMode(CATFrFTopologicalSweepRelimitation_Type)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRelimitationMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATFrFTopologicalSweepRelimitation_Type','CATFrFTopologicalSweepRelimitation_Type')</script> <span class='param'>iRelimitationMode</span><span class='param'>= CATFrFTopologicalSweepRelimitation_Off </span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the relimitation mode by the extremity profiles.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iRelimitationMode</span></dt>
+   <dd> The relimitation mode.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRhoLaw"></a><a id="SetRhoLaw(CATLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRhoLaw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLaw','CATLaw*')</script> <span class='param'>iLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the rho law of a conic sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaw</span></dt>
+   <dd> The pointer to the rho law, defining the conic type.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRhoLaw"></a><a id="SetRhoLaw(CATCompositeLaw*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRhoLaw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw*')</script> <span class='param'>iLaw</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the rho law of a conic sweep.
+<br>To use according of the chosen sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLaw</span></dt>
+   <dd> The pointer to the rho law, defining the conic type.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSimplification"></a><a id="SetSimplification(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSimplification</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iSimplify</span><span class='param'>= CATBoolean(1)</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the simplification mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSimplify</span></dt>
+   <dd> The simplification mode.
+ <br><b>Legal values</b>: <tt>TRUE</tt> for simplifying the adjacent faces on the same surface
+ (typically plane), <tt>FALSE</tt> otherwise (default mode at the operator creation).
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSmoothAngleThreshold"></a><a id="SetSmoothAngleThreshold(double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSmoothAngleThreshold</span><span class = 'signature'>(<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iAngleThreshold</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the smooth angle threshold.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSmoothAngleThreshold</span></dt>
+   <dd> The threshold for smooth (in radian); any angle below this value will be smoothed
+ if smooth option has been activated by SetSmoothOption method.
+ The default value, when method is not called, is the standard geometric modeler tangency continuity tolerance
+ (the equivalent in radian of 0.5 degree).
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSmoothOption"></a><a id="SetSmoothOption(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSmoothOption</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSmoothOption</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a smooth option for moving frame and comb extraction.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSmoothOption</span></dt>
+   <dd> The smoothing option
+ <br><b>Legal values</b>: <tt>0</tt> no smoothing will be done
+ (default mode at operator creation),
+ <tt>1</tt> smoothing will be done.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSolutionChoice"></a><a id="SetSolutionChoice(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSolutionChoice</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iSolutionChoice</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the conic, circle or segment to keep if case of ambiguous case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSolutionChoice</span></dt>
+   <dd> The chosen part. Refer to the encyclopedia documentation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSpine"></a><a id="SetSpine(CATGeometry*,CATFrFTopologicalSweepSpine_Type)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSpine</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iSpine</span>,<script type="text/javascript"> activateLink('CATFrFTopologicalSweepSpine_Type','CATFrFTopologicalSweepSpine_Type')</script> <span class='param'>iSpineType</span><span class='param'>= CATFrFTopologicalSweepSpine_Explicit</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the spine.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSpine</span></dt>
+   <dd> The pointer to the CATCurve or the wire body defining the spine. For a multi profiles sweep,
+ if <tt>iSpine=NULL</tt> and if
+ <tt>iSpineType=CATFrFTopologicalSweepSpine_Implicit</tt>, the spine is automatically computed
+ using the input profiles.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSpineType</span></dt>
+   <dd> The spine type.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTwistDetection"></a><a id="SetTwistDetection(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTwistDetection</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iTwistDetection</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the twist detection mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTwistDetection</span></dt>
+   <dd> The twist detection mode. If <tt>0</tt>, no twist detection.
+ If <tt>1</tt>, twists will be detected.
+ (historical behaviour: must be called if twist detection to be done;
+ upgraded behaviour if SetUpgradedDefaultSettings() has been called: twist detection is implicitly done)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetUntwistMode"></a><a id="SetUntwistMode(int,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetUntwistMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iUntwistMode</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iRecoilDistance</span><span class='param'>= 0.0</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the untwist mode, in which every twisted area will be computed.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iUntwistMode</span></dt>
+   <dd> The untwist mode. If <tt>0</tt>, no twisted areas computation.
+ If <tt>1</tt>, twisted areas will be computed and available.
+ If <tt>2</tt>, twisted areas will be computed and suppressed from the resulting body.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRecoilDistance</span></dt>
+   <dd> The recoil curvilinear distance on master guide to be used
+ before and after each twisted area in suppress mode.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetUpgradedDefaultSettings"></a><a id="SetUpgradedDefaultSettings(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetUpgradedDefaultSettings</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iSettingsLevel</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Upgrade default operator settings.
+ (for historical and compatibility reasons old fashioned default settings are still active without this call).
+ Must be called immediatly after operator creation.
+ Level 1 default setting changes:
+ <ul>
+ <li>Twist detection is activated.
+ <li>Wrap detection is activated.
+ <li>All angles are defined in degree including in circular sweep case.
+ <li>In case of profile or guide support, internal laydown will be done.
+ </ul>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSettingsLevel</span></dt>
+   <dd> the default settings level (if 0, always set the operator to the best so far default settings)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetWrapDetection"></a><a id="SetWrapDetection(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetWrapDetection</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iWrapDetection</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the wrap detection mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWrapDetection</span></dt>
+   <dd> The wrap detection mode. If <tt>0</tt>, no wrap computation.
+ If <tt>1</tt>, wrap areas will be computed.
+ (historical behaviour: must be called if wrap detection to be done;
+ upgraded behaviour if SetUpgradedDefaultSettings() has been called: wrap detection is implicitly done)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ValidateCaseNumber"></a><a id="ValidateCaseNumber(CATLONG32)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>ValidateCaseNumber</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iExpectedCase</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Checks the input data according to the sweep case.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iExpectedCase</span></dt>
+   <dd> The expected sweep case to test. If <tt>0</tt>, the method tries to determine
+ the appropriate case in function of the input arguments.
+ <br>Refer to the encyclopedia for the detailed options of the different sweep cases.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The case number if it is relevant, <tt>0</tt> if the the case number is
+ irrelevant, or if the inputs do not correspond to the specified case.
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATFrFTopologicalSweep.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATAdvancedTopologicalOpe</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

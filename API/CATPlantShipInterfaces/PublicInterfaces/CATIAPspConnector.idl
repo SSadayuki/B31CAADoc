@@ -1,0 +1,145 @@
+#ifndef CATIAPspConnector_IDL
+#define CATIAPspConnector_IDL
+
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+interface CATIAPspConnectable ;
+
+#include "CATIAPspListOfBSTRs.idl"
+
+#include "CATIABase.idl"
+
+/**
+ * Represents connector object. 
+ * <b>Role</b>: To specify connector behaviors such as
+ * connect and disconnect.
+ */
+
+interface CATIAPspConnector : CATIABase
+{
+
+ /**
+  * Get the connectable-owner of this connector.
+  * @param oConnectable
+  *   Connectable owner of this connector
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnector
+  * Dim objArg1 As CATIAPspConnectable
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">GetAssociatedConnectable</font>
+  * </pre>
+  *    
+  */
+ HRESULT GetAssociatedConnectable ( out /*IDLRETVAL*/ CATIAPspConnectable oConnectable );
+
+ /**
+  * Connect the connector to another connector.
+  * @param iCntrToConnect
+  *   the connector to be connected to
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnector
+  * Dim objArg1 As PspConnector
+  *  ...
+  * objThisIntf.<font color="red">Connect</font> objArg1
+  * </pre>
+  *    
+  */
+ HRESULT Connect( in  CATIAPspConnector iCntrToConnect );
+
+
+  /**
+  * DisConnect the connector from another connector.
+  * @param iCntrToDisconnect
+  *   The connector to be disconnected from
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnector
+  * Dim objArg1 As PspConnector
+  *  ...
+  * objThisIntf.<font color="red">Disconnect</font> objArg1
+  * </pre>
+  *    
+  */
+ HRESULT Disconnect( in CATIAPspConnector iCntrToDisconnect );
+
+ /**
+  * Query whether the connector has been connected.  
+  * @return
+  *   TRUE if this connector is connected.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnector  
+  * Dim bArg1 As boolean  
+  *  ...
+  * bArg1 = objThisIntf.<font color="red">IsCntrConnected</font> 
+  * </pre>
+  *    
+  */
+
+ HRESULT IsCntrConnected ( out /*IDLRETVAL*/  boolean obConnected );
+
+/**
+  * Returns or sets name of the connector.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnector
+  * Dim strVar1 As CATBSTR
+  *  ...
+  * Set strVar1 = objThisIntf.<font color="red">Name</font>
+  * Dim strVar1 As CATBSTR
+  *  ...
+  * objThisIntf.<font color="red">ConnectorName</font> = strVar2
+  * </pre>
+  *    
+  */
+
+
+#pragma PROPERTY ConnectorName
+  HRESULT get_ConnectorName (inout /*IDLRETVAL*/ CATBSTR ouCntrName);
+  HRESULT put_ConnectorName (in CATBSTR iuCntrName);
+
+
+ /**
+  * Returns or Sets Attribute names of the connector.  
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnector
+  * Dim ojArg1 As CATIAPspListOfBSTRs
+  *  ...
+  * Set ojArg1 = objThisIntf.<font color="red">AttrNames</font>
+  * 
+  * 
+  * 
+  * </pre>
+  *    
+  */
+
+#pragma PROPERTY AttrNames
+  HRESULT get_AttrNames (out /*IDLRETVAL*/ CATIAPspListOfBSTRs oLAttributeNames);
+  HRESULT put_AttrNames (in CATIAPspListOfBSTRs iLAttributeNames);
+	         
+};
+
+// Interface name : CATIAPspConnector
+#pragma ID CATIAPspConnector "DCE:6ed7ce41-fe13-4568-bf6bc97b528bdce0"
+#pragma DUAL CATIAPspConnector
+
+// VB object name : PspConnector
+#pragma ID PspConnector      "DCE:e25d8368-8daa-42d0-84b8e5eb099cf6de"
+#pragma ALIAS CATIAPspConnector PspConnector
+
+#endif

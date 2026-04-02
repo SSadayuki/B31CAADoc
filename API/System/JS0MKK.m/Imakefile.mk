@@ -1,0 +1,38 @@
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+ENCODING_KEY = System
+DELIVERABLE = NO
+COMMON_LINK_WITH = JS0ZLIB SystemUUID JS0DSLUTILS JS0GROUP LCCArch DSLSArch SSLArch HTTPArch JS0DSLOCK 
+
+LOCAL_CCFLAGS = $(COMMON_CCFLAGS)
+LINK_WITH = $(COMMON_LINK_WITH)
+
+OS = AIX
+BUILD = YES
+LOCAL_CCFLAGS = $(COMMON_CCFLAGS) -DAIX
+LINK_WITH = $(COMMON_LINK_WITH) 
+SYS_LIBS = -lodm -lcfg -lpthreads
+
+
+OS = Darwin
+BUILD = YES
+SYS_LIBS=-framework CoreServices -framework CoreFoundation
+
+
+OS = Linux
+BUILD = YES
+LINK_WITH = $(COMMON_LINK_WITH) 
+
+
+OS = SunOS
+BUILD = YES
+LOCAL_CCFLAGS = $(COMMON_CCFLAGS) -DSOLARIS
+SYS_LIBS = -lnsl -lsocket -lCrun -lCstd -ldevinfo -lpthread
+FORTRAN_LIBS=
+SUNMATH_LIBS=
+
+OS = Windows_NT
+BUILD = YES
+SYS_LIBS = netapi32.lib wsock32.lib comsuppw.lib Wbemuuid.lib Ws2_32.lib
+LOCAL_LDFLAGS = /NODEFAULTLIB:msvcirt.lib /NODEFAULTLIB:libcmt.lib 
+
+

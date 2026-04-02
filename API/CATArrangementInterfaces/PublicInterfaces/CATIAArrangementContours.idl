@@ -1,0 +1,82 @@
+#ifndef CATIAArrangementContours_IDL
+#define CATIAArrangementContours_IDL
+// COPYRIGHT DASSAULT SYSTEMES 2000
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+interface CATIAArrangementRectangle;
+interface CATIAArrangementContour;
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+/**  
+ * A collection object for ArrangementContours of an Area.
+ * <b> Role: </b>
+ * Use this to manage (create, retrieve and remove) ArrangementContours of an ArrangementArea.
+ */
+interface CATIAArrangementContours : CATIACollection 
+{
+
+  /**
+   * Creates a Rectangular Contour by adding a ArrangementRectangle to the collection.
+   *
+   * @param iRectangle
+   *   ArrangementRectangle to create the contour from.
+   * @return
+   *   Returns the newly created ArrangementContour object and adds it to the collection.
+   */
+
+  HRESULT AddRectangularContour(in CATIAArrangementRectangle    iRectangle, 
+                     out /*IDLRETVAL*/ CATIAArrangementContour oArrangementContour);
+
+
+  /**
+   * Returns the specified ArrangementContour item of the collection.
+   * 
+   * @param iIndex
+   *   The index or the name of the ArrangementContour to retrieve from this collection.
+   *   <dl>
+   *   <dt> To retrieve a specific object by number, use the rank of the ArrangementContour in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To retrieve a specific ArrangementContour by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   * @return
+   *    The retrieved ArrangementContour object.
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAArrangementContour oArrangementContour);
+
+  /**
+   * Removes the specified ArrangementContour object from the collection.
+   * 
+   * @param iIndex
+   *   The index or the name of the ArrangementContour to remove from this collection.
+   *   <dl>
+   *   <dt> To remove a specific object by number, use the rank of the ArrangementContour in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To remove a specific ArrangementContour by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   */
+
+   HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAArrangementContours
+#pragma ID CATIAArrangementContours "DCE:40081977-b984-11d4-8def00d0b7acadba"
+#pragma DUAL CATIAArrangementContours
+
+// VB object name : ArrangementContours (Id used in Visual Basic)
+#pragma ID ArrangementContours "DCE:40081978-b984-11d4-8def00d0b7acadba"
+#pragma ALIAS CATIAArrangementContours ArrangementContours
+
+#endif

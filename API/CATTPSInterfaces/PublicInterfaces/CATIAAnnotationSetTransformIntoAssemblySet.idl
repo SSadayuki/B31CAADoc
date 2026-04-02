@@ -1,0 +1,45 @@
+#ifndef CATIAAnnotationSetTransformIntoAssemblySet_IDL
+#define CATIAAnnotationSetTransformIntoAssemblySet_IDL
+
+
+// COPYRIGHT Dassault Systemes 2013
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+
+/**
+ * Interface designed to transform an annotation set into an assembly annotation set.
+ */
+
+interface CATIAAnnotationSetTransformIntoAssemblySet : CATIABase 
+{
+  /**
+  * Transforms annotation set into an assembly annotation set.
+  * 
+  * @param iAssemblyannotationSetName [in]
+  *   The name of the assembly annotation transformed
+  *   If the iAssemblyannotationSetName is an empty string, the assembly annotation set keeps the name
+  *   of the annotation set from which it comes.
+  *
+  * returns S_OK when transformation succeeded.
+  * returns S_OK when the annotation set is already an assembly annotation set.
+  * otherwise returns E_FAIL.
+  */
+  HRESULT Transform(in CATBSTR iAssemblyannotationSetName);
+
+};
+
+// Interface name : CATIAAnnotationSetTransformIntoAssemblySet
+#pragma ID CATIAAnnotationSetTransformIntoAssemblySet "DCE:0373c0eb-aa29-4d13-b2e6980b345483d1"
+#pragma DUAL CATIAAnnotationSetTransformIntoAssemblySet
+
+// VB object name : ReferenceFrame (Id used in Visual Basic)
+#pragma ID AnnotationSetTransformIntoAssemblySet "DCE:28a8bdfb-477a-41c6-a64857fccd6b1296"
+#pragma ALIAS CATIAAnnotationSetTransformIntoAssemblySet AnnotationSetTransformIntoAssemblySet
+
+#endif
+

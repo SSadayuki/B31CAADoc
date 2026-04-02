@@ -1,0 +1,65 @@
+// COPYRIGHT Dassault Systemes 2013
+//===================================================================
+//
+// ENOIACD5IDs.idl
+// Automation interface for the ENOVIA IDs element 
+//
+//===================================================================
+
+#ifndef ENOIACD5IDs_IDL
+#define ENOIACD5IDs_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATIACollection.idl"
+interface IDispatch;
+interface ENOIACD5ID;
+
+ /**
+ * Represents a list of ENOVIA V6 Integration identifier(CD5ID). 
+ *
+ * @sample
+ * The following example indicates how to retrieve list of ENOVIA V6 Integration identifier.
+ * <ul>
+ * <li>PhysicalIDs : "6EFB8D2E00008A445257E36100000DF7,6EFB8D2E00008A445257E3610000090".</li>
+ * </ul>
+ * <pre>
+ * <font color="blue">Dim</font> oIDs <font color="blue">As</font> ENOIACD5IDs
+ * <font color="blue">Set</font> oIDs = GetIDsFromPhysicalIDs(PhysicalIDs);
+ * </pre>
+ * @see ENOIACD5EngineV6R2015, ENOIACD5ID
+ */
+
+ interface ENOIACD5IDs : CATIACollection
+{
+      /**
+    * Returns (gets) CD5ID from the list of ids.
+    *
+    * @sample
+    * The following example gets a CD5ID at index 1.
+    * <pre>
+    * <font color="blue">Dim</font> oID <font color="blue">As</font> ENOIACD5ID
+    * <font color="blue">Set</font> oID = CD5IDs.<font color="red">Item</font>(1)
+    * </pre>
+    */
+
+     HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ ENOIACD5ID oID);
+
+};
+
+// Interface name : ENOIACD5IDs
+#pragma ID ENOIACD5IDs "DCE:470DA71D-1097-40C6-B60EDDF6D7C67049"
+#pragma DUAL ENOIACD5IDs
+
+// VB object name : ENOIACD5IDs (Id used in Visual Basic)
+#pragma ID CD5IDs "DCE:374005E1-5854-43C3-B0E4186F67F4023D"
+#pragma ALIAS ENOIACD5IDs CD5IDs
+
+#endif

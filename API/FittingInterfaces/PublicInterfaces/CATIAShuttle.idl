@@ -1,0 +1,172 @@
+
+
+//===================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//
+//===================================================================
+//
+// CATIAShuttle.idl
+// Automation interface for the Shot element 
+//
+//===================================================================
+
+
+
+#ifndef CATIAShuttle_IDL
+#define CATIAShuttle_IDL
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R5
+/*IDLREP*/
+
+
+/**
+ * @CAA2Level L1  
+ * @CAA2Usage U3
+ */
+
+
+#include "CATIABase.idl"
+#include "CATIAGroup.idl"
+#include "CATIAMove.idl"
+#include "CATIAPosition.idl"
+
+interface CATIAShuttles;
+
+
+enum CatShuttleMoveMode {
+	CatShuttle,
+	CatAxis
+};
+
+
+enum CatShuttleVector {
+	CatShuttleVectorX,
+	CatShuttleVectorY,
+	CatShuttleVectorZ
+};
+
+
+    /**  
+     * The interface to access a CATIAShuttle.
+     * <b>Role:</b> The shuttle object is used to define a grouping of products. 
+     * Once products have been placed in the shuttle then they can be moved 
+     * all at once.  Also the shuttle has a base location defined by the 
+     * shuttle axis.
+     */
+
+
+interface CATIAShuttle : CATIABase 
+{
+
+    /**
+     * Returns or sets the associated group object.
+     * <b>Role:/b> Retrieves/stores the objects within the shuttle as a group,
+     * that is a CATIAGroup.
+     */
+#pragma PROPERTY Group
+	HRESULT get_Group(out /*IDLRETVAL*/ CATIAGroup oGroup);
+	HRESULT put_Group(in CATIAGroup iGroup);
+
+
+    /**
+     * Returns or sets the associated reference object.
+     * <b>Role:/b> Retrieves/stores the shuttle's reference object.
+     */
+#pragma PROPERTY Reference
+	HRESULT get_Reference(out /*IDLRETVAL*/ CATBaseDispatch oReference);
+	HRESULT put_Reference(in CATBaseDispatch iReference);
+
+
+    /**
+     * Returns any shuttles that are contained within the current shuttle.
+     * <b>Role:/b> Returns any shuttles that are contained within the current 
+     * shuttle.
+     */
+#pragma PROPERTY SubShuttles
+	HRESULT get_SubShuttles(out /*IDLRETVAL*/ CATIAShuttles oSubShuttles);
+
+
+    /**
+     * Returns/Stores the angle validation attribute.
+     * <b>Role:/b> Retrieves/stores the shuttle's angle validation attribute.
+     */
+#pragma PROPERTY AngleValidation
+	HRESULT get_AngleValidation(out /*IDLRETVAL*/ boolean oValidation);
+	HRESULT put_AngleValidation(in boolean iValidation);
+
+
+    /**
+     * Returns/Stores the angle limit attribute.
+     * <b>Role:/b> Retrieves/stores the shuttle's angle limit attribute.
+     */
+#pragma PROPERTY AngleLimit
+	HRESULT get_AngleLimit(out /*IDLRETVAL*/ double oAngle);
+	HRESULT put_AngleLimit(in double iAngle);
+
+
+    /**
+     * Returns/Stores the validation vector attribute.
+     * <b>Role:/b> Retrieves/stores the validation vector attribute.
+     */
+#pragma PROPERTY Vector
+	HRESULT get_Vector(out /*IDLRETVAL*/ CatShuttleVector oVector);
+	HRESULT put_Vector(in CatShuttleVector iVector);
+
+
+    /**
+     * Returns/Stores the shuttle move mode.
+     * <b>Role:/b> Retrieves/stores the shuttle move mode.  This can be either
+     * shuttle mode (to move the shuttle) or axis mode (to simply move the 
+     * shuttle axis).
+     */
+#pragma PROPERTY MoveMode
+	HRESULT get_MoveMode(out /*IDLRETVAL*/ CatShuttleMoveMode oMoveMode);
+	HRESULT put_MoveMode(in CatShuttleMoveMode iMoveMode);
+
+
+    /**
+     * Returns the shuttle's move object.
+     * The move object is aggregated by the shuttle object
+     * and itself aggregates a movable object
+     * to which you can apply a move transformation
+     * by means of an isometry matrix. It moves your shuttle
+     * according to this isometry.
+     * @sample
+     * This example retrieves the move object for the
+     * <tt>Engine</tt> shuttle.
+     * <pre>
+     * Dim EngineMoveObject As Move
+     * Set EngineMoveObject = Engine.<font color="red">Move</font>
+     * </pre>
+     */
+#pragma PROPERTY Move
+	HRESULT get_Move(out /*IDLRETVAL*/ CATIAMove oMove);
+
+
+    /**
+     * Returns the shuttle's position object.
+     * The position object is the object aggregated by the ahuttle object that
+     * holds the position of the shuttle in the space.
+     * @sample
+     * This example retrieves the position object for the
+     * <tt>Engine</tt> shuttle.
+     * <pre>
+     * Dim EnginePositionObject As Position
+     * Set EnginePositionObject = Engine.<font color="red">Position</font>
+     * </pre>
+     */
+#pragma PROPERTY Position
+	HRESULT get_Position(out /*IDLRETVAL*/ CATIAPosition oPosition);
+};
+
+// Interface name : CATIAShuttle
+#pragma ID CATIAShuttle "DCE:ea061dd4-4c0f-11d4-9eee00508b67522f"
+#pragma DUAL CATIAShuttle
+
+// VB object name : Shuttle (Id used in Visual Basic)
+#pragma ID Shuttle "DCE:efc111d4-4c0f-11d4-9eee00508b67522f"
+#pragma ALIAS CATIAShuttle Shuttle
+
+#endif
+#endif

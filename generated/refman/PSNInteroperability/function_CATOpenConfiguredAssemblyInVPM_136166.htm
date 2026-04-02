@@ -1,0 +1,99 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>PSNInteroperability PSNInteroperability Framework:CATOpenConfiguredAssemblyInVPM   Global Function  </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../PSNInteroperability.htm" href="../PSNInteroperability.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "PSNInteroperability";	}
+		function getCurrentObjectName() { 
+ 	return "CATOpenConfiguredAssemblyInVPM"; } 
+	function getCurrentType() { 
+ 	return "global function"; }  
+ </script><h1 class='title1'>PSNInteroperability Framework:CATOpenConfiguredAssemblyInVPM   Global Function  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+
+<br><section id='objdef'><dl><dt class='dt1'><span class = 'method'><script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>CATOpenConfiguredAssemblyInVPM</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLgId</span>,<script type="text/javascript"> activateLink('char','char*')</script> <span class='param'>iRootPartId</span>,<script type="text/javascript"> activateLink('CATLISTV(CATUnicodeString)','CATLISTV(CATUnicodeString)*')</script> <span class='param'>iConfiguration</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='dd1'>
+ Opens a Structure Exploded assembly within ENOVIAvpm V4.
+
+<br><b>Role:</b>This method opens an assembly stored in Structure Exploded mode 
+ within ENOVIAvpm V4 memory according to the specified parameters. 
+ <br>Configured and non configured assemblies can be open using this method.
+
+ <p>
+ This method takes as input the root part identifier <tt>iRootPartId</tt>. 
+ Only the 42 first character of the string are relevant and must be structured as followed:
+ <ul> 
+   <li> the Coid of the root part (database binary 8 crc long)
+    <li> the Compid of the root part (database binary 8 crc long)
+    <li> the VPM environment name of the root part (8 crc long). 
+       <br> For instance <tt>"VPMENV  "</tt>
+    <li> the VPM PART table name of the root Part (18 crc long). 
+       <br> For instance <tt>"PART_LIST        "</tt>
+ </ul>
+ <br> The 8 crc long server name might be present in the string but will be ignored.
+ <br>
+ Use 
+<script type="text/javascript"> activateLinkAnchor('CATCloseAssemblyInVPM','','CATCloseAssemblyInVPM') </script> to close the open assembly. </p>
+<p>If needed, your Imakefile.mk should include the module: <b>CATPinServices</b> </p>
+<p>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLgId</span></dt>
+   <dd>    length of the iRootPartId string
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRootPartId</span></dt>
+   <dd>    ENOVIAvpm root part identifier.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iConfiguration</span></dt>
+   <dd>    list of the Configuration handler.
+    The list must be allocated by caller and must not contain NULL pointers. 
+    This list must be empty for non configured assemblies or if the assembly explosion 
+   has to be performed without configuration.
+ <br>
+<b>Note:</b>Only the first element of the list is taken into account. 
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     <ul>
+   <li><tt>S_OK</tt>: The configured assembly has been successfully open</li> 
+   <li><tt>E_FAIL</tt>: ENOVIAvpm server cannot be detected</li>
+   <li><tt>E_FAIL</tt>: Configured assembly cannot be opened for input parameters</li>
+  </ul>
+ </ dd>
+</dl>
+</dd></dl>
+</section></section'>
+<hr/>
+ This object is included in the file: <b>CATBatchServices.h</b><br>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

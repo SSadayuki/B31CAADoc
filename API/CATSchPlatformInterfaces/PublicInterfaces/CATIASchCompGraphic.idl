@@ -1,0 +1,200 @@
+#ifndef CATIASchCompGraphic_IDL 
+#define CATIASchCompGraphic_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchGRRComp;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the graphical representation of a schematic component.
+  */
+
+interface CATIASchCompGraphic : CATIABase
+{
+  /**
+  * Add a graphical representation to a component.
+  * @param iGRRToAdd
+  *   The graphical representation to be added to the component.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGraphic
+  * Dim objArg1 As SchGRRComp
+  *  ...
+  * objThisIntf.<font color="red">AddGraphicalRepresentation</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AddGraphicalRepresentation ( 
+    in CATIASchGRRComp iGRRToAdd );
+    
+  /**
+  * Remove a graphical representation from a component.
+  * @param iGRRToRemove
+  *   The graphical representation to be removed from the component.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGraphic
+  * Dim objArg1 As SchGRRComp
+  *  ...
+  * objThisIntf.<font color="red">RemoveGraphicalRepresentation</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT RemoveGraphicalRepresentation ( 
+    in CATIASchGRRComp iGRRToRemove );
+    
+  /**
+  * List all graphical representation of a component.
+  * @param oLGRR
+  *   A list of graphical representations
+  *   (members are CATISchGRRComp interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGraphic
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListGraphicalRepresentations</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListGraphicalRepresentations ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLGRR );
+    
+  /**
+  * List all graphical images (instances of the rep) of a component.
+  * @param oLGRR
+  *   A list of graphical images
+  *   (members are CATISchGRRComp interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGraphic
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListGraphicalImages</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListGraphicalImages ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLGRR );
+    
+  /**
+  * Replace all occurances of the images of this component with those of
+  * the graphical representation with the input name.
+  * @param iGRRName
+  *   The name of the graphical representation
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGraphic
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">SwitchAll</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT SwitchAll ( 
+    in CATBSTR iGRRName );
+    
+  /**
+  * Replace the input image object with an image of the graphical
+  * representation with the input name.
+  * @param iGRR
+  *   Pointer to the component graphical image to be switched.
+  * @param oGRR
+  *   Pointer to the new graphical image of the component.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGraphic
+  * Dim objArg1 As SchGRRComp
+  * Dim strVar2 As String
+  * Dim objArg3 As SchGRRComp
+  *  ...
+  * objThisIntf.<font color="red">Switch</font>objArg1,strVar2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT Switch ( 
+    in CATIASchGRRComp iGRR, 
+    in CATBSTR iGRRName, 
+    inout CATIASchGRRComp oGRR );
+    
+  /**
+  * To add a new image to an existing object. This new image is
+  * an instance of graphical representation with the input
+  * name. 
+  * @param iGRRName
+  *   The name of the graphic representation
+  * @param iDb2WhereAt
+  *   The x-y coordinates of the image position. If NULL, the image
+  *   will be positioned at the origin.
+  * @param oGRR
+  *   Pointer to the new graphical image of the component.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGraphic
+  * Dim strVar1 As String
+  * Dim dbVar2(2) As CATSafeArrayVariant
+  * Dim objArg3 As SchGRRComp
+  *  ...
+  * objThisIntf.<font color="red">Activate</font>strVar1,dbVar2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT Activate ( 
+    in CATBSTR iGRRName, 
+    in CATSafeArrayVariant iDb2WhereAt, 
+    inout CATIASchGRRComp oGRR );
+    
+  /**
+  * To remove an image to an existing object. 
+  * @param iGRR
+  *   The graphical image to be removed from the component. 
+  * @param iDb2WhereAt
+  *   The x-y coordinates of the image position. If NULL, the image
+  *   will be positioned at the origin.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompGraphic
+  * Dim objArg1 As SchGRRComp
+  *  ...
+  * objThisIntf.<font color="red">Deactivate</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT Deactivate ( 
+    in CATIASchGRRComp iGRR );
+    
+};
+    
+// Interface name : CATIASchCompGraphic
+#pragma ID CATIASchCompGraphic "DCE:36de45c6-2e0b-4de4-b799bdb7c80b89c4"
+#pragma DUAL CATIASchCompGraphic
+    
+// VB object name : SchCompGraphic
+#pragma ID SchCompGraphic "DCE:0a795fb4-fff8-4332-b287dbedb488a787"
+#pragma ALIAS CATIASchCompGraphic SchCompGraphic
+    
+#endif 
+    

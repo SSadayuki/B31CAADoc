@@ -1,0 +1,103 @@
+#ifndef CATIAFillet_IDL
+#define CATIAFillet_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAFillet:						   
+// Exposed interface for Mechanical Fillet
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation					Ph Baucher
+// Dec97 Modification					L  Lalere
+// Jan99 Modification					L  Deparday
+//=================================================================
+#include "CATIADressUpShape.idl"
+#include "CATFilletDefs.idl"
+
+/**
+ * Represents the fillet shape.
+ * It is the base object for face fillets and edge fillets.
+ * @see CATIAFaceFillet, CATIAEdgeFillet
+ */
+
+//-----------------------------------------------------------------
+interface CATIAFillet : CATIADressUpShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+
+    //    ON BOUNDARIES RELIMITATION MODE
+    //    ------------------------------
+    //
+    /**
+     * Returns or sets the fillet boundary relimitation mode.
+     * This boundary relimitation mode is used when computing the fillet.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>mode</tt> the fillet
+     * boundary relimitation mode of the <tt>firstFillet</tt> fillet,
+     * and then sets it to <tt>catMinimumFilletBoundaryRelimitation</tt>,
+     * so that the fillet expands up to the limits of the smallest shell:
+     * <pre>
+     * Set mode = firstFillet.<font color="red">FilletBoundaryRelimitation</font>
+     * Set FirstFillet.<font color="red">FilletBoundaryRelimitation</font> = catMinimumFilletBoundaryRelimitation
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FilletBoundaryRelimitation
+    HRESULT    get_FilletBoundaryRelimitation ( out /*IDLRETVAL*/ CatFilletBoundaryRelimitation oRelimitation ) ;
+    HRESULT    put_FilletBoundaryRelimitation ( in                CatFilletBoundaryRelimitation iRelimitation ) ;
+
+    //    ON TRIM SUPPORT MODE
+    //    ------------------------------
+    //
+    /**
+     * Returns or sets the fillet Trim Support mode.
+     * This Trim Support mode is used when computing the fillet.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>mode</tt> the fillet
+     * Trim Support mode of the <tt>firstFillet</tt> fillet,
+     * and then sets it to <tt>catMinimumFilletTrimSupport</tt>,
+     * so that the fillet expands up to the limits of the smallest shell:
+     * <pre>
+     * Set mode = firstFillet.<font color="red">FilletTrimSupport</font>
+     * Set FirstFillet.<font color="red">FilletTrimSupport</font> = catNoTrimFilletSupport
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FilletTrimSupport
+    HRESULT    get_FilletTrimSupport ( out /*IDLRETVAL*/ CatFilletTrimSupport oRelimitation ) ;
+    HRESULT    put_FilletTrimSupport ( in                CatFilletTrimSupport iRelimitation ) ;
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+};
+
+// Interface name : CATIAFillet
+#pragma ID CATIAFillet "DCE:8859f497-6108-11d1-a27d0000f87546fd"
+#pragma DUAL CATIAFillet
+
+// VB object name : Fillet (Id used in Visual Basic)
+#pragma ID Fillet "DCE:88827c91-6108-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIAFillet Fillet
+
+
+#endif
+// CATIAFillet_IDL
+

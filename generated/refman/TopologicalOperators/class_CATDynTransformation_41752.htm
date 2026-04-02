@@ -1,0 +1,381 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>TopologicalOperators CATDynTransformation Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../TopologicalOperators.htm" href="../TopologicalOperators.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "TopologicalOperators";	}
+		function getCurrentObjectName() { 
+ 	return "CATDynTransformation"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>TopologicalOperators Framework: CATDynTransformation <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATDynTransformation_41752','CATDynTransformation','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATDynTransformation</b>
+</p>
+<p>
+<b><i> Class representing the topological operator that transforms a CATBody.</i></b><br>
+
+ <br>
+ It follows the use frame of all operator and satisfies to the smart mechanism: the
+ input body is not modified. A new resulting body is created, 
+ possibly sharing data with the input one.
+<ul>
+ <li>A CATDynTransformation is created with the <tt>CATCreateDynTransformation</tt> global function:
+ It must be
+ directly deleted after use with the usual C++ <tt>delete</tt> operator.
+ It is not streamable. 
+<li>Options can be precised with the <tt>SetXxx</tt> methods, before
+ asking for the computation with the <tt>Run</tt> method. In particular, the operator can be re-use to
+ transform the same body with different transformations; in this case, you can precise another journal to
+ be filled, with the <tt>SetNewJournal</tt> method. 
+<li>The result is accessed with the <tt>GetResult</tt> method. 
+</ul>
+ This operator is optimized and simplified with regards to the <script type="text/javascript"> activateLinkAnchor('CATTransfoManager','','CATTransfoManager') </script> : The CATDynTransfomation operator chooses the best way to call the CATTransfoManager. In another way, the CATTransfoManager provides more
+ options.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#~CATDynTransformation()"><b>~CATDynTransformation</b></a>()
+</td><td id='tdright'>  Destructor.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#SetAffinity(CATMathPlane&amp;,CATLength)"><b>SetAffinity</b></a>(CATMathPlane&amp;,CATLength)
+</td><td id='tdright'>  Defines <tt>this</tt> CATDynTransformation as an affinity.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFullDuplicateMode(CATBoolean)"><b>SetFullDuplicateMode</b></a>(CATBoolean)
+</td><td id='tdright'>  Controls whether the operator will use full duplicate mode (false by
+ default).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetJournalInfo(CATBoolean)"><b>SetJournalInfo</b></a>(CATBoolean)
+</td><td id='tdright'>  Defines whether a CATCGMJournalInfo has to be added to the item corresponding to <tt>this</tt> operation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetNewJournal(CATCGMJournalList*)"><b>SetNewJournal</b></a>(CATCGMJournalList*)
+</td><td id='tdright'>  Defines another journal to be filled after another run of <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetReportMode(CATDynReportMode)"><b>SetReportMode</b></a>(CATDynReportMode)
+</td><td id='tdright'>  Defines the type of follow-up of the modifications to write in the journal.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRotation(CATAngle,CATMathLine&amp;)"><b>SetRotation</b></a>(CATAngle,CATMathLine&amp;)
+</td><td id='tdright'>  Defines <tt>this</tt> CATDynTransformation as a rotation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetScaling(CATMathPoint&amp;,CATLength)"><b>SetScaling</b></a>(CATMathPoint&amp;,CATLength)
+</td><td id='tdright'>  Defines <tt>this</tt> CATDynTransformation as a scaling.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSymmetry(CATMathPlane&amp;)"><b>SetSymmetry</b></a>(CATMathPlane&amp;)
+</td><td id='tdright'>  Defines <tt>this</tt> CATDynTransformation as a symmetry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTransformation(CATMathTransformation&amp;)"><b>SetTransformation</b></a>(CATMathTransformation&amp;)
+</td><td id='tdright'>  Sets to <tt>this</tt> CATDynTransformation the parameters of a given transformation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTranslation(CATMathVector&amp;)"><b>SetTranslation</b></a>(CATMathVector&amp;)
+</td><td id='tdright'>  Defines <tt>this</tt> CATDynTransformation as a translation.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+<nav id = 'idxnav'> <table class = 'fill' id='idxtab' ><tbody>					<tr><th colspan = '2'>Enumerated Type Index</th></tr> 
+ <tr><td  id='tdleft'> 
+    <a href="#CATDynReportMode"><b>CATDynReportMode</b></a>
+</td><td id='tdrigth'>  Type of follow-up to be written in the journal.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="~CATDynTransformation"></a><a id="~CATDynTransformation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATDynTransformation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Destructor.
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="SetAffinity"></a><a id="SetAffinity(CATMathPlane&amp;,CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAffinity</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPlane','CATMathPlane&amp;')</script> <span class='param'>iReflectPlane</span>,<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iRatio</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines <tt>this</tt> CATDynTransformation as an affinity.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iReflectPlane</span></dt>
+   <dd> The plane for the reflecting part of the affinity.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRatio</span></dt>
+   <dd> The value of the ratio for the scaling part of the affinity.<br>
+ The value <tt>iRatio=-1</tt> is the only value allowed for the moment.
+ Use better the <tt>SetSymmetry</tt> method.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFullDuplicateMode"></a><a id="SetFullDuplicateMode(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFullDuplicateMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iYesOrNo</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Controls whether the operator will use full duplicate mode (false by
+ default). <br>By default, before the transformation is performed, the
+ operator checks for surfaces that will remain invariant under the
+ transformation. These surfaces are re-used in the output, rather than being
+ copied and transformed. Calling <tt>SetFullDuplicateMode(TRUE)</tt>
+ will make the operator skip this optimization step and create duplicates of
+ every input surface.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iYesOrNo</span></dt>
+   <dd> If <tt>TRUE</tt>, sets the operator to full duplicate mode.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetJournalInfo"></a><a id="SetJournalInfo(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetJournalInfo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iTrueOrFalse</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines whether a CATCGMJournalInfo has to be added to the item corresponding to <tt>this</tt> operation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTrueOrFalse</span></dt>
+   <dd> <tt>TRUE</tt> if an additional information must be added to the item, <tt>FALSE</tt> otherwise. In case of
+ adding the additional information, this information is put to 0.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetNewJournal"></a><a id="SetNewJournal(CATCGMJournalList*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetNewJournal</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCGMJournalList','CATCGMJournalList*')</script> <span class='param'>iJournal</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines another journal to be filled after another run of <tt>this</tt> operator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iJournal</span></dt>
+   <dd> The pointer to the new journal to be filled in another run. This can be used in case of
+ pattern transformation, if you want that each occurence has a different journal.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetReportMode"></a><a id="SetReportMode(CATDynReportMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetReportMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDynReportMode','CATDynReportMode')</script> <span class='param'>iTypeOfFollowUp</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the type of follow-up of the modifications to write in the journal.<br>
+ This information is used by applications, depending on the type of operations they want to 
+ perform after calling the transformation. This information has no impact on the objects of the
+ geometric modeler itself.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTypeOfFollowUp</span></dt>
+   <dd> The type of report mode.
+ <br><b>Legal values</b>:
+ <dl><dt><tt>CATDynModification</tt></dt>
+ <dd>The transformation is seen as a modification: the body is always duplicated, but the application
+ wants to mask the input body for showing only the resulting body (case of an applicative
+ transformation). This is the default of a CATDynTransformation.
+ <dt><tt>CATDynCreation</tt></dt>
+ <dd>The transformation is seen as a creation: The application keeps the input body and
+ the duplicated body, and wants to union them for example:
+ this is a typical case of an applicative operation of mirror.
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRotation"></a><a id="SetRotation(CATAngle,CATMathLine&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRotation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATAngle','CATAngle')</script> <span class='param'>iAngle</span>, const <script type="text/javascript"> activateLink('CATMathLine','CATMathLine&amp;')</script> <span class='param'>iAxis</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines <tt>this</tt> CATDynTransformation as a rotation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAngle</span></dt>
+   <dd> The angle of the rotation (in radians).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAxis</span></dt>
+   <dd> The direction of the rotation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetScaling"></a><a id="SetScaling(CATMathPoint&amp;,CATLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetScaling</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iOrigin</span>,<script type="text/javascript"> activateLink('CATLength','CATLength')</script> <span class='param'>iRatio</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines <tt>this</tt> CATDynTransformation as a scaling.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOrigin</span></dt>
+   <dd> The origin of the scaling.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRatio</span></dt>
+   <dd> The value of the scaling
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSymmetry"></a><a id="SetSymmetry(CATMathPlane&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSymmetry</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPlane','CATMathPlane&amp;')</script> <span class='param'>iSymmetryPlane</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines <tt>this</tt> CATDynTransformation as a symmetry.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSymmetryPlane</span></dt>
+   <dd> The plane of symmetry.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTransformation"></a><a id="SetTransformation(CATMathTransformation&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTransformation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathTransformation','CATMathTransformation&amp;')</script> <span class='param'>iTransformation</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets to <tt>this</tt> CATDynTransformation the parameters of a given transformation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTransformation</span></dt>
+   <dd> The mathematical definition of the transformation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTranslation"></a><a id="SetTranslation(CATMathVector&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTranslation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathVector','CATMathVector&amp;')</script> <span class='param'>iTranslationVector</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines <tt>this</tt> CATDynTransformation as a translation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTranslationVector</span></dt>
+   <dd> The vector of the translation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+ <h2  class='title2'>Enumerated Types</h2> <br><dl>
+<dt class='dt1'><a id="CATDynReportMode"/>CATDynReportMode</dt>
+  <dd class='dd1'>
+
+enum <b>CATDynReportMode</b> {<pre class='light'>
+  CATDynModification,
+  CATDynCreation
+</pre>}
+ Type of follow-up to be written in the journal.<br>
+ This information is used by applications, depending on the type of operations they want to 
+ perform after calling the transformation. This information has no impact on the objects of the
+ geometrical modeler itself.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> CATDynModification</span></dt>
+   <dd> The transformation is seen as a modification: the body is always duplicated, but the application
+ wants to mask the input body for showing only the resulting body (case of an applicative
+ transformation). This is the default of a CATDynTransformation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> CATDynCreation</span></dt>
+   <dd> The transformation is seen as a creation: The application keeps the input body and
+ the duplicated body, and wants to union them for example:
+ this is a typical case of an applicative operation of mirror.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATDynTransformation.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATTopologicalOperators</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

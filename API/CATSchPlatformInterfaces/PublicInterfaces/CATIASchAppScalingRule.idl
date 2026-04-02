@@ -1,0 +1,52 @@
+#ifndef CATIASchAppScalingRule_IDL 
+#define CATIASchAppScalingRule_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004   
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Provide application rule of how to scale schematic objects.
+  */
+
+interface CATIASchAppScalingRule : CATIABase
+{
+  /**
+  * Get a priority number to indicate the adjustment (moving)
+  * priority of this object during scaling.
+  * @param oPriority
+  *   1 to 99.  The lower the number, the higher the processing
+  *   priority.  For example, an object with priority 1 is processed
+  *   first and will not move while connected objects adjust. 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppScalingRule
+  * Dim intVar1 As Integer
+  *  ...
+  * objThisIntf.<font color="red">AppGetScalingPriority</font>intVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppGetScalingPriority ( 
+    inout long oPriority );
+    
+};
+    
+// Interface name : CATIASchAppScalingRule
+#pragma ID CATIASchAppScalingRule "DCE:2306a3aa-2448-48b1-a7e1559a3eb0cfe3"
+#pragma DUAL CATIASchAppScalingRule
+    
+// VB object name : SchAppScalingRule
+#pragma ID SchAppScalingRule "DCE:c339cc79-b106-4d4f-880c84ef7a567cd7"
+#pragma ALIAS CATIASchAppScalingRule SchAppScalingRule
+    
+#endif 
+    

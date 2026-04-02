@@ -1,0 +1,358 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+#ifndef CATIADrawingDimExtLine_IDL
+#define CATIADrawingDimExtLine_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+
+
+/**  
+ * Manages extension lines of a dimension in drawing view.
+* <p>
+* This interface is obtained from @href CATIADrawingDimension#GetExtLine method.
+*/
+
+
+interface CATIADrawingDimExtLine : CATIABase
+{
+
+//=================================
+//          Properties
+//=================================
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns extension line type of dimension.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves extension line type of dimension <tt>MyExtLine</tt> drawing dimension.
+  * <pre>
+  * oExtLineType = MyExtLine.<font color="red">ExtLineType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ExtLineType
+HRESULT get_ExtLineType(out /*IDLRETVAL*/ long oExtLineType); 
+//linear or  circular
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets slant angle of extension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves slant angle of extension line <tt>MyExtLine</tt> drawing dimension.
+  * <pre>
+  * oExtLineSlant = MyExtLine.<font color="red">ExtLineSlant</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ExtLineSlant
+HRESULT get_ExtLineSlant(out /*IDLRETVAL*/ double oExtLineSlant); 
+HRESULT put_ExtLineSlant(in  double iExtLineSlant); 
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets color of extension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves color of extension line <tt>MyExtLine</tt> drawing dimension.
+  * <pre>
+  * oColorExtLine = MyExtLine.<font color="red">Color</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Color
+HRESULT get_Color(out /*IDLRETVAL*/ long oColorExtLine);
+HRESULT put_Color(in long iColorExtLine);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets thickness of extension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves thickness of extension line <tt>MyExtLine</tt> drawing dimension.
+  * <pre>
+  * oThickExtLine = MyExtLine.<font color="red">Thickness</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Thickness
+HRESULT get_Thickness(out /*IDLRETVAL*/ double oThickExtLine);
+HRESULT put_Thickness(in double iThickExtLine);
+
+
+//=================================
+//           Methods
+//=================================
+
+//------------------------------------------------------------------------------
+ /**
+  * Get geometrical infomation of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param oGeomInfos
+  *   List of geometric coordinates (X1,Y1,X2,Y2,X3,Y3).
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets geometrical infomation of <tt>MyExtLine</tt> path.
+  * <pre>
+  * MyExtLine.<font color="red">GetGeomInfo</font>(iIndex, oGeomInfos)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetGeomInfo(in long iIndex, inout CATSafeArrayVariant oGeomInfos); 
+//(First point, second point, center for circular extension line).
+
+//--- Set/Get Interruptions ? ---
+
+//------------------------------------------------------------------------------
+ /**
+  * Get funnel infomation of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param oMode
+  *   funnel inside/outside mode.
+  * @param oAngle
+  *   funnel angle.
+  * @param oHeight
+  *   funnel height.
+  * @param oWidth
+  *   funnel width.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets funnel infomation of <tt>MyExtLine</tt> path.
+  * <pre>
+  * MyExtLine.<font color="red">GetFunnel</font>(iIndex, oMode, oAngle, oHeight, oWidth)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetFunnel(in long iIndex, inout long oMode, inout double oAngle, inout double oHeight, inout double oWidth ); 
+
+//------------------------------------------------------------------------------
+ /**
+  * Set funnel infomation of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param iMode
+  *   funnel inside/outside mode.
+  * @param iAngle
+  *   funnel angle.
+  * @param iHeight
+  *   funnel height.
+  * @param iWidth
+  *   funnel width.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets funnel infomation of <tt>MyExtLine</tt> path.
+  * <pre>
+  * MyExtLine.<font color="red">SetFunnel</font>(iIndex, iMode, iAngle, iHeight, iWidth)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetFunnel(in long iIndex, in long iMode, in double iAngle, in double iHeight, in double iWidth ); 
+//Note: Mode = 0 No funnel = 1 internal funnel =2 external funnel.
+
+//------------------------------------------------------------------------------
+ /**
+  * Get overrun of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param oOverrun
+  *   Overrun
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets overrun of <tt>MyExtLine</tt> path.
+  * <pre>
+  * Overrun = MyExtLine.<font color="red">GetOverrun</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetOverrun(in long iIndex, out /*IDLRETVAL*/ double oOverrun);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set overrun of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param iOverrun
+  *   Overrun
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets overrun of <tt>MyExtLine</tt> path.
+  * <pre>
+  * MyExtLine.<font color="red">SetOverrun</font>(iIndex, iOverrun)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetOverrun(in long iIndex, in double iOverrun);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get gap of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param oGap
+  *   Gap.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets gap of <tt>MyExtLine</tt> path.
+  * <pre>
+  * Gap = MyExtLine.<font color="red">GetGap</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetGap(in long iIndex, out /*IDLRETVAL*/ double oGap);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set gap of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param iGap
+  *   gap
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets gap of <tt>MyExtLine</tt> path.
+  * <pre>
+  * MyExtLine.<font color="red">SetGap</font>(iIndex, iGap)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetGap(in long iIndex, in double iGap);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get visivility of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param oGap
+  *   Gap.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets visivility of <tt>MyExtLine</tt> path.
+  * <pre>
+  * ExtlineVisibility = MyExtLine.<font color="red">GetVisibility</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetVisibility(in long iIndex, out /*IDLRETVAL*/ long oExtlineVisibility);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set visivility of dimension extension line.
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param iExtlineVisibility
+  *   visivility
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets visivility of <tt>MyExtLine</tt> path.
+  * <pre>
+  * MyExtLine.<font color="red">SetVisibility</font>(iIndex, iExtlineVisibility)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetVisibility(in long iIndex, in long iExtlineVisibility);
+
+//------------------------------------------------------------------------------
+ /**
+  * Add an interrupt to an extension line. 
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param iTwoPoints
+  *   Defines the first and second point of the gap to create. 
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds an interrupt to <tt>MyExtLine</tt> path.
+  * <pre>
+  * MyExtLine.<font color="red">AddInterrupt</font>(iIndex, iTwoPoints)
+  * </pre>
+  * </dl>
+  */
+HRESULT AddInterrupt(in long iIndex, in CATSafeArrayVariant iTwoPoints);
+
+//------------------------------------------------------------------------------
+ /**
+  * Remove interruption on extension lines. 
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example Remove interruption on <tt>MyExtLine</tt> path.
+  * <pre>
+  * MyExtLine.<font color="red">RemoveInterrupt</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT RemoveInterrupt(in long iIndex );
+
+//------------------------------------------------------------------------------
+ /**
+  * Get the number of interruptions stored in each extension lines. 
+  * @param iIndex
+  *   1: first extension line
+  *   2: second extension line
+  * @param oNbIntOnExtLine
+  *   The number of interruptions.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the number of interruptions of <tt>MyExtLine</tt> path.
+  * <pre>
+  * NbIntOnExtLine = MyExtLine.<font color="red">GetInterrupt</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetInterrupt(in long iIndex ,out /*IDLRETVAL*/ long oNbIntOnExtLine);
+
+};
+
+#pragma ID CATIADrawingDimExtLine "DCE:05E8D870-4DF7-11d6-AA6E00D059334107"
+#pragma DUAL CATIADrawingDimExtLine
+
+// Visual Basic name
+#pragma ID DrawingDimExtLine "DCE:05E8D871-4DF7-11d6-AA6E00D059334107"
+#pragma ALIAS CATIADrawingDimExtLine DrawingDimExtLine
+
+
+#endif

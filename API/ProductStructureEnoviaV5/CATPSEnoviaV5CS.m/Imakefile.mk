@@ -1,0 +1,23 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= SHARED LIBRARY
+
+LOCAL_CCFLAGS = -DCATPDMLogIntegration
+
+LINK_WITH = JS0GROUP AD0XXBAS AC0SPBAS AS0STARTUP ApplicationFrame \
+            CATEnoviaV5AdapterBase CATEnoviaV5AdapterItf CATPDMBaseItf   
+
+#
+OS = AIX
+# 
+OS = HP-UX
+#
+OS = IRIX
+#
+OS = SunOS
+
+OS = Windows_NT
+
+
+

@@ -1,0 +1,5 @@
+BUILT_OBJECT_TYPE = NONE
+#
+OS = SunOS
+LOCAL_FFLAGS= -xlibmil -xdepend
+OPTIMIZATION_F=-xO4

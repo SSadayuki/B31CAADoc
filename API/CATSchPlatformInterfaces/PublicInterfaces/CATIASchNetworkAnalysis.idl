@@ -1,0 +1,100 @@
+#ifndef CATIASchNetworkAnalysis_IDL 
+#define CATIASchNetworkAnalysis_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+    
+interface  CATIASchListOfObjects;
+interface  CATIASchAppConnectable;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Represents a schematic network.
+  */
+
+interface CATIASchNetworkAnalysis : CATIABase
+{
+  /**
+  * List the connected objects in the network.
+  * @param oLNetworkObjs
+  *   Pointer to a list of all connected objects in the network.
+  *   (Members are CATISchAppConnectable interface pointers)
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchNetworkAnalysis
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListNetworkObjects</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListNetworkObjects ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLNetworkObjs );
+    
+  /**
+  * Given a start and end object in the network, this method returns
+  * a list of network objects each representing a path connecting the
+  * the 2 input objects.
+  * @param iFromObject
+  *   The connectable to start from.
+  * @param iToObject
+  *   The connectable to finish at.
+  * @param oLNetworks
+  *   Pointer to a list of networks.
+  *   (Members are CATISchNetworkAnalysis interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchNetworkAnalysis
+  * Dim objArg1 As SchAppConnectable
+  * Dim objArg2 As SchAppConnectable
+  * Dim objArg3 As SchListOfObjects
+  *  ...
+  * Set objArg3 = objThisIntf.<font color="red">FindPaths</font>(objArg1,objArg2)
+  * </pre>
+  *    
+  */
+  HRESULT FindPaths ( 
+    in CATIASchAppConnectable iFromObject, 
+    in CATIASchAppConnectable iToObject, 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLNetworks );
+    
+  /**
+  * List the extremity objects of the network.
+  * @param oLExtremityObjs
+  *   Pointer to a list of extremity objects of the network 
+  *    (Members are CATISchAppConnectable interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchNetworkAnalysis
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListExtremityObjects</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListExtremityObjects ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLExtremityObjs );
+    
+};
+    
+// Interface name : CATIASchNetworkAnalysis
+#pragma ID CATIASchNetworkAnalysis "DCE:62101f72-359f-4f3b-baedae6247b9843f"
+#pragma DUAL CATIASchNetworkAnalysis
+    
+// VB object name : SchNetworkAnalysis
+#pragma ID SchNetworkAnalysis "DCE:adfc71b7-72ff-44e2-ab7fad9b1129cd99"
+#pragma ALIAS CATIASchNetworkAnalysis SchNetworkAnalysis
+    
+#endif 
+    

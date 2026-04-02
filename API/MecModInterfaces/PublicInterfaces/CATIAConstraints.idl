@@ -1,0 +1,247 @@
+#ifndef CATIAConstraints_IDL
+#define CATIAConstraints_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAConstraints:						   
+// Exposed interface for Constraints collection
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Dec97 Creation					   Ph Baucher
+// Feb98 COM compliance					    L Lalere
+// May98 DOC compliance                                     PSR/JGR
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATConstraintType.idl"
+#include "CATConstraintMode.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAConstraint;
+interface CATIADimension;
+interface CATIAReference;
+
+//-----------------------------------------------------------------
+/**
+ * A collection of all geometric constraints set on a part, a sketch,
+ * or a product. 
+ * A constraint collection is created with default values for its properties
+ * (such as value, orientation, etc.). Use the constraint properties 
+ * edition services to set them to appropriate values after constraint
+ * creation.
+ * @see CATIAConstraint 
+ */
+
+interface CATIAConstraints : CATIACollection
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+    /**
+     * Returns the number of broken constraints from the Constraints collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>BknCstNum</tt>
+     * the number of broken constraints from the
+     * <tt>myListofConstraints</tt> collection of constraints:
+     * <pre>
+     * BknCstNum = myListofConstraints.<font color="red">BrokenConstraintsCount</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY BrokenConstraintsCount
+        HRESULT get_BrokenConstraintsCount( out /*IDLRETVAL*/ long  oNbItems );
+		    
+    /**
+     * Returns the number of unupdated constraints from the Constraints
+     * collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>UnUpdCstNum</tt>
+     * the number of unupdated constraints from the
+     * <tt>myListofConstraints</tt> collection of constraints:
+     * <pre>
+     * UnUpdCstNum = myListofConstraints.<font color="red">UnUpdatedConstraintsCount</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY UnUpdatedConstraintsCount
+        HRESULT get_UnUpdatedConstraintsCount( out /*IDLRETVAL*/ long  oNbItems );
+	//
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+    /**
+     * Creates a new constraint applying to a single geometric element
+     * and adds it to the Constraints collection.
+     * @param iCstType
+     *   The constraint type
+     * @param iElem
+     *   The constrained geometric element<br>
+     * The following @href CATIABoundary object is supported: 
+     *   @href CATIABoundary.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the reference constraint <tt>NewCst</tt> to a part,
+     * stating that 
+     * the <tt>P1</tt> point should remain fixed with respect to the part's
+     * origin elements using the value 0 for <tt>catCstTypeReference</tt>,
+     * and adds it to the <tt>cstList</tt> collection.
+     * <pre>
+     * Set NewCst = cstList.<font color="red">AddMonoEltCst</font>(0, P1)
+     * </pre>
+     * </dl>
+     */
+         HRESULT   AddMonoEltCst
+	              (in                CatConstraintType     iCstType,
+ 		       in                CATIAReference        iElem,
+		       out /*IDLRETVAL*/ CATIAConstraint       oConstraint);
+
+//
+    /**
+     * Creates a new constraint applying to two geometric elements
+     * and adds it to the Constraints collection.
+     * @param iCstType
+     *   The constraint type
+     * @param iFirstElem
+     *   The first constrained geometric element<br>
+     *   The following @href CATIABoundary object is supported: 
+     *   @href CATIABoundary.
+     * @param iSecondElem
+     *   The second constrained geometric element<br>
+     *   The following @href CATIABoundary object is supported: 
+     *   @href CATIABoundary.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example adds  the <tt>NewCst</tt> tangency constraint in a sketch,
+     * between the two circles <tt>c1</tt> and <tt>c2</tt>
+     * using the value 4 for <tt>catCstTypeTangency</tt>.
+     * <pre>
+     * Set newCst = skCstList.<font color="red">AddBiEltCst</font>(4, c1, c2)
+     * </pre>
+     * </dl>
+     */
+         HRESULT   AddBiEltCst
+	              (in                CatConstraintType     iCstType,
+ 		       in                CATIAReference        iFirstElem,
+ 		       in                CATIAReference        iSecondElem,
+		       out /*IDLRETVAL*/ CATIAConstraint       oConstraint);
+//
+    /**
+     * Creates a new constraint applying to three geometric elements
+     * and adds it to the Constraints collection.
+     * @param iCstType
+     *   The constraint type
+     * @param iFirstElem
+     *   The first constrained geometric element<br>
+     *   The following @href CATIABoundary object is supported: 
+     *   @href CATIABoundary.
+     * @param iSecondElem
+     *   The second constrained geometric element<br>
+     *   The following @href CATIABoundary object is supported: 
+     *   @href CATIABoundary.
+     * @param iThirdElem
+     *   The third constrained geometric element<br>
+     *   The following @href CATIABoundary object is supported: 
+     *   @href CATIABoundary.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example adds <tt>symCst</tt> symmetry constraint in a part,
+     * stating that the cylinders <tt>cyl1</tt> and <tt>cyl2</tt> are
+     * symmetric with respect to the plane <tt>symPlane</tt> using the
+     * value 15 for <tt>catCstTypeSymmetry</tt>.
+     * <pre>
+     * Set symCst = prtCstList.<font color="red">AddTriEltCst</font>(15, cyl1, cyl2, symPlane)
+     * </pre>
+     * </dl>
+     */
+         HRESULT   AddTriEltCst
+	              (in                CatConstraintType iCstType,
+ 		       in                CATIAReference    iFirstElem,
+ 		       in                CATIAReference    iSecondElem,
+ 		       in                CATIAReference    iThirdElem,
+	               out /*IDLRETVAL*/ CATIAConstraint    oConstraint);
+
+    /**
+     * Returns a constraint using its index or its name from the Constraints
+     * collection.
+     * @param iIndex
+     *   The index or the name of the constraint to retrieve frm
+     *   the collection of constraints.
+     *   As a numerics, this index is the rank of the constraint
+     *   in the collection.
+     *   The index of the first constraint in the collection is 1, and
+     *   the index of the last constraint is Count.
+     *   As a string, it is the name you assigned to the constraint using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved constraint
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+	 * This example retrieves in <tt>cst1</tt> the first constraint
+     * in the collection and in <tt>cst2</tt> the constraint Constraint.2. 
+     * <pre>
+	 * Set cst1 = cstList.<font color="red">Item</font>(1)
+     * Set cst2 = cstList.<font color="red">Item</font>("Constraint.2")
+     * </pre>
+     */
+	HRESULT   Item(in                CATVariant       iIndex,
+                       out /*IDLRETVAL*/ CATIAConstraint  oConstraint);
+
+    /**
+     * Removes a constraint from the Constraints collection.
+     * @param iIndex
+     *   The index or the name of the constraint to remove from the Constraints
+     *   collection.
+     *   As a numerics, this index is the rank of the constraint
+     *   in the collection.
+     *   The index of the first constraint in the collection is 1, and
+     *   the index of the last constraint is Count.
+     *   As a string, it is the name you assigned to the constraint using
+     *   the @href CATIABase#Name property.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example removes the last constraint in the collection. 
+     * <pre>
+     * cstList.<font color="red">Remove</font>(cstList.Count)
+     * </pre>
+     * </dl>
+     */
+	HRESULT   Remove(in CATVariant iIndex);
+    
+};
+
+// Interface name : CATIAConstraints
+#pragma ID CATIAConstraints "DCE:6b70f3b3-6bcf-11d1-a2800000f87546fd"
+#pragma DUAL CATIAConstraints
+
+// VB object name : Constraints (Id used in Visual Basic)
+#pragma ID Constraints "DCE:6b7f41cf-6bcf-11d1-a2800000f87546fd"
+#pragma ALIAS CATIAConstraints Constraints
+
+#endif
+// CATIAConstraints_IDL
+

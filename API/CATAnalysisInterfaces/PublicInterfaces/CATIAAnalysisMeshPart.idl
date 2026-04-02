@@ -1,0 +1,135 @@
+#ifndef CATIAAnalysisMeshPart_IDL
+#define CATIAAnalysisMeshPart_IDL
+/*IDLREP*/
+//===================================================================
+// COPYRIGHT Dassault Systemes 2003
+//===================================================================
+//
+// CATIAAnalysisMeshPart.idl
+// Automation interface for the AnalysisMeshPart element 
+//
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIAAnalysisSet.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAProduct;
+interface CATIAReference;
+interface CATIAPublication;
+interface CATIAAnalysisMeshLocalSpecifications;
+
+
+/**  
+ * The interface to access a CATIAAnalysisMeshPart.  
+ */
+interface CATIAAnalysisMeshPart : CATIAAnalysisSet 
+{
+/**
+  * Creates a new support and add it to the support description of the mesh part.
+  * @param iProduct  the CATIA Product that represent the object to linked.<br>
+  * @param iSupport  the CATIA Reference that represent the geometry to meshed.<br>
+  * @see CATIAReference , CATIAProduct
+  */
+  HRESULT AddSupportFromReference(in CATIAProduct   iProduct,
+                                  in CATIAReference iSupport);
+
+/**
+  * Creates a new support and add it to the support description of the mesh part.
+  * @param iProduct  the CATIA Product that represent the object to linked.<br>
+  * @param iPublication  the CATIA Publication that represent the the geometry to meshed.<br>
+  * @see CATIAPublication , CATIAProduct
+  */
+  HRESULT AddSupportFromPublication(in CATIAProduct   iProduct,
+                                    in CATIAPublication iSupport);
+
+/**
+ * Sets the value corresponding to the given global specification.<br>
+ * @param iName  The identifier if the global specification.<br>
+ * @param iValue  The value of the global specification.<br>
+ */
+  HRESULT SetGlobalSpecification(in CATBSTR iName,
+	 	     in CATVariant iValue); 
+/**
+ * Set the geometric value corresponding to the given global specification.<br>
+ * @param iName  The identifier if the global specification.<br>
+ * @param iProduct  the CATIA Product that represent the object to linked.<br>
+ * @param iSupport  the CATIA Reference that represent the geometry to meshed.<br>
+ * @see CATIAReference , CATIAProduct
+ * @param iMode
+ *   The mode used to valuate the reference global specification.
+ *   <br><b>Legal values</b>: 
+ *   <dl><dt>0</dt><dd>the global specification is defined as a single reference.
+ *   <dt>1</dt><dd>the global specification is added to exising references.</dl>
+ */
+  HRESULT SetSpecificationFromReference(in CATBSTR iName, in CATIAProduct iProduct,
+                                  in CATIAReference iSupport, in long iMode);
+
+/**
+ * Adds the geometric value corresponding to the given global specification.<br>
+ * @param iName  The identifier if the global specification.<br>
+ * @param iProduct  the CATIA Product that represent the object to linked.<br>
+ * @param iPublication  the CATIA Publication that represent the the geometry to meshed.<br>
+ * @see CATIAPublication , CATIAProduct
+ * @param iMode
+ *   The mode used to valuate the publication global specification.
+ *   <br><b>Legal values</b>: 
+ *   <dl><dt>0</dt><dd>the global specification is defined as a single reference.
+ *   <dt>1</dt><dd>the global specification is added to exising references.</dl>
+ */
+  HRESULT SetSpecificationFromPublication(in CATBSTR iName, in CATIAProduct iProduct,
+                                  in CATIAPublication iSupport, in long iMode);
+
+/**
+ * Set the list of candidate <b>Mesh Parts</b> for capture. 
+ * @param iMeshParts
+ *   Safe array of mesh parts.  
+ * @return
+ *   An HRESULT.
+ *   <br><b>Legal values</b>:
+ *   <dl><dt>S_OK</dt><dd>Operation successfull.
+ *   <dt>E_FAIL</dt><dd>Operation failed.
+ *   </dl>
+ */
+  HRESULT SetMeshPartsToCapture ( in CATSafeArrayVariant iMeshParts );
+
+
+/**
+ * Returns the local specification collection from the meshpart analysis.
+ */
+#pragma PROPERTY AnalysisMeshLocalSpecifications
+	HRESULT get_AnalysisMeshLocalSpecifications(out /*IDLRETVAL*/ CATIAAnalysisMeshLocalSpecifications oLocalSpecs);
+
+ /**
+   * Returns the activity of an meshpart.
+   * @param oActivity
+	 * <br><b>Legal values</b>:
+	 * <dl><dt>FALSE</dt><dd><b>Mesh Part</b> is not active.
+	 * <dt>TRUE</dt><dd><b>Mesh Part</b> is active.
+	 * </dl>
+   */
+#pragma PROPERTY Activity
+  HRESULT  get_Activity (inout /*IDLRETVAL*/ boolean oActivity);
+  /**
+   * Set the activity of an meshpart.
+   * @param iActivity
+	 * <br><b>Legal values</b>:
+	 * <dl><dt>FALSE</dt><dd>to set the <b>Mesh Part</b> unactive.
+	 * <dt>TRUE</dt><dd>to set the <b>Mesh Part</b> active.
+	 * </dl>
+   */
+  HRESULT  put_Activity (in boolean iActivity );
+};
+
+// Interface name : CATIAAnalysisMeshPart
+#pragma ID CATIAAnalysisMeshPart "DCE:787774ff-fb2c-4339-88980238f788ac8e"
+#pragma DUAL CATIAAnalysisMeshPart
+
+// VB object name : AnalysisMeshPart (Id used in Visual Basic)
+#pragma ID AnalysisMeshPart "DCE:c72bf299-3dce-4c5e-b38719d7786f3b9b"
+#pragma ALIAS CATIAAnalysisMeshPart AnalysisMeshPart
+
+#endif

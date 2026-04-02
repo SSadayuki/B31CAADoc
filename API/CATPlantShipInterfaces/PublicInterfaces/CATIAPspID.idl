@@ -1,0 +1,156 @@
+#ifndef CATIAPspID_IDL 
+#define CATIAPspID_IDL 
+    
+/*IDLREP*/
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+        
+#include "CATBSTR.idl"    
+#include "CATIABase.idl"
+
+/**
+ * Represents the interface to generate and set IDs for the Distributive System Objects.
+ * <b>Role</b>: This is the interface for Plant Ship object ID generation.
+ */
+interface CATIAPspID : CATIABase
+{
+ /**
+  * Gets ID for the object.
+  * @return
+  *   ID of the object.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspID
+  * 
+  * Dim iStrVar1 As String
+  *  ...
+  * iStrVar1 =objThisIntf.<font color="red">GetID</font>
+  * </pre>
+  *    
+  */
+
+  HRESULT GetID (inout /*IDLRETVAL*/ CATBSTR oID);
+
+ /**
+  * Sets ID for the object.
+  * @param oID
+  *   ID to be set.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspID
+  * 
+  * Dim iStrVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">SetID</font> iStrVar1
+  * </pre>
+  *    
+  */
+  HRESULT SetID (in CATBSTR iID);
+
+ /**
+  * Returns the Generated ID with the sequence number and is stored on the object.
+  * @return
+  *   ID generated
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspID
+  * 
+  * Dim iStrVar1 As String
+  *  ...
+  * iStrVar1 =objThisIntf.<font color="red">GenAndPutID</font>
+  * </pre>
+  *    
+  */
+  
+  HRESULT GenAndPutID (inout /*IDLRETVAL*/ CATBSTR oGeneratedID);
+
+
+  /**
+  * Generates ID without the sequence number and is stored on the object.
+  * @return
+  *   ID generated
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspID
+  * 
+  * Dim iStrVar1 As String
+  *  ...
+  * iStrVar1 =objThisIntf.<font color="red">GenAndPutIDNoGenSeqNum</font>
+  * </pre>
+  *    
+  */
+
+  HRESULT GenAndPutIDNoGenSeqNum (inout /*IDLRETVAL*/ CATBSTR oGeneratedID);
+
+
+ /**
+  * Generates ID without the sequence number( if not set previously) and is not stored on the object.
+  *  
+  * @param oGeneratedID
+  *   ID generated
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspID
+  * 
+  * Dim iStrVar1 As String
+  *  ...
+  * iStrVar1 =objThisIntf.<font color="red">GenIDNoGenSeqNum</font>
+  * </pre>
+  *    
+  */
+
+  HRESULT GenIDNoGenSeqNum (inout /*IDLRETVAL*/ CATBSTR oGeneratedID);
+
+ /**
+  * Checks if the ID on the object is generated( based on the ID Schema).  
+  * @param oBIsGenerated
+  *   TRUE if ID is generated from the ID schema
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspID
+  * 
+  * Dim bVar1 As boolean
+  *  ...
+  * bVar1 =objThisIntf.<font color="red">IsIDGenerated</font>
+  * </pre>
+  *    
+  */
+		
+  HRESULT IsIDGenerated (out /*IDLRETVAL*/ boolean oBIsGenerated);
+ 
+  /**
+  * Retrieves local ID of the object.
+  *  
+  * @return
+  *   Local ID generated
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspID
+  * 
+  * Dim iStrVar1 As String
+  *  ...
+  * iStrVar1 =objThisIntf.<font color="red">GetLocalID</font>
+  * </pre>
+  *    
+  */
+
+  HRESULT GetLocalID (inout /*IDLRETVAL*/ CATBSTR oLocalID);
+  
+};
+    
+// Interface name : CATIAPspID
+#pragma ID CATIAPspID "DCE:f562bd86-091f-45e2-84a414e6d93b6838"
+#pragma DUAL CATIAPspID
+    
+// VB object name : PspID
+#pragma ID   PspID    "DCE:fc04ca0e-159a-43d2-b07eb2f77e723fa0"
+#pragma ALIAS CATIAPspID PspID
+    
+#endif 
+    

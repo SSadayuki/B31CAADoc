@@ -1,0 +1,100 @@
+#ifndef CATIAAngularRepartition_IDL
+#define CATIAAngularRepartition_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAAngularRepartition:                           
+// Exposed interface for AngularRepartition
+//                                   
+//=================================================================
+// Usage notes:
+//        For Pattern definitions
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification					  L Lalere
+//=================================================================
+#include "CATIARepartition.idl"
+
+interface CATIAAngle;
+
+/**
+ * Represents the angular repartition.
+ * It is used by the circular pattern.
+ * It is made up of a number of times the shape is copied and of
+ * an angular spacing between two consecutive copies
+ * of the shape along a crown.
+ * The number of times the shape is copied is accessible using
+ * the @href CATIARepartition#InstancesCount property.
+ * @see CATIACircPattern
+ */
+//-----------------------------------------------------------------
+interface CATIAAngularRepartition : CATIARepartition
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON ANGULAR SPACING    (between 2 instances)
+    //    ------------------
+    //
+   /**
+     * Returns the angle between two consecutive copies of a shape
+     * along the repartition crown.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>AngSpace1</tt>
+     * the angular spacing of the
+     * angular repartition <tt>firstRepartition</tt>:
+     * <pre>
+     * Set AngSpace1 = firstRepartition.<font color="red">AngularSpacing</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY AngularSpacing
+    HRESULT get_AngularSpacing ( out /*IDLRETVAL*/ CATIAAngle oAngularSpacing );
+
+	/**
+     * Returns the angle at which the pattern spacing is done for unequal angular spacing mode.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>AngSpace1</tt>
+     * the angular spacing of the
+     * angular repartition <tt>firstRepartition</tt>:
+     * <pre>
+     * Set AngSpace1 = firstRepartition.<font color="red">AngularSpacing</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY InstanceSpacing
+	HRESULT  get_InstanceSpacing (out /*IDLRETVAL*/ CATIAAngle oAngularSpacing);
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+};
+
+// Interface name : CATIAAngularRepartition
+#pragma ID CATIAAngularRepartition "DCE:629953b8-6745-11d1-a27f0000f87546fd"
+#pragma DUAL CATIAAngularRepartition
+
+// VB object name : AngularRepartition (Id used in Visual Basic)
+#pragma ID AngularRepartition "DCE:62b4bec3-6745-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIAAngularRepartition AngularRepartition
+
+
+#endif
+// CATIAAngularRepartition_IDL
+

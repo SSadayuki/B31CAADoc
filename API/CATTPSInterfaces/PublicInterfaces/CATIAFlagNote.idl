@@ -1,0 +1,98 @@
+#ifndef CATIAFlagNote_IDL
+#define CATIAFlagNote_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+
+interface CATIATPSParallelOnScreen;
+
+/**
+ * Interface for the TPS Flag Note object.
+ */
+interface CATIAFlagNote : CATIABase 
+{
+    /**
+     * Retrieves or sets Flag Text Representation.
+     *   @param oText
+     *     Returned text for graphical representation.
+     */
+  #pragma PROPERTY Text
+    HRESULT get_Text (inout /*IDLRETVAL*/ CATBSTR oText);
+    HRESULT put_Text (in CATBSTR iText);
+
+    /**
+     * Retrieves or sets Flag Text.
+     *   @param oText
+     *     Returned Flag text.
+     */
+  #pragma PROPERTY FlagNoteText
+    HRESULT get_FlagNoteText (inout /*IDLRETVAL*/ CATBSTR oFlagText);
+    HRESULT put_FlagNoteText (in CATBSTR iText);
+
+    /**
+     * Retrieves URL.
+     *  @param iIndex
+     *   Index of URL.
+     *  @param oUrl
+     *   URL
+     */
+    HRESULT URL (in CATVariant iIndex, inout /*IDLRETVAL*/ CATBSTR oUrl );
+
+    /**
+     * Sets an URL.
+     *  @param iUrl
+     *   URL to Set
+     */
+    HRESULT AddURL(in CATBSTR iUrl );
+
+    /**
+     * Remove an URL.
+     *  @param iIndex
+     *   position of the URL to remove.
+     */
+    HRESULT RemoveURL(in CATVariant iIndex);
+
+    /**
+     * Modifies an URL.
+     *  @param iUrl
+     *   URL to Set.
+     *  @param iIndex
+     *   index of the URL to modify.
+     */
+    HRESULT ModifyURL(inout CATBSTR iUrl, in CATVariant iIndex );
+
+    /**
+	   * @deprecated V5-6R2017
+	   * This method is replaced by @href CATIAFlagNote#GetNbrURL2
+     */
+    HRESULT /*IDLHIDDEN*/ GetNbrURL (out CATVariant oNumberOfURL);
+
+     /**
+     * Gets the number of URL.
+     *  @param oNumberOfURL
+     *   returns param oNumberOfURL.
+     */
+    HRESULT GetNbrURL2( out /*IDLRETVAL*/ long oNumberOfURL );
+
+  /**
+    * Gets the annotation on TPSParallelOnScreen interface.
+    */
+    HRESULT  TPSParallelOnScreen (out /*IDLRETVAL*/ CATIATPSParallelOnScreen  oTPSParallelOnScreen);
+};
+
+// Interface name : CATIAFlagNote
+#pragma ID CATIAFlagNote "DCE:f3f07450-13e5-11d6-be7a0002b341dd3a"
+#pragma DUAL CATIAFlagNote
+
+// VB object name : FlagNote (Id used in Visual Basic)
+#pragma ID FlagNote "DCE:f3f07451-13e5-11d6-be7a0002b341dd3a"
+#pragma ALIAS CATIAFlagNote FlagNote
+
+#endif

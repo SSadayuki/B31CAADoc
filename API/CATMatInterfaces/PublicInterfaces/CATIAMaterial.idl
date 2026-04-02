@@ -1,0 +1,107 @@
+#ifndef CATIAMaterial_IDL
+#define CATIAMaterial_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIAMaterial:                           
+// Exposed interface for Material object
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun02 Creation					A. Schmitt
+// Apr03 Adds on					BMB
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATIARenderingMaterial.idl"
+#include "CATIAAnalysisMaterial.idl"
+
+/**
+ * Represents a Material object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAMaterial : CATIABase
+{
+#pragma PROPERTY RenderingMaterial
+  /**
+   * Returns the rendering material object from the current material.
+   */
+  HRESULT get_RenderingMaterial(out /*IDLRETVAL*/ CATIARenderingMaterial oRenderingMaterial);
+
+  /**
+   * Returns true if a rendering material exists on the current material.
+   */
+  HRESULT ExistRenderingData(out /*IDLRETVAL*/ short bAnswer);
+
+  /**
+   * Create a default rendering material on the current material.
+   */
+  HRESULT CreateRenderingData(out /*IDLRETVAL*/ CATIARenderingMaterial oRenderingMaterial);
+
+  /**
+   * Copy rendering data from a material to the current material.
+   */
+  HRESULT CopyRenderingDataFrom(in CATIARenderingMaterial iRenderingMaterial);
+
+  /**
+   * Write the icon of a material to disc.
+   * The parameter is the path of the folder where the JPEG is going to be written
+   * Ex : E:\folder\
+   */
+  HRESULT  GetIcon ( in CATBSTR iPath);
+
+  /**
+   * Read the icon of a material from JPEG file.
+   * The parameter is the path of the folder where the JPEG is going to be read
+   * Ex : E:\folder\
+   */
+  HRESULT  PutIcon ( in	CATBSTR iPath);
+
+	// ANALYSIS
+
+#pragma PROPERTY AnalysisMaterial
+  /**
+   * Returns the analysis material object from the current material.
+   */
+  HRESULT get_AnalysisMaterial(out /*IDLRETVAL*/ CATIAAnalysisMaterial oAnalysisMaterial);
+
+  /**
+   * Returns true if a analysis material exists on the current material.
+   */
+  HRESULT ExistAnalysisData(out /*IDLRETVAL*/ short bAnswer);
+
+  /**
+   * Create a default analysis material on the current material.
+   */
+  HRESULT CreateAnalysisData(in CATBSTR iLabel, out /*IDLRETVAL*/ CATIAAnalysisMaterial oAnalysisMaterial);
+
+};
+
+// Interface Name : CATIAMaterial
+#pragma ID CATIAMaterial "DCE:8b628440-77a8-11d6-80560030f113d1bf"
+#pragma DUAL CATIAMaterial
+ 
+// VB Object Name : Material
+#pragma ID Material "DCE:a472e890-77a8-11d6-80560030f113d1bf"
+#pragma ALIAS CATIAMaterial Material
+
+#endif
+// CATIAMaterial_IDL
+
+
+
+
+
+
+

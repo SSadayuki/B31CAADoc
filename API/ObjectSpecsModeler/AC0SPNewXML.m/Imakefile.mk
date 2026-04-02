@@ -1,0 +1,10 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+#if os Windows
+CXX_WARNINGPROMOTE=CATOsmWarningPromote.h
+#endif
+
+CXX_EXCEPTION=
+LOCAL_CCFLAGS=-DNATIVE_EXCEPTION
+
+LINK_WITH=@ObjectModelerCollection XMLUtils xmlxerces xmlicuuc AC0SPBAS CATObjectModelerBase AC0CATPL

@@ -1,0 +1,72 @@
+#ifndef CATIAAnalysisSensor_IDL
+#define CATIAAnalysisSensor_IDL
+/*IDLREP*/
+
+//
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//
+//                                   
+// CATIAAnalysisSensor:                           
+// Exposed interface for Analysis Sensor
+//                                   
+//
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIAAnalysisEntity.idl"
+#include "CATVariant.idl"
+#include "CATIAParameters.idl"
+
+/**
+ * Represent the  analysis sensor.
+ */ 
+
+interface CATIAAnalysisSensor : CATIAAnalysisEntity
+{
+
+/**
+ * Returns the collection object containing the sensor parameters.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>The following example returns in <tt>params</tt> the parameters computed by the sensor:
+ * <pre>
+ * Dim AnalysisSensor1 As AnalysisSensor
+ * Dim params As CATIAParameters
+ * Set params = AnalysisSensor1.<font color="red">OutPutParameters</font>
+ * </pre>
+ * </dl>
+ */
+
+#pragma PROPERTY OutPutParameters
+	HRESULT get_OutPutParameters(out /*IDLRETVAL*/ CATIAParameters oParameters);
+	
+/**
+ * Update the sensor.
+ * Computation of OutPutParameters if needed.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>The following example computes the sensor:
+ * <pre>
+ * Dim AnalysisSensor1 As AnalysisSensor
+ * AnalysisSensor1.<font color="red">Update</font>
+ * </pre>
+ * </dl>
+ */
+  HRESULT Update();
+
+
+};
+
+// Interface name : CATIAAnalysisSensor
+#pragma ID CATIAAnalysisSensor "DCE:5d5d33c0-8820-4377-adb84a9554c36828"
+#pragma DUAL CATIAAnalysisSensor
+
+// VB object name : AnalysisSensor (Id used in Visual Basic)
+#pragma ID AnalysisSensor "DCE:90c35bb5-bf12-4c2e-a266aa148574b45d"
+#pragma ALIAS CATIAAnalysisSensor AnalysisSensor
+
+#endif
+// CATIAAnalysisSensor_IDL

@@ -1,0 +1,25 @@
+#
+# SHARED LIBRARY PRTInertia
+#
+
+OS = COMMON
+#if defined(_DS_COMPUTE_SERVER)
+BUILT_OBJECT_TYPE = NONE
+BUILD=NO
+#else
+#if defined(CATIAR201)
+BUILT_OBJECT_TYPE = NONE
+#else
+#if defined(CATIAV5R21)
+BUILT_OBJECT_TYPE = NONE
+BUILD=NO
+#endif
+#endif
+#endif
+
+LINK_WITH_V5_ONLY=
+LINK_WITH_V6_ONLY=
+
+LINK_WITH =
+    $(LINK_WITH_V5_ONLY)           \
+    $(LINK_WITH_V6_ONLY)           \

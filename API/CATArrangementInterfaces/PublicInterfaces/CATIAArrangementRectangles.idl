@@ -1,0 +1,96 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAArrangementRectangles.idl
+// Automation interface for the ArrangementRectangles element 
+//
+#ifndef CATIAArrangementRectangles_IDL
+#define CATIAArrangementRectangles_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+interface CATIAArrangementRectangle;
+interface CATIAMove;
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+/**  
+ * A Collection object for ArrangementRectangle objects.
+ * <b> Role:</b> Use this object to manage (create, retrieve and remove) ArrangementRectangle objects.
+ */
+interface CATIAArrangementRectangles : CATIACollection 
+{
+
+  /**
+   * Creates an ArrangementRectangle and adds it to the collection.
+   *
+   * @param iRelAxis
+   *   Relative Axis to be considered.
+   * @param iPosition
+   *   Position information for the Rectangle (rotation and location).
+   * @param iWidth
+   *   Width of the Rectangle. 
+   * @param iLength 
+   *   Length of the Rectangle. 
+   * @return
+   *   Returns the newly created ArrangementRectangle and adds it to the collection.
+   */
+
+  HRESULT AddRectangle(in CATIAMove           iRelAxis,
+                       in CATSafeArrayVariant iPosition,
+                       in double              iWidth, 
+                       in double              iLength,
+                       out /*IDLRETVAL*/ CATIAArrangementRectangle oArrRectangle);
+
+  /**
+   * Returns the specified ArrangementRectangle item of the collection object.
+   * 
+   * @param iIndex
+   *   The index or the name of the ArrangementRectangle to retrieve from this collection.
+   *   <dl>
+   *   <dt> To retrieve a specific object by number, use the rank of the ArrangementRectangle in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To retrieve a specific ArrangementRectangle by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   * @return
+   *    The retrieved ArrangementRectangle object.
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAArrangementRectangle oArrRectangle);
+
+  /**
+   * Removes the specified ArrangementRectangle object from the collection.
+   * 
+   * @param iIndex
+   *   The index or the name of the ArrangementRectangle to remove from this collection.
+   *   <dl>
+   *   <dt> To remove a specific object by number, use the rank of the ArrangementRectangle in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To remove a specific ArrangementRectangle by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   */
+   HRESULT Remove(in CATVariant iIndex);
+
+
+};
+
+// Interface name : CATIAArrangementRectangles
+#pragma ID CATIAArrangementRectangles "DCE:4008196f-b984-11d4-8def00d0b7acadba"
+#pragma DUAL CATIAArrangementRectangles
+
+// VB object name : ArrangementRectangles (Id used in Visual Basic)
+#pragma ID ArrangementRectangles "DCE:40081970-b984-11d4-8def00d0b7acadba"
+#pragma ALIAS CATIAArrangementRectangles ArrangementRectangles
+
+#endif

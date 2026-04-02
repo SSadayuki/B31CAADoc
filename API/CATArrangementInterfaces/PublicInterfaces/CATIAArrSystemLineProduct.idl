@@ -1,0 +1,50 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//
+// CATIAArrSystemLineProduct.idl
+// Automation interface for the ArrSystemLineProduct element 
+//
+//===================================================================
+#ifndef CATIAArrSystemLineProduct_IDL
+#define CATIAArrSystemLineProduct_IDL
+
+#include "CATIABase.idl"
+
+/**  
+ * The interface to access a CATIAArrSystemLineProduct  
+ * <p>
+ * Using this prefered syntax will enable mkdoc to document your class.
+ */
+interface CATIAArrSystemLineProduct : CATIABase
+{
+  /**
+   * Returns the count of the sub-products that make up the System-Line
+   * Arrangement Product and that match a specifc interface id. If the
+   * interface Id is NULL, then it searches for CATIAProduct objects by
+   * default.
+   */
+   HRESULT GetSubProductsCount(in CATBSTR iIntfId, out /*IDLRETVAL*/ long oSubProductCount);
+
+  /**
+   * Allows the user to get the item at a specific index location.
+   *
+   */
+   HRESULT GetSubItem(in long iIndex, out /*IDLRETVAL*/ CATIABase oOutputObject);
+
+};
+
+// Interface name : CATIAArrSystemLineProduct
+#pragma ID CATIAArrSystemLineProduct "DCE:3ea6c59a-0400-11d4-8bd3006094eb5532"
+#pragma DUAL CATIAArrSystemLineProduct
+
+// VB object name : ArrSystemLineProduct (Id used in Visual Basic)
+#pragma ID ArrSystemLineProduct "DCE:3ea6c59b-0400-11d4-8bd3006094eb5532"
+#pragma ALIAS CATIAArrSystemLineProduct ArrSystemLineProduct
+
+#endif

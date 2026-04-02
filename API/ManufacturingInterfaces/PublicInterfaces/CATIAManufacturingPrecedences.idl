@@ -1,0 +1,77 @@
+#ifndef CATIAManufacturingPrecedences_IDL
+#define CATIAManufacturingPrecedences_IDL
+/*IDLREP*/
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAManufacturingPrecedences:                           
+// Exposed interface for Process collection
+//                                   
+//=================================================================
+// Nov 99 Janvier                                         F.ZERR
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATManufacturingPrecedenceType.idl"
+
+interface CATIAManufacturingPrecedence;
+interface CATIAManufacturingActivity;
+
+/**
+ * Interface that manage the precedences for an object of type @ CATIAManufacturingActivity. 
+ * If an object A has objects B and C as precedence constraints, it means that B and C have to be performed
+ * before A.
+ */
+
+interface CATIAManufacturingPrecedences : CATIACollection
+{
+    /**
+     * Adds a new precedence in the collection of precedences. 
+	 * The type of added object is a CATIAManufacturingActivity.
+     */
+    HRESULT     AddOperation
+                ( in CATIAManufacturingActivity           iObject,
+				  in CatManufacturingPrecedenceType        iType);
+
+    /**
+    * Returns a precedence object from the precedence collection.
+     */
+   HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ CATIAManufacturingPrecedence oPrecedence );
+
+	//	REMOVE an item
+	//	--------------
+    /**
+     * Removes an object from the precedences collection. The removed precedence will be deleted, but not the referenced object attach to this precedence. 
+     */
+
+	HRESULT     Remove
+				( in					long				iIndex );
+
+	//	REMOVE all items
+	//	----------------
+    /**
+    * Removes all objects from the precedences collection. 
+     */
+	HRESULT     RemoveAll
+				();
+};
+
+// Interface name : CATIAManufacturingPrecedences
+#pragma ID CATIAManufacturingPrecedences "DCE:57d0bb6a-f32b-11d2-9ee30004ac963be8"
+#pragma DUAL CATIAManufacturingPrecedences
+
+// VB object name : ManufacturingPrecedences (Id used in Visual Basic)
+#pragma ID ManufacturingPrecedences "DCE:5fb1c0d6-f32b-11d2-9ee30004ac963be8"
+#pragma ALIAS CATIAManufacturingPrecedences ManufacturingPrecedences
+
+#endif
+
+// CATIAManufacturingPrecedences_IDL
+
+

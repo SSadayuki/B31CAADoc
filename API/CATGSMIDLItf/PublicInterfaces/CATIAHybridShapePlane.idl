@@ -1,0 +1,171 @@
+#ifndef CATIAHybridShapePlane_IDL
+#define CATIAHybridShapePlane_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+// CATIAHybridShapePlane:         
+// Exposed interface for HybridShape Plane
+//=================================================================
+
+
+#include "CATIAHybridShape.idl"
+#include "CATSafeArray.idl"
+#include "CATIAReference.idl"
+/**
+ * Represents the hybrid shape Plane feature object.
+ * <b>Role</b>: Declare  hybrid shape Plane root feature object. 
+ * All interfaces for different type of Plane derivates HybridShapePlane.
+ * <p> Use the CATIAHybridShapeFactory to create a HybridShapePlane objects.
+ * @see CATIAHybridShapeFactory 
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapePlane : CATIAHybridShape
+{
+ /**
+ *  Returns the origin of the plane.
+    *   @param oOrigin[0]
+    *   The X Coordinate of the plane origin
+    *   @param oOrigin[1]
+    *   The Y Coordinate of the plane origin
+    *   @param oOrigin[2]
+    *   The Z Coordinate of the plane origin
+ * @see CATIAHybridShapeFactory 
+ */ 
+        HRESULT GetOrigin (inout  CATSafeArrayVariant oOrigin);
+
+
+ /**
+ *  Returns the coordinates of the first plane axis.
+ *   @param oFirstAxis[0]
+ *   The X Coordinate of the first plane axis
+ *   @param oFirstAxis[1]
+ *   The Y Coordinate of the first plane axis
+ *   @param oFirstAxis[2]
+ *   The Z Coordinate of the first plane axis
+ * @see CATIAHybridShapeFactory 
+ */ 
+        HRESULT GetFirstAxis (inout  CATSafeArrayVariant oFirstAxis);
+
+
+ /**
+  *  Returns the coordinates of the second plane axis.
+  *   @param oSecondAxis[0]
+  *    The X Coordinate of the second plane axis
+  *   @param oSecondAxis[1]
+  *   The Y Coordinate of the second plane axis
+  *   @param oSecondAxis[2]
+  *   The Z Coordinate of the second plane axis
+  * @see CATIAHybridShapeFactory 
+  */ 
+        HRESULT GetSecondAxis (inout CATSafeArrayVariant oSecondAxis);
+
+ // -----------------------------------------------------------------------------
+ // WARNING : The following three calls can only be used on CATIAHybridShapePlane2Lines feature
+ // -----------------------------------------------------------------------------
+ /**
+  * Sets the origin of the plane.
+  * <br>Note:  This method can only be used on CATIAHybridShapePlane2Lines feature
+  *   @param iOrigin[0]
+  *   The X Coordinate of the plane origin
+  *   @param iOrigin[1]
+  *   The Y Coordinate of the plane origin
+  *   @param iOrigin[2]
+  *   The Z Coordinate of the plane origin
+  * @see CATIAHybridShapeFactory 
+  */ 
+        HRESULT PutOrigin (in     CATSafeArrayVariant iOrigin);
+
+
+ /**
+  * Sets the first axis. The first plane axis must be a point-direction line. 
+  * <br>Note:  This method can only be used on CATIAHybridShapePlane2Lines feature
+  *   @param iFirstAxis[0]
+  *   The X Coordinate of the first plane axis
+  *   @param iFirstAxis[1]
+  *   The Y Coordinate of the first plane axis
+  *   @param iFirstAxis[2]
+  *   The Z Coordinate of the first plane axis
+  * @see CATIAHybridShapeFactory 
+  */ 
+        HRESULT PutFirstAxis (in     CATSafeArrayVariant iFirstAxis);
+
+
+ /**
+  * Sets the coordinates of the second plane axis. The second plane axis must be a point-direction line
+  * <br>Note:  This method can only be used on CATIAHybridShapePlane2Lines feature
+  *   @param iSecondAxis[0]
+  *   The X Coordinate of the second plane axis
+  *   @param iSecondAxis[1]
+  *   The Y Coordinate of the second plane axis
+  *   @param iSecondAxis[2]
+  *   The Z Coordinate of the second plane axis
+  * @see CATIAHybridShapeFactory 
+  */ 
+        HRESULT PutSecondAxis (in    CATSafeArrayVariant iSecondAxis);
+  // -----------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------
+
+ /**
+  * Gets the position where the plane is displayed.
+  * @param oX 
+  *      X coordinates 
+  * @param oY 
+  *      Y coordinates 
+  * @param oZ 
+  *      Z coordinates 
+  * @return 
+  * S_OK if the position has been set before, E_FAIL else.
+  */
+        HRESULT GetPosition(out double  oX, out double  oY, out double  oZ);
+
+/**
+  * Sets the position where the plane is displayed.
+  * @param iX 
+  *      X coordinates 
+  * @param iY 
+  *      Y coordinates 
+  * @param iZ 
+  *      Z coordinates 
+  */
+        HRESULT SetPosition(in double iX, in double iY, in double iZ);
+
+/**
+  * Removes reference position of a plane.
+  * <br> Note: 
+  * When removed, the plane is displayed at its default position.
+  */
+	    HRESULT RemovePosition();
+
+/**
+  * Queries whether the plane is a reference plane (fixed axis plane).
+  * @return 
+  *   0 when the plane is a reference plane, 1 else.
+  */
+        HRESULT IsARefPlane(out /*IDLRETVAL*/ long oRef);
+};
+
+
+
+
+
+// Interface name : CATIAHybridShapePlane
+#pragma ID CATIAHybridShapePlane "DCE:89b52f57-4465-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapePlane
+
+// VB object name : HybridShapePlane (Id used in Visual Basic)
+#pragma ID Plane "DCE:89b52f60-1276-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapePlane Plane
+
+
+#endif
+
+

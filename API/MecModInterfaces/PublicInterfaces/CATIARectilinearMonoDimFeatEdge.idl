@@ -1,0 +1,72 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIARectilinearMonoDimFeatEdge_IDL
+#define CATIARectilinearMonoDimFeatEdge_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// RectilinearMonoDimFeatEdge Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIAMonoDimFeatEdge.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+/**
+ * 1-D boundary belonging to a feature whose topological result is one dimensional, the boundary having a rectilinear geometry.
+ * <b>Role</b>: 
+ * This @href CATIABoundary object may be, for example, in a part containing a Sketch which is made up of a line
+ * segment and a spline, the line segment.</br> 
+ * You will create a RectilinearMonoDimFeatEdge object using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it
+ * to the operator (such as @href CATIAHole#SetDirection ).</br> 
+ * The lifetime of a RectilinearMonoDimFeatEdge object is limited, see @href CATIABoundary.</br> 
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b> see the @href CATIARectilinearTriDimFeatEdge example
+ * </dl>
+ */ 
+
+interface CATIARectilinearMonoDimFeatEdge : CATIAMonoDimFeatEdge
+{
+  /**
+    * Returns the origin of the the rectilinear edge. 	
+    *   @param oOrigin[0]
+    *   The X Coordinate of the rectilinear edge origin
+    *   @param oOrigin[1]
+    *   The Y Coordinate of the rectilinear edge origin
+    *   @param oOrigin[2]
+    *   The Z Coordinate of the rectilinear edge origin
+    */
+  HRESULT GetOrigin (inout  CATSafeArrayVariant oOrigin);
+
+  /**
+    *  Returns the direction of the rectilinear edge
+    *   @param oDirection[0]
+    *   The X Coordinate of the direction
+    *   @param oDirection[1]
+    *   The Y Coordinate of the direction
+    *   @param oDirection[2]
+    *   The Z Coordinate of the direction
+    */ 
+  HRESULT GetDirection (inout  CATSafeArrayVariant oDirection);
+};
+
+// Interface Name : CATIARectilinearMonoDimFeatEdge
+
+#pragma ID CATIARectilinearMonoDimFeatEdge "DCE:a6c72b30-31f2-11d6-80660010b5d44ab2"
+#pragma DUAL CATIARectilinearMonoDimFeatEdge
+
+// VB Object Name : RectilinearMonoDimFeatEdge
+#pragma ID RectilinearMonoDimFeatEdge "DCE:ceacd470-31f2-11d6-80660010b5d44ab2"
+#pragma ALIAS CATIARectilinearMonoDimFeatEdge RectilinearMonoDimFeatEdge
+
+#endif
+//#endif
+

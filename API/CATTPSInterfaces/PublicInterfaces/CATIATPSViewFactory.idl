@@ -1,0 +1,51 @@
+#ifndef CATIATPSViewFactory_IDL
+#define CATIATPSViewFactory_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATVariant.idl"
+
+interface CATIAReference;
+interface CATIATPSView;
+
+/**
+ * Represents the TPS view factory object.
+ * All the created views are added to the annotation set object from which this 
+ * interface is retrieved, thanks to the @href CATIAAnnotationSet#TPSFactory property.
+ */
+interface CATIATPSViewFactory : CATIABase 
+{
+   /**
+    * Creates a view.
+    * @param iPlane
+    *   The plane onto which the view will be created
+    * @param iViewType
+    *  The view type
+    *  <br><b>Legal values</b>:
+    *  <ul>
+    *   <li>1: Front View</li>
+    *   <li>2: Section View</li>
+    *   <li>3: Cut View</li>
+    *  </ul>
+    */
+    HRESULT CreateView (in CATIAReference              iPlane,
+                        in CATVariant                  iViewType,
+                        out /*IDLRETVAL*/ CATIATPSView oView);
+};
+
+// Interface name : CATIATPSViewFactory
+#pragma ID CATIATPSViewFactory "DCE:da708650-ecfd-41be-a37b97f4edb2d576"
+#pragma DUAL CATIATPSViewFactory
+
+// VB object name : TPSViewFactory (Id used in Visual Basic)
+#pragma ID TPSViewFactory "DCE:13775ac1-198e-412b-a399773edb27eda5"
+#pragma ALIAS CATIATPSViewFactory TPSViewFactory
+
+#endif

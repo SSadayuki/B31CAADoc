@@ -1,0 +1,264 @@
+// COPYRIGHT Dassault Systemes 2001
+//===================================================================
+#ifndef CATIAInstanceFactory_IDL
+#define CATIAInstanceFactory_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAFactory.idl"
+#include "CATBSTR.idl"
+
+	/**  
+	 * Represents the CATIAInstanceFactory.
+	 * <b>Role</b>:
+	 * This interface is used to create a new instance of a shape reference (@href CATIAShapeInstance )
+	 * or a hybrid shape reference (@href CATIAHybridShapeInstance ) in case of the instantiation of a <tt>User Feature</tt>.<br>
+	 * It is also used to instantiate a <tt>Power Copy</tt> reference.<br><br>
+	 * This interface contains two protocols of instantiation:<br>
+	 * <ul>
+	 * <li>The first protocol is dedicated to <tt>User Feature</tt> instantiation only.<br>
+	 * It is defined by a single method: @href #AddInstance .
+	 * It creates a shape or hybrid shape instance depending on the result of the <tt>User Feature</tt>.<br>
+	 * Use this method when you want to perform only one instantiation of the reference.
+	 * Read the document containing the <tt>User Feature</tt> reference and instantiate it.<br>
+	 * As the document containing the reference is released from the session at the end of the instantiation,
+	 * it is not recommmended to use this method if you want to perform several instantiations of the same reference in a loop.<br>
+	 * In that case, prefer the second protocol of instantiation.</li>
+	 * <li>The second protocol is dedicated to both <tt>User Feature</tt> and <tt>Power Copy</tt> instantiations.<br>
+	 * It is defined by several methods that must be called in order.<br>
+	 * <ul>
+	 * <li>For <tt>User Feature</tt> instantiation, these methods are an alternative way of the @href #AddInstance method.<br>
+	 * It is recommended to use the second protocol to perform several instantiations of the same reference in a loop.<br></li>
+	 * <li>For <tt>Power Copy</tt> instantiation, it is the only way of instantiating a reference.<br></li>
+	 * </ul>
+	 * The instantiation process is composed of three major steps:<br>
+	 * <ol>
+	 * <li>The first step @href #BeginInstanceFactory consists in initializing the @href CATIAInstanceFactory with the reference
+	 * and the document where it is stored.<br>This step must be called once at the beginning whatever the number of instantiations are done.</li>
+	 * <li> Optional step @href #InstantiationMode allow the user to specify the mode of the instantiation, that is to say "After" or "Inside".<br> 
+	 * If this method is not called, the instantiation mode will be chosen according to the BeginInstantiate method.</li>
+	 * <li>The second step is the instantiation itself: it is composed of five methods that must be called in the order.<br>
+	 * This set of five methods can be called in a loop in order to make several instantiations.<br>
+	 * <ol>
+	 * <li>The method @href #BeginInstantiate is used to initialize all data of the reference.</li>
+	 * <li>The method @href #PutInputData is used to set a value to any input of the reference.</li>
+	 * <li>The method @href #GetParameter is used to retrieve any parameter of the reference in order to modify its value.</li>
+	 * <li>The method @href #Instantiate is used to duplicate the reference. It returns the created instance when it does exist.</li>
+	 * <li>The method @href #EndInstantiate is used to indicate that the instantiation is done.</li>
+	 * </ol>
+	 * <li>The third step @href #EndInstanceFactory consists in ending the instantiation and cleaning the @href CATIAInstanceFactory.<br>
+	 * When doing several instantiations in a loop, this step must be called just once at the end of all instantiations.</li>
+	 * </ol>
+	 * </ul>
+	 */
+
+interface CATIAInstanceFactory : CATIAFactory 
+{
+
+	//
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+
+    /**
+     * Creates a new instance of a shape or hybrid shape.
+     * @param iReference
+     *   The reference shape or hybrid shape.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the instance <tt>NewInstance</tt> in the part.
+     * <pre>
+     * Set NewInstance = instanceFactory.<font color="red">AddInstance</font>(reference)
+     * </pre>
+     * </dl>
+     */
+         HRESULT   AddInstance(in CATIABase iReference,
+					out /*IDLRETVAL*/ CATIABase oInstance);
+
+	//
+	//		=================
+	//		== NEW METHODS ==
+	//		=================
+	//    
+
+	/**
+	 * Initializes the instantiation process with the document containing the reference.
+	 * <br><b>Role</b>:
+	 * Use this method to start instantiating a reference in the current document.<br>
+	 * In that method, the document containing the reference is locked in session.<br>
+	 * It will be unlocked in the last step @href #EndInstanceFactory .
+	 * @param iNameOfReference
+	 *	The name of the reference to be instantiated.
+	 * @param iDocumentFileName
+	 *  The name of the file containing the document where to find the reference to be instantiated.
+     * <! @sample >
+	 * </dl>
+     * <dt>
+	 * <b>Example:</b>
+     * <dd>
+	 * The following example initializes the factory with a document and a reference:
+     * <pre>
+     * InstanceFactory.<font color="red">BeginInstanceFactory</font>"NameOfReference","c:\tmp\NameOfDocument.CATPart"
+     * </pre>
+     * </dl>
+	 */
+		HRESULT   BeginInstanceFactory(in CATBSTR iNameOfReference, in CATBSTR iNameOfDocument);
+
+	/**
+	 * Sets the mode of instantiation to "Inside" or "After".
+	 * <br><b>Role</b>:
+	 * This method should be called BEFORE the method BeginInstantiate to take into account the desired instantiation mode.<br>
+	 * It is used to set the destination path of insertion of the template reference.
+	 * <! @sample >
+	 * <dl><dt>
+	 * <b>Example:</b>
+	 * <dd>
+	 * The following example shows how to determine the instantiation mode (Mode's value is "Inside" or "After"):
+	 * <pre>
+	 * InstanceFactory.<font color="red">InstantationMode</font> = Mode
+	 * </pre>
+	 * </dl>
+	*/
+	#pragma PROPERTY InstantiationMode
+		HRESULT   put_InstantiationMode (in CATBSTR iInstantiationModeBSTR);
+	
+	/**
+	 * Initializes the data of the reference.
+	 * <br><b>Role</b>:
+	 * This is the first method of the second step of instantiation.<br>
+	 * It is used to initialize all data of the reference in the factory.
+	 * <! @sample >
+	 * <dl><dt>
+	 * <b>Example:</b>
+	 * <dd>
+	 * The following example shows how to initialize the factory:
+	 * <pre>
+	 * InstanceFactory.<font color="red">BeginInstantiate</font>
+	 * </pre>
+	 * </dl>
+	*/
+		HRESULT   BeginInstantiate();
+    
+	/**
+     * Sets a value to an input of the reference.
+	 * <br><b>Role</b>:
+	 * This is the second method of the second step of instantiation.<br>
+	 * It is used to set a value to any input of the reference.<br>
+	 * It has to be called on each input of the reference.
+     * @param iName
+     *   The name of the input.
+	 * @param iInput
+     *   The element to set as the new value of the input.
+     *   <br>All types of @href CATIABoundary object are possibly supported.
+     * <! @sample >
+	 * </dl>
+     * <dt>
+	 * <b>Example:</b>
+     * <dd>
+	 * The following example sets a value to an input of the reference:
+	 * The input is a point and its name is Input1. 
+     * <pre>
+     * InstanceFactory.<font color="red">PutInputData</font> "Input1",point1
+     * </pre>
+     * </dl>
+     */
+		HRESULT   PutInputData (in CATBSTR iName, in CATBaseDispatch iInput);
+
+    /**
+     * Retrieves a parameter of the reference by its name.
+	 * <br><b>Role</b>:
+	 * This is the third method of the second step of instantiation.<br>
+	 * This step is optional.<br>
+	 * It is used to retrieve a parameter of the reference in order to change
+	 * its value, using the <tt>ValuateFromString</tt> method of the <tt>Parameter</tt> interface.<br>
+	 * It has to be called on each parameter whose value has to be changed.
+     * @param iName
+     *   The name of the parameter.
+     * <! @sample >
+	 * </dl>
+     * <dt>
+	 * <b>Example:</b>
+     * <dd>
+	 * The following example retrieves a parameter on the reference:
+     * <pre>
+     * Set parameter = InstanceFactory.<font color="red">GetParameter</font>("Parameter1")
+     * </pre>
+     * </dl>
+     */
+		HRESULT   GetParameter(in CATBSTR iName, out /*IDLRETVAL*/ CATIABase oParameter);
+
+	/**
+	 * Instantiates the reference in the current document.
+	 * <br><b>Role</b>:
+	 * This is the fourth method of the second step of instantiation.<br>
+	 * It is used to duplicate or instantiate the data of the reference.<br>
+	 * <ul>
+	 * <li>In case of <tt>Power Copy</tt> instantiation, the data are duplicated and there is
+	 * no created instance.</li>
+	 * <li>In case of <tt>User Feature</tt> instantiation, the data are instantiated and an
+	 * instance is created and returned.</li>
+	 * </ul>
+     * <! @sample >
+	 * <dl><dt>
+	 * <b>Example:</b>
+     * <dd>
+	 * The following example instantiates the reference:
+     * <pre>
+     * Set Instance = InstanceFactory.<font color="red">Instantiate</font>
+     * </pre>
+     * </dl>
+	 */
+		HRESULT   Instantiate(out /*IDLRETVAL*/ CATIABase oInstance);
+
+	/**
+	 * Ends the instantiation of the reference.
+	 * <br><b>Role</b>:
+	 * This is the fifth and last method of the second step of instantiation.<br>
+	 * It is used to end the instantiation: after this step, all the links to the
+	 * reference are broken.
+	 * <! @sample >
+	 * <dl><dt>
+	 * <b>Example:</b>
+	 * <dd>
+	 * The following example shows how to end the instantiation:
+	 * <pre>
+	 * InstanceFactory.<font color="red">EndInstantiate</font>
+	 * </pre>
+	 * </dl>
+	 */
+		HRESULT   EndInstantiate();
+
+	/**
+	 * Ends the instantiation process.
+	 * <br><b>Role</b>:
+	 * Use this method to end the instantiation process.<br>
+	 * In that method the document containing the reference is unlocked and released from the session.
+     * <! @sample >
+	 * <dl><dt>
+	 * <b>Example:</b>
+     * <dd>
+	 * The following example shows how to end the instantiation:
+     * <pre>
+     * InstanceFactory.<font color="red">EndInstanceFactory</font>
+     * </pre>
+     * </dl>
+	 */
+		HRESULT   EndInstanceFactory();
+};
+
+// Interface name : CATIAInstanceFactory
+#pragma ID CATIAInstanceFactory "DCE:fc7949ec-bc89-11d5-a39600d0b7ac7adb"
+#pragma DUAL CATIAInstanceFactory
+
+// VB object name : InstanceFactory (Id used in Visual Basic)
+#pragma ID InstanceFactory "DCE:fc7949ed-bc89-11d5-a39600d0b7ac7adb"
+#pragma ALIAS CATIAInstanceFactory InstanceFactory
+
+#endif

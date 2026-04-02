@@ -1,0 +1,102 @@
+#ifndef CATIAHybridBodies_IDL
+#define CATIAHybridBodies_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//                                   
+// CATIAHybridBodies:                           
+// Exposed interface for GSM Bodies collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Apr99	Creation						 JM Gautier
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAHybridBody;
+
+//-----------------------------------------------------------------
+    /**
+     * A collection of the HybridBody objects.
+     */
+ 
+interface CATIAHybridBodies : CATIACollection
+{
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+
+    /**
+    * Creates a new hybrid body and adds it to the HybridBodies collection.
+    * This body becomes the current one
+    * @return The created body
+    * <! @sample >
+    * <dt><b>Example:</b>
+    * <dd>
+    * The following example creates a body named <tt>newHybridBody</tt>
+    * in the hybrid body collection of the <tt>rootPart</tt> part
+    * in the <tt>partDoc</tt> part document. <tt>NewPartBody</tt> becomes
+    * the current body in <tt>partDoc</tt>.
+    * <pre>
+    * Set NewPartBody = rootPart.Bodies.<font color="red">AddPartBody</font>()
+    * </pre>
+    */
+
+    HRESULT     Add
+               ( out /*IDLRETVAL*/ CATIAHybridBody            oHybridBody );
+
+    /**
+    * Returns a body using its index or its name from the Bodies
+    * collection.
+    * @param iIndex
+    *   The index or the name of the hybrid body to retrieve from
+    *   the collection of hybrid bodies.
+    *   As a numerics, this index is the rank of the hybrid body
+    *   in the collection.
+    *   The index of the first hybrid body in the collection is 1, and
+    *   the index of the last hybrid body is Count.
+    *   As a string, it is the name you assigned to the hybrid body using
+    *   the @href CATIABase#Name property.
+    * @return The retrieved hybrid body
+    * <dt><b>Example:</b>
+    * <dd>
+    * This example retrieves in <tt>ThisHybridBody</tt> the fifth hybrid body
+    * in the collection and in <tt>ThatHybridBody</tt> the hybrid body
+    * named <tt>MyHybridBody</tt> in the hybrid body collection of the <tt>partDoc</tt>
+    * part document.
+    * <pre>
+    * Set hybridBodyColl = partDoc.Part.HybridBodies
+    * Set ThisHybridBody = hybridBodyColl.<font color="red">Item</font>(5)
+    * Set ThatHybridBody = hybridBodyColl.<font color="red">Item</font>("MyHybridBody")
+    * </pre>
+    */
+
+    HRESULT     Item
+            ( in     CATVariant           iIndex,
+              out /*IDLRETVAL*/ CATIAHybridBody oHybridBody);
+};
+
+// Interface name : CATIAHybridBodies
+
+#pragma ID CATIAHybridBodies "DCE:e567225a-e83d-11d2-9265006094b9a462"
+#pragma DUAL CATIAHybridBodies
+
+// VB object name : HybridBodies (Id used in Visual Basic)
+
+#pragma ID HybridBodies "DCE:960b7cb0-e83d-11d2-9265006094b9a462"
+#pragma ALIAS CATIAHybridBodies HybridBodies
+
+#endif
+// CATIAHybridBodies_IDL
+

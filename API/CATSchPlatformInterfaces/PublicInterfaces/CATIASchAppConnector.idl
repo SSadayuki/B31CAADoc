@@ -1,0 +1,190 @@
+#ifndef CATIASchAppConnector_IDL 
+#define CATIASchAppConnector_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchAppConnectable;
+interface  CATIASchListOfBSTRs;
+interface  CATIASchListOfObjects;
+interface  CATIASchAppConnector;
+interface  CATIASchAppConnection;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic connector.
+  */
+
+interface CATIASchAppConnector : CATIABase
+{
+  /**
+  * Find the application object that owns this connector.
+  * @param oConnectable
+  *   An application object that the connector belongs to.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnector
+  * Dim objArg1 As SchAppConnectable
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">AppGetAssociatedConnectable</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppGetAssociatedConnectable ( 
+    out /*IDLRETVAL*/ CATIASchAppConnectable oConnectable );
+    
+  /**
+  * Find all the class types of connector that are compatible with
+  * this connector for connections.
+  * @param oLCntrCompatClassTypes
+  *   A list of all the class types of connectors that are compatible
+  *   with this connector for connections.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnector
+  * Dim objArg1 As SchListOfBSTRs
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">AppListCompatibleTypes</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppListCompatibleTypes ( 
+    out /*IDLRETVAL*/ CATIASchListOfBSTRs oLCntrCompatClassTypes );
+    
+  /**
+  * Find all the connections that include this connector.
+  * @param oLCntnClassFilter
+  *   A list of all the class types for filtering the output connection
+  *   list.
+  * @param oLConnections
+  *   A list of connections that include this connector
+  *   (members are CATISchAppConnection interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnector
+  * Dim objArg1 As SchListOfBSTRs
+  * Dim objArg2 As SchListOfObjects
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">AppListConnections</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT AppListConnections ( 
+    in CATIASchListOfBSTRs iLCntnClassFilter, out /*IDLRETVAL*/ CATIASchListOfObjects oLConnections );
+    
+  /**
+  * Connect to an input connector.
+  * @param iCntrToConnect
+  *   A schematic connector object to connect to
+  * @param oConnection
+  *   Connection created
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnector
+  * Dim objArg1 As SchAppConnector
+  * Dim objArg2 As SchAppConnection
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">AppConnect</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT AppConnect ( 
+    in CATIASchAppConnector iCntrToConnect, 
+    out /*IDLRETVAL*/ CATIASchAppConnection oConnection );
+    
+  /**
+  * Connect to an input connector for Branch.
+  * @param iCntrToConnect
+  *   A schematic connector object to connect to
+  * @param oConnection
+  *   Connection created
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnector
+  * Dim objArg1 As SchAppConnector
+  * Dim objArg2 As SchAppConnection
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">AppConnectBranch</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT AppConnectBranch ( 
+    in CATIASchAppConnector iCntrToConnect, 
+    out /*IDLRETVAL*/ CATIASchAppConnection oConnection );
+    
+  /**
+  * Disconnect from an input connector.
+  * @param iCntrToDisconnect
+  *   A schematic connector object to disconnect from
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnector
+  * Dim objArg1 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">AppDisconnect</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppDisconnect ( 
+    in CATIASchAppConnector iCntrToDisConnect );
+    
+  /**
+  * Query whether it is OK to no show the connector after it is connected.
+  * @param oBYes
+  *   If TRUE, then it is OK to no show.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnector
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppOKToNoShowConnectedCntr</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppOKToNoShowConnectedCntr ( 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether the connector has been connected. 
+  * @param oBYes
+  *   If TRUE, then it is connected
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnector
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppIsCntrConnected</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppIsCntrConnected ( 
+    inout boolean oBYes );
+    
+};
+    
+// Interface name : CATIASchAppConnector
+#pragma ID CATIASchAppConnector "DCE:8e4ab25d-e75f-4b7a-bd2c09676f64f4b4"
+#pragma DUAL CATIASchAppConnector
+    
+// VB object name : SchAppConnector
+#pragma ID SchAppConnector "DCE:7349836a-54b6-4eb3-8a681869dd1ca09e"
+#pragma ALIAS CATIASchAppConnector SchAppConnector
+    
+#endif 
+    

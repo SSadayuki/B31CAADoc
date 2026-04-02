@@ -1,0 +1,62 @@
+#include "CATIAV5Level.h"
+#ifndef CATIAR201
+
+#ifndef CATIAPrismExt_IDL
+#define CATIAPrismExt_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L0
+ * @CAA2Usage U0
+ */
+
+/*	CAA2Level L0
+		Provides Customers, Business Partners, and Adopters with Authorized APIs for beta testing 
+		Provides Authorized APIs to be qualified as L1 in next releases to enable a validation/evaluation process. 
+		No compatibility is insured - but usage is allowed 
+		May change or disappear without any warning 
+		No documentation is provided 
+*/
+
+/*	CAA2Usage U0
+		Usage not yet specified. Reserved for L0 Authorized APIs
+		Nevertheless, L0 Authorized APIs can have a specified usage ranging from U1 to U6.
+*/
+
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2010
+//=================================================================
+//								   
+// CATIAPrismExt:						   
+// Interface for Extension Mechanical Prism which will support GetProfileElement
+//								   
+#include  "CATIABase.idl"
+interface CATIAReference;
+
+// IDLHIDDEN tag to specify that CATIAPrismExt interface is an hidden interface.
+//-----------------------------------------------------------------
+interface /*IDLHIDDEN*/  CATIAPrismExt : CATIABase
+{	
+	/*
+	* Returns a profile element
+	* Takes input as Prism Object Reference and returns the Profile Element as Reference.
+	*/
+	HRESULT	GetProfileElement ( in CATIAReference iPrismObj , out  /*IDLRETVAL*/  CATIAReference oProfileElement );
+
+};
+
+// Interface name : CATIAPrismExt
+#pragma ID CATIAPrismExt "DCE:80360f84-153a-11df-abf3001111ca785b"
+#pragma DUAL CATIAPrismExt
+
+// VB object name : PrismExt (Id used in Visual Basic)
+#pragma ID PrismExt "DCE:b39a111f-1539-11df-abf3001111ca785b"
+#pragma ALIAS CATIAPrismExt PrismExt
+
+
+#endif
+// CATIAPrismExt_IDL
+
+#endif
+

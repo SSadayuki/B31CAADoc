@@ -1,0 +1,120 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAMarker3Ds.idl
+//   This automation interface allows to manage a Marker3D collection.
+//
+//===================================================================
+//
+//  Aug 2000  Creation: LJE
+//
+//===================================================================
+#ifndef CATIAMarker3Ds_IDL
+#define CATIAMarker3Ds_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIAMarker3D.idl"
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+
+/**  
+ * A collection of Marker3D objects.
+ * <p>The method @href CATIAProduct#GetTechnologicalObject <tt>("Marker3Ds")</tt> on the root product retrieves this collection.
+ */
+interface CATIAMarker3Ds : CATIACollection
+{
+  /**
+   * Creates a text marker 3D and adds it to the marker 3D collection. The bottom-left corner of the text is anchored to a given point.
+   * @param iTextCoordinates
+   *    The coordinates of the text anchor point
+   *    <ul>
+   *    <li>iTextCoordinates(0) is the X coordinate of the text anchor point
+   *    <li>iTextCoordinates(1) is the Y coordinate of the text anchor point
+   *    <li>iTextCoordinates(2) is the Z coordinate of the text anchor point
+   *    </ul>
+   * @param iText
+   *    The text
+   * @param iObjectCoordinates
+   *    The coordinates of the anchor of the marker 3D on the object
+   *    <ul>
+   *    <li>iObjectCoordinates(0) is the X coordinate of the object anchor point
+   *    <li>iObjectCoordinates(1) is the Y coordinate of the object anchor point
+   *    <li>iObjectCoordinates(2) is the Z coordinate of the object anchor point
+   *    </ul>
+   * @param iObject
+   *    The object which supports the text.
+   * @return
+   *    The created marker 3D
+   * @sample
+   *    This example creates a new marker 3D in the <tt>TheMarker3Ds</tt> collection.
+   *    <pre>
+   *    Dim NewMarker3DText As Marker3D
+   *    Set NewMarker3DText = TheMarker3Ds.<font color="red">Add3DText</font>(Position1, "example", Position2, Product2)
+   *    </pre>
+   */
+  HRESULT Add3DText(
+    in  CATSafeArrayVariant           iTextCoordinates,
+    in  CATBSTR                       iText,
+    in  CATSafeArrayVariant           iObjectCoordinates,
+    in  CATIABase                     iObject,
+    out /*IDLRETVAL*/ CATIAMarker3D   oMarker3D);
+
+  /**
+   * Returns a marker 3D using its index from the Marker3Ds collection.
+   * @param iIndex
+   *    The index or the name of the marker 3D to retrieve from the collection of Marker3Ds.
+   *    As a numerics, this index is the rank of the marker 3D in the collection.
+   *    The index of the first Marker3D in the collection is 1, and
+   *    the index of the last Marker3D is Count.
+   *    As a string, it is the name you assigned to the Marker3D.
+   * @return
+   *    The retrieved marker 3D
+   * @sample
+   *    This example retrieves in <tt>ThisMarker3D</tt> the ninth marker 3D,
+   *    and in <tt>ThatMarker3D</tt> the marker 3D named
+   *    <tt>Marker3D3</tt> from the <tt>TheMarker3Ds</tt> collection. 
+   *    <pre>
+   *    Dim ThisMarker3D As Marker3D
+   *    Set ThisMarker3D = TheMarker3Ds.<font color="red">Item</font>(9)
+   *    Dim ThatMarker3D As Marker3D
+   *    Set ThatMarker3D = TheMarker3Ds.<font color="red">Item</font>("Marker3D3")
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAMarker3D oMarker3D);
+
+  /**
+   * Removes a marker 3D from the Marker3Ds collection.
+   * @param iIndex
+   *    The index or the name of the marker 3D to retrieve from the collection of Marker3Ds.
+   *    As a numerics, this index is the rank of the marker 3D in the collection.
+   *    The index of the first marker 3D in the collection is 1, and
+   *    the index of the last marker 3D is Count.
+   *    As a string, it is the name you assigned to the marker 3D.
+   * @sample
+   *    The following example removes the tenth marker 3D and the marker 3D named
+   *    <tt>Marker3D2</tt> from the <tt>TheMarker3Ds</tt> collection.
+   *    <pre>
+   *    TheMarker3Ds.<font color="red">Remove</font>(10)
+   *    TheMarker3Ds.<font color="red">Remove</font>("Marker3D2")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAMarker3Ds
+#pragma ID CATIAMarker3Ds "DCE:05e771d2-7cb3-11d4-a38400d0b7ac57cb"
+#pragma DUAL CATIAMarker3Ds
+
+// VB object name : Marker3Ds (Id used in Visual Basic)
+#pragma ID Marker3Ds "DCE:08286ae6-7cb3-11d4-a38400d0b7ac57cb"
+#pragma ALIAS CATIAMarker3Ds Marker3Ds
+
+#endif

@@ -1,0 +1,41 @@
+#ifndef CATIACompositeTolerance_IDL
+#define CATIACompositeTolerance_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+/**
+ * Interface for accessing composite tolerance on a TPS.
+ * (ASME norm only)
+ */
+interface CATIACompositeTolerance : CATIABase 
+{
+    /**
+     * Retrieves value (in millimeters).
+     *  @param oValue
+     *    Positive or equal to -1 which means not valuated.
+     */
+  #pragma PROPERTY Value
+   HRESULT get_Value (out /*IDLRETVAL*/ double oValue);
+    /**
+     * Retrieves datum count.
+     */
+  #pragma PROPERTY BoxCount
+   HRESULT get_BoxCount (out /*IDLRETVAL*/ double oBoxCount);
+};
+
+// Interface name : CATIACompositeTolerance
+#pragma ID CATIACompositeTolerance "DCE:538cec20-2f7e-11d6-be890002b341dd3a"
+#pragma DUAL CATIACompositeTolerance
+
+// VB object name : CompositeTolerance (Id used in Visual Basic)
+#pragma ID CompositeTolerance "DCE:538cec21-2f7e-11d6-be890002b341dd3a"
+#pragma ALIAS CATIACompositeTolerance CompositeTolerance
+
+#endif

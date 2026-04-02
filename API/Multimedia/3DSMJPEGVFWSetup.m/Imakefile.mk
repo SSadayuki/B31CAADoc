@@ -1,0 +1,9 @@
+BUILT_OBJECT_TYPE = RUNTIME DATA
+BUILD = NO
+
+OS = intel_a
+BUILD = YES
+
+OS = win_b64
+BUILD = YES
+

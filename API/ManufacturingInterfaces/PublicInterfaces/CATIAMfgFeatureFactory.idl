@@ -1,0 +1,40 @@
+//===================================================================
+// COPYRIGHT Dassault Systemes 2019
+//===================================================================
+#ifndef CATIAMfgFeatureFactory_IDL
+#define CATIAMfgFeatureFactory_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+/**
+* Interface dedicated to machining features creation.
+* <b>Role</b>: This interface is used to create new machining features. <br>
+*/
+interface CATIAMfgFeatureFactory : CATIABase
+{
+	/**
+	* Creates a new machining feature.
+	* @param iType
+	*   The type of feature (ex: MfgInstructionSet, MfgOffsetPosition)
+	* @return
+	*   The created machining feature
+	**/
+	HRESULT CreateMachiningFeature(in CATBSTR iType, out /*IDLRETVAL*/ CATIABase oFeature);
+
+};
+
+// Interface name : CATIAMfgFeatureFactory
+#pragma ID CATIAMfgFeatureFactory "DCE:2df50675-f664-473a-94195269018ffce3"
+#pragma DUAL CATIAMfgFeatureFactory
+
+// VB object name : ManufacturingFeatureFactory (Id used in Visual Basic)
+#pragma ID ManufacturingFeatureFactory "DCE:52ec8068-c9a2-4edc-8a85be9c0623cbb2"
+#pragma ALIAS CATIAMfgFeatureFactory ManufacturingFeatureFactory
+
+#endif

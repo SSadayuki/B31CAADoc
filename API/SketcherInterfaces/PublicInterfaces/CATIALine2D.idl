@@ -1,0 +1,80 @@
+#ifndef CATIALine2D_IDL
+#define CATIALine2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACurve2D.idl"
+#include "CATSafeArray.idl"
+
+/** 
+ *   Class defining a line in 2D Space.
+ */
+
+interface CATIALine2D : CATIACurve2D
+{
+	//		=============
+	//		== METHODS ==
+	//		=============
+        //
+
+        /**
+        *       Returns a point lying on the line
+        *       @param oPoint[0]            
+        *       The X Coordinate of a point lying on the line
+        *       @param oPoint[1]
+        *       The Y Coordinate of a point lying on the line
+        */
+        HRESULT GetOrigin(inout  CATSafeArrayVariant oOrigin);
+        //
+
+        /**
+        *       Returns the unit-vector pointing in the direction of the
+        *       line.
+        *       @param oDirection[0]
+        *       The X Coordinate of the unit vector pointing in the 
+        *       direction of the line
+        *       @param oDirection[1]
+        *       The Y Coordinate of the unit vector pointing in the
+        *        direction of the line
+        */
+        HRESULT GetDirection(inout  CATSafeArrayVariant oDirection);
+        //
+        //
+        /**
+        *       Modifies the caracteristics of the infinite line
+        *       @param iX              
+        *       The X Coordinate of a point lying on the line
+        *       @param iY
+        *       The Y Coordinate of a point lying on the line
+        *       @param iXDirection
+        *       The X Coordinate of the unit vector pointing in the
+        *       direction of the line
+        *       @param iYDirection
+        *       The Y Coordinate of the unit vector pointing in the 
+        *       direction of the line
+        */
+        HRESULT SetData (in     double    iX,
+                         in     double    iY,
+                         in     double    iXDirection,
+                         in     double    iYDirection);
+
+};
+
+// Interface name : CATIALine2D
+#pragma ID CATIALine2D "DCE:a014abde-6b19-11d1-a2800000f87546fd"
+#pragma DUAL CATIALine2D
+
+// VB object name : Line2D (Id used in Visual Basic)
+#pragma ID Line2D "DCE:a02ee5bc-6b19-11d1-a2800000f87546fd"
+#pragma ALIAS CATIALine2D Line2D
+
+
+#endif
+// CATIALine2D_IDL
+

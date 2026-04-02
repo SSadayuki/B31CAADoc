@@ -1,0 +1,60 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIAUnits_IDL
+#define CATIAUnits_IDL
+// COPYRIGHT Dassault Systemes 2001
+
+/*IDLREP*/
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAUnit;
+
+/**  
+ * Represents the collection of Units.
+ * This collection can be retrieved via any collection of parameters (method Units).
+ */
+interface CATIAUnits : CATIACollection 
+{
+	/**
+     * Returns a unit using its index or its name from the
+     * from the Parameters collection.
+     * @param iIndex
+     *   The index or the name of the unit to retrieve from
+     *   the collection of parameters.
+     *   As a numerics, this index is the rank of the unit
+     *   in the collection.
+     *   The index of the first unit in the collection is 1, and
+     *   the index of the last parameter is Count.
+     *   As a string, it is the name you assigned to the parameter using
+     *   the @href CATIABase#Name property or when creating the parameter.
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the millimeter unit in the <tt>units</tt>
+     * collection:
+     * <pre>
+     * Set unitmm = units.<font color="red">Item</font>("mm")
+     * </pre>
+     * </dl>
+     */
+    HRESULT     Item
+                ( in                CATVariant            iIndex
+                , out /*IDLRETVAL*/ CATIAUnit        oUnit
+                );
+};
+
+// Interface name : CATIAUnits
+#pragma ID CATIAUnits "DCE:dd507fe2-a8f2-11d5-a39e00d0b7ac63be"
+#pragma DUAL CATIAUnits
+
+// VB object name : Units (Id used in Visual Basic)
+#pragma ID Units "DCE:dd507fe3-a8f2-11d5-a39e00d0b7ac63be"
+#pragma ALIAS CATIAUnits Units
+
+#endif

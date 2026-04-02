@@ -1,0 +1,119 @@
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#ifndef CATIADesignTable_IDL
+#define CATIADesignTable_IDL
+/*IDLREP*/
+
+#include "CATIARelation.idl"
+interface CATIAParameter;
+
+
+/**  
+ * Represents the DesignTable object. 
+ */
+interface CATIADesignTable : CATIARelation 
+{
+	/**
+	* Adds an association between a parameter iParameter and a 
+	* column of the design table. 	
+	* This method does nothing if the column does not exist or if 
+	* the type of the parameter isn t compliant with the column type.
+	* @param iParameter
+	* The parameter.
+	* @param iSheetColumn
+	* The name of the column to be associated with the parameter.
+	*/
+	HRESULT AddAssociation(in CATIAParameter iParameter,
+		 in CATBSTR iSheetColumn);
+
+	/**
+	* Removes an existing association.
+	* This method does nothing if the column isn t associated or 
+	* if it doesn t exist.
+	* @param iSheetColumn
+	* The name of an associated column.
+	*/
+	HRESULT RemoveAssociation(in CATBSTR iSheetColumn);
+
+	/**
+	* Adds a row in the design table source file. 
+	* The new row is filled in with values of associated parameters.
+	* ##### Since V5R14 ##### 
+	* If the file contains at least one empty row between two not empty rows,
+	* the behavior of this method is the same for Excel and Text files :
+	* => the new row containing the current parameters values replaces the first
+	*    empty row found from the beginning of the file.
+	* RQ : before R14, for text files, the new row was appended at the end of the file.
+	*      The empty rows were never filed by this way, so that the new row was not
+	*      visible in Design Table dialog.
+	* ######################
+	* @return
+	* S_OK if succeeded, E_FAIL else.
+	*/
+	HRESULT AddNewRow();
+
+	/**
+	* Returns or sets whether the data contained in the file must be 
+	* included inside the CATIA model.
+	*/
+#pragma PROPERTY CopyMode
+	HRESULT get_CopyMode(inout /*IDLRETVAL*/ boolean oMode);
+	HRESULT put_CopyMode(in boolean iMode);
+
+	/**
+	* Returns or sets the current configuration. 
+	* Legal values:  1 to ConfigurationsNb.
+	*/
+#pragma PROPERTY Configuration
+	HRESULT get_Configuration(inout /*IDLRETVAL*/ short oLineNb);
+	HRESULT put_Configuration(in short iLineNb);
+
+	/**
+	* Returns the number of design table configurations.
+	*/
+#pragma PROPERTY ConfigurationsNb
+	HRESULT get_ConfigurationsNb(inout /*IDLRETVAL*/ short oConfigurationsNb);
+
+	/**
+	*  Returns or sets the path of the design table (read/write property).
+	*/
+#pragma PROPERTY FilePath
+	HRESULT get_FilePath(inout /*IDLRETVAL*/ CATBSTR oFilePath);
+	HRESULT put_FilePath(in CATBSTR iFilePath);
+
+	/**
+	* Returns the nb of columns in the design table file.
+	*/
+#pragma PROPERTY ColumnsNb
+	HRESULT get_ColumnsNb(inout /*IDLRETVAL*/ short oColumns);
+
+
+	/**
+	* Returns the content of a specific cell.
+	* @param iRow the index of the row where the cell is located.
+	* @param iColumn the index of the column where the cell is located.
+	*/
+	HRESULT CellAsString(in short iRow, in short iColumn, inout /*IDLRETVAL*/ CATBSTR oValue);
+
+
+	/**
+	* Synchronizes the design table with its source file. If the file is managed in Enovia LCA, copies this file on local disk, and synchronizes design table content
+	*/
+	HRESULT Synchronize();
+};
+
+// Interface name : CATIADesignTable
+#pragma ID CATIADesignTable "DCE:9817625e-7257-11d2-83780060941974ff"
+#pragma DUAL CATIADesignTable
+
+// VB object name : DesignTable (Id used in Visual Basic)
+#pragma ID DesignTable "DCE:9817625f-7257-11d2-83780060941974ff"
+#pragma ALIAS CATIADesignTable DesignTable
+
+#endif

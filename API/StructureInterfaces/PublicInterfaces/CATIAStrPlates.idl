@@ -1,0 +1,137 @@
+#ifndef CATIAStrPlates_IDL
+#define CATIAStrPlates_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 16/01/98
+//  But   : Creation
+//
+// ****************************************************************************
+#include "CATIACollection.idl"
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+#include "CATIAStrServices.idl"
+
+interface CATIAStrPlate;
+
+    /**
+     * A collection of the Plate objects contained in a given
+     * Product object of a ProductDocument object.
+     * A Product object can aggregate one or zero Plates collection.
+     * This collection is retrieved using the @href CATIAProduct#GetTechnologicalObject
+     * method of the product. 
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example retrieves the plate collection from the
+     * <tt>oProduct</tt> Product.
+     * <pre>
+     * Dim oPlates as AnyObject
+     * Set oPlates = oProduct.GetTechnologicalObject("StructurePlates")
+     * </pre>
+     */
+
+interface CATIAStrPlates : CATIACollection
+{
+    /**
+     * Removes a plate from the Plates collection.
+     * @param iIndex
+     *   The index of the plate to remove.
+     *   This index can either be the rank of the plate in the collection
+     *   or the name you assigned to the plate.
+     *   As a numerics, this index is the rank of the plate 
+     *   in the collection.
+     *   The index of the first plate in the collection is 1, and
+     *   the index of the last plate is Count.
+     *   As a string, it is the name you assigned to the plate using
+     *   the @href CATIABase#Name property 
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example removes the sixth plate and the plate named
+     * <tt>EndPlate_1</tt> from the <tt>Assembly_1</tt> plate collection.
+     * <pre>
+     * Assembly_1.<font color="red">Remove</font>(6)
+     * Assembly_1.<font color="red">Remove</font>("EndPlate_1")
+     * </pre>
+     * </dl>
+     */
+
+  HRESULT Remove(in CATVariant iIndex);
+
+    /**
+     * Returns a plate from its index in the Plates collection.
+     * @param iIndex
+     *   The index of the plate to retrieve in the collection of plates.
+     *   This index can either be the rank of the plate in the collection
+     *   or the name you assign to the plate.
+     *   As a numerics, this index is the rank of the plate 
+     *   in the collection.
+     *   The index of the first plate in the collection is 1, and
+     *   the index of the last plate is Count.
+     *   As a string, it is the name you assigned to the plate using
+     *   the @href CATIABase#Name property 
+     * @return The retrieved plate
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example returns in <tt>ThisPlate</tt> the third plate,
+     * and in <tt>ThatPlate</tt> the plate named
+     * <tt>EndPlate_1</tt> in the <tt>Assembly_1</tt> plate collection.
+     * <pre>
+     * Dim ThisPlate As Plate
+     * Set ThisPlate = Assembly_1.<font color="red">Item</font>(3)
+     * Dim ThatPlate As Plate
+     * Set ThatPlate = Assembly.<font color="red">Item</font>("EndPlate_1")
+     * </pre>
+     * </dl>
+     */
+
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAStrPlate oPlate);
+
+};
+
+// Interface name : CATIAStrPlates
+#pragma ID CATIAStrPlates "DCE:82618c91-7951-0280-020c320000000000"
+#pragma DUAL CATIAStrPlates
+
+// VB object name : StrPlates
+#pragma ID StrPlates "DCE:82618c93-98bb-0280-020c320000000000"
+#pragma ALIAS CATIAStrPlates StrPlates
+
+#endif

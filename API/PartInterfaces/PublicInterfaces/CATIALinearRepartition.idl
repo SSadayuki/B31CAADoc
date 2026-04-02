@@ -1,0 +1,83 @@
+#ifndef CATIALinearRepartition_IDL
+#define CATIALinearRepartition_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIALinearRepartition:                           
+// Exposed interface for LinearRepartition
+//                                   
+//=================================================================
+// Usage notes:
+//        For Pattern definitions
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification				     	  L Lalere
+//=================================================================
+#include "CATIARepartition.idl"
+
+interface CATIALength;
+
+/**
+ * Represents the linear repartition.
+ * It is used by the rectangular and circular patterns.
+ * It is made up of a number of times the shape is copied
+ * and of a spacing distance between two consecutive copies of this
+ * shape along a direction.
+ * The number of times the shape is copied is accessible using
+ * the @href CATIARepartition#InstancesCount property.
+ * @see CATIARectPattern, CATIACircPattern
+ */
+
+//-----------------------------------------------------------------
+interface CATIALinearRepartition : CATIARepartition
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON SPACING    (between 2 instances)
+    //    ----------
+    //
+    /**
+     * Returns the distance between two consecutive shapes
+     * along the repartition direction.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>space1</tt>
+     * the spacing distance of the
+     * linear repartition <tt>firstRepartition</tt>:
+     * <pre>
+     * Set space1 = firstRepartition.<font color="red">Spacing</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Spacing
+    HRESULT get_Spacing ( out /*IDLRETVAL*/ CATIALength oSpacing );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+};
+
+// Interface name : CATIALinearRepartition
+#pragma ID CATIALinearRepartition "DCE:cb9ce830-6744-11d1-a27f0000f87546fd"
+#pragma DUAL CATIALinearRepartition
+
+// VB object name : LinearRepartition (Id used in Visual Basic)
+#pragma ID LinearRepartition "DCE:cbbab595-6744-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIALinearRepartition LinearRepartition
+
+
+#endif
+// CATIALinearRepartition_IDL
+

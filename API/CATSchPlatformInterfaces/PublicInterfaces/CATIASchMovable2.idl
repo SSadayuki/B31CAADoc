@@ -1,0 +1,55 @@
+#ifndef CATIASchMovable2_IDL 
+#define CATIASchMovable2_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004        
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage rotation of a schematic object.
+  */
+
+interface CATIASchMovable2 : CATIABase
+{
+  /**
+  * Rotate a schematic object with an angle in radian at a point.
+  * @param iDb1RotationAngleInRadian
+  *   Rotation angle (from x-axis) in radian.
+  * @param iDb2CenterPoint
+  *   X-Y components of a center point of rotation.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchMovable2
+  *
+  * Dim dbVar2(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">RotateAtPoint</font>,dbVar2
+  * </pre>
+  *    
+  */
+  HRESULT RotateAtPoint ( 
+    in double iDb1RotationAngleInRadian, 
+    in CATSafeArrayVariant iDb2CenterPoint );
+    
+};
+    
+// Interface name : CATIASchMovable2
+#pragma ID CATIASchMovable2 "DCE:10eee4ae-16a5-4c7c-bfc9f29eb3926dd5"
+#pragma DUAL CATIASchMovable2
+    
+// VB object name : SchMovable2
+#pragma ID SchMovable2 "DCE:93e9dde0-20a5-40bf-9d89e520de7bb3b0"
+#pragma ALIAS CATIASchMovable2 SchMovable2
+    
+#endif 
+    

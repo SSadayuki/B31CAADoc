@@ -1,0 +1,79 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIAVertex_IDL
+#define CATIAVertex_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// Vertex Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIABoundary.idl"
+#include "CATBSTR.idl"
+
+/**
+ * 0-D boundary.
+ * <b>Role</b>: 
+ * This @href CATIABoundary object may be, for example, the corner of a Pad resulting from the extrusion of a 
+ * square.</br>
+ * You will create an Vertex object using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it
+ * to the operator (such as @href CATIAHybridShapeFactory#AddNewLinePtPt ).</br> 
+ * The lifetime of a Vertex object is limited, see @href CATIABoundary.</br> 
+ * <b>See also:</b><br>
+ * @href CATIATriDimFeatVertexOrBiDimFeatVertex , @href CATIANotWireBoundaryMonoDimFeatVertex ,
+ * @href CATIAZeroDimFeatVertexOrWireBoundaryMonoDimFeatVertex .
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example asks the end user to select successively two vertices. Then, it creates a line between these
+ * two vertices.
+ * <pre>
+ * Dim InputObjectType(0)
+ * Set Document = CATIA.ActiveDocument
+ * Set Selection = Document.Selection
+ * Set HybridBodies = Document.Part.HybridBodies
+ * Set HybridBody = HybridBodies.Item("Geometrical Set.1")
+ * 'We propose to the user that he select the first vertex
+ * InputObjectType(0)="Vertex"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the first vertex",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set FirstVertex = Selection.Item(1).Value
+ * Selection.Clear
+ * 'We propose to the user that he select the second vertex
+ * InputObjectType(0)="Vertex"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the second vertex",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set SecondVertex = Selection.Item(1).Value
+ * Set hybridShapeLinePtPt = HybridShapeFactory.AddNewLinePtPt(FirstVertex,SecondVertex)
+ * HybridBody.AppendHybridShape hybridShapeLinePtPt
+ * Document.Part.InWorkObject = hybridShapeLinePtPt
+ * Document.Part.Update 
+ * </pre>
+ * </dl>
+ */  
+
+interface CATIAVertex : CATIABoundary
+{
+
+};
+
+// Interface Name : CATIAVertex
+
+#pragma ID CATIAVertex "DCE:48cb0ee0-1be1-11d6-80600010b5d44ab2"
+#pragma DUAL CATIAVertex
+
+// VB Object Name : Vertex
+#pragma ID Vertex "DCE:9e14fee0-1be7-11d6-80600010b5d44ab2"
+#pragma ALIAS CATIAVertex Vertex
+
+#endif
+//#endif
+

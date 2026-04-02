@@ -1,0 +1,133 @@
+// COPYRIGHT Dassault Systemes 2011.
+//=============================================================================
+// CATIASfmOperationFactory
+//   Factory to Get Information about available Slots/EndCuts.
+//=============================================================================
+// Usage notes:
+//   Interface for Automation Integration.
+//=============================================================================
+// Sept. 2011  Creation                                         Deshmane Rahul
+//=============================================================================
+#ifndef CATIASfmOperationFactory_IDL
+#define CATIASfmOperationFactory_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl" 
+#include "CATIAReference.idl" 
+#include "CATBSTR.idl" 
+#include "CATIAFactory.idl" 
+#include "CATSafeArray.idl" 
+#include "CATIAPart.idl" 
+#include "CATBaseDispatch.idl" 
+#include "CATIASfmSlot.idl"
+#include "CATIASfmEndcutManager.idl"
+#include "CATIASfmProfile.idl"
+
+/**
+* Gets the Operation Factory. 
+*<dl>
+*<dt><b>Example:<b>
+*<dd>
+* This Example Retrieves SfmOperationFactory from Part.
+* <pre>
+* Set part1 = partDocument1.Part
+* Dim Factory As SfmOperationFactory
+* Set Factory =  part1.GetCustomerFactory("SfmOperationFactory")
+* </pre>
+* </dl> 
+*/
+
+interface CATIASfmOperationFactory : CATIAFactory
+{    
+  /**
+  * Gets the list of available Slots from catalog for a given Profile(Stiffener/Member).
+  * @param iSfmProfile [in]
+  *     The given profile.
+  * @param oListofSlotNames [out]
+  *   The List of Slots available.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example retrieves the list of avaliable Slots.
+  * <pre>
+  * Dim FactoryObj As SfmOperationFactory
+  * Set FactoryObj = PartObj.GetCustomerFactory("SfmOperationFactory")
+  * Dim ListOfAvailableSlots() As Variant
+  * ListOfAvailableSlots = SlotFactoryObj.<font color="red">GetAvailableSlotsFromCatalog(SfmProfileObj)</font>
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetAvailableSlotsFromCatalog (in CATIASfmProfile iSfmProfile, out /*IDLRETVAL*/CATSafeArrayVariant oListofSlotNames);
+  /**
+  * Gets the Slot Parameters and Names for a slot from catalog.
+  * @param iSfmProfile [in]
+  *     The given profile.
+  * @param iSlotName [in]
+  *   Name of the Slot.
+  * @param oListSlotParameters [out]
+  *   The Slot UDF Parameters with deafult values.
+  * @param oListSlotParamNames [out]
+  *   Slot Parameter Names.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example retrieves Parameters for Slot.
+  * <pre>
+  * Dim FactoryObj As SfmOperationFactory
+  * Set FactoryObj = PartObj.GetCustomerFactory("SfmOperationFactory")
+  * Dim oListSlotParams As SfmConnectionParameters
+  * Dim oListSlotPramNames() As Variant
+  * SlotFactoryObj.<font color="red">GetSlotParameters SfmProfileObj, "Tee_Slot_thru_Plate", oListSlotParams, oListSlotPramNames</font>
+  * 'Reading Slot Param Values
+  * Dim UDFParam As Parameter
+  * ParamCount = oListSlotParams.Count
+  * For i = 1 To ParamCount
+  * Set UDFParam = oListSlotParams.Item(i)
+  * ParamName = oListSlotPramNames(i - 1)
+  * ParamValue = UDFParam.ValueAsString
+  * End If
+  * Next
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetSlotParameters(in CATIASfmProfile iSfmProfile, in CATBSTR iSlotName, out CATIASfmConnectionParameters oListSlotParameters,out CATSafeArrayVariant oListSlotParamNames);
+  /**
+  * Gets the Endcut Manager.
+  * @param oSfmEndcutManager [out]
+  *   The retrieved Manager.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example retrieves the Endcut Manager from the Factory.
+  * <pre>
+  * Dim FactoryObj As SfmOperationFactory
+  * Set FactoryObj = PartObj.GetCustomerFactory("SfmOperationFactory")
+  * Dim EndCutManagerObj As SfmEndcutManager
+  * Set EndCutManagerObj = FactoryObj.<font color="red">GetEndcutManager</font>
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetEndcutManager(out /*IDLRETVAL*/ CATIASfmEndcutManager oSfmEndcutManager);
+};
+
+
+// Interface name : SfmOperationFactory
+#pragma ID CATIASfmOperationFactory "DCE:C11987E8-C9D7-4456-89F41BCAC2D9C758" 
+#pragma DUAL CATIASfmOperationFactory
+
+// VB object name : SfmOperationFactory
+#pragma ID SfmOperationFactory "DCE:29897BC0-82BC-4402-A49E51C31945247E"                                    
+#pragma ALIAS CATIASfmOperationFactory SfmOperationFactory
+
+#endif

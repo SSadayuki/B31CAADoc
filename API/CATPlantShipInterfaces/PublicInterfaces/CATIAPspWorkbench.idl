@@ -1,0 +1,114 @@
+#ifndef CATIAPspWorkbench_IDL
+#define CATIAPspWorkbench_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+
+
+#include "CATIAPspApplication.idl"
+#include "CatPspIDLApplicationID.idl"
+#include "CATBSTR.idl"
+
+#include "CATIABase.idl"
+
+interface CATIADocument;
+
+/**
+ * Represents the PspWorkbench.
+ * <b>Role</b>: To manage application and Psp interface handlers.
+ * From this object all the queries for lists of Distributive system (PSP) objects can be made. 
+ * Furthermore,  all the interface handles can be obtained through this interface.
+ * 
+ */
+
+interface CATIAPspWorkbench : CATIABase
+{
+ 
+  
+/**
+  * Returns the PspApplication associated with the input ApplicationID.
+  *
+  * @param CatPspIDLApplicationID
+  *   Application ID to get.  
+  * @param oApplication
+  *   PspApplication handle found.
+  * @sample
+  * <pre>
+  * Dim objPspWorkbench As PspWorkbench
+  * Dim objArg1 As CatPspIDLApplicationID
+  * Dim objArg2 As PspApplication
+  * objArg1 = catPspIDLCATPiping
+  * Set objArg2 = objPspWorkbench.<font color="red">GetApplication</font> (objArg1)
+  * </pre>
+
+  */
+  HRESULT GetApplication (in CatPspIDLApplicationID iApplicationID, out /*IDLRETVAL*/ CATIAPspApplication oApplication);
+
+ /**
+  * Returns specific interface handle on a given object.  
+  * @param iInterfaceName
+  *   interface name to search for ("CATIAxxxx")
+  * @param iObject
+  *   The object to search for the required interface.
+  * @return 
+  *   Interface handle found
+  * @sample
+  * This example illustrates how to get a specific interface handle from a given object. 
+  * <pre>
+  * Dim objPspWorkbench As PspWorkbench
+  * Dim objPspApplication As PspApplication
+  * Dim objPspAppFactory As PspAppFactory
+  * Dim objProductRoot As Product
+  * Set objProductRoot = CATIA.ActiveDocument.Product
+  * Set objPspWorkbench = objProductRoot.GetTechnologicalObject ("PspWorkbench")
+  * Set objPspPipApplication = objPspWorkbench.GetApplication(catPspIDLCATPiping)
+  *
+  * Set objPspPipAppFactory = objPspWorkbench.<font color="red">GetInterface</font> ("CATIAPspAppFactory",objPspPipApplication)
+  * </pre>
+  */
+
+  
+  HRESULT GetInterface (in CATBSTR iInterfaceName, in CATIABase iObject, out /*IDLRETVAL*/ CATIABase oInterfaceFound);
+
+
+ /**
+  * This method extracts property values of the current document to an output XML file.
+  * The format is determined by CATIA PlantShip XML-DTD file.
+  * @param iDocumentToExportFrom
+  *   Documennt to export from
+  * @param iXMLOutputFileName
+  *   The file name to output the data to.
+  * @sample
+  * 
+  * <pre>
+  * Dim objPspWorkbench As PspWorkbench  
+  * Dim objCATIAV5CurDocument As Document
+  * Dim iXMLOutputFileName As String
+  * Set objCATIAV5CurDocument = CATIA.ActiveDocument  
+  * Set objProductRoot = objCATIAV5CurDocument.Product
+  * Set objPspWorkbench = objProductRoot.GetTechnologicalObject ("PspWorkbench")
+  * ..
+  * objThisIntf.<font color="red">ExportProperties</font> objCATIAV5CurDocument, iXMLOutputFileName
+  * </pre>
+  */
+  HRESULT ExportProperties (in CATIADocument iDocumentToExportFrom, in CATBSTR iXMLOutputFileName);
+
+
+
+};
+
+// Interface name : CATIAPspWorkbench
+#pragma ID CATIAPspWorkbench "DCE:3da93c6a-3b38-11d5-8e3e00d0b7acb59a"
+#pragma DUAL CATIAPspWorkbench
+
+// VB object name : PspWorkbench
+#pragma ID PspWorkbench "DCE:41f91d30-3b38-11d5-8e3e00d0b7acb59a"
+#pragma ALIAS CATIAPspWorkbench PspWorkbench
+
+#endif

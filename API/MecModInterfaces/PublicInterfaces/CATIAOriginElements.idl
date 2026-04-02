@@ -1,0 +1,105 @@
+#ifndef CATIAOriginElements_IDL
+#define CATIAOriginElements_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAOriginElements:                           
+// Exposed interface for Mechanical Part's OriginElements
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Dec97 Creation                                        Ph Baucher
+// May99 Remplacer CATIAPlane par CATIAReference JM Gautier
+// Jun99 get_Plane* rendent un CATIAGeometricElement PFS/JGR
+//=================================================================
+#include "CATIABase.idl"
+#include "CATIAGeometricElement.idl"
+
+/**
+ * Represents the part's 3D reference axis system.
+ * It allows an easy access to 3D reference axis system of a
+ * Part object thru the three planes XY, YZ, and ZX.
+ * <br>
+ * See @href CATIAPart for parent object.
+ */
+//-----------------------------------------------------------------
+interface CATIAOriginElements : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    /**
+     * Returns the XY plane of the part 3D reference axis system.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>plnXY</tt> the XY plane of
+     * the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set plnXY = partRoot.originElements.<font color="red">PlaneXY</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY PlaneXY
+    HRESULT        get_PlaneXY
+                ( out /*IDLRETVAL*/ CATIABase oPlane );
+
+    /**
+     * Returns the YZ plane of the part 3D reference axis system.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>plnYZ</tt> the YZ plane of
+     * the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set plnYZ = partRoot.originElements.<font color="red">PlaneYZ</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY PlaneYZ
+    HRESULT        get_PlaneYZ
+                ( out /*IDLRETVAL*/ CATIABase oPlane );
+
+    /**
+     * Returns the ZX plane of the part 3D reference axis system.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>plnZX</tt> the ZX plane of
+     * the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set plnZX = partRoot.originElements.<font color="red">PlaneZX</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY PlaneZX
+    HRESULT        get_PlaneZX
+                ( out /*IDLRETVAL*/ CATIABase oPlane );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+};
+
+// Interface name : CATIAOriginElements
+#pragma ID CATIAOriginElements "DCE:336fcb1b-6a84-11d1-a2800000f87546fd"
+#pragma DUAL CATIAOriginElements
+
+// VB object name : OriginElements (Id used in Visual Basic)
+#pragma ID OriginElements "DCE:337ce80a-6a84-11d1-a2800000f87546fd"
+#pragma ALIAS CATIAOriginElements OriginElements
+
+
+#endif
+// CATIAOriginElements_IDL
+

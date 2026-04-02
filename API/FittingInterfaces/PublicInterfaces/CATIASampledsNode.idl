@@ -1,0 +1,64 @@
+#ifndef CATIASampledsNode_IDL
+#define CATIASampledsNode_IDL
+
+
+/*IDLREP*/
+
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//===================================================================
+// CATIASampledsNodes.idl
+// Automation interface for the SampledsNode element
+//===================================================================
+
+
+#include "CATIABase.idl"
+
+    /**
+     * The interface to access a CATIASampledsNode.
+     * <b>Role:</b> The SampledsNode interface can be used to obtain different types
+     * of @href CATIASampled based collections from within the current action document.
+     */
+
+
+interface CATIASampledsNode : CATIABase
+{
+    /**
+     * Retrieves a sampleds based collection of objects
+     * @param iCollectionName
+     *    The name of the collection to retrieve.
+     * @return The requested collection
+     *
+     * <! @sample>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example retrieves the collection of @href CATIATrack objects 
+     * (called <tt>CATIATracks</tt>) from within the current document.
+     *
+     * <pre>
+     * Dim myTracks as Tracks
+     * Set myTracks = SampledsNode.<font color="red">GetSampleds</font> ("Tracks")
+     * </pre>
+     */
+
+    HRESULT GetSampleds (in CATBSTR iCollectionName, out /*IDLRETVAL*/ CATBaseDispatch oCollection);
+};
+
+
+// Interface name : CATIASampledsNode
+#pragma ID CATIASampledsNode "DCE:c7a49c87-9c60-4197-a6607f30461dd782"
+#pragma DUAL CATIASampledsNode
+
+
+// VB object name : SampledsNode (Id used in Visual Basic)
+#pragma ID SampledsNode "DCE:8b42a23b-2446-4e1c-b2dfe3a1fef84c80"
+#pragma ALIAS CATIASampledsNode SampledsNode
+
+
+#endif

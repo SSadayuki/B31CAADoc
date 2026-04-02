@@ -1,0 +1,79 @@
+#ifndef CATIARepartition_IDL
+#define CATIARepartition_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIARepartition:                           
+// Exposed interface for repartition
+//                                   
+//=================================================================
+// Usage notes:
+//        For Pattern definitions
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification                                     L Lalere
+//=================================================================
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+interface CATIAIntParam;
+interface CATIAApplication;
+
+/**
+ * Represents the repartition.
+ * A repartition is a set of objects used by the pattern shapes.
+ * It is the base object for linear and angular repartitions.
+ * @see CATIALinearRepartition, CATIAAngularRepartition
+ */
+//-----------------------------------------------------------------
+interface CATIARepartition : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON INSTANCES COUNT
+    //    ------------------
+    //
+    /**
+     * Returns the total number of copied shapes.
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>Nb</tt> the number
+     * of shapes of the repartition <tt>firstRepartition</tt>:
+     * <pre>
+     * Set Nb = firstRepartition.<font color="red">InstancesCount</font>
+     * </pre>
+     * </dl>
+     */ 
+#pragma PROPERTY InstancesCount
+    HRESULT    get_InstancesCount ( out /*IDLRETVAL*/ CATIAIntParam oInstancesCount );
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+};
+
+// Interface name : CATIARepartition
+#pragma ID CATIARepartition "DCE:ff357d85-6742-11d1-a27f0000f87546fd"
+#pragma DUAL CATIARepartition
+
+// VB object name : Repartition (Id used in Visual Basic)
+#pragma ID Repartition "DCE:ff8a2100-6742-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIARepartition Repartition
+
+
+#endif
+// CATIARepartition_IDL
+

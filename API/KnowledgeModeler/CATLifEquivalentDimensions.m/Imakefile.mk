@@ -1,0 +1,19 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=NONE
+PROGRAM_NAME = CATLifEquivalentDimensions
+
+# pour referencer le modules prereq
+# meme vide, il faut le laisser
+LINK_WITH = JS0GROUP CK0FEAT YN000MAT  NS0SI18N DI0PANV2 \
+			CD0FRAME JS0FM Collections AC0SPBAS AC0SPDOC \
+			ObjectModeler CD0AUTOSTART AC0XXLNK
+
+CXX_EXCEPTION=
+
+#LOCAL_CCFLAGS=-GX
+OS = Windows_NT
+LOCAL_CCFLAGS=/I"$(MkmkMSVCDIR)\atl\include"
+
+INCLUDED_MODULES= 

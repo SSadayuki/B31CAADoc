@@ -1,0 +1,42 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+SystemUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# PG0GV4 : Generateur V4 pour encapsulation des appels aux 
+#          plots, plot, newpen, ....
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+OS = AIX
+LINK_WITH=$(LINK_WITH_FOR_IID)  CATPrt JS0GROUP JS0FM VE0PIX DI0PANV2 CATLightXml XMLParserItf V4SysMEM 
+SYS_LIBS = -lxlf -lxlf90 -lxlfpad
+
+OS = IRIX
+LINK_WITH=$(LINK_WITH_FOR_IID)  CATPrt JS0GROUP JS0FM VE0PIX DI0PANV2 CATLightXml XMLParserItf V4SysMEM 
+SYS_LIBS = -lftn
+
+OS = HP-UX
+LINK_WITH=$(LINK_WITH_FOR_IID)  CATPrt JS0GROUP JS0FM VE0PIX DI0PANV2 CATLightXml XMLParserItf V4SysMEM 
+#if os hpux_a
+SYS_LIBS = -lf
+#else
+SYS_LIBS= -lF90
+#endif
+
+OS = hpux_b64 
+LINK_WITH=$(LINK_WITH_FOR_IID)  CATPrt JS0GROUP JS0FM VE0PIX DI0PANV2 CATLightXml XMLParserItf V4SysMEM 
+#if os hpux_a
+SYS_LIBS = -lf
+#else
+SYS_LIBS= -lF90 -lcps 
+#endif
+
+OS = SunOS
+LINK_WITH=$(LINK_WITH_FOR_IID)  CATPrt JS0GROUP JS0FM VE0PIX DI0PANV2 CATLightXml XMLParserItf V4SysMEM 
+SYS_LIBS = -lF77 -lM77
+
+OS = Windows_NT
+BUILD = NO

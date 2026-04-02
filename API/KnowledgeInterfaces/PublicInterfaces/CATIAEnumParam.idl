@@ -1,0 +1,64 @@
+#ifndef CATIAEnumParam_IDL
+#define CATIAEnumParam_IDL
+/*IDLREP*/
+
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAParameter.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Represents the enum parameter.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAEnumParam : CATIAParameter
+{
+    //===========================
+    //======= Properties ========
+    //===========================
+    //....ON VALUE
+    /**
+     * Returns or sets the value of the EnumParameter object.
+     * Units are expressed in the IS unit system, except for lengthes
+     * expressed in millimeters, and angles expressed in decimal degrees.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>param1</tt> value to 1
+     * if its value is greater than 2.5:
+     * <pre>
+     * If (density.<font color="red">Value</font> > 2.5)  Then
+     *     density.<font color="red">Value</font> = 1
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ValueEnum
+    HRESULT    get_ValueEnum   
+                ( inout   /*IDLRETVAL*/      CATBSTR            oValue );
+    HRESULT    put_ValueEnum    
+                ( in                       CATBSTR            iValue );
+
+
+};
+
+// Interface name : CATIARealParam
+#pragma ID CATIAEnumParam "DCE:0c6cbfe2-95e8-11d3-b8030008c70fcbf2"
+#pragma DUAL CATIAEnumParam
+
+// VB object name : EnumParam (Id used in Visual Basic)
+#pragma ID EnumParam      "DCE:5bb2f062-95e8-11d3-b8030008c70fcbf2"
+#pragma ALIAS CATIAEnumParam EnumParam
+
+
+#endif
+// CATIAEnumParam_IDL
+

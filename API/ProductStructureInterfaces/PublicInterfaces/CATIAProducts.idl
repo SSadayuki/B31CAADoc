@@ -1,0 +1,223 @@
+#ifndef CATIAProducts_IDL
+#define CATIAProducts_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//--------------------------------------------------------------------------
+// This is the interface of the collection of Product instances
+//   directly instanciated (aggregated) within a product
+// This is an idl interface for journaling
+// ngy december 1997
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+interface CATIAProduct;    
+interface CATIADocument;    
+//interface CATIADocuments;    //cai
+
+    /**
+     * The collection of the Product objects contained in a given
+     * Product object of a ProductDocument object.
+     * A Product object can aggregate one or zero Products collection.
+     */
+interface CATIAProducts : CATIACollection
+{
+//-----------------------------------------------------------------------------
+
+//  Creates a Product instance (from a reference) and adds it to the collection
+    /**
+     * Creates a component and adds it to the Products collection.
+     * A component is a Product object created from another Product
+     * object used as reference.
+     * @param iReferenceProduct
+     *   The product used as reference
+     * @sample
+     * The following example creates the <tt>SpareWheel</tt> component from
+     * the reference product <tt>FrontRightWheel</tt> and adds the component
+     * to the <tt>ToolKits</tt> collection.
+     * <pre>
+     * Dim SpareWheel As Product
+     * Set SpareWheel = ToolKits.<font color="red">AddComponent</font>(FrontRightWheel)
+     * </pre>
+     */
+  HRESULT AddComponent(in CATIAProduct iReferenceProduct, out /*IDLRETVAL*/ CATIAProduct oNewProduct);
+
+//  Creates a Product instance and its reference and adds it to the collection
+    /**
+     * Creates a Product reference object.
+     * This creates a Product reference object and the associated component
+     * by specifying its type and adds it to the Products collection.
+     * @param iPartNumber
+     *   The part number of the product to be created and added to the 
+     *   to the collection
+     * @sample
+     * The following example creates the <tt>Engine</tt> product
+     * and adds the created component to the <tt>PowerTrains</tt> collection.
+     * <pre>
+     * Dim Engine As Product
+     * Set Engine = PowerTrains.<font color="red">AddNewProduct</font>(V6Engine)
+     * </pre>
+     */
+  HRESULT AddNewProduct(in CATBSTR iPartNumber, out /*IDLRETVAL*/ CATIAProduct oNewProduct);
+
+//  Instanciates a Product which reference has already been defined in 
+//   another ProductDocument (the Product to instanciate is the root Product
+//   of the document)
+    /**
+     * Creates a component from the root product of 
+     * another ProductDocument object.
+     * This root product is used as a reference to create the component.
+     * The component is added to the Products collection.
+     * @param iProductDocument
+     *   The product document whose root object is to be used as reference
+     *   to create the component
+     * @sample
+     * The following example creates the <tt>GearBox</tt> component by
+     * referencing the <tt>GearBoxDocument</tt> and adds it
+     * to the <tt>PowerTrains</tt> collection.
+     * <pre>
+     * Dim GearBox As Product
+     * Set GearBox = PowerTrains.<font color="red">AddExternalComponent</font>(GearBoxDocument)
+     * </pre>
+     */
+  HRESULT AddExternalComponent(in CATIADocument iProductDocument, out /*IDLRETVAL*/ CATIAProduct oNewProduct);
+
+//-----------------------------------------------------------------------------
+//  Instanciates a Product or a Part which reference is defined in a new 
+//   ProductDocument or PartDocument 
+    /**	
+     * Creates a component from the root product of 
+     * a new ProductDocument object.
+     * This root product is used as a reference to create the component.
+     * The component is added to the Products collection.
+     * @param iProductDocument
+     *   The product document whose root object is to be used as reference
+     *   to create the component
+     * @sample
+     * The following example creates the <tt>GearBox</tt> component by
+     * referencing the <tt>GearBoxDocument</tt> and adds it
+     * to the <tt>PowerTrains</tt> collection.
+     * <pre>
+     * Dim GearBox As Product
+     * Set GearBox = PowerTrains.<font color="red">AddNewComponent</font>(GearBoxDocument, "A120-253X-7")
+     * </pre>
+     */
+  HRESULT AddNewComponent(in CATBSTR iDocumenType,in CATBSTR iPartNumber, out /*IDLRETVAL*/ CATIAProduct oNewProduct);
+
+//-----------------------------------------------------------------------------
+  // Removes a Part from the collection
+    /**
+     * Removes a product from the Products collection.
+     * @param iIndex
+     *   The index of the product to remove.
+     *   This index can either be the rank of the product in the collection
+     *   or the name you assigned to the product.
+     *   As a numerics, this index is the rank of the product 
+     *   in the collection.
+     *   The index of the first product in the collection is 1, and
+     *   the index of the last product is Count.
+     *   As a string, it is the name you assigned to the product using
+     *   the @href CATIABase#Name property 
+     * @sample
+     * The following example removes the sixth product and the product named
+     * <tt>LeftRearDisc</tt> from the <tt>Brakes</tt> product collection.
+     * <pre>
+     * Brakes.<font color="red">Remove</font>(6)
+     * Brakes.<font color="red">Remove</font>("LeftRearDisc")
+     * </pre>
+     */
+  HRESULT     Remove(in CATVariant iIndex);
+
+//-----------------------------------------------------------------------------
+  // Return the indexth item of the collection 
+    /**
+     * Returns a product from its index in the Products collection.
+     * @param iIndex
+     *   The index of the product to retrieve in the collection of products.
+     *   This index can either be the rank of the product in the collection
+     *   or the name you assign to the product.
+     *   As a numerics, this index is the rank of the product 
+     *   in the collection.
+     *   The index of the first product in the collection is 1, and
+     *   the index of the last product is Count.
+     *   As a string, it is the name you assigned to the product using
+     *   the @href CATIABase#Name property 
+     * @return The retrieved product
+     * @sample
+     * The following example returns in <tt>ThisProduct</tt> the third product,
+     * and in <tt>ThatProduct</tt> the product named
+     * <tt>Wheel</tt> in the <tt>CarParts</tt> product collection.
+     * <pre>
+     * Dim ThisProduct As Product
+     * Set ThisProduct = CarParts.<font color="red">Item</font>(3)
+     * Dim ThatProduct As Product
+     * Set ThatProduct = CarParts.<font color="red">Item</font>("Wheel")
+     * </pre>
+     */
+  HRESULT     Item( in CATVariant iIndex, out /*IDLRETVAL*/ CATIAProduct oProduct);
+
+  // Creates components from the listed files and adds them to the collection.
+    /**
+     * Creates a component for each file.
+     * The components are added to the Products collection.
+     * @param iFilesList
+     *   The paths of the files used to retrieve the reference or the
+     *   shape of th component
+     * @param iMethod
+     *   A string describing the expected type of the files
+     */
+  HRESULT AddComponentsFromFiles( in CATSafeArrayVariant iFilesList, in CATBSTR iMethod);
+ 
+
+  // Replace a component
+    /**
+     * Creates a component which replace the given one.
+     * @param iOldComponent
+     *   The component which will be replaced
+     * @param iFilePath
+     *   the document to replace with
+     * @param  iMultiInstances
+     *   Parameter to set to True if all instances are to be replaced, or to False otherwise. 
+     *   Returns the component replacing iOldComponent
+     * <p><br>Note:</br>
+     *   Part Number conflict will be resolved automatically.
+     */
+  HRESULT ReplaceComponent( in CATIAProduct  iOldComponent, in CATBSTR iFilePath
+                          , in boolean iMultiInstances, out /*IDLRETVAL*/ CATIAProduct oNewComponent);
+
+  // Replace a product with an already created one
+    /**
+     * Creates a component which replace the given one.
+     * @param iOldComponent
+     *   The component which will be replaced
+     * @param iNewReference
+     *   the reference whom the old copmponent will be reconnected
+     * @param  iMultiInstances
+     *   Parameter to set to True if all instances are to be replaced, or to False otherwise. 
+     *   Returns the component replacing iOldComponent
+     */	
+  HRESULT ReplaceProduct( in CATIAProduct  iOldComponent, in CATIAProduct  iNewReference
+                          , in boolean iMultiInstances, out /*IDLRETVAL*/ CATIAProduct oNewComponent);
+ 
+};
+
+// Interface name : CATIAProducts
+#pragma ID CATIAProducts "DCE:01b73398-5b43-11d1-a124080009dca4ae"
+#pragma DUAL CATIAProducts
+
+// VB object name : Products   
+#pragma ID Products "DCE:0f41cec4-5b43-11d1-a124080009dca4ae"
+#pragma ALIAS CATIAProducts Products
+
+
+#endif
+
+

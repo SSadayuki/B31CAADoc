@@ -1,0 +1,90 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAWorkScenes.idl
+//   This automation interface allows to manage a Scenes collection.
+//
+//===================================================================
+//
+//  Jan 2000  Creation: OBE
+//
+//===================================================================
+#ifndef CATIAWorkScenes_IDL
+#define CATIAWorkScenes_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATVariant.idl"
+#include "CATIAProduct.idl"
+#include "CATIAWorkScene.idl"
+
+/**
+ * A collection of scenes contained in a given ProductDocument.
+ */
+interface CATIAWorkScenes : CATIACollection
+{
+  /**
+   * Creates a scene from a product and adds it to the Scenes collection.
+   * @param iName
+   *    The name of the scene
+   * @param iReferenceProduct
+   *    The product used as reference
+   * @return
+   *    The created scene
+   * @sample
+   *    This example creates the <tt>SpareWheel</tt> scene from the reference product
+   *    <tt>FrontRightWheel</tt> and adds the scene to the <tt>ToolKits</tt> collection.
+   *    <pre>
+   *    Dim SpareWheel As Scene
+   *    Set SpareWheel = ToolKits.<font color="red">AddNewScene</font>("SpareWheel", FrontRightWheel)
+   *    </pre>
+   */
+  HRESULT AddNewScene(in CATBSTR iName, in CATIAProduct iReferenceProduct, out /*IDLRETVAL*/ CATIAWorkScene oNewScene);
+
+  /**
+   * Creates a scene from another and adds it to the Scenes collection.
+   * @param iName
+   *    The name of the scene
+   * @param iReferenceScene
+   *    The scene to be copied
+   * @return
+   *    The created scene
+   * @sample
+   *    This example creates the <tt>Engine</tt> scene from the <tt>SpareWheel</tt> scene
+   *    and adds the scene to the <tt>ToolKits</tt> collection.
+   *    <pre>
+   *    Dim Engine As Scene
+   *    Set Engine = ToolKits.<font color="red">AddNewScene</font>("Engine", SpareWheel)
+   *    </pre>
+   */
+  HRESULT AddCopyScene(in CATBSTR iName, in CATIAWorkScene iReferenceScene, out /*IDLRETVAL*/ CATIAWorkScene oNewScene);
+
+  /**
+   * Removes a scene from the Scenes collection.
+   * @param iScene
+   *   The scene to remove.
+   * @sample
+   *    This example removes the <tt>Engine</tt> scene from the <tt>ToolKits</tt> collection.
+   *    <pre>
+   *    ToolKits.<font color="red">Remove</font> Engine
+   *    </pre>
+   */
+  HRESULT Remove(in CATIAWorkScene iScene);
+
+};
+
+// Interface name : CATIAWorkScenes
+#pragma ID CATIAWorkScenes "DCE:46282cc0-cf57-11d3-876d006094eb3996"
+#pragma DUAL CATIAWorkScenes
+
+// VB object name : Scenes (Id used in Visual Basic)
+#pragma ID Scenes "DCE:46282cc1-cf57-11d3-876d006094eb3996"
+#pragma ALIAS CATIAWorkScenes Scenes
+
+#endif

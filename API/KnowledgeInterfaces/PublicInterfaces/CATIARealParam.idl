@@ -1,0 +1,254 @@
+#ifndef CATIARealParam_IDL
+#define CATIARealParam_IDL
+/*IDLREP*/
+
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAParameter.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * Represents the real parameter.
+ * The following example shows how to create it:
+ * <pre>
+ *  Dim CATDocs As Documents
+ *  Set CATDocs = CATIA.Documents
+ *  Dim part1 As Document
+ *  Set part1   = CATDocs.Add("CATPart")
+ *  Dim density As RealParam
+ *  Set density = part1.Part.Parameters.CreateReal("density", 2.5)
+ * </pre>
+ * The real parameter is the base object for dimensions.
+ * @see CATIADimension
+ */
+
+//-----------------------------------------------------------------
+interface CATIARealParam : CATIAParameter
+{
+    //===========================
+    //======= Properties ========
+    //===========================
+    //....ON VALUE
+    /**
+     * Returns or sets the value of the real parameter.
+     * Units are expressed in the IS unit system, except for lengthes
+     * expressed in millimeters, and angles expressed in decimal degrees.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>density</tt> value to 1
+     * if its value is greater than 2.5:
+     * <pre>
+     * If (density.<font color="red">Value</font> &gt; 2.5)  Then
+     *     density.<font color="red">Value</font> = 1
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Value
+    HRESULT    get_Value    
+                ( out   /*IDLRETVAL*/      double            oValue );
+    HRESULT    put_Value    
+                ( in                       double            iValue );
+
+
+
+    /**
+     * Returns or sets the value of the lower bound that
+	 * the parameter object value can take.
+	 * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>RangeMin</tt> value to 0
+     * if its value is bigger than 0:
+     * <pre>
+     * If (Length.<font color="red">RangeMin</font> &gt; 0.0 and Length.RangeMinValidity &lt;&gt; 0)  Then
+     *     Length.<font color="red">RangeMin</font> = 0.0
+     * End If
+     * </pre>
+     * </dl>		  
+     */
+#pragma PROPERTY RangeMin
+	HRESULT	   get_RangeMin
+				( out   /*IDLRETVAL*/      double            oRangeMin );
+
+	HRESULT	   put_RangeMin	
+				( in                       double            iRangeMin );
+    /**
+     * Returns or sets the value of the upper bound that
+		 * the parameter object value can take.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>RangeMax</tt> value to 0
+     * if its value is smaller than 0:
+     * <pre>
+     * If (Length.<font color="red">RangeMax</font> &lt; 0.0 and Length.RangeMaxValidity &lt;&gt; 0)  Then
+     *     Length.<font color="red">RangeMax</font> = 0.0
+     * End If
+     * </pre>
+     * </dl>		 
+     */
+#pragma PROPERTY RangeMax
+	HRESULT	   get_RangeMax
+				( out   /*IDLRETVAL*/      double            oRangeMax );
+
+	HRESULT	   put_RangeMax	
+				( in                       double            iRangeMax );
+
+
+
+    /**
+     * Returns or sets the type of the lower bound of
+	 * the parameter.
+	 * <dl>
+	 * <dt>0<dd>the lower bound is meaningless
+	 * <dt>1<dd>the lower bound can be reached
+	 * <dt>2<dd>the lower bound cannot be reached
+	 * </dl>
+	 */
+#pragma PROPERTY RangeMinValidity
+	HRESULT	   get_RangeMinValidity
+				( out   /*IDLRETVAL*/      long oRangeMinValidity );
+
+	HRESULT	   put_RangeMinValidity
+				( in                       long iRangeMinValidity );
+
+    /**
+     * Returns or sets the type of the upper bound of
+	 * the parameter.
+	 * <dl>
+	 * <dt>0<dd>the upper bound is meaningless
+	 * <dt>1<dd>the upper bound can be reached
+	 * <dt>2<dd>the upper bound cannot be reached
+	 * </dl>
+	 */
+#pragma PROPERTY RangeMaxValidity
+	HRESULT	   get_RangeMaxValidity
+				( out   /*IDLRETVAL*/      long oRangeMaxValidity );
+
+	HRESULT	   put_RangeMaxValidity
+				( in                       long iRangeMaxValidity );
+
+
+     // Tolerance
+    /**
+     * Returns or sets the value of the minimum tolerance of a parameter.
+     * Units are expressed in the IS unit system.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>MinumumTolerance</tt> value to 0
+     * if its value is bigger than 0:
+     * <pre>
+     * If (Length.<font color="red">MinimumTolerance</font> &gt; 0.0)  Then
+     *     Length.<font color="red">MinimumTolerance</font> = 0.0
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY MinimumTolerance
+    HRESULT    get_MinimumTolerance    
+                ( out /*IDLRETVAL*/  double            oValue );
+    HRESULT    put_MinimumTolerance    
+                ( in                 double            iValue );
+    /**
+     * Returns or sets the value of the maximum tolerance of a parameter.
+     * Units are expressed in the IS unit system.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>MaximumTolerance</tt> value to 0
+     * if its value is bigger than 0:
+     * <pre>
+     * If (Length.<font color="red">MaximumTolerance</font> &lt; 0.0)  Then
+     *     Length.<font color="red">MaximumTolerance</font> = 0.0
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY MaximumTolerance
+    HRESULT    get_MaximumTolerance    
+                ( out /*IDLRETVAL*/  double            oValue );
+    HRESULT    put_MaximumTolerance    
+                ( in                 double            iValue );
+
+   /**
+     * Returns an array containing the different values that the real param can take
+	 * in the case of multiple values.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * <pre>
+	 * Dim enumValues () as Variant
+	 * ReDim enumValues (aRealParameter.GetEnumerateValuesSize() - 1)
+	 * aRealParameter.GetEnumerateValues(enumValues)
+	 * For i = LBound(enumValues) to UBound(enumValues)
+	 *   ...
+	 * Next
+     * </pre>
+     * </dl>
+    */
+    HRESULT    GetEnumerateValues    
+                ( inout  CATSafeArrayVariant oSafeArray);
+
+	/**
+	* Returns the number of enumerate values.
+	*/
+    HRESULT    GetEnumerateValuesSize
+                ( out /*IDLRETVAL*/  long            oValue );
+   /**
+     * Sets an array containing the different values that the real param can take
+		 * in the case of multiple values.
+    */
+    HRESULT    SetEnumerateValues    
+                ( in                 CATSafeArrayVariant iSafeArray);
+
+   /**
+     * Resets the status of the object to a single value object.
+    */
+    HRESULT    SuppressEnumerateValues    ();
+
+
+	/**
+	* Tests the equality of the parameter value with a given value.
+	* @param iValueToCompare
+	*   The value to compare the parameter value with
+	* @return
+	* <dl>
+	* <dt>True</dt>
+	* <dd>If the current value of the parameter (the one get by the get_Value property, for dimensions
+	* notice that it is not the MKS value) is equal to the one given in argument.
+	* Notice that two values are considered as equal if their difference is insignificant faced with the
+	* two compared values. This method allows you to avoid problems due to computation errors.</dd>
+	* <dt>False</dt>
+	* <dd>If the two values are different.</dd>
+	* </dl>
+	*/
+	HRESULT		IsEqualTo(in double iValueToCompare, out /*IDLRETVAL*/ boolean oIsEqual);
+};
+
+// Interface name : CATIARealParam
+#pragma ID CATIARealParam "DCE:ff4a4b48-51cb-11d1-a2710000f87546fd"
+#pragma DUAL CATIARealParam
+
+// VB object name : RealParam (Id used in Visual Basic)
+#pragma ID RealParam "DCE:ff9eeec3-51cb-11d1-a2710000f87546fd"
+#pragma ALIAS CATIARealParam RealParam
+
+
+#endif
+// CATIARealParam_IDL
+

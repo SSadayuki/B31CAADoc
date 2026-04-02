@@ -1,0 +1,72 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIAFace_IDL
+#define CATIAFace_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// Face Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIABoundary.idl"
+#include "CATBSTR.idl"
+
+/**
+ * 2-D boundary.
+ * <b>Role</b>: 
+ * This @href CATIABoundary object may be, for example, the lateral face of cylinder.</br>
+ * You will create a Face object using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it
+ * to the operator (such as @href CATIAShapeFactory#AddNewFaceFillet ).</br> 
+ * The lifetime of a Face object is limited, see @href CATIABoundary.</br> 
+ * <b>See also:</b><br>
+ * @href CATIAPlanarFace , @href CATIACylindricalFace .
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example asks the end user to select two faces, and creates a face-face fillet on these faces:
+ * <pre>
+ * Dim InputObjectType(0)
+ * Set Document = CATIA.ActiveDocument
+ * Set Selection = Document.Selection
+ * 'We propose to the user that he select the first face
+ * InputObjectType(0)="Face"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the first face",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set FirstFace = Selection.Item(1).Value
+ * Selection.Clear
+ * 'We propose to the user that he select the second face
+ * InputObjectType(0)="Face"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the second face",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set SecondFace = Selection.Item(1).Value
+ * Set FaceFillet = ShapeFactory.AddNewFaceFillet(FirstFace,SecondFace,5.0)
+ * Document.Part.Update  
+ * </pre>
+ * </dl>
+ */  
+
+interface CATIAFace : CATIABoundary
+{
+
+};
+
+// Interface Name : CATIAFace
+
+#pragma ID CATIAFace "DCE:0dd02330-1be1-11d6-80600010b5d44ab2"
+#pragma DUAL CATIAFace
+
+// VB Object Name : Face
+#pragma ID Face "DCE:462d0490-1be7-11d6-80600010b5d44ab2"
+#pragma ALIAS CATIAFace Face
+
+#endif
+//#endif
+

@@ -1,0 +1,189 @@
+
+#ifndef CATIAHybridShapeCylinder_IDL
+#define CATIAHybridShapeCylinder_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT Dassault Systemes 2003
+
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//
+//===================================================================
+// CATIAHybridShapeCylinder.idl
+// Automation interface for the HybridShapeCylinder element 
+//===================================================================
+//
+// CATIAHybridShapeCylinder:         
+// Exposed interface for HybridShape Cylinder
+//=================================================================
+
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+ * Represents the hybrid shape Cylinder feature object.
+ * <b>Role</b>: To access the data of the hybrid shape Cylinder feature object.
+ * This data includes:
+ * <ul>
+ * <li>The center of the Cylinder </li>
+ * <li>The Radius of the Cylinder </li>
+ * <li>Length of Cylinder in the given extrusion direction </li>
+ * <li>Length of Cylinder opposite to extrusion direction</li>
+ * <li>Direction of extrusion for cylinder. </li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeCylinder object.
+ * @see CATIAHybridShapeFactory
+ */
+interface CATIAHybridShapeCylinder : CATIAHybridShape 
+{
+
+/**
+ * Returns or sets the center of the cylinder object.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>CylinderCenter</code> the center of the Cylinder,
+ * for the <code>Cylinder</code> hybrid shape feature.
+ * <pre>
+ * Dim CylinderCenter As Reference 
+ * Set CylinderCenter = Cylinder.<font color="red">Center</font>
+ * </pre>
+ * </dl>
+ */ 
+  
+  #pragma PROPERTY Center
+  HRESULT get_Center    ( out /*IDLRETVAL*/ CATIAReference oCenter);
+  HRESULT put_Center    ( in                CATIAReference iCenter); 
+
+/**
+ * Returns or sets the direction of the cylinder object.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>CylinderDirection</code> the direction of extrusion of the Cylinder,
+ * for the <code>Cylinder</code> hybrid shape feature.
+ * <pre>
+ * Dim CylinderDirection As HybridShapeDirection 
+ * Set CylinderDirection = Cylinder.<font color="red">Direction</font>
+ * </pre>
+ * </dl>
+ */ 
+
+  #pragma PROPERTY Direction
+  HRESULT get_Direction ( out /*IDLRETVAL*/ CATIAHybridShapeDirection oDir);
+  HRESULT put_Direction ( in                CATIAHybridShapeDirection iDir);
+
+/**
+ * Returns or sets the radius of the cylinder object.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>CylinderRadius</code> the radius of the Cylinder,
+ * for the <code>Cylinder</code> hybrid shape feature.
+ * <pre>
+ * Dim CylinderRadius As Length
+ * Set CylinderRadius = Cylinder.<font color="red">Radius</font>
+ * </pre>
+ * </dl>
+ */
+
+  #pragma PROPERTY Radius
+  HRESULT get_Radius    (out /*IDLRETVAL*/ 	CATIALength oRadius);
+  HRESULT put_Radius    (in 			          CATIALength iRadius);
+
+
+/**
+ * Returns or sets the length of the cylinder object in the given extrusion direction.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>CylinderLength1</code> the length of the Cylinder in the given
+ * extrusion direction, for the <code>Cylinder</code> hybrid shape feature.
+ * <pre>
+ * Dim CylinderLength1 As Length
+ * Set CylinderLength1 = Cylinder.<font color="red">Length1</font>
+ * </pre>
+ * </dl>
+ */
+
+  #pragma PROPERTY Length1
+  HRESULT get_Length1   (out /*IDLRETVAL*/ 	CATIALength oLength1);
+  HRESULT put_Length1   (in 			          CATIALength iLength1);
+
+/**
+ * Returns or sets the length of the cylinder object in the opposite direction of given extrusion direction.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>CylinderLength2</code> the length of the Cylinder in the opposite direction 
+ * of the given extrusion direction, for the <code>Cylinder</code> hybrid shape feature.
+ * <pre>
+ * Dim CylinderLength2 As Length
+ * Set CylinderLength2 = Cylinder.<font color="red">Length2</font>
+ * </pre>
+ * </dl>
+ */
+  
+  #pragma PROPERTY Length2
+  HRESULT get_Length2   (out /*IDLRETVAL*/ 	CATIALength oLength2 );
+  HRESULT put_Length2   (in 			          CATIALength iLength2);
+
+/**
+ * Returns or sets the the inversion of extrusion direction.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>IsInverted</code> the inversion status of extrusion direction 
+ * for the <code>Cylinder</code> hybrid shape feature.
+ * <pre>
+ * Dim IsInverted As boolean
+ * Set IsInverted = Cylinder.<font color="red">Orientation</font>
+ * </pre>
+ * </dl>
+ */
+
+  #pragma PROPERTY Orientation
+  HRESULT put_Orientation (in 	              boolean iOrientation);
+  HRESULT get_Orientation (out	/*IDLRETVAL*/ boolean oOrientation);
+
+
+/**
+ * Inverts the Orientation of Cylinder object.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example inverts the orientation for the <code>Cylinder</code> hybrid shape feature.
+ * <pre>
+ * Cylinder.<font color="red">InvertOrientation</font>
+ * </pre>
+ * </dl>
+ */
+  
+  HRESULT InvertOrientation ();
+
+ /**
+ * Gets or Sets the symmetrical extension of Cylinder (Length 2 = -Length 1).
+ *   @param iSym
+ *       Symetry flag  
+ */
+  #pragma PROPERTY SymmetricalExtension
+  HRESULT get_SymmetricalExtension(out /*IDLRETVAL*/ boolean oSym);
+  HRESULT put_SymmetricalExtension(in                boolean iSym);
+};
+
+// Interface name : CATIAHybridShapeCylinder
+#pragma ID CATIAHybridShapeCylinder "DCE:9c54f975-321c-4494-94301df90be3f273"
+#pragma DUAL CATIAHybridShapeCylinder
+
+// VB object name : HybridShapeCylinder (Id used in Visual Basic)
+#pragma ID HybridShapeCylinder "DCE:0095e162-a108-43a4-91de52ceacb7667e"
+#pragma ALIAS CATIAHybridShapeCylinder HybridShapeCylinder
+
+#endif

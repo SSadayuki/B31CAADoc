@@ -1,0 +1,132 @@
+#ifndef CATIAPspConnectable_IDL
+#define CATIAPspConnectable_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+interface CATIAPspConnector ;
+
+#include "CATIAPspListOfBSTRs.idl"
+#include "CATIAPspListOfObjects.idl"
+
+#include "CATIABase.idl"
+
+/**
+ * Represents an Interface to manage object behaviors in making connections. 
+ * <b>Role</b>: To specify object behaviors such as
+ * adding a connector and removing a connector.
+ */
+interface CATIAPspConnectable : CATIABase
+{
+
+ /**
+  * Returns a list of connectors of the object.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnectable
+  * Dim objArg1 As CatPspIDLDomainID
+  * Dim objArg2 As PspListOfBSTRs
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">Connectors</font> 
+  * </pre>
+  *    
+  */
+
+#pragma PROPERTY Connectors		
+  HRESULT get_Connectors ( out /*IDLRETVAL*/ CATIAPspListOfObjects oLConnectors );
+
+
+ /**
+  * Retrieve a list of connectors of the object.
+  *
+  * @param iuClassFilter
+  *  Class filter list. If iuClassFilter is an empty list then it will get
+  *  connectors for all the application connector types.
+  * @param oLCntbles
+  *  a list of CATIAPspConnectable  objects that connect this object
+  * @param oLCntrsOnThisObj
+  *  a list of connectors on "this" object in the connections
+  *   ( A list of CATIAPspConnector)
+  * @param oLCntrsOnConnected
+  *  a list of connectors on the other objects that the member of the 
+  *  former list is connected to (positions in oLCntrsOnThisObj and 
+  *  oLCntrsOnConnected corresponds to each other)
+  *   ( A list of CATIAPspConnector)
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnectable
+  * Dim objArg1 As PspListOfBSTRs
+  * Dim objArg2 As PspListofObjects
+  * Dim objArg3 As PspListofObjects
+  * Dim objArg4 As PspListofObjects
+  *  ...
+  * objThisIntf.<font color="red">ListConnectables</font> objArg1,objArg2,objArg3,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT ListConnectables ( 
+               in  CATIAPspListOfBSTRs iuClassFilter,
+               inout CATIAPspListOfObjects oLCntbles,
+               inout CATIAPspListOfObjects oLCntrsOnThisObj,
+               inout CATIAPspListOfObjects oLCntrsOnConnected
+                );
+
+ /**
+  * Returns a list of Valid connector types on this object.
+  *  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnectable
+  * Dim objArg1 As PspListOfBSTRs  
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ValidConnectorTypes</font> 
+  * </pre>
+  *    
+  */
+
+#pragma PROPERTY ValidConnectorTypes		
+  HRESULT get_ValidConnectorTypes( out /*IDLRETVAL*/ CATIAPspListOfBSTRs oLValidConnectorTypes );
+
+
+ /**
+  *  
+  * Retrieves a connector with the given name. 
+  * @param iConnectorName
+  *   Connector name to look for.
+  * @return 
+  *   Connector with given name.
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspConnectable
+  * Dim strVar1 As PspListOfBSTRs
+  * Dim objArg2 As PspConnector
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">GetConnectorByName</font> (strVar1)
+  * </pre>
+  *    
+  */
+
+
+  HRESULT GetConnectorByName( 
+             in CATBSTR iuConnectorName,
+             out /*IDLRETVAL*/ CATIAPspConnector oCntr );
+
+	
+        
+};
+
+// Interface name : CATIAPspConnectable
+#pragma ID CATIAPspConnectable "DCE:9a5453bf-6ae3-4985-91293cb7ac97098f"
+#pragma DUAL CATIAPspConnectable
+
+// VB object name : PspConnectable
+#pragma ID PspConnectable      "DCE:ad05b7ae-9ac2-465a-8b2f1c64a85a6c1e"
+#pragma ALIAS CATIAPspConnectable PspConnectable
+
+#endif

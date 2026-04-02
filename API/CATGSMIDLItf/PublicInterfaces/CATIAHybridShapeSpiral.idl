@@ -1,0 +1,177 @@
+#ifndef CATIAHybridShapeSpiral_IDL
+#define CATIAHybridShapeSpiral_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//           
+// CATIAHybridShapeSpiral:         
+// Exposed interface for HybridShape Spiral
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Janvier2000 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+#include "CATIARealParam.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+ * Represents the hybrid shape Spiral feature object.
+ * <b>Role</b>: Allows to access data of the Spiral feature.  
+ * This data includes:
+ * <ul>
+ * <li>type</li>
+ * <li>support</li>
+ * <li>centre point</li>
+ * <li>axis</li>
+ * <li>starting radius</li>
+ * <li>orientation</li>
+ * <li>ending angle</li>
+ * <li>ending radius</li>
+ * <li>revolution</li>
+ * <li>pitch</li>
+ * </ul>
+ * @see CATIAHybridShapeFactory
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeSpiral : CATIAHybridShape
+{
+
+/**
+ * Reads / Changes the spiral type.
+ */
+#pragma PROPERTY Type
+ HRESULT get_Type   (out /*IDLRETVAL*/ long   oType);
+ HRESULT put_Type   (in                long	  iType);
+
+
+ /**
+ * Reads / Changes the spiral plane support.
+ */
+
+#pragma PROPERTY Support
+ HRESULT get_Support   (out /*IDLRETVAL*/ CATIAReference   oSupportPlane);
+ HRESULT put_Support   (in                CATIAReference   iSupportPlane);
+
+/**
+ * Reads / Changes the center point of the Spiral.
+ */
+
+#pragma PROPERTY CenterPoint
+ HRESULT get_CenterPoint   (out /*IDLRETVAL*/ CATIAReference   oCenterPt);
+ HRESULT put_CenterPoint   (in                CATIAReference   iCenterPt);
+
+/**
+ * Reads / Changes the Spiral axis (Reference direction).
+ */
+
+#pragma PROPERTY Axis
+ HRESULT get_Axis   (out /*IDLRETVAL*/ CATIAHybridShapeDirection   oAxis);
+ HRESULT put_Axis   (in                CATIAHybridShapeDirection   iAxis);
+
+ /**
+ * Reads / Modifies the orientation .
+ * <br>     FALSE   means that there is no invertion (natural orientation). 
+ * <br>     TRUE    to invert this orientation.
+ */
+
+#pragma PROPERTY InvertAxis
+ HRESULT get_InvertAxis   (out /*IDLRETVAL*/ boolean   oInvert);
+ HRESULT put_InvertAxis   (in                boolean   iInvert);
+
+ /**
+ * Reads / Changes the starting radius of the Spiral.
+ */
+#pragma PROPERTY StartingRadius
+ HRESULT get_StartingRadius   (out /*IDLRETVAL*/ CATIALength   oStRadius);
+ HRESULT put_StartingRadius   (in                CATIALength   iStRadius);
+
+
+/**
+ * Reads / Modifies the sense of revolutions .
+ * <br>      FALSE   means that revolutions are counter-clockwise. 
+ * <br>      TRUE    means that revolutions are clockwise.
+ */
+#pragma PROPERTY ClockwiseRevolution
+ HRESULT get_ClockwiseRevolution   (out /*IDLRETVAL*/ boolean   oClockwiseRevolution);
+ HRESULT put_ClockwiseRevolution   (in                boolean   iClockwiseRevolution);
+
+ /**
+ * Reads / Changes the Ending Angle of the Spiral.
+ */
+#pragma PROPERTY EndingAngle
+ HRESULT get_EndingAngle   (out /*IDLRETVAL*/ CATIAAngle   oEndAngle);
+ HRESULT put_EndingAngle   (in                CATIAAngle   iEndAngle);
+
+  /**
+ * Reads / Changes the ending radius of the Spiral.
+ */
+#pragma PROPERTY EndingRadius
+ HRESULT get_EndingRadius   (out /*IDLRETVAL*/ CATIALength   oEndRadius);
+ HRESULT put_EndingRadius   (in                CATIALength   iEndRadius);
+
+
+ /**
+ * Reads / Changes the revolution number of the Spiral.
+ */
+#pragma PROPERTY RevolNumber
+ HRESULT get_RevolNumber   (out /*IDLRETVAL*/ CATIARealParam   oNbRevol);
+ HRESULT put_RevolNumber   (in				  CATIARealParam   iNbRevol);
+
+ /**
+ * Reads / Changes the pitch of the Spiral.
+ */
+#pragma PROPERTY Pitch
+ HRESULT get_Pitch   (out /*IDLRETVAL*/ CATIALength   oInvert);
+ HRESULT put_Pitch   (in				CATIALength   iInvert);
+
+// ----------------------------
+// Methods to set parameters as per type set by user to create a spiral
+// -----------------------------
+/**
+ * Sets Angle radius parameters.
+ */
+ HRESULT SetAngleRadiusParam(in double iEndAngle, in double iRevolNumber, in double iEndRadius);
+
+/**
+ * Sets Angle pitch parameter.
+ */
+ HRESULT SetAnglePitchParam(in double iEndAngle, in double iRevolNumber, in double iPitch);
+
+/**
+ * Sets Radius pitch parameter.
+ */
+ HRESULT SetRadiusPitchParam(in double iEndRadius, in double iPitch);
+
+};
+ 
+// Interface name : CATIAHybridShapeSpiral
+#pragma ID CATIAHybridShapeSpiral "DCE:306CD039-881D-11d6-81AD00065BDCB6ED"
+#pragma DUAL CATIAHybridShapeSpiral
+
+// VB object name : HybridShapeSpiral (Id used in Visual Basic)
+
+#pragma ID HybridShapeSpiral "DCE:306CD03A-881D-11d6-81AD00065BDCB6ED"
+#pragma ALIAS CATIAHybridShapeSpiral HybridShapeSpiral
+
+#endif
+// CATIAHybridShapeSpiral_IDL
+
+
+
+
+
+

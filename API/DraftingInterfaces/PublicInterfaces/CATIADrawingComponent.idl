@@ -1,0 +1,309 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIADrawingComponent_IDL
+#define CATIADrawingComponent_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+
+interface CATIADrawingSheet;
+interface CATIADrawingView;
+
+/**  
+ * Represents a drawing component instance (ditto) in a drawing view.
+ */
+interface CATIADrawingComponent : CATIABase 
+{
+//------------------------------------------------------------------------------
+ /**
+  * Returns the component reference of this drawing component instance.
+  * this is a CATIADrawingView
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the drawing component reference of the
+  * <tt>MyComponent</tt> drawing component instance.
+  * <pre>
+  * Dim ComponentRef As DrawingView
+  * Set ComponentRef = MyComponent.<font color="red">CompRef</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY CompRef	 
+  HRESULT get_CompRef(out /*IDLRETVAL*/ CATIADrawingView oComponentRef);
+//------------------------------------------------------------------------------
+ /**
+  * Gets the matrix of the drawing component instance.
+  * This matrix enables you to define the position (index 4 and 5 of the matrix)
+  * and the scale, the angle and the flip (index 0,1,2 and 3)
+  * of the drawing component instance at the same time.
+  * @param ioMatrix[0]
+  * The 1st coordinate of the first vector
+  * @param ioMatrix[1]
+  * The 2nd coordinate of the first vector
+  * @param ioMatrix[2]
+  * The 1st coordinate of the second vector
+  * @param ioMatrix[3]
+  * The 2nd coordinate of the second vector
+  * @param ioMatrix[4]
+  * The x value of the translation vector
+  * @param ioMatrix[5]
+  * The y value of the translation vector
+  */
+  HRESULT GetMatrix(inout CATSafeArrayVariant ioMatrix);
+  //------------------------------------------------------------------------------
+ /**
+  * Sets the matrix of the drawing component instance.
+  * This matrix enables you to define the position (index 4 and 5 of the matrix)
+  * and the scale, the angle and the flip (index 0,1,2 and 3)
+  * of the drawing component instance at the same time.
+  * @param ioMatrix[0]
+  * The 1st coordinate of the first vector
+  * @param ioMatrix[1]
+  * The 2nd coordinate of the first vector
+  * @param ioMatrix[2]
+  * The 1st coordinate of the second vector
+  * @param ioMatrix[3]
+  * The 2nd coordinate of the second vector
+  * @param ioMatrix[4]
+  * The x value of the translation vector
+  * @param ioMatrix[5]
+  * The y value of the translation vector
+  */
+  HRESULT SetMatrix(in CATSafeArrayVariant iMatrix);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the x coordinate of the drawing component instance position.
+  * It is expressed with respect to the view coordinate system.
+  * This coordinate, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the x coordinate of the position of the
+  * <tt>MyComponent</tt> drawing component instance to 5 inches.
+  * You need first to convert the 5 inches into millimeters.
+  * <pre>
+  * NewXCoordinate = 5*25.4
+  * MyComponent.<font color="red">x</font> =  NewXCoordinate
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY x	 
+  HRESULT get_x(out /*IDLRETVAL*/ double oXPosition);
+  HRESULT put_x(in double iXPosition);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the y coordinate of the drawing component instance position.
+  * It is expressed with respect to the view coordinate system.
+  * This coordinate, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the y coordinate of the position of the
+  * <tt>MyComponent</tt> drawing component instance to 5 inches.
+  * You need first to convert the 5 inches into millimeters.
+  * <pre>
+  * NewYCoordinate = 5*25.4
+  * MyComponent.<font color="red">y</font> =  NewYCoordinate
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY y	 
+  HRESULT get_y(out /*IDLRETVAL*/ double oYPosition);
+  HRESULT put_y(in double iYPosition);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the angle of the drawing component instance.
+  * The angle is given in the axis system of the drawing view
+  * The angle is measured in radians and is counted counterclockwise.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the angle of the <tt>MyComponent</tt> drawing component instance to 90
+  * degrees clockwise.
+  * You first need to compute the angle in radians and set the
+  * minus sign to indicate the rotation is clockwise.
+  * <pre>
+  * PI = 3.1415926535
+  * Angle90Clockwise = -PI/2
+  * MyComponent.<font color="red">Angle</font> = Angle90Clockwise
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Angle	 
+  HRESULT get_Angle(out /*IDLRETVAL*/ double oAngle);
+  HRESULT put_Angle(in double iAngle);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the scale of the drawing component instance (Workaround for VBA keyword).
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the scale of the <tt>MyComponent</tt> drawing component instance to 0.5.
+  * <pre>
+  * MyComponent.<font color="red">Scale2</font> = 0.5
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Scale2
+  HRESULT get_Scale2(out /*IDLRETVAL*/ double oComponentScale);
+  HRESULT put_Scale2(in double iComponentScale);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the flip state of a drawing component instance around X axis.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example Get the flip info of the <tt>MyComponent</tt> drawing component instance.
+  * <pre>
+  * IsFlipped = MyComponent.<font color="red">GetFlip</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetFlip(out /*IDLRETVAL*/ boolean oComponentFlip);
+
+//------------------------------------------------------------------------------
+ /**
+  * Flips the drawing component instance around X axis
+  * To flip around Y axis you have to flip the component around X and to add
+  * a rotation of 180 degrees.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example Flips the <tt>MyComponent</tt> drawing component instance.
+  * <pre>
+  * MyComponent.<font color="red">Flip</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT Flip();
+
+//------------------------------------------------------------------------------
+  /**
+  * Explodes the drawing component instance (every sub elements of the drawing component
+  * are created).
+  * Note: The drawing component is not removed by Explode method
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example Explodes the <tt>MyComponent</tt> drawing component instance and removes it.
+  * <pre>
+  * MyComponent.<font color="red">Explode</font>
+  * Set MySelection = CATIA.ActiveDocument.Selection
+  * MySelection.clear
+  * MySelection.add MyComponent
+  * MySelection.delete
+  * </pre>
+  * </dl>
+  */
+  HRESULT Explode();
+//------------------------------------------------------------------------------
+ /**
+  * Gets the number of modifiable objects in this drawing component instance.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example Gets the number of modifiable objects in <tt>MyComponent</tt> drawing 
+  * component instance.
+  * <pre>
+  * Count = MyComponent.<font color="red">GetModifiableObjectsCount</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetModifiableObjectsCount (out /*IDLRETVAL*/long oCount);
+//------------------------------------------------------------------------------
+ /**
+  * Gets a modifiable object by index or name in this drawing component instance.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example Gets the first modifiable object in the <tt>MyComponent</tt> drawing 
+  * component instance.
+  * <pre>
+  * Object = MyComponent.<font color="red">GetModifiableObject</font>(1)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetModifiableObject (in CATVariant iIndex, out /*IDLRETVAL*/ CATIABase oObject);
+
+  /**
+  * Exposes the component reference of this drawing component instance in a new detail sheet.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example exposes the component reference of the <tt>MyComponent</tt> drawing
+  * component instance in a new detail sheet.
+  * <pre>
+  * MyComponent.<font color="red">ExposeCompRef</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT ExposeCompRef();
+
+ /**
+  * Exposes the component reference of this drawing component instance in a specific detail sheet.
+  * @param iSheet
+  * The drawing sheet where the reference component has to be exposed.
+  * This sheet has to be a detail sheet, if not the component reference
+  * will be placed in a new detail sheet.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example exposes the component reference of the <tt>MyComponent</tt> drawing
+  * component instance in the <tt>MyDetailSheet</tt> drawing sheet.
+  * <pre>
+  * MyComponent.<font color="red">ExposeCompRefInSheet</font> MyDetailSheet
+  * </pre>
+  * </dl>
+  */
+  HRESULT ExposeCompRefInSheet(in CATIADrawingSheet iSheet);
+ /**
+  * Explodes the drawing component instance (every sub elements of the drawing component
+  * are created) and put created sub elements in selection set.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example Explodes the <tt>MyComponent</tt> drawing component instance.
+  * <pre>
+  * MyComponent.<font color="red">ExplodeAndSelect</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT ExplodeAndSelect();
+};
+
+// Interface name : CATIADrawingComponent
+#pragma ID CATIADrawingComponent "DCE:e46b2f56-070f-11d5-a39400d0b7ac5749"
+#pragma DUAL CATIADrawingComponent
+
+// VB object name : DrawingComponent (Id used in Visual Basic)
+#pragma ID DrawingComponent "DCE:e46b2f57-070f-11d5-a39400d0b7ac5749"
+#pragma ALIAS CATIADrawingComponent DrawingComponent
+
+#endif
+
+

@@ -1,0 +1,145 @@
+#ifndef CATIAPCBArea_IDL
+#define CATIAPCBArea_IDL
+
+/*IDLREP*/
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//--------------------------------------------------------------------------
+// Document object
+// gha Oct.99
+//
+//--------------------------------------------------------------------------
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"	
+#include "CATBSTR.idl"
+
+ 
+ /** 
+   interface to manage a PCB Constraints Area 
+  */
+
+
+interface CATIAPCBArea : CATIABase
+{
+//----------------------------------------------------------------------------------
+  /**
+  * Allow to get the Type of a constraint area
+  *  The possible values are : ROUTE_OUTLINE, 
+							   PLACE_OUTLINE,
+							   OTHER_OUTLINE,
+							   VIA_KEEPOUT,
+							   PLACE_KEEPOUT,
+							   PLACE_REGION,
+							   ROUTE_KEEPOUT
+		   
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY AreaType
+  HRESULT get_AreaType(out /*IDLRETVAL*/  CATBSTR  oCstType);
+  
+ 
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the OWNER of the constraint area
+  * The possible value are MCAD,ECAD, UNOWNED
+  *   
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY OWNER  
+ HRESULT get_OWNER  (out /*IDLRETVAL*/ CATBSTR oOwner );
+ HRESULT put_OWNER  (in  CATBSTR iOwner  );
+
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get the position of a hole
+  * The possible values are : TOP,BOTTOM,BOTH,INNER,ALL
+  * It depends on the the type of the constraints area according to the IDF format
+  * This property is valid for the following constraints areas: OTHER_OUTLINE, ROUTING_OUTLINE, 
+  * PLACE_OUTLINE, ROUTE_KEEPOUT, PLACE_KEEPOUT, PLACE_REGION, 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+
+#pragma PROPERTY LAYER  
+HRESULT get_LAYER  (out /*IDLRETVAL*/  CATBSTR  oLayer);
+
+
+ //----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the Identifier of the constraint area
+  * This property is valid for the following constraints areas: OTHER_OUTLINE, PLACE_REGION
+  *   
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY Identifier  
+ HRESULT get_Identifier  (out /*IDLRETVAL*/ CATBSTR oIdentifier );
+ HRESULT put_Identifier  (in  CATBSTR iIdentifier  );
+
+
+ //----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the Height max  of the constraint area
+  * This property is valid for the following constraints areas: OTHER_OUTLINE, PLACE_REGION
+  *   
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY Heightmax  
+ HRESULT get_Heightmax  (out /*IDLRETVAL*/ double  oMax );
+ HRESULT put_Heightmax  (in  double oMax  );
+
+ //----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the Height min  of the constraint area
+  * This property is valid for the following constraints areas: PLACE_KEEPOUT
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY Heightmin   
+ HRESULT get_Heightmin  (out /*IDLRETVAL*/ double oMin);
+ HRESULT put_Heightmin  (in  double iMin  );
+
+};
+
+// Interface name : CATIAPCBArea
+#pragma ID CATIAPCBArea "DCE:074ccce6-c65f-4b9e-a01753c10361ac9d"
+#pragma DUAL CATIAPCBArea
+// VB object name : CATIAPCBArea
+#pragma ID PCBArea "DCE:4c5fd5ea-c2ed-4b93-8f4b8e0e9bff06c2"
+#pragma ALIAS CATIAPCBArea PCBArea
+
+#endif

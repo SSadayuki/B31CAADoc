@@ -1,0 +1,95 @@
+#ifndef CATIADimensionLimit_IDL
+#define CATIADimensionLimit_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+/**
+ * Represents the limit object of tolerance dimensions.
+ */
+interface CATIADimensionLimit : CATIABase 
+{
+
+    /**
+     * Returns or sets the dimension limit type.
+     * <br><b>Legal values</b>:
+     * Valid dimension limit type values are:
+     * <ul>
+     * <li>CATTPSDLNotDefined</li>
+     * <li>CATTPSDLNumerical</li>
+     * <li>CATTPSDLTabulated</li>
+     * <li>CATTPSDLSingleLimit</li>
+     * </ul> 
+     */
+   #pragma PROPERTY DimensionLimitType
+    HRESULT get_DimensionLimitType (inout /*IDLRETVAL*/ CATBSTR oDimLimitType);
+    HRESULT put_DimensionLimitType (in CATBSTR iDimLimitType);
+
+    /**
+     * Retrieves dimension limit values.
+     * <br>These values are expressed in millimeters.
+     * @param oBottom
+     *   The dimension limit bottom value
+     * @param oUp
+     *   The dimension limit up value
+     */
+    HRESULT Limits (out double oBottom,
+                    out double oUp);
+
+    /**
+     * Sets dimension limit values.
+     * <br>These values are expressed in millimeters.
+     * @param iBottom
+     *   The dimension limit bottom value
+     * @param iUp
+     *   The dimension limit up value
+     */
+    HRESULT PutLimits (in double iBottom,
+                       in double iUp);
+
+    /**
+     * Returns or sets the dimension single limit modifier.
+     */
+  #pragma PROPERTY Modifier
+    HRESULT get_Modifier (inout /*IDLRETVAL*/ CATBSTR oModifier);
+    HRESULT put_Modifier (in CATBSTR iModifier);
+
+    /**
+     * Returns or sets the dimension tabulated limit.
+     * <br>This tabulated limit is expressed as a string.
+     */
+  #pragma PROPERTY TabulatedLimit
+    HRESULT get_TabulatedLimit (inout /*IDLRETVAL*/ CATBSTR oTabulatedLimit);
+    HRESULT put_TabulatedLimit (in CATBSTR iTabulatedLimit);
+
+    /**
+     * Returns the dimension limit nominal value.
+     * <br>This value is expressed in millimeters.
+	 */
+  #pragma PROPERTY Nominalvalue
+    HRESULT get_Nominalvalue (out /*IDLRETVAL*/ double oNominalvalue);
+
+    /**
+     * Returns or sets whether the dimension limit is symmetric.
+     * <br>TRUE if it is symmetric.
+     */
+  #pragma PROPERTY SymetricValue
+    HRESULT get_SymetricValue (out /*IDLRETVAL*/ boolean obSymetric);
+    HRESULT put_SymetricValue (in boolean ibSymetric);
+};
+
+// Interface name : CATIADimensionLimit
+#pragma ID CATIADimensionLimit "DCE:a33f6be4-260d-11d6-be890002b341dd3a"
+#pragma DUAL CATIADimensionLimit
+
+// VB object name : DimensionLimits (Id used in Visual Basic)
+#pragma ID DimensionLimit "DCE:a33f6be5-260d-11d6-be890002b341dd3a"
+#pragma ALIAS CATIADimensionLimit DimensionLimit
+
+#endif

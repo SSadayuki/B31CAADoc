@@ -1,0 +1,191 @@
+#ifndef CATIASchAppRoute_IDL 
+#define CATIASchAppRoute_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+interface  CATIADocument;
+interface  CATIASchAppRoute;
+interface  CATIASchRoute;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic route.
+  */
+
+interface CATIASchAppRoute : CATIABase
+{
+  /**
+  * Make a local route reference in another document by copying an 
+  * existing one in the current document.
+  * @param iDocumentToPutCopyIn
+  *   Pointer to the document to make the copy in
+  * @param oSchAppRoute
+  *   Pointer to the copy.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute
+  * Dim objArg1 As Document
+  * Dim objArg2 As SchAppRoute
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">AppCreateLocalReference</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT AppCreateLocalReference ( 
+    in CATIADocument iDocumentToPutCopyIn, 
+    out /*IDLRETVAL*/ CATIASchAppRoute oSchAppRoute );
+    
+  /**
+  * Post process after breaking an application route into 2 pieces. 
+  * @param iOldAppRoute
+  *   The old application route object
+  * @param iNewAppRoute
+  *   The new Application route object
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute
+  * Dim objArg1 As SchRoute
+  * Dim objArg2 As SchRoute
+  *  ...
+  * objThisIntf.<font color="red">AppPostBreakProcess</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT AppPostBreakProcess ( 
+    in CATIASchRoute iOldAppRoute, 
+    in CATIASchRoute iNewAppRoute );
+    
+  /**
+  * Post process after concatenate 2 application routes into one.
+  * @param iSchRoute2
+  *   Second route 
+  *   to be concatenate to this. This route will be deleted.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute
+  * Dim objArg1 As SchRoute
+  *  ...
+  * objThisIntf.<font color="red">AppPostConcatenateProcess</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppPostConcatenateProcess ( 
+    in CATIASchRoute iSchRoute2 );
+    
+  /**
+  * Query whether it is OK to modify (add or remove) the points.
+  * @param oBYes
+  *   If TRUE, then it is OK to add or remove the points from the application
+  *   route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppOKToModifyPoints</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppOKToModifyPoints ( 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether it is OK to break.
+  * @param oBYes
+  *   If TRUE, then it is OK to break the application route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppOKToBreak</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppOKToBreak ( 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether it is OK to concatenate.
+  * @param oBYes
+  *   If TRUE, then it is OK to concatenate the application route
+  *   with another
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppOKToConcatenate</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppOKToConcatenate ( 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether it is OK to create branch.
+  * @param iBranchClassType
+  *   Class type of the branch to create.
+  * @param oBYes
+  *   If TRUE, then it is OK to create a branch from an application route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute
+  * Dim strVar1 As String
+  * Dim bVar2 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppOKToBranch</font>strVar1,bVar2
+  * </pre>
+  *    
+  */
+  HRESULT AppOKToBranch ( 
+    in CATBSTR iBranchClassType, 
+    inout boolean oBYes );
+    
+  /**
+  * Break the application route into 2 routes.
+  * @param oNewAppRoute
+  *   New application route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppRoute
+  * Dim objArg1 As AnyObject
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">AppBreak</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppBreak ( 
+    out /*IDLRETVAL*/ CATIABase oNewAppRoute );
+    
+};
+    
+// Interface name : CATIASchAppRoute
+#pragma ID CATIASchAppRoute "DCE:44ed1054-0388-42e0-97032a5e2b865a36"
+#pragma DUAL CATIASchAppRoute
+    
+// VB object name : SchAppRoute
+#pragma ID SchAppRoute "DCE:2eb75582-54bf-46d9-9883888b520471b0"
+#pragma ALIAS CATIASchAppRoute SchAppRoute
+    
+#endif 
+    

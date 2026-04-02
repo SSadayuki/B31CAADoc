@@ -1,0 +1,75 @@
+#ifndef CATIAPspAttributeReport_IDL
+#define CATIAPspAttributeReport_IDL
+/*IDLREP*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004    
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIABase.idl"
+
+/**
+ * Represents the Attribute Report.
+ * <b>Role</b>: To generate attributes report.
+ */
+
+interface CATIAPspAttributeReport : CATIABase 
+{
+ /**
+  * Generate report (output format in html or CSV) and returns the status.
+  * It reports attribute data for all the selected objects in the document.
+  * @param iInputFormatFile
+  * Attribute report format filename. It should contain the directory path.
+  *  <pre> Note:    
+  *   The format file is a text (.txt) file containing data in following
+  *   order.
+  *   Title=Title of the report
+  *   TextFormat=HTML  or  TextFormat=CSV (Comma separated )
+  *   Attrib=AttributeName likes Nominal size,EndStyle, Rating etc.
+  *   Len=Integer value indicating length of attribute value
+  *   and so on...
+  *   Report format sample: Sample.txt
+  *   Title=Piping parts report
+  *   TextFormat=HTML
+  *   Attrib=ID
+  *   Len=15
+  *   Attrib=Nominal size
+  *   Len=10
+  *   Attrib=Rating
+  *   Len=10
+  *   .... and so on  
+  * </pre>
+  * @param iOutputfile
+  *   Output filename. Full file name of the report output.
+  * @return 0 or 1.
+  *	<b>Legal values</b>:
+	*	<br><tt>1 :</tt>   Report generation failed.
+	* <br><tt>0 :</tt>   Report generation succeeded.
+  * 
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttributeReport
+  * Dim strVar1 As CATBSTR
+  * Dim StrVar2 As CATBSTR
+  * Dim longRet    As Long
+  *  ...
+  * olongRet = objThisIntf.<font color="red">GenerateReport</font> (strVar1,strVar2 )
+  * </pre>
+  *    
+  */
+  HRESULT GenerateReport (in CATBSTR iInputFormatFile,
+                          in CATBSTR iOutputfile, 
+                          out /*IDLRETVAL*/ long oRet);
+};
+
+// Interface name : CATIAPspAttributeReport
+#pragma ID CATIAPspAttributeReport "DCE:d3097224-398d-11d5-8e0a00d0b7acaaba"
+#pragma DUAL CATIAPspAttributeReport
+
+// VB object name : PspAttributeReport (Id used in Visual Basic)
+#pragma ID PspAttributeReport "DCE:d3097225-398d-11d5-8e0a00d0b7acaaba"
+#pragma ALIAS CATIAPspAttributeReport PspAttributeReport
+
+#endif

@@ -1,0 +1,166 @@
+#ifndef CATIACapture_IDL
+#define CATIACapture_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIAAnnotations;
+interface CATIATPSView;
+interface CATIATPSViews;
+interface CATIAAnnotationSet;
+interface CATIACamera3D;
+interface CATIATPSHyperlinksManager;
+interface CATIATPSParallelOnScreen;
+
+/**
+ * The interface to access a CATIACapture
+ */
+interface CATIACapture : CATIABase 
+{
+    /**
+     * Retrieves the TPSs that are visualy managed by this Capture.
+     */
+  #pragma PROPERTY Annotations
+   HRESULT get_Annotations (out /*IDLRETVAL*/ CATIAAnnotations oAnnotations);
+    /**
+     * Sets the TPSs that are visualy managed by this Capture.
+     */
+    HRESULT put_Annotations (in CATIAAnnotations iAnnotations);
+
+    /**
+     * Retrieves the TPS Views that are visualy managed by this Capture.
+     */
+  #pragma PROPERTY TPSViews
+    HRESULT get_TPSViews (out /*IDLRETVAL*/ CATIATPSViews oViews);
+    /**
+     * Sets the TPS Views that are visualy managed by this Capture.
+     */
+    HRESULT put_TPSViews (in CATIATPSViews iViews);
+
+    /**
+     * Retrieves the active view for the capture.
+     */
+  #pragma PROPERTY ActiveView
+    HRESULT get_ActiveView (out /*IDLRETVAL*/ CATIATPSView oActiveView);
+    /**
+     * Sets the active view for the capture.
+     */
+    HRESULT put_ActiveView (in CATIATPSView iActiveView);
+
+    /**
+     * Retrieves the Active View state, saved or Not. 
+     * The Active View state describes what happens when Capture is displayed,
+     * if TRUE, the active view of the tolerancing set is replaced by the 
+     * active view of the capture.
+     */
+  #pragma PROPERTY ActiveViewState
+    HRESULT get_ActiveViewState (out /*IDLRETVAL*/ boolean obActiveState);
+    /**
+     * Sets the Active View state, saved or Not. 
+     */
+    HRESULT put_ActiveViewState (in boolean ibActiveState);
+
+    /**
+     * Retrieves the ViewPoint state, saved or Not. 
+     * The ViewPoint state describes what happens when Capture is displayed,
+     * if TRUE, the 3D Camera of the Capture is used to change the 3D
+     * ViewPoint.
+     */
+  #pragma PROPERTY ViewPoint
+    HRESULT get_ViewPoint (out /*IDLRETVAL*/ boolean obActiveState);
+    /**
+     * Sets the ViewPoint state, saved or Not. 
+     */
+    HRESULT put_ViewPoint (in boolean ibActiveState);
+
+    /**
+     * Retrieves tolerancing set the Capture belongs too.
+     */
+  #pragma PROPERTY Set
+    HRESULT get_Set (out /*IDLRETVAL*/ CATIAAnnotationSet opSet);
+
+    /**
+     * Retrieves the Capture state, current or Not.
+     *   @param oCurrentState
+     *     Capture state. if TRUE the capture is current.that means that after
+     *     the creation of the capture, the future TPSs that would be added to 
+     *     the document will belong to the capture.
+     */
+  #pragma PROPERTY Current
+    HRESULT get_Current (out /*IDLRETVAL*/ boolean obCurrentState);
+
+    /**
+     * Sets the Capture state, current or Not.
+     */
+    HRESULT put_Current (in boolean ibCurrentState);
+
+    /**
+     * Retrieves the clipping plane state, activated or Not. 
+     * The Clipping plane state describes what happens when Capture is 
+     * displayed, if TRUE, the active view is used to define a clipping plane.
+     * If FALSE, there is no clipping plane applied.
+     *   @param oClipPlane
+     *     The clipping plane state.
+     */
+  #pragma PROPERTY ClippingPlane
+    HRESULT get_ClippingPlane (out /*IDLRETVAL*/ boolean obClipPlane);
+
+    /**
+     * Sets the clipping plane state, activated or Not. 
+     */
+    HRESULT put_ClippingPlane (in boolean ibClipPlane);
+
+    /**
+     * Retrieves or sets a camera.
+     */
+  #pragma PROPERTY Camera
+    HRESULT get_Camera (out /*IDLRETVAL*/ CATIACamera3D oCamera);
+    HRESULT put_Camera (in CATIACamera3D iCamera);
+
+    /**
+     * Displays the Capture.
+     */
+    HRESULT DisplayCapture ();
+
+    /**
+     * Displays the Capture with mirroring annotations management.
+     * @param <tt>out boolean ibApplyMirror</tt>
+     * [out] Annotations mirroring management:
+     *    TRUE: The annotations mirroring is activated.
+     *    FALSE: The annotations mirroring is desactivated.
+     */
+    HRESULT DisplayCapture2 (in boolean ibApplyMirror);
+
+    /**
+     * Manages the visibility of Part instances, bodies and geometrical sets 
+     * across the Capture.
+     *   @param obManageHideShowBody
+     *    TRUE: If Hide/Show of these elements will be managed
+     *    FALSE: If Hide/Show of these elements will not be managed
+     */
+  #pragma PROPERTY ManageHideShowBody
+    HRESULT get_ManageHideShowBody (out /*IDLRETVAL*/ boolean obHideShowBody);
+    HRESULT put_ManageHideShowBody (in boolean ibHideShowBody);
+
+    /**
+    * Gets the annotation on TPSParallelOnScreen interface.
+    */
+    HRESULT  TPSParallelOnScreen (out /*IDLRETVAL*/ CATIATPSParallelOnScreen  oTPSParallelOnScreen);
+
+};
+
+// Interface name : CATIACapture
+#pragma ID CATIACapture "DCE:76150e9c-0691-11d7-bebc0002b341dd3a"
+#pragma DUAL CATIACapture
+
+// VB object name : Capture (Id used in Visual Basic)
+#pragma ID Capture "DCE:76150e9d-0691-11d7-bebc0002b341dd3a"
+#pragma ALIAS CATIACapture Capture
+
+#endif

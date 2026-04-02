@@ -1,0 +1,118 @@
+#ifndef CATIAManufacturingOutputGenerator_IDL
+#define CATIAManufacturingOutputGenerator_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAManufacturingOutputGenerator:                           
+// Exposed interface for Manufacturing Output Generation 
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIABase.idl"
+#include "CATBSTR.idl" 
+
+#include "CATIAManufacturingGeneratorData.idl" 
+
+//-----------------------------------------------------------------
+/**
+ * Father object to generate output machining code.
+ */
+interface CATIAManufacturingOutputGenerator : CATIABase
+{
+    //        ===================
+    //        == OUTPUT CODE   ==
+    //        ===================
+    //
+    /**
+     * Return the Output Code for an object in the right CNC Machine.
+     */
+    HRESULT    GenerateOutputCode (in CATIAManufacturingGeneratorData iData);
+
+    /**
+     * Init the Output Generator on the current Object and initialise all datas.
+     * Generation of NC code can start from the Process, Setup, Program or an Activity. 
+     * @param iFormat
+     *   Format of the output file : "APT", ...
+     * @param iFileName
+     *   Output file name
+    * @param oData
+     *   iData contains all the information about the generated NC code
+      */
+    HRESULT    InitFileGenerator (in CATBSTR iFormat, in CATBSTR iFileName,
+				 out CATIAManufacturingGeneratorData oData);	
+
+    /**
+     * Runs the Output Generator on the datas used for generation.
+     * Generation of NC code can start from the Process, Setup, Program or an Activity. 
+     * @param iData
+     *   iData contains all the information about the generated NC code
+      */
+    HRESULT    RunFileGenerator (in CATIAManufacturingGeneratorData iData);	
+
+    //        ===================
+    //        == OTHER METHODS ==
+    //        ===================
+    //
+    /**
+     * Return the characteristic of an object : Modal or Not Modal.
+     */
+    HRESULT    IsModal (out	long 	oIsModal );
+
+    /**
+     * Implement a method to specify if two objects are same (when Modal Mode).
+     * The result depends on the tolerance on the values (to points)
+     */
+    HRESULT    IsSimilarTo (in	CATIAManufacturingOutputGenerator	iObject, 
+                            out /*IDLRETVAL*/	long oIsSimilar);
+    /**
+     * Return the characteristic of an object : 
+	 * Reset or not Modal Values.
+     */
+    HRESULT    HasToResetModalValues (out	long 	oIsModal );
+
+    /**
+     * Management of specific buffer for aligned points elimination.
+	 * 
+     */
+    HRESULT AddMeToBuffer(out	long oAddMe );
+
+    /**
+     * Retrieve generated APT code.
+	 * 
+     */
+    HRESULT          GetAPTCode    (in CATIAManufacturingGeneratorData iData, 
+	                                         out CATBSTR oCode);
+    /**
+     * Set current object to buffer.
+	 * 
+     */
+    HRESULT          SetCurrentObject    (in long iCurrentObject);
+    
+	/**
+     * Get current object from buffer.
+	 * 
+     */
+    HRESULT          GetCurrentObject    (out long oCurrentObject);
+
+
+};
+
+// Interface Name : CATIAManufacturingOutputGenerator
+#pragma ID CATIAManufacturingOutputGenerator "DCE:3b13e5d0-7a39-11d2-b72e006094b9a308"
+#pragma DUAL CATIAManufacturingOutputGenerator
+ 
+// VB Object Name : ManufacturingOutputGenerator
+#pragma ID ManufacturingOutputGenerator "DCE:3bd9c8fe-7a39-11d2-b72e006094b9a308"
+#pragma ALIAS CATIAManufacturingOutputGenerator ManufacturingOutputGenerator
+
+#endif
+// CATIAManufacturingOutputGenerator_IDL

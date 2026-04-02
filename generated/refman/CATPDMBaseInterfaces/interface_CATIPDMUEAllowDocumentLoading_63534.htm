@@ -1,0 +1,125 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATPDMBaseInterfaces CATIPDMUEAllowDocumentLoading Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATPDMBaseInterfaces.htm" href="../CATPDMBaseInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATPDMBaseInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIPDMUEAllowDocumentLoading"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>CATPDMBaseInterfaces Framework:  CATIPDMUEAllowDocumentLoading Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIPDMUEAllowDocumentLoading_63534','CATIPDMUEAllowDocumentLoading','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can freely reimplement this interface.</b></p>
+<hr/>
+<p>
+ interface <b>CATIPDMUEAllowDocumentLoading</b>
+</p>
+<p>
+<b><i>  Interface to enable some user specific size-check operations on the document/s for load.</i></b><br>
+
+  <b>Role</b>: This interface is a user exit allowing a user to ensure whether the selected
+  document/s can be loaded or not subject to memeory considerations.
+  <br>
+  You should implement it on the <tt>CATIPDMUEAllowDocumentLoading</tt> component by using
+  the CATObject mechanism.
+  NOTE - The Late-type to be used by the customer to implement this interface is "VPM1_AllowDocLoad".
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AllowDocumentLoading(int,CATIDocId**,double**)"><b>AllowDocumentLoading</b></a>(int,CATIDocId**,double**)
+</td><td id='tdright'>  Allows the user to estimate whether the present system resoursces are enough to load the desired document/s.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AllowDocumentLoading"></a><a id="AllowDocumentLoading(int,CATIDocId**,double**)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AllowDocumentLoading</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbDocs</span>,<script type="text/javascript"> activateLink('CATIDocId','CATIDocId**')</script> <span class='param'>iListDocIds</span>,<script type="text/javascript"> activateLink('double','double**')</script> <span class='param'>ipDocSize</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Allows the user to estimate whether the present system resoursces are enough to load the desired document/s.
+ <br><b>Role</b>: This method will allow the user to compare the system memory resources with the memory
+ required to load the desired document/s and decide whether the documents can be loaded.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'>  NbDocs</span></dt>
+   <dd> -- the number of documents to be loaded.  The document to check.
+ 
+ </ dd>
+    <dt><span class='paramitem'>  iListDocIds</span></dt>
+   <dd>  list of the Ids of the documents for load.
+ 
+ </ dd>
+    <dt><span class='paramitem'>  ipDocSize</span></dt>
+   <dd> -- Size of the documents to be loaded.  <br><b>Legal values:  </b>
+  <ul>
+    <li><tt>S_OK</tt> It is allowed to load the desired document/s.
+    <li><tt>S_FALSE</tt> It's not allowed to load the desired document/s.
+  </ul>
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   <ul>
+   <li><tt>S_OK</tt>: execution successful</li>
+   <li><tt>E_FAIL</tt>: The method has failed. A 
+<script type="text/javascript"> activateLinkAnchor('CATError','','CATError') </script> class instance is generated.</li>  </ul>
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIPDMUEAllowDocumentLoading.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATPDMBaseItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

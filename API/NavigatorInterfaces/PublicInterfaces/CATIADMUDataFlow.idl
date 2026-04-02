@@ -1,0 +1,115 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIADMUDataFlow.idl
+//   This automation interface allows the manage DMU DataFlow.
+//
+//===================================================================
+//
+//  Sep 2002  Creation: LJE
+//
+//===================================================================
+#ifndef CATIADMUDataFlow_IDL
+#define CATIADMUDataFlow_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+/**
+ * Allows the DMU Data Flow Management within the DMU Navigator environment.
+ */
+interface CATIADMUDataFlow : CATIABase
+{
+  /**
+   * Saves all documents related to the product in a directory.
+   * @param iDirectory
+   *    The directory that will contain documents.
+   * @param iPrefix
+   *    The prefix used to save product documents.
+   * @param iData
+   *    To save geometries.
+   *    <ul>
+   *    <li>0: no save.
+   *    <li>1: save.
+   *    </ul>
+   * @param iCache
+   *    To cache data.
+   *    <ul>
+   *    <li>0: no save.
+   *    <li>1: save.
+   *    </ul>
+   */
+  HRESULT SaveAsFrozen (
+      in CATBSTR iDirectory,
+      in CATBSTR iPrefix,
+      in long iData,
+      in long iCache);
+
+  /**
+   * Exports all documents related to the product in a directory.
+   * @param iDirectory
+   *    The directory that will contain documents.
+   * @param iPrefix
+   *    The prefix used to save product documents.
+   * @param iData
+   *    To save geometries.
+   *    <ul>
+   *    <li>0: no save.
+   *    <li>1: save.
+   *    </ul>
+   */
+  HRESULT CacheExport (
+      in CATBSTR iDirectory,
+      in CATBSTR iPrefix,
+      in long iData);
+
+  /**
+   * Imports in the cache of marked documents in a directory.
+   * @param iDirectory
+   *    The directory that contains marked documents.
+   */
+  HRESULT CacheImport (in CATBSTR iDirectory);
+
+  /**
+   * Replaces all components of the product by the corresponding CGR located in a directory.
+   * @param iDirectory
+   *    The directory that will contain documents.
+   * @param iPrefix
+   *    The prefix used to save product documents.
+   */
+  HRESULT ReplaceByCGR (
+      in CATBSTR iDirectory,
+      in CATBSTR iPrefix);
+
+  /**
+   * Collapse the product by replacing all sub-product by corresponding components.
+   */
+  HRESULT Collapse ();
+
+  /**
+   * @nodoc
+   */
+  HRESULT Load (
+      in CATBSTR iName,
+      out /*IDLRETVAL*/ CATBaseDispatch oDocument);
+
+  /**
+   * @nodoc
+   */
+  HRESULT Execute (in CATBSTR iCommand);
+};
+
+// Interface name : CATIADMUDataFlow
+#pragma ID CATIADMUDataFlow "DCE:a3245acf-709b-0000-0280030ccd000000"
+#pragma DUAL CATIADMUDataFlow
+
+// VB object name : DMUDataFlow (Id used in Visual Basic)
+#pragma ID DMUDataFlow "DCE:e7233e09-c24c-45a1-94b50170032003a8"
+#pragma ALIAS CATIADMUDataFlow DMUDataFlow
+
+#endif

@@ -1,0 +1,2 @@
+BUILT_OBJECT_TYPE = NONE
+ALIASES_ON_IMPORT = CATCldVisualization CATCloudVisualization

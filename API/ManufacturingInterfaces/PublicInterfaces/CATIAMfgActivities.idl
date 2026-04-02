@@ -1,0 +1,93 @@
+#ifndef CATIAMfgActivities_IDL
+#define CATIAMfgActivities_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//								   
+// CATIAMfgActivities:						   
+// Exposed interface for MfgActivities
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep99 Creation				       K. Bouharb
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIACollection.idl"
+#include "CATIAManufacturingActivity.idl"
+#include "CATVariant.idl"
+
+/**
+* The collection of MfgActivities related to the Manufacturing Document .<br>
+*/
+
+interface CATIAMfgActivities : CATIACollection
+
+{
+
+// Method Add
+
+  /**
+  * This method adds the specified CATIAManufacturingActivity in the current list CATIAMfgActivities. <br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example adds in CATIAMfgActivities <tt>ListActivities</tt> the CATIAManufacturingActivity <tt>ThisActivity</tt> in position
+  * <tt>NumPos</tt>:
+  * <pre>
+  * ListActivities.<font color="red">Add</font>(ThisActivity)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT     Add( in CATIAManufacturingActivity iRealObj);
+
+// Method Item
+
+  /**
+  * This method return the specified CATIAManufacturingActivity in the current list CATIAMfgActivities. <br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the CATIAManufacturingActivity <tt>ThisActivity</tt> in CATIAMfgActivities <tt>ListActivities</tt> in position
+  * <tt>NumPos</tt>:
+  * <pre>
+  * Set ThisActivity = ListActivities.<font color="red">Item</font>(Numpos)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT     Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAManufacturingActivity oItem);
+
+// Method GetElement
+
+  /**
+  * This method return the specified CATIAManufacturingActivity in the current list CATIAMfgActivities. <br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the CATIAManufacturingActivity <tt>ThisActivity</tt> in CATIAMfgActivities <tt>ListActivities</tt> in position
+  * <tt>NumPos</tt>:
+  * <pre>
+  * Set ThisActivity = ListActivities.<font color="red">GetElement</font>(Numpos)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT     GetElement(in long iIndex, out /*IDLRETVAL*/ CATIAManufacturingActivity oItem);
+
+};
+
+// Interface name : CATIAMfgActivities
+#pragma ID CATIAMfgActivities "DCE:63f5cebe-74d4-11d3-b8110008c74fe567"
+#pragma DUAL CATIAMfgActivities
+
+// VB object name : MfgActivities (Id used in Visual Basic)
+#pragma ID MfgActivities "DCE:64dab07e-74d4-11d3-b8110008c74fe567"
+#pragma ALIAS CATIAMfgActivities MfgActivities
+
+#endif // CATIAMfgActivities_IDL

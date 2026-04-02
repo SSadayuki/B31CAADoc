@@ -1,0 +1,593 @@
+#ifndef CATIAStrObjectFactory_IDL
+#define CATIAStrObjectFactory_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIACollection
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 16/01/98
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIADocument;
+interface CATIAStrMember;
+interface CATIAStrSection;
+interface CATIAStrPlate;
+interface CATIAStrSection;
+interface CATIAStrFoundation;
+
+#include "CATBSTR.idl"
+#include "CATIABase.idl"
+#include "CATIACollection.idl"
+#include "CATIAStrServices.idl"
+#include "CATIAReference.idl"
+#include "CATSafeArray.idl"
+
+	/**
+	*  Represents the factory object for all the structure objects.
+        * The factory is retrieved using the @href CATIAProduct#GetTechnologicalObject
+        * method of the product. 
+        * <! @sample>
+        * <dl>
+        * <dt><b>Example:</b>
+        * <dd>
+        * The following example retrieves the structure factory object from the
+        * <tt>oProduct</tt> Product.
+        * <pre>
+        * Dim oFactory as AnyObject
+        * Set oFactory = oProduct.GetTechnologicalObject("StructureObjectFactory")
+        * </pre>
+        */
+
+interface CATIAStrObjectFactory : CATIABase
+{
+
+	/**
+	* Creates a member extremity definition object from coordinates and an offset
+	* value.  
+	*
+	* @param iCoord
+	*	The coordinates of the extremity
+	* @param iOffset
+	*	The offset on this extremity
+	*/
+
+	HRESULT AddDefExtFromCoordinates(in CATSafeArrayVariant iCoord,
+							 in double iOffset,
+					 		 out /*IDLRETVAL*/ CATIABase oDefExtremity);
+
+	/**
+	* Creates a member extremity definition object from an existing object in the model 
+	* and an offset value. 
+	*
+	* @param iReference
+	*	The reference object defining the extremity
+	* @param iOffset
+	*	The offset on this extremity
+	*/
+
+	HRESULT AddDefExtFromReference(in CATIAReference iReference,
+						   in double iOffset,
+						   out /*IDLRETVAL*/ CATIABase oDefExtremity);
+
+	/**
+	* Creates a member extremity definition object from another member object, its
+	* side, a distance on it and an offset.
+	*
+	* @param iMember
+	*	The member used to define the extremity
+	* @param iSide
+	*	The side of the previous member used to define the distance along the member
+	* @param iDistance
+	*	The distance along the selected member
+	* @param iOffset
+	*	The offset on the extremity
+	*
+	*/
+
+	HRESULT AddDefExtOnMember(in CATIAStrMember iMember,
+								in CatStrMemberExtremity iSide,
+								in double iDistance,
+								in double iOffset,
+								out /*IDLRETVAL*/ CATIABase oDefExtremity);
+
+	/**
+	* Creates a section object from part document. This part must aggregate a
+	* sketch object defining the contour of the section.
+	*
+	* The contour of the section have to be closed and may contain several
+	* domains.
+	*
+	* @param iPart
+	*	The part document where the sketch of the section is defined
+	*/
+
+	HRESULT AddSection(in CATIADocument iPart,
+						  out /*IDLRETVAL*/ CATIAStrSection oSection);
+
+
+	/**
+	* Creates a section object from part document. This part must aggregate a
+	* sketch object defining the contour of the section. This service gives you
+	* to define where the resolved part comes from to allow a replace mechanism.
+	*
+	* The contour of the section have to be closed and may contain several
+	* domains.
+	*
+	* @param iCatalogName
+	*	The catalog name where the document comes from
+	* @param iFamilyName
+	*	The family name where the document comes from
+	* @param iSectionName
+	*	The section name where the document comes from
+	* @param iPart
+	*	The part document where the sketch of the section is defined
+	*/
+
+	HRESULT AddSectionFromCatalog(in CATIADocument iPart,
+								in CATBSTR iCatalogName,
+								in CATBSTR iFamilyName,
+								in CATBSTR iSectionName,
+								out /*IDLRETVAL*/ CATIAStrSection oSection);
+
+	/**
+	* Creates a member object.
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*/
+
+	HRESULT AddMember(in CATIAStrSection iSection,
+						 in CATBSTR iAnchorName,
+						 in double iAngle,
+						 in CATIABase iDefExtr1,
+						 in CATIABase iDefExtr2,
+						 in CATBSTR iType,
+						 out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+	/**
+	* Creates a member object using a direction object as a line or a plane.
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member
+	* @param iDirection
+	*	The direction object used to orientate the support. The
+	*	direction object can be a plane or a line.
+	* @param iMode
+	*	The way the member is created with respect to the direction plane. Useless if
+        *       if the direction is not a plane.
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*/
+
+	HRESULT AddMemberFromDir(in CATIAStrSection iSection,
+								in CATBSTR iAnchorName,
+								in double iAngle,
+								in CATIABase iDefExtr1,
+								in CATIABase iDefExtr2,
+								in CATIAReference iDirection,
+								in CatStrPlaneMode iMode,
+								in CATBSTR iType,
+								out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+	/**
+	* Creates a member object using a mathematical definition of the direction.
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member
+	* @param iDirection
+	*	The mathematical definition of the direction
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*
+	*/
+
+	HRESULT AddMemberFromMathDir(in CATIAStrSection iSection,
+									in CATBSTR iAnchorName,
+									in double iAngle,
+									in CATIABase iDefExtr1,
+									in CATIABase iDefExtr2,
+									in CATSafeArrayVariant iDirection,
+									in CATBSTR iType,
+									out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+	/**
+	* Creates a member object from a mathematical definition of a plane. 
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member
+	* @param iDirection
+	*	The mathematical definition of a plane
+	* @param iPlaneMode
+	*	The way the member is created with respect to the direction plane. Useless if
+        *       if the direction is not a plane.
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*/
+
+	HRESULT AddMemberFromMathPlane(in CATIAStrSection iSection,
+									in CATBSTR iAnchorName,
+									in double iAngle,
+									in CATIABase iDefExtr1,
+									in CATIABase iDefExtr2,
+									in CATSafeArrayVariant iPlane,
+									in CatStrPlaneMode iPlaneMode,
+									in CATBSTR iType,
+									out /*IDLRETVAL*/ CATIAStrMember oMember);
+						  
+	/**
+	* Creates a dimension member object from a point and a mathematical definition of
+	* a direction.
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member
+	* @param iMathDirection
+	*	The mathematical definition of the direction
+	* @param iLength
+	*	The length of the member
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*/
+
+	HRESULT AddDimMember(in CATIAStrSection iSection,
+						 in CATBSTR iAnchorName,
+						 in double iAngle,
+						 in CATIABase iDefExtr1,
+						 in CATSafeArrayVariant iMathDirection,
+						 in double iLength,
+						 in CATBSTR iType,
+						 out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+	/**
+	* Creates a dimension member object from two given points. 
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member
+	* @param iLength
+	*	The length of the member
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*/
+
+	HRESULT AddDimMemberPtPt(in CATIAStrSection iSection,
+						 in CATBSTR iAnchorName,
+						 in double iAngle,
+						 in CATIABase iDefExtr1,
+						 in CATIABase iDefExtr2,
+						 in double iLength,
+						 in CATBSTR iType,
+						 out /*IDLRETVAL*/ CATIAStrMember oMember);
+						   
+
+	/**
+	* Creates a dimension member object using a support object.
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member. In case of line for a support,
+	*   this parameter is not taking into account.
+	* @param iDirection
+	*	The direction object. It can be a line or a plane
+	* @param iMode
+	*	The way the member is created with respect to the direction plane. Useless if
+        *       if the direction is not a plane.
+	* @param iOrientation
+	*	The orientation of the member
+	* @param iLength
+	*	The length of the member
+	* @param iType
+	*	The type of the member
+	*/
+
+	HRESULT AddDimMemberWithSupport(in CATIAStrSection iSection,
+						 in CATBSTR iAnchorName,
+						 in double iAngle,
+						 in CATIABase iDefExtr1,
+						 in CATIABase iDefExtr2,
+						 in CATIAReference iDirection,
+						 in CatStrPlaneMode iMode,
+						 in CatStrMaterialOrientation iOrientation,
+						 in double iLength,
+						 in CATBSTR iType,
+						 out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+	/**
+	* Creates a dimension member object on a plane following a mathematical
+	* definition of a plane. 
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member
+	* @param iDirection
+	*	The direction object. It can be a line or a plane
+	* @param iMode
+	*	The way the member is created with respect to the direction plane. Useless if
+        *       if the direction is not a plane.
+	* @param iOrientation
+	*	The orientation of the member
+	* @param iLength
+	*	The length of the member
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*/
+
+	HRESULT AddDimMemberOnPlane(in CATIAStrSection iSection,
+						 in CATBSTR iAnchorName,
+						 in double iAngle,
+						 in CATIABase iDefExtr1,
+						 in CATIABase iDefExtr2,
+						 in CATSafeArrayVariant iDirection,
+						 in CatStrPlaneMode iMode,
+						 in double iLength,
+						 in CATBSTR iType,
+						 out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+	/**
+	* Creates a member object on a given support. 
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iSupport
+	*	The support for the member. The support can be a line or a curve
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member. It can
+	*	be NULL.
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member. It can 
+	*	be NULL.
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*
+	*/
+
+	HRESULT AddMemberOnSupport(in CATIAStrSection iSection,
+						 in CATBSTR iAnchorName,
+						 in double iAngle,
+						 in CATIAReference iSupport,
+						 in CATIABase iDefExtr1,
+						 in CATIABase iDefExtr2,
+						 in CATBSTR iType,
+						 out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+	/**
+	* Creates a member object on a given support object and a surface used
+	* to define the orientation of the section. 
+	* 
+	* The surface reference defines the relative orientation on which you
+	* add an angle. 
+	*
+	* @param iSection
+	*	The section object defining the profile for the member
+	* @param iAnchorName
+	*	The name of the anchor point
+	* @param iReference
+	*	The reference to define the zero orientation of the section. The 
+	*	section follows this guide line along the support of the member.
+	* @param iAngle
+	*	The orientation of the section on its support
+	* @param iSupport
+	*	The support for the member. The support can be a line or a curve
+	* @param iDefExtr1
+	*	The extremity object defining the start limit of the member. It can
+	*	be NULL.
+	* @param iDefExtr2
+	*	The extremity object defining the end limit of the member. It can 
+	*	be NULL.
+	* @param iType
+	*	The type of the member. This type is user defined.
+	*/
+
+	HRESULT AddMemberOnSupportWithRef(in CATIAStrSection iSection,
+						 in CATBSTR iAnchorName,
+						 in CATIAReference iSurfRef,
+						 in double iAngle,
+						 in CATIAReference iSupport,
+						 in CATIABase iDefExtr1,
+						 in CATIABase iDefExtr2,
+						 in CATBSTR iType,
+						 out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+	/**
+	* Creates a plate from a contour defined by coordinates.
+	*
+	* @param iSupport
+	*	The plane defining the support of the plate
+	* @param iThickness
+	*	The standard thickness of the plate. The thickness follows the 
+	*	standard orientation of the support
+	* @param iOrientation
+	*	The material orientation of the plate
+	* @param iContour
+	*	The array containing all objects defining the contour of the plate
+	* @param iOffset
+	*	The offset applies to the support of the plate
+	* @param iType
+	*	The type of the plate. This information is user defined. It is added as an 
+        *       attribute on the plate.
+	*/
+
+	HRESULT AddPlate(in CATIAReference iSupport,
+						in double iThickness,
+						in CatStrMaterialOrientation iOrientation,
+						in CATSafeArrayVariant iContour,
+						in double iOffset,
+						in CATBSTR iType,
+						out /*IDLRETVAL*/ CATIAStrPlate oPlate);
+
+	/**
+	* Creates a plate from a surface.
+	*
+	* @param iThickness
+	*	The standard thickness of the plate. The thickness follows the 
+	*	standard orientation of the support
+	* @param iOrientation
+	*	The material orientation of the plate
+	* @param iSurface
+	*	The surface on which plate is to be created.
+  * If Surface path is NULL then method will return E_INVALID_ARG
+	* @param iOffset
+	*	The offset applies to the support of the plate
+	* @param iType
+	*	The type of the plate. This information is user defined. It is added as an 
+  * attribute on the plate.
+	*/
+
+	HRESULT AddPlateOnSurface(in double iThickness,
+						in CatStrMaterialOrientation iOrientation,
+						in CATIAReference iSurface,
+			  		in double iOffset,
+						in CATBSTR iType,
+						out /*IDLRETVAL*/ CATIAStrPlate oPlate);
+
+	/**
+	* Creates a rectangular end plate on an extremity of a given member. 
+	*
+	* @param iMember
+	*	The member on which the end-plate will be created
+	* @param iSide
+	*	The side of the selected member
+	* @param iThickness
+	*	The standard thickness of the plate. The thickness follows the 
+	*	standard orientation of the support
+	* @param iHeight
+	*	The height of the plate
+	* @param iWidth
+	*	The width of the plate
+	* @param iOrientation
+	*	The material orientation of the plate
+	* @param iType
+	*	The type of the plate. This information is user defined. It is added as an
+        *       attribute on the plate.
+	*/
+
+	HRESULT AddRectangularEndPlate(in CATIAStrMember iMember,
+							in CatStrMemberExtremity iSide,
+							in double iThickness,
+							in double iHeight,
+							in double iWidth,
+							in CatStrMaterialOrientation iOrientation,
+							in CATBSTR iType,
+							out /*IDLRETVAL*/ CATIAStrPlate oPlate);
+
+
+	/**
+	* Extend an assembly as a structure foundation assembly. 
+	*
+	* @param iClass
+	*	the name of the user class
+	*/
+
+	HRESULT ExtendProductAsFoundation(in CATBSTR iClass,
+							out /*IDLRETVAL*/ CATIAStrFoundation oFoundation);
+
+};
+
+
+// Interface name : CATIAStrObjectFactory
+#pragma ID CATIAStrObjectFactory "DCE:40cfdfa0-8e06-11d4-94c200108379318c"
+#pragma DUAL CATIAStrObjectFactory
+
+// VB object name : StrObjectFactory   
+#pragma ID StrObjectFactory "DCE:47657e2e-8e06-11d4-94c200108379318c"
+#pragma ALIAS CATIAStrObjectFactory StrObjectFactory
+
+#endif

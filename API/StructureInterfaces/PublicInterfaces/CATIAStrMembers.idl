@@ -1,0 +1,134 @@
+#ifndef CATIAStrMembers_IDL
+#define CATIAStrMembers_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIACollection
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 16/01/98
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIADocument;
+interface CATIAStrMember;
+interface CATIAStrSection;
+
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+#include "CATIACollection.idl"
+#include "CATIAStrServices.idl"
+
+    /**
+     * A collection of the Member objects contained in a given
+     * Product object of a ProductDocument object.
+     * A Product object aggregates zero or one Members collection.
+     * This collection is retrieved using the @href CATIAProduct#GetTechnologicalObject
+     * method of the product. 
+     * <! @sample>
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example retrieves the member collection from the
+     * <tt>oProduct</tt> Product.
+     * <pre>
+     * Dim oMembers as AnyObject
+     * Set oMembers = oProduct.GetTechnologicalObject("StructureMembers")
+     * </pre>
+     */
+
+interface CATIAStrMembers : CATIACollection
+{
+    /**
+     * Removes a member from the Members collection.
+     * @param iIndex
+     *   The index of the member to remove.
+     *   This index can either be the rank of the member in the collection
+     *   or the name you assigned to the member.
+     *   As a numerics, this index is the rank of the member 
+     *   in the collection.
+     *   The index of the first member in the collection is 1, and
+     *   the index of the last member is Count.
+     *   As a string, it is the name you assigned to the member using
+     *   the @href CATIABase#Name property 
+     * @sample
+     * The following example removes the sixth member and the member named
+     * <tt>Column_1</tt> from the <tt>Assembly_1</tt> member collection.
+     * <pre>
+     * Assembly_1.<font color="red">Remove</font>(6)
+     * Assembly_1.<font color="red">Remove</font>("Column_1")
+     * </pre>
+     */
+
+  HRESULT Remove(in CATVariant iIndex);
+
+    /**
+     * Returns a member from its index in the Members collection. 
+     * @param iIndex
+     *   The index of the member to retrieve in the collection of members.
+     *   This index can either be the rank of the member in the collection
+     *   or the name you assign to the member.
+     *   As a numerics, this index is the rank of the member 
+     *   in the collection.
+     *   The index of the first member in the collection is 1, and
+     *   the index of the last member is Count.
+     *   As a string, it is the name you assigned to the member using
+     *   the @href CATIABase#Name property 
+     * @return The retrieved member
+     * @sample
+     * The following example returns in <tt>ThisMember</tt> the third member,
+     * and in <tt>ThatMember</tt> the member named
+     * <tt>Column_1</tt> in the <tt>Assembly_1</tt> member collection.
+     * <pre>
+     * Dim ThisMember As Member
+     * Set ThisMember = Assembly_1.<font color="red">Item</font>(3)
+     * Dim ThatMember As Member
+     * Set ThatMember = Assembly.<font color="red">Item</font>("Column_1")
+     * </pre>
+     */
+
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAStrMember oMember);
+
+};
+
+// Interface name : CATIAStrMembers
+#pragma ID CATIAStrMembers "DCE:9fd5196c-e375-11d2-b7f20008c70fcbec"
+#pragma DUAL CATIAStrMembers
+
+// VB object name : StrMembers   
+#pragma ID StrMembers "DCE:b5ea00fa-e375-11d2-b7f20008c70fcbec"
+#pragma ALIAS CATIAStrMembers StrMembers
+
+#endif

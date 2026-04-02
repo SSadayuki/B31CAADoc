@@ -1,0 +1,63 @@
+#ifndef CATIABehaviorExtension_IDL
+#define CATIABehaviorExtension_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//--------------------------------------------------------------------------
+// Application Object
+// drl nov.99
+//--------------------------------------------------------------------------
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABehavior.idl" 
+
+interface CATIABehaviors; 
+
+/**
+ * Manages the behaviors of a technological object.
+ * <b>Role</b>: This interface allows to select and perform the behaviors (tasks) associated to a technological object.
+ * A behavior extension is obtained from an object using the method GetItem of CATIABase with in argument the keyword "CATGetBehaviorExtension".
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * <pre>
+ * Set RootPart = CATIA.ActiveDocument.Part
+ * Set MyExtension = RootPart.GetItem(<font color="red">"CATGetBehaviorExtensions"</font>)
+ * Set listBehavior = MyExtension.Behaviors
+ * MyExtension.SelectBehavior("MyBehavior") 
+ * </pre>
+ * </dl>
+ */
+interface CATIABehaviorExtension : CATIABehavior
+{
+    /**
+     * Returns the type of the technological object associated to this behavior extension.
+     */
+#pragma PROPERTY ExtensionClass
+    HRESULT get_ExtensionClass(inout /*IDLRETVAL*/ CATBSTR ClassName);
+
+    /**
+     * Selects and executes a behavior of the technological object. The wanted behavior is specified by its name.
+ 	 * @param BehaviorName
+	 *	 the name of the behavior.
+     */
+    HRESULT SelectBehavior(in CATBSTR BehaviorName, out /*IDLRETVAL*/ CATIABehavior oBehavior); 
+
+};
+
+
+// Interface name : CATIABehavior
+#pragma ID CATIABehaviorExtension "DCE:febdcaae-2936-11b3-b051f06094eb7cd3"
+#pragma DUAL CATIABehaviorExtension
+
+// VB object name : 
+#pragma ID BehaviorExtension "DCE:0e9bc828-2937-11c3-b052f06094eb7cd3"
+#pragma ALIAS CATIABehaviorExtension BehaviorExtension
+
+#endif
+

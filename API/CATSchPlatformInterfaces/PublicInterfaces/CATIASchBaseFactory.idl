@@ -1,0 +1,272 @@
+#ifndef CATIASchBaseFactory_IDL 
+#define CATIASchBaseFactory_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfObjects;
+interface  CATIASchComponent;
+interface  CATIASchRoute;
+interface  CATIASchAppConnector;
+interface  CATIASchGRRComp;
+interface  CATIASchCompGroupExt;
+interface  CATIASchZone;
+    
+#include "CatSchIDLRouteMode.idl"
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Factory to create basic schematic objects.
+  */
+
+interface CATIASchBaseFactory : CATIABase
+{
+  /**
+  * Create a Schematic Component reference.
+  * @param iAppComponentRef
+  *   Application component reference (at least a feature)
+  * @param iLGRR
+  *   A list of graphical representations.
+  * @param oSchComp
+  *   Pointer to the new component.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBaseFactory
+  * Dim objArg1 As AnyObject
+  * Dim objArg2 As SchListOfObjects
+  * Dim objArg3 As SchComponent
+  *  ...
+  * Set objArg3 = objThisIntf.<font color="red">CreateSchComponent</font>(objArg1,objArg2)
+  * </pre>
+  *    
+  */
+  HRESULT CreateSchComponent ( 
+    in CATIABase iAppComponentRef, 
+    in CATIASchListOfObjects iLGRR, 
+    out /*IDLRETVAL*/ CATIASchComponent oSchComp );
+    
+  /**
+  * Create a Schematic Route object with primitives.
+  * @param iAppRoute
+  *   Application route (at least a feature)
+  * @param iLGRR
+  *   A list of graphical primitives.
+  *   pointer).
+  * @param oSchRoute
+  *   Pointer to the new route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBaseFactory
+  * Dim objArg1 As AnyObject
+  * Dim objArg2 As SchListOfObjects
+  * Dim objArg3 As SchRoute
+  *  ...
+  * Set objArg3 = objThisIntf.<font color="red">CreateSchRouteByPrim</font>(objArg1,objArg2)
+  * </pre>
+  *    
+  */
+  HRESULT CreateSchRouteByPrim ( 
+    in CATIABase iAppRoute, 
+    in CATIASchListOfObjects iLGRR, 
+    out /*IDLRETVAL*/ CATIASchRoute oSchRoute );
+    
+  /**
+  * Create a Schematic Route object with a list of points.
+  * @param iAppRoute
+  *   Application route (at least a feature)
+  * @param iLDbPt
+  *   A list of X-Y coordinates of points. 2 doubles per point.
+  * @param oSchRoute
+  *   Pointer to the new route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBaseFactory
+  * Dim objArg1 As AnyObject
+  * Dim dbVar2(x) As CATSafeArrayVariant
+  * Dim objArg4 As SchRoute
+  *  ...
+  * objThisIntf.<font color="red">CreateSchRouteByPoints</font>objArg1,dbVar2,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT CreateSchRouteByPoints ( 
+    in CATIABase iAppRoute, 
+    in CATSafeArrayVariant iLDbPt,
+    inout CATIASchRoute oSchRoute );
+    
+  /**
+  * Create a route and connect its extremity connectors to input objects.
+  * @param iAppRoute
+  *   Application route (at least a feature)
+  * @param iCntrCompFrom
+  *   Pointer to component connector to connect starting end of the route to
+  *   If NULL, no connection is made at this end.
+  * @param iCntrCompTo
+  *   Pointer to component connector to connect end of the route to
+  *   If NULL, no connection is made at this end.
+  * @param iGRRCompFrom
+  *   Pointer to first component graphical image, if NULL, the PRIMARY image 
+  *   associated with component will be used
+  * @param iGRRCompTo
+  *   Pointer to second component graphical image, if NULL, the PRIMARY image 
+  *   associated with component will be used
+  * @param iLDb2PtPath
+  *   A list of X-Y coordinates of points to be used for the route image. 
+  *   2 doubles per point. Not used if iERouteMode=SchRouteMode_AroundObject
+  *   input a NULL for this case
+  * @param iERouteMode
+  *   Route mode to use. Only used when iLDb2PtPath is NULL.
+  * @param oSchRoute
+  *   Pointer to the new route 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBaseFactory
+  * Dim objArg1 As AnyObject
+  * Dim objArg2 As SchAppConnector
+  * Dim objArg3 As SchAppConnector
+  * Dim objArg4 As SchGRRComp
+  * Dim objArg5 As SchGRRComp
+  * Dim dbVar6(x) As CATSafeArrayVariant
+  *
+  * Dim objArg9 As SchRoute
+  *  ...
+  * objThisIntf.<font color="red">CreateRouteAndConnectToObjects</font>objArg1,objArg2,objArg3,objArg4,objArg5,dbVar6,CatSchIDLRouteMode_Enum,objArg9
+  * </pre>
+  *    
+  */
+  HRESULT CreateRouteAndConnectToObjects ( 
+    in CATIABase iAppRoute, 
+    in CATIASchAppConnector iCntrCompFrom, 
+    in CATIASchAppConnector iCntrCompTo, 
+    in CATIASchGRRComp iGRRCompFrom, 
+    in CATIASchGRRComp iGRRCompTo, 
+    in CATSafeArrayVariant iLDb2PtPath,
+    in CatSchIDLRouteMode iERouteMode, 
+    inout CATIASchRoute oSchRoute );
+    
+  /**
+  * Create a Schematic Component Group object.
+  * @param iAppGroup
+  *   Application group object (at least a feature)
+  *   Optional, it could be NULL. If NULL, one will be created by the platform
+  * @param iLGRR
+  *   A list of graphical representation. Optional, it could be NULL.
+  * @param iLMembers
+  *   A list of initial members. Optional, it could be NULL.
+  * @param oSchGroup
+  *   Pointer to the new group.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBaseFactory
+  * Dim objArg1 As AnyObject
+  * Dim objArg2 As SchListOfObjects
+  * Dim objArg3 As SchListOfObjects
+  * Dim objArg4 As SchCompGroupExt
+  *  ...
+  * Set objArg4 = objThisIntf.<font color="red">CreateSchCompGroup</font>(objArg1,objArg2,objArg3)
+  * </pre>
+  *    
+  */
+  HRESULT CreateSchCompGroup ( 
+    in CATIABase iAppGroup, 
+    in CATIASchListOfObjects iLGRR, 
+    in CATIASchListOfObjects iLMember, 
+    out /*IDLRETVAL*/ CATIASchCompGroupExt oSchGroup );
+    
+  /**
+  * Create a Schematic Zone object.
+  * @param iAppZone
+  *   Application zone object (at least a feature)
+  * @param iLGRR
+  *   A list of graphical representation.
+  * @param oSchZone
+  *   Pointer to the new zone.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBaseFactory
+  * Dim objArg1 As AnyObject
+  * Dim objArg2 As SchListOfObjects
+  * Dim objArg3 As SchZone
+  *  ...
+  * Set objArg3 = objThisIntf.<font color="red">CreateSchZone</font>(objArg1,objArg2)
+  * </pre>
+  *    
+  */
+  HRESULT CreateSchZone ( 
+    in CATIABase iAppZone, 
+    in CATIASchListOfObjects iLGRR, 
+    out /*IDLRETVAL*/ CATIASchZone oSchZone );
+    
+  /**
+  * Create schematic networks for query. These are volatile objects and will not
+  * be saved in the model.
+  * @param iLCntbl
+  *   A list of related objects that belong to the network (CATISchAppConnectable pointers). 
+  *   These objects do not need to be connected.
+  *   This method will do the analysis and returns the network(s) containing these objects.
+  * @param iLCntbl
+  *   A list of graphical images interface (CATISchGRR) pointers. Each member corresponds
+  *   to the members in iLCntbl.
+  * @param oNetwork [out, IUnknown#Release]
+  *   Pointer to the network analysis interface pointers.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBaseFactory
+  * Dim objArg1 As SchListOfObjects
+  * Dim objArg2 As SchListOfObjects
+  * Dim objArg3 As SchListOfObjects
+  *  ...
+  * Set objArg3 = objThisIntf.<font color="red">CreateNetwork</font>(objArg1,objArg2)
+  * </pre>
+  *    
+  */
+  HRESULT CreateNetwork ( 
+    in CATIASchListOfObjects iLCntbls, 
+    in CATIASchListOfObjects iLGRRs, 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLNetAnalysis );
+    
+ /**
+  * Delete a schematic object.  
+  * @param iObject
+  *   interface pointer to the object to be deleted 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBaseFactory
+  * Dim objArg1 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">DeleteObject</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT DeleteObject ( 
+    in CATIABase iObject );
+    
+};
+    
+// Interface name : CATIASchBaseFactory
+#pragma ID CATIASchBaseFactory "DCE:c2f9ad03-b7df-4228-a6199973d6bcd89d"
+#pragma DUAL CATIASchBaseFactory
+    
+// VB object name : SchBaseFactory
+#pragma ID SchBaseFactory "DCE:349f3355-c4ce-480a-ba5d1e1b5e98a22e"
+#pragma ALIAS CATIASchBaseFactory SchBaseFactory
+    
+#endif 
+    

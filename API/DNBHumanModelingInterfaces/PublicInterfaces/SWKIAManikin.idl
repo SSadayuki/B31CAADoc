@@ -1,0 +1,242 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAManikin_IDL
+#define SWKIAManikin_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  SWKIAManikinPart
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_Body
+//   get_BodyNode
+//   get_Anthro
+//   get_IKManager
+//   get_Vision
+//   get_Ergo
+//   get_Move
+//    get_SettingsNode
+//    get_LineOfSightNode
+//    get_ProfilesNode
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 00/01/26
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIAManikinPart.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface CATIAMove;
+interface SWKIAAnthro;
+interface SWKIABody;
+interface SWKIAErgo;
+interface SWKIAIKManager;
+interface SWKIALineOfSightNode;
+interface SWKIANode;
+interface SWKIASegmentNode;
+interface SWKIAVision;
+
+/**
+  *  This interface groups the methods directly related to the definition of
+  *  a manikin.  <br>Its main purpose is to provide bridges to the other interfaces
+  *  related to a manikin.
+  *  <br>
+  *  Once these interfaces are recovered, it is possible to have access to 
+  *  their specific functionalities.
+  **/
+interface SWKIAManikin : SWKIAManikinPart
+{
+ // ===========================================================================
+ //  get_Body
+ //  --------
+ //
+    /**
+      * Returns the body of the current manikin.
+      * The body can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">Body</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY Body
+    HRESULT get_Body(out /*IDLRETVAL*/ SWKIABody poBody);
+
+
+ // ===========================================================================
+ //  get_BodyNode
+ //  ------------
+ //
+    /**
+      * Returns the body node of the current manikin.
+      * The body node is the node named "Body", as it
+      * appears underneath the manikin in the specification
+      * tree.  This body node can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">BodyNode</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY BodyNode
+    HRESULT get_BodyNode(out /*IDLRETVAL*/ SWKIASegmentNode poBodyNode);
+
+
+ // ===========================================================================
+ //  get_Anthro
+ //  ----------
+ //
+    /**
+      * Returns the anthropometry of the current manikin.
+      * The anthropometry can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">Anthro</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY Anthro
+    HRESULT get_Anthro(out /*IDLRETVAL*/ SWKIAAnthro poAnthro);
+
+
+ // ===========================================================================
+ //  get_Vision
+ //  ----------
+ //
+    /**
+      * Returns the vision of the current manikin.
+      * The vision can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">Vision</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY Vision
+    HRESULT get_Vision(out /*IDLRETVAL*/ SWKIAVision poVision);
+
+
+ // ===========================================================================
+ //  get_Ergo
+ //  --------
+ //
+    /**
+      * Returns the ergonomic analysis of the current manikin.
+      * The ergo can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">Ergo</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY Ergo
+    HRESULT get_Ergo(out /*IDLRETVAL*/ SWKIAErgo poErgo);
+
+ // ===========================================================================
+ // get_IKManager
+ // -------------
+ //
+    /**
+      * Returns the inverse kinematics (IK) engine of the current manikin.
+      * The IK manager can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">IKManager</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY IKManager
+    HRESULT get_IKManager(out /*IDLRETVAL*/ SWKIAIKManager poIKManager);
+
+ // ===========================================================================
+ // get_Move
+ // --------
+ //
+    /**
+      * Returns the manikin's move object.
+      * The move object is aggregated by the manikin object
+      * and itself aggregates a movable object
+      * to which you can apply a move transformation
+      * by means of an isometry matrix. It moves the manikin's
+      * representation according to this isometry.
+      *
+      * @sample
+      * This example retrieves the move object for the manikin
+      * <code>myManikin</code>.
+      * <pre>
+      * Dim myManikinMoveObject As Move
+      * Set myManikinMoveObject = myManikin.<font color="red">Move</font>
+      * </pre>
+      **/
+#pragma PROPERTY Move
+  HRESULT get_Move(out /*IDLRETVAL*/ CATIAMove poMove);
+
+ // ===========================================================================
+ // get_SettingsNode
+ // ----------------
+ //
+    /**
+      * Returns the settings node of the current manikin.
+      * The Settings node can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">SettingsNode</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY SettingsNode
+    HRESULT get_SettingsNode(out /*IDLRETVAL*/ SWKIANode poNode);
+
+ // ===========================================================================
+ // get_LineOfSightNode
+ // ---------------
+ //
+    /**
+      * Returns the Line of sight node of the current manikin.
+      * The Line of sight node can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">LineOfSightNode</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY LineOfSightNode
+    HRESULT get_LineOfSightNode(out /*IDLRETVAL*/ SWKIALineOfSightNode poNode);
+
+ // ===========================================================================
+ // get_ProfilesNode
+ // ---------------
+ //
+    /**
+      * Returns the Profiles node of the current manikin.
+      * The Profiles node can also be obtained by invoking
+      * method GetItem (from <code>AnyObject</code>)
+      * with the character string "<font color="green">ProfilesNode</font>"
+      * as an argument.
+      **/
+#pragma PROPERTY ProfilesNode
+    HRESULT get_ProfilesNode(out /*IDLRETVAL*/ SWKIANode poNode);
+};
+
+// Interface name : SWKIAManikin
+#pragma ID SWKIAManikin "DCE:12c1da9c-d402-11d3-8092005004d3fe74"
+#pragma DUAL SWKIAManikin
+
+// VB object name : SWManikin (Id used in Visual Basic)
+#pragma ID SWKManikin "DCE:12c1da9d-d402-11d3-8092005004d3fe74"
+#pragma ALIAS SWKIAManikin SWKManikin
+
+#endif

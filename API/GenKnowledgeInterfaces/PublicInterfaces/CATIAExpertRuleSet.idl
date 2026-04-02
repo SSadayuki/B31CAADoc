@@ -1,0 +1,226 @@
+#ifndef CATIAExpertRuleSet_IDL
+#define CATIAExpertRuleSet_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAExpertRuleSetRuntime.idl"
+#include "CATVariant.idl"
+
+#include "CATIAExpertRuleBaseComponentRuntime.idl"
+#include "CATIAExpertCheck.idl"
+#include "CATIAExpertRule.idl"
+
+interface CATIAExpertRuleSet;
+
+/**
+ * Represents the ExpertRuleSet object which is the editable part of a RuleSet or a RuleBase.
+ *
+ * The following example shows how to access the RuleSet of the rule Base RB1
+ * <pre>
+ * Dim CATDocs As Documents 
+ * Set CATDocs   = CATIA.Documents
+ * Dim partdoc As Document
+ * Set partdoc   = CATDocs.Add("CATPart")
+ * Dim part as Part
+ * Set part      = partdoc.Part
+ * Dim relations as Relations
+ * Set relations = part.Relations
+ * Dim RuleBase as ExpertRuleBaseRuntime
+ * Set RuleBase  = relations.Item("RB1")
+ * Dim RuleSet as ExpertRuleSet
+ * Set RuleSet	 = RuleBase.RuleSet
+ * </pre>
+ */
+interface CATIAExpertRuleSet : CATIAExpertRuleSetRuntime
+{
+     
+
+
+    /**
+     * Creates a check and adds it to the RuleSet.
+     * @param iName
+     *    The check name
+     * @param iCheckVariables
+     *    define variables of the check.
+     * @param iCheckBody
+     *    The check definition
+     * @param iRuleSet
+     *    The ruleset name where the check is to be aggregated.
+	 *    If this macro is used from the RuleSet where we want to create the check, the param
+	 *    must be equal to value : "".
+     * @return The created check
+	 *
+	 *
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <tt>SolidActivity</tt> check
+     * and adds it to the newly created <tt>RuleSet.1</tt> RuleSet then
+	 * creates the <tt>HoleActivity</tt> check
+     * and adds it to the newly created <tt>RuleSet.2</tt> RuleSet
+     * <pre>
+     *  Dim CATDocs As Documents 
+     *  Set CATDocs   = CATIA.Documents
+     *  Dim partdoc As Document
+	 *  Dim part as Part
+	 *  Dim CheckSolid as ExpertCheck
+	 *  Dim ruleset as ExpertRuleSet
+	 *  Dim CheckHole as ExpertCheck
+	 *
+     *  Set partdoc      = CATDocs.Add("CATPart")
+     *  Set part         = partdoc.Part 
+     *  Set CheckSolid   = part.Relations.Item("RuleBase").RuleSet.<font color="red">CreateCheck</font>
+     *                     ("SolidActivity",
+     *                      "Sol : Solid",
+     *                      "Sol.Activity == True",
+	 *                      "RuleSet.1")
+     *  Set ruleset      = part.Relations.Item("RuleBase").RuleSet.CreateRuleSet
+	 *                     ("RuleSet.2",
+	 *                      "")
+	 *  Set CheckHole    = ruleset.<font color="red">CreateCheck</font>
+     *                     ("HoleActivity",
+     *                      "H : Hole",
+     *                      "H.Activity == True",
+	 *                      "")
+	 *
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateCheck
+                (in                   CATBSTR					iName,
+                 in                   CATBSTR					iCheckVariables,
+                 in                   CATBSTR					iCheckBody,
+				 in                   CATBSTR					iRuleSet,
+
+                 out   /*IDLRETVAL*/  CATIAExpertCheck          oCheck);
+
+
+
+	/**
+     * Creates a rule and adds it to the RuleSet.
+     * @param iName
+     *    The rule name
+     * @param iRuleVariables
+     *    define variables of the rule.
+     * @param iRuleBody
+     *    The check definition
+     * @param iRuleSet
+     *    The RuleSet name where this rule aggregated.
+	 *    If this macro is used from the ruleset where we want to aggregate the rule, the param
+	 *    must be equal to value : "".
+     * @return The created rule
+	 *
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <tt>DesactivateIfActivatedOnSolid</tt> rule
+     * and adds it to the newly created <tt>RuleSet.1</tt> RuleSet then creates the 
+     * <tt>DesactivateIfActivatedOnHole</tt> rule and adds it to the newly created <tt>RuleSet.2</tt>
+	 * RuleSet
+	 *
+	 * <pre>
+     *  Dim CATDocs As Documents 
+     *  Set CATDocs   = CATIA.Documents
+	 *
+     *  Dim partdoc As Document
+     *  Set partdoc   = CATDocs.Add("CATPart")
+	 *
+	 *  Dim part as Part
+     *  Set part         = partdoc.Part
+	 *
+	 *  Dim rulesolid as ExpertRule
+     *  Set rulesolid    = part.Relations.Item("RuleBase").RuleSet.<font color="red">CreateRule</font>
+     *                     ("DesactivateIfActivatedOnSolid",
+     *                      "Sol : Solid",
+     *                      "Sol.Activity == True then Sol.Activity = False",
+	 *						"RuleSet.1")
+	 *  Dim ruleset as ExpertRuleSet
+     *  Set ruleset      = part.Relations.Item("RuleBase").RuleSet.CreateRuleSet
+     *                     ("RuleSet.2",
+	 *                      "")
+	 *  Dim rulehole as ExpertRule
+	 *  Set rulehole     = ruleset.<font color="red">CreateRule</font>
+     *                     ("DesactivateIfActivatedOnHole",
+     *                      "H : Hole",
+     *                      "H.Activity == True then H.Activity = False",
+	 *                      "")
+	 *
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateRule
+                (in                   CATBSTR					iName,
+                 in                   CATBSTR					iRuleVariables,
+                 in                   CATBSTR					iRuleBody,
+				 in                   CATBSTR					iRuleSet,
+
+                 out   /*IDLRETVAL*/  CATIAExpertRule           oRule);
+
+
+
+	/**
+     * Creates a RuleSet and adds it to the RuleSet.
+     * @param iName
+     *    The ruleset name
+     * @param iRuleSet
+     *    The ruleset name where this ruleset is to be aggregated.
+	 *    If this macro is used from the ruleset or the rulebase where we want to aggregate
+	 *    the ruleset, the param must be equal to value : "".
+     * @return The created ruleset
+	 *
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example, firstly, creates the <tt>RuleSet.1</tt> RuleSet
+     * and adds it to the newly created RuleBase. Secondly, it creates <tt>RuleSet.2</tt> RuleSet 
+	 * and adds it to the ruleset <tt>RuleSet.1</tt>
+     * <pre>
+     *  Dim CATDocs As Documents 
+     *  Set CATDocs   = CATIA.Documents
+     *  Dim partdoc As Document
+     *  Set partdoc   = CATDocs.Add("CATPart")
+	 *  Dim part as Part
+     *  Set part         = partdoc.Part
+	 *  Dim RS1 as ExpertRuleSet
+     *  RS1 = part.Relations.Item("RuleBase").RuleSet.<font color="red">CreateRuleSet</font>
+     *                     ("RuleSet.1",
+	 *                      "")
+	 *  Dim RS2 as ExpertRuleSet
+     *  RS2 = part.Relations.Item("RuleBase").RuleSet.<font color="red">CreateRuleSet</font>
+     *                     ("RuleSet.2",
+	 *                      "RuleSet.1")
+	 *  
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateRuleSet
+                (in                   CATBSTR					iName,
+				 in                   CATBSTR					iRuleSet,
+
+                 out   /*IDLRETVAL*/  CATIAExpertRuleSet        oRuleSet);
+
+
+
+
+
+};
+
+// Interface name : CATIAExpertRuleSet
+#pragma ID CATIAExpertRuleSet "DCE:d095f2ee-bcfe-11d2-9b5b006094eb7eca"
+#pragma DUAL CATIAExpertRuleSet
+
+// VB object name : Relation (Id used in Visual Basic)
+#pragma ID ExpertRuleSet "DCE:d116b1ea-bcfe-11d2-9b5b006094eb7eca"
+#pragma ALIAS CATIAExpertRuleSet ExpertRuleSet
+
+#endif
+// CATIAExpertRuleSet_IDL
+

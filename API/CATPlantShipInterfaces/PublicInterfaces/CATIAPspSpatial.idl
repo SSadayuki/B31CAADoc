@@ -1,0 +1,70 @@
+#ifndef CATIAPspSpatial_IDL
+#define CATIAPspSpatial_IDL
+
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+#include "CATIAPspListOfObjects.idl"
+ 
+#include "CATIABase.idl"
+
+/**
+ * Represents the Psp Spatial object. 
+ * <b>Role</b>: To access Plant Ship spatial object information. 
+ */
+
+
+interface CATIAPspSpatial : CATIABase
+{
+
+ /**
+  * Returns all physical objects associated to this spatial object.  
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspSpatial
+  * Dim objArg1 As CATIAPspListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">Physicals</font>
+  * </pre>
+  *    
+  */
+#pragma PROPERTY Physicals		
+  HRESULT get_Physicals ( out /*IDLRETVAL*/ CATIAPspListOfObjects oLPspPhysicals);
+
+   /**
+  * Return all physical objects associated to this extremity nodes
+  * 
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspSpatial
+  * Dim objArg1 As CATIABase
+  * Dim objArg2 As CATIAPspListOfObjects
+  * Dim objArg3 As CATIAPspListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf
+  * Set objArg1 = oLPspConnectors
+  * Set objArg1 = oLPspPhysicals <font color="red">GetConnectedPhysicals</font>
+  * </pre>
+  */
+  HRESULT GetConnectedPhysicals (   in CATIABase ispNode, 
+                                    out CATIAPspListOfObjects oLPspConnectors,                              
+                                    out CATIAPspListOfObjects oLPspPhysicals );
+};
+
+// Interface name : CATIAPspSpatial
+#pragma ID CATIAPspSpatial "DCE:94f1d6fc-56c5-46c7-835a6fb8196b6205"
+#pragma DUAL CATIAPspSpatial
+
+// VB object name : PspSpatial
+#pragma ID PspSpatial     "DCE:d1da5ba7-c940-4773-aec26c6b8d914408"
+#pragma ALIAS CATIAPspSpatial PspSpatial
+
+#endif

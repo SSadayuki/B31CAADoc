@@ -1,0 +1,212 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAAnnotatedView.idl
+//   This automation interface allows the manage AnnotatedView information.
+//
+//===================================================================
+//
+//  Jul 2000  Creation: LJE
+//
+//===================================================================
+#ifndef CATIAAnnotatedView_IDL
+#define CATIAAnnotatedView_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATSafeArray.idl"
+#include "CatProjectionMode.idl"
+#include "CATIAMarker2Ds.idl"
+#include "CATIAViewer3D.idl"
+#include "CatAnnotatedViewBehavior.idl"
+
+/**  
+ * Represents an annotated view.
+ */
+interface CATIAAnnotatedView : CATIABase
+{
+  /**
+   * Retrieves the coordinates of the origin of the 3D viewpoint of the annotated view.
+   * @param oOrigin
+   *    The coordinates of the view point origin expressed as an array of 3 variants are:
+   *    <ul>
+   *    <li>oOrigin(0) is the X coordinate of the origin
+   *    <li>oOrigin(1) is the Y coordinate of the origin
+   *    <li>oOrigin(2) is the Z coordinate of the origin
+   *    </ul>
+   * @sample
+   *    This example retrieves the origin of the 3D viewpoint of the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim origin(2)
+   *    NewAnnotatedView.<font color="red">GetOrigin</font> origin
+   *    </pre>
+   */
+  HRESULT GetOrigin (inout CATSafeArrayVariant oOrigin);
+
+  /**
+   * Retrieves the components of the sight direction of the 3D viewpoint of the annotated view.
+   * The sight direction is the line that passes by the origin of the viewpoint
+   * and by the target.
+   * @param oSight
+   *    The components of the viewpoint sight direction expressed as an array of 3 variants are: 
+   *    <ul>
+   *    <li>oSight(0) is the X component of the sight direction
+   *    <li>oSight(1) is the Y component of the sight direction
+   *    <li>oSight(2) is the Z component of the sight direction
+   *    </ul>
+   * @sample
+   *    This example retrieves the sight direction of the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim sight(2)
+   *    NewAnnotatedView.<font color="red">GetSightDirection</font> sight
+   *    </pre>
+   */
+  HRESULT GetSightDirection(inout CATSafeArrayVariant oSight);
+
+  /**
+   * Retrieves the components of the up direction of the 3D viewpoint of the annotated view.
+   * @param oUp
+   *    The components of the viewpoint up direction expressed as an array of 3 variants are:
+   *    <ul>
+   *    <li>oUp(0) is the X component of the up direction
+   *    <li>oUp(1) is the Y component of the up direction
+   *    <li>oUp(2) is the Z component of the up direction
+   *    </ul>
+   * @sample
+   *    This example retrieves the up direction of the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim up(2)
+   *    NewAnnotatedView.<font color="red">GetUpDirection</font> up
+   *    </pre>
+   */
+  HRESULT GetUpDirection(inout CATSafeArrayVariant oUp);
+
+  /**
+   * Returns the projection mode of the annotated view.
+   * This projection mode is the one of the associated 3D View point.
+   * @sample
+   *    This example retrieves the projection mode of the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim Mode
+   *    Mode = NewAnnotatedView.<font color="red">ProjectionMode</font>
+   *    </pre>
+   */
+#pragma PROPERTY ProjectionMode
+  HRESULT get_ProjectionMode(out /*IDLRETVAL*/ CatProjectionMode oProjectionMode);
+
+  /**
+   * Returns the zoom factor associated with the annotated view.
+   * This property exists with the parallel (cylindric) projection mode only.
+   * This zoom factor is the one of the associated 3D View point.
+   * @sample
+   *    This example retrieves in <tt>ZoomFactor</tt> the zoom of the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim ZoomFactor As Double
+   *    ZoomFactor = NewAnnotatedView.<font color="red">Zoom</font>
+   *    </pre>
+   */
+#pragma PROPERTY Zoom
+  HRESULT get_Zoom(out /*IDLRETVAL*/ double oZoom);
+
+  /**
+   * Returns the field of view associated with the annotated view.
+   * The field of view is half of the vertical angle of the viewpoint,
+   * expressed in degrees.
+   * This property exists with the perspective (conic) projection mode only.
+   * @sample
+   *    This example retrieves the field of view</tt> of the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim Field As Double
+   *    Field = NewAnnotatedView.<font color="red">FieldOfView</font>
+   *    </pre>
+   */
+#pragma PROPERTY FieldOfView
+  HRESULT get_FieldOfView(out /*IDLRETVAL*/ double oFieldOfView);
+
+  /**
+   * Returns or sets the comment associated with the annotated view.
+   * @sample
+   *    This example retrieves the comment of <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim text As String
+   *    text = NewAnnotatedView.<font color="red">Comment</font>
+   *    </pre>
+   */
+#pragma PROPERTY Comment
+    HRESULT get_Comment(inout /*IDLRETVAL*/ CATBSTR oText);
+    HRESULT put_Comment(in CATBSTR iText);
+
+  /**
+   * Returns or sets the path of the sound file associated with the annotated view.
+   * @param iPath
+   *    The path of the sound file.
+   *    If this path is not empty, the sound replaces the old associated one (if it exists) or creates a new association (if not).
+   *    If this path is empty, the sound is removed.
+   * @return
+   *    The path of the sound file.
+   *    If this path is empty, the annotated view has no associated sound.
+   * @sample
+   *    This example retrieves the path of the sound file associated with the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim path As String
+   *    path = NewAnnotatedView.<font color="red">Sound</font>
+   *    </pre>
+   */
+#pragma PROPERTY Sound
+    HRESULT get_Sound(inout /*IDLRETVAL*/ CATBSTR oPath);
+    HRESULT put_Sound(in CATBSTR iPath);
+
+  /**
+   * Returns the Marker2D Collection associated with the annotated view.
+   * @sample
+   *    This example retrieves the <tt>TheMarker2Ds</tt> collection
+   *    from the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim TheMarker2Ds As AnnotatedView
+   *    Set TheMarker2Ds = NewAnnotatedView.<font color="red">Marker2Ds</font>(9)
+   *    </pre>
+   */
+#pragma PROPERTY Marker2Ds
+  HRESULT get_Marker2Ds (out /*IDLRETVAL*/ CATIAMarker2Ds oMarker2Ds);
+
+  /**
+   * Updates the annotated view: that is to take into account all modifications which occur since last update. 
+   * @sample
+   *    This example updates the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    NewAnnotatedView.<font color="red">Update</font>
+   *    </pre>
+   */
+  HRESULT Update ();
+
+  /**
+   * Returns or sets the behavior mode of the annotated view.
+   * This behavior mode enables the annotated view to be independant from the viewpoint.
+   * @sample
+   *    This example retrieves the behavior mode of the <tt>NewAnnotatedView</tt> annotated view.
+   *    <pre>
+   *    Dim Mode
+   *    Mode = NewAnnotatedView.<font color="red">BehaviorMode</font>
+   *    </pre>
+   */
+  #pragma PROPERTY BehaviorMode
+    HRESULT get_BehaviorMode(out /*IDLRETVAL*/ CatAnnotatedViewBehavior oBehaviorMode);
+    HRESULT put_BehaviorMode(in                CatAnnotatedViewBehavior iBehaviorMode);
+
+};
+
+// Interface name : CATIAAnnotatedView
+#pragma ID CATIAAnnotatedView "DCE:d5430a2c-517a-11d4-9469006094eb3826"
+#pragma DUAL CATIAAnnotatedView
+
+// VB object name : AnnotatedView (Id used in Visual Basic)
+#pragma ID AnnotatedView "DCE:d5ec5122-517a-11d4-9469006094eb3826"
+#pragma ALIAS CATIAAnnotatedView AnnotatedView
+
+#endif

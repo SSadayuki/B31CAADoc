@@ -1,0 +1,252 @@
+#ifndef CATIAHybridShapeCircleCenterTangent_IDL
+#define CATIAHybridShapeCircleCenterTangent_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2002
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//===================================================================
+//
+// CATIAHybridShapeCircleCenterTangent.idl
+// Automation interface for the HybridShapeCircleCenterTangent element 
+//
+//===================================================================
+
+#include "CATIAHybridShapeCircle.idl"
+
+/**  
+ * Represents the hybrid shape circle object defined using a center,  a curve and a support.  
+ * <b>Role</b>: To access the data of the hybrid shape circle tangent object.
+ * <p>This data includes:
+ * <ul>
+ * <li>The center element</li>
+ * <li>The tangent curve </li>
+ * <li>The support </li>
+ * <li>The value of the raduius </li>
+ * <li>and also the type of solution index </li>
+ * </ul>
+ * <p>Use the CATIAHybridShapeFactory to create a HybridShapeCircleCenterTangent object.
+ * @see CATIAHybridShapeFactory#AddNewCircleCenterTangent
+ */
+interface CATIAHybridShapeCircleCenterTangent : CATIAHybridShapeCircle 
+{
+    //        =============
+    //        == METHODS ==
+    //        =============
+ /**
+  * Returns or sets the Center Element of the circle.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpCircleCenterCurve</code> the first curve to which
+  * the <code>HybShpCircle</code> hybrid shape circle is Center curve.
+  * <pre>
+  * Dim HybShpCircleFirstCurve As Reference 
+  * HybShpCircleFirstCurve = HybShpCircle.<font color="red">CenterElem</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY CenterElem
+ HRESULT get_CenterElem(out /*IDLRETVAL*/ CATIAReference   oCenterElem);
+ HRESULT put_CenterElem (in                CATIAReference   iCenterElem);
+
+ /**
+  * Returns or sets the tangent curve to which the circle will be tangent.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the tangent curve to which
+  * the <code>HybShpCircle</code> hybrid shape circle will be tangent to TgtCrv.
+  * <pre>
+  * Set HybShpCircle.<font color="red">Tangent Curve</font> TgtCrv
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY TangentCurve
+ HRESULT get_TangentCurve (out /*IDLRETVAL*/ CATIAReference   oTgtCrv);
+ HRESULT put_TangentCurve (in                CATIAReference   iTgtCrv);
+
+ /**
+  * Returns or sets the circle support surface.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAFace.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpCircleSupportSurf</code> the support surface
+  * of the <code>HybShpCircle</code> hybrid shape circle.
+  * <pre>
+  * Dim HybShpCircleSupportSurf As Reference 
+  * Set HybShpCircleSupportSurf = HybShpCircle.<font color="red">Support</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY Support
+ HRESULT get_Support (out /*IDLRETVAL*/ CATIAReference   oSupport);
+ HRESULT put_Support (in                CATIAReference   iSupport);
+
+ /**
+  * Returns or sets the orientation of the first curve to which the circle is tangent.
+  * <br><b>Role</b>: The orientation of the first curve determines the side of this curve
+  * taken into account to find the point where the circle is tangent to the curve.
+  * <br><b>Legal values</b>: <blink>To be provided by Claire (1/-1??)</blink>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the orientation of the first curve to which
+  * the <code>HybShpCircle</code> hybrid shape circle is tangent
+  * to reverse.
+  * <pre>
+  * Set HybShpCircle.<font color="red">Orientation1</font> -1
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Orientation1
+ HRESULT get_Orientation1 (out /*IDLRETVAL*/ long   oOri);
+ HRESULT put_Orientation1 (in                long   iOri);
+
+ /**
+  * Returns or sets the orientation of the second curve to which the circle is tangent.
+  * <br><b>Role</b>: The orientation of the second curve determines the side of this curve
+  * taken into account to find the point where the circle is tangent to the curve.
+  * <br><b>Legal values</b>: <blink>To be provided by Claire (1/-1??)</blink>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpCircleOrientation</code> the orientation
+  * of the second curve to which the <code>HybShpCircle</code> hybrid shape circle is tangent.
+  * <pre>
+  * HybShpCircleOrientation = HybShpCircle.<font color="red">Orientation2</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Orientation2
+ HRESULT get_Orientation2 (out /*IDLRETVAL*/ long   oOri);
+ HRESULT put_Orientation2 (in     long   iOri);
+
+ /**
+  *  Returns or sets the DiameterMode.
+  * <br><b>Legal values</b>: <b>True</b> implies diameter
+  * <b>False</b> implies radius (default).
+  *  When DiameterMode is changed, Radius/Diameter value, which is stored will not be modified.
+  *  @sample
+  *  This example sets that the DiameterMode of
+  *  the <code>HybShpCircle</code> hybrid shape circle feature
+  *  <pre>
+  *  HybShpCircle.<font color="red">DiameterMode</font> = True
+  *  </pre>
+  */ 
+#pragma PROPERTY DiameterMode
+ HRESULT get_DiameterMode (out /*IDLRETVAL*/ boolean oDiameterMode);
+ HRESULT put_DiameterMode (in         boolean iDiameterMode);
+
+ /**
+  * Returns the circle radius.
+  * It is expressed as a @href CATIALength literal. Succeeds only if DiameterMode is set to False.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpCircleRadius</code> the radius
+  * of the <code>HybShpCircle</code> hybrid shape circle.
+  * <pre>
+  * Dim HybShpCircleRadius As Length
+  * HybShpCircleRadius = HybShpCircle.<font color="red">Radius</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Radius
+ HRESULT get_Radius   ( out /*IDLRETVAL*/ CATIALength     Radius );
+
+ /**
+  * Returns the circle diameter.
+  * It is expressed as a @href CATIALength literal. Succeeds only if DiameterMode is set to True.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>HybShpCircleDiameter</code> the diameter
+  * of the <code>HybShpCircle</code> hybrid shape circle feature
+  * <pre>
+  * Dim HybShpCircleDiameter As Length
+  * HybShpCircleDiameter = HybShpCircle.<font color="red">Diameter</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Diameter
+ HRESULT get_Diameter (out /*IDLRETVAL*/ CATIALength oDiameter);
+
+/**
+ * Return or set the discrimination index of the current circle.
+ * Several resulting solutions produced by the operator can be same 
+ * oriented regarding to the input wire bodies. 
+ * In such a case, they are sorted in order to distinguish them.
+ * The Sequence FirstOrientation - SecondOrientation - DiscriminationIndex 
+ * allows you to identifie a unique one-domain solution.
+ * @sample
+ * This example set the discrimination index of
+ * the <code>hybShpcircle</code> hybrid shape circle 
+ * <pre>
+ * hybShpcircle.<font color="red">DiscriminationIndex</font> = 2
+ * </pre>
+ */ 
+#pragma PROPERTY DiscriminationIndex
+    HRESULT get_DiscriminationIndex (out /*IDLRETVAL*/ long oDiscriminationIndex) ;
+    HRESULT put_DiscriminationIndex (in                long iDiscriminationIndex) ;
+
+  /**
+  * Return or Set the number of the beginning curve of the circle.
+  * This parameter is used to stabilize the resulting circle
+  * @sample
+  * This example set the beginning wire index of
+  * the <code>hybShpcircle</code> hybrid shape circle 
+  * <pre>
+  * hybShpcircle.<font color="red">BeginOfCircle</font> = 1
+  * </pre>
+  */
+#pragma PROPERTY BeginOfCircle
+    HRESULT get_BeginOfCircle (out /*IDLRETVAL*/ long oNumWireBegin) ;
+    HRESULT put_BeginOfCircle (in                long iNumWireBegin) ;
+
+  /**
+  * Returns or sets the tangent orientation of the circle first reference element.
+  * compared to the circle itself
+  * @sample
+  * This example retrieves the tangent orientation of first reference element of
+  * the <code>hybShpcircle</code> hybrid shape circle in <code>firstOrient</code>.
+  * <pre>
+  * Dim firstOrient As long
+  * firstOrient = hybShpcircle.<font color="red">FirstTangentOrientation</font>
+  * </pre>
+  */
+#pragma PROPERTY TangentOrientation1
+    HRESULT get_TangentOrientation1 (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_TangentOrientation1 (in                long iOrientation) ;
+
+  /**
+  * Returns or sets the tangent orientation of the circle second reference element.
+  * compared to the corner itself
+  * @sample
+  * This example retrieves the tangent orientation of second reference element of
+  * the <code>hybShpcircle</code> hybrid shape circle in <code>secondOrient</code>.
+  * <pre>
+  * Dim secondOrient As long
+  * secondOrient = hybShpcircle.<font color="red">SecondTangentOrientation</font>
+  * </pre>
+  */
+#pragma PROPERTY TangentOrientation2
+    HRESULT get_TangentOrientation2 (out /*IDLRETVAL*/ long oOrientation) ;
+    HRESULT put_TangentOrientation2 (in                long iOrientation) ;
+};
+
+// Interface name : CATIAHybridShapeCircleCenterTangent
+#pragma ID CATIAHybridShapeCircleCenterTangent "DCE:f166c07e-0db3-46de-876262adb7402ba3"
+#pragma DUAL CATIAHybridShapeCircleCenterTangent
+
+// VB object name : HybridShapeCircleCenterTangent (Id used in Visual Basic)
+#pragma ID HybridShapeCircleCenterTangent "DCE:f366feb1-991e-497d-8e94e2fe18b2e328"
+#pragma ALIAS CATIAHybridShapeCircleCenterTangent HybridShapeCircleCenterTangent
+
+#endif

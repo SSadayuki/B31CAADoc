@@ -1,0 +1,90 @@
+#ifndef CATIASchGapDisplay_IDL 
+#define CATIASchGapDisplay_IDL 
+    
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the graphical representation of a schematic route.
+  */
+
+interface CATIASchGapDisplay : CATIABase
+{
+  /**
+  * Add gap display attributes on the route.
+  * @param iLUKRoutes
+  *   A list of routes to be processed, default is NULL
+  *   (if NULL, then all routes in model are processed). 
+  *   Members are CATISchRoute interface pointers. 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGapDisplay
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">SetGap</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT SetGap ( 
+    in CATIASchListOfObjects iLUKRoutes );
+    
+  /**
+  * Remove gap display attributes on the route.
+  *   A list of routes to be processed, default is NULL
+  *   (if NULL, then all routes in model are processed). 
+  *   Members are CATISchRoute interface pointers. 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGapDisplay
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">UnsetGap</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT UnsetGap ( 
+    in CATIASchListOfObjects iLUKRoutes );
+    
+  /**
+  * Query whether gaps are shown (gap attributes exist).
+  * @param oBYes
+  *   If TRUE,  then gaps are shown     (gap attributes exist).
+  *   If FALSE, then gaps are not shown (gap attributes do not exist).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGapDisplay
+  * Dim bVar1 As boolean
+  *  ...
+  * objThisIntf.<font color="red">IsGapShown</font>bVar1
+  * </pre>
+  *    
+  */
+  HRESULT IsGapShown ( 
+    inout boolean oBYes );
+    
+};
+    
+// Interface name : CATIASchGapDisplay
+#pragma ID CATIASchGapDisplay "DCE:e481574f-aac4-4510-b3e2ca59c8458431"
+#pragma DUAL CATIASchGapDisplay
+    
+// VB object name : SchGapDisplay
+#pragma ID SchGapDisplay "DCE:a801c7e2-5755-4563-be5f86851c67205f"
+#pragma ALIAS CATIASchGapDisplay SchGapDisplay
+    
+#endif 
+    

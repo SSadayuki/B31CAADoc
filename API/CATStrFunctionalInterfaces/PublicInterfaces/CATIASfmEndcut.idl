@@ -1,0 +1,118 @@
+// COPYRIGHT Dassault Systemes 2011
+//=============================================================================
+// CATIASfmEndcut
+//   CATIASfmEndcut interface for getting EndCut Attributes/Information
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Jul. 2011  Creation                                              R. DESHMANE
+//=============================================================================
+#ifndef CATIASfmEndcut_IDL
+#define CATIASfmEndcut_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATIASfmConnectionParameters.idl"
+#include "CATIASfmReferences.idl"
+#include "CATIAReference.idl"
+#include "CATIASfmConnectionParameters.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+/**
+ * Interface to manage the EndCut on Super Profile.
+ * <b>Role</b>:  Allows managing (mainly retreiving parameters)on existing EndCut.
+ * @see CATIASfmProfile,CATIASfmEndcutManager, CATIASfmConnectionParameters
+ */
+interface CATIASfmEndcut : CATIABase
+{
+  /**
+  * Gets the information on existing Endcut.
+  * @param oTypeOfEndcut [out]
+  *      Type of Endcut(Snipe,Trim,Weld).
+  * @param oNameOfEndcut [out]
+  *      Name of the Endcut.
+  * @param oListOfEndcutContexts [out]
+  *      List of Contexts (Limits) defined for Cutbacks and Contextual Endcuts.
+  *      The list will be empty for custom UDF based endcuts.
+  * @param oListOfEndcutParams [out]
+  *      List of Parameters set when defining the Endcut.
+  * @param oListOfEndCutParamNames [out]
+  *      List of Parameter Names set when defining the Endcut.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * The example retrieves endcut information.
+  * <pre>
+  * Dim EndcutObj As SfmEndcut
+  * Set EndcutObj = StiffObj.GetEndcut(1)
+  * Dim EndCutName, EndCutType As String
+  * Dim ContextList  As SfmReferences
+  * Dim ParamList As SfmConnectionParameters
+  * Dim ParamNamesList() As Variant
+  * EndcutObj.<font color="red">GetEndcutinfo EndCutType, EndCutName, ContextList, ParamList, ParamNamesList</font>
+  * </pre>
+  * </dl> 
+  */ 
+  HRESULT GetEndcutinfo(inout CATBSTR oTypeOfEndcut,inout CATBSTR oNameOfEndcut,
+                         out CATIASfmReferences   oListOfEndcutContexts, 
+                         out CATIASfmConnectionParameters oListOfEndcutParams,
+                         out CATSafeArrayVariant oListOfEndCutParamNames);
+  /**
+  * Gets thelocation of existing endcut.
+  * @param oCoordinate [out]
+  *      The Coordinates.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * The example retrieves endcut Coordinates defined on start end.
+  * <pre>
+  * Dim EndcutObj As SfmEndcut
+  * Set EndcutObj = StiffObj.GetEndcut(1)
+  * Dim Coord() As Variant
+  * Dim x,y,z as Double
+  * Coord() = EndcutObj.<font color="red">GetConnectionCoordinate</font>
+  * x = Coord(0)
+  * y = Coord(1)
+  * z = Coord(2)
+  * </pre>
+  * </dl> 
+  */ 
+ HRESULT GetConnectionCoordinate(out /*IDLRETVAL*/CATSafeArrayVariant oCoordinate);
+  /**
+  * Updates the Connection Set.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * The example Updates the Connection Set.
+  * <pre>
+  * Dim EndcutObj As SfmEndcut
+  * Set EndcutObj = StiffObj.GetEndcut(1)
+  * EndcutObj.<font color="red">UpdateConnectionsSet</font>
+  * </pre>
+  * </dl> 
+  */ 
+ HRESULT UpdateConnectionsSet();
+
+};
+
+// Interface name : CATIASfmEndcut
+#pragma ID CATIASfmEndcut "DCE:887D2AEC-F2F1-46c7-A8FDE5ACA46D1224"                               
+#pragma DUAL CATIASfmEndcut
+
+// VB object name : SfmStiffener (Id used in Visual Basic)
+#pragma ID SfmEndcut "DCE:A38D5B2C-DD06-434d-A7799B5F27CD60D9"                         
+#pragma ALIAS CATIASfmEndcut SfmEndcut
+
+#endif

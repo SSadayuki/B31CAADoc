@@ -1,0 +1,151 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMModelInterfaces CATICGMDistanceTool Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMModelInterfaces.htm" href="../GMModelInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMModelInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATICGMDistanceTool"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>GMModelInterfaces Framework:  CATICGMDistanceTool Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATICGMDistanceTool_34739','CATICGMDistanceTool','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATICGMDistanceTool</b>
+</p>
+<p>
+<b><i> Class defining the type of parallel computation and is to be used when you want to 
+ create a parallel curve onto a support.</i></b><br>
+ This class does not create directly a curve onto 
+ a support. To do this, you must:
+ <ol>
+ <li>Specify the parameters of the offset distance by using CATICGMDistanceTool: 
+ <ul>
+ <li> the parallelism mode: euclidian or geodesic 
+ <li> the side on which the wire is offset, it is computed from the support normal and the wire tangent: Side = Normal^Tangent 
+ <li> the law which defines the distance evolution along the wire.
+ </ul>
+ <li>Specify the type of relimitation: sharp or round and the support on which the wire is offset.
+ This is done by creating the CATICGMExtrapolParallelTool object. 
+ <li>Create and run the CATICGMTopParallel operator.
+ </ol>
+ The CATICGMDistanceTool class is created by :
+ <ul> 
+ <li> either <script type="text/javascript"> activateLinkAnchor('CATCGMCreateTopEuclidianDistanceTool','','CATCGMCreateTopEuclidianDistanceTool') </script> that computes the parallel with an euclidian distance
+ <li> or 
+<script type="text/javascript"> activateLinkAnchor('CATCGMCreateTopGeodesicDistanceTool','','CATCGMCreateTopGeodesicDistanceTool') </script> that computes the parallel with a geodesic distance.
+ </ul>
+ This class is the base class for some supplied classes, but you must not derive it yourself.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetCompositeLaw()"><b>GetCompositeLaw</b></a>()
+</td><td id='tdright'>  Returns the law used to compute the distance.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSide()"><b>GetSide</b></a>()
+</td><td id='tdright'>  Returns the side on which the parallel is computed.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetType()"><b>GetType</b></a>()
+</td><td id='tdright'>  Returns the type of parallelism.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetCompositeLaw"></a><a id="GetCompositeLaw()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATCompositeLaw','CATCompositeLaw *')</script>  <span class='objname'>GetCompositeLaw</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the law used to compute the distance.
+ <br>Note that this operator converts the law provided to CATCGMCreateTopEuclidianDistanceTool
+ and CATCGMCreateTopGeodesicDistanceTool into a CATCompositeLaw (if it is not already one).
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the law.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSide"></a><a id="GetSide()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('short','short')</script>  <span class='objname'>GetSide</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the side on which the parallel is computed.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The side value defined when standing along the face direction and watching in the wire direction.
+ <ul>
+ <li><tt>1</tt> for the left side
+ <li><tt>-1</tt> for the right side.
+ </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetType"></a><a id="GetType()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('short','short')</script>  <span class='objname'>GetType</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','const = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the type of parallelism.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <ul>
+ <li>1 = GeodesicDistanceToolType_Euclidian
+ <li>or 2 = GeodesicDistanceToolType_Geodesic.
+ </ul>
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICGMDistanceTool.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMModelInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

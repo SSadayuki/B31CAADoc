@@ -1,0 +1,264 @@
+#ifndef CATIAV4WritingSettingAtt_IDL
+#define CATIAV4WritingSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+#include "CATV4IV5V4AssociativityModeEnum.h"
+#include "CATV4IV5V4ErrorFeatureCreationEnum.h"
+#include "CATV4IV5V4InternalCurveCreationEnum.h"
+
+/** 
+ * Represents the Saving As V4 Data setting controller object.
+ * <b>Role</b>: The Saving As V4 Data setting controller object deals with the setting
+ * parameters displayed in the Saving As V4 Data property page.
+ * To access this property page:
+ * <ul>
+ *  <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *  <li>Click + left of </b>General</b> to unfold the workbench list</li>   
+ *  <li>Click </b>Compatibility</b></li>
+ * </ul> 
+ * <br><b>The different options for V4/V5SPEC tab</b>:
+ * <table>
+ *   <tr><td>The Writing Code Page</td>  
+ *   <tr><td>The Model Dimension </td> 
+ *	 <tr><td>The Model Unit </td>  
+ *	 <tr><td>The Initial Model File Path </td>  
+ *	 <tr><td>The Associativity Mode </td>  
+ *	 <tr><td>The Layer For Non Associative Data </td>
+ *	 <tr><td>The Error Feature Creation if the Save is not complete </td>
+ *	 <tr><td>The Curves Associated To Face Boundaries Creation </td> 
+ *	 <tr><td>The V4 Model File Name In Capitals Letters </td> 
+ *	 <tr><td>The Small Edges And Faces Cleaning Tolerance </td>        
+ * </table>
+ */
+interface CATIAV4WritingSettingAtt : CATIASettingController
+{   
+/**
+ * Returns or sets the activation state of the writing code page.
+ * <br><b>Role</b>: Returns or sets the value of the writing code page. 
+*/
+		#pragma PROPERTY   Code_page_Dest  
+	HRESULT get_Code_page_Dest(out /*IDLRETVAL*/ long  oStateOfCpdest);  
+	HRESULT put_Code_page_Dest(in long iStateOfCpdest);  
+/** 
+ * Locks or unlocks the Code_page_Dest setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */	 
+	HRESULT SetCode_page_DestLock (in boolean iLock);  
+/** 
+ * Retrieves information about the Code_page_Dest setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+	HRESULT GetCode_page_DestInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+/**
+ * Returns or sets the model dimension.
+ * <br><b>Role</b>: Returns or sets the model dimension. 
+ */	
+		#pragma PROPERTY   Model_Dimension  
+	HRESULT get_Model_Dimension(out /*IDLRETVAL*/ double  oValueOfModelDim);  
+	HRESULT put_Model_Dimension(in double iValueOfModelDim);  
+/** 
+ * Locks or unlocks the Model_Dimension setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */		
+	HRESULT SetModel_DimensionLock (in boolean iLock); 
+/** 
+ * Retrieves information about the Model_Dimension setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  
+	HRESULT GetModel_DimensionInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, 	 out /*IDLRETVAL*/ boolean oModified); 								 
+/**
+ * Returns or sets the model unit.
+ * <br><b>Role</b>: Returns or sets the model unit. 
+ */	
+		#pragma PROPERTY   Model_Unit  
+	HRESULT get_Model_Unit(out /*IDLRETVAL*/ long  oDefaultModelUnit);  
+	HRESULT put_Model_Unit(in long iDefaultModelUnit);
+/** 
+ * Locks or unlocks the Model_Unit setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  
+	HRESULT SetModel_UnitLock (in boolean iLock);
+/** 
+ * Retrieves information about the Model_Unit setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */   
+	HRESULT GetModel_UnitInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+/**
+ * Returns or sets the associativity mode of migration.
+ * <br><b>Role</b>: Returns or sets the associativity mode of migration.If non associative mode is chosen, it is possible to create or not the solid. 
+ */									
+		#pragma PROPERTY   Asso_mode  
+	HRESULT get_Asso_mode(inout /*IDLRETVAL*/ CATV4IV5V4AssociativityModeEnum  oDefaultAssoMode);  
+	HRESULT put_Asso_mode(in CATV4IV5V4AssociativityModeEnum iDefaultAssoMode);
+/** 
+ * Locks or unlocks the Asso_mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */    	
+	HRESULT SetAsso_modeLock (in boolean iLock);  
+/** 
+ * Retrieves information about the Asso_mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  
+	HRESULT GetAsso_modeInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+/**
+ * Returns or sets the layer for not associative data.
+ * <br><b>Role</b>: Returns or sets the layer for not associative data.
+ */									  
+		#pragma PROPERTY   Layer_for_No_Asso  
+	HRESULT get_Layer_for_No_Asso(out /*IDLRETVAL*/ long  oDefaultLayer);  
+	HRESULT put_Layer_for_No_Asso(in long iDefaultLayer);  
+/** 
+ * Locks or unlocks the Layer_for_No_Asso setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+	HRESULT SetLayer_for_No_AssoLock (in boolean iLock);  
+/** 
+ * Retrieves information about the Layer_for_No_Asso setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  
+	HRESULT GetLayer_for_No_AssoInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+/**
+ * Returns or sets the error feature creation option.
+ * <br><b>Role</b>: Returns or sets the error feature creation option.
+ */	
+		#pragma PROPERTY   ModeErrorDisplay  
+	HRESULT get_ModeErrorDisplay(inout /*IDLRETVAL*/ CATV4IV5V4ErrorFeatureCreationEnum  oModeErrorDisplay);  
+	HRESULT put_ModeErrorDisplay(in CATV4IV5V4ErrorFeatureCreationEnum iModeErrorDisplay);  	
+/** 
+ * Locks or unlocks the ModeErrorDisplay setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+	HRESULT SetModeErrorDisplayLock (in boolean iLock); 
+/** 
+ * Retrieves information about the ModeErrorDisplay setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  
+	HRESULT GetModeErrorDisplayInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked,  out /*IDLRETVAL*/ boolean oModified); 								 								
+/**
+ * Returns or sets the initial model file path.
+ * <br><b>Role</b>: Returns or sets the initial model file path.
+ */	
+		#pragma PROPERTY   Initial_Model_File_Path  
+	HRESULT get_Initial_Model_File_Path(inout /*IDLRETVAL*/ CATBSTR  oDefaultInitialModelPath);  
+	HRESULT put_Initial_Model_File_Path(in CATBSTR iDefaultInitialModelPath);
+/** 
+ * Locks or unlocks the Initial_Model_File_Path setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  
+	HRESULT SetInitial_Model_File_PathLock (in boolean iLock); 
+/** 
+ * Retrieves information about the Initial_Model_File_Path setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */   
+	HRESULT GetInitial_Model_File_PathInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 								
+/**
+ * Returns or sets the curves associated to faces'boundaries creation option.
+ * <br><b>Role</b>: Returns or sets the curves associated to faces'boundaries creation option.
+ */									
+		#pragma PROPERTY   ModeCreateDisplay  
+	HRESULT get_ModeCreateDisplay(inout /*IDLRETVAL*/ CATV4IV5V4InternalCurveCreationEnum  oDefaultCreateDisplay);  
+	HRESULT put_ModeCreateDisplay(in CATV4IV5V4InternalCurveCreationEnum iDefaultCreateDisplay);
+/** 
+ * Locks or unlocks the ModeCreateDisplay setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+	HRESULT SetModeCreateDisplayLock (in boolean iLock); 
+/** 
+ * Retrieves information about the ModeCreateDisplay setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */   
+	HRESULT GetModeCreateDisplayInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked,out /*IDLRETVAL*/ boolean oModified); 
+/**
+ * Returns or sets the model factor.
+ * <br><b>Role</b>: Returns or sets the model factor that manages the conversion
+ *   of model dimension in millimeters.
+ */	
+		#pragma PROPERTY   Model_Factor  
+	HRESULT get_Model_Factor(out /*IDLRETVAL*/ double  oDefaultModelFactor);  
+	HRESULT put_Model_Factor(in double iDefaultModelFactor);  
+/** 
+ * Locks or unlocks the Model_Factor setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+	HRESULT SetModel_FactorLock (in boolean iLock);  
+/** 
+ * Retrieves information about the Model_Factor setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetModel_FactorInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+/**
+ * Returns or sets the model file name in capital letters option.
+ * <br><b>Role</b>: Returns or sets the model file name in capital letters option.
+ */									 
+		#pragma PROPERTY   Model_File_Name  
+	HRESULT get_Model_File_Name(inout /*IDLRETVAL*/ boolean oDefaultModelFileName);  
+	HRESULT put_Model_File_Name(in boolean iDefaultModelFileName);
+/** 
+ * Locks or unlocks the Model_File_Name setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */   
+	HRESULT SetModel_File_NameLock (in boolean iLock);  
+/** 
+ * Retrieves information about the Model_File_Name setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetModel_File_NameInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+/**
+ * Returns or sets the small edges and faces cleaning tolerance activation.
+ * <br><b>Role</b>: Returns or sets the small edges and faces cleaning tolerance activation.
+ */
+	#pragma PROPERTY   CleanTolCheck  
+	HRESULT get_CleanTolCheck(inout /*IDLRETVAL*/ boolean oDefaultCleanTolCheck);  
+	HRESULT put_CleanTolCheck(in boolean iDefaultCleanTolCheck);
+/** 
+ * Locks or unlocks the CleanTolCheck setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */   
+	HRESULT SetCleanTolCheckLock (in boolean iLock);  
+/** 
+ * Retrieves information about the CleanTolCheck setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetCleanTolCheckInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+/**
+ * Returns or sets the small edges and faces cleaning tolerance value if activated.
+ * <br><b>Role</b>: Returns or sets the small edges and faces cleaning tolerance value if activated.
+ */
+	#pragma PROPERTY   CleanTolValue  
+	HRESULT get_CleanTolValue(inout /*IDLRETVAL*/ double oDefaultCleanTolValue);  
+	HRESULT put_CleanTolValue(in double iDefaultCleanTolValue); 
+/** 
+ * Locks or unlocks the CleanTolValue setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */   
+	HRESULT SetCleanTolValueLock (in boolean iLock); 
+/** 
+ * Retrieves information about the CleanTolValue setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+	HRESULT GetCleanTolValueInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+							
+};
+  								
+//Interface Name (Autom)
+#pragma ID CATIAV4WritingSettingAtt "DCE:aaa72638-8769-0000-02800310fe000000" 
+#pragma DUAL CATIAV4WritingSettingAtt
+	
+	//VB Object Name (autre)
+#pragma ID V4WritingSettingAtt "DCE:aaa7276e-0603-0000-02800310fe000000"
+#pragma ALIAS CATIAV4WritingSettingAtt V4WritingSettingAtt
+
+#endif
+
+

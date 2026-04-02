@@ -1,0 +1,128 @@
+#ifndef CATIACatalogDocument_IDL
+#define CATIACatalogDocument_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//--------------------------------------------------------------------------
+// CATIACatalogDocument.idl
+// Automation interface for the CatalogDocument element 
+//--------------------------------------------------------------------------
+
+#include "CATIADocument.idl"
+
+/**
+ * Represents the Document object for catalog.
+ * <b>Role</b>: A catalog document references data (documents: CATPart..., features, etc) organized as a tree: the nodes are called chapters and
+ * the leaves are called descriptions. Each description may reference a document (CATPart...) and couples of keyword + value.
+ * The keywords are defined at the parent chapter level.<br>
+ * A catalog may reference parametric Parts. In that case, the Part is associated with a Design Table.
+ * A Design Table is a file (text file, Excel document) that contains named columns and rows.
+ * Each row corresponds to a description, and each column may correspond to a keyword.<br>
+ * Refer to CATIA V5 Documentation, Component Catalog Editor and to CAA V5 Encyclopedia, Document, Catalog.
+ */
+
+interface CATIACatalogDocument : CATIADocument
+{
+
+  /**
+   * Creates a catalog from a csv file.<br>
+   * Refer to CATIA V5 Documentation, Component Catalog Editor, Creating a Catalog in Batch Mode.
+   * @param iInitData
+   *   The csv (Comma Separated Values) file path.
+   * @param iNewCatalog
+   *   The new catalog path.
+   * <! @sample>
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example creates a catalog from a csv file.
+   * <pre>
+   *   InputFile ="E:\users\Catalogs\BatchCatalog.csv"
+   *   OutputFile ="E:\users\Catalogs\Catalog_Result.catalog"
+   *   Dim Catalog As Document
+   *   Set Catalog=CATIA.Documents.Add("CatalogDocument")
+   *   Catalog.<font color="red">CreateCatalogFromcsv</font> InputFile, OutputFile
+   * </pre>
+   * </dl>
+   */
+        
+//#pragma PROPERTY CreateCatalogFromcsv
+
+  HRESULT CreateCatalogFromcsv(in CATBSTR iInitData, in CATBSTR iNewCatalog);
+
+
+  /**
+   * Creates a catalog from a V4 library.
+   * @param iLibraryPath
+   *   The V4 library path.
+   * @param iProjectPath
+   *   The V4 project path.
+   * @param iCatalogPath
+   *   The new catalog path.
+   * @param iTablePath
+   *   The mapping table path.
+   * @param iConvFormat
+   *   <tt>0</tt>: As Specification<br>
+   *   <tt>1</tt>: As Result
+   * @param iBatchMode
+   *   <tt>0</tt>: As Specification<br>
+   *   <tt>1</tt>: As Result
+   * @param iBatchMode
+   *   <tt>0</tt>: Create the V5 documents<br>
+   *   <tt>1</tt>: Simulate: the V5 documents are not created<br>
+   *   <tt>2</tt>: If the previous migration has failed, continue since this point.
+   */
+
+  HRESULT CreateCatalogFromLibrary( 
+	in CATBSTR	iLibraryPath,
+	in CATBSTR	iProjectPath, 
+	in CATBSTR	iCatalogPath, 
+	in CATBSTR	iTablePath, 
+	in short	iConvFormat,
+	in short	iBatchMode );
+
+  /**
+   * Creates a chapter in the current catalog document where keywords 
+   * correspond to parameters of the Design Table and add the descriptions
+   * corresponding to whole configurations of the Design Table.<br>
+   * Refer to CATIA V5 Documentation, Component Catalog Editor, Creating a Catalog in Batch Mode.
+   * @param iChapterName
+   *   The name of the new chapter.
+   * @param iDocumentContainingDT
+   *   The path of the Design Table.
+   * <! @sample>
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example creates a catalog and a chapter is added from a Design Table.
+   * <pre>
+   *   Chapter = "NewChapter"
+   *   DTFile ="E:\users\Catalogs\DesignTable.xls"
+   *   Dim Catalog As Document
+   *   Set Catalog=CATIA.Documents.Add("CatalogDocument")
+   *   Catalog.<font color="red">CreateChapterFromDesignTable</font> Chapter, DTFile
+   * </pre>
+   * </dl>
+   */
+
+  HRESULT CreateChapterFromDesignTable( 
+	in CATBSTR	iChapterName, 
+	in CATBSTR	iDocumentContainingDT );
+
+};
+
+// Interface name : CATIACatalogDocument
+#pragma ID CATIACatalogDocument "DCE:8231c1c0-d89f-11d2-be6c00104b7d1988"
+#pragma DUAL CATIACatalogDocument
+
+// VB object name : CatalogDocument
+#pragma ID CatalogDocument "DCE:8f1e0ab0-d89f-11d2-be6c00104b7d1988"
+#pragma ALIAS CATIACatalogDocument CatalogDocument
+
+
+#endif

@@ -1,0 +1,12 @@
+#
+BUILT_OBJECT_TYPE= NONE
+#
+OS = COMMON
+
+LINK_WITH = SI0REPER SI0TOPAC GN0GRAPH\
+            SI0BREPA\
+            Collections\
+            JS0CORBA JS0ERROR\
+            JS0SCBAK JS0STR\
+            AD0XXBAS YP00IMPL 
+

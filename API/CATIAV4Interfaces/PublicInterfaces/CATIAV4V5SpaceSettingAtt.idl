@@ -1,0 +1,288 @@
+#ifndef CATIAV4V5SpaceSettingAtt_IDL
+#define CATIAV4V5SpaceSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"     
+#include "CATIASettingController.idl"
+
+/** 
+ * Represents  the object to handle the setting parameters of the "V4V5 Space" tab page.
+ * <b>Role</b>: This interface is implemented by a component named
+ * CATV4IV4V5SpaceSettingCtrl which represents the controller of the Setting. 
+ * parameters displayed in the V4V5 Space Data property page.
+ * To access this property page:
+ * <ul>
+ *  <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *  <li>Click + left of </b>General</b> to unfold the workbench list</li>   
+ *  <li>Click </b>Compatibility</b></li>
+ * </ul> 
+ * <br><b>The different options for V4/V5 SPACE tab</b> are the following :
+ * <table>
+ *   <tr><td>Gap Healing</td>  
+ *   <tr><td>Curvature Improvement </td> 
+ *	 <tr><td>Surface and Curve sub-elements </td>  
+ *	 <tr><td>Migration of DETAILS spaces udes by dittos</td>  
+ *	 <tr><td>Isolated Solid Mock-up migration </td>  
+ *	 <tr><td>3D Text Migration </td>  
+ * <br>This interface defines:
+ * <ul>
+ * <li>A method to get each parameter</li>
+ * <li>A method to set the value of each parameter</li>
+ * <li>A method to lock/unlock each parameter</li>
+ * <li>A method to retrieve the informations concerning each parameter</li>
+ * </ul>
+ */
+
+
+interface CATIAV4V5SpaceSettingAtt : CATIASettingController
+{   
+/**
+ * Returns or sets the activation state of type for external deformation (Gap Healing).
+ * <br><b>Role</b>: Returns or sets the activation state of type for external deformation 
+ *  (Model relative or User defined value) during a Copy/Paste As Spec. 
+*/	
+	#pragma PROPERTY   ExternalTypeDeformation  
+	
+	HRESULT get_ExternalTypeDeformation(out /*IDLRETVAL*/ long  oExtType); 
+	HRESULT put_ExternalTypeDeformation(in long iExtType);  
+
+/** 
+ * Locks or unlocks the activation mode with external deformation (Gap Healing).
+ * <br><b>Role</b>:Locks or unlocks the activation mode with external deformation if it is possible
+ * <br>Refer to @href CATIASettingController for a detailed description.
+*/		 
+
+	HRESULT SetExternalTypeDeformationLock (in boolean iLock);  
+/** 
+ * Retrieves environment informations for activation mode with external deformation (Gap Healing).
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+
+	HRESULT GetExternalTypeDeformationInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+/**
+ * Returns or sets the activation state of mode with external deformation (Gap Healing).
+ * <br><b>Role</b>: Returns or sets the activation state of mode with external deformation (Gap Healing).
+ *  during a Copy/Paste As Spec. 
+*/	
+
+	#pragma PROPERTY   ExternalMaxDeformation  
+	HRESULT get_ExternalMaxDeformation(out /*IDLRETVAL*/ double  oExtMaxDef);  
+	HRESULT put_ExternalMaxDeformation(in double iExtMaxDef);  
+
+/** 
+ * Locks or unlocks the "External Control Point Maximum Deformation" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */	  
+
+	HRESULT SetExternalMaxDeformationLock (in boolean iLock);  
+
+/** 
+ * Retrieves information about the ExternalMaxDeformation setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetExternalMaxDeformationInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+
+
+/**
+ * Returns or sets the activation state of type for internal deformation (Curve Improvement).
+ * <br><b>Role</b>: Returns or sets the activation state of type for internal deformation 
+ *  (Model relative or User defined value) during a Copy/Paste As Spec. 
+*/
+	#pragma PROPERTY   InternalTypeDeformation  
+	HRESULT get_InternalTypeDeformation(out /*IDLRETVAL*/ long  oIntType);  
+	HRESULT put_InternalTypeDeformation(in long iIntType);  
+
+/** 
+ * Locks or unlocks the activation mode with internal deformation (Curve Improvement).
+ * <br><b>Role</b>:Locks or unlocks the activation mode with external deformation if it is possible
+ * <br>Refer to @href CATIASettingController for a detailed description.
+*/
+	HRESULT SetInternalTypeDeformationLock (in boolean iLock);  
+
+
+/** 
+ * Retrieves environment informations for activation mode with internal deformation (Curve Improvement).
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+	HRESULT GetInternalTypeDeformationInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+/**
+ * Returns or sets the activation state of mode with internal deformation (Curve Improvement).
+ * <br><b>Role</b>: Returns or sets the activation state of mode with internal deformation
+ *  during a Copy/Paste As Spec. 
+*/	
+
+	#pragma PROPERTY   InternalMaxDeformation  
+	HRESULT get_InternalMaxDeformation(out /*IDLRETVAL*/ double  oIntMaxDef);  
+	HRESULT put_InternalMaxDeformation(in double iIntMaxDef);  
+
+/** 
+ * Locks or unlocks the "Internal Control Point Maximum Deformation" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetInternalMaxDeformationLock (in boolean iLock);  
+
+
+/** 
+ * Retrieves information about the InternalMaxDeformation setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+ 
+    HRESULT GetInternalMaxDeformationInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Returns or sets the activation state of mode with segmentation (Keep V4 Segmentation ).
+ * <br><b>Role</b>: Returns or sets the activation state of mode with segmentation
+ *  during a Copy/Paste As Spec. 
+*/	
+
+	#pragma PROPERTY   KeepSegmentation  
+	HRESULT get_KeepSegmentation(out /*IDLRETVAL*/ long  oSegmentationState);  
+	HRESULT put_KeepSegmentation(in long iSegmentationState);  
+
+
+/** 
+ * Locks or unlocks the KeepSegmentation setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */	
+	HRESULT SetKeepSegmentationLock (in boolean iLock);  
+
+ /** 
+ * Retrieves information about the KeepSegmentation setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  
+	HRESULT GetKeepSegmentationInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Returns or sets the activation state of mode for details migration (Usual Mode)
+ * <br><b>Role</b>: Returns or sets the state of mode for details migration. 
+ */	
+	#pragma PROPERTY   DetailsModeUsual  
+	HRESULT get_DetailsModeUsual(out /*IDLRETVAL*/ long  oDetailsChoiceUsual);  
+	HRESULT put_DetailsModeUsual(in long iDetailsChoiceUsual);  
+
+/** 
+ * Locks or unlocks the Details Migration Mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  
+
+	HRESULT SetDetailsModeUsualLock (in boolean iLock);  
+/** 
+ *  Retrieves information about the Details Migration Mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetDetailsModeUsualInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+/**
+ * Returns or sets the activation state of mode for details migration (Explode Mode)
+ * <br><b>Role</b>: Returns or sets the state of mode for details migration. 
+ */	
+
+	#pragma PROPERTY   DetailsModeExplode  
+	HRESULT get_DetailsModeExplode(out /*IDLRETVAL*/ long  oDetailsChoiceExplode);  
+	HRESULT put_DetailsModeExplode(in long iDetailsChoiceExplode);  
+
+/** 
+ * Locks or unlocks the Details Migration Mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetDetailsModeExplodeLock (in boolean iLock);  
+/** 
+ *  Retrieves information about the Details Migration Mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetDetailsModeExplodeInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+/**
+ * Returns or sets the activation state of mode for details migration (WireFrame Mode)
+ * <br><b>Role</b>: Returns or sets the state of mode for details migration. 
+ */
+
+	#pragma PROPERTY   DetailsModeWireframe  
+	HRESULT get_DetailsModeWireframe(out /*IDLRETVAL*/ long  oDetailsChoiceWireframe);  
+	HRESULT put_DetailsModeWireframe(in long iDetailsChoiceWireframe);  
+
+/** 
+ * Locks or unlocks the Details Migration Mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetDetailsModeWireframeLock (in boolean iLock);  
+
+/** 
+ *  Retrieves information about the Details Migration Mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetDetailsModeWireframeInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+
+
+
+/**
+ * Returns or sets the activation state of mode for isolated Solids Mock-Up migration 
+ * <br><b>Role</b>: Returns or sets the state of mode for isolated Solids Mock-Up migration. 
+ */	
+
+	#pragma PROPERTY   SolidMU  
+	HRESULT get_SolidMU(inout /*IDLRETVAL*/ CATBSTR  ochoiceMU);  
+	HRESULT put_SolidMU(in CATBSTR ichoiceMU);  
+
+/** 
+ * Locks or unlocks the Solid Mock-Up Migration Mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetSolidMULock (in boolean iLock);  
+/** 
+ *  Retrieves information about the Solid Mock-Up  Migration Mode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetSolidMUInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Returns or sets the activation state of mode for 3D Text migration 
+ * <br><b>Role</b>: Returns or sets the state of mode for 3D Text migration. 
+ */	
+
+	#pragma PROPERTY   TextMigration  
+	HRESULT get_TextMigration(out /*IDLRETVAL*/ long  oTextMigrationState);  
+	HRESULT put_TextMigration(in long iTextMigrationState);  
+/** 
+ * Locks or unlocks the 3D Text Migration setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetTextMigrationLock (in boolean iLock);  
+/** 
+ *  Retrieves information about the 3D Text Migration setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetTextMigrationInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+
+
+//----------------------------------------------------------------------------------
+		
+};
+  								
+//Interface Name (Autom)
+#pragma ID CATIAV4V5SpaceSettingAtt "DCE:bcbdd91b-9bf4-4480-8a38c7e99df8b3eb"
+#pragma DUAL CATIAV4V5SpaceSettingAtt
+	
+	//VB Object Name (autre)
+#pragma ID V4V5SpaceSettingAtt "DCE:7938ea8a-029e-4f0f-9ad446abbc889ee9"
+#pragma ALIAS CATIAV4V5SpaceSettingAtt V4V5SpaceSettingAtt
+
+#endif
+
+

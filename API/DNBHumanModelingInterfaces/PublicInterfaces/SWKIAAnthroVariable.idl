@@ -1,0 +1,259 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAAnthroVariable_IDL
+#define SWKIAAnthroVariable_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework (2000) Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_FullName
+//
+//   get_ReferenceNumber
+//
+//   get_Value
+//   put_Value
+//
+//   get_ValueAsString
+//   put_ValueAsString
+//
+//   get_ValueAsPercentile
+//   put_ValueAsPercentile
+//
+//   get_MinValue
+//   get_MaxValue
+//
+//   get_Mean
+//   get_StdDev
+//
+//   get_Correlation
+//
+//   get_Manual
+//   put_Manual
+//
+//   GetCorrelationWith
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 07/06/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIAManikinPart.idl"
+
+
+
+/**  
+ * This interface is used to access an anthropometric variable.
+ */
+interface SWKIAAnthroVariable : SWKIAManikinPart
+{
+ // ===========================================================================
+ //  get_FullName
+ //  ------------
+ //
+    /**
+      * Returns the full name of the variable.<br>
+      * This property is different from the property<br>
+      * <code>Name</code> of <code>AnyObject</code>,<br>
+      * which gives the short name or acronym name<br>
+      * of the variable.<br>
+      * <br>
+      * For instance, if the variable in question is<br>
+      * the head length, then property <code>Name</code><br>
+      * yields "<font color=green>&lt;HEADLGTH&gt;</font>", whereas<br>
+      * property <code>FullName</code> yields the character<br>
+      * string "<font color=green>Head length</font>".
+      **/
+#pragma PROPERTY FullName
+    HRESULT get_FullName(inout /*IDLRETVAL*/ CATBSTR pioFullName);
+
+
+ // ===========================================================================
+ //  get_ReferenceNumber
+ //  -------------------
+ //
+    /**
+      * Returns the reference number of the variable.<br>
+      * This reference number is unique to the variable.
+      **/
+#pragma PROPERTY ReferenceNumber
+    HRESULT get_ReferenceNumber(out /*IDLRETVAL*/ long poRefNumber);
+
+
+ // ===========================================================================
+ //  get_Value
+ //  ---------
+ //  put_Value
+ //  ---------
+ //
+    /**
+      * Returns or sets the value of the variable.
+      **/
+#pragma PROPERTY Value
+    HRESULT get_Value(out /*IDLRETVAL*/ double poValue);
+    HRESULT put_Value(in double piValue);
+
+// ===========================================================================
+ //  get_ValueAsString
+ //  -----------------
+ //  put_ValueAsString
+ //  -----------------
+ //
+    /**
+      * Returns or sets the value of the variable, as a string.
+      **/
+#pragma PROPERTY ValueAsString
+    HRESULT get_ValueAsString(inout /*IDLRETVAL*/ CATBSTR pioValue);
+    HRESULT put_ValueAsString(in CATBSTR piValue);
+
+
+ // ===========================================================================
+ //  get_ValueAsPercentile
+ //  ---------------------
+ //  put_ValueAsPercentile
+ //  ---------------------
+ //
+    /**
+      * Returns or sets the value of the variable.<br>
+      * When using that property, the number returned or set<br>
+      * must be a percentile, that is, must be between 0.0 and 100.0 inclusise.<br>
+      * <br>
+      * If this variable is a mass, the value returned or set is in<br>
+      * kilograms, if not, the value returned or set is in centimeters.
+      **/
+#pragma PROPERTY ValueAsPercentile
+    HRESULT get_ValueAsPercentile(out /*IDLRETVAL*/ double poValueAsPercentile);
+    HRESULT put_ValueAsPercentile(in double piValueAsPercentile);
+
+
+ // ===========================================================================
+ //  get_MinValue
+ //  ------------
+ //
+    /**
+      * Returns the lowest value that the variable can take.
+      * This value corresponds to percentile 0.<br>
+      * <br>
+      * If this variable is a mass, the value returned is in<br>
+      * kilograms; if not, the value returned is in centimeters.
+      **/
+#pragma PROPERTY MinValue
+    HRESULT get_MinValue(out /*IDLRETVAL*/ double poMinValue);
+
+
+ // ===========================================================================
+ //  get_MaxValue
+ //  ------------
+ //
+    /**
+      * Returns the highest value that the variable can take.
+      * This value corresponds to percentile 100.<br>
+      * <br>
+      * If this variable is a mass, the value returned is in<br>
+      * kilograms; if not, the value returned is in centimeters.
+      **/
+#pragma PROPERTY MaxValue
+    HRESULT get_MaxValue(out /*IDLRETVAL*/ double poMaxValue);
+
+
+ // ===========================================================================
+ //  get_Mean
+ //  --------
+ //
+    /**
+      * Returns the mean value os the variable.
+      * This value corresponds to percentile 50.<br>
+      * <br>
+      * If this variable is a mass, the value returned is in<br>
+      * kilograms; if not, the value returned is in centimeters.
+      **/
+#pragma PROPERTY Mean
+    HRESULT get_Mean(out /*IDLRETVAL*/ double poMean);
+
+
+ // ===========================================================================
+ //  get_StdDev
+ //  ----------
+ //
+    /**
+      * Returns the standard deviation of the variable.<br>
+      * <br>
+      * If this variable is a mass, the value returned is in<br>
+      * kilograms; if not, the value returned is in centimeters.
+      **/
+#pragma PROPERTY StdDev
+    HRESULT get_StdDev(out /*IDLRETVAL*/ double poStdDev);
+
+
+ // ===========================================================================
+ //  get_Manual
+ //  ----------
+ //  put_Manual
+ //  ----------
+ //
+    /**
+      * Returns or sets the management of the variable.<br>
+      * A anthropometric variable being manual means that<br>
+      * the variable's value is managed by the user and its current value will<br>
+      * remain until the user changes it again.<br>
+      * <br>
+      * If the variable is not manual, then it is automatic, which
+      * means that the variable is managed by the system and that its value
+      * may be overriden, every time the anthropometry is updated.
+      **/
+#pragma PROPERTY Manual
+    HRESULT get_Manual(out /*IDLRETVAL*/ boolean poValueAsPercentile);
+    HRESULT put_Manual(in boolean piValueAsPercentile);
+
+
+ // ===========================================================================
+ //  GetCorrelationWith
+ //  ------------------
+ //  
+    /**
+      * Returns the correlation between this variable and another.
+      *
+      * @param piRefNumberOfOther The reference number of the other variable
+      * (ex.: 3 for us3, 100 for us100, etc).
+      **/
+    HRESULT GetCorrelationWith(in long piRefNumberOfOther, out /*IDLRETVAL*/ double poCorrelationValue);
+};
+
+// Interface name : SWKIAAnthroVariable
+#pragma ID SWKIAAnthroVariable "DCE:62de6f70-3c9c-11d4-a223000629753ac1"
+#pragma DUAL SWKIAAnthroVariable
+
+// VB object name : SWKAnthroVariable (Id used in Visual Basic)
+#pragma ID SWKAnthroVariable "DCE:c265c430-3c9c-11d4-a223000629753ac1"
+#pragma ALIAS SWKIAAnthroVariable SWKAnthroVariable
+
+#endif

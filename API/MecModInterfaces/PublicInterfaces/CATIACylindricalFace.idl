@@ -1,0 +1,93 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIACylindricalFace_IDL
+#define CATIACylindricalFace_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// CylindricalFace Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIAFace.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+/**
+ * 2-D boundary with a cylindrical geometry.
+ * <b>Role</b>: 
+ * This @href CATIABoundary object may be, for example, the lateral face of a cylinder.</br>
+ * You will create a CylindricalFace object using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it
+ * to the operator (such as @href CATIAShapeFactory#AddNewCircPattern ).</br> 
+ * The lifetime of a CylindricalFace object is limited, see @href CATIABoundary.</br> 
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example asks the end user to select a shape to pattern and a cylindrical face, and creates a circular
+ * pattern of the shape. The cylindrical face specifies the rotation axis.
+ * <pre>
+ * Dim InputObjectType(0)
+ * Set Document = CATIA.ActiveDocument
+ * Set Selection = Document.Selection
+ * 'We propose to the user that he select the shape to pattern
+ * InputObjectType(0)="SketchBasedShape"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the shape to pattern",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set Shape = Selection.Item(1).Value
+ * Selection.Clear
+ * 'We propose to the user that he select the cylindrical face
+ * InputObjectType(0)="CylindricalFace"
+ * Status=Selection.SelectElement2(InputObjectType,"Select the cylindrical face",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set CylindricalFace = Selection.Item(1).Value
+ * Set RotationCenter = Document.Part.CreateReferenceFromName("")
+ * Set CircPattern = ShapeFactory.AddNewCircPattern(Shape,1,4,20.0,45.0,1,4,RotationCenter,CylindricalFace,True,0.0,True)
+ * Document.Part.Update  
+ * </pre>
+ * </dl>
+ */ 
+     
+interface CATIACylindricalFace : CATIAFace
+{
+  /**
+    * Returns the origin of the cylindrical face axis. 	
+    *   @param oOrigin[0]
+    *   The X Coordinate of the axis origin
+    *   @param oOrigin[1]
+    *   The Y Coordinate of the axis origin
+    *   @param oOrigin[2]
+    *   The Z Coordinate of the axis origin
+    */
+  HRESULT GetOrigin (inout  CATSafeArrayVariant oOrigin);
+
+  /**
+    *  Returns the direction of the cylindrical face axis
+    *   @param oDirection[0]
+    *   The X Coordinate of the axis direction 
+    *   @param oDirection[1]
+    *   The Y Coordinate of the axis direction
+    *   @param oDirection[2]
+    *   The Z Coordinate of the axis direction
+    */ 
+  HRESULT GetDirection (inout  CATSafeArrayVariant oDirection);
+};
+
+// Interface Name : CATIACylindricalFace
+
+#pragma ID CATIACylindricalFace "DCE:29a45170-31f0-11d6-80660010b5d44ab2"
+#pragma DUAL CATIACylindricalFace
+
+// VB Object Name : CylindricalFace
+#pragma ID CylindricalFace "DCE:5bba67c0-31f0-11d6-80660010b5d44ab2"
+#pragma ALIAS CATIACylindricalFace CylindricalFace
+
+#endif
+//#endif
+

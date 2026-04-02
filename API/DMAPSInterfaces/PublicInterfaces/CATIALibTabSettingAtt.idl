@@ -1,0 +1,217 @@
+#ifndef CATIALibTabSettingAtt_IDL
+#define CATIALibTabSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+#include "CATIABase.idl"
+
+interface CATIALibTabSettingAtt : CATIASettingController 
+{
+
+     /**
+     * Retrieves the List of Libraries that are used in the Process document
+     * <br><b>Role</b>: Retrieves the List of Libraries that are used in the Process document
+     * @param ioPath
+     *       a CATSafeArrayVariant of CATBSTR that has the list of libraries
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+	 HRESULT GetListOfLibraryFilePath(out /*IDLRETVAL*/ CATSafeArrayVariant ioPath);
+
+
+     /**
+     * Sets a List of Libraries that are used in the Process document
+     * <br><b>Role</b>: Sets the List of Libraries that are used in the Process document
+     * @param iPath
+     *       a CATSafeArrayVariant of CATBSTR that has the list of libraries.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+	 HRESULT PutListOfLibraryFilePath(in CATSafeArrayVariant	iPath );
+
+
+	 /** 
+	 * Retrieves the information about the list of libraries path that are used
+	 * in the Process document
+	 * <br><b>Role</b>:Retrieves the information about the list of libraries path that are used
+	 * in the Process document
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetListOfLibraryFilePathInfo	( inout					CATBSTR		ioAdminLevel
+						                    , inout					CATBSTR		ioLocked
+						                    , out  /*IDLRETVAL*/	boolean		oModified
+						                    );
+
+    /**
+     * Locks or unlocks the list of libraries to be used
+	 * <br><b>Role</b>:Locks or unlocks the "list of libraries"  parameter if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *	the locking operation to be performed
+	 *	<b>Legal values</b>:
+	 *	<br><tt>TRUE :</tt>   to lock the parameter.
+	 * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetListOfLibraryFilePathLock( in  boolean iLocked );
+
+     /**
+     * Retrieves the path of custom VB script to generate process ID
+     * <br><b>Role</b>: Retrieves the path of custom VB script to generate process ID
+     * @param oPath
+     *	The output path of the custom VB script
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+     HRESULT GetProcessIDScript(inout CATBSTR oPath );
+
+     /**
+     * Sets the path of custom VB script to generate process ID
+     * <br><b>Role</b>: Sets the path of custom VB script to generate process ID
+     * @param iPath
+     *	Path of the custom VB script to be set
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+     HRESULT SetProcessIDScript( in CATBSTR iPath );
+
+	 /** 
+	 * Retrieves the information about the custom VB script path that are used
+	 * in the Process document
+	 * <br><b>Role</b>:Retrieves the information about the custom VB script path that are used
+	 * in the Process document
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetProcessIDScriptInfo	( inout					CATBSTR		ioAdminLevel
+									  , inout					CATBSTR		ioLocked
+						              , out  /*IDLRETVAL*/	boolean		oModified
+						              );
+
+    /** 
+     * Locks or unlocks the "Custom VB Script" parameter.
+     * <br><b>Role</b>: Locks or unlocks the 'Custom VB Script' parameter if the
+     * operation is allowed in the current administrated environment. In user mode 
+     * this method will always return E_FAIL.
+     * @param iLocked
+     *	the locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>1 :</tt>   to lock the parameter.
+     * 	<br><tt>0:</tt>   to unlock the parameter.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+     HRESULT SetProcessIDScriptLock( in boolean iLocked );
+
+     /**
+     * Retrieves the option which enables to check ID uniqueness amongst sibling processes
+     * <br><b>Role</b>: Retrieves the option which enables to check ID uniqueness amongst sibling processes
+     * @param oIsUnique
+     *	Flag indicating whether the check should be enabled or not
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+     HRESULT GetIDUniqueSetting(out long oIsUnique );
+
+     /**
+     * Sets the option which enables to check ID uniqueness amongst sibling processes
+     * <br><b>Role</b>: Sets the option which enables to check ID uniqueness amongst sibling processes
+     * @param isUnique
+     *	Sets the option to enable uniqueness check or not
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+     HRESULT SetIDUniqueSetting( in long isUnique );
+
+	 /** 
+	 * Retrieves environment informations for the 'Unique Check' parameter.
+	 * <br><b>Role</b>:Retrieves the state of the 'Unique Check' parameter 
+	 * in the current environment. 
+	 * @param ioAdminLevel
+	 *       <br>If the parameter is locked, AdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *	 <br>If the parameter is not locked, AdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param ioLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return 
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+     */
+     HRESULT GetIDUniqueSettingInfo	( inout		CATBSTR		ioAdminLevel
+						, inout					CATBSTR		ioLocked
+						, out  /*IDLRETVAL*/	boolean		oModified
+						);
+
+
+    /** 
+     * Locks or unlocks the "Unique Check" parameter.
+     * <br><b>Role</b>: Locks or unlocks the 'Unique Check' parameter if the
+     * operation is allowed in the current administrated environment. In user mode 
+     * this method will always return E_FAIL.
+     * @param iLocked
+     *	the locking operation to be performed
+     *	<b>Legal values</b>:
+     *	<br><tt>1 :</tt>   to lock the parameter.
+     * 	<br><tt>0:</tt>   to unlock the parameter.
+     * @return
+     *	<b>Legal values</b>:
+     *	<br><tt>S_OK :</tt>   on Success
+     * 	<br><tt>E_FAIL:</tt>  on failure
+     */
+     HRESULT SetIDUniqueSettingLock( in boolean iLocked );
+
+};
+
+// Interface name : CATIALibTabSettingAtt
+#pragma ID CATIALibTabSettingAtt "DCE:536685b5-c834-456c-8fefd8a8167802f3"
+#pragma DUAL CATIALibTabSettingAtt
+
+// VB object name : LibTabSettingAtt (Id used in Visual Basic)
+#pragma ID LibTabSettingAtt "DCE:08781790-16c3-4f02-bbbffc8586b6815d"
+#pragma ALIAS CATIALibTabSettingAtt LibTabSettingAtt
+
+
+#endif
+

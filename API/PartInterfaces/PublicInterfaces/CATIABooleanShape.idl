@@ -1,0 +1,75 @@
+#ifndef CATIABooleanShape_IDL
+#define CATIABooleanShape_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIABooleanShape:						   
+// Exposed interface for Boolean Shape
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                       Ph Baucher
+//=================================================================
+#include "CATIAShape.idl"
+
+interface CATIABody;
+interface CATIAReference;
+
+/**
+ * Represents the shapes based on boolean operations on other shapes.
+ * It is the base object for add, assemble, intersect, remove, and split shapes.
+ * @see CATIAAdd, CATIAAssemble, CATIAIntersect, CATIARemove, CATIASplit, CATIATrim 
+ */
+interface CATIABooleanShape : CATIAShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+
+    /**
+     * Returns the inserted body.
+     */
+#pragma PROPERTY Body
+    HRESULT    get_Body
+                ( out /*IDLRETVAL*/  CATIABody         oBody );
+
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+
+  /**
+  * Modifies the Second Operand.
+  * input object to replace with Body or Volume
+  */ 
+ 	HRESULT SetOperatedObject ( in	CATIAReference  iReferenceObject );
+	
+  /**
+  * Swaps the operands. Both the Operands must be Volume.
+  * This is available only for Volume Add and Volume UnionTrim Operations
+  */
+	HRESULT SetOperatingVolume ( in CATIAReference  iReferenceObject );
+};
+
+// Interface Name : CATIABooleanShape
+#pragma ID CATIABooleanShape "DCE:8142de11-aec0-0000-0280030ba6000000"
+#pragma DUAL CATIABooleanShape
+ 
+// VB Object Name : BooleanShape
+#pragma ID BooleanShape "DCE:8142de16-ad41-0000-0280030ba6000000"
+#pragma ALIAS CATIABooleanShape BooleanShape
+
+#endif
+// CATIABooleanShape_IDL
+

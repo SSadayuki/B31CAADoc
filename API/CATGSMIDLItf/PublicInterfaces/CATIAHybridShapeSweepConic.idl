@@ -1,0 +1,370 @@
+#ifndef CATIAHybridShapeSweepConic_IDL
+#define CATIAHybridShapeSweepConic_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+//=================================================================
+//           
+// CATIAHybridShapeSweepConic:         
+// Exposed interface for HybridShape SweepConic
+//           
+//=================================================================
+
+#include "CATIAHybridShapeSweep.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+
+
+/**
+* Represents the hybrid shape conic sweep  feature.
+* <b>Role</b>: To access the data of the conic sweep feature .
+* <p>Use the @href CATIAHybridShapeFactory#AddNewSweepConic to create a HybridShapeConicSweep object.
+*/
+interface CATIAHybridShapeSweepConic : CATIAHybridShapeSweep
+{
+  // =============
+  // PROPERTIES
+  // ==============
+
+  /**
+  * Returns or sets the spine (optional) for sweep operation.
+  * <br> param :  oElem 
+  *   Spine curve.
+  *   @see CATIAReference 
+  */ 
+#pragma PROPERTY Spine
+  HRESULT get_Spine(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_Spine(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the first guide curve.
+  */ 
+#pragma PROPERTY FirstGuideCrv
+  HRESULT get_FirstGuideCrv(out /*IDLRETVAL*/ CATIAReference opIAElem);
+  HRESULT put_FirstGuideCrv(in CATIAReference ipIAElem);
+
+
+  /**
+  * Returns or sets the second guide curve.
+  */ 
+#pragma PROPERTY SecondGuideCrv
+  HRESULT get_SecondGuideCrv(out /*IDLRETVAL*/ CATIAReference opIAElem);
+  HRESULT put_SecondGuideCrv(in CATIAReference ipIAElem);
+
+
+  /**
+  * Returns or sets the third guide curve.
+  */ 
+#pragma PROPERTY ThirdGuideCrv
+  HRESULT get_ThirdGuideCrv(out /*IDLRETVAL*/ CATIAReference opIAElem);
+  HRESULT put_ThirdGuideCrv(in CATIAReference ipIAElem);
+
+
+  /**
+  * Returns or sets the fourth guide curve.
+  */
+#pragma PROPERTY FourthGuideCrv
+  HRESULT get_FourthGuideCrv(out /*IDLRETVAL*/ CATIAReference opIAElem);
+  HRESULT put_FourthGuideCrv(in CATIAReference ipIAElem);
+
+
+  /**
+  * Returns or sets the fifth guide curve.
+  */ 
+#pragma PROPERTY FifthGuideCrv
+  HRESULT get_FifthGuideCrv(out /*IDLRETVAL*/ CATIAReference opIAElem);
+  HRESULT put_FifthGuideCrv(in CATIAReference ipIAElem);
+
+  /**
+  * Returns or sets the parameter for conic sweep operation.
+  *<br> if the parameter is a law, the method returns FALSE
+  * see @href CATIAHybridShapeLawDistProj
+  */ 
+#pragma PROPERTY Parameter
+  HRESULT  get_Parameter(out /*IDLRETVAL*/ double oValue);
+  HRESULT  put_Parameter(in double iValue);
+
+
+  /**
+  * Returns or sets the parameter law inversion flag of conic sweep operation.
+  * <br> TRUE if parameter law is inverted.  Else it is FALSE. 
+  * see @href CATIAHybridShapeLawDistProj
+  */
+#pragma PROPERTY ParameterLawInversion
+  HRESULT get_ParameterLawInversion(out /*IDLRETVAL*/ boolean oInversion);
+  HRESULT put_ParameterLawInversion(in boolean iInversion);
+
+  /**
+  * Returns or sets the parameter law useful in conic sweep operation.
+  */
+#pragma PROPERTY ParameterLaw
+  HRESULT get_ParameterLaw (out /*IDLRETVAL*/ CATIAReference opIAElem);
+  HRESULT put_ParameterLaw (in CATIAReference ipIAElem);
+
+
+  /**
+  * Returns or sets the parameter law type in conic sweep operation.
+  */
+#pragma PROPERTY ParameterLawType
+  HRESULT get_ParameterLawType (out /*IDLRETVAL*/ long oLawType);
+  HRESULT put_ParameterLawType (in long iLawType);
+
+  /**
+  * Returns  or sets information whether sweeping operation is smoothed or not.
+  * <br> TRUE or FALSE (FALSE if not specified).
+  */ 
+#pragma PROPERTY SmoothActivity
+  HRESULT get_SmoothActivity(out /*IDLRETVAL*/ boolean  oSmooth);
+  HRESULT put_SmoothActivity(in boolean iSmooth);
+
+  /**
+  * Returns  angular threshold under which discontinuities .
+  * <br> moving frame,tangency net on reference surface will be smoothed when sweeping.
+  */ 
+#pragma PROPERTY SmoothAngleThreshold
+  HRESULT get_SmoothAngleThreshold(out /*IDLRETVAL*/ CATIAAngle  opIAAngle);
+
+  /**
+  * Returns or sets information whether a deviation from guide curves is allowed or not. 
+  * <br> Gives the information on performing smoothinh during sweeping operation.
+  * <br>  TRUE or FALSE (FALSE if not specified).
+  */
+#pragma PROPERTY GuideDeviationActivity
+  HRESULT get_GuideDeviationActivity(out /*IDLRETVAL*/ boolean  oActivity);
+  HRESULT put_GuideDeviationActivity(in boolean iActivity);
+
+
+  /**
+  * Returns deviation value (length) from guide curves allowed during sweeping operation in order to smooth it.
+  */ 
+#pragma PROPERTY GuideDeviation
+  HRESULT get_GuideDeviation(out /*IDLRETVAL*/ CATIALength opIALength);
+
+  // =============
+  // METHODS
+  // ==============
+  /**
+  * Gets  tangency surface or curve and its angle given the guide curve index. 
+  * <br> param :  opIAElem 
+  Tangency surface or curve feature.
+  * <br> param :  opIAAngleStart
+  *  Start tangency angle from surface or curve reference.
+  * <br> param :  opIAAngleEnd
+  *  End tangency angle from surface or curve reference.
+  * <br> param :  oLawType
+  *  Type of law used for tangency angle from surface or curve reference.
+  * <br> param :  iIndex
+  *  Guide curve index : 1 to 5.
+  */ 
+  HRESULT GetTangency(out CATIAReference  opIAElem, out CATIAAngle  opIAAngleStart, 
+    out CATIAAngle opIAAngleEnd, out long oLawType, in long iIndex);
+
+  /**
+  *  Sets tangency surface or curve and its angle given the guide curve index. 
+  * <br> param :  ipIAElem 
+  *	Tangency surface or curve feature.
+  * <br> param :  iAngleStart
+  *  Start tangency angle from surface or curve reference.
+  * <br> param :  iAngleEnd
+  *  End tangency angle from surface or curve reference.
+  * <br> param :  iAngleLawType
+  *  Type of law used for tangency angle from surface or curve reference.
+  * <br> param :  iIndex
+  *  Guide curve index : 1 to 5.
+  */
+  HRESULT SetTangency(in CATIAReference ipIAElem, in double iAngleStart, 
+    in double iAngleEnd, in long  ilawType, in long iIndex);
+
+  /**
+  * Gets tangency surface or curve and its angle given the guide curve index.
+  * <br> param :  opIAElem
+  *      Tangency surface or curve feature.
+  * <br> param :  opIALaw
+  *      Start tangency angle from surface or curve reference.
+  * <br> param :  iIndex
+  *      Guide curve index : 1 to 5.
+  */
+  HRESULT GetTangencyLaw(out CATIAReference  opIAElem, out CATIAReference  opIALaw,
+    in long iIndex);
+
+  /**
+  * Sets tangency surface or curve and its angle given the guide curve index.
+  * <br> param :  ipIAElem
+  *   Tangency surface or curve feature.
+  * <br> param :  ipIALaw
+  *   Start tangency angle from surface or curve reference.
+  * <br> param :  iIndex
+  *   Guide curve index : 1 to 5.
+  */
+  HRESULT SetTangencyLaw(in CATIAReference ipIAElem, in CATIAReference ipIALaw, 
+    in long iIndex);
+
+
+  /**
+  * Gets information whether tangency angle law has to be inverted or not
+  *			for a specified guide curve.
+  * <br> param :  iIndex 
+  *   Guide curve index : 1 to 5
+  * <br> param :  oInversion
+  *   Non-Zero for TRUE and 0 for FALSE.
+  */ 
+  HRESULT GetTangencyAngleLawInversion(in long iIndex, out long  oInversion);
+
+  /**
+  * Sets information whether tangency angle law has to be inverted or not
+  *			for a specified guide curve.
+  * <br> param :  iIndex 
+  *   Guide curve index : 1 to 5
+  * <br> param :  iInversion
+  *   1 for TRUE and 0 for FALSE.
+  */ 
+  HRESULT SetTangencyAngleLawInversion(in long iIndex, in long iInversion);
+
+  /**
+  *  Gets the parameter law used in conic sweep operation.
+  * <br> param :  oParamStart 
+  *   Parameter law start value.
+  * <br> param :  oParamEnd
+  *   Parameter law end value.
+  * <br> param :  oLawType
+  *   Parameter law type.
+  */
+  HRESULT GetParameterLaw(out double oParamStart, out double oParamEnd, out long oLawType);
+
+  /**
+  * Sets the parameter law that will be used in conic sweep operation.
+  * <br> param :  iParamStart 
+  *   Parameter law start value.
+  * <br> param :  iParamEnd
+  *   Parameter law end value.
+  * <br> param :  iLawType
+  *   Parameter law type.
+  */
+  HRESULT SetParameterLaw(in double iParamStart, in double iParamEnd, in long iLawType);
+
+
+  /**
+  * Removes a guide curve given its index. 
+  * <br> it removes also  tangency element if specified.
+  * <br> param :  iIndex 
+  *     Guide curve index : 1 to 5. If 0, all guides are removed.
+  */ 
+
+  HRESULT RemoveGuide(in long iIndex);
+
+  /**
+  * Gets the number of guides. 
+  * <br> param :  oNum 
+  *   Number of guides curve.
+  */ 
+  HRESULT GetNbGuides(out long oNum);
+
+
+  /**
+  * removes tangency surface or curve and its angle given the guide curve index. 
+  * <br> param :  iIndex 
+  *   Guide curve index : 1 to 5.
+  */ 
+  HRESULT RemoveTangency(in long iIndex);
+
+  /**
+  * @deprecated V5R16 CATHybridShapeSweepConic#GetRelimiters
+  * Gets the elements relimiting the spine (or the default spine).
+  * <br> param :  opIAElem1 
+  *   First relimiting feature (plane or point)
+  * <br> param :  opIAElem2
+  *   Second relimiting feature (plane or point)
+  */ 
+  HRESULT GetLongitudinalRelimiters(out CATIAReference  opIAElem1, out CATIAReference opIAElem2);
+
+  /**
+  * @deprecated V5R16 CATHybridShapeSweepConic#SetRelimiters
+  *  Sets the elements relimiting the spine (or the default spine).
+  * <br> param :  ipIAElem1 
+  *   First relimiting feature (plane or point)
+  * <br> param :  ipIAElem2
+  *   Second relimiting feature (plane or point)
+  */ 
+  HRESULT SetLongitudinalRelimiters(in CATIAReference  ipIAElem1, in CATIAReference ipIAElem2) ;
+
+  /**
+  * Retrieves the elements relimiting the spine (or the default spine).
+  * @param opIAElem1 
+  *   The first relimiting feature (plane or point)
+  * @param opOrient1
+  *   Split direction for the first relimitation<br>
+  *   0 means that the beginning of the spine (considering its orientation) is removed, 1 means that the end of the spine is removed
+  * @param opIAElem2
+  *   The second relimiting feature (plane or point)
+  * @param opOrient2
+  *   Split direction for the second relimitation
+  */
+  HRESULT GetRelimiters(out CATIAReference  opIAElem1, out long opOrient1, out CATIAReference opIAElem2, out long opOrient2);
+
+  /**
+  *	 Sets the elements relimiting the spine (or the default spine).
+  *  @param ipIAElem1 
+  *	  The first relimiting feature (plane or point)
+  *  @param ipOrient1
+  *   Split direction for the first relimitation<br>
+  *   0 means that the beginning of the spine (considering its orientation) is removed, 1 means that the end of the spine is removed
+  *  @param ipIAElem2
+  *   The second relimiting feature (plane or point)
+  *  @param ipOrient2
+  *   Split direction for the second relimitation
+  */ 
+  HRESULT SetRelimiters(in CATIAReference  ipIAElem1, in long ipOrient1, in CATIAReference ipIAElem2, in long ipOrient2) ;
+
+  /**
+  * Sets angular threshold under which discontinuities. 
+  *<br> note: moving frame,tangency net on reference surface will be smoothed when sweeping.
+  * <br> param :  iAngle 
+  *   Numerical value.
+  */ 
+  HRESULT SetSmoothAngleThreshold(in double  iAngle);
+
+  /**
+  * Sets deviation value (length) from guide curves allowed during sweeping
+  * operation in order to smooth it.
+  * <br> param :  iLength 
+  *   Numerical value.
+  */ 
+  HRESULT SetGuideDeviation(in double  iLength);
+  /**
+  * Removes conical sweep parameter, whether it is a single value or a law.
+  */
+  HRESULT RemoveParameter();
+
+  /**
+  * Returns or sets whether canonical surfaces of the swept surface are detected.
+  * <br><b>Legal values</b>:
+    *  <table>
+  *     <tr> <td>0</td> <td>No detection of canonical surface is performed.</td> </tr>
+  *     <tr> <td>2</td> <td>Detection of canonical surfaces is performed.</td> </tr>
+  *  </table>
+  */
+  
+#pragma PROPERTY CanonicalDetection
+  HRESULT get_CanonicalDetection(out /*IDLRETVAL*/ long oDetection);
+  HRESULT put_CanonicalDetection(in long iDetection);
+
+};
+
+// Interface name : CATIAHybridShapeSweepConic
+#pragma ID CATIAHybridShapeSweepConic "DCE:993a12e1-c364-0000-0280020c4e000000"
+#pragma DUAL CATIAHybridShapeSweepConic
+
+// VB object name : HybridShapeSweepConic (Id used in Visual Basic)
+#pragma ID HybridShapeSweepConic "DCE:993a153f-a022-0000-0280020c4e000000"
+#pragma ALIAS CATIAHybridShapeSweepConic HybridShapeSweepConic
+
+#endif

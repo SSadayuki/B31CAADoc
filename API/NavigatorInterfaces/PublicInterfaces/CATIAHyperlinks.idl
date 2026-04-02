@@ -1,0 +1,112 @@
+// COPYRIGHT DASSAULT SYSTEMES 2006
+//===================================================================
+//
+// CATIAHyperlinks.idl
+//   This automation interface allows to manage a Hyperlink collection.
+//
+//===================================================================
+//
+//  Jan 2006  Creation: SLW
+//
+//===================================================================
+#ifndef CatHyperlinksType_IDL
+#define CatHyperlinksType_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIACollection.idl"
+
+#include "CATIABase.idl"
+#include "CATIAHyperlink.idl"
+#include "CATVariant.idl"
+
+/**
+ *
+ */
+interface CATIAHyperlinks : CATIACollection
+{
+	/**
+	* Retrieve an Hyperlink associated to an object
+	* @param iObject
+	*    The object which supports the hyperlink. The call fails otherwise.
+	* @return
+	*    The retrieved Hyperlink if it exists
+	* @sample
+	*    This example retrieves an existing one in the <tt>TheHyperlinks</tt> collection.
+	*    <pre>
+	*    Dim NewHyperlink As Hyperlink
+	*    Set NewHyperlink = TheHyperlinks.<font color="red">GetHyperlink</font>(iObject)
+	*    </pre>
+	*/ 
+	HRESULT GetHyperlink(in CATIABase iObject, out /*IDLRETVAL*/ CATIAHyperlink   oURL);
+
+	/**
+	* Returns an Hyperlink using its index from the Hyperlinks collection.
+	* @param iIndex
+	*    The index or the name of the hyperlink to retrieve from the collection of Hyperlinks.
+	*    As a numerics, this index is the rank of the Hyperlink in the collection.
+	*    The index of the first Hyperlink in the collection is 1, and
+	*    the index of the last Hyperlink is Count.
+	*    As a string, it is the name you assigned to the Hyperlink.
+	* @return
+	*    The retrieved Hyperlink
+	* @sample
+	*    This example retrieves in <tt>ThisHyperlink</tt> the ninth Hyperlink ,
+	*    and in <tt>ThatHyperlink</tt> the Hyperlink named
+	*    <tt> Hyperlink3</tt> from the <tt>TheHyperlinks</tt> collection. 
+	*    <pre>
+	*    Dim ThisHyperlink As Hyperlink
+	*    Set ThisHyperlink = TheHyperlinks.<font color="red">Item</font>(9)
+	*    Dim ThatHyperlink As Hyperlink
+	*    Set ThatHyperlink = TheHyperlinks.<font color="red">Item</font>("Hyperlink3")
+	*    </pre>
+	*/
+	HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAHyperlink oHyperlink);
+
+	/**
+	* Removes a Hyperlink from the Hyperlinks collection.
+	* @param iIndex
+	*    The index or the name of the Hyperlink to retrieve from the collection of Hyperlinks.
+	*    As a numerics, this index is the rank of the Hyperlink in the collection.
+	*    The index of the first Hyperlink in the collection is 1, and
+	*    the index of the last Hyperlink is Count.
+	*    As a string, it is the name you assigned to the Hyperlink.
+	* @sample
+	*    The following example removes the tenth Hyperlink and the Hyperlink named
+	*    <tt> Hyperlink 2</tt> from the <tt>TheHyperlinks</tt> collection.
+	*    <pre>
+	*    TheHyperlinks.<font color="red">Remove</font>(10)
+	*    TheHyperlinks.<font color="red">Remove</font>("Hyperlink2")
+	*    </pre>
+	*/
+	HRESULT Remove(in CATVariant iIndex);
+
+	/**
+	* Adds a Hyperlink to the Hyperlinks collection. Be careful: only one Hyperlink instance is allowed per object which supports the hyperlink.
+	* If one adds a Hyperlink on an object which already has a Hyperlink, the call fails.
+  * The Hyperlink name is internally generated. If one wants to manage Hyperlink using its name, he has to set it manually.
+	* @param iObject
+	*    The object which supports the hyperlink.
+	* @sample
+	*    The following example adds a Hyperlink
+	*    <pre>
+	*    Dim NewHyperlink As Hyperlink
+	*    Set NewHyperlink = TheHyperlinks.<font color="red">Add</font>(iObject)
+	*    </pre>
+	*/
+	HRESULT Add(in CATIABase iObject, out /*IDLRETVAL*/ CATIAHyperlink   oURL);
+};
+
+// Interface name : CATIAHyperlinks
+#pragma ID CATIAHyperlinks "DCE:1611d0f8-7a68-4621-8c73aa3b696183b5"
+#pragma DUAL CATIAHyperlinks
+
+// VB object name : Hyperlinks (Id used in Visual Basic)
+#pragma ID Hyperlinks "DCE:751bb0b6-7474-4b3f-a11c174a03e9fdbc"
+#pragma ALIAS CATIAHyperlinks Hyperlinks
+
+#endif

@@ -1,0 +1,234 @@
+#ifndef CATIACurve2D_IDL
+#define CATIACurve2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAGeometry2D.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+interface CATIAPoint2D;
+
+/** 
+ *   Class defining a curve in 2D Space.
+ */
+
+interface CATIACurve2D : CATIAGeometry2D
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+        //
+
+        //
+#pragma PROPERTY StartPoint
+        /**
+        *       Returns the start point of the curve.  The start point is
+        *       decided with respect to the logical flow      
+        *       imposed on the curve by the object.
+        *       @param oStartPoint   
+        *       The start point of the curve
+        */
+        HRESULT get_StartPoint(out /*IDLRETVAL*/ CATIAPoint2D oStartPoint);
+        //
+        /**
+        *       Sets the start point of the curve.  The start point is
+        *       decided with respect to the logical flow      
+        *       imposed on the curve by the object.
+        *       @param iStartPoint   
+        *       The start point of the curve
+        */
+        HRESULT put_StartPoint(in CATIAPoint2D iStartPoint);
+        //
+#pragma PROPERTY EndPoint
+        /**
+        *       Returns the end point of the curve.  The end point is
+        *       decided with respect to the logical flow      
+        *       imposed on the curve by the object.
+        *       @param oEndPoint   
+        *       The end point of the curve
+        */
+        HRESULT get_EndPoint(out /*IDLRETVAL*/ CATIAPoint2D oEndPoint);
+        //
+        /**
+        *       Sets the end point of the curve.  The end point is
+        *       decided with respect to the logical flow      
+        *       imposed on the curve by the object.
+        *       @param iEndPoint   
+        *       The end point of the curve
+        */
+        HRESULT put_EndPoint(in  CATIAPoint2D iEndPoint);
+        //
+
+        //
+#pragma PROPERTY Continuity
+        /**
+        *       Returns the highest level of geometric continuity the curve
+        *       possesses.                         
+        *       @param oLevel
+        *       The maximum geometric continuity level
+        */
+        HRESULT get_Continuity (out /*IDLRETVAL*/ short   oLevel);
+        //
+#pragma PROPERTY Period
+        /**
+        *       Returns the period of a periodic curve.
+        *       @param oPeriod   
+        *       The period of the curve.
+        */
+        HRESULT get_Period (out /*IDLRETVAL*/ double oPeriod);
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+        //
+        /**
+        *       Returns a point on the curve computed from an
+        *       input parameter.
+        *       @param iParam    
+        *       The parameter
+        *       @param oPoint    
+        *       The X and Y coordinates of the computed 2D space point.
+        */
+        HRESULT GetPointAtParam (in     double                iParam,
+                                 inout  CATSafeArrayVariant oPoint);
+        //
+        /**
+        *       Returns the unit-vector tangent at the parameter specified.
+        *       @param iParam 
+        *       The parameter of the chosen point on the curve.
+        *       @param oTangency 
+        *       The X and Y coordinates of the unit-vector tangent at the
+        *       specified parameter.
+        */
+        HRESULT GetTangent  (in      double    iParam,
+                             inout CATSafeArrayVariant oTangency);
+        //
+        /**
+        *       Returns the curvature and curvature direction at the 
+        *       parameter specified.
+        *       @param iParam 
+        *       The parameter of the chosen point on the curve.
+        *       @param oCurvature[0] 
+        *       The curvature at the specified parameter.
+        *       @param oCurvature[1;2] 
+        *       The unit-vector of curvature direction at the specified 
+        *       parameter.
+        */
+        HRESULT GetCurvature  (in      double    iParam,
+                               inout CATSafeArrayVariant oCurvature);
+        //
+        /**
+        *       Returns the first, second and third derivatives at the 
+        *       parameter specified.
+        *       @param iParam 
+        *       The parameter of the chosen point on the curve.
+        *       @param oDerivative[0] 
+        *       First degree derivative.
+        *       @param oDerivative[1] 
+        *       Second degree derivative.
+        *       @param oDerivative[2] 
+        *       Third degree derivative.
+        */
+        HRESULT GetDerivatives (in      double    iParam,
+                               inout  CATSafeArrayVariant oDerivative);
+        /**
+        *       Returns the parameter at a given length, measured along
+        *       the curve, starting from a given parameter.  The direction
+        *       of measurement is always in the direction of the logical
+        *       flow of the curve.  If no inherent logical flow can be  
+        *       assigned the direction is the direction of increasing
+        *       parameterization.
+        *       @param iFromParam 
+        *       The parameter from which the length needs to be measured.
+        *       @param iLength   
+        *       The length of the curve to be measured from iFromParam in
+        *       the logical flow direction of the curve.
+        *       @param oParam    
+        *       The computed parameter.
+        */
+        HRESULT GetParamAtLength (in      double    iFromParam,
+                                  in      double    iLength,
+                                  out /*IDLRETVAL*/  double    oParam);
+        //
+        /**
+        *       Returns the length, measured along the curve, from a given
+        *       parameter to a given parameter.
+        *       @param iFromParam
+        *       The parameter from which the length is to be measured.
+        *       @param iToParam  
+        *       The parameter to which the length is to be measured.
+        *       @param oLength
+        *       The length between the parameters
+        */
+        HRESULT GetLengthAtParam (in      double    iFromParam,
+                                  in      double    iToParam,   
+                                  out /*IDLRETVAL*/ double    oLength);
+        //
+        /**
+        *       Specifies whether a curve is periodic or not.
+        *       @param oPeriodic
+        *       Returns true if the curve is periodic.
+        */
+        HRESULT IsPeriodic (out /*IDLRETVAL*/ boolean oPeriodic);
+        //
+        /**
+        *       Returns the parametric extents of the curve. This is the
+        *       parametric equivalent of the end-points.
+        *       @param oParams[0]
+        *       The parameter associated with the start point of the curve
+        *       @param oParams[1]
+        *       The parameter associated with the end point of the curve
+        */
+        HRESULT GetParamExtents (inout CATSafeArrayVariant oParams);
+        /**
+        *       Returns the range box (or bounding box) of the object
+        *       <br>The box is axially aligned within the local coordinate
+        *       system of the server.
+        *       @param oBoundPoint[0]
+        *       The minimum x point of the box
+        *       @param oBoundPoint[1]
+        *       The minimum y point of the box
+        *       @param oBoundPoint[2]
+        *       The maximum x point of the box
+        *       @param oBoundPoint[3]
+        *       The maximum y point of the box
+        */
+        HRESULT GetRangeBox (inout  CATSafeArrayVariant oBoundPoint);
+        //
+
+        /**
+        *       Returns the end-points of the curve. The start point and the
+        *       end point are decided with respect to the logical flow      
+        *       imposed on the curve by the object.
+        *       @param oEndPoints[0]
+        *       The x coordinate of the start point
+        *       @param oEndPoints[1]
+        *       The y coordinate of the start point
+        *       @param oEndPoints[2]
+        *       The x coordinate of the end point
+        *       @param oEndPoints[3]
+        *       The y coordinate of the end point
+        */
+        HRESULT GetEndPoints(inout  CATSafeArrayVariant oEndPoints);
+
+};
+
+// Interface name : CATIACurve2D
+#pragma ID CATIACurve2D "DCE:80ec7509-b0e8-0000-0280030ba6000000"
+#pragma DUAL CATIACurve2D
+
+// VB object name : Curve2D (Id used in Visual Basic)
+#pragma ID Curve2D "DCE:80ec7518-a018-0000-0280030ba6000000"
+#pragma ALIAS CATIACurve2D Curve2D
+
+
+#endif
+// CATIACurve2D_IDL
+

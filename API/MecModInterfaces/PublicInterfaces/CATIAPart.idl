@@ -1,0 +1,732 @@
+#ifndef CATIAPart_IDL
+#define CATIAPart_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAPart:                           
+// Exposed interface for Mechanical Part
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jul97 Creation                                        BGE / FCM
+// Sep97 Consider bodies                                Ph Baucher
+// Oct97 Consider planes                                Ph Baucher
+// Dec97 After Design Review                            Ph Baucher
+// Dec97 New Inheritance / Shape Factory		 L Lalere
+// Jan98 Split Part Document and Part Feature	  	 L Lalere
+// Jan99 ajout MainBody InWorkObject					JM Gautier
+// Mar99 ajout HybridShapeFactory						JM Gautier
+// Apr99 ajout HybridBodies								JM Gautier
+// Apr99 Remove CurrentBody/Shape replaced by InWorkObject JM Gautier
+// Jun99 Remove Factory3D (replaced by HybridShapeFactory) JM Gautier
+// Nov99 Add AnnotationSets and SheetMetalFactory          JM Gautier
+// Nov99 Add UserSurfaces (tolerances)					JM Gautier				
+// Feb00 Add AxisSystems						JM Gautier
+// Feb00 Add Customer Factory						L Lalere / JM Gautier
+// Apr04 add the property get_OrderedGeometricalSets	 JM Gautier
+//=================================================================
+#include "CATIABase.idl"
+
+interface CATIABodies;
+interface CATIAHybridBodies;
+interface CATIAOrderedGeometricalSets;
+interface CATIAOriginElements;
+interface CATIAGeometricElement;
+interface CATIAGeometricElements;
+interface CATIAConstraints;
+interface CATIAParameters;
+interface CATIARelations;
+interface CATIAFactory;
+interface CATIAReference;
+interface CATIABody;
+interface CATIACollection;
+interface CATIAAxisSystems;
+
+/**
+ * The root level object inside a PartDocument object. 
+ * <b>Role</b>: It aggregates all the objects making up the part document.
+ * <br>It provides many factories and collections. The collections list only the direct children of the part.
+ * @href CATIASelection#Search allows to get all objects of one type.
+ * @see CATIAPartDocument
+ */
+//-----------------------------------------------------------------
+interface CATIAPart : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON MAIN BODY
+    //    ------------
+    /**
+     * Returns or sets the main body of the part.
+	 * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns the main body 
+     * of the part of the current document.
+     * <pre>
+	 * Dim mainBody As Body
+     * Set mainBody=CATIA.ActiveDocument.Part.<font color="red">MainBody</font>
+     * </pre>
+     * </dl>	 
+     */
+#pragma PROPERTY MainBody
+    HRESULT   get_MainBody ( out /*IDLRETVAL*/ CATIABody oMainBody );
+	HRESULT   put_MainBody ( in  CATIABody  iNewMainBody);
+
+    //
+    //    ON IN WORK OBJECT
+    //    -----------------
+    //
+    /**
+     * Returns or sets the in work object of the part.
+     * The in work object is the object after which a new object is added.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set partRoot.<font color="red">InWorkObject</font> = cylindricPad
+     * If ( partRoot.<font color="red">InWorkObject</font> &lt;&gt; cylindricPad ) Then
+     *      MsgBox "There is a big problem"
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY InWorkObject
+    HRESULT    get_InWorkObject ( out /*IDLRETVAL*/ CATIABase oInWorkObject);    
+    HRESULT    put_InWorkObject ( in  CATIABase iInWorkObject);   
+
+    //
+    //    ON BODIES
+    //    ---------
+    //
+    /**
+     * Returns the collection object containing the bodies that are direct children of the part.
+	 * <br>It does not return all the bodies of the part, particularly the bodies in a boolean operation.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>bodiesColl</tt> the collection
+     * of the bodies of the <tt>partRoot</tt> part from the
+     * <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set bodiesColl = partRoot.<font color="red">Bodies</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Bodies
+    HRESULT    get_Bodies ( out /*IDLRETVAL*/ CATIABodies oBodies );
+
+    //
+    //    ON HYBRID BODIES
+    //    ----------------
+    //
+    /**
+     * Returns the collection object containing the hybrid bodies that are direct children of the part.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>hybridBodiesColl</tt> the collection
+     * of hybrid bodies of the <tt>partRoot</tt> part from the
+     * <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set hybridBodiesColl = partRoot.<font color="red">HybridBodies</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY HybridBodies
+    HRESULT    get_HybridBodies ( out /*IDLRETVAL*/ CATIAHybridBodies oHybridBodies );
+
+    //
+    //    ON SHAPE FACTORY
+    //    ----------------
+    //
+    /**
+     * Returns the part shape factory.
+     * It allows the creation of shapes in the part.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>shapeFact</tt> the shape factory
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+	 * Dim shapeFact As Factory	
+     * Set shapeFact = partRoot.<font color="red">ShapeFactory</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ShapeFactory
+    HRESULT    get_ShapeFactory ( out /*IDLRETVAL*/ CATIAFactory oShapeFactory );
+    //
+    //    ON HYBRID SHAPE FACTORY
+    //    -----------------------
+    //
+    /**
+     * Returns the part hybrid shape factory.
+     * It allows the creation of hybrid shapes in the part.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>hybridShapeFact</tt> the hybrid shape factory
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+	 * Dim hybridShapeFact As Factory
+     * Set hybridShapeFact = partRoot.<font color="red">HybridShapeFactory</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY HybridShapeFactory
+    HRESULT    get_HybridShapeFactory
+	 ( out /*IDLRETVAL*/ CATIAFactory oHybridShapeFactory );
+
+    //
+    //    ON SHEET METAL FACTORY
+    //    ----------------------
+    //
+    /**
+     * Returns the sheet metal factory of the part.
+     * It allows the creation of sheet metal elements in the part.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>sheetMetalFact</tt> the sheet metal factory
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+	 * Dim sheetMetalFact As Factory
+     * Set sheetMetalFact = partRoot.<font color="red">SheetMetalFactory</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SheetMetalFactory
+    HRESULT    get_SheetMetalFactory
+	 ( out /*IDLRETVAL*/ CATIAFactory oSheetMetalFactory );
+
+    //
+    //    ON SHEET METAL PARAMETERS
+    //    -------------------------
+    //
+    /**
+     * Returns the sheet metal parameters of the part.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>sheetMetalParm</tt> the sheet metal parameters
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+	 * Dim sheetMetalParm As SheetMetalParameters
+     * Set sheetMetalFact = partRoot.<font color="red">SheetMetalParameters</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY SheetMetalParameters
+    HRESULT    get_SheetMetalParameters
+	 ( out /*IDLRETVAL*/ CATIABase oSheetMetalParameters );
+
+
+    //
+    //    ON GEOM ELEMENTS
+    //    ----------------
+    //
+    /**
+     * Returns the collection object containing the part geometrical elements.
+     * Only 3D elements are concerned here, 2D elements are managed in sketches.
+     * The origin elements are also accessible thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>geomElts</tt> the 3D elements
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set geomElts = partRoot.<font color="red">GeometricElements</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY GeometricElements
+    HRESULT get_GeometricElements    
+                ( out /*IDLRETVAL*/ CATIAGeometricElements oGeometricElements );
+
+    //
+    //    ON CONSTRAINTS
+    //    --------------
+    //
+    /**
+     * Returns the collection object containing the part constraints.
+     * Only 3D constraints are concerned here, 2D constraints
+     * are managed in sketches.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>csts</tt> the constraints
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set csts = partRoot.<font color="red">Constraints</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Constraints
+    HRESULT get_Constraints ( out /*IDLRETVAL*/ CATIAConstraints oConstraints );
+
+    //
+    //    ON RELATIONS
+    //    ------------
+    //
+    /**
+     * Returns the collection object containing the part relations.
+     * All the relations that are used to valuate 
+     * the parameters of the part might be accessed thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>rels</tt> the relations
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set rels = partRoot.<font color="red">Relations</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Relations
+    HRESULT get_Relations ( out /*IDLRETVAL*/ CATIARelations oRelations );
+
+    //
+    //    ON PARAMETERS
+    //    -------------
+    //
+    /**
+     * Returns the collection object containing the part parameters.
+     * All the parameters that are aggregated in the different
+     * objects of the part might be accessed thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>params</tt> the parameters
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Dim params As Parameters
+	 * Set params = partRoot.<font color="red">Parameters</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Parameters
+    HRESULT get_Parameters ( out /*IDLRETVAL*/ CATIAParameters oParameters );
+
+    //
+    //    ON ANNOTATION SETS
+    //    ------------------
+    //
+    /**
+     * Returns the collection object containing the annotation sets.
+     * All the annotation sets that are aggregated in the part
+	 *  might be accessed thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>annotationSets</tt> the annotation sets
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+	 * Dim annotationSets As AnnotationSets
+     * Set annotationSets = partRoot.<font color="red">AnnotationSets</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY AnnotationSets
+    HRESULT get_AnnotationSets ( out /*IDLRETVAL*/ CATIACollection oAnnotationSets);
+
+    //
+    //    ON USER SURFACES
+    //    ------------------
+    //
+    /**
+     * Returns the collection object containing the user surfaces.
+     * All the user surfaces that are aggregated in the part
+	 *  might be accessed thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>userSurfaces</tt> the user surfaces
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+	 * Dim userSurfaces As UserSurfaces
+     * Set userSurfaces = partRoot.<font color="red">UserSurfaces</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY UserSurfaces
+    HRESULT get_UserSurfaces ( out /*IDLRETVAL*/ CATIACollection oUserSurfaces);
+
+
+    //
+    //    ON COORDINATE SYSTEMS
+    //    ---------------------
+    //
+    /**
+     * Returns the collection object containing the coordinate systems.
+     * All the coordinate systems that are aggregated in the part
+	 *  might be accessed thru that collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>axisSystems</tt> the coordinate systems
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+	 * Dim axisSystems As AxisSystems
+     * Set axisSystems = partRoot.<font color="red">AxisSystems</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY AxisSystems
+    HRESULT get_AxisSystems ( out /*IDLRETVAL*/ CATIAAxisSystems oAxisSystems);
+
+    //
+    //    ON ORIGIN ELEMENTS
+    //    ------------------
+    //
+    /**
+     * Returns the object defining the part 3D reference axis system.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>originElts</tt> the origin
+     * of the <tt>partRoot</tt> part from the <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set originElts = partRoot.<font color="red">OriginElements</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY OriginElements
+    HRESULT get_OriginElements ( out /*IDLRETVAL*/ CATIAOriginElements oOrigin );
+
+    //
+    //    ON DENSITY
+    //    ----------
+    //
+	//
+    /**
+     * Returns the part density.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example displays the density
+     * of the part:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * MsgBox "The density is " & partRoot.<font color="red">Density</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Density
+    HRESULT get_Density ( out /*IDLRETVAL*/ double oDensity );
+
+    
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+
+   
+    //    Creates a reference from Label (GenericNaming)
+    //    --------------------------------------------
+    /**
+     * Creates a reference from a GenericNaming label.
+     * This allows manipulation of B-Rep (type Functional Only) that are not easy to access.
+     * @param iLabel
+     *   The GenericNaming identification for an object.
+     *   This is a cryptic form for "the edge surrounded by the face extruded
+     *   from line.12 of sketch.4 and the face...")
+     * @return The reference to a B-Rep sub-element such a face or an edge
+     */
+      HRESULT    CreateReferenceFromName
+                          ( in                    CATBSTR            iLabel
+                          , out    /*IDLRETVAL*/  CATIAReference     oRef
+                          );
+
+    //
+    //    Creates a reference from an object 
+    //    ---------------------------------
+    /**
+     * @nodoc
+     * Creates a reference from a geometric object.
+     * Use of reference allows a uniform handling of B-Rep and non B-Rep objects.
+     * @param iObject
+     *   The geometric object to be referenced.
+     *   It can be a plane, a line or a point.
+     * @return The reference to the object.
+     * This way, a direction can be either an edge of a pad or a 3D line.
+     */
+      HRESULT    CreateReferenceFromGeometry
+                          ( in        CATIABase				       iObject
+                          , out    /*IDLRETVAL*/  CATIAReference     oRef
+                          );
+
+    //
+    //    Creates a reference from an object
+    //    ---------------------------------
+    /**
+     * Creates a reference from a operator.
+     * Use of reference allows a uniform handling of B-Rep and non B-Rep objects.
+     * @param iObject
+     *   The geometric object to be referenced.
+     *   It can be a plane, a line or a point.
+     * @return The reference to the object.
+     * This way, a direction can be either an edge of a pad or a 3D line.
+     */
+      HRESULT    CreateReferenceFromObject
+                          ( in        CATIABase                     iObject
+                          , out    /*IDLRETVAL*/  CATIAReference     oRef
+						  );
+
+    //
+    //  Find object by NAME
+    //  -------------------
+    /**
+     * Finds an object that is not a collection by its name.
+     * Scan in depth among all the direct and indirect children
+     * (expensive, but hard to escape).
+     * @param iObjName
+     *   The name to be searched
+     * @return The object, if found
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>The following example tests if the object was found:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set obj = partRoot.<font color="red">FindObjectByName</font>("Wrong name")
+     * If TypeName(obj)="Nothing" Then
+     *      MsgBox "Object not found"
+     * End If
+     * </pre>
+     * </dl>
+     */
+    HRESULT    FindObjectByName
+                ( in                CATBSTR            iObjName
+                , out /*IDLRETVAL*/    CATIABase         oObject );
+
+    //
+    //  Updates of the whole Part
+    //  ------------------------
+    /**
+     * Updates of the part result with respect to its specifications.
+     * Any composing specification that hasn't its result up-to-date will
+     * recompute it, thus propagating changes to the whole part.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example update the part:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * partRoot.<font color="red">Update</font>
+     * </pre>
+     * </dl>
+     */
+    HRESULT    Update();
+
+    //
+    //  Update of an object
+    //  -------------------
+    /**
+     * Updates an object with respect to its specifications.
+     * Any composing specification of the object that hasn't 
+     * its result up-to-date will recompute it,
+     * thus propagating changes to the object.
+     * @param iObject
+     *   The object to be updated
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example updates Pad.1:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set pad1 = partRoot.FindObjectByName("Pad.1")
+     * partRoot.<font color="red">UpdateObject</font>(pad1)
+     *</pre>
+     * </dl>
+     */
+    HRESULT    UpdateObject( in	 CATIABase		iObject );
+
+    //
+    //  Update status of an object
+    //  --------------------------
+    /**
+     * Indicates whether an object needs to be updated.
+     * An object which is not up-to-date has not be calculated 
+     * with the last specifications.
+     * @param iObject
+     *   The object to examine
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>isuptodate</tt> whether
+     * the <tt>pad1</tt> pad is up-to-date:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set pad1 = partRoot.FindObjectByName("Pad.1")
+     * isuptodate = partRoot.<font color="red">IsUpToDate</font>(pad1)
+     *</pre>
+     * </dl>
+     */
+    HRESULT    IsUpToDate( in	 CATIABase		iObject
+						 , out /*IDLRETVAL*/ boolean oValue );
+
+
+    //
+    //  Supppression of an object
+    //  -------------------------
+    /**
+     * Suppresses an object from being updated.
+     * A suppressed object is not taken into account 
+     * for the calculation of the part.
+     * @param iObject
+     *   The object to suppress from being updated
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example suppresses the <tt>pad1</tt> pad
+     * from being updated:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set pad1 = partRoot.FindObjectByName("Pad.1")
+     * partRoot.<font color="red">Inactivate</font>(pad1)
+     *</pre>
+     * </dl>
+     */
+    HRESULT    Inactivate( in	 CATIABase		iObject );
+						     
+
+    //
+    //  Reactivation of an object
+    //  -----------------------------
+    /**
+     * Unsuppresses an object for the update process.
+     * A unsuppressed object is again taken into account 
+     * for the calculation of the part.
+     * @param iObject
+     *   The object to unsuppress for the update process
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example unsuppresses the <tt>pad1</tt> pad:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set pad1 = partRoot.FindObjectByName("Pad.1")
+     * partRoot.<font color="red">Activate</font>(pad1)
+     *</pre>
+     * </dl>
+     */
+    HRESULT    Activate( in	 CATIABase		iObject );
+						   
+
+    //
+    //  Inactive status of an object
+    //  -----------------------------
+    /**
+     * Indicates whether an object is deactivated.
+     * A deactivated object is not taken into account for the calculation of the part.
+     * @param iObject
+     *   The object to examine
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>isInactive</tt>
+     * whether the <tt>pad1</tt> pad is deactivated:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set pad1 = partRoot.FindObjectByName("Pad.1")
+     * isInactive = partRoot.<font color="red">IsInactive</font>(pad1)
+     *</pre>
+     * </dl>
+     */
+    HRESULT    IsInactive( in	 CATIABase		iObject
+						   , out /*IDLRETVAL*/ boolean oValue );
+
+    //    Creates a reference from Label (GenericNaming)
+    //    --------------------------------------------
+    /**
+     * Creates a reference from a GenericNaming label.
+     * This allows manipulation of B-Rep (Type Functinal and Relimited) that are not easy to access.
+     * @param iLabel
+     *   The GenericNaming identification for an object.
+     *   This is a cryptic form for "the edge surrounded by the face extruded
+     *   from line.12 of sketch.4 and the face...")
+	 * @param iObjectContext
+	 *   The Object Context of Resolution 
+	 *   This is the feature used for label GenericNaming resolution     
+     * @return The reference to a B-Rep sub-element such a face or an edge
+     */
+      HRESULT    CreateReferenceFromBRepName
+                          ( in                    CATBSTR            iLabel
+						  ,	in                    CATIABase          iObjectContext
+                          , out    /*IDLRETVAL*/  CATIAReference     oRef
+                          );
+
+	//    Returns a customer factory
+	//    --------------------------
+	/**
+	* Returns a customer factory from a code string defined by the customer.
+	* It allows a customer to define its own factory to create its own objects.
+	* 
+	* @param iFactoryIID
+	*	The code name of the factory 
+	*/
+    HRESULT    GetCustomerFactory ( in CATBSTR iFactoryIID,
+	  out /*IDLRETVAL*/ CATIAFactory oCustomerFactory );
+
+    //
+    //    ON ORDERED GEOMETRICAL SETS
+    //    ---------------------------
+    //
+    /**
+     * Returns the collection object containing the ordered geometrical sets of the part.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>ogsColl</tt> the collection
+     * of ordered geometrical sets of the <tt>partRoot</tt> part from the
+     * <tt>partDoc</tt> part document:
+     * <pre>
+     * Set partRoot = partDoc.Part
+     * Set ogsColl = partRoot.<font color="red">OrderedGeometricalSets</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY OrderedGeometricalSets
+    HRESULT    get_OrderedGeometricalSets ( out /*IDLRETVAL*/ CATIAOrderedGeometricalSets oOrderedGeometricalSets );
+
+};
+
+// Interface name : CATIAPart
+#pragma ID CATIAPart "DCE:d402d912-39a4-11d1-a26c0000f87546fd"
+#pragma DUAL CATIAPart
+
+// VB object name : Part (Id used in Visual Basic)
+#pragma ID Part "DCE:c2619590-39a4-11d1-a26c0000f87546fd"
+#pragma ALIAS CATIAPart Part
+
+#endif
+// CATIAPart_IDL

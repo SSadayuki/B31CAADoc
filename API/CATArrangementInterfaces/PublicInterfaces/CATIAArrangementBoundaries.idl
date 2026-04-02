@@ -1,0 +1,94 @@
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAArrangementBoundaries.idl
+// Automation interface for the ArrangementBoundaries element 
+//
+#ifndef CATIAArrangementBoundaries_IDL
+#define CATIAArrangementBoundaries_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+
+interface CATIAMove;
+interface CATIAArrangementBoundary;
+
+#include "CATIACollection.idl"
+
+/**  
+ * A collection object for ArrangementBoundary objects.
+ * <b> Role: </b> This collection object is used to manage (create, retrieve and remove )ArrangementBoundary
+ * objects.
+ */
+interface CATIAArrangementBoundaries : CATIACollection 
+{
+
+  /**
+   * Creates an ArrangementBoundary and adds it to the collection.
+   *
+   * @param iRelAxis
+   *   Relative Axis to be considered.
+   * @param iListofMathPoints
+   *   List of points through which to route.
+   * @param iMathDirection
+   *   Starting routing direction.
+   * @return
+   *   The newly created ArrangementBoundary object.
+   */
+
+  HRESULT AddBoundary(in CATIAMove           iRelAxis,
+                 in CATSafeArrayVariant iListofMathPoints,
+                 in CATSafeArrayVariant iMathDirection,
+                 out /*IDLRETVAL*/ CATIAArrangementBoundary oArrBoundary);
+
+
+  /**
+   * Returns the specified ArrangementBoundary item of the collection.
+   * @param iIndex
+   *   The index or the name of the ArrangementBoundary to retrieve from this collection.
+   *   <dl>
+   *   <dt> To retrieve a specific object by number, use the rank of the ArrangementBoundary in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To retrieve a specific ArrangementBoundary by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   * @return
+   *    The retrieved ArrangementBoundary object.
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAArrangementBoundary oArrBoundary);
+
+  /**
+   * Removes the specified ArrangementBoundary object from the collection.
+   * 
+   * @param iIndex
+   *   The index or the name of the ArrangementBoundary to remove from this collection.
+   *   <dl>
+   *   <dt> To remove a specific object by number, use the rank of the ArrangementBoundary in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To remove a specific ArrangementBoundary by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   */
+   HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAArrangementBoundaries
+#pragma ID CATIAArrangementBoundaries "DCE:631fb4f0-cc5f-11d4-8df300d0b7acadba"
+#pragma DUAL CATIAArrangementBoundaries
+
+// VB object name : ArrangementBoundaries (Id used in Visual Basic)
+#pragma ID ArrangementBoundaries "DCE:631fb4f1-cc5f-11d4-8df300d0b7acadba"
+#pragma ALIAS CATIAArrangementBoundaries ArrangementBoundaries
+
+#endif

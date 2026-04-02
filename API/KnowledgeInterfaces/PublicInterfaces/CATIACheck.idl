@@ -1,0 +1,77 @@
+#ifndef CATIACheck_IDL
+#define CATIACheck_IDL
+/*IDLREP*/
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIARelation.idl"
+
+/**
+ * Represents the check relation.
+ * The following example shows how to create a check which checks if a given
+ * mass is less than 10kg. The mass should be defined previously:
+ * <pre>
+ *	Dim CATDocs As Documents
+ * Set CATDocs = CATIA.Documents
+ * Dim part1 As Document
+ * Set part1   = CATDocs.Add("CATPart")
+ * Dim mass As RealParam
+ * Set mass         = part1.Part.Parameters.<font color="red">CreateReal</font>("mass", 5.)
+ * Dim maximummass As Check
+ * Set maximummass = part1.Relations.<font color="red">CreateCheck</font>
+ *                    ("maximummass",
+ *                     "Ensures that mass is less than 10 kg",
+ *                     "mass&lt;10kg")
+ *  </pre>
+ */
+
+//-----------------------------------------------------------------
+interface CATIACheck : CATIARelation
+{
+    //....ON SEVERITY
+    /**
+     * Returns or sets the check severity.
+     * The severity is the way the check will manifest itself:
+		 *		<li>Silent (1)</li>
+		 *		<li>Information (2)</li>
+		 *		<li>Warning (3)</li>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Severity
+    HRESULT    get_Severity    
+					( out /*IDLRETVAL*/ long          oSeverity );
+    HRESULT    put_Severity
+					( in                long          iSeverity );
+
+   //....ON DIAGNOSIS
+    /**
+     * Returns the check diagnosis.
+     * True if the condition of the check is verified. False
+		 * otherwise.
+		 * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Diagnosis
+    HRESULT    get_Diagnosis    
+					( out /*IDLRETVAL*/ boolean          oDiagnosis );
+
+};
+
+// Interface name : CATIACheck
+#pragma ID CATIACheck "DCE:cfc1b652-5466-11d1-a2720000f87546fd"
+#pragma DUAL CATIACheck
+
+// VB object name : Check (Id used in Visual Basic)
+#pragma ID Check "DCE:cffd511c-5466-11d1-a2720000f87546fd"
+#pragma ALIAS CATIACheck Check
+
+
+#endif
+// CATIACheck_IDL
+

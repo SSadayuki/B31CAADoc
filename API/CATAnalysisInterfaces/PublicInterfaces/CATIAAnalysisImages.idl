@@ -1,0 +1,114 @@
+// COPYRIGHT Dassault Systemes 2000
+#ifndef CATIAAnalysisImages_IDL
+#define CATIAAnalysisImages_IDL
+/*IDLREP*/
+//===================================================================
+//
+// CATIAAnalysisImages.idl
+// Automation interface for the AnalysisImages element 
+//
+//===================================================================
+//
+// Usage notes:
+//   New interface: describe its use here
+//
+//===================================================================
+// May.2002		Creation                  Christophe DAGRON
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAAnalysisImage;
+
+/**  
+ * The collection of analysis images.
+ * <p>
+ */
+
+interface CATIAAnalysisImages : CATIACollection 
+{
+/**
+ * Creates a new image and adds it to the analysis image collection.<br>
+ * @param iImageName
+ * The name of the image to create.
+ * @param iHideExistingImages
+ * To deactivate or not all the activated images before create the new image.
+ * @param iShowMesh
+ * To show or not the mesh image.
+ * @param iDuplicate
+ * To duplicate or not the new image, if same image already exists in collection of images.
+ * @return The created Analysis Image
+ *
+ * @sample
+ * This example create <tt>ThisAnalysisImage</tt> in the <tt>analysisImages</tt>analysis <br>
+ * images collection. The image to create is supposed to be a mesh deformed image. <br>
+ * <pre>
+ * Dim ThisAnalysisImage As AnalysisImage
+ * Set ThisAnalysisImage = analysisImages.Add("Mesh_Deformed", True, False, False)
+ * </pre>
+ */
+    HRESULT     Add(  in  CATBSTR           iImageName,
+                      in  CATVariant        iHideExistingImages,
+                      in  CATVariant        iShowMesh,
+                      in  CATVariant        iDuplicate,
+                      out   /*IDLRETVAL*/ CATIAAnalysisImage    oImage );
+
+ /**
+  * Returns an analysis image using its index or its name from the analysis images collection. 
+  * @param iIndex
+  *   The index or the name of the analysis image to retrieve from
+  *   the collection of analysis images.
+  *   This index is the rank of the analysis image in the collection.
+  *   The index of the first analysis image in the collection is 1, and
+  *   the index of the last analysis image is Count.
+  * @return The retrieved analysis image
+  *
+  * @sample
+  * This example retrieves in <tt>ThisAnalysisImage</tt> the third analysis image.
+  * <pre>
+  * Dim ThisAnalysisImage As AnalysisImage
+  * Set ThisAnalysisImage = analysisImages.<font color="red">Item</font>(3)
+  * </pre>
+  */
+     HRESULT     Item( in                CATVariant            iIndex,
+                       out /*IDLRETVAL*/ CATIAAnalysisImage    oImage );
+
+
+ /**
+  * Deletes the Analysis Image from the analysis images collection of the Analysis Set. 
+  * @param iImageIdentifier
+  *   The index or the name of the analysis image to delete from the Analysis Set.
+  *   Note: The index given is the position of the image in the Analysis Set.
+  *   Note: The name given is the string got from analysisImage.Name
+  *	  If the index or the name specified is not present in the Analysis Set, this method FAILS.
+  *   The index of the first analysis image in the collection is 1, and
+  *   the index of the last analysis image is Count.
+  *
+  * @sample
+  * Example 1
+  * In this example analysisImages1 is the Analysis Set and analysisImage1 is the image present in it.
+  * imageName = analysisImage1.Name
+  * analysisImages1.RemoveImage(imageName)
+  * 
+  * Example 2
+  * analysisImages1.RemoveImage(4)
+  * In this example 4 is the index of the Image to be deleted in Analysis Set: analysisImages1
+  */
+	 HRESULT RemoveImage(in CATVariant iImageIdentifier);
+
+};
+
+// Interface name : CATIAAnalysisImages
+#pragma ID CATIAAnalysisImages "DCE:473acc80-6806-11d6-b8de00025521aada"
+#pragma DUAL CATIAAnalysisImages
+
+// VB object name : AnalysisImages (Id used in Visual Basic)
+#pragma ID AnalysisImages "DCE:48da6f80-6806-11d6-b8de00025521aada"
+#pragma ALIAS CATIAAnalysisImages AnalysisImages
+
+#endif

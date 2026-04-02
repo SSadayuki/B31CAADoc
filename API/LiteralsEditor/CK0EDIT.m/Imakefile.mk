@@ -1,0 +1,5 @@
+#
+# Imakefile pour CK0EDIT
+#
+
+BUILT_OBJECT_TYPE=NONE

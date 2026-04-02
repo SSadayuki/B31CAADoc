@@ -1,0 +1,88 @@
+#ifndef CATIASchCntrDocLink_IDL 
+#define CATIASchCntrDocLink_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchAppConnector;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the on-off sheet connector.
+  */
+
+interface CATIASchCntrDocLink : CATIABase
+{
+  /**
+  * Create an external link to another connector.
+  * @param iSchConnector
+  *   The connector to link to.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrDocLink
+  * Dim objArg1 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">Link</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT Link ( 
+    in CATIASchAppConnector iSchConnector );
+    
+  /**
+  * Remove external link to another connector.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrDocLink
+  *  ...
+  * objThisIntf.<font color="red">UnLink</font>
+  * </pre>
+  *    
+  */
+  HRESULT UnLink ( );
+    
+  /**
+  * Get the linked connector and its document name.
+  * @param oSchConnector
+  *   The connector that is linked to this connector.
+  * @param oDocumentName
+  *   Name of document containing the linked connector.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCntrDocLink
+  * Dim objArg1 As SchAppConnector
+  * Dim strVar2 As String
+  *  ...
+  * objThisIntf.<font color="red">GetLink</font>objArg1,strVar2
+  * </pre>
+  *    
+  */
+  HRESULT GetLink ( 
+    inout CATIASchAppConnector oSchConnector, 
+    inout CATBSTR oDocumentName );
+    
+};
+    
+// Interface name : CATIASchCntrDocLink
+#pragma ID CATIASchCntrDocLink "DCE:3f945900-72db-421c-a118d382669cbfbf"
+#pragma DUAL CATIASchCntrDocLink
+    
+// VB object name : SchCntrDocLink
+#pragma ID SchCntrDocLink "DCE:6fbb843c-fcb6-4bbb-b44ab660b8230b7b"
+#pragma ALIAS CATIASchCntrDocLink SchCntrDocLink
+    
+#endif 
+    

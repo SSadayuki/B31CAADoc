@@ -1,0 +1,241 @@
+#ifndef CATIAHybridShapeProject_IDL
+#define CATIAHybridShapeProject_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeProject:         
+// Exposed interface for HybridShape Project
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation     
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+  * Represents the hybrid shape project feature object.
+  * <b>Role</b>: To access data of the hybrid shape project feature.
+  * The data includes:
+  * <ul>
+  * <li> The element to project which is a point or a curve </li>
+  * <li> The support element which is a curve or a surface </li>
+  * <li> The projection type ( normal or along a direction) </li>
+  * <li> The projection direction if needed </li>
+  * <li> The option to have either the nearest solution or all solutions </li>  
+  * </ul>
+  * Use the CATIAHybridShapeFactory to create HybridShapeFeatures objects.
+  * @see CATIAHybridShapeFactory
+  */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeProject : CATIAHybridShape
+{
+
+ /**
+ * Returns or sets the element to project.This element can be a point or a curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge or @href CATIAVertex.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>Elem</code> the element to project for the
+ * <code>Project</code> hybrid shape feature.
+ * <pre>
+ * Dim Elem As Reference
+ * Set Elem = Project.<font color="red">ElemToProject</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY ElemToProject    
+    HRESULT get_ElemToProject (out /*IDLRETVAL*/ CATIAReference   oElem);
+    HRESULT put_ElemToProject (in                CATIAReference   iElem);
+
+
+
+
+ /**
+ * Returns or sets the projection direction. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>Dir</code> the direction for the
+ * <code>Project</code> hybrid shape feature.
+ * <pre>
+ * Dim Dir As Reference
+ * Set Dir = Project.<font color="red">Direction</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Direction
+    HRESULT get_Direction (out /*IDLRETVAL*/ CATIAHybridShapeDirection oElem)  ;
+    HRESULT put_Direction (in                CATIAHybridShapeDirection  iElem)  ;
+
+
+ /**
+ * Returns or sets the support element.This element can be a plane or a surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace, @href CATIATriDimFeatEdge or @href CATIABiDimFeatEdge.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>SupportElem</code> the support for the
+ * <code>Project</code> hybrid shape feature.
+ * <pre>
+ * Dim SupportElem As Reference
+ * Set SupportElem = Project.<font color="red">Support</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Support
+    HRESULT get_Support (out /*IDLRETVAL*/ CATIAReference   oElem)  ;
+    HRESULT put_Support (in                CATIAReference   iElem)  ;
+
+
+ /**
+ * Returns or sets the direction option.
+ * <b>Role</b>: To define the type of projection. 
+ * Normal is set to TRUE if the projection is a normal projection.Otherwise, 
+ * the projection is defined along a specified direction.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>NormalOption</code> the support for the
+ * <code>Project</code> hybrid shape feature.
+ * <pre>
+ * Dim NormalOption As boolean
+ * Set NormalOption = Project.<font color="red">Normal</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Normal  
+    HRESULT get_Normal (out /*IDLRETVAL*/ boolean oNormal)  ;
+    HRESULT put_Normal (in                boolean iNormal)  ;
+
+
+    /**
+    * Returns or sets the solution type.
+    * When the solution type being set is 'All solutions' (1), the extrapolation
+    * mode gets overriden to 'None' (0). 
+    *<b>Role</b>:
+    * All solutions (1) or Nearest solution (0) (only nearest projection
+    * is kept when more than one solution is possible).
+    * <dl>
+    * <dt><b>Example</b>:
+    * This example retrieves in <code>SolType</code> the solution type for the
+    * <code>Project</code> hybrid shape feature.
+    * <pre>
+    * Dim SolType As long
+    * Set SolType = Project.<font color="red">SolutionType</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY SolutionType 
+    HRESULT get_SolutionType (out /*IDLRETVAL*/ long oSolutionType);
+    HRESULT put_SolutionType (in                long iSolutionType); 
+
+/**
+ * Sets or Gets Smoothing Type.<br> 
+ * <b>Role</b>:
+ *   Smoothing type <br> 
+ *    : 0 -> No Smoothing <br> 
+ *    : 2 -> G1 Smoothing : Enhance current continuity to tangent continuity <br> 
+ *	  : 3 -> G2 Smoothing : Enhance current continuity to curvature continuity <br> 
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>SType</code> the smoothing type for the
+ * <code>Project</code> hybrid shape feature.
+ * <pre>
+ * Dim SType As long
+ * Set SType = Project.<font color="red">SmoothingType</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY SmoothingType 
+    HRESULT get_SmoothingType (out /*IDLRETVAL*/ long oType);
+    HRESULT put_SmoothingType (in                long iType);
+	 
+
+
+ /**
+ * Sets or Gets the maximum deviation allowed for smoothing operation.<br> 
+ * Sets in  distance unit, it corresponds to the radius of a
+ * pipe around the input curve in which the result is allowed to be.
+ * This value must be set in SI unit (m).
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>DeviationValue</code> the maximum deviation value for the
+ * <code>Project</code> hybrid shape feature.
+ * <pre>
+ * Dim DeviationValue As CATIALength
+ * Set DeviationValue = Project.<font color="red">MaximumDeviationValue</font>
+ * </pre>
+ * </dl> 
+ */
+#pragma PROPERTY MaximumDeviationValue 
+    HRESULT get_MaximumDeviationValue (out /*IDLRETVAL*/ double oDevValue);
+    HRESULT put_MaximumDeviationValue (in                double iDevValue);
+
+ /**
+ * Returns or sets the '3D Smoothing' option.
+ * <b>Role</b>: To activate or not the 3D smoothing option 
+ * Available only for tangent or curvature smoothing type
+ *      TRUE  : Smoothing performed without specifying support
+ *      FALSE : Smoothing performed with specific support
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>3DSmoothingOption</code> the support for the
+ * <code>Project</code> hybrid shape feature.
+ * <pre>
+ * Dim 3DSmoothingOption As boolean
+ * Set 3DSmoothingOption = Project.<font color="red">p3DSmoothing</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY p3DSmoothing  
+    HRESULT get_p3DSmoothing (out /*IDLRETVAL*/ boolean o3DSmoothing);
+    HRESULT put_p3DSmoothing (in                boolean i3DSmoothing);
+
+
+    /**
+    * Returns or sets the extrapolation mode.
+    * The extrapolation mode is overriden when the solution type is 'Nearest
+    * solution' (0) or when the extrapolation mode being set is 'None' (0),
+    * otherwise the method fails.
+    *<b>Role</b>:
+    * None (0), Tangency (1) or Curvature (2). 
+    * <dl>
+    * <dt><b>Example</b>:
+    * This example retrieves in <code>ExtrapolMode</code> the solution type for the
+    * <code>Project</code> hybrid shape feature.
+    * <pre>
+    * Dim ExtrapolMode As long
+    * Set ExtrapolMode = Project.<font color="red">ExtrapolationMode</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY ExtrapolationMode
+    HRESULT get_ExtrapolationMode (out /*IDLRETVAL*/ long oExtrapolationMode);
+    HRESULT put_ExtrapolationMode (in                long iExtrapolationMode);
+
+};
+
+
+// Interface name : CATIAHybridShapeProject
+#pragma ID CATIAHybridShapeProject "DCE:8c89b257-28c2-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeProject
+
+// VB object name : HybridShapeProject (Id used in Visual Basic)
+#pragma ID HybridShapeProject "DCE:8c89b252-2b4a-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeProject HybridShapeProject
+
+#endif
+// CATIAHybridShapeProject_IDL

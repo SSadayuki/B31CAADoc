@@ -1,0 +1,13 @@
+#
+# Imakefile pour MecModBundle
+#
+
+BUILT_OBJECT_TYPE=NONE
+
+
+LINK_WITH = Mathematics 
+
+
+# END WIZARD EDITION ZONEv
+
+LINK_WITH = $(WIZARD_LINK_MODULES)

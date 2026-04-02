@@ -1,0 +1,377 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAVision_IDL
+#define SWKIAVision_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  SWKIAManikinPart
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//    get_FocalDistance
+//    put_FocalDistance
+//    get_PonctumProximum
+//    put_PonctumProximum
+//    get_PonctumRemotum
+//    put_PonctumRemotum
+//    get_FocalPointX
+//    get_FocalPointY
+//    get_FocalPointZ
+//    LookAt
+//    LookAtPoint
+//    get_ActiveSide
+//    get_MonocularAngle
+//    put_MonocularAngle
+//    get_BinocularAngle
+//    put_BinocularAngle
+//    get_AmbinocularAngle
+//    put_AmbinocularAngle
+//    get_VerticalTopAngle
+//    put_VerticalTopAngle
+//    get_VerticalBottomAngle
+//    put_VerticalBottomAngle
+//    get_CentralConeAngle
+//    put_CentralConeAngle
+//    get_ActiveLineOfSight
+//    get_Type
+//    put_Type
+//    Reset
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 00/03/29
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIAManikinPart.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIALineOfSight;
+
+/**
+  *  This interface manages the vision of the manikin. It provides<br>
+  *  access to the vision data (lines of sight, focal point...)
+  **/
+interface SWKIAVision : SWKIAManikinPart 
+{
+ // ===========================================================================
+ //  get_FocalDistance
+ //  -----------------
+ //  put_FocalDistance
+ //  -----------------
+ //
+    /**
+      * Returns or sets the focal distance, in centimeters.<br>
+      * <strong>N.B.</strong>: if the value is <code>-1.0</code>,<br>
+      * then the focal distance is set to infinite.
+      **/
+#pragma PROPERTY FocalDistance
+    HRESULT get_FocalDistance(out /*IDLRETVAL*/ double poFocalDistance);
+    HRESULT put_FocalDistance(in double piFocalDistance);
+
+
+ // ===========================================================================
+ //  get_PonctumProximum
+ //  -------------------
+ //  put_PonctumProximum
+ //  -------------------
+ //
+    /**
+      * Returns or sets the ponctum proximum, in centimeters.
+      * The ponctum proximum is the minimum value the focal
+      * distance can take.
+      **/
+#pragma PROPERTY PonctumProximum
+    HRESULT get_PonctumProximum(out /*IDLRETVAL*/ double poPonctumProximum);
+    HRESULT put_PonctumProximum(in double piPonctumProximum);
+
+
+// ===========================================================================
+ //  get_PonctumRemotum
+ //  ------------------
+ //  put_PonctumRemotum
+ //  -------------------
+ //
+    /**
+      * Returns or sets the ponctum remotum, in centimeters.
+      * The ponctum remotum is the largest value that the focal
+      * distance can take.
+      * <strong>N.B.</strong>: if the value is <code>-1.0</code>, then the<br>
+      * ponctum remotum is set to infinite.
+      **/
+#pragma PROPERTY PonctumRemotum
+    HRESULT get_PonctumRemotum(out /*IDLRETVAL*/ double poPonctumRemotum);
+    HRESULT put_PonctumRemotum(in double piPonctumRemotum);
+
+
+ // ===========================================================================
+ //  get_FocalPointX
+ //  ---------------
+ //
+    /**
+      * Returns the x coordinate (in millimeters) of the focal point.
+      **/
+#pragma PROPERTY FocalPointX
+    HRESULT get_FocalPointX(out /*IDLRETVAL*/ double poFocalPointX);
+
+
+ // ===========================================================================
+ //  get_FocalPointY
+ //  ---------------
+ //
+    /**
+      * Returns the y coordinate (in millimeters) of the focal point.
+      **/
+#pragma PROPERTY FocalPointY
+    HRESULT get_FocalPointY(out /*IDLRETVAL*/ double poFocalPointY);
+
+
+ // ===========================================================================
+ //  get_FocalPointZ
+ //  ---------------
+ //
+    /**
+      * Returns the z coordinate (in millimeters) of the focal point.
+      **/
+#pragma PROPERTY FocalPointZ
+    HRESULT get_FocalPointZ(out /*IDLRETVAL*/ double poFocalPointZ);
+
+
+ // ===========================================================================
+ //  LookAt
+ //  ------
+ //
+    /**
+      * Make the manikin look at the specified position in space.<br>
+      * This position is given by the focal distance, and two<br>
+      * deviation angles.
+      *
+      * @param piFocalDistance The focal distance (measured from the active eye),
+      * which is a horizontal straight distance, measured in centimeters.
+      *
+      * @param piVAngle The vertical angle (in radians) between the focal point and<br>
+      * the active eye (positive angle deviates up, negative angle deviates down).
+      *
+      * @param piHAngle The horizontal angle (in radians) between the focal<br>
+      * point and the active eye (positive angle deviates left, negative angle deviates right).
+      *
+      * <strong>N.B.</strong>: the manikin's eyes will move only if it is able<br>
+      * to reach the specified point.
+      **/
+    HRESULT LookAt(in double piFocalDistance, in double piVAngle, in double piHAngle);
+
+
+ // ===========================================================================
+ //  LookAtPoint
+ //  -----------
+ //
+    /**
+      * Make the manikin look at the specified position in space.<br>
+      * This position is given by three coordinates (expressed in millimeters)<br>
+      * passed to the method.<br>
+      * <br>
+      * <strong>N.B.</strong>: the manikin's eyes will move only if it is able<br>
+      * to reach the specified point.
+      **/
+    HRESULT LookAtPoint(in double piX, in double piY, in double piZ);
+
+
+ // ===========================================================================
+ //  get_ActiveSide
+ //  --------
+ //
+    /**
+      * Returns the vision active side.<br>
+      * The active line of sight is the one able to<br>
+      * control the two others.  That is, when the active line of<br>
+      * sight moves, the two others update accordingly.<br>
+      * When setting the type, the value given must be 0, 1 or 2.<br>
+      * The value 0 activates the left line of sight, the value 1<br>
+      * activates the central line of sight, the value 2 activates<br>
+      * the right line of sight.<br>
+      * If other values are given, an error will occur.
+      **/
+#pragma PROPERTY ActiveSide
+    HRESULT get_ActiveSide(out /*IDLRETVAL*/ long poType);
+
+ // ===========================================================================
+ //  get_MonocularAngle
+ //  ------------------
+ //  put_MonocularAngle
+ //  ------------------
+ //
+    /**
+      * Returns or sets the vision Monocular angle.<br>
+      * This angle is always in degrees.
+      **/
+#pragma PROPERTY MonocularAngle 
+    HRESULT get_MonocularAngle(out /*IDLRETVAL*/ double poAngle);
+    HRESULT put_MonocularAngle(in double piAngle);
+
+
+// ===========================================================================
+ //  get_BinocularAngle
+ //  ------------------
+ //  put_BinocularAngle
+ //  ------------------
+ //
+    /**
+      * Returns or sets the vision Binocular angle.<br>
+      * This angle is always in degrees.
+      **/
+#pragma PROPERTY BinocularAngle
+    HRESULT get_BinocularAngle(out /*IDLRETVAL*/ double poAngle);
+    HRESULT put_BinocularAngle(in double piAngle);
+
+
+// ===========================================================================
+ //  get_AmbinocularAngle
+ //  --------------------
+ //  put_AmbinocularAngle
+ //  --------------------
+ //
+    /**
+      * Returns or sets the vision Ambinocular angle.<br>
+      * This angle is always in degrees.
+      **/
+#pragma PROPERTY AmbinocularAngle
+    HRESULT get_AmbinocularAngle(out /*IDLRETVAL*/ double poAngle);
+    HRESULT put_AmbinocularAngle(in double piAngle);
+
+
+
+// ===========================================================================
+ //  get_VerticalTopAngle
+ //  --------------------
+ //  put_VerticalTopAngle
+ //  --------------------
+ //
+    /**
+      * Returns or sets the vision Vertical Top angle.<br>
+      * This angle is always in degrees.
+      **/
+#pragma PROPERTY VerticalTopAngle
+    HRESULT get_VerticalTopAngle(out /*IDLRETVAL*/ double poAngle);
+    HRESULT put_VerticalTopAngle(in double piAngle);
+
+
+
+// ===========================================================================
+ //  get_VerticalBottomAngle
+ //  -----------------------
+ //  put_VerticalBottomAngle
+ //  -----------------------
+ //
+    /**
+      * Returns or sets the vision Vertical Bottom angle.<br>
+      * This angle is always in degrees.
+      **/
+#pragma PROPERTY VerticalBottomAngle
+    HRESULT get_VerticalBottomAngle(out /*IDLRETVAL*/ double poAngle);
+    HRESULT put_VerticalBottomAngle(in double piAngle);
+
+
+
+// ===========================================================================
+ //  get_CentralConeAngle
+ //  --------------------
+ //  put_CentralConeAngle
+ //  --------------------
+ //
+    /**
+      * Returns or sets the vision Central cone angle.<br>
+      * This angle is always in degrees.
+      **/
+#pragma PROPERTY CentralConeAngle
+    HRESULT get_CentralConeAngle(out /*IDLRETVAL*/ double poAngle);
+    HRESULT put_CentralConeAngle(in double piAngle);
+
+
+ // ===========================================================================
+ // get_ActiveLineOfSight
+ // ---------------------
+ //
+    /**
+      * Returns the active line of sight, according to the vision type.
+      **/
+#pragma PROPERTY ActiveLineOfSight
+    HRESULT get_ActiveLineOfSight(out /*IDLRETVAL*/ SWKIALineOfSight poLineOfSight);
+
+ // ===========================================================================
+ //  get_Type
+ //  --------
+ //  put_Type
+ //  --------
+ //
+    /**
+      * Returns or sets the vision type. (binocular, ambinocular, monocular left,
+      * monocular right or stereo.<br>
+      * When setting the type, the value given must be 0, 1, 2, 3, or 4 <br>
+      * The value 0 activates the Binocular type, 1 is Ambinocular, 2 is
+      * MonocularRight, 3 is MonocularLeft, and 4 is Stereo.
+      * If other values are given, an error will occur.
+      **/
+#pragma PROPERTY Type
+    HRESULT get_Type(out /*IDLRETVAL*/ long poType);
+    HRESULT put_Type(in long piType);
+
+ // ===========================================================================
+ //  Reset
+ //  -----
+ //
+    /**
+      * Resets all attributes of the vision to their default values.
+      * This method resets the focal distance, the active line of sight,
+      * the ponctum proximum, the ponctum remotum, the field of view angles,
+      * the convergence mode, and restores the default DOF values on the three
+      * lines of sight.
+      **/
+    HRESULT Reset();
+
+ // ===========================================================================
+ //  CloseVisionWindows
+ //  ------------------
+ //
+    /**
+      * Closes all open vision windows relating to the manikin on which the
+      * function is called.
+      **/
+    HRESULT CloseVisionWindows();
+};
+
+// Interface name : SWKIAVision
+#pragma ID SWKIAVision "DCE:7eb69268-da41-11d3-8097005004d3fe74"
+#pragma DUAL SWKIAVision
+
+// VB object name : SWVision (Id used in Visual Basic)
+#pragma ID SWKVision "DCE:7eb69269-da41-11d3-8097005004d3fe74"
+#pragma ALIAS SWKIAVision SWKVision
+
+#endif

@@ -1,0 +1,126 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>Visualization CATIVisuFilter Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../Visualization.htm" href="../Visualization.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "Visualization";	}
+		function getCurrentObjectName() { 
+ 	return "CATIVisuFilter"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>Visualization Framework:  CATIVisuFilter Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIVisuFilter_21588','CATIVisuFilter','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIVisuFilter</b>
+</p>
+<p>
+<b><i> Interface for visibility in layer filter.</i></b><br>
+
+ <br>Interface implemented by the <script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script> that you retrieve by the static function 
+<script type="text/javascript"> activateLinkAnchor('CATVisManager','GetVisManager','CATVisManager.GetVisManager') </script> .
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#IsVisible(CATBaseUnknown*,int)"><b>IsVisible</b></a>(CATBaseUnknown*,int)
+</td><td id='tdright'>  Returns the visibility state of an object or a layer in the current layer filter.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="IsVisible"></a><a id="IsVisible(CATBaseUnknown*,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>IsVisible</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iObject</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLayerNumber</span><span class='param'>=-1</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the visibility state of an object or a layer in the current layer filter.
+ <br><br>Role</b>: This method gives the visibility state of an object or a layer. Two usages for this
+ method:
+ <ul>
+ <li>iObject=NULL, and you only set iLayerNumber</li>
+ <p>In this case, you want to know whether a layer is visible in the current filter.</p>
+ <li>iObject!=NULL, and you don't set iLayerNumber</li>
+ <p>In this case, you want to know whether an object is visible in the current filter.</p>
+ </ul>
+ <p>The reference layer filter for the query is the layer filter currently applied on the currently edited object.
+ The currently edited object is the UIActive object in the current editor (CATFrmEditor).
+ <p>This means an interactive context is needed for this method to work correctly. It may not work correctly
+ if used in a batch context because there will be no current editor and no UIActive objects in editors.
+ In a batch context the method will work fine only if the context contains only one editor and if this editor
+ edits a single object and no assembly (i.e. no hierarchy of UIActivable objects).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iObject</span></dt>
+   <dd> The object you want to query. Remember objects placed in no layer are always visible.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLayerNumber</span></dt>
+   <dd> The number of the layer you want to query:
+ <br>
+ <ul>
+ <li>a valid value ranges between 0 and 999,  </li>
+ <li>-1, the method ignores the value. </li>
+ </ul>
+ Remember the current layer is always visible.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  S_OK if the layer or object is visible, E_FAIL if not visible.
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIVisuFilter.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATVisualization</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

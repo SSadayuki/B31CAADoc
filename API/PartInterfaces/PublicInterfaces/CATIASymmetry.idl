@@ -1,0 +1,70 @@
+#ifndef CATIASymmetry_IDL
+#define CATIASymmetry_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//=================================================================
+
+
+//=================================================================                                   
+// CATIASymmetry:                           
+// Exposed interface for symmetry
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+#include "CATIAShape.idl"
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the shape symmetry feature object. This solid feature is created from 
+ * an underlying HybridShapeSymmetry aggregated by the Symmetry.
+ * <b>Role</b>: To access the data of the symmetry shape feature object.
+ * The data includes:
+ * <ul>
+ * <li> The element to be transformed </li>
+ * <li> The reference element which can be a point, a line or a plane </li>
+ * </ul>
+ * Use the CATIAShapeFactory to create ShapeFeature object.
+ * @see CATIAShapeFactory
+ */
+//-----------------------------------------------------------------
+interface CATIASymmetry : CATIAShape
+{
+
+#pragma PROPERTY HybridShape
+ 
+ /**
+  * Gets the underlying HybridShapeSymmetry.
+  *<dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example explains how to retrieve the underlying HybridShape Symmetry
+  * <pre>
+  *  Dim oHybridShape as AnyObject
+  *  Set oHybridShape=oSymmetry.HybridShape
+  *  oHybridShape.SectionCoupling = 2
+  * </pre>
+  * </dl>
+  */
+    HRESULT get_HybridShape (out /*IDLRETVAL*/ CATIAHybridShape oHybridShapeSymmetry);
+
+};
+#pragma ID CATIASymmetry "DCE:cdc680e0-fcdf-11d4-9efc00508b5fe787"
+#pragma DUAL CATIASymmetry
+
+// VB object name Symmetry: (Id used in Visual Basic)
+#pragma ID Symmetry  "DCE:ceb66950-fcdf-11d4-9efc00508b5fe787"
+#pragma ALIAS CATIASymmetry Symmetry
+
+
+#endif
+// CATIASymmetry_IDL
+

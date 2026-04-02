@@ -1,0 +1,110 @@
+#ifndef CATIADrawingTexts_IDL
+#define CATIADrawingTexts_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1997
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIADrawingText.idl"
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+ /**
+  * A collection of all the drawing texts currently managed by a
+  * drawing view of drawing sheet in a drawing document.
+  */
+interface CATIADrawingTexts : CATIACollection
+{
+ /**
+  * Creates a drawing text and adds it to the DrawingTexts collection.
+  * @param iDrawingText
+  *   The character string that makes up the drawing text to create
+  * @param iPositionX,iPositionY
+  *   The drawing text x and y coordinates, expressed in millimeters,
+  *   with respect to the drawing view coordinate system
+  * @return The created drawing text
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates a drawing text with the string <tt>ComplexText</tt>
+  * and retrieved in <tt>MyText</tt> in the drawing view collection
+  * of the <tt>MyView</tt> drawing view.
+  * This view belongs to the drawing view collection of the drawing sheet
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView = MySheet.Views.<font color="red">ActiveView</font>
+  * Dim MyText As DrawingText
+  * Set MyText = MyView.Texts.<font color="red">Add</font>("ComplexText", 0., 0.)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Add(in CATBSTR iDrawingText, in double iPositionX, in double iPositionY,
+              out /*IDLRETVAL*/ CATIADrawingText oNewDrawingText);
+
+
+ /**
+  * Removes a drawing text from the DrawingTexts collection.
+  * @param iIndex
+  *   The index of the drawing text to remove from
+  *   the collection of drawing texts.
+  *   As a numerics, this index is the rank of the drawing text
+  *   in the collection.
+  *   The index of the first drawing text in the collection is 1, and
+  *   the index of the last drawing text is Count.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing text 
+  * in the drawing text collection of the active view
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * MyView.DrawingTexts.<font color="red">Remove</font>(3)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Remove(in long iIndex);
+
+/**
+  * Returns a drawing text using its index from the DrawingTexts collection.
+  * @param iIndex
+  *   The index of the drawing text to retrieve from the collection of drawing texts.
+  *   As a numerics, this index is the rank of the drawing text in the collection.
+  *   The index of the first drawing text in the collection is 1, and
+  *   the index of the last drawing text is Count.
+  * @return The retrieved drawing view
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisDrawingText</tt> the second drawing text,
+  * in the drawing view collection of the active view
+  * in the active sheet, in the active document supposed to be a drawing document.
+  * <pre>
+  * Dim MyView  As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * Dim ThisDrawingText As DrawingText
+  * Set ThisDrawingText = MyView.Texts.<font color="red">Item</font>(2)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Item(in long iIndex, out /*IDLRETVAL*/ CATIADrawingText oItem);
+			
+};
+
+// Interface name : CATIADrawingTexts
+#pragma ID CATIADrawingTexts "DCE:5c154c7a-6a7f-11d2-ad4b00609419af4f"
+#pragma DUAL CATIADrawingTexts
+
+// VB object name : DrawingTexts
+#pragma ID DrawingTexts "DCE:955e6cf0-6a7f-11d2-ad4b00609419af4f"
+#pragma ALIAS CATIADrawingTexts DrawingTexts
+
+#endif
+

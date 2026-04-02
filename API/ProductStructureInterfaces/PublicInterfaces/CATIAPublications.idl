@@ -1,0 +1,140 @@
+#ifndef CATIAPublications_IDL
+#define CATIAPublications_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//--------------------------------------------------------------------------
+// This is the interface of the collection of Product publications
+// This is an idl interface for journaling
+//--------------------------------------------------------------------------
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAReference;
+interface CATIAPublication;
+	/**
+	 * The collection of the Product publications.
+	 * A Product object can aggregate one or zero Publications collection.
+	 */
+interface CATIAPublications : CATIACollection
+{
+   /**
+     * Returns the publication object corresponding to the given publication name.
+     * @param iIdentifier
+     *       The name of the publication
+	 * @param oPub
+	 *       The publication object
+     * <!@sample>
+	 * <dl>
+	 * <dt><b>Example: </b>
+	 * The following example returns <tt>Pub1</tt> publication object from
+     * the product referencing the published name <tt>PubId</tt>.
+     * <pre>
+	 * Dim Prod1 As Product
+	 * Set Pub1 = Prod1.<font color="red">Item</font>(PubId)
+     * </pre>
+	 * </dl>
+     */
+	HRESULT Item( in CATVariant iIdentifier, out /*IDLRETVAL*/ CATIAPublication oPub );
+
+   /**
+     * Adds a publication object to the product and returns a pointer to the 
+	 * publication object.
+     * @param iPublicName
+     *       The name of the publication
+	 * @param oPub
+	 *       The publication object
+     * <!@sample>
+	 * <dl>
+	 * <dt><b>Example: </b>
+     * The following example adds a new publication object with the name "PubName"
+	 * to the product and returns the publication object <tt>Pub1</tt>.
+     * <pre>
+	 * Dim Prod1 As Product
+	 * Set Pub1 = Prod1.<font color="red">Add</font>(PubName)
+     * </pre>
+	 * </dl>
+     */
+   	HRESULT Add( in CATBSTR iPublicName, out /*IDLRETVAL*/ CATIAPublication oPub );
+
+   /**
+     * Removes a publication from the product.
+     * @param iIdentifier
+     *       The name of the publication
+	 * <!@sample>
+	 * <dl>
+	 * <dt><b>Example: </b>
+     * The following example removes the publication object corresponding to the name
+	 * <tt>PubId</tt>.
+     * <pre>
+	 * Dim Prod1 As Product
+	 * Prod1.<font color="red">Remove</font>(PubId)
+     * </pre>
+	 * </dl>
+     */
+	HRESULT Remove( in CATBSTR iIdentifier );
+
+    /** @nodoc */ 
+   /**
+     * Valuates a publication object with another publication object.
+     * @param iIdentifier
+     *       The name of the publication to be valuated
+	 * @param iRelayer
+	 *       The product aggregating the valuating intermediate publication object
+	 * @param iNameInRelay
+	 *       The name of the valuating publication object  
+	 * <!@sample>
+	 * <dl>
+	 * <dt><b>Example: </b>
+     * The following example valuates the publication object of product <tt>Prod1</tt> 
+	 * having the name <tt>PubId1</tt> with the publication object of product <tt>Prod2</tt>
+	 * having the name <tt>PubId2</tt>.
+     * <pre>
+	 * Dim Prod1 As Product
+	 * Prod1.<font color="red">SetRelay</font>(PubId1,Prod2,PubId2)
+     * </pre>
+	 * </dl>
+     */
+	HRESULT SetRelay( in CATVariant iIdentifier, in CATIAPublications iRelayer, in CATVariant iNameInRelay );
+
+    /** @nodoc */ 
+   /**
+     * Valuates a publication object directly with the object it publishes.
+     * @param iIdentifier
+     *       The name of the publication
+	 * @param iPointed
+	 *       The published object</br>
+	 *       The following @href CATIABoundary objects is supported: @href CATIABoundary
+	 * <!@sample>
+	 * <dl>
+	 * <b>Example: </b>
+     * The following example valuates the publication object of product <tt>Prod1</tt>
+	 * having the name <tt>PubId</tt> with the reference object <tt>RefObject</tt>.
+     * <pre>
+	 * Dim Prod1 As Product
+	 * Prod1.<font color="red">SetDirect</font>(PubId,RefObject)
+     * </pre>
+	 * </dl>
+     */
+	HRESULT SetDirect( in CATVariant iIdentifier, in CATIAReference iPointed );
+
+};
+
+// Interface name : CATIAPublications
+#pragma ID CATIAPublications "DCE:8be882d1-1339-0000-0280030d0e000000"
+#pragma DUAL CATIAPublications
+
+// VB object name : Publications  
+#pragma ID Publications "DCE:8be88305-722d-0000-0280030d0e000000"
+#pragma ALIAS CATIAPublications Publications
+
+
+#endif

@@ -1,0 +1,185 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=============================================================================
+// CATIAStrFeatureFactory
+//   Interface for creating Structure Features
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Nov. 2010  Creation                                           Rahul DESHMANE
+//=============================================================================
+#ifndef CATIAStrFeatureFactory_IDL
+#define CATIAStrFeatureFactory_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+interface CATIADocument;
+interface CATIAStrMember;
+interface CATIAStrSection;
+interface CATIAStrPlate;
+interface CATIAStrSection;
+interface CATIAStrFoundation;
+
+#include "CATBSTR.idl"
+#include "CATIABase.idl"
+#include "CATIACollection.idl"
+#include "CATIAStrServices.idl"
+#include "CATIAReference.idl"
+#include "CATSafeArray.idl"
+#include "CATIAStrNibblingFeature.idl"
+#include "CATSafeArray.idl"
+#include "CATIAStrCutoutFeature.idl"
+#include "CATIAStrPlate.idl"
+	/**
+	*  Represents the Factory Object for Structure Features.
+    * The factory is retrieved using the StrPlate or StrMember
+    * <! @sample>
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>
+    * The following example retrieves the Feature factory object from the Selection on ActiveDocument.
+    * <pre>
+    * Dim Plate As StrPlate
+    * Set Plate = strPlates.Item("Plate_007")
+    * Dim Sel As Selection
+    * Set Sel = CATIA.ActiveDocument.Selection
+    * ' Use the Add method to add Plate to selection
+    * Sel.Add Plate
+    * Dim Factory As StrFeatureFactory
+    * Set Factory = Sel.FindObject("CATIAStrFeatureFactory")
+    * </pre>
+    */
+
+
+interface CATIAStrFeatureFactory : CATIABase
+{
+
+  /**
+  * Adds a Coping on Plate or Member.  
+  * @param iListOfLimitingElements [in]
+  *   List of Limiting elements used for limiting the Plate/Member. Pass only one limit at a time.
+  * @param iNibblingType [in]
+  *   Possible Values for Plate:"Remove".
+  *   Possible Values for Member:"Remove","ShortPoint","LongPoint","WeldCut". 
+  *	For Defining further attributes refer CATIAStrNibblingFeature.
+  * @param oNibblingFeature[out]
+  *	  The Nibbled Plate/Member.
+  * @param @return
+  *   <code>S_OK</code> if everything ran ok.
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example creates Coping on Plate.  
+  * <pre>
+  * Dim Limitplate1 As StrPlate
+  * Set Limitplate1 = strPlates.Item("Plate_008")
+  * Dim Listoflimits As Variant
+  * Set Listoflimits(0) =Limitplate1
+  * Dim NibblingFeature As StrNibblingFeature
+  * Set NibblingFeature = Factory.<font color="red">AddNibbling(Listoflimits, "Remove")</font>
+  * </pre>
+  */
+
+  HRESULT AddNibbling(in CATSafeArrayVariant iListOfLimitingElements, 
+                              in CATBSTR iNibblingType, 
+                              out /*IDLRETVAL*/ CATIAStrNibblingFeature oNibblingFeature);
+
+  /**
+  * Adds a Cutout Feature on Plate/Member using AfterForming Mode.  
+  * @param iContour [in]
+  *   The Sketch used to create the cutout. This must exist in the document.
+  * @param iDirection [in]
+  *   The direction in which the cutout should be created. Valid inputs are line created in sketch,3D Line.
+  * @param oCutout[out]
+  *	  The CutOut Feature 
+  * @param @return
+  *   <code>S_OK</code> if everything ran ok.
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example creates Cutout on Plate. 
+  * <pre>
+  * ' Define the Plate on which cutout is to be created
+  * Dim strPlates As strPlates
+  * Set strPlates = rootProduct.GetTechnologicalObject("StructurePlates")
+  * Dim PlateToCut As StrPlate
+  * Set PlateToCut = strPlates.Item("Plate_012")
+  *' Add the Plate to Selection
+  * Dim Sel As Selection
+  * Set Sel = CATIA.ActiveDocument.Selection
+  * Sel.Add PlateToCut
+  * 'Get The factory from selection
+  * Dim Factory As StrFeatureFactory
+  * Set Factory = Sel.FindObject("CATIAStrFeatureFactory")
+  * ' Select the Sketch profile exisitng in the document
+  * Dim sketch As Reference
+  * Set sketch = rootProduct.CreateReferenceFromName("Product1/Grid/!Sketch.1")
+  * ' Select the direction in which the cutout should be created
+  * Dim dir1 As Reference
+  * Set dir1 = rootProduct.CreateReferenceFromName("Product1/Grid/!Sketch.2")
+  * ' Create cutout
+  * Dim Cutout1 As StrCutoutFeature
+  * Set Cutout1 = Factory.<font color="red">AddCutoutWithAfterFormingMode(sketch, dir1)</font>
+  * </pre>
+  */
+ HRESULT AddCutoutWithAfterFormingMode(in CATIAReference iContour, 
+                                        in CATIAReference iDirection, 
+                                        out /*IDLRETVAL*/ CATIAStrCutoutFeature oCutout);
+
+  /**
+  * Adds a Cutout Feature on Plate/Member using BeforeForming Mode.  
+  * @param iContour [in]
+  *   The Sketch used to create the cutout. This must exist in the document
+  * @param iSurface [in]
+  *   A Surface on which Plate/Member is created.
+  * @param oCutout[out]
+  *	  The CutOut Feature 
+  * @param @return
+  *   <code>S_OK</code> if everything ran ok.
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example creates Cutout on Member. 
+  * <pre>
+  * 'Define the Plate on which cutout is to be created
+  * Dim strPlates As strPlates
+  * Set strPlates = rootProduct.GetTechnologicalObject("StructurePlates")
+  * Dim PlateToCut As StrPlate
+  * Set PlateToCut = strPlates.Item("Plate_012")
+  * ' Add the Plate to Selection
+  * Dim Sel As Selection
+  * Set Sel = CATIA.ActiveDocument.Selection
+  * Sel.Add PlateToCut
+  * ' Get The factory from selection
+  * Dim Factory As StrFeatureFactory
+  * Set Factory = Sel.FindObject("CATIAStrFeatureFactory")
+  * ' Select the Sketch profile exisitng in the document
+  * Dim sketch As Reference
+  * Set sketch = rootProduct.CreateReferenceFromName("Product1/Grid/!Sketch.1")
+  * ' Select the surface 
+  * Dim Surface1 As Reference
+  * Set Surface1 = rootProduct.CreateReferenceFromName("Product1/Grid/!Extrude.1")
+  * ' Create cutout
+  * Dim Cutout1 As StrCutoutFeature
+  * Set Cutout1 = Factory.AddCutoutWithBeforeFormingMode(sketch, Surface1)
+  * </pre>
+  */
+
+  HRESULT AddCutoutWithBeforeFormingMode(in CATIAReference iContour, 
+                                         in CATIAReference iSurface, 
+                                         out /*IDLRETVAL*/ CATIAStrCutoutFeature oCutout);
+
+
+
+};
+// Interface name : CATIAStrFeatureFactory
+#pragma ID CATIAStrFeatureFactory "DCE:BE70E567-AFD8-476c-9ECBEA32CC3CD55F"                                       
+#pragma DUAL CATIAStrFeatureFactory
+
+// VB object name : StrFeatureFactory   
+#pragma ID StrFeatureFactory "DCE:E79BF1F3-ECFA-49f3-9D4D8188332F08EF"                                 
+#pragma ALIAS CATIAStrFeatureFactory StrFeatureFactory
+
+#endif

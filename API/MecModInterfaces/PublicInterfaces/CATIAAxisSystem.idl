@@ -1,0 +1,571 @@
+#ifndef CATIAAxisSystem_IDL
+#define CATIAAxisSystem_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAAxisSystem:                           
+// Exposed interface for Axis System
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Feb2000 Creation							JM Gautier		
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+
+#include "CATAxisSystemMainType.idl"
+#include "CATAxisSystemOriginType.idl"
+#include "CATAxisSystemAxisType.idl"
+
+/**
+ * The object Axis System 
+ * A axis system has got one origin point and three orthogonal axes, 
+ * crossing at the origin point.
+ *<br>
+ */
+
+//-----------------------------------------------------------------
+interface CATIAAxisSystem : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+
+	/**
+     * Returns or sets the type of the axis system. 
+	 * Sets the axis system type.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>type1</tt>
+     * the type of the axis system <tt>axisSystem1</tt>: 
+     * <pre>
+     * type1 = axisSystem1.<font color="red">Type</font>
+     *</pre>
+	 * <dd>The following example sets the type of the axis system <tt>axisSystem1</tt> as standard: 
+     * <pre>
+     * axisSystem1.<font color="red">Type</font> = 0
+     *</pre>
+	 * <dd>The following example sets the type of the axis system <tt>axisSystem1</tt> as axis rotation: 
+     * <pre>
+     * axisSystem1.<font color="red">Type</font> = 1
+     *</pre>
+     * </dl>
+	 * <dd>The following example sets the type of the axis system <tt>axisSystem1</tt> as datum (explicit): 
+     * <pre>
+     * axisSystem1.<font color="red">Type</font> = 3
+     *</pre>
+     * </dl>
+     */
+
+#pragma PROPERTY Type
+	HRESULT get_Type(out /*IDLRETVAL*/ CATAxisSystemMainType oType);
+	HRESULT put_Type(in CATAxisSystemMainType iType);
+
+    /**
+     * Returns True if the axis system is the current one, else returns False. 
+	 * Sets the axis system as the current one or not.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>isCurrent</tt>
+     * True if the axis system <tt>axisSystem</tt> is the current one : 
+     * <pre>
+     * isCurrent = axisSystem.<font color="red">IsCurrent</font>
+     *</pre>
+	 * <dd>The following example sets the axis system <tt>axisSystem</tt> as the current one : 
+     * <pre>
+     * axisSystem.<font color="red">IsCurrent</font> = 1
+     *</pre>
+	 *</pre>
+	 * <dd>The following example sets the axis system <tt>axisSystem</tt> as not the current one : 
+     * <pre>
+     * axisSystem.<font color="red">IsCurrent</font> = 0
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY IsCurrent
+	 HRESULT   get_IsCurrent(out /*IDLRETVAL*/ boolean  oIsCurrent);
+	 HRESULT   put_IsCurrent(in   boolean  iIsCurrent);
+
+	 /**
+	 * Returns or sets the way the origin point is defined. 
+	 * <br>The origin point can be not specified, or be defined by coordinates or by a geometric point.
+	 * <br>CATAxisSystemOriginType is the enumeration which describes how the origin point is defined :
+	 * <br>If OriginType=0, the origin point is defined by a geometric point.
+	 * If no point si selected, the origin will be automatically put at the intersection
+	 * of the lines or planes defining the axes. 
+	 * <br>If OriginType=1, the origin is defined by three coordinates x,y,z.
+	 * Then, the origin will allways stays at the position defined by the coordinates.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example prints the origin type :
+     * <pre>
+     * Catia.SystemService.Print " OriginType = " & axisSystem.<font color="red">OriginType</font>
+     *</pre>
+	 * <dd>The following example sets the origin type to 1 : 
+     * <pre>
+     * axisSystem.<font color="red">OriginType</font> = 1
+     *</pre>
+     * </dl>
+     */
+
+#pragma PROPERTY OriginType
+	HRESULT get_OriginType(out /*IDLRETVAL*/ CATAxisSystemOriginType oOriginType);
+	HRESULT put_OriginType(in CATAxisSystemOriginType iOriginType);
+
+	/**
+	* Returns or sets the geometric point which defines the origin of the axis system. 
+	* <br> OriginPoint is and must be a reference on a geometric 3D point.
+	* <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+	* <dd>The following example sets the point <tt>Point.1</tt> of the Geometrical Set 
+	* <tt>Geometrical Set.1</tt> as the origin point of the axis system <tt>AxisSystem0</tt>:
+	* 
+    * <pre>
+	* Dim HybridBody4 As AnyObject
+	* Set HybridBody4 = Body1.HybridBodies.Item  ( "Geometrical Set.1" ) 
+	* Dim HybridShapePointCoord5 As AnyObject
+	* Set HybridShapePointCoord5 = HybridBody4.HybridShapes.Item  ( "Point.1" ) 
+	* Dim Reference6 As Reference
+	* Set Reference6 = CATIA.ActiveDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord5 ) 
+	* AxisSystem0.<font color="red">OriginPoint</font> = Reference6
+    *</pre>
+    * </dl>
+	*/
+#pragma PROPERTY OriginPoint
+	HRESULT get_OriginPoint(out /*IDLRETVAL*/ CATIAReference oOriginPoint);
+	HRESULT put_OriginPoint(in CATIAReference iOriginPoint);
+
+	/**
+	* Reads or sets the way the X axis is specified.
+	* <br>
+	* An axis X,Y, or Z of the axis system can be defined 
+	* by a geometric point, line or plane, or by coordinates.
+	* <br> AxisType = 0 : The axis is defined by a geometric point, line or plane
+	* and with the same direction.	
+	* <br> AxisType = 1 : The axis direction is defined by the three coordinates x,y,z,
+	* of a vector, to which the axis will allways stay parallel.  
+	* <br> AxisType = 2 : the axis is defined by a geometric point, line or plane
+	* and with the opposite direction.
+	* Notice : If the X axis is neither defined by coordinates nor by a point,line or plane,
+	* the axis will be automatically computed in order to build an orthogonal 
+	* axis sytem with the other specified axes.
+	* <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example prints the X axis type :
+	* <pre>
+    * Catia.SystemService.Print " XAxisType = " & axisSystem.<font color="red">XAxisType</font>
+    *</pre>
+	* <dd>The following example sets the X axis type to 1 : 
+    * <pre>
+    * axisSystem.<font color="red">XAxisType</font> = 1
+    *</pre>
+    * </dl> 
+	*/
+#pragma PROPERTY XAxisType
+	HRESULT get_XAxisType(out /*IDLRETVAL*/ CATAxisSystemAxisType oAxisType);		 
+	HRESULT put_XAxisType(in CATAxisSystemAxisType iAxisType);
+
+	/**
+	* Reads or sets the way the Y axis is specified.
+	* <br>
+	* An axis X,Y, or Z of the axis system can be defined 
+	* by a geometric point, line or plane, or by coordinates.
+	* <br> AxisType = 0 : The axis is defined by a geometric point, line or plane
+	* and with the same direction.	
+	* <br> AxisType = 1 : The axis direction is defined by the three coordinates x,y,z,
+	* of a vector, to which the axis will allways stay parallel.  
+	* <br> AxisType = 2 : the axis is defined by a geometric point, line or plane
+	* and with the opposite direction.
+	* Notice : If the Y axis is neither defined by coordinates nor by a point,line or plane,
+	* the axis will be automatically computed in order to build an orthogonal 
+	* axis sytem with the other specified axes.
+	* <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example prints the Y axis type :
+	* <pre>
+    * Catia.SystemService.Print " YAxisType = " & axisSystem.<font color="red">YAxisType</font>
+    *</pre>
+	* <dd>The following example sets the Y axis type to 1 : 
+    * <pre>
+    * axisSystem.<font color="red">YAxisType</font> = 1
+    *</pre>
+    * </dl> 
+	*/
+#pragma PROPERTY YAxisType
+	HRESULT get_YAxisType(out /*IDLRETVAL*/ CATAxisSystemAxisType oAxisType);		 
+	HRESULT put_YAxisType(in CATAxisSystemAxisType iAxisType);
+
+	/**
+	* Reads or sets the way the Z axis is specified.
+	* <br>
+	* An axis X,Y, or Z of the axis system can be defined 
+	* by a geometric point, line or plane, or by coordinates.
+	* <br> AxisType = 0 : The axis is defined by a geometric point, line or plane
+	* and with the same direction.	
+	* <br> AxisType = 1 : The axis direction is defined by the three coordinates x,y,z,
+	* of a vector, to which the axis will allways stay parallel.  
+	* <br> AxisType = 2 : the axis is defined by a geometric point, line or plane
+	* and with the opposite direction.
+	* Notice : If the Z axis is neither defined by coordinates nor by a point,line or plane,
+	* the axis will be automatically computed in order to build an orthogonal 
+	* axis sytem with the other specified axes.
+	* <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example prints the Z axis type :
+	* <pre>
+    * Catia.SystemService.Print " ZAxisType = " & axisSystem.<font color="red">ZAxisType</font>
+    *</pre>
+	* <dd>The following example sets the Z axis type to 1 : 
+    * <pre>
+    * axisSystem.<font color="red">ZAxisType</font> = 1
+    *</pre>
+    * </dl> 
+	*/
+
+#pragma PROPERTY ZAxisType
+	HRESULT get_ZAxisType(out /*IDLRETVAL*/ CATAxisSystemAxisType oAxisType);		 
+	HRESULT put_ZAxisType(in CATAxisSystemAxisType iAxisType);
+
+	/**
+	* Reads or sets the geometric point, line or plane which defines the direction of the X axis.
+	* <br>AxisDirection is and must be a reference on a 3D point or 3D line or plane.
+	* <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the point <tt>Point.1</tt> of the Geometrical Set 
+	* <tt>Geometrical Set.1</tt>
+	* as the direction of the X axis of the axis system <tt>AxisSystem0</tt>:
+    * <pre>
+	* Dim HybridBody4 As AnyObject
+	* Set HybridBody4 = Body1.HybridBodies.Item  ( "Geometrical Set.1" ) 
+	* Dim HybridShapePointCoord5 As AnyObject
+	* Set HybridShapePointCoord5 = HybridBody4.HybridShapes.Item  ( "Point.1" ) 
+	* Dim Reference6 As Reference
+	* Set Reference6 = CATIA.ActiveDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord5 ) 
+	* AxisSystem0.<font color="red">XAxisDirection</font> = Reference6
+    *</pre>
+    * </dl>
+	*/
+#pragma PROPERTY XAxisDirection
+	HRESULT get_XAxisDirection(out /*IDLRETVAL*/ CATIAReference oAxisDirection);		 
+	HRESULT put_XAxisDirection(in CATIAReference iAxisDirection);
+
+	/**
+	* Reads or sets the geometric point, line or plane which defines the direction of the Y axis.
+	* <br>AxisDirection is and must be a reference on a 3D point or 3D line or plane.
+	* <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the point <tt>Point.1</tt> of the Geometrical Set <tt>Geometrical Set.1</tt>
+	* as the direction of the Y axis of the axis system <tt>AxisSystem0</tt>:
+    * <pre>
+	* Dim HybridBody4 As AnyObject
+	* Set HybridBody4 = Body1.HybridBodies.Item  ( "Geometrical Set.1" ) 
+	* Dim HybridShapePointCoord5 As AnyObject
+	* Set HybridShapePointCoord5 = HybridBody4.HybridShapes.Item  ( "Point.1" ) 
+	* Dim Reference6 As Reference
+	* Set Reference6 = CATIA.ActiveDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord5 ) 
+	* AxisSystem0.<font color="red">YAxisDirection</font> = Reference6
+    *</pre>
+    * </dl>
+	*/
+
+#pragma PROPERTY YAxisDirection
+	HRESULT get_YAxisDirection(out /*IDLRETVAL*/ CATIAReference oAxisDirection);		 
+	HRESULT put_YAxisDirection(in CATIAReference iAxisDirection);
+
+	/**
+	* Reads or sets the geometric point, line or plane which defines the direction of the Z axis.
+	* <br>AxisDirection is and must be a reference on a 3D point or 3D line or plane.
+	* <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the point <tt>Point.1</tt> of the Geometrical Set <tt>Geometrical Set.1</tt>
+	* as the direction of the Z axis of the axis system <tt>AxisSystem0</tt>:
+    * <pre>
+	* Dim HybridBody4 As AnyObject
+	* Set HybridBody4 = Body1.HybridBodies.Item  ( "Geometrical Set.1" ) 
+	* Dim HybridShapePointCoord5 As AnyObject
+	* Set HybridShapePointCoord5 = HybridBody4.HybridShapes.Item  ( "Point.1" ) 
+	* Dim Reference6 As Reference
+	* Set Reference6 = CATIA.ActiveDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord5 ) 
+	* AxisSystem0.<font color="red">ZAxisDirection</font> = Reference6
+    *</pre>
+    * </dl>
+	*/
+
+#pragma PROPERTY ZAxisDirection
+	HRESULT get_ZAxisDirection(out /*IDLRETVAL*/ CATIAReference oAxisDirection);		 
+	HRESULT put_ZAxisDirection(in CATIAReference iAxisDirection);
+
+	/**
+    * Returns the reference for the axis rotation.
+	* Succeeds only if the axis system is defined by a rotation around an axis,
+	* wich means that its type is catAxisSystemAxisRotation.
+	*/
+#pragma PROPERTY AxisRotationReference
+	HRESULT get_AxisRotationReference(out /*IDLRETVAL*/ CATIAReference oAxisRotationReference);		 
+	HRESULT put_AxisRotationReference(in CATIAReference iAxisRotationReference);
+
+	/**
+    * Returns the rotation angle of an axis system.
+	* Succeeds only if the axis system is defined by a rotation around an axis,
+	* wich means that its type is catAxisSystemAxisRotation.
+	*/
+#pragma PROPERTY AxisRotationAngle
+	HRESULT get_AxisRotationAngle (out /*IDLRETVAL*/ CATIAAngle oAxisRotationAngle);
+
+
+
+	//        ================
+    //        == METHODS    ==
+    //        ================
+
+   /**
+     * Returns the coordinates X,Y,Z of the origin point of the axis system.
+     * @param oOrigin
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the origin point of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>originCoord</tt> the coordinates 
+     * of the origin point of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim originCoord(2)
+     * axisSystem.<font color="red">GetOrigin</font> originCoord
+     *</pre>
+     * </dl>
+     */
+
+    HRESULT GetOrigin (inout  CATSafeArrayVariant oOrigin); 
+
+	/**
+     * Defines the coordinates X,Y,Z of the origin point of the axis system.
+     * @param iOrigin
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the origin point of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example puts in <tt>originCoord</tt> the new coordinates of 
+	 * the origin point of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim originCoord(2)
+	 * originCoord ( 0 )  = 100.000000
+	 * originCoord ( 1 )  = 200.000000
+	 * originCoord ( 2 )  = 10.000000
+     * axisSystem.<font color="red">PutOrigin</font> originCoord
+     *</pre>
+     * </dl>
+     */
+
+    HRESULT PutOrigin (in     CATSafeArrayVariant iOrigin);
+
+	/**
+     * Returns the coordinates X,Y,Z of the axes X and Y of the axis system.
+     * @param oVectorX
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the X axis vector of the axis system.
+	 * @param oVectorY
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the Y axis vector of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>vectorXCoord</tt> and <tt>vectorYCoord</tt>
+	 * the coordinates of the vectors of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim vectorXCoord(2)
+	 * Dim vectorYCoord(2)
+     * axisSystem.<font color="red">GetVectors</font> vectorXCoord, vectorYCoord
+     *</pre>
+     * </dl>
+     */
+
+    HRESULT GetVectors (inout CATSafeArrayVariant oVectorX, inout CATSafeArrayVariant oVectorY);
+
+	/**
+     * Defines the coordinates X,Y,Z of the axes X and Y of the axis system.
+     * @param iVectorX
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the X axis vector of the axis system.
+	 * @param iVectorY
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the Y axis vector of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example modifies in <tt>vectorXCoord</tt> and <tt>vectorYCoord</tt>
+	 * the coordinates of the vectors of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim vectorXCoord(2)
+	 * vectorYCoord ( 0 )  = 1.000000
+	 * vectorYCoord ( 1 )  = -1.000000
+     * vectorYCoord ( 2 )  = 0.000000
+	 * Dim vectorYCoord(2)
+	 * vectorYCoord ( 0 )  = 0.000000
+	 * vectorYCoord ( 1 )  = 0.000000
+     * vectorYCoord ( 2 )  = 1.000000
+     * axisSystem.<font color="red">PutVectors</font> vectorXCoord, vectorYCoord
+     *</pre>
+     * </dl>
+     */
+
+    HRESULT PutVectors (in    CATSafeArrayVariant iVectorX, in CATSafeArrayVariant iVectorY);
+
+   /**
+     * Returns the coordinates X,Y,Z of the X axis of the axis system.
+     * @param oXAxis
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the X axis of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>XAxisCoord</tt> the coordinates 
+     * of the X axis of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim XAxisCoord(2)
+     * axisSystem.<font color="red">GetXAxis</font> XAxisCoord
+     *</pre>
+     * </dl>
+     */
+
+    HRESULT GetXAxis (inout  CATSafeArrayVariant oXAxis); 
+
+	/**
+     * Defines the coordinates X,Y,Z of the X axis of the axis system.
+     * @param iXAxis
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the X axis of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example puts in <tt>XAxisCoord</tt> the new coordinates of 
+	 * the X axis of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim XAxis(2)
+	 * XAxis ( 0 )  = 100.000000
+	 * XAxis ( 1 )  = 200.000000
+	 * XAxis ( 2 )  = 10.000000
+     * axisSystem.<font color="red">PutXAxis</font> XAxis
+     *</pre>
+     * </dl>
+     */
+	HRESULT PutXAxis (in     CATSafeArrayVariant iXAxis);
+
+   /**
+     * Returns the coordinates X,Y,Z of the Y axis of the axis system.
+     * @param oYAxis
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the Y axis of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>YAxisCoord</tt> the coordinates 
+     * of the Y axis of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim YAxisCoord(2)
+     * axisSystem.<font color="red">GetYAxis</font> XAxisCoord
+     *</pre>
+     * </dl>
+     */
+	HRESULT GetYAxis (inout  CATSafeArrayVariant oYAxis); 
+	/**
+     * Defines the coordinates X,Y,Z of the Y axis of the axis system.
+     * @param iYAxis
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the Y axis of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example puts in <tt>XAxisCoord</tt> the new coordinates of 
+	 * the Y axis of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim YAxis(2)
+	 * YAxis ( 0 )  = 100.000000
+	 * YAxis ( 1 )  = 200.000000
+	 * YAxis ( 2 )  = 10.000000
+     * axisSystem.<font color="red">PutYAxis</font> YAxis
+     *</pre>
+     * </dl>
+     */
+	HRESULT PutYAxis (in     CATSafeArrayVariant iYAxis);
+   /**
+     * Returns the coordinates X,Y,Z of the Z axis of the axis system.
+     * @param oZAxis
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the Z axis of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example retrieves in <tt>ZAxisCoord</tt> the coordinates 
+     * of the Z axis of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim ZAxisCoord(2)
+     * axisSystem.<font color="red">GetZAxis</font> ZAxisCoord
+     *</pre>
+     * </dl>
+     */
+	HRESULT GetZAxis (inout  CATSafeArrayVariant oZAxis); 
+	/**
+     * Defines the coordinates X,Y,Z of the Z axis of the axis system.
+     * @param iZAxis
+     *   A Safe Array made up of 3 doubles: X, Y, Z, representing the 
+     *   coordinates in model space of the Z axis of the axis system.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example puts in <tt>ZAxisCoord</tt> the new coordinates of 
+	 * the Z axis of the <tt>axisSystem</tt> axis system:
+     * <pre>
+     * Dim ZAxis(2)
+	 * ZAxis ( 0 )  = 100.000000
+	 * ZAxis ( 1 )  = 200.000000
+	 * ZAxis ( 2 )  = 10.000000
+     * axisSystem.<font color="red">PutZAxis</font> ZAxis
+     *</pre>
+     * </dl>
+     */
+	HRESULT PutZAxis (in     CATSafeArrayVariant iZAxis);
+
+	/**
+    * Returns the Euler Angles of an axis system.
+	* Succeeds only if the axis system is defined by Euler angles,
+	* wich means its type is catAxisSystemEulerAngles.
+	*/
+	HRESULT GetEulerAngles (out CATIAAngle oFirstAngle, out CATIAAngle oSecondAngle, out CATIAAngle ThirdAngle );
+};	
+
+// Interface name : CATIAAxisSystem
+#pragma ID CATIAAxisSystem "DCE:6e1073c2-d7cb-11d3-85a000108301432b"
+#pragma DUAL CATIAAxisSystem
+
+// VB object name : Body (Id used in Visual Basic)
+#pragma ID AxisSystem "DCE:778b8da6-d7cb-11d3-85a000108301432b"
+#pragma ALIAS CATIAAxisSystem AxisSystem
+
+
+#endif
+// CATIAAxisSystem_IDL
+

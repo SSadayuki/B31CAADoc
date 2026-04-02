@@ -1,0 +1,241 @@
+#ifndef CATIASweep_IDL
+#define CATIASweep_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIASweep:						   
+// Exposed interface for sweep
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation					Ph Baucher
+// Dec97 Modification					 L Lalere	
+// Avr 2000 Modification					          JL Delvordre	
+//=================================================================
+#include "CATIASketchBasedShape.idl"
+#include "CATLimitDefs.idl"
+
+interface CATIASketch;
+
+/**
+ * Represents the sweep shape.
+ * It is the base object for ribs and slots.
+ */
+
+//-----------------------------------------------------------------
+interface CATIASweep : CATIASketchBasedShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//	ON CENTERCURVE SKETCH
+	//	---------------------
+	//
+#pragma PROPERTY CenterCurve
+//
+    /**
+     * Returns the sketch used as the sweep center curve.
+     * The sweep is built along this sketch.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>centerCurve</tt> 
+     * the sketch used as center curve by the
+     * <tt>firstSweep</tt> sweep object:
+     * <pre>
+     * Set centerCurve = firstSweep.<font color="red">CenterCurve</font>
+     * </pre>
+     * </dl>
+     */
+	HRESULT	get_CenterCurve ( out /*IDLRETVAL*/ CATIASketch oCenterCurve );
+
+
+/**
+ * Returns or sets the center curve .<br>
+ * To set the property, you can use the following @href CATIABoundary object: 
+ * @href CATIATriDimFeatEdge.
+ */
+#pragma PROPERTY CenterCurveElement
+	HRESULT	get_CenterCurveElement ( out /*IDLRETVAL*/ CATIAReference oCenterCurveElement );
+	HRESULT	put_CenterCurveElement ( in CATIAReference iCenterCurveElement );
+
+/**
+ * Returns or sets the reference surface .<br>
+ * To set the property, you can use the following @href CATIABoundary object: 
+ * @href CATIAFace.
+ */
+#pragma PROPERTY ReferenceSurfaceElement
+	HRESULT	get_ReferenceSurfaceElement ( out /*IDLRETVAL*/ CATIAReference oReferenceSurfaceElement );
+	HRESULT	put_ReferenceSurfaceElement ( in CATIAReference iReferenceSurfaceElement );
+
+/**
+ * Returns or sets the pulling direction .<br>
+ * To set the property, you can use one of the following @href CATIABoundary objects: 
+ * @href CATIAPlanarFace, @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge, @href CATIARectilinearMonoDimFeatEdge.
+ */
+#pragma PROPERTY PullingDirElement
+	HRESULT	get_PullingDirElement ( out /*IDLRETVAL*/ CATIAReference oPullingDirElement );
+	HRESULT	put_PullingDirElement ( in CATIAReference iPullingDirElement );
+
+/**
+ * Returns or sets the end mode .
+ */
+#pragma PROPERTY MergeMode
+	HRESULT	get_MergeMode (out /*IDLRETVAL*/  CatMergeMode oMergeMode );
+	HRESULT	put_MergeMode (in  CatMergeMode iMergeMode );
+
+/**
+ *  Actives KeepAngleOption.
+ */
+	HRESULT	SetKeepAngleOption ();
+
+    //
+    //  ON Thin mode
+    //  ------------
+    //
+#pragma PROPERTY IsThin
+//
+        /**
+         * Returns the Sweep thin flag.<br>
+         * It returns TRUE if the Sweep is a thin Sweep , FALSE if not.
+         * @return oIsThin
+         *   The thin flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>thinFlag</tt> the thin flag of
+         * Sweep <tt>firstSweep</tt>, and then sets it so that it will be now thin :
+         * <pre>
+         * Set thinFlag = firstSweep.<font color="red">IsThin</font>
+         * firstSweep.<font color="red">IsThin</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_IsThin ( out /*IDLRETVAL*/ boolean oIsThin);
+        //
+        HRESULT put_IsThin ( in  boolean iIsThin );
+    //
+    //  ON Neutral fiber
+    //  ----------------
+    //
+#pragma PROPERTY NeutralFiber
+//
+        /**
+         * Returns the Sweep neutral fiber flag (for thin Sweep only).<br>
+         * It returns TRUE if the Sweep is a neutral fiber Sweep , FALSE if not.
+         * @return oIsNeutralFiber
+         *   The neutral fiber flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>NeutralFiberFlag</tt> the neutral fiber flag of
+         * Sweep <tt>firstSweep</tt>, and then sets it so that it will be now neutral fiber :
+         * <pre>
+         * Set NeutralFiberFlag = firstSweep.<font color="red">IsNeutralFiber</font>
+         * firstSweep.<font color="red">IsNeutralFiber</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_NeutralFiber ( out /*IDLRETVAL*/ boolean oIsNeutralFiber);
+        //
+        HRESULT put_NeutralFiber ( in  boolean iIsNeutralFiber );
+
+    //
+    //  ON Merge mode
+    //  ----------------
+    //
+#pragma PROPERTY MergeEnd
+//
+        /**
+         * Returns the Sweep merge end flag (for thin Sweep only).<br>
+         * It returns TRUE if merge ends is required , FALSE if not.
+         * @return oIsMergeEnd
+         *   The merge end flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example saves in <tt>MergeEndFlag</tt> the merge end flag of
+         * Sweep <tt>firstSweep</tt>, and then sets it so that merge end will be required :
+         * <pre>
+         * Set MergeEndFlag = firstSweep.<font color="red">IsMergeEnd</font>
+         * firstSweep.<font color="red">IsMergeEnd</font> = TRUE
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_MergeEnd ( out /*IDLRETVAL*/ boolean oIsMergeEnd);
+        //
+        HRESULT put_MergeEnd ( in  boolean iIsMergeEnd );
+
+#pragma PROPERTY MoveProfileToPath
+//
+        /**
+         * Returns the Sweep MoveProfileToPath flag (for Sweep Move Profile only).<br>
+         * It returns TRUE if move profile is required , FALSE if not.
+         * @return oIsMoveProfileToPath
+         *   The MoveProfileToPath flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_MoveProfileToPath ( out /*IDLRETVAL*/ boolean oIsMoveProfileToPath);
+        //
+        HRESULT put_MoveProfileToPath ( in  boolean iIsMoveProfileToPath );
+
+#pragma PROPERTY NormalAxisDirReverse
+//
+        /**
+         * Returns the Sweep NormalAxisDirReverse flag (for Sweep Move Profile only).<br>
+         * It returns TRUE if Normal Axis direction is reversed , FALSE if not.
+         * @return oNormalAxisDirReverse
+         *   The oNormalAxisDirReverse flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_NormalAxisDirReverse ( out /*IDLRETVAL*/ boolean oNormalAxisDirReverse);
+        //
+        HRESULT put_NormalAxisDirReverse ( in  boolean iNormalAxisDirReverse );
+
+#pragma PROPERTY AnchorDirReverse
+//
+        /**
+         * Returns the Sweep AnchorDirReverse flag (for Sweep Move Profile only).<br>
+         * It returns TRUE if Anchor direction is reversed , FALSE if not.
+         * @return oAnchorDirReverse
+         *   The oAnchorDirReverse flag as a boolean 
+         * <dl>
+         * <dt><b>Example:</b>
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_AnchorDirReverse ( out /*IDLRETVAL*/ boolean oAnchorDirReverse);
+        //
+        HRESULT put_AnchorDirReverse ( in  boolean iAnchorDirReverse );
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+};
+
+// Interface name : CATIASweep
+#pragma ID CATIASweep "DCE:aa37beaa-56b8-11d1-a2730000f87546fd"
+#pragma DUAL CATIASweep
+
+// VB object name : Sweep (Id used in Visual Basic)
+#pragma ID Sweep "DCE:aad9de92-56b8-11d1-a2730000f87546fd"
+#pragma ALIAS CATIASweep Sweep
+
+#endif
+// CATIASweep_IDL
+

@@ -1,0 +1,284 @@
+#ifndef CATIAAnnotationSet_IDL
+#define CATIAAnnotationSet_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 1999 - 2018
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAAnnotationFactory;
+interface CATIAAnnotationFactory2;
+interface CATIATPSViewFactory;
+interface CATIAAnnotations;
+interface CATIACaptures;
+interface CATIACaptureFactory;
+interface CATIATPSViews;
+interface CATIATPSView;
+interface CATIAPart;
+
+/**
+ * The type of the annotation set.
+ * @param catAnnotationSetStandard
+ *   Regular annotation set.
+ * @param catAnnotationSetLight
+ *   Light annotation set.
+ * @param catAnnotationSetResult
+ *   Result annotation set.
+ */
+enum CatAnnotationSetType
+{
+  catAnnotationSetStandard, 
+  catAnnotationSetLight, 
+  catAnnotationSetResult
+};
+
+/**
+ * Interface for the TPS Set of objects.
+ */
+interface CATIAAnnotationSet : CATIABase
+{
+    /**
+     * Gets the factory to create annotations.
+     *   @param oAFact
+     *     Annotations' factory.
+     */
+  #pragma PROPERTY AnnotationFactory
+   HRESULT get_AnnotationFactory(
+                             out /*IDLRETVAL*/ CATIAAnnotationFactory oAFact);
+    /**
+     * Gets the factory to create TPS Views.
+     *   @param oTPSViewFact
+     *     TPS Views' factory.
+     */
+  #pragma PROPERTY TPSViewFactory
+   HRESULT get_TPSViewFactory(
+                           out /*IDLRETVAL*/ CATIATPSViewFactory oTPSViewFact);
+    /**
+     * Gets the factory to create Capture.
+     *   @param opiCapFact
+     *     Capture factory.
+     */
+  #pragma PROPERTY CaptureFactory
+   HRESULT get_CaptureFactory(
+                             out /*IDLRETVAL*/ CATIACaptureFactory opiCapFact);
+    /**
+     * Retrieves the TPS components of the set.
+     *   @param oAnnots
+     *     Collection of returned component.
+     */
+  #pragma PROPERTY Annotations
+   HRESULT get_Annotations (out /*IDLRETVAL*/ CATIAAnnotations oAnnots );
+
+    /**
+     * Retrieves an empty Annotations'Collection.
+     *   @param oAnnots
+     *     Empty Annotations' Collection.
+     */
+  #pragma PROPERTY AnEmptyAnnotationsList
+   HRESULT get_AnEmptyAnnotationsList (out /*IDLRETVAL*/ CATIAAnnotations oAnnots );
+
+    /**
+     * Retrieves the Parent Standard defined at set creation.
+     *   @param oStandard
+     *     Name of the Parent Standard applied for all TPS in the set.
+     *     The Parent Standard is the international standard on which 
+     *     Standard File is based on. It can only be ISO, ANSI and JIS.
+     *     (ANSI stands for ASME).
+     */
+  #pragma PROPERTY Standard
+   HRESULT get_Standard (inout /*IDLRETVAL*/ CATBSTR oStandard );
+
+    /**
+     * Retrieves the ISO 14405 and ISO 1101 default specifications.
+     * This method is not relevant in case of ASME Standard.
+     *   @param oISODefaults
+     *     Array of ISO default defined onto the annotation set.
+     *     Composition of the array may looks like the following schema
+     *<br />         [ Linear size ISO 14405  property
+     *<br />           Angular size ISO 14405  property
+     *<br />           Default specification elements for form association property
+     *<br />           Default specification elements for toleranced feature filtering property ]
+     *<br />    When oCount is not null, minimal size of oISODefaults "vector"
+     *    of string is 3 (the 3 first strings are always existing); depending
+     *    on GDT toleranced feature filtering options activated on the
+     *    annotation set, oCount may reach the limit of 7 (4 more texts).
+     *   @param oCount
+     *     Number of lines in returned array of strings. When this
+     *     procedure is not applicable (either due to wrong Standard,
+     *     old annotation set), oCount equals 0.
+     */
+   HRESULT ReadISODefaultProperties ( inout CATSafeArrayVariant oISODefaults, inout /*IDLRETVAL*/ long oCount );
+
+    /**
+     * Retrieves all the Captures that belong to the set.
+     *   @param oCaptures
+     *     Collection of returned Captures.
+     */
+  #pragma PROPERTY Captures
+   HRESULT get_Captures ( out /*IDLRETVAL*/ CATIACaptures oCaptures);
+
+    /**
+     * Gives the kind of set (Part, Product...).
+     *   @param oKindOfSet
+     *     It could be : Part
+     *                   Product
+     *                   Product_TP
+     *                   Process_BB
+     *                   Cgr
+     *                   Cgr_TP.
+     */
+  #pragma PROPERTY KindOfSet
+   HRESULT get_KindOfSet ( inout /*IDLRETVAL*/ CATBSTR oKindOfSet);
+
+   /**
+     * Gets or Sets Annotation Set Visualization.
+     *   @param oDisplay
+     *     Value of visualisation mode.
+     */
+  #pragma PROPERTY SwitchOn
+   HRESULT get_SwitchOn (out /*IDLRETVAL*/ boolean oDisplay);
+   HRESULT put_SwitchOn (in boolean iDisplay);
+
+ /**
+   * Retrieves all the TPSViews that belong to the set.
+   *   @param oViews
+   *     Collection of returned views.
+   */
+ #pragma PROPERTY TPSViews
+  HRESULT get_TPSViews (out /*IDLRETVAL*/ CATIATPSViews oViews );
+
+  /**
+     * Gets or Sets Annotation Set ActiveView.
+     *   @param oView
+     *     Value of CATIATPSView.
+     */
+  #pragma PROPERTY ActiveView
+   HRESULT get_ActiveView (out /*IDLRETVAL*/ CATIATPSView oView );
+   HRESULT put_ActiveView (in CATIATPSView iView );
+
+    /**
+     * Gets the factory to create annotations.
+     *   @param oAFact
+     *     Annotations' factory.
+     */
+  #pragma PROPERTY AnnotationFactory2
+   HRESULT get_AnnotationFactory2(out /*IDLRETVAL*/ CATIAAnnotationFactory2 oAFact);
+
+   /**
+     * Gets the annotation Set type.
+     *   @param oAnnotationSetType 
+     *     Value of Set Type.
+     */
+  #pragma PROPERTY AnnotationSetType
+   HRESULT get_AnnotationSetType(out /*IDLRETVAL*/ CatAnnotationSetType oAnnotationSetType);
+
+   /**
+   * Gets the annotation Set specifications purpose.
+   *<br />Any existing set is implicitly an Engineering Annotation Set.
+   *   @param oAnnotationSetSpecification 
+   *     Value indicating purpose of the Annotation Set.
+   *<br />     List of legal values:
+   *<br />     oAnnotationSetSpecification = "FTA_EngineeringSet",
+   *<br />     oAnnotationSetSpecification = "FTA_ManufacturingSet".
+   */
+  #pragma PROPERTY AnnotationSetPupose
+   HRESULT get_AnnotationSetPupose(inout /*IDLRETVAL*/ CATBSTR oAnnotationSetSpecification);
+
+   /**
+    * Copies the entire or a subpart of a part level Annotation Set into a destination CATPart
+    *   @param iDestinationPart
+    *     destination CATPart.
+    *   @param oMessage
+    *     result of datums merge.
+    */
+    HRESULT GlobalCopySetTo (in CATIAPart iDestinationPart, inout /*IDLRETVAL*/ CATBSTR oMessage);
+
+    /**
+    * Copies the entire Annotation Set into a destination CATPart
+    *   @param iDestinationPart
+    *     destination CATPart.
+    *   @param iTransfo
+    *     Optional argument. Transformation matrix to apply to FTA features during copy.
+    *     The transformation is also used for retrieving in the destination CATPart the geometrical elements the FTA
+    *     features are rerouted on.
+    *<br />     Transformation matrix is composed by a matrix3x3 and a translation vector:
+    *<br />         [[a11    a12    a13
+    *<br />            a21    a22    a23
+    *<br />            a31    a32    a33]
+    *<br />          [u1      u2      u3]]
+    *<br />
+    *<br />     a11 is in iTransfo(0)
+    *<br />     a12 is in iTransfo(1)
+    *<br />     a13 is in iTransfo(2)
+    *<br />     a21 is in iTransfo(3)
+    *<br />     a22 is in iTransfo(4)
+    *<br />     a23 is in iTransfo(5)
+    *<br />     a31 is in iTransfo(6)
+    *<br />     a32 is in iTransfo(7)
+    *<br />     a33 is in iTransfo(8)
+    *<br />      u1  is in iTransfo(9)
+    *<br />      u2 is in iTransfo(10)
+    *<br />      u3 is in iTransfo(11)
+    *
+    *   @param oMessage
+    *     result of datums merge.
+    */
+    HRESULT GlobalCopySetToWithTransformation (in CATIAPart iDestinationPart, inout CATSafeArrayVariant iTransfo, inout /*IDLRETVAL*/ CATBSTR oMessage);
+
+    /**
+    * Register for next call to either GlobalCopySetTo and like methods.
+    * @see CATIAAnnotationSet#GlobalCopySetTo or CATIAAnnotationSet#GlobalCopySetToWithTransformation
+    * Those routines are used to import annotations in target set located in iDestinationPart.
+    * Incidence of this procedure is about instanciated annotations: as much as possible, they are
+    * placed in existing Views.
+    * This call sets an option valid for the next import run only; in other words,
+    * this option is reset at the end of import.
+    * When activated, this option will not break the import processing; if no View
+    * in target set can receive a candidate FTA entity resulting from the import,
+    * regular handling is carried on.
+    */
+    HRESULT ApplyViewReUseWhenCopySetTo( ) ;
+
+    /**
+    * Register for next call to either GlobalCopySetTo and like methods.
+    * @see CATIAAnnotationSet#GlobalCopySetTo or CATIAAnnotationSet#GlobalCopySetToWithTransformation
+    * Those routines are used to import annotations in target set located in iDestinationPart.
+    * Incidence of this procedure is about instanciated annotations: they are copied as result annotations with link to the corresponding source annotations.
+    * This call sets an option valid for the next import run only; in other words, this option is reset at the end of import.
+    * When activated, the annotations are copied as result with link annotations.
+    * @sample
+    * This example illustrates activation of the 'as result with link' option for the next import (GlobalCopySetTo) run.
+    * <pre>
+    * Dim myPart As Part
+    * Set myPart = CATIA.ActiveEditor.ActiveObject
+    * Dim mySelection As Selection
+    * Set mySelection = CATIA.ActiveEditor.Selection
+    * Dim SelectionFilter(0)
+    * SelectionFilter(0)="AnnotationSet"
+    * Dim Status As String
+    * Status = mySelection.SelectElement2(SelectionFilter, "Select an Annotation Set to copy: ", False)
+    * Dim SelectedEntity As SelectedElement
+    * Set SelectedEntity = mySelection.Item( 1 )
+    * Dim SetToReplicate As AnnotationSet
+    * Set SetToReplicate = SelectedEntity.Value
+    * SetToReplicate.ApplyResultWithLinkWhenCopySetTo
+    * SetToReplicate.GlobalCopySetTo(myPart)
+    * </pre>
+    */
+    HRESULT ApplyResultWithLinkWhenCopySetTo( ) ;
+};
+
+// Interface name : CATIAAnnotationSet
+#pragma ID CATIAAnnotationSet "DCE:4869ba2a-9dd5-11d3-9c940008c725d79e"
+#pragma DUAL CATIAAnnotationSet
+
+// VB object name : AnnotationSet
+#pragma ID AnnotationSet "DCE:4869ba2a-9dd5-11d3-9c940008c725d79f"
+#pragma ALIAS CATIAAnnotationSet AnnotationSet
+
+#endif

@@ -1,0 +1,192 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIAErgoPushPull_IDL
+#define SWKIAErgoPushPull_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework (2000) Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  CATIABase
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_Frequency
+//   put_Frequency
+//
+//   get_DistanceOfPush
+//   put_DistanceOfPush
+//
+//   get_DistanceOfPull
+//   put_DistanceOfPull
+//
+//   get_Population
+//   put_Population
+//
+//   get_MaxInitialPushForce
+//   get_MaxSustainedPushForce
+//   get_MaxInitialPullForce
+//   get_MaxSustainedPullForce
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 14/06/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- System
+#include "CATIABase.idl"
+
+
+/**
+  *  This interface deals the push/pull ergonomic analysis.
+  **/
+interface SWKIAErgoPushPull : CATIABase
+{
+ // ===========================================================================
+ //  get_Frequency
+ //  ------------
+ //  put_Frequency
+ //  ------------
+ //
+    /**
+      * Returns or sets the push/pull frequecy.<br>
+      * This frequency must be expressed in pushes or pulls per second, and must<br>
+      * be specified before attempting to retrive any output value from the study.<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY Frequency
+    HRESULT get_Frequency(out /*IDLRETVAL*/ double poFrequency);
+    HRESULT put_Frequency(in double piFrequency);
+
+
+
+ // ===========================================================================
+ //  get_DistanceOfPush
+ //  ------------------
+ //  put_DistanceOfPush
+ //  ------------------
+ //
+    /**
+      * Returns or sets the distance of push.<br>
+      * This distance must specified at least once.<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY DistanceOfPush
+    HRESULT get_DistanceOfPush(inout /*IDLRETVAL*/ CATBSTR pioDistanceOfPush);
+    HRESULT put_DistanceOfPush(in CATBSTR piDistanceOfPush);
+
+ // ===========================================================================
+ //  get_DistanceOfPull
+ //  ------------------
+ //  put_DistanceOfPull
+ //  ------------------
+ //
+    /**
+      * Returns or sets the distance of pull.<br>
+      * This distance must specified at least once.<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY DistanceOfPull
+    HRESULT get_DistanceOfPull(inout /*IDLRETVAL*/ CATBSTR pioDistanceOfPull);
+    HRESULT put_DistanceOfPull(in CATBSTR piDistanceOfPull);
+
+
+ // ===========================================================================
+ //  get_Population
+ //  --------------
+ //  put_Population
+ //  --------------
+ //
+    /**
+      * Returns or sets the percentage of the population that should be able to
+      * perform the push/pull task safely.<br>
+      * This property can only take the values 50.0, 75.0 and 90.0, and must be specified
+      * <br>at least once.<br>
+      * Failure to do so will result in invalid output values.
+      **/
+#pragma PROPERTY Population
+    HRESULT get_Population(out /*IDLRETVAL*/ double poPopulation);
+    HRESULT put_Population(in double piPopulation);
+
+
+ // ===========================================================================
+ //  get_MaxInitialPushForce
+ //  -----------------------
+ //
+    /**
+      * This field is the maximum initial pushing force, produced by the study,
+      * given the current input guidelines.
+      **/
+#pragma PROPERTY MaxInitialPushForce
+    HRESULT get_MaxInitialPushForce(inout /*IDLRETVAL*/ CATBSTR pioMaxInitialPushForce);
+
+
+ // ===========================================================================
+ //  get_MaxSustainedPushForce
+ //  -------------------------
+ //
+    /**
+      * This field is the maximum sustained pushing force, produced by the study,
+      * given the current input guidelines.
+      **/
+#pragma PROPERTY MaxSustainedPushForce
+    HRESULT get_MaxSustainedPushForce(inout /*IDLRETVAL*/ CATBSTR pioMaxSustainedPushForce);
+
+
+ // ===========================================================================
+ //  get_MaxInitialPullForce
+ //  -----------------------
+ //
+    /**
+      * This field is the maximum initial pulling force, produced by the study,
+      * given the current input guidelines.
+      **/
+#pragma PROPERTY MaxInitialPullForce
+    HRESULT get_MaxInitialPullForce(inout /*IDLRETVAL*/ CATBSTR pioMaxInitialPullForce);
+
+
+ // ===========================================================================
+ //  get_MaxSustainedPullForce
+ //  -------------------------
+ //
+    /**
+      * This field is the maximum sustained pulling force, produced by the study,
+      * given the current input guidelines.
+      **/
+#pragma PROPERTY MaxSustainedPullForce
+    HRESULT get_MaxSustainedPullForce(inout /*IDLRETVAL*/ CATBSTR pioMaxSustainedPullForce);
+};
+
+// Interface name : SWKIAErgoPushPull
+#pragma ID SWKIAErgoPushPull "DCE:ce3c8690-4204-11d4-a223000629753ac1"
+#pragma DUAL SWKIAErgoPushPull
+
+// VB object name : SWKErgoPushPull (Id used in Visual Basic)
+#pragma ID SWKErgoPushPull "DCE:d6ed6790-4204-11d4-a223000629753ac1"
+#pragma ALIAS SWKIAErgoPushPull SWKErgoPushPull
+
+#endif

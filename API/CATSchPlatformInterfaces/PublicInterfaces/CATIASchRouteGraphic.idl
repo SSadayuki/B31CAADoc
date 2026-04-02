@@ -1,0 +1,103 @@
+#ifndef CATIASchRouteGraphic_IDL 
+#define CATIASchRouteGraphic_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+    
+interface  CATIASchGRRRoute;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage graphical primitives representing a schematic route.
+  */
+
+interface CATIASchRouteGraphic : CATIABase
+{
+  /**
+  * Add a graphical primitive to a route.
+  * @param iGRRToAdd
+  *   The route graphical primitive to be added to the route.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteGraphic
+  * Dim objArg1 As SchGRRRoute
+  *  ...
+  * objThisIntf.<font color="red">AddGraphicalPrimitive</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AddGraphicalPrimitive ( 
+    in CATIASchGRRRoute iGRRToAdd );
+    
+  /**
+  * Remove a graphical primitive from a route.
+  * @param iGRRToRemove
+  *   The route graphical primitive to be removed from the component.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteGraphic
+  * Dim objArg1 As SchGRRRoute
+  *  ...
+  * objThisIntf.<font color="red">RemoveGraphicalPrimitive</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT RemoveGraphicalPrimitive ( 
+    in CATIASchGRRRoute iGRRToRemove );
+    
+  /**
+  * List all graphical primitives of a route.
+  * @param oLGRR
+  *   A list of graphical primitives
+  *   (members are CATISchGRRRoute interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteGraphic
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListGraphicalPrimitives</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListGraphicalPrimitives ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLGRR );
+    
+  /**
+  * Remove all graphical primitives of a route, including alternate 
+  * graphical primitives.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRouteGraphic
+  *  ...
+  * objThisIntf.<font color="red">RemoveAllGraphicalPrimitives</font>
+  * </pre>
+  *    
+  */
+  HRESULT RemoveAllGraphicalPrimitives ( );
+    
+};
+    
+// Interface name : CATIASchRouteGraphic
+#pragma ID CATIASchRouteGraphic "DCE:21ac4da5-ddde-40bf-a54db4ceedb6dc48"
+#pragma DUAL CATIASchRouteGraphic
+    
+// VB object name : SchRouteGraphic
+#pragma ID SchRouteGraphic "DCE:6ad268ed-ecfc-4a5a-8d50412ae5f90b7b"
+#pragma ALIAS CATIASchRouteGraphic SchRouteGraphic
+    
+#endif 
+    

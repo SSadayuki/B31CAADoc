@@ -1,0 +1,122 @@
+#ifndef CATIASchCompConnector_IDL 
+#define CATIASchCompConnector_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchGRRComp;
+interface  CATIASchAppConnector;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the connectors of a schematic component.
+  */
+
+interface CATIASchCompConnector : CATIABase
+{
+  /**
+  * Add a connector.
+  * @param iClassType 
+  *   Class type of the connector to be added.
+  * @param iGRR
+  *   The graphical image of the component to add the connector to.
+  *   If NULL, connector will be added to all representations.
+  * @param iDb2CntrPosition
+  *   The position of the connector (optional, it could be NULL).
+  * @param oNewSchCntr
+  *   The new Schematic Connector object created.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompConnector
+  * Dim strVar1 As String
+  * Dim objArg2 As SchGRRComp
+  * Dim dbVar3(2) As CATSafeArrayVariant
+  * Dim objArg4 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">AddConnector</font>strVar1,objArg2,dbVar3,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT AddConnector ( 
+    in CATBSTR iClassType, 
+    in CATIASchGRRComp iGRR, 
+    in CATSafeArrayVariant iDb2CntrPosition, 
+    inout CATIASchAppConnector oNewSchCntr );
+    
+  /**
+  * Add a dynamic connector.
+  * @param iClassType 
+  *   Class type of the connector to be added.
+  * @param iGRR
+  *   The graphical image of the component to add the connector to.
+  *   If NULL, connector will be added to all representations.
+  * @param iDb2CntrPosition
+  *   The position of the connector (optional, it could be NULL).
+  * @param oNewSchCntr
+  *   The new Schematic Connector object created.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompConnector
+  * Dim strVar1 As String
+  * Dim objArg2 As SchGRRComp
+  * Dim dbVar3(2) As CATSafeArrayVariant
+  * Dim objArg4 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">AddDynamicConnector</font>strVar1,objArg2,dbVar3,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT AddDynamicConnector ( 
+    in CATBSTR iClassType, 
+    in CATIASchGRRComp iGRR, 
+    in CATSafeArrayVariant iDb2CntrPosition, 
+    inout CATIASchAppConnector oNewSchCntr );
+    
+  /**
+  * Remove a connector.
+  * @param iCntrToRemove
+  *    The schematic connector object to be removed 
+  * @param iGRR
+  *   The graphical image of the component to remove the connector from.
+  *   If NULL, connector will be removed from all representations.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchCompConnector
+  * Dim objArg1 As SchGRRComp
+  * Dim objArg2 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">RemoveConnector</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT RemoveConnector ( 
+    in CATIASchGRRComp iGRR, 
+    in CATIASchAppConnector iCntrToRemove );
+    
+};
+    
+// Interface name : CATIASchCompConnector
+#pragma ID CATIASchCompConnector "DCE:22b17b4e-fea2-48e5-8aec5e3f7cc354eb"
+#pragma DUAL CATIASchCompConnector
+    
+// VB object name : SchCompConnector
+#pragma ID SchCompConnector "DCE:883d2288-3985-4edf-b49e9acebefd9060"
+#pragma ALIAS CATIASchCompConnector SchCompConnector
+    
+#endif 
+    

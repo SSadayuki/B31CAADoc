@@ -1,0 +1,58 @@
+#ifndef CATIAFormula_IDL
+#define CATIAFormula_IDL
+/*IDLREP*/
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIARelation.idl"
+
+/**
+ * Represents the formula relation.
+ * The following example shows how to create a formula that computes the mass
+ * of a cuboid, given its geometric dimensions and the density of the material
+ * it is made of: 
+ * <pre>
+*	Dim CATDocs As Documents
+ * Set CATDocs = CATIA.Documents
+ * Dim part1 As Document
+ * Set part1   = CATDocs.Add("CATPart")
+ * Dim width As RealParam
+ * Set width        = part1.Part.Parameters.<font color="red">CreateReal</font>("width", 1.)  
+ * Dim height As RealParam
+ * Set height       = part1.Part.Parameters.<font color="red">CreateReal</font>("height", 2.)  
+ * Dim depth As RealParam
+ * Set depth        = part1.Part.Parameters.<font color="red">CreateReal</font>("depth", 3.)  
+ * Dim density As RealParam
+ * Set density      = part1.Part.Parameters.<font color="red">CreateReal</font>("density", 1.5)  
+ * Dim mass As RealParam
+ * Set mass         = part1.Part.Parameters.<font color="red">CreateReal</font>("mass", 0.)  
+ * Dim computemass As RealParam
+ * Set computemass = part1.Part.Relations.<font color="red">CreateFormula</font>
+ *                    ("computemass",
+ *                     "Computes the cuboid mass",  mass,
+ *                     "(width*height*depth)*density")
+ *  </pre>
+ */
+
+//-----------------------------------------------------------------
+interface CATIAFormula : CATIARelation
+{
+};
+
+// Interface name : CATIAFormula
+#pragma ID CATIAFormula "DCE:13a1a882-5467-11d1-a2720000f87546fd"
+#pragma DUAL CATIAFormula
+
+// VB object name : Formula (Id used in Visual Basic)
+#pragma ID Formula "DCE:1579ba1e-5467-11d1-a2720000f87546fd"
+#pragma ALIAS CATIAFormula Formula
+
+
+#endif
+// CATIAFormula_IDL
+

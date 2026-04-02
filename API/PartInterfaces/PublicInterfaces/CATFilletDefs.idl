@@ -1,0 +1,112 @@
+#ifndef CATFilletDefs_IDL
+#define CATFilletDefs_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATFilletDefs:                           
+// enumerations for Mechanical Fillet
+//                                   
+//=================================================================
+// Usage notes:
+//    considered in fillets
+//=================================================================
+
+/**
+ * Fillet edge propagation.
+ * The fillet can apply to the selected edge only or to all contiguous
+ * edges that are tangent to the selected edge.
+ * @param catMinimalFilletEdgePropagation
+ *    The fillet is applied only to the selected edge and propagated to the
+ *    first natural relimitation
+ * @param catTangencyFilletEdgePropagation
+ *    The fillet is propagated to all the tangent contiguous edges
+ */
+enum CatFilletEdgePropagation    
+{
+    catMinimalFilletEdgePropagation ,
+    catTangencyFilletEdgePropagation
+};
+
+/**
+ * Fillet edge variation.
+ * Variable edge fillets can have their radius that varies in a    
+ * linear mode from vertex to vertex or in a cubic mode. 
+ * @param catLinearFilletVariation
+ *    The fillet radius varies in a linear mode
+ * @param catCubicFilletVariation
+ *    The fillet radius varies in a cubic mode
+ */
+enum CatFilletVariation
+{
+    catLinearFilletVariation ,
+    catCubicFilletVariation
+};
+
+/**
+ * Fillet boundary relimitation.
+ * Fillets can be created on open body, so you can choose     
+ * the relimitation mode on open boundaries. 
+ * @param catAutomaticFilletBoundaryRelimitation
+ * for PartDesign Fillet	
+ * @param catUVFilletBoundaryRelimitation
+ *   
+ * @param catConnectFilletBoundaryRelimitation
+ *  
+ * @param catMinimumFilletBoundaryRelimitation
+ * Fillet expands up to the limits of the smallest shell 
+ * @param catMaximumFilletBoundaryRelimitation
+ * Fillet expands up to the limits of the largest shell 
+ */
+enum CatFilletBoundaryRelimitation
+{
+    catAutomaticFilletBoundaryRelimitation ,
+    catUVFilletBoundaryRelimitation ,
+    catConnectFilletBoundaryRelimitation ,
+    catMinimumFilletBoundaryRelimitation ,
+    catMaximumFilletBoundaryRelimitation	
+};
+
+/**
+ * Fillet Trim Support.
+ * Fillets can be created on open body, so you can choose     
+ * to trim of fillet support.
+ * @param catTrimFilletSupport
+ *  Trim of fillet support
+ * @param catNoTrimFilletSupport
+ *  No trim of fillet support
+ * 
+ */
+enum CatFilletTrimSupport
+{
+    catTrimFilletSupport,
+    catNoTrimFilletSupport
+};
+
+/**
+ * Fillet Bitangency Type.
+ * Defines the type of Bitangency
+ * @param catCircleBitangencyType
+ *  Fillet type is circle. A Spine then 
+ * must be defined.
+ * @param catSphereBitangencyType
+ *  Fillet type is sphere
+ * 
+ */
+enum CatFilletBitangencyType
+{
+  catSphereBitangencyType,
+  catCircleBitangencyType
+};
+
+
+
+#endif
+// CATFilletDefs_IDL

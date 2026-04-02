@@ -1,0 +1,50 @@
+//===================================================================
+// COPYRIGHT Dassault Systemes 2019-12-03
+//===================================================================
+
+#ifndef CATIAMfgComputePMAParameters_IDL
+#define CATIAMfgComputePMAParameters_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+
+/**
+* Interface to compute and get PMA Parameters:
+* - MfgMinimumCornerRadius
+* - MfgMinimumChannelWidth
+* - MfgMaximumChannelWidth
+* - Depth
+* - MfgBottomFilletRadius
+* - BottomColor
+*/
+interface CATIAMfgComputePMAParameters : CATIABase
+{
+	/**
+	* This function computes the PMA parameters and stores for 2DMA feature
+	* @return S_OK or E_FAIL
+	*/
+	HRESULT ComputeParameters();
+
+	/**
+	* Get double parameter
+	* @param return double value
+	* @return S_OK or E_FAIL
+	*/
+	HRESULT GetParameterDoubleValue(in CATBSTR iName, out /*IDLRETVAL*/ double oValue);
+
+};
+
+// Interface name : CATIAMfgComputePMAParameters
+#pragma ID CATIAMfgComputePMAParameters "DCE:cf5bc15c-40ab-4508-bfe6e4ad7b4930bd"
+#pragma DUAL CATIAMfgComputePMAParameters
+
+// VB object name : ManufacturingComputePMAParameters (Id used in Visual Basic)
+#pragma ID ManufacturingComputePMAParameters "DCE:64f8417f-8295-4bb4-a0f7290fef15bd8c"
+#pragma ALIAS CATIAMfgComputePMAParameters ManufacturingComputePMAParameters
+
+#endif

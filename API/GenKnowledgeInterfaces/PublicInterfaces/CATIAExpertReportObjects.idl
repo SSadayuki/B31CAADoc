@@ -1,0 +1,155 @@
+#ifndef CATIAExpertReportObjects_IDL
+#define CATIAExpertReportObjects_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATIAExpertReportObject.idl"
+
+
+//-----------------------------------------------------------------
+/**
+ * Represents the collection of (succeeded or failed) report objects.
+*/
+interface CATIAExpertReportObjects : CATIACollection
+{
+
+	/**
+     * Returns the number of succeeded tuples in the succeeded tuples collection.
+	 *
+     * It is redundant with @href CATIACollection#Count for
+	 * @href CATIAExpertCheckRuntime#Succeeds collection.
+	 * For @href CATIAExpertCheckRuntime#Failures collection, it will fail.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in  <tt>ObjectNumber</tt> the number of tuples
+     * currently gathered in <tt>MyCollection</tt>.
+     * <pre>
+     * ObjectNumber = MyCollection.<font color="red">CountSucceed</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY CountSucceed
+	HRESULT		get_CountSucceed
+				( out /*IDLRETVAL*/					long				oNbItems );
+
+
+    /**
+     * Returns the number of failed tuples in the failed tuples collection.
+	 *
+     * It is redundant with @href CATIACollection#Count
+	 * for @href CATIAExpertCheckRuntime#Failures collection.
+	 * For @href CATIAExpertCheckRuntime#Succeeds collection, it will fail.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in  <tt>ObjectNumber</tt> the number of tuples
+     * currently gathered in <tt>MyCollection</tt>.
+     * <pre>
+     * ObjectNumber = MyCollection.<font color="red">CountFail</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY CountFail
+	HRESULT		get_CountFail
+				( out /*IDLRETVAL*/					long				oNbItems );
+
+
+     /**
+     * Retrieves a Report component using its index or its name from the Check collection.
+	 *
+     * @param iIndex
+     *   <p>
+	 *   The index or the name of the Report component to retrieve from
+     *   the collection of Report Components.
+     *   As a numerics, this index is the rank of the Report component
+     *   in the collection.
+     *   The index of the first component in the collection is 1, and
+     *   the index of the last component is <tt>Count</tt>.
+     *   As a string, it is the name you assigned to the component using
+     *   the @href CATIABase#Name property or when creating the component.
+	 *   </p>
+	 *
+     * @return The retrieved Report component
+     */
+    HRESULT     Item
+                ( in                CATVariant							 iIndex
+                , out /*IDLRETVAL*/ CATIAExpertReportObject        oReport 
+                );
+
+	/**
+     * Retrieves a report component from a succeeded tuples collection, using its index or its name from the Check collection.
+	 *
+	 * It is redundant with @href CATIAExpertReportObjects#Item for
+	 * @href CATIAExpertCheckRuntime#Succeeds collections.
+	 * For @href CATIAExpertCheckRuntime#Failures collections, it will fail.
+     * @param iIndex
+     *   The index or the name of the Report component to retrieve from
+     *   the collection of Report Components.
+     *   As a numerics, this index is the rank of the Report component
+     *   in the collection.
+     *   The index of the first component in the collection is 1, and
+     *   the index of the last component is <tt>Count</tt>.
+     *   As a string, it is the name you assigned to the component using
+     *   the @href CATIABase#Name property or when creating the component.
+     * @return The retrieved Report component
+     */
+
+
+ HRESULT     SucceedItem
+                ( in                CATVariant							 iIndex
+                , out /*IDLRETVAL*/ CATIAExpertReportObject        oReport 
+                );
+
+    
+
+	/**
+     * Retrieves a report failed component from a failed tuples collection, using its index or its name from the Check collection.
+	 *
+	 * It is redundant with @href CATIAExpertReportObjects#Item for
+	 * @href CATIAExpertCheckRuntime#Failures collections.
+	 * For @href CATIAExpertCheckRuntime#Succeeds collections, it will fail.
+     * @param iIndex
+     *   The index or the name of the Report component to retrieve from
+     *   the collection of Report Components.
+     *   As a numerics, this index is the rank of the Report component
+     *   in the collection.
+     *   The index of the first component in the collection is 1, and
+     *   the index of the last component is <tt>Count</tt>.
+     *   As a string, it is the name you assigned to the component using
+     *   the @href CATIABase#Name property or when creating the component.
+     * @return The retrieved Report component
+     */
+
+ HRESULT     FailItem
+                ( in                CATVariant							 iIndex
+                , out /*IDLRETVAL*/ CATIAExpertReportObject        oReport 
+                );
+   
+
+
+};
+
+// Interface name : CATIAExpertReportObjects
+#pragma ID CATIAExpertReportObjects "DCE:9e7f80c0-50d2-11d4-9eeb00508b617ae8"
+#pragma DUAL CATIAExpertReportObjects
+
+// VB object name : Relation (Id used in Visual Basic)
+#pragma ID ExpertReportObjects "DCE:c86b5010-50d3-11d4-9eeb00508b617ae8"
+#pragma ALIAS CATIAExpertReportObjects ExpertReportObjects
+
+#endif
+// CATIAExpertReportObjects_IDL
+

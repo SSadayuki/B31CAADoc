@@ -1,0 +1,161 @@
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//===================================================================
+//
+// CATIADressups.idl
+// Automation interface for the Dressups entity
+//
+//===================================================================
+//
+// Usage notes:
+//   
+//
+//===================================================================
+//
+//  March 2005  Creation: Code creation by Robert Karakozian
+//===================================================================
+#ifndef CATIADressups_IDL
+#define CATIADressups_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATIAMechanisms.idl"
+#include "CATIADressup.idl"
+#include "CATVariant.idl"
+
+
+/**  
+ * A collection of all Dressup entities currently managed by the application.
+ */
+interface CATIADressups : CATIACollection
+{
+  /**
+   * Creates a new Dressup and adds it to the Dressups collection.
+   * @param iMechanism
+   *   The mechanism on which the dressup will apply. 
+   * @param iContext
+   *   The Context product on which the mechanism is defined
+   * @return
+   *    The created Dressup
+   * <! @sample >
+   *    <dt><b>Example:</b>
+   *    <dd>
+   *    This example creates a new Dressup
+   *    in the <tt>TheDressups</tt> collection.
+   *    <pre>
+   *    Dim NewDressup As Dressup
+   *    Set NewDressup = TheDressups.<font color="red">Add</font>(Mechanism)
+   *    </pre>
+   */
+  HRESULT Add( in CATIAMechanism iMechanism, in CATIAProduct iContext, out /*IDLRETVAL*/ CATIADressup oDressup);
+
+  /**
+     * Returns a Dressup using its index or its name from the Dressups collection.
+     * @param iIndex
+     *   The index or the name of the Dressup to retrieve from
+     *   the collection of Dressups.
+     *   As a numerics, this index is the rank of the Dressup
+     *   in the collection.
+     *   The index of the first Dressup in the collection is 1, and
+     *   the index of the last Dressup is Count.
+     *   As a string, it is the name you assigned to the Dressup using
+     *   the @href CATIABase#Name property.
+     * @return 
+	 *   The retrieved Dressup
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example returns in <tt>ThisDressup</tt> the third Dressup
+     * in the collection, and in <tt>ThatDressup</tt> the Dressup named
+     * <tt>MyDressup</tt>.
+     * <pre>
+     * Dim ThisDressup As Dressup
+     * Set ThisDressup = TheDressups.<font color="red">Item</font>(3)
+     * Dim ThatDressup As Dressup
+     * Set ThatDressup = CATIA.Dressups.<font color="red">Item</font>("MyDressup")
+     * </pre>
+     */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIADressup oDressup);
+
+  /**
+   * Removes a Dressup from the Dressups collection.
+   * @param iIndex
+   *    The index or the name of the Dressup to retrieve from the collection of Dressups.
+   *    As a numerics, this index is the rank of the Dressup in the collection.
+   *    The index of the first Dressup in the collection is 1, and
+   *    the index of the last Dressup is Count.
+   *    As a string, it is the name you assigned to the Dressup.
+   * @return
+   *    Nothing
+   * <! @sample >
+   *    <dt><b>Example:</b>
+   *    <dd>
+   *    The following example removes the tenth Dressup and the Dressup named
+   *    <tt>DressupTwo</tt> from the <tt>TheDressups</tt> collection.
+   *    <pre>
+   *    TheDressups.<font color="red">Remove</font>(10)
+   *    TheDressups.<font color="red">Remove</font>("DressupTwo")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+   /** 
+     * Returns information about all possible mechanisms on which a dressup can be created.
+     * @param 
+	 *    Nothing
+     * @return
+     *    The list of possible mechanisms on which a dressup can be created. 
+     * <! @sample >
+     *    <dt><b>Example:</b>
+     *    <dd>
+     *    The following example returns the first and the last element of the list of possible mechanisms. 
+	 *    We assume that this list contains at least two values.  
+     *    <pre>
+     *    Dim PossibleMecList As Mechanism
+	 *    PossibleMecList = MyDressups.<font color="red">ListPossibleMechanisms</font>()
+     *    Dim FirstMeca As Mechanism
+	 *    Set Meca  = PossibleMecList(0) 
+     *    Dim LastMeca As Mechanism
+	 *    Set Meca  = PossibleMecList(ubound(PossibleMecList)) 
+     *    </pre>
+     */
+  HRESULT ListPossibleMechanisms (out  /*IDLRETVAL*/ CATSafeArrayVariant oMechanismList );
+
+   /** 
+     * Each mechanism of the list given by ListPossibleMechanisms has
+	 * a context product on which it is defined.
+     * @param 
+	 *   Nothing
+     * @return
+     *    The list of mechanisms' contexts on which a dressup can be created. 
+	 *    The context of oMechanismList(i) is oContextList(i). 
+     * <! @sample >
+     *    <dt><b>Example:</b>
+     *    <dd>
+     *    The following example returns the first and the last element of the list of mechanisms' contexts. 
+	 *    We assume that this list contains at least two values.  
+     *    <pre>
+     *    Dim ContextList As Product
+	 *    ContextList = MyDressups.<font color="red">ListMechanismsContext</font>()
+     *    Dim FirstContext As Product
+	 *    Set FirstContext = ContextList(0) 
+     *    Dim LastContext As Product
+	 *    Set LastContext = ContextList(ubound(ContextList)) 
+     *    </pre>
+     */
+  HRESULT ListMechanismsContext (out  /*IDLRETVAL*/ CATSafeArrayVariant oContextList);
+};
+
+// Interface name : CATIADressups
+#pragma ID CATIADressups "DCE:73ba05d5-78f5-4a18-97bd898e9c67af32"
+#pragma DUAL CATIADressups
+
+// VB object name : Dressups (Id used in Visual Basic)
+#pragma ID Dressups      "DCE:7cc9bbbf-5e27-4a68-bdf2f738e12f0ab5"
+#pragma ALIAS CATIADressups Dressups
+
+#endif

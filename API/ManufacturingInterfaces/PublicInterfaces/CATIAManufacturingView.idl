@@ -1,0 +1,94 @@
+#ifndef CATIAManufacturingView_IDL
+#define CATIAManufacturingView_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//								   
+// CATIAManufacturingView: 
+// Exposed interface for ManufacturingView
+//								   
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATIAManufacturingFeatures.idl"
+#include "CATIAProduct.idl"
+
+interface CATIARelations;
+
+/**
+ * The Manufacturing View is the object that holds all the manufacturing features of the model.
+ */
+
+interface CATIAManufacturingView : CATIABase
+{
+
+#pragma PROPERTY ManufacturingFeatures
+
+        /**
+         * Returns the Manufacturing Features of a Manufacturing View.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>ManufacturingFeatures</tt> the Manufacturing  
+         * Features of the Manufacturing View <tt>MfgView</tt>:
+         * <pre>
+         * Set ManufacturingFeatures = MfgView.ManufacturingFeatures
+         *</pre>
+         * </dl>
+         */
+
+    HRESULT get_ManufacturingFeatures  (out /*IDLRETVAL*/ CATIAManufacturingFeatures oManufacturingFeatures);
+
+#pragma PROPERTY Relations
+
+        /**
+         * Returns the Relations Set owned by a Manufacturing View.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>Relations</tt> the 
+         * Relations Set of the Manufacturing View <tt>MfgView</tt>:
+         * <pre>
+         * Set Relations = MfgView.Relations
+         *</pre>
+         * </dl>
+         */
+
+    HRESULT get_Relations  (out /*IDLRETVAL*/ CATIARelations oRelations);
+
+
+	/**
+	* @nodoc
+	*/
+	HRESULT CreateAllMachinableAreaFeatures(in CATIAProduct iFinishPartProduct, in CATIAProduct  iMachFeaturesProduct);
+	
+		/**
+         * Creates Machinable feature using TR of UDF.
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example takes <tt>iFinishPartProduct</tt>  
+         * and Create MAF in <tt>MfgView</tt>:
+         * <pre>
+         * MfgView.CreateAllMachinableAreaFeaturesFromTechResultsOfUDF(iFinishPartProduct)
+         *</pre>
+         * </dl>
+         */
+
+	HRESULT	CreateAllMachinableAreaFeaturesFromTechResultsOfUDF(in CATIAProduct iFinishPartProduct);
+
+};
+
+// Interface name : CATIAManufacturingView
+#pragma ID CATIAManufacturingView "DCE:da5f3350-5163-11d2-804700805fc75483"
+#pragma DUAL CATIAManufacturingView
+
+// VB object name : Constraint (Id used in Visual Basic)
+#pragma ID ManufacturingView "DCE:1725334a-6fe4-11d2-8dd7006094b92b60"
+#pragma ALIAS CATIAManufacturingView ManufacturingView
+
+#endif // CATIAManufacturingView_IDL
+

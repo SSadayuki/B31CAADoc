@@ -1,0 +1,81 @@
+#ifndef CATIAExpertRule_IDL
+#define CATIAExpertRule_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAExpertRuleRuntime.idl"
+
+/**
+ * Represents the edition part of a rule.
+ *
+ * The following example shows how access the Rule Rule1
+ * from an existing RuleSet RS1 of the RuleBase RB1
+ * <pre>
+ * Dim CATDocs As Document
+ * Set CATDocs   = CATIA.Documents
+ * Dim partdoc As PartDocument
+ * Set partdoc   = CATDocs.Add("CATPart")
+ * Dim part As Part
+ * Set part      = partdoc.Part
+ * Dim relations As Relations
+ * Set relations = part.Relations
+ * Dim Rulebase As ExpertRuleBaseRuntime
+ * Set RuleBase  = relations.Item("RB1")
+ * Dim Ruleset As ExpertRuleSetRuntime
+ * Set RuleSet	 = RuleBase.ExpertRuleBaseComponentRuntimes.Item("RS1")
+ * Dim Rule1 As ExpertRuleRuntime
+ * Set Rule1	 = RuleSet.ExpertRuleBaseComponentRuntimes.Item("Rule1")
+ * </pre>
+ * @see CATIARelations, CATIAExpertRuleBase
+ */
+interface CATIAExpertRule : CATIAExpertRuleRuntime
+{
+
+
+	//==================================
+    //========== Properties ============
+    //==================================
+/**
+* Returns or sets the variables scope of the a Rule.
+* For instance:
+* "H:Hole; P: Pad"
+*/
+#pragma PROPERTY Variables 
+  HRESULT get_Variables(inout /*IDLRETVAL*/ CATBSTR oVariablesBSTR);
+  HRESULT put_Variables(in CATBSTR iVariablesBSTR);
+	 
+
+/**
+  * Returns or sets the string that defines the body of a Rule.
+	* For instance:
+	* "if ( H\Diameter > 20mm ) H\Activity = FALSE"
+	*/
+#pragma PROPERTY Body 
+  HRESULT get_Body(inout /*IDLRETVAL*/ CATBSTR oBodyBSTR);	
+  HRESULT put_Body(in CATBSTR iBodyBSTR);	 
+
+	/**
+	 * Returns or sets the language of a rule.
+	 */
+#pragma PROPERTY Language
+    HRESULT    get_Language (inout /*IDLRETVAL*/ long oLanguage);
+    HRESULT    put_Language (in long iLanguage);
+};
+
+// Interface name : CATIAExpertRule
+#pragma ID CATIAExpertRule "DCE:fa729e14-9f72-11d4-9efb00d0b752954c"
+#pragma DUAL CATIAExpertRule
+
+// VB object name : ExpertCheck (Id used in Visual Basic)
+#pragma ID ExpertRule "DCE:57658320-a052-11d4-9efb00d0b752954c"
+#pragma ALIAS CATIAExpertRule ExpertRule
+
+#endif
+// CATIAExpertRule_IDL
+

@@ -1,0 +1,347 @@
+/**
+* @fullreview BE9 XEX 14:02:26
+*/
+//=============================================================================
+// COPYRIGHT Dassault Systemes 2014
+//=============================================================================
+// CATIASTRObjectExt
+//   Interface to get computed attributes on SR1 objects.
+//=============================================================================
+// Usage notes:
+//=============================================================================
+// Jan. 2014  Creation                                          Bhupendra MITHE
+//=============================================================================
+
+#ifndef CATIAStrObjectExt_IDL
+#define CATIAStrObjectExt_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+interface CATIAParameter;
+
+#include "CATIABase.idl"
+#include "CATIAProduct.idl"
+
+/**
+ * Represents a structure object. Retrieves the computed attributes of the SR1 objects.
+ */
+
+interface CATIAStrObjectExt : CATIABase
+{
+  /**
+  * Returns the COG X coordinate
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the X coordinate of the COG of the SR1 object.
+  * <pre>
+  * Dim CoG_x As Double
+  * CoG_x = StrObjectExt.<font color="red">CoG_x</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY CoG_x
+  HRESULT get_CoG_x(out /*IDLRETVAL*/ double oCoG_x);
+
+  /**
+  * Returns the COG Y coordinate
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Y coordinate of the COG of the SR1 object.
+  * <pre>
+  * Dim CoG_y As Double
+  * CoG_y = StrObjectExt.<font color="red">CoG_y</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY CoG_y
+  HRESULT get_CoG_y(out /*IDLRETVAL*/ double oCoG_y);
+
+  /**
+  * Returns the COG Z coordinate
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Z coordinate of the COG of the SR1 object.
+  * <pre>
+  * Dim CoG_z As Double
+  * CoG_z = StrObjectExt.<font color="red">CoG_z</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY CoG_z
+  HRESULT get_CoG_z(out /*IDLRETVAL*/ double oCoG_z);
+
+  /**
+  * Returns the grade of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the grade of the SR1 object.
+  * <pre>
+  * Dim Grade As String
+  * Grade = StrObjectExt.<font color="red">Grade</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY Grade
+  HRESULT get_Grade(inout /*IDLRETVAL*/ CATBSTR oGrade);
+
+  /**
+  * Returns the material of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the material of the SR1 object.
+  * <pre>
+  * Dim material As String
+  * material = StrObjectExt.<font color="red">Material</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY Material
+  HRESULT get_Material(inout /*IDLRETVAL*/ CATBSTR oMaterial);
+
+  /**
+  * Returns the PaintedArea of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the PaintedArea of the SR1 object.
+  * <pre>
+  * Dim PaintedArea As Double
+  * PaintedArea = StrObjectExt.<font color="red">PaintedArea</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY PaintedArea
+  HRESULT get_PaintedArea(out /*IDLRETVAL*/ double oPaintedArea);
+
+  /**
+  * Returns the ProfileLength of the profile SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the ProfileLength of the SR1 object.
+  * <pre>
+  * Dim ProfileLength As Double
+  * ProfileLength = StrObjectExt.<font color="red">ProfileLength</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY ProfileLength
+  HRESULT get_ProfileLength(out /*IDLRETVAL*/ double oProfileLength);
+
+  /**
+  * Returns the Weight of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Weight of the SR1 object.
+  * <pre>
+  * Dim Weight As Double
+  * Weight = StrObjectExt.<font color="red">Weight</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY Weight
+  HRESULT get_Weight(out /*IDLRETVAL*/ double oWeight);
+
+  /**
+  * Returns the WeldingLength of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the WeldingLength of the SR1 object.
+  * <pre>
+  * Dim WeldingLength As Double
+  * WeldingLength = StrObjectExt.<font color="red">WeldingLength</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY WeldingLength
+  HRESULT get_WeldingLength(out /*IDLRETVAL*/ double oWeldingLength);
+
+  /**
+  * Returns the Plate Perimeter of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Plate Perimeter of the SR1 object.
+  * <pre>
+  * Dim PlatePerimeter As Double
+  * PlatePerimeter = StrObjectExt.<font color="red">PlatePerimeter</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY PlatePerimeter
+  HRESULT get_PlatePerimeter(out /*IDLRETVAL*/ double oPlatePerimeter);
+  
+  /**
+  * Returns the Plate Width of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Plate Width of the SR1 object.
+  * <pre>
+  * Dim PlateWidth As Double
+  * PlateWidth = StrObjectExt.<font color="red">PlateWidth</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY PlateWidth
+  HRESULT get_PlateWidth(out /*IDLRETVAL*/ double oPlateWidth);
+  
+  /**
+  * Returns the Surface Area of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Surface Area of the SR1 object.
+  * <pre>
+  * Dim SurfaceArea As Double
+  * SurfaceArea = StrObjectExt.<font color="red">SurfaceArea</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY SurfaceArea
+  HRESULT get_SurfaceArea(out /*IDLRETVAL*/ double oSurfaceArea);
+
+  /**
+  * Returns the Thickness of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Thickness of the SR1 object.
+  * <pre>
+  * Dim Thickness As Double
+  * Thickness = StrObjectExt.<font color="red">Thickness</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY Thickness
+  HRESULT get_Thickness(out /*IDLRETVAL*/ double oThickness);
+
+  /**
+  * Returns the Offset of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Offset of the SR1 object.
+  * <pre>
+  * Dim Offset As Double
+  * Offset = StrObjectExt.<font color="red">Offset</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY Offset
+  HRESULT get_Offset(out /*IDLRETVAL*/ double oOffset);
+
+  /**
+  * Returns the SectionName of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the SectionName of the SR1 object.
+  * <pre>
+  * Dim SectionName As String
+  * SectionName = StrObjectExt.<font color="red">SectionName</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY SectionName
+  HRESULT get_SectionName(inout /*IDLRETVAL*/ CATBSTR oSectionName);
+
+  /**
+  * Returns the TopZ of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the TopZ of the SR1 object.
+  * <pre>
+  * Dim TopZ As Double
+  * TopZ = StrObjectExt.<font color="red">TopZ</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY TopZ
+  HRESULT get_TopZ(out /*IDLRETVAL*/ double oTopZ);
+
+  /**
+  * Returns the BottomZ of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the BottomZ of the SR1 object.
+  * <pre>
+  * Dim BottomZ As Double
+  * BottomZ = StrObjectExt.<font color="red">BottomZ</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY BottomZ
+  HRESULT get_BottomZ(out /*IDLRETVAL*/ double oBottomZ);
+
+  /**
+  * Returns the Start EndCut name of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Start EndCut name of the SR1 object.
+  * <pre>
+  * Dim StartEndCutName As String
+  * StartEndCutName = StrObjectExt.<font color="red">StartEndCutName</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY StartEndCutName
+  HRESULT get_StartEndCutName(inout /*IDLRETVAL*/ CATBSTR oStartEndCutName);
+
+  /**
+  * Returns the End EndCut name of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the End EndCut name of the SR1 object.
+  * <pre>
+  * Dim EndEndCutName As String
+  * EndEndCutName = StrObjectExt.<font color="red">EndEndCutName</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY EndEndCutName
+  HRESULT get_EndEndCutName(inout /*IDLRETVAL*/ CATBSTR oEndEndCutName);
+
+  /**
+  * Returns the Plate Length of the SR1 object.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves the Plate Length of the SR1 object.
+  * <pre>
+  * Dim PlateLength As Double
+  * PlateLength = StrObjectExt.<font color="red">PlateLength</font>
+  * </pre>
+  * </dl> 
+  */
+  #pragma PROPERTY PlateLength
+  HRESULT get_PlateLength(out /*IDLRETVAL*/ double oLength);
+
+
+};
+
+// Interface name : CATIAStrObjectExt
+#pragma ID CATIAStrObjectExt "DCE:45A8F2DC-7003-473C-AFBF23A012A68CAD"
+#pragma DUAL CATIAStrObjectExt
+
+
+#pragma ID StrObjectExt "DCE:CE0C6A5E-530F-4BA2-9BE5A6357555B83D"
+#pragma ALIAS CATIAStrObjectExt StrObjectExt
+
+#endif

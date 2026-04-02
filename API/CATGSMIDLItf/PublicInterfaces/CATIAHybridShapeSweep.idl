@@ -1,0 +1,118 @@
+#ifndef CATIAHybridShapeSweep_IDL
+#define CATIAHybridShapeSweep_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeSweep:         
+// Exposed interface for HybridShape Sweep
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+* Represents the hybrid shape Sweep feature object.
+* <b>Role</b>: Declare  hybrid shape Sweep root feature object. 
+* All interfaces for different type of sweep derivates HybridShapeSweep. 
+* <p> Use the CATIAHybridShapeFactory to create a HybridShapeSweep objects.
+* @see CATIAHybridShapeFactory 
+*/
+//-----------------------------------------------------------------
+interface CATIAHybridShapeSweep : CATIAHybridShape
+{
+	/* Gets the cut point at the iRank position.
+	* @param iRank
+	*		The cut point position.
+	* @param oElement
+	*		The cut point.
+	*/
+	HRESULT    GetCutPoint(in    long		iRank,
+		out  /*IDLRETVAL*/ CATIAReference   oElement);
+
+	/**
+	* Sets two cut points on the master guide. These points define a zone to be kept
+	* on the final swept surface.
+	*   @param iElement1
+	*      First / start cut point.
+	*   @param iElement2
+	*      Second / end cut point.
+	*/
+	HRESULT    AddCutPoints    (in    CATIAReference   iElement1, in    CATIAReference   iElement2);
+
+	/**
+	* Removes all cut points.
+	*/
+	HRESULT RemoveAllCutPoints();
+
+	/* Gets the fill point at the iRank position.
+	* @param iRank
+	*		The fill point position.
+	* @param oElement
+	*		The fill point.
+	*/
+	HRESULT    GetFillPoint(in    long		iRank,
+		out  /*IDLRETVAL*/ CATIAReference   oElement);
+
+	/**
+	* Sets two fill points on the master guide. These points define a zone to be filled
+	* on the final swept surface.
+	*   @param iElement1
+	*      First / start fill point.
+	*   @param iElement2
+	*      Second / end fill point.
+	*/
+	HRESULT    AddFillPoints    (in    CATIAReference   iElement1, in    CATIAReference   iElement2);
+
+	/**
+	* Removes all fill points.
+	*/
+	HRESULT RemoveAllFillPoints();
+
+	/**
+	* Returns or sets the setback value.
+	*/
+	#pragma PROPERTY SetbackValue
+	HRESULT get_SetbackValue ( out /*IDLRETVAL*/  double   oValue);
+	HRESULT put_SetbackValue ( in               double   iValue);
+
+	/**
+	* Returns or sets the fill twisted areas mode.
+	*/
+	#pragma PROPERTY FillTwistedAreas
+	HRESULT get_FillTwistedAreas ( out /*IDLRETVAL*/  long   oMode);
+	HRESULT put_FillTwistedAreas ( in               long   iMode);
+
+	/**
+	* Returns  or sets the management mode of C0 vertices as twisted areas.
+	* <br> TRUE or FALSE.
+	*/ 
+	#pragma PROPERTY C0VerticesMode
+	HRESULT get_C0VerticesMode(out /*IDLRETVAL*/ boolean  obC0VerticesMode);
+	HRESULT put_C0VerticesMode(in boolean ibC0VerticesMode);
+};
+
+// Interface name : CATIAHybridShapeSweep
+#pragma ID CATIAHybridShapeSweep "DCE:8cd8d95d-13a3-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeSweep
+
+// VB object name : HybridShapeSweep (Id used in Visual Basic)
+#pragma ID HybridShapeSweep "DCE:8cd8d951-8e52-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeSweep HybridShapeSweep
+
+
+#endif

@@ -1,0 +1,94 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>PSNInteroperability PSNInteroperability Framework:CATLoadDocumentFromVPM   Global Function  </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../PSNInteroperability.htm" href="../PSNInteroperability.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "PSNInteroperability";	}
+		function getCurrentObjectName() { 
+ 	return "CATLoadDocumentFromVPM"; } 
+	function getCurrentType() { 
+ 	return "global function"; }  
+ </script><h1 class='title1'>PSNInteroperability Framework:CATLoadDocumentFromVPM   Global Function  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+
+<br><section id='objdef'><dl><dt class='dt1'><span class = 'method'><script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>CATLoadDocumentFromVPM</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iLgId</span>,<script type="text/javascript"> activateLink('char','char*')</script> <span class='param'>iDocId</span>,<script type="text/javascript"> activateLink('CATDocument','CATDocument*&amp;')</script> <span class='param'>oDoc</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='dd1'>
+ Loads in session a document stored in an ENOVIAvpm V4 database.
+
+<br><b>Role:</b>This method loads in session a document stored 
+  in Publication Exposed mode in the ENOVIAvpm V4 database and 
+  returns the corresponding CATDocument. 
+<br>The document can be any CATIA V5 type document.
+
+ <p>
+ This method takes as input the document identifier <tt>iDocId</tt>. 
+ Only the 42 first character of the string are relevant and are structured as followed:
+ <ul>
+    <li> the Coid of the document (database binary 8 crc long) </li>
+    <li> the Compid of the document (database binary 8 crc long) </li>
+    <li> the VPM environment name of the root part (8 crc long). 
+           <br>   For instance <tt>"VPMENV  "</tt> </li>
+    <li> the VPM document table name  (18 crc long). 
+           <br>  For instance <tt>"DOCUMENT         "</tt> </li>
+ </ul>
+ <br> The 8 crc long server name might be present in the string but will be ignored.
+ </p>
+
+<p>If needed, your Imakefile.mk should include the module: <b>CATPinServices</b> </p>
+<p>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLgId</span></dt>
+   <dd>    length of the string iDocId.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDocId</span></dt>
+   <dd>    ENOVIAvpm document identifier.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oDoc</span></dt>
+   <dd>    the new document is session only if the method is successful
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     <ul>
+   <li><tt>S_OK</tt>: The document is successfuly loaded in session</li> 
+   <li><tt>E_FAIL</tt>: ENOVIAvpm server cannot be detected</li>
+   <li><tt>E_FAIL</tt>: The method has failed</li>
+  </ul>
+ </ dd>
+</dl>
+</dd></dl>
+</section></section'>
+<hr/>
+ This object is included in the file: <b>CATBatchServices.h</b><br>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

@@ -1,0 +1,245 @@
+#ifndef CATIAAutoFillet_IDL
+#define CATIAAutoFillet_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2006
+//=================================================================
+//                                   
+// CATIAAutoFillet: 
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jan-2006 Creation                                        NGW
+//=================================================================
+
+#include "CATIADressUpShape.idl"
+
+interface CATIAReferences;
+interface CATIAReference;
+interface CATIALength;
+
+/**
+ * Represents the AutoFillet shape.
+ * A AutoFillet fillets all the edges of Solid
+ */
+
+//-----------------------------------------------------------------
+interface CATIAAutoFillet : CATIADressUpShape
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON RADIUS
+    //    ---------
+    //
+    /**
+     * Returns the Fillet radius.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>fillet radius</tt> the fillet radius
+     * of the AutoFillet <tt>Autofillet</tt>:
+     * <pre>
+     * Set Filletradius = Autofillet.<font color="red">Radius</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FilletRadius
+    HRESULT    get_FilletRadius ( out /*IDLRETVAL*/ CATIALength oRadius ); 
+
+    /**
+     * Returns the Round radius.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>round radius</tt> the round radius
+     * of the AutoFillet <tt>Autofillet</tt>:
+     * <pre>
+     * Set roundradius = Autofillet.<font color="red">Radius</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY RoundRadius
+    HRESULT    get_RoundRadius ( out /*IDLRETVAL*/ CATIALength oRadius );
+
+    /**
+     * Returns the Curvature radius.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>Curvature radius</tt> the Curvature radius
+     * of the AutoFillet <tt>Autofillet</tt>:
+     * <pre>
+     * Set Curvatureradius = Autofillet.<font color="red">Radius</font>
+     * </pre>
+     * </dl>
+     */
+
+#pragma PROPERTY CurvatureRadius
+    HRESULT    get_CurvatureRadius ( out /*IDLRETVAL*/ CATIALength oRadius );
+
+    //
+    //    ON FUNCTIONAL FACE
+    //    -------------
+    //
+#pragma PROPERTY FunctionalFaces
+//
+    /**
+     * Returns or sets the functional face.<br>     
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>functionalface</tt> the 
+     * functional face of the
+     * autofillet <tt>autoFillet</tt>,
+     * and then sets it to <tt>NewfunctionalFace</tt>:
+     * <pre>
+     * Set functionalFace = autoFillet.<font color="red">FunctionalFace</font>
+     * autofillet.<font color="red">FunctionalFace</font> = NewfunctionalFace
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_FunctionalFaces ( out /*IDLRETVAL*/ CATIAReferences oFaces );
+    HRESULT    put_FunctionalFace ( in  CATIAReference iFace );
+
+    //
+    //    ON SLIVERS AND CRACKS
+    //    -------------
+    //
+#pragma PROPERTY SliversAndCracks
+//
+    /**
+     * Returns or sets the slivers face.<br>     
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>slivers</tt> the 
+     * sliver face of the
+     * autofillet <tt>autoFillet</tt>,
+     * and then sets it to <tt>Newsliver</tt>:
+     * <pre>
+     * Set sliversFace = autoFillet.<font color="red">SliversFace</font>
+     * autofillet.<font color="red">SliversFace</font> = NewsliversFace
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_SliversAndCracks ( out /*IDLRETVAL*/ CATIAReferences oSlivers );
+    HRESULT    put_SliversAndCrack ( in CATIAReference iSlivers );
+
+    //
+    //    ON FUNCTIONAL FACE
+    //    -------------
+    //
+#pragma PROPERTY PartingElement
+//
+    /**
+     * Returns or sets the parting element.<br>     
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>partingelement</tt> the 
+     * parting element of the
+     * autofillet <tt>autoFillet</tt>,
+     * and then sets it to <tt>Newparting element</tt>:
+     * <pre>
+     * Set Parting element = autoFillet.<font color="red">PartingElement</font>
+     * autofillet.<font color="red">PartingElement</font> = NewPartingElement
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_PartingElement ( out /*IDLRETVAL*/ CATIAReference oPartingElement );
+    HRESULT    put_PartingElement ( in CATIAReference iPartingElement );
+
+    //
+    //    ON FUNCTIONAL FACE
+    //    -------------
+    //
+#pragma PROPERTY FacesToFillet
+//
+    /**
+     * Returns or sets the faces to fillet.<br>     
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>facestofillet</tt> the 
+     * faces required for
+     * autofillet <tt>autoFillet</tt>,
+     * and then sets it to <tt>NewFacestofillet</tt>:
+     * <pre>
+     * Set Facestofillet = autoFillet.<font color="red">Facestofillet</font>
+     * autofillet.<font color="red">Facestofillet</font> = NewFacestofillet
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_FacesToFillet ( out /*IDLRETVAL*/ CATIAReferences oFaces );
+    HRESULT    put_FacesToFillets ( in CATIAReference iFace );
+
+    //
+    //    ON Round Radius Activation
+    //    -------------
+    //
+#pragma PROPERTY RoundRadiusActivation
+//
+        /**
+         * Returns the AutoFillet RoundRadiusActivation flag (for AutoFillet only).<br>
+         * It returns 1 if RoundRadius is activated, 0 if not.
+         * @return oRoundRadActivation
+         *   The RoundRadActivation flag as an int 
+         * <dl>
+         * <dt><b>Example:</b>
+         *</pre>
+         * </dl>
+         */
+        HRESULT get_RoundRadiusActivation ( out /*IDLRETVAL*/ boolean oRoundRadActivation);
+        HRESULT put_RoundRadiusActivation ( in  boolean iRoundRadActivation );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+    //    ON SUPPORT SURFACE
+    //    -------------
+    //
+#pragma PROPERTY SupportSurface
+//
+    /**
+     * Returns or sets the support surface.<br>     
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>SupportSurface</tt> the 
+     * support surface required for
+     * autofillet <tt>autoFillet</tt>,
+     * and then sets it to <tt>NewSupportSurface</tt>:
+     * <pre>
+     * Set SupportSurface = autoFillet.<font color="red">SupportSurface</font>
+     * autofillet.<font color="red">SupportSurface</font> = NewSupportSurface
+     * </pre>
+     * </dl>
+     */
+    HRESULT    get_SupportSurface ( out /*IDLRETVAL*/ CATIAReference oSupportSurface );
+    HRESULT    put_SupportSurface ( in CATIAReference iSupportSurface );
+};
+
+// Interface name : CATIAAutoFillet
+#pragma ID CATIAAutoFillet "DCE:AF328AAD-8CB0-45a6-A4EF968D5B33B706"
+#pragma DUAL CATIAAutoFillet
+
+// VB object name : AutoFillet (Id used in Visual Basic)
+#pragma ID AutoFillet "DCE:D7A7C69E-58AC-49c0-B7C1DF9895478D13"
+#pragma ALIAS CATIAAutoFillet AutoFillet
+
+
+#endif
+// CATIAAutoFillet_IDL
+

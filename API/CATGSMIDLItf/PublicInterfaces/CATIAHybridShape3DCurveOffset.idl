@@ -1,0 +1,89 @@
+#ifndef CATIAHybridShape3DCurveOffset_IDL
+#define CATIAHybridShape3DCurveOffset_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//           
+// CATIAHybridShape3DCurveOffset:         
+// Exposed interface for HybridShape 3D Curve Offset
+//           
+//=================================================================
+
+#include "CATIAHybridShape.idl"
+#include "CATIAHybridShapeDirection.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape 3DCurve Offset operation feature.
+ * <b>Role</b>: Allows you to access data of the 3D Curve Offset feature
+ * created by using  a curve, a direction and three litteral parameters
+ * <p>Use the @href CATIAHybridShapeFactory#AddNew3DCurveOffset to create a HybridShape3DCurveOffset object.
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShape3DCurveOffset : CATIAHybridShape
+{
+ //Properties
+
+/**
+ * Returns or sets the curve to offset.
+ */ 
+#pragma PROPERTY CurveToOffset
+ HRESULT get_CurveToOffset ( out /*IDLRETVAL*/ CATIAReference opIACurveToOffset );
+ HRESULT put_CurveToOffset ( in                CATIAReference ipIACurveToOffset );
+
+/**
+ * Returns or sets the direction.
+ */
+#pragma PROPERTY Direction
+ HRESULT get_Direction (out /*IDLRETVAL*/ CATIAHybridShapeDirection oDirection)  ;
+ HRESULT put_Direction (in                CATIAHybridShapeDirection  iDirection)  ;
+
+/**
+ * Returns or sets the OffsetValue.
+ */
+#pragma PROPERTY OffsetValue
+ HRESULT get_OffsetValue ( out /*IDLRETVAL*/ CATIALength oOffset );
+ HRESULT put_OffsetValue ( in				CATIALength iOffset );  
+
+/**
+ * Returns or sets the Corner Radius Value.
+ */
+#pragma PROPERTY CornerRadiusValue
+ HRESULT get_CornerRadiusValue ( out /*IDLRETVAL*/ CATIALength oCornerRadius );
+ HRESULT put_CornerRadiusValue ( in				   CATIALength iCornerRadius );  
+
+/**
+ * Returns or sets the Corner Tension Value.
+ */
+#pragma PROPERTY CornerTensionValue
+ HRESULT get_CornerTensionValue ( out /*IDLRETVAL*/ double oCornerTension );
+ HRESULT put_CornerTensionValue ( in				double iCornerTension );      
+
+/**
+ * Returns or sets the direction orientation.
+ */
+#pragma PROPERTY InvertDirection
+ HRESULT get_InvertDirection ( out /*IDLRETVAL*/ boolean oInvert );
+ HRESULT put_InvertDirection ( in				boolean iInvert );      
+
+};
+
+// Interface name : CATIAHybridShape3DCurveOffset
+#pragma ID CATIAHybridShape3DCurveOffset "DCE:EDB7F706-F1FC-4744-99C5F046AEF22C84"
+#pragma DUAL CATIAHybridShape3DCurveOffset
+
+// VB object name : HybridShape3DCurveOffset (Id used in Visual Basic)
+#pragma ID HybridShape3DCurveOffset "DCE:0AA33327-0E5B-4204-8E4573963CDE3D1E"
+#pragma ALIAS CATIAHybridShape3DCurveOffset HybridShape3DCurveOffset
+
+
+#endif
+// CATIAHybridShape3DCurveOffset_IDL

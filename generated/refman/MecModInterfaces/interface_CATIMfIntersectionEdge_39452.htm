@@ -1,0 +1,631 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>MecModInterfaces CATIMfIntersectionEdge Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../MecModInterfaces.htm" href="../MecModInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "MecModInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIMfIntersectionEdge"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>MecModInterfaces Framework:  CATIMfIntersectionEdge Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIMfIntersectionEdge_39452','CATIMfIntersectionEdge','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIMfIntersectionEdge</b>
+</p>
+<p>
+<b><i> Interface for Intersection Edges BRep features.</i></b><br>
+
+ <br><b>Role</b>:This interface allows to manage BRep features defined by edges produced by 
+ the intersection of two lists of features.
+ The information stored by an Intersection Edge consists in <ul>
+ <li>two lists of features to operate (called <tt>FirstOperands</tt> and <tt>SecondOperands</tt>),</li> 
+ <li>a resolution mode (called <tt>CATMfResolutionMode</tt>),</li> 
+ <li>in some cases, one applicative feature.</li>
+ <li>in some cases, the initial edge.</li></ul>
+ There are two ways to create an intersection edge:<ul>
+ <li>With <script type="text/javascript"> activateLinkAnchor('CATIFeaturize','FeaturizeR','CATIFeaturize.FeaturizeR') </script> applied to a 
+<script type="text/javascript"> activateLinkAnchor('CATIREdge','','CATIREdge') </script> or to another 
+CATIMfIntersectionEdge(if you want to duplicate it). <br>Then, in first step, only one feature is put in the <tt>FirstOperands</tt> list 
+ (either a boolean operation feature or another geometrical feature), and resolution mode is 
+ set to <tt>MfResolutionMode_GeneratedEdges</tt>.Thus, at creation, the feature is seen as 
+ the lists of edges created when intersecting the operands of
+ this <tt>FirstOperands</tt> feature if this is a boolean operation, or when intersecting 
+ this <tt>FirstOperands</tt> feature itself with its input.</li>
+ <li>With 
+<script type="text/javascript"> activateLinkAnchor('CATIMfBRepFactory','CreateMfIntersectionEdge','CATIMfBRepFactory.CreateMfIntersectionEdge') </script> which can have a 
+<script type="text/javascript"> activateLinkAnchor('CATIREdge','','CATIREdge') </script> as input, or not( and in this last case, the intersection edge is empty and must be filled with appropriate methods)</li></ul>
+ In both cases you must use at least the right featurization mode:
+ <li><tt>MfFeaturizeIntersection</tt> for a standard intersection edge.</li>
+ <li><tt>MfFeaturizeC1Intersection</tt> for a C1 intersection edge</li>
+ <li><tt>MfFeaturizeC1Intersection|MfFeaturizeSubElement</tt> for a not propaged intersection edge</li></ul>
+ <p>The definition of an intersection edge can be modified using the methods of the interface 
+ to add features in the lists or to change the resolution mode.
+ For instance, if needed, the application may change the resolution mode to 
+ <tt>MfResolutionMode_ListAgainstCurrent</tt> mode and set the <tt>SecondOperands</tt> list.</p>
+ Please refer to the technical article dealing with the intersection edge in the CAA Encyclopedia for further details.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetEdgeInit(CATIMfBRep_var&amp;)"><b>GetEdgeInit</b></a>(CATIMfBRep_var&amp;)
+</td><td id='tdright'>  Retrieves the initial edge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetEdgesAllInit(int,CATLISTV(CATISpecObject_var)&amp;)"><b>GetEdgesAllInit</b></a>(int,CATLISTV(CATISpecObject_var)&amp;)
+</td><td id='tdright'>  Retrieves the initial edges for functional tangent intersection edge.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetEdgesOriented(CATLISTP(CATCell)&amp;,CATListOfInt&amp;,CATISpecObject_var&amp;)"><b>GetEdgesOriented</b></a>(CATLISTP(CATCell)&amp;,CATListOfInt&amp;,CATISpecObject_var&amp;)
+</td><td id='tdright'>  Returns the oriented topological edges associated with the BRep Feature.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetFirstOperands(CATLISTV(CATISpecObject_var)&amp;)"><b>GetFirstOperands</b></a>(CATLISTV(CATISpecObject_var)&amp;)
+</td><td id='tdright'>  Reads the list of first operands.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetIntersectionEdgeType(CATIMfIntersectionEdge::CATMfIntersectionEdgeType&amp;)"><b>GetIntersectionEdgeType</b></a>(CATIMfIntersectionEdge::CATMfIntersectionEdgeType&amp;)
+</td><td id='tdright'>  Retrieves the intersection edge type.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResolveMode(CATMfResolutionMode&amp;,CATISpecObject_var&amp;)"><b>GetResolveMode</b></a>(CATMfResolutionMode&amp;,CATISpecObject_var&amp;)
+</td><td id='tdright'>  Returns the way to compute the result edges.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSecondOperands(CATLISTV(CATISpecObject_var)&amp;)"><b>GetSecondOperands</b></a>(CATLISTV(CATISpecObject_var)&amp;)
+</td><td id='tdright'>  Reads the list of second operands.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetTangentPropagationMode(CATMfTangentPropagationMode&amp;)"><b>GetTangentPropagationMode</b></a>(CATMfTangentPropagationMode&amp;)
+</td><td id='tdright'>  Returns the value of the tangent propagation mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsSameResult(CATIMfIntersectionEdge_var&amp;,CATISpecObject_var&amp;)"><b>IsSameResult</b></a>(CATIMfIntersectionEdge_var&amp;,CATISpecObject_var&amp;)
+</td><td id='tdright'>  Checks if two intersection edges give the same result.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFirstOperands(CATLISTV(CATISpecObject_var)&amp;)"><b>SetFirstOperands</b></a>(CATLISTV(CATISpecObject_var)&amp;)
+</td><td id='tdright'>  Sets the list of first operands.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetResolveMode(CATMfResolutionMode,CATISpecObject_var&amp;)"><b>SetResolveMode</b></a>(CATMfResolutionMode,CATISpecObject_var&amp;)
+</td><td id='tdright'>  Sets the value of the resolution mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSecondOperands(CATLISTV(CATISpecObject_var)&amp;)"><b>SetSecondOperands</b></a>(CATLISTV(CATISpecObject_var)&amp;)
+</td><td id='tdright'>  Sets the list of second operands.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTangentPropagationMode(CATMfTangentPropagationMode)"><b>SetTangentPropagationMode</b></a>(CATMfTangentPropagationMode)
+</td><td id='tdright'>  Sets the value of the tangent propagation mode.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+<nav id = 'idxnav'> <table class = 'fill' id='idxtab' ><tbody>					<tr><th colspan = '2'>Enumerated Type Index</th></tr> 
+ <tr><td  id='tdleft'> 
+    <a href="#CATMfIntersectionEdgeType"><b>CATMfIntersectionEdgeType</b></a>
+</td><td id='tdrigth'>   The type to compute the result edges.
+</td></tr>  <tr><td  id='tdleft'> 
+    <a href="#CATMfResolutionMode"><b>CATMfResolutionMode</b></a>
+</td><td id='tdrigth'>   The way to compute the result edges.
+</td></tr>  <tr><td  id='tdleft'> 
+    <a href="#CATMfTangentPropagationMode"><b>CATMfTangentPropagationMode</b></a>
+</td><td id='tdrigth'>   Mode used to define the tangent propagation mode.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetEdgeInit"></a><a id="GetEdgeInit(CATIMfBRep_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetEdgeInit</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMfBRep_var','CATIMfBRep_var&amp;')</script> <span class='param'>oStartEdge</span>)</span><script type="text/javascript"> activateLink('0','const = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the initial edge.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oStartEdge</span></dt>
+   <dd>   <li>This BRep Feature exists for types: <tt>TgtIntersEdge</tt>, <tt>TgtEdge</tt>, <tt>NotPropagEdge</tt></li>
+ <li>but is NULL_var for standard <tt>IntersectionEdge</tt>, as then it has no meaning.</li>
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The edge is retrieved (could be NULL_var) </li>
+   <li><tt>E_FAIL</tt>: Error occured.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetEdgesAllInit"></a><a id="GetEdgesAllInit(int,CATLISTV(CATISpecObject_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetEdgesAllInit</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iEdgesSecoursOnly</span>,<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>oListEdgesAllInit</span>)</span><script type="text/javascript"> activateLink('0','const = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the initial edges for functional tangent intersection edge.
+ <br>These BRep Feature exists for types: <tt>TgtFunctionalEdge</tt>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iEdgesSecoursOnly</span></dt>
+   <dd>   To take into account the main initial edge or not (the main can be retrieved by <tt>GetEdgeInit</tt> method.<ul>
+   <li><tt>0</tt> : to get all init, including the main one, which is always in first position</li>
+   <li><tt>1</tt> : to get only the secondary init. These ones are computed once at the creation by tangent propagation
+                    from the main init.</li></ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListEdgesAllInit</span></dt>
+   <dd>   The list of initial edges which are <tt>CATIMfBRep_var</tt>.
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The edges are retrieved (could be NULL_var) </li>
+   <li><tt>E_FAIL</tt>: Error occured.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetEdgesOriented"></a><a id="GetEdgesOriented(CATLISTP(CATCell)&amp;,CATListOfInt&amp;,CATISpecObject_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetEdgesOriented</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTP(CATCell)','CATLISTP(CATCell)&amp;')</script> <span class='param'>oListCellEdges</span>,<script type="text/javascript"> activateLink('CATListOfInt','CATListOfInt&amp;')</script> <span class='param'>oListOrientations</span>, const <script type="text/javascript"> activateLink('CATISpecObject_var','CATISpecObject_var&amp;')</script> <span class='param'>iFeat</span><span class='param'>= NULL_var </span>)</span><script type="text/javascript"> activateLink('0','const = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the oriented topological edges associated with the BRep Feature.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oListCellEdges</span></dt>
+   <dd>   List of topological edges, which are <tt>CATEdge</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListOrientations</span></dt>
+   <dd>   List of orientations, associated which each edge. Values should be <tt>+1</tt> or <tt>-1</tt>
+ <br>Notice that both lists are emptied at the beginning of this method.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeat</span></dt>
+   <dd>  Defines the body of the search, e.g. the feature of resolution.
+ <br>If NULL_var (default value), current feature is taken into account
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The full lists are retrieved (could be empty) </li>
+   <li><tt>E_FAIL</tt>: The lists cannot be computed.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetFirstOperands"></a><a id="GetFirstOperands(CATLISTV(CATISpecObject_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetFirstOperands</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>oFirstOperands</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Reads the list of first operands.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oFirstOperands</span></dt>
+   <dd> The list of features stored as <tt>FirstOperand</tt> features list.
+ The output list is not emptied when entering in the method. If the application reuses a previous
+ list, it should remove the elements inside before calling the method if necessary.
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The list is retrieved </li>
+   <li><tt>E_FAIL</tt>: The list could not be accessed.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetIntersectionEdgeType"></a><a id="GetIntersectionEdgeType(CATIMfIntersectionEdge::CATMfIntersectionEdgeType&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetIntersectionEdgeType</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIMfIntersectionEdge::CATMfIntersectionEdgeType','CATIMfIntersectionEdge::CATMfIntersectionEdgeType&amp;')</script> <span class='param'>oType</span>)</span><script type="text/javascript"> activateLink('0','const = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the intersection edge type.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oType</span></dt>
+   <dd>  The effective type of the intersection edge BRep Feature.
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The type is retrieved </li>
+   <li><tt>E_FAIL</tt>: Error occured.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResolveMode"></a><a id="GetResolveMode(CATMfResolutionMode&amp;,CATISpecObject_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetResolveMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMfResolutionMode','CATMfResolutionMode&amp;')</script> <span class='param'>oMode</span>,<script type="text/javascript"> activateLink('CATISpecObject_var','CATISpecObject_var&amp;')</script> <span class='param'>oApplicativeResolveOperator</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the way to compute the result edges.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oMode</span></dt>
+   <dd> The resolution mode.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oApplicativeResolveOperator</span></dt>
+   <dd> The feature implementing the 
+<script type="text/javascript"> activateLinkAnchor('CATIMfIntersectApplicativeResolution','','CATIMfIntersectApplicativeResolution') </script> interface,  to overload resolution. By this mean, the application may define how to compute 
+ the result edges of the intersection edge in his own way.
+ This feature is <tt>NULL_var</tt> for other 
+<script type="text/javascript"> activateLinkAnchor('','CATMfResolutionMode','CATMfResolutionMode') </script> values than <tt>MfResolutionMode_Application</tt>. 
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The value is retrieved </li>
+   <li><tt>E_FAIL</tt>: The value could not be accessed.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSecondOperands"></a><a id="GetSecondOperands(CATLISTV(CATISpecObject_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetSecondOperands</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>oSecondOperands</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Reads the list of second operands.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oSecondOperands</span></dt>
+   <dd> The list of features stored as <tt>SecondOperands</tt> features list.
+ The output list is not emptied when entering in the method. If the application reuses a previous
+ list, it should remove the elements inside before calling the method if necessary.
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The list is retrieved </li>
+   <li><tt>E_FAIL</tt>: The list could not be accessed.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetTangentPropagationMode"></a><a id="GetTangentPropagationMode(CATMfTangentPropagationMode&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetTangentPropagationMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMfTangentPropagationMode','CATMfTangentPropagationMode&amp;')</script> <span class='param'>oTgtMode</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the value of the tangent propagation mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oTgtMode</span></dt>
+   <dd> The tangent propagation mode.
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The mode is retrieved </li>
+   <li><tt>E_FAIL</tt>: The mode could not be accessed.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsSameResult"></a><a id="IsSameResult(CATIMfIntersectionEdge_var&amp;,CATISpecObject_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsSameResult</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIMfIntersectionEdge_var','CATIMfIntersectionEdge_var&amp;')</script> <span class='param'>iOtherIntersEdge</span>, const <script type="text/javascript"> activateLink('CATISpecObject_var','CATISpecObject_var&amp;')</script> <span class='param'>iFeat</span><span class='param'>= NULL_var </span>)</span><script type="text/javascript"> activateLink('0','const = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Checks if two intersection edges give the same result.
+ <br><b>Role</b>: Unlike 
+<script type="text/javascript"> activateLinkAnchor('CATIMfBRep','IsSame','CATIMfBRep.IsSame') </script> , this method will compare the results of two intersection edge, topology and geometry.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOtherIntersEdge</span></dt>
+   <dd>   The other intersection edge to compare
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeat</span></dt>
+   <dd>  Defines the body of the search, e.g. the feature of resolution.
+ <br>If NULL_var (default value), current feature is taken into account 
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <ul>   <li><tt>+1</tt> : the BRep Feature give same result as <tt>iOtherIntersEdge</tt>, (even if they could differ by specification)</li>
+   <li><tt>-1</tt> : the BRep Feature give same result as <tt>iOtherIntersEdge</tt>, but orientations are inverted</li>
+   <li><tt> 0</tt> : results are differents</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFirstOperands"></a><a id="SetFirstOperands(CATLISTV(CATISpecObject_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetFirstOperands</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>iFirstOperands</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the list of first operands.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFirstOperands</span></dt>
+   <dd> The list of features to be stored as <tt>FirstOperand</tt> features list.
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The list has been stored. </li>
+   <li><tt>ERROR_BAD_ARGUMENTS</tt>: The list contains more than one feature and the resolution mode is
+     equal to <tt>MfResolutionMode_GeneratedEdges</tt>.</li>
+   <li><tt>E_FAIL</tt>: the list is not empty but no feature in the list is a valid CATISpecObject. </li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetResolveMode"></a><a id="SetResolveMode(CATMfResolutionMode,CATISpecObject_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetResolveMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMfResolutionMode','CATMfResolutionMode')</script> <span class='param'>iMode</span>,<script type="text/javascript"> activateLink('CATISpecObject_var','CATISpecObject_var&amp;')</script> <span class='param'>iApplicativeResolveOperator</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the value of the resolution mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd> The resolution mode.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iApplicativeResolveOperator</span></dt>
+   <dd> The feature that implements the 
+<script type="text/javascript"> activateLinkAnchor('CATIMfIntersectApplicativeResolution','','CATIMfIntersectApplicativeResolution') </script> interface, to overload resolution. Allowed only when <tt>iMode</tt> is equal to <tt>MfResolutionMode_Application</tt>. 
+ This feature is ignored and not stored for other 
+<script type="text/javascript"> activateLinkAnchor('','CATMfResolutionMode','CATMfResolutionMode') </script> values.   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The mode has been stored. </li>
+   <li><tt>ERROR_BAD_ARGUMENTS</tt>: <tt>iMode</tt> is equal to <tt>MfResolutionMode_Application</tt> and 
+     <tt>iApplicativeResolveOperator</tt> does not implement <tt>CATIMfIntersectApplicativeResolution</tt>.</li>
+   <li><tt>ERROR_BAD_ARGUMENTS</tt>: <tt>iMode</tt> is equal to <tt>MfResolutionMode_GeneratedEdges</tt> and
+     <tt>FirstOperand</tt> list contains more than one feature.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSecondOperands"></a><a id="SetSecondOperands(CATLISTV(CATISpecObject_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetSecondOperands</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATISpecObject_var)','CATLISTV(CATISpecObject_var)&amp;')</script> <span class='param'>iSecondOperands</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the list of second operands.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSecondOperands</span></dt>
+   <dd> The list of features to be stored as <tt>SecondOperands</tt> features list.
+ <br>In case the second operands list is set although this is not consistent with
+ the resolution mode, an error will be raised when resolving the result edges.  
+   
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The list has been stored. </li>
+   <li><tt>E_FAIL</tt>: List could not be read properly</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTangentPropagationMode"></a><a id="SetTangentPropagationMode(CATMfTangentPropagationMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetTangentPropagationMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMfTangentPropagationMode','CATMfTangentPropagationMode')</script> <span class='param'>iTgtMode</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the value of the tangent propagation mode.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTgtMode</span></dt>
+   <dd> The tangent propagation mode.
+   The error code.
+   <br><b>Legal values</b>: <ul>
+   <li><tt>S_OK</tt>: The mode has been stored. </li>
+   <li><tt>E_FAIL</tt>: The mode could not be set properly</li></ul>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+ <h2  class='title2'>Enumerated Types</h2> <br><dl>
+<dt class='dt1'><a id="CATMfIntersectionEdgeType"/>CATMfIntersectionEdgeType</dt>
+  <dd class='dd1'>
+
+enum <b>CATMfIntersectionEdgeType</b> {<pre class='light'>
+  Type_IntersectionEdge,
+  Type_TgtIntersEdge,
+  Type_TgtEdge,
+  Type_NotPropagEdge,
+  Type_TgtFunctionalFEdge,
+  Type_TgtFunctionalREdge,
+  Type_DerTgtEdge,
+  Type_DerNotPropagEdge
+</pre>}
+  The type to compute the result edges.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> Type_IntersectionEdge</span></dt>
+   <dd> corresponds to nothing special; this value may be also called as standard (all edges within intersection edge are computed). <br>It is created with <tt>CATMfFeaturizeMode MfFeaturizeIntersection</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> Type_TgtIntersEdge</span></dt>
+   <dd> corresponds to C1 continuity propagation (edges computed depend of initial edge). <br>It is created with <tt>CATMfFeaturizeMode MfFeaturizeC1Intersection</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> Type_TgtEdge</span></dt>
+   <dd> corresponds to C1 continuity propagation but the initial edge cannot be built within an intersection edge (there is no semantic characteristic).
+ <br>It is created with <tt>CATMfFeaturizeMode MfFeaturizeC1Intersection</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> Type_NotPropagEdge</span></dt>
+   <dd> corresponds to only edge selection, without propagation, but this edge is built within an intersection edge (semantic characteristic is kept)
+ <br>It is created with <tt>CATMfFeaturizeMode MfFeaturizeC1Intersection|MfFeaturizeSubElement</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> Type_TgtFunctionalFEdge</span></dt>
+   <dd> corresponds to C1 continuity propagation of initial edge at the creation only, inside the initial feature of this edge. It has fonctional mode, see 
+<script type="text/javascript"> activateLinkAnchor('CATIMfBRep','GetBRepType','CATIMfBRep.GetBRepType') </script>. <br>It is created with <tt>CATMfFeaturizeMode MfFeaturizeFunctionalC1Intersection|MfFunctionalFeaturization</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> Type_TgtFunctionalREdge</span></dt>
+   <dd> corresponds to C1 continuity propagation of initial edge at the creation only, inside the initial feature of this edge. It has relimited mode, see 
+<script type="text/javascript"> activateLinkAnchor('CATIMfBRep','GetBRepType','CATIMfBRep.GetBRepType') </script>. <br>It is created with <tt>CATMfFeaturizeMode MfFeaturizeFunctionalC1Intersection|MfRelimitedFeaturization</tt>
+ or <tt>CATMfFeaturizeMode MfFeaturizeFunctionalC1Intersection|MfRelimitedFeaturization</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> Type_DerTgtEdge</span></dt>
+   <dd> is a type created after an Isolate functionnality: a former TgtIntersEdge became not semantic, it is similar to TgtEdge but it keeps its own orientation as it was before transformation (Der is just a shorcut for Derived).
+ 
+ </ dd>
+    <dt><span class='paramitem'> Type_DerNotPropagEdge</span></dt>
+   <dd> is analog to previous type, but it comes from NotPropagEdge.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dt1'><a id="CATMfResolutionMode"/>CATMfResolutionMode</dt>
+  <dd class='dd1'>
+
+enum <b>CATMfResolutionMode</b> {<pre class='light'>
+  MfResolutionMode_GeneratedEdges,
+  MfResolutionMode_ListAgainstList,
+  MfResolutionMode_ListAgainstCurrent,
+  MfResolutionMode_FreeEdges,
+  MfResolutionMode_Application
+</pre>}
+  The way to compute the result edges.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> MfResolutionMode_GeneratedEdges</span></dt>
+   <dd> is used when the need is to retrieve cells  generated when operating the feature in <tt>FirstOperands</tt> against its input context.
+ Only one feature is then allowed within <tt>FirstOperands</tt> list. <tt>SecondOperands</tt> 
+ list must be empty.
+ 
+ </ dd>
+    <dt><span class='paramitem'> MfResolutionMode_ListAgainstList</span></dt>
+   <dd> is used when the need is to retrieve cells that have one adjacent face issued from a feature in <tt>FirstOperand</tt> list, and the other face issued from a feature
+ in <tt>SecondOperands</tt> list.
+ 
+ </ dd>
+    <dt><span class='paramitem'> MfResolutionMode_ListAgainstCurrent</span></dt>
+   <dd> is used when the need is to retrieve cells that have one adjacent  face issued from a feature in <tt>FirstOperands</tt> list, and the other face issued from the global context.
+ 
+ </ dd>
+    <dt><span class='paramitem'> MfResolutionMode_FreeEdges</span></dt>
+   <dd> is used when the need is to retrieve cells that have both adjacent faces issued from features in <tt>FirstOperands</tt> list.
+ <tt>SecondOperands</tt> list must be empty.
+ 
+ </ dd>
+    <dt><span class='paramitem'> MfResolutionMode_Application</span></dt>
+   <dd> is available to add applicative resolution modes. In this mode, the resolution of the intersection edge is delegated to the application.
+ The application has to provide a solving method using the 
+<script type="text/javascript"> activateLinkAnchor('CATIMfIntersectApplicativeResolution','','CATIMfIntersectApplicativeResolution') </script> interface. A feature implementing this interface is provided in the 
+<script type="text/javascript"> activateLinkAnchor('','SetResolveMode','SetResolveMode') </script> method.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dt1'><a id="CATMfTangentPropagationMode"/>CATMfTangentPropagationMode</dt>
+  <dd class='dd1'>
+
+enum <b>CATMfTangentPropagationMode</b> {<pre class='light'>
+  MfTangentPropagationMode_Standard,
+  MfTangentPropagationMode_Fillet
+</pre>}
+  Mode used to define the tangent propagation mode.
+ <br><b>Role</b>:The type to compute the tangent propagation (only for 
+<script type="text/javascript"> activateLinkAnchor('CATMfFeaturizeMode','','CATMfFeaturizeMode') </script> <tt>MfFeaturizeC1Intersection</tt>) which allow to compute propagated edges
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> MfTangentPropagationMode_Standard</span></dt>
+   <dd> corresponds to standard propagation (similar to extract operator) and is the default value
+ 
+ </ dd>
+    <dt><span class='paramitem'> MfTangentPropagationMode_Fillet</span></dt>
+   <dd> corresponds to fillet tangency propagation (mandatory for fillet features)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIMfIntersectionEdge.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATMecModInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

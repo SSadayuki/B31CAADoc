@@ -1,0 +1,74 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIAEdge_IDL
+#define CATIAEdge_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// Edge Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIABoundary.idl"
+#include "CATBSTR.idl"
+
+/**
+ * 1-D boundary.
+ * <b>Role</b>: 
+ * This @href CATIABoundary object may be, for example, the edge of a cylinder.</br>
+ * You will create an Edge object using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it
+ * to the operator (such as @href CATIAHybridShapeFactory#AddNewPointTangent ).</br> 
+ * The lifetime of an Edge object is limited, see @href CATIABoundary.</br> 
+ * <b>See also:</b><br>
+ * @href CATIATriDimFeatEdge , @href CATIARectilinearTriDimFeatEdge ,
+ * @href CATIABiDimFeatEdge , @href CATIARectilinearBiDimFeatEdge ,
+ * @href CATIAMonoDimFeatEdge , @href CATIARectilinearMonoDimFeatEdge .
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example asks the end user to select a planar curve, whose plane is parallel to the XY plane. 
+ * Then, it creates a point on the tangent to the curve in the X direction:
+ * <pre>
+ * Dim InputObjectType(0)
+ * Set Document = CATIA.ActiveDocument
+ * Set Selection = Document.Selection
+ * Set HybridBodies = Document.Part.HybridBodies
+ * Set HybridBody = HybridBodies.Item("Geometrical Set.1")
+ * 'We propose to the user that he select a planar curve whose plane is parallel to the XY plane
+ * InputObjectType(0)="Edge"
+ * Status=Selection.SelectElement2(InputObjectType,"Select a planar curve whose plane is parallel to the XY plane",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set PlanarCurve = Selection.Item(1).Value
+ * Set HybridShapeDirection = HybridShapeFactory.AddNewDirectionByCoord(1.0,0.0,0.0)
+ * Set HybridShapePointTangent = HybridShapeFactory.AddNewPointTangent(PlanarCurve,HybridShapeDirection)
+ * HybridBody.AppendHybridShape HybridShapePointTangent
+ * Document.Part.InWorkObject = HybridShapePointTangent
+ * Document.Part.Update  
+ * </pre>
+ * </dl>
+ */  
+
+interface CATIAEdge : CATIABoundary
+{
+
+};
+
+// Interface Name : CATIAEdge
+
+#pragma ID CATIAEdge "DCE:24e09fb0-1be1-11d6-80600010b5d44ab2"
+#pragma DUAL CATIAEdge
+
+// VB Object Name : Edge
+#pragma ID Edge "DCE:6e8b65a0-1be7-11d6-80600010b5d44ab2"
+#pragma ALIAS CATIAEdge Edge
+
+#endif
+//#endif
+

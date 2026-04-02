@@ -1,0 +1,856 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>VisualizationBase CAT3DBoundingGP Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../VisualizationBase.htm" href="../VisualizationBase.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "VisualizationBase";	}
+		function getCurrentObjectName() { 
+ 	return "CAT3DBoundingGP"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>VisualizationBase Framework: CAT3DBoundingGP <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CAT3DBoundingGP_24965','CAT3DBoundingGP','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CAT3DBoundingGP</b>
+</p>
+<p>
+<b><i> Class to create a graphic primitive which geometry is enclosed
+ in a bounding element.</i></b><br>
+
+ <b>Role</b>:
+    The box can either be an Axis Aligned Bounding Box
+    (AABB) or an Object Bounding Box (OBB).
+     - The AABB is aligned on the 3D axis system and so, of easy use with the GP coordinates 
+       system, that can be obtained by reading the Representation tree.
+     - The OBB is the best bounding box enclosing an object, and it is built
+       through the use of the convex hull of the GP.
+
+    Presently, the box is computed in the GP axis coordinate system
+    and is an AABB.
+
+    We although store a Bounding Sphere. Box and sphere are separately
+    computed and have no common parameters, but are both enclosing the GP's
+    geometry.
+
+    Don't worry about how to build it... The GP that inherits from this GP
+    have to update the box included in this object, with the provided methods.
+    As for the children, we have a provided method to retrieve tesselation
+    parameters. This method will only be efficient in the subclasses that
+    have overloaded it.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CAT3DBoundingGP(void)"><b>CAT3DBoundingGP</b></a>(void)
+</td><td id='tdright'>  Constructs a boxed graphic primitive.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Clear(int*,float**,int*,float**,int*,int**,int*,int**,int*,int**,int**,int*,int**)"><b>Clear</b></a>(int*,float**,int*,float**,int*,int**,int*,int**,int*,int**,int**,int*,int**)
+</td><td id='tdright'>  Clears tesselation data  by deallocating memory.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ClearUV(int*,float**,int*)"><b>ClearUV</b></a>(int*,float**,int*)
+</td><td id='tdright'>  Clears surfacic mesh parameters data structure by deallocating memory.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ClearVertices(int*,float**,int*)"><b>ClearVertices</b></a>(int*,float**,int*)
+</td><td id='tdright'>  Clears vertices data structure by deallocating memory.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ComputeBox(void)"><b>ComputeBox</b></a>(void)
+</td><td id='tdright'>  Box and sphere computation method prototype.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Draw(CATRender&amp;)"><b>Draw</b></a>(CATRender&amp;)
+</td><td id='tdright'>  Draws the 3D bounding GP.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Get(int*,float**,int*,float**,int*,int**,int*,int**,int*,int**,int**,int*,int**)"><b>Get</b></a>(int*,float**,int*,float**,int*,int**,int*,int**,int*,int**,int**,int*,int**)
+</td><td id='tdright'>  Retrieves the tesselation information from the 3D bounding GP.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBoxCenter(void)"><b>GetBoxCenter</b></a>(void)
+</td><td id='tdright'>  Gets the box center coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBoxDimensions(void)"><b>GetBoxDimensions</b></a>(void)
+</td><td id='tdright'>  Gets the X,Y,Z half box spans.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSphereCenter(void)"><b>GetSphereCenter</b></a>(void)
+</td><td id='tdright'>  Gets the bounding sphere center coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSphereRadius(void)"><b>GetSphereRadius</b></a>(void)
+</td><td id='tdright'>  Gets the bounding sphere radius.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetTextureCoordinates(float**,int*)"><b>GetTextureCoordinates</b></a>(float**,int*)
+</td><td id='tdright'>  Retrieves the texture coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetUV(int*,float**,int*)"><b>GetUV</b></a>(int*,float**,int*)
+</td><td id='tdright'>  Retrieves the 3D bounding GP surfacic mesh parameters.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetVertices(int*,float**,int*)"><b>GetVertices</b></a>(int*,float**,int*)
+</td><td id='tdright'>  Retrieves 3D bounding GP vertices.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#HasNormals(void)"><b>HasNormals</b></a>(void)
+</td><td id='tdright'>  Tests whether the 3D bounding GP is owner of its normals informations.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#HasVertices(void)"><b>HasVertices</b></a>(void)
+</td><td id='tdright'>  Tests whether the 3D bounding GP is owner of its vertices informations.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetBoxCenter(float*)"><b>SetBoxCenter</b></a>(float*)
+</td><td id='tdright'>  Sets the box center coordinates.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetBoxDimensions(float*)"><b>SetBoxDimensions</b></a>(float*)
+</td><td id='tdright'>  Sets the X,Y,Z half box spans.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSphereCenter(float*)"><b>SetSphereCenter</b></a>(float*)
+</td><td id='tdright'>  Sets the bounding sphere center.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSphereRadius(float)"><b>SetSphereRadius</b></a>(float)
+</td><td id='tdright'>  Sets the bounding sphere radius.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTextureCoordinates(float*,int)"><b>SetTextureCoordinates</b></a>(float*,int)
+</td><td id='tdright'>  Sets the texture coordinates.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CAT3DBoundingGP"></a><a id="CAT3DBoundingGP(void)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CAT3DBoundingGP</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a boxed graphic primitive.
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Clear"></a><a id="Clear(int*,float**,int*,float**,int*,int**,int*,int**,int*,int**,int**,int*,int**)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Clear</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iAllocate</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>iVertices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iVerticesArraySize</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>iNormals</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iNormalsArraySize</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>iTriangleIndices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iNbTriangle</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>iTriangleStripIndices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iNbTriangleStrip</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>iNbVertexPerTriangleStrip</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>iTriangleFanIndices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iNbTriangleFan</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>iNbVertexPerTriangleFan</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Clears tesselation data  by deallocating memory.
+ The following parameters description does not explain in detail
+ each of them. It is only an overview of these parameters regarding to
+ the <tt>Clear</tt> method.
+ The full description can be found in the 
+<script type="text/javascript"> activateLinkAnchor('CAT3DBoundingGP','Get','CAT3DBoundingGP.Get') </script> method comments. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAllocate</span></dt>
+   <dd>   Flag to specify whether the data you are passing on were
+   allocated by this 3D bounding GP or not.
+    <br><b>Legal values</b>:
+      <dl>
+        <dt>1</dt>
+          <dd>passed data were allocated by this 3D bounding GP and must be deallocated</dd>
+        <dt>0</dt>
+          <dd>passed data were not allocated by this 3D bounding GP and nothing is done</dd>
+      </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iVertices</span></dt>
+   <dd>   Array of 3D bounding GP vertices coordinates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iVerticesArraySize</span></dt>
+   <dd>   Size of <tt>iVertices</tt> array. If equal to zero, <tt>iVertices</tt> is not deleted.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNormals</span></dt>
+   <dd>   Array of 3D bounding GP normals coordinates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNormalsArraySize</span></dt>
+   <dd>   Size of <tt>iNormals</tt> array. If equal to zero, <tt>iNormals</tt> is not deleted.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTriangleIndices</span></dt>
+   <dd>   Array of 3D bounding GP single triangles vertices coordinates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbTriangle</span></dt>
+   <dd>   The number of single triangles in the 3D bounding GP. If equal to zero, <tt>iTriangleIndices</tt>
+   is not deleted.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTriangleStripIndices</span></dt>
+   <dd>   Array of 3D bounding GP strips triangles vertices coordinates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbTriangleStrip</span></dt>
+   <dd>   The number of triangles strips in the 3D bounding GP. If equal to zero, <tt>iTriangleStripIndices</tt> and
+   <tt>iNbVertexPerTriangleStrip</tt> are not deleted.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbVertexPerTriangleStrip</span></dt>
+   <dd>   Array containing the number of vertices for each 3D bounding GP triangles strip. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTriangleFanIndices</span></dt>
+   <dd>   Array of 3D bounding GP fans triangles vertices coordinates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbTriangleFan</span></dt>
+   <dd>   The number of triangles fans in the 3D bounding GP. If equal to zero, <tt>iTriangleFanIndices</tt> and
+   <tt>iNbVertexPerTriangleFan</tt> are not deleted.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbVertexPerTriangleFan</span></dt>
+   <dd>   Array containing the number of vertices for each 3D bounding GP triangles fan.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ClearUV"></a><a id="ClearUV(int*,float**,int*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ClearUV</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iAllocate</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>iUV</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iUVArraySize</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Clears surfacic mesh parameters data structure by deallocating memory.
+ The following parameters description does not explain in detail
+ each of them. It is only an overview of these parameters regarding to
+ the <tt>ClearUV</tt> method.
+ The full description can be found in the 
+<script type="text/javascript"> activateLinkAnchor('CAT3DBoundingGP','GetUV','CAT3DBoundingGP.GetUV') </script> method comments. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAllocate</span></dt>
+   <dd>   Flag to specify whether the data you are passing on were
+   allocated by this 3D bounding GP or not.
+    <br><b>Legal values</b>:
+      <dl>
+        <dt>1</dt>
+          <dd>passed data were allocated by this 3D bounding GP and must be deallocated</dd>
+        <dt>0</dt>
+          <dd>passed data were not allocated by this 3D bounding GP and nothing is done</dd>
+      </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iUV</span></dt>
+   <dd>    UV array. Each vertex has an associated UV couple.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iUVArraySize</span></dt>
+   <dd>    UV array size. If equal to 0, <tt>iUVArray</tt> is not deleted.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ClearVertices"></a><a id="ClearVertices(int*,float**,int*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ClearVertices</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iAllocate</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>iVertices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>iVerticesArraySize</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Clears vertices data structure by deallocating memory.
+ The following parameters description does not explain in detail
+ each of them. It is only an overview of these parameters regarding to
+ the <tt>ClearVertices</tt> method.
+ The full description can be found in the 
+<script type="text/javascript"> activateLinkAnchor('CAT3DBoundingGP','GetVertices','CAT3DBoundingGP.GetVertices') </script> method comments. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iAllocate</span></dt>
+   <dd>   Flag to specify whether the data you are passing on were
+   allocated by this 3D bounding GP or not.
+    <br><b>Legal values</b>:
+      <dl>
+        <dt>1</dt>
+          <dd>passed data were allocated by this 3D bounding GP and must be deallocated</dd>
+        <dt>0</dt>
+          <dd>passed data were not allocated by this 3D bounding GP and nothing is done</dd>
+      </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iVertices</span></dt>
+   <dd>   Array of 3D bounding GP vertices coordinates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iVerticesArraySize</span></dt>
+   <dd>   Size of <tt>iVertices</tt> array. If equal to zero, <tt>iVertices</tt> is not deleted.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ComputeBox"></a><a id="ComputeBox(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ComputeBox</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Box and sphere computation method prototype.
+</dd>
+<dt class='dtmethod' >
+  <a id="Draw"></a><a id="Draw(CATRender&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Draw</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATRender','CATRender&amp;')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Draws the 3D bounding GP.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iRender</span></dt>
+   <dd>   The render through which the 3D bounding GP is drawn.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Get"></a><a id="Get(int*,float**,int*,float**,int*,int**,int*,int**,int*,int**,int**,int*,int**)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Get</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oAllocate</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>oVertices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oVerticesArraySize</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>oNormals</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oNormalsArraySize</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>oTriangleIndices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oNbTriangle</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>oTriangleStripIndices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oNbTriangleStrip</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>oNbVertexPerTriangleStrip</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>oTriangleFanIndices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oNbTriangleFan</span>,<script type="text/javascript"> activateLink('int','int**')</script> <span class='param'>oNbVertexPerTriangleFan</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the tesselation information from the 3D bounding GP.<br>
+ <b>Role</b>: As this method is designed to return values on its
+ parameters, it has to be called like this :<br>
+ <tt><pre>
+ int allocate;
+ float * vertices;
+ ...
+ Get(&allocate, &vertices, ...);
+ </pre></tt><br>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oAllocate</span></dt>
+   <dd>    Flag specifiying whether retrieved data is copied or not.
+    <br><b>Legal values</b>:
+      <dl>
+        <dt>1</dt>
+          <dd>retrieved data is copied.</dd>
+        <dt>0</dt>
+          <dd>retrieves references on data.</dd>
+      </dl>
+    oAllocate flag is always returned equal to 0: Get() only
+    retrieves references on stored data.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oVertices</span></dt>
+   <dd>    Retrieves an array made of face vertices coordinates: XYZXYZXYZ...
+    Its size is equal to three times the 3D bounding GP vertices number.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oVerticesArraySize</span></dt>
+   <dd>    Retrieves the size, in floats, of the <tt>oVertices</tt> array. Equal to three times the
+    vertices number.
+    If information on vertices is shared with another element,
+    returned size for this parameter is equal to 0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNormals</span></dt>
+   <dd>    Retrieves an array made of normals coordinates. It is organized as <tt>oVertices</tt> : one vertex has exactly
+    one normal at the same field entry.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNormalsArraySize</span></dt>
+   <dd>    Retrieves The size, in floats, of the <tt>oNormal</tt> array. Equal to three times the number
+    of normals.
+    If information on normals is shared with another element,
+    returned size for this parameter is equal to 0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oTriangleIndices</span></dt>
+   <dd>    Retrieves the array used to store the single triangles vertices. Each of its field represents
+    a vertex index, in the <tt>oVertices</tt> array.
+    As,  we find, in the <tt>*oVertices</tt> array, the XYZ coordinates for each
+    vertex, the indices used to designate the vertices are multiples of three.
+    So, the first three indices of the *oTriangleIndices array, are the indices of the 3D bounding GP first
+    single triangle three vertices.
+    <pre>
+
+                 -----------------       
+                |*oTriangleIndices |
+                 -----------------
+                |       i00       |   }
+                |       i01       |   } triangle 0 defined by index i00, i01 and i02
+                |       i02       |   }
+                |        .        |
+                |        .        |
+                |       ij0       |   }
+                |       ij1       |   } triangle j defined by index ij0, ij1 and ij2. 
+                |       ij2       |   }
+                |        .        |
+                |        .        |
+                 -----------------
+
+   </pre>
+    For example, index ij0 enables access to the 3D bounding GP j-th single triangle first vertex,
+    which coordinates are X = *oVertices[ij0], Y = *oVertices[ij0+1] and Z = *oVertices[ij0+2], and
+    which normal has coordinates Nx = *oNormals[ij0], Ny = *oNormals[ij0+1] and Nz = *oNormals[ij0+2].
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNbTriangle</span></dt>
+   <dd>    Retrieves the number of single triangles in the 3D bounding GP. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oTriangleStripIndices</span></dt>
+   <dd>    Retrieves the array used to store the 3D bounding GP triangles strips vertices. Each field contains a
+    vertex index, belonging to one of the strips, in the oVertices array.  As, we find, in the
+    <tt>oVertices</tt> array, the XYZ coordinates for each
+    vertex, the indices used to designate the vertices are multiples of three.
+    <pre>
+
+
+                   ----------------------
+                  | oTriangleStripIndices |
+                   ----------------------
+                  |          i00         |   }
+                  |          i01         |   } first triangle strip defined
+                  |           .          |   } by the first n1 indices
+                  |           .          |   }
+                  |          i0n1        |   }
+                  |           .          |
+                  |           .          |
+                  |           .          |   
+                  |          ij0         |   }
+                  |          ij1         |   }
+                  |           .          |   } triangle strip j
+                  |           .          |   } with nj vertices
+                  |          ijnj        |   }
+                   ----------------------
+
+
+    </pre> 
+    For example, index ij0 allows to access to the 3D bounding GP j-th strip first vertex 
+    wich coordinates are X = *oVertices[ij0], Y = *oVertices[ij0 + 1] and Z = *oVertices[ij0 + 2], and
+    which normal coordinates are Nx = *oNormals[ij0], Ny = *oNormals[ij0 + 1] and Nz = *oNormals[ij0 + 2].
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNbTriangleStrip</span></dt>
+   <dd>    Retrieves the number of 3D bounding GP triangles strips.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNbVertexPerTriangleStrip</span></dt>
+   <dd>    Retrieves an array containing the number of vertices for each 3D bounding GP triangles strip.
+    The size of this array is equal to <tt>*oNbTriangleStrip</tt>. For example, the first strip
+    is made with <tt>*oNbVertexPerTriangleStrip[0]</tt> vertices.
+    <pre>
+                --------------------------
+               |*oNbVertexPerTriangleStrip|
+                --------------------------
+               |             n1           |
+               |             .            |
+               |             .            |   m = Number of triangle strips(*oNbTriangleStrip)
+               |             nm           |   nm = number of vertices of the m-th strip. (*oNbVertexPerTriangleStrip[m]
+                --------------------------    
+
+   </pre>
+ 
+ </ dd>
+    <dt><span class='paramitem'> oTriangleFanIndices</span></dt>
+   <dd>    Retrieves the array used to store the 3D bounding GP triangles fans vertices. Each field contains a
+    vertex index, belonging to one of the fans, in the <tt>oVertices</tt> array.  As, we find, in the
+    <tt>oVertices</tt> array, the XYZ coordinates for each
+    vertex, the indices used to designate the vertices are multiples of three.
+    <pre>
+
+
+                   ----------------------
+                  | *oTriangleFanIndices  |
+                   ----------------------
+                  |          i00         |   }
+                  |          i01         |   } first triangle fan defined
+                  |           .          |   } by the first n1 indices
+                  |           .          |   }
+                  |          i0n1        |   }
+                  |           .          |
+                  |           .          |
+                  |           .          |   
+                  |          ij0         |   }
+                  |          ij1         |   }
+                  |           .          |   } triangle fan j
+                  |           .          |   } with nj vertices
+                  |          ijnj        |   }
+                   ----------------------
+
+
+    </pre> 
+    For example, index ij0 allows to access to the 3D bounding GP j-th fan first vertex
+    wich coordinates are X = *oVertices[ij0], Y = *oVertices[ij0 + 1] and Z = *oVertices[ij0 + 2], and
+    which normal coordinates are Nx = *oNormals[ij0], Ny = *oNormals[ij0 + 1] and Nz = *oNormals[ij0 + 2].
+    Each ij0, j in [0, jn], represents the j-th fan center.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNbTriangleFan</span></dt>
+   <dd>    Retrieves the number of 3D bounding GP triangles fans.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNbVertexPerTriangleFan</span></dt>
+   <dd>    Retrieves the array containing the number of vertices for each 3D bouning GP triangles fan.
+    The size of this array is equal to <tt>*oNbTriangleFan</tt>. For example, the first fan
+    is made with <tt>*oNbVertexPerTriangleStrip[0]</tt> vertices.
+    <pre>
+                --------------------------
+               | *oNbVertexPerTriangleFan |
+                --------------------------
+               |             n1           |
+               |             .            |
+               |             .            |   m = Number of triangle fans(*oNbTriangleFan)
+               |             nm           |   nm = number of vertices of the m-th fan. (*oNbVertexPerTriangleFan[m]
+                --------------------------    
+
+   </pre>
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBoxCenter"></a><a id="GetBoxCenter(void)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('float','inline float *')</script>  <span class='objname'>GetBoxCenter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the box center coordinates.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    returns the array containing the box center coordinates.
+   This array size is equal to three.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBoxDimensions"></a><a id="GetBoxDimensions(void)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('float','inline float *')</script>  <span class='objname'>GetBoxDimensions</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the X,Y,Z half box spans.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    returns the array containing the half box
+   spans coordinates. Its size is equal to three.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSphereCenter"></a><a id="GetSphereCenter(void)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('float','inline float *')</script>  <span class='objname'>GetSphereCenter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the bounding sphere center coordinates.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    returns a 3 fields array containing the sphere center coordinates.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSphereRadius"></a><a id="GetSphereRadius(void)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('float','inline float')</script>  <span class='objname'>GetSphereRadius</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the bounding sphere radius.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetTextureCoordinates"></a><a id="GetTextureCoordinates(float**,int*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetTextureCoordinates</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>oTextureCoord</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oDimension</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the texture coordinates.
+ This method must be used like this:
+ <br><tt><pre>
+ float * textureCoord;
+ GetTextureCoord(&textureCoord);
+ <br></pre></tt>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oTextureCoord</span></dt>
+   <dd>    Retrieves the array of texture coordinates.
+    Each vertex has an associated position
+    in the texture map. The number of texture coordinates groups is always equal to the number of
+    vertices. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oDimension</span></dt>
+   <dd>    Retrieve the number of coordinates per vertex.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetUV"></a><a id="GetUV(int*,float**,int*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetUV</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oAllocate</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>oUV</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oUVArraySize</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the 3D bounding GP surfacic mesh parameters.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oAllocate</span></dt>
+   <dd>    Flag specifiying whether retrieved data is copied or not.
+    <br><b>Legal values</b>:
+      <dl>
+        <dt>1</dt>
+          <dd>retrieved data is copied.</dd>
+        <dt>0</dt>
+          <dd>retrieves references on data.</dd>
+      </dl>
+    oAllocate flag is always returned equal to 0: GetUV() only
+    retrieves references on stored data.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oUV</span></dt>
+   <dd>    Retrieves the UV array. Each vertex has an associated UV couple.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oUVArraySize</span></dt>
+   <dd>    Retrieves the size of the UV array. 
+    Equals 0 if the mesh is shared with another element or if the array is NULL, two times the number
+    of vertices elsewhere.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetVertices"></a><a id="GetVertices(int*,float**,int*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetVertices</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oAllocate</span>,<script type="text/javascript"> activateLink('float','float**')</script> <span class='param'>oVertices</span>,<script type="text/javascript"> activateLink('int','int*')</script> <span class='param'>oVerticesArraySize</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves 3D bounding GP vertices.<br>
+ <b>Role</b>: As this method is designed to return values on its
+ parameters, it must be called like this :<br>
+ <tt><pre>
+ int allocate;
+ float * vertices;
+ ...
+ GetVertices(&allocate, &vertices, ...);
+ </pre></tt><br>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oAllocate</span></dt>
+   <dd>    Flag specifiying whether retrieved data is copied or not.
+    <br><b>Legal values</b>:
+      <dl>
+        <dt>1</dt>
+          <dd>retrieved data is copied.</dd>
+        <dt>0</dt>
+          <dd>retrieves references on data.</dd>
+      </dl>
+    oAllocate flag is always returned equal to 0: <tt>GetVertices</tt> only
+    retrieves references on stored data.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oVertices</span></dt>
+   <dd>    Retrieves an array made of 3D bounding GP vertices coordinates: XYZXYZXYZ...
+    Its size is equal to three times the 3D bounding GP vertices number.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oVerticesArraySize</span></dt>
+   <dd>    Retrieves the size, in floats, of the <tt>oVertices</tt> array. Equal to three times the
+    vertices number.
+    If information on vertices is shared with another element,
+    returned size for this parameter is equal to 0.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="HasNormals"></a><a id="HasNormals(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>HasNormals</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether the 3D bounding GP is owner of its normals informations.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     <br><b>Legal values</b>:
+      <dl>
+        <dt>1</dt>
+          <dd>The 3D bounding GP is owner of its normals informations</dd>
+        <dt>0</dt>
+          <dd>The 3D bounding GP is not owner of its normals informations</dd>
+      </dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="HasVertices"></a><a id="HasVertices(void)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>HasVertices</span><span class = 'signature'>(<script type="text/javascript"> activateLink('void','void')</script> <span class='param'></span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether the 3D bounding GP is owner of its vertices informations.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     <br><b>Legal values</b>:
+      <dl>
+        <dt>1</dt>
+          <dd>The 3D bounding GP is owner of its vertices informations</dd>
+        <dt>0</dt>
+          <dd>The 3D bounding GP is not owner of its vertices informations</dd>
+      </dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetBoxCenter"></a><a id="SetBoxCenter(float*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','inline void')</script>  <span class='objname'>SetBoxCenter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iNewCenter</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the box center coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNewCenter</span></dt>
+   <dd>   Array containing the new center coordinates: XYZ.
+   Its size is equal to three.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetBoxDimensions"></a><a id="SetBoxDimensions(float*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','inline void')</script>  <span class='objname'>SetBoxDimensions</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iNewDimensions</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the X,Y,Z half box spans.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNewDimensions</span></dt>
+   <dd>   Array containing the half box spans new coordinates.
+   Its size is equal to three.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSphereCenter"></a><a id="SetSphereCenter(float*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','inline void')</script>  <span class='objname'>SetSphereCenter</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iNewCenter</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the bounding sphere center.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNewCenter</span></dt>
+   <dd>   3 fields array containing the sphere center coordinates.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSphereRadius"></a><a id="SetSphereRadius(float)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','inline void')</script>  <span class='objname'>SetSphereRadius</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float')</script> <span class='param'>iNewRadius</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the bounding sphere radius.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNewRadius</span></dt>
+   <dd>   The new bounding sphere radius.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTextureCoordinates"></a><a id="SetTextureCoordinates(float*,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTextureCoordinates</span><span class = 'signature'>(<script type="text/javascript"> activateLink('float','float*')</script> <span class='param'>iTextureCoord</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iTextureFormat</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the texture coordinates.
+ If the 3D bounding GP shares its vertices, it also shares its
+ texture coordinates.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTextureCoord</span></dt>
+   <dd>    Array of texture coordinates. Each vertex has an associated position
+    in the texture map. The number of texture coordinates groups is always equal to the number of
+    vertices. 
+    Because vertex and normal information is being sorted at the 3D bounding GP
+    creation, texture coordinates are to be generated with the tessellation
+    parameters that are retrieved after the 3D bounding GP creation (ie with
+    properly translated indices). Nevertheless, a mapping operator can be
+    applied at anytime, when the 3D bounding GP is the owner of it's vertex data.
+    If computed before the 3D bounding GP creation, texture coordinates can be given
+    at the construction method. In this case, coordinates order is
+    rearranged in parallel with vertices coordinates.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTextureFormat</span></dt>
+   <dd>    iTextureFormat is the number of fields associated to one vertex in the <tt>iTextureCoord</tt> array.
+    It is also the number of texture coordinates associated to each vertex.
+    Indeed, each vertex has associated coordinates in the texture map. The
+    number of coordinates depends on the map dimension: the texture map
+    may be in 1D, 2D or 3D. 
+ <br><b>Legal values</b>:
+   <dl>
+      <dt>1</dt>
+        <dd>The texture map is a one dimension map. Each vertex has a single associated texture coordinate</dd>
+      <dt>2</dt>
+        <dd>The texture map is a two-dimension map. Each vertex has two associated texture coordinates</dd>
+      <dt>3</dt>
+        <dd>The texture map is a three-dimension map. Each vertex has three associated texture coordinates</dd>
+   </dl>
+    If data is shared, the format for the given texture coordinates must be three.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CAT3DBoundingGP.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATViz</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

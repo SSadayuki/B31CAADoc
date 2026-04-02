@@ -1,0 +1,358 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMOperatorsInterfaces CATICGMTopSweepSkinSkinSegment Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMOperatorsInterfaces.htm" href="../GMOperatorsInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMOperatorsInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATICGMTopSweepSkinSkinSegment"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>GMOperatorsInterfaces Framework: CATICGMTopSweepSkinSkinSegment <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATICGMTopSweepSkinSkinSegment_67377','CATICGMTopSweepSkinSkinSegment','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATICGMTopSweepSkinSkinSegment</b>
+</p>
+<p>
+<b><i> Class defining the topological operator that creates a sweep between a two skin bodies.</i></b><br>
+
+<br>The sweep is defined by
+ <ul>
+ <li>a skin body, to which the generated sweep is tangent and defining the first extremity of the sweep.
+ <li>a skin body, to which the generated sweep is tangent and defining the second extremity of the sweep..
+ <li>a spine wire body:  defines the moving plane (orthogonal to the spine) that is
+ swept along the spine. 
+ </ul>
+ As several solutions can be found, signatures are defined to distinguish them
+ <ul>
+ <li>signature with regards to the skin orientation: the solution is on the semi-space defined by the
+ normal to the skin, or in the opposite semi-space, or in both.
+ <li>for a same skin1 and skin2 signatures, the rank of the solution.
+ </ul>
+ This operator follows the general scheme of the topological operators producing several resulting bodies:
+ <ul>
+<li> Create the operator with the global function <script type="text/javascript"> activateLinkAnchor('CATCGMCreateTopSweepSkinSkinSegment','','CATCGMCreateTopSweepSkinSkinSegment') </script> <li> Set the parameters,
+<li> Run,
+<li> Get the resulting bodies (in this case, use the iterator on the resulting bodies, because
+ several bodies can be solution of the computation).
+<li> Release the operator with the <tt>Release</tt> method.
+</ul>
+ Sample:
+ <pre> 
+ CATICGMTopSweepSkinSkinSegment * pOp = CATCGMCreateTopSweepSkinSkinSegment(factory,Skin1,Skin2,Spine);
+ pOp->Run();
+ pOp->BeginningResult();
+ int nbBodies = pOp->GetNumberOfResults();
+ for (int iBody = 1 ; iBody <= nbBodies ; iBody ++)
+ {
+   pOp->NextResult();
+   CATBody * pCurBody = pOp->GetResult(pReport);
+ }  
+ pOp->Release();
+</pre>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATICGMTopSweepSkinSkinSegment()"><b>CATICGMTopSweepSkinSkinSegment</b></a>()
+</td><td id='tdright'>  Constructor
+</td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetResultInformation(int&amp;,int&amp;,int&amp;,int&amp;,int&amp;)"><b>GetResultInformation</b></a>(int&amp;,int&amp;,int&amp;,int&amp;,int&amp;)
+</td><td id='tdright'>  Retrieves the signature relative to the current resulting body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFirstCoupledOrientation(int)"><b>SetFirstCoupledOrientation</b></a>(int)
+</td><td id='tdright'>  Defines the signature of the desired results with regards to the first coulped orientation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFirstShellModeTrim(CATDynSegmentationMode)"><b>SetFirstShellModeTrim</b></a>(CATDynSegmentationMode)
+</td><td id='tdright'>  Defines the mode chosen for first skin
+ 
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFirstShellOrientation(int)"><b>SetFirstShellOrientation</b></a>(int)
+</td><td id='tdright'>  Defines the signature of the desired results with regards to the first skin orientation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSecondCoupledOrientation(int)"><b>SetSecondCoupledOrientation</b></a>(int)
+</td><td id='tdright'>  Defines the signature of the desired results with regards to the second coulped orientation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSecondShellModeTrim(CATDynSegmentationMode)"><b>SetSecondShellModeTrim</b></a>(CATDynSegmentationMode)
+</td><td id='tdright'>  Defines the mode chosen for second skin
+ 
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSecondShellOrientation(int)"><b>SetSecondShellOrientation</b></a>(int)
+</td><td id='tdright'>  Defines the signature of the desired results with regards to the second skin orientation.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATICGMTopSweepSkinSkinSegment"></a><a id="CATICGMTopSweepSkinSkinSegment()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATICGMTopSweepSkinSkinSegment</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructor
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetResultInformation"></a><a id="GetResultInformation(int&amp;,int&amp;,int&amp;,int&amp;,int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetResultInformation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>ioFirstShellOrientation</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>ioSecondShellOrientation</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>oCoupledFirstOrientation</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>oCoupledSecondOrientation</span>,<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>ioIndex</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the signature relative to the current resulting body.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioFirstShellOrientation</span></dt>
+   <dd> The signature with regards to the first skin orientation.
+<br><b>Legal values</b>:
+ <dl>
+ <dt> <tt>1</tt></dt><dd> The results are in the semi-space defined by the normal to the skin.
+ <dt><tt>-1</tt></dt><dd> The results are in the semi-space defined by the opposite to the normal to the skin.
+ <dt> <tt>0</tt></dt><dd> All the results must be output (<tt>1</tt>, <tt>-1</tt>, <tt>2</tt> cases all together).
+ <dt> <tt>2</tt></dt><dd> The results change of semi-space along the spine. 
+ </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioSecondShellOrientation</span></dt>
+   <dd> The signature with regards to the second skin orientation.
+<br><b>Legal values</b>:
+ <dl>
+ <dt> <tt>1</tt></dt><dd> The results are in the semi-space defined by the normal to the skin.
+ <dt><tt>-1</tt></dt><dd> The results are in the semi-space defined by the opposite to the normal to the skin.
+ <dt> <tt>0</tt></dt><dd> All the results must be output (<tt>1</tt>, <tt>-1</tt>, <tt>2</tt> cases all together).
+ <dt> <tt>2</tt></dt><dd> The results change of semi-space along the spine. 
+ </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCoupledFirstOrientation</span></dt>
+   <dd> The orientation of the trihedron defined by the the spine, the normal to the first skin and
+ the tangent to the profile.
+<br><b>Legal values</b>:
+ <dl>
+ <dt> <tt>1</tt></dt><dd> The output results are such that the triedron is counter clockwise.
+ <dt><tt>-1</tt></dt><dd> The output results are such that the triedron is clockwise.
+ <dt> <tt>0</tt></dt><dd> All the results must be output (<tt>1</tt>, <tt>-1</tt>, <tt>2</tt> cases all together).
+ <dt> <tt>2</tt></dt><dd> The orientation of the trihedron changes along the spine. 
+ </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCoupledSecondOrientation</span></dt>
+   <dd> The orientation of the trihedron defined by the the spine, the normal to the second skin and
+ the tangent to the profile.
+<br><b>Legal values</b>:
+ <dl>
+ <dt> <tt>1</tt></dt><dd> The output results are such that the triedron is counter clockwise.
+ <dt><tt>-1</tt></dt><dd> The output results are such that the triedron is clockwise.
+ <dt> <tt>0</tt></dt><dd> All the results must be output (<tt>1</tt>, <tt>-1</tt>, <tt>2</tt> cases all together).
+ <dt> <tt>2</tt></dt><dd> The orientation of the trihedron changes along the spine. 
+ </dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioIndex</span></dt>
+   <dd> The rank (beginning at <tt>1</tt>) of the current body inside a given quadruple 
+ (<tt>ioFirstShellOrientation, ioSecondShellOrientation, oCoupledFirstOrientation, oCoupledSecondOrientation</tt>)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> operator.
+ <br>To retrieve the resulting bodies, use the iterator on the bodies provided by 
+<script type="text/javascript"> activateLinkAnchor('CATICGMTopMultiResult','','CATICGMTopMultiResult') </script>.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFirstCoupledOrientation"></a><a id="SetFirstCoupledOrientation(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFirstCoupledOrientation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOrientation</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the signature of the desired results with regards to the first coulped orientation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd> The orientation of the trihedron defined by the the spine, the normal to the first skin and
+ the tangent to the profile.
+<br><b>Legal values</b>:
+ <dl>
+ <dt> <tt>1</tt></dt><dd> The output results are such that the triedron is counter clockwise.
+ <dt><tt>-1</tt></dt><dd> The output results are such that the triedron is clockwise.
+ <dt> <tt>0</tt></dt><dd> All the results must be output (<tt>1</tt>, <tt>-1</tt>, <tt>2</tt> cases all together).
+ <dt> <tt>2</tt></dt><dd> The orientation of the trihedron changes along the spine. 
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFirstShellModeTrim"></a><a id="SetFirstShellModeTrim(CATDynSegmentationMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFirstShellModeTrim</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDynSegmentationMode','CATDynSegmentationMode')</script> <span class='param'>iMode</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the mode chosen for first skin
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd> The segmentation mode (trim - no trim - trim on support)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFirstShellOrientation"></a><a id="SetFirstShellOrientation(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFirstShellOrientation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOrientation</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the signature of the desired results with regards to the first skin orientation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd> The semi-space to which the solution belongs.
+<br><b>Legal values</b>:
+ <dl>
+ <dt> <tt>1</tt></dt><dd> The results are in the semi-space defined by the normal to the skin.
+ <dt><tt>-1</tt></dt><dd> The results are in the semi-space defined by the opposite to the normal to the skin.
+ <dt> <tt>0</tt></dt><dd> All the results must be output (<tt>1</tt>, <tt>-1</tt>, <tt>2</tt> cases all together).
+ <dt> <tt>2</tt></dt><dd> The results change of semi-space along the spine. 
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSecondCoupledOrientation"></a><a id="SetSecondCoupledOrientation(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSecondCoupledOrientation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOrientation</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the signature of the desired results with regards to the second coulped orientation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd> The orientation of the trihedron defined by the the spine, the normal to the second skin and
+ the tangent to the profile.
+<br><b>Legal values</b>:
+ <dl>
+ <dt> <tt>1</tt></dt><dd> The output results are such that the triedron is counter clockwise.
+ <dt><tt>-1</tt></dt><dd> The output results are such that the triedron is clockwise.
+ <dt> <tt>0</tt></dt><dd> All the results must be output (<tt>1</tt>, <tt>-1</tt>, <tt>2</tt> cases all together).
+ <dt> <tt>2</tt></dt><dd> The orientation of the trihedron changes along the spine. 
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSecondShellModeTrim"></a><a id="SetSecondShellModeTrim(CATDynSegmentationMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSecondShellModeTrim</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDynSegmentationMode','CATDynSegmentationMode')</script> <span class='param'>iMode</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the mode chosen for second skin
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iMode</span></dt>
+   <dd> The segmentation mode (trim - no trim - trim on support)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSecondShellOrientation"></a><a id="SetSecondShellOrientation(int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSecondShellOrientation</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iOrientation</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines the signature of the desired results with regards to the second skin orientation.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOrientation</span></dt>
+   <dd> The semi-space to which the solution belongs.
+<br><b>Legal values</b>:
+ <dl>
+ <dt> <tt>1</tt></dt><dd> The results are in the semi-space defined by the normal to the skin.
+ <dt><tt>-1</tt></dt><dd> The results are in the semi-space defined by the opposite to the normal to the skin.
+ <dt> <tt>0</tt></dt><dd> All the results must be output (<tt>1</tt>, <tt>-1</tt>, <tt>2</tt> cases all together).
+ <dt> <tt>2</tt></dt><dd> The results change of semi-space along the spine. 
+ </dl>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICGMTopSweepSkinSkinSegment.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMOperatorsInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

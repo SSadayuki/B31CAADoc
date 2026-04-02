@@ -1,0 +1,664 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIASegment_IDL
+#define SWKIASegment_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//    Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//    SWKIABodyElement
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//    get_NbDOFs
+//    GetDOF
+//    get_IsDOFAt0
+//    get_IsDOFAt1
+//    get_IsDOFAt2
+//    get_Length
+//    get_EndPositionX
+//    get_EndPositionY
+//    get_EndPositionZ
+//    get_IsOnLeftSide
+//    get_IsOnRightSide
+//    get_IsOnHand
+//    get_IsOnSpine
+//    ResetPosture
+//    MirrorCopyPosture
+//    SwapPosture
+//    ResetPrefAngles
+//    MirrorCopyPrefAngles
+//    SwapPrefAngles
+//    RemoveLimits
+//    ResetAngularLimitations
+//    MirrorCopyAngularLimitations
+//    SwapAngularLimitations
+//    LockPosture
+//    Optimize
+//    SetPercentage
+//    get_MirrorSegment
+//    SetPosition
+//    ApplyPosition
+//    IsReachable
+//    IsObjectReachable
+//    CreateReachEnvelope
+//    DestroyReachEnvelope
+//    Attach
+//    Detach
+//    DetachAll
+//    IsAttached
+//    get_AttachSize
+//    GetAttachedObject
+//    GetIKOffset
+//    GetIKPosition
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 00/01/26
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIABodyElement.idl"
+//
+// --- System
+#include "CATSafeArray.idl"
+//
+// --- DNBHumanModelingInterfaces
+interface SWKIADOF;
+
+
+/**
+  *  This interface deals with a segment of a manikin.
+  **/
+interface SWKIASegment : SWKIABodyElement
+{
+ // ===========================================================================
+ //  get_NbDOFs
+ //  ----------
+ //  
+    /**
+      * Returns the number of degrees of freedom on the current segment.<br>
+      * Each segment can have up to three degrees of freedom.  Therefore<br>
+      * the value of this property will never be higher than 3.<br>
+      **/
+#pragma PROPERTY NbDOFs
+    HRESULT get_NbDOFs(out /*IDLRETVAL*/ long poNbDOFs);
+
+
+ // ===========================================================================
+ //  GetDOF
+ //  ------
+ //
+    /**
+      * Returns a specific degree of freedom of the segment.<br>
+      * A segment may have up to three degrees of freedom,<br>
+      * and these are numbered from 0 to 2.<br>
+      * However, the degrees of freedom do not always have<br>
+      * consecutive indices.  For instance the forearm<br>
+      * has 2 DOFs, but these are numbered 0 and 2.<br>
+      * That is why the set of DOFs under a segment cannot<br>
+      * be properly accessed as if it was a collection.<br>
+      * To loop through the degrees of freedom of a segment,<br>
+      * one should test the value of properties <code>IsDOFAt0</code>,
+      * <code>IsDOFAt1</code> or <code>IsDOFAt2</code>, and work with the<br>
+      * DOF only if the value of one of the corresponding property is<br>
+      * <code><strong>True</strong></code>.
+      *
+      * @param piDOFNumber  The index of the DOF to retrieve.<br>
+      * This parameter must be either 0, 1 or 2.
+      **/
+    HRESULT GetDOF(in long piDOFNumber, out /*IDLRETVAL*/ SWKIADOF poDOF);
+
+
+ // ===========================================================================
+ //  get_IsDOFAt0
+ //  ------------
+ //
+    /**
+      * Returns <code><strong>True</strong></code> if there is a DOF
+      * at index 0, <code><strong>False</strong></code> otherwise.
+      **/
+#pragma PROPERTY IsDOFAt0
+    HRESULT get_IsDOFAt0(out /*IDLRETVAL*/ boolean poIsDOFAt0);
+
+
+ // ===========================================================================
+ //  get_IsDOFAt1
+ //  ------------
+ //
+    /**
+      * Returns <code><strong>True</strong></code> if there is a DOF
+      * at index 1, <code><strong>False</strong></code> otherwise.
+      **/
+#pragma PROPERTY IsDOFAt1
+    HRESULT get_IsDOFAt1(out /*IDLRETVAL*/ boolean poIsDOFAt1);
+
+
+ // ===========================================================================
+ //  get_IsDOFAt2
+ //  ------------
+ //
+    /**
+      * Returns <code><strong>True</strong></code> if there is a DOF
+      * at index 2, <code><strong>False</strong></code> otherwise.
+      **/
+#pragma PROPERTY IsDOFAt2
+    HRESULT get_IsDOFAt2(out /*IDLRETVAL*/ boolean poIsDOFAt2);
+
+
+ // ===========================================================================
+ //  get_Length
+ //  ----------
+ //
+    /**
+      * Returns the length of the segment, in centimeters.
+      **/
+#pragma PROPERTY Length
+    HRESULT get_Length(out /*IDLRETVAL*/ double poLength);
+
+
+ // ===========================================================================
+ //  get_EndPositionX
+ //  ----------------
+ //
+    /**
+      * Returns the global x coordinate of the endpoint of the segment.<br>
+      **/
+#pragma PROPERTY EndPositionX
+    HRESULT get_EndPositionX (out /*IDLRETVAL*/ double poEndPositionX);
+
+
+ // ===========================================================================
+ //  get_EndPositionY
+ //  ----------------
+ //
+    /**
+      * Returns the global y coordinate of the endpoint of the segment.<br>
+      **/
+#pragma PROPERTY EndPositionY
+    HRESULT get_EndPositionY (out /*IDLRETVAL*/ double poEndPositionY);
+
+
+ // ===========================================================================
+ //  get_EndPositionZ
+ //  ----------------
+ //
+    /**
+      * Returns the global z coordinate of the endpoint of the segment.<br>
+      **/
+#pragma PROPERTY EndPositionZ
+    HRESULT get_EndPositionZ (out /*IDLRETVAL*/ double poEndPositionZ);
+
+
+ // ===========================================================================
+ //  get_IsOnLeftSide
+ //  --------------
+ //
+    /**
+      * This property is <strong>True</strong> if this segment is on the
+      * left side of the manikin.
+      **/
+#pragma PROPERTY IsOnLeftSide
+    HRESULT get_IsOnLeftSide(out /*IDLRETVAL*/ boolean poOnLeftSide);
+
+
+ // ===========================================================================
+ //  get_OnRightSide
+ //  ---------------
+ //
+    /**
+      * This property is <strong>True</strong> if this segment is on the
+      * right side of the manikin.
+      **/
+#pragma PROPERTY IsOnRightSide
+    HRESULT get_IsOnRightSide(out /*IDLRETVAL*/ boolean poOnRightSide);
+
+
+ // ===========================================================================
+ //  get_IsOnHand
+ //  ------------
+ //
+    /**
+      * This property is <strong>True</strong> if this segment belongs to
+      * the manikin's hand.
+      **/
+#pragma PROPERTY IsOnHand
+    HRESULT get_IsOnHand(out /*IDLRETVAL*/ boolean poOnHand);
+
+
+ // ===========================================================================
+ //  get_IsOnSpine
+ //  -------------
+ //
+    /**
+      * This property is <strong>True</strong> if this segment belongs to
+      * the manikin's spine.
+      **/
+#pragma PROPERTY IsOnSpine
+    HRESULT get_IsOnSpine(out /*IDLRETVAL*/ boolean poOnSpine);
+
+
+ // ===========================================================================
+ //  ResetPosture
+ //  ------------
+ //
+    /**
+      * Set the segment's posture back to its default position.
+      **/
+    HRESULT ResetPosture();
+
+
+ // ===========================================================================
+ //  MirrorCopyPosture
+ //  -----------------
+ //
+    /**
+      * Copy the posture on the equivalent segment, on the other side
+      * of the manikin. For instance, it copies the posture from the
+      * right leg to the left leg.
+      **/
+    HRESULT MirrorCopyPosture();
+
+
+ // ===========================================================================
+ //  SwapPosture
+ //  -----------
+ //
+    /**
+      * Swap the posture with the equivalent segment, on the other side
+      * of the manikin. For instance, the right leg takes the posture of
+      * the left leg, and vice versa.
+      **/
+    HRESULT SwapPosture();
+
+ // ===========================================================================
+ //  ResetPrefAngles
+ //  ---------------
+ //
+    /**
+      * Reset the preferred angles of the segment.
+      **/
+    HRESULT ResetPrefAngles(in long piDOFId);
+
+ // ===========================================================================
+ //  MirrorCopyPrefAngles
+ //  --------------------
+ //
+    /**
+      * Mirror copy the preferred angles of the segment.
+      **/
+    HRESULT MirrorCopyPrefAngles(in long piDOFId);
+    
+ // ===========================================================================
+ //  SwapPrefAngles
+ //  --------------
+ //
+    /**
+      * Swap the preferred angles of the segment.
+      **/
+    HRESULT SwapPrefAngles(in long piDOFId);
+
+ // ===========================================================================
+ //  RemoveLimits
+ //  -----------------------
+ //
+    /**
+      * Removes the angular limitations of the segment.
+      **/
+    HRESULT RemoveLimits(in long piDOFId);
+
+ // ===========================================================================
+ //  ResetAngularLimitations
+ //  -----------------------
+ //
+    /**
+      * Reset the angular limitations of the segment depending on piReset:
+      * 0 -> 2 OR 3 OR 4 depending of the first encountered.
+      * 1 -> 2 AND 3 AND 4
+      * 2 -> Unlock the value
+      * 3 -> Restore the angular limitations if it is "No Limits"
+      * 4 -> Set back the angular limitations to their default value (50.0%)
+      **/
+    HRESULT ResetAngularLimitations(in long piDOFId, in long piReset);
+    
+ // ===========================================================================
+ //  MirrorCopyAngularLimitations
+ //  ----------------------------
+ //
+    /**
+      * Mirror copy the angular limitations of the segment.
+      **/
+    HRESULT MirrorCopyAngularLimitations(in long piDOFId);
+    
+ // ===========================================================================
+ //  SwapAngularLimitations
+ //  ----------------------
+ //
+    /**
+      * Swap the angular limitations of the segment.
+      **/
+    HRESULT SwapAngularLimitations(in long piDOFId);
+    
+ // ===========================================================================
+ //  LockPosture
+ //  -------------
+ //
+    /**
+      * Lock the posture of the segment.
+      **/
+    HRESULT LockPosture(in long piDOFId);
+    
+ // ===========================================================================
+ //  Optimize
+ //  ---------
+ //
+    /**
+      * Sets the limits to match the best PrefAngle for the DOF piDOFId
+      **/
+    HRESULT Optimize(in long piDOFId);
+    
+ // ===========================================================================
+ //  SetPercentage
+ //  ---------
+ //
+    /**
+      * Sets the angular limitations to a percentage for the DOF piDOFId
+      **/
+    HRESULT SetPercentage(in double piPercentage, in long piDOFId);
+
+ // ===========================================================================
+ //  get_MirrorSegment
+ //  -----------------
+ //
+    /**
+      * This property returns the equivalent segment, but on the
+      * opposite side (ex.: right leg <-> left leg).
+      **/
+#pragma PROPERTY MirrorSegment
+    HRESULT get_MirrorSegment(out /*IDLRETVAL*/ CATBaseDispatch poMirrorSegment);
+
+
+ // ===========================================================================
+ //  SetPosition
+ //  -----------
+ //
+    /**  
+      * Sets a new absolute position for the segment.
+      *
+      * @param piNewPosition
+      *   The new position to place the segment.<br>
+      *   This array must contain 12 numbers, and msut be initialized
+      *   using the four columns of a transformation matrix.
+      *
+      *   The first nine components represent the rotation matrix.<br>
+      *   The last three components represent the translation vector.<br>
+      *
+      * @param piStartSegment The short name of the first segment of the
+      * kinematics chain. The short name specified has to identify a
+      * valid segment, which is an ancestor of the current one.
+      * For instance, is the segment to position is the right hand, then
+      * that start segment might be "RSArCl" (right clavicular).
+      *
+      * If the string "Default" is specified, then the start segment
+      * will be automatically chosen.
+      *
+      * @sample
+      * This example sets the segment to a 45-degree rotation around
+      * the x axis and at a (10, 20, 30) translation from the origin.<br>
+      *
+      * <pre>
+      * Dim myPosition(11)
+      * 'Rotation (45 degrees around the x axis)
+      * myPosition(0)  = 1.000
+      * myPosition(1)  = 0
+      * myPosition(2)  = 0
+      * myPosition(3)  = 0
+      * myPosition(4)  = 0.707
+      * myPosition(5)  = 0.707
+      * myPosition(6)  = 0
+      * myPosition(7)  = -0.707
+      * myPosition(8)  = 0.707
+      * 'Translation vector (10,20,30)
+      * myPosition(9)  = 10.000
+      * myPosition(10) = 20.000
+      * myPosition(11) = 30.000
+      * myManikin.Body.GetItem("LSHaCPr").SetPosition myPosition, "Default"
+      * </pre>
+      **/ 
+    HRESULT SetPosition(in CATSafeArrayVariant piNewPosition,
+                        in CATBSTR piStartSegment);
+
+
+ // ===========================================================================
+ //  ApplyPosition
+ //  -------------
+ //
+    /**  
+      * Applies a new relative position for the segment.
+      *
+      * @param piPositionIncrement
+      *   The new position to combine with the segment's current position.<br>
+      *   This array must contain 12 numbers, and msut be initialized
+      *   using the four columns of a transformation matrix.
+      *
+      *   The first nine components represent the rotation matrix.<br>
+      *   The last three components represent the translation vector.<br>
+      *
+      * @param piStartSegment The short name of the first segment of the
+      * kinematics chain. The short name specified has to identify a
+      * valid segment, which is an ancestor of the current one.
+      * For instance, is the segment to position is the right hand, then
+      * that start segment might be "RSArCl" (right clavicular).
+      *
+      * If the string "Default" is specified, then the start segment
+      * will be automatically chosen.
+      *
+      * @sample
+      * This example sets the segment to a 45-degree rotation around
+      * the x axis and at a (10, 20, 30) translation from the origin.<br>
+      *
+      * <pre>
+      * Dim myPosition(11)
+      * 'Rotation (45 degrees around the x axis)
+      * myPosition(0)  = 1.000
+      * myPosition(1)  = 0
+      * myPosition(2)  = 0
+      * myPosition(3)  = 0
+      * myPosition(4)  = 0.707
+      * myPosition(5)  = 0.707
+      * myPosition(6)  = 0
+      * myPosition(7)  = -0.707
+      * myPosition(8)  = 0.707
+      * 'Translation vector (10,20,30)
+      * myPosition(9)  = 10.000
+      * myPosition(10) = 20.000
+      * myPosition(11) = 30.000
+      * myManikin.Body.GetItem("LSHaCPr").ApplyPosition myPosition
+      * </pre>
+      **/ 
+    HRESULT ApplyPosition(in CATSafeArrayVariant piPositionIncrement,
+                        in CATBSTR piStartSegment);
+
+
+// ===========================================================================
+ //  IsReachable
+ //  -----------
+ //
+    /**
+      * Reachability check.
+      * @return <code><font color="blue"><strong>true</strong></font></code>
+      * if the location expressed in the coordinates is reachable by the segment,
+      * <code><font color="blue"><strong>false</strong></font></code>
+      * otherwise.
+      **/
+    HRESULT IsReachable(in double piX, in double piY, in double piZ, out /*IDLRETVAL*/ boolean poIsReachable);
+
+
+// ===========================================================================
+ //  IsObjectReachable
+ //  -----------------
+ //
+    /**
+      * Reachability check.
+      * @return <code><font color="blue"><strong>true</strong></font></code>
+      * if the object passed is reachable by the segment,
+      * <code><font color="blue"><strong>false</strong></font></code>
+      * otherwise.  The position taken is that of the center of the object.
+      **/
+    HRESULT IsObjectReachable(in CATIABase piObject, out /*IDLRETVAL*/ boolean poIsReachable);
+
+
+ // ===========================================================================
+ //  CreateReachEnvelope
+ //  -------------------
+ //
+    /**
+      * This method creates and displayed the reach envelope on the
+      * current segment.  This segment must be part of the hand,
+      * otherwise an error code is returned.<br>
+      * Property <code>IsOnHand</code> can be used to check whether
+      * the segment is located on the hand.
+      **/
+    HRESULT CreateReachEnvelope();
+
+ // ===========================================================================
+ //  DestroyReachEnvelope
+ //  --------------------
+ //
+    /**
+      * This method destroys the reach envelope previously created
+      * for this segment.
+      **/
+    HRESULT DestroyReachEnvelope();
+
+
+ // ===========================================================================
+ //  Attach
+ //  ------
+ //
+    /**
+      * Attach a geometry to the segment.
+      *
+      * @param piObjectToAttach The object to attach.
+      * This object must be a movable object.
+      *
+      * Once the attach relationship is made, the object's postition
+      * will be updated every time the segment moves.
+      **/
+    HRESULT Attach(in CATIABase piObjectToAttach);
+
+
+ // ===========================================================================
+ //  Detach
+ //  ------
+ //
+    /**
+      * Detach a geometry previously attached to the segment.
+      *
+      * @param piObjectToDetach The object to detach.
+      * This object's will no longer be driven by the segment's
+      * position.
+      **/
+    HRESULT Detach(in CATIABase piObjectToDetach);
+
+
+ // ===========================================================================
+ //  DetachAll
+ //  ---------
+ //
+    /**
+      * Detach all objects attached so far to the segment.
+      **/
+    HRESULT DetachAll();
+
+
+ // ===========================================================================
+ //  IsAttached
+ //  ----------
+ //
+    /**
+      * @return <code><font color="blue"><strong>true</strong></font></code>
+      * if the object passed in the parameter is attached to the segment,
+      * <code><font color="blue"><strong>false</strong></font></code>
+      * otherwise.
+      **/
+    HRESULT IsAttached(in CATIABase piObject, out /*IDLRETVAL*/ boolean poIsAttached);
+
+
+ // ===========================================================================
+ //  get_AttachSize
+ //  --------------
+ //  
+    /**
+      * Returns the number of objects currently attached to the segment.<br>
+      **/
+#pragma PROPERTY AttachSize
+    HRESULT get_AttachSize(out /*IDLRETVAL*/ long poAttachSize);
+
+
+ // ===========================================================================
+ //  GetAttachedObject
+ //  -----------------
+ //
+    /**
+      * Retrieve one object currently attached to the segment.
+      *
+      * @param piIndex The index of the object to retrieve.  First
+      * attached object is at index 0.
+      **/
+    HRESULT GetAttachedObject(in long piIndex, out /*IDLRETVAL*/ CATIABase poObject);
+
+ // ===========================================================================
+ //  GetIKOffset
+ //  -----------
+ //
+    /**
+      * @return The IK offset for this segment.
+      **/
+    HRESULT GetIKOffset(inout CATSafeArrayVariant poOffset);
+
+
+ // ===========================================================================
+ //  GetIKPosition
+ //  -------------
+ //
+    /**
+      * @return The position used for IK on this segment.
+      **/
+    HRESULT GetIKPosition(inout CATSafeArrayVariant poIKPosition);
+};
+
+// Interface name : SWKIASegment
+#pragma ID SWKIASegment "DCE:12c1da9e-d402-11d3-8092005004d3fe74"
+#pragma DUAL SWKIASegment
+
+// VB object name : SWSegment (Id used in Visual Basic)
+#pragma ID SWKSegment "DCE:12c1da9f-d402-11d3-8092005004d3fe74"
+#pragma ALIAS SWKIASegment SWKSegment
+
+#endif

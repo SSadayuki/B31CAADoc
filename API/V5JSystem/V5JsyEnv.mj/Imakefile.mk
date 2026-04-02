@@ -1,0 +1,9 @@
+# Imakefile for V5JsyEnv
+
+BUILT_OBJECT_TYPE=JAVA
+TYPE = COMMON
+LINK_WITH=
+JNI=YES
+
+
+  

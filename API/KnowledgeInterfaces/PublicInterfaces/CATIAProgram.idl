@@ -1,0 +1,53 @@
+#ifndef CATIAProgram_IDL
+#define CATIAProgram_IDL
+/*IDLREP*/
+
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIARelation.idl"
+
+/**
+ * Represents the program relation.
+ * The following example shows how to create a program that selects a 
+ * depth with respect to a mass value. The depth and mass parameters
+ * should exist before the creation of the program (also called Rule) object.
+ * <pre>
+*	Dim CATDocs As Documents
+ * Set CATDocs = CATIA.Documents
+ * Dim part1 As Document
+ * Set part1   = CATDocs.Add("CATPart")
+ * Dim mass As RealParam
+ * Set mass         = part1.Part.Parameters.<font color="red">CreateReal</font>("mass", 5.)
+	* Dim depth As RealParam
+ * Set depth        = part1.Part.Parameters.<font color="red">CreateReal</font>("depth", 0.)
+	* Dim selectdepth As Relation
+ * Set selectdepth = part1.Part.Relations.<font color="red">CreateProgram</font>
+ *                    ("select_depth",
+ *                     "Select depth with respect to mass", 
+ *                     "if (mass>2kg) { depth=2mm } else { depth=1mm }")
+ * </pre>
+ */
+
+//-----------------------------------------------------------------
+interface CATIAProgram : CATIARelation
+{
+};
+
+// Interface name : CATIAProgram
+#pragma ID CATIAProgram "DCE:cfb0a9a1-5476-11d1-a2720000f87546fd"
+#pragma DUAL CATIAProgram
+
+// VB object name : Program (Id used in Visual Basic)
+#pragma ID Rule "DCE:d065dc59-5476-11d1-a2720000f87546fd"
+#pragma ALIAS CATIAProgram Rule
+
+
+#endif
+// CATIAProgram_IDL
+

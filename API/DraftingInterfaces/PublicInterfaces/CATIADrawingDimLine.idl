@@ -1,0 +1,324 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+#ifndef CATIADrawingDimLine_IDL
+#define CATIADrawingDimLine_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+
+#include "CatDimLineRep.idl"
+#include "CatDimLineGraphRep.idl"
+#include "CatDimOrientation.idl"
+#include "CatDimReference.idl"
+#include "CatDimSymbols.idl"
+
+/**  
+ * Manages dimension line of a dimension in drawing view.
+* <p>
+* This interface is obtained from @href CATIADrawingDimension#GetDimLine method.
+*/
+
+interface CATIADrawingDimLine : CATIABase
+{
+
+//=================================
+//          Properties
+//=================================
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns type of dimension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves type of dimension line <tt>MyDimLine</tt> drawing dimension.
+  * <pre>
+  * odimLineType = MyDimLine.<font color="red">DimLineType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY DimLineType
+HRESULT get_DimLineType(out /*IDLRETVAL*/ long odimLineType); 
+///linear, circular, curvilinear.
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or representation of dimension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves representation of dimension line <tt>MyDimLine</tt> drawing dimension.
+  * <pre>
+  * odimLineRep = MyDimLine.<font color="red">DimLineRep</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY DimLineRep
+HRESULT get_DimLineRep(out /*IDLRETVAL*/ CatDimLineRep odimLineRep); 
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or graphic representation of dimension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves graphic representation of dimension line <tt>MyDimLine</tt> drawing dimension.
+  * <pre>
+  * odimLineGraphRep = MyDimLine.<font color="red">DimLineGraphRep</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY DimLineGraphRep
+HRESULT get_DimLineGraphRep(out /*IDLRETVAL*/ CatDimLineGraphRep odimLineGraphRep);
+HRESULT put_DimLineGraphRep(in CatDimLineGraphRep idimLineGraphRep);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or orientation of dimension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves orientation of dimension line <tt>MyDimLine</tt> drawing dimension.
+  * <pre>
+  * odimLineOrient = MyDimLine.<font color="red">DimLineOrientation</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY DimLineOrientation
+HRESULT get_DimLineOrientation(out /*IDLRETVAL*/ CatDimOrientation odimLineOrient);
+HRESULT put_DimLineOrientation(in CatDimOrientation idimLineOrient);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or reference of dimension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves reference of dimension line <tt>MyDimLine</tt> drawing dimension.
+  * <pre>
+  * odimLineRef = MyDimLine.<font color="red">DimLineReference</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY DimLineReference
+HRESULT get_DimLineReference(out /*IDLRETVAL*/ CatDimReference odimLineRef);
+HRESULT put_DimLineReference(in CatDimReference idimLineRef);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets color of dimension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves color of dimension line <tt>MyDimLine</tt> drawing dimension.
+  * <pre>
+  * oColorDimLine = MyDimLine.<font color="red">Color</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Color
+HRESULT get_Color(out /*IDLRETVAL*/ long oColorDimLine);
+HRESULT put_Color(in long iColorDimLine);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets thickness of dimension line.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves thickness of dimension line <tt>MyDimLine</tt> drawing dimension.
+  * <pre>
+  * oThickDimLine = MyDimLine.<font color="red">Thickness</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Thickness
+HRESULT get_Thickness(out /*IDLRETVAL*/ double oThickDimLine);
+HRESULT put_Thickness(in double iThickDimLine);
+
+
+//=================================
+//           Methods
+//=================================
+
+//------------------------------------------------------------------------------
+ /**
+  * Get geometrical infomation of dimension line.
+  * @param oGeomInfos
+  *   geometrical information.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets geometrical infomation of <tt>MyDimLine</tt> path.
+  * <pre>
+  * MyDimLine.<font color="red">GetGeomInfo</font>(oGeomInfos)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetGeomInfo(inout CATSafeArrayVariant oGeomInfos);
+///(First point, second point, center for circular dimension line);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get symbol type of dimension line.
+  * @param Index
+  *   1:first symbol
+  *   2:second symbol
+  *   3:leader symbol
+  * @param oTypeSymb
+  *   symbol type.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets symbol type of <tt>MyDimLine</tt> path.
+  * <pre>
+  * typeSymb = MyDimLine.<font color="red">GetSymbType</font>(Index)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetSymbType(in long Index, out /*IDLRETVAL*/ CatDimSymbols oTypeSymb);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set symbol type of dimension line.
+  * @param Index
+  *   1:first symbol
+  *   2:second symbol
+  *   3:leader symbol
+  * @param iSymbType
+  *   symbol type.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets symbol type of <tt>MyDimLine</tt> path.
+  * <pre>
+  * MyDimLine.<font color="red">SetSymbType</font>(Index, iSymbType)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetSymbType(in long Index, in CatDimSymbols iSymbType);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get symbol color of dimension line.
+  * @param Index
+  *   1:first symbol
+  *   2:second symbol
+  *   3:leader symbol
+  * @param oColorSymb
+  *   symbol color.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets symbol color of <tt>MyDimLine</tt> path.
+  * <pre>
+  * ColorSymb = MyDimLine.<font color="red">GetSymbColor</font>(Index)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetSymbColor(in long Index, out /*IDLRETVAL*/ long oColorSymb);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set symbol color of dimension line.
+  * @param Index
+  *   1:first symbol
+  *   2:second symbol
+  *   3:leader symbol
+  * @param oColorSymb
+  *   symbol color.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets symbol color of <tt>MyDimLine</tt> path.
+  * <pre>
+  * MyDimLine.<font color="red">SetSymbColor</font>(Index, iColorSymb)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetSymbColor(in long Index, in long iColorSymb);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get symbol thickness of dimension line.
+  * @param Index
+  *   1:first symbol
+  *   2:second symbol
+  *   3:leader symbol
+  * @param oThickSymb
+  *   symbol thickness.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets symbol thickness of <tt>MyDimLine</tt> path.
+  * <pre>
+  * ThickSymb = MyDimLine.<font color="red">GetSymbThickness</font>(Index)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetSymbThickness(in long Index, out /*IDLRETVAL*/ double oThickSymb);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set symbol thickness of dimension line.
+  * @param Index
+  *   1:first symbol
+  *   2:second symbol
+  *   3:leader symbol
+  * @param oThickSymb
+  *   symbol thickness.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets symbol thickness of <tt>MyDimLine</tt> path.
+  * <pre>
+  * MyDimLine.<font color="red">GetSymbThickness</font>(Index, iThickSymb)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetSymbThickness(in long Index, in double iThickSymb);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns direction of a dimension line in case of a catDimUserDefined representation mode.
+  * To retrieve the representation mode: @href CATIADrawingDimLine#get_DimLineRep.
+  * @param oDirX,oDirY
+  *   The components of the direction vector
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the direction vector of a dimension line <tt>MyDimLine</tt> drawing dimension.
+  * <pre>
+  * MyDimLine.<font color="red">GetDimLineDir</font> oDirX, oDirY
+  * </pre>
+  * </dl>
+  */
+HRESULT GetDimLineDir(out double oDirX, out double oDirY);
+
+
+};
+
+#pragma ID CATIADrawingDimLine "DCE:05E8D872-4DF7-11d6-AA6E00D059334107"
+#pragma DUAL CATIADrawingDimLine
+
+// Visual Basic name
+#pragma ID DrawingDimLine "DCE:05E8D873-4DF7-11d6-AA6E00D059334107"
+#pragma ALIAS CATIADrawingDimLine DrawingDimLine
+
+#endif

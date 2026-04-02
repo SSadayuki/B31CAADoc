@@ -1,0 +1,158 @@
+/* -*-c++-*- */
+#ifndef CATIAHybridShapeLine_IDL
+#define CATIAHybridShapeLine_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeLine:         
+// Exposed interface for HybridShape Line
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATSafeArray.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape Line feature object.
+ * <b>Role</b>: Declare  hybrid shape Line root feature object. 
+ * All interfaces for different type of Line derivates HybridShapeLine.
+ * <p> Use the CATIAHybridShapeFactory to create a HybridShapeLine objects.
+ * @see CATIAHybridShapeFactory 
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeLine : CATIAHybridShape
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+
+ /**
+ * <b>Role</b>: Returns the origin of the line.   
+ * @param oOrigin 
+    *   @param oOrigin[0]
+    *   The X Coordinate of a point lying on the line
+    *   @param oOrigin[1]
+    *   The Y Coordinate of a point lying on the line
+    *   @param oOrigin[2]
+    *   The Z Coordinate of a point lying on the line
+	*   The Origin is evaluated from the geometry of the line.
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+        HRESULT GetOrigin(inout   CATSafeArrayVariant oOrigin);
+
+
+ /**
+ * <b>Role</b>: Returns the unit-vector pointing in the direction of the line.
+ * @param oDirection 
+    *   @param oDirection[0]
+    *   The X Coordinate of the unit vector pointing in the
+    *   direction of the line
+    *   @param oDirection[1]
+    *   The Y Coordinate of the unit vector pointing in the
+    *   direction of the line
+    *   @param oDirection[2]
+    *   The Z Coordinate of the unit vector pointing in the
+    *   direction of the line
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+        HRESULT GetDirection (inout  CATSafeArrayVariant oDirection);
+
+
+ /**
+ *  The following call can only be used on CATIAHybridShapeLinePtDir feature.
+ */
+
+ /**
+ * <b>Role</b>: Sets the unit-vector pointing in the direction of the line.
+ * @param iDirection 
+    *   @param iDirection[0]
+    *   The X Coordinate of the unit vector pointing in the
+    *   direction of the line
+    *   @param iDirection[1]
+    *   The Y Coordinate of the unit vector pointing in the
+    *   direction of the line
+    *   @param iDirection[2]
+    *   The Z Coordinate of the unit vector pointing in the
+    *   direction of the line
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+        HRESULT PutDirection (in     CATSafeArrayVariant iDirection);
+
+#pragma PROPERTY FirstUptoElem
+ /**
+ * <b>Role</b>: Gets the First upto element of the line.
+ * @param oFirstUpto 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ */ 
+ HRESULT get_FirstUptoElem (out /*IDLRETVAL*/ CATIAReference   oFirstUpto);
+ /**
+ * <b>Role</b>: Sets the First upto element of the line.
+ * @param iFirstUpto 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ */ 
+ HRESULT put_FirstUptoElem (in     CATIAReference   iFirstUpto);
+
+#pragma PROPERTY SecondUptoElem
+ /**
+ * <b>Role</b>: Gets the Second upto element of the line.
+ * @param oSecondUpto 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ */ 
+ HRESULT get_SecondUptoElem (out /*IDLRETVAL*/ CATIAReference   oSecondUpto);
+ /**
+ * <b>Role</b>: Sets the Second upto element of the line.
+ * @param oSecondUpto 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ */ 
+ HRESULT put_SecondUptoElem (in     CATIAReference   iSecondUpto);
+
+};
+
+
+// Interface name : CATIAHybridShapeLine
+#pragma ID CATIAHybridShapeLine "DCE:89640411-a336-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeLine
+
+// VB object name : HybridShapeLine (Id used in Visual Basic)
+#pragma ID Line "DCE:89640416-b8eb-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeLine Line
+
+
+#endif
+
+

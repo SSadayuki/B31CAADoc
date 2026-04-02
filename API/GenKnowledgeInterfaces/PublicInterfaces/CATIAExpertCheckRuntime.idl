@@ -1,0 +1,212 @@
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+#ifndef CATIAExpertCheckRuntime_IDL
+#define CATIAExpertCheckRuntime_IDL
+/*IDLREP*/
+
+
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAExpertRuleBaseComponentRuntime.idl"
+#include "CATIAExpertReportObjects.idl"
+
+
+
+interface CATIAExpertCheck ;
+
+
+/**
+ * Runtime part of a check.
+ *
+ * The following example shows how to access the Check check1
+ * from an existing RuleSet RS1 of the RuleBase RB1.
+ * <pre>
+ * Dim CATDocs As Document
+ * Set CATDocs   = CATIA.Documents
+ * Dim partdoc As PartDocument
+ * Set partdoc   = CATDocs.Add("CATPart")
+ * Dim part As Part
+ * Set part      = partdoc.Part
+ * Dim relations As Relations
+ * Set relations = part.Relations
+ * Dim Rulebase As ExpertRuleBaseRuntime
+ * Set RuleBase  = relations.Item("RB1")
+ * Dim Ruleset As ExpertRuleSetRuntime
+ * Set RuleSet	 = RuleBase.RuleSet.ExpertRuleBaseComponentRuntimes.Item("RS1")
+ * Dim Check1 As ExpertCheckRuntime
+ * Set Check1	 = RuleSet.ExpertRuleBaseComponentRuntimes.Item("Check1")
+ * </pre>
+ * @see CATIARelations, CATIAExpertRuleBase .
+ */
+interface CATIAExpertCheckRuntime : CATIAExpertRuleBaseComponentRuntime
+{
+
+ 
+	/**
+	* Returns the list of the tuples that don't satisfy this check.
+	*/ 
+#pragma PROPERTY Failures	
+  HRESULT    get_Failures   
+                ( inout /*IDLRETVAL*/ CATIAExpertReportObjects oFailCollection  );
+
+
+	/**
+	* Returns the list of the tuples that satisfy this check.
+	*/ 
+#pragma PROPERTY Succeeds 
+    HRESULT    get_Succeeds    
+                ( out /*IDLRETVAL*/ CATIAExpertReportObjects oSucceedCollection  );
+
+
+	/**
+	* Returns or sets the body to be called in order to correct the check.
+	*/ 
+#pragma PROPERTY CorrectFunction 	
+    HRESULT    get_CorrectFunction
+                (inout /*IDLRETVAL*/ CATBSTR oCorrectFunctionBSTR);							 
+    HRESULT    put_CorrectFunction
+                (in  CATBSTR iCorrectFunctionBSTR); 
+
+
+	/**
+	* Returns or sets the type of the body to be called in order to correct the check.
+	*
+	* <dl>
+	* <dt>1<dd>Visual Basic
+	* <dt>2<dd>Comment
+	* <dt>3<dd>Http
+	* <dt>4<dd>User Function
+	* </dl>
+	*/ 
+#pragma PROPERTY CorrectFunctionType
+    HRESULT    get_CorrectFunctionType
+                (inout /*IDLRETVAL*/ long oCorrectFunctionType);							 
+    HRESULT    put_CorrectFunctionType
+                (in long iCorrectFunctionType);
+
+
+ /**
+	* Returns or sets the status of the automatic correction facility.
+	*
+	* When set to TRUE, the check automatically calls the user function 
+	* defined by put_CorrectFunction when it fails.
+	*/
+#pragma PROPERTY AutomaticCorrect	
+  	HRESULT    get_AutomaticCorrect
+                (out /*IDLRETVAL*/ boolean   oAutomatic); 					 
+    HRESULT    put_AutomaticCorrect
+                (in  boolean   iAutomatic); 
+
+
+	/**
+	* Returns or sets the contextual help of the check object.
+	*/
+#pragma PROPERTY Help
+    HRESULT    get_Help
+                (inout /*IDLRETVAL*/ CATBSTR oHelpBSTR); 
+    HRESULT    put_Help
+                 (in  CATBSTR iHelpBSTR); 
+
+
+	/**
+	* Returns or sets the reason why the check was overridden.
+	*/
+#pragma PROPERTY Justification
+    HRESULT    get_Justification
+                (inout /*IDLRETVAL*/ CATBSTR oJustificationBSTR); 
+    HRESULT    put_Justification
+                 (in  CATBSTR iJustificationBSTR); 
+
+	/**
+	* Returns or sets the comment of the correct function of the check.
+	*/
+#pragma PROPERTY CorrectFunctionComment
+    HRESULT    get_CorrectFunctionComment
+                (inout /*IDLRETVAL*/ CATBSTR oCommentBSTR); 							 
+    HRESULT    put_CorrectFunctionComment
+                 (in  CATBSTR iCommentBSTR); 
+
+	/**
+	* Returns the editable object corresponding to this check.
+	*
+	* Be careful that, according to your licence, or the type of check
+	* you're handling, you may not have the right to edit the check.
+	*
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Dim aCheckEdition As ExpertCheck
+	* Set aCheckEdition = aCheckRuntime.CheckEdition
+	*
+	* If not(aCheckEdition is Nothing) Then
+	*   CATIA.SystemService.Print aCheckEdition.Body
+	* End if
+	* </pre>
+	* </dl>
+	*/
+#pragma PROPERTY CheckEdition
+   HRESULT    get_CheckEdition
+              (inout /*IDLRETVAL*/ CATIAExpertCheck oCheckEdition); 
+
+
+     /**
+     * Highlights the Failures on the check.
+     */
+        HRESULT   Highlight();
+
+	/**
+     * Applies the "correction" function on failed elements.
+     */
+        HRESULT   Correct();
+
+    /**
+     * Returns the Status of the check.
+	 *
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+	 * <pre>
+	 * Dim Check1 As ExpertCheck 
+     * Set Check1	 = RuleSet.ExpertRuleBaseComponentRuntimes.Item("Check1")
+     * status = Check1.<font color="red">Status</font> ()
+     * </pre>
+     * </dl>
+	 *
+	 * @return
+	 *   1=OK, 0=KO.
+     */
+    HRESULT    Status    
+                ( out /*IDLRETVAL*/   long             oStatus );
+
+
+    /**
+     * Returns or sets the priority of the check.
+	 *
+	 * The priority of expert checks
+	 * indicates the order in which the checks are evaluated. Checks with
+	 * the same priority are evaluated in the order of their creation.
+     */
+#pragma PROPERTY Priority		 
+    HRESULT    get_Priority
+                (out /*IDLRETVAL*/ double oPriority); 
+    HRESULT    put_Priority
+                (in double iPriority); 
+
+};
+
+// Interface name : CATIAExpertCheckRuntime
+#pragma ID CATIAExpertCheckRuntime "DCE:a4ca4a50-a02d-11d4-9efb00d0b752954c"
+#pragma DUAL CATIAExpertCheckRuntime
+
+// VB object name : ExpertCheck (Id used in Visual Basic)
+#pragma ID ExpertCheckRuntime "DCE:0c4fd790-a052-11d4-9efb00d0b752954c"
+#pragma ALIAS CATIAExpertCheckRuntime ExpertCheckRuntime
+
+#endif
+// CATIAExpertCheckRuntime_IDL
+

@@ -1,0 +1,104 @@
+// COPYRIGHT Dassault Systemes 2011
+//=============================================================================
+// CATIASfmEndcutManager
+//   Define the CATIASfmEndcutManager interface for managing EndCut attributes
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Jul. 2011  Creation                                                R. DESHMANE
+//=============================================================================
+#ifndef CATIASfmEndcutManager_IDL
+#define CATIASfmEndcutManager_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATIASfmConnectionParameters.idl"
+#include "CATIASfmReferences.idl"
+
+
+
+/**
+ * Interface to get information on available endcuts from catalog. 
+ * <b>Role</b>:  Allows to see avaiable endcuts and their reuired inputs.
+ */
+interface CATIASfmEndcutManager : CATIABase
+{
+  /**
+  * Gets the list of available endcuts for a given family and type from the catalog.
+  * @param iSectionFamily [in]
+  *     The name of the Section Family(Tee,Angle,Bulb).
+  * @param iType [in]
+  *   The Type of Endcut(Snipe,Trim,Weld).
+  * @param oListEndcutNames [out]
+  *   A list of the available Endcuts.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example retrieves the list of avaliable Endcuts for Tee ProfileType and Snipe EndcutType.
+  * <pre>
+  * Dim FactoryObj As SfmOperationFactory
+  * Set FactoryObj = PartObj.GetCustomerFactory("SfmOperationFactory")
+  * Dim EndCutManagerObj As SfmEndcutManager
+  * Set EndCutManagerObj = FactoryObj.GetEndcutManager
+  * Dim ListOfEndCutNames() As Variant
+  * ListOfEndCutNames = EndCutManagerObj.<font color="red">GetAvailableEndcuts("Tee", "Snipe")</font>
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetAvailableEndcuts (in CATBSTR iSectionFamily,in CATBSTR iEndcutType, out /*IDLRETVAL*/ CATSafeArrayVariant oListEndcutNames);
+  /**
+  * Gets the Specifications required to define a particular Endcut.
+  * @param iSectionFamily [in]
+  *     The Section Family(Tee,Angle,Bulb).
+  * @param iEndcutType [in]
+  *   The EndcutType(Snipe,Trim,Weld).
+  * @param iEndcutName [in]
+  *   The Name of the Endcut sought from GetAvailableEndcuts Method.
+  * @param oListOfContextNames [out]
+  *   The Limit Names for the Endcut(Cutbacks & Contextual only). The List will be empty for Cutom Endcut.
+  * @param oListEndCutParameters [out]
+  *   A list of Parameters published by the UDF. The default values can be read using this output.
+  * @param oListOfEndCutParamNames [out]
+  *   A list of Parameter Names published by the UDF.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example retrieves the list of avaliable Endcuts for Tee ProfileType and Snipe EndcutType.
+  * <pre>
+  * Dim FactoryObj As SfmOperationFactory
+  * Set FactoryObj = PartObj.GetCustomerFactory("SfmOperationFactory")
+  * Dim EndCutManagerObj As SfmEndcutManager
+  * Set EndCutManagerObj = FactoryObj.GetEndcutManager
+  * Dim ListOfContextNames, ListOfUDFParamNames As Variant
+  * Dim ListOfUDFParameters As SfmConnectionParameters
+  * EndCutManagerObj.<font color="red">GetEndcutSpecifications "Tee", "Snipe", "T-CTX-PLATE", ListOfContextNames, ListOfUDFParameters, ListOfUDFParamNames</font>
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetEndcutSpecifications (in CATBSTR iSectionFamily,in CATBSTR iEndcutType, in CATBSTR iEndcutName, 
+                                   out CATSafeArrayVariant oListOfContextNames,
+                                   out CATIASfmConnectionParameters oListEndCutParameters,
+                                   out CATSafeArrayVariant oListOfEndCutParamNames);
+  
+};
+
+// Interface name : CATIASfmEndcutManager
+#pragma ID CATIASfmEndcutManager "DCE:F37C5DEF-D619-4ca3-9524A07B96FE1565"  
+#pragma DUAL CATIASfmEndcutManager
+
+// VB object name : SfmStiffener (Id used in Visual Basic)
+#pragma ID SfmEndcutManager "DCE:B53A7493-6785-49fd-8EB51E17FE1D6C80"                                 
+#pragma ALIAS CATIASfmEndcutManager SfmEndcutManager
+
+#endif

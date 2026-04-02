@@ -1,0 +1,19 @@
+#
+# CATVisTextureObjects
+# SHARED LIBRARY
+#
+
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH = JS0GROUP CATViz
+
+
+OS = IRIX
+
+OS = AIX 
+
+OS = HP-UX
+
+OS = SunOS
+
+OS = Windows_NT

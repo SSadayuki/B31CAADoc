@@ -1,0 +1,60 @@
+#
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+
+#
+
+#
+OS = AIX
+BUILD=YES
+LINK_WITH=  JS0CORBA OracleGLUE clntsh
+LOCAL_CCFLAGS=  -D_oracle_XA
+LOCAL_LDFLAGS=  -bnoquiet
+
+#
+OS = HP-UX
+BUILD=YES
+LINK_WITH= JS0CORBA OracleGLUE clntsh9
+LOCAL_CCFLAGS=  -D_oracle_XA
+
+#
+OS = IRIX
+BUILD=YES
+LINK_WITH=  JS0CORBA clntsh 
+LOCAL_CCFLAGS=  -D_oracle_XA
+
+#
+OS = SunOS
+BUILD=YES
+LINK_WITH= JS0CORBA OracleGLUE clntsh9
+LOCAL_CCFLAGS=  -D_oracle_XA
+
+
+OS = alpha_a
+BUILD=NO
+
+OS = intel_a
+BUILD=YES
+LOCAL_CCFLAGS = -D__STDC__ -DWIN32COMMON   ######-D_oracle_XA
+LINK_WITH=  JS0CORBA OracleGLUE Oci
+
+OS = intel_a64
+BUILD=YES
+LOCAL_CCFLAGS = -D__STDC__ -DWIN32COMMON   ######-D_oracle_XA
+LINK_WITH= JS0CORBA  Oci
+  
+OS = win_a
+BUILD=YES
+LOCAL_CCFLAGS = -D__STDC__ -DWIN32COMMON   ######-D_oracle_XA
+LINK_WITH=  JS0CORBA Oci
+
+OS = win_b64
+BUILD=YES
+LOCAL_CCFLAGS = -D__STDC__   ######-D_oracle_XA
+LINK_WITH= JS0CORBA OracleGLUE Oci
+
+
+
+
+
+
+

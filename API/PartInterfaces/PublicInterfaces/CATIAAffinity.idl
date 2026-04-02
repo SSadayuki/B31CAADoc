@@ -1,0 +1,79 @@
+#ifndef CATIAAffinity_IDL
+#define CATIAAffinity_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2006
+
+//=================================================================                                   
+// CATIAAffinity:                           
+// Exposed interface for translation
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+//=============================================================================
+// Dec. 2006 - Creation                                                     TRK
+//=============================================================================
+//
+#include "CATIAShape.idl"
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+* Represents the hybrid shape Affinity feature object. 
+* This solid feature is 
+* created from an underlying HybridShapeAffinity aggregated by the Affinity.
+* <b>Role</b>: To access the data of the hybrid shape Affinity feature object.
+* This data includes:
+*<ul>
+*<li> The element to Affinity </li>
+*<li> Origin for the Affinity </li>
+*<li> Plane for the Affinity </li>
+*<li> Direction for the Affinity </li>
+*<li> XRatio Value for the Affinity </li>
+*<li> YRatio Value for the Affinity </li>
+*<li> ZRatio Value for the Affinity </li>
+*<li> The translation distance and its value </li>
+*</ul>
+* Use the CATIAHybridShapeFactory to create HybridShapeFeature object.
+* @see CATIAHybridShapeFactory
+*/
+//-------------------------------------------------------------------------------
+interface CATIAAffinity : CATIAShape
+{
+
+#pragma PROPERTY HybridShape
+
+  /**
+  * Gets the underlying HybridShapeAffinity.
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example explains how to retrieve the underlying HybridShape Affinity
+  * <pre>
+  *  Dim oHybridShape as AnyObject
+  *  Set oHybridShape=oAffinity.HybridShape
+  *  oHybridShape.ElemToAffinity = reference1
+  * </pre>
+  * </dl>
+  */
+  HRESULT get_HybridShape (out /*IDLRETVAL*/ CATIAHybridShape oHybridShapeAffinity);
+
+};
+
+#pragma ID CATIAAffinity "DCE:5925B967-7E2F-4d1b-8F55E66270563B26"
+#pragma DUAL CATIAAffinity
+
+// VB object name Affinity: (Id used in Visual Basic)
+#pragma ID Affinity  "DCE:7DFD06E5-94EB-4057-8E861F97E10627C4"
+#pragma ALIAS CATIAAffinity Affinity
+
+
+#endif
+// CATIAAffinity_IDL
+

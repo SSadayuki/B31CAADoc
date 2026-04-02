@@ -1,0 +1,12 @@
+BUILT_OBJECT_TYPE = ARCHIVE
+DELIVERABLE = NO
+BUILD = NO
+
+OS = intel_a
+BUILD = YES
+
+OS = win_b
+BUILD = YES
+
+OS = win_a
+BUILD = YES

@@ -1,0 +1,26 @@
+#@ autoformat 10:02:05
+
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+
+BUILD =NO
+
+LINK_WITH_V5_ONLY=
+LINK_WITH_V6_ONLY=
+LINK_WITH= \
+    $(LINK_WITH_V5_ONLY)           \
+    $(LINK_WITH_V6_ONLY)           \
+#
+
+INCLUDED_MODULES= GSMItfCPP
+
+OS = COMMON
+#if defined(CATIAR201)
+LINK_WITH_V6_ONLY= \
+#
+#else
+#if defined(CATIAV5R21)
+LINK_WITH_V5_ONLY= \
+#
+ALIASES_ON_IMPORT = GSMItf CATGSMIDLItf
+#endif
+#endif

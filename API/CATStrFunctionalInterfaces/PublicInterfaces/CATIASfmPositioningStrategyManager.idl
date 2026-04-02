@@ -1,0 +1,112 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=================================================================================================
+// CATIASfmPositioningStrategyManager
+//   Position Strategy Manager Interface to GetAvailablePositioningStrategies & GetPositioningStrategyParams
+//=================================================================================================
+// Usage notes:
+//   Interface for automation integration
+//=================================================================================================
+// Nov. 2010  Creation                                         Deshmane Rahul
+//=================================================================================================
+
+#ifndef CATIASfmPositioningStrategyManager_IDL
+#define CATIASfmPositioningStrategyManager_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIABase.idl"
+#include "CATIAReferences.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+#include "CATIASfmStandardPosStrategyParameters.idl"
+
+/**
+* Gets CATIASfmPositioningStrategyManager.Use this Manager to GetAvailablePositioningStrategies & GetPositioningStrategyParams.
+* <dl>
+* <dt>Example</dt>:
+* <dd>
+* Get the Manager from factory.
+* <pre>
+*  'Retrieve the Factory
+*  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+*  'Retrieve the Position Strategy Manager
+*  Dim ObjSfmPosStrategyMgr  As SfmPositioningStrategyManager
+*  Set ObjSfmPosStrategyMgr  = Factory.GetOpeningMgr(Part1, "SfmPositioningStrategyManager")
+* </pre>
+* </dl> 
+*/
+
+interface CATIASfmPositioningStrategyManager: CATIABase
+{   
+  /**
+  * Get The list of Available Position Strategies.
+  * @param oListStrategyNames [out] 
+  *     List of Strategies.
+  * @return
+  *   <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  *<dd>
+  * Gets Available Positoning Strategies from Position Strategy Manager.
+  * <pre>
+  *  'Retrieve the Factory
+  *  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+  *  'Retrieve the Position Strategy Manager
+  *  Dim ObjSfmPosStrategyMgr As SfmPositioningStrategyManager
+  *  Set ObjSfmPosStrategyMgr = Factory.GetOpeningMgr(Part1, "SfmPositioningStrategyManager")
+  *  'Get The List of Available Strategies
+  *  Dim oListStrategies() As Variant
+  *  ObjSfmPosStrategyMgr.GetAvailablePositioningStrategies oListStrategies
+  *  'Display The List of Available Strategies
+  *  Dim NbOfStrategies As Long
+  *  NbOfStrategies = UBound(oListStrategies)
+  *  Display List of Strategies
+  *  For i = 0 To NbOfStrategies
+  *  MsgBox oListStrategies(i)
+  *  Next
+  * </pre>
+  * </dl> 
+  */
+
+  HRESULT GetAvailablePositioningStrategies (out CATSafeArrayVariant oListStrategyNames);
+
+  /**
+  * Get The list of Available Position Strategies Parameters, depending on Strategy Name.
+  * See CATIASfmStandardPosStrategyParameters for details
+  * @param iPosStrategyName [in] 
+  *     Name of Strategy.
+  * @param oListPosParams [out] 
+  *     List of parameters.
+  * @return
+  *   <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * The Example Demonstrates how to get position strategy parameters for "CATSfmPosMidDistMidDist".
+  * <pre>
+  *  'Retrieve the Factory
+  *  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+  *  'Retrieve the Position Strategy Manager
+  *  Dim ObjSfmPosStrategyMgr As SfmPositioningStrategyManager
+  *  Set ObjSfmPosStrategyMgr = Factory.GetOpeningMgr(Part1, "SfmPositioningStrategyManager")
+  *  Dim PositionStrategyParms As SfmStandardPosStrategyParameters
+  *  Set PositionStrategyParms = ObjSfmPosStrategyMgr.GetPositioningStrategyParams("CATSfmPosMidDistMidDist")
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetPositioningStrategyParams (in CATBSTR iPosStrategyName,out /*IDLRETVAL*/CATIASfmStandardPosStrategyParameters  oListPosParams);
+
+};
+
+// Interface name : CATIASfmPositioningStrategyManager
+#pragma ID CATIASfmPositioningStrategyManager "DCE:EC1E72BE-C9CC-47fb-A2680521C1C6624A"                                                   
+#pragma DUAL CATIASfmPositioningStrategyManager
+
+// VB object name : SfmPositioningStrategyManager
+#pragma ID SfmPositioningStrategyManager "DCE:5CB0CD77-5E16-4e9f-9E4E9EFE94BB0062"                                               
+#pragma ALIAS CATIASfmPositioningStrategyManager SfmPositioningStrategyManager
+
+#endif

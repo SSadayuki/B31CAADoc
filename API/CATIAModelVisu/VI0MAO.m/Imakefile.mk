@@ -1,0 +1,36 @@
+# 
+# 
+# 
+BUILT_OBJECT_TYPE = NONE
+COMDYN_MODULE = V4SysCOMD
+
+LINK_WITH = \
+AC0CATPL \
+NS0S3STR \
+JS0CORBA \
+JS0SCBAK \
+VI0GEVUE \
+CATIAUDB2 \
+CATIAEntity \
+V4Geom5 \
+V4Maths1 \
+V4Maths2 \
+V4SysMEM \
+V4SysUTIL \
+V4Topo0 \
+VE0BASE \
+CATViz
+
+OS = AIX
+SYS_LIBS = -lxlf -lxlf90 -lxlfpad
+
+OS = IRIX
+SYS_LIBS = -lftn
+
+OS = HP-UX
+SYS_LIBS = -lf
+
+OS = SunOS
+SYS_LIBS = -lF77 -lM77
+
+OS = Windows_NT

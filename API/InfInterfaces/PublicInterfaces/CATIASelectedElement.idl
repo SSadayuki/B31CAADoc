@@ -1,0 +1,196 @@
+#ifndef CATIASelectedElement_IDL
+#define CATIASelectedElement_IDL
+/*IDLREP*/ 
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//--------------------------------------------------------------------------
+// SelectedElement Object
+// mcf - 2000
+//--------------------------------------------------------------------------
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+interface CATIADocument;
+interface CATIAReference;
+ 
+/**
+  * Represents an element contained by a Selection object.
+  * This object is an object contained by a @href CATIASelection object. The @href CATIASelection object contains
+  * @href CATIASelectedElement objects, which are accessed through the @href CATIASelection#Count2 and
+  * @href CATIASelection#Item2 methods.
+  */
+interface CATIASelectedElement : CATIABase
+{
+   /**
+	 * Returns the string constant which describes the selected element Automation type.
+	 * <br>This type is returned by the @href #Value property, and
+     * may be, for instance <tt>"Pad"</tt> or <tt>"Line2D"</tt>.
+     * <br><b>Caution</b>: This property gives the leaf automation type of the object, in the
+	 * inheritance hierarchy. Nevertheless, after a call to @href CATIASelection#SelectElement2 ,
+	 * @href CATIASelection#SelectElement3 , @href CATIASelection#SelectElement4 ,
+	 * @href CATIASelection#IndicateOrSelectElement2D or @href CATIASelection#IndicateOrSelectElement3D , 
+	 * this property gives the input filter string constant relative to the effective selection (more precisely 
+	 * the first filter string constant delivered through the iFilterType
+	 * parameter, for which the current automation object fullfills the string constant). This string constant may be
+	 * an automation object name corresponding to the iFilterType parameter with which
+	 * @href CATIASelection#SelectElement2 has previously been called, or even a @href CATSelectionFilter value
+	 * name. 
+     * @sample
+     * Suppose you run the following piece of script: 
+     * <pre>
+     * Set Selection = CATIA.ActiveDocument.Selection
+     *'  We propose to the user that he select a Prism or a Hole
+     * ReDim InputObjectType(1) : InputObjectType(0)="Prism" : InputObjectType(1)="Hole"
+     * Status=Selection.SelectElement2(InputObjectType,"Select a prism or a hole",true)
+     * if (Status = "Cancel") then Exit Sub
+     * AutomationType = Selection.Item(1).Type</pre>
+	 * If the user selects a Pad, the script <tt>AutomationType</tt> variable will contain <tt>"Prism"</tt>
+	 * and not <tt>"Pad"</tt>.
+	 * <br><p>Consequently, in most cases, use the VBScript TypeName function instead of this property.
+	 */
+#pragma PROPERTY Type
+	HRESULT get_Type(inout /*IDLRETVAL*/ CATBSTR oType);
+
+	/**
+	 * Returns the document to which the selected element belongs. 	
+	 */
+#pragma PROPERTY Document
+	HRESULT get_Document(out /*IDLRETVAL*/ CATIADocument oDocument);
+
+	/**
+	 * Returns the coordinates of the pick point. 	
+	 * @param oPoint
+	 * The coordinates of the pick point, i.e. the hit between the geometric object and the cursor.</br> 
+	 * The length of this parameter will be 3, except if the document is a @href CATIADrawingDocument <br>
+     * @sample
+     * This example retrieves the coordinates of the pick point in the
+     * array myArray:
+     *<pre>
+     * Dim oSelElem As SelectedElement
+     * Set oSelElem = CATIA.ActiveDocument.Selection.Item(1)
+     * ReDim myArray(2)
+     * oSelElem.GetCoordinates myArray
+     *</pre>
+	 */
+	HRESULT GetCoordinates(inout CATSafeArrayVariant ioPoint);
+
+	/**
+	 * Returns the actual selected automation object. 
+	 */
+#pragma PROPERTY Value
+	HRESULT get_Value(out /*IDLRETVAL*/ CATBaseDispatch oObject);
+
+    /**
+     * Returns a Reference version of the Value property.
+	 * <br><b>Role</b>: Returns a @href CATIAReference version of @href #Value .
+     */
+#pragma PROPERTY Reference
+	HRESULT get_Reference(out /*IDLRETVAL*/ CATIAReference oReference);
+
+    /**
+     * Returns the leaf product corresponding to the selection in the specification tree.
+	 * <br><b>Role</b>: Returns the leaf @href CATIAProduct (component, corresponding for example to "Product1.1"
+	 * in the specification tree). The @href CATIABase returned is a @href CATIAProduct if a product appears in the
+	 * specification tree, in the path corresponding to the current selection, and a fake @href CATIABase whose
+	 * @href CATIABase#Name property equals to "InvalidLeafProduct" otherwise.</br>
+	 * Cumulated with the use of the @href CATIABase#Parent property (which enables to navigate into the object
+	 * structure), the current property enables the scripter to obtain the path, in the specification tree,
+	 * corresponding to the selection.
+	 * @sample
+     * The following example supposes a @href CATIAPart or a @href CATIAProduct is opened. It asks the end user to select
+	 * a @href CATIAShape in the current window. It then sends message boxes containing the names of the automation
+	 * objects contained in the specification tree path corresponding to the shape selected, and, regarding the 
+	 * automation objects which are products (only products which are components), a message box containing the 
+	 * abcissa of the translation of the product compared to its reference product.
+     * <pre>
+     * Dim Status,Feature,LeafProduct,LeafProductProcessed,InputObjectType(0)
+	 * Dim Document,Selection,AutomationTreeNodeOrProduct,Position,AxisComponentsArray(11)
+     * Set Document = CATIA.ActiveDocument : Set Selection = Document.Selection
+     *'We propose to the user that he select a feature
+     * InputObjectType(0)="AnyObject" 
+     * Status=Selection.SelectElement2(InputObjectType,"Select a feature",true)
+     * if (Status = "Cancel") then Exit Sub
+     * Set Feature = Selection.Item(1).Value
+     * Set LeafProduct = Selection.Item(1).LeafProduct
+	 * LeafProductProcessed = true
+	 * if (LeafProduct.Name&lt;&gt;"InvalidLeafProduct") then LeafProductProcessed = false
+	 * Set AutomationTreeNodeOrProduct = Feature
+	 * do while (TypeName(AutomationTreeNodeOrProduct)&lt;&gt;"Application")
+	 *'  We send a message box, if AutomationTreeNodeOrProduct is not nor a Shapes object neither a PartDocument object
+	 *     if ((TypeName(AutomationTreeNodeOrProduct)&lt;&gt;"Shapes") And _
+     *         (TypeName(AutomationTreeNodeOrProduct)&lt;&gt;"Bodies") And _
+     *         (TypeName(AutomationTreeNodeOrProduct)&lt;&gt;"PartDocument") And _
+	 *         (TypeName(AutomationTreeNodeOrProduct)&lt;&gt;"Products") And _
+	 *         (TypeName(AutomationTreeNodeOrProduct)&lt;&gt;"ProductDocument")) then
+	 *         msgbox AutomationTreeNodeOrProduct.Name
+     *         if (TypeName(AutomationTreeNodeOrProduct)="Product") then
+	 *'          We display a message box containing the abcissa of the translation, except in the case of the
+	 *'          root product
+	 *             if (TypeName(AutomationTreeNodeOrProduct.Parent.Parent)&lt;&gt;"Application") then
+     *                 Set Position = AutomationTreeNodeOrProduct.Position
+     *                 Call Position.GetComponents(AxisComponentsArray)
+     *                 msgbox AxisComponentsArray(9)
+	 *             end if
+     *         end if
+	 *     end if
+	 *'  We determine the next automation tree node or product
+	 *     Set AutomationTreeNodeOrProduct = AutomationTreeNodeOrProduct.Parent
+	 *     if ((TypeName(AutomationTreeNodeOrProduct)="Application") And (Not LeafProductProcessed)) then
+	 *'      The specification tree path corresponding to the selection contains at least one product, which the current
+	 *'      loop as not yet processed. It means that the parent in the specification tree of the feature corresponding
+	 *'      to the last message box sent is LeafProduct
+	 *         Set AutomationTreeNodeOrProduct = LeafProduct
+	 *         LeafProductProcessed = true
+	 *     end if
+	 * loop</pre>
+     * If you run the preceeding piece of script, the current document beeing a product with the following specification
+	 * tree: 
+     * <pre>
+     *     +--------+ 
+     *     !Product3!
+     *     +----+---+
+     *          !
+     *          +- Product2 (Product2.1)             'translation value: 10
+     *          !     !
+     *          !     +- Product1 (Product1.1)       'translation value: 20
+     *          !           !
+     *          !           +- Part1 (Part1.1)       
+	 *          !                !
+     *          !                +- Part1
+	 *          !                     !
+	 *          !                     +- PartBody
+	 *          !                           !
+	 *          !                           +- Pad.1
+     *          +- Part2 (Part2.1)</pre>
+     * and you select Pad.1, the message boxes displayed will be:
+	 * <pre>
+	 *     Pad.1
+	 *     PartBody
+	 *     Part1
+	 *     Part1.1
+	 *     Product1.1
+	 *     20
+	 *     Product2.1
+	 *     10
+	 *     Product3
+	 * </pre>
+     */
+#pragma PROPERTY LeafProduct
+	HRESULT get_LeafProduct(out /*IDLRETVAL*/ CATIABase oProduct);
+
+};
+
+// Interface Name : CATIASelectedElement
+#pragma ID CATIASelectedElement "DCE:6ef9ead4-7378-11d4-85b400508b675233"
+								
+#pragma DUAL CATIASelectedElement
+
+// VB Object Name : SelectedElement
+#pragma ID SelectedElement "DCE:82cca884-7378-11d4-85b400508b675233"
+#pragma ALIAS CATIASelectedElement SelectedElement
+
+#endif

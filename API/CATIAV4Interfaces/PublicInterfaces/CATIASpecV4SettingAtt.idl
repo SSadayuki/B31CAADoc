@@ -1,0 +1,82 @@
+#ifndef CATIASpecV4SettingAtt_IDL
+#define CATIASpecV4SettingAtt_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2003
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATBSTR.idl"          
+#include "CATIASettingController.idl"
+#include "CATV4IV4V5SpecDraftMigrationEnum.h"
+/** 
+ * Represents the V4/V5 SPEC setting controller object.
+ * <b>Role</b>: The V4/V5 SPEC setting controller object deals with the setting
+ * parameters displayed in the V4/V5SPEC property page.
+ * To access this property page:
+ * <ul>
+ *  <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *  <li>Click + left of </b>General</b> to unfold the workbench list</li>   
+ *  <li>Click </b>Compatibility</b></li>
+ * </ul> 
+ * <br><b>The different options for V4/V5SPEC tab</b>:
+ * <table>
+ *   <tr><td>The Step By Step Update And Reroute</td>  
+ *   <tr><td>The Draft Feature Migration Mode </td>  
+ * </table>
+ */
+interface CATIASpecV4SettingAtt : CATIASettingController
+{
+/**
+ * Returns or sets the activation state of Step By Step Update And Reroute.
+ * <br><b>Role</b>: The Step By Step Update And Reroute setting parameter manages the activation
+ * of the step by step update and reroute during a Copy/Paste As Spec when solids are involved. 
+*/   
+  #pragma PROPERTY   StepByStepUpdateAndReroute  
+	HRESULT get_StepByStepUpdateAndReroute( out /*IDLRETVAL*/boolean oSpecUpdate);  
+	HRESULT put_StepByStepUpdateAndReroute(in boolean iSpecUpdate); 
+/** 
+ * Retrieves information about the StepByStepUpdateAndReroute setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */ 
+	HRESULT GetStepByStepUpdateAndRerouteInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+/** 
+ * Locks or unlocks the StepByStepUpdateAndReroute setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */	 
+	HRESULT SetStepByStepUpdateAndRerouteLock (in boolean iLock);
+/**
+ * Returns or sets the activation state of the mode of migration for draft feature.
+ * <br><b>Role</b>: This setting parameter manages the activation of the mode of migration for draft feature
+ *  during a Copy/Paste As Spec. 
+*/	
+  #pragma PROPERTY   DraftFeatureMigrationMode 
+
+	HRESULT get_DraftFeatureMigrationMode(out /*IDLRETVAL*/CATV4IV4V5SpecDraftMigrationEnum  oDraftMode);   
+	HRESULT put_DraftFeatureMigrationMode(in CATV4IV4V5SpecDraftMigrationEnum iDraftMode);  
+/** 
+ * Retrieves information about the DraftFeatureMigrationMode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */  		 
+	HRESULT GetDraftFeatureMigrationModeInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, 	 out /*IDLRETVAL*/ boolean oModified);
+/** 
+ * Locks or unlocks the DraftFeatureMigrationMode setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetDraftFeatureMigrationModeLock (in boolean iLock); 							 
+
+};
+  								
+//Interface Name (Autom)
+#pragma ID CATIASpecV4SettingAtt "DCE:32690a7b-41c6-4f92-82ffb4f5cd937e78" 
+#pragma DUAL CATIASpecV4SettingAtt
+	
+	//VB Object Name (autre)
+#pragma ID SpecV4SettingAtt "DCE:85b224c9-b31e-4491-9452ea03f3636e86"
+#pragma ALIAS CATIASpecV4SettingAtt SpecV4SettingAtt
+
+#endif
+
+

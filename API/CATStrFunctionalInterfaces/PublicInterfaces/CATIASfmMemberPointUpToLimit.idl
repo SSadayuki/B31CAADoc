@@ -1,0 +1,118 @@
+// COPYRIGHT Dassault Systemes 2007
+//=============================================================================
+// CATIASfmMemberPointUpToLimit
+//   Define the CATIASfmMemberPointUpToLimit interface for managing
+//   SfmMemberPointUpToLimit attributes
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar. 2007  Creation                                                S. QUINCI
+//=============================================================================
+#ifndef CATIASfmMemberPointUpToLimit_IDL
+#define CATIASfmMemberPointUpToLimit_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIASfmMember.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Interface to manage Member created with one point, one direction and one limit.
+ * <b>Role</b>: To manage member created with one point, one direction and one limit.
+ */
+interface CATIASfmMemberPointUpToLimit : CATIASfmMember
+{
+  /**
+  * Returns or sets the point.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAVertex.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Point</code> the point for the <code>SfmMemberPointUpToLimit</code> feature.
+  * <pre>
+  * Dim Point As Reference
+  * Set Point = SfmMemberPointUpToLimit.<font color="red">Point</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY Point
+  HRESULT get_Point(out /*IDLRETVAL*/ CATIAReference oPoint);
+  HRESULT put_Point(in CATIAReference iPoint);
+
+  /**
+  * Returns or sets the direction.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Direction</code> the direction for the <code>SfmMemberPointUpToLimit</code> feature.
+  * <pre>
+  * Dim Direction As Reference
+  * Set Direction = SfmMemberPointUpToLimit.<font color="red">Direction</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY Direction
+  HRESULT get_Direction(out /*IDLRETVAL*/ CATIAReference oDirection);
+  HRESULT put_Direction(in CATIAReference iDirection);
+
+  /**
+  * Returns or sets the direction orientation.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>DirectionOrientation</code> the direction orientation for the <code>SfmMemberPointUpToLimit</code> feature.
+  * <pre>
+  * Dim DirectionOrientation As Integer
+  * Set DirectionOrientation = SfmMemberPointUpToLimit.<font color="red">DirectionOrientation</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY DirectionOrientation
+  HRESULT get_DirectionOrientation(out /*IDLRETVAL*/ long oOrientation);
+  HRESULT put_DirectionOrientation(in long iOrientation);
+
+  /**
+  * Inverts the direction orientation.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example inverts the orientation of the direction for the <code>SfmMemberPointUpToLimit</code> feature.
+  * <pre>
+  * SfmMemberPointUpToLimit.<font color="red">InvertDirection</font>
+  * </pre>
+  * </dl> 
+  */ 
+  HRESULT InvertDirection();
+
+  /**
+  * Returns or sets the limit.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example retrieves in <code>Limit</code> the limit for the <code>SfmMemberPointUpToLimit</code> feature.
+  * <pre>
+  * Dim Limit As Reference
+  * Set Limit = SfmMemberPointUpToLimit.<font color="red">Limit</font>
+  * </pre>
+  * </dl> 
+  */ 
+  #pragma PROPERTY Limit
+  HRESULT get_Limit(out /*IDLRETVAL*/ CATIAReference oLimit);
+  HRESULT put_Limit(in CATIAReference iLimit);
+};
+
+// Interface name : CATIASfmMemberPointUpToLimit
+#pragma ID CATIASfmMemberPointUpToLimit "DCE:44b2d1a1-3ff6-4bab-871e61819f890877"
+#pragma DUAL CATIASfmMemberPointUpToLimit
+
+// VB object name : SfmMemberPointUpToLimit (Id used in Visual Basic)
+#pragma ID SfmMemberPointUpToLimit "DCE:5078b110-a1f7-4d7f-94ab9dcf01a27804"
+#pragma ALIAS CATIASfmMemberPointUpToLimit SfmMemberPointUpToLimit
+
+#endif

@@ -1,0 +1,90 @@
+#ifndef CATIASplit_IDL
+#define CATIASplit_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIASplit:                           
+// Exposed interface for split
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Feb98 References management				  L Lalere
+// Dec98 integration Sewing                              JL Delvordre
+// Fev99 Creation de CATIASurfaceBasedShape              JL Delvordre
+//=================================================================
+#include "CATIASurfaceBasedShape.idl"
+#include "CATSplitDefs.idl"
+
+interface CATIAReference;
+
+/**
+ * Represents the split operation.
+ * It splits a shape using a splitting element,
+ * such as a surface, a face or a plane.
+ */
+
+//-----------------------------------------------------------------
+interface CATIASplit : CATIASurfaceBasedShape     
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //
+    //    ON SPITTING SIDE
+    //    ----------------
+    //
+    /**
+     * Returns or sets the splitting side .
+     * The splitting side is the side of the splitting element
+     * kept after the split.
+     * A positive side refers to the same orientation
+     * than the splitting element normal vector.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>sptSide</tt> the splitting side
+     * of the split shape <tt>mySplit</tt>, and then sets it to
+     * <tt>catPositiveSide</tt>:
+     * <pre>
+     * Set sptSide = mySplit.<font color="red">SplittingSide</font>
+     * mySplit.<font color="red">SplittingSide</font> = catPositiveSide
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SplittingSide
+    HRESULT    get_SplittingSide    
+                ( out /*IDLRETVAL*/  CatSplitSide            oSplittingSide );
+    HRESULT    put_SplittingSide    
+                ( in                 CatSplitSide            iSplittingSide );
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+};
+
+// Interface name : CATIASplit
+#pragma ID CATIASplit "DCE:20d0ecb9-65ad-11d1-a27f0000f87546fd"
+#pragma DUAL CATIASplit
+
+// VB object name : Split (Id used in Visual Basic)
+#pragma ID Split "DCE:20f84386-65ad-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIASplit Split
+
+
+#endif
+// CATIASplit_IDL
+

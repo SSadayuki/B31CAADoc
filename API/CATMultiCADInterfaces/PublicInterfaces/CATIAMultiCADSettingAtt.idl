@@ -1,0 +1,776 @@
+#ifndef CATIAMultiCADSettingAtt_IDL
+#define CATIAMultiCADSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+
+interface CATIAMultiCADSettingAtt : CATIASettingController 
+{
+#pragma PROPERTY VisuFormatUnit
+    /**
+     * Returns or sets the Unit for Visu Format (number of milimeters
+     * per unit of the file)
+     */
+     HRESULT get_VisuFormatUnit( out /*IDLRETVAL*/ float oUnit );
+     HRESULT put_VisuFormatUnit( in float iUnit );
+
+    /**
+     * Retrieves environment informations for the VisuFormatUnit parameter.
+     * <br><b>Role</b>:Retrieves the state of the VisuFormatUnit parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetVisuFormatUnitInfo( inout               CATBSTR ioAdminLevel
+                                  , inout               CATBSTR ioLocked
+                                  , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the VisuFormatUnit parameter.
+     * <br><b>Role</b>:Locks or unlocks the VisuFormatUnit parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetVisuFormatUnitLock( in boolean iLocked );
+
+
+#pragma PROPERTY ConversionTechnology
+
+    /**
+     * Returns or sets the Conversion Technology
+     */
+     HRESULT get_ConversionTechnology( out /*IDLRETVAL*/ long oConvTechno );
+     HRESULT put_ConversionTechnology( in long iConvTechno );
+
+    /**
+     * Retrieves environment informations for the ConversionTechnology parameter.
+     * <br><b>Role</b>:Retrieves the state of the ConversionTechnology parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetConversionTechnologyInfo( inout               CATBSTR ioAdminLevel
+                                        , inout               CATBSTR ioLocked
+                                        , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the ConversionTechnology parameter.
+     * <br><b>Role</b>:Locks or unlocks the ConversionTechnology parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetConversionTechnologyLock( in boolean iLocked );
+
+#pragma PROPERTY LinkMode
+
+    /**
+     * Returns or sets the Link Mode
+     */
+     HRESULT get_LinkMode( out /*IDLRETVAL*/ long oLinkMode );
+     HRESULT put_LinkMode( in long iLinkMode );
+
+    /**
+     * Retrieves environment informations for the LinkMode parameter.
+     * <br><b>Role</b>:Retrieves the state of the LinkMode parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetLinkModeInfo( inout               CATBSTR ioAdminLevel
+                            , inout               CATBSTR ioLocked
+                            , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the LinkMode parameter.
+     * <br><b>Role</b>:Locks or unlocks the LinkMode parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetLinkModeLock( in boolean iLocked );
+
+
+#pragma PROPERTY OutputPath
+
+    /**
+     * Returns or sets the Output Path
+     */
+     HRESULT get_OutputPath( inout /*IDLRETVAL*/ CATBSTR oOutputPath );
+     HRESULT put_OutputPath( in CATBSTR iOutputPath );
+
+    /**
+     * Retrieves environment informations for the OutputPath parameter.
+     * <br><b>Role</b>:Retrieves the state of the OutputPath parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetOutputPathInfo( inout               CATBSTR ioAdminLevel
+                              , inout               CATBSTR ioLocked
+                              , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the OutputPath parameter.
+     * <br><b>Role</b>:Locks or unlocks the OutputPath parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetOutputPathLock( in boolean iLocked );
+
+#pragma PROPERTY SaveCoorsysInCgr
+
+    /**
+     * Returns or sets the Save Coordinate Systems in CGR
+     */
+     HRESULT get_SaveCoorsysInCgr( out /*IDLRETVAL*/ boolean oSaveCoorsysInCgr );
+     HRESULT put_SaveCoorsysInCgr( in boolean iSaveCoorsysInCgr );
+
+    /**
+     * Retrieves environment informations for the SaveCoorsysInCgr parameter.
+     * <br><b>Role</b>:Retrieves the state of the SaveCoorsysInCgr parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetSaveCoorsysInCgrInfo( inout               CATBSTR ioAdminLevel
+                                    , inout               CATBSTR ioLocked
+                                    , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the SaveCoorsysInCgr parameter.
+     * <br><b>Role</b>:Locks or unlocks the SaveCoorsysInCgr parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetSaveCoorsysInCgrLock( in boolean iLocked );
+
+#pragma PROPERTY PartsParameterMode
+
+    /**
+     * Returns or sets the parts parameterization mode
+     */
+     HRESULT get_PartsParameterMode( out /*IDLRETVAL*/ long oPartsParameterMode );
+     HRESULT put_PartsParameterMode( in long iPartsParameterMode );
+
+    /**
+     * Retrieves environment informations for the PartsParameterMode parameter.
+     * <br><b>Role</b>:Retrieves the state of the PartsParameterMode parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetPartsParameterModeInfo( inout               CATBSTR ioAdminLevel
+                                    , inout               CATBSTR ioLocked
+                                    , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the PartsParameterMode parameter.
+     * <br><b>Role</b>:Locks or unlocks the PartsParameterMode parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetPartsParameterModeLock( in boolean iLocked );
+
+
+
+
+#pragma PROPERTY ProEQuiltsRead
+
+    /**
+     * Returns or sets the ProEQuiltsRead
+     */
+     HRESULT get_ProEQuiltsRead( out /*IDLRETVAL*/ boolean oProEQuiltsRead );
+     HRESULT put_ProEQuiltsRead( in boolean iProEQuiltsRead );
+
+    /**
+     * Retrieves environment informations for the ProEQuiltsRead parameter.
+     * <br><b>Role</b>:Retrieves the state of the ProEQuiltsRead parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetProEQuiltsReadInfo( inout               CATBSTR ioAdminLevel
+                                  , inout               CATBSTR ioLocked
+                                  , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the ProEQuiltsRead parameter.
+     * <br><b>Role</b>:Locks or unlocks the ProEQuiltsRead parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetProEQuiltsReadLock( in boolean iLocked );
+
+
+#pragma PROPERTY ProESimpRepMode
+
+    /**
+     * Returns or sets the ProESimpRepMode
+     */
+     HRESULT get_ProESimpRepMode( out /*IDLRETVAL*/ boolean oProESimpRepMode );
+     HRESULT put_ProESimpRepMode( in boolean iProESimpRepMode );
+
+    /**
+     * Retrieves environment informations for the ProESimpRepMode parameter.
+     * <br><b>Role</b>:Retrieves the state of the ProESimpRepMode parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetProESimpRepModeInfo( inout               CATBSTR ioAdminLevel
+                                   , inout               CATBSTR ioLocked
+                                   , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the ProESimpRepMode parameter.
+     * <br><b>Role</b>:Locks or unlocks the ProESimpRepMode parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetProESimpRepModeLock( in boolean iLocked );
+
+
+#pragma PROPERTY ProESimpRepName
+
+    /**
+     * Returns or sets the ProESimpRepName
+     */
+     HRESULT get_ProESimpRepName( inout /*IDLRETVAL*/ CATBSTR oProESimpRepName );
+     HRESULT put_ProESimpRepName( in CATBSTR iProESimpRepName );
+
+    /**
+     * Retrieves environment informations for the ProESimpRepName parameter.
+     * <br><b>Role</b>:Retrieves the state of the ProESimpRepName parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetProESimpRepNameInfo( inout               CATBSTR ioAdminLevel
+                                   , inout               CATBSTR ioLocked
+                                   , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the ProESimpRepName parameter.
+     * <br><b>Role</b>:Locks or unlocks the ProESimpRepName parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetProESimpRepNameLock( in boolean iLocked );
+
+
+#pragma PROPERTY ProEInstanceMode
+
+    /**
+     * Returns or sets the ProEInstanceMode
+     */
+     HRESULT get_ProEInstanceMode( out /*IDLRETVAL*/ boolean oProEInstanceMode );
+     HRESULT put_ProEInstanceMode( in boolean iProEInstanceMode );
+
+    /**
+     * Retrieves environment informations for the ProEInstanceMode parameter.
+     * <br><b>Role</b>:Retrieves the state of the ProEInstanceMode parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetProEInstanceModeInfo( inout               CATBSTR ioAdminLevel
+                                    , inout               CATBSTR ioLocked
+                                    , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the ProEInstanceMode parameter.
+     * <br><b>Role</b>:Locks or unlocks the ProEInstanceMode parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetProEInstanceModeLock( in boolean iLocked );
+
+
+#pragma PROPERTY ProEInstanceName
+
+    /**
+     * Returns or sets the ProEInstanceName
+     */
+     HRESULT get_ProEInstanceName( inout /*IDLRETVAL*/ CATBSTR oProEInstanceName );
+     HRESULT put_ProEInstanceName( in CATBSTR iProEInstanceName );
+
+    /**
+     * Retrieves environment informations for the ProEInstanceName parameter.
+     * <br><b>Role</b>:Retrieves the state of the ProEInstanceName parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetProEInstanceNameInfo( inout               CATBSTR ioAdminLevel
+                                    , inout               CATBSTR ioLocked
+                                    , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the ProEInstanceName parameter.
+     * <br><b>Role</b>:Locks or unlocks the ProEInstanceName parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetProEInstanceNameLock( in boolean iLocked );
+	 
+#pragma PROPERTY UGLayerNumbers
+
+    /**
+     * Returns or sets the UGLayerNumbers
+     */
+     HRESULT get_UGLayerNumbers( inout /*IDLRETVAL*/ CATBSTR oUGLayerNumbers );
+     HRESULT put_UGLayerNumbers( in CATBSTR iUGLayerNumbers );
+
+    /**
+     * Retrieves environment informations for the UGLayerNumbers parameter.
+     * <br><b>Role</b>:Retrieves the state of the UGLayerNumbers parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetUGLayerNumbersInfo( inout               CATBSTR ioAdminLevel
+                                  , inout               CATBSTR ioLocked
+                                  , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the UGLayerNumbers parameter.
+     * <br><b>Role</b>:Locks or unlocks the UGLayerNumbers parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetUGLayerNumbersLock( in boolean iLocked );
+
+#pragma PROPERTY UGActiveLayersOnly
+
+    /**
+     * Returns or sets the UGActiveLayersOnly
+     */
+     HRESULT get_UGActiveLayersOnly( out /*IDLRETVAL*/ boolean oUGActiveLayersOnly );
+     HRESULT put_UGActiveLayersOnly( in boolean iUGActiveLayersOnly );
+
+    /**
+     * Retrieves environment informations for the UGActiveLayersOnly parameter.
+     * <br><b>Role</b>:Retrieves the state of the UGActiveLayersOnly parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetUGActiveLayersOnlyInfo( inout               CATBSTR ioAdminLevel
+                                      , inout               CATBSTR ioLocked
+                                      , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the UGActiveLayersOnly parameter.
+     * <br><b>Role</b>:Locks or unlocks the UGActiveLayersOnly parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetUGActiveLayersOnlyLock( in boolean iLocked );
+
+#pragma PROPERTY UGOpenSurfaces
+
+    /**
+     * Returns or sets the UGOpenSurfaces
+     */
+     HRESULT get_UGOpenSurfaces( out /*IDLRETVAL*/ boolean oUGOpenSurfaces );
+     HRESULT put_UGOpenSurfaces( in boolean iUGOpenSurfaces );
+
+    /**
+     * Retrieves environment informations for the UGOpenSurfaces parameter.
+     * <br><b>Role</b>:Retrieves the state of the UGOpenSurfaces parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetUGOpenSurfacesInfo( inout               CATBSTR ioAdminLevel
+                                  , inout               CATBSTR ioLocked
+                                  , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the UGOpenSurfaces parameter.
+     * <br><b>Role</b>:Locks or unlocks the UGOpenSurfaces parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetUGOpenSurfacesLock( in boolean iLocked );
+
+#pragma PROPERTY UGDrawingName
+
+    /**
+     * Returns or sets the UGDrawingName
+     */
+     HRESULT get_UGDrawingName( inout /*IDLRETVAL*/ CATBSTR oUGDrawingName );
+     HRESULT put_UGDrawingName( in CATBSTR iUGDrawingName );
+
+    /**
+     * Retrieves environment informations for the UGDrawingName parameter.
+     * <br><b>Role</b>:Retrieves the state of the UGDrawingName parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetUGDrawingNameInfo( inout               CATBSTR ioAdminLevel
+                                 , inout               CATBSTR ioLocked
+                                 , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the UGDrawingName parameter.
+     * <br><b>Role</b>:Locks or unlocks the UGDrawingName parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetUGDrawingNameLock( in boolean iLocked );
+
+#pragma PROPERTY UgReferenceSet
+
+    /**
+     * Returns or sets the UgReferenceSet
+     */
+     HRESULT get_UgReferenceSet( inout /*IDLRETVAL*/ CATBSTR oUgReferenceSet );
+     HRESULT put_UgReferenceSet( in CATBSTR iUgReferenceSet );
+
+    /**
+     * Retrieves environment informations for the UgReferenceSet parameter.
+     * <br><b>Role</b>:Retrieves the state of the UgReferenceSet parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetUgReferenceSetInfo( inout               CATBSTR ioAdminLevel
+                                   , inout               CATBSTR ioLocked
+                                   , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the UgReferenceSet parameter.
+     * <br><b>Role</b>:Locks or unlocks the UgReferenceSet parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetUgReferenceSetLock( in boolean iLocked );
+
+#pragma PROPERTY Annotation3DMode
+
+    /**
+     * Returns or sets the Annotation 3D mode
+     * R18sp3 on env. variable
+     */
+     HRESULT get_Annotation3DMode( out /*IDLRETVAL*/ boolean oAnnotation3DMode );
+     HRESULT put_Annotation3DMode( in boolean iAnnotation3DMode );
+
+    /**
+     * Retrieves environment informations for the Annotation3DMode parameter.
+     * <br><b>Role</b>:Retrieves the state of the Annotation3DMode parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetAnnotation3DModeInfo( inout               CATBSTR ioAdminLevel
+                                    , inout               CATBSTR ioLocked
+                                    , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the Annotation3DMode parameter.
+     * <br><b>Role</b>:Locks or unlocks the Annotation3DMode parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetAnnotation3DModeLock( in boolean iLocked );
+
+#pragma PROPERTY TranslatorMode
+
+    /**
+     * Returns or sets the Translator mode
+     */
+     HRESULT get_TranslatorMode( inout /*IDLRETVAL*/ long oTranslatorMode );
+     HRESULT put_TranslatorMode( in long iTranslatorMode );
+
+    /**
+     * Retrieves environment informations for the Translator mode parameter.
+     * <br><b>Role</b>:Retrieves the state of the Translator mode parameter 
+     * in the current environment. 
+     * @param ioAdminLevel
+     *       <br>If the parameter is locked, AdminLevel gives the administration
+     *       level that imposes the value of the parameter.
+     *   <br>If the parameter is not locked, AdminLevel gives the administration
+     *       level that will give the value of the parameter after a reset.
+     * @param ioLocked
+     *      Indicates if the parameter has been locked.
+     * @return 
+     *      Indicates if the parameter has been explicitly modified or remain
+     *      to the administrated value.
+     */
+     HRESULT GetTranslatorModeInfo( inout               CATBSTR ioAdminLevel
+                                   , inout               CATBSTR ioLocked
+                                   , out   /*IDLRETVAL*/ boolean oModified );
+
+
+    /**
+     * Locks or unlocks the Translator mode parameter.
+     * <br><b>Role</b>:Locks or unlocks the Translator mode parameter if it is possible
+     * in the current administrative context. In user mode this method will always
+     * return E_FAIL.
+     * @param iLocked
+     *  the locking operation to be performed
+     *  <b>Legal values</b>:
+     *  <br><tt>TRUE :</tt>   to lock the parameter.
+     *  <br><tt>FALSE:</tt>   to unlock the parameter.
+     */
+     HRESULT SetTranslatorModeLock( in boolean iLocked );
+};
+
+// Interface name : CATIAMultiCADSettingAtt
+#pragma ID CATIAMultiCADSettingAtt "DCE:bc2103a3-5b5d-4eff-b0c6221373d274c2"
+#pragma DUAL CATIAMultiCADSettingAtt
+
+// VB object name : MultiCADSettingAtt (Id used in Visual Basic)
+#pragma ID MultiCADSettingAtt "DCE:7c91fc67-1507-4761-865a95a36e158227"
+#pragma ALIAS CATIAMultiCADSettingAtt MultiCADSettingAtt
+
+#endif

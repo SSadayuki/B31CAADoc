@@ -1,0 +1,33 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+CATIAApplicationFrameUUID \
+NavigatorInterfacesUUID \
+ProductStructureUUID \
+SimulationInterfacesUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH=$(LINK_WITH_FOR_IID)  JS0CORBA JS0FM JS0SCBAK JS0STR JS0ERROR\
+            AD0XXBAS NS0S3STR NS0S1MSG CD0FRAME DI0PANV2 \
+            VE0BASE  YN000MFL O20COLLI AC0SPBAS DI0STATE\
+            ON0FRAME CD0STWIN CD0SHOW  ON0FRAME AS0STARTUP \
+            SimulationItf  SimulationItfCPP\
+            CATNavigatorItf CATDMUModel CATSimulationBase DNBSimulationBaseLegacy CATPrsRep \
+			CATDMUBase CATMathStream CATNavigator2Itf CATViz CATDMUWind VE0GRPH2
+
+OS = AIX
+SYS_LIBS = -lXt -lX11
+
+OS = HP-UX
+SYS_LIBS = -lXt -lX11
+
+OS = IRIX
+SYS_LIBS = -lXt -lX11 
+
+OS = SunOS
+SYS_LIBS = -lXt -lX11

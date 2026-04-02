@@ -1,0 +1,265 @@
+#ifndef CATIASketch_IDL
+#define CATIASketch_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+
+interface CATIAFactory2D;
+interface CATIALine2D;
+interface CATIAAxis2D;
+interface CATIAGeometricElements;
+interface CATIAConstraints;
+interface CATIACircle;
+interface CATIARectangle;
+
+/**
+ * The Sketch is a 2D based element comprising constrained 2D geometrical elements.
+ * The Sketch is created by giving a 2D support.
+ */
+
+interface CATIASketch : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+#pragma PROPERTY GeometricElements
+    //
+        /**
+         * Returns the list of geometrical elements included in the sketch.
+         * @return oGeometricElements
+         *   The list of geometric elements in the sketch (@see CATIAGeometricElements<br>
+         *   for more information).
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>colGeometry</tt> the list of geometrical<br>
+         * elements in the sketch <tt>mySketch</tt>:
+         * <pre>
+         * Set colGeometry = mySketch.<b>GeometricElements</b>
+         * </pre>
+         * </dl>
+         */
+
+    HRESULT    get_GeometricElements
+                ( out /*IDLRETVAL*/        CATIAGeometricElements     oGeometricElements );
+
+
+#pragma PROPERTY Constraints
+    //
+        /**
+         * Returns the list of constraints included in the sketch.
+         * @return oConstraints
+         *   The list of constraints in the sketch (@see CATIAConstraints<br>
+         *   for more information).
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>colConstraint</tt> the list of constraints<br>
+         * in the sketch <tt>mySketch</tt>:
+         * <pre>
+         * Set colConstraint = mySketch.<b>Constraints</b>
+         * </pre>
+         * </dl>
+         */
+
+    HRESULT    get_Constraints
+                ( out /*IDLRETVAL*/        CATIAConstraints      oConstraints );
+
+#pragma PROPERTY Factory2D
+    //
+        /**
+         * Returns the 2D factory of the sketch.  Take care that you must open edition<br>
+         * on a sketch before adding or modifying elements in it.
+         * @return oFactory
+         *   The 2D geometrical factory of the sketch (@see CATIAFactory2D<br>
+         *   for more information).
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>my2DFactory</tt> the 2D factory<br>
+         * of the sketch <tt>mySketch</tt>:
+         * <pre>
+         * Set my2DFactory = mySketch.<b>Factory2D</b>
+         * </pre>
+         * </dl>
+         */
+
+    HRESULT    get_Factory2D
+                ( out /*IDLRETVAL*/        CATIAFactory2D      oFactory );
+
+#pragma PROPERTY CenterLine
+    //
+        /**
+         * Returns the geometric 2D line defined as the center line of the sketch.
+         * Center lines are then used for creating shafts.
+         * @return oLine
+         *   The center line of the sketch(@see CATIALine2D for more information).
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example returns in <tt>myCenterLine</tt> the center line<br>
+         * in the sketch <tt>mySketch</tt>:
+         * <pre>
+         * Set myCenterLine = mySketch.<b>CenterLine</b>
+         * </pre>
+         * </dl>
+         */
+
+    HRESULT    get_CenterLine
+                ( out /*IDLRETVAL*/        CATIALine2D           oLine );
+    //
+        /**
+         * Sets a geometric 2D line as the center line of the sketch.
+         * Center lines are then used for creating shafts.
+         * @param iLine
+         *   The line that will be used as the center line of the sketch<br>
+         *   (@see CATIALine2D for more information).
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example sets the line <tt>myLine</tt> as the center line<br>
+         * of the sketch <tt>mySketch</tt>:
+         * <pre>
+         * mySketch.<b>CenterLine</b> = myLine
+         * </pre>
+         * </dl>
+         */
+
+    HRESULT    put_CenterLine
+                ( in                       CATIALine2D           iLine );
+
+#pragma PROPERTY AbsoluteAxis
+    //
+        /**
+         * Returns the 2D absolute axis of the sketch. The absolute axis is used for constraining
+         * the sketch in 3D space, and its constituting horizontal and vertical directions can
+         * also be used to constrain horizontally or vertically subsequent geometrical elements
+         * in the sketch.
+         * @return oAxis
+         *   The absolute axis of the sketch (@see CATIAAxis2D for more information).
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example places in <tt>myAxis</tt> the absolute axis<br>
+         * of the sketch <tt>mySketch</tt>:
+         * <pre>
+         * Set myAxis = mySketch.<b>AbsoluteAxis</b>
+         * </pre>
+         * </dl>
+         */
+
+    HRESULT    get_AbsoluteAxis
+                ( out /*IDLRETVAL*/        CATIAAxis2D           oAxis );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+    /**
+     * Returns the sketch axis coordinates in 3D space. 
+     * The matrix returned comprises 9 doubles, the first 3 being the coordinates<br>
+     * of the axis origin, the next 3 being those of the horizontal axis, and the<br>
+     * last 3 those of the vertical axis.
+     * <br>The sketch horizontal axis is in fact computed from the first non null
+     * projection of one of the 3 3D space axes on the sketch plane.
+     * @return oAxisData
+     *   The matrix of the axis in 3D space.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example reads the coordinates of the axis<br>
+     * of the sketch <tt>mySketch</tt>:
+     * <pre>
+     * Dim myAxisCoordinate (8)
+	 * mySketch.GetAbsoluteAxisData myAxisCoordinate
+     * Set OriginX = myAxisCoordinate(1)
+     * Set OriginY = myAxisCoordinate(2)
+     * Set OriginZ = myAxisCoordinate(3)
+     * Set HorizontalX = myAxisCoordinate(4)
+     * Set HorizontalY = myAxisCoordinate(5)
+     * Set HorizontalZ = myAxisCoordinate(6)
+     * Set VerticalX = myAxisCoordinate(7)
+     * Set VerticalY = myAxisCoordinate(8)
+     * Set VerticalZ = myAxisCoordinate(9)
+     * </pre>
+     * </dl>
+	 */
+    HRESULT    GetAbsoluteAxisData 
+                ( inout				       CATSafeArrayVariant   oAxisData );
+
+    /**
+     * Sets the absolute axis of the sketch in 3D space.
+     * @param oAxisData
+     *	 The matrix comprises 9 doubles, the first 3 being the coordinates<br>
+     *   of the axis origin, the next 3 being those of the horizontal axis,<br>
+	 *   and the last 3 those of the vertical axis of the absolute axis.
+     */
+
+	HRESULT	   SetAbsoluteAxisData 
+				( in					   CATSafeArrayVariant   iAxisData );
+
+    /**
+     *  Opens the Sketch Edition. You must open edition on a sketch before you can add<br>
+     *  elements in it.  The CATIAFactory2D returned then enables you to create 2D<br>
+     *  geometrical elements in the sketch.
+     *  @return oFactory
+     *  Returns the 2D FACTORY.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example opens edition on the sketch <tt>mySketch</tt><br>
+     * and places the factory in <tt>my2DFactory</tt>:
+     * <pre>
+     * Set my2DFactory = mySketch.<b>OpenEdition</b>
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT    OpenEdition
+                ( out /*IDLRETVAL*/        CATIAFactory2D        oFactory );
+
+
+    /**
+     *  Closes the Sketch Edition. Once you have finished working with the sketch, you<br>
+     *  must close its edition before using it for sketch-based shapes.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example closes the edition of the sketch <tt>mySketch</tt>:
+     * <pre>
+     * mySketch.<b>CloseEdition</b>
+     * </pre>
+     * </dl>
+     */
+    HRESULT    CloseEdition
+                ( );
+
+	/**
+	*  Inverse Orientation Of Sketch
+	*
+	*/
+	HRESULT InverseOrientation
+				( );
+
+  /**
+  *  Evaluate the constraint system of the sketch. If SetData is used to modify geometries,
+  * these geometry changes will be taken into account after an evaluation of the sketch.
+  * And take care that you must open edition on a sketch before adding or modifying elements in it.
+  */
+	HRESULT Evaluate
+				( );
+
+};
+
+// Interface name : CATIASketch
+#pragma ID CATIASketch "DCE:ee3021b2-3b09-11d1-a26c0000f87546fd"
+#pragma DUAL CATIASketch
+
+// VB object name : Sketch (Id used in Visual Basic)
+#pragma ID Sketch "DCE:eeedaca5-3b09-11d1-a26c0000f87546fd"
+#pragma ALIAS CATIASketch Sketch
+
+
+#endif
+// CATIASketch_IDL
+

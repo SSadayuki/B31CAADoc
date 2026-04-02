@@ -1,0 +1,4 @@
+
+# module IDANNCONT
+
+BUILT_OBJECT_TYPE = NONE

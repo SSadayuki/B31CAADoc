@@ -1,0 +1,57 @@
+#ifndef CATIADefaultAnnotation_IDL
+#define CATIADefaultAnnotation_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+/**
+ * This interface is used to get information about default annotation.
+ * Ther is two kinds of default annotation :
+ *  - with a manual selection
+ *  - with a selection automatic
+ */
+interface CATIADefaultAnnotation : CATIABase 
+{
+    /**
+     * Get the type of link between the default annotation and the geometry.
+     * Return E_FAIL if the annotation is not a default one.
+     *   @param oLinkWiGeom
+     *     Type of link.
+     */
+  #pragma PROPERTY LinkWiGeomType
+   HRESULT get_LinkWiGeomType (inout /*IDLRETVAL*/ CATBSTR oLinkWiGeom);
+    /**
+     * Get the type of search algo to find geometry on which the annotation
+     * apply to.
+     * Return E_FAIL if the annotation is not a default one.
+     *   @param oAlgo
+     *     Type of algo.
+     */
+  #pragma PROPERTY SearchAlgoType
+   HRESULT get_SearchAlgoType (inout /*IDLRETVAL*/ CATBSTR oAlgo);
+
+    /**
+     * Get the type of search algo 
+     * Return E_FAIL if the annotation is not a default one.
+     *   @param oIsAutoMode
+     *     oIsAutoMode = TRUE if Automatic mode
+     */
+    HRESULT IsInAutomaticSearchMode (out /*IDLRETVAL*/ boolean oIsAutoMode);
+
+};
+
+// Interface name : CATIADefaultAnnotation
+#pragma ID CATIADefaultAnnotation "DCE:d372de3a-193b-11d6-be7d0002b341dd3a"
+#pragma DUAL CATIADefaultAnnotation
+
+// VB object name : DefaultAnnotation (Id used in Visual Basic)
+#pragma ID DefaultAnnotation "DCE:d372de3b-193b-11d6-be7d0002b341dd3a"
+#pragma ALIAS CATIADefaultAnnotation DefaultAnnotation
+
+#endif

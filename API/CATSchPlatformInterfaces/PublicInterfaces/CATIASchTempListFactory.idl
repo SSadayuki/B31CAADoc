@@ -1,0 +1,96 @@
+#ifndef CATIASchTempListFactory_IDL
+#define CATIASchTempListFactory_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+
+interface CATIASchListOfObjects;
+interface CATIASchListOfBSTRs;
+interface CATIASchListOfLongs;
+interface CATIASchListOfDoubles;
+
+#include "CATIABase.idl"
+
+ /** 
+  * Create temporary (non-persistent) lists to be used in VB environment.
+  */
+
+interface CATIASchTempListFactory : CATIABase
+{
+ /**
+  * This method returns a new empty list of objects.
+  * 
+  * @return a empty list of objects.
+  *
+  * @sample
+  * This example illustrates how to create a new empty list of objects.
+  * <pre>
+  * Dim SchListFact As SchTempListFactory
+  * Dim NewList As SchListOfObjects
+  * Set NewList = SchListFact.<font color="red">CreateListOfObjects</font>
+  * </pre>
+  */
+  HRESULT CreateListOfObjects (out /*IDLRETVAL*/ CATIASchListOfObjects oLObject);
+
+ /**
+  * This method returns a new empty list of strings.
+  * 
+  * @return a empty list of strings.
+  *
+  * @sample
+  * This example illustrates how to create a new empty list of strings.
+  * <pre>
+  * Dim SchListFact As SchTempListFactory
+  * Dim NewList As SchListOfBSTRs
+  * Set NewList = SchListFact.<font color="red">CreateListOfBSTRs</font>
+  * </pre>
+  */
+  HRESULT CreateListOfBSTRs (out /*IDLRETVAL*/ CATIASchListOfBSTRs oLBSTR);
+
+ /**
+  * This method returns a new empty list of doubles.
+  * 
+  * @return a empty list of doubles.
+  *
+  * @sample
+  * This example illustrates how to create a new empty list of doubles.
+  * <pre>
+  * Dim SchListFact As SchTempListFactory
+  * Dim NewList As SchListOfDoubles
+  * Set NewList = SchListFact.<font color="red">CreateListOfDoubles</font>
+  * </pre>
+  */
+  HRESULT CreateListOfDoubles (out /*IDLRETVAL*/ CATIASchListOfDoubles oLDb);
+
+ /**
+  * This method returns a new empty list of long integers.
+  * 
+  * @return a empty list of long integers.
+  *
+  * @sample
+  * This example illustrates how to create a new empty list of long integers.
+  * <pre>
+  * Dim SchListFact As SchTempListFactory
+  * Dim NewList As SchListOfLongs
+  * Set NewList = SchListFact.<font color="red">CreateListOfLongs</font>
+  * </pre>
+  */
+  HRESULT CreateListOfLongs (out /*IDLRETVAL*/ CATIASchListOfLongs oLLong);
+
+};
+
+// Interface name : CATIASchTempListFactory
+#pragma ID CATIASchTempListFactory "DCE:72af7c31-34c9-4498-ab2ad9e8ee4c708c"
+#pragma DUAL CATIASchTempListFactory
+
+// VB object name : SchWorkbench
+#pragma ID SchTempListFactory "DCE:cd3092f5-02fb-4604-9c5521c16c18bf10"
+#pragma ALIAS CATIASchTempListFactory SchTempListFactory
+
+#endif

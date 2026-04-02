@@ -1,0 +1,333 @@
+#ifndef CATIAPRINTERSSETTINGATT_IDL
+#define CATIAPRINTERSSETTINGATT_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2004
+//--------------------------------------------------------------------------
+// Printers setting interface
+//           Modify the settings about the printers
+//--------------------------------------------------------------------------
+#include "CATIABase.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+#include "CatPrinterDirState.idl"
+
+/**
+ * Represents a setting controller for the printer settings.
+ * <b>Role</b>: This interface is implemented by a component which
+ * represents the controller of the printer settings.
+*/
+interface CATIAPrintersSettingAtt : CATIASettingController
+{
+	/**
+	 * Returns the directories of printer files.
+	 * <br>
+	 * @return
+	 *  array of directories where 3DPLM printers are defined.
+	*/
+	HRESULT GetPrinterDirectories (out /*IDLRETVAL*/ CATSafeArrayVariant oPrinterDirs);
+
+	/**
+	 * Returns the state of the directory of printer files.
+	 * <br>
+	 * @param iPrinterDir 
+	 *  directory where some 3DPLM printers are defined.
+	 * @return
+	 *  printer directory state.
+	 *  <br>Each directory can be protected to prevent user access to the printers it contains.
+	 *  <br>The state could be protect or free.
+	 *  <br>If the state is CatPrinterDirProtect, the parameters of each printer included in the directory 
+	 *  cannot be changed.
+	 *  <br>If the state is CatPrinterDirFree, the parameters of each printer included in the directory 
+	 *  can be changed, and the printers can be removed.
+	 *      <br><b>Legal values</b>:
+	 *      <br><tt>CatPrinterDirProtect :</tt> the printers included in the directory are protected.
+	 *      <br><tt>CatPrinterDirFree :</tt> the printers included in the directory are free.
+	*/
+	HRESULT GetPrinterDirectoryState (in CATBSTR iPrinterDir, 
+									  out /*IDLRETVAL*/ CatPrinterDirState oPrinterDirState);
+
+	/**
+	 * Add a printer file directory to printer directories list and define its state.
+	 * <br>
+	 * @param iPrinterDir
+	 *  directory where some 3DPLM printers are defined.
+	 *  <br>The printers defined in this directory will be available for each user. 
+	 * @param iPrinterDirState 
+	 *  printer directory state.
+	 *  <br>Each directory can be protected to prevent user access to the printers it contains.
+	 *  <br>The state could be protect or free.
+	 *  <br>If the state is CatPrinterDirProtect, the parameters of each printer included in the directory 
+	 *  cannot be changed.
+	 *  <br>If the state is CatPrinterDirFree, the parameters of each printer included in the directory 
+	 *  can be changed, and the printers can be removed.
+	 *      <br><b>Legal values</b>:
+	 *      <br><tt>CatPrinterDirProtect :</tt> the printers included in the directory are protected.
+	 *      <br><tt>CatPrinterDirFree :</tt> the printers included in the directory are free.
+	*/
+	HRESULT AddPrinterDirectory (in CATBSTR iPrinterDir, 
+								 in CatPrinterDirState iPrinterDirState);
+
+	/**
+	 * Modify a printer file directory state.
+	 * <br>
+	 * @param iPrinterDir
+	 *  directory where some 3DPLM printers are defined.
+	 * @param iPrinterDirState 
+	 *  printer directory state.
+	 *  <br>Each directory can be protected to prevent user access to the printers it contains.
+	 *  <br>The state could be protect or free.
+	 *  <br>If the state is CatPrinterDirProtect, the parameters of each printer included in the directory 
+	 *  cannot be changed.
+	 *  <br>If the state is CatPrinterDirFree, the parameters of each printer included in the directory 
+	 *  can be changed, and the printers can be removed.
+	 *      <br><b>Legal values</b>:
+	 *      <br><tt>CatPrinterDirProtect :</tt> the printers included in the directory are protected.
+	 *      <br><tt>CatPrinterDirFree :</tt> the printers included in the directory are free.
+	*/
+	HRESULT ModifyPrinterDirectoryState (in CATBSTR iPrinterDir, 
+										 in CatPrinterDirState iPrinterDirState);
+
+	/**
+	 * Remove a directory of printer files from the directories list.
+	 * <br>
+	 * @param iPrinterDir 
+	 *  directory where some 3DPLM printers are defined.
+	*/
+	HRESULT RemovePrinterDirectory (in CATBSTR iPrinterDir);
+
+	/**
+	 * Remove all the directories including printer files.
+	*/
+	HRESULT RemoveAllPrinterDirectories ();
+	
+	/**
+	 * Locks or unlocks the directories of printer files and their states.
+	 * <br><b>Role</b>: Locks or unlocks the directories of printer files and their states if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *      the locking operation to be performed
+	 *      <br><b>Legal values</b>:
+	 *      <br><tt>TRUE :</tt>   to lock the parameter.
+	 *      <br><tt>FALSE:</tt>   to unlock the parameter.
+	*/
+	HRESULT SetPrinterDirectoriesLock (in boolean iLock);
+
+	 /**
+	  * Retrieves environment informations for the directories of printer files and their states.
+	  * <br><b>Role</b>: Retrieves the state of the directories of printer files and their states
+	  * in the current environment.
+	  * @param oAdminLevel
+	  *       If the parameter is locked, oAdminLevel gives the administration
+	  *       level that imposes the value of the parameter.
+	  *       <br>If the parameter is not locked, oAdminLevel gives the administration
+	  *       level that will give the value of the parameter after a reset.
+	  * @param oLocked
+	  *      Indicates if the parameter has been locked.
+	  * @return
+	  *      Indicates if the parameter has been explicitly modified or remain
+	  *      to the administrated value.
+	*/
+	HRESULT GetPrinterDirectoriesInfo (inout CATBSTR oAdminLevel, 
+		                               inout CATBSTR oLocked,
+									   out /*IDLRETVAL*/ boolean oModified);
+
+	/**
+	 * Returns the directory where new printers will be added.
+	 * <br>
+	 * @param oNewPrinterDir 
+	 *  directory to add new printers
+	 *  <br><b>Role</b>: Each new printer created by an user is added in this directory.
+	*/
+	HRESULT GetNewPrinterDirectory (inout CATBSTR oNewPrinterDir);
+
+	/**
+	 * Sets the directory where new printers will be added.
+	 * <br>
+	 * @param iNewPrinterDir 
+	 *  directory to add new printers
+	 *  <br><b>Role</b>: Each new printer created by an user is added in this directory.
+	*/
+	HRESULT SetNewPrinterDirectory (in CATBSTR iNewPrinterDir);
+
+	/**
+	 * Locks or unlocks the directory where printers will be added.
+	 * <br><b>Role</b>: Locks or unlocks the directory where printers will be added if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *      the locking operation to be performed
+	 *      <br><b>Legal values</b>:
+	 *      <br><tt>TRUE :</tt>   to lock the parameter.
+	 *      <br><tt>FALSE:</tt>   to unlock the parameter.
+	*/
+	HRESULT SetNewPrinterDirectoryLock (in boolean iLock);
+
+	/**
+	 * Retrieves environment informations for the directory where printers will be added.
+	 * <br><b>Role</b>: Retrieves the state of the directory where printers will be added
+	 * in the current environment.
+	 * @param oAdminLevel
+	 *       If the parameter is locked, oAdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *       <br>If the parameter is not locked, oAdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param oLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+	*/
+	HRESULT GetNewPrinterDirectoryInfo (inout CATBSTR oAdminLevel, 
+		                                inout CATBSTR oLocked,
+										out /*IDLRETVAL*/ boolean oModified);
+
+	/**
+	 * Returns the driver configuration file.
+	 * <br>
+	 * @param oDriverCfgPath 
+	 *  path of the driver configuration file
+	*/
+	HRESULT GetDriverConfigurationPath (inout CATBSTR oDriverCfgPath );
+
+	/**
+	 * Sets the driver configuration file.
+	 * <br>
+	 * @param iDriverCfgPath 
+	 *  path of the driver configuration file
+	*/
+	HRESULT SetDriverConfigurationPath (in CATBSTR iDriverCfgPath);
+
+	/**
+	 * Locks or unlocks the driver configuration file.
+	 * <br><b>Role</b>: Locks or unlocks the driver configuration file if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *      the locking operation to be performed
+	 *      <br><b>Legal values</b>:
+	 *      <br><tt>TRUE :</tt>   to lock the parameter.
+	 *      <br><tt>FALSE:</tt>   to unlock the parameter.
+	*/
+	HRESULT SetDriverConfigurationPathLock (in boolean iLock);
+
+	/**
+	 * Retrieves environment informations for the driver configuration file.
+	 * <br><b>Role</b>: Retrieves the state of the driver configuration file
+	 * in the current environment.
+	 * @param oAdminLevel
+	 *       If the parameter is locked, oAdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *       <br>If the parameter is not locked, oAdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param oLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+	*/
+	HRESULT GetDriverConfigurationPathInfo (inout CATBSTR oAdminLevel, 
+			 								inout CATBSTR oLocked,
+			 								out /*IDLRETVAL*/ boolean oModified);
+
+	/**
+	 * Returns the printer groups.
+	 * <br>
+	 * @return
+	 *  array of printer group names
+	*/
+	HRESULT GetPrinterGroups (out /*IDLRETVAL*/ CATSafeArrayVariant oPrinterGroupNames);
+
+	/**
+	 * Returns the definition of the printer group.
+	 * <br>
+	 * @param iPrinterGroupName 
+	 *  printer group name
+	 * @return
+	 *  array of printers included in the group.
+	*/
+	HRESULT GetPrinterArrayForGroup (in CATBSTR iPrinterGroupName, 
+									 out /*IDLRETVAL*/ CATSafeArrayVariant oPrinterNames);
+
+	/**
+	 * Add a printer group and define the printers included in this group.
+	 * <br>
+	 * @param iPrinterGroupName 
+	 *  printer group name
+	 * @param iPrinterNames
+	 *  array of printers included in the group.
+	*/
+	HRESULT AddPrinterGroup (in CATBSTR iPrinterGroupName, 
+							 in CATSafeArrayVariant iPrinterNames);
+
+	/**
+	 * Modify a printer group: redefine the array of printers included in this group.
+	 * <br>
+	 * @param iPrinterGroupName 
+	 *  printer group name
+	 * @param iPrinterNames
+	 *  array of printers included in the group.
+	*/
+	HRESULT ModifyPrinterArrayForGroup (in CATBSTR iPrinterGroupName, 
+										in CATSafeArrayVariant iPrinterNames);
+
+	/**
+	 * Remove a group of printers.
+	 * <br>
+	 * @param iPrinterGroupName 
+	 *  name of the group to remove.
+	*/
+	HRESULT RemovePrinterGroup (in CATBSTR iPrinterGroupName);
+
+	/**
+	 * Remove all the groups of printers.
+	*/
+	HRESULT RemoveAllPrinterGroups ();
+
+	/**
+	 * Locks or unlocks the definition of each printer group.
+	 * <br><b>Role</b>: Locks or unlocks the definition of each printer group if it is possible
+	 * in the current administrative context. In user mode this method will always
+	 * return E_FAIL.
+	 * @param iLocked
+	 *      the locking operation to be performed
+	 *      <br><b>Legal values</b>:
+	 *      <br><tt>TRUE :</tt>   to lock the parameter.
+	 *      <br><tt>FALSE:</tt>   to unlock the parameter.
+	*/
+	HRESULT SetPrinterGroupsLock ( in boolean iLock);
+
+	/**
+	 * Retrieves environment informations for the definition of each printer group.
+	 * <br><b>Role</b>: Retrieves the state of the definition of each printer group
+	 * in the current environment.
+	 * @param oAdminLevel
+	 *       If the parameter is locked, oAdminLevel gives the administration
+	 *       level that imposes the value of the parameter.
+	 *       <br>If the parameter is not locked, oAdminLevel gives the administration
+	 *       level that will give the value of the parameter after a reset.
+	 * @param oLocked
+	 *      Indicates if the parameter has been locked.
+	 * @return
+	 *      Indicates if the parameter has been explicitly modified or remain
+	 *      to the administrated value.
+	*/
+	HRESULT GetPrinterGroupsInfo (inout CATBSTR oAdminLevel, 
+		                          inout CATBSTR oLocked,
+								  out /*IDLRETVAL*/ boolean oModified);
+};
+	
+//Interface Name
+#pragma ID CATIAPrintersSettingAtt "DCE:401DD642-B5CF-486F-B237B471F97A9DC0"
+#pragma DUAL CATIAPrintersSettingAtt
+
+//VB Object Name
+#pragma ID PrintersSettingAtt "DCE:F03EB00A-1FC0-4773-A6E449423D28F681"
+#pragma ALIAS CATIAPrintersSettingAtt PrintersSettingAtt
+
+#endif

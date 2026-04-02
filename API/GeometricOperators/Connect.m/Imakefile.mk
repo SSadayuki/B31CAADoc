@@ -1,0 +1,13 @@
+#
+BUILT_OBJECT_TYPE=NONE
+
+OS = IRIX
+LOCAL_CCFLAGS = -G0
+LOCAL_LDFLAGS = -G0
+#
+OS = Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+#

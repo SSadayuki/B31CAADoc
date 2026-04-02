@@ -1,0 +1,1189 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GeometricObjects CATKnotVector Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GeometricObjects.htm" href="../GeometricObjects.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GeometricObjects";	}
+		function getCurrentObjectName() { 
+ 	return "CATKnotVector"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>GeometricObjects Framework: CATKnotVector <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATKnotVector_21856','CATKnotVector','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATKnotVector</b>
+</p>
+<p>
+<b><i> Class containing all the data necessary to define 
+ a uniform or non uniform, non periodic basis.</i></b><br>
+ PERIODIC NURBS ARE NOT SUPPORTED.
+ The maximum degree of a NURBS is 15.
+ <br> A <b>basis</b> is a set of piecewise polynomial functions
+ (of a given <b> degree</b>), called 
+ <b>basis functions</b>. The pieces are the <b>arcs</b>. 
+ They  define the parameter domains between
+ two distincts successive <b> knot values</b> (global parameters at the
+ arc extremities). Then, the number of knots is the number of arcs plus 1.
+ The matching between arc number and Knot vector rank follows the rules ;
+  <tt>(i - IndexOffset)-th Arc starts at Knots(i-1) and ends at Knots(i) </tt>,
+ There is one polynom per arc for each basis function.  
+ The <b>continuity order</b> between arcs is equal to the degree minus the
+ multiplicity of the corresponding knot value.
+ <table>
+ <tr><td></td><td>Multiplicity</td><td>Continuity order</td></tr>
+ <tr><td>single knot value</td><td><tt>1</tt></td><td><tt>Degree-1</tt></td></tr>
+ <tr><td>internal knot values</td><td><tt>1<=m<=degree</tt></td>
+     <td><tt>Degree-m</tt></td></tr>
+ <tr><td>extreme knot values for a non periodic basis</td>
+     <td><tt>degree+1 </tt>(by convention)</td><td><tt>(-1)</tt></td></tr>
+ <tr><td>same first and last knot values for a periodic basis</td>
+     <td><tt>1<=m<=degree</tt></td><td><tt>Degree-m </tt></td></tr>
+ </table>
+ The number of arcs where 
+ the polynom is not null depends on the knot vector mutiplicities.
+ <br>Associating each basis
+ function to a <b> control point</b> (also called <b>vertex</b>),
+ allows the definition of Nurbs geometric
+ elements. A basis function represents the influence of one control point.
+ Note that vertices are not data of the knot vector, but of
+ the Nurbs polynomial element. Nevertheless, vertex ranks are handled in
+ methods of this class, because they are equivalent to the polynomial
+ basis ranks.
+ <br>A CATKnotVector is a transient object, it can be  saved as private data of a
+  curve or a surface. 
+ A CATKnotVector is defined with:
+ <table>
+ <tr><td>CATLONG32</td> <td>Degree</td>
+        <td> The degree of the B-Spline basis functions</td></tr>
+ <tr><td>CATBoolean</td> <td>IsPeriodic</td>
+        <td> 1 for a periodic basis: the parameter domain is unlimited.
+ If <tt>Delta= LastKnotValue - FirstKnotValue</tt>,
+ the evaluations at <tt>Parameter + Delta</tt> and <tt>Parameter</tt> are
+ the same.
+        <br> 0 otherwise</td></tr>
+ <tr><td>CATBoolean</td> <td>IsUniform</td>
+        <td> 1 in case of equally spaced knot values.
+         <br>0 otherwise.</td></tr>
+ <tr><td>CATLONG32</td> <td>NbOfKnots</td>
+        <td> The number of knot values ( <tt>=NbOfArcs + 1</tt></td></tr>
+ <tr><td>CATLONG32</td> <td>Knots</td>
+        <td> The array of the knots values </td></tr>
+ <tr><td>CATLONG32</td> <td>Multiplicities</td>
+        <td> The array of the multiplicity of a knot value</td></tr>
+ </table>
+ <br>Sample of a non periodic non uniform knot vector, with C2 continuity:
+ <table>
+ <tr><td>CATLONG32</td> <td>Degree</td>
+        <td> 3 </td></tr>
+ <tr><td>CATBoolean</td> <td>IsPeriodic</td>
+        <td>  0 </td></tr>
+ <tr><td>CATBoolean</td> <td>IsUniform</td>
+        <td> 0 </td></tr>
+ <tr><td>CATLONG32</td> <td>NbOfKnots</td>
+        <td> 4</td></tr>
+ <tr><td>CATLONG32</td> <td>Knots</td>
+        <td> 0 , 2 , 8 , 9 </td></tr>
+ <tr><td>CATLONG32</td> <td>Multiplicities</td>
+        <td> 4 , 1 , 1 , 4</td></tr>
+ </table></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATKnotVector(CATLONG32)"><b>CATKnotVector</b></a>(CATLONG32)
+</td><td id='tdright'>  Constructs a Bezier CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATKnotVector(CATTolerance&amp;,CATLONG32)"><b>CATKnotVector</b></a>(CATTolerance&amp;,CATLONG32)
+</td><td id='tdright'>  Constructs a Bezier CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATKnotVector(CATKnotVector&amp;,double,double,CATTolerance&amp;)"><b>CATKnotVector</b></a>(CATKnotVector&amp;,double,double,CATTolerance&amp;)
+</td><td id='tdright'>  Copy Constructor.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)"><b>CATKnotVector</b></a>(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)
+</td><td id='tdright'>  Constructs a uniform CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)"><b>CATKnotVector</b></a>(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)
+</td><td id='tdright'>  Constructs a non-uniform CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATKnotVector(CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32&amp;,CATLONG32,CATTolerance&amp;)"><b>CATKnotVector</b></a>(CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32&amp;,CATLONG32,CATTolerance&amp;)
+</td><td id='tdright'>  Constructs a non-uniform CATKnotVector from a parameter array and 
+ a general continuity order.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATKnotVector(CATTolerance&amp;,CATError*&amp;,CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)"><b>CATKnotVector</b></a>(CATTolerance&amp;,CATError*&amp;,CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)
+</td><td id='tdright'>  Constructs a uniform CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CATKnotVector(CATTolerance&amp;,CATError*&amp;,CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)"><b>CATKnotVector</b></a>(CATTolerance&amp;,CATError*&amp;,CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)
+</td><td id='tdright'>  Constructs a non-uniform CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATKnotVector()"><b>~CATKnotVector</b></a>()
+</td><td id='tdright'>  Destructor.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#ConvertGlobalToLocalParameter(double&amp;,double&amp;,CATLONG32&amp;)"><b>ConvertGlobalToLocalParameter</b></a>(double&amp;,double&amp;,CATLONG32&amp;)
+</td><td id='tdright'>  Retrieves the local parameter and the arc number of
+ this CATKnotVector global parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ConvertLocalToGlobalParameter(double&amp;,CATLONG32&amp;,double&amp;)"><b>ConvertLocalToGlobalParameter</b></a>(double&amp;,CATLONG32&amp;,double&amp;)
+</td><td id='tdright'>  Retrieves the global parameter associated with a local parameter and an
+ arc number of <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Extrapol(CATLONG32&amp;,double*,CATLONG32*)"><b>Extrapol</b></a>(CATLONG32&amp;,double*,CATLONG32*)
+</td><td id='tdright'>  Adds knots at the left or the right of <tt>this</tt> KnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#FirstVertexForOneArc(CATLONG32&amp;,CATLONG32&amp;)"><b>FirstVertexForOneArc</b></a>(CATLONG32&amp;,CATLONG32&amp;)
+</td><td id='tdright'>  Retrieves the first control point which acts on an arc.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetDegree()"><b>GetDegree</b></a>()
+</td><td id='tdright'>  Returns the degree of the basis defined by <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetIndexOffset()"><b>GetIndexOffset</b></a>()
+</td><td id='tdright'>   Returns the arc index offset.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetInternalExtremities(CATLONG32,double&amp;,double&amp;)"><b>GetInternalExtremities</b></a>(CATLONG32,double&amp;,double&amp;)
+</td><td id='tdright'>  Returns the local parameters on the arc <tt>iArc</tt>.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetKnotMultiplicity(CATLONG32&amp;)"><b>GetKnotMultiplicity</b></a>(CATLONG32&amp;)
+</td><td id='tdright'>  Returns the multiplicity of <tt>this</tt> CATKnotVector knot value.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetKnots(double*&amp;)"><b>GetKnots</b></a>(double*&amp;)
+</td><td id='tdright'>  Returns the pointer to the knot values array of <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMaxExtremities(CATLONG32&amp;,double&amp;,CATLONG32&amp;,double&amp;)"><b>GetMaxExtremities</b></a>(CATLONG32&amp;,double&amp;,CATLONG32&amp;,double&amp;)
+</td><td id='tdright'>  Returns the maximum local parameters and arc number of <tt>this</tt> Knot vector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfArcs()"><b>GetNumberOfArcs</b></a>()
+</td><td id='tdright'>  Returns the number of arcs of a nurbs using <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfControlPoints()"><b>GetNumberOfControlPoints</b></a>()
+</td><td id='tdright'>  Returns the number of necessary control points for a nurbs using <tt>this</tt>
+ CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfKnots()"><b>GetNumberOfKnots</b></a>()
+</td><td id='tdright'>  Returns the number of distinct knot values of <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPolynomialBasisForAllArcs()"><b>GetPolynomialBasisForAllArcs</b></a>()
+</td><td id='tdright'>  Returns the array of pointers on the polynoms defined by <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPolynomialBasisForOneArc(CATLONG32&amp;)"><b>GetPolynomialBasisForOneArc</b></a>(CATLONG32&amp;)
+</td><td id='tdright'>  Returns the array of pointers on the polynoms defined by <tt>this</tt> CATKnotVector
+ involved in one arc.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsContinuousOnDomain(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;)"><b>IsContinuousOnDomain</b></a>(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;)
+</td><td id='tdright'>  Tests whether a given continuity order of the related basis
+ is garanteed on a subparameter domain.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsPeriodic()"><b>IsPeriodic</b></a>()
+</td><td id='tdright'>  Tests if a CATKnotVector defines a periodic basis.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsUniform()"><b>IsUniform</b></a>()
+</td><td id='tdright'>  Tests if a CATKnotVector defines a uniform basis.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#MoveInExtendedKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;)"><b>MoveInExtendedKnotVector</b></a>(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;)
+</td><td id='tdright'>  Shifts a position into the expanded CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#PolynomialBasisForAllArcs(CATMathPolynomX***)"><b>PolynomialBasisForAllArcs</b></a>(CATMathPolynomX***)
+</td><td id='tdright'>  Retrieves a bi-dimensional array of pointers on the polynoms defined by
+ <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#PolynomialBasisForOneArc(CATLONG32&amp;,CATMathPolynomX**)"><b>PolynomialBasisForOneArc</b></a>(CATLONG32&amp;,CATMathPolynomX**)
+</td><td id='tdright'>  Retrieves an array of pointers on the polynoms defined by <tt>this</tt> CATKnotVector
+ involved in one arc.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SearchArcFromParameter(double&amp;)"><b>SearchArcFromParameter</b></a>(double&amp;)
+</td><td id='tdright'>  Returns the arc number of this CATKnotVector global parameter.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Set(CATKnotVector&amp;,double,double,CATTolerance&amp;)"><b>Set</b></a>(CATKnotVector&amp;,double,double,CATTolerance&amp;)
+</td><td id='tdright'>  Copies a knot vector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetDegree(CATLONG32&amp;)"><b>SetDegree</b></a>(CATLONG32&amp;)
+</td><td id='tdright'>  Modifies the degree.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetIndexOffset(CATLONG32&amp;)"><b>SetIndexOffset</b></a>(CATLONG32&amp;)
+</td><td id='tdright'>   Modifies the arc index offset.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetKnotMultiplicity(CATLONG32&amp;,CATLONG32&amp;)"><b>SetKnotMultiplicity</b></a>(CATLONG32&amp;,CATLONG32&amp;)
+</td><td id='tdright'>  Modifies a knot value multiplicity of <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetKnotValue(CATLONG32&amp;,double&amp;,CATTolerance&amp;)"><b>SetKnotValue</b></a>(CATLONG32&amp;,double&amp;,CATTolerance&amp;)
+</td><td id='tdright'>  Modifies a knot value of <tt>this</tt> CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetNonUniformKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)"><b>SetNonUniformKnotVector</b></a>(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)
+</td><td id='tdright'>  Redefines <tt>this</tt> as a non uniform CATKnotVector.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTolerance(CATTolerance&amp;)"><b>SetTolerance</b></a>(CATTolerance&amp;)
+</td><td id='tdright'> </td></tr>  <tr><td id='tdleft'>
+    <a href="#SetUniformKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)"><b>SetUniformKnotVector</b></a>(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)
+</td><td id='tdright'>  Redefines <tt>this</tt> as a uniform CATKnotVector .
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#operator =(CATKnotVector&amp;)"><b>operator =</b></a>(CATKnotVector&amp;)
+</td><td id='tdright'>   Assignment operator.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+<nav id = 'idxnav'> <table class = 'fill' id='idxtab' ><tbody>					<tr><th colspan = '2' >Data Member Index</th></tr> 
+ <tr> <td id='tdleft'> 
+    <a href="#_PrivateDoNotUseNotScaled_R18Restricted"><b>_PrivateDoNotUseNotScaled_R18Restricted</b></a>
+</td><td id='tdright'> </td><tr> </tbody></table></nav>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATKnotVector"></a><a id="CATKnotVector(CATLONG32)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iDegree</span><span class='param'>= 3</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a Bezier CATKnotVector.
+ <br>It corresponds to one arc of degree <tt>iDegree</tt>.
+ <br>Parameterization on [0.0, 1.0], not Extreme Scale compliant.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The degree of the polynomial basis.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATKnotVector"></a><a id="CATKnotVector(CATTolerance&amp;,CATLONG32)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATTolerance','CATTolerance&amp;')</script> <span class='param'>iTolObject</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iDegree</span><span class='param'>= 3</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a Bezier CATKnotVector.
+ <br>It corresponds to one arc of degree <tt>iDegree</tt>.
+ <br>Parameterization on [0.0, Scale], Extreme Scale compliant (Scale being factory scale, read in <tt>iTolObject</tt>).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTolObject</span></dt>
+   <dd> The set of geometric and mathematical tolerances.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The degree of the polynomial basis.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATKnotVector"></a><a id="CATKnotVector(CATKnotVector&amp;,double,double,CATTolerance&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATKnotVector','CATKnotVector&amp;')</script> <span class='param'>iKnotVectorToCopy</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iCoefficient</span><span class='param'>= 1.</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iShift</span><span class='param'>= 0.</span>, const <script type="text/javascript"> activateLink('CATTolerance','CATTolerance&amp;')</script> <span class='param'>iTolObject</span><span class='param'>= CATGetDefaultTolerance()</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Copy Constructor.
+ <br>A linear transformation of the parameterization can be applied (optional)
+  <tt>New parameter= iCoefficient * Old parameter + iShift</tt>,
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKnotVectorToCopy</span></dt>
+   <dd> The knot vector to copy.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoefficient</span></dt>
+   <dd> The coeficient of the transformation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iShift</span></dt>
+   <dd> The shift of the transformation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTolObject</span></dt>
+   <dd> The set of geometric and mathematical tolerances.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATKnotVector"></a><a id="CATKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iDegree</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iIsPeriodic</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iNbOfArcs</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iKnotStart</span><span class='param'>= 0.</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iStep</span><span class='param'>= 1.</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iIndexOffset</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a uniform CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The degree of the polynomial basis.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIsPeriodic</span></dt>
+   <dd> The periodicity. So far, periodic basis are not supported.
+ <br><b>Legal values</b>  0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbOfArcs</span></dt>
+   <dd> The number of arcs.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKnotStart</span></dt>
+   <dd> The parameter value of the first knot.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStep</span></dt>
+   <dd> The uniform step value between two knots.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndexOffset</span></dt>
+   <dd> The index for the first arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATKnotVector"></a><a id="CATKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iDegree</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iIsPeriodic</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iNbOfKnots</span>, const <script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iKnots</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32*')</script> <span class='param'>iMultiplicities</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iIndexOffset</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a non-uniform CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The degree of the polynomial basis.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIsPeriodic</span></dt>
+   <dd> The periodicity.
+ <br><b>Legal values</b> 0. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbOfKnots</span></dt>
+   <dd> The number of knot values specified for the knot vector. The number of arcs
+ is <tt>iNbOfKnots - 1</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKnots</span></dt>
+   <dd> The array of the global parameter values at the end of each arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMultiplicities</span></dt>
+   <dd> The array of the corresponding multiplicities.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndexOffset</span></dt>
+   <dd> The index for the first arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATKnotVector"></a><a id="CATKnotVector(CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32&amp;,CATLONG32,CATTolerance&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iIsPeriodic</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iNbOfParameters</span>, const <script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iParameters</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iContinuityOrder</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iIndexOffset</span><span class='param'>= 0</span>, const <script type="text/javascript"> activateLink('CATTolerance','CATTolerance&amp;')</script> <span class='param'>iTolObject</span><span class='param'>= CATGetDefaultTolerance()</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a non-uniform CATKnotVector from a parameter array and 
+ a general continuity order.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIsPeriodic</span></dt>
+   <dd> The periodicity.
+ <br><b>Legal values</b>0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbOfParameters</span></dt>
+   <dd> The number of knot values specified for the knot vector. The number of arcs
+ is <tt>iNbOfParameters - 1</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iParameters</span></dt>
+   <dd> The array of the global parameter values at the end of each arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iContinuityOrder</span></dt>
+   <dd> The global continuity (0,1,2) of the curve. The degree of the polynomial basis
+ is <tt>iContinuityOrder + 1</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndexOffset</span></dt>
+   <dd> The index for the first arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTolObject</span></dt>
+   <dd> The set of geometric and mathematical tolerances.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATKnotVector"></a><a id="CATKnotVector(CATTolerance&amp;,CATError*&amp;,CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATTolerance','CATTolerance&amp;')</script> <span class='param'>iTolObject</span>,<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>oError</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iDegree</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iIsPeriodic</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iNbOfArcs</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iKnotStart</span><span class='param'>= 0.</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iStep</span><span class='param'>= 1.</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iIndexOffset</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a uniform CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTolObject</span></dt>
+   <dd> The set of geometric and mathematical tolerances.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oError</span></dt>
+   <dd> (output argument) The Error to raise if invalid data given to constructor.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The degree of the polynomial basis.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIsPeriodic</span></dt>
+   <dd> The periodicity. So far, periodic basis are not supported.
+ <br><b>Legal values</b>  0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbOfArcs</span></dt>
+   <dd> The number of arcs.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKnotStart</span></dt>
+   <dd> The parameter value of the first knot.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStep</span></dt>
+   <dd> The uniform step value between two knots.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndexOffset</span></dt>
+   <dd> The index for the first arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATKnotVector"></a><a id="CATKnotVector(CATTolerance&amp;,CATError*&amp;,CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATTolerance','CATTolerance&amp;')</script> <span class='param'>iTolObject</span>,<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>oError</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iDegree</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iIsPeriodic</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iNbOfKnots</span>, const <script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iKnots</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32*')</script> <span class='param'>iMultiplicities</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iIndexOffset</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a non-uniform CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iTolObject</span></dt>
+   <dd> The set of geometric and mathematical tolerances.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oError</span></dt>
+   <dd> (output argument) The Error to raise if invalid data given to constructor.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The degree of the polynomial basis.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIsPeriodic</span></dt>
+   <dd> The periodicity.
+ <br><b>Legal values</b> 0. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNbOfKnots</span></dt>
+   <dd> The number of knot values specified for the knot vector. The number of arcs
+ is <tt>iNbOfKnots - 1</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKnots</span></dt>
+   <dd> The array of the global parameter values at the end of each arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMultiplicities</span></dt>
+   <dd> The array of the corresponding multiplicities.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndexOffset</span></dt>
+   <dd> The index for the first arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATKnotVector"></a><a id="~CATKnotVector()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATKnotVector</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Destructor.
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="ConvertGlobalToLocalParameter"></a><a id="ConvertGlobalToLocalParameter(double&amp;,double&amp;,CATLONG32&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ConvertGlobalToLocalParameter</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>iGlobalParameter</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioLocalParameter</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>ioArcNum</span>)</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the local parameter and the arc number of
+ this CATKnotVector global parameter.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioLocalParameter</span></dt>
+   <dd> The local parameter on <tt>oArcNum</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioArcNum</span></dt>
+   <dd> The arc number starting at 1.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ConvertLocalToGlobalParameter"></a><a id="ConvertLocalToGlobalParameter(double&amp;,CATLONG32&amp;,double&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ConvertLocalToGlobalParameter</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>iLocalParameter</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iArcNum</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioParameter</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the global parameter associated with a local parameter and an
+ arc number of <tt>this</tt> CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iLocalParameter</span></dt>
+   <dd> The local parameter on <tt>iArcNum</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iArcNum</span></dt>
+   <dd> The arc number.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioGlobalParameter</span></dt>
+   <dd> The corresponding global parameter.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Extrapol"></a><a id="Extrapol(CATLONG32&amp;,double*,CATLONG32*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Extrapol</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iNbOfParameters</span>, const <script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iParameters</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32*')</script> <span class='param'>iContinuityOrders</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds knots at the left or the right of <tt>this</tt> KnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbOfParameters</span></dt>
+   <dd> The number of knots to add.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iParameters</span></dt>
+   <dd> The array of parameters to add. These parameters must be either all strictly lower than the first knot, 
+ or all strictly  greater than the last knot.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iContinuityOrders</span></dt>
+   <dd> The <tt>iContinuityOrders</tt> at the additionnal arc limits ( shift of one with the parameters array)
+ This method returns an error when <tt>this</tt> is periodic.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="FirstVertexForOneArc"></a><a id="FirstVertexForOneArc(CATLONG32&amp;,CATLONG32&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>FirstVertexForOneArc</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iArcNum</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>oFirstVertexNum</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the first control point which acts on an arc.
+<br>There is always <tt>Degree+1</tt> control points acting on one arc. The
+ last point to act is then <tt>FirstVertexNum+Degree</tt>.
+<br>For advanced use.
+<br>The numbers start at 1.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetDegree"></a><a id="GetDegree()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('short','INLINE short')</script>  <span class='objname'>GetDegree</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the degree of the basis defined by <tt>this</tt> CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The degree.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetIndexOffset"></a><a id="GetIndexOffset()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('short','INLINE short')</script>  <span class='objname'>GetIndexOffset</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Returns the arc index offset.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The arc index offset.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetInternalExtremities"></a><a id="GetInternalExtremities(CATLONG32,double&amp;,double&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetInternalExtremities</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iArc</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioLocalStart</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioLocalEnd</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the local parameters on the arc <tt>iArc</tt>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iArc</span></dt>
+   <dd> The arc number. Begins at <tt>CATKnotVector::GetIndexOffset</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioLocalStart</span></dt>
+   <dd> The parameter value at the begining of the arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioLocalEnd</span></dt>
+   <dd> The parameter value at the end of the arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetKnotMultiplicity"></a><a id="GetKnotMultiplicity(CATLONG32&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>GetKnotMultiplicity</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iKnotNum</span>)</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the multiplicity of <tt>this</tt> CATKnotVector knot value.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKnotNum</span></dt>
+   <dd> The knot number ( from 1 to <tt>KnotVector.GetNumberOfKnots </tt>)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetKnots"></a><a id="GetKnots(double*&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','INLINE void')</script>  <span class='objname'>GetKnots</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('double','double*&amp;')</script> <span class='param'>oKnots</span>)</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the pointer to the knot values array of <tt>this</tt> CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oKnots</span></dt>
+   <dd> The array of the knots. As part of the knot vector, it is deleted at the knot vector deletion.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMaxExtremities"></a><a id="GetMaxExtremities(CATLONG32&amp;,double&amp;,CATLONG32&amp;,double&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>GetMaxExtremities</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>ioStartArc</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioLocalStart</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>ioEndArc</span>,<script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>ioLocalEnd</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the maximum local parameters and arc number of <tt>this</tt> Knot vector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioStartArc</span></dt>
+   <dd> The start arc. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioLocalStart</span></dt>
+   <dd> The parameter value at the begining of <tt>ioStartArc</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioEndArc</span></dt>
+   <dd> The end arc. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioLocalEnd</span></dt>
+   <dd> The parameter value at the end of the arc of <tt>ioEndArc</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfArcs"></a><a id="GetNumberOfArcs()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('short','INLINE short')</script>  <span class='objname'>GetNumberOfArcs</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the number of arcs of a nurbs using <tt>this</tt> CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The number of arcs.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfControlPoints"></a><a id="GetNumberOfControlPoints()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('short','INLINE short')</script>  <span class='objname'>GetNumberOfControlPoints</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the number of necessary control points for a nurbs using <tt>this</tt>
+ CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The number of control points.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfKnots"></a><a id="GetNumberOfKnots()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('short','INLINE short')</script>  <span class='objname'>GetNumberOfKnots</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the number of distinct knot values of <tt>this</tt> CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The number of distinct knot values.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPolynomialBasisForAllArcs"></a><a id="GetPolynomialBasisForAllArcs()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('const','const CATMathPolynomX* const *')</script>  <span class='objname'>GetPolynomialBasisForAllArcs</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the array of pointers on the polynoms defined by <tt>this</tt> CATKnotVector.
+<br>For advanced use.
+<br>The returned array pointer is part of  CATKnotVector local data.
+<br>This method must be recalled after any non const method applied on the CATKnotvector
+ The array consists of  <tt>KnotVector.GetNumberOfArcs *( KnotVector.GetDegree + 1)</tt>
+ pointers on polynoms of degree <tt>KnotVector.GetDegree</tt>.
+ These polynoms are reparametrized in <tt>[0,Knots[ArcNum]-Knots[ArcNum-1]]</tt> where Arcnum
+ is the current arc number in array.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPolynomialBasisForOneArc"></a><a id="GetPolynomialBasisForOneArc(CATLONG32&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('const','const CATMathPolynomX* const *')</script>  <span class='objname'>GetPolynomialBasisForOneArc</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iArcNum</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the array of pointers on the polynoms defined by <tt>this</tt> CATKnotVector
+ involved in one arc.
+<br>For advanced use.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iArcNum</span></dt>
+   <dd> The arc number starting at 1.
+<br>The returned array pointer is part of  CATKnotVector local data.
+<br>This method must be recalled after any non const method applied on the CATKnotvector
+<br>The array consists of <tt>KnotVector.GetDegree + 1</tt>
+ pointers on polynoms of degree <tt>KnotVector.GetDegree</tt>.
+ These polynoms are reparametrized in <tt>[0,Knots[iArcNum +IndexOffset-1]-Knots[iArcNum +IndexOffset]]</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsContinuousOnDomain"></a><a id="IsContinuousOnDomain(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>IsContinuousOnDomain</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iContinuityOrder</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iStartArcNum</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iEndArcNum</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether a given continuity order of the related basis
+ is garanteed on a subparameter domain.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iContinuityOrder</span></dt>
+   <dd> The global continuity (0,1,2) to test.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStartArcNum</span></dt>
+   <dd> The number of the first arc of the domain.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEndArcNum</span></dt>
+   <dd> The number of the last arc of the domain.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The result of the test.
+ <br><b>Legal values</b>: <tt>TRUE</tt> if the continuity is garanteed, <tt>FALSE</tt> otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsPeriodic"></a><a id="IsPeriodic()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBoolean','INLINE CATBoolean')</script>  <span class='objname'>IsPeriodic</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests if a CATKnotVector defines a periodic basis.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <dl> <dt> <tt>FALSE</tt><dd> if the basis is not periodic
+      <dt> <tt>TRUE</tt> <dd> if the basis is periodic (NOT SUPPORTED)</dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsUniform"></a><a id="IsUniform()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBoolean','INLINE CATBoolean')</script>  <span class='objname'>IsUniform</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests if a CATKnotVector defines a uniform basis.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <dl> <dt> <tt>FALSE</tt> <dd> if the basis is not uniform
+      <dt> <tt>TRUE</tt> <dd> if the basis is uniform </dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="MoveInExtendedKnotVector"></a><a id="MoveInExtendedKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>MoveInExtendedKnotVector</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>ioKnotIndex</span>,<script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>ioKnotRep</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iMove</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Shifts a position into the expanded CATKnotVector.
+<br>For advanced use.
+<br>The extented knot vector is the array of knot values as many repeated as
+ the multiplicity order. The expanded vector of the introduction sample is
+ the following series:
+<dl><dt>expanded knot<dd><tt> 0, 0, 0, 0, 2, 8, 9, 9, 9, 9</tt>
+    <dt>knot repetition<dd><tt> 1, 2, 3, 4, 1, 1, 1, 2, 3, 4</tt></dl>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioKnotIndex</span></dt>
+   <dd> The index (starting at 0) of the knot value of a CATKnotVector to shift 
+(resp being shifted).
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioKnotRep</span></dt>
+   <dd> The corresponding knot repetition value to shift (resp being shifted).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMove</span></dt>
+   <dd> The shift to operate to the corresponding point into the expanded knot
+ vector.
+<pre>
+ CATLONG32 ioKnotIndex = 0, ioKnotRep = 2, iMove = 5;
+ KnotVector.MoveInExtendedKnotVector(ioKnotIndex,ioKnotRep,iMove)
+ cout << "new knot index=" << ioKnotIndex << endl; 
+ cout << "corresponding knot repetition=" << ioKnotRep << endl;</pre>
+ gives
+ <pre><i>
+ new knot index= 3
+ corresponding knot repetition= 1</i></pre>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="PolynomialBasisForAllArcs"></a><a id="PolynomialBasisForAllArcs(CATMathPolynomX***)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>PolynomialBasisForAllArcs</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATMathPolynomX','CATMathPolynomX***')</script> <span class='param'>ioPolynom</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves a bi-dimensional array of pointers on the polynoms defined by
+ <tt>this</tt> CATKnotVector.
+<br>For advanced use.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ioPolynom</span></dt>
+   <dd> The array of <tt>KnotVector.GetNumberOfArcs</tt>
+ pointers on array of <tt>KnotVector.GetDegree + 1</tt>
+ pointers on polynoms of degree <tt>KnotVector.GetDegree</tt>.
+ These polynoms are reparametrized in <tt>[0,Knots[ArcNum]-Knots[ArcNum-1]]</tt> where Arcnum
+ is the current arc number in array.
+ If a pointer is NULL in the array, the polynom is created and you then have to deleted it after use.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="PolynomialBasisForOneArc"></a><a id="PolynomialBasisForOneArc(CATLONG32&amp;,CATMathPolynomX**)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>PolynomialBasisForOneArc</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iArcNum</span>,<script type="text/javascript"> activateLink('CATMathPolynomX','CATMathPolynomX**')</script> <span class='param'>ioPolynom</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves an array of pointers on the polynoms defined by <tt>this</tt> CATKnotVector
+ involved in one arc.
+<br>For advanced use.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iArcNum</span></dt>
+   <dd> The arc number.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioPolynom</span></dt>
+   <dd> The array of <tt>KnotVector.GetDegree + 1</tt>
+ pointers on polynoms of degree <tt>KnotVector.GetDegree</tt>.
+ These polynoms are reparametrized in <tt>[0,Knots[iArcNum +IndexOffset-1]-Knots[iArcNum +IndexOffset]]</tt>
+ If a pointer is NULL in the array, the polynom is created and you then have to deleted it after use.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SearchArcFromParameter"></a><a id="SearchArcFromParameter(double&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script>  <span class='objname'>SearchArcFromParameter</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>iGlobalParameter</span>)</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the arc number of this CATKnotVector global parameter.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The arc numbers start at 1.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Set"></a><a id="Set(CATKnotVector&amp;,double,double,CATTolerance&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Set</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATKnotVector','CATKnotVector&amp;')</script> <span class='param'>iKnotVectorToCopy</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iCoefficient</span><span class='param'>= 1.</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iShift</span><span class='param'>= 0.</span>, const <script type="text/javascript"> activateLink('CATTolerance','CATTolerance&amp;')</script> <span class='param'>iTolObject</span><span class='param'>= CATGetDefaultTolerance()</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Copies a knot vector.
+ <br>Optionally, redefines the parameterization by a linear transformation:
+  <tt>New parameter= iCoefficient * Old parameter + iShift</tt>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKnotVectorToCopy</span></dt>
+   <dd> The knot vector to copy.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iCoefficient</span></dt>
+   <dd> The coefficient of the transformation.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iShift</span></dt>
+   <dd> The shift of the transformation.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetDegree"></a><a id="SetDegree(CATLONG32&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetDegree</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iDegree</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Modifies the degree.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The new degree value. If it is
+ higher, the continuity order between arcs remains unchanged.
+ If it is lower, the continuity order between arcs is limited to <tt>Degree -1</tt>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetIndexOffset"></a><a id="SetIndexOffset(CATLONG32&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','INLINE void')</script>  <span class='objname'>SetIndexOffset</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iOffset</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Modifies the arc index offset.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOffset</span></dt>
+   <dd> The new value of the arc offset.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetKnotMultiplicity"></a><a id="SetKnotMultiplicity(CATLONG32&amp;,CATLONG32&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetKnotMultiplicity</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iKnotNum</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iNewKnotMultiplicity</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Modifies a knot value multiplicity of <tt>this</tt> CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKnotNum</span></dt>
+   <dd> The knot number ( from 1 to <tt>KnotVector.GetNumberOfKnots</tt> ).
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNewKnotMultiplicity</span></dt>
+   <dd> The new knot multiplicity.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetKnotValue"></a><a id="SetKnotValue(CATLONG32&amp;,double&amp;,CATTolerance&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetKnotValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iKnotNum</span>, const <script type="text/javascript"> activateLink('double','double&amp;')</script> <span class='param'>iNewKnotValue</span>, const <script type="text/javascript"> activateLink('CATTolerance','CATTolerance&amp;')</script> <span class='param'>iTolObject</span><span class='param'>= CATGetDefaultTolerance()</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Modifies a knot value of <tt>this</tt> CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKnotNum</span></dt>
+   <dd> The knot number ( from 1 to <tt>KnotVector.GetNumberOfKnots</tt> )
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNewKnotValue</span></dt>
+   <dd> The new knot value.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetNonUniformKnotVector"></a><a id="SetNonUniformKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double*,CATLONG32*,CATLONG32)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetNonUniformKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iDegree</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iIsPeriodic</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iKnotsCount</span>, const <script type="text/javascript"> activateLink('double','double*')</script> <span class='param'>iKnots</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32*')</script> <span class='param'>iMultiplicities</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iIndexOffset</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Redefines <tt>this</tt> as a non uniform CATKnotVector.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The new degree of the polynomial basis.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIsPeriodic</span></dt>
+   <dd> The new periodicity.
+ <br><b>legal values</b>0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKnotsCount</span></dt>
+   <dd> The new number of knot values specified for the knot vector. The number of arcs
+ is <tt>iKnotsCount - 1</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKnots</span></dt>
+   <dd> The array of the new global parameter values at the end of each arc.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iMultiplicities</span></dt>
+   <dd> The array of the new corresponding multiplicities.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndexOffset</span></dt>
+   <dd> The new index for the first arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTolerance"></a><a id="SetTolerance(CATTolerance&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTolerance</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATTolerance','CATTolerance&amp;')</script> <span class='param'>iTolObject</span><span class='param'>=CATGetDefaultTolerance()</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetUniformKnotVector"></a><a id="SetUniformKnotVector(CATLONG32&amp;,CATLONG32&amp;,CATLONG32&amp;,double,double,CATLONG32)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetUniformKnotVector</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iDegree</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iIsPeriodic</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32&amp;')</script> <span class='param'>iArcsCount</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iKnotStart</span><span class='param'>= 0.</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iStep</span><span class='param'>= 1.</span>, const <script type="text/javascript"> activateLink('CATLONG32','CATLONG32')</script> <span class='param'>iIndexOffset</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Redefines <tt>this</tt> as a uniform CATKnotVector .
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDegree</span></dt>
+   <dd> The new degree of the polynomial basis.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIsPeriodic</span></dt>
+   <dd> The new periodicity.
+ <br><b>legal values</b>0.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iArcsCount</span></dt>
+   <dd> The new number of arcs.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iKnotStart</span></dt>
+   <dd> The new parameter value of the first knot.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStep</span></dt>
+   <dd> The new uniform step value between two knots.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndexOffset</span></dt>
+   <dd> The new index for the first arc.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="operator ="></a><a id="operator =(CATKnotVector&amp;)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATKnotVector','CATKnotVector &')</script>  <span class='objname'>operator =</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATKnotVector','CATKnotVector&amp;')</script> <span class='param'>iKnotVectorToAffect</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Assignment operator.
+<br>Desallocates and reallocates the left operand, except if it is the
+ same object as the right operand (<tt>iKnotVectorToAffect</tt>).
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+ <h2 class='title2'>Data Members</h2> <br><dl>
+<dt class='dtdata'><a id="_PrivateDoNotUseNotScaled_R18Restricted"></a>_PrivateDoNotUseNotScaled_R18Restricted
+
+  public int _PrivateDoNotUseNotScaled_R18Restricted</dt>
+  <dd>
+</dd>
+</dl><br class='brart'/>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATKnotVector.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGeometricObjects</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

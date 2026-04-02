@@ -1,0 +1,125 @@
+#ifndef CATIAMaterialManager_IDL
+#define CATIAMaterialManager_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2003
+//=================================================================
+//                                   
+// CATIAMaterialManager:                           
+// Exposed interface for Material Manager object
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATIAMaterial.idl"
+#include "CATIAProduct.idl"
+#include "CATIAPart.idl"
+#include "CATIABody.idl"
+#include "CATIAHybridBody.idl"
+
+/**
+  * Interface to manage material manager object.
+  * <b>Role</b>: A material manager is used to manage materials application on geometrical objects.
+  */
+
+//-----------------------------------------------------------------
+interface CATIAMaterialManager : CATIABase
+{
+  /**
+   * Apply a Material on a Product.
+   * If Material is NULL, deletes the material already applied on the Product
+   */
+    HRESULT ApplyMaterialOnProduct(in CATIAProduct iProduct, in CATIAMaterial iMaterial, in short iLinkMode);
+
+  /**
+   * Apply a Material on a Part.
+   * If Material is NULL, deletes the material already applied on the Part
+   */
+	HRESULT ApplyMaterialOnPart(in CATIAPart iPart, in CATIAMaterial iMaterial, in short iLinkMode);
+
+  /**
+   * Apply a Material on a Body.
+   * If Material is NULL, deletes the material already applied on the Body
+   */
+	HRESULT ApplyMaterialOnBody(in CATIABody iBody, in CATIAMaterial iMaterial, in short iLinkMode);
+
+  /**
+   * Apply a Material on a Hybrid Body.
+   * If Material is NULL, deletes the material already applied on the Hybrid Body
+   */
+	HRESULT ApplyMaterialOnHybridBody(in CATIAHybridBody iHybridBody, in CATIAMaterial iMaterial, in short iLinkMode);
+  /**
+   * Get a Material on a Product.
+   * Material returned is NULL if no material is applied on the Product
+   */
+    HRESULT GetMaterialOnProduct(in CATIAProduct iProduct, out CATIAMaterial oMaterial);
+
+  /**
+   * Get a Material on a Part.
+   * Material returned is NULL if no material is applied on the Part
+   */
+	HRESULT GetMaterialOnPart(in CATIAPart iPart, out CATIAMaterial oMaterial);
+
+  /**
+   * Get a Material on a Body.
+   * Material returned is NULL if no material is applied on the Body
+   */
+	HRESULT GetMaterialOnBody(in CATIABody iBody, out CATIAMaterial oMaterial);
+
+  /**
+   * Get a Material on a Hybrid Body.
+   * Material returned is NULL if no material is applied on the Hybrid Body
+   */
+	HRESULT GetMaterialOnHybridBody(in CATIAHybridBody iHybridBody, out CATIAMaterial oMaterial);
+
+  /**
+   * In current session, replace all links towards a material 1 with a link towards 
+   * an other material 2.
+   * N.B. Both materials entered should be in a material library.
+   */
+	HRESULT ReplaceMaterialLinks(in CATIAMaterial iMaterial1, in CATIAMaterial iMaterial2);
+
+  /**
+   * Apply a Material on a User Material (Analysis entity).
+   * Warning: iUserMaterial should be a CATIAAnalysisEntity object.
+   * If Material is NULL, deletes the material already applied on the User Material
+   */
+	HRESULT ApplyMaterialOnUserMaterial(in CATIABase iUserMaterial, in CATIAMaterial iMaterial, in short iLinkMode);
+
+  /**
+   * Get a Material on a User Material (Analysis entity).
+   * Warning: iUserMaterial should be a CATIAAnalysisEntity object.
+   * Material returned is NULL if no material is applied on the User Material
+   */
+	HRESULT GetMaterialOnUserMaterial(in CATIABase iUserMaterial, out CATIAMaterial oMaterial);
+
+};
+
+// Interface Name : CATIAMaterialManager
+#pragma ID CATIAMaterialManager "DCE:ab79a853-15ce-0000-0280021513000000"
+#pragma DUAL CATIAMaterialManager
+ 
+// VB Object Name : MaterialManager
+#pragma ID MaterialManager "DCE:ab79ab1a-308f-0000-0280021513000000"
+#pragma ALIAS CATIAMaterialManager MaterialManager
+
+#endif
+// CATIAMaterialManager_IDL
+
+
+
+
+
+
+

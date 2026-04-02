@@ -1,0 +1,55 @@
+#ifndef CATIAManufacturingPrecedence_IDL
+#define CATIAManufacturingPrecedence_IDL
+/*IDLREP*/
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAManufacturingPrecedence:                           
+// Exposed interface for Process collection
+//                                   
+//=================================================================
+// April 99 Janvier                                         F.ZERR
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATManufacturingPrecedenceType.idl"
+#include "CATIAManufacturingActivity.idl"
+
+/**
+ * Defines a precedence relation between objects. 
+ */
+
+interface CATIAManufacturingPrecedence : CATIABase
+{
+    /**
+     * Returns the target object of the precedence, but with the Operation interface if it is.
+     */
+
+#pragma PROPERTY TargetOperation
+  HRESULT    get_TargetOperation ( out /*IDLRETVAL*/ CATIAManufacturingActivity oTarget);
+
+    /**
+     * Returns the type of the precedence.
+     */
+#pragma PROPERTY PrecedenceType
+  HRESULT    get_PrecedenceType ( out /*IDLRETVAL*/ CatManufacturingPrecedenceType oType);
+};
+
+// Interface name : CATIAManufacturingPrecedence
+#pragma ID CATIAManufacturingPrecedence "DCE:29a3f05e-f32b-11d2-9ee30004ac963be8"
+#pragma DUAL CATIAManufacturingPrecedence
+
+// VB object name : ManufacturingPrecedence (Id used in Visual Basic)
+#pragma ID ManufacturingPrecedence "DCE:452b9796-f32b-11d2-9ee30004ac963be8"
+#pragma ALIAS CATIAManufacturingPrecedence ManufacturingPrecedence
+
+#endif
+
+// CATIAManufacturingPrecedence_IDL
+
+

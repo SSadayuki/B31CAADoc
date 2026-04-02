@@ -1,0 +1,89 @@
+#ifndef CATIASchComponentGroup_IDL 
+#define CATIASchComponentGroup_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchAppConnectable;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Represents a temporary group of schematic objects for component placement.
+  */
+
+
+interface CATIASchComponentGroup : CATIABase
+{
+  /**
+  * Add a member to the component group.
+  * @param iCntblToAdd
+  *   The application connectable to be added to the group
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchComponentGroup
+  * Dim objArg1 As SchAppConnectable
+  *  ...
+  * objThisIntf.<font color="red">AddMember</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AddMember ( 
+    in CATIASchAppConnectable iCntblToAdd );
+    
+  /**
+  * Remove a member to the component group.
+  * @param iCntbleToRemove
+  *   The application connectable to be removed from the group
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchComponentGroup
+  * Dim objArg1 As SchAppConnectable
+  *  ...
+  * objThisIntf.<font color="red">RemoveMember</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT RemoveMember ( 
+    in CATIASchAppConnectable iCntblToRemove );
+    
+  /**
+  * List all connectable members in the group.
+  * @param oLGRR
+  *   A list of connectables.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchComponentGroup
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListMembers</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListMembers ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLCntbl );
+    
+};
+    
+// Interface name : CATIASchComponentGroup
+#pragma ID CATIASchComponentGroup "DCE:f05b1410-391a-40c3-a4edc7a23724ea88"
+#pragma DUAL CATIASchComponentGroup
+    
+// VB object name : SchComponentGroup
+#pragma ID SchComponentGroup "DCE:d845c721-c720-46ef-bce147406a7e9647"
+#pragma ALIAS CATIASchComponentGroup SchComponentGroup
+    
+#endif 
+    

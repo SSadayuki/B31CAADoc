@@ -1,0 +1,126 @@
+#ifndef CATIAAssemblyFeature_IDL
+#define CATIAAssemblyFeature_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAAssemblyFeature:						   
+// Exposed interface for AssemblyFeature
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep. 2000 Creation					                 CRX
+//=================================================================
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAProduct;
+
+/**
+ * Represents the AssemblyFeature object.
+ */
+interface CATIAAssemblyFeature : CATIABase
+{
+	  //		================
+	  //		== PROPERTIES ==
+	  //		================
+    //
+
+
+	  //		================
+	  //		==   METHODS  ==
+	  //		================
+    //
+   /**
+    * Adds a component to the affected component list.
+    * An update of the aggregating Product is necessary 
+    * to apply the Assembly Feature to this component.
+    * @param  iComponent
+    *   The component to affect
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example adds the component <tt>ProdToAffect</tt> to 
+    * the affected component list of the AssemblyFeature <tt>assemblyFeat</tt>.
+    * <pre>
+    * assemblyFeat.<font color="red">AddAffectedComponent</font>( ProdToAffect )
+    * </pre>
+    * </dl>
+    */
+    HRESULT AddAffectedComponent ( in CATIAProduct iComponent );
+
+   /**
+    * Removes a component from the affected component list.
+    * An update of the aggregating Product is necessary
+    * to remove the generated feature from this component.
+    * @param  iComponent
+    *   The affected component to remove
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example removes the component <tt>ProdToRemove</tt> from 
+    * the affected component list of the AssemblyFeature <tt>assemblyFeat</tt>.
+    * <pre>
+    * assemblyFeat.<font color="red">RemoveAffectedComponent</font>( ProdToRemove )
+    * </pre>
+    * </dl>
+    */
+    HRESULT RemoveAffectedComponent ( in CATIAProduct iComponent );
+
+   /**
+    * Retrieves the affected component list.
+    * @param oListOfComponents
+    *   The retrieved list.
+    *   <br>
+    *   The array must be previously initialized
+    *   using the @href #AffectedComponentsCount method.
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example retrieves the affected component list of 
+    * the AssemblyFeature <tt>assemblyFeat</tt> in <tt>affectedList</tt>.
+    * <pre>
+    * affectedListSize = assemblyFeat.AffectedComponentsCount
+    * Dim affectedList(affectedListSize-1) 
+    * assemblyFeat.<font color="red">ListAffectedComponents</font>(affectedList)
+    * </pre>
+    */
+    HRESULT ListAffectedComponents (  inout CATSafeArrayVariant oListOfComponents );
+
+   /**
+    * Returns the affected component list count.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example retrieves the affected component list count of 
+    * the AssemblyFeature <tt>assemblyFeat</tt> in <tt>affectedListSize</tt>.
+    * <pre>
+    * affectedListSize = assemblyFeat.<font color="red">AffectedComponentsCount</font>
+    * </pre>
+    * </dl>
+    */
+    HRESULT AffectedComponentsCount (  out /*IDLRETVAL*/ long oComponentCount );
+
+
+};
+
+// Interface name : CATIAAssemblyFeature
+#pragma ID CATIAAssemblyFeature "DCE:749cb904-9543-11d4-9349006094eb72e6"
+#pragma DUAL CATIAAssemblyFeature
+
+// VB object name : AssemblyFeature (Id used in Visual Basic)
+#pragma ID AssemblyFeature "DCE:7ebc552a-9543-11d4-9349006094eb72e6"
+#pragma ALIAS CATIAAssemblyFeature AssemblyFeature
+
+
+#endif // CATIAAssemblyFeature_IDL
+

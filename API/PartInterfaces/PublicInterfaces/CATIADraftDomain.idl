@@ -1,0 +1,277 @@
+#ifndef CATIADraftDomain_IDL
+#define CATIADraftDomain_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIADraftDomain:                           
+// Exposed interface for DraftDomain
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                        Ph Baucher
+// Dec97 Modification                                     L Lalere
+//=================================================================
+#include "CATIABase.idl"
+#include "CATDraftDefs.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAAngle;
+interface CATIAReferences;
+interface CATIAReference;
+
+/**
+ * Represents the draft domain.
+ * A draft domain is a basic object used by a draft shape.
+ * It contains objects such as an angle, a pulling direction,
+ * and a collection of faces to be drafted.
+ */
+//-----------------------------------------------------------------
+interface CATIADraftDomain : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON DRAFT ANGLE
+    //    --------------
+    //
+    /**
+     * Returns the draft angle.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>angle</tt>
+     * the draft angle of the draft domain <tt>firstDraftDomain</tt>:
+     * <pre>
+     * Set angle = firstDraftDomain.<font color="red">DraftAngle</font>
+     * </pre>
+     * </dl>
+     */ 
+#pragma PROPERTY DraftAngle
+    HRESULT    get_DraftAngle ( out /*IDLRETVAL*/ CATIAAngle oDraftAngle );
+
+    //    ON SUPPORT
+    //    ----------
+    //
+    /**
+     * Returns the faces to be drafted.
+     * They are returned as a collection of reference geometric elements.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns the collection of faces to be drafted
+     * of the draft domain <tt>firstDraftDomain</tt> in <tt>list</tt>:
+     * <pre>
+     * Set list = firstDraftDomain.<font color="red">FacesToDraft</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FacesToDraft
+    HRESULT    get_FacesToDraft ( out /*IDLRETVAL*/ CATIAReferences oSupport );
+
+    //    ON NEUTRAL ELEMENT
+    //    ------------------
+    //
+    /**
+     * Returns or sets the draft neutral element.<br>
+     * To set the property, you can use the following @href CATIABoundary object: 
+     * @href CATIAPlanarFace.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>neutral</tt>
+     * the neutral element of the draft domain <tt>firstDraftDomain</tt>,
+     * and then sets it to <tt>newNeutral</tt>:
+     * <pre>
+     * Set neutral = firstDraftDomain.<font color="red">NeutralElement</font>
+     * firstDraftDomain.<font color="red">NeutralElement</font> = newNeutral
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY NeutralElement
+    HRESULT    get_NeutralElement ( out /*IDLRETVAL*/ CATIAReference oNeutralElement );
+    HRESULT    put_NeutralElement ( in         CATIAReference iNeutralElement );
+
+    //    ON NEUTRAL PROPAGATION MODE
+    //    ---------------------------
+    //
+    /**
+     * Returns or sets the neutral element propagation mode.
+     * This mode is used when computing the needed neutral elements.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>propMode</tt>
+     * the neutral propagation mode of the
+     * draft domain <tt>firstDraftDomain</tt>, and then sets it to
+     * <tt>CATSmoothDraftNeutralPropagationMode</tt> so that
+     * the neutral propagation will now be smooth:
+     * <pre>
+     * Set propMode = firstDraftDomain.<font color="red">NeutralPropagationMode</font>
+     * firstDraftDomain.<font color="red">NeutralPropagationMode</font> = CATSmoothDraftNeutralPropagationMode
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY NeutralPropagationMode
+    HRESULT    get_NeutralPropagationMode ( out /*IDLRETVAL*/ CatDraftNeutralPropagationMode oNeutralPropagationMode );
+    HRESULT    put_NeutralPropagationMode ( in                CatDraftNeutralPropagationMode iNeutralPropagationMode );
+
+	/** 
+     * Changes the multiselection mode.
+	 * @param iMultiselectionMode.
+	 * The elements to be drafted can be selected explicitly (CATNoneDraftMultiselectionMode)
+	 * or can implicitly selected as neighbors of the neutral face (CATMultiselectionByNeutralMode)
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>MultiselMode</tt>
+     * the multiselection mode of the
+     * draft domain <tt>firstDraftDomain</tt>, and then sets it to
+     * <tt>CATMultiselectionByNeutralMode</tt> 
+     * <pre>
+     * Set MultiselMode = firstDraftDomain.<font color="red">MultiselectionMode</font>
+     * firstDraftDomain.<font color="red">MultiselectionMode</font> = CATMultiselectionByNeutralMode
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY MultiselectionMode
+HRESULT   get_MultiselectionMode(out /*IDLRETVAL*/CatDraftMultiselectionMode oMultiselectionMode);
+HRESULT   put_MultiselectionMode(in CatDraftMultiselectionMode iMultiselectionMode);
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+    //    ON PULLING DIRECTION
+    //    --------------------
+    //
+    /**
+     * Returns the draft pulling direction.
+     * The pulling direction is returned as an array containing
+     * the pulling direction vector components.
+     * Assume this array is <tt>PullDir</tt>. It contains:
+     * <dl>
+     * <dt><tt>PullDir[0],PullDir[1],PullDir[2]</tt>
+     * <dd>The X, Y, and Z pulling direction vector components
+     * </dl>
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>PullDir</tt>
+     * the pulling direction vector components of the
+     * draft domain <tt>firstDraftDomain</tt>:
+     * <pre>
+     * Set PullDir = firstDraftDomain.<font color="red">PullingDirection</font>
+     * Set x = PullDir[0]
+     * Set y = PullDir[1]
+     * Set z = PullDir[2]
+     * </pre>
+     * </dl>
+     */
+    HRESULT    GetPullingDirection ( inout  CATSafeArrayVariant ioPullingDirection );
+
+
+    /**
+     * Sets the draft pulling direction.
+     * @param iX,iY,iZ
+     *   The X, Y, and Z pulling direction vector components
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example sets the draft pulling direction of
+     * the draft domain <tt>firstDraftDomain</tt> to the direction
+     * with the vector components 10, -5, 10:
+     * <pre>
+     * firstDraftDomain.<font color="red">PullingDirection</font> 10, -5, 10
+     * </pre>
+     * </dl>
+     */
+    HRESULT    SetPullingDirection ( in  double iX, in double iY, in double iZ );
+
+     /**
+	 * Returns or sets the draft pulling direction element.<br>
+     * To set the property, you can use one of the following @href CATIABoundary objects: 
+     * @href CATIAPlanarFace or @href CATIARectilinearTriDimFeatEdge.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>pullingdirection</tt>
+     * the pulling direction element of the draft domain <tt>firstDraftDomain</tt>,
+     * and then sets it to <tt>newPullingDirection</tt>:
+     * <pre>
+     * Set pullingdirection = firstDraftDomain.<font color="red">NeutralElement</font>
+     * firstDraftDomain.<font color="red">PullingDirectionElement</font> = newPullingDirection
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY PullingDirectionElement
+    HRESULT    get_PullingDirectionElement ( out /*IDLRETVAL*/ CATIAReference oPullingDirectionElement );
+    HRESULT    put_PullingDirectionElement ( in         CATIAReference iPullingDirectionElement );
+
+    // Draft Supports management 
+    //
+    /**
+     * Adds a face to those to be drafted.
+     * @param iFace
+     *   The face to add to those to be drafted<br>
+     * The following @href CATIABoundary object is supported: 
+     * ScFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the face <tt>NewFaceToDraft</tt>
+     * to the draft domain <tt>CurrentDraftDomain</tt>:
+     * <pre>
+     * CurrentDraftDomain.<font color="red">AddFaceToDraft</font>(NewFaceToDraft)
+     * </pre>
+     * </dl>
+     */ 
+    HRESULT   AddFaceToDraft    (in CATIAReference iFace);
+
+    /** 
+     * Removes a face from those to be drafted.
+     * @param iFace
+     *   The face to be removed from those to be drafted<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIAFace.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example removes the face <tt>FaceToRemove</tt>
+     * from the draft domain <tt>CurrentDraftDomain</tt>:
+     * <pre>
+     * CurrentDraftDomain.<font color="red">RemoveFaceToDraft</font>(FaceToRemove)
+     * </pre>
+     * </dl>
+     */
+    HRESULT   RemoveFaceToDraft (in CATIAReference iFace);
+
+    /** 
+     * Value the support of draft.
+     * @param iVolumeSupport
+	 */
+	HRESULT	  SetVolumeSupport  (in CATIAReference iVolumeSupport);
+};
+
+// Interface name : CATIADraftDomain
+#pragma ID CATIADraftDomain "DCE:fd532a56-60be-11d1-a27d0000f87546fd"
+#pragma DUAL CATIADraftDomain
+
+// VB object name : DraftDomain (Id used in Visual Basic)
+#pragma ID DraftDomain "DCE:fecbdde2-60be-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIADraftDomain DraftDomain
+
+
+#endif
+// CATIADraftDomain_IDL
+

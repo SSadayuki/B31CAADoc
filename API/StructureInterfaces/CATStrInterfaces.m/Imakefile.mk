@@ -1,0 +1,14 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+StructureInterfacesUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# Imakefile CATGitInterfaces.m
+#
+
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH=$(LINK_WITH_FOR_IID)  JS0GROUP DraftingItfCPP
+

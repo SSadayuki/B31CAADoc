@@ -1,0 +1,89 @@
+#ifndef CATIAHybridShapeMidSurface_IDL
+#define CATIAHybridShapeMidSurface_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2014
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeMidSurface:         
+// Exposed interface for HybridShape MidSurface
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+
+/**
+* Represents the hybrid shape MidSurface feature object.
+* <b>Role</b>: To access the data of the hybrid shape MidSurface feature object.
+* <br>This data includes:
+* <ul>
+* <li>Support Body</li>
+* <li>Creation Mode</li>
+* <li>Threshold Thickness</li>
+* </ul>
+* <p>Use the  CATIAHybridShapeFactory to create a HybridShapeMidSurface object.
+* @see CATIAHybridShapeFactory */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeMidSurface : CATIAHybridShape
+{
+	/**
+	* Returns or sets Support Body. 
+	* @href CATIAReference. 
+	*/ 
+#pragma PROPERTY Support
+	HRESULT get_Support (out /*IDLRETVAL*/ CATIAReference   oSupport);
+	HRESULT put_Support (in                CATIAReference   iSupport);
+
+	/**
+	* Returns or sets Threshold Thickness. 
+	* @href CATIALength. 
+	*/ 
+#pragma PROPERTY Threshold
+	HRESULT get_Threshold   ( out /*IDLRETVAL*/ CATIALength    oThresholdThickness );
+	HRESULT put_Threshold   ( in CATIALength    iThresholdThickness );
+
+	/**
+	* Returns or sets CreationMode. 
+	* Face Pairs : 0, Faces To Offset : 1, Automatic : 2
+	* (Only Automatic Creation Mode Available for Automation)
+	*/ 
+#pragma PROPERTY CreationMode
+	HRESULT get_CreationMode(out /*IDLRETVAL*/ long oCreationMode) ;
+	HRESULT put_CreationMode(in                long iCreationMode) ;
+
+    /**
+	* Returns or sets AutoThicknessThreshold. 
+	* Automatic Thickmess Threshold Check Button ON :1, OFF : 0
+	* (Only Automatic Creation Mode Available for Automation)
+	*/ 
+#pragma PROPERTY AutoThicknessThreshold
+	HRESULT get_AutoThicknessThreshold(out /*IDLRETVAL*/long  oAutoThresh);
+	HRESULT put_AutoThicknessThreshold(in long iAutoThresh);
+};
+
+
+// Interface name : CATIAHybridShapeMidSurface
+#pragma ID CATIAHybridShapeMidSurface "DCE:84f5f53e-f584-4090-88aeaef9d20ca35d" 
+#pragma DUAL CATIAHybridShapeMidSurface
+
+// VB object name : HybridShapeMidSurface (Id used in Visual Basic)
+#pragma ID HybridShapeMidSurface "DCE:b47500e3-5cd9-4af6-930b27c3cf53f4a4"
+#pragma ALIAS CATIAHybridShapeMidSurface HybridShapeMidSurface
+
+#endif
+// CATIAHybridShapeMidSurface_IDL

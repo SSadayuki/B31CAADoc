@@ -1,0 +1,88 @@
+#ifndef CATIASketchBasedShape_IDL
+#define CATIASketchBasedShape_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIASketchBasedShape:						   
+// Exposed interface for sketchBased Shapes
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation                                       Ph Baucher
+// Nov97 Form Features renamed SketchBased Features     Ph Baucher
+// Dec97 Modification / Rename CATIASketchBasedFeature    L Lalere
+//=================================================================
+#include "CATIAShape.idl"
+
+interface CATIASketch;
+interface CATIAReference;
+
+/**
+ * Represents the shapes based on sketched 2D geometry.
+ * It is the base object for prisms, holes, revolutions, stiffeners, and sweeps.
+ * @see CATIAPrism, CATIAHole, CATIARevolution, CATIAStiffener, CATIASweep
+ */
+
+//-----------------------------------------------------------------
+interface CATIASketchBasedShape : CATIAShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	//
+	//	ON SKETCH
+	//	---------
+	//
+#pragma PROPERTY Sketch
+//
+/**
+ * Returns the sketch the shape is based on.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>The following example returns the sketch a pad
+ * named <tt>firstPad</tt> is based on:
+ * <pre>
+ * Set sketchPad = firstPad.<font color="red">Sketch</font>
+ * </pre>
+ * </dl>
+ */
+	HRESULT	get_Sketch ( out /*IDLRETVAL*/ CATIASketch oSketch );
+
+	//	PROFILE REFERENCE
+	//	-----------------
+  //
+//
+/**
+ * Returns or sets a profile element.
+ */
+	HRESULT	SetProfileElement ( in CATIAReference iProfileElement );
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+};
+
+// Interface name : CATIASketchBasedShape
+#pragma ID CATIASketchBasedShape "DCE:eff6b576-55f6-11d1-a2720000f87546fd"
+#pragma DUAL CATIASketchBasedShape
+
+// VB object name : SketchBasedShape (Id used in Visual Basic)
+#pragma ID SketchBasedShape "DCE:f00765ec-55f6-11d1-a2720000f87546fd"
+#pragma ALIAS CATIASketchBasedShape SketchBasedShape
+
+
+#endif
+// CATIASketchBasedShape_IDL
+

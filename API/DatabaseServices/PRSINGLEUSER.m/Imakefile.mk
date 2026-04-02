@@ -1,0 +1,24 @@
+#
+BUILT_OBJECT_TYPE = SHARED LIBRARY
+#
+OS = COMMON
+
+LINK_WITH= NS0S3STR 
+
+OS = AIX
+LOCAL_CCFLAGS=   -Dunix -D_AIX_SOURCE 
+LOCAL_LDFLAGS = -bloadmap:load.log
+SYS_LIBS  = 
+
+#
+OS = HP-UX
+
+#
+OS = IRIX
+
+#
+OS = SunOS
+
+#
+OS = Windows_NT
+

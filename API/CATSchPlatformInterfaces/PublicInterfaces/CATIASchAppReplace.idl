@@ -1,0 +1,71 @@
+#ifndef CATIASchAppReplace_IDL 
+#define CATIASchAppReplace_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic component.
+  */
+
+interface CATIASchAppReplace : CATIABase
+{
+  /**
+  * Query whether it is OK to replace an existing object (component, route...)
+  * with this object.
+  * @param iSchObjectToBeReplacedByThis
+  *   Pointer to the existing object to be replaced by this object. 
+  * @param oBYes
+  *   If TRUE, then it is OK to replace the object.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppReplace
+  * Dim objArg1 As AnyObject
+  * Dim bVar2 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppOKToReplace</font>objArg1,bVar2
+  * </pre>
+  *    
+  */
+  HRESULT AppOKToReplace ( 
+    in CATIABase iSchObjectToBeReplacedByThis, 
+    inout boolean oBYes );
+    
+  /**
+  * Post process after replacing an object.
+  * @param iNewObject
+  *   The new Application object
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppReplace
+  * Dim objArg1 As AnyObject
+  *  ...
+  * objThisIntf.<font color="red">AppPostReplaceProcess</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppPostReplaceProcess ( 
+    in CATIABase iSchObjectToBeReplacedByThis );
+    
+};
+    
+// Interface name : CATIASchAppReplace
+#pragma ID CATIASchAppReplace "DCE:1dccc645-c8ca-4796-b67389edfee4e490"
+#pragma DUAL CATIASchAppReplace
+    
+// VB object name : SchAppReplace
+#pragma ID SchAppReplace "DCE:1848048b-ad2c-432f-9ce074e5b8fc820e"
+#pragma ALIAS CATIASchAppReplace SchAppReplace
+    
+#endif 
+    

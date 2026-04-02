@@ -1,0 +1,7 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=NONE
+
+# for tracing :
+# LOCAL_CCFLAGS= -DTRACE_ON

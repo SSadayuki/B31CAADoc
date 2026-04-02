@@ -1,0 +1,63 @@
+// COPYRIGHT Dassault Systemes 2003
+//===================================================================
+//
+// CATIAAnalysisMeshLocalSpecifications.idl
+// Automation interface for the AnalysisMeshLocalSpecifications element 
+//
+//===================================================================
+//
+// Usage notes:
+//   New interface: describe its use here
+//
+//===================================================================
+#ifndef CATIAAnalysisMeshLocalSpecifications_IDL
+#define CATIAAnalysisMeshLocalSpecifications_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATIAAnalysisMeshLocalSpecification.idl"
+
+/**  
+ * The interface to access a AnalysisMeshLocalSpecifications. 
+ */
+interface CATIAAnalysisMeshLocalSpecifications : CATIACollection 
+{
+/**
+ * Creates a new local specification  and adds it to the local specification  collection.<br>
+ * The local specification  will be created linked to the AnalysisMeshManager object.
+ * @param iType under the form : oStartUpName@oCatalogName?oClientId (For User defined Startups).
+ * The type of mesh part to create.
+ * @return The created local specification 
+*/
+    HRESULT  Add
+             ( in	CATBSTR				             iType,
+               out  /*IDLRETVAL*/ CATIAAnalysisMeshLocalSpecification oLocalSpec  );
+/**
+ * Removes a local specification  using its index or its name from the local specification  collection.
+ * @param iIndex
+ *   The index or the name of the local specification  to retrieve from
+ *   the collection of local specification .
+ *   As a numeric, this index is the rank of the local specification 
+ *   in the collection. The index of the first local specification  in the collection is 1,
+ *   and the index of the last local specification  is Count.
+ *   As a string, it is the name you assigned to the local specification using
+ *   the @href CATIABase#Name property.
+ */
+
+	HRESULT Remove(in CATVariant iIndex);
+};
+
+// Interface name : CATIAAnalysisMeshLocalSpecifications
+#pragma ID CATIAAnalysisMeshLocalSpecifications "DCE:95a7b913-9add-4f73-8d6b952d579b2899"
+#pragma DUAL CATIAAnalysisMeshLocalSpecifications
+
+// VB object name : AnalysisMeshLocalSpecifications (Id used in Visual Basic)
+#pragma ID AnalysisMeshLocalSpecifications "DCE:405fcedb-1d0c-4fc5-953b9063fac80fba"
+#pragma ALIAS CATIAAnalysisMeshLocalSpecifications AnalysisMeshLocalSpecifications
+
+#endif

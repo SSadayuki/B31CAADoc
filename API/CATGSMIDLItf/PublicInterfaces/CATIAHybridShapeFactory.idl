@@ -1,0 +1,2921 @@
+#ifndef CATIAHybridShapeFactory_IDL
+#define CATIAHybridShapeFactory_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000 - 2014
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//=================================================================
+//
+// CATIAHybridShapeFactory:
+// Exposed interface for HybridShape factory
+//
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+
+//=================================================================
+// Dec97 Creation    
+//=================================================================
+
+#include "CATIAFactory.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+
+#include "CATIAHybridShapeCircle.idl"
+#include "CATIAHybridShapeCircle2PointsRad.idl"
+#include "CATIAHybridShapeCircle3Points.idl"
+#include "CATIAHybridShapeCircleBitangentPoint.idl"
+#include "CATIAHybridShapeCircleBitangentRadius.idl"
+#include "CATIAHybridShapeCircleCtrPt.idl"
+#include "CATIAHybridShapeCircleCtrRad.idl"
+#include "CATIAHybridShapeCircleTritangent.idl"
+#include "CATIAHybridShapeCircleCenterTangent.idl"
+#include "CATIAHybridShapeCircleCenterAxis.idl"
+
+
+#include "CATIAHybridShapeLine.idl"
+#include "CATIAHybridShapeLineAngle.idl"
+#include "CATIAHybridShapeLineNormal.idl"
+#include "CATIAHybridShapeLineBisecting.idl"
+#include "CATIAHybridShapeLinePtDir.idl"
+#include "CATIAHybridShapeLinePtPt.idl"
+#include "CATIAHybridShapeLineTangency.idl"
+#include "CATIAHybridShapeLineBiTangent.idl"
+
+
+#include "CATIAHybridShapePoint.idl"
+#include "CATIAHybridShapePointBetween.idl"
+#include "CATIAHybridShapePointCenter.idl"
+#include "CATIAHybridShapePointCoord.idl"
+#include "CATIAHybridShapePointOnCurve.idl"
+#include "CATIAHybridShapePointOnPlane.idl"
+#include "CATIAHybridShapePointOnSurface.idl"
+#include "CATIAHybridShapePointTangent.idl"
+
+
+#include "CATIAHybridShapePlane.idl"
+#include "CATIAHybridShapePlaneAngle.idl"
+#include "CATIAHybridShapePlane1Curve.idl"
+#include "CATIAHybridShapePlane1Line1Pt.idl"
+#include "CATIAHybridShapePlane2Lines.idl"
+#include "CATIAHybridShapePlane3Points.idl"
+#include "CATIAHybridShapePlaneEquation.idl"
+#include "CATIAHybridShapePlaneMean.idl"
+#include "CATIAHybridShapePlaneNormal.idl"
+#include "CATIAHybridShapePlaneOffset.idl"
+#include "CATIAHybridShapePlaneOffsetPt.idl"
+#include "CATIAHybridShapePlaneTangent.idl"
+
+
+#include "CATIAHybridShapeOffset.idl"
+#include "CATIAHybridShapeExtrude.idl"
+#include "CATIAHybridShapeCylinder.idl"
+#include "CATIAHybridShapeRevol.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+#include "CATIAHybridShapeBoundary.idl"
+#include "CATIAHybridShapeSpline.idl"
+#include "CATIAHybridShapeConic.idl"
+
+#include "CATIAHybridShapeFill.idl"
+
+#include "CATIAHybridShapeLineExplicit.idl"
+#include "CATIAHybridShapePointExplicit.idl"
+#include "CATIAHybridShapeCircleExplicit.idl"
+#include "CATIAHybridShapeCurveExplicit.idl"
+#include "CATIAHybridShapeSurfaceExplicit.idl"
+#include "CATIAHybridShapePlaneExplicit.idl"
+#include "CATIAHybridShapeVolumeExplicit.idl"
+#include "CATIAHybridShapeAxisLine.idl"
+
+#include "CATIAHybridShapeSymmetry.idl"
+#include "CATIAHybridShapeAxisToAxis.idl"
+#include "CATIAHybridShapeRotate.idl"
+#include "CATIAHybridShapeIntersection.idl"
+#include "CATIAHybridShapeExtrapol.idl"
+#include "CATIAHybridShapeCorner.idl"
+#include "CATIAHybridShapeProject.idl"
+#include "CATIAHybridShapeTrim.idl"
+#include "CATIAHybridShapeSplit.idl"
+#include "CATIAHybridShapeAffinity.idl"
+#include "CATIAHybridShapeTranslate.idl"
+#include "CATIAHybridShapeCurvePar.idl"
+#include "CATIAHybridShapeConnect.idl"
+#include "CATIAHybridShapeNear.idl"
+#include "CATIAHybridShapeScaling.idl"
+#include "CATIAHybridShapeHealing.idl"
+
+#include "CATIAHybridShapeExtract.idl"
+#include "CATIAHybridShapeExtractMulti.idl"
+#include "CATIAHybridShapeInverse.idl"
+
+#include "CATIAHybridShapeAssemble.idl"
+#include "CATIAHybridShapeLoft.idl"
+// #include "CATIAHybridShapeLoftSection.idl"
+
+#include "CATIAHybridShapeSweep.idl"
+#include "CATIAHybridShapeSweepCircle.idl"
+#include "CATIAHybridShapeSweepExplicit.idl"
+#include "CATIAHybridShapeSweepLine.idl"
+#include "CATIAHybridShapePositionTransfo.idl"
+#include "CATIAHybridShapeDevelop.idl"
+#include "CATIAHybridShapeUnfold.idl"
+#include "CATIAHybridShapeTransfer.idl"
+#include "CATIAHybridShapeFilletBiTangent.idl"
+#include "CATIAHybridShapeFilletTriTangent.idl"
+
+#include "CATIAHybridShapeExtremum.idl"
+#include "CATIAHybridShapeCombine.idl"
+#include "CATIAHybridShapeHelix.idl"
+#include "CATIAHybridShapeBlend.idl"
+#include "CATIAHybridShapeLawDistProj.idl"
+
+#include "CATIAHybridShapeSpine.idl"
+#include "CATIAHybridShapeReflectLine.idl"
+
+#include "CATIAHybridShapeRollingOffset.idl"
+
+#include "CATIAHybridShapeSphere.idl"
+
+#include "CATIAHybridShapeBump.idl"
+#include "CATIAHybridShapeWrapCurve.idl"
+
+#include "CATIAHybridShapeWrapSurface.idl"
+
+
+#include "CATIAHybridShapeSpiral.idl"
+#include "CATIAHybridShapePolyline.idl"
+#include "CATIAHybridShapeCurveSmooth.idl"
+#include "CATIAHybridShapeExtremumPolar.idl"
+#include "CATIAHybridShapeSweepConic.idl"
+
+#include "CATIAHybridShape3DCurveOffset.idl"
+
+#include "CATIAHybridShapeSection.idl"
+#include "CATIAHybridShapeIntegratedLaw.idl"
+#include "CATIAHybridShapeMidSurface.idl"
+
+//-----------------------------------------------------------------
+
+/**
+ * Interface to create all kinds of HybridShape objects that may be needed in wireframe and surface design.
+ * <br>Note:
+ * <br>This interface concern GSD/GSO/DL1 feature creation via VB 
+ * <br>      Use of the creation methods requires to have granted license configuration for feature creation
+ * <br>      i.e:  
+ * <br>      - Bump, Develop,WrapCurve,WrapSurface require GSO license. 
+ * <br>      - Unfold,  Develop require DL1 license. 
+ * <br>      - Other require GSD license. 
+ * <br>Note2:
+ * <br>For all methods creating datums AddNew*Datum,
+ * <br>the object passed as parameter to create the datum has to be in the current container.
+ * <br>Otherwise, an error occurs.
+ */
+interface CATIAHybridShapeFactory : CATIAFactory
+{
+
+/**
+ * Creates a new spine within the current body. 
+ * @param oExt 
+ *   CATIAHybridShapeSpine created  
+ */ 
+   HRESULT AddNewSpine (out /*IDLRETVAL*/ CATIAHybridShapeSpine       oExt);
+
+/**
+ * Creates a new AxisLine within the current body. 
+ * @param iElement
+ *   Circle, Ellipse, Oblong, Sphere, Revolution surface. Axis is computed for this element
+ * @param oAxisLine 
+ *   Created axis line
+ */ 
+   HRESULT AddNewAxisLine (in CATIAReference iElement,
+					       out /*IDLRETVAL*/ CATIAHybridShapeAxisLine oAxisLine);
+
+/**
+ * Creates a new law within the current body. 
+ * @param iReference
+ *   Reference line of the law.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iDefinition 
+ *   Definition curve of the law.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param oLaw
+ *   The Law object if succeded  
+ */ 
+   HRESULT AddNewLawDistProj (in CATIAReference iReference,
+							  in CATIAReference iDefinition,
+					          out /*IDLRETVAL*/ CATIAHybridShapeLawDistProj oLaw);
+
+/**
+ * Creates a new blend surface within the current body. 
+ * @param oBlend
+ *   The Blend object if succeded  
+ */ 
+   HRESULT AddNewBlend (out /*IDLRETVAL*/ CATIAHybridShapeBlend  oBlend);
+
+
+/**
+ * Creates a new conic within the current body. 
+    *   @param iSupport
+    *      The conic support (always a plane).
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * see @href CATIAPlanarFace.
+    *   @param iStartingPoint
+    *      Starting Point.
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * see @href CATIAVertex.
+    *   @param iEndPoint
+    *      End Point<br>
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * see @href CATIAVertex.
+ * @param oConic
+ *   The Conic object if succeded  
+ */ 
+   HRESULT AddNewConic (in      CATIAReference   iSupport,
+                        in      CATIAReference   iStartingPoint,
+                        in      CATIAReference      iEndPoint,
+      out /*IDLRETVAL*/ CATIAHybridShapeConic  oConic);
+
+
+
+ /**
+ * Creates a new Helix within the current body. 
+    *   @param iAxis
+    *      The helix axis (always a line).
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+    *   @param iInvertAxis
+    *   @param iStartingPoint
+    *      Starting Point.
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * see @href CATIAVertex.
+    *   @param iPitch
+    *      Pitch.
+    *   @param iHeight
+    *      Helix height.
+    *   @param iClockwiseRevolution
+    *      Revolutions are clockwise if TRUE, counterclockwise if FALSE.
+    *   @param iStartingAngle
+    *      Starting angle from starting point measured on the helix itself.
+    *      If no starting angle is wanted, set it to 0.0.
+    *   @param iTaperAngle
+    *      0 &lt;= Taper Angle &lt; Pi/2
+    *      If no taper angle is wanted, set it to 0.0 (constant helix radius).
+    *   @param iTaperOutward
+    *      Helix radius increases if TRUE, decreases if FALSE.
+ * @param oHelix
+ *   The Helix object if succeded  
+ */ 
+   HRESULT AddNewHelix (in      CATIAReference   iAxis,
+                        in      boolean     iInvertAxis,
+                        in      CATIAReference   iStartingPoint,
+                        in      double     iPitch,
+                        in      double     iHeight,
+                        in      boolean     iClockwiseRevolution,
+                        in      double     iStartingAngle,
+                        in                double                 iTaperAngle,
+                        in                boolean                iTaperOutward,
+      out /*IDLRETVAL*/ CATIAHybridShapeHelix  oHelix);
+                                        
+
+
+ /**
+ * Creates a new Combine within the current body. 
+ * By default, the combine direction is the normal of each curve. If you want to change
+ * see CATIAHybridShapeCombine interfaces.
+ * @param iFirstCurve
+ *   First curve to combine<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.  
+ * @param iSecondCurve 
+ *   Second curve to combine<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.  
+ * @param iNearestSolution 
+ *   If more than one solution, to choose the nearest solution of the first curve  
+ * @param oCombine
+ *   The combine object if succeded  
+ */ 
+   HRESULT AddNewCombine  (in                CATIAReference              iFirstCurve, 
+                           in                CATIAReference              iSecondCurve, 
+                           in                long       iNearestSolutions, 
+                  out /*IDLRETVAL*/ CATIAHybridShapeCombine  oCombine);
+
+
+ /**
+ * Creates a new Extremum within the current body. 
+ * @param iObjet 
+ *   Element onto extremum is computed<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAFace.
+ * @param iDir 
+ *   Extremum direction
+ * @param iMinMax 
+        *                        Maximum (GSMMax) or Minimum (GSMMin)
+ * @param oExt 
+ *   The extremum object if succeded  
+ */ 
+ HRESULT AddNewExtremum (in CATIAReference        iObjet,
+     in CATIAHybridShapeDirection     iDir,
+     in long                          iMinMax,
+     out /*IDLRETVAL*/ CATIAHybridShapeExtremum    oExt);
+
+ /**
+ * Creates a new Extremum Polar within the current body. 
+ * @param iType 
+ *   Type of extremum polar 0-Min Radius 1-Max Radius 2- Min Angle 3- Maximum Angle
+ * @param ipIAContour 
+ *   Extremum Polar Contour. It should be non convex
+ * @param opIAExtPolar 
+ *   The extremum polar object if succeded  
+ */ 
+ HRESULT AddNewExtremumPolar (in short              iType,
+	 in	CATIAReference				  ipIAContour,
+	 out /*IDLRETVAL*/ CATIAHybridShapeExtremumPolar  opIAExtPolar);
+
+ /**
+ * Creates a new Circle passing through 2 points with a radius within the current body. 
+ * @param iPoint1 
+ *   first passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPoint2 
+ *   second passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport 
+ *   support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iGeodesic 
+ *   Puts the circle on the surface.
+ * @param iRadius 
+ *   Value specified is considered as radius. To use this value as diameter,
+ *   set DiameterMode using SetDiameterMode method
+ * @param iOri 
+ *   circle orientation.
+ *   Defines the side where circle is computed using the normal direction of line between the 2 passing points.
+ * @param oCircle
+ *   The Circle object if succeded  
+ */ 
+ HRESULT AddNewCircle2PointsRad (in CATIAReference iPoint1,
+     in CATIAReference iPoint2,
+     in CATIAReference iSupport,
+     in boolean        iGeodesic,
+     in double         iRadius,
+     in long           iOri,
+     out /*IDLRETVAL*/ CATIAHybridShapeCircle2PointsRad oCircle);
+
+
+ /**
+ * Creates a new a sphere bitangent fillet between two skins.
+ * @param iElement1 
+ *   First support of fillet. 
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace. 
+ * @param iElement2 
+ *   Second support of fillet.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iRadius 
+ *   Radius of the fillet.
+ * @param iOrientation1 
+ *   Manage the fillet center position.
+ * @param iOrientation2 
+ *   Manage the fillet center position. 
+ * @param iSupportsTrimMode 
+ *   The 2 supports can be trimmed and assembled with the fillet.
+ *   Value can be 0 (No trim ) or 1 (Trim)
+ * @param iRibbonRelimitationMode 
+ *   Manage the relimition of fillet extremities.
+ *   Value can be : 0 (Smooth), 1 (Straight), 2 (Maximum) or 3 (Minimum)
+ * @param oFillet
+ *   Created fillet.
+ */ 
+   HRESULT AddNewFilletBiTangent ( in              CATIAReference  iElement1,
+                          in              CATIAReference  iElement2,
+                          in              double          iRadius,
+                          in              long            iOrientation1,
+                          in              long            iOrientation2,
+                          in              long            iSupportsTrimMode,
+						  in              long            iRibbonRelimitationMode,
+						  out /*IDLRETVAL*/ CATIAHybridShapeFilletBiTangent  oFillet);
+
+ /**
+ * Creates a new a tritangent fillet between three skins.
+ * @param iElement1 
+ *   First support of fillet. 
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace. 
+ * @param iElement2 
+ *   Second support of fillet.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iRemoveElem 
+ *   Support to remove of fillet.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iOrientation1 
+ *   Manage the fillet center position.
+ * @param iOrientation2 
+ *   Manage the fillet center position. 
+ * @param iRemoveOrientation 
+ *   Manage the fillet center position. 
+ * @param iSupportsTrimMode 
+ *   The 2 supports can be trimmed and assembled with the fillet.
+ *   Value can be 0 (No trim ) or 1 (Trim)
+ * @param iRibbonRelimitationMode 
+ *   Manage the relimition of fillet extremities.
+ *   Value can be : 0 (Smooth), 1 (Straight), 2 (Maximum) or 3 (Minimum)
+ * @param oFillet
+ *   Created fillet.
+ */ 
+   HRESULT AddNewFilletTriTangent ( in              CATIAReference  iElement1,
+                          in              CATIAReference  iElement2,
+                          in              CATIAReference  iRemoveElem,
+                          in              long            iOrientation1,
+                          in              long            iOrientation2,
+						  in              long            iRemoveOrientation,
+                          in              long            iSupportsTrimMode,
+						  in              long            iRibbonRelimitationMode,
+						  out /*IDLRETVAL*/ CATIAHybridShapeFilletTriTangent  oFillet);
+
+ /**
+ * Creates a new circle passing through 3 points within the current body. 
+ * @param iPoint1 
+ *   first passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPoint2 
+ *   second passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPoint3 
+ *   third passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param oCircle
+ *   Created circle
+ */ 
+ HRESULT AddNewCircle3Points    (in CATIAReference iPoint1,
+     in CATIAReference iPoint2,
+     in CATIAReference iPoint3,
+     out /*IDLRETVAL*/ CATIAHybridShapeCircle3Points oCircle);
+
+ /**
+ * Creates a new circle tangent to 2 curves and passing through one point within the current body. 
+ * @param iCurve1 
+ *   first curve to which the circle will be tangent.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iCurve2 
+ *   second curve to which the circle will be tangent.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iPoint 
+ *   passing point. This point must lie on second curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport 
+ *   support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iOri1 
+ *   first curve orientation for circle computation.
+ * @param iOri2 
+ *   second curve orientation for circle computation.
+ * @param oCircle
+ *   Created circle
+ */ 
+ HRESULT AddNewCircleBitangentPoint (in CATIAReference iCurve1,
+         in CATIAReference iCurve2,
+         in CATIAReference iPoint,
+         in CATIAReference iSupport,
+         in long           iOri1,
+         in long           iOri2,
+            out /*IDLRETVAL*/ CATIAHybridShapeCircleBitangentPoint oCircle);
+ /**
+ * Creates a new circle tangent to 2 curves and with a radius within the current body. 
+ * @param iCurve1 
+ *   first curve to which the circle will be tangent.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iCurve2 
+ *   second curve to which the circle will be tangent.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iSupport 
+ *   support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iRadius 
+ *   Value specified is considered as radius. To use this value as diameter,
+ *   set DiameterMode using SetDiameterMode method
+ * @param iOri1 
+ *   first curve orientation for circle computation.
+ * @param iOri2 
+ *   second curve orientation for circle computation.
+ * @param oCircle
+ *   Created circle
+ */ 
+ HRESULT AddNewCircleBitangentRadius(in CATIAReference iCurve1,
+         in CATIAReference iCurve2,
+         in CATIAReference iSupport,
+         in double         iRadius,
+         in long           iOri1,
+         in long           iOri2,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleBitangentRadius oCircle);
+
+ /**
+ * Creates a new circle defined by its center, a passing point and angles within the current body. 
+ * @param iCenter 
+ *   circle center.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iCrossingPoint 
+ *   passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport 
+ *   support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iGeodesic 
+ *   Puts the circle on the surface.
+ * @param iStartAngle 
+ *   start angle
+ * @param iEndAngle 
+ *   end angle
+ * @param oCircle
+ *   Created circle
+ */ 
+ HRESULT AddNewCircleCtrPtWithAngles (in CATIAReference iCenter,
+         in CATIAReference iCrossingPoint,
+         in CATIAReference iSupport,
+         in boolean        iGeodesic,
+         in double         iStartAngle,
+         in double         iEndAngle,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleCtrPt oCircle);
+
+ /**
+ * Creates a new whole circle defined by its center, a passing point within the current body. 
+ * @param iCenter 
+ *   circle center.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iCrossingPoint 
+ *   passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport 
+ *   support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iGeodesic 
+ *   Puts the circle on the surface.
+ * @param oCircle
+ *   CreatedCircle
+ */ 
+ HRESULT AddNewCircleCtrPt (in CATIAReference iCenter,
+         in CATIAReference iCrossingPoint,
+         in CATIAReference iSupport,
+         in boolean        iGeodesic,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleCtrPt oCircle);
+ /**
+ * Creates a new circle defined by its center, a radius and angles within the current body. 
+ * @param iCenter 
+ *   circle center.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport 
+ *   support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iGeodesic 
+ *   Puts the circle on the surface.
+ * @param iRadius 
+ *   Value specified is considered as radius. To use this value as diameter,
+ *   set DiameterMode using SetDiameterMode method
+ * @param iStartAngle 
+ *   start angle
+ * @param iEndAngle 
+ *   end angle
+ * @param oCircle
+ *   Created circle
+ */ 
+ HRESULT AddNewCircleCtrRadWithAngles (in CATIAReference iCenter,
+         in CATIAReference iSupport,
+         in boolean        iGeodesic,
+         in double         iRadius,
+         in double         iStartAngle,
+         in double         iEndAngle,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleCtrRad oCircle);
+
+ /**
+ * Creates a new whole circle defined by its center and a radius within the current body. 
+ * @param iCenter 
+ *   circle center.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport 
+ *   support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iGeodesic 
+ *   Puts the circle on the surface.
+ * @param iRadius 
+ *   Value specified is considered as radius. To use this value as diameter,
+ *   set DiameterMode using SetDiameterMode method
+ * @param oCircle
+ *   Created circle
+ */ 
+ HRESULT AddNewCircleCtrRad         (in CATIAReference iCenter,
+         in CATIAReference iSupport,
+         in boolean        iGeodesic,
+         in double         iRadius,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleCtrRad oCircle);
+ /**
+ * Creates a new tritangent circle within the current body. 
+ * @param iCurve1 
+ *   first curve to which the circle will be tangent.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iCurve2 
+ *   second curve to which the circle will be tangent.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iCurve3 
+ *   third curve to which the circle will be tangent.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iSupport 
+ *   support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iOri1 
+ *   first curve orientation for circle computation.
+ * @param iOri2 
+ *   second curve orientation for circle computation.
+ * @param iOri3 
+ *   third curve orientation for circle computation.
+ * @param oCircle
+ *   Created circle
+ */ 
+ HRESULT AddNewCircleTritangent     (in CATIAReference iCurve1,
+         in CATIAReference iCurve2,
+         in CATIAReference iCurve3,
+         in CATIAReference iSupport,
+         in long           iOri1,
+         in long           iOri2,
+         in long           iOri3,
+          out /*IDLRETVAL*/ CATIAHybridShapeCircleTritangent oCircle);
+ /**
+ * Creates a new Develop within the current body. 
+  * <br> Note: require either DL1 or GSO license. 
+ * @param iMode 
+ *   Develop method.
+ * @param iToDevelop 
+ *   Wire to be developed.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iSupport 
+ *   Revolution support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param oExt 
+ *   Created developed wire.
+ */ 
+   HRESULT AddNewDevelop (in  long  iMode,
+     in  CATIAReference  iToDevelop,
+     in  CATIAReference  iSupport,
+     out /*IDLRETVAL*/ CATIAHybridShapeDevelop oExt);
+
+ /**
+ * Creates a new Unfold within the current body. 
+  * <br> Note: require DL1 license. 
+ * @param oExt 
+ *   Created unfold operation.
+ */ 
+   HRESULT AddNewUnfold (out /*IDLRETVAL*/ CATIAHybridShapeUnfold oExt);
+
+ /**
+ * Creates a new SweepCircle within the current body. 
+ * @param iGuide1 
+ *   First guide or center curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param oExt 
+ *   Created swept surface.
+ */ 
+   HRESULT AddNewSweepCircle (in  CATIAReference  iGuide1,
+     out /*IDLRETVAL*/ CATIAHybridShapeSweepCircle oExt);
+
+ /**
+ * Creates a new SweepExplicit within the current body. 
+ * @param iProfile 
+ *   Profile.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iGuide 
+ *   First guide curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param oExt 
+ *   Created swept surface.
+ */ 
+   HRESULT AddNewSweepExplicit (in  CATIAReference  iProfile,
+           in  CATIAReference  iGuide, 
+           out /*IDLRETVAL*/ CATIAHybridShapeSweepExplicit oExt);
+ /**
+ * Creates a new SweepLine within the current body. 
+ * @param iGuide1 
+ *   First guide curve.
+ * @param oExt 
+ *   Created swept surface.
+ */ 
+   HRESULT AddNewSweepLine (in  CATIAReference  iGuide1,
+         out /*IDLRETVAL*/ CATIAHybridShapeSweepLine oExt);
+
+ /**
+ * Creates a new PositionTransfo within the current body. 
+ * @param iMode 
+ *   Positioning mode.
+ * @param oExt 
+ *   Created positioning transformation (i.e. positioned wire / profile).
+ */ 
+   HRESULT AddNewPositionTransfo (in  long  iMode,
+     out /*IDLRETVAL*/ CATIAHybridShapePositionTransfo oExt);
+
+ /**
+ * Creates a new Loft within the current body. 
+ * @param oExt 
+ *   CATIAHybridShapeLoft created  
+ */ 
+   HRESULT AddNewLoft (out /*IDLRETVAL*/ CATIAHybridShapeLoft       oExt);
+
+ /**
+ * Creates a new Join within the current body. 
+ * @param iElement1 
+ *   First element to join ( curve or surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.  
+ * @param iElement2 
+ *   Second element to join ( same type of the first element)<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge. 
+ * @param oExt 
+ *   Join result
+ *                       The default value used to join element is 0.001mm  
+ */ 
+   HRESULT AddNewJoin     (in                CATIAReference                Element1, 
+                           in                CATIAReference                Element2, 
+         out /*IDLRETVAL*/ CATIAHybridShapeAssemble       oExt);
+ /**
+ * Creates a new Extract within the current body. 
+ * @param iElement 
+ *   Initial element used to start the extraction<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIABoundary. 
+ * @param oExt 
+ *   The extracted object
+ */ 
+   HRESULT AddNewExtract     (in                CATIAReference                Element, 
+         out /*IDLRETVAL*/ CATIAHybridShapeExtract       oExt);
+
+ /**
+ * Creates a new Multiple Extract within the current body. 
+ * @param iElement 
+ *   Initial element used to start the extraction<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIABoundary. 
+ * @param oExt 
+ *   The extracted object
+ */ 
+   HRESULT AddNewExtractMulti     (in                CATIAReference                Element, 
+         out /*IDLRETVAL*/ CATIAHybridShapeExtractMulti       oExt);
+
+ /**
+ * Creates a new Inverse within the current body. 
+ * @param iElement 
+ *   The objet to inverse
+ * @param iInverse 
+ *   the type of inversion (see CATGSMOrientation.h) 
+ *     1  for no inversion 
+ *    -1  for inversion
+ * @param oInv 
+ *   The inverted object  
+ */ 
+   HRESULT AddNewInverse     (in                CATIAReference                Element, 
+       in                long                 Inverse,          
+         out /*IDLRETVAL*/ CATIAHybridShapeInverse       oInv);
+
+ /**
+ * Creates a new Near within the current body. 
+ * @param iMultiElement 
+ *   Non connex element (point,curve,surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iReferenceElement 
+ *   Reference element<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.  
+ * @param oNear 
+ *   The result is the connex component that is the nearest from the reference element  
+ */ 
+   HRESULT AddNewNear        (in                CATIAReference                MultiElement, 
+                              in                CATIAReference                ReferenceElement, 
+         out /*IDLRETVAL*/ CATIAHybridShapeNear          oNear);
+
+ /**
+ * Creates a new Connect within the current body. 
+ * @param iCurve1 
+ *   First curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.  
+ * @param iPoint1 
+ *   First point (lying on the first curve)<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.  
+ * @param iOrient1 
+ *   Orientation on the first curve  
+ * @param iContinuity1 
+ *   Continuity on first curve  
+ * @param iTension1 
+ *   Tension on first curve    
+ * @param iCurve2 
+ *   Second curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.  
+ * @param iPoint2 
+ *   Second point (lying on the second curve)<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.  
+ * @param iOrient2 
+ *   Orientation on the second curve  
+ * @param iContinuity2 
+ *   Continuity on second curve  
+ * @param iTension2 
+ *   Tension on second curve  
+ * @param iTrim 
+ *   Trim the two curves with the connect  
+ * @param oConnect 
+ *   The connect object   
+ */ 
+   HRESULT AddNewConnect     (in             CATIAReference             iCurve1, 
+                              in             CATIAReference             iPoint1, 
+                              in             long                       iOrient1,
+                              in             long                       iContinuity1,
+                              in             double                     iTension1, 
+                              in             CATIAReference             iCurve2, 
+                              in             CATIAReference             iPoint2,
+                              in             long                       iOrient2,
+                              in             long                       iContinuity2,
+                              in             double                     iTension2, 
+                              in             boolean                    Trim,
+         out /*IDLRETVAL*/ CATIAHybridShapeConnect       oConnect);
+
+ /**
+ * Creates a new CurvePar within the current body. 
+ * @param iCurve 
+ *   Reference curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.  
+ * @param iSupport 
+ *   Support on which the curve is lying on<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.  
+ * @param iDistance 
+ *   Distance value  
+ * @param iInvertDirection 
+ *   Orientation
+ * @param iGeodesic 
+ *   Geodesic mode    
+ * @param oCurvePar 
+ *   Parallel curve  
+ */ 
+   HRESULT AddNewCurvePar    (in                CATIAReference                Curve, 
+                              in                CATIAReference                Support, 
+                              in                double                        Distance,
+							  in                boolean                       InvertDirection,   
+							  in                boolean                       Geodesic,   
+         out /*IDLRETVAL*/ CATIAHybridShapeCurvePar     oCurvePar);
+
+ /**
+ * Creates a new CurveSmooth within the current body. 
+ * @param iCurve 
+ *   Reference curve to be smoothened   
+ * @param oCurveSmooth 
+ *   Smoothened curve  
+ */ 
+   HRESULT AddNewCurveSmooth  (in                CATIAReference   ipIACurve, 
+         out /*IDLRETVAL*/ CATIAHybridShapeCurveSmooth     opIACurveSmooth);
+
+ /**
+ * Creates a new Translate within the current body. 
+ * @param iElement 
+ *   Point, curve, surface or solid to translate. 
+ * @param iDirection 
+ *   Translation direction.
+ * @param iDistance
+ *   Translation Distance. 
+ * @param oTranslate 
+ *   Created translation
+ * @param oTranslate  
+ *   Created Translate (Empty feature)
+ * <br> Note: Then translate mode and inputs has to be initialized
+ * @see CATIAHybridShapeTranslate 
+ */ 
+   HRESULT AddNewTranslate   (in                CATIAReference                iElement, 
+                              in                CATIAHybridShapeDirection     iDirection, 
+                              in                double                        iDistance, 
+         out /*IDLRETVAL*/ CATIAHybridShapeTranslate     oTranslate);
+
+ /**
+ * Creates a new empty Translate within the current body.
+ */
+   HRESULT AddNewEmptyTranslate   (out /*IDLRETVAL*/ CATIAHybridShapeTranslate     oTranslate);
+
+ /**
+ * Creates a new Affinity within the current body. 
+ * @param iElement 
+ *   point, curve, surface or solid.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iXRatio 
+ *   Ratio of affinity in iX direction. 
+ * @param iYRatio 
+ *   Ratio of affinity in iY direction.
+ * @param iZRatio 
+ *   Ratio of affinity in iZ direction.  
+ * @param oAffinity 
+ *   Created affinity
+ */ 
+   HRESULT AddNewAffinity   (in                CATIAReference                iElement, 
+                             in                double                        iXRatio, 
+                             in                double                        iYRatio, 
+                             in                double                        iZRatio, 
+        out /*IDLRETVAL*/ CATIAHybridShapeAffinity      oAffinity);
+
+ /**
+ * Creates a new Split within the current body. 
+ * @param iElement1 
+ *   The feature to cut (curve or surface).
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iElement2 
+ *   The cutting feature (point, curve, surface).
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iOrientation 
+ *   Manage the kept side of the feature to cut (value can be 1 or -1)
+ * @param oSplit 
+ *   Created split
+ */ 
+   HRESULT AddNewHybridSplit   (in              CATIAReference         iElement1, 
+        in              CATIAReference         iElement2, 
+        in              long                   iOrientation, 
+        out /*IDLRETVAL*/ CATIAHybridShapeSplit      oSplit);
+
+ /**
+ * Creates a new Trim within the current body by cutting and joining two elements.
+    * <br>You can trim a surface by a surface or a curve by a curve. 
+ * @param iElement1 
+ *   The feature to trim (curve or surface).
+ * @param iOrientation1 
+ *   Manage the kept side of iElement1  (value can be 1 or -1).
+ * @param iElement2 
+ *   The second feature to trim (curve or surface).
+ * @param iOrientation2 
+ *   Manage the kept side of iElement2  (value can be 1 or -1).
+ * @param oTrim 
+ *   Created trim.
+ */ 
+   HRESULT AddNewHybridTrim   ( in              CATIAReference    iElement1, 
+        in              long                        iOrientation1, 
+        in              CATIAReference              iElement2, 
+        in              long                        iOrientation2, 
+        out /*IDLRETVAL*/ CATIAHybridShapeTrim      oTrim);
+
+/**
+ * Creates a new Project within the current body. 
+ * @param iElement 
+ *   Element to project (point, curve).
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iSupport 
+ *   Curve or surface support for projection.  
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.  
+ * @param oProjection 
+ *   Created projection
+ */ 
+   HRESULT AddNewProject  (in                CATIAReference           iElement, 
+                           in                CATIAReference           iSupport, 
+         out /*IDLRETVAL*/ CATIAHybridShapeProject  oProjection);
+ /**
+ * Creates a new Corner within the current body.
+ * <br> Create a corner curve between a point and a curve or 2 curves on a support surface. 
+ * @param iElement1 
+ *   First reference curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iElement2 
+ *   Second reference curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iSupport 
+ *   Support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iRadius 
+ *   Radius of the corner.
+ * @param iOrientation1 
+ *   Manage the corner center position.
+ *   Value can be 1 or -1 
+ * @param iOrientation2 
+ *   Manage the corner center position.
+ *   Value can be 1 or -1     
+ * @param iTrim 
+ *   Value can be FALSE or TRUE<br>
+ *   if TRUE the 2 curves are trimed and asembled with the corner.
+ * @param oCorner 
+ *   Created corner.
+ */ 
+   HRESULT AddNewCorner  (in              CATIAReference  iElement1, 
+                          in              CATIAReference  iElement2, 
+                          in              CATIAReference  iSupport, 
+                          in              double          iRadius, 
+                          in              long            iOrientation1, 
+                          in              long            iOrientation2, 
+                          in              boolean         iTrim, 
+     out /*IDLRETVAL*/ CATIAHybridShapeCorner  oCorner);
+
+ /**
+ * Creates a new 3D Corner within the current body.
+ * <br> Create a 3D corner curve between a point and a curve or 2 curves along a direction. 
+ * @param iElement1 
+ *   First reference curve.
+ * @param iElement2 
+ *   Second reference curve.
+ * @param iDirection 
+ *   Direction.
+ * @param iRadius 
+ *   Radius of the corner.
+ * @param iOrientation1 
+ *   Manage the corner center position.
+ *   Value can be 1 or -1 
+ * @param iOrientation2 
+ *   Manage the corner center position.
+ *   Value can be 1 or -1     
+ * @param iTrim 
+ *   Value can be FALSE or TRUE<br>
+ *   if TRUE the 2 curves are trimed and asembled with the corner.
+ * @param oCorner 
+ *   Created corner.
+ */ 
+   HRESULT AddNew3DCorner  (in              CATIAReference  iElement1, 
+							in              CATIAReference  iElement2, 
+							in              CATIAHybridShapeDirection  iDirection, 
+							in              double          iRadius, 
+							in              long            iOrientation1, 
+							in              long            iOrientation2, 
+							in              boolean         iTrim, 
+     out /*IDLRETVAL*/ CATIAHybridShapeCorner  oCorner);
+
+ /**
+ * Creates a new Extrapol (until an element) within the current body. 
+ * @param iBoundary 
+ *   Boundary point of curve to extrapolate or boundary curve of surface to extrapolate.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iToExtrapol 
+ *   Curve or surface to extrapolate.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iUntil 
+ *   Extrapolation limit surface.
+ * @param oExtrapol
+ *   Created Extrapolation.
+ */ 
+   HRESULT AddNewExtrapolUntil (in              CATIAReference              iBoundary,
+              in              CATIAReference              iToExtrapol,
+              in              CATIAReference              iUntil,
+        out /*IDLRETVAL*/ CATIAHybridShapeExtrapol  oExtrapol);
+
+ /**
+ * Creates a new Extrapol (specified by length) within the current body. 
+ * @param iBoundary 
+ *   Boundary point of curve to extrapolate or boundary curve of surface to extrapolate.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iToExtrapol 
+ *   Curve or surface to extrapolate.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iLength 
+ *   Extrapolation length.
+ * @param oExtrapol
+ *   Created Extrapolation.
+ */ 
+   HRESULT AddNewExtrapolLength (in              CATIAReference              iBoundary,
+               in              CATIAReference              iToExtrapol,
+               in              double                      iLength,
+         out /*IDLRETVAL*/ CATIAHybridShapeExtrapol  oUntil);
+
+ /**
+ * Creates a new Rotate within the current body. 
+ * @param iToRotate 
+ *   point, curve, surface or solid to transform.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iAxis 
+ *   Rotation axis.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAEdge.
+ * @param iAngle 
+ *   Rotation angle.
+ * @param oRotate
+ *   Created rotation.
+ */ 
+   HRESULT AddNewRotate (in              CATIAReference            iToRotate,
+             in              CATIAReference            iAxis,
+             in              double                    iAngle,
+       out /*IDLRETVAL*/ CATIAHybridShapeRotate  oRotate);
+ /**
+ * Creates a new empty Rotate within the current body.
+ */
+   HRESULT AddNewEmptyRotate   (out /*IDLRETVAL*/ CATIAHybridShapeRotate     oRotate);
+
+ /**
+ * Creates a new Intersection within the current body. 
+ * @param iObject1 
+ *   First element ( line, curve, plane, surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace,  @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge. 
+ * @param iObject2 
+ *   Second element ( line , curve, plane, surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace,  @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param oIntersection 
+ *   Intersection  
+ */ 
+   HRESULT AddNewIntersection  (in              CATIAReference                  iObject1,
+         in              CATIAReference                  iObject2,
+       out /*IDLRETVAL*/ CATIAHybridShapeIntersection  oIntersection);
+
+ /**
+ * Creates a new Symmetry within the current body. 
+ * @param iObject 
+ *   Point, curve, surface or solid to transform.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iReference 
+ *   Point, line or reference plane.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAPlanarFace, @href CATIAEdge and @href CATIAVertex.
+ * @param oSymmetry 
+ *   Created symmetry.
+ */ 
+   HRESULT AddNewSymmetry ( in      CATIAReference            iObject,
+         in      CATIAReference            iReference,
+       out /*IDLRETVAL*/ CATIAHybridShapeSymmetry  oSymmetry);
+
+ /**
+ * Creates a new axis to axis transformation within the current body. 
+ * @param iObject 
+ *   Point, curve, surface or solid to transform.
+ * @param iReferenceAxis
+ *   reference axis system
+ * @param iTargetAxis
+ *   target axis system
+ * @param oAxisToAxis 
+ *   Created axis to axis transformation.
+ */ 
+   HRESULT AddNewAxisToAxis ( in      CATIAReference            iObject,
+         in      CATIAReference            iReferenceAxis,
+         in      CATIAReference            iTargetAxis,
+         out /*IDLRETVAL*/ CATIAHybridShapeAxisToAxis  oAxisToAxis);
+
+ /**
+ * Creates a new datum of point within the current body. 
+ * @param iObject 
+ *   The object whose topological body will be duplicated and put into created datum
+ * @param oPoint 
+ *   Created datum
+ * Note2: the object passed as parameter to create the datum has to be in the current container.
+ * Otherwise, an error occurs.
+*/ 
+   HRESULT AddNewPointDatum   (in CATIAReference   iObject ,
+         out /*IDLRETVAL*/ CATIAHybridShapePointExplicit   oPoint);
+
+ /**
+ * Creates a new datum of line within the current body. 
+ * @param iObject 
+ *   The object whose topological body will be duplicated and put into created datum
+ * @param oLine
+ *   Created datum
+ * Note2: the object passed as parameter to create the datum has to be in the current container.
+ * Otherwise, an error occurs.
+ */ 
+   HRESULT AddNewLineDatum    (in CATIAReference   iObject ,
+         out /*IDLRETVAL*/ CATIAHybridShapeLineExplicit   oLine );
+
+ /**
+ * Creates a new datum of plane within the current body. 
+ * @param iObject 
+ *   The object whose topological body will be duplicated and put into created datum
+ * @param oPlane
+ *   Created datum
+ * Note2: the object passed as parameter to create the datum has to be in the current container.
+ * Otherwise, an error occurs.
+ */ 
+   HRESULT AddNewPlaneDatum   (in CATIAReference   iObject ,
+         out /*IDLRETVAL*/ CATIAHybridShapePlaneExplicit   oPlane );
+
+ /**
+ * Creates a new datum of curve within the current body. 
+ * @param iObject 
+ *   The object whose topological body will be duplicated and put into created datum
+ * @param oCurve
+ *   Created curve
+ * Note2: the object passed as parameter to create the datum has to be in the current container.
+ * Otherwise, an error occurs.
+ */ 
+   HRESULT AddNewCurveDatum   (in CATIAReference   iObject ,
+         out /*IDLRETVAL*/ CATIAHybridShapeCurveExplicit   oCurve );
+
+ /**
+ * Creates a new datum of circle within the current body. 
+ * @param iObject 
+ *   The object whose topological body will be duplicated and put into created datum
+ * @param oCircle
+ *   Created datum
+ * Note2: the object passed as parameter to create the datum has to be in the current container.
+ * Otherwise, an error occurs.
+ */ 
+   HRESULT AddNewCircleDatum   (in CATIAReference   iObject ,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleExplicit   oCircle );
+
+ /**
+ * Creates a new datum of surface within the current body. 
+ * @param iObject 
+ *   The object whose topological body will be duplicated and put into created datum
+ * @param oSurface
+ *   Created surface
+ * Note2: the object passed as parameter to create the datum has to be in the current container.
+ * Otherwise, an error occurs.
+ */ 
+   HRESULT AddNewSurfaceDatum   (in CATIAReference   iObject ,
+         out /*IDLRETVAL*/ CATIAHybridShapeSurfaceExplicit   oSurface );
+
+ /**
+ * Creates a new datum of volume within the current body.
+ * <br> Note: requires GSO License   
+ * @param iObject 
+ *   The object whose topological body will be duplicated and put into created datum
+ * @param oVolume
+ *   Created Volume
+ * Note2: the object passed as parameter to create the datum has to be in the current container.
+ * Otherwise, an error occurs.
+ */ 
+   HRESULT AddNewVolumeDatum   (in CATIAReference   iObject ,
+         out /*IDLRETVAL*/ CATIAHybridShapeVolumeExplicit   oVolume );
+
+ /**
+ * Deletes an object within the current body. 
+ * @param iObject 
+ *   Object to delete
+ */ 
+   HRESULT DeleteObjectForDatum  (in CATIAReference   iObject);
+
+ /**
+ * Creates a new Fill within the current body. 
+ * @param oFill 
+ *   Fill object  
+ */ 
+   HRESULT AddNewFill  (out /*IDLRETVAL*/ CATIAHybridShapeFill      oFill);
+
+ /**
+ * Creates a new Spline within the current body. 
+ * @param oSpline 
+ *   Created spline.
+ */ 
+   HRESULT AddNewSpline (out /*IDLRETVAL*/ CATIAHybridShapeSpline      oSpline);
+
+ /**
+ * Creates a new Spiral within the current body. 
+    *   @param iType 
+    *      Spiral is defined by AngleRadius, AnglePitch or PitchRadius.
+    *   @param iSupport
+    *      Spiral planar support.
+    *   @param iCenterPoint
+    *      Center point.
+    *   @param iAxis
+    *      Axis.
+    *   @param iStartingRadius
+    *      Defines the starting point: distance from the center point on the axis.
+    *   @param iClockwiseRevolution
+    *      Revolutions are clockwise if TRUE, counterclockwise if FALSE.
+ * @param oSpiral
+ *   The Spiral object if succeded  
+ */ 
+   HRESULT AddNewSpiral	(in		long								iType,
+						 in		CATIAReference						iSupport,
+						 in		CATIAReference						iCenterPoint,
+						 in		CATIAHybridShapeDirection			iAxis,
+						 in		double								iStartingRadius,	
+						 in     boolean								iClockwiseRevolution,
+						 out /*IDLRETVAL*/ CATIAHybridShapeSpiral	oSpiral);
+
+
+  /**
+ * Creates a new Boundary within the current body. 
+ * @param iInitialElement 
+ *   the element used to initialise the propagation around the surface <br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIABiDimFeatEdge.
+ * @param iSupport 
+ *   the surface used to compute the boundary around it<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iTypedePropagation
+ *   Propagation type the values are:
+ *     0  for Boundary for all edges
+ *     1  for Boundary propagation for edges on connexe point
+ *     2  for Boundary propagation for edges  tangent at point  breaks
+ *     3  for Boundary not propagation from the current edge
+ * @param oBoundary 
+ *   The computed element
+ */ 
+   HRESULT AddNewBoundary (in CATIAReference iInitialElement,
+      in CATIAReference iSupport,
+      in long iTypedePropagation,
+      out /*IDLRETVAL*/ CATIAHybridShapeBoundary oBoundary);
+
+ /**
+ * Creates a Boundary within the current body. 
+ * @param iSurface 
+ *   the feature on which all the boundaries will be computed  
+ * @param oBoundary 
+ *   the whole boundary of the Surface given in first parameter 
+ */ 
+   HRESULT AddNewBoundaryOfSurface (in CATIAReference Surface,
+      out /*IDLRETVAL*/ CATIAHybridShapeBoundary oBoundary);
+   
+ /**
+ * Creates a new point defined by its cartesian coordinates within the current body. 
+ * @param iX 
+        *                       X coordinate for the point
+ * @param iY 
+        *                       Y coordinate for the point
+ * @param iZ 
+        *                       Z coordinate for the point
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT AddNewPointCoord (in double iX,
+        in double iY,
+        in double iZ,
+        out /*IDLRETVAL*/ CATIAHybridShapePointCoord oPoint);
+
+ /**
+ * Creates a new point defined its the cartesian coordinates regarding a reference point. 
+ * @param iX 
+        *                       X coordinate for the point
+ * @param iY 
+        *                       Y coordinate for the point
+ * @param iZ 
+        *                       Z coordinate for the point
+ * @param iPt
+		*						Reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT AddNewPointCoordWithReference (in double iX,
+        in double iY,
+        in double iZ,
+		in CATIAReference iPt,
+        out /*IDLRETVAL*/ CATIAHybridShapePointCoord oPoint);
+
+ /**
+ * Creates a new PointBetween within the current body. 
+ * @param iPoint1
+ *   Reference point to compute the barycenter.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.  
+ * @param iPoint2
+ *   Second point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.  
+ * @param iRatio 
+ *   barycenter parameter  
+ * @param iOrientation 
+ *   To compute the barycenter of the segment [Pt1 - Pt2]  
+ * @param oPoint 
+ *   PointBetween if succeded  
+ */ 
+   HRESULT   AddNewPointBetween (in CATIAReference iPoint1,
+         in CATIAReference iPoint2,
+         in double     iRatio,
+         in long     iOrientation,
+         out /*IDLRETVAL*/ CATIAHybridShapePointBetween oPoint);
+
+ /**
+ * Creates a new point on a curve with a reference point and from a distance within the current body. 
+ * @param iCrv 
+ *   support curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iPt 
+ *   reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iLong 
+ *   distance (length) to reference point
+ * @param iOrientation 
+ *   Orientation = TRUE means that distance is measured in the other orientation of the curve
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT   AddNewPointOnCurveWithReferenceFromDistance (in CATIAReference iCrv,
+          in CATIAReference iPt,
+          in double iLong,
+          in boolean iOrientation,
+          out /*IDLRETVAL*/ CATIAHybridShapePointOnCurve oPoint);
+
+ /**
+ * Creates a new point on a curve from a distance to an extremity within the current body. 
+ * @param iCrv 
+ *   support curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iLong 
+ *   distance to extremity
+ * @param iOrientation 
+ *   Orientation = TRUE means that distance is measured in the other orientation of
+ *   the curve and from the other extremity.
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT  AddNewPointOnCurveFromDistance (in CATIAReference iCrv,
+          in double iLong,
+          in boolean iOrientation,
+          out /*IDLRETVAL*/ CATIAHybridShapePointOnCurve oPoint);
+
+ /**
+ * Creates a new point on a curve with a reference point and from a ratio of distance within the current body. 
+ * @param iCrv 
+ *   Support curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iPt 
+ *   reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iLong 
+ *   Ratio of curve length
+ * @param iOrientation 
+ *   Orientation = TRUE means that ratio is measured in the other orientation of the curve
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT  AddNewPointOnCurveWithReferenceFromPercent (in CATIAReference iCrv,
+          in CATIAReference iPt,
+          in double iLong,
+          in boolean iOrientation,
+          out /*IDLRETVAL*/ CATIAHybridShapePointOnCurve oPoint);
+		  
+ /**
+ * Creates a new point on a curve from a ratio of distance to an extremity within the current body. 
+ * @param iCrv 
+ *   support curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iLong 
+ *   Ratio of curve length
+ * @param iOrientation 
+ *   Orientation = TRUE means that ratio is measured in the other orientation of
+ *   the curve and from the other extremity.
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT  AddNewPointOnCurveFromPercent (in CATIAReference iCrv,
+          in double iLong,
+          in boolean iOrientation,
+          out /*IDLRETVAL*/ CATIAHybridShapePointOnCurve oPoint);
+
+ /**
+ * Creates a new point on a plane with a reference point within the current body. 
+ * @param iPlane 
+ *   Support plane<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAPlanarFace.
+ * @param iPt 
+ *   Reference plane<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iX
+ *   X cartesian coordinates in the plane.
+ * @param iY 
+ *   Y cartesian coordinates in the plane.
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT AddNewPointOnPlaneWithReference (in CATIAReference iPlane,
+          in CATIAReference iPt,
+          in double iX,
+          in double iY,
+          out /*IDLRETVAL*/ CATIAHybridShapePointOnPlane oPoint);
+
+ /**
+ * Creates a new point on a plane within the current body. 
+ * @param iPlane 
+ *   Support plane <br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAPlanarFace.
+ * @param iX 
+ *   X cartesian coordinates in the plane.
+ * @param iY 
+ *   Y cartesian coordinates in the plane.
+ * @param oPoint 
+ *   Created point
+ */ 
+    HRESULT AddNewPointOnPlane (in CATIAReference iPlane,
+          in double iX,
+          in double iY,
+          out /*IDLRETVAL*/ CATIAHybridShapePointOnPlane oPoint);
+ /**
+ * Creates a new point on a surface with a reference point within the current body. 
+ * @param iSurface 
+ *   Support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iPt 
+ *   reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iDirection 
+ *   Direction from the reference point in which the point is computed.
+ * @param iX 
+ *   geodesic length to reference point
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT AddNewPointOnSurfaceWithReference (in CATIAReference iSurface,
+     in CATIAReference iPt,
+     in CATIAHybridShapeDirection iDirection,
+     in double iX,
+     out /*IDLRETVAL*/ CATIAHybridShapePointOnSurface oPoint);
+
+ /**
+ * Creates a new point on a surface within the current body. 
+ * @param iSurface 
+ *   Support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iDirection 
+ *   Direction from the reference point in which the point is computed.
+ * @param iX 
+ *   geodesic length to reference point
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT AddNewPointOnSurface (in CATIAReference iSurface,
+     in CATIAHybridShapeDirection iDirection,
+     in double iX,
+     out /*IDLRETVAL*/ CATIAHybridShapePointOnSurface oPoint);
+   
+ /**
+ * Creates a new circle center point within the current body. 
+ * @param iCurve 
+ *   Reference circle<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAEdge.
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT AddNewPointCenter (in CATIAReference iCurve,
+         out /*IDLRETVAL*/ CATIAHybridShapePointCenter oPoint);
+
+ /**
+ * Creates a new tangent to curve point within the current body. 
+ * @param iCurve 
+ *   Reference curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAEdge.
+ * @param iDirection 
+ *   Direction in which tangent points are computed
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT AddNewPointTangent (in CATIAReference iCurve,
+          in CATIAHybridShapeDirection iDirection,
+          out /*IDLRETVAL*/ CATIAHybridShapePointTangent oPoint);
+
+ /**
+ * Creates a new point-point line within the current body. 
+ * @param iPtOrigine 
+ *   Origin point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPtExtremite 
+ *   Extremity point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLinePtPt (in CATIAReference iPtOrigine,
+      in CATIAReference iPtExtremite,
+      out /*IDLRETVAL*/ CATIAHybridShapeLinePtPt oLine);
+
+ /**
+ * Creates a new point-point line with support within the current body. 
+ * @param iPtOrigine 
+ *   Origin point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPtExtremite 
+ *   Extremity point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport
+ *   Support element (surface or plane)<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLinePtPtOnSupport (in CATIAReference iPtOrigine,
+      in CATIAReference iPtExtremite,
+      in CATIAReference iSupport,
+      out /*IDLRETVAL*/ CATIAHybridShapeLinePtPt oLine);
+
+ /**
+ * Creates a new point-point line with extensions within the current body. 
+ * @param iPtOrigine 
+ *   Origin point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPtExtremite 
+ *   Extremity point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLinePtPtExtended (in CATIAReference iPtOrigine,
+      in CATIAReference iPtExtremite,
+      in double iBeginOffset,
+      in double iEndOffset,
+      out /*IDLRETVAL*/ CATIAHybridShapeLinePtPt oLine);
+ /**
+ * Creates a new point-point line with extensions and with support within the current body. 
+ * @param iPtOrigine 
+ *   Origin point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPtExtremite 
+ *   Extremity point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport
+ *   Support element (surface or plane)<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLinePtPtOnSupportExtended (in CATIAReference iPtOrigine,
+      in CATIAReference iPtExtremite,
+      in CATIAReference iSupport,
+      in double iBeginOffset,
+      in double iEndOffset,
+      out /*IDLRETVAL*/ CATIAHybridShapeLinePtPt oLine);
+
+ /**
+ * Creates a new point-direction line within the current body. 
+ * @param iPt 
+ *   reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iDirection 
+ *   Direction
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ *    
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLinePtDir (in CATIAReference iPt,
+       in CATIAHybridShapeDirection   iDirection,
+       in double iBeginOffset,
+       in double iEndOffset,
+       in boolean iOrientation, 
+       out /*IDLRETVAL*/ CATIAHybridShapeLinePtDir oLine);
+ /**
+ * Creates a new point-direction line within the current body. 
+ * @param iPt 
+ *   reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iDirection 
+ *   Direction
+ * @param iSupport
+ *   Support element (surface or plane)<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ *    
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLinePtDirOnSupport (in CATIAReference iPt,
+       in CATIAHybridShapeDirection   iDirection,
+	   in CATIAReference iSupport,
+       in double iBeginOffset,
+       in double iEndOffset,
+       in boolean iOrientation, 
+       out /*IDLRETVAL*/ CATIAHybridShapeLinePtDir oLine);
+   
+ /**
+ * Creates a new angle line within the current body. 
+ * @param iCurve 
+ *   Reference curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iSurface 
+ *   Reference surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iPoint 
+ *   reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iGeodesic 
+ *   Puts the line on the surface
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iAngle 
+ *   angle to reference curve
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineAngle (in CATIAReference iCurve,
+       in CATIAReference iSurface,
+       in CATIAReference iPoint,
+       in boolean iGeodesic, 
+       in double iBeginOffset,
+       in double iEndOffset,
+       in double iAngle,
+       in boolean iOrientation, 
+       out /*IDLRETVAL*/ CATIAHybridShapeLineAngle oLine);
+ /**
+ * Creates a new tangent line within the current body. 
+ * @param iCurve 
+ *   Reference curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iPoint 
+ *   Reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ *    
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineTangency (in CATIAReference iCurve,
+          in CATIAReference iPoint,
+          in double iBeginOffset,
+          in double iEndOffset,
+          in boolean iOrientation, 
+          out /*IDLRETVAL*/ CATIAHybridShapeLineTangency oLine);
+
+ /**
+ * Creates a new bitangent line within the current body. 
+ * @param iCurve1 
+ *   First tangency curve lying on the support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iCurve2
+ *   Second tangency element (point, curve) lying on the support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iSupport
+ *   The support surface of the two elements.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineBiTangent (in CATIAReference iCurve1,
+          in CATIAReference iElement2,
+          in CATIAReference iSupport,
+          out /*IDLRETVAL*/ CATIAHybridShapeLineBiTangent oLine);
+
+ /**
+ * Creates a new tangent line within the current body. 
+ * @param iCurve 
+ *   Reference curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iPoint 
+ *   Reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSupport
+ *   Support element (surface or plane)<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineTangencyOnSupport (in CATIAReference iCurve,
+          in CATIAReference iPoint,
+		  in CATIAReference iSupport,
+          in double iBeginOffset,
+          in double iEndOffset,
+          in boolean iOrientation, 
+          out /*IDLRETVAL*/ CATIAHybridShapeLineTangency oLine);
+ /**
+ * Creates a new normal line within the current body. 
+ * @param iSurface 
+ *   Reference surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iPoint 
+ *   Reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineNormal (in CATIAReference iSurface,
+        in CATIAReference iPoint,
+        in double iBeginOffset,
+        in double iEndOffset,
+        in boolean iOrientation, 
+        out /*IDLRETVAL*/ CATIAHybridShapeLineNormal oLine);
+   
+ /**
+ * Creates a new bisecting line within the current body. 
+ * @param iLine1 
+ *   First line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iLine2 
+ *   Second line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineBisecting (in CATIAReference iLine1,
+    in CATIAReference iLine2,
+    in double iBeginOffset,
+    in double iEndOffset,
+    in boolean iOrientation, 
+	in long SolutionNb,
+    out /*IDLRETVAL*/ CATIAHybridShapeLineBisecting oLine);
+
+ /**
+ * Creates a new bisecting line on a support within the current body. 
+ * @param iLine1 
+ *   First line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iLine2 
+ *   Second line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iSurface 
+ *   Reference surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineBisectingOnSupport (in CATIAReference iLine1,
+    in CATIAReference iLine2,
+    in CATIAReference iSurface,
+    in double iBeginOffset,
+    in double iEndOffset,
+    in boolean iOrientation, 
+	in long SolutionNb,
+    out /*IDLRETVAL*/ CATIAHybridShapeLineBisecting oLine);
+
+ /**
+ * Creates a new bisecting line with a starting point within the current body. 
+ * @param iLine1 
+ *   First line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iLine2 
+ *   Second line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iRefPoint 
+ *   Starting point of the bisecting line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineBisectingWithPoint (in CATIAReference iLine1,
+    in CATIAReference iLine2,
+    in CATIAReference iRefPoint,
+    in double iBeginOffset,
+    in double iEndOffset,
+    in boolean iOrientation, 
+	in long SolutionNb,
+    out /*IDLRETVAL*/ CATIAHybridShapeLineBisecting oLine);
+
+ /**
+ * Creates a new bisecting line on a support with a atarting point within the current body. 
+ * @param iLine1 
+ *   First line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iLine2 
+ *   Second line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+ * @param iRefPoint 
+ *   Starting point of the bisecting line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iSurface 
+ *   Reference surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iBeginOffset 
+ *   start offset
+ * @param iEndOffset 
+ *   end offset
+ * @param iOrientation 
+    *   Orientation allows to reverse the line direction from the reference point.
+    *   For a line of L length, it is the same as creating this line with -L length.
+ * @param oLine 
+ *   Created line
+ */ 
+   HRESULT AddNewLineBisectingOnSupportWithPoint (in CATIAReference iLine1,
+    in CATIAReference iLine2,
+    in CATIAReference iRefPoint,
+    in CATIAReference iSurface,
+    in double iBeginOffset,
+    in double iEndOffset,
+    in boolean iOrientation, 
+	in long SolutionNb,
+    out /*IDLRETVAL*/ CATIAHybridShapeLineBisecting oLine);
+
+ /**
+ * Creates a new equation plane within the current body. 
+ *      Plane equation is Ax+By+Cz = D.
+ * @param iA_Coeff 
+ *   A coefficient
+ * @param iB_Coeff 
+ *   B coefficient
+ * @param iC_Coeff 
+ *   C coefficient
+ * @param iD_Coeff 
+ *   D coefficient
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlaneEquation (in double iA_Coeff,
+    in double iB_Coeff,
+    in double iC_Coeff,
+    in double iD_Coeff,
+    out /*IDLRETVAL*/ CATIAHybridShapePlaneEquation oPlane);
+
+ /**
+ * Creates a new plane passing through 3 points within the current body. 
+ * @param iPt1 
+ *   first passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPt2 
+ *   second passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iPt3 
+ *   third passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlane3Points (in CATIAReference iPt1,
+          in CATIAReference iPt2,
+          in CATIAReference iPt3,
+          out /*IDLRETVAL*/ CATIAHybridShapePlane3Points oPlane);
+
+ /**
+ * Creates a new plane passing through 2 lines within the current body. 
+ * @param iLn1 
+ *   first passing line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge and @href CATIARectilinearMonoDimFeatEdge.
+ * @param iLn2 
+ *   second passing line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge and @href CATIARectilinearMonoDimFeatEdge.
+ * @param oPlane 
+ *   Created line
+ */ 
+   HRESULT AddNewPlane2Lines (in CATIAReference iLn1,
+         in CATIAReference iLn2,
+         out /*IDLRETVAL*/ CATIAHybridShapePlane2Lines oPlane);
+
+ /**
+ * Creates a new plane passing through 1 line and 1 point within the current body. 
+ * @param iLn 
+ *   passing line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge and @href CATIARectilinearMonoDimFeatEdge.
+ * @param iPt 
+ *   passing point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlane1Line1Pt (in CATIAReference iLn,
+    in CATIAReference iPt,
+    out /*IDLRETVAL*/ CATIAHybridShapePlane1Line1Pt oPlane);
+
+ /**
+ * Creates a new plane passing through one planar curve within the current body. 
+ * @param iPlanarCurve 
+ *   passing curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlane1Curve (in CATIAReference iPlanarCurve,
+         out /*IDLRETVAL*/ CATIAHybridShapePlane1Curve oPlane);
+
+ /**
+ * Creates a new tangent plane within the current body. 
+ * @param iSurface 
+ *   reference surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iPt 
+ *   reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlaneTangent (in CATIAReference iSurface,
+          in CATIAReference iPt,
+          out /*IDLRETVAL*/ CATIAHybridShapePlaneTangent oPlane);
+
+ /**
+ * Creates a new normal plane within the current body. 
+ * @param iCurve 
+ *   Reference curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iPt 
+ *   Reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlaneNormal (in CATIAReference iCurve,
+         in CATIAReference iPt,
+         out /*IDLRETVAL*/ CATIAHybridShapePlaneNormal oPlane);
+   
+/**
+ * Creates a new offset plane within the current body. 
+ * @param iPlane 
+ *   reference plane<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAPlanarFace.
+ * @param iOffset 
+ *   offset value
+ * @param iOrientation 
+ *   Orientation to reverse the plane from the reference plane. 
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlaneOffset (in CATIAReference iPlane,
+         in double iOffset,
+         in boolean iOrientation,
+         out /*IDLRETVAL*/ CATIAHybridShapePlaneOffset oPlane);
+
+/**
+ * Creates a new offset trough point plane within the current body. 
+ * @param iPlane 
+ *   reference plane<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAPlanarFace.
+ * @param iPt 
+ *   Reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlaneOffsetPt (in CATIAReference iPlane,
+    in CATIAReference iPt,
+    out /*IDLRETVAL*/ CATIAHybridShapePlaneOffsetPt oPlane);
+ 
+/**
+ * Creates a new angle plane within the current body. 
+ * @param iPlane 
+ *   reference plane<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAPlanarFace.
+ * @param iRevolAxis 
+ *   rotation axis<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge and @href CATIARectilinearMonoDimFeatEdge.
+ * @param iAngle 
+ *   angle
+ * @param iOrientation 
+ *   Orientation to reverse the plane from the reference plane.
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlaneAngle (in CATIAReference iPlane,
+        in CATIAReference iRevolAxis,
+        in double iAngle,
+        in boolean iOrientation,
+        out /*IDLRETVAL*/ CATIAHybridShapePlaneAngle oPlane);
+   
+/**
+ * Creates a new  mean through points plane within the current body. 
+ * @param oIListOfPoints 
+ *   list of passing points
+ *   Warning : Input and Output parameter for CATScript applications, procedural type
+ * @param iNbPoint 
+ *   Number of points
+ * @param oPlane 
+ *   Created plane
+ */ 
+   HRESULT AddNewPlaneMean (inout CATSafeArrayVariant iListOfPoints,
+       in    long                NbPoint,
+       out /*IDLRETVAL*/ CATIAHybridShapePlaneMean oPlane);
+ 
+/**
+ * Creates a new extrude within the current body.
+ * @param iObjectToExtrude 
+ *   Object to be extruded (point, line ,curve,or face)<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIABoundary.  
+ * @param iOffsetDebut 
+ *   Length value   
+ * @param iOffsetFin 
+ *   Length value 
+ *                       ( iOffsetFin has to be larger than iOffsetDebut) 
+ * @param iDirection 
+ *   Extrusion direction  
+ * @param oExtrudeObject 
+ *   Extruded result  
+ */ 
+   HRESULT AddNewExtrude (in    CATIAReference  iObjectToExtrude,
+     in    double         iOffsetDebut,
+     in    double         iOffsetFin,
+     in    CATIAHybridShapeDirection    iDirection,
+     out   /*IDLRETVAL*/ CATIAHybridShapeExtrude oExtrudeObject);
+
+
+/**
+ * Creates a new Cylinder within the current body. 
+ * @param iCenter 
+ *   Center of the Cylinder - Can be Point or Vertex.
+ * <br>Sub-element(s) supported (see @href CATIAVertex object): 
+ * @param iRadius 
+ *   Radius of Cylinder.
+ * @param iFirstLength 
+ *   Length of Cylinder in the given direction.
+ * @param iSecondLength 
+ *   Length of Cylinder in the opposite direction.
+ * @param iDirection 
+ *   Direction of extrusion for Cylinder.
+ * @param oCylinderObject
+ *   Created CylinderObjct.
+ */ 
+   
+   HRESULT AddNewCylinder ( in    CATIAReference  iCenter,
+                            in    double         iRadius,
+                            in    double         iFirstLength,
+                            in    double         iSecondLength,
+                            in    CATIAHybridShapeDirection    iDirection,
+                            out   /*IDLRETVAL*/ CATIAHybridShapeCylinder oCylinderObject);
+
+/**
+ * Creates a new revolution within the current body. 
+ * @param iObjectToExtrude 
+ *   Profile to be revolved<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.  
+ * @param iOffsetDebut 
+ *   Angle value  
+ * @param iOffsetFin 
+ *   Angle value  
+ * @param iAxis 
+ *   Revolution axis ( line that has to be in the profil plane<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge and @href CATIARectilinearMonoDimFeatEdge.
+ * @param oRevolObject 
+ *   Revolved result  
+ */ 
+   HRESULT AddNewRevol   (in CATIAReference  iObjectToExtrude,
+     in double          iOffsetDebut,
+     in double          iOffsetFin,
+     in CATIAReference  iAxis,
+     out /*IDLRETVAL*/ CATIAHybridShapeRevol oRevolObject);
+   
+/**
+ * Creates a new direction specified by an element within the current body. 
+ * @param iElement
+ *   Line or plane specifying the direction.
+ *                        In case of plane, the plane normal vector is the direction<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge and @href CATIARectilinearMonoDimFeatEdge.
+ * @param oDirection 
+ *   Created direction.
+ */ 
+   HRESULT AddNewDirection (in CATIAReference iElement,
+       out /*IDLRETVAL*/ CATIAHybridShapeDirection oDirection);
+
+/**
+ * Creates a new Direction specifed by coordinates within the current body. 
+ * @param iX 
+ *   X component
+ * @param iY 
+ *   Y component
+ * @param iZ 
+ *   Z component
+ * @param oDirection 
+ *   Created direction
+ */ 
+   HRESULT AddNewDirectionByCoord (in double iX,
+       in double iY,
+       in double iZ,
+       out /*IDLRETVAL*/ CATIAHybridShapeDirection oDirection);   
+
+/**
+ * Creates a new offset within the current body. 
+ * @param iObjectToOffset 
+ *   Surface to offset.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.  
+ * @param iOffset 
+ *   Offset value  
+ * @param iOrientation 
+ *   Offset orientation
+ * @param iPrecision 
+ *   This variable is no longer in use and any change in it's value does not impact the output.
+ * @param oOffsetObject 
+ *   Offset Surface 
+ */ 
+   HRESULT AddNewOffset (in CATIAReference iObjectToOffset,
+    in double iOffset,
+    in boolean iOrientation,
+    in double iPrecision,
+    out /*IDLRETVAL*/ CATIAHybridShapeOffset oOffsetObject);
+
+/**
+ * Creates a new scaling within the current body. 
+ * @param iElemToScale 
+ *   Point, curve, surface or solid to transform.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace, @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge and @href CATIAVertex.
+ * @param iCenter 
+ *   Reference point or reference plane.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAPlanarFace and @href CATIAVertex.
+ * @param iRatio 
+ *   Scaling ratio.
+ * @param oScaling 
+ *   Created scaling.
+ */ 
+   HRESULT AddNewHybridScaling (in CATIAReference iElemToScale,
+                          in CATIAReference iCenter,
+                          in double   iRatio,
+        out /*IDLRETVAL*/ CATIAHybridShapeScaling  oScaling);
+
+
+/**
+ * Creates a new healing within the current body. 
+ * @param iBodyToHeal 
+ *   The body to heal  
+ * @param oHealing 
+ *   The created healing  
+ */ 
+
+   HRESULT AddNewHealing     (in             CATIAReference             iBodyToheal, 
+//                              in             CATIAReference             iFixElements,
+//                              in             double                     iMergeTol, 
+//                              in             long                       iCanonicFree,
+//                              in             long                       iContinuity,
+//                              in             double                     iDevUserG0, 
+//                              in             double                     iDevUserG1, 
+//                              in             double                     iDevUserG2, 
+         out /*IDLRETVAL*/ CATIAHybridShapeHealing       oHealing);
+
+ /**
+ * @nodoc 
+ * Creates a new RollingOffset within the current body. 
+ * @param iCurve 
+ *   Reference curve  
+ * @param iSupport 
+ *   Support on which the curve is lying on  
+ * @param iDistance 
+ *   Distance value  
+ * @param oRollingOffset 
+ *   Rolling Offset curve  
+ */ 
+   HRESULT AddNewRollingOffset(out /*IDLRETVAL*/ CATIAHybridShapeRollingOffset     oRollingOffset);
+
+ /**
+ * @deprecated  V5R17 CATIAHybridShapeFactory#AddNewReflectLineWithType
+ * Creates a new ReflectLine within the current body.
+ * <br> Create a reflectline curve on a support surface along a direction with an angle. 
+ * @param iSupport 
+ *   Support surface.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAFace.
+ * @param iAngle 
+ *   Angle of the reflectline.
+ * @param iOrientationSupport 
+ *   Manage the angle used to compute the reflectline.
+ *   Value can be 1 or -1 
+ * @param iOrientationDirection 
+ *   Manage the angle used to compute the reflectline.
+ *   Value can be 1 or -1     
+ * @param oReflectLine 
+ *   Created reflectline.
+ */ 
+   HRESULT AddNewReflectLine  (in              CATIAReference             iSupport, 
+                               in              CATIAHybridShapeDirection  iDir,
+                               in              double                     iAngle, 
+                               in              long                       iOrientationSupport, 
+                               in              long                       iOrientationDirection, 
+                               out /*IDLRETVAL*/ CATIAHybridShapeReflectLine  oReflectLine);
+
+ /**
+ * Creates a new ReflectLine within the current body.
+ * <br> Create a reflectline curve on a support surface along a direction with an angle. 
+ * @param iSupport 
+ *   Support surface.
+ * @param iAngle 
+ *   Angle of the reflectline.
+ * @param iOrientationSupport 
+ *   Manage the angle used to compute the reflectline.
+ *   Value can be 1 or -1 
+ * @param iOrientationDirection 
+ *   Manage the angle used to compute the reflectline.
+ *   Value can be 1 or -1     
+ * @param iType 
+ *   Manage the type used to compute the reflectline.
+ *   Value can be 0 or 1
+ *   Returns or sets whether the reflectline curve is or should be created with the normal
+ *   to the support or the tangent plane to the support.
+ *   <br><b>Role</b>: The TypeSolution indicates whether the created reflectline curve
+ *   is compute with the angle between the normale to the support and the direction 
+ *   or with the angle between the tangent plane to the support and the direction..
+ *   <br><b>Legal values</b>: 0 for the normal and 1 for the tangent plane.
+ * @param oReflectLine 
+ *   Created reflectline.
+ */ 
+   HRESULT AddNewReflectLineWithType  (in              CATIAReference             iSupport, 
+                               in              CATIAHybridShapeDirection  iDir,
+                               in              double                     iAngle, 
+                               in              long                       iOrientationSupport, 
+                               in              long                       iOrientationDirection, 
+                               in              long                       iType, 
+                               out /*IDLRETVAL*/ CATIAHybridShapeReflectLine  oReflectLine);
+
+ /**
+ * Creates a new conical ReflectLine within the current body.
+ * <br> Create a conical reflectline curve on a support surface from an origin point with an angle. 
+ * @param iSupport 
+ *   Support surface.
+ * @param iOrigin 
+ *   Origin point.
+ * @param iAngle 
+ *   Angle of the reflectline.
+ * @param iOrientationSupport 
+ *   Manage the angle used to compute the reflectline.
+ *   Value can be 1 or -1 
+ * @param iType 
+ *   Manage the type used to compute the reflectline.
+ *   Value can be 0 or 1
+ *   Returns or sets whether the reflectline curve is or should be created with the normal
+ *   to the support or the tangent plane to the support.
+ *   <br><b>Role</b>: The TypeSolution indicates whether the created reflectline curve
+ *   is compute with the angle between the normale to the support and the direction 
+ *   or with the angle between the tangent plane to the support and the direction..
+ *   <br><b>Legal values</b>: 0 for the normal and 1 for the tangent plane.
+ * @param oReflectLine 
+ *   Created conical reflectline.
+ */ 
+  HRESULT AddNewConicalReflectLineWithType  (in              CATIAReference             iSupport, 
+                               in              CATIAReference             iOrigin,
+                               in              double                     iAngle, 
+                               in              long                       iOrientationSupport, 
+                               in              long                       iType, 
+                               out /*IDLRETVAL*/ CATIAHybridShapeReflectLine  oReflectLine);
+
+ /**
+ * Creates a new Sphere within the current body. 
+ * @param iCenter 
+ *   Sphere center.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.  
+ * @param iAxis 
+ *   Sphere axis
+ * @param iRadius 
+ *   Radius
+ * @param iBeginParallelAngle 
+ *   Angle value  
+ * @param iEndParallelAngle 
+ *   Angle value  
+ * @param iBeginMeridianAngle 
+ *   Angle value  
+ * @param iEndMeridianAngle 
+ *   Angle value  
+ * @param oSphereObject 
+ *   Sphere result  
+ */ 
+   HRESULT AddNewSphere	   (in CATIAReference  iCenter,
+							in CATIAReference  iAxis,
+							in double          iRadius,
+							in double          iBeginParallelAngle,
+							in double          iEndParallelAngle,
+							in double          iBeginMeridianAngle,
+							in double          iEndMeridianAngle,
+							out /*IDLRETVAL*/ CATIAHybridShapeSphere oSphereObject);
+
+/**
+ * Creates a new Bump within the current body. 
+ * <br> Note: require GSO license.
+ * @param: iBodyToBump 
+ *   Body to deform witn a Bump  
+ * @param: oBump 
+ *   Bump result  
+ */ 
+
+   HRESULT AddNewBump  (in CATIAReference          iBodyToBump, 
+        out /*IDLRETVAL*/ CATIAHybridShapeBump     oBump);
+
+/**
+ * Creates a new Wrap Curve Surface within the current body.
+  * <br> Note: require GSO license.  
+ * @param oWrapCurve
+ *   The Wrap Curve object if succeded  
+ */ 
+   HRESULT AddNewWrapCurve (out /*IDLRETVAL*/ CATIAHybridShapeWrapCurve oWrapCurve);
+
+
+/**
+ * Creates a new Wrap Surface within the current body. 
+  * <br> Note: require GSO license. 
+ * @param: iBodyToDeform 
+ *   Body to deform with a  Wrap Surface
+ * @param oWrapSurface
+ *   The Wrap Surface object if succeded  
+ */ 
+   HRESULT AddNewWrapSurface (in CATIAReference    iBodyToDeform,
+   out /*IDLRETVAL*/ CATIAHybridShapeWrapSurface oWrapSurface);
+
+/**
+ * Creates a new Polyline within the current body. 
+ * @param oPolyline
+ *   The Polyline object if succeded  
+ */ 
+   HRESULT AddNewPolyline (out /*IDLRETVAL*/ CATIAHybridShapePolyline  oPolyline);
+
+
+ /**
+ * Creates a new SweepConic within the current body. 
+ * @param iGuide1 
+ *   First guide curve.
+ * @param opIASweepConic 
+ *   Created swept surface.
+ */ 
+   HRESULT AddNewSweepConic (in  CATIAReference  ipIAGuide1,
+     out /*IDLRETVAL*/ CATIAHybridShapeSweepConic opIASweepConic);
+
+/**
+ * Creates a new circle with given center element and tangent curve. 
+ * @param iCenterElem 
+ *   Can be either curve or point.
+ * @param iTangentCurve 
+ *   Curve to which the circle will be tangent.
+ * @param iSupport 
+ *   support surface or plane.
+ * @param iRadius 
+ *   circle radius, valid only if center element is curve. Value specified is considered as radius. 
+ *   To use this value as diameter, set DiameterMode using SetDiameterMode method
+ * @param oCircle
+ *   Created circle
+ */ 
+ 
+ HRESULT AddNewCircleCenterTangent(in CATIAReference iCenterElem,
+         in CATIAReference iTangentCurve,
+         in CATIAReference iSupport,
+         in double         iRadius,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleCenterTangent oCircle);
+
+/**
+ * Creates a circle from point and axis. 
+ * @param iAxis
+ *   Axis of plane in which circle is lying
+ * @param iPoint 
+ *   Point used for center computation. It will be the center if ProjectionMode
+ *   is False. If ProjectionMode = True, this point will be projected on to axis/line
+ * @param iValue 
+ *   Value specified is considered as radius. To use this value as diameter,
+ *   set DiameterMode property
+ * @param iProjection 
+ *   Sets Projection Mode. ProjectionMode = TRUE implies point will be projected on to axis/line,
+ *   ProjectionMode = FALSE implies that point will be center of the circle. 
+ * @param oCircle
+ *   Created circle
+ */ 
+ 
+ HRESULT AddNewCircleCenterAxis(in CATIAReference iAxis,
+         in CATIAReference iPoint,
+		 in double         iValue,
+		 in boolean        iProjection,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleCenterAxis oCircle);
+
+/**
+ * Creates a circle from point and axis. 
+ * @param iAxis
+ *   Axis of plane in which circle is lying
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @param iPoint 
+ *   Point used for center computation. It will be the center if ProjectionMode
+ *   is False. If ProjectionMode = True, this point will be projected on to axis/line
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @param iValue 
+ *   Value specified is considered as radius. To use this value as diameter,
+ *   set DiameterMode property
+ * @param iProjection 
+ *   Sets Projection Mode. ProjectionMode = TRUE implies point will be projected on to axis/line,
+ *   ProjectionMode = FALSE implies that point will be center of the circle. 
+ * @param iStartAngle 
+ *   start angle
+ * @param iEndAngle 
+ *   end angle
+ * @param oCircle
+ *   Created circle
+ */ 
+ 
+ HRESULT AddNewCircleCenterAxisWithAngles (in CATIAReference iAxis,
+         in CATIAReference iPoint,
+         in double         iValue,
+		 in boolean        iProjection,
+         in double         iStartAngle,
+         in double         iEndAngle,
+         out /*IDLRETVAL*/ CATIAHybridShapeCircleCenterAxis oCircle);
+
+// ===========================================================================
+// 3D Curve Offset 
+// ===========================================================================
+/**
+ * Creates a 3D Curve Offset.
+ *   @param iCurve
+ *      The curve to offset
+ *   @param iDirection
+ *      Offset pulling direction.
+ *   @param iOffsetValue
+ *      Offset Value.
+ *   @param iCornerRadius
+ *      Radius of the 3D corners.
+ *   @param iCornerTension
+ *      Tension of the 3D corners.
+ *   @return CATIGSM3DCurveOffset_var
+ *      created 3DCurveOffset.
+ */
+ HRESULT AddNew3DCurveOffset(	in CATIAReference			iCurveToOffset,
+								in CATIAHybridShapeDirection iDirection,
+								in double iOffset,
+								in double iCornerRadius,
+								in double iCornerTension,
+						        out /*IDLRETVAL*/ CATIAHybridShape3DCurveOffset o3DCurveOffset);
+
+
+ // ===========================================================================
+ //  Sectionning 
+ // ===========================================================================
+ 
+/**
+ *  Creates a new section.  
+ *  @param oSection 
+ *    Created Section 
+ *
+ */
+ HRESULT AddNewSection(out /*IDLRETVAL*/ CATIAHybridShapeSection oSection);
+
+ // ===========================================================================
+ //  Integrated Law 
+ // ===========================================================================
+/** 
+ * Creates Integrated Law. 
+ *   @param iType
+ *       Type of law = 0 : None
+ *	                 = 1 : Constant
+ *                   = 2 : Linear
+ *                   = 3 : SType
+ *                   = 4 : Advanced
+ *                   = 5 : Implicit
+ @   @param oLaw
+ @       Integrated law
+ */
+ HRESULT AddNewIntegratedLaw(in long iType,out /*IDLRETVAL*/ CATIAHybridShapeIntegratedLaw oLaw);
+
+ // ===========================================================================
+ //  Datums 
+ // ===========================================================================
+ /**
+ * Creates datums from a multi-domain result feature, one datum is created by object domain. 
+ * <br> Note; Available only for a shape design feature as input ( not for datum feature ).    
+ * @param iElem 
+ *  Reference element 
+ * @param oArrayOfDatum 
+ *  List of datum objects , one datum is created per omain 
+ * <br> Level of availability = V5R14 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example converts a hybrid shape object in as much as datums that the original 
+ * hybrid shape features contains of domain 
+ * <pre>
+ *  Dim HShape 
+ *  Set reference   = part.CreateReferenceFromObject(hybridShapeObject)
+ *  ' Convert to Datums 
+ *  HShape = hybridShapeFactory.<font color="red">AddNewDatums</font> reference  
+ *  Num =UBound(HShape)
+ *  For i = 0 to Num  
+ *        hybridBody1.AppendHybridShape HShape (i) 
+ *  Next 
+ *  part.InWorkObject = HShape(num) 
+ *  part.Update 
+ *  ' Delete original feature 
+ *  hybridShapeFactory.DeleteObjectForDatum reference
+ * </pre> 
+ */
+ HRESULT AddNewDatums(in CATIAReference       iElem, 
+       	                            out /*IDLRETVAL*/    CATSafeArrayVariant oArrayOfDatum ) ;
+
+ /**
+ * Returns type of "geometrical" shape Design feature . 
+ * @param iElem 
+ *  Reference element  
+ * @param oType  
+ *   Type of feature 
+ *   = 0 , Unknown 
+ *   = 1 , Point 
+ *   = 2 , Curve 
+ *   = 3 , Line 
+ *   = 4 , Circle 
+ *   = 5 , Surface 
+ *   = 6 , Plane 
+ *   = 7 , Solid, Volume 
+ * <br> Level of availability = V5R14 
+ */
+ HRESULT GetGeometricalFeatureType   ( in CATIAReference   iElem, 	out /*IDLRETVAL*/ short  oType );  		
+ 
+ // ===========================================================================
+ //  Shape Design Automation Tools 
+ // ===========================================================================
+
+/**
+ * Set Visibility attribut for Shape Design Features.
+ *   @param iElem 
+ *      Element to show/NoShow 
+ *   @param Show 
+ *      = 0 NoShow , 1= Show
+ */
+ HRESULT GSMVisibility (in CATIAReference       iElem, in long  Show);
+
+/**
+ * Set display name for Shape Design Features. 
+ *   @param iElem 
+ *      Element to rename 
+ *   @param Name 
+ *      User name  
+ */
+ HRESULT ChangeFeatureName	(in CATIAReference       iElem, in CATBSTR Name);
+
+/**
+ * Creates a new Transfer within the current body. 
+  * <br> Note: require DL1 license.
+ * @param iElementToTransfer
+ *	The element to transfer
+ * @param iTypeOfTransfer
+ *	The type of transfer
+ * @param oExt 
+ *   Created Transfer operation.
+ */ 
+ HRESULT AddNewTransfer (in CATIAReference			iElementToTransfer,
+							in  long  iTypeOfTransfer,
+							out /*IDLRETVAL*/ CATIAHybridShapeTransfer oExt);
+
+ // ===========================================================================
+ // Do not use internal DS Only
+ // ===========================================================================
+
+ /**
+ * @nodoc 
+ */
+ HRESULT GSMGetObjectFromReference (in CATIAReference       iElem, out /*IDLRETVAL*/ CATIAHybridShape oObjet);
+
+ /**
+ * @nodoc 
+ */
+ HRESULT DuplicateGSMSpec (in CATIAReference       iRef,
+         out /*IDLRETVAL*/ CATIAHybridShape  oDupSpec);
+
+ /**
+ * @nodoc 
+ */
+ HRESULT SetReferenceElemForMultiple (in CATIAReference       iSpec,
+           in CATIAReference       iNewRef);
+
+/**
+ * Creates a new point on a curve with a reference point and from a distance along direction. 
+ * @param iCrv 
+ *   support curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iPt 
+ *   reference point.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIAVertex.
+ * @param iLong 
+ *   distance (length) to reference point
+ * @param iOrientation 
+ *   Orientation = TRUE means that distance is measured in the other orientation of the curve
+ * @param iDirection 
+ *   Direction = The distance at which point is created is measured in this direction.
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT  AddNewPointOnCurveWithReferenceAlongDirection(in CATIAReference iCrv,
+					in CATIAReference iPt,
+					in double iLong,
+					in boolean iOrientation,
+					in CATIAHybridShapeDirection iDirection,
+					out /*IDLRETVAL*/ CATIAHybridShapePointOnCurve oPoint);
+ /**
+ * Creates a new point on a curve with a deafult origin point and from a distance along direction. 
+ * @param iCrv 
+ *   support curve.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+ * @param iLong 
+ *   distance to default origin point.(origin of acurrent axis system)
+ * @param iOrientation 
+ *   Orientation = TRUE means that distance is measured in the other orientation of
+ *   the curve.
+  * @param iDirection 
+ *   Direction = The distance at which point is created is measured in this direction.
+ * @param oPoint 
+ *   Created point
+ */ 
+   HRESULT  AddNewPointOnCurveAlongDirection (in CATIAReference iCrv,
+          in double iLong,
+          in boolean iOrientation,
+					in CATIAHybridShapeDirection iDirection,
+					out /*IDLRETVAL*/ CATIAHybridShapePointOnCurve oPoint);
+
+   /**
+   * Creates a new MidSurface in Automatic Creation Mode Only. 
+   * @param iSupport 
+   *   support Body
+   * @param iCreationMode 
+   *   Creation Mode (Only Automatic Accepted)
+   * @param iThreshold 
+   *   Threshold Thickness
+   * @return oMidSurface 
+   *   Created MidSurface
+   */ 
+
+   HRESULT AddNewMidSurface (in CATIAReference iSupport,
+	   in long iCreationMode,
+	   in double iThreshold,
+	   out /*IDLRETVAL*/ CATIAHybridShapeMidSurface oMidSurface);
+
+   /**
+   * Creates a new MidSurface in Automatic Creation Mode Only. 
+   * @param iSupport 
+   *   support Body
+   * @param iCreationMode 
+   *   Creation Mode (Only Automatic Accepted)
+   * @param iThreshold 
+   *   Threshold Thickness
+   * @param iAutoThicknessThreshold
+   *  Automatic Thickness Threshold
+   * @return oMidSurface 
+   *   Created MidSurface
+   */ 
+
+   HRESULT AddNewMidSurfaceWithAutoThreshold (in CATIAReference iSupport,
+	   in long iCreationMode,
+	   in double iThreshold,
+	   in long iAutoThicknessThreshold,
+	   out /*IDLRETVAL*/ CATIAHybridShapeMidSurface oMidSurface);
+
+};
+
+// Interface Name : CATIAHybridShapeFactory
+#pragma ID CATIAHybridShapeFactory "DCE:8964041b-bb8a-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeFactory
+
+// VB Object Name : HybridShape Factory
+#pragma ID HybridShapeFactory "DCE:89640420-b107-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeFactory HybridShapeFactory
+
+
+#endif
+// CATIAHybridShape Factory_IDL

@@ -1,0 +1,116 @@
+// COPYRIGHT Dassault Systemes 2002
+#ifndef CATIADrawingPictures_IDL
+#define CATIADrawingPictures_IDL
+/*IDLREP*/
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIADrawingPicture;
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+/**  
+  * A collection of all the drawing pictures currently managed by a
+  * drawing view of drawing sheet in a drawing document.
+  */
+interface CATIADrawingPictures : CATIACollection 
+{
+ /**
+  * Inserts a drawing picture in the drawing view and adds it to the DrawingPictures collection.
+  * @param iDrawingPicturePath
+  *   The path of the picture file (ex : "C:\tmp\ball.bmp") .
+  * @param iPositionX,iPositionY
+  *   The drawing picture x and y coordinates, expressed in millimeters,
+  *   with respect to the drawing view coordinate system
+  * @return The inserted drawing picture
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example inserts a drawing picture from a given picture file path 
+  * The <tt>MyView</tt> is the active view in the active drawing sheet
+  * <pre>
+  * Dim MySheet As DrawingSheet
+  * Set MySheet = CATIA.ActiveDocument.Sheets.ActiveSheet
+  * Dim MyView As DrawingView
+  * Set MyView = MySheet.Views.<font color="red">ActiveView</font>
+  * Dim MyDrawingPicture1 As DrawingPicture
+  * Set MyDrawingPicture1 = MyView.Pictures.<font color="red">Add</font>("C:\tmp\ball.bmp", 100., 50.)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Add(in CATBSTR iDrawingPicturePath, in double iPositionX, in double iPositionY,
+              out /*IDLRETVAL*/ CATIADrawingPicture oNewDrawingPictureInst);
+
+
+ /**
+  * Removes a drawing picture from the DrawingPictures collection.
+  * @param iIndex
+  *   The index of the drawing picture to remove from
+  *   the collection of drawing pictures.
+  *   As a numerics, this index is the rank of the drawing picture
+  *   in the collection.
+  *   The index of the first drawing picture in the collection is 1, and
+  *   the index of the last drawing picture is Count.
+  *   As a string, it is the name you assigned to the drawing picture using
+  *   the @href CATIABase#Name property 
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing picture 
+  * in the drawing pictures collection of the active view
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * MyView.Pictures.<font color="red">Remove</font>(3)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Remove(in CATVariant iIndex);
+
+/**
+  * Returns a drawing picture using its index or its name from the DrawingPictures collection.
+  * @param iIndex
+  *   The index or the name of the drawing picture to retrieve from the collection of 
+  *   drawing pictures.
+  *   As a numerics, this index is the rank of the drawing picture in the collection.
+  *   The index of the first drawing picture in the collection is 1, and
+  *   the index of the last drawing picture is Count.
+  *   As a string, it is the name you assigned to the drawing picture using
+  *   the @href CATIABase#Name property 
+  * @return The retrieved drawing picture
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisDrawingPicture</tt> the second drawing picture,
+  * <tt>MyView</tt> in the drawing view collection of the active sheet
+  * in the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MySheet As DrawingSheet
+  * Set MySheet = CATIA.ActiveDocument.Sheets.ActiveSheet
+  * Dim MyView  As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * Dim ThisDrawingPicture As DrawingPicture
+  * Set ThisDrawingPicture = MyView.Pictures.<font color="red">Item</font>(2)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIADrawingPicture oItem);
+};
+
+// Interface name : CATIADrawingPictures
+#pragma ID CATIADrawingPictures "DCE:5c8b4046-098f-11d6-a3c400d0b7ac5749"
+#pragma DUAL CATIADrawingPictures
+
+// VB object name : DrawingPictures (Id used in Visual Basic)
+#pragma ID DrawingPictures "DCE:5c8b4047-098f-11d6-a3c400d0b7ac5749"
+#pragma ALIAS CATIADrawingPictures DrawingPictures
+
+#endif

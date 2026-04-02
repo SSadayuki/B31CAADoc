@@ -1,0 +1,33 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+CATIAApplicationFrameUUID \
+InfInterfacesUUID \
+SystemUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+INCLUDED_MODULES = CD0AUTOSTART
+ 
+LINK_WITH=$(LINK_WITH_FOR_IID)   SystemUUID JS0GROUP CATPrint CATPrt JS0FM JS0INF CATSysTS \
+            DI0PANV2 CD0FRAME InfItf NS0SI18N ObjectModeler \
+            OM0EDPRO AD0XXBAS CATAfrMail CATAutoItf AutomationInterfacesUUID CATIAApplicationFrameUUID CATBatchUtils
+
+OS = intel_a
+
+OS = win_a
+
+OS = AIX
+SYS_LIBS=-lXm -lXt -lX11
+
+OS = HP-UX
+
+OS = IRIX
+SYS_LIBS=-lXm -lXt -lX11
+
+OS = SunOS
+
+

@@ -1,0 +1,353 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>Visualization CATIVisu Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../Visualization.htm" href="../Visualization.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "Visualization";	}
+		function getCurrentObjectName() { 
+ 	return "CATIVisu"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>Visualization Framework:  CATIVisu Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIVisu_15033','CATIVisu','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you cannot implement this base interface directly. You must first derive it and then implement the derived interface. </b></p>
+<hr/>
+<p>
+ interface <b>CATIVisu</b>
+</p>
+<p>
+<b><i>  Basic class of any visualization interface used to make objects visualized.</i></b><br>
+
+ <b>Role</b>: This is the basic class that any visualization interface has to C++ 
+ derive from. 
+ <br>Components that implement any specialized <tt>CATIVisu</tt> interface 
+ are able to be visualized and  highlighted. 
+ <br><br>All visualization mecanisms are controlled by the <script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script>.  <br><br><b>How to create the specialized interface:</b>
+ <br> The new interface is named IMyNewVisu. 
+ <ul>
+ <li>The new interface must C++ derives from <tt>CATIVisu</tt> </li>
+ <br>Extract from IMyNewVisu.h
+ <pre>
+    .....
+    class  IMyNewVisu : public <b>CATIVisu</b>
+    {
+      CATDeclareInterface;
+      public: 
+         ....
+    } ; 
+
+ </pre>
+ <li>The new interface must OM-derives from 
+<script type="text/javascript"> activateLinkAnchor('CATBaseUnknown','','CATBaseUnknown') </script> </li> <br>Extract from IMyNewVisu.cpp
+ <pre>
+    CATImplementInterface(IMyNewVisu, <b>CATBaseUnknown</b>);
+ </pre>
+ </ul>
+ This allows you to make a given component implement several visualization 
+ interfaces.
+ <br><br><b>Caution:</b>A specialized interface must never derive from an another one. The  interface must always 
+ derive from <tt>CATIVisu</tt>. In particular, do not derive from 
+<script type="text/javascript"> activateLinkAnchor('CATI3DGeoVisu','','CATI3DGeoVisu') </script> or  
+<script type="text/javascript"> activateLinkAnchor('CATI2DGeoVisu','','CATI2DGeoVisu') </script> to create a 3D ou 2D visualization interface. <br><br>To implement the specialized interface used the 
+<script type="text/javascript"> activateLinkAnchor('CATExtIVisu','','CATExtIVisu') </script> adapter.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#BuildHighlightLook(CATPathElement&amp;,CATRepPath&amp;)"><b>BuildHighlightLook</b></a>(CATPathElement&amp;,CATRepPath&amp;)
+</td><td id='tdright'>  Adds the graphical representation of one visualization extension into the output path of graphical representations.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BuildRep()"><b>BuildRep</b></a>()
+</td><td id='tdright'>  Builds the graphical representation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#BuildRepPath(CATPathElement&amp;,CATRepPath&amp;)"><b>BuildRepPath</b></a>(CATPathElement&amp;,CATRepPath&amp;)
+</td><td id='tdright'>  Adds the graphical representation of one visualization extension into the output path of graphical representations.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#DecodeGraphic(CATPickPath&amp;,CATPathElement&amp;)"><b>DecodeGraphic</b></a>(CATPickPath&amp;,CATPathElement&amp;)
+</td><td id='tdright'>  Adds the component of the current visualization extension into the output path of components.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GiveRep()"><b>GiveRep</b></a>()
+</td><td id='tdright'>  Returns the pointer of the graphical representation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsHighlightValid(CATPathElement&amp;)"><b>IsHighlightValid</b></a>(CATPathElement&amp;)
+</td><td id='tdright'>  Tests if the elements of a CATPathElement are valid for highlight.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsRepUpToDate()"><b>IsRepUpToDate</b></a>()
+</td><td id='tdright'>  Tests whether or not the graphical representation of the current component is uptodate.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ModifyRep(CATNotification&amp;)"><b>ModifyRep</b></a>(CATNotification&amp;)
+</td><td id='tdright'>  Processes visualization notifications.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRepNotUpToDate()"><b>SetRepNotUpToDate</b></a>()
+</td><td id='tdright'>  Sets the graphical representation of this component to an not uptodate state.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#UnreferenceRep()"><b>UnreferenceRep</b></a>()
+</td><td id='tdright'>  Makes visualization extension not point to their graphical representation anymore and conversely.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="BuildHighlightLook"></a><a id="BuildHighlightLook(CATPathElement&amp;,CATRepPath&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>BuildHighlightLook</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPathElement','CATPathElement&amp;')</script> <span class='param'>iPathElt</span>,<script type="text/javascript"> activateLink('CATRepPath','CATRepPath&amp;')</script> <span class='param'>ioPathRep</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds the graphical representation of one visualization extension into the output path of graphical representations.
+ <br><b>Role</b>:
+ The same as 
+<script type="text/javascript"> activateLinkAnchor('','BuildRepPath','BuildRepPath') </script> but it is for (pre)highlight purposes only. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPathElt</span></dt>
+   <dd>  path of components from which the current component is extracted.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioPathRep</span></dt>
+   <dd> output path of graphical representations to fill in.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   an HRESULT value.
+ <br><b>Legal values</b>:
+ <ul>
+ <li>S_OK if the operation succeeds </li>
+ <li>E_FAIL otherwise </li>.
+ </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BuildRep"></a><a id="BuildRep()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATRep','CATRep *')</script>  <span class='objname'>BuildRep</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Builds the graphical representation.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   A pointer to the graphical representation of one extension of any visualization interface.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="BuildRepPath"></a><a id="BuildRepPath(CATPathElement&amp;,CATRepPath&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>BuildRepPath</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPathElement','CATPathElement&amp;')</script> <span class='param'>iPathElt</span>,<script type="text/javascript"> activateLink('CATRepPath','CATRepPath&amp;')</script> <span class='param'>ioPathRep</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds the graphical representation of one visualization extension into the output path of graphical representations.
+ <br><b>Role</b>:
+ This method is part of the usual mechanism of generating a path of graphical representations from a path of
+ components. And this mechanism is managed by the 
+<script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script>.  
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPathElt</span></dt>
+   <dd> path of components from which the current component is extracted.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioPathRep</span></dt>
+   <dd> output path of graphical representations to fill in.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   an HRESULT value.
+ <br><b>Legal values</b>:
+ <ul>
+ <li>S_OK if the operation succeeds </li>
+ <li>E_FAIL otherwise </li>
+ </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="DecodeGraphic"></a><a id="DecodeGraphic(CATPickPath&amp;,CATPathElement&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>DecodeGraphic</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATPickPath','CATPickPath&amp;')</script> <span class='param'>iPickPath</span>,<script type="text/javascript"> activateLink('CATPathElement','CATPathElement&amp;')</script> <span class='param'>ioPathElt</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds the component of the current visualization extension into the output path of components.
+ <br><b>Role</b>:
+ This method is part of the usual mechanism of generating a path of components from a path of graphical
+ representations. And this mechanism is managed by the 
+<script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script>.  
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPickPath</span></dt>
+   <dd> input path of graphical representations from which the graphical representation of the current extension is extracted.
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioPathElt</span></dt>
+   <dd> output path of components to fill in.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   an HRESULT value.
+ <br><b>Legal values</b>:
+ <ul>
+ <li>S_OK if the operation succeeds </li>
+ <li>E_FAIL otherwise </li>.
+ </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GiveRep"></a><a id="GiveRep()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATRep','CATRep *')</script>  <span class='objname'>GiveRep</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the pointer of the graphical representation.
+ <br><b>Role</b>: With this method you get the graphic representation for this interface. But in most
+ case to get it you must use the 
+<script type="text/javascript"> activateLinkAnchor('CATVisManager','GenerateRepPathFromPathElement','CATVisManager.GenerateRepPathFromPathElement') </script>.
+</dd>
+<dt class='dtmethod' >
+  <a id="IsHighlightValid"></a><a id="IsHighlightValid(CATPathElement&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>IsHighlightValid</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATPathElement','CATPathElement&amp;')</script> <span class='param'>iPathElt</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests if the elements of a CATPathElement are valid for highlight.
+ <br><b>Role</b>: in the default implementation, calls recursively the method IsHighlightValid
+ on the elements of the CATPathElement that implement CATIVisu.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPathElt</span></dt>
+   <dd> input path of components from which the current component is extracted.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   an HRESULT value.
+ <br><b>Legal values</b>:
+ <ul>
+ <li>S_OK if the component is to be highlighted </li>
+ <li>E_FAIL otherwise </li>.
+ </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsRepUpToDate"></a><a id="IsRepUpToDate()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsRepUpToDate</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether or not the graphical representation of the current component is uptodate.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>   <ol>
+ <li>1 if the graphical representation of the component is uptodate</li>
+ <li>0 if the graphical representation of the component is not uptodate</li>
+ </ol>
+
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ModifyRep"></a><a id="ModifyRep(CATNotification&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>ModifyRep</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATNotification','CATNotification&amp;')</script> <span class='param'>iInfo</span>)</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Processes visualization notifications.
+ <br><b>Role</b>: 
+ It is the usual method called by the 
+<script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script> for processing  all types of visu notifications concerning 
+ any graphical change of one component. Such visu notifications have to derive from 
+<script type="text/javascript"> activateLinkAnchor('CATModify','','CATModify') </script>.  For instance
+ when the color of one component is changed, a visualization event 
+<script type="text/javascript"> activateLinkAnchor('CATModifyVisProperties','','CATModifyVisProperties') </script> is  sent, then received by the 
+ 
+<script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script> and finally processed by any visualization extension of the component through  the <tt>ModifyRep</tt> method. 
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iInfo</span></dt>
+   <dd> the input visu event deriving from 
+<script type="text/javascript"> activateLinkAnchor('CATModify','','CATModify') </script> 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  status of processing:
+ <ul>
+ <li> 0 when the input visu event has not been processed </li>
+ <li> 1 when the input visu event has been procesed </li>
+ </ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRepNotUpToDate"></a><a id="SetRepNotUpToDate()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRepNotUpToDate</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the graphical representation of this component to an not uptodate state.
+
+</dd>
+<dt class='dtmethod' >
+  <a id="UnreferenceRep"></a><a id="UnreferenceRep()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>UnreferenceRep</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Makes visualization extension not point to their graphical representation anymore and conversely.
+ <br><b>Role</b>:
+ When one graphical representation is deleted, the 
+<script type="text/javascript"> activateLinkAnchor('CATVisManager','','CATVisManager') </script> provides a mechanism which ensures to find the component and the visualization interface to which the deleting graphical representation is linked. This operation
+ can be done thanks to the model identifier enclosed into the graphical representation.
+ Then it is possible to update the corresponding visualization extension: this is typically where   
+ the 
+<script type="text/javascript"> activateLinkAnchor('','UnreferenceRep','UnreferenceRep') </script> method is useful.
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIVisu.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATVisualization</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

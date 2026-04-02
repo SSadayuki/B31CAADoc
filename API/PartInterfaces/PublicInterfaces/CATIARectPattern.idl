@@ -1,0 +1,381 @@
+#ifndef CATIARectRectPattern_IDL
+#define CATIARectPattern_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIARectPattern:                           
+// Exposed interface for rectPattern
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Dec97 Modification					  L Lalere
+//=================================================================
+#include "CATIAPattern.idl"
+#include "CATSafeArray.idl"
+#include "CATPatternDefs.idl"
+
+interface CATIAReference;
+interface CATIAIntParam;
+interface CATIALinearRepartition;
+
+/**
+ * Represents the rectangular pattern.
+ * The shape is copied along two directions.
+ * Two linear repartitions control the shape copy.
+ * @see CATIALinearRepartition
+ */
+
+//-----------------------------------------------------------------
+interface CATIARectPattern : CATIAPattern
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON FIRST DIRECTION ROW
+    //    ----------------------
+    //
+   /**
+    * Returns the position of the shape to be copied along the
+    * first linear direction.
+    * <! @sample > 
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>FirstDirPos</tt> the 
+    * position of the shape to be copied along the
+    * first linear direction
+    * in the rectangular pattern <tt>firstPattern</tt>:
+    * <pre>
+    * Set FirstDirPos = firstPattern.<font color="red">FirstDirectionRow</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY FirstDirectionRow
+    HRESULT get_FirstDirectionRow ( out /*IDLRETVAL*/ CATIAIntParam oFirstRow );
+
+    //    ON SECOND DIRECTION ROW
+    //    -----------------------
+    //
+   /**
+    * Returns the position of the shape to be copied along the
+    * second linear direction.
+    * <! @sample > 
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>SecondDirPos</tt> the 
+    * position of the shape to be copied along the
+    * second linear direction
+    * in the rectangular pattern <tt>firstPattern</tt>:
+    * <pre>
+    * Set SecondDirPos = firstPattern.<font color="red">SecondDirectionRow</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY SecondDirectionRow
+    HRESULT get_SecondDirectionRow ( out /*IDLRETVAL*/ CATIAIntParam oSecondRow );
+
+    //
+    //    ON ORIENTATION FOR FIRST DIRECTION
+    //    ----------------------------------
+    //
+   /**
+    * Returns or sets whether the pattern is built towards
+    * the first direction orientation.
+    * <br>
+    * <b>True</b> if the pattern is built towards
+    * the first direction orientation.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>aligned1</tt> whether the
+    * rectangular pattern <tt>firstPattern</tt> is built towards the
+    * first direction orientation, and then sets its to <tt>True</tt>:
+    * <pre>
+    * Set aligned1 = firstPattern.<font color="red">FirstOrientation</font>
+    * firstPattern.<font color="red">FirstOrientation</font> = True
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY FirstOrientation
+    HRESULT get_FirstOrientation ( out /*IDLRETVAL*/ boolean oIsAligned );
+    HRESULT put_FirstOrientation ( in boolean iIsAligned );
+
+    //
+    //    ON ORIENTATION FOR SECOND DIRECTION 
+    //    -----------------------------------
+    //
+   /**
+    * Returns or sets whether the pattern is built towards
+    * the second direction orientation.
+    * <br>
+    * <b>True</b> if the pattern is built towards
+    * the second direction orientation.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>aligned2</tt> whether the
+    * rectangular pattern <tt>firstPattern</tt> is built towards the
+    * second direction orientation, and then sets its to <tt>False</tt>,
+    * meaning the pattern is built in the opposite direction:
+    * <pre>
+    * Set aligned2 = firstPattern.<font color="red">SecondOrientation</font>
+    * firstPattern.<font color="red">SecondOrientation</font> = False
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY SecondOrientation
+    HRESULT get_SecondOrientation ( out /*IDLRETVAL*/ boolean oIsAligned );
+    HRESULT put_SecondOrientation ( in boolean iIsAligned );
+
+    //
+    //    ON FIRST DIRECTION REPARTITION
+    //    ------------------------------
+    //
+   /**
+    * Returns the linear repartition along the first direction.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>repart1</tt>
+    * the first linear repartition of the
+    * rectangular pattern <tt>firstPattern</tt>:
+    * <pre>
+    * Set repart1 = firstPattern.<font color="red">FirstDirectionRepartition</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY FirstDirectionRepartition
+    HRESULT get_FirstDirectionRepartition ( out /*IDLRETVAL*/ CATIALinearRepartition oOnFirstDirection );
+
+    //
+    //    ON SECOND DIRECTION REPARTITION
+    //    -------------------------------
+    //
+    /**
+    * Returns the linear repartition along the second direction.
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>repart2</tt>
+    * the second linear repartition of the
+    * rectangular pattern <tt>firstPattern</tt>:
+    * <pre>
+    * Set repart2 = firstPattern.<font color="red">SecondDirectionRepartition</font>
+    * </pre>
+    * </dl>
+    */
+#pragma PROPERTY SecondDirectionRepartition
+    HRESULT get_SecondDirectionRepartition ( out /*IDLRETVAL*/ CATIALinearRepartition oOnSecondDirection ) ;
+
+	
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+
+    //
+    //    ON FIRST DIRECTION
+    //    ------------------
+    //
+//
+   /**
+    * Returns the first repartition direction.
+    * The first repartition direction is returned as an array containing
+    * the direction vector components.
+    * Assume this array is <tt>o1stDirRep</tt>. It contains: 
+    * <dl>
+    * <dt><tt>o1stDirRep[0],o1stDirRep[1],o1stDirRep[2]</tt>
+    * <dd>The X, Y, and Z direction vector components
+    * </dl>
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>FirstDir</tt>
+    * the first repartition direction vector
+    * components of the rectangular pattern <tt>firstPattern</tt>
+    * and saves them in variables:
+    * <pre>
+    * Dim FirstDir()
+    * Call firstPattern.<font color="red">GetFirstDirection</font>(FirstDir)
+    * x = FirstDir(0)
+    * y = FirstDir(1)
+    * z = FirstDir(2)
+    * </pre>
+    * </dl>
+    */
+    HRESULT GetFirstDirection ( inout CATSafeArrayVariant ioFirstDirection );
+
+   /**
+    * Sets the first repartition direction.
+    * @param iFirstDirection
+    *   The first repartition direction.
+    *   It is passed as a @href CATIAReference and can be valuated
+    *   with a reference to a line or an edge.<br>
+    * The following @href CATIABoundary objects are supported: 
+    * @href CATIAPlanarFace, @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the first repartition direction
+    * of the rectangular pattern
+    * <tt>firstPattern</tt> with the <tt>refToLine1</tt> reference :
+    * <pre>
+    * firstPattern.<font color="red">SetFirstDirection</font> refToLine1
+    * </pre>
+    * </dl>
+    */
+    HRESULT SetFirstDirection ( in CATIAReference iFirstDirection );
+
+    //
+    //    ON SECOND DIRECTION
+    //    -------------------
+    //
+//
+   /**
+    * Returns the second repartition direction.
+    * The second repartition direction is returned as an array containing
+    * the direction vector components.
+    * Assume this array is <tt>o2ndDirRep</tt>. It contains: 
+    * <dl>
+    * <dt><tt>o2ndDirRep[0],o2ndDirRep[1],o2ndDirRep[2]</tt>
+    * <dd>The X, Y, and Z direction vector components
+    * </dl>
+    * <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>SecondDir</tt>
+    * the second repartition direction vector
+    * components of the rectangular pattern <tt>firstPattern</tt>
+    * and saves them in variables:
+    * <pre>
+    * Call firstPattern.<font color="red">GetSecondDirection</font>(SecondDir)
+    * x = SecondDir[0]
+    * y = SecondDir[1]
+    * z = SecondDir[2]
+    * </pre>
+    * </dl>
+    */
+    HRESULT GetSecondDirection ( inout CATSafeArrayVariant ioSecondDirection );
+
+   /**
+    * Sets the second repartition direction.
+    * @param iSecondDirection
+    *   The second repartition direction.
+    *   It is passed as a @href CATIAReference and can be valuated
+    *   with a reference to a line or an edge.<br>
+    * The following @href CATIABoundary objects are supported: 
+    * @href CATIAPlanarFace, @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the second repartition direction
+    * of the rectangular pattern
+    * <tt>firstPattern</tt> with the <tt>refToLine2</tt> reference :
+    * <pre>
+    * firstPattern.<font color="red">SetSecondDirection</font> refToLine2
+    * </pre>
+    * </dl>
+    */
+    HRESULT SetSecondDirection ( in CATIAReference iSecondDirection );
+
+	/**
+    * Sets the InstanceSpacing.
+    * @param iInstanceNumber
+    *   The Instance Number
+	* @param iSpacing
+    *   The Spacing 
+	* @param iDirection
+    *   The Instance direction
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example sets the InstanceSpacing in a direction for unequal spacing
+    *</pre>
+    * </dl>
+    */
+	HRESULT SetInstanceSpacing(in long iInstanceNumber, in double iSpacing, in long iDirection);
+
+	/**
+    * Sets the Instance Number.
+    * @param iInstanceNumber
+    *   The Instance Number
+	* @param iDirection
+    *   The Instance direction
+    * <! @sample >
+    * </dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example modifies the instance number for unequal spacing
+    *</pre>
+    * </dl>
+    */
+	HRESULT SetUnequalInstanceNumber(in long iInstanceNumber, in long iDirection);	 
+
+	//
+    //    ON Rectangular PATTERN PARAMETERS
+    //    ------------------------------
+    //
+    /**
+     * Returns or sets the rectangular pattern parameters required to define the pattern.
+     * These parameters are used when reading the CATIALinearRepartition properties.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>parameters</tt> the rectangular pattern parameters
+     * of the <tt>firstPattern</tt> rectangular pattern,
+     * and then sets it to <tt>catUnequalSpacing</tt>,
+     * so that the unqual spacing will be defined in first direction:
+     * <pre>
+     * Set parameters = firstPattern.<font color="red">FirstCircularPatternParameters</font>
+     * Set firstPattern.<font color="red">FirstCircularPatternParameters</font> = catUnequalSpacing
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FirstRectangularPatternParameters
+    HRESULT    get_FirstRectangularPatternParameters ( out /*IDLRETVAL*/ CatRectangularPatternParameters oParameters ) ;
+    HRESULT    put_FirstRectangularPatternParameters ( in                CatRectangularPatternParameters iParameters ) ;
+
+	/**
+     * Returns or sets the rectangular pattern parameters required to define the pattern.
+     * These parameters are used when reading the CATIALinearRepartition properties.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>parameters</tt> the rectangular pattern parameters
+     * of the <tt>secondPattern</tt> rectangular pattern,
+     * and then sets it to <tt>catUnequalSpacing</tt>,
+     * so that the unqual spacing will be defined in second direction:
+     * <pre>
+     * Set parameters = secondPattern.<font color="red">SecondCircularPatternParameters</font>
+     * Set secondPattern.<font color="red">SecondCircularPatternParameters</font> = catUnequalSpacing
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY SecondRectangularPatternParameters
+    HRESULT    get_SecondRectangularPatternParameters ( out /*IDLRETVAL*/ CatRectangularPatternParameters oParameters ) ;
+    HRESULT    put_SecondRectangularPatternParameters ( in                CatRectangularPatternParameters iParameters ) ;
+
+};
+
+// Interface name : CATIARectPattern
+#pragma ID CATIARectPattern "DCE:322f5870-669c-11d1-a27f0000f87546fd"
+#pragma DUAL CATIARectPattern
+
+// VB object name : RectPattern (Id used in Visual Basic)
+#pragma ID RectPattern "DCE:324d25d5-669c-11d1-a27f0000f87546fd"
+#pragma ALIAS CATIARectPattern RectPattern
+
+
+#endif
+// CATIARectPattern_IDL
+

@@ -1,0 +1,539 @@
+#ifndef CATIAHybridShapeSweepCircle_IDL
+#define CATIAHybridShapeSweepCircle_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeSweepCircle:         
+// Exposed interface for HybridShape SweepCircle
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sept 99 : Creation   
+//=================================================================
+
+#include "CATIAHybridShapeSweep.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+
+/**
+* Represents the hybrid shape sweep circle feature object.
+* <b>Role</b>: To access the data of the hybrid shape sweep circle feature object.
+* <p>  LICENSING INFORMATION: Creation of volume result requires GSO License
+* <br> if GSO License is not granted , settting of Volume context has not effect 
+* <br> 
+* @see CATIAHybridShapeFactory
+*/
+interface CATIAHybridShapeSweepCircle : CATIAHybridShapeSweep
+{
+
+  /**
+  * Returns or sets the sweep operation first guide curve.
+  */ 
+#pragma PROPERTY FirstGuideCrv
+  HRESULT get_FirstGuideCrv(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_FirstGuideCrv(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the sweep operation second guide curve.
+  */ 
+#pragma PROPERTY SecondGuideCrv
+  HRESULT get_SecondGuideCrv(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_SecondGuideCrv(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the sweep operation third guide curve.
+  */ 
+#pragma PROPERTY ThirdGuideCrv
+  HRESULT get_ThirdGuideCrv(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_ThirdGuideCrv(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the sweep operation spine (optional).
+  */ 
+#pragma PROPERTY Spine
+  HRESULT get_Spine(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_Spine(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the circular sweep mode.
+  * <br>Legal mode values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined circular profile swept surface (CATGSMCircularSweep_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Circular profile swept surface defined by three guide curves (4 solutions)
+  *       (CATGSMCircularSweep_ThreeGuides)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>Circular profile swept surface defined by a center curve and a reference curve (for angles and radius)
+  *       (CATGSMCircularSweep_TwoGuidesAndRadius)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">5</td>
+  *   <td>Circular profile swept surface defined by a center curve and a reference curve (for angles and radius)
+  *       (CATGSMCircularSweep_CenterAndAngleCurve)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">6</td>
+  *   <td>Circular profile swept surface defined by a center curve and a radius
+  *       (CATGSMCircularSweep_CenterAndRadius)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">7</td>
+  *   <td>Circular profile swept surface defined by two guide curves with a tangency
+  *     condition on the second one (with reference surface)
+  *       (CATGSMCircularSweep_TwoGuidesAndTangency)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">8</td>
+  *   <td>Circular profile swept surface defined by a guide curve, a radius and a tangency surface
+  *       (CATGSMCircularSweep_GuideAndTangencyAndRadius)</td>
+  * </tr>
+  *  </table>
+  */ 
+#pragma PROPERTY Mode
+  HRESULT get_Mode(out /*IDLRETVAL*/ long Elem);
+  HRESULT put_Mode(in long Elem);
+
+  /**
+  * Returns or sets the choice number, which corresponds to each solution
+  * of a given circular sweep case.
+  * <br>For example: a circular sweep with two guide curves and a radius leads
+  * to four possible solutions.
+  */
+#pragma PROPERTY ChoiceNo  
+  HRESULT get_ChoiceNo(out /*IDLRETVAL*/ long Elem);
+  HRESULT put_ChoiceNo(in long Elem);
+
+  /**
+  * Returns or sets the reference (functional curve or guide surface).
+  */
+#pragma PROPERTY Reference
+  HRESULT get_Reference(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_Reference(in CATIAReference Elem);
+
+  /**
+  * Returns the angle values useful in some circular sweep types.
+  * @param iI 
+  *   The angle value index
+  * @return 
+  *   The angle value
+  */ 
+  HRESULT GetAngle(in long iI, out /*IDLRETVAL*/ CATIAAngle oElem);
+
+  /**
+  * Sets the angle values useful in some circular sweep types.
+  * @param iI 
+  *   The angle value index
+  * @param iElem 
+  *   The angle value
+  */ 
+  HRESULT SetAngle(in long iI, in double iElem);
+
+
+  /**
+  * Returns or sets the first angle law useful in some circular sweep types.
+  */
+#pragma PROPERTY FirstAngleLaw
+  HRESULT get_FirstAngleLaw(out /*IDLRETVAL*/ CATIAReference oElem);
+  HRESULT put_FirstAngleLaw(in CATIAReference iElem);
+
+  /**
+  * Retrieves the first angle law useful in some circular sweep types.
+  * @param oElem1
+  *   The angle law start value
+  * @param oElem2
+  *   The angle law end value
+  * @param olLawType
+  *   The angle law type
+  */
+  HRESULT GetFirstAngleLaw(out CATIAAngle oElem1, out CATIAAngle oElem2, out long olLawType);
+
+  /**
+  * Sets the first angle law useful in some circular sweep types.
+  * @param iElem1
+  *   The angle law start value
+  * @param iElem2
+  *   The angle law end value
+  * @param ilLawType
+  *   The angle law type
+  */
+  HRESULT SetFirstAngleLaw(in double iElem1, in double iElem2, in long ilLawType);
+
+  /**
+  * Returns or sets the first angle law inversion information.
+  */
+#pragma PROPERTY FirstAngleLawInversion
+  HRESULT get_FirstAngleLawInversion(out /*IDLRETVAL*/ long oElem);
+  HRESULT put_FirstAngleLawInversion(in long iElem);
+
+  /**
+  * Returns or sets the second angle law useful in some circular sweep types.
+  */
+#pragma PROPERTY SecondAngleLaw
+  HRESULT get_SecondAngleLaw(out /*IDLRETVAL*/ CATIAReference oElem);
+  HRESULT put_SecondAngleLaw(in CATIAReference iElem);
+
+  /**
+  * Retrieves the second angle law useful in some circular sweep types.
+  * @param oElem1
+  *   The angle law start value
+  * @param oElem2
+  *   The angle law end value
+  * @param olLawType
+  *   The angle law type
+  */
+  HRESULT GetSecondAngleLaw(out CATIAAngle oElem1, out CATIAAngle oElem2, out long olLawType);
+  /**
+  * Sets the second angle law useful in some circular sweep types.
+  * @param iElem1
+  *   The angle law start value
+  * @param iElem2
+  *   The angle law end value
+  * @param ilLawType
+  *   Tha angle law type
+  */
+  HRESULT SetSecondAngleLaw(in double iElem1, in double iElem2, in long ilLawType);
+
+  /**
+  * Returns or sets the second angle law inversion information.
+  */
+#pragma PROPERTY SecondAngleLawInversion
+  HRESULT get_SecondAngleLawInversion(out /*IDLRETVAL*/ long oElem);
+  HRESULT put_SecondAngleLawInversion(in long iElem);
+
+  /**
+  * Returns the radius value useful in some circular sweep types.
+  * @param iI 
+  *   The radius value index (1: start value, 2: end value)
+  * @return
+  *   The radius value
+  */ 
+  HRESULT GetRadius(in long iI, out /*IDLRETVAL*/ CATIALength oRadius);
+
+  /**
+  * Sets the radius value useful in some circular sweep types.
+  * @param iI 
+  *   The radius value index (1: start value, 2: end value)
+  * @param iRadius
+  *   The radius value
+  */ 
+  HRESULT SetRadius(in long iI, in double iRadius);
+
+  /**
+  * Returns or sets the radius law type.
+  */
+#pragma PROPERTY RadiusLawType
+  HRESULT get_RadiusLawType(out /*IDLRETVAL*/ long oElem);
+  HRESULT put_RadiusLawType(in long iElem);
+
+  /**
+  * Returns or sets the radius law inversion information.
+  */
+#pragma PROPERTY RadiusLawInversion
+  HRESULT get_RadiusLawInversion(out /*IDLRETVAL*/ long oElem);
+  HRESULT put_RadiusLawInversion(in long iElem);
+
+  /**
+  * Returns or sets the radius law feature.
+  */
+#pragma PROPERTY RadiusLaw
+  HRESULT get_RadiusLaw(out /*IDLRETVAL*/ CATIAReference oElem);
+  HRESULT put_RadiusLaw(in CATIAReference iElem);
+
+  /**
+  * Returns or sets the trim option status.
+  * <br>The trim option status legal values are:
+  * <table>
+  *  <tr> <td>0</td>  <td>No trim computed or undefined (CATGSMSweepTrimMode_None)</td> </tr>
+  *  <tr> <td>1</td>  <td>Trim computed (CATGSMSweepTrimMode_On)</td> </tr>
+  * </table>
+  */
+#pragma PROPERTY TrimOption  
+  HRESULT get_TrimOption(out /*IDLRETVAL*/ long Elem);
+  HRESULT put_TrimOption(in long Elem);
+
+  // =============
+  // PROPERTIES
+  // =============
+
+  /**
+  * Returns or sets information whether a sweeping operation is smoothed or not.
+  * <br>TRUE if the sweeping operation is smoothed, or FALSE otherwise (FALSE if not specified).
+  */ 
+#pragma PROPERTY SmoothActivity
+  HRESULT get_SmoothActivity(out /*IDLRETVAL*/ boolean  oSmooth);
+  HRESULT put_SmoothActivity(in boolean iSmooth);
+
+  /**
+  * Returns the angular threshold.
+  */ 
+#pragma PROPERTY SmoothAngleThreshold
+  HRESULT get_SmoothAngleThreshold(out /*IDLRETVAL*/ CATIAAngle  opIAAngle);
+
+  /**
+  * Returns or sets information whether a deviation from guide curves is allowed or not.
+  * <br>Gives the information on performing smoothing during sweeping operation.
+  * <br>TRUE if a deviation from guide curves is allowed, or FALSE otherwise (FALSE if not specified).
+  */
+#pragma PROPERTY GuideDeviationActivity
+  HRESULT get_GuideDeviationActivity(out /*IDLRETVAL*/ boolean  oActivity);
+  HRESULT put_GuideDeviationActivity(in boolean iActivity);
+
+  /**
+  * Returns the deviation value (length) from guide curves allowed during a sweeping operation in order to smooth it.
+  */ 
+#pragma PROPERTY GuideDeviation
+  HRESULT get_GuideDeviation(out /*IDLRETVAL*/ CATIALength opIALength);
+
+  // =============
+  // METHODS
+  // =============
+
+  /**
+  * Sets the angular threshold.
+  * @param iAngle 
+  *   The angular threshold
+  */ 
+  HRESULT SetSmoothAngleThreshold(in double  iAngle);
+
+  /**
+  * Sets the deviation value (length) from guide curves allowed during sweeping
+  * operation in order to smooth it.
+  * @param iLength 
+  *   The deviation value
+  */ 
+  HRESULT SetGuideDeviation(in double  iLength);
+
+  /**
+  * Retrieves the number of guide curves.
+  * @param oNum 
+  *   The number of guide curves
+  */ 
+  HRESULT GetNbGuide(out long oNum);
+
+  /**
+  * Removes a guide curve.
+  */ 
+  HRESULT RemoveGuide();
+
+  /**
+  * @deprecated V5R16 CATHybridShapeSweepCircle#GetRelimiters
+  * Retrieves the elements relimiting the spine (or the default spine).
+  * @param opIAElem1 
+  *   The first relimiting feature (plane or point)
+  * @param opIAElem2
+  *   The second relimiting feature (plane or point)
+  */   
+  HRESULT GetLongitudinalRelimiters(out CATIAReference  opIAElem1, out CATIAReference opIAElem2);
+
+  /**
+  * @deprecated V5R16 CATHybridShapeSweepCircle#SetRelimiters
+  *  Sets the elements relimiting the spine (or the default spine).
+  *  @param ipIAElem1 
+  *   The first relimiting feature (plane or point)
+  *  @param ipIAElem2
+  *   The second relimiting feature (plane or point)
+  */   
+  HRESULT SetLongitudinalRelimiters(in CATIAReference  ipIAElem1, in CATIAReference ipIAElem2) ;
+
+  /**
+  * Retrieves the elements relimiting the spine (or the default spine).
+  * @param opIAElem1 
+  *   The first relimiting feature (plane or point)
+  * @param opOrient1
+  *   Split direction for the first relimitation<br>
+  *   0 means that the beginning of the spine (considering its orientation) is removed, 1 means that the end of the spine is removed
+  * @param opIAElem2
+  *   The second relimiting feature (plane or point)
+  * @param opOrient2
+  *   Split direction for the second relimitation
+  */
+  HRESULT GetRelimiters(out CATIAReference  opIAElem1, out long opOrient1, out CATIAReference opIAElem2, out long opOrient2);
+
+  /**
+  *	 Sets the elements relimiting the spine (or the default spine).
+  *  @param ipIAElem1 
+  *	  The first relimiting feature (plane or point)
+  *  @param ipOrient1
+  *   Split direction for the first relimitation<br>
+  *   0 means that the beginning of the spine (considering its orientation) is removed, 1 means that the end of the spine is removed
+  *  @param ipIAElem2
+  *   The second relimiting feature (plane or point)
+  *  @param ipOrient2
+  *   Split direction for the second relimitation
+  */ 
+  HRESULT SetRelimiters(in CATIAReference  ipIAElem1, in long ipOrient1, in CATIAReference ipIAElem2, in long ipOrient2);
+
+  /**
+  * Retrieves a sequence which identifies a solution among all possibilities
+  * of a circular profile sweep tangent to a surface.
+  * (case CATGSMCircularSweep_GuideAndTangencyAndRadius).
+  *   @param oNo
+  *      Given the orientations, solution number in a distance ordered list.
+  *   @param oShellOri
+  *      This orientation allows to compute just the results that are tangent
+  *      to a specific side of the shell. It can take three values:
+  *      <table>
+  *        <tr> <td>+1</td> <td>The result is on the normal side of the shell</td> </tr>
+  *        <tr> <td>-1</td> <td>The result is on the side of the shell opposite to the normal</td> </tr>
+  *        <tr> <td>0</td>  <td>No orientation is specified</td> </tr>
+  *      </table>
+  *   @param oGuideOri
+  *      This orientation allows to compute just the results that are on the
+  *      "left" or the "right" side of the shell, when looking in
+  *      the guide direction. It can take three values:
+  *      <table>
+  *        <tr> <td>+1</td> <td>The result is on the "left" side</td> </tr>
+  *        <tr> <td>-1</td> <td>The result is on the "right" side</td> </tr>
+  *        <tr> <td>0</td>  <td>No orientation is specified</td> </tr>
+  *      </table>
+  */
+  HRESULT GetTangencyChoiceNo(out long oNo, out long oShellOri, out long oGuideOri);
+  /**
+  * Sets a sequence which identifies a solutionamong all possibilities
+  * of a circular profile sweep tangent to a surface.
+  *   @param iNo
+  *      Given the orientations, solution number in a distance ordered list.
+  *   @param iShellOri
+  *      This orientation allows to compute just the results that are tangent
+  *      to a specific side of the shell. It can take three values:
+  *      <table>
+  *        <tr> <td>+1</td> <td>The result is on the normal side of the shell</td> </tr>
+  *        <tr> <td>-1</td> <td>The result is on the side of the shell opposite to the normal</td> </tr>
+  *        <tr> <td>0</td>  <td>No orientation is specified</td> </tr>
+  *      </table>
+  *   @param iGuideOri
+  *      This orientation allows to compute just the results that are on the
+  *      "left" or the "right" side of the shell, when looking in
+  *      the guide direction. It can take three values:
+  *      <table>
+  *        <tr> <td>+1</td> <td>The result is on the "left" side</td> </tr>
+  *        <tr> <td>-1</td> <td>The result is on the "right" side</td> </tr>
+  *        <tr> <td>0</td>  <td>No orientation is specified</td> </tr>
+  *      </table>
+  */
+  HRESULT SetTangencyChoiceNo(in long iShellOri, in long iGuideOri, in long iNo);
+
+  /**
+  * Retrieves the number of radii.
+  * @param oRad 
+  *   The number of radii
+  */ 
+  HRESULT GetNbRadius(out long oRad);
+
+  /**
+  * Removes a radius. 
+  */ 
+  HRESULT RemoveRadius();
+
+  /**
+  * Retrieves the number of angles.
+  * @param oAng 
+  *   The number of angles
+  */ 
+  HRESULT GetNbAngle(out long oAng);
+
+  /**
+  * Removes an angle. 
+  */ 
+  HRESULT RemoveAngle();
+
+  /**
+  * Retrieves angle law types.
+  * @param oFirstType
+  *   The first type of law (from CATGSMBasicLawType enumeration).
+  *   <table>
+  *     <tr> <td>0</td> <td>Undefined law type (CATGSMBasicLawType_None)</td> </tr>
+  *     <tr> <td>1</td> <td>Constant law type (CATGSMBasicLawType_Constant)</td>  </tr>
+  *     <tr> <td>2</td> <td>Linear law type (CATGSMBasicLawType_Linear)</td>  </tr>
+  *     <tr> <td>3</td> <td>S law type (CATGSMBasicLawType_SType)</td>  </tr>
+  *     <tr> <td>4</td> <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>  </tr>
+  *   </table>
+  * @param oSecondType
+  *   The second type of law (from CATGSMBasicLawType enumeration).
+  *   <br>Same legal values as <code>oFirstType</code>
+  */
+  HRESULT GetAngleLawTypes(out long oFirstType, out long oSecondType);
+  /**
+  * Sets angle law types.
+  * @param iFirstType
+  *   The first type of law (from CATGSMBasicLawType enumeration).
+  *   <br><b>Legal values</b>:
+  *   <table>
+  *     <tr> <td>0</td> <td>Undefined law type (CATGSMBasicLawType_None)</td> </tr>
+  *     <tr> <td>1</td> <td>Constant law type (CATGSMBasicLawType_Constant)</td>  </tr>
+  *     <tr> <td>2</td> <td>Linear law type (CATGSMBasicLawType_Linear)</td>  </tr>
+  *     <tr> <td>3</td> <td>S law type (CATGSMBasicLawType_SType)</td>  </tr>
+  *     <tr> <td>4</td> <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>  </tr>
+  *   </table>
+  * @param iSecondType
+  *   The second type of law (from CATGSMBasicLawType enumeration).
+  *   <br>Same legal values as <code>iFirstType</code>
+  */
+  HRESULT SetAngleLawTypes(in long iFirstType, in long iSecondType);
+
+  /**
+  * Returns or sets the context on Sweep feature.
+  * <ul>
+  * <li><b>0</b> This option creates Swept surface.</li>
+  * <li><b>1</b> This option creates Swept volume.</li>
+  * </ul>
+  * <br> Note: Setting volume result requires GSO License. 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oContext</code> the context
+  * for the <code>Sweep</code> hybrid shape feature.
+  * <pre>
+  * Dim oContext
+  * Set oContext = Sweep.<font color="red">Context</font>
+  * </pre>
+  * </dl>
+  */
+
+  HRESULT get_Context ( out /*IDLRETVAL*/ long oContext );
+  HRESULT put_Context ( in                long iContext );
+
+  /**
+  * Returns or sets whether canonical surfaces of the swept surface are detected.
+  * <br><b>Legal values</b>:
+    *  <table>
+  *     <tr> <td>0</td> <td>No detection of canonical surface is performed.</td> </tr>
+  *     <tr> <td>2</td> <td>Detection of canonical surfaces is performed.</td> </tr>
+  *  </table>
+  */
+  
+#pragma PROPERTY CanonicalDetection
+  HRESULT get_CanonicalDetection(out /*IDLRETVAL*/ long oDetection);
+  HRESULT put_CanonicalDetection(in long iDetection);
+
+};
+
+// Interface name : CATIAHybridShapeSweepCircle
+#pragma ID CATIAHybridShapeSweepCircle "DCE:8d01de2f-4d15-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeSweepCircle
+
+// VB object name : HybridShapeSweepCircle (Id used in Visual Basic)
+#pragma ID HybridShapeSweepCircle "DCE:8d01de1d-04a2-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeSweepCircle HybridShapeSweepCircle
+
+#endif

@@ -1,0 +1,87 @@
+#ifndef CATIARenderingShootings_IDL
+#define CATIARenderingShootings_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIARenderingShootings:                           
+// Exposed interface for Rendering Shootings collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jul02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIACollection.idl"
+#include "CATIARenderingShooting.idl"
+#include "CATVariant.idl"
+
+/**
+ * A collection of all the Rendering Shootings objects.
+ */
+
+//-----------------------------------------------------------------
+interface CATIARenderingShootings : CATIACollection
+{
+    /**
+     * Returns a renderingshooting index in the renderingshootings collection.
+     * @param iIndex
+     *   The index of the shooting to retrieve in the collection of shootings.
+     *   Compared with other collections, you cannot use the name of the
+     *   shooting as argument.
+     * @return The retrieved shooting
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example returns in <tt>MyShooting</tt> the sixth
+     * shooting in a shootings collection.
+     * <pre>
+     * Dim MyShooting As RenderingShooting
+     * Set MyShooting = RenderingShootings.<font color="red">Item</font>(6)
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIARenderingShooting oShooting);
+
+    /**
+     * Adds a new shooting to the shootings collection.
+     */
+    HRESULT Add(out /*IDLRETVAL*/ CATIARenderingShooting oShooting);
+
+    /**
+     * Removes a shooting from the shootings collection.
+     */
+    HRESULT Remove(in CATVariant iIndex);
+
+	/**
+     * Removes all shootings from the collection.
+     */
+    HRESULT RemoveAll();
+};
+
+// Interface Name : CATIARenderingShootings
+#pragma ID CATIARenderingShootings "DCE:4f062fa0-999b-11d6-805e0030f113d1bf"
+#pragma DUAL CATIARenderingShootings
+ 
+// VB Object Name : RenderingShootings
+#pragma ID RenderingShootings "DCE:5815ce40-999b-11d6-805e0030f113d1bf"
+#pragma ALIAS CATIARenderingShootings RenderingShootings
+
+#endif
+// CATIARenderingShootings_IDL
+
+
+
+
+
+
+

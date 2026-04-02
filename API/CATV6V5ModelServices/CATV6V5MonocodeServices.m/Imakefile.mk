@@ -1,0 +1,40 @@
+#
+# SHARED LIBRARY
+#
+
+BUILT_OBJECT_TYPE = NONE
+
+LINK_WITH_V5_ONLY=
+LINK_WITH_V6_ONLY=
+
+LINK_WITH =
+    $(LINK_WITH_V5_ONLY)           \
+    $(LINK_WITH_V6_ONLY)           \
+
+OS = AIX
+SYS_INCPATH =
+SYS_LIBS =
+SYS_LIBPATH = 
+
+OS = HP-UX
+SYS_INCPATH =
+SYS_LIBS =
+SYS_LIBPATH =
+
+OS = IRIX
+SYS_INCPATH =
+SYS_LIBS =
+SYS_LIBPATH =
+
+
+
+OS = COMMON
+#if defined(CATIAR201)
+LINK_WITH_V6_ONLY= \
+#
+#else
+#if defined(CATIAV5R21)
+LINK_WITH_V5_ONLY= \
+#
+#endif
+#endif

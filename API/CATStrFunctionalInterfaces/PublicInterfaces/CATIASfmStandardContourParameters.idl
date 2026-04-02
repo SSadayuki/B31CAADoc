@@ -1,0 +1,96 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=============================================================================
+// CATIASfmStandardContourParameters
+//   Conotur Manager Interface to Manage Contour Parameters
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Nov. 2010  Creation                                         Deshmane Rahul
+//=============================================================================
+
+
+#ifndef CATIASfmStandardContourParameters_IDL
+#define CATIASfmStandardContourParameters_IDL
+/*IDLREP*/
+/**
+
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATIAReference.idl"
+#include "CATBSTR.idl"
+#include "CATVariant.idl"
+#include "CATIACollection.idl"
+#include "CATIASfmStandardContourParameters.idl"
+#include "CATIAParameter.idl"
+
+/**
+* Interface to access Contour Parametrs from/to the collection.
+*/
+
+
+interface CATIASfmStandardContourParameters: CATIACollection
+{   
+
+  /**  
+  *  Gets a Reference from the collection.
+  *  @param iIndex [in]  
+  *      Index of the Reference to be retrieved.  
+  *  @param oReference [out]  
+  *      Reference.  
+  *  @return  
+  *      <code>S_OK</code> if everything ran ok.  
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example retrieves Contour Parameters. The Values to these parameters then can be set.
+  * <pre>
+  * Dim oListCkeParms As SfmStandardContourParameters
+  * Set oListCkeParms = ObjSfmContourMgr.GetStdOpeningContourParams("Sfm_Rect")
+  * 'Display List of Parameters for Selected Contour
+  * Dim NbOfParam As Long
+  * NbOfParam = oListCkeParms.Count
+  * Dim ContourParam As Parameter
+  * Dim ContourParamName As String
+  * For i = 1 To NbOfParam
+  * Set ContourParam = oListCkeParms.<font color="red">Item</font>(i)
+  * ContourParamName = oListCkeParms.<font color="red">Item(i)</font>.Name
+  * MsgBox ContourParamName
+  * If ContourParamName = "Sfm_Width" Then
+  *    ContourParam.ValuateFromString ("1000mm")
+  *    End If
+  *  If ContourParamName = "Sfm_Height" Then
+  *    ContourParam.ValuateFromString ("2000mm")
+  *     End If
+  *  If ContourParamName = "Sfm_CornerRadius" Then
+  *   ContourParam.ValuateFromString ("10mm")
+  *     End If
+  *  Next
+  * </pre>
+  * </dl> 
+  */
+
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAParameter oStdConParm);
+
+  /**  
+  *@ nodoc
+  */ 
+  HRESULT GetRole(inout /*IDLRETVAL*/ CATBSTR oRole);
+  /**  
+  *@ nodoc
+  */ 
+
+};
+
+// Interface name : CATIASfmStandardContourParameters
+#pragma ID CATIASfmStandardContourParameters "DCE:5C5FCAC1-0A83-49ad-B5AC67757C955D8B"                                                  
+#pragma DUAL CATIASfmStandardContourParameters
+
+// VB object name : SfmStandardContourParameters
+#pragma ID SfmStandardContourParameters "DCE:6F1A20E1-6EFC-4493-90C93B0012DAD0AB"                                             
+#pragma ALIAS CATIASfmStandardContourParameters SfmStandardContourParameters
+
+#endif

@@ -1,0 +1,80 @@
+#ifndef CATIAPartDocument_IDL
+#define CATIAPartDocument_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAPartDocument:                           
+// Exposed interface for Part Document
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jan98 Creation					L Lalere
+//=================================================================
+#include "CATIADocument.idl"
+
+interface CATIAPart;
+interface CATIAProduct;
+
+/**
+ * Represents the Document object for parts.
+ * <br><b>Role</b>:
+ * When a PartDocument object is created, a Part object is also created.
+ * This Part object is the root object  of the Part structure.
+ * <p> A reference Product object is also created in each PartDocument. It is used to access Publications,
+ * PartNumber.
+ * @see CATIAProduct , CATIAPart
+ */
+
+//-----------------------------------------------------------------
+interface CATIAPartDocument : CATIADocument
+{
+#pragma PROPERTY Part
+ /**
+  * Returns the root Part object from the current part document.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>RootPart</tt> the root Part
+  * object of the active document, assumed to be a part document:
+  * <pre>
+  * Set RootPart = CATIA.ActiveDocument.<font color="red">Part</font>
+  *</pre>
+  * </dl>
+  */
+  HRESULT get_Part(out /*IDLRETVAL*/ CATIAPart oPart);
+
+#pragma PROPERTY Product
+ /**
+  * Returns the root Product object from the current part document.
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>RootProd</tt> the root Product
+  * object of the active document, assumed to be a part document:
+  * <pre>
+  * Set RootProd = CATIA.ActiveDocument.<font color="red">Part</font>
+  *</pre>
+  * </dl>
+  */
+  HRESULT get_Product(out /*IDLRETVAL*/ CATIAProduct oProduct);
+};
+
+// Interface Name : CATIAPartDocument
+#pragma ID CATIAPartDocument "DCE:818c8b33-806b-0000-0280030d3b000000"
+#pragma DUAL CATIAPartDocument
+ 
+// VB Object Name : PartDocument
+#pragma ID PartDocument "DCE:818c8b38-ec91-0000-0280030d3b000000"
+#pragma ALIAS CATIAPartDocument PartDocument
+
+#endif
+// CATIAPartDocument_IDL

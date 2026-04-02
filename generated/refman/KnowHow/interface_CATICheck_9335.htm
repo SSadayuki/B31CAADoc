@@ -1,0 +1,360 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>KnowHow CATICheck Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../KnowHow.htm" href="../KnowHow.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "KnowHow";	}
+		function getCurrentObjectName() { 
+ 	return "CATICheck"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>KnowHow Framework:  CATICheck Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATICheck_9335','CATICheck','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATICheck</b>
+</p>
+<p>
+<b><i> Interface dedicated to defining the basic possibilities of an expert check.</i></b><br>
+
+
+ <br><b>Role</b> : the goal of an expert check is to check a condition over a kind of objects
+ (for instance that all the holes of a part have a diameter of at least
+ 15mm, or that no two holes have the same diameter).
+ <br>
+ The second example would have been made with the following check:
+ <br>
+ Check.1
+ <dl>
+ <dt>Variables <dd> "H1:SimpleHole; H2:Simplehole"
+ <dt>Body      <dd> "H1.Diameter != H2.Diameter"
+ </dl>
+
+ <br>
+ All the possible t-uples (H1, H2) (for H1, H2 any SimpleHoles) are evaluated by the check.
+ If the condition is true for all of them, then the check is correct. If at least one of them makes
+ the condition false, then the check is false.
+
+ <br>
+ If the check is false, then a corrective action can be done with a correction function. This
+ function is applied on each t-uple failing the condition of the check, when the user decides to
+ (manually) or automatically.
+
+ <br>
+ If the check is false, the user also can do nothing and simply justify the falseness of the check
+ with a comment. Then the check is considered as true.</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#ApplyCorrect()"><b>ApplyCorrect</b></a>()
+</td><td id='tdright'>  Triggers the application of the correction function of the check on the t-uples failing the condition.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ApplyHighlight()"><b>ApplyHighlight</b></a>()
+</td><td id='tdright'>  Highlights each object of the t-uples failing the condition.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetAutomaticCorrect()"><b>GetAutomaticCorrect</b></a>()
+</td><td id='tdright'>  Gets the correction function triggering mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCorrectFunction()"><b>GetCorrectFunction</b></a>()
+</td><td id='tdright'>  Gets the VB script executed as a correction function.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCorrectFunctionComment()"><b>GetCorrectFunctionComment</b></a>()
+</td><td id='tdright'>  Gets the comment of the correction function.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCorrectFunctionType()"><b>GetCorrectFunctionType</b></a>()
+</td><td id='tdright'>  Gets the correction function type.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetHelp()"><b>GetHelp</b></a>()
+</td><td id='tdright'>  Gets the help string.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetJustification()"><b>GetJustification</b></a>()
+</td><td id='tdright'>  Gets the justification string.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetStatus()"><b>GetStatus</b></a>()
+</td><td id='tdright'>  Gets the validity of the check.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetAutomaticCorrect(boolean)"><b>SetAutomaticCorrect</b></a>(boolean)
+</td><td id='tdright'>  Sets the correction function to be triggered automatically or not.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCorrectFunction(CATUnicodeString)"><b>SetCorrectFunction</b></a>(CATUnicodeString)
+</td><td id='tdright'>  Sets the script executed as a correction function.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCorrectFunctionComment(CATUnicodeString)"><b>SetCorrectFunctionComment</b></a>(CATUnicodeString)
+</td><td id='tdright'>  Sets the comment of the correction function.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCorrectFunctionType(CATExpertReportEnum::CorrectingFunctionTypeEnum)"><b>SetCorrectFunctionType</b></a>(CATExpertReportEnum::CorrectingFunctionTypeEnum)
+</td><td id='tdright'>  Sets the correction function type.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetHelp(CATUnicodeString)"><b>SetHelp</b></a>(CATUnicodeString)
+</td><td id='tdright'>  Sets the help string.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetJustification(CATUnicodeString)"><b>SetJustification</b></a>(CATUnicodeString)
+</td><td id='tdright'>  Sets the justification string.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="ApplyCorrect"></a><a id="ApplyCorrect()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ApplyCorrect</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Triggers the application of the correction function of the check on the t-uples failing the condition.
+</dd>
+<dt class='dtmethod' >
+  <a id="ApplyHighlight"></a><a id="ApplyHighlight()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>ApplyHighlight</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Highlights each object of the t-uples failing the condition.
+</dd>
+<dt class='dtmethod' >
+  <a id="GetAutomaticCorrect"></a><a id="GetAutomaticCorrect()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('boolean','boolean')</script>  <span class='objname'>GetAutomaticCorrect</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the correction function triggering mode.
+
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  true or false.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCorrectFunction"></a><a id="GetCorrectFunction()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script>  <span class='objname'>GetCorrectFunction</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the VB script executed as a correction function.
+
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Script of the correction function
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCorrectFunctionComment"></a><a id="GetCorrectFunctionComment()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script>  <span class='objname'>GetCorrectFunctionComment</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the comment of the correction function.
+
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  the comment.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCorrectFunctionType"></a><a id="GetCorrectFunctionType()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATExpertReportEnum::CorrectingFunctionTypeEnum','CATExpertReportEnum::CorrectingFunctionTypeEnum')</script>  <span class='objname'>GetCorrectFunctionType</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the correction function type.
+
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  Type of correction function (
+<script type="text/javascript"> activateLinkAnchor('CATExpertReportEnum','CorrectingFunctionTypeEnum','CATExpertReportEnum.CorrectingFunctionTypeEnum') </script> ).
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetHelp"></a><a id="GetHelp()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script>  <span class='objname'>GetHelp</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the help string.
+
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  the help string.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetJustification"></a><a id="GetJustification()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script>  <span class='objname'>GetJustification</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the justification string.
+
+ The justification string is a comment explainig why a false check (i.e.
+ at least one t-uple fails the condition) can be considered as true.
+
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  the justification string.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetStatus"></a><a id="GetStatus()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATExpertReportEnum::ValidityTypeEnum','CATExpertReportEnum::ValidityTypeEnum')</script>  <span class='objname'>GetStatus</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the validity of the check.
+
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  the validity.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetAutomaticCorrect"></a><a id="SetAutomaticCorrect(boolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetAutomaticCorrect</span><span class = 'signature'>(<script type="text/javascript"> activateLink('boolean','boolean')</script> <span class='param'>iIsAutomatic</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the correction function to be triggered automatically or not.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iIsAutomatic</span></dt>
+   <dd> true or false.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCorrectFunction"></a><a id="SetCorrectFunction(CATUnicodeString)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCorrectFunction</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script> <span class='param'>iScript</span>)</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the script executed as a correction function.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iScript</span></dt>
+   <dd> VB script to be executed.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCorrectFunctionComment"></a><a id="SetCorrectFunctionComment(CATUnicodeString)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCorrectFunctionComment</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script> <span class='param'>iComment</span>)</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the comment of the correction function.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iComment</span></dt>
+   <dd> the comment.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCorrectFunctionType"></a><a id="SetCorrectFunctionType(CATExpertReportEnum::CorrectingFunctionTypeEnum)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCorrectFunctionType</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATExpertReportEnum::CorrectingFunctionTypeEnum','CATExpertReportEnum::CorrectingFunctionTypeEnum')</script> <span class='param'>iType</span>)</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the correction function type.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iType</span></dt>
+   <dd> Type of correction function (
+<script type="text/javascript"> activateLinkAnchor('CATExpertReportEnum','CorrectingFunctionTypeEnum','CATExpertReportEnum.CorrectingFunctionTypeEnum') </script> ).
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetHelp"></a><a id="SetHelp(CATUnicodeString)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetHelp</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script> <span class='param'>iHelp</span>)</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the help string.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iHelp</span></dt>
+   <dd> the help string.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetJustification"></a><a id="SetJustification(CATUnicodeString)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetJustification</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script> <span class='param'>iJustification</span>)</span><script type="text/javascript"> activateLink('=0','=0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the justification string.
+
+ The justification string is a comment explainig why a false check (i.e.
+ at least one t-uple fails the condition) can be considered as true.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iJustification</span></dt>
+   <dd> the justification string.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICheck.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATKWERule</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

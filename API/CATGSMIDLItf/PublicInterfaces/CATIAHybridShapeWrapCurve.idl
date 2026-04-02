@@ -1,0 +1,307 @@
+#ifndef CATIAHybridShapeWrapCurve_IDL
+#define CATIAHybridShapeWrapCurve_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+ /**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//           
+// CATIAHybridShapeWrapCurve:         
+// Exposed interface for HybridShape WrapCurve
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Fev 2001 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIAHybridShapeDirection.idl"
+
+/**
+ * Represents the hybrid shape wrap curve surface object.
+ * <b>Role</b>: To access the data of the hybrid shape wrap curve surface object.
+ * <p>This data includes:
+ * <ul>
+ * <li>Two support surfaces, one at each limit of the wrap curve surface</li>
+ * <li>Two curves, one for each support surface</li>
+ * <li>The curve closing points</li>
+ * </ul>
+ * <p>Use the CATIAHybridShapeFactory to create a HybridShapeWrapCurve object.
+ * @see CATIAHybridShapeFactory
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeWrapCurve : CATIAHybridShape
+{
+ /**
+  * Returns or sets the surface to deform of the WrapCurve.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAFace.
+  * </dl>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>SurfaceToDeform</code> the surface to deform
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+  * <pre>
+  * SurfaceToDeform = ShpWrapCurve.<font color="red">Surface</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Surface
+ HRESULT get_Surface (out /*IDLRETVAL*/ CATIAReference            oSurface);
+ HRESULT put_Surface (in                CATIAReference            iSurface);
+
+    /**
+	* Inserts a couple of reference curve and target curve to the wrap curve.
+	*   @param iPosition
+	*     The position of the curves in the list of curves. 
+	*     <br><b>Legal values</b>: 0 for the end of the list, or positive and not null.
+	* @param iReferenceCurve 
+	*   the reference curve. 
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge. 
+	* @param iTargetCurve 
+	*   the target curve.
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge. 
+	* </dl>
+	* <dt><b>Example</b>:
+	* <dd>
+	* This example sets the <code>RefCurveForWrapCurve</code> curve and the <code>TargCurveForWrapCurve</code> curve
+	* at the end of the list to the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+	* <pre>
+	* ShpWrapCurve.<font color="red">InsertCurves</font> (0, RefCurveForWrapCurve, TargCurveForWrapCurve)
+	* </pre>
+	* </dl>
+	*/
+ HRESULT InsertCurves (in long iPosition
+					   , in CATIAReference iReferenceCurve
+					   , in CATIAReference iTargetCurve
+					   );
+
+    /**
+	* Inserts a of reference curve to the wrap curve.
+	*   @param iPosition
+	*     The position of the curves in the list of curves. 
+	*     <br><b>Legal values</b>: 0 for the end of the list, or positive and not null.
+	* @param iReferenceCurve 
+	*   the reference curve. 
+    * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+    * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge. 
+	* <dt><b>Example</b>:
+	* <dd>
+	* This example sets the <code>RefCurveForWrapCurve</code> curve 
+	* at the end of the list to the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+	* <pre>
+	* ShpWrapCurve.<font color="red">InsertCurves</font> (0, RefCurveForWrapCurve)
+	* </pre>
+	* </dl>
+	*/
+ HRESULT InsertReferenceCurve (in long iPosition
+					   , in CATIAReference iReferenceCurve
+					   );
+
+ /**
+  * Returns the number of couples of curves of the WrapCurve.
+  *   @return
+  *      The number of couples of curves
+  *     <br><b>Legal values</b>: positive or null.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>NumberOfCurves</code> the number of couples of curves
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+  * <pre>
+  * NumberOfCurves = ShpWrapCurve.<font color="red">GetNumberOfCurves</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetNumberOfCurves (out   /*IDLRETVAL*/  long            oNumberOfCurves);
+ 
+ /**
+  * Removes a couple of reference curve and target curve from the WrapCurve. 
+  *   @param iPosition
+  *     The position of the curves in the list of curves. 
+  *     <br><b>Legal values</b>: positive, not null and lower to numberOfCurves
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example removes the first couple of reference curve and target curve 
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+  * <pre>
+  * ShpWrapCurve.<font color="red">RemoveCurves</font> (1)
+  * </pre>
+  * </dl>
+  */
+ HRESULT RemoveCurves (in                long            iPosition);
+ 
+ /**
+  * Returns a curve from the WrapCurve.
+  *   @param iPosition
+  *     The position of the curves in the list of curves. 
+  * @param oReferenceCurve 
+  *   the reference curve. 
+  * @param oTargetCurve 
+  *   the target curve.
+  *   <br><b>Legal values</b>: can be egal to Nothing. In this case, the associated ref curve will be fixed.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>WrapCurveRefCurve</code> the first reference curve 
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature and retrieves in <code>WrapCurveTargCurve</code>
+  * the first target curve of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+  * <pre>
+  * Dim WrapCurveRefCurve As Reference
+  * Dim WrapCurveTargCurve As Reference
+  * ShpWrapCurve.<font color="red">GetCurve</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetCurves (in                long            iPosition
+                    , out   CATIAReference  oReferenceCurve
+                    , out   CATIAReference  oTargetCurve
+					);
+
+ /**
+  * Returns or sets constraint at first curves of the WrapCurve.
+  *  <br><b>Legal values</b>: 1 = no constraint, 2 = Deformed surface will have the same tangency 
+  *  and the same curvature as the original surface at first curves.
+  * </dl>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>FirstCurvesConstraint</code> the constraint at first curves
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+  * <pre>
+  * Dim FirstCurvesConstraint As long
+  * Set FirstCurvesConstraint = ShpWrapCurve.<font color="red">FirstCurvesConstraint</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY FirstCurvesConstraint
+ HRESULT get_FirstCurvesConstraint (out /*IDLRETVAL*/ long            oConstraint);
+ HRESULT put_FirstCurvesConstraint (in                long            iConstraint);
+
+ /**
+  * Returns or sets constraint at last curves of the WrapCurve.
+  *  <br><b>Legal values</b>: 1 = no constraint, 2 = Deformed surface will have the same tangency 
+  *  and the the same curvatureas the original surface at last curves.
+  * </dl>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>LastCurvesConstraint</code> the constraint at last curves
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+  * <pre>
+  * Dim LastCurvesConstraint As long
+  * Set LastCurvesConstraint = ShpWrapCurve.<font color="red">LastCurvesConstraint</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY LastCurvesConstraint
+ HRESULT get_LastCurvesConstraint (out /*IDLRETVAL*/ long            oConstraint);
+ HRESULT put_LastCurvesConstraint (in                long            iConstraint);
+
+ /**
+  * Sets the reference spine to the wrap curve feature.
+  *   @param iSpine
+  *     curve to be added as a spine.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIATriDimFeatEdge, @href CATIABiDimFeatEdge.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the <code>Curve10</code> curve as the reference Spine
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+  * <pre>
+  * ShpWrapCurve.<font color="red">SetReferenceSpine</font> Curve10
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetReferenceSpine (in                CATIAReference  iSpine);
+
+ /**
+  * Returns the reference spine of the wrap curve feature.
+  *   @param oSpineType
+  *     type of spine.
+  *     <br><b>Legal values</b>: 1 = Reference Spine is equal to the first reference curve, 
+  *       and 2 = user spine.
+  *   @param oSpine
+  *     curve to be added as a spine, if iSpineType = 2.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>RefSpine</code> the reference spine
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature and
+  * in <code>RefSpineType</code> the reference spine type.
+  * <pre>
+  * Dim RefSpineType As long 
+  * Dim RefSpine As Reference 
+  * ShpWrapCurve.<font color="red">GetReferenceSpine</font> (RefSpineType, RefSpine)
+  * </pre>
+  */
+ HRESULT GetReferenceSpine (out                long            oSpineType,
+                          out                CATIAReference  oSpine);
+
+ /**
+  * Sets the reference direction projection to the wrap curve feature.
+  *   @param iDirection
+  *     curve to be added as a direction, if iDirectionType = 2.
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the <code>RefDirection</code> curve as the reference direction
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature.
+  * <pre>
+  * ShpWrapCurve.<font color="red">SetReferenceDirection</font> RefDirection
+  * </pre>
+  */
+ HRESULT SetReferenceDirection (in                CATIAHybridShapeDirection  iDirection);
+
+ /**
+  * Gets the reference direction projection of the wrap curve feature.
+  *   @param oDirectionType
+  *     type of direction.
+  *     <br><b>Legal values</b>: 1 = reference direction is computed,
+  *       and 2 = user direction.
+  *   @param oDirection
+  *     curve to be added as a direction, if oDirectionType = 2.
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>RefDirection</code> the reference direction
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve feature and 
+  * in <code>RefDirectionType</code> the reference direction
+  * of the <code>ShpWrapCurve</code> hybrid shape WrapCurve
+  * <pre>
+  * Dim RefDirectionType As long 
+  * Dim RefDirection As CATIAHybridShapeDirection 
+  * ShpWrapCurve.<font color="red">SetReferenceDirection</font> (RefDirectionType, RefDirection)
+  * </pre>
+  */
+ HRESULT GetReferenceDirection (out                long            oDirectionType,
+                          out                CATIAHybridShapeDirection  oDirection);
+
+};
+
+
+// Interface name : CATIAHybridShapeWrapCurve
+#pragma ID CATIAHybridShapeWrapCurve "DCE:97d3e643-de62-0000-0280020c4e000000"
+#pragma DUAL CATIAHybridShapeWrapCurve
+
+
+// VB object name : HybridShapeWrapCurve (Id used in Visual Basic)
+#pragma ID HybridShapeWrapCurve "DCE:97d4f7e2-6909-0000-0280020c4e000000"                                  
+#pragma ALIAS CATIAHybridShapeWrapCurve HybridShapeWrapCurve
+
+
+#endif
+// CATIAHybridShapeWrapCurve_IDL
+

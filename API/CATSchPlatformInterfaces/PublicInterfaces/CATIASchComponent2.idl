@@ -1,0 +1,119 @@
+#ifndef CATIASchComponent2_IDL 
+#define CATIASchComponent2_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+interface  CATIASchGRRComp;
+interface  CATIADocument;
+interface  CATIASchComponent;
+interface  CATIASchAppConnectable;
+    
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Manage a schematic component.
+  */
+
+
+interface CATIASchComponent2 : CATIABase
+{
+  /**
+  * Place a component in space, unconnected to other objects.
+  * It will create local reference (from a catalog referenced document)
+  * if necessary.
+  * @param iGRR
+  *   Pointer to the component graphical representation.
+  *   if NULL the "Primary" graphical representation will be used.
+  * @param iDb6Axis[6]
+  *   X-axis of the local axis of the new instance
+  *   Y-axis of the local axis of the new instance
+  *   X-Y coordinates of the orgin of the new instance.
+  *   This axis defines the orientation and location of the new instance
+  *   in space.
+  * @param iDoc
+  *   Pointer to a document to create the object in. If NULL, the
+  *   document associated with the current Editor will be used.
+  * @param oNewComponent
+  *   Interface pointer to the new component instance placed.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchComponent2
+  * Dim objArg1 As SchGRRComp
+  * Dim dbVar2(6) As CATSafeArrayVariant
+  * Dim objArg3 As Document
+  * Dim objArg4 As SchComponent
+  *  ...
+  * objThisIntf.<font color="red">PlaceInSpace</font>objArg1,dbVar2,objArg3,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT PlaceInSpace ( 
+    in CATIASchGRRComp iGRR, 
+    in CATSafeArrayVariant iDb6Axis, 
+    in CATIADocument iDoc, 
+    inout CATIASchComponent oNewComponent );
+    
+  /**
+  * Place a component connected to another component or insert into a route. 
+  * @param iGRR
+  *   Pointer to the component graphical representation.
+  *   if NULL the "Primary" graphical representation will be used.
+  * @param iDb6Axis[6]
+  *   X-axis of the local axis of the new instance
+  *   Y-axis of the local axis of the new instance
+  *   X-Y coordinates of the orgin of the new instance.
+  *   This axis defines the orientation and location of the new instance
+  *   in space.
+  * @param iObjectToConnect
+  *   Pointer to a component to connect the new instance to or a route object
+  *   to insert new component into.
+  * @param iDoc
+  *   Pointer to a document to create the object in. If NULL, the
+  *   document associated with the current Editor will be used.
+  * @param oNewComponent
+  *   Interface pointer to the new component instance placed.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchComponent2
+  * Dim objArg1 As SchGRRComp
+  * Dim dbVar2(6) As CATSafeArrayVariant
+  * Dim objArg3 As SchAppConnectable
+  * Dim objArg4 As Document
+  * Dim objArg5 As SchComponent
+  *  ...
+  * objThisIntf.<font color="red">PlaceOnObject</font>objArg1,dbVar2,objArg3,objArg4,objArg5
+  * </pre>
+  *    
+  */
+  HRESULT PlaceOnObject ( 
+    in CATIASchGRRComp iGRR, 
+    in CATSafeArrayVariant iDb6Axis, 
+    in CATIASchAppConnectable iObjectToConnect, 
+    in CATIADocument iDoc, 
+    inout CATIASchComponent oNewComponent );
+    
+};
+    
+// Interface name : CATIASchComponent2
+#pragma ID CATIASchComponent2 "DCE:74d1b6d2-f8bf-4703-af4d34f269701fcc"
+#pragma DUAL CATIASchComponent2
+    
+// VB object name : SchComponent2
+#pragma ID SchComponent2 "DCE:b40eef59-5aeb-4167-b5a4179be7216a01"
+#pragma ALIAS CATIASchComponent2 SchComponent2
+    
+#endif 
+    

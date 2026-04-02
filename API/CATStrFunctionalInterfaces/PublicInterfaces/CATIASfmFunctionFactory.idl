@@ -1,0 +1,189 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=============================================================================
+// CATIASfmFunctionFactory
+//   Factory to Create Openings.
+//=============================================================================
+// Usage notes:
+//   Interface for Automation Integration.
+//=============================================================================
+// Nov. 2010  Creation                                         Deshmane Rahul
+//=============================================================================
+#ifndef CATIASfmFunctionFactory_IDL
+#define CATIASfmFunctionFactory_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl" 
+#include "CATIAReference.idl" 
+#include "CATBSTR.idl" 
+#include "CATIASfmOpening.idl" 
+#include "CATIAFactory.idl" 
+#include "CATSafeArray.idl" 
+#include "CATIASfmStandardContourParameters.idl" 
+#include "CATIASfmStandardPosStrategyParameters.idl" 
+#include "CATIASfmOpeningContoursMgr.idl" 
+#include "CATIAPart.idl" 
+#include "CATBaseDispatch.idl" 
+#include "CATIASfmReferences.idl" 
+#include "CATIASfmStandardOpening.idl" 
+
+/**
+* Gets the Function Factory. 
+*<dl>
+*<dt><b>Example:<b>
+*<dd>
+* This Example Retrieves SfmFunctionFactory from Part.
+* <pre>
+* Set part1 = partDocument1.Part
+* Dim Factory As SfmFunctionFactory
+* Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+* </pre>
+* </dl> 
+*/
+
+interface CATIASfmFunctionFactory : CATIAFactory
+{    
+  /**
+  * Creates Opening on SuperPlate or a Profile using a sketch or 3DObject.
+  * @param iCategory [in]
+  *      Category of Opening
+  * @param iMode [in] 
+  *      Enter 1: To Create Opening Using Sketch Mode
+  *      Enter 0: To Create Opening Using 3D Object Mode
+  * @param iIntersectingElement [in] 
+  *      Sketch or 3D Object
+  * @param iSfmObject [in] 
+  *     Object on which Opening is to be created.
+  * @param oOpening [out] 
+  *     Created Opening
+  * @return
+  *   <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example Creates Opening on the Plate using Sketch Mode. The Factory is retrieved from the Part.
+  * <pre>
+  *  'Retrieve the Factory
+  *  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+  *  Set sketch = part1.FindObjectByName("Sketch.1")
+  *  Set sketchref = part1.CreateReferenceFromObject(sketch)
+  *  Set plate = part1.FindObjectByName("Deck_117")
+  *  Set plateref = part1.CreateReferenceFromObject(plate)
+  *  'Create Opening
+  *  Dim OpeningRes as SfmOpening
+  *  Set OpeningRes = Factory.CreateOpening("FunctionalOpening",1,sketchref, plateref)
+  * </pre>
+  * </dl> 
+  */
+  HRESULT CreateOpening(in CATBSTR iCategory, in long  iMode, 
+    in CATIAReference iIntersectingElement, 
+    in CATIAReference iSfmObject, 
+    out  /*IDLRETVAL*/ CATIASfmOpening oOpening);
+  /**
+  * Creates a StandardOpening on SuperPlate.
+  * @param iCategory [in]
+  *      Category of Opening
+  * @param iContourName [in] 
+  *      Name of the Contour. To Get List of Available contour names ,please see CATIASfmOpeningContoursMgr
+  * @param iListContourParams [in] 
+  *      List of Conotour Parameters for selected Contour
+  *      For Setting these parameters,Please see CATIASfmOpeningContoursMgr
+  * @param iPosStrategyName [in] 
+  *      Name of the Position Strategy.
+  *      Legal Values:"CATSfmPosOffsetOffset","CATSfmPosHalfHeightOffset","CATSfmPosMidDistOffset","CATSfmPosMidDistMidDist","CATSfmPosHalfHeightMidDist"
+  *      Please see CATIASfmPositioningStrategyManager
+  * @param iPositionStrategyParms [in ] 
+  *      List of Parameters for Positioning the Contour. See CATIASfmStandardPosStrategyParameters
+  * @param ispTargetSfmObject [in ] 
+  *     Object on which Opening will be created
+  * @param ospOpening [out] 
+  *      Created Opening
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt><b>Example:<b>
+  *<dd>
+  * This Creates Opening on the Plate using StandardOpening Mode.The Factory is retrieved from the Part
+  * <pre>
+  *  'Get the Factory
+  *  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+  *  Dim StdOpening as SfmStandardOpening
+  *  Set StdOpening = Factory.CreateStandardOpening("FunctionalOpening", "Sfm_Rect", oListCkeParms, "CATSfmPosMidDistMidDist", PositionStrategyParms, plateref)
+  * </pre>
+  * </dl> 
+  */
+  HRESULT CreateStandardOpening (in CATBSTR iCategory, 
+    in CATBSTR iContourName, 
+    in CATIASfmStandardContourParameters iListContourParams, 
+    in CATBSTR iPosStrategyName, 
+    in CATIASfmStandardPosStrategyParameters iPositionStrategyParms, 
+    in CATIAReference ispTargetSfmObject, 
+    out /*IDLRETVAL*/ CATIASfmStandardOpening ospOpening); 
+
+  /**
+  * Gets the Opening Manager.Use this manager to get SfmOpeningContoursMgr or SfmPositioningStrategyManager. 
+  * Use SfmOpeningContoursMgr to GetAvailableStdOpeningContours and GetStdOpeningContourParams Methods.See CATIASfmOpeningContoursMgr
+  * Use SfmPositioningStrategyManager to manage Position of contour.See CATIASfmPositioningStrategyManager
+  *   @param iPrtPart [in]
+  *      Part which contains the plate on which opening is to be created.
+  *   @param iMgrName [in] 
+  *      SfmOpeningContoursMgr: Use to Get Contour Manager.
+  *      SfmPositioningStrategyManager: Use to Get Position Strategy Manager
+  *   @param oSfmOpeningMgr [out] 
+  *      Manager Object
+  * @return
+  *   <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt><b>Example:<b>
+  *<dd>
+  * This Example gets the Manager from Factory.
+  * <pre>
+  *  'Get the Factory
+  *  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+  *  'Retrieve the Contour Manager
+  *  Dim ObjSfmContourMgr As SfmOpeningContoursMgr
+  *  Set ObjSfmContourMgr = Factory.GetOpeningMgr(Part1, "SfmOpeningContoursMgr")
+  *  'Retrieve the Postion Strategy Manager
+  *  Dim ObjSfmPosStrategyMgr  As SfmPositioningStrategyManager
+  *  Set ObjSfmPosStrategyMgr = Factory.GetOpeningMgr(Part1, "SfmPositioningStrategyManager")
+  * </pre>
+  * </dl> 
+  */
+
+  HRESULT GetOpeningMgr(in CATIAPart iPrtPart, in CATBSTR iMgrName, out /*IDLRETVAL*/ CATBaseDispatch oSfmOpeningMgr);
+
+  /**
+  * Gets the list of Sfm References. Use it to prepare a list of U & V References for Standard Opening.
+  *<dl>
+  *<dt><b>Example:<b>
+  *<dd>
+  * This example populates a list for U References. Use the Add Method to add a reference to the list.
+  * <pre>
+  * Dim Factory As SfmFunctionFactory
+  * Set Factory = Part1.GetCustomerFactory("SfmFunctionFactory") 
+  * Dim Uref1 As Reference
+  * Set Uref1 = Part1.FindObjectByName("CROSS.95")
+  * Dim UrefList As SfmReferences
+  * Set UrefList = Factory.<font color="red">SfmReferences</font>
+  * UrefList.Add Uref1
+  * </pre>
+  * </dl> 
+  */
+#pragma PROPERTY SfmReferences
+  HRESULT get_SfmReferences(out/*IDLRETVAL*/ CATIASfmReferences oSfmReferences);
+};
+
+
+// Interface name : CATIASfmFunctionFactory
+#pragma ID CATIASfmFunctionFactory "DCE:0CB56503-C9E5-4eac-B8938FFE7A65D559"  
+#pragma DUAL CATIASfmFunctionFactory
+
+// VB object name : SfmOpening
+#pragma ID SfmFunctionFactory "DCE:6C5BFD5D-1016-42e3-B5E4906D9386A6BC"
+#pragma ALIAS CATIASfmFunctionFactory SfmFunctionFactory
+
+#endif

@@ -1,0 +1,202 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=============================================================================
+// CATIASfmOpening
+//   Interface to manage Edition of Openings
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Nov. 2010  Creation                                         Deshmane Rahul
+//=============================================================================
+#ifndef CATIASfmOpening_IDL
+#define CATIASfmOpening_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATIAReference.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+
+/**
+* Defines Edition Techniques for Openings created using sketch and 3D Object.
+* 
+*/
+interface CATIASfmOpening : CATIABase
+{   
+  /** 
+  * Determines if it is a Plate Opening or a Profile one.
+  * @param oStatus [out]
+  *     oStatus=0, if the Opening is on Plate
+  *     oStatus=1, if the Opening is Not on Plate
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example Checks weather the opening is a Plate Opening.
+  * <pre>
+  * 'Get the Existing Opening in the Part Document
+  * Dim OpeningPlate As SfmOpening
+  * Set OpeningPlate = part1.FindObjectByName("Opening_028")
+  * Dim Sel As Selection
+  * Set Sel = CATIA.ActiveDocument.Selection
+  * Sel.Add OpeningPlate 
+  * Dim OpenFact As SfmOpening
+  * Set OpenFact = Sel.FindObject("CATIASfmOpening")
+  * 'Get the Status of Opening
+  * Dim status As Long
+  * status = OpenFact.IsAPlateOpening
+  * </pre>
+  * </dl> 
+  */
+  HRESULT IsAPlateOpening(out /*IDLRETVAL*/long oStatus);
+
+  /**
+  * Returns or Sets the Opening Creation Mode.
+  * 0  for 3D Mode.
+  * 1 for Sketch Mode.
+  * 2 for StandardOpening Mode.
+  *<dl>
+  *<dt><b>Example:<b>
+  *<dd>
+  * This example gets the Creation Mode for existing Opening.
+  * <pre>
+  * 'Get the Existing Opening
+  * Dim OpeningPlate As SfmOpening
+  * Set OpeningPlate = part1.FindObjectByName("Opening_028")
+  * Dim Sel As Selection
+  * Set Sel = CATIA.ActiveDocument.Selection
+  * Sel.Add OpeningPlate 
+  * Dim OpenFact As SfmOpening
+  * Set OpenFact = Sel.FindObject("CATIASfmOpening")
+  * Dim CreationMode As Long
+  * CreationMode = OpenFact.<font color="red">CreationMode</font>
+  * </pre>
+  * </dl> 
+  */
+
+#pragma PROPERTY CreationMode
+  HRESULT put_CreationMode(in long  iMode);
+  HRESULT get_CreationMode(out /*IDLRETVAL*/ long  oMode);
+
+  /**
+  * Returns or Sets the Intersecting Element to Create a Opening.
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This example sets the intersecting element for the existing opening, after changing it's mode to sketch mode.
+  * <pre>
+  * 'Get the Creation Mode for Existing Opening. The Existing Opening is created using 3D Mode.
+  *  CreationMode = Opening1.CreationMode
+  * 'Set the Creation Mode for Existing Opening to sketch mode
+  * Opening1.CreationMode = 1
+  * 'Assign a new sketch to the existing opening
+  * Set Sketch = part1.FindObjectByName("Sketch.4")
+  * Set sketchref = part1.CreateReferenceFromObject(Sketch)
+  * Opening1.<font color="red">IntersectingElement</font> = sketchref
+  * </pre>
+  * </dl> 
+  */
+
+#pragma PROPERTY IntersectingElement
+  HRESULT put_IntersectingElement(in CATIAReference iIntersectingElement);
+  HRESULT get_IntersectingElement(out /*IDLRETVAL*/ CATIAReference oIntersectingElement);
+
+  /**
+  * Returns or Sets the Molded Surface for the Opening.
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This example modifies the molded surface for the existing opening.
+  * <pre>
+  * 'Get the Surface to be used as molded surface for the opening
+  * Dim GSDSurf As Reference
+  * Set GSDSurf = part1.FindObjectByName("Fill.1")
+  * Set GSDSurfref = part1.CreateReferenceFromObject(GSDSurf)
+  * Opening1.<font color="red">MoldedSurface</font> = GSDSurfref
+  * </pre>
+  * </dl> 
+  */
+
+#pragma PROPERTY MoldedSurface
+  HRESULT put_MoldedSurface(in CATIAReference iMoldedSurface);
+  HRESULT get_MoldedSurface(out /*IDLRETVAL*/ CATIAReference oMoldedSurface);
+
+  /**
+  * Returns or Sets the Direction for a Wire Element Case.
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This example modifies the direction of existing opening.
+  * <pre>
+  * 'Get the element to be used as direction element.
+  * Set Dir = part1.FindObjectByName("Line.4")
+  * Set DirRef = part1.CreateReferenceFromObject(Dir)
+  * Opening1.<font color="red">Direction</font> = DirRef
+  * </pre>
+  * </dl> 
+  */
+
+#pragma PROPERTY Direction
+  HRESULT put_Direction(in CATIAReference iDirection);
+  HRESULT get_Direction(out /*IDLRETVAL*/ CATIAReference oDirection);
+
+  /** 
+  * Gets the Direction for Opening in the form of Vector.
+  * @param oDirection [out]
+  *     Direction vector
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example Gets the Direction for the Opening.
+  * <pre>
+  * Dim Dir() As Variant
+  * Dir = OpeningPlate.GetDirection
+  * Dim x, y, z As Double
+  * x = Dir(0)
+  * y = Dir(1)
+  * z = Dir(2)
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetDirection(out /*IDLRETVAL*/ CATSafeArrayVariant oDirection);
+  /** 
+  * Sets Master mode on Copy Pasted Opening. It breaks the dependency by duplicating the sketch.
+  * @return
+  * <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt><b>Example:<b>
+  * <dd>
+  * This Example Sets Master Mdoe on a Copy Pasted Opening.
+  * <pre>
+  * Dim OpeningMaster As SfmOpening
+  * Set OpeningMaster = part1.FindObjectByName("Opening_035")
+  * Dim Sel As Selection
+  * Set Sel = CATIA.ActiveDocument.Selection
+  * Sel.Add OpeningMaster 
+  * Dim OpenFact As SfmOpening
+  * Set OpenFact = Sel.FindObject("CATIASfmOpening")
+  * OpenFact.SetMasterMode
+  * </pre>
+  * </dl> 
+  */
+  HRESULT SetMasterMode();
+};
+
+// Interface name : CATIASfmOpening
+#pragma ID CATIASfmOpening "DCE:32010629-BF85-4aff-BC5DE63AE2EC46FB"                                  
+#pragma DUAL CATIASfmOpening
+
+// VB object name : SfmOpening
+#pragma ID SfmOpening "DCE:EB7583F5-3263-4b5a-9C7DE9BFD1B79098"                           
+#pragma ALIAS CATIASfmOpening SfmOpening
+
+#endif

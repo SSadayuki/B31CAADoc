@@ -1,0 +1,558 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATMecModExtendItf CATIMmiErrUpdate Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATMecModExtendItf.htm" href="../CATMecModExtendItf.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATMecModExtendItf";	}
+		function getCurrentObjectName() { 
+ 	return "CATIMmiErrUpdate"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>CATMecModExtendItf Framework:  CATIMmiErrUpdate Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIMmiErrUpdate_30958','CATIMmiErrUpdate','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIMmiErrUpdate</b>
+</p>
+<p>
+<b><i> Interface to manage update error.</i></b><br>
+
+ <b>Role:</b>An update error is an error which occurs during the build process of
+ the feature. This error can be corrected by the end-user by modifying a parameter 
+ of the feature. An update error is made of:
+ <ul>
+ <li>A list of <i>sick</i> features:</li>
+  <br>a sick feature is a feature associated with the error. This list can help 
+  to know the features which are at the origin of the error.
+ <li>A diagnosis. </li>
+  <br>It is a NLS message to understand the error.
+ <li>An associated feature that aggregates the update error </li>
+ <br>On this feature use the <script type="text/javascript"> activateLinkAnchor('CATIMmiUseUpdateError','','CATIMmiUseUpdateError') </script> or @hrefCATIMmiUpdateError interface </ul>
+ About the <b>chained</b> sick features:
+ A sick feature can have an update error and this error has perhaps also sick features, and so one.
+ So from a current error, you can recursively find a set of chained sick features. 
+
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AddMmiSickFeature(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)"><b>AddMmiSickFeature</b></a>(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)
+</td><td id='tdright'>  Adds a sick feature in the list of sick features.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddMmiSickFeatures(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>AddMmiSickFeatures</b></a>(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Adds a list of sick features in the list of sick features.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CreateNewError(CATError*&amp;)"><b>CreateNewError</b></a>(CATError*&amp;)
+</td><td id='tdright'>  Creates a new update error.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMmiAllSickFeatures(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>GetMmiAllSickFeatures</b></a>(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Retrieves a list of chained sick features associated with the update error.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMmiAssociatedFeature(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)"><b>GetMmiAssociatedFeature</b></a>(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)
+</td><td id='tdright'>  Retrieves the feature that aggregates the error.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMmiDeepSickFeatures(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>GetMmiDeepSickFeatures</b></a>(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Retrieves only the deeper sick feature(s) for the given update error.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMmiDiagnostic(CATError*&amp;,CATUnicodeString&amp;)"><b>GetMmiDiagnostic</b></a>(CATError*&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the update error diagnosis.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMmiFullDiagnostic(CATError*&amp;,CATUnicodeString&amp;,int)"><b>GetMmiFullDiagnostic</b></a>(CATError*&amp;,CATUnicodeString&amp;,int)
+</td><td id='tdright'>  Retrieves all the chained sick features diagnoses.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMmiNLSDiagnostic(CATError*&amp;,CATUnicodeString&amp;)"><b>GetMmiNLSDiagnostic</b></a>(CATError*&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves a complete error diagnosis.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMmiSickFeatures(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"><b>GetMmiSickFeatures</b></a>(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)
+</td><td id='tdright'>  Retrieves the list of sick features associated with the update error.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsAnUpdateError(CATError*&amp;)"><b>IsAnUpdateError</b></a>(CATError*&amp;)
+</td><td id='tdright'>  Checks if the error is an update error.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsMmiCycleDetected(CATError*&amp;,CATBoolean&amp;)"><b>IsMmiCycleDetected</b></a>(CATError*&amp;,CATBoolean&amp;)
+</td><td id='tdright'>  Checks if the error is due to a cyclicity.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RemoveMmiSickFeature(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)"><b>RemoveMmiSickFeature</b></a>(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)
+</td><td id='tdright'>  Removes a sick feature from the list of sick features.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMmiAssociatedFeature(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)"><b>SetMmiAssociatedFeature</b></a>(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)
+</td><td id='tdright'>  Sets the feature to the error.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetMmiDiagnostic(CATError*&amp;,CATUnicodeString&amp;)"><b>SetMmiDiagnostic</b></a>(CATError*&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Sets the update error diagnosis.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AddMmiSickFeature"></a><a id="AddMmiSickFeature(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AddMmiSickFeature</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>iSickFeature</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds a sick feature in the list of sick features.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>  The error on wich the sick feature is added.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSickFeature</span></dt>
+   <dd>   The new sick feature.
+ 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the sick feature is successfully added.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddMmiSickFeatures"></a><a id="AddMmiSickFeatures(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AddMmiSickFeatures</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>iSickFeatures</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds a list of sick features in the list of sick features.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>  The error on wich the sick feature is added.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> iSickFeatures</span></dt>
+   <dd>   The new list of sick features.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the sick feature are successfully added.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CreateNewError"></a><a id="CreateNewError(CATError*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>CreateNewError</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>oError</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates a new update error.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oError</span></dt>
+   <dd>   The created error.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> the error is created
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMmiAllSickFeatures"></a><a id="GetMmiAllSickFeatures(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMmiAllSickFeatures</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oSickFetaures</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves a list of chained sick features associated with the update error.
+ <br><b>Role:</b>This method returns the sick features of the current error and
+  the sick features of each error associated with the previous sick features and so one....
+ 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>  The error from wich the sick features are retrieved.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oSickFeatures</span></dt>
+   <dd>  The list of chained sick features associated to the error.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the features are successfully retrieved.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMmiAssociatedFeature"></a><a id="GetMmiAssociatedFeature(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMmiAssociatedFeature</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>oAssociatedFeature</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the feature that aggregates the error.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>  The error from wich the feature is retrieved.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oAssociatedFeature</span></dt>
+   <dd>  The feature associated to the update error.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the feature correctly is retrieved.
+   <br><code>E_FAIL</code> otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMmiDeepSickFeatures"></a><a id="GetMmiDeepSickFeatures(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMmiDeepSickFeatures</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oDeepSickFeatures</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves only the deeper sick feature(s) for the given update error. 
+ <br><b>Role:</b>This method retrieves the deeper sick features of the <tt>iError</tt> parameter.
+ The returned feature(s) are 
+ those that the user sees in the Update Error Dialog box.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>   The error used to find the sick features.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oDeepSickFeatures</span></dt>
+   <dd>   The list of the deeper sick features of iErrUpdate .
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the features are correctly retrieved.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMmiDiagnostic"></a><a id="GetMmiDiagnostic(CATError*&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMmiDiagnostic</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oDiagnostic</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the update error diagnosis.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>   The error on wich the diagnosis is retrieved.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oDiagnostic</span></dt>
+   <dd>   The diagnosis.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the diagnosis is correctly retrieved.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMmiFullDiagnostic"></a><a id="GetMmiFullDiagnostic(CATError*&amp;,CATUnicodeString&amp;,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMmiFullDiagnostic</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oDiagnostic</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iIndentation</span><span class='param'>=1</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all the chained sick features diagnoses.
+ <br><b>Role:</b>  This method makes the concatenation of all 
+ the sick features diagnoses from the current feature.
+ It is the same method as the 
+<script type="text/javascript"> activateLinkAnchor('CATIMmiUseUpdateError','GetFullDiagnostic','CATIMmiUseUpdateError.GetFullDiagnostic') </script> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>   The error on wich the diagnosis is retrieved.
+ 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oDiagnostic</span></dt>
+   <dd>   The diagnosis.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> iIndentation</span></dt>
+   <dd>  The count of space before the first diagnosis.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the diagnosis is correctly retrieved.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMmiNLSDiagnostic"></a><a id="GetMmiNLSDiagnostic(CATError*&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMmiNLSDiagnostic</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oNLSDiagnostic</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves a complete error diagnosis.
+ <br><b>Role:</b>This method returns the concatenation of several diagnoses:
+ the diagnoses of the error (given by 
+<script type="text/javascript"> activateLinkAnchor('','GetMmiDiagnostic','GetMmiDiagnostic') </script> ) and the diagnoses of the  chained sick feature. 
+ 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>   The error on wich the NLS dignosis is retrieved.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNLSDiagnostic</span></dt>
+   <dd>   The diagnosis
+  
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the diagnosis is correctly retrieved.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMmiSickFeatures"></a><a id="GetMmiSickFeatures(CATError*&amp;,CATLISTV(CATIMmiMechanicalFeature_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMmiSickFeatures</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATLISTV(CATIMmiMechanicalFeature_var)','CATLISTV(CATIMmiMechanicalFeature_var)&amp;')</script> <span class='param'>oSickFeatures</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the list of sick features associated with the update error.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>  The error from wich the sick features are retrieved.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oSickFeatures</span></dt>
+   <dd>  The sick features associated with the error.
+  
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the features are successfully retrieved.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsAnUpdateError"></a><a id="IsAnUpdateError(CATError*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>IsAnUpdateError</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Checks if the error is an update error.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>   The error to check.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> the error is an update error
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsMmiCycleDetected"></a><a id="IsMmiCycleDetected(CATError*&amp;,CATBoolean&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>IsMmiCycleDetected</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean&amp;')</script> <span class='param'>oCyclicity</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Checks if the error is due to a cyclicity.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>   the error to check.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCyclicity</span></dt>
+   <dd>   TRUE if is an cyclicity error.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the information is retrieved.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="RemoveMmiSickFeature"></a><a id="RemoveMmiSickFeature(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>RemoveMmiSickFeature</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>iFeature</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Removes a sick feature from the list of sick features.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>  The error on wich the sick feature is removed.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd>   The feature to be removed from the list
+ 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the sick feature are successfully removed.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMmiAssociatedFeature"></a><a id="SetMmiAssociatedFeature(CATError*&amp;,CATIMmiMechanicalFeature_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetMmiAssociatedFeature</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>,<script type="text/javascript"> activateLink('CATIMmiMechanicalFeature_var','CATIMmiMechanicalFeature_var&amp;')</script> <span class='param'>iFeature</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the feature to the error.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>  The error on wich the feature is set.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd>   The iFeature to associate to the error.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the feature is successfully associated to the error.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetMmiDiagnostic"></a><a id="SetMmiDiagnostic(CATError*&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetMmiDiagnostic</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATError','CATError*&amp;')</script> <span class='param'>iError</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iDiagnosis</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the update error diagnosis.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iError</span></dt>
+   <dd>   The error on wich the diagnosis is set.
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> iDiagnosis</span></dt>
+   <dd>   The diagnosis.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    <code>S_OK</code> if the diagnosis is correctly set.
+   <br><code>E_FAIL</code> otherwise
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIMmiErrUpdate.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATMecModExtendItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

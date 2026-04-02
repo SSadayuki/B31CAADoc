@@ -1,0 +1,13 @@
+#
+# Makefile for the .idl files
+# which are in the ProtectedInterfaces directory
+#
+ 
+BUILT_OBJECT_TYPE=NONE
+#BUILD = YES 
+#
+# Flags for the idl compilation
+#
+SOURCES_PATH=ProtectedInterfaces
+COMPILATION_IDL=YES
+ 

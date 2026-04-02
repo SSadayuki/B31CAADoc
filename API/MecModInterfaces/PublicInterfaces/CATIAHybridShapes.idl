@@ -1,0 +1,85 @@
+#ifndef CATIAHybridShapes_IDL
+#define CATIAHybridShapes_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAHybridShapes:						   
+// Exposed interface for Mechanical HybridShapes collection
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Oct97 Creation					Ph Baucher
+// Dec97 Modification					 L Lalere
+// Feb98 COM compliance					 L Lalere
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATIAHybridShape.idl"
+interface CATIAHybridShape;
+interface CATIABoundary;
+
+//-----------------------------------------------------------------
+/**
+ * The collection of the HybridShapes making up a body.
+ */
+interface CATIAHybridShapes : CATIACollection
+{
+    /**
+     * Returns a HybridShape using its index or its name from the HybridShapes collection.
+     * @param iIndex
+     *   The index or the name of the HybridShape to retrieve from
+     *   the collection of HybridShapes.
+     *   As a numerics, this index is the rank of the HybridShape
+     *   in the collection.
+     *   The index of the first HybridShape in the collection is 1, and
+     *   the index of the last HybridShape is @href CATIACollection#Count.
+     *   As a string, it is the name you assigned to the HybridShape using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved HybridShape
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>ThisHybridShape</tt> the third HybridShape,
+     * and in <tt>ThatHybridShape</tt> the HybridShape named
+     * <tt>MyHybridShape</tt> in the HybridShape collection of the active document,
+     * supposed to be a part document.
+     * <pre>
+     * Set ThisHybridShape = CATIA.ActiveDocument.HybridShapes.<font color="red">Item</font>(3)
+     * Set ThatHybridShape = CATIA.ActiveDocument.HybridShapes.<font color="red">Item</font>("MyHybridShape")
+     * </pre>
+     */
+	HRESULT Item ( in CATVariant iIndex, out /*IDLRETVAL*/ CATIAHybridShape oHybridShape );
+	    /**
+     * Returns a boundary using its label.
+     * @param iLabel
+     *   Identification of the @href CATIABoundary object.
+	 *   See @href CATIAReference#DisplayName.
+     * @return The retrieved boundary
+     */
+	HRESULT GetBoundary (in CATBSTR iLabel, out /*IDLRETVAL*/ CATIABoundary oBoundary);
+
+};
+
+
+
+// Interface name : CATIAHybridShapes
+#pragma ID CATIAHybridShapes "DCE:89734e01-834a-0000-0280020c70000000"
+#pragma DUAL CATIAHybridShapes
+
+// VB object name : HybridShapes (Id used in Visual Basic)
+#pragma ID HybridShapes "DCE:89734e4f-1a0c-0000-0280020c70000000"
+#pragma ALIAS CATIAHybridShapes HybridShapes
+
+
+#endif
+// CATIAHybridShapes_IDL

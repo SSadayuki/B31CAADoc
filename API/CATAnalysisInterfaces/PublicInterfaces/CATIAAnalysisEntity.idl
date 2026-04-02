@@ -1,0 +1,249 @@
+#ifndef CATIAAnalysisEntity_IDL
+#define CATIAAnalysisEntity_IDL
+/*IDLREP*/
+
+//
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//
+//                                   
+// CATIAAnalysisEntity:                           
+// Exposed interface for Analysis Entity Management
+//                                   
+//
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+//-----------------------------------------------------------------
+interface CATIABasicComponents;
+interface CATIAReferences;
+interface CATIAReference;
+interface CATIAProduct;
+interface CATIAPart;
+interface CATIAConstraint;
+interface CATIAAnalysisImages;
+interface CATIAAnalysisLocalEntities;
+interface CATIAAnalysisSupports;
+interface CATIAPublication;
+
+/**
+ * Represent the  analysis entity object.
+ * This class provides services to describe a analysis entity. 
+ * It represents some preprocessing activities.<br>
+ * It agregates descriptive sub-entities named 
+ * Basic Components, and Analysis Supports.<br>
+ * The basic component represent the physical data and the support the localisation.
+ */
+//-----------------------------------------------------------------
+
+interface CATIAAnalysisEntity : CATIABase
+{
+
+/**
+  * Returns the type of the analysis entity.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns <tt>TypeofEntity</tt> of <tt>MyEntity</tt>.
+  * <pre>
+  * Dim MyEntity As AnalysisEntity
+  * Dim TypeofEntity As CATBSTR
+  * Set TypeofEntity = MyEntity.<font color="red">Type</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Type
+  HRESULT get_Type(inout /*IDLRETVAL*/ CATBSTR oType);
+
+/**
+ * Returns the basic components collection associated with an analysis entity.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>This example retrieves <tt> basiccomponents</tt> collection .<br>
+ * <pre>
+ * Dim MyEntity As AnalysisEntity
+ * Dim basiccomponents As BasicComponents 
+ * Set basiccomponents = MyEntity.<font color="red">BasicComponents</font>
+ * </pre>
+ * </dl>
+ */
+
+#pragma PROPERTY BasicComponents
+  HRESULT get_BasicComponents(out /*IDLRETVAL*/ CATIABasicComponents oComponents);
+
+ /**
+ * Returns the value corresponding to the given component.<br>
+ * @param iComponent  The identifier if the basic component.<br>
+ * @param iLabel  The label of the block containing the value.<br>
+ * @param iLineIndex  The line index of the value.<br>
+ * @param iColumnIndex  The column index of the value.<br>
+ * @param iLayerIndex  The layer index of the value.<br>
+ */
+
+  HRESULT GetValue(in CATBSTR iComponent,
+         in CATBSTR iLabel, 
+		     in long iLineIndex, 
+		     in long iColumnIndex, 
+		     in long iLayerIndex, 
+		     inout /*IDLRETVAL*/ CATVariant iValue); 
+
+/**
+ * Sets the value corresponding to the given component.<br>
+ * @param iComponent  The identifier if the basic component.<br>
+ * @param iLabel  The label of the block containing the value.<br>
+ * @param iLineIndex  The line index of the value.<br>
+ * @param iColumnIndex  The column index of the value.<br>
+ * @param iLayerIndex  The layer index of the value.<br>
+ * If the the component has a single value, assign 0 to the 3 parameters.
+ *
+ * <! @sample >
+ * This example create <tt>ThisAnalysisEntity</tt> in the <tt>analysisEntities</tt> collection <br>
+ * The entity to create is supposed to be a pressure defined in a load set. We<br>
+ * will valuate the basic component that contain the pressure data "SAMPressureMag".
+ * <pre>
+ * Dim analysisEntities As CATIAAnalysisEntities
+ * Dim ThisAnalysisEntity As AnalysisEntity
+ * Set ThisAnalysisEntity = analysisEntities.Add("SAMPressure")
+ * ThisAnalysisEntity.<font color="red">SetValue("SAMPressureMag"," ",0,0,0,100)</font>
+ * </pre>
+
+ */
+  HRESULT SetValue(in CATBSTR iComponent,
+         in CATBSTR iLabel, 
+		     in long iLineIndex, 
+		     in long iColumnIndex,
+		     in long iLayerIndex,
+	 	     in CATVariant iValue); 
+
+ /**
+ * Returns the reference corresponding to the given component.<br>
+ * @param iComponent  The identifier if the basic component.<br>
+ * @param iLabel  The label of the block containing the value.<br>
+ * @param iLineIndex  The line index of the value.<br>
+ * @param iColumnIndex  The column index of the value.<br>
+ * @param iLayerIndex  The layer index of the value.<br>
+ */
+
+  HRESULT GetReference(in CATBSTR iComponent,
+			in CATBSTR iLabel, 
+		    in long iLineIndex, 
+		    in long iColumnIndex, 
+		    in long iLayerIndex, 
+		    inout /*IDLRETVAL*/ CATIAReference iValue); 
+
+/**
+ * Sets the reference corresponding to the given component.<br>
+ * @param iComponent  The identifier if the basic component.<br>
+ * @param iLabel  The label of the block containing the value.<br>
+ * @param iLineIndex  The line index of the value.<br>
+ * @param iColumnIndex  The column index of the value.<br>
+ * @param iLayerIndex  The layer index of the value.<br>
+ * If the the component has a single value, assign 0 to the 3 parameters.
+ */
+  HRESULT SetReference(in CATBSTR iComponent,
+			in CATBSTR iLabel, 
+		    in long iLineIndex, 
+		    in long iColumnIndex,
+		    in long iLayerIndex,
+	 	    in CATIAReference iValue); 
+
+/**
+  * Returns the list of Analysis Supports.
+  * The support defines the area on which the analysis is applied on.
+  */
+#pragma PROPERTY AnalysisSupports
+  HRESULT get_AnalysisSupports(out /*IDLRETVAL*/ CATIAAnalysisSupports oSupports);
+
+/**
+  * Creates a new support and add it to the description of the Analysis Entity.
+  * @param iReference  the CATIA Reference that represent the object to linked. This identification,
+  *  may locate the instance of the object<br>
+  * @param iSupport  the CATIA Reference that represent the object to linked.<br>
+  * @see CATIAReference
+  */
+  HRESULT AddSupportFromReference(in CATIAReference iReference,
+                                  in CATIAReference iSupport);
+/**
+  * Creates a new support and add it to the description of the Analysis Entity.
+  * @param iPartProduct  the CATIA Product of the part.<br>
+  * @param iPart the CATIA Part that represent the object to linked.<br>
+  * @see CATIAReference , CATIAPart
+  */
+  HRESULT AddSupportFromPart(in CATIAProduct   iPartProduct,
+							 in CATIAPart      iPart);
+
+/**
+  * Creates a new support and add it to the description of the Analysis Entity.
+  * @param iConstraintProduct  the CATIA Product of the Constraint.<br>
+  * @param iConstraint the CATIA Constraint that represent the object to linked.<br>
+  * @see CATIAReference , CATIAPart
+  */
+  HRESULT AddSupportFromConstraint(in CATIAProduct    iConstraintProduct,
+							       in CATIAConstraint iConstraint);
+
+/**
+  * Creates a new support and add it to the description of the Analysis Entity.
+  * @param iProduct  the CATIA Product that represent the object to linked.<br>
+  * @param iSupport  the CATIA Reference that represent the object to linked.<br>
+  * @see CATIAReference , CATIAProduct
+  */
+  HRESULT AddSupportFromProduct(in CATIAProduct   iProduct,
+                                in CATIAReference iSupport);
+
+/**
+  * Creates a new support and add it to the description of the Analysis Entity.
+  * @param iProduct  the CATIA Product that represent the object to linked.<br>
+  * @param iPublication  the CATIA Publication that represent the object to linked.<br>
+  * @see CATIAPublication , CATIAProduct
+  */
+  HRESULT AddSupportFromPublication(in CATIAProduct   iProduct,
+                           in CATIAPublication iPublication);
+
+/**
+ * Returns the analysis images collection associated with an analysis entity.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>This example retrieves <tt>analysisimages</tt> collection .<br>
+ * <pre>
+ * Dim MyEntity As AnalysisEntity
+ * Dim analysisimages As AnalysisImages
+ * Set analysisimages = MyEntity.<font color="red">AnalysisImages </font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY AnalysisImages
+	HRESULT get_AnalysisImages(out /*IDLRETVAL*/ CATIAAnalysisImages oAnalysisImages);
+
+/**
+ * Returns the analysis local entity collection associated with an analysis entity.
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>This example retrieves <tt>analysislocalEntity</tt> collection .<br>
+ * <pre>
+ * Dim MyEntity As AnalysisEntity
+ * Dim analysislocalEntity As AnalysisLocalEntities
+ * Set analysislocalEntity = MyEntity.<font color="red">AnalysisLocalEntities </font>
+ * </pre>
+ * </dl>
+ */
+
+#pragma PROPERTY AnalysisLocalEntities
+	HRESULT get_AnalysisLocalEntities(out /*IDLRETVAL*/ CATIAAnalysisLocalEntities oAnalysisLocalEntities);
+
+};
+
+// Interface name : CATIAAnalysisEntity
+#pragma ID CATIAAnalysisEntity "DCE:84a39cae-9a7d-11d2-97ba0008c71933b6"
+#pragma DUAL CATIAAnalysisEntity
+
+// VB object name : AnalysisEntity (Id used in Visual Basic)
+#pragma ID AnalysisEntity "DCE:8e81859e-9a7d-11d2-97ba0008c71933b6"
+#pragma ALIAS CATIAAnalysisEntity AnalysisEntity
+
+#endif
+// CATIAAnalysisEntity_IDL

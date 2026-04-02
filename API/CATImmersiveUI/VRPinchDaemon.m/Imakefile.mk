@@ -1,0 +1,25 @@
+#
+# LOAD MODULE
+#
+BUILT_OBJECT_TYPE= LOAD MODULE
+
+OS = COMMON
+
+LINK_WITH = JS0MT JS0GROUP
+
+
+OS = AIX
+BUILD=NO
+
+OS = HP-UX
+BUILD=NO
+
+OS = SunOS
+BUILD=NO
+SYS_LIBS = -lsocket -lnsl -lXt
+
+OS = Windows_NT
+BUILD=NO
+SYS_LIBS = vfw32.lib wsock32.lib
+LOCAL_LDFLAGS =  $(SUB_CON)
+

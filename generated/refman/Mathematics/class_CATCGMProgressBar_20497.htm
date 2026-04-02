@@ -1,0 +1,292 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>Mathematics CATCGMProgressBar Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../Mathematics.htm" href="../Mathematics.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "Mathematics";	}
+		function getCurrentObjectName() { 
+ 	return "CATCGMProgressBar"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>Mathematics Framework: CATCGMProgressBar <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATCGMProgressBar_20497','CATCGMProgressBar','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATCGMProgressBar</b>
+</p>
+<p>
+<b><i> Class to track the progress of a task.</i></b><br>
+
+ This object can be used in the <tt>Run</tt> of an operator to specify an estimated progress rate for different steps
+ of the algorithm. A progress bar can be assigned an interruption function which is to be written by the calling application. 
+ A progress bar indicator is incremented between 0 and 100. 
+ Progress bars can be nested
+ which is useful if an operator calls other operators which may themselves call other operators.  With this
+ mecanism, progress can be tracked linearly between 0 and 100 regardless of the nesting depth.<br>
+ <b>Example</b>
+ If Operator A calls Operators B and C, 
+ it can assign to them the progress bars and sets arbitrary proportions.  For instance, assume that the Run method 
+ from A calls sequentially the Run methods from B and C and finally a Foo method from A.  Furthermore,
+ assume that on average 30% of the time is spent in B::Run, 50% in C::Run and 20% in A::Foo. 
+ The three operators have a SetProgressBar method that sets the callback in the operator; <br>
+ Let _operA_CB be a pointer to a progress bar instance set in A. Then, the A::Run and A::Foo would be implemented 
+ as follows:
+ <pre>
+  CATBoolean A::Run ()
+  {
+    CATBoolean okToContinue = TRUE;
+
+    B operB;
+    C operC;
+
+    // _operA_CB is the progress bar that is set in Class A.
+
+    CATCGMProgressBar operB_CB (_operA_CB, 0.0, 30.0);     // 30%
+    b.SetProgressBar (&operB_CB);
+    okToContinue = operB.Run ();
+
+    if (okToContinue)
+    {
+      CATCGMProgressBar operC_CB (_cb, 30.0, 80.0);        // 50%
+      c.SetProgressBar (&cCB);
+      okToContinue = operC.Run ();
+    }
+
+    if (okToContinue)
+    {
+      CATCGMProgressBar fooCB (_cb, 80.0, 100.0);          // 20%
+      okToContinue = Foo (&fooCB);
+    }
+    
+    return okToContinue;
+  }
+
+  okToContinue = A::Foo (CATCGMProgressBar* fooCB)
+  {
+    CATBoolean okToContinue = TRUE;
+
+    if (fooCB)
+      okToContinue = fooCB->SetProgress (0.0);
+    +++
+
+    if (fooCB && okToContinue)
+      okToContinue = fooCB->SetProgress (50.0);
+    +++
+
+    if (okToContinue)
+      okToContinue = fooCB->SetProgress (100.0);
+    +++
+     
+  }
+ </pre></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATCGMProgressBar()"><b>CATCGMProgressBar</b></a>()
+</td><td id='tdright'> </td></tr>  <tr><td id='tdleft'>
+    <a href="#CATCGMProgressBar(CATCGMProgressBar*,double,double)"><b>CATCGMProgressBar</b></a>(CATCGMProgressBar*,double,double)
+</td><td id='tdright'>  Constructs a nested progress bar.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATCGMProgressBar()"><b>~CATCGMProgressBar</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetInterruptFunction()"><b>GetInterruptFunction</b></a>()
+</td><td id='tdright'>   Returns the external interrupt function (NULL if none)
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetProgress()"><b>GetProgress</b></a>()
+</td><td id='tdright'>  Returns the progress currently made.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetProgress(double,double,CATBoolean,char*)"><b>SetProgress</b></a>(double,double,CATBoolean,char*)
+</td><td id='tdright'>  Sets the progress.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetProgressBarFunction(CATCGMInterruptFunction)"><b>SetProgressBarFunction</b></a>(CATCGMInterruptFunction)
+</td><td id='tdright'>  Sets the progress bar display and interrupt function.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATCGMProgressBar"></a><a id="CATCGMProgressBar()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATCGMProgressBar</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+<dt class='dtmethod' >
+  <a id="CATCGMProgressBar"></a><a id="CATCGMProgressBar(CATCGMProgressBar*,double,double)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATCGMProgressBar</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCGMProgressBar','CATCGMProgressBar*')</script> <span class='param'>iParentProgressBar</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iStartPercentage</span><span class='param'>= 0.0</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iEndPercentage</span><span class='param'>= 100.0</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs a nested progress bar.
+ The two arguments are the mapped starting and end percentage values respectively:
+ <ul>
+ <li>A call to SetProgress (0.0) will map the progress to the iStartPercentage value and will call
+ callback->SetProgress (startPercentage).
+ <li>A call to SetProgress (100.0) will map the progress to the iEndPercentage value and will call
+ callback->SetProgress (endPercentage).
+ </ul>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParentProgressBar</span></dt>
+   <dd> The parent progress bar.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStartPercentage</span></dt>
+   <dd> A value between 0.0 and 100.0 to which a progress of 0% will be mapped.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iEndPercentage</span></dt>
+   <dd> A value between 0.0 and 100.0 to which a progress of 100% will be mapped. 
+ The iEndPercentage must be greater or equal to the iStartPercentage.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATCGMProgressBar"></a><a id="~CATCGMProgressBar()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATCGMProgressBar</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetInterruptFunction"></a><a id="GetInterruptFunction()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATCGMInterruptFunction','CATCGMInterruptFunction')</script>  <span class='objname'>GetInterruptFunction</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Returns the external interrupt function (NULL if none)
+</dd>
+<dt class='dtmethod' >
+  <a id="GetProgress"></a><a id="GetProgress()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('double','double')</script>  <span class='objname'>GetProgress</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the progress currently made.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  A double between 0 and 100.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetProgress"></a><a id="SetProgress(double,double,CATBoolean,char*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script>  <span class='objname'>SetProgress</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iValue</span>, const <script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iTotalValue</span><span class='param'>= 100.0</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iThrowIfInterrupted</span><span class='param'>= FALSE</span>, const <script type="text/javascript"> activateLink('char','char*')</script> <span class='param'>iStaticConstLabel</span><span class='param'>= NULL</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the progress.
+ <ul>
+ <li>If iValue=0 and iTotal value=0, interrupt function is called to check if "stop" is requested.
+ <li>If iValue is outside progress range, the real progress value won't change.
+ <li>An internal test avoid any progress back if iValue is lesser than current progress value.
+ </ul>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iValue</span></dt>
+   <dd> The value currently reached (between 0 and iTotalValue if iTotalValue>0.)
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTotalValue</span></dt>
+   <dd> The value that is reached when 100% progress is achieved.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iThrowIfInterrupted</span></dt>
+   <dd> Indicates if an error "MathInterruptedOperator_ERR_110" has to be raised in case of interruption
+ 
+ </ dd>
+    <dt><span class='paramitem'> iStaticConstLabel</span></dt>
+   <dd>    This value is usefull for debugging purpose.
+    if not NULL, to avoid memory lifecycle and invalid pointer, it MUST refers something such as :
+     <pre> 
+        static const char MyOperationLabel[] = "IntersectionFaceFace"; 
+        const char* iStaticConstLabel = MyOperationLabel; 
+     </pre>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  A boolean to specify whether computation should continue (TRUE) or stop (FALSE.)
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetProgressBarFunction"></a><a id="SetProgressBarFunction(CATCGMInterruptFunction)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetProgressBarFunction</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCGMInterruptFunction','CATCGMInterruptFunction')</script> <span class='param'>ipInterruptFunction</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the progress bar display and interrupt function. The progress bar function cannot be specified twice.
+ If a parent progress bar is specified, its interrupt function is used,
+ even if  an other interrupt function is set by SetProgressBarFunction.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ipInterruptFunction</span></dt>
+   <dd> The interruption function to be written by the calling application.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATCGMProgressBar.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATMathStream</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

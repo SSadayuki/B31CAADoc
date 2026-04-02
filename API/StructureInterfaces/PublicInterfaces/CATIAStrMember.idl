@@ -1,0 +1,246 @@
+#ifndef CATIAStrMember_IDL
+#define CATIAStrMember_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIAStructuralObject
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+//
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 09/12/97
+//  But   : Creation
+//
+// ****************************************************************************
+interface CATIADocument;
+interface CATIAStrMemberExtremity;
+interface CATIAStrSection;
+interface CATIAStrAnchorPoint;
+interface CATIAParameter;
+interface CATIAStrCutback;
+
+#include "CATIAStrObject.idl"
+#include "CATSafeArray.idl"
+#include "CATIAStrServices.idl"
+
+  /**
+   * Represents a member object. The member object aggregates a section coming
+   * from a catalog, a support and two extremities.
+   *
+   * The member object inherits all methods from the structure object and the 
+   * product object.
+   */
+
+interface CATIAStrMember : CATIAStrObject
+{
+
+	/**
+	* Returns or sets the section object.
+    * @sample
+    * <pre>
+	* Dim section As StrSection
+    * Set section = Member_1.<font color="red">Section</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY Section
+
+	HRESULT get_Section(out /*IDLRETVAL*/ CATIAStrSection oSection);
+
+	/**
+	* Returns the member's start extremity object.
+    * @sample
+    * <pre>
+	* Dim extremity As StrMemberExtremity
+    * Set extremity = Member_1.<font color="red">StartExtremity</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY StartExtremity
+
+	HRESULT get_StartExtremity(out /*IDLRETVAL*/ CATIAStrMemberExtremity oExtremity);
+
+	/**
+	* Returns the member's end extremity object.
+    * @sample
+    * <pre>
+	* Dim extremity As StrMemberExtremity
+    * Set extremity = Member_1.<font color="red">EndExtremity</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY EndExtremity
+
+	HRESULT get_EndExtremity(out /*IDLRETVAL*/ CATIAStrMemberExtremity oExtremity);
+
+	/**
+	* Returns or sets the current anchor point used to locate the section on the
+	* support object.
+    * @sample
+    * <pre>
+    * name = Member_1.<font color="red">CurrentAnchorPointName</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY CurrentAnchorPointName
+
+	HRESULT get_CurrentAnchorPointName(inout /*IDLRETVAL*/ CATBSTR oName);
+	
+	HRESULT put_CurrentAnchorPointName(in CATBSTR iName);
+
+	/**
+	* Returns or set the orientation of the section on the support object.
+    * @sample
+    * <pre>
+    * angle = Member_1.<font color="red">Angle</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY Angle
+
+	HRESULT get_Angle(out /*IDLRETVAL*/ double oAngle);
+	
+	HRESULT put_Angle(in double iAngle);
+
+	/**
+	* Returns the parameter used to define the orientation of the section on the
+	* support object.
+    * @sample
+    * <pre>
+	* Dim angle As Parameter
+    * Set angle = Member_1.<font color="red">AngleParameter</font>
+    * </pre>
+	*/
+
+#pragma PROPERTY AngleParameter
+
+	HRESULT get_AngleParameter(out /*IDLRETVAL*/ CATIAParameter oAngle);
+
+	/** 
+	* Rotates the section on its support object. The given angle is applied using
+	* the current orientation of the section.
+    * @sample
+    * <pre>
+	* Dim extremity As StrMemberExtremity
+    * Set extremity = Member_1.<font color="red">StartExtremity</font>
+    * </pre>
+	*/
+
+	HRESULT Rotate(in double iAngle);
+
+	/**
+	* Flips the section. Useful for asymetric section as the angle section, or the channel
+	* section.
+    * @sample
+    * <pre>
+    * Member_1.<font color="red">Rotate</font>(1,25)
+    * </pre>
+	*/
+
+	HRESULT Flip();
+
+	/**
+	* Retrieves or sets the surface reference object for the member. The 
+	* section will be oriented using this surface reference object if one is set.
+	* Nevertheless, the surface reference object can be null.
+        * <! @sample >
+        * <dl>
+        * <dt><b>Example:</b>
+        * <dd>
+        * This example sets the reference object to null.
+        * <pre>
+        * myMember.<font color="red">SurfaceReference</font> = Nothing
+        * </pre>
+        * </dl>
+	*/
+
+#pragma PROPERTY SurfaceReference
+
+	HRESULT get_SurfaceReference(out /*IDLRETVAL*/ CATIAReference oSurface);
+	
+	HRESULT put_SurfaceReference(in CATIAReference iSurface);
+
+	/**
+	* Retrieves the result support object. 
+	*
+	* For example, if your member object is created using two points, the result
+	* support object will be the line joining these two points.
+	*/
+
+#pragma PROPERTY Support
+
+	HRESULT get_Support(out /*IDLRETVAL*/ CATIAReference oSupport);
+
+	/**
+	* Retrieves the input support. The input support is the given support at the creation
+	* of the member.
+	*/
+
+#pragma PROPERTY InputSupport
+
+	HRESULT get_InputSupport(out /*IDLRETVAL*/ CATIAReference oInputSupport);
+
+	/**
+	* Creates a cutback object between two member objects.
+	*
+	* @param iMember
+	*	The relimiting member
+	* @param iCutback
+	*	The type of the cutback.
+	* @param iOffset
+	*	The offset used in the cutback.
+	*
+    * @sample
+    * The following example create a cutback 
+    * 
+    * <pre>
+	* Dim cutback As StrCutback
+    * Set cutback = Member_1.<font color="red">CreateCutback</font>(Member_2, catStrWeldedType, 0.05)  
+    * </pre>
+	*/
+
+	HRESULT CreateCutback(in CATIAStrMember iMember,
+							in CatStrCutbackType iCutback,
+							in double iOffset,
+							out /*IDLRETVAL*/ CATIAStrCutback oCutback); 
+
+};
+
+// Interface name : CATIAStrMember
+#pragma ID CATIAStrMember "DCE:dbcc2696-e36a-11d2-b7f20008c70fcbec"
+#pragma DUAL CATIAStrMember
+
+#pragma ID StrMember "DCE:efde1234-e36a-11d2-b7f20008c70fcbec"
+#pragma ALIAS CATIAStrMember StrMember
+
+#endif

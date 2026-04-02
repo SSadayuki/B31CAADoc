@@ -1,0 +1,32 @@
+#
+# LOAD MODULE
+#
+BUILT_OBJECT_TYPE=LOAD MODULE
+
+PROGRAM_NAME = DSLicMgt
+MKMFC_DEPENDENCY = yes
+
+LINK_WITH = DI0PANV2 JS0STR JS0FM  JS0GROUP CATDlgStandard   JS0ZLIB JS0MT DSLicMgtDlg  JS0DSLUTILS DSLSArch  SSLArch LCCArch #\
+#Logon Matrix One V6            ObjectModelerSystem CATAfrFoundation
+
+#
+OS = AIX
+
+#
+OS = HP-UX
+
+#
+OS = IRIX
+
+#
+OS = SunOS
+SYS_LIBS = -lXm
+
+OS = Windows_NT
+LOCAL_LDFLAGS= $(SUB_WIN)
+DESCRIPTION = "Offline License Management"
+
+## @linux mcf 2004-06-02.12:47:29 [Linux support: Add CATDlgStandard] ##
+OS = Linux
+LINK_WITH = DI0PANV2 JS0STR JS0FM JS0GROUP CATDlgStandard  JS0DSLIC JS0ZLIB JS0MT DSLicMgtDlg JS0DSLUTILS
+

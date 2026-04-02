@@ -1,0 +1,22 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+#
+LINK_WITH= JS0GROUP CATSysTS CATCDS CATCDSUtilities CATTechTools CATMathStream CATMathematics \
+  CATAdvancedMathematics CATCGMGeoMath \
+  CATGeometricObjects CATGMGeometricInterfaces CATGeometricOperators \
+  CATGMModelInterfaces CATGMOperatorsInterfaces \
+  BODYNOPE \
+  CATCDSV5Driver
+
+LOCAL_CCFLAGS_ASSERT=-DNOT_CDS_ASSERT $(MKMK_DEBUG:+"-DCDS_ASSERT")
+
+#if os Windows
+LOCAL_CCFLAGS=-D_HAS_EXCEPTIONS=0 $(LOCAL_CCFLAGS_ASSERT)
+#elif os Linux
+LOCAL_CCFLAGS=-std=c++0x -DCPP11_AVALAIBLE $(LOCAL_CCFLAGS_ASSERT)
+#else
+LOCAL_CCFLAGS=$(LOCAL_CCFLAGS_ASSERT)
+#endif
+

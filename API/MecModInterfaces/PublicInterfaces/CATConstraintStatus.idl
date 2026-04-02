@@ -1,0 +1,62 @@
+#ifndef CatConstraintStatus_IDL
+#define CatConstraintStatus_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CatConstraintStatus:						   
+// enumeration for all possible states of a constraint
+//								   
+//=================================================================
+// Dec97 Creation                                        JJ Auffret 
+// May98 Update						 JM Gautier
+//=================================================================
+/**
+ * Possible state of a constraint. 
+ * <br>
+ * Indicates whether a constraint is 
+ * satisfied or not, along with a diagnosis when not satisfied.
+ * @param catCstStatusOK
+ *    The constraint is satisfied.
+ * @param catCstStatusKOStronglyNotSatisfied
+ *    The constraint is strongly not satisfied (e.g. distance constraint 
+ * 	between two planes, which are not currently parallel).
+ * @param catCstStatusKOWrongOrientOrSide
+ *    The constraint is not satisfied because of the wrong orientation or 
+ *    side of its geometric elements (e.g. planes are parallel and at 
+ *    the specified distance, but their orientation is inverted with 
+ *    respect to the one specified by the constraint).
+ * @param catCstStatusKOWrongValue
+ *    The constraint is not satisfied because of its value 
+ *    (e.g. planes are parallel and at the specified orientation and side
+ *    but not at the specified distance).   
+ * @param catCstStatusKOWrongGeomEltType
+ *    The constraint is not satisfied because of the wrong type of 
+ *    its geometric elements (e.g.  angle between a point and a plane).
+ *    It can happen in an assembly when replacing a part by another.
+ * @param catCstStatusKOBroken
+ *    The constraint is not satisfied because a geometric element is
+ *    missing. It can happen in an assembly when a part is missing.       
+ */
+
+
+enum CatConstraintStatus	
+{
+	catCstStatusOK,
+	catCstStatusKOStronglyNotSatisfied,
+	catCstStatusKOWrongOrientOrSide,
+	catCstStatusKOWrongValue,
+	catCstStatusKOWrongGeomEltType,
+	catCstStatusKOBroken
+};
+
+#endif // CatConstraintStatus_IDL 
+
+

@@ -1,0 +1,152 @@
+// COPYRIGHT Dassault Systemes 2010
+//===================================================================
+//
+// CATIAAnalysisPostProANRSettingAtt.idl
+// Automation interface for the GeneralSettingAtt element 
+// Dedicated to ANR
+// Interface created to keep the run time compatibility of CATIAAnalysisPostProSettingAtt
+// Interface only used in CXR20
+//
+//===================================================================
+//
+// Usage notes:
+//   New interface: describe its use here
+//
+//===================================================================
+//
+//  Jul 2010  Creation: lr1
+//===================================================================
+#ifndef CATIAAnalysisPostProANRSettingAtt_IDL
+#define CATIAAnalysisPostProANRSettingAtt_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+// Putting your explanations in the following "JavaDoc"-like comment will enable mkdcidl to document your class.
+/**  
+ * Interface to handle the Analysis & Simulation "PostProcessingSetting".
+ */
+interface CATIAAnalysisPostProANRSettingAtt : CATIASettingController 
+{  
+   #pragma PROPERTY DMUPlayerDeformation
+   /**
+   * Returns or sets the DMUPlayerDeformation parameter.
+   * @param iDMUPlayerDeformation
+   * <b>Legal values</b>:
+   * <br><tt>1 :</tt> Deformation is real
+   * <br><tt>2 :</tt> Deformation is amplified
+   * Ensure consistency with the C++ interface to which the work is delegated.
+   */
+   HRESULT get_DMUPlayerDeformation(out /*IDLRETVAL*/ long		oDMUPlayerDeformation);
+	 
+   HRESULT put_DMUPlayerDeformation( in long    iDMUPlayerDeformation );
+     
+   /** 
+   * Retrieves environment informations for the DMUPlayerDeformation parameter.
+   * <br><b>Role</b>:Retrieves the state of the DMUPlayerDeformation parameter 
+   * in the current environment. 
+   * @param ioAdminLevel
+   * <br>If the parameter is locked, AdminLevel gives the administration
+   * level that imposes the value of the parameter.
+   * <br>If the parameter is not locked, AdminLevel gives the administration
+   * level that will give the value of the parameter after a reset.
+   * @param ioLocked
+   * Indicates if the parameter has been locked.
+   * @return 
+   * Indicates if the parameter has been explicitly modified or remain
+   * to the administrated value.
+   */
+   HRESULT GetDMUPlayerDeformationInfo( inout   CATBSTR   ioAdminLevel,
+                                     inout   CATBSTR   ioLocked,
+                                     out  /*IDLRETVAL*/	boolean  oModified
+                                   );
+
+  /**
+  * Locks or unlocks the DMUPlayerDeformation parameter.
+  * <br><b>Role</b>:Locks or unlocks the DMUPlayerDeformation parameter if it is possible
+  * in the current administrative context. In user mode this method will always
+  * return E_FAIL.
+  * @param iLocked
+  *	the locking operation to be performed
+  *	<b>Legal values</b>:
+  *	<br><tt>TRUE :</tt>   to lock the parameter.
+  * <br><tt>FALSE:</tt>   to unlock the parameter.
+  */
+  HRESULT SetDMUPlayerDeformationLock( in  boolean iLocked );
+
+  
+   #pragma PROPERTY DMUPlayerMode
+   /**
+   * Returns or sets the DMUPlayerMode parameter.
+   * @param iDMUPlayerMode
+   * <b>Legal values</b>:
+   * <br><tt>1 :</tt> Mode is One Occurrence
+   * <br><tt>2 :</tt> Mode is All Occurrences
+   * Ensure consistency with the C++ interface to which the work is delegated.
+   */
+   HRESULT get_DMUPlayerMode(out /*IDLRETVAL*/ long		oDMUPlayerMode);
+	 
+   HRESULT put_DMUPlayerMode( in long    iDMUPlayerMode );
+     
+   /** 
+   * Retrieves environment informations for the DMUPlayerMode parameter.
+   * <br><b>Role</b>:Retrieves the state of the DMUPlayerMode parameter 
+   * in the current environment. 
+   * @param ioAdminLevel
+   * <br>If the parameter is locked, AdminLevel gives the administration
+   * level that imposes the value of the parameter.
+   * <br>If the parameter is not locked, AdminLevel gives the administration
+   * level that will give the value of the parameter after a reset.
+   * @param ioLocked
+   * Indicates if the parameter has been locked.
+   * @return 
+   * Indicates if the parameter has been explicitly modified or remain
+   * to the administrated value.
+   */
+   HRESULT GetDMUPlayerModeInfo( inout   CATBSTR   ioAdminLevel,
+                                     inout   CATBSTR   ioLocked,
+                                     out  /*IDLRETVAL*/	boolean  oModified
+                                   );
+
+  /**
+  * Locks or unlocks the DMUPlayerMode parameter.
+  * <br><b>Role</b>:Locks or unlocks the DMUPlayerMode parameter if it is possible
+  * in the current administrative context. In user mode this method will always
+  * return E_FAIL.
+  * @param iLocked
+  *	the locking operation to be performed
+  *	<b>Legal values</b>:
+  *	<br><tt>TRUE :</tt>   to lock the parameter.
+  * <br><tt>FALSE:</tt>   to unlock the parameter.
+  */
+  HRESULT SetDMUPlayerModeLock( in  boolean iLocked );
+
+
+  
+   #pragma PROPERTY DMUPlayerStepsNumber
+   /**
+   * Returns or sets the DMUPlayerStepsNumber parameter.
+   * Ensure consistency with the C++ interface to which the work is delegated.
+   */
+   HRESULT get_DMUPlayerStepsNumber(out /*IDLRETVAL*/ long		oDMUPlayerStepsNumber);
+	 
+   HRESULT put_DMUPlayerStepsNumber( in long    iDMUPlayerStepsNumber );
+};
+
+// Interface name : CATIAAnalysisPostProANRSettingAtt
+#pragma ID CATIAAnalysisPostProANRSettingAtt "DCE:4b9c4700-d2d4-4c1d-9919d264950a98d1"
+#pragma DUAL CATIAAnalysisPostProANRSettingAtt
+
+// VB object name : PostProANRGeneralSettingAtt (Id used in Visual Basic)
+#pragma ID AnalysisPostProANRSettingAtt "DCE:bf87b0fd-14cf-4000-808bfb37b57a47b1"
+#pragma ALIAS CATIAAnalysisPostProANRSettingAtt AnalysisPostProANRSettingAtt 
+
+#endif

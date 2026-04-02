@@ -1,0 +1,79 @@
+#ifndef CATIAPositionedMaterial_IDL
+#define CATIAPositionedMaterial_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIAPositionedMaterial:                           
+// Exposed interface for Positioned Material object
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATIAMaterial.idl"
+
+/**
+ * Represents a Positioned Material object.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAPositionedMaterial : CATIABase
+{
+#pragma PROPERTY Material
+  /**
+   * Returns the material object from the current positioned material.
+   */
+  HRESULT get_Material(out /*IDLRETVAL*/ CATIAMaterial oMaterial);
+
+  /**
+   * Returns the application mode of the material.
+   * <ul> Possible mode values are:
+   *   <li>  0: Material has been applied as a copy on the geometrical object </li>
+   *   <li>  1: Material has been applied as a link on the geometrical object </li>
+   * </ul>
+   */
+#pragma PROPERTY ApplicationMode
+  HRESULT  get_ApplicationMode ( out /*IDLRETVAL*/ short oApplicationMode);
+
+  /**
+   * Returns or sets the inheritance mode of an applied material.
+   * <ul> Possible inheritance mode values are:
+   *   <li>  0: The material is propagated towards its children </li>
+   *   <li>  1: The material is not propagated towards its children </li>
+   *   <li>  2: The material do not accept material propagated by its father (forced mode)</li>
+   * </ul>
+   */
+#pragma PROPERTY InheritanceMode
+  HRESULT  get_InheritanceMode ( out /*IDLRETVAL*/ short oInheritanceMode);
+  HRESULT  put_InheritanceMode ( in short iInheritanceMode);
+};
+
+// Interface Name : CATIAMaterial
+#pragma ID CATIAPositionedMaterial "DCE:a6727e46-2052-0000-0280030c8d000000"
+#pragma DUAL CATIAPositionedMaterial
+ 
+// VB Object Name : PositionedMaterial
+#pragma ID PositionedMaterial "DCE:a6728772-7f45-0000-0280030c8d000000"
+#pragma ALIAS CATIAPositionedMaterial PositionedMaterial
+
+#endif
+// CATIAPositionedMaterial_IDL
+
+
+
+
+
+
+

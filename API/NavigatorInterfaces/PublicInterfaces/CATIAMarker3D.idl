@@ -1,0 +1,278 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAMarker3D.idl
+//   This automation interface allows the manage Marker3D information.
+//
+//===================================================================
+//
+//  Aug 2000  Creation: LJE
+//
+//===================================================================
+#ifndef CATIAMarker3D_IDL
+#define CATIAMarker3D_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+#include "CatMarker3DType.idl"
+#include "CatMarkerTextOrientation.idl"
+
+/**  
+ * Represents a marker 3D.
+ */
+interface CATIAMarker3D : CATIABase
+{
+  /**
+   * Returns the type of the marker 3D.
+   * @sample
+   *    This example reads the type of <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim type As CatMarker3DType
+   *    type = NewMarker3D.<font color="red">Type</font>
+   *    </pre>
+   */
+#pragma PROPERTY Type
+    HRESULT get_Type(out /*IDLRETVAL*/ CatMarker3DType oType);
+
+  /**
+   * Retrieves the coordinates of the positions of a text marker 3D. The bottom-left corner of the text is anchored to a given point.
+   * @return
+   *    The coordinates of the text anchor point
+   *    <ul>
+   *    <li>oCoordinates(0) is the X coordinate of the text anchor point
+   *    <li>oCoordinates(1) is the Y coordinate of the text anchor point
+   *    <li>oCoordinates(2) is the Z coordinate of the text anchor point
+   *    </ul>
+   * @sample
+   *    This example retrieves the coordinates of the text in the <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim Coordinates (2)
+   *    NewMarker3D.<font color="red">GetTextPositions</font> Coordinates
+   *    </pre>
+   */
+  HRESULT GetTextPositions (inout CATSafeArrayVariant oCoordinates);
+
+  /**
+   * Sets the coordinates of the positions of a text marker 3D.
+   * @param iCoordinates
+   *    The coordinates of the text anchor point
+   *    <ul>
+   *    <li>oCoordinates(0) is the X coordinate of the text anchor point
+   *    <li>oCoordinates(1) is the Y coordinate of the text anchor point
+   *    <li>oCoordinates(2) is the Z coordinate of the text anchor point
+   *    </ul>
+   * @sample
+   *    This example sets the coordinates of the text in the <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim Coordinates (2)
+   *    NewMarker3D.<font color="red">SetTextPositions</font> Coordinates
+   *    </pre>
+   */
+  HRESULT SetTextPositions (in CATSafeArrayVariant iCoordinates);
+
+  /**
+   * Returns or sets the text for a text marker 3D.
+   * @sample
+   *    This example reads the text of <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim text As String
+   *    text = NewMarker3D.<font color="red">Text</font>
+   *    </pre>
+   */
+#pragma PROPERTY Text
+    HRESULT get_Text(inout /*IDLRETVAL*/ CATBSTR oText);
+    HRESULT put_Text(in CATBSTR iText);
+
+  /**
+   * Returns the number of objects which are linked to the marker 3D.
+   * @sample
+   *    This example reads the number of objects in the marker3D <tt>NewMarker3D</tt>.
+   *    <pre>
+   *    Dim number As Integer
+   *    number = NewMarker3D.<font color="red">CountObject</font>
+   *    </pre>
+   */
+  HRESULT CountObject (out /*IDLRETVAL*/ long oNbItems);
+
+  /**
+   * Returns an object which is linked to the marker 3D using its index.
+   * @param iIndex
+   *    The index of the object in the marker 3D.
+   *    The index of the first object is 1, and
+   *    the index of the last object is CountObject.
+   * @return
+   *    The retrieved object
+   * @sample
+   *    This example retrieves in <tt>ThisObject</tt> the ninth object
+   *    from the <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim ThisObject As Marker3D
+   *    Set ThisObject = NewMarker3D.<font color="red">ItemObject</font>(9)
+   *    </pre>
+   */
+  HRESULT ItemObject (in CATVariant iIndex, out /*IDLRETVAL*/ CATBaseDispatch oObject);
+
+  /**
+   * Adds a link to an object.
+   * @param iObject
+   *    The object to be linked.
+   * @sample
+   *    This example links <tt>ThisProduct</tt> to the <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    NewMarker3D.<font color="red">AddObject</font>(ThisProduct)
+   *    </pre>
+   */
+  HRESULT AddObject (in CATIABase iObject);
+
+  /**
+   * Removes an object which is linked to the marker 3D using its index.
+   * @param iIndex
+   *    The index of the object in the marker 3D.
+   *    The index of the first object is 1, and
+   *    the index of the last object is CountObject.
+   * @sample
+   *    This example removes the ninth object
+   *    from the <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    NewMarker3D.<font color="red">RemoveObject</font>(9)
+   *    </pre>
+   */
+  HRESULT RemoveObject (in CATVariant iIndex);
+
+  /**
+   * Retrieves the coordinates of the anchor point of the marker on the object.
+   * @param iIndex
+   *    The index of the object in the marker 3D.
+   *    The index of the first object is 1, and
+   *    the index of the last object is CountObject.
+   * @param oCoordinates
+   *    The coordinates of the anchor point
+   *    <ul>
+   *    <li>oCoordinates(0) is the X coordinate of the anchor point
+   *    <li>oCoordinates(1) is the Y coordinate of the anchor point
+   *    <li>oCoordinates(2) is the Z coordinate of the anchor point
+   *    </ul>
+   * @sample
+   *    This example retrieves the coordinates of the anchor in the <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim Coordinates (3)
+   *    NewMarker3D.<font color="red">GetObjectPositions</font> Coordinates
+   *    </pre>
+   */
+  HRESULT GetObjectPositions (in CATVariant iIndex, inout CATSafeArrayVariant oCoordinates);
+
+  /**
+   * Sets the coordinates of the anchor point of the marker on the object.
+   * @param iIndex
+   *    The index of the object in the marker 3D.
+   *    The index of the first object is 1, and
+   *    the index of the last object is CountObject.
+   * @param iCoordinates
+   *    The coordinates of the anchor point
+   *    <ul>
+   *    <li>oCoordinates(0) is the X coordinate of the anchor point
+   *    <li>oCoordinates(1) is the Y coordinate of the anchor point
+   *    <li>oCoordinates(2) is the Z coordinate of the anchor point
+   *    </ul>
+   * @sample
+   *    This example sets the coordinates of the anchor in the <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim Coordinates (3)
+   *    NewMarker3D.<font color="red">SetObjectPositions</font> Coordinates
+   *    </pre>
+   */
+  HRESULT SetObjectPositions (in CATVariant iIndex, in CATSafeArrayVariant iCoordinates);
+
+  /**
+   * Returns or sets the marker 3D's filling status (1 the figure is filled, 0 the figure is not filled).
+   * @sample
+   *    This example retrieves the filling status of <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim status As Integer
+   *    status = NewMarker3D.<font color="red">Fill</font>
+   *    </pre>
+   */
+#pragma PROPERTY Fill
+    HRESULT get_Fill(out /*IDLRETVAL*/ long oStatus);
+    HRESULT put_Fill(in long iStatus);
+
+  /**
+   * Returns or sets the marker 3D's framing status (1 the figure is framed, 0 the figure is not framed).
+   * @sample
+   *    This example retrieves the framing status of <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim status As Integer
+   *    status = NewMarker3D.<font color="red">Frame</font>
+   *    </pre>
+   */
+#pragma PROPERTY Frame
+    HRESULT get_Frame(out /*IDLRETVAL*/ long oStatus);
+    HRESULT put_Frame(in long iStatus);
+
+  /**
+   * Returns or sets the text's font for a marker 3D.
+   * @sample
+   *    This example retrieves the text's font of <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim font As String
+   *    font = NewMarker3D.<font color="red">TextFont</font>
+   *    </pre>
+   */
+#pragma PROPERTY TextFont
+    HRESULT get_TextFont(inout /*IDLRETVAL*/ CATBSTR oFont);
+    HRESULT put_TextFont(in CATBSTR iFont);
+
+  /**
+   * Returns or sets the text's size for a marker 3D.
+   * @sample
+   *    This example retrieves the text's size of <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim size As Double
+   *    size = NewMarker3D.<font color="red">TextSize</font>
+   *    </pre>
+   */
+#pragma PROPERTY TextSize
+    HRESULT get_TextSize(inout /*IDLRETVAL*/ double oSize);
+    HRESULT put_TextSize(in double iSize);
+
+  /**
+   * Returns or sets the orientation of text.
+   * @sample
+   *    This example retrieves the orientation of <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    Dim orientation As CatMarkerTextOrientation
+   *    orientation = NewMarker3D.<font color="red">TextOrientation</font>
+   *    </pre>
+   */
+#pragma PROPERTY TextOrientation
+    HRESULT get_TextOrientation(out /*IDLRETVAL*/ CatMarkerTextOrientation oOrientation);
+    HRESULT put_TextOrientation(in CatMarkerTextOrientation iOrientation);
+
+  /**
+   * Updates the the marker 3D: that is to take into account all modifications which occur since last update.
+   * @sample
+   *    This example updates the <tt>NewMarker3D</tt> marker 3D.
+   *    <pre>
+   *    NewMarker3D.<font color="red">Update</font>
+   *    </pre>
+   */
+  HRESULT Update ();
+};
+
+// Interface name : CATIAMarker3D
+#pragma ID CATIAMarker3D "DCE:08dffff8-7cb3-11d4-a38400d0b7ac57cb"
+#pragma DUAL CATIAMarker3D
+
+// VB object name : Marker3D (Id used in Visual Basic)
+#pragma ID Marker3D "DCE:09789678-7cb3-11d4-a38400d0b7ac57cb"
+#pragma ALIAS CATIAMarker3D Marker3D
+
+#endif

@@ -1,0 +1,244 @@
+#ifndef CATIAManufacturingTool_IDL
+#define CATIAManufacturingTool_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//
+// CATIAManufacturingTool:
+// Exposed interface for ManufacturingTool
+//
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep99 Creation                                        K. Bouharb
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATIAParameter.idl"
+#include "CATSafeArray.idl"
+#include "CATIAManufacturingToolCorrector.idl"
+
+/**
+ * A ManufacturingTool for a Manufacturing Document.
+ */
+interface CATIAManufacturingTool : CATIABase
+{
+#pragma PROPERTY ToolType
+ 
+  /**
+  * Return the technological type of a the tool.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the tool type <tt>ToolType</tt> of to the manufacturing tool <tt>CurrentTool</tt>
+  * <pre>
+  * Set ToolType=CurrentTool.<font color="red">ToolType</font>
+  *</pre>
+  * </dl>
+  */
+	HRESULT get_ToolType (inout /*IDLRETVAL*/ CATBSTR oToolType);
+
+#pragma PROPERTY Comment
+ 
+  /**
+  * Return the Default Comment of a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the comment <tt>ToolComment</tt> of to the manufacturing tool <tt>CurrentTool</tt>
+  * <pre>
+  * ToolComment=CurrentTool.<font color="red">Comment</font>
+  *</pre>
+  * </dl>
+  */
+	HRESULT get_Comment (inout /*IDLRETVAL*/ CATBSTR oComment);
+
+  /**
+  * Give the Number linked to a Manufacturing Tool.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the <tt>Number</tt> linked to the manufacturing Tool <tt>CurrentTool</tt>
+  * <pre>
+  * Number = CurrentTool.ToolNumber
+  *</pre>
+  * </dl>
+  */
+#pragma PROPERTY ToolNumber
+  HRESULT get_ToolNumber (out /*IDLRETVAL*/ long oNumber);  
+
+#pragma PROPERTY Picture
+ 
+  /**
+  * Return the path where a picture of the parametrized tool is stored.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the path <tt>PicturePath</tt> where can be found the picture of the tool <tt>CurrentTool</tt>
+  * <pre>
+  * PicturePath=CurrentTool.<font color="red">Picture</font>
+  *</pre>
+  * </dl>
+  */
+	HRESULT get_Picture (inout /*IDLRETVAL*/ CATBSTR oPicture);
+
+// Method GetAttribute
+ 
+  /**
+  * Retrieve by is name the attribute of a Manufacturing Tool.<br>
+  * Each attribute is a CKE object.
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>Diameter</tt> the attribute 
+  * <tt>MfgDiameter</tt> of the Manufacturing Tool <tt>firstTool</tt>
+  * <pre>
+  * Set Diameter = firstTool.<font color="red">GetAttribute</font>(MfgDiameter)
+  *</pre>
+  * </dl>
+  */
+
+	HRESULT GetAttribute(in CATBSTR iAttribut,out  /*IDLRETVAL*/ CATIAParameter oAttributCke);
+
+#pragma PROPERTY NumberOfAttributes
+
+  /**
+  * Give the Number og attributes of a Manufacturing Tool.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the <tt>Number</tt> of attributes of the manufacturing Tool <tt>CurrentTool</tt>
+  * <pre>
+  * Number = CurrentTool.NumberOfAttributes
+  *</pre>
+  * </dl>
+  */
+	HRESULT get_NumberOfAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method GetListOfAttributes
+ 
+  /**
+  * Retrieve the list of attributes of a Manufacturing Tool.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>TabAttributes</tt> the list of attributes 
+  * of the Manufacturing Tool <tt>firstTool</tt>
+  * <pre>
+  * call firstTool.<font color="red">GetListOfAttributes</font>(TabAttributes)
+  *</pre>
+  * </dl>
+  */
+
+	HRESULT GetListOfAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+// Method GetListOfAttributeUnits
+ 
+  /**
+  * Retrieve the list of attribute units of a Manufacturing Tool.<br>
+  * The number of items in the output array is equal to the number of attributes of the tool.<br>
+  * When an attribute has no unit definition, the corresponding unit item in the output array is a blank string.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>TabAttributeUnits</tt> the list of attribute units 
+  * of the Manufacturing Tool <tt>firstTool</tt>
+  * <pre>
+  * call firstTool.<font color="red">GetListOfAttributeUnits</font>(TabAttributeUnits)
+  *</pre>
+  * </dl>
+  */
+
+	HRESULT GetListOfAttributeUnits (inout CATSafeArrayVariant oListOfAttributeUnits);
+
+
+#pragma PROPERTY CorrectorCount
+ 
+  /**
+  * Retreive the number of correctors of a Manufacturing tool.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>CorrCount</tt> the number of
+  * tool correctors of tool <tt>CurrentTool</tt>
+  * <pre>
+  * Set NbCorr = CurrentTool.<font color="red">CorrectorCount</font>
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT get_CorrectorCount(out  /*IDLRETVAL*/ short oCorrectorCount);
+
+
+// Method GetCorrector
+ 
+  /**
+  * Retreive the corrector (index) of a Manufacturing tool.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>Corr</tt> the tool corrector
+  * of Tool <tt>CurrentTool</tt>
+  * <pre>
+  * Set Corr = CurrentTool.<font color="red">GetCorrector(index)</font>
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT GetCorrector(in short index , out  /*IDLRETVAL*/ CATIAManufacturingToolCorrector oMfgToolCorrector);
+
+  /**
+  * Adds a corrector to a Manufacturing tool.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example adds in <tt>Corr</tt> the tool corrector
+  * of Tool <tt>CurrentTool</tt>
+  * <pre>
+  * Set Corr = CurrentTool.<font color="red">AddCorrector</font>
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT AddCorrector(out  /*IDLRETVAL*/ CATIAManufacturingToolCorrector oMfgToolCorrector);
+
+// Method GetListOfGeomAttributes
+ 
+  /**
+  * Retrieve the list of geometry attributes of a Manufacturing Tool.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>TabGeomAttributes</tt> the list of geometry 
+  * attributes of the Manufacturing Tool <tt>firstTool</tt>
+  * <pre>
+  * call firstTool.<font color="red">GetListOfGeomAttributes</font>(TabAttributes)
+  *</pre>
+  * </dl>
+  */
+
+	HRESULT GetListOfGeomAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+// Method GetAttributeNLSName
+ 
+  /**
+  * Retrieve the NLS name from the attribute name of a Manufacturing Tool.<br>
+  */
+    HRESULT GetAttributeNLSName (in CATBSTR iAttributName , inout /*IDLRETVAL*/ CATBSTR oNLSName);
+
+// Method GetListOfAptParameters
+  /**
+  * Retrieve the list of apt definition parameters of a Manufacturing Tool.<br>
+  * Parameters are returned in an array of real values.<br>
+  */
+
+	HRESULT GetListOfAptParameters (inout CATSafeArrayVariant oListOfAptParameters);
+};
+
+// Interface name : CATIAManufacturingTool
+#pragma ID CATIAManufacturingTool "DCE:c9c483ae-817a-11d3-99930004ac960883"
+#pragma DUAL CATIAManufacturingTool
+
+// VB object name : ManufacturingTool (Id used in Visual Basic)
+#pragma ID ManufacturingTool "DCE:ddc5bed6-817a-11d3-99930004ac960883"
+#pragma ALIAS CATIAManufacturingTool ManufacturingTool
+
+#endif // CATIAManufacturingTool_IDL

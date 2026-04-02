@@ -1,0 +1,94 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAArrangementRectangle.idl
+// Automation interface for the ArrangementRectangle element 
+//
+#ifndef CATIAArrangementRectangle_IDL
+#define CATIAArrangementRectangle_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+/**
+ * Use this object to access the properties and methods of an ArrangementRectangle object.
+ * <b>Role</b>:
+ * The ArrangementRectangle object is a geometric shape used for defining 
+ * Contours of Areas. The ArrangementRectangle is defined by width and length and
+ * its Product position (which is the min-x, min-y corner of the rectangle).
+ */
+
+interface CATIAArrangementRectangle : CATIABase 
+{
+  /**
+   * Returns or sets the XLength of the ArrangementRectangle.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the XLength for the <tt>objRectangle1</tt>
+   * object.
+   * <pre>
+   * Dim dblXLength  As Double
+   * dblXLength = objRectangle1.<font color="red">XLength</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY XLength
+   HRESULT get_XLength(out /*IDLRETVAL*/ double oXLength);
+   HRESULT put_XLength(in  double iXLength);
+
+  /**
+   * Returns or sets the YLength of the ArrangementRectangle.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the YLength for the <tt>objRectangle1</tt>
+   * object.
+   * <pre>
+   * Dim dblYLength  As Double
+   * dblYLength = objRectangle1.<font color="red">YLength</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY YLength
+   HRESULT get_YLength(out /*IDLRETVAL*/ double oYLength);
+   HRESULT put_YLength(in double iYLength);
+
+  /**
+   * Returns the applicative data which type is the given parameter.
+   * @param iApplicationType
+   *   The type of applicative data searched.
+   * @param oApplicativeObj
+   *   The matched applicative object. 
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the desired applicative object from the <tt>objRectangle1</tt> object.
+   * <pre>
+   * Dim objProd   As Product
+   * objProd  = objRectangle1.<font color="red">GetTechnologicalObject("Product")</font>
+   * </pre>
+   * </dl>
+   */
+  HRESULT GetTechnologicalObject (  in CATBSTR iApplicationType, 
+                                    out /*IDLRETVAL*/ CATBaseDispatch oApplicativeObj);
+
+};
+
+// Interface name : CATIAArrangementRectangle
+#pragma ID CATIAArrangementRectangle "DCE:40081971-b984-11d4-8def00d0b7acadba"
+#pragma DUAL CATIAArrangementRectangle
+
+// VB object name : ArrangementRectangle (Id used in Visual Basic)
+#pragma ID ArrangementRectangle "DCE:40081972-b984-11d4-8def00d0b7acadba"
+#pragma ALIAS CATIAArrangementRectangle ArrangementRectangle
+
+#endif

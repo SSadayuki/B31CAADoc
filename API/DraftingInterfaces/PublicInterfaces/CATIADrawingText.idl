@@ -1,0 +1,523 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIADrawingText_IDL
+#define CATIADrawingText_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+#include "CatTextFrameType.idl"
+#include "CatTextAnchorPosition.idl"
+#include "CatTextProperty.idl"
+#include "CATBSTR.idl"
+
+interface CATIADrawingLeaders;
+interface CATIADrawingTextProperties;
+
+ /** 
+  * Represents a drawing text in a drawing view.
+  */
+
+interface CATIADrawingText : CATIABase
+{
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets character string that makes up the text.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>CharString</tt> the character string of the 
+  * <tt>MyText</tt> drawing text.
+  * <pre>
+  * CharString = MyText.<font color="red">Text</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Text
+  HRESULT get_Text(inout /*IDLRETVAL*/ CATBSTR oText);
+  HRESULT put_Text(in CATBSTR iText);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the x coordinate of the text.
+  * It is expressed with respect to the current view coordinate system.
+  * This coordinate, like any length, is measured in meters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the x coordinate of the text 
+  * <tt>MyText</tt> drawing text.
+  * <pre>
+  * X = MyText.<font color="red">x</font>
+  * </pre>
+  *</dl>
+  */
+#pragma PROPERTY x	 
+  HRESULT get_x(out /*IDLRETVAL*/ double oxposition);
+  HRESULT put_x(in double oxposition);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the y coordinate of the text.
+  * It is expressed with respect to the view coordinate system.
+  * This coordinate, like any length, is measured in meters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the y coordinate of the text
+  * <tt>MyText</tt> drawing text to 5 inches.
+  * You need first to convert the 5 inches into meters.
+  * <pre>
+  * NewYCoordinate = 5*25.4/1000
+  * MyText.<font color="red">y</font> =  NewYCoordinate
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY y	 
+  HRESULT get_y(inout /*IDLRETVAL*/ double oyposition);
+  HRESULT put_y(in double iyposition);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the angle of the drawing text.
+  * The angle is measured between the axis system of the drawing view and the
+  * local axis system of the drawing text.
+  * The angle is measured in radians and is counted counterclockwise.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the angle of the <tt>MyText</tt> drawing Text to 90
+  * degrees clockwise.
+  * You first need to compute the angle in degrees and set the
+  * minus sign to indicate the rotation is clockwise.
+  * <pre>
+  * Angle90Clockwise = -90
+  * MyText.<font color="red">Angle</font> = Angle90Clockwise
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Angle	 
+  HRESULT get_Angle(out /*IDLRETVAL*/ double oAngle);
+  HRESULT put_Angle(in double iAngle);
+
+  //------------------------------------------------------------------------------
+  /**
+  * Returns or sets the orientation reference of the drawing text.
+  * <br>0 : Sheet orientation
+  * <br>1 : View/Label/2Dcomponent orientation
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the orientation reference of <tt>MyText</tt> drawing text to sheet orientation
+  * <pre>
+  * MyText.<font color="red">OrientationReference</font> = 0
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY OrientationReference
+  HRESULT get_OrientationReference(out /*IDLRETVAL*/ long oOri);
+  HRESULT put_OrientationReference(in long iOri);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the wrapping width of the drawing text.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the wrapping width of the <tt>MyText</tt> drawing text to 50.
+  * <pre>
+  * MyText.<font color="red">WrappingWidth</font> = 50.
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY WrappingWidth	 
+  HRESULT get_WrappingWidth(out /*IDLRETVAL*/ double oTewtWrapping);
+  HRESULT put_WrappingWidth(in double iTewtWrapping);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the anchor position of the drawing text.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the anchor position of the <tt>MyText</tt> drawing text to 
+  * top left position.
+  * <pre>
+  * MyText.<font color="red">AnchorPosition</font> = TopLeft
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY AnchorPosition	 
+  HRESULT get_AnchorPosition(out /*IDLRETVAL*/ CatTextAnchorPosition oTextAnchorPos);
+  HRESULT put_AnchorPosition(in CatTextAnchorPosition iTextAnchorPos);
+
+ //------------------------------------------------------------------------------
+ /**
+  * Returns or sets the associative object of the drawing text.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets an associative line of the <tt>MyText</tt> drawing text to 
+  * top left position. 
+  * <pre>
+  * MyText.<font color="red">AssociativeElement</font> = line
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY AssociativeElement	 
+  HRESULT get_AssociativeElement(out /*IDLRETVAL*/ CATBaseDispatch oAssociativeElement);
+  HRESULT put_AssociativeElement(in CATBaseDispatch iAssociativeElement);
+
+ //------------------------------------------------------------------------------
+ /**
+  * Returns or sets the frame type of the drawing text.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the frame type of the <tt>MyText</tt> drawing text to 
+  * an ellipse.
+  * <pre>
+  * MyText.<font color="red">FrameType</font> = catEllipse
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY FrameType	 
+  HRESULT get_FrameType(out /*IDLRETVAL*/ CatTextFrameType oTextFrameType);
+  HRESULT put_FrameType(in CatTextFrameType iTextFrameType);
+
+//------------------------------------------------------------------------------
+ /**
+  * Activates the text frame of the drawing text.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds a rectangle frame to <tt>MyText</tt> drawing text.
+  * <pre>
+  * CatTextFrameType ityp = catRectangle
+  * MyText.<font color="red">ActivateFrame</font>(itype)
+  * </pre>
+  * This example removes the frame to <tt>MyText</tt> drawing text.
+  * <pre>
+  * CatTextFrameType ityp = catNone
+  * MyText.<font color="red">ActivateFrame</font>(itype)
+  * </pre>
+  * </dl> 
+  */
+  HRESULT ActivateFrame(in CatTextFrameType itype);
+
+  //------------------------------------------------------------------------------
+  /**
+  * @nodoc Not yet implemented. Do not use.
+  * Returns or sets the frame Name of the drawing text.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the frame type of the <tt>MyText</tt> drawing text to 
+  * an ellipse
+  * <pre>
+  * MyText.<font color="red">SetFrameName</font>("Variable_Rectangle")
+  * </pre>
+  * </dl> 
+  */
+#pragma PROPERTY FrameName	 
+  HRESULT get_FrameName(inout /*IDLRETVAL*/ CATBSTR oFontName); 
+  HRESULT put_FrameName(in CATBSTR iFontName);
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets a property on a substring of the drawing text.
+  * @param iParam
+  *   The drawing text property
+  * @param iFirst
+  *   The first character to which the property should apply 
+  * @param inbCharacter
+  *   The number of characters to which the property should apply
+  * @param iVal
+  *    The value to be applied according to the property
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets all <tt>MyText</tt> drawing text in bold character.
+  * <pre>
+  * CatTextProperty iParam = catBold 
+  * iFirst = 0
+  * inbCharacter = 0
+  * ival = 1
+  * MyText.<font color="red">SetParameterOnsubString</font> iParam, iFirst, inbCharacter, ival
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetParameterOnSubString(in CatTextProperty iParam, in long iFirst, 
+                                  in long inbCharacter, in long iVal);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns a property on a substring of the drawing text.
+  * @param iParam
+  *   The drawing text property
+  * @param iFirst
+  *   The first character to which the property should apply 
+  * @param inbCharacter
+  *   The number of characters to which the property should apply
+  * @return oval
+  *   The value corresponding to the property
+  *
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the parameter Italic on <tt>MyText</tt> drawing text.
+  * <pre>
+  * CatTextProperty iParam = catItalic 
+  * iFirst = 0
+  * inbCharacter = 0
+  * oval = MyText.<font color="red">GetParameterOnsubString</font>(iParam, iFirst, inbCharacter)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetParameterOnSubString(in CatTextProperty iParam, in long iFirst, 
+                                  in long inbCharacter, out /*IDLRETVAL*/ long oval);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets the font size on a substring of the drawing text.
+  * @param iFirst
+  *   The first character to which the property should apply 
+  * @param inbCharacter
+  *   The number of characters to which the property should apply
+  * @param iFontSize
+  *    The size of the font
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the <tt>MyText</tt> font size to <tt>3.5</tt>.
+  * <pre>
+  * iFontSize = 3.5
+  * MyText.<font color="red">SetFontSize</font> 0,  0, iFontSize
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetFontSize(in long iFirst, in long inbCharacter, in double iFontSize);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the font size on a substring of the drawing text.
+  * @param iFirst
+  *   The first character to which the property should apply 
+  * @param inbCharacter
+  *   The number of characters to which the property should apply
+  * @return oFontSize
+  *    The size of the font
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the <tt>MyText</tt> font size.
+  * <pre>
+  * oFontSize = MyText.<font color="red">GetFontSize</font>(0, 0)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetFontSize(in long iFirst, in long inbCharacter, 
+                      out /*IDLRETVAL*/ double oFontSize); 
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets the font size on a substring of the drawing text.
+  * @param iFirst
+  *   The first character to which the property should apply 
+  * @param inbCharacter
+  *   The number of characters to which the property should apply
+  * @param iFontName
+  *    The name of the font
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the <tt>MyText</tt> drawing text font as <tt>Courrier 10 BT</tt>.
+  * <pre>
+  * MyText.<font color="red">SetFontName</font> 0,  0, "Courrier 10 BT"
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetFontName(in long iFirst, in long inbCharacter, in CATBSTR iFontName);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the font name on a substring of the drawing text.
+  * @param iFirst
+  *   The first character to which the property should apply 
+  * @param inbCharacter
+  *   The number of characters to which the property should apply
+  * @return oFontName
+  *    The name of the font
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the <tt>MyText</tt> drawing text font.
+  * <pre>
+  * oFontName = MyText.<font color="red">GetFontName</font>(0, 0)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetFontName(in long iFirst, in long inbCharacter, 
+                      inout /*IDLRETVAL*/ CATBSTR oFontName); 
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets a Parameter in a string of the drawing text.
+  * @param iFirst
+  *   The first character from which the parameter is inserted 
+  * @param inbCharacter
+  *   The number of characters the parameter will replace
+  * @param iParameter
+  *   The parameter to be inserted
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets a parameter right at the end of <tt>MyText</tt> drawing text.
+  * <pre>
+  * Dim DrwDocument As DrawingDocument
+  * Set DrwDocument = CATIA.ActiveDocument
+  *
+  * Dim iParameter As Parameter
+  * Set iParameter = DrwDocument.Parameters.Item("Drawing\Sheet.1\ViewMakeUp.1\Scale")
+  *
+  * MyText.<font color="red">InsertVariable</font> 0, 0, iParameter
+  * </pre>
+  * </dl>
+  */
+  HRESULT InsertVariable(in long iFirst, in long inbCharacter, 
+                      in CATBaseDispatch ibase);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Returns the drawing leader collection of the drawing text.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>LeaderCollection</tt> the collection of
+  * leaders of the <tt>MyText</tt> drawing text.
+  * <pre>
+  * Dim LeaderCollection As DrawingLeaders
+  * Set LeaderCollection = MyText.<font color="red">Leaders</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Leaders
+  HRESULT get_Leaders(out /*IDLRETVAL*/ CATIADrawingLeaders oLeaders);
+
+//------------------------------------------------------------------------------
+ /**
+  * Sets the text as modifiable in 2D component instances.The text must
+  * own to a 2D component (NOT to a view).then ,its content will be modifiable
+  * inside instances of this 2D component.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the <tt>MyText</tt> drawing text as modifiable.
+  * <pre>
+  * MyText.<font color="red">SetModifiableIn2DComponentInstances</font> 
+  * </pre>
+  * </dl>
+  */
+  HRESULT SetModifiableIn2DComponentInstances ();
+//----------------------------------------------------------------------------------
+ /**
+  * Returns if the text is modifiable or not in 2D component instances.
+  * The text must own to a 2D component (NOT to a view)
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves if <tt>MyText</tt> drawing text is modifiable or not
+  * <pre>
+  * IsModifiable = MyText.<font color="red">GetModifiableIn2DComponentInstances</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetModifiableIn2DComponentInstances (out /*IDLRETVAL*/ boolean oModifiable);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Returns the number of attributes link 
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets number of attributes link of <tt>MyText</tt> drawing text.
+  * <pre>
+  * nbLink = MyText.<font color="red">NbLink</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY NbLink 
+  HRESULT get_NbLink(out /*IDLRETVAL*/ long oNbLink);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Returns the pointed parameter link
+  * @param iIndex
+  *   The index of the pointed parameter link. 1 <= iIndex <= NbLink
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the first parameter link of <tt>MyText</tt> drawing text.
+  * <pre>
+  * Dim MyParm As Parameter
+  * MyParm = MyText.<font color="red">GetParameterLink</font>(1)
+  * If MyParm.Value<>"Front view" Then
+  *   'Do something
+  * End If
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetParameterLink(in long iIndex, out /*IDLRETVAL*/ CATBaseDispatch oPointedParm);
+  
+//----------------------------------------------------------------------------------
+ /**
+  * Returns the text properties of the drawing text.
+  * Allows to modify the whole text properties. To manage a sub part of the text use 
+  * GetParameterOnSubString
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>TextProperties</tt> the text properties of
+  * the <tt>MyText</tt> drawing text.
+  * <pre>
+  * Dim TextProperties As DrawingTextProperties
+  * Set TextProperties = MyText.<font color="red">TextProperties</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TextProperties
+  HRESULT get_TextProperties(out /*IDLRETVAL*/ CATIADrawingTextProperties oTextProperties);
+};
+
+#pragma ID CATIADrawingText "DCE:1101e0c8-6a7e-11d2-ad4b00609419af4f"
+#pragma DUAL CATIADrawingText
+
+// Visual Basic name
+#pragma ID DrawingText "DCE:28d05b20-6a7f-11d2-ad4b00609419af4f"
+#pragma ALIAS CATIADrawingText DrawingText
+
+#endif

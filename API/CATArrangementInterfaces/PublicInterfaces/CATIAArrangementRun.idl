@@ -1,0 +1,184 @@
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAArrangementRun.idl
+// Automation interface for the ArrangementRun element 
+//
+#ifndef CATIAArrangementRun_IDL
+#define CATIAArrangementRun_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+interface CATIAMove;
+interface CATIAArrangementNodes;
+
+#include "CATIABase.idl"
+#include "CATArrangementRouteVisuMode.idl"
+#include "CATArrangementRouteSection.idl"
+
+/**  
+ * Use this object to access the properties and methods of an ArrangementRun object.
+ * <b> Role: </b> Use this interface to control the visualization mode,
+ * section parameters, nodes that define the ArrangementRun
+ * object.
+ */
+interface CATIAArrangementRun : CATIABase 
+{
+  /**
+   * Returns or sets the Visualization Mode for an ArrangementRun object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example sets the Visualization Mode for the <tt>objRun1</tt>
+   * object to <tt>CatArrangementRouteVisuModeSolid</tt>.
+   * <pre>
+   * objRun1.<font color="red">VisuMode</font> = CatArrangementRouteVisuModeSolid
+   * </pre>
+   * </dl>
+   */
+
+#pragma PROPERTY VisuMode
+   HRESULT get_VisuMode(out /*IDLRETVAL*/ CATArrangementRouteVisuMode oVisuMode);
+   HRESULT put_VisuMode(in  CATArrangementRouteVisuMode iVisuMode);
+
+  /**
+   * Returns or sets the SectionType for an ArrangementRun object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example sets the SectionType for the <tt>objRun1</tt>
+   * object to <tt>CatArrangementRouteSectionRectangular</tt>.
+   * <pre>
+   * objRun1.<font color="red">SectionType</font> = CatArrangementRouteSectionRectangular
+   * </pre>
+   * </dl>
+   */
+
+#pragma PROPERTY SectionType
+   HRESULT get_SectionType(out /*IDLRETVAL*/ CATArrangementRouteSection oRouteSection);
+   HRESULT put_SectionType(in  CATArrangementRouteSection iRouteSection);
+
+  /**
+   * Returns or sets the SectionDiameter for an ArrangementRun object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the SectionDiameter for the <tt>objRun1</tt>
+   * object.
+   * <pre>
+   * Dim dblSectionDia   As Double
+   * dblSectionDia = objRun1.<font color="red">SectionDiameter</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY SectionDiameter
+   HRESULT get_SectionDiameter(out /*IDLRETVAL*/ double oSectionDiameter);
+   HRESULT put_SectionDiameter(in double iSectionDiameter);
+
+  /**
+   * Returns or sets the SectionWidth for an ArrangementRun object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example gets the SectionWidth for the <tt>objRun1</tt>
+   * object.
+   * <pre>
+   * Dim dblSectionWidth   As Double
+   * dblSectionWidth = objRun1.<font color="red">SectionWidth</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY SectionWidth
+   HRESULT get_SectionWidth(out /*IDLRETVAL*/ double oSectionWidth);
+   HRESULT put_SectionWidth(in double iSectionWidth);
+
+  /**
+   * Returns or sets the SectionHeight for an ArrangementRun object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example gets the SectionHeight for the <tt>objRun1</tt>
+   * object.
+   * <pre>
+   * Dim dblSectionHeight   As Double
+   * dblSectionHeight = objRun1.<font color="red">SectionHeight</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY SectionHeight
+   HRESULT get_SectionHeight(out /*IDLRETVAL*/ double oSectionHeight);
+   HRESULT put_SectionHeight(in double iSectionHeight);
+
+  /**
+   * Returns the ArrangementNodes that make up the ArrangementRun.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example gets the ArrangementNodes for the <tt>objRun1</tt>
+   * object.
+   * <pre>
+   * Dim objArrNodes   As ArrangementNodes
+   * Set objArrNodes = objRun1.<font color="red">ArrangementNodes</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY ArrangementNodes
+   HRESULT get_ArrangementNodes(out /*IDLRETVAL*/ CATIAArrangementNodes oArrNodes);
+
+#pragma PROPERTY Length
+  /**
+   * Returns the length of the ArrangementRun object.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the Length of the <tt>objRun1</tt> object.
+   * <pre>
+   * Dim dblLength   As Double
+   * dblLength  = objRun1.<font color="red">Length</font>
+   * </pre>
+   * </dl>
+   */
+   HRESULT get_Length(out /*IDLRETVAL*/ double oRunLength);
+
+  /**
+   * Returns the applicative data which type is the given parameter.
+   * @param iApplicationType
+   *   The type of applicative data searched.
+   * @param oApplicativeObj
+   *   The matched applicative object. 
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the desired applicative object from the <tt>objRun1</tt> object.
+   * <pre>
+   * Dim objProd   As Product
+   * objProd  = objRun1.<font color="red">GetTechnologicalObject("Product")</font>
+   * </pre>
+   * </dl>
+   */
+  HRESULT GetTechnologicalObject (  in CATBSTR iApplicationType, 
+                                    out /*IDLRETVAL*/ CATBaseDispatch oApplicativeObj);
+
+};
+
+// Interface name : CATIAArrangementRun
+#pragma ID CATIAArrangementRun "DCE:998dcdde-ba53-11d4-8df200d0b7acadba"
+#pragma DUAL CATIAArrangementRun
+
+// VB object name : ArrangementRun (Id used in Visual Basic)
+#pragma ID ArrangementRun "DCE:998dcddf-ba53-11d4-8df200d0b7acadba"
+#pragma ALIAS CATIAArrangementRun ArrangementRun
+
+#endif

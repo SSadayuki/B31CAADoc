@@ -1,0 +1,142 @@
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//
+//===================================================================
+//
+// CATIATrack.idl
+// Automation interface for the track element 
+//
+//===================================================================
+//
+// Usage notes:
+//   See example scripts
+//
+//===================================================================
+//
+// Modification History:
+//
+//      cre     ???     ??/??/????      Original Implementation
+//      mod     bpl     03/03/2006      Added methods for Matrix All and Move Mode
+//
+//===================================================================
+
+
+/**
+ * @CAA2Level L1  
+ * @CAA2Usage U3
+ */
+
+
+#ifndef CATIATrack_IDL
+#define CATIATrack_IDL
+
+/*IDLREP*/
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATIASampled.idl"
+
+
+/**
+  * The movement mode for tracks.
+  * To be used in automation scripts.
+  * @param DMUTrackSpeedMode
+  *   The track is to be followed at the specified speed.
+  * @param DMUTrackTimeMode
+  *   The track is to be traversed within the specified time.
+  */
+enum DMUTrackMoveMode
+{
+    DMUTrackSpeedMode,
+    DMUTrackTimeMode
+};
+
+    /**  
+     * The interface to access a CATIATrack.
+     * <b>Role:</b> A CATIATrack (or track) object is an object to 
+     * define motion to various items (such as a product or a shuttle).  
+     * These tracks can be simulated which results in them to move along 
+     * the defined trajectory (with a set speed).
+     */
+
+interface CATIATrack : CATIASampled
+{
+    /**
+     * Returns or sets the track speed.  Please note that the value of 
+     * the speed should be greater than zero.
+     * <dl>
+     * <dt><b>Example</b>
+     * <dd>
+     * This example sets the track speed to <tt>17.54</tt>.
+     * <pre>
+     * myTrack.<font color="red">Speed</font> =  17.54
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Speed
+    HRESULT get_Speed                       (out /*IDLRETVAL*/ double oSpeed);
+    HRESULT put_Speed                       (in double iSpeed);
+
+
+    /**
+     * Produces a "mirror image" of the track.  
+     * <b>Role:</b> Determines the "mirror image" of a track.  The "mirror" is
+     * a 3d plane specified by a point on the plane and the normal to the surface
+     * of the plane.  The mirror calculation involves going through each shot
+     * and projecting it in the space on the other side of the mirror plane.  The 
+     * projection "reflects" the point perpendicularly to the plane.
+     * @param iPoint
+     *    A point on the plane that will be used to define the mirror.
+     * @param iNormal
+     *    A normal to the plane that will be used to define the mirror.
+     */
+    HRESULT Mirror       (in CATSafeArrayVariant iPoint, in CATSafeArrayVariant iNormal);
+
+
+    /**
+     * Moves the track a certain position.
+     * @param iTransfo
+     *    Specifies a relative amount to move the track.
+     *
+     */
+    HRESULT Move         (in CATSafeArrayVariant iTransfo);
+
+    /**
+    * GetMatrixAll
+    *   Gets the base location of the track.
+    *  The sum of several internal transforms.
+    * @param oMatrixAll
+    *    An array of 12 doubles.  A 3 by 3 rotation matrix followed by 
+    *   a position (x/y/z) vector, in millimeters.
+    * @return
+    *   S_OK if everything was succcessfull
+    */
+    HRESULT     GetMatrixAll (inout CATSafeArrayVariant oMatrixAll);
+
+    /**
+     *  Returns or sets the track's movement mode.  Can be speed or 
+     * time based.  
+     *  In Speed mode, the total time is calculated based on the 
+     * time need to travel the distance of the track at the given speed.
+     *  In Time mode, the movement speed to calculated so that the 
+     * end of the track is reached by the end of the total time.
+     *  Uses enum DMUTrackMoveMode, which defined is 
+     * in this interface.
+     */
+#pragma PROPERTY MoveMode
+    HRESULT get_MoveMode (out /*IDLRETVAL*/ DMUTrackMoveMode oMoveMode);
+    HRESULT put_MoveMode (in DMUTrackMoveMode iMoveMode);
+
+};
+
+
+// Interface name : CATIATrack
+#pragma ID CATIATrack "DCE:f7d1b1e0-ae71-11d4-9efb00508b67522f"
+#pragma DUAL CATIATrack
+
+
+// VB object name : Track (Id used in Visual Basic)
+#pragma ID Track "DCE:f7d1b1e1-ae71-11d4-9efb00508b67522f"
+#pragma ALIAS CATIATrack Track
+
+
+#endif

@@ -1,0 +1,167 @@
+#ifndef CATIAHybridShapeDirection_IDL
+#define CATIAHybridShapeDirection_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeDirection:         
+// Exposed interface for HybridShape Direction
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation    
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+
+
+/**
+ * Represents the hybrid shape direction feature object.
+ * <b>Role</b>: To access the data of the hybrid shape direction feature object.
+ * A direction can be specified using:
+ * <ul>
+ * <li>A line: the direction is tangent to the line</li>
+ * <li>A plane: the direction is normal to the plane</li>
+ * <li>Its components</li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeDirection object.
+ * @see CATIAHybridShapeFactory
+ */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeDirection : CATIAHybridShape
+{  
+                
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+/**
+ * Returns the direction X component. This method succeeds only when direction is specified using components.
+ * It fails when direction is specified using a geometrical element i.e Line, Plane. 
+ * In such cases use GetXVal method instead.
+ * @param oCoordinates 
+ *   The direction X component
+ */ 
+  HRESULT GetX(out /*IDLRETVAL*/ CATIARealParam oCoordinates);
+
+/**
+ * Returns the direction Y component. This method succeeds only when direction is specified using components.
+ * It fails when direction is specified using a geometrical element i.e Line, Plane. 
+ * In such cases use GetYVal method instead.
+ * @param oCoordinates 
+ *   The direction Y component
+ */ 
+  HRESULT GetY(out /*IDLRETVAL*/ CATIARealParam oCoordinates);
+
+/**
+ * Returns the direction Z component. This method succeeds only when direction is specified using components.
+ * It fails when direction is specified using a geometrical element i.e Line, Plane. 
+ * In such cases use GetZVal method instead.
+ * @param oCoordinates 
+ *   The direction Z component
+ */ 
+  HRESULT GetZ(out /*IDLRETVAL*/ CATIARealParam oCoordinates);
+
+/**
+ * Returns the direction X component as Double. This method succeeds irrespective of the way direction is
+ * specified.
+ * @param oX 
+ *   The direction X component
+ */ 
+  HRESULT GetXVal(out /*IDLRETVAL*/ double oX);
+
+/**
+ * Returns the direction Y component as Double.This method succeeds irrespective of the way direction is
+ * specified.
+ * @param oY 
+ *   The direction Y component
+ */ 
+  HRESULT GetYVal(out /*IDLRETVAL*/ double oY);
+
+/**
+ * Returns the direction Z component as Double.This method succeeds irrespective of the way direction is
+ * specified.
+ * @param oZ
+ *   The direction Z component
+ */ 
+  HRESULT GetZVal(out /*IDLRETVAL*/ double oZ);
+
+/**
+ * Returns or sets the object that specifies the direction.
+ * <br>This object can be a line or a plane.
+ * @param oObject 
+ *   The object (a line or a plane) that specifies the direction<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge or @href CATIARectilinearMonoDimFeatEdge.
+ */ 
+#pragma PROPERTY Object
+ HRESULT get_Object ( out /*IDLRETVAL*/ CATIAReference   oObject);
+ HRESULT put_Object ( in     CATIAReference   iObject);
+
+/**
+ * Returns the direction type.
+ * <br><b>Legal value</b>: The direction type can be: 
+ * <dl>
+ *   <dt>0</dt>
+ *   <dd>The direction is specified using an object (a line or a plane). 
+ *       In the case of a plane, the direction is the normal to the plane</dd>
+ *   <dt>1</dt>
+ *   <dd>The direction is specified using its components</dd>
+ * </dl>
+ */ 
+#pragma PROPERTY Type
+ HRESULT get_Type ( out /*IDLRETVAL*/ long     oType);
+
+/**
+ * Queries the direction specification status. 
+ *   @param oDir 
+ *      direction specification =  0 : Direction is not specified.
+ *                              =  1 : Direction is specified and is valid.
+ *                              = -1 : Direction is specified but is not valid.
+ */ 
+ HRESULT DirectionSpecification(out /*IDLRETVAL*/ long oDir);
+
+/**
+ * Returns or Sets the reference Axis System for Direction feature.
+ *<br>This data is not mandatory, if element is null, the absolute axis system is taken.
+ *<br>When an element is given, X, Y and Z are considered in this Axis system.
+ *<dt>Example</dt>:
+ *<dd>
+ * This example retrieves in <code>oRefAxis</code> the reference Axis System for <code>Direction</code> feature.
+ * <pre>
+ * Dim oRefAxis As CATIAReference
+ * Set oRefAxis  = Direction.<font color="red">RefAxisSystem</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY RefAxisSystem
+ HRESULT get_RefAxisSystem ( out /*IDLRETVAL*/  CATIAReference   oRefAxis);
+ HRESULT put_RefAxisSystem ( in                 CATIAReference   iRefAxis);
+
+};
+
+
+// Interface name : CATIAHybridShapeDirection
+#pragma ID CATIAHybridShapeDirection "DCE:8a86f836-b093-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeDirection
+
+
+// VB object name : HybridShapeDirection (Id used in Visual Basic)
+#pragma ID HybridShapeDirection "DCE:8a86f844-96ae-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeDirection HybridShapeDirection
+
+
+#endif
+// CATIAHybridShapeDirection_IDL

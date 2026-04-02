@@ -1,0 +1,20 @@
+#
+# LOAD MODULE
+#
+BUILT_OBJECT_TYPE= LOAD MODULE
+
+OS = COMMON
+
+LINK_WITH = CATVisVR JS0MT VE0BASE YN000MAT DI0PANV2 JS0GROUP CATObjectModelerBase CATNeoWandDaemon
+
+
+OS = AIX
+
+OS = HP-UX
+
+OS = SunOS
+SYS_LIBS = -lsocket -lnsl -lXt
+
+OS = Windows_NT
+SYS_LIBS = vfw32.lib wsock32.lib
+LOCAL_LDFLAGS =  $(SUB_CON)

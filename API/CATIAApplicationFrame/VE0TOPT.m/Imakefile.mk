@@ -1,0 +1,6 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= NONE
+
+LINK_WITH = OM0EDPRO CAPPFRM JS0GROUP ObjectModeler CATVisualization DI0PANV2 ApplicationFrame JS0FM Mathematics CATDlgStandard

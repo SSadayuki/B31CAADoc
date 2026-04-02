@@ -1,0 +1,77 @@
+#ifndef CATIAAssemblyAnnotationSets_IDL
+#define CATIAAssemblyAnnotationSets_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 2012
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*
+Sample to get the CATIAAssemblyAnnotationSets interface
+
+Language = "VBSCRIPT"
+
+Sub CATMain()
+
+Dim partDocument1 As Document
+Set partDocument1 = CATIA.ActiveDocument
+
+Dim part1 As Part
+Set part1 = partDocument1.Part
+
+Dim annotationSets1 As Collection
+Set annotationSets1 = part1.AnnotationSets
+
+Dim myARMSets As AssemblyAnnotationSets
+Set myARMSets = annotationSets1.GetItem(“AssemblyAnnotationSets”)
+
+Dim annotationSet1 As AnnotationSet
+Set annotationSet1 = myARMSets.AddAssemblySet("ISO")
+*/
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATIABase.idl"
+
+interface CATIAAnnotationSet;
+interface CATIAProduct;
+
+/**
+ * Interface for collection of Annotations' Set
+ */
+interface CATIAAssemblyAnnotationSets : CATIACollection
+{
+  /**
+   * @nodoc.
+   * Add a set.
+   */
+  HRESULT AddAssemblySet (in CATBSTR        iStandard,
+                                      out /*IDLRETVAL*/ CATIAAnnotationSet oSet);
+
+  /**
+   * Retrieve a set.
+   */
+  HRESULT Item (in CATVariant iIndex,
+                out /*IDLRETVAL*/ CATIABase  oSet);
+
+  /**
+    * Loads the Annotation Sets list.
+    * This method is very useful when a cgr document containing Annotation Set
+    * is inserted in the product, because the Annotation Set is not automatically loaded
+    * If the Annotation Set is already loaded nothing happens.
+    */
+   HRESULT LoadAnnotationSetsList ();
+
+};
+
+// Interface name : CATIAAssemblyAnnotationSets
+#pragma ID CATIAAssemblyAnnotationSets "DCE:78a20098-72f8-4d7f-83f9616a6b7d099c"
+#pragma DUAL CATIAAssemblyAnnotationSets
+
+// VB object name : AnnotationSets 
+#pragma ID AssemblyAnnotationSets "DCE:dc4211d9-f981-40ab-9c1c869624f9b74f"
+#pragma ALIAS CATIAAssemblyAnnotationSets AssemblyAnnotationSets
+
+#endif

@@ -1,0 +1,454 @@
+#ifndef CATIARenderingLight_IDL
+#define CATIARenderingLight_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIARenderingLight:                           
+// Exposed interface for Rendering Light object
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jul02 Creation					A. Schmitt
+// Mar03 Adds-on					BMB
+//=================================================================
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+/**
+ * Represents a Rendering Light object.
+ */
+
+interface CATIARenderingLight : CATIABase
+{
+/**
+ * Returns or sets the light type.
+ *   <ul> Possible light types are:
+ *   <li> 1: Spot light </li>
+ *   <li> 2: Point light </li>
+ *   <li> 3: Directional light </li>
+ *   </ul>
+ */
+#pragma PROPERTY Type
+  HRESULT  get_Type ( out /*IDLRETVAL*/ short oType);
+  HRESULT  put_Type ( in	short iType);
+
+/**
+ * Returns or sets the light mode.
+ *   <ul> Possible light modes are:
+ *   <li> 1: Light is linked to the viewpoint </li>
+ *   <li> 2: Light is linked to the model </li>
+ *   </ul>
+ */
+#pragma PROPERTY Mode
+  HRESULT  get_Mode ( out /*IDLRETVAL*/ short oMode);
+  HRESULT  put_Mode ( in	short iMode);
+
+/**
+ * Returns the coordinates of the origin of the light.
+ * <br>
+ * These coordinates are set as an array of 3 Variants (double type).
+ */
+  HRESULT GetOrigin (inout CATSafeArrayVariant oOrigin);
+
+/**
+ * Sets the coordinates of the origin of the light.
+ * <br>
+ * These coordinates are set as an array of 3 Variants (double type).
+ * <! @sample >
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example sets the origin of the <tt>MyLight</tt> light.
+ * to the point with coordinates (10, 25, 15).
+ * <pre>
+ * MyLight.<font color="red">PutOrigin</font> Array(10, 25, 15)
+ * </pre>
+ * </dl>
+ */
+  HRESULT PutOrigin (in CATSafeArrayVariant iOrigin);
+
+/**
+ * Returns the coordinates of the target point of the light.
+ * <br>
+ * These coordinates are set as an array of 3 Variants (double type).
+ */
+  HRESULT GetTarget (inout CATSafeArrayVariant oTarget);
+
+/**
+ * Sets the coordinates of the target point of the light.
+ * <br>
+ * These coordinates are set as an array of 3 Variants (double type).
+ */
+  HRESULT PutTarget(in CATSafeArrayVariant iTarget);
+
+/**
+ * Returns the color of a light.
+ * <br>
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @param oColor
+ *   The color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  GetColor ( inout CATSafeArrayVariant oColor);
+
+/**
+ * Sets the color of a light.
+ * <br>
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @Returns the color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  PutColor ( in	CATSafeArrayVariant	iColor);
+
+/**
+ * Returns or sets the light intensity of a light.
+ */
+#pragma PROPERTY Intensity
+  HRESULT  get_Intensity ( out /*IDLRETVAL*/ double oIntensity);
+  HRESULT  put_Intensity ( in	double iIntensity);
+
+/**
+ * Returns or sets the light ambient intensity of a light.
+ */
+#pragma PROPERTY Ambient
+  HRESULT  get_Ambient ( out /*IDLRETVAL*/ double oAmbient);
+  HRESULT  put_Ambient ( in	double iAmbient);
+
+/**
+ * Returns or sets the light diffuse intensity of a light.
+ */
+#pragma PROPERTY Diffuse
+  HRESULT  get_Diffuse ( out /*IDLRETVAL*/ double oDiffuse);
+  HRESULT  put_Diffuse ( in	double iDiffuse);
+
+/**
+ * Returns or sets the light specular intensity of a light.
+ */
+#pragma PROPERTY Specular
+  HRESULT  get_Specular ( out /*IDLRETVAL*/ double oSpecular);
+  HRESULT  put_Specular ( in	double iSpecular);
+
+/**
+ * Returns or sets the light angle of a spot light.
+ * <br>
+ * The angle ranges from <code>0.</code> (directional light) to 
+ * <code>360.</code> (point light).
+ */
+#pragma PROPERTY Angle
+  HRESULT  get_Angle ( out /*IDLRETVAL*/ double oAngle);
+  HRESULT  put_Angle ( in	double iAngle);
+
+/**
+ * Returns or sets the light maximum distance of illumination.
+ * <br>
+ * The light illuminates from its origin to its end
+ * distance. Objects farther than this distance are not
+ * affected by the light.
+ */
+#pragma PROPERTY EndDistance
+  HRESULT  get_EndDistance ( out /*IDLRETVAL*/ double oEndDistance);
+  HRESULT  put_EndDistance ( in	double iEndDistance);
+
+/**
+ * Returns or sets the light attenuation start ratio.
+ * <br>
+ * It represents the fraction of the end distance where
+ * the light intensity starts to attenuate.
+ * <br>
+ * The ratio ranges from <code>0.</code> (attenuation
+ * starts at the origin) to <code>1.</code> (attenuation
+ * starts at the end distance = no attenuation).
+ */
+#pragma PROPERTY AttenuationStartRatio
+  HRESULT  get_AttenuationStartRatio ( out /*IDLRETVAL*/ double oAttenuationStartRatio);
+  HRESULT  put_AttenuationStartRatio ( in	double iAttenuationStartRatio);
+
+/**
+ * Returns or sets the light attenuation angle ratio.
+ * <br>
+ * It represents the fraction of the light angle where
+ * the illumination starts to attenuate.
+ * <br>
+ * The ratio ranges from <code>0.</code> (attenuation
+ * starts when angle is null) to <code>1.</code> (attenuation
+ * starts when angle is maximum = no angle attenuation).
+ */
+#pragma PROPERTY AttenuationAngleRatio
+  HRESULT  get_AttenuationAngleRatio ( out /*IDLRETVAL*/ double oAttenuationAngleRatio);
+  HRESULT  put_AttenuationAngleRatio ( in	double iAttenuationAngleRatio);
+
+/**
+ * Returns or sets the light shadow status.
+ * <br>
+ *   The shadow status can be:
+ *   <li> 1: light casts shadows </li>
+ *   <li> 0: light does not cast shadows </li>
+ */
+#pragma PROPERTY ShadowStatus
+  HRESULT  get_ShadowStatus ( out /*IDLRETVAL*/ short oShadowStatus);
+  HRESULT  put_ShadowStatus ( in	short iShadowStatus);
+
+/**
+ * Returns or sets the light shadow status on environmemt.
+ * <br>
+ *   The shadow status can be:
+ *   <li> 1: light casts shadows on environmemt</li>
+ *   <li> 0: light does not cast shadows on environmemt</li>
+ * <br>
+ *   The shadow status on environmemt can be activate only with a directional light
+ */
+#pragma PROPERTY HardwareShadowStatus
+  HRESULT  get_HardwareShadowStatus ( out /*IDLRETVAL*/ short oHardwareShadowStatus);
+  HRESULT  put_HardwareShadowStatus ( in	short iHardwareShadowStatus);
+
+/**
+ * Returns or sets the light shadow smoothing.
+ * <br>
+ *   It is an integer in the scale 0 to 10
+ *   It represents the cleanliness of the shadow limits
+ */
+#pragma PROPERTY HardwareShadowSmoothing
+  HRESULT  get_HardwareShadowSmoothing ( out /*IDLRETVAL*/ short oHardwareShadowSmoothing);
+  HRESULT  put_HardwareShadowSmoothing ( in	short iHardwareShadowSmoothing);
+
+/**
+ * Returns the color of a shadow.
+ * <br>
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @param oColor
+ *   The color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  GetShadowColor ( inout CATSafeArrayVariant oShadowColor);
+
+/**
+ * Sets the color of a shadow.
+ * <br>
+ * The color is expressed with r, g, and b coefficients (between 0 and 255)
+ * <br>
+ * @Returns the color as a safe array made up of three doubles: r, g, b
+ * <br>
+ *   The array must be previously initialized.
+ */
+  HRESULT  PutShadowColor ( in	CATSafeArrayVariant	iShadowColor);
+
+/**
+ * Returns or sets the light shadow transparency.
+ * <br>
+ *   It is a float in the scale 0.0(no transparency) to 1.0(full transparency)
+ */
+#pragma PROPERTY HardwareShadowTransparency
+  HRESULT  get_HardwareShadowTransparency ( out /*IDLRETVAL*/ double oHardwareShadowTransparency);
+  HRESULT  put_HardwareShadowTransparency ( in	double iHardwareShadowTransparency);
+
+/**
+ * Returns or sets the light shadow status on objet.
+ * <br>
+ *   The shadow status can be:
+ *   <li> 1: light casts shadows on objet</li>
+ *   <li> 0: light does not cast shadows on objet</li>
+ * <br>
+ *   The shadow status on object can be activate only with a spot light
+ */
+#pragma PROPERTY ShadowObjectStatus
+  HRESULT  get_ShadowObjectStatus ( out /*IDLRETVAL*/ short oShadowObjectStatus);
+  HRESULT  put_ShadowObjectStatus ( in	short iShadowObjectStatus);
+
+/**
+ * Returns or sets the light shadow map size.
+ * <br>
+ *   The shadow map size can be:
+ *   <li> 0: Small (512)</li>
+ *   <li> 1: Medium (1024)</li>
+ *   <li> 2: Large (2048)</li>
+ */
+#pragma PROPERTY ShadowMapSize
+  HRESULT  get_ShadowMapSize ( out /*IDLRETVAL*/ short oShadowMapSize);
+  HRESULT  put_ShadowMapSize ( in	short iShadowMapSize);
+
+/**
+ * Returns or sets the light shadow fitting mode.
+ * <br>
+ *   The shadow fitting mode can be:
+ *   <li> 0: Standard</li>
+ *   <li> 1: Good</li>
+ */
+#pragma PROPERTY ShadowFittingMode
+  HRESULT  get_ShadowFittingMode ( out /*IDLRETVAL*/ short oShadowFittingMode);
+  HRESULT  put_ShadowFittingMode ( in	short iShadowFittingMode);
+
+/**
+ * Returns or sets the light active status.
+ * <br>
+ * A light illuminates only when it is active.
+ *   The active status can be:
+ *   <li> 1: light is on </li>
+ *   <li> 0: light is off</li>
+ */
+#pragma PROPERTY ActiveStatus
+  HRESULT  get_ActiveStatus ( out /*IDLRETVAL*/ short oActiveStatus);
+  HRESULT  put_ActiveStatus ( in	short iActiveStatus);
+
+/**
+ * Returns or sets the light area type.
+ *   <ul> Possible area light types are:
+ *   <li> 1: CATNone </li>
+ *   <li> 2: CATRectangle </li>
+ *   <li> 3: CATDisk </li>
+ *   <li> 4: CATSphere </li>
+ *   <li> 5: CATCylinder </li>
+ *   </ul>
+ */
+#pragma PROPERTY LightAreaType
+  HRESULT  get_LightAreaType ( out /*IDLRETVAL*/ short oLightAreaType);
+  HRESULT  put_LightAreaType ( in	short iLightAreaType);
+
+/**
+ * Returns or sets the light area visibility status.
+ * <br>
+ *   The area visibility status can be:
+ *   <li> 1: light area is rendered </li>
+ *   <li> 0: light area is not rendered</li>
+ */
+#pragma PROPERTY AreaStatus
+  HRESULT  get_AreaStatus ( out /*IDLRETVAL*/ short oAreaStatus);
+  HRESULT  put_AreaStatus ( in	short iAreaStatus);
+
+/**
+ * Returns or sets the light area length.
+ */
+#pragma PROPERTY RectangleLightLength
+  HRESULT  get_RectangleLightLength ( out /*IDLRETVAL*/ double oRectangleLightLength);
+  HRESULT  put_RectangleLightLength ( in	double iRectangleLightLength);
+
+/**
+ * Returns or sets the light area width.
+ */
+#pragma PROPERTY RectangleLightWidth
+  HRESULT  get_RectangleLightWidth ( out /*IDLRETVAL*/ double oRectangleLightWidth);
+  HRESULT  put_RectangleLightWidth ( in	double iRectangleLightWidth);
+
+/**
+ * Returns or sets the disk light area radius.
+ */
+#pragma PROPERTY DiskLightRadius
+  HRESULT  get_DiskLightRadius ( out /*IDLRETVAL*/ double oDiskLightRadius);
+  HRESULT  put_DiskLightRadius ( in	double iDiskLightRadius);
+
+/**
+ * Returns or sets the sphere light area radius.
+ */
+#pragma PROPERTY SphereLightRadius
+  HRESULT  get_SphereLightRadius ( out /*IDLRETVAL*/ double oSphereLightRadius);
+  HRESULT  put_SphereLightRadius ( in	double iSphereLightRadius);
+
+/**
+ * Returns or sets the cylinder light area radius.
+ */
+#pragma PROPERTY CylinderLightRadius
+  HRESULT  get_CylinderLightRadius ( out /*IDLRETVAL*/ double oCylinderLightRadius);
+  HRESULT  put_CylinderLightRadius ( in	double iCylinderLightRadius);
+
+/**
+ * Returns or sets the cylinder light area radius.
+ */
+#pragma PROPERTY CylinderLightHeight
+  HRESULT  get_CylinderLightHeight ( out /*IDLRETVAL*/ double oCylinderLightHeight);
+  HRESULT  put_CylinderLightHeight ( in	double iCylinderLightHeight);
+
+/**
+ * Changes the number of samples taken in U direction of the area source.
+ */
+#pragma PROPERTY AreaSamplesU
+  HRESULT  get_AreaSamplesU ( out /*IDLRETVAL*/ short oAreaSamplesU);
+  HRESULT  put_AreaSamplesU ( in	short iAreaSamplesU);
+
+/**
+ * Changes the number of samples taken in V direction of the area source.
+ */
+#pragma PROPERTY AreaSamplesV
+  HRESULT  get_AreaSamplesV ( out /*IDLRETVAL*/ short oAreaSamplesV);
+  HRESULT  put_AreaSamplesV ( in	short iAreaSamplesV);
+
+/**
+ * Changes the indirect illumination status.
+ * <br>
+ *   The indirect illumination status can be:
+ *   <li> 1: indirect illumination is enabled </li>
+ *   <li> 0: indirect illumination is disabled</li>
+ */
+#pragma PROPERTY IlluminationStatus
+  HRESULT  get_IlluminationStatus ( out /*IDLRETVAL*/ short oIlluminationStatus);
+  HRESULT  put_IlluminationStatus ( in	short iIlluminationStatus);
+
+/**
+ * Changes the light falloff exponent.
+ * Exponent value can be 0, 1 or 2.
+ * <br>
+ * An exponent of 0 means that the light energy does not fall off with distance.
+ * <br>
+ * An exponent of 1 means that the light energy fall off is linear.
+ * <br>
+ * An exponent of 2 is physically correct.
+ */
+#pragma PROPERTY FalloffExponent
+  HRESULT  get_FalloffExponent ( out /*IDLRETVAL*/ short oFalloffExponent);
+  HRESULT  put_FalloffExponent ( in	short iFalloffExponent);
+
+/**
+ * Changes the factor for indirect illumination energy.
+ */
+#pragma PROPERTY EnergyFactor
+  HRESULT  get_EnergyFactor ( out /*IDLRETVAL*/ double oEnergyFactor);
+  HRESULT  put_EnergyFactor ( in	double iEnergyFactor);
+
+/**
+ * Changes the maximum number of caustic photons to emit from the light source.
+ */
+#pragma PROPERTY CausticPhotonsNumber
+  HRESULT  get_CausticPhotonsNumber ( out /*IDLRETVAL*/ long oCausticPhotonsNumber);
+  HRESULT  put_CausticPhotonsNumber ( in	long iCausticPhotonsNumber);
+
+/**
+ * Changes the maximum number of global illumination photons to emit from the light source.
+ */
+#pragma PROPERTY GlobalPhotonsNumber
+  HRESULT  get_GlobalPhotonsNumber ( out /*IDLRETVAL*/ long oGlobalPhotonsNumber);
+  HRESULT  put_GlobalPhotonsNumber ( in	long iGlobalPhotonsNumber);
+
+};
+
+// Interface Name : CATIARenderingLight
+#pragma ID CATIARenderingLight "DCE:bb2d22f0-9999-11d6-805e0030f113d1bf"
+#pragma DUAL CATIARenderingLight
+ 
+// VB Object Name : RenderingLight
+#pragma ID RenderingLight "DCE:c5cb9580-9999-11d6-805e0030f113d1bf"
+#pragma ALIAS CATIARenderingLight RenderingLight
+
+#endif
+// CATIARenderingLight_IDL
+
+
+
+
+
+
+

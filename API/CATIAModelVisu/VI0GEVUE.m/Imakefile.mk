@@ -1,0 +1,48 @@
+#
+# 
+#
+BUILT_OBJECT_TYPE = NONE
+
+LINK_WITH = \
+AC0CATPL \
+AC0XXLNK \
+AD0XXBAS \
+CATGEOBasic \
+CATIAEntity \
+CATIAPlug \
+CATV4epsilon \
+CO0LSTPV \
+JS03TRA \
+JS0CORBA \
+JS0FM \
+JS0ERROR \
+NS0S3STR \
+//V4APS01 \
+//V4Geom1 \
+//V4Geom2 \
+//V4GeomPRM \
+//V4MSK \
+//V4Maths1 \
+//V4Proc1 \
+//V4Proc10 \
+//V4Proc2 \
+//V4Proc3 \
+//V4Proc4 \
+//V4SysB \
+//V4SysENV \
+//V4SysMEM \
+//V4Topo0 \
+//V4Util3 \
+VE0BASE \
+VE0LOD \
+VE0MDL \
+VI0HLR \
+VI0REPV4 \
+VI0TEXV4 \
+YI00IMPL \
+//YJ0OPER \
+YN000MFL \
+YN000FUN \
+YP00IMPL \
+CATViz \
+CATMeasureGeometryInterfaces

@@ -1,0 +1,103 @@
+#ifndef CATIAPublication_IDL
+#define CATIAPublication_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//===================================================================
+//
+// CATIAPublication.idl
+// Automation interface for the Publication element 
+//
+//===================================================================
+//
+// Usage notes:
+//   New interface: describe its use here
+//
+
+#include "CATIABase.idl"
+#include "CATIAReference.idl"
+#include "CATVariant.idl"
+
+/**  
+ * The interface to access a CATIAPublication.  
+ */
+interface CATIAPublication : CATIABase 
+{
+  
+    /** @nodoc */ 
+#pragma PROPERTY Next
+	HRESULT get_Next( out /*IDLRETVAL*/ CATVariant oDirect );
+	HRESULT put_Next( in CATVariant iRelayed );
+
+    /**
+     * Returns published object.
+	 * <b> Role: </b> This method gives access to the finally published object.
+	 * @param oRef
+	 *      The final reference of the publication object.
+     * <!@sample>
+	 * <dl>
+	 * <dt> <b>Example: </b>
+	 * This example returns the final reference <tt>Ref</tt> 
+	 * of the publication object <tt>Pub1</tt>.
+	 * <pre>
+     * Dim Ref As Reference
+     * Ref = Pub1.<font color="red">Valuation
+     * </pre>
+	 * </dl>
+     */
+#pragma PROPERTY Valuation
+	HRESULT get_Valuation( out /*IDLRETVAL*/ CATBaseDispatch oRef );
+
+    /**
+     * Valuates a publication object directly with the object it publishes.
+	 * <b> Role: </b> This method allows to valuate a publication with the pointed object.
+	 * @param oRef
+	 *      The final reference of the publication object.
+     * <!@sample>
+	 * <dl>
+	 * <dt> <b>Example: </b>
+	 * The following example valuates the publication <tt>Pub1</tt>
+	 * with the reference object <tt>RefObject</tt>.
+	 * <pre>
+     * Pub1.<font color="red">Valuation</font>(RefObject)
+     * </pre>
+	 * </dl>
+     */
+
+	HRESULT put_Valuation( in CATBaseDispatch iRef );
+
+    /**
+     * Valuates a publication object with another publication object.
+	 * <b> Role: </b> This method allows to valuate a publication with an intermediate one.
+	 * @param iPub
+	 *      The intermediate publication object
+     * <!@sample>
+	 * <dl>
+	 * <dt> <b>Example: </b>
+     * The following example valuates the publication object <tt>Pub1</tt> 
+	 * with the publication object <tt>Pub2</tt>
+	 * <pre>
+     * Pub1.<font color="red">Relay</font>(Pub2)
+     * </pre>
+	 * </dl>
+     */
+#pragma PROPERTY Relay
+    HRESULT put_Relay (in CATIAPublication iPub) ;
+
+
+};
+
+// Interface name : CATIAPublication
+#pragma ID CATIAPublication "DCE:8e3491a3-b6fc-11d3-904b0004ac96f573"
+#pragma DUAL CATIAPublication
+
+// VB object name : Publication (Id used in Visual Basic)
+#pragma ID Publication "DCE:8e3491a4-b6fc-11d3-904b0004ac96f573"
+#pragma ALIAS CATIAPublication Publication
+
+#endif

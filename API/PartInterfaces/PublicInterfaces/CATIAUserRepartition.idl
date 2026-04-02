@@ -1,0 +1,102 @@
+#ifndef CATIAUserRepartition_IDL
+#define CATIAUserRepartition_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAUserRepartition:                           
+// Exposed interface for UserRepartition
+//                                   
+//=================================================================
+// Usage notes:
+//        For Pattern definitions
+//
+//=================================================================
+// Dec98 Creation                                        E Langlois
+//=================================================================
+#include "CATIARepartition.idl"
+
+interface CATIABase;
+
+/**
+ * Represents the User Pattern  repartition.
+ * It is made up of a number of times the shape is copied and 
+ * the location of instances.
+ * The number of times the shape is copied is accessible using
+ * the @href CATIARepartition#InstancesCount property.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAUserRepartition : CATIARepartition
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //	
+    //
+    //	ON FEATURE TO LOCATE POSITIONS
+    //	------------------------------
+    //
+    /**
+     * Returns the collection of feature to locate instances.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>list</tt> the list of feature
+     * to locate instances of the Pattern <tt>firstPattern</tt>:
+     * <pre>
+     * Set list = firstPattern.<font color="red">FeatureToLocatePositions</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY FeatureToLocatePositions
+	HRESULT	get_FeatureToLocatePositions
+				( out /*IDLRETVAL*/ CATIABase oFeatureToLocatePositions );
+
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+	//	ADD A FEATURE TO LOCATE POSITIONS
+	//	---------------------------------
+	//
+    /**
+     * Adds a new feature to locate instances. 
+     * @param iFeatureToLocatePositions
+     *   The new face to process
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new feature <tt>feature</tt>
+     * to locate instances of the Pattern <tt>firstPattern</tt>:
+     * <pre>
+     * call firstPattern.<font color="red">AddFeatureToLocatePositions</font>(face)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	AddFeatureToLocatePositions
+				( in CATIABase iFeatureToLocatePositions );
+
+};
+
+// Interface name : CATIAUserRepartition
+#pragma ID CATIAUserRepartition "DCE:c88e60d1-997f-11d2-8ae80008c719428c"
+#pragma DUAL CATIAUserRepartition
+
+// VB object name : UserRepartition (Id used in Visual Basic)
+#pragma ID UserRepartition "DCE:e27f65b1-997f-11d2-8ae80008c719428c"
+#pragma ALIAS CATIAUserRepartition UserRepartition
+
+
+#endif
+// CATIAUserRepartition_IDL
+
+

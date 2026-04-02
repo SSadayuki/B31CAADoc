@@ -1,0 +1,248 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMOperatorsInterfaces CATICGMThickenOp Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMOperatorsInterfaces.htm" href="../GMOperatorsInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMOperatorsInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATICGMThickenOp"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>GMOperatorsInterfaces Framework:  CATICGMThickenOp Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATICGMThickenOp_37231','CATICGMThickenOp','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATICGMThickenOp</b>
+</p>
+<p>
+<b><i> Class defining the topological operator that thickens a skin body into a volume body.</i></b><br>
+
+ <br>A global offset value can be defined on the body, or faces to thicken can be individually chosen as well
+ as the corresponding offset values.
+<br>
+ This operator follows the global frame of the topological operators 
+ and satisfies the smart mechanism: the
+ input body is not modified. A new resulting body is created, 
+ possibly sharing data with the input body. A CATICGMThickenOp operator is not streamable.
+ To use it:
+<ul>
+ <li>Create it with the <tt>CATCGMCreateThickenOp</tt> global function.
+ <li>Tune it with appropriate options, using the <tt>SetXxx</tt> methods.
+ <li>Run it
+ <li>Get the result with the <tt>GetResult</tt> method. If you do not want 
+ to keep the resulting body, use the <script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory, after the operator deletion.
+<li>Release the operator with the <tt>Release</tt> method after use.
+</ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#Append(CATLISTP(CATFace)&amp;,double,double)"><b>Append</b></a>(CATLISTP(CATFace)&amp;,double,double)
+</td><td id='tdright'>  This API must not be used.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBooleanResult()"><b>GetBooleanResult</b></a>()
+</td><td id='tdright'>  Returns the body created from the Boolean operation between a given body and the thickened body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetResult()"><b>GetResult</b></a>()
+</td><td id='tdright'>  Returns the created thickened body.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Run()"><b>Run</b></a>()
+</td><td id='tdright'>  Runs <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetBooleanOperation(CATDynBooleanType,CATBody*,CATCGMJournalList*)"><b>SetBooleanOperation</b></a>(CATDynBooleanType,CATBody*,CATCGMJournalList*)
+</td><td id='tdright'>  Defines a Boolean operation between a given body and the result of 
+ <tt>this</tt> operator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetCleverRibbonComputation(short)"><b>SetCleverRibbonComputation</b></a>(short)
+</td><td id='tdright'>  Activates an enhanced algorithm (recommended).
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetSharpBorderMode(short)"><b>SetSharpBorderMode</b></a>(short)
+</td><td id='tdright'>  Defines how borders are transformed in the neighborhood of sharp edges.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="Append"></a><a id="Append(CATLISTP(CATFace)&amp;,double,double)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>Append</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATLISTP(CATFace)','CATLISTP(CATFace)&amp;')</script> <span class='param'>iFaces</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iOffset1</span>,<script type="text/javascript"> activateLink('double','double')</script> <span class='param'>iOffset2</span><span class='param'>= 0.</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ This API must not be used.
+ Defines offsets on individual faces.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFaces</span></dt>
+   <dd> The list of pointer to the faces.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOffset1</span></dt>
+   <dd> The smaller value of the offset in the side of the natural orientation of the skin.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOffset2</span></dt>
+   <dd> The larger value of the offset in the side of the natural orientation of the skin.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBooleanResult"></a><a id="GetBooleanResult()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody *')</script>  <span class='objname'>GetBooleanResult</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the body created from the Boolean operation between a given body and the thickened body.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the Boolean result.
+ If you do not want to keep the resulting body, 
+ use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory, after the operator deletion.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetResult"></a><a id="GetResult()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATBody','CATBody *')</script>  <span class='objname'>GetResult</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the created thickened body.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The pointer to the result of <tt>this</tt> operator.
+ If you do not want to keep the resulting body, 
+ use the 
+<script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory, after the operator deletion.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Run"></a><a id="Run()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>Run</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Runs <tt>this</tt> operator.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  The diagnosis of the computation.
+ <br><b>Legal values</b>: <tt>1</tt> if the computation failed, <tt>0</tt> otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetBooleanOperation"></a><a id="SetBooleanOperation(CATDynBooleanType,CATBody*,CATCGMJournalList*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetBooleanOperation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATDynBooleanType','CATDynBooleanType')</script> <span class='param'>iOpType</span>,<script type="text/javascript"> activateLink('CATBody','CATBody*')</script> <span class='param'>iOperandBody</span>,<script type="text/javascript"> activateLink('CATCGMJournalList','CATCGMJournalList*')</script> <span class='param'>iReport</span><span class='param'>= 0</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines a Boolean operation between a given body and the result of 
+ <tt>this</tt> operator.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iOpType</span></dt>
+   <dd> The boolean operation type.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOperandBody</span></dt>
+   <dd> The pointer to the body representing the first operand of the Boolean operation. 
+ The second operand is the result of the thicken.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iReport</span></dt>
+   <dd> A pointer to the journal corresponding to the Boolean operation. This journal can be different
+ from the journal of the thicken operation itself. If <tt>NULL</tt>, the Boolean journal
+ is not written.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetCleverRibbonComputation"></a><a id="SetCleverRibbonComputation(short)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetCleverRibbonComputation</span><span class = 'signature'>(<script type="text/javascript"> activateLink('short','short')</script> <span class='param'>iCleverRibbonComputation</span><span class='param'>= 1</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Activates an enhanced algorithm (recommended).
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iCleverRibbonComputation</span></dt>
+   <dd> Enhanced algorithm is activated if 1 is specified, otherwise it is not activated.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetSharpBorderMode"></a><a id="SetSharpBorderMode(short)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetSharpBorderMode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('short','short')</script> <span class='param'>iSharpBorderOptimisation</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Defines how borders are transformed in the neighborhood of sharp edges.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iSharpBorderOptimisation</span></dt>
+   <dd> <br><b>Legal values:</b>
+ <dl><dt>0</dt><dd>Optimization not required
+ <dt>1</dt><dd>Optimization required (Skin handled like a Volume)
+ </dl>
+ This option has no effect when SetCleverRibbonComputation() is set to 1.
+ Default value for optimisation is 1. (Optimization required).
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICGMThickenOp.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMOperatorsInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

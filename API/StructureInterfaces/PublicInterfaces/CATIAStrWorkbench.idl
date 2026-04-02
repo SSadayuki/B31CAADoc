@@ -1,0 +1,82 @@
+#ifndef CATIAStrWorkbench_IDL
+#define CATIAStrWorkbench_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 10/03/98
+//  But   : Creation
+//
+// ****************************************************************************
+#include "CATIABase.idl"
+#include "CATIAWorkbench.idl"
+#include "CATIAStrComputeServices.idl"
+
+interface CATIAProduct;
+interface CATIAStrObjectFactory;
+interface CATIAStrPlates;
+interface CATIAStrMembers;
+
+	/**
+	* Represents the structure workbench object.
+	*
+	*/
+
+interface CATIAStrWorkbench : CATIAWorkbench
+{
+
+	/**
+	* Returns the compute services object. It allows you to calculate some
+	* properties on the structure objects.
+	* @sample
+	* <pre>
+	* Dim services As StrComputeServices
+    * Set services = workbench_1.<font color="red">StrComputeServices</font>
+    * </pre>
+
+	*/
+
+	HRESULT get_StrComputeServices(out /*IDLRETVAL*/ CATIAStrComputeServices oServices);
+
+};
+
+// Interface name : CATIAStrWorkbench
+#pragma ID CATIAStrWorkbench "DCE:b43d8d02-1711-11d2-990300609419b521"
+#pragma DUAL CATIAStrWorkbench
+
+// VB object name : StrWorkbench
+#pragma ID StrWorkbench "DCE:4f010086-590b-11d2-990900609419b521"
+#pragma ALIAS CATIAStrWorkbench StrWorkbench
+
+#endif

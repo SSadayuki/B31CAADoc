@@ -1,0 +1,358 @@
+#ifndef CATIAManufacturingMachine_IDL
+#define CATIAManufacturingMachine_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//								   
+// CATIAManufacturingMachine:						   
+// Exposed interface for ManufacturingMachine
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep99 Creation				       K. Bouharb
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATIAParameter.idl"
+#include "CATBSTR.idl"
+
+#include "CATSafeArray.idl"
+
+/**
+ * Machine in machining domain.
+ */
+interface CATIAManufacturingMachine : CATIABase
+{
+#pragma PROPERTY MachineType
+ 
+  /**
+  * Return the Type of a Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the type <tt>MachineType</tt> of to the manufacturing Machine <tt>CurrentMachine</tt>
+  * <pre>
+  * MachineType = CurrentMachine.<font color="red">Type</font>
+  *</pre>
+  * </dl>
+  */
+	HRESULT get_MachineType (inout /*IDLRETVAL*/ CATBSTR oType);
+
+// Methode DefaultName
+  /**
+  * Return the string the Type of a Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the type <tt>MachineType</tt> of to the manufacturing Machine <tt>CurrentMachine</tt>
+  * <pre>
+  * MachineType = CurrentMachine.<font color="red">Type</font>
+  *</pre>
+  * </dl>
+  */
+	HRESULT DefaultName (inout /*IDLRETVAL*/ CATBSTR oTypeNLS);
+
+#pragma PROPERTY Comment
+ 
+  /**
+  * Return the Comment of a Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the comment <tt>MachineComment</tt> of to the manufacturing Machine <tt>CurrentMachine</tt>
+  * <pre>
+  * MachineComment = CurrentMachine.<font color="red">Comment</font>
+  *</pre>
+  * </dl>
+  */
+	HRESULT get_Comment (inout /*IDLRETVAL*/ CATBSTR oComment);
+
+#pragma PROPERTY RotaryAxis
+
+  /**
+  * Give the MfgRotaryAxis linked to a Manufacturing Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the MfgRotaryAxis <tt>ThisAxis</tt> linked to the Manufacturing Machine <tt>CurrentMachine</tt>
+  * <pre>
+  * Set ThisAxis = CurrentMachine.RotaryAxis
+  *</pre>
+  * </dl>
+  */
+HRESULT get_RotaryAxis (inout /*IDLRETVAL*/ CATBSTR oRotaryAxis);
+ 
+  /**
+  * Initialise or modify the MfgRotaryAxis of a Manufacturing Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example initialise the MfgRotaryAxis <tt>A</tt> of to the manufacturing machine <tt>CurrentMachine</tt>
+  * <pre>
+  * call CurrentMachine.<font color="red">RotaryAxis</font>(A)
+  *</pre>
+  * </dl>
+  */
+HRESULT put_RotaryAxis (in CATBSTR iRotaryAxis);
+
+#pragma PROPERTY PreferedToolCatalogName
+
+  /**
+  * Give the PreferedToolCatalogName linked to a Manufacturing Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the PreferedToolCatalogName <tt>ThisCatalog</tt> linked to the Manufacturing Machine <tt>CurrentMachine</tt>
+  * <pre>
+  * Set ThisCatalog = CurrentMachine.PreferedToolCatalogName
+  *</pre>
+  * </dl>
+  */
+HRESULT get_PreferedToolCatalogName (inout /*IDLRETVAL*/ CATBSTR oPreferedToolCatalogName);
+
+  /**
+  * Initialise or modify the MfgToolCatalog of a Manufacturing Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example initialise the MfgToolCatalog <tt>CatalogOne</tt> of to the manufacturing machine <tt>CurrentMachine</tt>
+  * <pre>
+  * call CurrentMachine.<font color="red">PreferedToolCatalog</font>(CatalogOne)
+  *</pre>
+  * </dl>
+  */
+HRESULT put_PreferedToolCatalogName (in CATBSTR iToolCatalog);
+
+#pragma PROPERTY PPTableName
+
+  /**
+  * Give the PPTableName linked to a Manufacturing Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the PPTableName <tt>ThisPPTable</tt> linked to the Manufacturing Machine <tt>CurrentMachine</tt>
+  * <pre>
+  * Set ThisPPTable = CurrentMachine.PPTableName
+  *</pre>
+  * </dl>
+  */
+HRESULT get_PPTableName (inout /*IDLRETVAL*/ CATBSTR oPPTableName);
+ 
+  /**
+  * Initialise or modify the PPTable name of a Manufacturing Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example initialise the PPTable name <tt>PPTableOne</tt> of to the manufacturing machine <tt>CurrentMachine</tt>
+  * <pre>
+  * call CurrentMachine.<font color="red">PPPTableName</font>(PPTableOne)
+  *</pre>
+  * </dl>
+  */
+HRESULT put_PPTableName (in CATBSTR iPPTableName);
+
+// Method set_DefaultValues
+
+         /**
+         * Initialise the Manufacturing Machine parameters.<br>
+         * <dl>
+         * <dt><b>Example:</b>
+         * <dd>The following example make the init of the parameter of the Machine <tt>ThisMachine</tt> .
+         * <pre>
+         * call ThisMachine.<font color="red">set_DefaultValues</font>
+         *</pre>
+         * </dl>
+         */
+HRESULT set_DefaultValues();
+
+// Method GetAttribute
+ 
+  /**
+  * Retrieve the Attribute of a Manufacturing Machine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retreives in <tt>HomePosX</tt> the attribute 
+  * <tt>MFG_HOME_POS_X</tt> of Manufacturing Machine <tt>MyMachine</tt>
+  * <pre>
+  *  Set HomePosX = MyMachine.<font color="red">GetAttribute</font>(MFG_HOME_POS_X)
+  *</pre>
+  * </dl>
+  */
+
+HRESULT GetAttribute(in CATBSTR iAttribut,out  /*IDLRETVAL*/ CATIAParameter oAttributCke);
+
+
+#pragma PROPERTY NumberOfAttributes
+
+  /**
+  * Gives the number of attributes of a ManufacturingMachine.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the <tt>Number</tt> of attributes of the ManufacturingMachine <tt>CurrentMachine</tt>
+  * <pre>
+  * Number = CurrentMachine.NumberOfAttributes
+  *</pre>
+  * </dl>
+  */
+	HRESULT get_NumberOfAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method GetListOfAttributes
+
+  /**
+  * Retrieve the list of all attributes of a ManufacturingMachine.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>TabAttributes</tt> the list of attributes 
+  * of the ManufacturingMachine <tt>CurrentMachine</tt>
+  * <pre>
+  * call CurrentMachine.<font color="red">GetListOfAttributes</font>(TabAttributes)
+  *</pre>
+  * </dl>
+  */
+
+	HRESULT GetListOfAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+
+// Method GetListOfAttributeUnits
+ 
+  /**
+  * Retrieve the list of attribute units of a ManufacturingMachine.<br>
+  * The number of items in the output array is equal to the number of attributes of the machine.<br>
+  * When an attribute has no unit definition, the corresponding unit item in the output array is a blank string.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>TabAttributeUnits</tt> the list of attribute units 
+  * of the ManufacturingMachine <tt>CurrentMachine</tt>
+  * <pre>
+  * call CurrentMachine.<font color="red">GetListOfAttributeUnits</font>(TabAttributeUnits)
+  *</pre>
+  * </dl>
+  */
+	HRESULT GetListOfAttributeUnits (inout CATSafeArrayVariant oListOfAttributeUnits);
+
+
+#pragma PROPERTY NumberOfNumericalControlAttributes
+// Property NumberOfNumericalControlAttributes
+   /**
+    * This property returns the number of Numerical Control attributes of a Manufacturing Machine.
+    */  
+	HRESULT get_NumberOfNumericalControlAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method GetListOfNumericalControlAttributes
+  /**
+  * Retrieve the list of Numerical Control attributes of a Manufacturing Machine.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>oListOfAttributes</tt> the list of Numerical Control 
+  * attributes of the Manufacturing Machine <tt>myMachine</tt>
+  * <pre>
+  * call myMachine.<font color="red">GetListOfNumericalControlAttributes</font>(oListOfAttributes)
+  *</pre>
+  * </dl>
+  */
+	HRESULT GetListOfNumericalControlAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+
+#pragma PROPERTY NumberOfSpindleAttributes
+// Property NumberOfSpindleAttributes
+   /**
+    * This property returns the number of Spindle attributes of a Manufacturing Machine.
+    */  
+	HRESULT get_NumberOfSpindleAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method GetListOfSpindleAttributes
+  /**
+  * Retrieve the list of Spindle attributes of a Manufacturing Machine.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>oListOfAttributes</tt> the list of Spindle 
+  * attributes of the Manufacturing Machine <tt>myMachine</tt>
+  * <pre>
+  * call myMachine.<font color="red">GetListOfSpindleAttributes</font>(oListOfAttributes)
+  *</pre>
+  * </dl>
+  */
+	HRESULT GetListOfSpindleAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+
+#pragma PROPERTY NumberOfToolChangeAttributes
+// Property NumberOfToolChangeAttributes
+   /**
+    * This property returns the number of Tool change attributes of a Manufacturing Machine.
+    */  
+	HRESULT get_NumberOfToolChangeAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method NumberOfToolChangeAttributes
+  /**
+  * Retrieve the list of Tool Change attributes of a Manufacturing Machine.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>oListOfAttributes</tt> the list of Tool Change 
+  * attributes of the Manufacturing Machine <tt>myMachine</tt>
+  * <pre>
+  * call myMachine.<font color="red">GetListOfToolChangeAttributes</font>(oListOfAttributes)
+  *</pre>
+  * </dl>
+  */
+	HRESULT GetListOfToolChangeAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+
+// RotaryTableParameters for Mfg3AxisWithTableRotationMachine type of Manufacturing machine
+#pragma PROPERTY NumberOfRotaryTableAttributes
+// Property NumberOfRotaryTableAttributes
+   /**
+    * This property returns the number of rotary table attributes of a Manufacturing Machine.
+	* The machine is upposed to accept Rotary table (type is Mfg3AxisWithTableRotationMachine).
+    */  
+	HRESULT get_NumberOfRotaryTableAttributes (out /*IDLRETVAL*/ short oNumber);  
+
+// Method GetListOfRotaryTableAttributes
+  /**
+  * Retrieve the list of Rotary table attributes of a Manufacturing Machine.<br>
+  * Each attribute is returned as the name of a CKE object.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves in <tt>oListOfAttributes</tt> the list of Tool Change 
+  * attributes of the Manufacturing Machine <tt>myMachine</tt>
+  * <pre>
+  * call myMachine.<font color="red">GetListOfRotaryTableAttributes</font>(oListOfAttributes)
+  *</pre>
+  * </dl>
+  */
+	HRESULT GetListOfRotaryTableAttributes (inout CATSafeArrayVariant oListOfAttributes);
+
+// Method GetAttributeNLSName
+ 
+  /**
+  * Retrieve the NLS name from the attribute name of a Manufacturing Machine.<br>
+  */
+	HRESULT GetAttributeNLSName (in CATBSTR iAttributName , inout /*IDLRETVAL*/ CATBSTR oNLSName);
+
+#pragma PROPERTY PostProcessorFile
+// Property PostProcessorFile
+   /**
+    * This property returns the post processor file of a Manufacturing Machine
+	* Machine.PostProcessorFile
+    */  
+	HRESULT get_PostProcessorFile (inout /*IDLRETVAL*/ CATBSTR oPostProcessorFile);  
+
+   /**
+    * This property sets the post processor file of a Manufacturing Machine
+	* Machine.PostProcessorFile = "e:\downloadofcxr13\intel_a\startup\Manufacturing\pppar\MAHO_CNC432_3X.pp"
+    */  
+	HRESULT put_PostProcessorFile (in CATBSTR iPostProcessorFile);  
+
+};
+
+// Interface name : CATIAManufacturingMachine
+#pragma ID CATIAManufacturingMachine "DCE:edc2f018-6b51-11d3-99870004ac960883"
+#pragma DUAL CATIAManufacturingMachine
+
+// VB object name : ManufacturingMachine (Id used in Visual Basic)
+#pragma ID ManufacturingMachine "DCE:f22d0abc-6b51-11d3-99870004ac960883"
+#pragma ALIAS CATIAManufacturingMachine ManufacturingMachine
+
+#endif // CATIAManufacturingMachine_IDL

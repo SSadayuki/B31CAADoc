@@ -1,0 +1,71 @@
+#include "CATIAV5Level.h"
+//#ifdef CATIAV5R9
+#ifndef CATIABiDimFeatEdge_IDL
+#define CATIABiDimFeatEdge_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//--------------------------------------------------------------------------
+// BiDimFeatEdge Object
+// bpt - 02/2002
+//--------------------------------------------------------------------------
+
+#include "CATIAEdge.idl"
+#include "CATBSTR.idl"
+
+/**
+ * 1-D boundary belonging to a feature whose topological result is two dimensional.
+ * <b>Role</b>: 
+ * This @href CATIABoundary object may be, for example, the edge of a surface obtained through the extrusion of
+ * a spline.</br> 
+ * You will create a BiDimFeatEdge object using the @href CATIAShapes#GetBoundary , @href CATIAHybridShapes#GetBoundary , 
+ * @href CATIASketches#GetBoundary or @href CATIASelection#SelectElement2 method. Then, you pass it
+ * to the operator (such as @href CATIAHybridShapeFactory#AddNewPointOnCurveFromDistance ).</br> 
+ * The lifetime of a BiDimFeatEdge object is limited, see @href CATIABoundary.</br> 
+ * <! @sample>
+ * <dl>
+ * <dt><b>Example:</b>
+ * <dd>
+ * This example asks the end user to select an edge, and creates a point on this edge. Here, both 
+ * TriDimFeatEdge and BiDimFeatEdge objects are proposed to the user.
+ * <pre>
+ * Dim InputObjectType(1)
+ * Set Document = CATIA.ActiveDocument
+ * Set Selection = Document.Selection
+ * Set HybridBodies = Document.Part.HybridBodies
+ * Set HybridBody = HybridBodies.Item("Geometrical Set.1")
+ * 'We propose to the user that he select an edge
+ * InputObjectType(0)="TriDimFeatEdge"
+ * InputObjectType(1)="BiDimFeatEdge"
+ * Status=Selection.SelectElement2(InputObjectType,"Select an edge",true)
+ * if (Status = "cancel") then Exit Sub
+ * Set Curve = Selection.Item(1).Value
+ * Set HybridShapePointOnCurve = HybridShapeFactory.AddNewPointOnCurveFromDistance(Curve,18.0,False)
+ * HybridBody.AppendHybridShape HybridShapePointOnCurve
+ * Document.Part.InWorkObject = HybridShapePointOnCurve
+ * Document.Part.Update 
+ * </pre>
+ * </dl>
+ */ 
+
+interface CATIABiDimFeatEdge : CATIAEdge
+{
+
+};
+
+// Interface Name : CATIABiDimFeatEdge
+
+#pragma ID CATIABiDimFeatEdge "DCE:38b97a20-1be1-11d6-80600010b5d44ab2"
+#pragma DUAL CATIABiDimFeatEdge
+
+// VB Object Name : BiDimFeatEdge
+#pragma ID BiDimFeatEdge "DCE:cf521890-1be7-11d6-80600010b5d44ab2"
+#pragma ALIAS CATIABiDimFeatEdge BiDimFeatEdge
+
+#endif
+//#endif
+

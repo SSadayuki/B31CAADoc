@@ -1,0 +1,61 @@
+#ifndef CATIAHybridShapeSection_IDL
+#define CATIAHybridShapeSection_IDL
+/*IDLREP*/
+
+// COPYRIGHT Dassault Systemes 2003
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//           
+// CATIAHybridShapeSection:         
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Octobre03 Creation       
+//=================================================================
+
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Interface to hybrid shape section feature.
+ * <b>Role</b>: Allows you to access data of the Hybrid Shape Section feature.
+ * @see CATIAHybridShapeFactory#AddNewSection
+ */
+interface CATIAHybridShapeSection : CATIAHybridShape 
+{
+/**
+ * Returns or sets the section plane..
+ * @param oPlane 
+ *   The section oPlane
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>RefPlane</code> the plane of the section 
+ * <pre>
+ * Dim RefPlane As Reference 
+ * Set RefPlane = HybridShapeSection.<font color="red">SectionPlane</font>
+ * </pre>
+ * </dl> 
+ */ 
+ #pragma PROPERTY SectionPlane
+ HRESULT get_SectionPlane ( out /*IDLRETVAL*/  CATIAReference   oPlane);
+ HRESULT put_SectionPlane ( in           CATIAReference   iPlane);
+
+};
+
+// Interface name : CATIAHybridShapeSection
+#pragma ID CATIAHybridShapeSection "DCE:063624eb-b9b6-4aac-ae1ef7532d1a4213"
+#pragma DUAL CATIAHybridShapeSection
+
+// VB object name : HybridShapeSection (Id used in Visual Basic)
+#pragma ID HybridShapeSection "DCE:21979fd2-a6f0-4079-858817df6339019a"
+#pragma ALIAS CATIAHybridShapeSection HybridShapeSection
+
+#endif

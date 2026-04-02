@@ -1,0 +1,80 @@
+// COPYRIGHT Dassault Systemes 2003
+//===================================================================
+//
+// CATIAAnalysisMeshLocalSpecification.idl
+// Automation interface for the AnalysisMeshLocalSpecification element 
+//
+//===================================================================
+#ifndef CATIAAnalysisMeshLocalSpecification_IDL
+#define CATIAAnalysisMeshLocalSpecification_IDL
+/*IDLREP*/
+//===================================================================
+// COPYRIGHT Dassault Systemes 2003
+//===================================================================
+//
+// CATIAAnalysisMeshLocalSpecification.idl
+// Automation interface for the CATIMSHLocalSpecification element 
+//
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+interface CATIAProduct;
+interface CATIAReference;
+interface CATIAPublication;
+
+/**  
+ * The interface to access a CATIAAnalysisMeshLocalSpecification.
+ */
+interface CATIAAnalysisMeshLocalSpecification : CATIABase
+{
+/**
+  * Returns the type of the local specification.
+  * @return The string that represent the type of local specification.
+  */
+#pragma PROPERTY Type
+  HRESULT get_Type(inout /*IDLRETVAL*/ CATBSTR oType);
+
+/**
+ * Sets the value corresponding to the given local specification.
+ * @param iName  The identifier of the attribute.
+ * @param iValue  The value of the local specification.
+ */
+  HRESULT SetAttribute(in CATBSTR iName, in CATVariant iValue);
+
+/**
+  * Defines the support of the local specification.
+  * @param iName  The identifier of the attribute.
+  * @param iProduct  the CATIA Product that represent the object to linked.
+  * @param iSupport  the CATIA Reference that represent the geometry.
+  * @see CATIAReference , CATIAProduct
+  */
+
+  HRESULT AddSupportFromReference(in CATBSTR iName, in CATIAProduct   iProduct,
+                                  in CATIAReference iSupport);
+
+/**
+  * Defines the support of the local specification.
+  * @param iName  The identifier of the attribute.
+  * @param iProduct  the CATIA Product that represent the object to linked.
+  * @param iPublication  the CATIA Publication that represent the geometry.
+  * @see CATIAPublication , CATIAProduct
+  */
+
+  HRESULT AddSupportFromPublication(in CATBSTR iName, in CATIAProduct   iProduct,
+                                    in CATIAPublication iSupport);
+
+};
+
+// Interface name : CATIAAnalysisMeshLocalSpecification
+#pragma ID CATIAAnalysisMeshLocalSpecification "DCE:92f448f0-0545-4631-ae790de51b8bcf56"
+#pragma DUAL CATIAAnalysisMeshLocalSpecification
+
+// VB object name : AnalysisMeshLocalSpecification (Id used in Visual Basic)
+#pragma ID AnalysisMeshLocalSpecification "DCE:d7d8cbc5-7368-4339-b784ce164fde2e35"
+#pragma ALIAS CATIAAnalysisMeshLocalSpecification AnalysisMeshLocalSpecification
+
+#endif

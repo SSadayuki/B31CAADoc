@@ -1,0 +1,8 @@
+# 
+BUILT_OBJECT_TYPE = NONE
+OS = intel_a
+#if MK_IFVER > 1900000
+LOCAL_POST_FFLAGS = /Od
+#endif
+#
+

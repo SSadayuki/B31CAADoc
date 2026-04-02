@@ -1,0 +1,349 @@
+#ifndef CATIAFactory2D_IDL
+#define CATIAFactory2D_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+
+interface CATIAPoint2D;
+interface CATIALine2D;
+interface CATIAEllipse2D;
+interface CATIASpline2D;
+interface CATIACircle2D;
+interface CATIAControlPoint2D;
+interface CATIAReference;
+interface CATIAGeometry2D;
+interface CATIAHyperbola2D;
+interface CATIAParabola2D;
+interface CATIAGeometricElements;
+interface CATIAAngle;
+interface CATIALength;
+
+/**
+ * Interface to the factory for 2D objects.
+ */
+interface CATIAFactory2D : CATIABase
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+ 
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+	//	-----------------------------------
+	//	--  W I R E F R A M E  CREATION  --
+	//	-----------------------------------
+	//
+	//	CREATE POINT
+	//	------------
+	//
+      /**
+       * Creates and returns a 2D point.
+       * @param iX
+	 * The X coordinate of point to create
+       * @param iY
+	 * The Y coordinate of point to create
+       */
+	HRESULT	CreatePoint
+				( in    double    iX
+				, in    double    iY
+				, out /*IDLRETVAL*/    CATIAPoint2D    oNewPoint);
+
+	//
+	//	CREATE A CONTROL POINT FOR A SPLINE
+	//	-----------------------------------
+	//
+      /**
+       * Creates and returns a 2D spline control point.
+       * @param iX
+	 * The X coordinate of point to create
+       * @param iY
+	 * The Y coordinate of point to create
+       */
+	HRESULT	CreateControlPoint
+				( in    double    iX
+				, in    double    iY
+				, out /*IDLRETVAL*/    CATIAControlPoint2D oNewPoint);
+
+	//
+	//	CREATE LINE
+	//	-----------
+	//
+      /**
+       * Creates and returns a 2D line.
+       * @param iX1
+	 * The X coordinate of line first extremity
+       * @param iY1
+	 * The Y coordinate of line first extremity
+       * @param iX2
+	 * The X coordinate of line second extremity
+       * @param iY2
+	 * The Y coordinate of line second extremity
+       */
+	HRESULT	CreateLine
+				( in   double   iX1
+				, in   double   iY1
+				, in   double   iX2
+				, in   double   iY2
+				, out /*IDLRETVAL*/   CATIALine2D    oNewLine);
+	//
+	//	CREATE LINE FROM VECTOR
+	//	-----------------------
+	//
+      /**
+       * Creates and returns a 2D line.
+       * @param iX1
+	 * The X coordinate of the line origin
+       * @param iY1
+	 * The Y coordinate of the line origin
+       * @param iUX
+	 * The X component of the line vector
+       * @param iUY
+	 * The Y component of the line vector
+       */
+	HRESULT	CreateLineFromVector
+				( in   double   iX1
+				, in   double   iY1
+				, in   double   iUX
+				, in   double   iUY
+				, out /*IDLRETVAL*/   CATIALine2D    oNewLine);
+
+	//
+	//	CREATE CIRCLE
+	//	-------------
+	//
+      /**
+       * Creates and returns a closed 2D circle.
+       *       @param iCenterX
+       *       The X coordinate of the circle center
+       *       @param iCenterY
+       *       The Y coordinate of the circle center
+       *       @param iRadius
+       *       The radius of the circle
+       */
+        HRESULT CreateClosedCircle (in     double    iCenterX,
+                                    in     double    iCenterY,
+                                    in     double    iRadius,
+		            	    out /*IDLRETVAL*/   CATIACircle2D  oNewCircle);
+      /**
+       * Creates and returns a 2D circle arc.
+       *       @param iCenterX
+       *       The X coordinate of the circle center
+       *       @param iCenterY
+       *       The Y coordinate of the circle center
+       *       @param iRadius
+       *       The radius of the circle
+       *       @param iStartParam
+       *       The beginning parameter of the circle.
+       *       <br>This parameter is an angle value between 0 included and 2PI excluded.
+       *       Parameter values are computed from the axis horizontal direction in the
+       *       trigonometrical direction.
+       *       @param iEndParam
+       *       The end parameter of the circle.
+       *       <br>This parameter may take any value between iStartParam excluded and 4PI 
+       *       included.
+       */
+        HRESULT CreateCircle (in     double    iCenterX,
+                              in     double    iCenterY,
+                              in     double    iRadius,
+                              in     double    iStartParam,
+                              in     double    iEndParam,
+			      out /*IDLRETVAL*/   CATIACircle2D  oNewCircle);
+
+	//
+	//
+	//	CREATE ELLIPSE
+	//	--------------
+	//
+      /**
+       * Creates and returns a closed 2D ellipse.
+       *       @param iCenterX
+       *       The X coordinate of the ellipse center
+       *       @param iCenterY
+       *       The Y coordinate of the ellipse center
+       *       @param iMajorX
+       *       The X component of the major axis direction
+       *       @param iMajorY
+       *       The Y component of the Major axis direction
+       *       @param iMajorRadius
+       *       The length of the major axis
+       *       @param iMinorRadius
+       *       The length of the minor axis
+       */
+        HRESULT CreateClosedEllipse (in     double    iCenterX,
+                               in     double    iCenterY,
+                               in     double    iMajorX,
+                               in     double    iMajorY,
+                               in     double    iMajorRadius,
+                               in     double    iMinorRadius,
+			       out /*IDLRETVAL*/   CATIAEllipse2D  oNewEllipse);
+      /**
+       * Creates and returns a 2D ellipse arc.
+       *       @param iCenterX
+       *       The X coordinate of the ellipse center
+       *       @param iCenterY
+       *       The Y coordinate of the ellipse center
+       *       @param iMajorX
+       *       The X component of the major axis direction
+       *       @param iMajorY
+       *       The Y component of the major axis direction
+       *       @param iMajorRadius
+       *       The length of the major axis
+       *       @param iMinorRadius
+       *       The length of the minor axis
+       *       @param iStartParam
+       *       The beginning parameter of the ellipse.
+       *       <br>This parameter is an angle value between 0 included and 2PI excluded.
+       *       Parameter values are computed from the major axis direction in the
+       *       trigonometrical direction.
+       *       @param iEndParam
+       *       The end parameter of the ellipse.
+       *       <br>This parameter may take any value between iStartParam excluded and 4PI 
+       *       included.
+       */
+        HRESULT CreateEllipse (in     double    iCenterX,
+                               in     double    iCenterY,
+                               in     double    iMajorX,
+                               in     double    iMajorY,
+                               in     double    iMajorRadius,
+                               in     double    iMinorRadius,
+                               in     double    iStartParam,
+                               in     double    iEndParam,
+			       out /*IDLRETVAL*/   CATIAEllipse2D  oNewEllipse);
+
+	//
+	//	CREATE B-SPLINE
+	//	---------------
+	//
+      /**
+       * Creates and returns a 2D b-spline.
+       *       @param iPoles
+       *       An array of CATIAPoint2D forming the poles of the b-spline.
+       */
+        HRESULT CreateSpline (in     CATSafeArrayVariant    iPoles,
+			      out /*IDLRETVAL*/   CATIASpline2D  oNewSpline);
+
+	//
+	//
+	//
+	//
+      /**
+       * Creates and returns the possible projections of an object on the sketch.
+       *       @param iGeometry
+       *       The object to project on the sketch
+       */
+        HRESULT CreateProjections (in     CATIAReference    iGeometry,
+			      out /*IDLRETVAL*/   CATIAGeometricElements  oSolutions);
+
+	//
+	//
+	//
+	//
+      /**
+       * Creates and returns the possible intersections of an object with the sketch.
+       *       @param iGeometry
+       *       The object to intersect with the sketch
+       */
+        HRESULT CreateIntersections (in     CATIAReference    iGeometry,
+			      out /*IDLRETVAL*/   CATIAGeometricElements  oSolutions);
+    //
+	//
+	//
+      /**
+       * Creates and returns the projection of an object on the sketch.
+       *       @param iGeometry
+       *       The object to project on the sketch
+       */
+        HRESULT CreateProjection (in     CATIAReference    iGeometry,
+			      out /*IDLRETVAL*/   CATIAGeometry2D  oFirstSolution);
+
+	//
+	//
+	//
+	//
+      /**
+       * Creates and returns the intersection of an object with the sketch.
+       *       @param iGeometry
+       *       The object to intersect with the sketch
+       */
+        HRESULT CreateIntersection (in     CATIAReference    iGeometry,
+			      out /*IDLRETVAL*/   CATIAGeometry2D  oFirstSolution);
+
+
+    //
+	//
+	//
+	//
+      /**
+       * Creates and returns a parabola.
+       *       @param iCenterX
+       *       The X coordinate of the parabola center
+       *       @param iCenterY
+       *       The Y coordinate of the parabola center
+       *       @param iAxisX
+       *       The X coordinate of the major axis direction
+       *       @param iAxisY
+       *       The Y coordinate of the major axis direction
+       *       @param iFocalDistance
+       *       The parabola focal distance
+       */    
+		HRESULT CreateParabola(in     double    iCenterX,
+                                in     double    iCenterY,
+                                in     double    iAxisX,
+                                in     double    iAxisY,
+                                in     double    iFocalDistance,
+								out /*IDLRETVAL*/   CATIAParabola2D oParabola);
+								
+
+    //
+	//
+	//
+	//
+
+      /**
+       * Creates and returns a hyperbola.
+       *       @param iCenterX
+       *       The X coordinate of the hyperbola center
+       *       @param iCenterY
+       *       The Y coordinate of the hyperbola center
+       *       @param iAxisX
+       *       The X coordinate of the major axis direction
+       *       @param iAxisY
+       *       The Y coordinate of the major axis direction
+       *       @param iMajorRadius
+       *       The length of the major axis
+       *       @param iMinorRadius
+       *       The length of the minor axis
+       */
+		HRESULT CreateHyperbola(in     double    iCenterX,
+                                in     double    iCenterY,
+                                in     double    iAxisX,
+                                in     double    iAxisY,
+                                in     double    iMajorRadius,
+                                in     double    iMinorRadius,
+								out /*IDLRETVAL*/   CATIAHyperbola2D oHyperbola);
+
+};
+
+// Interface name : CATIAFactory2D
+#pragma ID CATIAFactory2D "DCE:80ec75fa-ae47-0000-0280030ba6000000"
+#pragma DUAL CATIAFactory2D
+
+// VB object name : Factory2D (Id used in Visual Basic)
+#pragma ID Factory2D "DCE:80ec75ff-76e4-0000-0280030ba6000000"
+#pragma ALIAS CATIAFactory2D Factory2D
+
+
+#endif
+// CATIAFactory2D_IDL

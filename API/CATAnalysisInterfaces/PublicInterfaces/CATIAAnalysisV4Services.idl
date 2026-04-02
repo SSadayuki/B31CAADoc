@@ -1,0 +1,129 @@
+#ifndef CATIAAnalysisV4Services_IDL
+#define CATIAAnalysisV4Services_IDL
+/*IDLREP*/
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2005
+//=================================================================
+//                                   
+// CATIAAnalysisV4Services:                           
+// Various services for V4 Analysis Migration.
+//=================================================================                                  
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+/**  
+ * The interface to access a CATIAAnalysisV4Services.<br>
+ * This service provides tools to extract analysis information stored in V4 model and session.<br> 
+ * Note:  The implementation of this API requires specific Licensing:
+ * <font color="red">V4A</font> product needs to be installed.<br> 
+ * To get access to this service:<br>
+ * <pre>
+ *  Dim SAMV4Service As <font color="red">AnalysisV4Services </font>
+ *  Set SAMV4Service = CATIA.GetItem<font color="red">("SAMV4Service")</font>
+ * </pre>
+ */
+interface CATIAAnalysisV4Services : CATIABase 
+{
+/**
+ * Gets V4 External Storage information stored in a model.
+ * @param iModelPath: Path of model file.<br>
+ * @param oExternal: Storage Path.
+ * @param oPrefix: Directory prefix: Something like "D1998124T083802".
+ * @sample
+ * This example return external storage information for a model path<br>
+ * <pre>
+ *  Dim SAMV4Service As AnalysisV4Services 
+ *  Set SAMV4Service = CATIA.GetItem("SAMV4Service")
+ *  Dim Prefix As String 
+ *  Prefix = ""
+ *  Dim PathStorage As String 
+ *  Dim sDocPath As String 
+ *  sDocPath = "E:\mymodel.model"
+ *  PathStorage = SAMV4Service.<font color="red">GetStorageInfo</font>(sDocPath,Prefix)
+ *  CATIA.SystemService.Print "GetStorageInfo for Model: " & sDocPath
+ *  CATIA.SystemService.Print "GetStorageInfo PathStorage: " & PathStorage & " Prefix " & Prefix
+ * </pre>
+ */ 
+  HRESULT GetStorageInfo ( in CATBSTR    iModelPath,
+                           inout CATBSTR  oPrefix,
+                           inout /*IDLRETVAL*/ CATBSTR oExternal);
+
+
+/**
+ * Gets V4 Session information.
+ * The file is made of submesh & model name identification.
+ * @param iSessionPath: Path of session file.<br>
+ * @param iPrintPath: Path where to create the dump file.<br>
+ * Note that if the file already exists it will be replaced.
+ * @sample
+ * This example extract session information.<br>
+ * <pre>
+ *  Dim SAMV4Service As AnalysisV4Services 
+ *  Set SAMV4Service = CATIA.GetItem("SAMV4Service")
+ *  Dim sSession As String 
+ *  sSession = "E:\MYSESSION.session"
+ *  Dim sSumpFile As String 
+ *  sSumpFile = "E:\MyFile.txt"
+ *  SAMV4Service.PrintSessionInfo <font color="red">sSession,sSumpFile </font>
+ * </pre>
+ */ 
+  HRESULT PrintSessionInfo (in CATBSTR iSessionPath,in CATBSTR  iPrintPath);
+
+/**
+ * Gets sets list for a model included in a V4 Session.
+ * The generated file contains names of load, restraint, non structural mass and displacement sets for a given submesh number.
+ * @param iSessionPath: Path of session file.<br>
+ * @param iPrintPath: Path where to create the dump file.<br>
+ * @param iSubmesh: Submesh Number of the modelo.<br>
+ * Note that if the file already exists it will be replaced.
+ * @sample
+ * This example extract assembled sets information.<br>
+ * <pre>
+ *  Dim SAMV4Service As AnalysisV4Services 
+ *  Set SAMV4Service = CATIA.GetItem("SAMV4Service")
+ *  Dim sSession As String 
+ *  sSession = "E:\MYSESSION.session"
+ *  Dim sSumpFile As String 
+ *  sSumpFile = "E:\MyFile.txt"
+ *  SAMV4Service.PrintAssembledSetsInfo <font color="red">sSession,sSumpFile,120 </font>
+ * </pre>
+ */ 
+  HRESULT PrintAssembledSetsInfo (in CATBSTR iSessionPath,in CATBSTR  iPrintPath, in long iSubmesh);
+
+  /**
+  * Gets V4 Coupling analysis information.
+  * @param iSessionPath: Path of the model file.<br>
+  * @param iPrintPath: Path where to create the dump file.<br>
+  * @param iSubmesh: Sub mesh number, the file will dump at the level of this submesh.<br>
+  * Note that if file already exists it will be replaced.
+  * @sample
+  * This example extracts sets information.<br>
+  * <pre>
+  *  Dim SAMV4Service As AnalysisV4Services
+  *  Set SAMV4Service = CATIA.GetItem("SAMV4Service")
+  *  Dim sSession As String
+  *  sSession = "E:\MYSESSION.session"
+  *  Dim sSumpFile As String
+  *  sSumpFile = "E:\MyCouplingAnalysisFile.txt"
+  *  SAMV4Service.PrintCouplingAnalysisInfo <font color="red">sSession,sSumpFile, 120 </font>
+  * </pre>
+  */
+  HRESULT PrintCouplingAnalysisInfo (in CATBSTR iSessionPath, in CATBSTR  iPrintPath, in long iSubmesh);
+
+};
+
+// Interface name : CATIAAnalysisV4Services
+#pragma ID CATIAAnalysisV4Services "DCE:0223B5F1-278F-4e99-8AA06CA49A1291F5"
+#pragma DUAL CATIAAnalysisV4Services
+
+// VB object name : AnalysisV4Services (Id used in Visual Basic)
+#pragma ID AnalysisV4Services "DCE:FA1198D1-ADED-40fb-AA47341DAAFE6427"
+#pragma ALIAS CATIAAnalysisV4Services AnalysisV4Services
+
+#endif
+// CATIAAnalysisV4Services_IDL

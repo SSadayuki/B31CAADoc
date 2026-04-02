@@ -1,0 +1,187 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>GMOperatorsInterfaces CATICGMDynAdvancedFillet Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../GMOperatorsInterfaces.htm" href="../GMOperatorsInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "GMOperatorsInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATICGMDynAdvancedFillet"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>GMOperatorsInterfaces Framework:  CATICGMDynAdvancedFillet Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATICGMDynAdvancedFillet_53046','CATICGMDynAdvancedFillet','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATICGMDynAdvancedFillet</b>
+</p>
+<p>
+<b><i> Class defining an operator to create a fillet.</i></b><br>
+
+ This operator offers more capabilities than <tt>CATICGMDynFillet</tt> and 
+ might be able to generate a result in cases where <tt>CATICGMDynFillet</tt> could fail.
+ <br>
+ <br>
+ The <tt>CATICGMDynAdvancedFillet</tt> operator follows the global frame of the topological
+ operators and satisfies the smart mechanism: 
+ the input bodies are not modified. A new resulting body is created, 
+ possibly sharing data with the input bodies.
+<ul>
+ <li>A <tt>CATICGMDynAdvancedFillet</tt> operator is created with the <tt>CATCGMCreateDynAdvancedFillet</tt> global function:
+ It must be directly released with the <tt>Release</tt> method after use. It is not streamable. 
+ <li>Options must be precised (such as the faces or edges to fillet) with the appropriate methods, before
+ asking for the computation with the <tt>Run</tt> method. 
+<li>The result is accessed with the <tt>GetResult</tt> method. If you do not want 
+ to keep the resulting body, use the <script type="text/javascript"> activateLinkAnchor('CATICGMContainer','Remove','CATICGMContainer.Remove') </script> method to remove it from the  geometric factory.
+ </ul>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#SetContinuityLevel(CATFrFContinuity,CATPositiveLength)"><b>SetContinuityLevel</b></a>(CATFrFContinuity,CATPositiveLength)
+</td><td id='tdright'>  Sets internal continuity level of fillet ribbon
+ 
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFastPreview()"><b>SetFastPreview</b></a>()
+</td><td id='tdright'>  Set fast fillet preview
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetFilletLongPropagation()"><b>SetFilletLongPropagation</b></a>()
+</td><td id='tdright'> 	Setting the FilletLongPropagation option on allows controlling the relimitation of the fillet 
+ in case it encounters a sharp edge on one support and then a smooth edge on the second 
+ support in the relimitation zone.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetKeepFeature(CATBoolean)"><b>SetKeepFeature</b></a>(CATBoolean)
+</td><td id='tdright'>  To keep features that are entirely engulfed by the result of a fillet operation the method SetKeepFeature should be used.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#UseKeepEdgeSameConvexityModeForImplicitKeepEdges(CATBoolean)"><b>UseKeepEdgeSameConvexityModeForImplicitKeepEdges</b></a>(CATBoolean)
+</td><td id='tdright'>  If CATDynImplicitKeepEdgeMode has been specified for edge fillet ribbons, use the 
+ specified CATDynKeepEdgeSameConvexityMode also for potential implicit keep edges.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="SetContinuityLevel"></a><a id="SetContinuityLevel(CATFrFContinuity,CATPositiveLength)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetContinuityLevel</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATFrFContinuity','CATFrFContinuity')</script> <span class='param'>iContinuityLevel</span>, const <script type="text/javascript"> activateLink('CATPositiveLength','CATPositiveLength')</script> <span class='param'>iTolerance</span><span class='param'>= 0.</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets internal continuity level of fillet ribbon
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iContinuityLevel</span></dt>
+   <dd> Continuity level requested. Use either CATFrFPointCont or CATFrFTangentCont. Default is CATFrFPointCont.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iTolerance</span></dt>
+   <dd> Maximum deformation allowed to achieve the continuity. Not used as of now.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFastPreview"></a><a id="SetFastPreview()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFastPreview</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Set fast fillet preview
+</dd>
+<dt class='dtmethod' >
+  <a id="SetFilletLongPropagation"></a><a id="SetFilletLongPropagation()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetFilletLongPropagation</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+	Setting the FilletLongPropagation option on allows controlling the relimitation of the fillet 
+ in case it encounters a sharp edge on one support and then a smooth edge on the second 
+ support in the relimitation zone. Without this option, the fillet is extrapolated 
+ after the second smooth edge and the relimitation may be sharp but will be shorter. 
+ If the option is activated, the fillet will be able to roll on to the next support after 
+ the smooth edge and thus will offer a smooth relimitation at the cost of its length.
+ This option is de-activated by default.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetKeepFeature"></a><a id="SetKeepFeature(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetKeepFeature</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iKeepFeature</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ To keep features that are entirely engulfed by the result of a fillet operation the method SetKeepFeature should be used.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKeepFeature</span></dt>
+   <dd> Keep feature option: CATTrue – feature kept; CATFalse – feature not kept. 
+ By default a fillet operation does not keep any feature that isn’t interfering with the boundary of the fillet.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="UseKeepEdgeSameConvexityModeForImplicitKeepEdges"></a><a id="UseKeepEdgeSameConvexityModeForImplicitKeepEdges(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>UseKeepEdgeSameConvexityModeForImplicitKeepEdges</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iUseKeepEdgeSameConvexityMode</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ If CATDynImplicitKeepEdgeMode has been specified for edge fillet ribbons, use the 
+ specified CATDynKeepEdgeSameConvexityMode also for potential implicit keep edges.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iUseKeepEdgeSameConvexityMode</span></dt>
+   <dd> <ul>
+ <li> FALSE: Turn the mode off
+ <li> TRUE : Turn the mode on
+ </ul>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATICGMDynAdvancedFillet.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATGMOperatorsInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

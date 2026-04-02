@@ -1,0 +1,95 @@
+#ifndef CATIAHybridShapeInverse_IDL
+#define CATIAHybridShapeInverse_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeInverse:         
+// Exposed interface for HybridShape Inverse
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+ * The Inverse feature : an Inverse is made up of a face to process
+ * and one Inverse parameter.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeInverse : CATIAHybridShape
+{
+#pragma PROPERTY Element
+
+
+
+
+
+ /**
+ * <b>Role</b>: To get the element inverted. 
+ * @param oElem 
+ *   Element inverted  
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_Element (out /*IDLRETVAL*/ CATIAReference   oElem);
+
+
+
+
+
+ /**
+ * <b>Role</b>: To change the element to invert. 
+ * @param iElem 
+ *   Element to ivert 
+ *   @see CATIAReference 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT put_Element (in     CATIAReference   iElem);
+
+ /**
+ * Gets or sets the element's orientation.
+ *   Orientation =  1 : the element is not inverted.
+ *               = -1 : the element is inverted,
+ *               =  2 : the element can not be inverted.
+ * Orientation can not be set to 2.
+ */
+#pragma PROPERTY Orientation
+ HRESULT get_Orientation   (out /*IDLRETVAL*/ long   oOrientation);
+ HRESULT put_Orientation   (in                long   iOrientation);
+};
+
+
+// Interface name : CATIAHybridShapeInverse
+#pragma ID CATIAHybridShapeInverse "DCE:8ccf2fbc-8c10-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeInverse
+
+// VB object name : HybridShapeInverse (Id used in Visual Basic)
+#pragma ID HybridShapeInverse "DCE:8ccf2fcc-04d7-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeInverse HybridShapeInverse
+
+#endif
+// CATIAHybridShapeInverse_IDL

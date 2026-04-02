@@ -1,0 +1,66 @@
+//=============================================================================
+// COPYRIGHT Dassault Systemes 2013
+//=============================================================================
+// CATIASfmSplitPlate
+//   Interface for managing welds on split plate.
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Mar  Creation                                                Bhupendra MITHE
+//=============================================================================
+
+#ifndef CATIASfmSplitPlate_IDL
+#define CATIASfmSplitPlate_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl" 
+#include "CATIAReference.idl" 
+#include "CATIASfmWelds.idl"
+
+/**
+* Interface to manage the Structure Functional Modeler Split plate object.
+* <b>Role</b>:  Provides access to weld objects on Split plate.
+*/
+
+interface CATIASfmSplitPlate : CATIABase
+{
+  /**
+  * Gets Welds feature on operated Plate.
+  * @param iOperatingEle [in]
+  *     Operating element of the weld features.
+  * @param oWelds [out]
+  *      The retrieved Weld features.
+  * @return
+  * <code>S_OK</code> if everything ran ok.
+  *<dl>
+  *<dt>Example</dt>:
+  *<dd>
+  * This example gets welds features of Split Plate.
+  * <pre>
+  * Dim Welds As SfmWelds
+  * Set Welds = Split_Plate.<font color="red">GetWelds</font>(Nothing)
+  * </pre>
+  * </dl> 
+  */
+
+  HRESULT GetWelds(in CATIAReference iOperatingEle, out /*IDLRETVAL*/ CATIASfmWelds oWelds);
+
+};
+
+// Interface name : CATIASfmSplitPlate
+#pragma ID CATIASfmSplitPlate "DCE:4083A62C-03C9-4365-ABE878D4BC2EAFEE"
+#pragma DUAL CATIASfmSplitPlate
+
+// VB object name : SfmSplitPlate
+#pragma ID SfmSplitPlate "DCE:945376CB-1ED4-40b5-AC2E066530CC4EC3"
+#pragma ALIAS CATIASfmSplitPlate SfmSplitPlate
+
+#endif
+
+

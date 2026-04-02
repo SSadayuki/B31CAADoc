@@ -1,0 +1,541 @@
+#ifndef CATIAHybridShapeExtractMulti_IDL
+#define CATIAHybridShapeExtractMulti_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATSafeArray.idl"
+#include "CATIALength.idl"
+/**
+ * Represents the hybrid shape ExtractMulti feature object.
+ * <b>Role</b>: To access the data of the hybrid shape ExtractMulti feature object.
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeExtractMulti object.
+ * @see CATIAHybridShapeFactory#AddNewExtractMulti
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeExtractMulti : CATIAHybridShape
+{
+ /**
+ * Returns the sub element used as init for the propagation. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the sub element in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>Elem</code>.
+ * <pre>
+ * Dim oElem as CATIAReference
+ * oElem = HybShpExtractMulti.<font color="red">GetElement(1)  </font>
+ * </pre>
+ * </dl>
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT  GetElement (in long iPos, out /*IDLRETVAL*/ CATIAReference   oElem);
+
+ /**
+ * Sets the sub element used as init for the propagation. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the sub element in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>Elem</code>.
+ * <pre>
+ * Dim iPos as long 
+ * Dim iElem as CATIAReference
+ * HybShpExtractMulti.<font color="red">SetElement 1 iElem  </font>
+ * </pre>
+ * </dl>
+  * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT  SetElement (in long iPos,	in     CATIAReference   iElem);
+
+
+ /**
+ * Returns the type of propagation of the list of constraints at specified position. 
+ * <br>The propagation types for the ExtractMulti can have the following values: 
+ * <ul> 
+ *    <li>1 for extraction propagation in point continuity</li>
+ *    <li>2 for extraction propagation in tangent continuity</li>
+ *    <li>3 for extraction without propagation</li>
+ *    <li>4 for extraction propagation in curvature continuity</li>
+ * </ul>
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the PropagationType in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>TypePropag</code>.
+ * <pre>
+ * Dim oTypePropag as long 
+ * oTypePropag  = HybShpExtractMulti.<font color="red">GetPropagationType(1)  </font>
+ * </pre>
+ * </dl>
+  */ 
+ HRESULT  GetPropagationType (in long iPos, out /*IDLRETVAL*/ long oTypePropag );
+
+ /**
+ * Sets the type of propagation for the ExtractMulti in the list of constraints at specified position. 
+ * <br>The propagation types for the ExtractMulti can have the following values: 
+ * <ul> 
+ *    <li>1 for extraction propagation in point continuity</li>
+ *    <li>2 for extraction propagation in tangent continuity</li>
+ *    <li>3 for extraction without propagation</li>
+ *    <li>4 for extraction propagation in curvature continuity</li>
+ * </ul>
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the PropagationType of the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>TypePropag</code>.
+ * <pre>
+ * Dim iTypePropag as long 
+ * iTypePropag = 1 
+ * HybShpExtractMulti.<font color="red">SetPropagationType 1 iTypePropag </font>
+ * </pre>
+ * </dl>
+  */ 
+ HRESULT  SetPropagationType (in long iPos, in long iTypePropag);
+
+
+ /**
+ * Returns the Complementary flag checked/unchecked of the list of constraints at specified position. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the Complementary flag in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>Complementaire</code>.
+ * <pre>
+ * Dim oComplementaire as boolean
+ * oComplementaire  = HybShpExtractMulti.<font color="red">GetComplementaryExtractMulti(1)  </font>
+ * </pre>
+ * </dl>
+  */ 
+HRESULT  GetComplementaryExtractMulti (in long iPos, out /*IDLRETVAL*/ boolean oComplementaire);
+
+ /**
+ * Sets the Complementary flag checked/unchecked in the list of constraints at specified position. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the Complementary flag of the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>Complementaire</code>.
+ * <pre>
+ * Dim iComplementaire as boolean
+ * iComplementaire  = TRUE 
+ * HybShpExtractMulti.<font color="red">SetComplementaryExtractMulti 1   iComplementaire </font>
+ * </pre>
+ * </dl>
+  */ 
+HRESULT  SetComplementaryExtractMulti (in long iPos, in     boolean   iComplementaire);
+
+
+ /**
+ * Returns the IsFederated flag checked/unchecked of the list of constraints at specified position. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the federated flag in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>IsFederated</code>.
+ * <pre>
+ * Dim oIsFederated as boolean 
+ * oIsFederated  = HybShpExtractMulti.<font color="red">GetIsFederated(1)  </font>
+ * </pre>
+ * </dl>
+  */ 
+HRESULT  GetIsFederated (in long iPos, out /*IDLRETVAL*/ boolean   oIsFederated);
+
+ /**
+ * Sets the IsFederated flag checked/unchecked in the list of constraints at specified position. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the federated flag in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>IsFederated</code>.
+ * <pre>
+ * Dim iIsFederated as boolean 
+ *  iIsFederated = TRUE 
+ * HybShpExtractMulti.<font color="red">SetIsFederated 1  iIsFederated </font>
+ * </pre>
+ * </dl>
+ */ 
+HRESULT  SetIsFederated (in long iPos, in     boolean  iIsFederated);
+
+
+/**
+ * Returns the CurvatureThreshold of the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the CurvatureThreshold in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>CurvatureThH</code>.
+ * <pre>
+ * Dim oCrvtreThsld as double
+ * CurvatureThH = HybShpExtractMulti.<font color="red">GetCurvatureThreshold(1)  </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT GetCurvatureThreshold (in long iPos, out /*IDLRETVAL*/ double oCrvtreThsld );
+
+/**
+ * Sets the CurvatureThreshold in the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the CurvatureThreshold of the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>CurvatureThH</code>.
+ * <pre>
+ * Dim iCrvtreThsld as double
+ * HybShpExtractMulti.<font color="red">SetCurvatureThreshold 1 iCrvtreThsld  </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT SetCurvatureThreshold (in long iPos, in                double iCrvtreThsld );
+
+
+/**
+ * Returns the CurvatureThresholdActivity of the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the CurvatureThresholdActivity of the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>CurvatureActivity </code>.
+ * <pre>
+ * Dim oCrvtreThsldActivity as boolean 
+ * oCrvtreThsldActivity  = HybShpExtractMulti.<font color="red">GetCurvatureThresholdActivity (1) </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT GetCurvatureThresholdActivity (in long iPos, out /*IDLRETVAL*/ boolean oCrvtreThsldActivity );
+
+/**
+ * Sets the CurvatureThresholdActivity in the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the CurvatureThresholdActivity in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>CurvatureActivity </code>.
+ * <pre>
+ * Dim iCrvtreThsldActivity as boolean 
+ * iCrvtreThsldActivity = TRUE 
+ * HybShpExtractMulti.<font color="red">SetCurvatureThresholdActivity 1  iCrvtreThsldActivity </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT SetCurvatureThresholdActivity (in long iPos, in                boolean iCrvtreThsldActivity );
+
+/**
+ * Returns number of constraints in the list of Extracted Elements.
+ *  @param oNbConstraints 
+ *        number of constraints in the list of Extracted Elements.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example returns number of constraints in the list of constraints
+ * of the <code>HybShpExtractMulti</code> hybrid shape ExtractMulti.
+ * <pre>
+ * Dim oNbConstraints as long 
+ * HybShpExtractMulti.<font color="red">GetNbConstraints (oNbConstraints ) </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT GetNbConstraints (out long  oNbConstraints);
+
+/**
+ * Returns the list of Extracted Elements.
+ *   @param oListOfExtractedConstraints 
+ *        The list of constraints. It is returned as an array of nbconstraints in SafeArrayVariant. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example returns the list of constraints
+ * of the <code>HybShpExtractMulti</code> hybrid shape ExtractMulti.
+ * <pre>
+ * Dim oListOfExtractedConstraints as CATSafeArrayVariant 
+ * HybShpExtractMulti.<font color="red">GetListOfConstraints (oListOfExtractedConstraints) </font>
+ * </pre>
+ * 
+ * <p> Note: You can access each constraint as follows:
+ * <ul>
+ *    <li><code>1</code> is in <code>oListOfExtractedConstraints(0)</code>
+ *    <li><code>2</code> is in <code>oListOfExtractedConstraints(1)</code>
+ *    <li><code>nbconstraints</code> is in <code>oListOfExtractedConstraints(nbconstraints-1)</code>
+ * </ul>
+ * </dl>
+ */ 
+ HRESULT GetListOfConstraints (inout   CATSafeArrayVariant  oListOfExtractedConstraints);
+
+
+/**
+ * @deprecated  V5R16 CATIAHybridShapeExtractMulti#AddConstraintTolerant
+ * Adds a constraint to the list of Extracted Elements.
+ *   @param iConstraint 
+ *        The constraint to add.
+ *   @param iType 
+ *        the type of propagation for the ExtractMulti.
+ *   @param iComplementaire 
+ *        the Complementary flag checked/unchecked for for the constraint.
+ *   @param iIsFederated 
+ *        the Federated flag checked/unchecked for the constraint.
+ *   @param iCrvtreThsld 
+ *        the CurvatureThreshold for the constraint.
+ *   @param iPos 
+ *        The position at which the element is to be added in the list of constraints.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example adds a body in the list of constraints at specified position
+ * with the type of propagation, the Federated flag and the CurvatureThreshold 
+ * of the <code>HybShpExtractMulti</code> hybrid shape ExtractMulti.
+ * <pre>
+ * Dim iType as long 
+ * Dim iComplementaire as boolean 
+ * Dim iIsFederated as boolean 
+ * Dim iCrvtreThsld as double
+ * HybShpExtractMulti.<font color="red">AddConstraint iCst  iType  iComplementaire iIsFederated iCrvtreThsld  1 </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT AddConstraint(	in CATIAReference iConstraint, in long iType, 
+						in boolean iComplementaire,
+						in boolean iIsFederated, in double iCrvtreThsld, in long iPos);
+
+
+/**
+ * Adds a constraint to the list of Extracted Elements.
+ *   @param iConstraint 
+ *        The constraint to add.
+ *   @param iType 
+ *        the type of propagation for the ExtractMulti.
+ *   @param iComplementaire 
+ *        the Complementary flag checked/unchecked for for the constraint.
+ *   @param iIsFederated 
+ *        the Federated flag checked/unchecked for the constraint.
+ *   @param iDistreThsld 
+ *        the DistanceThreshold for the constraint.
+ *   @param iAngtreThsld 
+ *        the AngularThreshold for the constraint.
+ *   @param iCrvtreThsld 
+ *        the CurvatureThreshold for the constraint.
+ *   @param iPos 
+ *        The position at which the element is to be added in the list of constraints.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example adds a body in the list of constraints at specified position
+ * with the type of propagation, the Federated flag and the CurvatureThreshold 
+ * of the <code>HybShpExtractMulti</code> hybrid shape ExtractMulti.
+ * <pre>
+ * Dim iType as long 
+ * Dim iComplementaire as boolean 
+ * Dim iIsFederated as boolean 
+ * Dim iDistreThsld as double
+ * Dim iAngtreThsld as double
+ * Dim iCrvtreThsld as double
+ * HybShpExtractMulti.<font color="red">AddConstraintTolerant iCst  iType  iComplementaire iIsFederated iCrvtreThsld  1 </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT AddConstraintTolerant(	in CATIAReference iConstraint, in long iType, 
+						in boolean iComplementaire,
+						in boolean iIsFederated, in double iDistreThsld, in double iAngtreThsld, in double iCrvtreThsld,
+						in long iPos);
+
+
+/**
+ * Replaces an element to extract in the list of constraints at specified position.
+ *   @param iExtractToReplace 
+ *        The element to replace.
+ *   @param iNewExtract 
+ *        The new element.
+ *   @param iPos 
+ *        The position at which the element is to be replaced in the list of constraints.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example replaces the body from the list of constraints at specified position
+ * of the <code>HybShpExtractMulti</code> hybrid shape ExtractMulti.
+ * <pre>
+ * Dim RefToRep  as CATIAReference
+ * Dim RefNewExtract  as CATIAReference
+ * HybShpExtractMulti.<font color="red">ReplaceElement RefToRep  RefNewExtract 1  </font>
+ * </pre>
+ * </dl>
+ */ 
+  HRESULT ReplaceElement(in CATIAReference iExtractToReplace,in CATIAReference iNewExtract, in long iPos);
+
+/**
+ * Removes the body to be extracted from the list of constraints at specified position.
+ *   @param iPosition  
+ *     Position at which the body is to be removed
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example removes the body from the list of constraints at specified position
+ * of the <code>HybShpExtractMulti</code> hybrid shape ExtractMulti.
+ * <pre>
+ * HybShpExtractMulti.<font color="red">RemoveElement  1  </font>
+ * </pre>
+ * </dl>
+ */
+	
+  HRESULT RemoveElement  (in long  iPosition);
+
+/**
+ * Returns the DistanceThreshold of the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the DistanceThreshold in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>DistanceThH</code>.
+ * <pre>
+ * Dim oDistreThsld as double
+ * DistanceThH = HybShpExtractMulti.<font color="red">GetDistanceThreshold(1)  </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT GetDistanceThreshold (in long iPos, out /*IDLRETVAL*/ double oDistreThsld );
+
+/**
+ * Sets the DistanceThreshold in the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the DistanceThreshold of the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>DistanceThH</code>.
+ * <pre>
+ * Dim iDistreThsld as double
+ * HybShpExtractMulti.<font color="red">SetDistanceThreshold 1 iDistreThsld  </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT SetDistanceThreshold (in long iPos, in                double iDistreThsld );
+
+
+/**
+ * Returns the DistanceThresholdActivity of the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the DistanceThresholdActivity of the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>DistanceActivity </code>.
+ * <pre>
+ * Dim oDistreThsldActivity as boolean 
+ * oDistreThsldActivity  = HybShpExtractMulti.<font color="red">GetDistanceThresholdActivity (1) </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT GetDistanceThresholdActivity (in long iPos, out /*IDLRETVAL*/ boolean oDistreThsldActivity );
+
+/**
+ * Sets the DistanceThresholdActivity in the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the DistanceThresholdActivity in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>DistanceActivity </code>.
+ * <pre>
+ * Dim iDistreThsldActivity as boolean 
+ * iDistreThsldActivity = TRUE 
+ * HybShpExtractMulti.<font color="red">SetDistanceThresholdActivity 1  iDistreThsldActivity </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT SetDistanceThresholdActivity (in long iPos, in                boolean iDistreThsldActivity );
+
+/**
+ * Returns the AngularThreshold of the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the AngularThreshold in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>AngularThH</code>.
+ * <pre>
+ * Dim oAngtreThsld as double
+ * AngularThH = HybShpExtractMulti.<font color="red">GetAngularThreshold(1)  </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT GetAngularThreshold (in long iPos, out /*IDLRETVAL*/ double oAngtreThsld );
+
+/**
+ * Sets the AngularThreshold in the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the AngularThreshold of the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>AngularThH</code>.
+ * <pre>
+ * Dim iAngtreThsld as double
+ * HybShpExtractMulti.<font color="red">SetAngularThreshold 1 iAngtreThsld  </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT SetAngularThreshold (in long iPos, in                double iAngtreThsld );
+
+
+/**
+ * Returns the AngularThresholdActivity of the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves the AngularThresholdActivity of the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>AngularActivity </code>.
+ * <pre>
+ * Dim oAngtreThsldActivity as boolean 
+ * oAngtreThsldActivity  = HybShpExtractMulti.<font color="red">GetAngularThresholdActivity (1) </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT GetAngularThresholdActivity (in long iPos, out /*IDLRETVAL*/ boolean oAngtreThsldActivity );
+
+/**
+ * Sets the AngularThresholdActivity in the list of constraints at specified position.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example sets the AngularThresholdActivity in the list of constraints at specified position of 
+ * the <code>hybShpExtractMulti</code> in <code>AngularActivity </code>.
+ * <pre>
+ * Dim iAngtreThsldActivity as boolean 
+ * iAngtreThsldActivity = TRUE 
+ * HybShpExtractMulti.<font color="red">SetAngularThresholdActivity 1  iAngtreThsldActivity </font>
+ * </pre>
+ * </dl>
+ */ 
+ HRESULT SetAngularThresholdActivity (in long iPos, in                boolean iAngtreThsldActivity );
+
+/**
+ * Returns the support of the list of constraints at specified position.
+ *   @param oSupport 
+ *        The support.
+ */ 
+ HRESULT GetSupport (in long iPos, out /*IDLRETVAL*/ CATIAReference   oSupport );
+
+/**
+ * Sets the support of the list of constraints at specified position.
+ *   @param oSupport 
+ *        The support.
+ */ 
+ HRESULT SetSupport (in long iPos, in     CATIAReference   iSupport );
+
+};
+
+
+// Interface name : CATIAHybridShapeExtractMulti
+#pragma ID CATIAHybridShapeExtractMulti "DCE:b11d247f-bb0f-0000-0280031551000000"
+#pragma DUAL CATIAHybridShapeExtractMulti
+
+// VB object name : HybridShapeExtractMulti (Id used in Visual Basic)
+#pragma ID HybridShapeExtractMulti "DCE:b11d2616-7e2a-0000-0280031551000000"
+#pragma ALIAS CATIAHybridShapeExtractMulti HybridShapeExtractMulti
+
+#endif
+// CATIAHybridShapeExtract_IDL
+

@@ -1,0 +1,88 @@
+#ifndef CATIAStrAnchorPoints_IDL
+#define CATIAStrAnchorPoints_IDL
+
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// ****************************************************************************
+// CATIA Version 5 Release 1 Framework Structure
+// Copyright Dassault Systemes 1997
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//    
+//  Interfaces for Journalling  
+//    
+// ****************************************************************************
+//  Usage:
+//  ------
+//    
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//  
+//  CATIACollection
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//    
+// ****************************************************************************
+//  Historic
+//  --------
+//
+//  Author: Alain Debuisson
+//  Date  : 16/01/98
+//  But   : Creation
+//
+// ****************************************************************************
+
+interface CATIADocument;
+interface CATIAStrSection;
+interface CATIAStrAnchorPoint;
+
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+#include "CATIACollection.idl"
+#include "CATIAStrServices.idl"
+
+	/**
+         * A collection of the anchor points of a section object.
+         */
+
+interface CATIAStrAnchorPoints : CATIACollection
+{
+
+    /**
+     * Returns an anchor point from its index in the anchor points collection.
+     * @param iIndex
+     *   The index of the anchor point to retrieve in the collection of anchor points.
+     *   This index can either be the rank of the anchor point in the collection
+     *   or the name you assign to the anchor point.
+     *   As a numerics, this index is the rank of the anchor point 
+     *   in the collection.
+     *   The index of the first anchor point in the collection is 1, and
+     *   the index of the last anchor point is Count.
+     *   As a string, it is the name you assigned to the member using
+     *   the @href CATIABase#Name property.
+     * @return The retrieved anchor point
+     */	
+
+	HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAStrAnchorPoint oItem);
+
+};
+
+// Interface name : CATIAStrAnchorPoints
+#pragma ID CATIAStrAnchorPoints "DCE:447f7180-9395-11d4-94c300108379318c"
+#pragma DUAL CATIAStrAnchorPoints
+
+// VB object name : StrAnchorPoints
+#pragma ID StrAnchorPoints "DCE:44da0adc-9395-11d4-94c300108379318c"
+#pragma ALIAS CATIAStrAnchorPoints StrAnchorPoints
+
+#endif

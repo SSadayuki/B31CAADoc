@@ -1,0 +1,8 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = GeometricObjectsUUID SystemUUID
+#else
+LINK_WITH_FOR_IID = 
+#endif
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+#
+LINK_WITH= $(LINK_WITH_FOR_IID) CATGeometricObjects JS0ERROR V5ToV4GeomTranslator CATMathematics CATCGMGeoMath CATMathStream   

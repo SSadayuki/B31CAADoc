@@ -1,0 +1,514 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+#ifndef CATIADrawingDimValue_IDL
+#define CATIADrawingDimValue_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+
+#include "CatDimFake.idl"
+#include "CatDimFramedElement.idl"
+#include "CatDimFramedGroup.idl"
+#include "CatDimScore.idl"
+
+/**  
+ * Manages dimension value of a dimension in drawing view.
+* <p>
+* This interface is obtained from @href CATIADrawingDimension#GetValue method.
+*/
+
+interface CATIADrawingDimValue : CATIABase
+{
+
+//=================================
+//          Properties
+//=================================
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns value of dimension.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves value of dimension <tt>MyDimValue</tt> drawing dimension.
+  * <pre>
+  * oValue = MyDimValue.<font color="red">Value</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Value
+HRESULT get_Value (out /*IDLRETVAL*/ double oValue);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets fake dimension type of value.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves fake dimension type of value <tt>MyDimValue</tt> drawing dimension.
+  * <pre>
+  * oFakeType = MyDimValue.<font color="red">FakeDimType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY FakeDimType
+HRESULT get_FakeDimType(out /*IDLRETVAL*/ CatDimFake oFakeType);
+HRESULT put_FakeDimType(in CatDimFake iFakeType);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets dimension framed group.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves dimension framed group <tt>MyDimValue</tt> drawing dimension.
+  * <pre>
+  * oValueFramedGroup = MyDimValue.<font color="red">FakeDimType</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ValueFramedGroup
+HRESULT get_ValueFramedGroup (out /*IDLRETVAL*/ CatDimFramedGroup oValueFramedGroup);
+HRESULT put_ValueFramedGroup (in CatDimFramedGroup iValueFramedGroup);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get dimension framed element.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets dimension framed element of <tt>MyValue</tt> path.
+  * <pre>
+  * ValueFramedElement = MyValue.<font color="red">ValueFramedElement</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ValueFramedElement
+HRESULT get_ValueFramedElement ( out /*IDLRETVAL*/ CatDimFramedElement oValueFramedElement);
+HRESULT put_ValueFramedElement ( in CatDimFramedElement iValueFrameElement);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get dimension scoring mode.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets dimension scoring mode of <tt>MyValue</tt> path.
+  * <pre>
+  * ValueScoreType = MyValue.<font color="red">ScoringMode</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ScoringMode
+HRESULT get_ScoringMode ( out /*IDLRETVAL*/ CatDimScore oValueScoreType);
+HRESULT put_ScoringMode ( in CatDimScore iValueScoreType);
+
+
+//=================================
+//           Methods
+//=================================
+
+//------------------------------------------------------------------------------
+ /**
+  * Get PS text to dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param oPrefix
+  *   prefix text.
+  * @param oSuffix
+  *   suffix text
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets PS text of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">GetBaultText</font>(iIndex, oPrefix, oSuffix)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetPSText(in long iIndex, inout CATBSTR oPrefix, inout CATBSTR oSuffix);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set PS text to dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iPrefix
+  *   prefix text.
+  * @param iSuffix
+  *   suffix text
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets PS text of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetBaultText</font>(iIndex, iPrefix, iSuffix)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetPSText( in long iIndex, in CATBSTR iPrefix, in CATBSTR iSuffix);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get bault text of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param oBefore
+  *   before text.
+  * @param oAfter
+  *   after text
+  * @param oUpper
+  *   upper text
+  * @param oLower
+  *   lower text
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets bault text of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">GetBaultText</font>(iIndex, oBefore, oAfter, oUpper, oLower)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetBaultText(in long iIndex, inout CATBSTR oBefore, inout CATBSTR oAfter, inout CATBSTR oUpper, inout CATBSTR oLower);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set bault text to dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iBefore
+  *   before text.
+  * @param iAfter
+  *   after text
+  * @param iUpper
+  *   upper text
+  * @param iLower
+  *   lower text
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets bault text of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetBaultText</font>(iIndex, iBefore, iAfter, iUpper, iLower)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetBaultText( in long iIndex, in CATBSTR iBefore, in CATBSTR iAfter, in CATBSTR iUpper, in CATBSTR iLower);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get format name of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param oFmName
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format name of <tt>MyValue</tt> path.
+  * <pre>
+  * FmName = MyValue.<font color="red">GetFormatName</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetFormatName( in long iIndex, inout /*IDLRETVAL*/ CATBSTR oFmName);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set format name of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iFrmName
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format name of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetFormatName</font>(iIndex, iFrmName)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetFormatName( in long iIndex, in CATBSTR iFrmName);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get format unit of dimension value.
+  * @param Index
+  *   1: main value
+  *   2: dual value
+  * @param oFrmUnit
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format unit of <tt>MyValue</tt> path.
+  * <pre>
+  * FrmUnit = MyValue.<font color="red">GetFormatUnit</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetFormatUnit( in long iIndex, out /*IDLRETVAL*/ long oFrmUnit);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set format unit of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iFrmUnit
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format unit of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetFormatUnit</font>(iIndex, iFrmUnit)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetFormatUnit( in long iIndex, in long iFrmUnit);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get display unit of dimension value.
+  * @param Index
+  *   1: main value
+  *   2: dual value
+  * @param oDisplUnit
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format unit of <tt>MyValue</tt> path.
+  * <pre>
+  * FrmUnit = MyValue.<font color="red">GetDisplayUnit</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetDisplayUnit( in long iIndex, out /*IDLRETVAL*/ long oDisplUnit);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get format precision of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param oFrmPrecision
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format precision of <tt>MyValue</tt> path.
+  * <pre>
+  * FrmPrecision = MyValue.<font color="red">GetFormatPrecision</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT  GetFormatPrecision( in long Index, out /*IDLRETVAL*/ double oFrmPrecision);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set format precision of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iFrmPrecision
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format precision of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetFormatPrecision</font>(iIndex, iFrmPrecision)
+  * </pre>
+  * </dl>
+  */
+HRESULT  SetFormatPrecision( in long iIndex, in double iFrmPrecision);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get format type of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param oFrmType
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format type of <tt>MyValue</tt> path.
+  * <pre>
+  * FrmType = MyValue.<font color="red">GetFormatType</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT  GetFormatType( in long iIndex, out /*IDLRETVAL*/ long oFrmType);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set format type of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iFrmType
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format type of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetFormatType</font>(iIndex, iFrmType)
+  * </pre>
+  * </dl>
+  */
+HRESULT  SetFormatType( in long iIndex, in long iFrmType);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get format display factor of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param oFrmDspFact
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format display factor of <tt>MyValue</tt> path.
+  * <pre>
+  * FrmDspFact = MyValue.<font color="red">GetFormatDisplayFactor</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT  GetFormatDisplayFactor ( in long iIndex, out /*IDLRETVAL*/ long oFrmDspFact);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set format display factor of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iFrmDspFact
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets format display factor of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetFormatDisplayFactor</font>(iIndex, iFrmDspFact)
+  * </pre>
+  * </dl>
+  */
+HRESULT  SetFormatDisplayFactor ( in long iIndex, in long iFrmDspFact);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get fake value of dimension.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param oFakeDimValue
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets fake value of <tt>MyValue</tt> path.
+  * <pre>
+  * FakeDimValue = MyValue.<font color="red">GetFakeDimValue</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT  GetFakeDimValue( in long iIndex, inout /*IDLRETVAL*/ CATBSTR oFakeDimValue);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set fake value of dimension value.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iFakeDimValue
+  *   before text.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets fake value of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetFakeDimValue</font>(iIndex, iFakeDimValue)
+  * </pre>
+  * </dl>
+  */
+HRESULT  SetFakeDimValue( in long iIndex, in CATBSTR iFakeDimValue);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get dimension scored element.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param oScoredElement
+  *  TRUE:
+  *   Scoring is applied to the all bloc text.
+  *  FALSE:
+  *   Scoring is only applied to the value.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets dimension scored element of <tt>MyValue</tt> path.
+  * <pre>
+  * ScoredElement = MyValue.<font color="red">GetScoredElement</font>(iIndex)
+  * </pre>
+  * </dl>
+  */
+HRESULT GetScoredElement (in long iIndex, out /*IDLRETVAL*/ boolean oScoredElement);
+
+//------------------------------------------------------------------------------
+ /**
+  * Set dimension scored element.
+  * @param iIndex
+  *   1: main value
+  *   2: dual value
+  * @param iScoredElement
+  *  TRUE:
+  *   Scoring is applied to the all bloc text.
+  *  FALSE:
+  *   Scoring is only applied to the value.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets dimension scored element of <tt>MyValue</tt> path.
+  * <pre>
+  * MyValue.<font color="red">SetScoredElement</font>(iIndex, iScoredElement)
+  * </pre>
+  * </dl>
+  */
+HRESULT SetScoredElement (in long iIndex, in boolean iScoredElement);
+
+
+};
+
+#pragma ID CATIADrawingDimValue "DCE:05E8D876-4DF7-11d6-AA6E00D059334107"
+#pragma DUAL CATIADrawingDimValue
+
+// Visual Basic name
+#pragma ID DrawingDimValue "DCE:05E8D877-4DF7-11d6-AA6E00D059334107"
+#pragma ALIAS CATIADrawingDimValue DrawingDimValue
+
+#endif

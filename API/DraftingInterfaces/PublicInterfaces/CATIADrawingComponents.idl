@@ -1,0 +1,123 @@
+// COPYRIGHT Dassault Systemes 2001
+#ifndef CATIADrawingComponents_IDL
+#define CATIADrawingComponents_IDL
+/*IDLREP*/
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIADrawingView;
+interface CATIADrawingComponent;
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+/**  
+  * A collection of all the drawing components (ditto) currently managed by a
+  * drawing view of drawing sheet in a drawing document.
+  */
+interface CATIADrawingComponents : CATIACollection 
+{
+ /**
+  * Creates a drawing component instance and adds it to the DrawingComponents collection.
+  * @param iDrawingComponentRef
+  *   The view (i.e. the detail) that is the component reference .
+  *   This view also called a detail MUST belong to a sheet of component references (i.e. details)
+  * @param iPositionX,iPositionY
+  *   The drawing component x and y coordinates, expressed in millimeters,
+  *   with respect to the drawing view coordinate system
+  * @return The created drawing component instance
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates a drawing component instance with a given component reference <tt>MyComponentRef</tt>
+  * coming from a Sheet of component references (i.e. details) <tt>SheetComponentRef</tt> 
+  * and retrieved in <tt>MyComponentInst</tt> in the drawing view collection
+  * of the <tt>MyView</tt> drawing view.
+  * This view belongs to the drawing view collection of the drawing sheet
+  * <pre>
+  * Dim MyComponentRef As DrawingView
+  * Set MyComponentRef = SheetComponentRef.Views.<font color="red">Item</font>(1)
+  * Dim MyView As DrawingView
+  * Set MyView = MySheet.Views.<font color="red">ActiveView</font>
+  * Dim MyComponentInst As DrawingComponent
+  * Set MyComponentInst = MyView.Components.<font color="red">Add</font>(MyComponentRef, 100., 50.)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Add(in CATIADrawingView iDrawingComponentRef, in double iPositionX, in double iPositionY,
+              out /*IDLRETVAL*/ CATIADrawingComponent oNewDrawingComponentInst);
+
+
+ /**
+  * Removes a drawing component from the DrawingComponents collection.
+  * @param iIndex
+  *   The index of the drawing component to remove from
+  *   the collection of drawing components.
+  *   As a numerics, this index is the rank of the drawing component
+  *   in the collection.
+  *   The index of the first drawing component instance in the collection is 1, and
+  *   the index of the last drawing component instance is Count.
+  *   As a string, it is the name you assigned to the drawing component using
+  *   the @href CATIABase#Name property 
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing component instance 
+  * in the drawing component collection of the active view
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * MyView.Components.<font color="red">Remove</font>(3)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Remove(in CATVariant iIndex);
+
+/**
+  * Returns a drawing component instance using its index or its name from the DrawingComponents collection.
+  * @param iIndex
+  *   The index or the name of the drawing component instance to retrieve from
+  *   the collection of drawing components.
+  *   As a numerics, this index is the rank of the drawing component instance
+  *   in the collection.
+  *   The index of the first drawing component instance in the collection is 1, and
+  *   the index of the last drawing component instance is Count.
+  *   As a string, it is the name you assigned to the drawing component instance using
+  *   the @href CATIABase#Name property 
+  * @return The retrieved drawing component instance
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisDrawingComponent</tt> the second drawing component instance,
+  * <tt>MyView</tt> in the drawing view collection of the active sheet
+  * in the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MySheet As DrawingSheet
+  * Set MySheet = CATIA.ActiveDocument.Sheets.ActiveSheet
+  * Dim MyView  As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * Dim ThisDrawingComponent As DrawingComponent
+  * Set ThisDrawingComponent = MyView.Components.<font color="red">Item</font>(2)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIADrawingComponent oItem);
+			
+};
+
+// Interface name : CATIADrawingComponents
+#pragma ID CATIADrawingComponents "DCE:e46b2f54-070f-11d5-a39400d0b7ac5749"
+#pragma DUAL CATIADrawingComponents
+
+// VB object name : DrawingComponents (Id used in Visual Basic)
+#pragma ID DrawingComponents "DCE:e46b2f55-070f-11d5-a39400d0b7ac5749"
+#pragma ALIAS CATIADrawingComponents DrawingComponents
+
+#endif

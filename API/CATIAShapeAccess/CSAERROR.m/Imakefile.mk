@@ -1,0 +1,21 @@
+#
+BUILT_OBJECT_TYPE= NONE
+#
+OS = COMMON
+
+CATIA_LSTCOMDYN=NO
+
+#
+OS = AIX
+
+#
+OS = IRIX
+
+#
+OS = HP-UX
+
+#
+OS = SunOS
+
+OS = Windows_NT
+

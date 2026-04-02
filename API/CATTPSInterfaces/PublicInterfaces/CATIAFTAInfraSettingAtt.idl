@@ -1,0 +1,660 @@
+
+#ifndef CATIAFTAInfraSettingAtt_IDL
+#define CATIAFTAInfraSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT Dassault Systemes 2003
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATBSTR.idl"
+
+/**
+ * The associativity of a FT&amp;A (Functional Tolerancing &amp; Annotation) leader with respect to the pointed geometrical element.
+ * @param CATFTALeaderAssociativityUndefined
+ *   When undefined, there is no leader
+ * @param CATFTALeaderAssociativityFree
+ *   The leader is freely positioned with respect to the pointed geometrical element. This is the default.
+ * @param CATFTALeaderAssociativityPerpendicular
+ *   The leader is perpendicular to to the pointed geometrical element 
+ */
+enum CATFTALeaderAssociativity
+{
+  CATFTALeaderAssociativityUndefined, 
+  CATFTALeaderAssociativityFree, 
+  CATFTALeaderAssociativityPerpendicular
+};
+
+/**
+ * Represents the FT&amp;A (Functional Tolerancing &amp; Annotation) infrastructure setting controller object.
+ * <b>Role</b>: The FT&amp;A infrastructure setting controller object deals with the setting
+ * parameters displayed in:
+ * <ul>
+ * <li>The Tolerancing property page for the Tolerancing Standard and the Leader Associativity setting parameters.
+ * <br>To access this property page:
+ *   <ul>
+ *    <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *    <li>Click + left of </b>Mechanical Design</b> to unfold the workbench list</li>   
+ *    <li>Click <b>Functional Tolerancing &amp; Annotation</b></li>
+ *    <li>Click <b>Tolerancing</b></li>
+ *   </ul>
+ * </li>
+ * <li>The Display property page for the Grid Display, the Grid Snap Point, the Allow Distorsions,
+ * the Grid Primary Spacing, the Grid Secondary Step, the GridV Primary Spacing, the GridV Secondary Step,
+ * the Under Set Tree Visu, the Under View Tree Visu, and the Under Feature Tree Visu
+ * setting parameters.
+ * <br>To access this property page:
+ *   <ul>
+ *    <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *    <li>Click + left of </b>Mechanical Design</b> to unfold the workbench list</li>   
+ *    <li>Click <b>Functional Tolerancing &amp; Annotation</b></li>
+ *    <li>Click <b>Display</b></li>
+ *   </ul>
+ * </li>
+ * <li>The Manipulators property page for the Manipulator Reference Size, the Manipulator Zoom Capability,
+ * and the Move After Creation,
+ * setting parameters.
+ * <br>To access this property page:
+ *   <ul>
+ *    <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *    <li>Click + left of </b>Mechanical Design</b> to unfold the workbench list</li>   
+ *    <li>Click <b>Functional Tolerancing &amp; Annotation</b></li>
+ *    <li>Click <b>Manipulators</b></li>
+ *   </ul>
+ * </li>
+ * <li>The View/Annotation Plane property page for the View Associativity, the View Referential,
+ * the View Referential Zoomable, and the View Profile
+ * setting parameters.
+ * <br>To access this property page:
+ *   <ul>
+ *    <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *    <li>Click + left of </b>Mechanical Design</b> to unfold the workbench list</li>   
+ *    <li>Click <b>Functional Tolerancing &amp; Annotation</b></li>
+ *    <li>Click <b>View/Annotation Plane</b></li>
+ *   </ul>
+ * </li>
+ * <li>The Cgr Management property page for the Save in CGR setting parameter.
+ * <br>To access this property page:
+ *   <ul>
+ *    <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+ *    <li>Click + left of </b>Infrastructure</b> to unfold the workbench list</li>   
+ *    <li>Click <b>Product Structure</b></li>
+ *    <li>Click <b>Cgr Management</b></li>
+ *   </ul>
+ * <p>The Save in CGR setting parameter represents the state of the check button named:
+ * Save FTA 3D Annotation representation in CGR.</p>
+ * </li>
+ * </ul>
+ */
+interface CATIAFTAInfraSettingAtt : CATIASettingController 
+{
+  //------------------------------------------------------
+  //  Standard setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Tolerancing Standard setting parameter value.
+     * <br><b>Role</b>: The Tolerancing Standard setting parameter defines the standard of the annotation's set.
+     * <br><b>Legal values</b>: five conventional standards are available:
+     * <ul>
+     *   <li><b>ASME</b>: American Society for Mechanical Engineers 
+     *   <li><b>ASME_3D</b>: American Society for Mechanical Engineers 
+     *   <li><b>ANSI</b>: American National Standards Institute 
+     *   <li><b>JIS</b>: Japanese Industrial Standard 
+     *   <li><b>ISO</b>: International Organization for Standardization 
+     * </ul>
+     */
+#pragma PROPERTY Standard
+    HRESULT get_Standard(inout /*IDLRETVAL*/ CATBSTR oStandard );
+    HRESULT put_Standard( in CATBSTR iStandard );
+
+    /** 
+     * Locks or unlocks the Tolerancing Standard setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetStandardLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Tolerancing Standard setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetStandardInfo ( inout CATBSTR AdminLevel,
+                              inout CATBSTR oLocked,
+                              out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Leader Associativity setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Leader Associativity setting parameter value.
+     * <br><b>Role</b>: The Leader Associativity setting parameter defines the associativity 
+     * of a leader with the pointed geometrical element.
+     */
+#pragma PROPERTY LeaderAssociativity
+    HRESULT get_LeaderAssociativity(out /*IDLRETVAL*/ CATFTALeaderAssociativity oLeaderAssociativity);
+    HRESULT put_LeaderAssociativity( in CATFTALeaderAssociativity iLeaderAssociativity );
+
+    /** 
+     * Locks or unlocks the Leader Associativity setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetLeaderAssociativityLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Leader Associativity setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetLeaderAssociativityInfo ( inout CATBSTR AdminLevel,
+                                         inout CATBSTR oLocked,
+                                         out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Grid Display setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Grid Display setting parameter value.
+     * <br><b>True</b> if the Grid Display setting parameter is checked and thus enables the grid to be displayed.
+     * <br><b>Role</b>: The Grid Display setting parameter displays a grid on the active view. 
+     */
+#pragma PROPERTY GridDisplay
+    HRESULT get_GridDisplay(out /*IDLRETVAL*/ boolean oGridDisplay);
+    HRESULT put_GridDisplay( in boolean iGridDisplay );
+
+    /** 
+     * Locks or unlocks the Grid Display setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetGridDisplayLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Grid Display setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetGridDisplayInfo ( inout CATBSTR AdminLevel,
+                                 inout CATBSTR oLocked,
+                                 out  /*IDLRETVAL*/boolean oModified);
+
+
+  //------------------------------------------------------
+  //  Grid Snap Point setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Grid Snap Point setting parameter value.
+     * <br><b>True</b> if the Grid Snap Point setting parameter is checked
+     * and thus enables the annotation to be snapped to the nearest grid point.
+     * Otherwise, the gris is not used to anchor the annotation.
+     */
+#pragma PROPERTY GridSnapPoint
+    HRESULT get_GridSnapPoint(out /*IDLRETVAL*/ boolean oGridSnapPoint);
+    HRESULT put_GridSnapPoint( in boolean iGridSnapPoint );
+
+    /** 
+     * Locks or unlocks the Grid Snap Point setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetGridSnapPointLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Grid Snap Point setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetGridSnapPointInfo ( inout CATBSTR AdminLevel,
+                                   inout CATBSTR oLocked,
+                                   out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Allow Distorsions setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Allow Distortions setting parameter value.
+     * <br><b>True</b> if the Allow Distortions setting parameter is checked and thus enables distorsions.
+     * <br><b>Role</b>: The Allow Distortions setting parameter defines whether grid spacing and graduations
+     * are the same horizontally and vertically (no distorsion) or not (distorsions enabled).
+     */
+#pragma PROPERTY AllowDistortions
+    HRESULT get_AllowDistortions(out /*IDLRETVAL*/ boolean oAllowDistortions);
+    HRESULT put_AllowDistortions( in boolean iAllowDistortions );
+
+    /** 
+     * Locks or unlocks the Allow Distorsions setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetAllowDistortionsLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Allow Distorsions setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetAllowDistortionsInfo ( inout CATBSTR AdminLevel,
+                                   inout CATBSTR oLocked,
+                                   out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Grid Primary Spacing setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Grid Primary Spacing setting parameter value.
+     * <br><b>Role</b>: The Grid Primary Spacing setting parameter defines the horizontal spacing on the grid,
+     * expressed in millimiters. The default value is 100mm.
+     */
+#pragma PROPERTY GridPrimarySpacing
+    HRESULT get_GridPrimarySpacing(out /*IDLRETVAL*/ double oGridPrimarySpacing);
+    HRESULT put_GridPrimarySpacing( in double iGridPrimarySpacing );
+
+    /** 
+     * Locks or unlocks the Grid Primary Spacing setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetGridPrimarySpacingLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Grid Primary Spacing setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetGridPrimarySpacingInfo ( inout CATBSTR AdminLevel,
+                                   inout CATBSTR oLocked,
+                                   out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Grid Secondary Step setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Grid Secondary Step setting parameter value.
+     * <br><b>Role</b>: The Grid Secondary Step setting parameter defines the grid's horizontal graduations.
+     * The default value is 10.
+     */
+#pragma PROPERTY GridSecondaryStep
+    HRESULT get_GridSecondaryStep(out /*IDLRETVAL*/ long oGridSecondaryStep);
+    HRESULT put_GridSecondaryStep( in long iGridSecondaryStep );
+
+    /** 
+     * Locks or unlocks the Grid Secondary Step setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetGridSecondaryStepLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Grid Secondary Step setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetGridSecondaryStepInfo ( inout CATBSTR AdminLevel,
+                                   inout CATBSTR oLocked,
+                                   out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  GridV Primary Spacing setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the GridV Primary Spacing setting parameter value.
+     * <br><b>Role</b>: The GridV Primary Spacing setting parameter defines the vertical spacing on the grid,
+     * expressed in millimiters. The default value is 100mm.
+     * Set this value only if distorsions are allowed thanks to the @href #AllowDistortions property.
+     * Otherwise, the value sets to the Grid Primary Spacing setting parameter
+     * thanks to the @href #GridPrimarySpacing
+     * for horizontal spacing is taken into account.
+     */
+#pragma PROPERTY GridVPrimarySpacing
+    HRESULT get_GridVPrimarySpacing(out /*IDLRETVAL*/ double oGridVPrimarySpacing);
+    HRESULT put_GridVPrimarySpacing( in double iGridVPrimarySpacing );
+
+    /** 
+     * Locks or unlocks the GridV Primary Spacing setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetGridVPrimarySpacingLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the GridV Primary Spacing setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetGridVPrimarySpacingInfo ( inout CATBSTR AdminLevel,
+                                   inout CATBSTR oLocked,
+                                   out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  GridV Secondary Step setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the GridV Secondary Step setting parameter value.
+     * <br><b>Role</b>: The GridV Secondary Step setting parameter defines the grid's vertical graduations.
+     * The default value is 10.
+     * Set this value only if distorsions are allowed thanks to the @href #AllowDistortions property.
+     * Otherwise, the value sets to the Grid Secondary Step setting parameter
+     * thanks to the @href #GridSecondaryStep
+     * for the number of horizontal graduations is taken into account.
+     */
+#pragma PROPERTY GridVSecondaryStep
+    HRESULT get_GridVSecondaryStep(out /*IDLRETVAL*/ long oGridVSecondaryStep);
+    HRESULT put_GridVSecondaryStep( in long iGridVSecondaryStep );
+
+    /** 
+     * Locks or unlocks the GridV Secondary Step setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetGridVSecondaryStepLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the GridV Secondary Step setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetGridVSecondaryStepInfo ( inout CATBSTR AdminLevel,
+                                   inout CATBSTR oLocked,
+                                   out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Under Set Tree Visu setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Under Annotation Set Node setting parameter value.
+     * <br><b>True</b> if the Under Annotation Set Node setting parameter is checked
+     * and thus enables 3D annotations to be displayed under the annotation set node
+     * in the specification tree.
+     * Set this parameter to True only if the Under View/Annotation Plane Nodes setting parameter
+     * managed by @href #UnderView is set to True.
+     */
+#pragma PROPERTY UnderSet
+    HRESULT get_UnderSet(out /*IDLRETVAL*/ boolean oUnderSet);
+    HRESULT put_UnderSet( in boolean iUnderSet );
+
+    /** 
+     * Locks or unlocks the Under Annotation Set Node setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetUnderSetLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Under Annotation Set Node setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetUnderSetInfo ( inout CATBSTR AdminLevel,
+                              inout CATBSTR oLocked,
+                              out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Under View Tree Visu setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Under View/Annotation Plane Nodes setting parameter value.
+     * <br><b>True</b> if the Under View/Annotation Plane Nodes setting parameter is checked
+     * and thus enables 3D annotations to be displayed under the view/annotation plane nodes
+     * in the specification tree.
+     * This lets you view 3D annotations under the view node to which they are linked.
+     */
+#pragma PROPERTY UnderView
+    HRESULT get_UnderView(out /*IDLRETVAL*/ boolean oUnderView);
+    HRESULT put_UnderView( in boolean iUnderView );
+
+    /** 
+     * Locks or unlocks the Under View/Annotation Plane Nodes setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetUnderViewLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Under View/Annotation Plane Nodes setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetUnderViewInfo ( inout CATBSTR AdminLevel,
+                              inout CATBSTR oLocked,
+                              out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Under Feature Tree Visu setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Under Geometric Feature Nodes setting parameter value.
+     * <br><b>True</b> if the Under Geometric Feature Nodes setting parameter is checked
+     * and thus enables 3D annotations to be displayed in the specification tree.
+     * This lets you view 3D annotations under the Part Design or Generative Shape Design feature nodes
+     * to which they are applied.
+     */
+#pragma PROPERTY UnderFeature
+    HRESULT get_UnderFeature(out /*IDLRETVAL*/ boolean oUnderFeature);
+    HRESULT put_UnderFeature( in boolean iUnderFeature );
+
+    /** 
+     * Locks or unlocks the Under Geometric Feature Nodes setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetUnderFeatureLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Under Geometric Feature Nodes setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetUnderFeatureInfo ( inout CATBSTR AdminLevel,
+                                  inout CATBSTR oLocked,
+                                  out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Save In CGR setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Save In CGR setting parameter value.
+     * <br><b>True</b> if the Save In CGR setting parameter is checked.
+     * <br><b>Role</b>: When set to True, the FT&amp;A 3D Annotation representations are saved in CGR.
+     * Otherwise, they are not saved.
+     */
+#pragma PROPERTY SaveInCGR
+    HRESULT get_SaveInCGR(out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_SaveInCGR( in boolean iValue );
+
+    /** 
+     * Locks or unlocks the Save In CGR setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetSaveInCGRLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Save In CGR setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetSaveInCGRInfo ( inout CATBSTR AdminLevel,
+                               inout CATBSTR oLocked,
+                               out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Manipulator Reference Size setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Manipulator Reference Size setting parameter value.
+     * <br><b>Role</b>: The Manipulator Reference Size setting parameter defines the size of the manipulator
+     * attached to the end of an annotation leader.
+     * The default value is 2mm.
+     */
+#pragma PROPERTY ManRefSiz
+    HRESULT get_ManRefSiz(out /*IDLRETVAL*/ double oValue);
+    HRESULT put_ManRefSiz( in double iValue );
+
+    /** 
+     * Locks or unlocks the Manipulator Reference Size setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetManRefSizLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Manipulator Reference Size setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetManRefSizInfo ( inout CATBSTR AdminLevel,
+                               inout CATBSTR oLocked,
+                               out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Manipulator Zoom Capability setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Manipulator Zoom Capability setting parameter value.
+     * <br><b>True</b> if the Manipulator Zoom Capability setting parameter is checked and thus enables
+     * the annotation leader end manipulator to be zoomable. Otherwise, it is not zoomable.
+     */
+#pragma PROPERTY ManZooCap
+    HRESULT get_ManZooCap(out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_ManZooCap( in boolean iValue );
+
+    /** 
+     * Locks or unlocks the Manipulator Zoom Capability setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetManZooCapLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Manipulator Zoom Capability setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetManZooCapInfo ( inout CATBSTR AdminLevel,
+                               inout CATBSTR oLocked,
+                               out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  Move After Creation setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the Move After Creation setting parameter value.
+     * <br><b>True</b> if the Move After Creation setting parameter is checked and thus enables
+     * the annotation leader end manipulator to be moved, after the annotation creation,
+     * along lines or curves that represent
+     * the intersection between the geometry and the annotation's plane.
+     * Otherwise, the annotation leader end manipulator cannot be moved.
+     */
+#pragma PROPERTY MoveAfterCreation
+    HRESULT get_MoveAfterCreation(out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_MoveAfterCreation( in boolean iValue );
+
+    /** 
+     * Locks or unlocks the Move After Creation setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetMoveAfterCreationLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the Move After Creation setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetMoveAfterCreationInfo ( inout CATBSTR AdminLevel,
+                                       inout CATBSTR oLocked,
+                                       out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  View Associativity setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the View Associativity setting parameter value.
+     * <br><b>True</b> if the View Associativity setting parameter is checked and thus enables
+     * the associativity of the view/annotation plane associativity with the pointed geometrical elements.
+     * <br><b>Role</b>: The View Associativity setting parameter defines whether the 
+     * views created are associative with the geometry.
+     * When views are associative to the geometry, any modification applied to the geometry
+     * or to the axis system is reflected in the view definition. 
+     */
+#pragma PROPERTY ViewAssociativity
+    HRESULT get_ViewAssociativity(out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_ViewAssociativity( in boolean iValue );
+
+    /** 
+     * Locks or unlocks the View Associativity setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetViewAssociativityLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the View Associativity setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetViewAssociativityInfo ( inout CATBSTR AdminLevel,
+                                       inout CATBSTR oLocked,
+                                       out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  View Referential setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the View Referential setting parameter value.
+     * <br><b>True</b> if the View Referential setting parameter is checked and thus enables
+     * the display of the active annotation plane axis system.
+     */
+#pragma PROPERTY ViewReferential
+    HRESULT get_ViewReferential(out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_ViewReferential( in boolean iValue );
+
+    /** 
+     * Locks or unlocks the View Referential setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetViewReferentialLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the View Referential setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetViewReferentialInfo ( inout CATBSTR AdminLevel,
+                                     inout CATBSTR oLocked,
+                                     out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  View Referential Zoomable setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the View Referential Zoomable setting parameter value.
+     * <br><b>True</b> if the View Referential Zoomable setting parameter is checked and thus enables
+     * the annotation plane axis to be zoomable.
+     */
+#pragma PROPERTY ViewReferentialZoomable
+    HRESULT get_ViewReferentialZoomable(out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_ViewReferentialZoomable( in boolean iValue );
+
+    /** 
+     * Locks or unlocks the View Referential Zoomable setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetViewReferentialZoomableLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the View Referential Zoomable setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetViewReferentialZoomableInfo ( inout CATBSTR AdminLevel,
+                                             inout CATBSTR oLocked,
+                                             out  /*IDLRETVAL*/boolean oModified);
+
+  //------------------------------------------------------
+  //  View Profile setting parameter
+  //------------------------------------------------------
+    /**
+     * Returns or sets the View Profile setting parameter value.
+     * <br><b>True</b> if the View Profile setting parameter is checked and thus enables
+     * the view/annotation plane profile on the part/product to be displayed.
+     */
+#pragma PROPERTY ViewProfile
+    HRESULT get_ViewProfile(out /*IDLRETVAL*/ boolean oValue);
+    HRESULT put_ViewProfile( in boolean iValue );
+
+    /** 
+     * Locks or unlocks the View Profile setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */
+    HRESULT SetViewProfileLock( in boolean iLocked );
+
+    /** 
+     * Retrieves information about the View Profile setting parameter value.
+     * <br>Refer to @href CATIASettingController for a detailed description.
+     */ 
+    HRESULT GetViewProfileInfo ( inout CATBSTR AdminLevel,
+                                 inout CATBSTR oLocked,
+                                 out  /*IDLRETVAL*/boolean oModified);
+};
+
+// Interface name : CATIAFTAInfraSettingAtt
+#pragma ID CATIAFTAInfraSettingAtt "DCE:afca9698-a469-4ea7-8ad79f79d5a2268d"
+#pragma DUAL CATIAFTAInfraSettingAtt
+
+// VB object name : FTAInfraSettingAtt (Id used in Visual Basic)
+#pragma ID FTAInfraSettingAtt "DCE:850f4ffe-73e3-4621-8ad99eaed69c08ee"
+#pragma ALIAS CATIAFTAInfraSettingAtt FTAInfraSettingAtt
+
+#endif

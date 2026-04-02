@@ -1,0 +1,73 @@
+#ifndef CATIAAnalysisPostManager_IDL
+#define CATIAAnalysisPostManager_IDL
+// Do not remove the following line IDLREP, necessary for journaling!!
+/*IDLREP*/
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAAnalysisPostManager.idl
+// Automation interface for the AnalysisPostManager element 
+//
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+//===================================================================
+#include "CATIABase.idl"
+#include "CATIAAnalysisCase.idl"
+#include "CATIAFolder.idl"
+
+/**  
+ * Interface to define the Post Processing Manager.
+ * <b>Role</b>: In the analysis document, an Post Processing is dedicated to
+ * Visualization and reporting.
+ * <p>
+ */
+interface CATIAAnalysisPostManager : CATIABase 
+{
+ /**
+  * Adds an existing analysis case to manager.
+  * To declare Case which will be taken into account for the HTML report.
+  * @param iCase
+  * The Existing Analysis Case.
+  */
+
+  HRESULT AddExistingCaseForReport (in  CATIAAnalysisCase  iCase);
+
+ /**
+ * @deprecated V5R14 use BuildReport instead.
+ * Extract the HTML Report.
+ * The Report is defined related to Analysis cases, using AddExistingCaseForReport 
+ * and will be stored in a CATIA Folder.
+ * @param iFolder  Folder to store the HTML file.
+ * @param iTitle   Title of the report.
+ */
+
+  HRESULT ExtractHTMLReport(in  CATIAFolder				iFolder,
+							in	CATBSTR					iTitle);
+
+ /**
+ * Extract the HTML Report.
+ * The Report is defined related to Analysis cases, using AddExistingCaseForReport 
+ * and will be stored in a CATIA Folder.
+ * @param iFolder  Folder to store the HTML file.
+ * @param iTitle   Title of the report.
+ * @param iAddCreatedImages
+ * To add created images under analysis case in the report.<br>
+ */
+
+  HRESULT BuildReport(in  CATIAFolder				iFolder,
+				      in  CATBSTR					iTitle,
+					  in  CATVariant                iAddCreatedImages);
+};
+
+// Interface name : CATIAAnalysisPostManager
+#pragma ID CATIAAnalysisPostManager "DCE:b8898585-9a97-11d4-9f0a00508b6a3154"
+#pragma DUAL CATIAAnalysisPostManager
+
+// VB object name : AnalysisPostManager (Id used in Visual Basic)
+#pragma ID AnalysisPostManager "DCE:b8898586-9a97-11d4-9f0a00508b6a3154"
+#pragma ALIAS CATIAAnalysisPostManager AnalysisPostManager
+
+#endif

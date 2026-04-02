@@ -1,0 +1,165 @@
+#ifndef CATIARelation_IDL
+#define CATIARelation_IDL
+/*IDLREP*/
+
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAKnowledgeActivableObject.idl"
+
+interface CATIAParameter;
+
+/**
+ * Represents the relation object.
+ * It is an abstract object which is not intended to be created as such,
+ * but from which the check, design table, formula, rule,
+ * objects derive.
+ * @see  CATIACheck, CATIADesignTable, CATIAFormula, CATIAProgram
+ */
+
+//-----------------------------------------------------------------
+// interface CATIARelation : CATIABase
+interface CATIARelation : CATIAKnowledgeActivableObject
+{
+    //==================================
+    //========== Properties ============
+    //==================================
+    //....ON VALUE 
+    /**
+     * Returns the definition of the relation. 
+		 * It returns an empty string
+		 * if the relation is not an expressional one (for example for
+		 * a design table).
+     * The definition is the body to be executed to compute
+     * one or several parameters.
+     * It is passed as the last input argument of the relation creation
+     * methods of the @href CATIARelations collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the <tt>maximummass</tt> relation definition
+     * and displays it in a message box: 
+     * <pre>
+     * reldef = maximummass.<font color="red">Value</font>
+     * MsgBox "maximummass relation is defined as " & reldef
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Value  
+    HRESULT    get_Value      
+                ( inout /*IDLRETVAL*/ CATBSTR          oValue   );
+
+    //....ON COMMENT
+    /**
+     * Returns or sets the comment associated with the relation.
+     * The comment explains the relation's purpose.
+     * It is passed as the second input argument of the relation creation
+     * methods of the @href CATIARelations collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the <tt>maximummass</tt> relation comment
+     * and displays it in a message box:
+     * <pre>
+     * relcomment = maximummass.<font color="red">Comment</font>
+     * MsgBox "maximummass comment : " & relcomment
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Comment
+    HRESULT    get_Comment    
+                ( inout /*IDLRETVAL*/ CATBSTR          oComment );
+    HRESULT    put_Comment( in     CATBSTR      iComment );
+
+
+    //=================================
+    //==========  Methods  ============
+    //=================================
+    /**
+     * Renames the relation.
+     * @param iName
+     *   The new relation name
+     */
+    HRESULT    Rename( in     CATBSTR      iName );  
+
+    /**
+     * Modifies the relation.
+     * @param iValue
+     *   The new relation value
+     */
+	HRESULT    Modify( in     CATBSTR          iValue);
+
+	/**
+	* Returns the number of input parameters of the relation.
+	*/
+#pragma PROPERTY NbInParameters
+	HRESULT get_NbInParameters(inout /*IDLRETVAL*/ long oNbInputs);
+	
+	/**
+	* Returns the number of output parameters of the relation.
+	* <br>The output parameters of the relation are those constrained
+	* by the relation.
+	*/
+#pragma PROPERTY NbOutParameters
+	HRESULT get_NbOutParameters(inout /*IDLRETVAL*/ long oNbOutputs);
+
+	/**
+	* Returns an input parameter of the relation.
+	* <br>This method can return an object that is not a parameter,
+	* that is, you cannot handle it as a Parameter object.
+	* For example, in a relation like
+	* <pre>Area.1 = area(PartBody\Pad.1\Sketch.1)</pre>
+	* the object PartBody\Pad.1\Sketch.1 is a sketch and not a parameter.<br>
+	* To use such an object, call the Visual Basic <code>TypeName</code> function to retrieve its real type.
+	* <pre>Dim objectType
+	* objectType = TypeName(oParameter)
+	* If objectType = "Parameter" Then
+	* ...</pre>
+	* @param iIndex
+	* The searched input parameter index in the relation.
+	* <br><b>Legal values</b>: 1 &le; iIndex &le; @href #NbInParameters
+	*/
+	HRESULT GetInParameter(in long iIndex, out /*IDLRETVAL*/ CATIABase oParameter);
+
+	/**
+	* Returns an output parameter of the relation. 
+	* Use TypeName method on the returned parameter to get the real type of the parameter.
+	* @param iIndex
+	* The searched input parameter index in the relation.
+	* <br><b>Legal values</b>: 1 &le; iIndex &le; @href #NbOutParameters
+	*/
+	HRESULT GetOutParameter(in long iIndex, out /*IDLRETVAL*/ CATIAParameter oParameter);
+
+	#pragma PROPERTY Context
+
+	/**
+	 * Returns the context of the parameter.
+	 * <br>The context of a parameter can be a part, a product, a drafting, or a process document,
+	 * depending where the parameter is.
+	 * @return
+	 *  The context
+	 * @see CATIAPart, CATIAProduct, CATIADrawing, CATIAProcess
+	 */
+	HRESULT	   get_Context
+				( out /*IDLRETVAL*/ CATIABase oContext );
+};
+
+// Interface name : CATIARelation
+#pragma ID CATIARelation "DCE:0dbe5a92-5466-11d1-a2720000f87546fd"
+#pragma DUAL CATIARelation
+
+// VB object name : Relation (Id used in Visual Basic)
+#pragma ID Relation "DCE:0dfd88e3-5466-11d1-a2720000f87546fd"
+#pragma ALIAS CATIARelation Relation
+
+
+#endif
+// CATIARelation_IDL
+

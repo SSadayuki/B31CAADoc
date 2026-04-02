@@ -1,0 +1,125 @@
+#ifndef CATIASchAppConnection_IDL 
+#define CATIASchAppConnection_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfBSTRs;
+interface  CATIASchListOfObjects;
+interface  CATIASchAppConnector;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic connection.
+  */
+
+
+interface CATIASchAppConnection : CATIABase
+{
+  /**
+  * Find all the connectors included in this connection.
+  * @param oLCntrClassFilter
+  *   A list of all the class types for filtering the output connector
+  *   list.
+  * @param oLCntrs
+  *   A list of connectors included in this connection.
+  *   (members are CATISchAppConnector interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnection
+  * Dim objArg1 As SchListOfBSTRs
+  * Dim objArg2 As SchListOfObjects
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">AppListConnectors</font>(objArg1)
+  * </pre>
+  *    
+  */
+  HRESULT AppListConnectors ( 
+    in CATIASchListOfBSTRs iLCntrClassFilter, 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLCntrs );
+    
+  /**
+  * Find all the application object connected to this connection through
+  * their connectors.
+  * @param oLCntrClassFilter
+  *   A list of all the class types for filtering the output application
+  *   objects list.
+  * @param oLCntbles
+  *   A list of application objects connected to this connection.
+  *   (members are CATISchAppConnectable interface pointers). 
+  * @param oLCntrs
+  *   A list of connectors through which this connection is made.
+  *   (members are CATISchAppConnector interface pointers).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnection
+  * Dim objArg1 As SchListOfBSTRs
+  * Dim objArg2 As SchListOfObjects
+  * Dim objArg3 As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">AppListConnectables</font>objArg1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT AppListConnectables ( 
+    in CATIASchListOfBSTRs iLCntbleClassFilter, 
+    inout CATIASchListOfObjects oLCntbles, 
+    inout CATIASchListOfObjects oLCntrs );
+    
+  /**
+  * Add a connector.
+  * @param iCntrToAdd
+  *   The Application Connector to be added to the 
+  *   connection
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnection
+  * Dim objArg1 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">AppAddConnector</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppAddConnector ( 
+    in CATIASchAppConnector iCntrToAdd );
+    
+  /**
+  * Remove a connector.
+  * @param iCntrToRemove
+  *    The Application Connector to be removed 
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppConnection
+  * Dim objArg1 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">AppRemoveConnector</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppRemoveConnector ( 
+    in CATIASchAppConnector iCntrToRemove );
+    
+};
+    
+// Interface name : CATIASchAppConnection
+#pragma ID CATIASchAppConnection "DCE:6ad206c3-8e60-443e-ac29ea876a98e48f"
+#pragma DUAL CATIASchAppConnection
+    
+// VB object name : SchAppConnection
+#pragma ID SchAppConnection "DCE:3645c87d-dde9-43e5-ba44afff17bb8692"
+#pragma ALIAS CATIASchAppConnection SchAppConnection
+    
+#endif 
+    

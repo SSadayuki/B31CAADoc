@@ -1,0 +1,171 @@
+#ifndef CATIAMachiningProcess_IDL
+#define CATIAMachiningProcess_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2001
+//=================================================================
+//								   
+// CATIAMachiningProcess:						   
+// Exposed interface for MachiningProcess
+//								   
+//=================================================================
+// DCN V5R8  08/06/01 Creation
+// DCN V5R11 13/01/03 Instantiate method taking into account the product
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingActivity.idl"
+#include "CATIAMfgActivities.idl"
+
+interface CATIAManufacturingProgram;
+interface CATIABase;
+interface CATIAProduct;
+
+/**
+ * MachiningProcess defines a set of properties and methods to apply a Machining Process 
+ * to a geometrical feature (design or manufacturing). It refers to a Machining Process
+ * which has been defined in the Machining Process view of a CATProcess file
+ * In the VB macro, be sure that the <b>active document</b> is the <b>target document</b> where are located
+ * the insertion level and where the instantiated activities will be created
+ **/ 
+
+interface CATIAMachiningProcess : CATIAManufacturingActivity
+{
+    /**
+     * This property defines the insertion level in the program receiving the resulting operations. 
+     * It can be set to either the Manufacturing Program or 
+	 * one the Manufacturing Activities of the Manufacturing Program.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example sets the <tt>InsertionLevel</tt> property to the first  
+     * Manufacturing Program as <tt>ManufacturingActivity</tt> Activity for the mpReference
+	 * <tt>MachiningProcess</tt> which will be used for the Machining Process application:
+     * <pre>
+     * ...
+     * Dim programReference As ManufacturingActivity
+     * Set programReference = ... 
+     * Dim mpReference As MachiningProcess
+     * Set mpReference = ...
+     * mpReference.<font color="red">InsertionLevel</font> = programReference
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY InsertionLevel
+ 
+        HRESULT get_InsertionLevel (inout /*IDLRETVAL*/ CATIAManufacturingActivity oInsertionLevel);
+ 
+ 
+        HRESULT put_InsertionLevel (in CATIAManufacturingActivity iInsertionLevel);
+    /**
+     * This method enables to apply a Machining Process to an any feature. This one has to be  
+     * available for all Manufacturing Activities inside the Machining Process.
+	 * At the end of the Machining Process application, the InsertionLevel property is set to
+	 * the last created Manufacturing Activity in the Manufacturing program
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example executes the <tt>Instantiate</tt> method to apply the  
+     *  mpReference <tt>MachiningProcess</tt> to a DesignFeature selected feature
+     * <pre>
+     * ...
+     * Dim mpReference As MachiningProcess
+     * Set mpReference = ...
+	 * ...
+     * Dim DesignFeature As AnyObject
+     * Set DesignFeature = ...
+	 * ...
+     * mpReference.<font color="red">Instantiate</font>(DesignFeature)
+     *</pre>
+     * </dl>
+     */
+
+        HRESULT Instantiate (in CATIABase iFeature);  
+
+    /**
+     * This method enables to apply a Machining Process to a given feature by taking into account
+	 * the product from which it belongs to. This one has to be  
+     * available for all Manufacturing Activities inside the Machining Process.
+	 * At the end of the Machining Process application, the InsertionLevel property is set to
+	 * the last created Manufacturing Activity in the Manufacturing program
+     * @param iFeature
+     *   The feature on which the Machining Process is instantiated
+     * @param iProduct
+     *   The product containing the feature. 
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example executes the <tt>Instantiate</tt> method to apply the  
+     *  mpReference <tt>MachiningProcess</tt> to a iDesignFeature selected feature
+     * <pre>
+     * ...
+     * Dim mpReference As MachiningProcess
+     * Set mpReference = ...
+	 * ...
+     * Dim iDesignFeature As AnyObject
+     * Set iDesignFeature = ...
+	 * ...
+     * Dim iProduct As Product
+     * Set iProduct = ...
+	 * ...
+     * mpReference.<font color="red">Instantiate</font>(iDesignFeature,iProduct)
+     *</pre>
+     * </dl>
+     */
+
+        HRESULT InstantiateInProductContext (in CATIABase iFeature, in CATIAProduct iProduct);  
+
+    /**
+     * This method creates and inserts a Manufacturing Activity in the Machining Process.
+     * @param iActivityType
+     *   The activity to be created type
+     * @param iReferencedActivity
+     *   The insertion level in the machining process: the machining process itself to insert 
+	 *   at the beginning of the Machining Process
+     * @param oManufacturingActivity
+     *   The inserted activity
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example executes the <tt>InsertActivity</tt> method to add a drilling operation to
+     *  the mpReference <tt>MachiningProcess</tt> 
+     * <pre>
+     * ...
+     * Dim mpReference As MachiningProcess
+     * Set mpReference = ...
+	 * ...
+     * Dim iActivityType As CATBSTR
+     * Set iActivityType = Drilling
+     * Dim iReferencedActivity As CATIAManufacturingActivity
+     * Set iReferencedActivity = MachiningProcess
+     * Dim oManufacturingActivity As CATIAManufacturingActivity
+     * mpReference.<font color="red">InsertActivity</font>(iActivityType,iReferencedActivity,oManufacturingActivity)
+     *</pre>
+     * </dl>
+     */
+        HRESULT InsertActivity (in CATBSTR iActivityType, in CATIAManufacturingActivity iReferencedActivity,
+	                            inout /*IDLRETVAL*/ CATIAManufacturingActivity oManufacturingActivity);
+
+    /**
+     * This method gets the Manufacturing Activities referenced by the Machining Process.
+     * @param oMfgActivities
+     *   The Manufacturing Activities list
+     */
+        HRESULT GetActivities (inout /*IDLRETVAL*/ CATIAMfgActivities oMfgActivities);
+
+};
+
+// Interface name : CATIAMachiningProcess
+#pragma ID CATIAMachiningProcess "DCE:b85c4eb0-5fef-11d5-9efd0002b31ea50f"
+#pragma DUAL CATIAMachiningProcess
+
+// VB object name : MachiningProcess (Id used in Visual Basic)
+#pragma ID MachiningProcess "DCE:cc2f0c60-5fef-11d5-9efd0002b31ea50f"
+#pragma ALIAS CATIAMachiningProcess MachiningProcess
+
+#endif // CATIAMachiningProcess_IDL
+

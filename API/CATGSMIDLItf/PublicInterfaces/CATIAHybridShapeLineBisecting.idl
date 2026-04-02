@@ -1,0 +1,159 @@
+/* -*-c++-*- */
+#ifndef CATIAHybridShapeLineBisecting_IDL
+#define CATIAHybridShapeLineBisecting_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation
+//=================================================================
+#include "CATIAHybridShapeLine.idl"
+#include "CATIAReference.idl"
+#include "CATIALength.idl"
+
+
+/**
+ * Represents the hybrid shape bisecting line feature object.
+ * <b>Role</b>: To access the data of the hybrid shape bisecting line feature object.
+ * This data includes:
+ * <ul>
+ * <li>The two lines used to create the bisecting line</li>
+ * <li>The reference point</li>
+ * <li>The support</li>
+ * <li>The start and end offsets</li>
+ * <li>The orientation</li>
+ * <li>The solution type</li>
+ * </ul>
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeAffinity object.
+ * @see CATIAHybridShapeFactory
+ */
+
+interface CATIAHybridShapeLineBisecting : CATIAHybridShapeLine
+{
+
+/**
+ * Returns or sets the first line used to create the bisecting line. <br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href  CATIARectilinearTriDimFeatEdge or @href CATIARectilinearBiDimFeatEdge.
+ */ 
+#pragma PROPERTY Elem1
+    HRESULT get_Elem1 (out /*IDLRETVAL*/ CATIAReference   oElem);
+    HRESULT put_Elem1 (in                CATIAReference   iElem);
+
+/**
+ * Returns or sets the second line used to create the bisecting line. 
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href  CATIARectilinearTriDimFeatEdge or @href CATIARectilinearBiDimFeatEdge. 
+ */ 
+#pragma PROPERTY Elem2
+    HRESULT get_Elem2 (out /*IDLRETVAL*/ CATIAReference   oElem);
+    HRESULT put_Elem2 (in                CATIAReference   iElem);
+
+/**
+ * Returns or sets the reference point used to create the bisecting line. 
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href  CATIAVertex.
+ */ 
+#pragma PROPERTY RefPoint
+    HRESULT get_RefPoint (out /*IDLRETVAL*/ CATIAReference   oElem);
+    HRESULT put_RefPoint (in                CATIAReference   iElem);
+
+/**
+ * Returns or sets the support used to create the bisecting line. 
+ * @param oElem 
+ *   retrieve the support of the bisecting line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href  CATIAFace.  
+ */ 
+#pragma PROPERTY Support
+    HRESULT get_Support (out /*IDLRETVAL*/ CATIAReference   oElem);
+    HRESULT put_Support (in                CATIAReference   iElem);
+
+/**
+ * Returns the start offset of the line.
+ */ 
+#pragma PROPERTY BeginOffset
+ HRESULT get_BeginOffset ( out /*IDLRETVAL*/  CATIALength   oStart);
+
+/**
+ * Returns the end offset of the line.
+ */
+#pragma PROPERTY EndOffset
+ HRESULT get_EndOffset ( out /*IDLRETVAL*/  CATIALength   oEnd);
+
+/**
+ * Returns or sets the orientation used to compute the bisecting line.
+ * <br><b>Role</b>: the orientation specifies bisecting line position
+ * <br><b>Legal values</b>:
+ *   The orientation can be the same(1) or the inverse(-1)
+ */ 
+#pragma PROPERTY Orientation
+    HRESULT get_Orientation (out /*IDLRETVAL*/ long  oOrientation);
+    HRESULT put_Orientation (in                long  iOrientation);
+
+/**
+ * Returns or sets the solution type.
+ * <br><b>Role</b>: The solution type allows you to know where is the bisecting line.
+ */ 
+#pragma PROPERTY SolutionType
+ HRESULT get_SolutionType (out /*IDLRETVAL*/  boolean       oSolutionType); 
+ HRESULT put_SolutionType (in                 boolean       iSolutionType);
+
+ //  ================
+ //  == METHODS ==
+ //  ================
+ /**
+ * Gets the length type
+ * Default is 0.
+ *   @param oType
+ *   The length type = 0 : length               - the line is limited by its extremities
+ *                   = 1 : infinite             - the line is infinite
+ *                   = 2 : infinite start point - the line is infinite on the side of the start point
+ *                   = 3 : infinite end point   - the line is infinite on the side of the end point
+ */
+ HRESULT GetLengthType (out /*IDLRETVAL*/  long  oType);
+ /**
+ * Sets the length type
+ * Default is 0.
+ *   @param iType
+ *   The length type = 0 : length               - the line is limited by its extremities
+ *                   = 1 : infinite             - the line is infinite
+ *                   = 2 : infinite start point - the line is infinite on the side of the start point
+ *                   = 3 : infinite end point   - the line is infinite on the side of the end point
+ */
+ HRESULT SetLengthType(in long iType);
+ /**
+ * Sets the symmetrical extension of the line (start = -end).
+ *   @param iSym
+ *       Symetry flag  
+ */
+ HRESULT SetSymmetricalExtension(in boolean iSym);
+
+ /**
+ * Gets whether the symmetrical extension of the line is active.
+ *   @param oSym
+ *       Symetry flag  
+ */
+ HRESULT GetSymmetricalExtension(out /*IDLRETVAL*/ boolean oSym);
+
+};
+
+// Interface name : CATIAHybridShapeLineBisecting
+#pragma ID CATIAHybridShapeLineBisecting "DCE:89d765f5-b292-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeLineBisecting
+
+// VB object name : HybridShapeLineBisecting (Id used in Visual Basic)
+#pragma ID HybridShapeLineBisecting "DCE:89d768f3-9775-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeLineBisecting HybridShapeLineBisecting
+
+#endif

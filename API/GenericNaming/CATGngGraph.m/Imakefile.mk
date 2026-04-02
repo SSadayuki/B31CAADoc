@@ -1,0 +1,36 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+SystemUUID \
+ObjectSpecsModelerUUID \
+ObjectModelerBaseUUID  \
+#else
+LINK_WITH_FOR_IID =
+#endif
+
+#ifndef _MOBILE_SOURCE
+LINK_WITH_FOR_NONMOBILE = DataAdmin
+#else
+LINK_WITH_FOR_NONMOBILE =
+#endif
+
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+INCLUDED_MODULES = GN0GRAPH GN0ATTRIBUTES GN0STREAM
+
+LINK_WITH= \
+  $(LINK_WITH_FOR_IID) \
+  $(LINK_WITH_FOR_NONMOBILE) \
+  AD0XXBAS \
+  CATCGMKernel \
+  CATGngName \
+  CATMathStream \
+  CATOmxBase \
+  CATSysAllocator \
+  JS0GROUP \
+  YP00IMPL \
+#ifdef CATIAR201
+  CATCDMInterfaces \
+  CATGMModelInterfaces \
+#endif
+#ifdef CATIAV5R16
+  YI00IMPL \
+#endif

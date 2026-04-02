@@ -1,0 +1,63 @@
+#ifndef CATIAArrNomenclatureTree_IDL
+#define CATIAArrNomenclatureTree_IDL
+
+// ****************************************************************************
+// Copyright Dassault Systemes 1999
+// ****************************************************************************
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+interface CATIAArrNomenclatures;
+interface CATIAArrNomenclature;
+
+//-----------------------------------------------------------------
+/**
+ * Represents the root User Dictionary object.
+ * The user dictionary defines a hierarchy of user object type names 
+ * used for dynamically classifying objects. These type names are 
+ * defined by the user organization according to the needs of 
+ * the disciplines represented in the data. The user type of any 
+ * object may be changed as the data becomes more precise.
+ * 
+ * The hierarchy of type names starts with base names, defined by 
+ * the system, for each type of object. The user organization may 
+ * define or change the hierarchy of type names under each base name.
+ */
+interface CATIAArrNomenclatureTree : CATIABase
+{
+  //        ================
+  //        == PROPERTIES ==
+  //        ================
+  //
+  /**
+   * Returns the collection of BaseNomenclatures within 
+   * this UserDictionary.
+   */
+#pragma PROPERTY BaseNomenclatures
+  HRESULT get_BaseNomenclatures(out /*IDLRETVAL*/ CATIAArrNomenclatures oNomenclatures);          
+
+  //
+  //        =============
+  //        == METHODS ==
+  //        =============
+  //
+  /**
+   * Finds a UserNomenclature by Name from this UserDictionary.
+   */
+  HRESULT GetNomenclature(in CATBSTR iTypeName,out /*IDLRETVAL*/ CATIAArrNomenclature oNomenclature);            
+			
+};
+
+// Interface name : CATIAUserDictionary
+#pragma ID CATIAArrNomenclatureTree "DCE:18cefea0-153e-11d3-92db00104b1f6bd2"
+#pragma DUAL CATIAArrNomenclatureTree
+
+// VB object name : ArrNomenclatureTree 
+#pragma ID ArrNomenclatureTree "DCE:18cefea1-153e-11d3-92db00104b1f6bd2"
+#pragma ALIAS CATIAArrNomenclatureTree ArrNomenclatureTree 
+
+#endif

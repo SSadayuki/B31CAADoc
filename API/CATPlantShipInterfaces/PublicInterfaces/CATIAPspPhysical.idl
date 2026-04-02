@@ -1,0 +1,67 @@
+#ifndef CATIAPspPhysical_IDL
+#define CATIAPspPhysical_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+interface CATIAPspFunctional;
+interface CATIAPspSpatial ;
+
+#include "CATIABase.idl"
+
+/**
+ * Represents the object to access Plant Ship physical object information. 
+ * <b>Role</b>: To access access Plant Ship physical object information. 
+ */
+
+interface CATIAPspPhysical : CATIABase
+{
+
+ /**
+  * Returns the Function object.
+  * @return
+  *   Functional object associated with the physical object  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspPhysical
+  * Dim objArg1 As PspFunctional
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">GetFunctional</font>
+  * </pre>
+  *    
+  */
+ HRESULT GetFunctional ( out /*IDLRETVAL*/ CATIAPspFunctional oFunctional);
+
+
+ /**
+  * Returns the Spatial object.
+  * @return
+  *   Spatial object associated with the physical object
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspPhysical
+  * Dim objArg1 As PspSpatial
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">GetSpatial</font>
+  * </pre>
+  *    
+  */
+ HRESULT GetSpatial ( out /*IDLRETVAL*/ CATIAPspSpatial oSpatial);
+
+ 	         
+};
+
+// Interface name : CATIAPspPhysical
+#pragma ID CATIAPspPhysical "DCE:1d991bbe-ca4f-463c-a14805fea1fe4944"
+#pragma DUAL CATIAPspPhysical
+
+// VB object name : PspPhysical
+#pragma ID PspPhysical      "DCE:b1a9d1f7-9406-439d-93e2654a5191787f"
+#pragma ALIAS CATIAPspPhysical PspPhysical
+
+#endif

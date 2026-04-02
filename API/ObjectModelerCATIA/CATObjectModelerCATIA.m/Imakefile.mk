@@ -1,0 +1,25 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+#
+
+INCLUDED_MODULES = AC0CATPL AC0CATNAV AC0UAX CATV4mData 
+
+COMDYN_MODULE = V4SysCOMD
+
+DUMMY_LINK_WITH = CATCdbEntity AD0XXBAS AC0XXLNK \
+            JS0CORBA JS0SCBAK JS03TRA JS0SETT JS0STR JS0COMP JS0FILE\
+            JT0TRCBK JS0LIB0 \
+            NS0S3STR NS0S7TIM \
+            CO0LSTPV CO0LSTST VVSNetBase \						
+			      VVSUrlUtils DataAdmin \
+            CATOmx\
+            CATOmxBase
+            
+#
+OS = COMMON
+LINK_WITH = $(DUMMY_LINK_WITH) \
+         CATInfInterfaces CATV4iInteropReport \ # Nouveau report
+
+SYS_LIBPATH = 

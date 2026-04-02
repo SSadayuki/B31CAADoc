@@ -1,0 +1,174 @@
+#ifndef CATIAArrangementItemReservation_IDL
+#define CATIAArrangementItemReservation_IDL
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAArrangementItemReservation.idl
+// Automation interface for the ArrangementItemReservation element 
+//
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATArrangementItemResVisuMode.idl"
+
+/**  
+ * Use this object to access the ArrangementItemReservation properties and
+ * methods.
+ * <b> Role: </b>
+ * Use this object to control the visualization mode, dimensions of the
+ * ArrangementItemReservation.
+ */
+interface CATIAArrangementItemReservation : CATIABase 
+{
+
+  /**
+   * Returns or sets the XLength of the ArrangementItemReservation.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the XLength of the <tt>objItemRes1</tt> object.
+   * <pre>
+   * Dim dblXLength   As Double
+   * dblXLength  = objItemRes1.<font color="red">XLength</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY XLength
+   HRESULT get_XLength(out /*IDLRETVAL*/ double oXLength);
+   HRESULT put_XLength(in double iXLength);
+
+  /**
+   * Returns or sets the YLength of the ArrangementItemReservation.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the YLength of the <tt>objItemRes1</tt> object.
+   * <pre>
+   * Dim dblYLength   As Double
+   * dblYLength  = objItemRes1.<font color="red">YLength</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY YLength
+   HRESULT get_YLength(out /*IDLRETVAL*/ double oWidth);
+   HRESULT put_YLength(in double iWidth);
+
+  /**
+   * Returns or sets the height of the ArrangementItemReservation.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the Height of the <tt>objItemRes1</tt> object.
+   * <pre>
+   * Dim dblHeight   As Double
+   * dblHeight  = objItemRes1.<font color="red">Height</font>
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY Height
+   HRESULT get_Height(out /*IDLRETVAL*/ double oHeight);
+   HRESULT put_Height(in double iHeight);
+
+  /**
+   * Returns or set the Visualization Mode for the ArrangementItemReservation.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example Sets the Visualization Mode of the <tt>objItemRes1</tt> object to
+   * <tt> CatArrangementItemReservationVisuModeBox </tt>.
+   * <pre>
+   * objItemRes1.<font color="red">VisuMode</font> = CatArrangementItemReservationVisuModeBox
+   * </pre>
+   * </dl>
+   */
+#pragma PROPERTY VisuMode
+   HRESULT get_VisuMode(out /*IDLRETVAL*/ CATArrangementItemResVisuMode oVisuMode);
+   HRESULT put_VisuMode(in CATArrangementItemResVisuMode iVisuMode);
+
+  /**
+   * Returns the Dimensions of the ArrangementItemReservation.
+   * @param ioItemResDimensions
+   *   The output array initialized with the dimensions that make up the ArrangementItemReservation.
+   *   The first three components represent the Minimum XCoord, YCoord and Z Coord while the 
+   *   remaining three components represent the Maximum XCoord, YCoord and Z Coord respectively.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the coordinate dimensions of the <tt>objItemRes1</tt>
+   * object.
+   * <pre>
+   * Dim dblDimension(6)   As Double
+   * objItemRes1.<font color="red">GetDimension</font>(dblDimension)
+   * </pre>
+   * </dl>
+   */
+
+   HRESULT GetDimension(inout CATSafeArrayVariant ioItemResDimensions);
+
+  /**
+   * Sets the Dimensions of the ArrangementItemReservation.
+   * @param iItemResDimensions
+   *   The input array initialized with the dimensions that make up the ArrangementItemReservation.
+   *   The first three components represent the Minimum XCoord, YCoord and Z Coord while the 
+   *   remaining three components represent the Maximum XCoord, YCoord and Z Coord respectively.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example sets the coordinate dimensions of the <tt>objItemRes1</tt>
+   * object.
+   * <pre>
+   * Dim dblDimension(6)   As Double
+   * dblDimension(0)       = 300.0 '//XMin
+   * dblDimension(1)       = 500.0 '//YMin
+   * dblDimension(2)       = 300.0 '//ZMin
+   * dblDimension(3)       = 500.0 '//XMax
+   * dblDimension(4)       = 0.0   '//YMax
+   * dblDimension(5)       = 300.0 '//ZMax
+   * objItemRes1.<font color="red">SetDimension</font>(dblDimension)
+   * </pre>
+   * </dl>
+   */
+   HRESULT SetDimension(in CATSafeArrayVariant iItemResDimensions);
+
+  /**
+   * Returns the applicative data whose type is the given parameter.
+   * @param iApplicationType
+   *   The type of applicative data searched.
+   * @param oApplicativeObj
+   *   The matched applicative object. 
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>
+   * This example retrieves the desired applicative object from the <tt>objItemRes1</tt> object.
+   * <pre>
+   * Dim objProd   As Product
+   * objProd  = objItemRes1.<font color="red">GetTechnologicalObject("Product")</font>
+   * </pre>
+   * </dl>
+   */
+  HRESULT GetTechnologicalObject (  in CATBSTR iApplicationType, 
+                                    out /*IDLRETVAL*/ CATBaseDispatch oApplicativeObj);
+
+};
+
+// Interface name : CATIAArrangementItemReservation
+#pragma ID CATIAArrangementItemReservation "DCE:4008197b-b984-11d4-8def00d0b7acadba"
+#pragma DUAL CATIAArrangementItemReservation
+
+// VB object name : ArrangementItemReservation (Id used in Visual Basic)
+#pragma ID ArrangementItemReservation "DCE:4008197c-b984-11d4-8def00d0b7acadba"
+#pragma ALIAS CATIAArrangementItemReservation ArrangementItemReservation
+
+#endif

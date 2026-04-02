@@ -1,0 +1,292 @@
+#ifndef CATIASemanticGDT_IDL
+#define CATIASemanticGDT_IDL
+
+// COPYRIGHT Dassault Systemes 2002 - 2018
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAToleranceZone;
+interface CATIAToleranceUnitBasisValue;
+interface CATIAMaterialCondition;
+interface CATIATangentPlane;
+interface CATIATolerancePerUnitBasisRestrictiveValue;
+interface CATIAShiftedProfileTolerance;
+interface CATIAParticularTolElem;
+interface CATIAFreeState;
+interface CATIACompositeTolerance;
+interface CATIAProjectedToleranceZone;
+interface CATIAAssociatedRefFrame;
+interface CATIATPSParallelOnScreen;
+interface CATIAMedianFeature;
+interface CATIASemanticGDTNxDisplay;
+interface CATIASemanticGDTFrameExtension;
+
+/**
+* Interface managing Semantic GDT.
+*/
+
+interface CATIASemanticGDT : CATIABase
+{
+  /**
+  * <br /><strong>Role</strong>: Checks if a Tolerance Zone exists.
+  * @param oIsATolZone
+  * <ul>
+  * <li>TRUE: A Tolerance Zone exits</li>
+  * <li>FALSE: There is no Tolerance Zone</li>
+  * </ul>
+  */
+  HRESULT IsAToleranceZone (out /*IDLRETVAL*/ boolean oIsATolZone);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the ToleranceZone interface.
+  * @param oTolZone
+  *   The Tolerance Zone.
+  */
+  HRESULT ToleranceZone (out /*IDLRETVAL*/ CATIAToleranceZone oTolZone);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT is a Tolerance Unit Basis Value.
+  * @param oIsATolUnitBas
+  * <ul>
+  * <li>TRUE: A Tolerance Zone exits</li>
+  * <li>FALSE: There is no Tolerance Zone</li>
+  * </ul>
+  */
+  HRESULT IsAToleranceUnitBasisValue(out /*IDLRETVAL*/ boolean oIsATolUnitBas);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the ToleranceUnitBasisValue interface.
+  * @param oTolUnitBas
+  *   The Tolerance Unit Basis Value.
+  */
+  HRESULT ToleranceUnitBasisValue(out /*IDLRETVAL*/ CATIAToleranceUnitBasisValue oTolUnitBas);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT has a Material Condition.
+  * @param oHasMatCond
+  * <ul>
+  * <li>TRUE: A Material Condition exits</li>
+  * <li>FALSE: There is no Material Condition</li>
+  * </ul>
+  */
+  HRESULT HasAMaterialCondition (out /*IDLRETVAL*/ boolean oHasMatCond);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the MaterialCondition interface.
+  * @param oMatCond
+  *   The Material Condition.
+  */
+  HRESULT MaterialCondition(out /*IDLRETVAL*/ CATIAMaterialCondition oMatCond);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT has a Tangent Plane Modifier.
+  * @param oIsATangentPlane
+  * <ul>
+  * <li>TRUE: There has a Tangent Plane</li>
+  * <li>FALSE: There has not Tangent Plane </li>
+  * </ul>
+  */
+  HRESULT HasATangentPlane (out /*IDLRETVAL*/ boolean oIsATangentPlane);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the Tangent Plane interface.
+  * @param oTangentPlane
+  *   The Tangent Plane.
+  */
+  HRESULT TangentPlane (out /*IDLRETVAL*/ CATIATangentPlane oTangentPlane);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT has a Tolerance Per Unit Basis Restricted Value.
+  * @param oHasATolRes
+  * <ul>
+  * <li>TRUE: There is a Tolerance Per Unit Basis Restricted Value</li>
+  * <li>FALSE: There is no Tolerance Per Unit Basis Restricted Value</li>
+  * </ul>
+  */
+  HRESULT HasATolerancePerUnitBasisRestrictiveValue(out /*IDLRETVAL*/ boolean oHasATolRes);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the TolerancePerUnitBasisRestrictiveValue interface.
+  * @param oTolRes
+  *   The TolerancePerUnitBasisRestrictiveValue.
+  */
+  HRESULT TolerancePerUnitBasisRestrictiveValue(out /*IDLRETVAL*/ CATIATolerancePerUnitBasisRestrictiveValue oTolRes);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT is a Shifted Profile Tolerance.
+  * @param oIsAShiftProTol
+  * <ul>
+  * <li>TRUE: There is a Shifted Profile Tolerance</li>
+  * <li>FALSE: There is no Shifted Profile Tolerance</li>
+  * </ul>
+  */
+  HRESULT IsAShiftedProfileTolerance(out /*IDLRETVAL*/ boolean oIsAShiftProTol);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the ShiftedProfileTolerance interface.
+  * @param oShiftProTol
+  *   The ShiftedProfileTolerance.
+  */
+  HRESULT ShiftedProfileTolerance(out /*IDLRETVAL*/ CATIAShiftedProfileTolerance oShiftProTol);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT has a Particuler Element.
+  * @param oHasAParTolElem
+  * <ul>
+  * <li>TRUE: There is a Particuler Element </li>
+  * <li>FALSE: There is no Particuler Element </li>
+  * </ul>
+  */
+  HRESULT HasAParticularTolElem (out /*IDLRETVAL*/ boolean oHasAParTolElem);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the ParticularTolElem interface.
+  * @param oParTolElem
+  *   The ParticularTolElem.
+  */
+  HRESULT ParticularTolElem(out /*IDLRETVAL*/ CATIAParticularTolElem oParTolElem);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT has a Free State.
+  * @param oHasAFreeState
+  * <ul>
+  * <li>TRUE: There is a Free State</li>
+  * <li>FALSE: There is no Free State</li>
+  * </ul>
+  */
+  HRESULT HasAFreeState (out /*IDLRETVAL*/ boolean oHasAFreeState);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the FreeState interface.
+  * @param oFreeState
+  *   The FreeState.
+  */
+  HRESULT FreeState (out /*IDLRETVAL*/ CATIAFreeState oFreeState);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT is a Composite Tolerance.
+  * @param oIsACompTol
+  * <ul>
+  * <li>TRUE: There is a Composite Tolerance </li>
+  * <li>FALSE: There is no Composite Tolerance </li>
+  * </ul>
+  */
+  HRESULT IsACompositeTolerance (out /*IDLRETVAL*/ boolean oIsACompTol);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the CompositeTolerance interface.
+  * @param oCompTol
+  *   The CompositeTolerance.
+  */
+  HRESULT CompositeTolerance(out /*IDLRETVAL*/ CATIACompositeTolerance oCompTol);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT is a Projected Zone.
+  * @param oIsAProjTolZone
+  * <ul>
+  * <li>TRUE: There is a Projected Zone </li>
+  * <li>FALSE: There is no Projected Zone </li>
+  * </ul>
+  */
+  HRESULT IsAProjectedToleranceZone(out /*IDLRETVAL*/ boolean oIsAProjTolZone);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the ProjectedToleranceZone interface.
+  * @param oProjTolZone
+  *   The ProjectedToleranceZone.
+  */
+  HRESULT ProjectedToleranceZone(out /*IDLRETVAL*/ CATIAProjectedToleranceZone oProjTolZone);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the geometrical specification has a centered element.
+  * <br /><strong>Precondition</strong>: Median Feature characteristics is valid only for ISO standard
+  * @param oHasCenterElt
+  * <ul>
+  * <li>TRUE: The GDT has a center element </li>
+  * <li>FALSE: The GDT has not a center element or standard different from ISO.</li>
+  */
+  HRESULT HasACenteredElement (out /*IDLRETVAL*/ boolean oHasCenterElt);
+
+  /**
+  * <br /><strong>Role</strong>: Gets the GDT on the Median Feature interface.
+  * @param oMedianFeat
+  *   The Median Feature.
+  */
+  HRESULT MedianFeature (out /*IDLRETVAL*/ CATIAMedianFeature oMedianFeat);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the geometrical specification is applied onto multiple geometries.
+  * @param oIsAPattern
+  * <ul>
+  * <li>TRUE: The GDT is applied on Nx elements </li>
+  * <li>FALSE: The GDT is applied on a unique surface.</li>
+  */
+  HRESULT IsAppliedOnMultipleEntities (out /*IDLRETVAL*/ boolean oIsAPattern);
+
+  /**
+  * <br /><strong>Role</strong>: Gets the GDT on the handle to read Nx instance count, Collection or
+  * Separate type of the geometrical specification.
+  * @param oNxDisplay
+  *   Behavior to qualify Nx application context of this GDT.
+  */
+  HRESULT NxDisplay (out /*IDLRETVAL*/ CATIASemanticGDTNxDisplay oNxDisplay);
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the geometrical specification wears a frame extension specification.
+  * <br /><strong>Precondition</strong>: Intersection Plane, Orientation Plane, Collection Plane or Direction Feature
+  * are only meaningful in ISO Standard.
+  * @param oFrameExtentNumber
+  * <ul>
+  * <li>Greater than 0: The GDT has oFrameExtentNumber frame extensions </li>
+  * <li>Equal or less than 0: The GDT has not a frame extension or standard
+  * different from ISO (value is -1).</li>
+  */
+  HRESULT HasAFrameExtension (out /*IDLRETVAL*/ long oFrameExtentNumber );
+
+  /**
+  * <br /><strong>Role</strong>: Gets the Auxiliary Features at given Index applied on GDT.
+  * @param iFrameExtentIndex
+  *   Index of the Frame Extension to retrieve.
+  * @param oAuxiliaryFeatures
+  *   The list of Auxiliary Features specified on GDT (implies ISO Standard applied).
+  */
+  HRESULT FrameExtensions (in long iFrameExtentIndex, out /*IDLRETVAL*/ CATIASemanticGDTFrameExtension oAuxiliaryFeatures );
+
+  /**
+  * <br /><strong>Role</strong>: Checks if the GDT is an Associated Reference Frame.
+  * @param oIsAnAssRefFra
+  * <ul>
+  * <li>TRUE: There is an Associated Reference Frame</li>
+  * <li>FALSE: There is no Associated Reference Frame </li>
+  * </ul>
+  */
+  HRESULT IsAnAssociatedRefFrame (out /*IDLRETVAL*/ boolean oIsAnAssRefFra);
+
+  /**
+  * <br /><strong>Role</strong>: Returns the annotation on the AssociatedRefFrame interface.
+  * @param oAssRefFra
+  *   The AssociatedRefFrame.
+  */
+  HRESULT AssociatedRefFrame(out /*IDLRETVAL*/ CATIAAssociatedRefFrame oAssRefFra);
+
+  /**
+  * <br /><strong>Role</strong>: Gets the annotation on TPSParallelOnScreen interface.
+  */
+  HRESULT  TPSParallelOnScreen (out /*IDLRETVAL*/ CATIATPSParallelOnScreen  oTPSParallelOnScreen);
+};
+
+// Interface name : CATIASemanticGDT
+#pragma ID CATIASemanticGDT "DCE:2ca10c78-bdae-474a-9e636cc875bfaebb"
+#pragma DUAL CATIASemanticGDT
+
+// VB object name : NonSemanticGDT
+#pragma ID SemanticGDT "DCE:e45e83de-2c82-40a0-9d5a037f12ad3816"
+#pragma ALIAS CATIASemanticGDT SemanticGDT
+
+#endif

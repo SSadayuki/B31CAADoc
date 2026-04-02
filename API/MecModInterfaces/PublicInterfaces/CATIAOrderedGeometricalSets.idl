@@ -1,0 +1,102 @@
+#ifndef CATIAOrderedGeometricalSets_IDL
+#define CATIAOrderedGeometricalSets_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2004
+//=================================================================
+//                                   
+// CATIAOrderedGeometricalSets:                           
+// Exposed interface for the Ordered Geometrical Set collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Apr04	Creation						 JM Gautier
+//=================================================================
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+interface CATIAOrderedGeometricalSet;
+
+//-----------------------------------------------------------------
+    /**
+     * A collection of the OrderedGeometricalSet objects.
+     */
+ 
+interface CATIAOrderedGeometricalSets : CATIACollection
+{
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+
+    /**
+    * Creates a new ordered geometrical set and adds it to the OrderedGeometricalSets collection.
+    * Thisordered geometrical set becomes the current one
+    * @return The created ordered geometrical set
+    * <! @sample >
+    * <dt><b>Example:</b>
+    * <dd>
+    * The following example creates a ordered geometrical set named <tt>newOrderedGeometricalSet</tt>
+    * in the ordered geometrical set collection of the <tt>rootPart</tt> part
+    * in the <tt>partDoc</tt> part document. <tt>NewPartBody</tt> becomes
+    * the in work object of <tt>partDoc</tt>.
+    * <pre>
+    * Set NewPartBody = rootPart.OrderedGeometricalSets.<font color="red">Add</font>()
+    * </pre>
+    */
+
+    HRESULT     Add
+               ( out /*IDLRETVAL*/ CATIAOrderedGeometricalSet oOrderedGeometricalSet );
+
+    /**
+    * Returns a ordered geometrical set using its index or its name from the ordered geometrical set
+    * collection.
+    * @param iIndex
+    *   The index or the name of the ordered geometrical set to retrieve from
+    *   the collection of ordered geometrical sets.
+    *   As a numerics, this index is the rank of the ordered geometrical set
+    *   in the collection.
+    *   The index of the first ordered geometrical set in the collection is 1, and
+    *   the index of the last ordered geometrical set is Count.
+    *   As a string, it is the name you assigned to the ordered geometrical set using
+    *   the @href CATIABase#Name property.
+    * @return The retrieved ordered geometrical set
+    * <dt><b>Example:</b>
+    * <dd>
+    * This example retrieves in <tt>ThisOrderedGeometricalSet</tt> the fifth ordered geometrical set 
+    * in the collection and in <tt>ThatOrderedGeometricalSet</tt> the ordered geometrical set 
+    * named <tt>MyOrderedGeometricalSet</tt> in the ordered geometrical set collection of the <tt>partDoc</tt>
+    * part document.
+    * <pre>
+    * Set orderedGeometricalSetColl = partDoc.Part.OrderedGeometricalSets
+    * Set ThisOrderedGeometricalSet = orderedGeometricalSetColl.<font color="red">Item</font>(5)
+    * Set ThatOrderedGeometricalSet = orderedGeometricalSetColl.<font color="red">Item</font>("MyOrderedGeometricalSet")
+    * </pre>
+    */
+
+    HRESULT     Item
+            ( in     CATVariant           iIndex,
+              out /*IDLRETVAL*/ CATIAOrderedGeometricalSet oOrderedGeometricalSet);
+};
+
+// Interface name : CATIAOrderedGeometricalSets
+
+#pragma ID CATIAOrderedGeometricalSets "DCE:e2277638-e3c1-4430-800e14f232a52f69"
+#pragma DUAL CATIAOrderedGeometricalSets
+
+// VB object name : OrderedGeometricalSets (Id used in Visual Basic)
+
+#pragma ID OrderedGeometricalSets "DCE:6ce68643-f5ac-44ea-a34a669760ad4d7f"
+#pragma ALIAS CATIAOrderedGeometricalSets OrderedGeometricalSets
+
+#endif
+// CATIAOrderedGeometricalSets_IDL
+

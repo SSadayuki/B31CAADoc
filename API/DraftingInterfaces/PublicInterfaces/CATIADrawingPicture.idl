@@ -1,0 +1,264 @@
+// COPYRIGHT Dassault Systemes 2002
+#ifndef CATIADrawingPicture_IDL
+#define CATIADrawingPicture_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+#include "CatPicture.idl"
+
+interface CATIADrawingView;
+
+/**  
+ * Represents a drawing picture in a drawing view.
+ */
+interface CATIADrawingPicture : CATIABase 
+{
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the x coordinate of the drawing picture position.
+  * It is expressed with respect to the view coordinate system.
+  * This coordinate, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the x coordinate of the position of the
+  * <tt>MyPicture</tt> drawing picture to 5 inches.
+  * You need first to convert the 5 inches into millimeters.
+  * <pre>
+  * NewXCoordinate = 5*25.4
+  * MyPicture.<font color="red">x</font> =  NewXCoordinate
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY x	 
+  HRESULT get_x(out /*IDLRETVAL*/ double oXPosition);
+  HRESULT put_x(in double iXPosition);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the y coordinate of the drawing picture position.
+  * It is expressed with respect to the view coordinate system.
+  * This coordinate, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the y coordinate of the position of the
+  * <tt>MyPicture</tt> drawing picture to 5 inches.
+  * You need first to convert the 5 inches into millimeters.
+  * <pre>
+  * NewYCoordinate = 5*25.4
+  * MyPicture.<font color="red">y</font> =  NewYCoordinate
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY y	 
+  HRESULT get_y(out /*IDLRETVAL*/ double oYPosition);
+  HRESULT put_y(in double iYPosition);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the height of the drawing picture.
+  * The height, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the height of the <tt>MyPicture</tt> drawing picture
+  * <pre>
+  * Height = MyPicture.<font color="red">height</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY height
+  HRESULT get_height(out /*IDLRETVAL*/ double oHeight);
+  HRESULT put_height(in double iHeight);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the width of the drawing picture.
+  * The width, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the width of the <tt>MyPicture</tt> drawing picture
+  * <pre>
+  * Width = MyPicture.<font color="red">width</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY width
+  HRESULT get_width(out /*IDLRETVAL*/ double oWidth);
+  HRESULT put_width(in double iWidth);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the cropTop of the drawing picture.
+  * The cropTop is the size of the margin on the top of the picture.
+  * The cropTop, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the cropTop of the <tt>MyPicture</tt> drawing picture to 10 mm
+  * <pre>
+  * MyPicture.<font color="red">cropTop</font> = 10.
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY cropTop
+  HRESULT get_cropTop(out /*IDLRETVAL*/ double oCropTop);
+  HRESULT put_cropTop(in double iCropTop);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the cropBottom of the drawing picture.
+  * The cropBottom is the size of the margin on the bottom of the picture.
+  * The cropBottom, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the cropBottom of the <tt>MyPicture</tt> drawing picture to 10 mm
+  * <pre>
+  * MyPicture.<font color="red">cropBottom</font> = 10.
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY cropBottom
+  HRESULT get_cropBottom(out /*IDLRETVAL*/ double oCropBottom);
+  HRESULT put_cropBottom(in double iCropBottom);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the cropLeft of the drawing picture.
+  * The cropLeft is the size of the margin on the left of the picture.
+  * The cropLeft, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the cropLeft of the <tt>MyPicture</tt> drawing picture to 10 mm
+  * <pre>
+  * MyPicture.<font color="red">cropLeft</font> = 10.
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY cropLeft
+  HRESULT get_cropLeft(out /*IDLRETVAL*/ double oCropLeft);
+  HRESULT put_cropLeft(in double iCropLeft);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the cropRight of the drawing picture.
+  * The cropRight is the size of the margin on the right of the picture.
+  * The cropRight, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the cropRight of the <tt>MyPicture</tt> drawing picture to 10 mm
+  * <pre>
+  * MyPicture.<font color="red">cropRight</font> = 10.
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY cropRight
+  HRESULT get_cropRight(out /*IDLRETVAL*/ double oCropRight);
+  HRESULT put_cropRight(in double iCropRight);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the ratioLock of the drawing picture.
+  * The ratioLock is a boolean value
+  * If ratioLock is True it means that the size must not be changed by command
+  * in a interactive session.But it does not avoid size modifications thru
+  * VBscript exec (height and width still available for modification).
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the ratioLock of the <tt>MyPicture</tt> drawing picture to True
+  * <pre>
+  * MyPicture.<font color="red">ratioLock</font> = True
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ratioLock
+  HRESULT get_ratioLock(out /*IDLRETVAL*/ boolean oRatioLock);
+  HRESULT put_ratioLock(in boolean iRatioLock);
+
+
+//------------------------------------------------------------------------------
+ /**
+  * Gets the original height of the drawing picture.
+  * The height, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the original height of the <tt>MyPicture</tt> drawing picture
+  * <pre>
+  * Height = MyPicture.<font color="red">GetOriginalHeight</font>()
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetOriginalHeight(out /*IDLRETVAL*/double oHeight);	
+
+//------------------------------------------------------------------------------
+ /**
+  * Gets the original width of the drawing picture.
+  * The width, like any length, is measured in millimeters.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets the original width of the <tt>MyPicture</tt> drawing picture
+  * <pre>
+  * Width = MyPicture.<font color="red">GetOriginalWidth</font>()
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetOriginalWidth(out /*IDLRETVAL*/double oWidth);
+
+  /**
+    * Sets the picture format.
+	  * @param iPictureFormat
+    *    Compression format.
+    * @return
+    *    <br><b>Legal values</b>:
+    *    <dl>
+    *    <dt>S_OK
+    *    <dd>Method correctly executed. 
+    *    <dt>E_FAIL
+    *    <dd>Method execution failed.
+    *    <dd>Reasons of the failure are not given.
+    *    <dt>E_IMPL
+    *    <dd>No implementation available for this method.
+    *    </dl>
+    * @see CatPictureFormat
+    */
+#pragma PROPERTY format
+    HRESULT get_format( out /*IDLRETVAL*/ CatPictureFormat oPictureFormat );
+    HRESULT put_format( in CatPictureFormat iPictureFormat );
+};
+
+// Interface name : CATIADrawingPicture
+#pragma ID CATIADrawingPicture "DCE:5c8b4044-098f-11d6-a3c400d0b7ac5749"
+#pragma DUAL CATIADrawingPicture
+
+// VB object name : DrawingPicture (Id used in Visual Basic)
+#pragma ID DrawingPicture "DCE:5c8b4045-098f-11d6-a3c400d0b7ac5749"
+#pragma ALIAS CATIADrawingPicture DrawingPicture
+
+#endif

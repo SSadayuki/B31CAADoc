@@ -1,0 +1,217 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>ObjectSpecsLegacy CATOsmUpdateAdapter Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../ObjectSpecsLegacy.htm" href="../ObjectSpecsLegacy.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "ObjectSpecsLegacy";	}
+		function getCurrentObjectName() { 
+ 	return "CATOsmUpdateAdapter"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>ObjectSpecsLegacy Framework: CATOsmUpdateAdapter <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATOsmUpdateAdapter_32449','CATOsmUpdateAdapter','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you can derive this class.</b></p>
+<hr/>
+<p>
+ public class <b>CATOsmUpdateAdapter</b>
+</p>
+<p>
+<b><i>  Adapter class for the </i></b><br>
+<script type="text/javascript"> activateLinkAnchor('CATIOsmUpdate','','CATIOsmUpdate') </script> interface. <br><b>Role</b>:
+ This is the base class from which you should derive if you have to
+ <ul><li>overload the standard update mechanism, by redefining the Update 
+ and possibly the IsUpToDate and SetUpToDate methods</li>
+ <li>allow your object to be ignored by the update mechanism
+ by implementing the IsInactive method.</li></ul>
+ It is strongly advised not to implement this interface on features
+ that derive from startups defined by Dassault Systemes because the
+ update behaviour of these features is often specialised.
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#IsInactive()"><b>IsInactive</b></a>()
+</td><td id='tdright'>  Indicates whether the object must be ignored by the update mechanism.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsUpToDate()"><b>IsUpToDate</b></a>()
+</td><td id='tdright'>  Returns the status of the object concerning the update mechanism.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetUpToDate(CATBoolean)"><b>SetUpToDate</b></a>(CATBoolean)
+</td><td id='tdright'>  Modifies the object update status.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Update()"><b>Update</b></a>()
+</td><td id='tdright'>    Rebuilds the feature.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="IsInactive"></a><a id="IsInactive()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>IsInactive</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Indicates whether the object must be ignored by the update mechanism.
+ <br><b>Role</b>:
+ If you want to allow inactivation of your
+ object, you must store that information somehow and implement this
+ method to return S_OK when inactivated. Inactivated objects no
+ longer update themselves even if they are inputs of other objects.
+ Thus, inactive objects will never be called on 
+<script type="text/javascript"> activateLinkAnchor('CATIBuild','Build','CATIBuild.Build') </script> . <b>Note</b>: This method returns S_FALSE.
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  S_OK if the object is to be ignored by the update mechanism,         S_FALSE otherwise.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsUpToDate"></a><a id="IsUpToDate()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>IsUpToDate</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns the status of the object concerning the update mechanism.
+ <p>
+ If you overload this method and when you want to return S_FALSE, in 
+ addition to your own computation, you must also call 
+<script type="text/javascript"> activateLinkAnchor('','SetUpToDate','SetUpToDate') </script> (FALSE).<br>
+ If you don't want to force the S_FALSE result, you must call 
+ 
+<script type="text/javascript"> activateLinkAnchor('CATOsmUpdateAdapter','IsUpToDate','CATOsmUpdateAdapter.IsUpToDate') </script> in order for other dependencies to be checked properly. This method will check that all inputs are
+ up to date and that this feature has been updated after the update of
+ its inouts. <br>
+ For example:
+ <pre>
+   Example::IsUpToDate()
+   {
+     if (something())
+     {
+       SetUpToDate(FALSE);
+       return S_FALSE;
+     }
+     return CATOsmUpdateAdapter::IsUpToDate();
+   }
+ </pre>
+ Make sure your IsUpToDate implementation is consistent with 
+<script type="text/javascript"> activateLinkAnchor('','Update','Update') </script> . </p>
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     <ul><li>S_OK: the object has been updated.</li>
+    <li>S_FALSE : the object has to be updated.</li></ul>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetUpToDate"></a><a id="SetUpToDate(CATBoolean)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetUpToDate</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iflag</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Modifies the object update status.
+ <br><b>Role</b>:
+ This method changes the up to date status of the object. It is
+ called every time the object's status changes. The status may change
+ either because an input of the object changes, or because the object
+ is updated (or someone directly calls 
+<script type="text/javascript"> activateLinkAnchor('CATISpecObject','SetUpToDate','CATISpecObject.SetUpToDate') </script> ). <p>
+ You must always call 
+<script type="text/javascript"> activateLinkAnchor('CATOsmUpdateAdapter','SetUpToDate','CATOsmUpdateAdapter.SetUpToDate') </script> if you overload this method.
+ </p>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'>  iflag</span></dt>
+   <dd> The new status.<br>       <ul>
+       <li><tt>TRUE</tt> : the object has just been updated.</li>
+       <li><tt>FALSE</tt>: the object needs to be rebuild.</li>
+       </ul>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Update"></a><a id="Update()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Update</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+   Rebuilds the feature.
+ <br><b>Role</b>:
+ This method will be called internally by 
+<script type="text/javascript"> activateLinkAnchor('CATISpecObject','Update','CATISpecObject.Update') </script> if the startup implements <tt>CATIOsmUpdate</tt>. It allows the default 
+ method mechanism to be overriden.<br>
+ This method can throw exceptions.
+ <p>
+ You must always call 
+<script type="text/javascript"> activateLinkAnchor('CATOsmUpdateAdapter','Update','CATOsmUpdateAdapter.Update') </script> inside  your implementation if you overload this method, except when you know
+ the update will fail in which case you may return E_FAIL before calling
+ it. Doing this will allow the standard update mechanism to kick in: This
+ method detects all features that have been modified upstream from a 
+ feature, rebuilds all the feature impacting the updated feature, and finally rebuilds
+ the final feature thanks to the 
+<script type="text/javascript"> activateLinkAnchor('CATIBuild','','CATIBuild') </script> interface.<br> Make sure your Update implementation is consistent with 
+<script type="text/javascript"> activateLinkAnchor('','IsUpToDate','IsUpToDate') </script> . </p>
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  S_OK if update succeeded, E_FAIL otherwise (the update process is then aborted).
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATOsmUpdateAdapter.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATObjectSpecsModeler</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+#ifndef CATIAUserSurface_IDL
+#define CATIAUserSurface_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIAReference;
+interface CATIAProduct;
+
+interface CATIAUserSurface : CATIABase
+{
+  /**
+   * Add a surface in a User Surface Support
+   *   @param iSupport
+   *     The surface that you want to add in the User Surface.
+   */
+  HRESULT AddReference (in CATIAReference iSupport);
+
+  /**
+   * Add a surface in a User Surface Support
+   *   @param iProdInst
+   *     The product instance where there is the geometry.
+   *   @param iSupport
+   *     The surface that you want to add in the User Surface.
+   */
+  HRESULT AddReferenceInAProductCtx (in CATIAProduct   iProdInst,
+                                     in CATIAReference iSupport);
+
+  /**
+   * Add a User Surface Support in a User Surface Node
+   *   @param iUserSurf
+   *     The User Surface Support that you want to add in the User Surface.
+   */
+  HRESULT AddUserSurface (in CATIAUserSurface iUserSurf);
+
+};
+
+// Interface name : CATIAUserSurface
+#pragma ID CATIAUserSurface "DCE:cafd6866-a0ce-11d3-9c940008c725d79e"
+#pragma DUAL CATIAUserSurface
+
+// VB object name : UserSurface
+#pragma ID UserSurface "DCE:cafd6866-a0ce-11d3-9c940008c725d79f"
+#pragma ALIAS CATIAUserSurface UserSurface
+
+#endif

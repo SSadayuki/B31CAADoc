@@ -1,0 +1,90 @@
+#ifndef CATIASchBoundaryElem_IDL 
+#define CATIASchBoundaryElem_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfDoubles;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a boundary element of a schematic zone.
+  */
+
+interface CATIASchBoundaryElem : CATIABase
+{
+  /**
+  * Get the definition points (segments end points) of one side of the
+  * boundary. If the side is a curve, these points are the end points 
+  * of the chords approximating the curve.
+  * @param oLDbPts
+  *   A list of X-Y coordinates of the points. 2 doubles per point.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBoundaryElem
+  * Dim objArg1 As SchListOfDoubles
+  *  ...
+  * objThisIntf.<font color="red">GetBoundaryPoints</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT GetBoundaryPoints ( 
+    inout CATIASchListOfDoubles oLDbPts);
+    
+  /**
+  * Get the end points (segments end points) of one side of the
+  * boundary.
+  * @param oLDb4Pts
+  *   An array of 4 doubles.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBoundaryElem
+  * Dim objArg1 As SchListOfDoubles
+  *  ...
+  * objThisIntf.<font color="red">GetEndPoints</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT GetEndPoints ( 
+    inout CATIASchListOfDoubles oLDb4Pts );
+    
+  /**
+  * Get the list of owners of this zone.
+  * @param oLGRRZoneOwners
+  *   A list of GRRZone which has included this boundary element.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchBoundaryElem
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListGRRZoneOwners</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListGRRZoneOwners ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLGRRZoneOwners );
+    
+};
+    
+// Interface name : CATIASchBoundaryElem
+#pragma ID CATIASchBoundaryElem "DCE:dd5d5d5e-5fec-4796-be0cb963a88aaf11"
+#pragma DUAL CATIASchBoundaryElem
+    
+// VB object name : SchBoundaryElem
+#pragma ID SchBoundaryElem "DCE:0c9db5d5-c96a-4dc8-bd008edccdaa89a3"
+#pragma ALIAS CATIASchBoundaryElem SchBoundaryElem
+    
+#endif 
+    

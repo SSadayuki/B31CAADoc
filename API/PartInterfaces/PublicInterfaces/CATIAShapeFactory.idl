@@ -1,0 +1,2337 @@
+#ifndef CATIAShapeFactory_IDL
+#define CATIAShapeFactory_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                 
+// CATIAShapes:                        
+// Exposed interface for shape factory
+//                                 
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Dec97 Creation                   L Lalere
+//=================================================================
+#include "CATIAFactory.idl"
+#include "CATFilletDefs.idl"
+#include "CATDraftDefs.idl"
+#include "CATChamferDefs.idl"
+#include "CATSplitDefs.idl"
+
+interface CATIAShape;
+interface CATIASketch;
+//
+interface CATIAPad;
+interface CATIAPocket;
+//
+interface CATIAHole;
+//
+interface CATIAShaft;
+interface CATIAGroove;
+//
+interface CATIARib;
+interface CATIASlot;
+interface CATIAStiffener;
+//
+interface CATIAFaceFillet;
+//
+interface CATIAGeometricElement;
+// interface CATIAGeometry3D;
+interface CATIAScaling;
+//
+interface CATIAConstRadEdgeFillet;
+interface CATIAVarRadEdgeFillet;
+//
+interface CATIATritangentFillet;
+//
+interface CATIADraft;
+interface CATIAShell;
+interface CATIAThickness;
+interface CATIAChamfer;
+//
+interface CATIABody;
+interface CATIAAdd;
+interface CATIAAssemble;
+interface CATIACloseSurface;
+interface CATIARemove;
+interface CATIAIntersect;
+interface CATIATrim;
+//
+interface CATIASplit;
+interface CATIASewing;
+interface CATIAThickSurface;
+interface CATIAThread;
+//
+interface CATIAMirror;
+interface CATIARectPattern;
+interface CATIACircPattern;
+interface CATIAUserPattern;
+interface CATIABase;
+
+interface CATIARemoveFace;
+interface CATIASolidCombine;
+interface CATIAReplaceFace;
+
+interface CATIAReference;
+
+interface CATIAAutoFillet;
+interface CATIAAutoDraft;
+interface CATIADefeaturing;
+//-----------------------------------------------------------------
+/**
+* Represents the factory for shapes to create all kinds of shapes
+* that may be needed for part design.
+* <br>
+* The Shapefactory mission is to build from scratch shapes that 
+* will be used within the design process of parts. Those shapes have a 
+* strong mechanical built-in knowledge, such as chamfer or hole, and in 
+* most cases apply contextually to the part being designed. When created, 
+* they become part of the definition of whichever <i>body</i> or
+* <i>shape</i> that is current at that time. After they are created, they 
+* become in turn the current <i>body</i> or <i>shape</i>.
+* In most cases, shapes are created from a factory with a minimum number 
+* of parametersr. Other shapes parameters may be set further on by using 
+* methods offered by the shape itself.
+*/
+interface CATIAShapeFactory : CATIAFactory
+{
+
+  //      =============
+  //      == METHODS ==
+  //      =============
+  //
+  /**
+  * @section Sketch-based shapes 
+  */
+  //  ---------------------------
+  //  --  P R I S M  CREATION  --
+  //  ---------------------------
+  //
+  //  ADD A NEW PAD
+  //  -------------
+  //
+  /**
+  * Creates and returns a new pad within the current body.
+  * @param iSketch
+  *   The sketch defining the pad base
+  * @param iHeight
+  *   The pad height
+  * @return The created pad
+  */
+  HRESULT AddNewPad   ( in    CATIASketch iSketch
+    , in    double      iHeight
+    , out /*IDLRETVAL*/ CATIAPad oNewPad
+    );
+
+
+  //
+  //  ADD A NEW POCKET
+  //  ----------------
+  //
+  /**
+  * Creates and returns a new pocket within the current shape.
+  * @param iSketch
+  *   The sketch defining the pocket base
+  * @param iDepth
+  *   The pocket depth
+  * @return The created pocket
+  */
+  HRESULT AddNewPocket    ( in    CATIASketch iSketch
+    , in    double      iHeight
+    , out /*IDLRETVAL*/ CATIAPocket oNewPocket
+    );
+
+  //
+  //  ADD A NEW PAD FROM REFERENCE
+  //  ----------------------------
+  //
+  /**
+  * Creates and returns a new pad within the current body.
+  * @param iProfileElt
+  *   The reference on the element defining the pad base
+  * @param iHeight
+  *   The pad height
+  * @return The created pad
+  */
+  HRESULT AddNewPadFromRef   ( in    CATIAReference iProfileElt
+    , in    double      iHeight
+    , out /*IDLRETVAL*/ CATIAPad oNewPad
+    );
+
+
+  //
+  //  ADD A NEW POCKET FROM REFERENCE
+  //  -------------------------------
+  //
+  /**
+  * Creates and returns a new pocket within the current shape.
+  * @param iProfileElt
+  *   The reference on the element defining the pocket base
+  * @param iDepth
+  *   The pocket depth
+  * @return The created pocket
+  */
+  HRESULT AddNewPocketFromRef    ( in    CATIAReference iProfileElt
+    , in    double      iHeight
+    , out /*IDLRETVAL*/ CATIAPocket oNewPocket
+    );
+
+
+  //  -------------------------
+  //  --  H O L E  CREATION  --
+  //  -------------------------
+  //
+  //  ADD A NEW HOLE
+  //  --------------
+  //
+  /**
+  * Creates and returns a new hole within the current shape.
+  * <br>
+  * Actual hole shape is defined by editing hole properties after its
+  * creation.
+  * @param iSupport
+  *   The support defining the hole reference plane.
+  *   <br>
+  *   Anchor point is located at the barycenter of the support. 
+  *   The hole axis in 3D passes through that point and is normal to the plane.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iDepth
+  *   The hole depth.
+  * @return The created hole
+  */
+  HRESULT AddNewHole (
+    in CATIAReference iSupport,
+    in double         iDepth,
+    out /*IDLRETVAL*/ CATIAHole oNewHole
+    );
+
+  /**
+  * Creates and returns a new hole within the current shape.
+  * <br>
+  * Actual hole shape is defined by editing hole properties after its
+  * creation.
+  * @param iX
+  *   Origin point x absolute coordinate
+  * @param iY
+  *   Origin point y absolute coordinate
+  * @param iZ
+  *   Origin point z absolute coordinate
+  *   <br>
+  *   Sets the origin point which the hole is anchored to.<br> 
+  *   If mandatory, the entry point will be projected onto a tangent plane.
+  * @param iSupport
+  *   The support defining the hole reference plane.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iDepth
+  *   The hole depth.
+  * @return The created hole
+  */
+  HRESULT AddNewHoleFromPoint (
+    in double iX, in double iY, in double iZ,
+    in CATIAReference iSupport,
+    in double         iDepth,
+    out /*IDLRETVAL*/ CATIAHole oNewHole
+    );
+
+  /**
+  * Creates and returns a new hole within the current shape.
+  * <br>
+  * Actual hole shape is defined by editing hole properties after its
+  * creation.
+  * @param iOrigin
+  *   The origin point which the hole is anchored to.
+  * @param iSupport
+  *   The support defining the hole reference plane.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iDepth
+  *   The hole depth.
+  * @return The created hole
+  */
+  HRESULT AddNewHoleFromRefPoint (
+    in CATIAReference iOrigin,
+    in CATIAReference iSupport,
+    in double         iDepth,
+    out /*IDLRETVAL*/ CATIAHole oNewHole
+    );
+
+  /**
+  * Creates and returns a new hole within the current shape.
+  * <br>
+  * Actual hole shape is defined by editing hole properties after its
+  * creation.
+  * @param iX
+  *   Origin point x absolute coordinate
+  * @param iY
+  *   Origin point y absolute coordinate
+  * @param iZ
+  *   Origin point z absolute coordinate
+  *   <br>
+  *   Sets the origin point which the hole is anchored to.<br> 
+  *   If mandatory, the entry point will be projected onto a tangent plane.
+  * @param iEdge
+  *   The edge which the hole is constrained to.
+  *   <br>
+  *   If edge is circular, the origin of the hole will be concentric
+  *   to the edge (iX, iY, iZ will be overridden).
+  *   if not, the origin of the hole will have a length constraint with
+  *   the edge.<br>
+  *   The following @href CATIABoundary object is supported: 
+  *   @href CATIATriDimFeatEdge.
+  * @param iSupport
+  *   The support defining the hole reference plane.<br>
+  *   The following @href CATIABoundary object is supported: 
+  *   @href CATIAFace.
+  * @param iDepth
+  *   The hole depth.
+  * @return The created hole
+  */
+  HRESULT AddNewHoleWithConstraint (
+    in double iX, in double iY, in double iZ,
+    in CATIAReference iEdge,
+    in CATIAReference iSupport,
+    in double         iDepth,
+    out /*IDLRETVAL*/ CATIAHole oNewHole
+    );
+  /**
+  * Creates and returns a new hole within the current shape.
+  * <br>
+  * Actual hole shape is defined by editing hole properties after its
+  * creation.
+  * @param iX
+  *   Origin point x absolute coordinate
+  * @param iY
+  *   Origin point y absolute coordinate
+  * @param iZ
+  *   Origin point z absolute coordinate
+  *   <br>
+  *   Sets the origin point which the hole is anchored to.<br> 
+  *   If mandatory, the entry point will be projected onto a tangent plane.
+  * @param iEdge
+  *   The edge which the hole is constrained to.
+  *   <br>
+  *   The origin of the hole will have a length constraint with
+  *   each edge.<br>
+  *   The following @href CATIABoundary object is supported: 
+  *   @href CATIATriDimFeatEdge.
+  * @param iSupport
+  *   The support defining the hole reference plane.<br>
+  *   The following @href CATIABoundary object is supported: 
+  *   @href CATIAFace.
+  * @param iDepth
+  *   The hole depth.
+  * @return The created hole
+  */
+  HRESULT AddNewHoleWith2Constraints (
+    in double iX, in double iY, in double iZ,
+    in CATIAReference iEdge1,
+    in CATIAReference iEdge2,
+    in CATIAReference iSupport,
+    in double         iDepth,
+    out /*IDLRETVAL*/ CATIAHole oNewHole
+    );
+
+  /**
+  * Creates and returns a new hole within the current shape.
+  * <br>
+  * Actual hole shape is defined by editing hole properties after its
+  * creation.
+  * @param iSketch
+  *   The sketch defining the hole reference plane and anchor point.
+  *   <br>
+  *   This sketch must contain a single point that defines the hole axis: 
+  *   the hole axis in 3D passes through that point and is normal to the 
+  *   sketch plane.
+  * @param iDepth
+  *   The hole depth.
+  * @return The created hole
+  */
+  HRESULT AddNewHoleFromSketch (in CATIASketch iSketch,
+    in double      iDepth,
+    out /*IDLRETVAL*/ CATIAHole oNewHole);
+
+  //  ---------------------------
+  //  --  R E V O L  CREATION  --
+  //  ---------------------------
+  //
+  //  ADD A NEW SHAFT
+  //  ---------------
+  //
+  /**
+  * Creates and returns a new shaft within the current body.
+  * <br>
+  * The @href CATIARevolution, as a supertype for shafts,
+  * provides starting and ending angles for the shaft definition.
+  * <br>
+  * @param iSketch
+  *   The sketch defining the shaft section. 
+  *   <ul>
+  *      <li>If the shaft applies to the current body,
+  *          then the sketch must contain
+  *          a contour and an axis that will be used to rotate 
+  *          the contour in the space, thus defining the shaft.
+  *      <li>If the shaft is the first shape defined, there is not current 
+  *          body to apply to. In such a case, the sketch must contain a curve
+  *          whose end points are linked by an axis. By rotating the 
+  *          curve in the space around the axis, the shaft operation will define 
+  *          a revolution shape.
+  *          This also works if the sketch contains a closed contour and
+  *          an axis outside of this contour: in that case a revolution 
+  *          shape will be created, for example a torus.
+  *   </ul>
+  * @return The created shaft
+  */
+  HRESULT AddNewShaft ( in    CATIASketch iSketch
+    , out /*IDLRETVAL*/ CATIAShaft  oNewShaft
+    );
+
+  //
+  //  ADD A NEW GROOVE
+  //  ----------------
+  //
+  /**
+  * Creates and returns a new groove within the current body.
+  * <br>
+  * The @href CATIARevolution, as a supertype for grooves,
+  * provides starting and ending angles
+  * for the groove definition.
+  * @param iSketch
+  *   The sketch defining the groove section.
+  *   The sketch must contain
+  *   a contour and an axis that will be used to rotate 
+  *   the contour in the space, thus defining the groove. The contour has to 
+  *   penetrate in 3D space the current shape.
+  * @return The created groove
+  */
+  HRESULT AddNewGroove    ( in    CATIASketch iSketch
+    , out /*IDLRETVAL*/ CATIAGroove oNewGroove
+    );
+
+
+  //
+  //  ADD A NEW SHAFT FROM REFERENCE
+  //  ----------------------------
+  //
+  /**
+  * Creates and returns a new shaft within the current body.
+  * @param iProfileElt
+  *   The reference on the element defining the shaft base
+  * @return The created shaft
+  */
+  HRESULT AddNewShaftFromRef   ( in    CATIAReference iProfileElt
+    , out /*IDLRETVAL*/ CATIAShaft oNewShaft
+    );
+
+
+  //
+  //  ADD A NEW GROOVE FROM REFERENCE
+  //  -------------------------------
+  //
+  /**
+  * Creates and returns a new groove within the current body.
+  * @param iProfileElt
+  *   The reference on the element defining the groove base
+  * @return The created groove
+  */
+  HRESULT AddNewGrooveFromRef    ( in    CATIAReference iProfileElt
+    , out /*IDLRETVAL*/ CATIAGroove oNewGroove
+    );
+
+  //  ---------------------------
+  //  --  THREAD/TAP  CREATION  --
+  //  ---------------------------
+  //
+  //  ADD A NEW THREAD/TAP
+  //  --------------------
+  //
+  /**
+  * Creates and returns a new thread\tap within the current body.
+  * @param iLateralFace
+  *   The Face defining the support of thread\tap<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iLimitFacee
+  *   The Face defining the origin of the thread.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAPlanarFace.
+  * @return The created Thread
+  */
+  HRESULT AddNewThreadWithRef   ( in    CATIAReference iLateralFace
+    , in    CATIAReference iLimitFace
+    , out /*IDLRETVAL*/ CATIAThread    oNewThread  );
+
+
+  /**
+  * Creates and returns a new thread\tap within the current body.
+  * @return The created Thread
+  */
+  HRESULT AddNewThreadWithOutRef   (out /*IDLRETVAL*/ CATIAThread    oNewThread  );
+
+  //  ---------------------------
+  //  --  S W E E P  CREATION  --
+  //  ---------------------------
+  //
+  //  ADD A NEW RIB
+  //  -------------
+  //
+  /**
+  * Creates and returns a new rib within the current body.
+  * @param iSketch
+  *   The sketch defining the rib section
+  * @param iCenterCurve
+  *   The sketched curve that defines the rib center curve. It must cross the 
+  *   section definition sketch <tt>iSketch</tt> within the inner part of 
+  *   its contour.
+  * @return The created rib
+  */
+  HRESULT AddNewRib   ( in    CATIASketch iSketch
+    , in    CATIASketch iCenterCurve
+    , out /*IDLRETVAL*/ CATIARib    oNewRib
+    );
+
+  /**
+  * Creates and returns a new rib within the current body.
+  * @param iProfile
+  *   The Profile defining the rib section
+  * @param iCenterCurve
+  *   The curve that defines the rib center curve.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIATriDimFeatEdge.
+  * @return The created rib
+  */
+  HRESULT AddNewRibFromRef   ( in    CATIAReference iProfile
+    , in    CATIAReference iCenterCurve
+    , out /*IDLRETVAL*/ CATIARib    oNewRib
+    );
+
+  //
+  //  ADD A NEW SLOT
+  //  --------------
+  //
+
+  /**
+  * Creates and returns a new slot within the current shape.
+  * <br>
+  * @param iSketch
+  *   The sketch defining the slot section 
+  * @param iCenterCurve
+  *   The sketched curve that defines the slot center curve. It must cross the 
+  *   section definition sketch <tt>iSketch</tt> within the inner part of 
+  *   its contour.
+  * @return The created slot
+  */
+  HRESULT AddNewSlot  ( in    CATIASketch iSketch
+    , in    CATIASketch iCenterCurve
+    , out /*IDLRETVAL*/ CATIASlot   oNewSlot
+    );
+  /**
+  * Creates and returns a new slot within the current shape.
+  * <br>
+  * @param iProfile
+  *   The sketch defining the slot section 
+  * @param iCenterCurve
+  *   The curve that defines the slot center curve.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIATriDimFeatEdge.
+  * @return The created slot
+  */
+  HRESULT AddNewSlotFromRef  ( in    CATIAReference iProfile
+    , in    CATIAReference iCenterCurve
+    , out /*IDLRETVAL*/ CATIASlot   oNewSlot
+    );
+
+
+  //
+  //  ADD A NEW STIFFENER
+  //  -------------------
+  //
+
+  /**
+  * Creates and returns a new stiffener within the current body.
+  * <br>
+  * A stiffener is made up of a sketch used as the stiffener profile,
+  * that is extruded (offset) and that fills the nearest shape.
+  * @param iSketch
+  *   The sketch defining the stiffener border. It must contain a 
+  *   line or a curve that does not cross in 3D space the face(s) to stiffen.
+  * @return The created stiffener
+  */
+  HRESULT AddNewStiffener ( in    CATIASketch iSketch
+    , out /*IDLRETVAL*/ CATIAStiffener  oNewStifffener
+    );
+
+  //
+  //  ADD A NEW STIFFENER FROM REFERENCE
+  //  ----------------------------
+  //
+  /**
+  * Creates and returns a new stiffener within the current body.
+  * @param iProfileElt
+  *   The reference on the element defining the stiffener profile
+  * @return The created stiffener
+  */
+  HRESULT AddNewStiffenerFromRef   ( in    CATIAReference iProfileElt
+    , out /*IDLRETVAL*/ CATIAStiffener oNewStiffener
+    );
+
+
+  //      --------------------------------------------------------
+  //      -- C O N T E X T U A L  F E A T U R E S  C R E A T I O N
+  //      --------------------------------------------------------
+
+  //      ADD A NEW SCALING FEATURE
+  //      -------------------------
+  //
+  /**
+  * @section Contextual shapes
+  */
+
+  /**
+  * Creates and returns a new scaling within the current body.
+  * @param iScalingReference
+  *   The point, plane or  face of the current body  that will remain
+  *   fixed during the 
+  *   scaling process: even if the face itself shrinks or expands during the 
+  *   scaling, its supporting plane will remain unchanged after the scaling.<br>
+  *   The following @href CATIABoundary objects are supported: 
+  *   @href CATIAPlanarFace and @href CATIAVertex.
+  * @param iFactor
+  *   The scaling factor
+  * @return The created scaling
+  */
+  HRESULT AddNewScaling   ( in CATIAReference iScalingReference
+    , in double                 iFactor
+    , out /*IDLRETVAL*/ CATIAScaling    oNewScaling
+    );
+
+  //  -----------------------------
+  //  --  F I L L E T  CREATION  --
+  //  -----------------------------
+  //
+  //  ADD A NEW FACE FILLET
+  //  ---------------------
+  //
+  /**
+  * @deprecated V5R14 #AddNewFaceFillet
+  * use AddNewSolidFaceFillet or AddNewSurfaceFaceFillet 
+  * depending on the type of fillet you want to create
+  */
+  HRESULT AddNewFaceFillet( in    CATIAReference                  iF1
+    , in    CATIAReference                  iF2 
+    , in    double              iRadius
+    , out /*IDLRETVAL*/ CATIAFaceFillet oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW EDGE FILLET (CONSTANT RADIUS)
+  //  ---------------------------------------
+  //
+  /**
+  * @deprecated V5R14 #AddNewEdgeFilletWithConstantRadius
+  * use AddNewSolidEdgeFilletWithConstantRadius or AddNewSurfaceEdgeFilletWithConstantRadius 
+  * depending on the type of fillet you want to create
+  */
+  HRESULT AddNewEdgeFilletWithConstantRadius
+    ( in    CATIAReference                          iEdgeToFillet
+    , in    CatFilletEdgePropagation        iPropagMode
+    , in    double                  iRadius
+    , out /*IDLRETVAL*/ CATIAConstRadEdgeFillet     oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW EDGE FILLET (VARYING RADIUS)
+  //  --------------------------------------
+  //
+  /**
+  * @deprecated V5R14 #AddNewEdgeFilletWithVaryingRadius
+  * use AddNewSolidEdgeFilletWithVaryingRadius or AddNewSurfaceEdgeFilletWithVaryingRadius 
+  * depending on the type of fillet you want to create
+  */
+
+  HRESULT AddNewEdgeFilletWithVaryingRadius
+    ( in    CATIAReference                          iEdgeToFillet
+    , in    CatFilletEdgePropagation        iPropagMode
+    , in    CatFilletVariation          iVariationMode
+    , in    double                  iDefaultRadius
+    , out /*IDLRETVAL*/ CATIAVarRadEdgeFillet       oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW TRITANGENT FILLET
+  //  ---------------------------
+  //
+  /**
+  * @deprecated V5R14 #AddNewTritangentFillet
+  * use AddNewSolidTritangentFillet or AddNewSurfaceTritangentFillet 
+  * depending on the type of fillet you want to create
+  */
+
+  HRESULT AddNewTritangentFillet
+    ( in    CATIAReference                          iF1
+    , in    CATIAReference                          iF2 
+    , in    CATIAReference                          iRemovedFace
+    , out /*IDLRETVAL*/ CATIATritangentFillet   oNewFillet
+    );
+  //
+  //      ADD A NEW DRAFT
+  //      ---------------
+  //
+  /**
+  * Creates and returns a new draft within the current body.
+  * <br>
+  * The draft needs a reference face on the body. This face will remain 
+  * unchanged in the draft operation, while faces adjacent to it 
+  * and specified for drafting will be rotated by the draft angle.
+  * @param iFaceToDraft
+  *   The first face to draft in the body. This face should be adjacent to the 
+  *   <tt>iFaceToDraft</tt> face. If several faces are to be drafted, only the 
+  *   first one is specified here, the others being inferred by propagating the
+  *   draft operation onto faces adjacent to this first face. This is 
+  *   controlled by the <tt>iNeutralMode</tt> argument.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iNeutral
+  *   The reference face for the draft. The draft needs a reference face on 
+  *   the body, that will remain unchanged in the draft operation, while faces
+  *   adjacent to it and specified for drafting will be rotated according 
+  *   to the draft angle <tt>iAngle</tt>.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAPlanarFace.
+  * @param iNeutralMode
+  *   Controls if and how the drafting operation should be propagated beyond the 
+  *   first face to draft <tt>iFaceToDraft</tt> to other adjacent faces. 
+  * @param iParting 
+  *   The draft parting plane, face or surface.
+  *   It specifies the element within the body to draft 
+  *   that represents the bottom of the mold. This element can be located either
+  *   somewhere in the middle of the body or be one of its boundary faces. 
+  *   When located in the middle of the body, it crosses the faces to draft, 
+  *   and as a result, those faces are drafted with a positive angle on one 
+  *   side of the parting surface, and with a negative angle on the other side.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAPlanarFace.
+  * @param iDirX,iDirY,iDirZ
+  *   The X, Y, and Z components of the absolute vector representing the drafting
+  *   direction (i.e. the mold extraction direction).
+  * @param iMode
+  *   The draft connecting mode to its reference face <tt>iFaceToDraft</tt>
+  * @param iAngle
+  *   The draft angle
+  * @param iMultiselectionMode.
+  * The elements to be drafted can be selected explicitly
+  * or can implicitly selected as neighbors of the neutral face
+  * @return The created draft
+  */
+  HRESULT AddNewDraft
+    ( in CATIAReference                     iFaceToDraft
+    , in CATIAReference                     iNeutral
+    , in CatDraftNeutralPropagationMode     iNeutralMode
+    , in CATIAReference                     iParting
+    , in double                             iDirX
+    , in double                             iDirY
+    , in double                             iDirZ
+    , in CatDraftMode                       iMode
+    , in double                             iAngle
+    , in CatDraftMultiselectionMode       iMultiselectionMode
+    , out /*IDLRETVAL*/ CATIADraft         oNewDraft);
+
+
+
+  //
+  //      ADD A NEW VOLUMIC DRAFT
+  //      ---------------
+  //
+  /**
+  * Creates and returns a new volume draft within the current body.
+  * <br>
+  * The draft needs a reference face on the body. This face will remain 
+  * unchanged in the draft operation, while faces adjacent to it 
+  * and specified for drafting will be rotated by the draft angle.
+  * @param iFaceToDraft
+  *   The first face to draft in the body. This face should be adjacent to the 
+  *   <tt>iFaceToDraft</tt> face. If several faces are to be drafted, only the 
+  *   first one is specified here, the others being inferred by propagating the
+  *   draft operation onto faces adjacent to this first face. This is 
+  *   controlled by the <tt>iNeutralMode</tt> argument.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iNeutral
+  *   The reference face for the draft. The draft needs a reference face on 
+  *   the body, that will remain unchanged in the draft operation, while faces
+  *   adjacent to it and specified for drafting will be rotated according 
+  *   to the draft angle <tt>iAngle</tt>.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAPlanarFace.
+  * @param iNeutralMode
+  *   Controls if and how the drafting operation should be propagated beyond the 
+  *   first face to draft <tt>iFaceToDraft</tt> to other adjacent faces. 
+  * @param iParting 
+  *   The draft parting plane, face or surface.
+  *   It specifies the element within the body to draft 
+  *   that represents the bottom of the mold. This element can be located either
+  *   somewhere in the middle of the body or be one of its boundary faces. 
+  *   When located in the middle of the body, it crosses the faces to draft, 
+  *   and as a result, those faces are drafted with a positive angle on one 
+  *   side of the parting surface, and with a negative angle on the other side.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAPlanarFace.
+  * @param iDirX,iDirY,iDirZ
+  *   The X, Y, and Z components of the absolute vector representing the drafting
+  *   direction (i.e. the mold extraction direction).
+  * @param iMode
+  *   The draft connecting mode to its reference face <tt>iFaceToDraft</tt>
+  * @param iAngle
+  *   The draft angle
+  * @param iMultiselectionMode.
+  * The elements to be drafted can be selected explicitly
+  * or can implicitly selected as neighbors of the neutral face
+  * @param iType
+  *   The mode of draft creation (4=Volume)
+  * @param iVolumeSupport
+  *   The support volume for volumic draft
+  * @return The created draft
+  */
+  HRESULT AddNewVolumicDraft
+    ( in CATIAReference                     iFaceToDraft
+    , in CATIAReference                     iNeutral
+    , in CatDraftNeutralPropagationMode     iNeutralMode
+    , in CATIAReference                     iParting
+    , in double                             iDirX
+    , in double                             iDirY
+    , in double                             iDirZ
+    , in CatDraftMode                       iMode
+    , in double                             iAngle
+    , in CatDraftMultiselectionMode       iMultiselectionMode
+    , in long								iType
+    , in CATIAReference						iVolumeSupport
+    , out /*IDLRETVAL*/ CATIADraft         oNewDraft);
+
+  //
+  //      ADD A NEW SHELL
+  //      ---------------
+  //
+  /**
+  * Creates and returns a new shell within the current body.
+  * @param iFaceToRemove
+  *   The first face to be removed in the shell process.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iInternalThickness
+  *   The thickness of material to be added on the internal side of all the faces
+  *   during the shell process, except for those to be removed
+  * @param iExternaThickness
+  *   The thickness of material to be added on the external side of all the faces
+  *   during the shell process, except for those to be removed
+  * @return The created shell
+  */
+  HRESULT AddNewShell
+    ( in CATIAReference             iFaceToRemove
+    , in double                     iInternalThickness
+    , in double                     iExternalThickness
+    , out /*IDLRETVAL*/ CATIAShell  oNewShell
+    );
+  //
+  //      ADD A NEW THICKNESS
+  //      -------------------
+  //
+  /**
+  * Creates and returns a new thickness within the current body.
+  * @param iFaceToThicken
+  *   The first face to thicken in the thickening process.   
+  *   <br>
+  *   New faces to thicken can be added to the thickness afterwards by using 
+  *   methods offered by the created thickness<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iOffset
+  *   The thickness of material to be added on the external side of the face
+  *   <tt>iFaceToThicken</tt> during the thickening process
+  * @return The created thickness
+  */
+  HRESULT AddNewThickness
+    ( in CATIAReference                iFaceToThicken
+    , in double                        iOffset
+    , out /*IDLRETVAL*/ CATIAThickness oNewThickness
+    );
+
+  //
+  //      ADD A NEW CHAMFER
+  //      -----------------
+  //
+  /**
+  * Creates and returns a new chamfer within the current body.
+  * <br>
+  * @param iObjectToChamfer
+  *   The first edge or face to chamfer<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIATriDimFeatEdge.
+  * @param iPropagation
+  *   Controls if and how the chamfering operation should propagate beyond the 
+  *   first chamfer element <tt>iObjectToChamfer</tt>, when it is an edge
+  * @param iMode
+  *   Controls if the chamfer is defined by two lengthes, or by an angle and a 
+  *   length
+  *   <br>
+  *   The value of this argument changes the way the arguments <tt>iLength1</tt>
+  *   and <tt>iLength2OrAngle</tt> should be interpreted.
+  * @param iOrientation
+  *   Defines the relative meaning of arguments <tt>iLength1</tt> and 
+  *   <tt>iLength2OrAngle</tt> when defining a chamfer by two lengthes
+  * @param iLength1
+  *   The first value for chamfer dimensioning. It represents the chamfer 
+  *   first length if the chamfer is defined by two lengthes, or the chamfer
+  *   length if the chamfer is defined by a length and an angle. 
+  * @param iLength2OrAngle
+  *   The second value for chamfer dimensioning. It represents the chamfer 
+  *   second length if the chamfer is defined by two lengthes, or the chamfer
+  *   angle if the chamfer is defined by a length and an angle. 
+  * @return The created chamfer
+  */
+  HRESULT AddNewChamfer
+    ( in CATIAReference              iObjectToChamfer
+    , in CatChamferPropagation       iPropagation
+    , in CatChamferMode              iMode
+    , in CatChamferOrientation       iOrientation
+    , in double                      iLength1
+    , in double                      iLength2OrAngle
+    , out /*IDLRETVAL*/ CATIAChamfer oNewChamfer);
+
+  //      ----------------------------------------------------------------
+  //      -- T R A N S F O R M A T I O N  F E A T U R E S  C R E A T I O N
+  //      ----------------------------------------------------------------
+  ///**
+  // * @sectionTransformation-based shapes 
+  // */
+
+
+
+  //      ADD A NEW MIRROR FEATURE
+  //      ------------------------
+  //
+
+  /**
+  * Creates and returns a new mirror within the current body.
+  * <br>
+  * A mirror allows for transforming existing shapes by a symmetry
+  * with respect to an existing plane.
+  * @param iMirroringElement
+  *   The plane used by the mirror as the symmetry plane.<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAPlanarFace.
+  * @return The created mirror
+  */
+  HRESULT AddNewMirror
+    ( in CATIAReference       iMirroringElement
+    , out /*IDLRETVAL*/ CATIAMirror   oNewMirror
+    );
+
+  //      ADD A NEW RECTANGULAR PATTERN
+  //      -----------------------------
+  //
+  /**
+  * Creates and returns a new rectangular pattern within the current body.
+  * @param iShapeToCopy
+  *   The shape to be copied by the rectangular pattern
+  * @param iNbOfCopiesInDir1
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   the pattern first direction
+  * @param iNbOfCopiesInDir2
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   the pattern second direction
+  * @param iStepInDir1
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its first direction
+  * @param iStepInDir2
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its second direction
+  * @param iShapeToCopyPositionAlongDir1
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along <tt>iDir1</tt>
+  * @param iShapeToCopyPositionAlongDir2
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along <tt>iDir2</tt>
+  * @param iDir1
+  *   The line or linear edge that specifies the pattern first repartition
+  *   direction<br>
+  * The following @href CATIABoundary objects are supported: 
+  * @href CATIAPlanarFace, @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge.
+  * @param iDir2
+  *   The line or linear edge that specifies the pattern second repartition
+  *   direction<br>
+  * The following @href CATIABoundary objects are supported: 
+  * @href CATIAPlanarFace, @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge.
+  * @param iIsReversedDir1
+  *   The boolean flag indicating whether the natural orientation of
+  *   <tt>iDir1</tt> should be used to orient the pattern operation.
+  *   True indicates that <tt>iShapeToCopy</tt> is copied in the
+  *   direction of the natural orientation of <tt>iDir1</tt>.
+  * @param iIsReversedDir2
+  *   The boolean flag indicating whether the natural orientation of 
+  *   <tt>iDir2</tt> should be used to orient the pattern operation.
+  *   True indicates that <tt>iShapeToCopy</tt> is copied in the 
+  *   direction of the natural orientation of <tt>iDir2</tt>.
+  * @param iRotationAngle
+  *   The angle applied to both directions <tt>iDir1</tt> and <tt>iDir2</tt>
+  *   prior to applying the pattern. 
+  *   The original shape <tt>iShapeToCopy</tt> is used as the rotation center.
+  *   Nevertheless, the copied shapes themselves are not rotated.
+  *   This allows the definition of a rectangular pattern 
+  *   relatively to existing geometry, but not necessarily parallel to it.
+  * @return The created rectangular pattern
+  */ 
+
+  HRESULT AddNewRectPattern
+    ( in CATIABase                   	iShapeToCopy
+    , in long				iNbOfCopiesInDir1
+    , in long				iNbOfCopiesInDir2
+    , in double				iStepInDir1
+    , in double				iStepInDir2
+    , in long				iShapeToCopyPositionAlongDir1
+    , in long				iShapeToCopyPositionAlongDir2
+    , in CATIAReference			iDir1
+    , in CATIAReference			iDir2
+    , in boolean				iIsReversedDir1
+    , in boolean				iIsReversedDir2
+    , in double				iRotationAngle
+    , out /*IDLRETVAL*/ CATIARectPattern	oNewRectPattern
+    );
+  //                        ( in CATIABase                      iItemToDuplicate
+  //            , in long               iNbOfInstancesInDir1
+  //            , in long               iNbOfInstancesInDir2
+  //            , in double             iStepInDir1
+  //            , in double             iStepInDir2
+  //            , in long               iAnchorRowInDir1 
+  //            , in long               iAnchorRowInDir2 
+  //                        , in CATIAReference         iDir1
+  //                        , in CATIAReference         iDir2
+  //            , in boolean                iIsReversedDir1
+  //            , in boolean                iIsReversedDir2
+  //            , in double             iRotationAngle
+  //                        , out /*IDLRETVAL*/ CATIARectPattern    oNewRectPattern
+  //                        );
+
+  //      ADD A NEW GSD RECTANGULAR PATTERN
+  //      -----------------------------
+  //
+  /**
+  * @deprecated V5R15 #AddNewSurfacicRectPattern 
+  */ 
+  HRESULT AddNewGSDRectPattern
+    ( in CATIABase			iShapeToCopy
+    , in long				iNbOfCopiesInDir1
+    , in long				iNbOfCopiesInDir2
+    , in double				iStepInDir1
+    , in double				iStepInDir2
+    , in long				iShapeToCopyPositionAlongDir1
+    , in long				iShapeToCopyPositionAlongDir2
+    , in CATIAReference		iDir1
+    , in CATIAReference		iDir2
+    , in boolean			iIsReversedDir1
+    , in boolean			iIsReversedDir2
+    , in double				iRotationAngle
+    , in double				iType
+    , out /*IDLRETVAL*/ CATIARectPattern	oNewRectPattern
+    );
+
+  /**
+  * Creates and returns a new GSD rectangular pattern within the current body.
+  * @param iShapeToCopy
+  *   The shape to be copied by the rectangular pattern
+  * @param iNbOfCopiesInDir1
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   the pattern first direction
+  * @param iNbOfCopiesInDir2
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   the pattern second direction
+  * @param iStepInDir1
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its first direction
+  * @param iStepInDir2
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its second direction
+  * @param iShapeToCopyPositionAlongDir1
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along <tt>iDir1</tt>
+  * @param iShapeToCopyPositionAlongDir2
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along <tt>iDir2</tt>
+  * @param iDir1
+  *   The line or linear edge that specifies the pattern first repartition
+  *   direction<br>
+  * The following @href CATIABoundary objects are supported: 
+  * @href CATIAPlanarFace, @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge.
+  * @param iDir2
+  *   The line or linear edge that specifies the pattern second repartition
+  *   direction<br>
+  * The following @href CATIABoundary objects are supported: 
+  * @href CATIAPlanarFace, @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge.
+  * @param iIsReversedDir1
+  *   The boolean flag indicating whether the natural orientation of
+  *   <tt>iDir1</tt> should be used to orient the pattern operation.
+  *   True indicates that <tt>iShapeToCopy</tt> is copied in the
+  *   direction of the natural orientation of <tt>iDir1</tt>.
+  * @param iIsReversedDir2
+  *   The boolean flag indicating whether the natural orientation of 
+  *   <tt>iDir2</tt> should be used to orient the pattern operation.
+  *   True indicates that <tt>iShapeToCopy</tt> is copied in the 
+  *   direction of the natural orientation of <tt>iDir2</tt>.
+  * @param iRotationAngle
+  *   The angle applied to both directions <tt>iDir1</tt> and <tt>iDir2</tt>
+  *   prior to applying the pattern. 
+  *   The original shape <tt>iShapeToCopy</tt> is used as the rotation center.
+  *   Nevertheless, the copied shapes themselves are not rotated.
+  *   This allows the definition of a rectangular pattern 
+  *   relatively to existing geometry, but not necessarily parallel to it.
+  * @return The created rectangular pattern
+  */ 
+
+  HRESULT AddNewSurfacicRectPattern
+    ( in CATIABase          iShapeToCopy
+    , in long				iNbOfCopiesInDir1
+    , in long				iNbOfCopiesInDir2
+    , in double				iStepInDir1
+    , in double				iStepInDir2
+    , in long				iShapeToCopyPositionAlongDir1
+    , in long				iShapeToCopyPositionAlongDir2
+    , in CATIAReference		iDir1
+    , in CATIAReference		iDir2
+    , in boolean			iIsReversedDir1
+    , in boolean			iIsReversedDir2
+    , in double				iRotationAngle
+    , out /*IDLRETVAL*/ CATIARectPattern	oNewRectPattern
+    );
+  //                        ( in CATIABase                      iItemToDuplicate
+  //            , in long               iNbOfInstancesInDir1
+  //            , in long               iNbOfInstancesInDir2
+  //            , in double             iStepInDir1
+  //            , in double             iStepInDir2
+  //            , in long               iAnchorRowInDir1 
+  //            , in long               iAnchorRowInDir2 
+  //                        , in CATIAReference         iDir1
+  //                        , in CATIAReference         iDir2
+  //            , in boolean                iIsReversedDir1
+  //            , in boolean                iIsReversedDir2
+  //            , in double             iRotationAngle
+  //			  , in double				iType
+  //                        , out /*IDLRETVAL*/ CATIARectPattern    oNewRectPattern
+  //                        );
+
+  //      ADD A NEW CIRCULAR PATTERN
+  //      --------------------------
+  //
+  /**
+  * Creates and returns a new circular pattern within the current body.
+  * @param iShapeToCopy
+  *   The shape to be copied by the circular pattern
+  * @param iNbOfInstancesInRadialDir
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   pattern radial direction
+  * @param iNbOfInstancesInAngularDir
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   pattern angular direction
+  * @param iStepInRadialDir
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its radial direction
+  * @param iStepInAngularDir
+  *   The angle that will separate two consecutive copies in the pattern
+  *   along its angular direction
+  * @param iShapeToCopyPositionAlongRadialDir
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along the radial direction
+  * @param iShapeToCopyPositionAlongAngularDir
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along the angular direction
+  * @param iRotationCenter
+  *   The point or vertex that specifies the pattern center of rotation
+  * @param iRotationAxis
+  *   The line or linear edge that specifies the axis around which instances
+  *   will be rotated relative to each other<br>
+  * The following @href CATIABoundary objects are supported: 
+  * @href CATIAPlanarFace , @href CATIACylindricalFace , @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+  * @param iIsReversedRotationAxis
+  *   The boolean flag indicating wether the natural orientation of 
+  *   <tt>iRotationAxis</tt> should be used to orient the pattern operation.
+  *   A value 
+  *   of true indicates that <tt>iItemToDuplicate</tt> are copied in the 
+  *   direction of the natural orientation of <tt>iRotationAxis</tt>.
+  * @param iRotationAngle
+  *   The angle applied to the direction <tt>iRotationAxis</tt> 
+  *   prior to applying the pattern.
+  *   The original shape <tt>iShapeToCopy</tt> is used as the rotation center.
+  *   Nevertheless, the copied shapes themselves are not rotated.
+  *   This allows the definition of a circular pattern 
+  *   relatively to existing geometry, but not necessarily parallel to it.
+  * @param iIsRadiusAligned
+  *   The boolean flag that specifies whether the instances
+  *   of <tt>iItemToDuplicate</tt>
+  *   copied by the pattern should be kept parallel to each other (True)
+  *   or if they should 
+  *   be aligned with the radial direction they lie upon (False).
+  * @return The created circular pattern
+  */ 
+  HRESULT AddNewCircPattern
+    ( in CATIABase                          iShapeToCopy
+    , in long                               iNbOfCopiesInRadialDir
+    , in long                               iNbOfCopiesInAngularDir
+    , in double                             iStepInRadialDir
+    , in double                             iStepInAngularDir
+    , in long                               iShapeToCopyPositionAlongRadialDir
+    , in long                               iShapeToCopyPositionAlongAngularDir
+    , in CATIAReference			iRotationCenter
+    , in CATIAReference			iRotationAxis
+    , in boolean                            iIsReversedRotationAxis
+    , in double                             iRotationAngle
+    , in boolean				iIsRadiusAligned
+    , out /*IDLRETVAL*/ CATIACircPattern    oNewCircPattern);
+  //                        ( in CATIABase                          iItemToDuplicate
+  //                        , in long                               iNbOfInstancesInRadialDir
+  //                        , in long                               iNbOfInstancesInAngularDir
+  //                        , in double                             iStepInRadialDir
+  //                        , in double                             iStepInAngularDir
+  //                        , in long                               iAnchorRowInRadialDir 
+  //                        , in long                               iAnchorRowInAngularDir
+  //            , in CATIAReference         iRotationCenter
+  //            , in CATIAReference         iRotationAxis
+  //                        , in boolean                            iIsReversedRotationAxis
+  //                        , in double                             iRotationAngle
+  //            , in boolean                iIsRadiusAligned
+  //                        , out /*IDLRETVAL*/ CATIACircPattern    oNewCircPattern);
+
+
+  //      ADD A NEW GSD CIRCULAR PATTERN
+  //      --------------------------
+  //
+  /**
+  * @deprecated V5R15 #AddNewSurfacicCircPattern
+  */ 
+  HRESULT AddNewGSDCircPattern
+    ( in CATIABase                          iShapeToCopy
+    , in long                               iNbOfCopiesInRadialDir
+    , in long                               iNbOfCopiesInAngularDir
+    , in double                             iStepInRadialDir
+    , in double                             iStepInAngularDir
+    , in long                               iShapeToCopyPositionAlongRadialDir
+    , in long                               iShapeToCopyPositionAlongAngularDir
+    , in CATIAReference			iRotationCenter
+    , in CATIAReference			iRotationAxis
+    , in boolean                            iIsReversedRotationAxis
+    , in double                             iRotationAngle
+    , in boolean				iIsRadiusAligned
+    , in boolean							 iCompleteCrown
+    , in double                             iType
+    , out /*IDLRETVAL*/ CATIACircPattern    oNewCircPattern);
+  /**
+  * Creates and returns a new gsd circular pattern within the current body.
+  * @param iShapeToCopy
+  *   The shape to be copied by the circular pattern
+  * @param iNbOfInstancesInRadialDir
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   pattern radial direction
+  * @param iNbOfInstancesInAngularDir
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   pattern angular direction
+  * @param iStepInRadialDir
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its radial direction
+  * @param iStepInAngularDir
+  *   The angle that will separate two consecutive copies in the pattern
+  *   along its angular direction
+  * @param iShapeToCopyPositionAlongRadialDir
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along the radial direction
+  * @param iShapeToCopyPositionAlongAngularDir
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along the angular direction
+  * @param iRotationCenter
+  *   The point or vertex that specifies the pattern center of rotation
+  * @param iRotationAxis
+  *   The line or linear edge that specifies the axis around which instances
+  *   will be rotated relative to each other<br>
+  * The following @href CATIABoundary objects are supported: 
+  * @href CATIAPlanarFace , @href CATIACylindricalFace , @href CATIARectilinearTriDimFeatEdge and @href CATIARectilinearBiDimFeatEdge.
+  * @param iIsReversedRotationAxis
+  *   The boolean flag indicating wether the natural orientation of 
+  *   <tt>iRotationAxis</tt> should be used to orient the pattern operation.
+  *   A value 
+  *   of true indicates that <tt>iItemToDuplicate</tt> are copied in the 
+  *   direction of the natural orientation of <tt>iRotationAxis</tt>.
+  * @param iRotationAngle
+  *   The angle applied to the direction <tt>iRotationAxis</tt> 
+  *   prior to applying the pattern.
+  *   The original shape <tt>iShapeToCopy</tt> is used as the rotation center.
+  *   Nevertheless, the copied shapes themselves are not rotated.
+  *   This allows the definition of a circular pattern 
+  *   relatively to existing geometry, but not necessarily parallel to it.
+  * @param iIsRadiusAligned
+  *   The boolean flag that specifies whether the instances
+  *   of <tt>iItemToDuplicate</tt>
+  *   copied by the pattern should be kept parallel to each other (True)
+  *   or if they should 
+  *   be aligned with the radial direction they lie upon (False).
+  * @param iCompleteCrown
+  *   The boolean flag specifies the mode of angular distribution.
+  *   True indicates that the angular step will be equal to 360 degrees <tt>iNba</tt>.
+  * @return The created circular pattern
+  */ 
+  HRESULT AddNewSurfacicCircPattern
+    ( in CATIABase              iShapeToCopy
+    , in long                   iNbOfCopiesInRadialDir
+    , in long                   iNbOfCopiesInAngularDir
+    , in double                 iStepInRadialDir
+    , in double                 iStepInAngularDir
+    , in long                   iShapeToCopyPositionAlongRadialDir
+    , in long                   iShapeToCopyPositionAlongAngularDir
+    , in CATIAReference			iRotationCenter
+    , in CATIAReference			iRotationAxis
+    , in boolean                iIsReversedRotationAxis
+    , in double                 iRotationAngle
+    , in boolean				iIsRadiusAligned
+    , in boolean				iCompleteCrown
+    , out /*IDLRETVAL*/ CATIACircPattern    oNewCircPattern);
+  //                        ( in CATIABase                          iItemToDuplicate
+  //                        , in long                               iNbOfInstancesInRadialDir
+  //                        , in long                               iNbOfInstancesInAngularDir
+  //                        , in double                             iStepInRadialDir
+  //                        , in double                             iStepInAngularDir
+  //                        , in long                               iAnchorRowInRadialDir 
+  //                        , in long                               iAnchorRowInAngularDir
+  //            , in CATIAReference         iRotationCenter
+  //            , in CATIAReference         iRotationAxis
+  //                        , in boolean                            iIsReversedRotationAxis
+  //                        , in double                             iRotationAngle
+  //            , in boolean                iIsRadiusAligned
+  //			  , in boolean							 iCompleteCrown
+  //			  , in double                             iType
+  //                        , out /*IDLRETVAL*/ CATIACircPattern    oNewCircPattern);
+
+
+  //      ADD A NEW USER PATTERN
+  //      -----------------------------
+  //
+  /**
+  * Creates and returns a new user pattern within the current body.
+  * @param iShapeToCopy
+  *   The shape to be copied by the user pattern
+  * @param iNbOfCopies
+  *   The number of times <tt>iShapeToCopy</tt> will be copied
+  * @return The created user pattern
+  */ 
+
+  HRESULT AddNewUserPattern 
+    ( in CATIABase                   		iShapeToCopy
+    , in long								iNbOfCopies
+    , out /*IDLRETVAL*/ CATIAUserPattern	oNewUserPattern
+    );
+
+  //      ADD A NEW GSD USER PATTERN
+  //      -----------------------------
+  //
+  /**
+  * Creates and returns a new GSD user pattern within the current body.
+  * @param iShapeToCopy
+  *   The shape to be copied by the user pattern
+  * @param iNbOfCopies
+  *   The number of times <tt>iShapeToCopy</tt> will be copied
+  * @return The created user pattern
+  */ 
+
+  HRESULT AddNewSurfacicUserPattern 
+    ( in CATIABase                   		iShapeToCopy
+    , in long								iNbOfCopies
+    , out /*IDLRETVAL*/ CATIAUserPattern	oNewUserPattern
+    );
+
+
+  //      V5R8 Only: ADD A NEW RECTANGULAR PATTERN OF LIST
+  //      -----------------------------------------------
+  //
+  /**
+  * V5R8 Only: Creates and returns a new rectangular pattern within the current body using a list of shapes.
+  * @param iShapeToCopy
+  *   The shape to be copied by the rectangular pattern
+  *   Others shapes will be add by put_ItemToCopy with CATIAPattern interface
+  * @param iNbOfCopiesInDir1
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   the pattern first direction
+  * @param iNbOfCopiesInDir2
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   the pattern second direction
+  * @param iStepInDir1
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its first direction
+  * @param iStepInDir2
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its second direction
+  * @param iShapeToCopyPositionAlongDir1
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along <tt>iDir1</tt>
+  * @param iShapeToCopyPositionAlongDir2
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along <tt>iDir2</tt>
+  * @param iDir1
+  *   The line or linear edge that specifies the pattern first repartition
+  *   direction
+  * @param iDir2
+  *   The line or linear edge that specifies the pattern second repartition
+  *   direction
+  * @param iIsReversedDir1
+  *   The boolean flag indicating whether the natural orientation of
+  *   <tt>iDir1</tt> should be used to orient the pattern operation.
+  *   True indicates that <tt>iShapeToCopy</tt> is copied in the
+  *   direction of the natural orientation of <tt>iDir1</tt>.
+  * @param iIsReversedDir2
+  *   The boolean flag indicating whether the natural orientation of 
+  *   <tt>iDir2</tt> should be used to orient the pattern operation.
+  *   True indicates that <tt>iShapeToCopy</tt> is copied in the 
+  *   direction of the natural orientation of <tt>iDir2</tt>.
+  * @param iRotationAngle
+  *   The angle applied to both directions <tt>iDir1</tt> and <tt>iDir2</tt>
+  *   prior to applying the pattern. 
+  *   The original shape <tt>iShapeToCopy</tt> is used as the rotation center.
+  *   Nevertheless, the copied shapes themselves are not rotated.
+  *   This allows the definition of a rectangular pattern 
+  *   relatively to existing geometry, but not necessarily parallel to it.
+  * @return The created rectangular pattern
+  */ 
+
+  HRESULT AddNewRectPatternofList
+    ( in CATIABase                   	iShapeToCopy
+    , in long				iNbOfCopiesInDir1
+    , in long				iNbOfCopiesInDir2
+    , in double				iStepInDir1
+    , in double				iStepInDir2
+    , in long				iShapeToCopyPositionAlongDir1
+    , in long				iShapeToCopyPositionAlongDir2
+    , in CATIAReference			iDir1
+    , in CATIAReference			iDir2
+    , in boolean				iIsReversedDir1
+    , in boolean				iIsReversedDir2
+    , in double				iRotationAngle
+    , out /*IDLRETVAL*/ CATIARectPattern	oNewRectPattern
+    );
+
+  //      V5R8 Only: ADD A NEW CIRCULAR PATTERN  OF LIST
+  //      -----------------------------------------------
+  //
+  /**
+  * V5R8 Only: Creates and returns a new circular pattern within the current body using a list of shapes.
+  * @param iShapeToCopy
+  *   The shape to be copied by the circular pattern.
+  *   Others shapes will be add by put_ItemToCopy with CATIAPattern interface
+  * @param iNbOfInstancesInRadialDir
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   pattern radial direction
+  * @param iNbOfInstancesInAngularDir
+  *   The number of times <tt>iShapeToCopy</tt> will be copied along
+  *   pattern angular direction
+  * @param iStepInRadialDir
+  *   The distance that will separate two consecutive copies in the pattern
+  *   along its radial direction
+  * @param iStepInAngularDir
+  *   The angle that will separate two consecutive copies in the pattern
+  *   along its angular direction
+  * @param iShapeToCopyPositionAlongRadialDir
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along the radial direction
+  * @param iShapeToCopyPositionAlongAngularDir
+  *   Specifies the position of the original shape <tt>iShapeToCopy</tt>
+  *   among its copies along the angular direction
+  * @param iRotationCenter
+  *   The point or vertex that specifies the pattern center of rotation
+  * @param iRotationAxis
+  *   The line or linear edge that specifies the axis around which instances
+  *   will be rotated relative to each other
+  * @param iIsReversedRotationAxis
+  *   The boolean flag indicating wether the natural orientation of 
+  *   <tt>iRotationAxis</tt> should be used to orient the pattern operation.
+  *   A value 
+  *   of true indicates that <tt>iItemToDuplicate</tt> are copied in the 
+  *   direction of the natural orientation of <tt>iRotationAxis</tt>.
+  * @param iRotationAngle
+  *   The angle applied to the direction <tt>iRotationAxis</tt> 
+  *   prior to applying the pattern.
+  *   The original shape <tt>iShapeToCopy</tt> is used as the rotation center.
+  *   Nevertheless, the copied shapes themselves are not rotated.
+  *   This allows the definition of a circular pattern 
+  *   relatively to existing geometry, but not necessarily parallel to it.
+  * @param iIsRadiusAligned
+  *   The boolean flag that specifies whether the instances
+  *   of <tt>iItemToDuplicate</tt>
+  *   copied by the pattern should be kept parallel to each other (True)
+  *   or if they should 
+  *   be aligned with the radial direction they lie upon (False).
+  * @return The created circular pattern
+  */ 
+  HRESULT AddNewCircPatternofList
+    ( in CATIABase                          iShapeToCopy
+    , in long                               iNbOfCopiesInRadialDir
+    , in long                               iNbOfCopiesInAngularDir
+    , in double                             iStepInRadialDir
+    , in double                             iStepInAngularDir
+    , in long                               iShapeToCopyPositionAlongRadialDir
+    , in long                               iShapeToCopyPositionAlongAngularDir
+    , in CATIAReference			iRotationCenter
+    , in CATIAReference			iRotationAxis
+    , in boolean                            iIsReversedRotationAxis
+    , in double                             iRotationAngle
+    , in boolean				iIsRadiusAligned
+    , out /*IDLRETVAL*/ CATIACircPattern    oNewCircPattern);
+
+
+  //      V5R8 Only: ADD A NEW USER PATTERN OF LIST
+  //      ------------------------------------------
+  //
+  /**
+  * V5R8 Only: Creates and returns a new user pattern within the current body using a list of shapes.
+  * @param iShapeToCopy
+  *   The shape to be copied by the user pattern
+  *   Others shapes will be add by put_ItemToCopy with CATIAPattern interface
+  * @param iNbOfCopies
+  *   The number of times <tt>iShapeToCopy</tt> will be copied
+  * @return The created user pattern
+  */ 
+
+  HRESULT AddNewUserPatternofList 
+    ( in CATIABase                   	iShapeToCopy
+    , in long				iNbOfCopies
+    , out /*IDLRETVAL*/ CATIAUserPattern	oNewUserPattern
+    );
+
+
+  //      --------------------------------------------------
+  //      -- B O O L E A N  F E A T U R E S  C R E A T I O N
+  //      --------------------------------------------------
+
+  //      ADD A NEW ASSEMBLE FEATURE
+  //      --------------------------
+  //
+  /**
+  * @section Boolean operation based shapes
+  */
+
+  /**
+  * Creates and returns a new assembly operation within the current body.
+  * @param iBodyToAssemble
+  *   The body to assemble with the current body
+  * @return The created assembly operation
+  */
+  HRESULT AddNewAssemble  ( in CATIABody                      iBodyToAssemble
+    , out /*IDLRETVAL*/ CATIAAssemble       oNewAssemble
+    );
+
+  //      ADD A NEW ADD FEATURE
+  //      ---------------------
+  //
+  /**
+  * Creates and returns a new add operation within the current body.
+  * @param iBodyToAdd
+  *   The body to add to the current body
+  * @return The created add operation
+  */
+  HRESULT AddNewAdd  ( in CATIABody                      iBodyToAdd
+    , out /*IDLRETVAL*/ CATIAAdd        oNewAdd
+    );
+
+  //      ADD A NEW REMOVE FEATURE
+  //      ------------------------
+  //
+  /**
+  * Creates and returns a new remove operation within the current body.
+  * @param iBodyToRemove
+  *   The body to remove from the current body
+  * @return The created remove operation
+  */
+  HRESULT AddNewRemove  ( in CATIABody                      iBodyToRemove
+    , out /*IDLRETVAL*/ CATIARemove     oNewRemove
+    );
+
+  //      ADD A NEW INTERSECT FEATURE
+  //      ---------------------------
+  //
+  /**
+  * Creates and returns a new intersect operation within the current body.
+  * @param iBodyToIntersect
+  *   The body to intersect with the current body
+  * @return The created intersect operation
+  */
+  HRESULT AddNewIntersect ( in CATIABody                    iBodyToIntersect
+    , out /*IDLRETVAL*/ CATIAIntersect  oNewIntersect
+    );
+
+  //      ADD A NEW TRIM FEATURE
+  //      ----------------------
+  //
+  /**
+  * Creates and returns a new Trim operation within the current body.
+  * @param iBodyToTrim
+  *   The body to Trim with current body.
+  * @return The created Trim operation
+  */
+  HRESULT AddNewTrim ( in CATIABody                    iBodyToTrim
+    , out /*IDLRETVAL*/ CATIATrim  oNewTrim
+    );
+
+  //      ADD A NEW SPLIT FEATURE
+  //      -----------------------
+  //
+  /**
+  * Creates and returns a new split operation within the current body.
+  * @param iSplittingElement
+  *   The face or plane that will split the current body<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iSplitSide
+  *   The specification for which side of the current body should be kept
+  *   at the end of the split operation
+  * @return The created split operation
+  */
+  HRESULT AddNewSplit   ( in CATIAReference                  iSplittingElement
+    , in CatSplitSide                    iSplitSide
+    , out /*IDLRETVAL*/ CATIASplit       oNewSplit
+    );
+
+  //      ADD A NEW SEWING FEATURE
+  //      -----------------------
+  //
+  /**
+  * Creates and returns a new sewing operation within the current body.
+  * @param iSewingElement
+  *   The face or skin or surface that will be sewn on the current body
+  * @param iSewingSide
+  *   The specification for which side of the current body should be kept
+  *   at the end of the sewing operation
+  * @return The created sewing operation
+  */
+  HRESULT AddNewSewSurface   ( in CATIAReference                  iSewingElement
+    , in CatSplitSide                    iSewingSide
+    , out /*IDLRETVAL*/ CATIASewing       oNewSewing
+    );
+
+
+  //      ADD A NEW CLOSESURFACE FEATURE
+  //      -----------------------
+  //
+  /**
+  * Creates and returns a new CloseSurface feature.
+  * @param iCloseElement
+  *   The skin that will be closed and add with the current body
+  * @return The created CloseSurface feature
+  */
+  HRESULT AddNewCloseSurface ( in CATIAReference                  iCloseElement
+    , out /*IDLRETVAL*/ CATIACloseSurface       oNewClose
+    );
+
+
+
+  //      ADD A NEW THICKSURFACE FEATURE
+  //      -----------------------
+  //
+  /**
+  * Creates and returns a new ThickSurface feature.
+  * @param iOffsetElement
+  *   The skin that will be thicken and added with the current body
+  * @param iIsensOffset
+  *   The direction of the offset in regard to the direction of the normal
+  * @param iTopOffset
+  *   The Offset between the iOffsetElement and the upper skin of the 
+  *   resulting feature
+  * @param iBotOffset
+  *   The Offset between the iOffsetElement and the lower skin of the 
+  *   resulting feature
+  * @return The created ThickSurface feature
+  */
+  HRESULT AddNewThickSurface ( in CATIAReference                  iOffsetElement
+    , in long                                 iIsensOffset
+    , in double                               iTopOffset
+    , in double                               iBotOffset
+    , out /*IDLRETVAL*/ CATIAThickSurface       oNewOffset
+    );
+
+
+
+
+
+
+  //      ADD A NEW LOFT FEATURE
+  //      -----------------------
+  //
+  /**
+  * Creates and returns a new Loft feature.
+  * @return The created Loft feature
+  */
+  HRESULT AddNewLoft   ( out /*IDLRETVAL*/ CATIABase       oNewLoft
+    );
+
+
+
+
+  //      ADD A NEW REMOVED LOFT FEATURE
+  //      -----------------------
+  //
+  /**
+  * Creates and returns a new Removed Loft feature.
+  * @return The created Removed Loft feature
+  */
+  HRESULT AddNewRemovedLoft   ( out /*IDLRETVAL*/ CATIABase       oNewRemovedLoft
+    );
+
+
+
+  //      ADD A NEW BLEND FEATURE
+  //      -----------------------
+  //
+  /**
+  * Creates and returns a new Blend feature.
+  * @return The created Blend feature
+  */
+  HRESULT AddNewBlend   ( out /*IDLRETVAL*/ CATIABase       oNewBlend
+    );
+
+
+
+  //      ADD A NEW REMOVED BLEND FEATURE
+  //      -----------------------
+  //
+  /**
+  * Creates and returns a new Removed Blend feature.
+  * @return The created Removed Blend feature
+  */
+  HRESULT AddNewRemovedBlend   ( out /*IDLRETVAL*/ CATIABase       oNewRemovedBlend
+    );
+
+
+  /** 
+  * @nodoc 
+  */
+  HRESULT AddNewSymmetry2 (in      CATIAReference            iReference,
+    out /*IDLRETVAL*/ CATIABase oSymmetry);
+
+
+  /** 
+  * @nodoc 
+  */
+
+  HRESULT AddNewTranslate2 (in     double     iDistance,
+    out /*IDLRETVAL*/ CATIABase oSymmetry);
+
+
+  /** 
+  * @nodoc 
+  */ 
+  HRESULT AddNewScaling2   ( in CATIAReference iScalingReference
+    , in double                 iFactor
+    , out /*IDLRETVAL*/ CATIABase    oNewScaling
+    );
+
+
+  /** 
+  * @nodoc 
+  */ 
+  HRESULT AddNewRotate2 (
+    in              CATIAReference            iAxis,
+    in              double                    iAngle,
+    out /*IDLRETVAL*/ CATIABase  oRotate
+    );
+
+
+  /**
+  * Creates and returns a new SolidCombine feature.
+  * @param iProfileEltFirst
+  *   The reference of the element defining the profile for first component.
+  * @param iProfileEltSecond
+  *   The reference of the element defining the profile for second component.
+  * @return The created SolidCombine feature.
+  */
+  HRESULT AddNewSolidCombine(in CATIAReference iProfileEltFirst,
+    in CATIAReference iProfileEltSecond,
+    out /*IDLRETVAL*/ CATIASolidCombine oNewSolidCombine);
+
+  /**
+  * Creates and returns a new RemoveFace feature.
+  * @param iKeepFaces
+  *   The reference of the face to Keep.
+  * @param iRemoveFaces
+  *   The reference of the face to Remove.
+  * @return The created RemoveFace feature.
+  */
+  HRESULT AddNewRemoveFace(in CATIAReference iKeepFaces, 
+    in CATIAReference iRemoveFaces, 
+    out /*IDLRETVAL*/ CATIARemoveFace oNewRemoveFace);
+
+  /**
+  * Creates and returns a new Align/ ReplaceFace feature.
+  * @param iSplitPlane
+  *   The reference of the element defining the Splitting Plane.
+  * @param iRemoveFace
+  *   The reference of the Face to Remove.
+  * @param iSplittingSide
+  *   The specification for which side of the current body should be Align
+  * @return The created Align/ ReplaceFace feature.
+  */
+  HRESULT AddNewReplaceFace(in CATIAReference iSplitPlane,
+    in CATIAReference iRemoveFace,
+    in CatSplitSide iSplittingSide, 
+    out /*IDLRETVAL*/ CATIAReplaceFace oNewReplaceFace);
+  /**
+  * Creates and returns a Volumic Add feature.
+  * @param iBody1
+  *   The volume or body to be modified.
+  * @param iBody2
+  *   The volume or body to be operated.
+  * @param iType
+  *   iType = 0 if Part Design, = 4 if GSD.
+  * @return The created Volumic Add feature.
+  */
+
+  HRESULT AddNewVolumeAdd    ( in CATIAReference         iBody1,
+    in CATIAReference         iBody2,
+    in double			iType,
+    out /*IDLRETVAL*/ CATIAAdd oNewAdd );
+
+  /**
+  * Creates and returns a Volumic Remove feature.
+  * @param iBody1
+  *   The volume or body to be modified.
+  * @param iBody2
+  *   The volume or body to be operated.
+  * @param iType
+  *   iType = 0 if Part Design, = 4 if GSD.
+  * @return The created Volumic Remove feature.
+  */
+
+  HRESULT AddNewVolumeRemove  ( in CATIAReference      iBody1,
+    in CATIAReference      iBody2,
+    in double	      iType,
+    out /*IDLRETVAL*/ CATIARemove oNewRemove );
+  /**
+  * Creates and returns a Volumic Intersect feature.
+  * @param iBody1
+  *   The volume or body to be modified.
+  * @param iBody2
+  *   The volume or body to be operated.
+  * @param iType
+  *   iType = 0 if Part Design, = 4 if GSD.
+  * @return The created Volumic Intersect feature.
+  */
+
+  HRESULT AddNewVolumeIntersect ( in CATIAReference   iBody1,
+    in CATIAReference   iBody2,
+    in double	     iType,
+    out /*IDLRETVAL*/ CATIAIntersect  oNewIntersect );
+
+  //      ADD A NEW VOLUME SEWING FEATURE
+  //      -------------------------------
+  //
+  /**
+  * Creates and returns a new volume sewing operation within the current OGS/GS.
+  * @param iType
+  *   Parameter to determine the sewing type. For Volume sewing Type = 4
+  * @param iSupportVolume
+  *   The volume support on which sew operation will be performed
+  * @param iSewingElement
+  *   The face or skin or surface that will be sewn on the current volume support
+  * @param iSewingSide
+  *   The specification for which side of the current volume should be kept
+  *   at the end of the sewing operation
+  * @return The created sewing operation
+  */
+  HRESULT AddNewVolumeSewSurface   ( in long iType
+    , in CATIAReference				   iSupportVolume 
+    , in CATIAReference                  iSewingElement
+    , in CatSplitSide                    iSewingSide
+    , out /*IDLRETVAL*/ CATIASewing       oNewSewing
+    );
+
+  /**
+  * Creates and returns a Volumic Shell feature.
+  * @param iFacesToRemove
+  *   The Faces of the Volume
+  * @param iFacesToThicken
+  *   The Faces of the Volume
+  * @param iInternalThickness
+  *   The thickness of material to be added on the internal side of all the faces
+  *   during the shell process, except for those to be removed
+  * @param iExternaThickness
+  *   The thickness of material to be added on the external side of all the faces
+  *   during the shell process, except for those to be removed
+  * @param iVolumeSupport
+  *   The Volume related the faces to remove and faces to thicken
+  * @return The created Volumic Shell.
+  */
+  HRESULT AddNewVolumeShell	(in CATIAReference    iFaceToRemove,
+    in double            iInternalThickness,
+    in double            iExternalThickness,
+    in CATIAReference    iVolumeSupport, 
+    out /*IDLRETVAL*/ CATIAShell       oNewShell);
+
+  //      ADD A NEW VOLUME TRIM FEATURE
+  //      ------------------------------
+  //
+  /**
+  * Creates and returns a new Volume Trim operation within the GS/OGS.
+  * @param iSupportVolume
+  *   The Support Volume 
+  * @param iCutttingVolume
+  *   The trimming Volume 
+  * @return The created Trim operation
+  */
+  HRESULT AddNewVolumeTrim  ( in CATIAReference iSupportVolume,
+    in CATIAReference iCuttingVolume,
+    out /*IDLRETVAL*/ CATIATrim    oNewTrim);
+
+
+  //      ADD A NEW VOLUME CLOSESURFACE FEATURE
+  //      --------------------------------------
+  //
+  /**
+  * Creates and returns a new VolumeCloseSurface feature.
+  * @param iCloseElement
+  *   The skin that will be closed and add with the current body
+  * @return The created CloseSurface feature
+  */
+  HRESULT AddNewVolumeCloseSurface ( in CATIAReference                  iCloseElement
+    , out /*IDLRETVAL*/ CATIACloseSurface       oNewClose
+    );
+
+
+
+  //      ADD A NEW VOLUME THICKSURFACE FEATURE
+  //      -------------------------------------
+  //
+  /**
+  * Creates and returns a new VolumeThickSurface feature.
+  * @param iOffsetElement
+  *   The skin that will be thicken and added with the current OGS/GS
+  * @param iIsensOffset
+  *   The direction of the offset in regard to the direction of the normal
+  * @param iTopOffset
+  *   The Offset between the iOffsetElement and the upper skin of the 
+  *   resulting feature
+  * @param iBotOffset
+  *   The Offset between the iOffsetElement and the lower skin of the 
+  *   resulting feature
+  * @return The created ThickSurface feature
+  */
+  HRESULT AddNewVolumeThickSurface ( in CATIAReference				      iOffsetElement
+    , in long                               iIsensOffset
+    , in double                             iTopOffset
+    , in double                             iBotOffset
+    , out /*IDLRETVAL*/ CATIAThickSurface   oNewOffset
+    );
+
+  //  ----------------------------------------------------
+  //  --  S O L I D   F I L L E T   C R E A T I O N  --
+  //  ----------------------------------------------------
+  //
+  //  ADD A NEW FACE FILLET
+  //  ---------------------
+  //
+  /**
+  * Creates and returns a new solid face-to-face fillet.
+  * <br>
+  * Use this method to created face-to-face fillets with varying fillet radii,
+  * by editing fillet attributes driving its radius after its creation.
+  * @param iF1
+  *   The first face that will support the fillet<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iF2
+  *   The second face that will support the fillet<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iRadius
+  *   The fillet radius
+  * @return The created face-to-face fillet
+  */
+  HRESULT AddNewSolidFaceFillet( in    CATIAReference                  iF1
+    , in    CATIAReference                  iF2 
+    , in    double              iRadius
+    , out /*IDLRETVAL*/ CATIAFaceFillet oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW EDGE FILLET (CONSTANT RADIUS)
+  //  ---------------------------------------
+  //
+  /**
+  * Creates and returns a new solid edge fillet with a constant radius.
+  * within the current body.
+  * @param iEdgeToFillet
+  *   The edge that will be filleted first<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIATriDimFeatEdge.
+  * @param iPropagMode
+  *   Controls whether other edges found adjacent to the 
+  *   first one should also be filleted in the same operation
+  * @param iRadius
+  *   The fillet radius
+  * @return The created edge fillet
+  */
+  HRESULT AddNewSolidEdgeFilletWithConstantRadius
+    ( in    CATIAReference                          iEdgeToFillet
+    , in    CatFilletEdgePropagation        iPropagMode
+    , in    double                  iRadius
+    , out /*IDLRETVAL*/ CATIAConstRadEdgeFillet     oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW EDGE FILLET (VARYING RADIUS)
+  //  --------------------------------------
+  //
+  /**
+  * Creates and returns a new solid edge fillet with a varying radius.
+  * within the current body.
+  * @param iEdgeToFillet
+  *   The edge that will be filleted first<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIATriDimFeatEdge.
+  * @param iPropagMode
+  *   Controls whether other edges found adjacent to the 
+  *   first one should also be filleted in the same operation
+  * @param iVariationMode
+  *   Controls the law of evolution for the fillet radius 
+  *   between specified control points, such as edges extremities
+  * @param iDefaultRadius
+  *   The fillet default radius, that will apply when no other radius can 
+  *   be inferred from the <tt>iVariationMode</tt> parameter
+  * @return The created edge fillet
+  */
+
+  HRESULT AddNewSolidEdgeFilletWithVaryingRadius
+    ( in    CATIAReference                          iEdgeToFillet
+    , in    CatFilletEdgePropagation        iPropagMode
+    , in    CatFilletVariation          iVariationMode
+    , in    double                  iDefaultRadius
+    , out /*IDLRETVAL*/ CATIAVarRadEdgeFillet       oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW TRITANGENT FILLET
+  //  ---------------------------
+  //
+  /**
+  // * Creates and returns a new solid tritangent fillet within the current body.
+  // * <br>
+  // * This kind of fillet begins with tangency on a first face <tt>iF1</tt>, 
+  // * gets tangent to a second one <tt>iRemovedFace</tt>
+  // * and ends with tangency to a third one <tt>iF2</tt>. 
+  // * During the process the 
+  // * second face <tt>iRemovedFace</tt> is removed. 
+  // * @param iF1
+  // *    The starting face for the fillet<br>
+  // * The following @href CATIABoundary object is supported: 
+  // * @href CATIAFace.
+  // * @param iF2
+  // *    The ending face for the fillet<br>
+  // * The following @href CATIABoundary object is supported: 
+  // * @href CATIAFace.
+  // * @param iRemovedFace
+  // *    The face used as an intermediate tangent support for the fillet 
+  // *    during its course from <tt>iF1</tt> to <tt>iF2</tt>. This face will be 
+  // *    removed at the end of the filleting operation.<br>
+  // * The following @href CATIABoundary object is supported: 
+  // * @href CATIAFace
+  // * @return The created tritangent fillet
+  */
+
+  HRESULT AddNewSolidTritangentFillet
+    ( in    CATIAReference                          iF1
+    , in    CATIAReference                          iF2 
+    , in    CATIAReference                          iRemovedFace
+    , out /*IDLRETVAL*/ CATIATritangentFillet   oNewFillet
+    );
+
+
+
+  //  ----------------------------------------------------
+  //  --  S U R F A C E   F I L L E T  C R E A T I O N  --
+  //  ----------------------------------------------------
+  //
+  //  ADD A NEW FACE FILLET
+  //  ---------------------
+  //
+  /**
+  * Creates and returns a new surface face-to-face fillet.
+  * <br>
+  * Use this method to created face-to-face fillets with varying fillet radii,
+  * by editing fillet attributes driving its radius after its creation.
+  * @param iF1
+  *   The first face that will support the fillet<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iF2
+  *   The second face that will support the fillet<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iRadius
+  *   The fillet radius
+  * @return The created face-to-face fillet
+  */
+  HRESULT AddNewSurfaceFaceFillet( in    CATIAReference                  iF1
+    , in    CATIAReference                  iF2 
+    , in    double              iRadius
+    , out /*IDLRETVAL*/ CATIAFaceFillet oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW EDGE FILLET (CONSTANT RADIUS)
+  //  ---------------------------------------
+  //
+  /**
+  * Creates and returns a new surface edge fillet with a constant radius.
+  * within the current body.
+  * @param iEdgeToFillet
+  *   The edge that will be filleted first<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIATriDimFeatEdge.
+  * @param iPropagMode
+  *   Controls whether other edges found adjacent to the 
+  *   first one should also be filleted in the same operation
+  * @param iRadius
+  *   The fillet radius
+  * @return The created edge fillet
+  */
+  HRESULT AddNewSurfaceEdgeFilletWithConstantRadius
+    ( in    CATIAReference                          iEdgeToFillet
+    , in    CatFilletEdgePropagation        iPropagMode
+    , in    double                  iRadius
+    , out /*IDLRETVAL*/ CATIAConstRadEdgeFillet     oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW EDGE FILLET (VARYING RADIUS)
+  //  --------------------------------------
+  //
+  /**
+  * Creates and returns a new surface edge fillet with a varying radius.
+  * within the current body.
+  * @param iEdgeToFillet
+  *   The edge that will be filleted first<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIATriDimFeatEdge.
+  * @param iPropagMode
+  *   Controls whether other edges found adjacent to the 
+  *   first one should also be filleted in the same operation
+  * @param iVariationMode
+  *   Controls the law of evolution for the fillet radius 
+  *   between specified control points, such as edges extremities
+  * @param iDefaultRadius
+  *   The fillet default radius, that will apply when no other radius can 
+  *   be inferred from the <tt>iVariationMode</tt> parameter
+  * @return The created edge fillet
+  */
+
+  HRESULT AddNewSurfaceEdgeFilletWithVaryingRadius
+    ( in    CATIAReference                          iEdgeToFillet
+    , in    CatFilletEdgePropagation        iPropagMode
+    , in    CatFilletVariation          iVariationMode
+    , in    double                  iDefaultRadius
+    , out /*IDLRETVAL*/ CATIAVarRadEdgeFillet       oNewFillet
+    );
+
+
+  //
+  //  ADD A NEW TRITANGENT FILLET
+  //  ---------------------------
+  //
+  /**
+  // * Creates and returns a new surface tritangent fillet within the current body.
+  // * <br>
+  // * This kind of fillet begins with tangency on a first face <tt>iF1</tt>, 
+  // * gets tangent to a second one <tt>iRemovedFace</tt>
+  // * and ends with tangency to a third one <tt>iF2</tt>. 
+  // * During the process the 
+  // * second face <tt>iRemovedFace</tt> is removed. 
+  // * @param iF1
+  // *    The starting face for the fillet<br>
+  // * The following @href CATIABoundary object is supported: 
+  // * @href CATIAFace.
+  // * @param iF2
+  // *    The ending face for the fillet<br>
+  // * The following @href CATIABoundary object is supported: 
+  // * @href CATIAFace.
+  // * @param iRemovedFace
+  // *    The face used as an intermediate tangent support for the fillet 
+  // *    during its course from <tt>iF1</tt> to <tt>iF2</tt>. This face will be 
+  // *    removed at the end of the filleting operation.<br>
+  // * The following @href CATIABoundary object is supported: 
+  // * @href CATIAFace
+  // * @return The created tritangent fillet
+  */
+
+  HRESULT AddNewSurfaceTritangentFillet
+    ( in    CATIAReference                          iF1
+    , in    CATIAReference                          iF2 
+    , in    CATIAReference                          iRemovedFace
+    , out /*IDLRETVAL*/ CATIATritangentFillet   oNewFillet
+    );
+
+  //
+  //      ADD A NEW VOLUME THICKNESS
+  //      -------------------
+  //
+  /**
+  * Creates and returns a volume new thickness within the current GS or OGS.
+  * @param iFaceToThicken
+  *   The first face to thicken in the thickening process.   
+  *   <br>
+  *   New faces to thicken can be added to the thickness afterwards by using 
+  *   methods offered by the created thickness<br>
+  * The following @href CATIABoundary object is supported: 
+  * @href CATIAFace.
+  * @param iOffset
+  *   The thickness of material to be added on the external side of the face
+  *   <tt>iFaceToThicken</tt> during the thickening process
+  * @param iType
+  *   The mode of thickness creation (4=Volume)
+  * @param iVolumeSupport
+  *   The support volume for volumic draft
+  * @return The created thickness
+  */
+  HRESULT AddNewVolumeThickness
+    ( in CATIAReference                iFaceToThicken
+    , in double                        iOffset
+    , in long								iType
+    , in CATIAReference						iVolumeSupport
+    , out /*IDLRETVAL*/ CATIAThickness oNewThickness
+    );
+
+  //
+  //	ADD A NEW AUTOFILLET
+  //	---------------------------
+  //
+  /**
+  * Creates and returns a new solid autofillet.
+  * <br>
+  * Use this method to create autofillet by providing fillet and round radius values.
+  * @param iFilletRadius
+  *   The fillet radius
+  * @param iRoundRadius 
+  *   The round radius
+  * @return The created autofillet
+  */
+  HRESULT AddNewAutoFillet(in double iFilletRadius,
+    in double iRoundRadius,
+    out /*IDLRETVAL*/ CATIAAutoFillet  oNewFillet );
+
+  /** 
+  * Creates and returns an AxisToAxis transformation feature.
+  * @param iReference
+  *	The refrence axis.
+  * @param iTarget
+  *	The target axis.
+  * @return The created AxisToAxis transformation feature.
+  */ 
+
+  HRESULT AddNewAxisToAxis2 (in      CATIAReference   iReference,
+    in      CATIAReference            iTarget,
+    out /*IDLRETVAL*/ CATIABase oAxisToAxis);
+
+  /** 
+  * Creates and returns a Affinity feature.
+  * @param XRatio
+  *	Value for the XRatio.
+  * @param YRatio
+  *	Value for the YRatio.
+  * @param ZRatio
+  *	Value for the ZRatio.
+  * @return the created Affinity feature.
+  */ 
+
+  HRESULT AddNewAffinity2 (in      double XRatio,
+    in      double YRatio,
+    in      double ZRatio,
+    out /*IDLRETVAL*/ CATIABase oAffinity);
+
+  //
+  //	ADD A NEW AUTODRAFT
+  //	---------------------------
+  //
+  /**
+  * Creates and returns a new solid autodraft.
+  * <br>
+  * Use this method to create autodraft by providing draft angle.
+  * @param iDraftAngle
+  *   The draft angle.
+  * @return The created autodraft.
+  */
+  HRESULT AddNewAutoDraft(in double iDraftAngle, out /*IDLRETVAL*/ CATIAAutoDraft  oNewDraft );
+
+  //
+  //	ADD A NEW SURFACIC AUTOFILLET
+  //	---------------------------
+  //
+  /**
+  * Creates and returns a new Surfacic autofillet.
+  * <br>
+  * Use this method to create autofillet by providing fillet radius value.
+  * @param iFilletRadius
+  *   The fillet radius
+  * @return The created autofillet
+  */
+  HRESULT AddNewSurfacicAutoFillet(in double iFilletRadius,out /*IDLRETVAL*/ CATIAAutoFillet  oNewFillet);
+	
+	//      ADD A NEW SURFACIC SEWING FEATURE
+  //      -------------------------------
+  //
+  /**
+  * Creates and returns a new volume sewing operation within the current OGS/GS.
+  * @param iType
+  *   Parameter to determine the sewing type. For Volume sewing Type = 4
+  * @param iSupportSurface
+  *   The surfacic support on which sew operation will be performed
+  * @param iSewingElement
+  *   The face or skin or surface that will be sewn on the current volume support
+  * @param iSewingSide
+  *   The specification for which side of the current volume should be kept
+  *   at the end of the sewing operation
+  * @return The created sewing operation
+  */
+  HRESULT AddNewSurfacicSewSurface   ( in long iType
+    , in CATIAReference				   iSupportSurface 
+    , in CATIAReference                  iSewingElement
+    , in CatSplitSide                    iSewingSide
+    , out /*IDLRETVAL*/ CATIASewing       oNewSewing
+    );
+
+  //      ADD A NEW DEFEATURING FEATURE
+  //      -------------------------------
+  //
+  /**
+  * Creates and returns a new defeaturing operation within the current container.
+  * @return The created defeaturing operation
+  */
+  HRESULT AddNewDefeaturing   ( out /*IDLRETVAL*/ CATIADefeaturing oNewDefeaturing );
+
+};
+// Interface Name : CATIAShapeFactory
+#pragma ID CATIAShapeFactory "DCE:81463c0e-bbca-0000-0280030ba6000000"
+#pragma DUAL CATIAShapeFactory
+
+// VB Object Name : ShapeFactory
+#pragma ID ShapeFactory "DCE:81463c13-05a6-0000-0280030ba6000000"
+#pragma ALIAS CATIAShapeFactory ShapeFactory
+
+
+#endif
+// CATIAShapeFactory_IDL
+
+

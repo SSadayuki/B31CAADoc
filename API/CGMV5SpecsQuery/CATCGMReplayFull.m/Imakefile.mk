@@ -1,0 +1,9 @@
+#
+BUILT_OBJECT_TYPE=LOAD MODULE
+PROGRAM_NAME=CATCGMReplayFull
+#
+LINK_WITH=JS0GROUP CATMathematics CATMathStream CATCGMGeoMath \
+  CATGeometricObjects  CATTopologicalObjects
+#
+OS = MOBILE
+BUILD = NO

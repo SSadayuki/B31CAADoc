@@ -1,0 +1,9 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+BUILD=NO
+
+#ifdef MK_ORBIXCPP33
+OS=solaris_a
+BUILD=YES
+LOCAL_LDFLAGS=-z interpose
+#endif
+

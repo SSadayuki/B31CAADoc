@@ -1,0 +1,156 @@
+#ifndef CATIAConstRadEdgeFillet_IDL
+#define CATIAConstRadEdgeFillet_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAConstRadEdgeFillet:                           
+// Exposed interface for Mechanical Fillet along (ribbons of) Edges
+//    with a constant radius along the ribbons
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation                                        Ph Baucher
+// Jan98 Modification				 	  L Lalere
+//=================================================================
+#include "CATIAEdgeFillet.idl"
+
+interface CATIALength;
+interface CATIAReferences;
+interface CATIAReference;
+interface CATIAVarRadEdgeFillet;
+
+/**
+ * Represents the edge fillet shape with a constant radius.
+ * The resulting shape is made up of
+ * edge fillets built with a constant radius.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAConstRadEdgeFillet : CATIAEdgeFillet
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON OBJECTS TO FILLET
+    //    --------------------
+    //
+    /**
+     * Returns the collection of reference elements to be filleted.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>elements</tt>
+     * the reference elements to be filleted of the
+     * constant radius edge fillet <tt>firstCstEdgeFillet</tt>:
+     * <pre>
+     * Set elements = firstCstEdgeFillet.<font color="red">ObjectsToFillet</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ObjectsToFillet
+    HRESULT    get_ObjectsToFillet ( out /*IDLRETVAL*/ CATIAReferences oObjectsToFillet );
+
+    //
+    //    ON RADIUS
+    //    ---------
+    //
+    /**
+     * Returns the edge fillet constant radius.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>radius</tt>
+     * the radius of the
+     * constant radius edge fillet <tt>firstCstEdgeFillet</tt>:
+     * <pre>
+     * Set radius = firstCstEdgeFillet.<font color="red">Radius</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Radius
+    HRESULT    get_Radius ( out /*IDLRETVAL*/ CATIALength oRadius );
+
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+    // ADDING AN OBJECT TO FILLET
+    // --------------------------
+    //
+    /**
+     * Adds a new sub-element to be filleted.
+     * This sub-element is usually an edge.
+     * @param iObjectToFillet
+     *   The sub-element to be filleted<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIATriDimFeatEdge.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds a new geometrical element
+     * <tt>element</tt>
+     * to be filleted by the constant radius edge fillet
+     * <tt>firstCstEdgeFillet</tt>:
+     * <pre>
+     * firstCstEdgeFillet.<font color="red">AddObjectToFillet</font>(element)
+     * </pre>
+     * </dl>
+     */
+    HRESULT   AddObjectToFillet ( in CATIAReference iObjectToFillet );
+
+    // REMOVING AN OBJECT TO FILLET
+    // ----------------------------
+    //
+    /**
+     * Withdraws a sub-element from those to be filleted.
+     * This sub-element is usually an edge.
+     * @param iObjectToWithdraw
+     *   The sub-element to withdraw<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIATriDimFeatEdge.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the geometrical element
+     * <tt>element</tt> from those to be
+     * filleted by the constant radius edge fillet <tt>firstCstEdgeFillet</tt>:
+     * <pre>
+     * firstCstEdgeFillet.<font color="red">WithdrawObjectToFillet</font>(element)
+     * </pre>
+     * </dl>
+     */
+    HRESULT   WithdrawObjectToFillet ( in CATIAReference iObjectToWithdraw );
+
+   /**
+    * Changes the type of EdgeFillet to variable EdgeFillet and return it.
+    * @param opVarFillet
+    *   The opVarFillet is the variable edge fillet
+    */
+    HRESULT SwitchToVarFilletType(out /*IDLRETVAL*/ CATIAVarRadEdgeFillet opVarFillet);
+    
+};
+
+// Interface name : CATIAConstRadEdgeFillet
+#pragma ID CATIAConstRadEdgeFillet "DCE:f05e0a17-610b-11d1-a27d0000f87546fd"
+#pragma DUAL CATIAConstRadEdgeFillet
+
+// VB object name : ConstRadEdgeFillet (Id used in Visual Basic)
+#pragma ID ConstRadEdgeFillet "DCE:f0927dd3-610b-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIAConstRadEdgeFillet ConstRadEdgeFillet
+
+
+#endif
+// CATIAConstRadEdgeFillet_IDL
+

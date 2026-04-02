@@ -1,0 +1,77 @@
+#ifndef CATIAPCBObject_IDL
+#define CATIAPCBObject_IDL
+
+/*IDLREP*/
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//--------------------------------------------------------------------------
+// Document object
+// gha Oct.99
+//
+//--------------------------------------------------------------------------
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"	
+#include "CATBSTR.idl"
+
+ 
+ /** 
+   interface to manage a CBD object : Product, Hole, Pattern, Pad. 
+  */
+enum CatElectronicType
+ {
+          BOARD,
+		  PANEL,
+		  COMPONENT,
+		  AREA,
+		  PCBHOLE,
+		  PCBPATTERN,NOPCBBEHAVIOUR
+};
+
+interface CATIAPCBObject : CATIABase
+{
+//----------------------------------------------------------------------------------
+  /**
+  * Allow to know if  : a Product is a BOARD, a PANEL or a COMPONENT, a Hole is a PBD Hole
+  * a pattenr is a PCB pattern, a Pad is a contraint area.                      
+  * @param oType
+  * This parameter is the type of the object ( BOARD, PANEL, COMPONENT ) 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+
+#pragma PROPERTY ElectronicType
+  HRESULT get_ElectronicType(out /*IDLRETVAL*/ CatElectronicType  oType);   
+  
+//----------------------------------------------------------------------------------
+  /**
+   * Allow to remove a PCB behaviour of an object 
+   *   
+   * @return <UL> 
+   *         <LH>The result of the method:
+   *         <LI>S_OK if succeeded
+   *         <LI>E_FAIL if failed
+   *         </UL> 
+*/
+
+   HRESULT RemoveElectronicBehaviour();   
+
+};
+
+// Interface name : CATIAPCBObject
+#pragma ID CATIAPCBObject "DCE:04ba5791-f520-4ea6-b2cee836e2fcfab0"
+#pragma DUAL CATIAPCBObject
+
+// VB object name : PCBObject
+#pragma ID PCBObject "DCE:84005981-6859-411b-944bd8405df7d98a"
+#pragma ALIAS CATIAPCBObject PCBObject
+
+#endif

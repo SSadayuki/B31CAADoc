@@ -1,0 +1,5 @@
+# Mega module 
+# 
+IMPACT_ON_IMPORT = YES
+# 
+BUILT_OBJECT_TYPE = NONE

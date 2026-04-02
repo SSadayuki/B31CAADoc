@@ -1,0 +1,126 @@
+#ifndef CATIAHybridShapeWrapSurface_IDL
+#define CATIAHybridShapeWrapSurface_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2002
+
+ /**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//           
+// CATIAHybridShapeWrapSurface:         
+// Exposed interface for HybridShape WrapSurface
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Fev 2001 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Represents the hybrid shape wrap surface object.
+ * <b>Role</b>: To access the data of the hybrid shape wrap surface object.
+ * <p>This data includes:
+ * <ul>
+ * <li>Two definition surfaces (refrence and target), who define the deformation</li>
+ * </ul>
+ * <p>Use the CATIAHybridShapeFactory to create a HybridShapeWrapSurface object.
+ * @see CATIAHybridShapeFactory
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeWrapSurface : CATIAHybridShape
+{
+ /**
+  * Returns or sets the reference surface to deform of the WrapSurface.
+  * </dl>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>SurfaceToDeform</code> the surface to deform
+  * of the <code>ShpWrapSurface</code> hybrid shape WrapSurface feature.
+  * <pre>
+  * SurfaceToDeform = ShpWrapSurface.<font color="red">Surface</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Surface
+ HRESULT get_Surface (out /*IDLRETVAL*/ CATIAReference            oSurface);
+ HRESULT put_Surface (in                CATIAReference            iSurface);
+
+
+ /**
+  * Returns or sets the reference surface of the WrapSurface.
+  * </dl>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>ReferenceSurface</code> the surface to deform
+  * of the <code>ShpWrapSurface</code> hybrid shape WrapSurface feature.
+  * <pre>
+  * ReferenceSurface = ShpWrapSurface.<font color="red">Surface</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ReferenceSurface
+ HRESULT get_ReferenceSurface (out /*IDLRETVAL*/ CATIAReference            oReferenceSurface);
+ HRESULT put_ReferenceSurface (in                CATIAReference            iReferenceSurface);
+
+
+ /**
+  * Returns or sets the target surface of the WrapSurface.
+  * </dl>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>TargetSurface</code> the surface to deform
+  * of the <code>ShpWrapSurface</code> hybrid shape WrapSurface feature.
+  * <pre>
+  * TargetSurface = ShpWrapSurface.<font color="red">Surface</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TargetSurface
+ HRESULT get_TargetSurface (out /*IDLRETVAL*/ CATIAReference            oTargetSurface);
+ HRESULT put_TargetSurface (in                CATIAReference            iTargetSurface);
+
+
+/**
+ * Returns or sets whether the wrap surface is or should be created as a"Normal"
+ * or with a "3D" deformation mode.
+* <br><b>Legal values</b>: 2 for the normal solution and 1 for 3D solution.
+ * @sample
+ * This example sets the mode to create the wrap surface
+ * <code>hybWrapSurface</code> with a 3D deformation mode.
+ * <pre>
+ * hybWrapSurface.<font color="red">3D deformation mode</font> = 1
+ * </pre>
+ * </dl> 
+ */
+#pragma PROPERTY DeformationMode
+    HRESULT get_DeformationMode (out /*IDLRETVAL*/ long oDeformationMode);
+    HRESULT put_DeformationMode (in                long iDeformationMode); 
+
+};
+
+
+// Interface name : CATIAHybridShapeWrapSurface
+#pragma ID CATIAHybridShapeWrapSurface "DCE:97d3e643-de62-0000-0206040c4e000000"
+#pragma DUAL CATIAHybridShapeWrapSurface
+
+
+// VB object name : HybridShapeWrapSurface (Id used in Visual Basic)
+#pragma ID HybridShapeWrapSurface "DCE:97d4f7e2-6909-0000-0206040c4e000000"                                  
+#pragma ALIAS CATIAHybridShapeWrapSurface HybridShapeWrapSurface
+
+
+#endif
+// CATIAHybridShapeWrapSurface_IDL
+

@@ -1,0 +1,252 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>VPMInterfaces CATIVpmSCLogin Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../VPMInterfaces.htm" href="../VPMInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "VPMInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIVpmSCLogin"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>VPMInterfaces Framework:  CATIVpmSCLogin Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIVpmSCLogin_20485','CATIVpmSCLogin','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIVpmSCLogin</b>
+</p>
+<p>
+<b><i> CATIVpmSCLogin is one of the Security Management interfaces.</i></b><br>
+
+ <p>
+ It is used to :
+ <ol>
+  <li>authenticate user against People database.</li>
+  <li>initialize user's Security profile (privileges, mask, licensing, etc).</li>
+  <li></li>
+ </ol>
+ <p>
+ <u>Usage Notes:</u>
+   <ul>
+    <li>use first <tt>Login(...)</tt> to initialize login process
+        and verify that given user is recognized into P&amp.O database</li>
+    <li>then, use <tt>EndLogin()</tt></li>
+   </ul>
+
+ <p><a name=Example><b>Example</b></a>:
+ <table bgcolor=#fefedf><tr><td><pre>
+ <font color=red>// Suppose the exact role id (format: <i>name.org</i>)is provided there:</font>
+ CATUnicodeString sRoleId = <i>a role</i>;
+ HRESULT hr = S_OK;
+ VPMSession * pSession = VPMSession::OpenSession();
+ if (pSession) {
+    <font color=red>// Retrieves main factory</font>
+    CATIVpmFactoryManager_var vFM;
+    if (pSession->getVPMObjectFactory(vFM)==S_OK && !!vFM) {
+       <font color=red>// Retrieves security login (extension of factory)</font>
+       CATIVpmSCLogin_var vLogin = vFM;
+       if (!!vLogin) {
+          <font color=red>// Login procedure</font>
+          CATUnicodeString          sNone;
+          hr = vLogin->Login(sNone, sNone,
+                             <a href=VPMLoginPolicy.htm>VPMLoginEXACT_ROLE</a>, sRoleId);
+          if (FAILED(hr)) {
+            <i>aborting session...</i>
+          }
+       }
+    }
+ }</pre></td></tr></table>
+
+ <dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('VPMSession','','VPMSession') </script>, <script type="text/javascript"> activateLinkAnchor('CATIVpmFactoryManager','','CATIVpmFactoryManager') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetLoginInfos(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)"><b>GetLoginInfos</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)
+</td><td id='tdright'>  Get login informations.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsAuthenticated()"><b>IsAuthenticated</b></a>()
+</td><td id='tdright'>  Returns database(s) authentication mode.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Login(CATUnicodeString,CATUnicodeString,VPMLoginPolicy,CATUnicodeString)"><b>Login</b></a>(CATUnicodeString,CATUnicodeString,VPMLoginPolicy,CATUnicodeString)
+</td><td id='tdright'>  Performs the complete login procedure.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetLoginParameters(CATListOfCATUnicodeString&amp;,CATListOfCATUnicodeString&amp;)"><b>SetLoginParameters</b></a>(CATListOfCATUnicodeString&amp;,CATListOfCATUnicodeString&amp;)
+</td><td id='tdright'>  Set additionnal login parameters.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetLoginInfos"></a><a id="GetLoginInfos(CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;,CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetLoginInfos</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oUserId</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oCtxId</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oCtxRoleId</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oCtxOrgId</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oCtxProjectId</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Get login informations.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oUserId</span></dt>
+   <dd>   the current user id
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCtxId</span></dt>
+   <dd>   the current context id (format: role.organization.project)
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCtxRoleId</span></dt>
+   <dd>   the role id of the current context
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCtxOrgId</span></dt>
+   <dd>   the organization id of the current context
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCtxProjectId</span></dt>
+   <dd>   the project id of the current context
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsAuthenticated"></a><a id="IsAuthenticated()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>IsAuthenticated</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns database(s) authentication mode.
+ <p>When database is authenticated (also named SERVER mode), User and
+ Password must be used while connecting to the database,
+ unless the database is using a <i>single connection user</i>
+ (which is the default mode at installation).
+
+ 
+<dl  class='desclist'>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     1 (true) when database is authenticated, 0 otherwise.
+
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Login"></a><a id="Login(CATUnicodeString,CATUnicodeString,VPMLoginPolicy,CATUnicodeString)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Login</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script> <span class='param'>iUser</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script> <span class='param'>iPwd</span>,<script type="text/javascript"> activateLink('VPMLoginPolicy','VPMLoginPolicy')</script> <span class='param'>iRoleChoicePolicy</span>,<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString')</script> <span class='param'>iRoleName</span>)</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Performs the complete login procedure.
+ <p>See <a href=#Example>example</a>.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iUser</span></dt>
+   <dd>        user name.
+        Not any more used.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iPwd</span></dt>
+   <dd>        user password.
+        Not any more used.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRoleChoicePolicy</span></dt>
+   <dd>        enable the role choice strategy.
+        <br>Enumerated possibilities are : <a href=VPMLoginPolicy.htm>VPMLoginPolicy</a>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRoleName</span></dt>
+   <dd>        role name concatenated to its organization id (separated by a .(dot)).
+        <br>This argument must be specified with <b>VPMLoginEXACT_ROLE</b> policy.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>       HRESULT value. FAILED when login could not be completed.
+
+
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetLoginParameters"></a><a id="SetLoginParameters(CATListOfCATUnicodeString&amp;,CATListOfCATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetLoginParameters</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATListOfCATUnicodeString','CATListOfCATUnicodeString&amp;')</script> <span class='param'>iParameterNames</span>,<script type="text/javascript"> activateLink('CATListOfCATUnicodeString','CATListOfCATUnicodeString&amp;')</script> <span class='param'>iParameterValues</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Set additionnal login parameters.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iParameterNames</span></dt>
+   <dd>   the list of parameter names
+ 
+ </ dd>
+    <dt><span class='paramitem'> iParameterValues</span></dt>
+   <dd>   the list os parameter values
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    S_OK    if succeeded,
+   S_FALSE in case of error
+
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIVpmSCLogin.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>GUIDVPMInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

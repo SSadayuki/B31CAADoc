@@ -1,0 +1,77 @@
+#ifndef CATIASchGRRRoute2_IDL 
+#define CATIASchGRRRoute2_IDL 
+    
+/*IDLREP*/
+    
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+   
+    
+#include "CatSchIDLGRRRouteReshapeMode.idl"
+#include "CatSchIDLGRRRouteReshapeMode.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage the graphical representation of a schematic route.
+  */
+
+
+interface CATIASchGRRRoute2 : CATIABase
+{
+  /**
+  * Set the reshape mode.
+  * @param iReshapeMode
+  *   Whether or not the route shape is fixed for the purpose of reshaping the route.
+  *        = SchFixedShapeOff   : no restriction on how to reshape the route.
+  *        = SchFixedShapeOn    : reshape only the route's extremity (the segment directly 
+  *                               connected to the object that's being moved).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRRoute2
+  *
+  *  ...
+  * objThisIntf.<font color="red">SetReshapeMode</font>CatSchIDLGRRRouteReshapeMode_Enum
+  * </pre>
+  *    
+  */
+  HRESULT SetReshapeMode ( 
+    in CatSchIDLGRRRouteReshapeMode iReshapeMode );
+    
+  /**
+  * Get the reshape mode.
+  * @param oReshapeMode
+  *   Whether or not the route shape is fixed for the purpose of reshaping the route.
+  *        = SchFixedShapeOff   : no restriction on how to reshape the route.
+  *        = SchFixedShapeOn    : reshape only the route's extremity (the segment directly 
+  *                               connected to the object that's being moved).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchGRRRoute2
+  *
+  *  ...
+  * objThisIntf.<font color="red">GetReshapeMode</font>CatSchIDLGRRRouteReshapeMode_Enum
+  * </pre>
+  *    
+  */
+  HRESULT GetReshapeMode ( 
+    inout CatSchIDLGRRRouteReshapeMode oReshapeMode );
+    
+};
+    
+// Interface name : CATIASchGRRRoute2
+#pragma ID CATIASchGRRRoute2 "DCE:d85b3744-a604-437d-910c49623de3ef1f"
+#pragma DUAL CATIASchGRRRoute2
+    
+// VB object name : SchGRRRoute2
+#pragma ID SchGRRRoute2 "DCE:6fa39f15-fe2f-4924-bb3dc68180b9edc0"
+#pragma ALIAS CATIASchGRRRoute2 SchGRRRoute2
+    
+#endif 
+    

@@ -1,0 +1,7 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE = NONE
+#
+LINK_WITH = 
+	JS0FM  JS0GROUP  CATV4IntegrationBase CATBatProtocol CATV4iSettings

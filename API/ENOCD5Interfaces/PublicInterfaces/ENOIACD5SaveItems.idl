@@ -1,0 +1,67 @@
+// COPYRIGHT Dassault Systemes 2013
+//===================================================================
+//
+// ENOIACD5SaveItems.idl
+// Automation interface for the ENOIACD5SaveItems element 
+//
+//===================================================================
+
+#ifndef ENOIACD5SaveItems_IDL
+#define ENOIACD5SaveItems_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+interface CATIADocument;
+interface IDispatch;
+interface ENOIACD5SaveItem;
+
+/**
+ * Represents a Collection of items which user is trying to save.
+ *
+ * @sample
+ * The following example indicates how to retrieve the Collection of items to Save.
+ * <pre>
+ * <font color="blue">Dim</font> oCD5Engine <font color="blue">As</font> CD5EngineV6R2014x
+ * <font color="blue">Set</font> oCD5Engine = CATIA.GetItem("CD5EngineV6R2014x")
+ * <font color="blue">Dim</font> oSaveOperation <font color="blue">As</font> CD5SaveOperation
+ * <font color="blue">Set</font> oSaveOperation = oCD5Engine.CreateSaveOperation(CD5SaveOperation_Session)
+ * <font color="blue">Dim</font> oSaveItems <font color="blue">As</font> CD5SaveItems
+ * <font color="blue">Set</font> oSaveItems = oSaveOperation.Items()
+ * </pre>
+ * @see ENOIACD5SaveOperation
+ */
+interface ENOIACD5SaveItems : CATIACollection 
+{
+
+    /**
+    * Returns (gets) an item from the list of items in the current save scope.
+    * First item is at index 1.
+    *
+    * @sample
+    * The following example gets a SaveItem at index 1.
+    * <pre>
+    * <font color="blue">Dim</font> oSaveItem <font color="blue">As</font> CD5SaveItem
+    * <font color="blue">Set</font> oSaveItem = oSaveItems.<font color="red">Item</font>(1)
+    * </pre>
+    */
+
+    HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ ENOIACD5SaveItem SaveItem );
+
+};
+
+// Interface name : ENOIACD5SaveItems
+#pragma ID ENOIACD5SaveItems "DCE:7DFCC411-7A0C-4d91-9A57B700C493550B"
+#pragma DUAL ENOIACD5SaveItems
+
+// VB object name : ENOCD5SaveItems (Id used in Visual Basic)
+#pragma ID CD5SaveItems "DCE:14F54B4E-0CD5-4314-A048FDDDCFBF65B1"
+#pragma ALIAS ENOIACD5SaveItems CD5SaveItems
+
+#endif

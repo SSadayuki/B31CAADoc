@@ -1,0 +1,7 @@
+#
+# CATMcoModel
+#
+
+BUILT_OBJECT_TYPE=NONE
+
+LINK_WITH= 

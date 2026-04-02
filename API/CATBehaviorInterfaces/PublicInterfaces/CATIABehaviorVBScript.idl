@@ -1,0 +1,135 @@
+#ifndef CATIABehaviorVBScript_IDL
+#define CATIABehaviorVBScript_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+ //-------------------------------------------------------------------------
+
+/**
+ * Represents the VBScript behavior.
+ * <b>Role</b>: The VB script behavior is  designed to run a VBScript (or catvbs files) or to reference a VBA project.
+ * This interface derives from @href CATIABehavior and enables the manipulation of the internal variables of the VBScript behavior.
+ */
+
+
+#include "CATIABehavior.idl"
+
+interface CATIABehaviors; 
+
+interface CATIABehaviorVBScript : CATIABehavior
+{
+
+  /**
+     * Test for one available output of the behavior.
+	 * The behavior has to be in executing mode, otherwise it fails
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example test for the value existance of 
+	 * an internal parameter XXX that may contain or not a CATIAReference
+     * currently managed by a <tt>Behavior</tt> Beh.
+     * <pre>
+     * if (Beh.<font color="red">TestInternal("XXX")</font>)
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT TestInternal(in CATBSTR pName , out /*IDLRETVAL*/ long iExist);
+
+    /**
+     * Returns one available io of the behavior.
+	 * The behavior has to be in executing mode, otherwise it fails
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in <tt>BehParameter</tt> 
+	 * the internal parameter CATIAReference XXX 
+     * currently managed by a <tt>Behavior</tt> Beh.
+     * <pre>
+     * Dim BehParameter as Parameter
+     * Set BehParameter = Beh.<font color="red">GetInternal("XXX")</font>
+     * </pre>
+     * </dl>
+     */
+
+    HRESULT GetInternal(in CATBSTR pName , out /*IDLRETVAL*/ CATIABase oValue);
+
+   /**
+     * provide output of one available io of the behavior. 
+	 * The behavior has to be in executing mode, otherwise it fails
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example assign the <tt>BehParameter</tt> containing a CATIAReference 
+	 * to the internal parameter XXX
+     * currently managed by a <tt>Behavior</tt> Beh.
+     * <pre>
+     * Dim BehPower as Parameter
+     * Beh.<font color="red">PutInternal "XXX", BehParameter</font>
+     * </pre>
+     * </dl>
+     */
+    HRESULT PutInternal(in CATBSTR pName , in CATIABase oValue);
+
+
+   /**
+     * Inform Client VB has Started.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * </pre>
+     * </dl>
+	 * @deprecated V5R15 (Not needed)
+     */
+    HRESULT Start();
+
+   /**
+     * Inform Client VB has Successfully Finished.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * </pre>
+     * </dl>
+	 * @deprecated V5R15 (Not needed)
+     */
+    HRESULT Done();
+
+   /**
+     * Inform Client VB has not completly finished the task and has to be called later on
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * </pre>
+     * </dl>
+	 * @deprecated V5R15 (Not needed)
+     */
+    HRESULT Suspend();
+
+
+  /**
+     * Inform Client VB has Failed & Has Not operated.
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * </pre>
+     * </dl>
+	 * @deprecated V5R15 (Not needed)
+     */
+    HRESULT Cancel();
+};
+
+
+// Interface name : CATIABehaviorVBScript
+#pragma ID CATIABehaviorVBScript "DCE:fccccaae-2846-12d3-b051f06074eb7de3"
+#pragma DUAL CATIABehaviorVBScript
+
+// VB object name : 
+#pragma ID BehaviorVBScript "DCE:0d9cccb8-2747-12d3-b051f06074eb7de3"
+#pragma ALIAS CATIABehaviorVBScript BehaviorVBScript
+
+#endif
+

@@ -1,0 +1,109 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+#ifndef CATIADrawingArrows_IDL
+#define CATIADrawingArrows_IDL
+/*IDLREP*/
+
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIADrawingArrow.idl"
+#include "CATIACollection.idl"
+#include "CATBaseDispatch.idl"
+
+ /**
+  * A collection of all the drawing arrows currently managed by a
+  * drawing view of drawing sheet in a drawing document.
+  */
+interface CATIADrawingArrows : CATIACollection
+{
+ /**
+  * Creates a drawing arrow and adds it to the DrawingArrows collection.
+  * @param iHeadPointX,iHeadPointY
+  *   The x and y coordinates of head side of drawing arrow
+  * @param iTailPointX,iTailPointY
+  *   The x and y coordinates of tail side of drawing arrow
+  * @return The created drawing arrow
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example creates a drawing arrow
+  * and retrieved in <tt>MyArrow</tt> in the drawing view collection
+  * of the <tt>MyView</tt> drawing view.
+  * This view belongs to the drawing view collection of the drawing sheet
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView = MySheet.Views.<font color="red">ActiveView</font>
+  * Dim MyArrow As DrawingArrow
+  * Set MyArrow = MyView.Arrows.<font color="red">Add</font>(0., 0., 20., 50)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Add(in double iHeadPointX, in double iHeadPointY, in double iTailPointX, in double iTailPointY,
+              out /*IDLRETVAL*/ CATIADrawingArrow oNewDrawingArrow);
+
+
+ /**
+  * Removes a drawing arrow from the DrawingArrows collection.
+  * @param iIndex
+  *   The index of the drawing arrow to remove from
+  *   the collection of drawing arrows.
+  *   As a numerics, this index is the rank of the drawing arrow
+  *   in the collection.
+  *   The index of the first drawing arrow in the collection is 1, and
+  *   the index of the last drawing arrow is Count.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * The following example removes the third drawing arrow 
+  * in the drawing arrow collection of the active view
+  * of the active document, supposed to be a drawing document.
+  * <pre>
+  * Dim MyView As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * MyView.DrawingArrows.<font color="red">Remove</font>(3)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Remove(in long iIndex);
+
+/**
+  * Returns a drawing arrow using its index from the DrawingArrows collection.
+  * @param iIndex
+  *   The index of the drawing arrow to retrieve from the collection of drawing arows.
+  *   As a numerics, this index is the rank of the drawing arrow in the collection.
+  *   The index of the first drawing arrow in the collection is 1, and
+  *   the index of the last drawing arrow is Count.
+  * @return The retrieved drawing view
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ThisDrawingArrow</tt> the second drawing arrow,
+  * in the drawing view collection of the active view
+  * in the active sheet, in the active document supposed to be a drawing document.
+  * <pre>
+  * Dim MyView  As DrawingView
+  * Set MyView  = MySheet.Views.ActiveView
+  * Dim ThisDrawingArrow As DrawingArrow
+  * Set ThisDrawingArrow = MyView.Arrows.<font color="red">Item</font>(2)
+  * </pre>
+  * </dl>
+  */
+  HRESULT Item(in long iIndex, out /*IDLRETVAL*/ CATIADrawingArrow oItem);
+			
+};
+
+// Interface name : CATIADrawingArrows
+#pragma ID CATIADrawingArrows "DCE:6B0A1BC0-26C8-11d6-BE8F000347C379C9"
+#pragma DUAL CATIADrawingArrows
+
+// VB object name : DrawingArrows
+#pragma ID DrawingArrows "DCE:6B0A1BC1-26C8-11d6-BE8F000347C379C9"
+#pragma ALIAS CATIADrawingArrows DrawingArrows
+
+#endif
+

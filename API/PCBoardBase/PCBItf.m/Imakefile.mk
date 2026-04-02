@@ -1,0 +1,14 @@
+#
+# Makefile for the .idl files
+#
+
+BUILT_OBJECT_TYPE = NONE
+LINK_WITH = JS0CORBA CK0FEAT  \
+	    JS0GROUP  JS03TRA JS0ERROR JS0DSPA JS0LOGRP JS0CTYP JS0INF \
+	    SketcherItf InfItf MecModItf AD0XXBAS \
+	    Collections 
+
+  
+INCLUDED_MODULES= PCBItfCPP PCBPubIDL PCBProIDL
+
+

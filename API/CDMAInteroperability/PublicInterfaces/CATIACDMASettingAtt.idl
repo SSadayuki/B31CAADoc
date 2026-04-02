@@ -1,0 +1,515 @@
+#ifndef CATIACDMASettingAtt_IDL
+#define CATIACDMASettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2019
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+* Represents the base object to handle the parameters of the cache.
+*/
+interface CATIACDMASettingAtt : CATIASettingController
+{
+/**
+ * Returns or sets the activation of the work with VPM Cache.
+ * <br><b>Role</b>: Returns or sets the value of VPM cache activation. 
+*/
+#pragma PROPERTY WorkWithVPMCache	
+  HRESULT get_WorkWithVPMCache( out /*IDLRETVAL*/ boolean oIsActive);    
+  HRESULT put_WorkWithVPMCache( in  boolean iIsActive);    
+    
+/** 
+ * Locks or unlocks the VPM Cache Activation mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetWorkWithVPMCacheLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves informations about the VPM Cache activation mode.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetWorkWithVPMCacheModeInfo (inout CATBSTR AdminLevel,
+				 inout CATBSTR oLocked,
+				 out  /*IDLRETVAL*/boolean oModified);
+    
+
+
+/**
+ * Retrieves or sets the disabling of applicative object management.
+ * <br><b>Role</b>: Retrieves or sets the value of the disabling of applicative object management. 
+*/
+#pragma PROPERTY DisableAppObjMgt
+  HRESULT get_DisableAppObjMgt( inout /*IDLRETVAL*/ boolean oDisableAppObjMgt);    
+  HRESULT put_DisableAppObjMgt( in  boolean iDisableAppObjMgt);    
+    
+
+/** 
+ * Locks or unlocks the disabling of applicative object management.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetDisableAppObjMgtLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves informations about the disabling of applicative object management.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetDisableAppObjMgtInfo(inout CATBSTR AdminLevel,
+			   inout CATBSTR oLocked,
+			   out /*IDLRETVAL*/ boolean oModified); 
+
+ 
+
+/**
+ * Retrieves or sets the Load Of All VPM Properties status.
+ * <br><b>Role</b>: Sets the Load Of All VPM Properties status.
+*/
+#pragma PROPERTY LoadAllVPMProperties	
+  HRESULT get_LoadAllVPMProperties( inout /*IDLRETVAL*/ boolean oLoadAllVPMProperties);    
+  HRESULT put_LoadAllVPMProperties( in  boolean iLoadAllVPMProperties);    
+
+/** 
+ * Locks or unlocks the Load Of All VPM Properties status.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetLoadAllVPMPropertiesLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the Load Of All VPM Properties status.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetLoadAllVPMPropertiesInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the automatic highlight in PSN status.
+ * <br><b>Role</b>: Sets the automatic highlight in PSN status.
+*/
+#pragma PROPERTY AutoHigh	
+  HRESULT get_AutoHigh( inout /*IDLRETVAL*/ boolean oAutoHigh);    
+  HRESULT put_AutoHigh( in  boolean iAutoHigh);    
+
+/** 
+ * Locks or unlocks the automatic highlight in PSN status.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetAutoHighLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the automatic highlight in PSN status.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetAutoHighInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the database connection desabling.
+ * <br><b>Role</b>: Sets the database connection desabling.
+*/
+#pragma PROPERTY NoDBConnection	
+  HRESULT get_NoDBConnection( inout /*IDLRETVAL*/ boolean oNoDBConnection);    
+  HRESULT put_NoDBConnection( in  boolean iNoDBConnection);    
+
+/** 
+ * Locks or unlocks the database connection desabling.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetNoDBConnectionLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the database connection desabling.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetNoDBConnectionInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the manual cache cleaning activation.
+ * <br><b>Role</b>: Sets the manual cache cleaning activation.
+*/
+#pragma PROPERTY ManualCacheCleaning	
+  HRESULT get_ManualCacheCleaning( inout /*IDLRETVAL*/ boolean oManualCacheCleaning);    
+  HRESULT put_ManualCacheCleaning( in  boolean iManualCacheCleaning);    
+
+/** 
+ * Locks or unlocks the manual cache cleaning activation.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetManualCacheCleaningLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the manual cache cleaning activation.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetManualCacheCleaningInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the maximum number of files in VPM cache before automatic cache cleaning.
+ * <br><b>Role</b>: Sets the maximum number of files in VPM cache before automatic cache cleaning.
+*/
+#pragma PROPERTY NbFilesMax	
+  HRESULT get_NbFilesMax( inout /*IDLRETVAL*/ long oNbFilesMax);    
+  HRESULT put_NbFilesMax( in  long iNbFilesMax);    
+
+/** 
+ * Locks or unlocks the maximum number of files in VPM cache before automatic cache cleaning.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetNbFilesMaxLock( in  long iLocked);    
+  
+/** 
+ * Retrieves environment informations for the maximum number of files in VPM cache before automatic cache cleaning.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetNbFilesMaxInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the number of files to delete in VPM cache during automatic cache cleaning.
+ * <br><b>Role</b>: Sets the number of files to delete in VPM cache during automatic cache cleaning.
+*/
+#pragma PROPERTY NbFilesForDeletion	
+  HRESULT get_NbFilesForDeletion( inout /*IDLRETVAL*/ long oNbFilesForDeletion);    
+  HRESULT put_NbFilesForDeletion( in  long iNbFilesForDeletion);    
+
+/** 
+ * Locks or unlocks the number of files to delete in VPM cache during automatic cache cleaning.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetNbFilesForDeletionLock( in  long iLocked);    
+  
+/** 
+ * Retrieves environment informations for the number of files to delete in VPM cache during automatic cache cleaning.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetNbFilesForDeletionInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the maximum percentage cache size before automatic cache cleaning.
+ * <br><b>Role</b>: Sets the maximum percentage cache size before automatic cache cleaning.
+*/
+#pragma PROPERTY MaxPercentCacheSize	
+  HRESULT get_MaxPercentCacheSize( inout /*IDLRETVAL*/ long oMaxPercentCacheSize);    
+  HRESULT put_MaxPercentCacheSize( in  long iMaxPercentCacheSize);    
+
+/** 
+ * Locks or unlocks the maximum percentage cache size before automatic cache cleaning.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetMaxPercentCacheSizeLock( in  long iLocked);    
+  
+/** 
+ * Retrieves environment informations for the number of files to delete in VPM cache during automatic cache cleaning.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetMaxPercentCacheSizeInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the disabling of VPM Save Commit Panel.
+ * <br><b>Role</b>: Sets the disabling of VPM Save Commit Panel.
+*/
+#pragma PROPERTY DisableVPMSaveCommitPanel	
+  HRESULT get_DisableVPMSaveCommitPanel( inout /*IDLRETVAL*/ boolean oDisableVPMSaveCommitPanel);    
+  HRESULT put_DisableVPMSaveCommitPanel( in  boolean iDisableVPMSaveCommitPanel);    
+
+/** 
+ * Locks or unlocks the disabling of VPM Save Commit Panel.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetDisableVPMSaveCommitPanelLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the disabling of VPM Save Commit Panel.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetDisableVPMSaveCommitPanelInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the disabling of VPM Save Report Panel.
+ * <br><b>Role</b>: Sets the disabling of VPM Save Report Panel.
+*/
+#pragma PROPERTY DisableVPMSaveReportPanel	
+  HRESULT get_DisableVPMSaveReportPanel( inout /*IDLRETVAL*/ boolean oDisableVPMSaveReportPanel);    
+  HRESULT put_DisableVPMSaveReportPanel( in  boolean iDisableVPMSaveReportPanel);    
+
+/** 
+ * Locks or unlocks the disabling of VPM Save Report Panel.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetDisableVPMSaveReportPanelPanelLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the disabling of VPM Save Report Panel.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetDisableVPMSaveReportPanelInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the check of existence in VPM before FBDI.
+ * <br><b>Role</b>: Sets the check of existence in VPM before FBDI.
+*/
+#pragma PROPERTY CheckExistInVPMBeforeFBDI	
+  HRESULT get_CheckExistInVPMBeforeFBDI( inout /*IDLRETVAL*/ boolean oCheckExistInVPMBeforeFBDI);    
+  HRESULT put_CheckExistInVPMBeforeFBDI( in  boolean iCheckExistInVPMBeforeFBDI);    
+
+/** 
+ * Locks or unlocks the check of existence in VPM before FBDI.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetCheckExistInVPMBeforeFBDILock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the check of existence in VPM before FBDI.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetCheckExistInVPMBeforeFBDIInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the desabling of the overwrite/reload message.
+ * <br><b>Role</b>: Sets the desabling of the overwrite/reload message.
+*/
+#pragma PROPERTY DisableOverwriteReloadWarnMsg	
+  HRESULT get_DisableOverwriteReloadWarnMsg( inout /*IDLRETVAL*/ boolean oDisableOverwriteReloadWarnMsg);    
+  HRESULT put_DisableOverwriteReloadWarnMsg( in  boolean iDisableOverwriteReloadWarnMsg);    
+
+/** 
+ * Locks or unlocks the desabling of the overwrite/reload message.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetDisableOverwriteReloadWarnMsgLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the the desabling of the overwrite/reload message.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetDisableOverwriteReloadWarnMsgInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the enabling of the direct V5 Vault save.
+ * <br><b>Role</b>: Sets the enabling of the direct V5 Vault save.
+*/
+#pragma PROPERTY EnableDirectV5VaultSave	
+  HRESULT get_EnableDirectV5VaultSave( inout /*IDLRETVAL*/ boolean oEnableDirectV5VaultSave);    
+  HRESULT put_EnableDirectV5VaultSave( in  boolean iEnableDirectV5VaultSave);    
+
+/** 
+ * Locks or unlocks the enabling of the direct V5 Vault save.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetEnableDirectV5VaultSaveLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the enabling of the direct V5 Vault save.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetEnableDirectV5VaultSaveInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the enabling of asking before overwriting existing part.
+ * <br><b>Role</b>: Sets the enabling of asking before overwriting existing part.
+*/
+#pragma PROPERTY AskBeforeOverwriteExistingParts	
+  HRESULT get_AskBeforeOverwriteExistingParts( inout /*IDLRETVAL*/ boolean oAskBeforeOverwriteExistingParts);    
+  HRESULT put_AskBeforeOverwriteExistingParts( in  boolean iAskBeforeOverwriteExistingParts);    
+
+/** 
+ * Locks or unlocks the enabling of asking before overwriting existing part.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetAskBeforeOverwriteExistingPartsLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the enabling of asking before overwriting existing part.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetAskBeforeOverwriteExistingPartsInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the enabling of forbidding overwriting existing part.
+ * <br><b>Role</b>: Sets the enabling of forbidding overwriting existing part.
+*/
+#pragma PROPERTY NeverOverwriteExistingParts	
+  HRESULT get_NeverOverwriteExistingParts( inout /*IDLRETVAL*/ boolean oNeverOverwriteExistingParts);    
+  HRESULT put_NeverOverwriteExistingParts( in  boolean iNeverOverwriteExistingParts);    
+
+/** 
+ * Locks or unlocks the enabling of forbidding overwriting existing part.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetNeverOverwriteExistingPartsLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the enabling of forbidding overwriting existing part.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetNeverOverwriteExistingPartsInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the enabling of replacing the structure exposed assembly with the blackbox resulting of extract/save.
+ * <br><b>Role</b>: Sets the enabling of replacing the structure exposed assembly with the blackbox resulting of extract/save.
+*/
+#pragma PROPERTY AllowReplaceStructExposedDuringExtractSave	
+  HRESULT get_AllowReplaceStructExposedDuringExtractSave( inout /*IDLRETVAL*/ boolean oAllowReplaceStructExposedDuringExtractSave);    
+  HRESULT put_AllowReplaceStructExposedDuringExtractSave( in  boolean iAllowReplaceStructExposedDuringExtractSave);    
+
+/** 
+ * Locks or unlocks the enabling of forbidding overwriting existing part.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetAllowReplaceStructExposedDuringExtractSaveLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the enabling of forbidding overwriting existing part.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetAllowReplaceStructExposedDuringExtractSaveInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the enabling of forbidding inconsistent save.
+ * <br><b>Role</b>: Sets the enabling of forbidding inconsistent save.
+*/
+#pragma PROPERTY ForbidInconsistentSave	
+  HRESULT get_ForbidInconsistentSave( inout /*IDLRETVAL*/ boolean oForbidInconsistentSave);    
+  HRESULT put_ForbidInconsistentSave( in  boolean iForbidInconsistentSave);    
+
+/** 
+ * Locks or unlocks the enabling of forbidding inconsistent save.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetForbidInconsistentSaveLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the enabling of forbidding inconsistent save.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetForbidInconsistentSaveInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the VPM cache path.
+ * <br><b>Role</b>: Sets the VPM cache path.
+*/
+#pragma PROPERTY VPMCachePath	
+  HRESULT get_VPMCachePath( inout /*IDLRETVAL*/ CATBSTR oVPMCachePath);    
+  HRESULT put_VPMCachePath( in  CATBSTR iVPMCachePath);    
+
+/** 
+ * Locks or unlocks the VPM cache path.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetVPMCachePathLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the VPM cache path.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetVPMCachePathInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the enabling of generic FBDI.
+ * <br><b>Role</b>: Sets the enabling of generic FBDI.
+*/
+#pragma PROPERTY GFBDI	
+  HRESULT get_GFBDI( inout /*IDLRETVAL*/ boolean oGFBDI);    
+  HRESULT put_GFBDI( in  boolean iGFBDI);    
+
+/** 
+ * Locks or unlocks the enabling of generic FBDI.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetGFBDILock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the enabling of generic FBDI.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetGFBDIInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves or sets the mapping file.
+ * <br><b>Role</b>: Sets the mapping file.
+*/
+#pragma PROPERTY MappingFile	
+  HRESULT get_MappingFile( inout /*IDLRETVAL*/ CATBSTR oMappingFile);    
+  HRESULT put_MappingFile( in  CATBSTR iMappingFile);    
+
+/** 
+ * Locks or unlocks the mapping file.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/
+  HRESULT SetMappingFileLock( in  boolean iLocked);    
+  
+/** 
+ * Retrieves environment informations for the mapping file.
+ * <br>Refer to @href CATIASettingController for a detailled description.
+*/ 
+  HRESULT GetMappingFileInfo(inout CATBSTR AdminLevel,
+			     inout CATBSTR Locked,
+			     out /*IDLRETVAL*/ boolean oModified);
+};
+
+// Interface Name : CATIACDMASettingAtt
+#pragma ID CATIACDMASettingAtt "DCE:e3e0ef0b-4903-4872-aa1e5568071359ea"
+#pragma DUAL CATIACDMASettingAtt
+
+// VB Object Name : CDMASettingAtt
+#pragma ID CDMASettingAtt "DCE:d80c8c78-c455-4d5c-a225a7e24b80508d"
+#pragma ALIAS CATIACDMASettingAtt CDMASettingAtt
+#endif

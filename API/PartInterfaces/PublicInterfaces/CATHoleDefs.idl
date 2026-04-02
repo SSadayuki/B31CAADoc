@@ -1,0 +1,161 @@
+#ifndef CATHoleDefs_IDL
+#define CATHoleDefs_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATHoleDefs:						   
+// enumerations for Mechanical Hole
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Dec97 Creation                                      L Lalere
+//=================================================================
+
+// Hole global type
+/**
+ * Hole type.
+ * @param catSimpleHole
+ *  Simple hole
+ * @param catTaperedHole
+ *  Tapered hole
+ * @param catCounterboredHole
+ *  Counterbored hole
+ * @param catCountersunkHole
+ *  Countersunk hole
+ * @param catCounterdrilledHole
+ *  Counterdrilled hole
+ */
+enum CatHoleType
+{
+        catSimpleHole ,
+        catTaperedHole ,
+        catCounterboredHole ,
+        catCountersunkHole ,
+        catCounterdrilledHole
+};
+
+// Hole Anchor modes
+/**
+ * Hole anchoring mode.
+ * It specifies the way the hole is anchored to its support.
+ * This is valid with <tt>catCounterboredHole</tt> and
+ * <tt>catCounterdrilledHole</tt> holes only.
+ * Otherwise, holes are considered as anchored with the top of their head.
+ * @param catExtremPointHoleAnchor
+ *  The hole is anchored with the top of its head
+ * @param catCATMiddlePointHoleAnchor
+ *  The hole is anchored with the bottom of its head
+ */
+enum CatHoleAnchorMode
+{
+	catExtremPointHoleAnchor ,
+	catMiddlePointHoleAnchor
+};
+
+// Hole Threading modes
+/**
+ * Hole threading mode.
+ * It describes the different threadings the hole may receive.
+ * @param catThreadedHoleThreading
+ *  The hole is threaded
+ * @param catSmoothHoleThreading
+ *  The hole is smooth threaded
+ */
+enum CatHoleThreadingMode	
+{
+	catThreadedHoleThreading,
+	catSmoothHoleThreading
+};
+
+// Hole Threading side
+/**
+ * Hole threading .side
+ * It describes the side of hole thread.
+ * @param catRightThreadSide
+ *  The hole is right-threaded
+ * @param catLeftThreadSide
+ *  The hole is left-threaded
+ */
+enum CatHoleThreadSide	
+{
+	catRightThreadSide,
+	catLeftThreadSide
+};
+
+// Hole bottom type
+/**
+ * Hole bottom type.
+ * It describes the shape the hole bottom can have.
+ * @param catFlatHoleBottom
+ *  The hole bottom is flat
+ * @param catVHoleBottom
+ * The hole bottom has a V-Shape
+ * @param catTrimmedHoleBottom
+ * The hole bottom has a shape obtained by trimming of hole with surface/plane
+ */
+enum CatHoleBottomType	
+{
+	catFlatHoleBottom,
+	catVHoleBottom,
+	catTrimmedHoleBottom
+};
+
+// Countersunk Hole mode
+/**
+ * Countersunk hole mode.
+ * It describes the chosen mode for countersunk hole.
+ * @param catCSModeDepthAngle
+ *  Countersunk parameters are depth and angle
+ * @param catCSModeDepthDiameter
+ *  Countersunk parameters are depth and Diameter
+ * @param catCSModeAngleDiameter
+ *  Countersunk parameters are angle and Diameter
+ */
+enum CatCSHoleMode	
+{
+	catCSModeDepthAngle,
+	catCSModeDepthDiameter,
+    catCSModeAngleDiameter
+};
+
+// Hole Thread Standard
+/**
+ * Hole Thread Standard
+ * It describes the standard to be used for hole threads.
+ * @param catHoleMetricThinPitch
+ *  The hole thread standard is Metric Thin Pitch 
+ * @param catHoleMetricThickPitch
+ *  The hole thread standard is Metric Thick Pitch
+ */
+enum CatHoleThreadStandard	
+{
+	catHoleMetricThinPitch,
+	catHoleMetricThickPitch
+};
+
+// Counterdrilled Hole mode
+/**
+ * Counterdrilled hole mode.
+ * It describes the chosen mode for Counterdrilled hole.
+ * @param catCDModeNoCountersunkDiameter
+ *  Counterdrilled parameters are Diameter, Depth and Angle
+ * @param catCDModeCountersunkDiameter
+ *  Counterdrilled parameters are Diameter, Depth, Angle and Countersunk Diameter
+ */
+enum CatCDHoleMode	
+{
+	catCDModeNoCountersunkDiameter,
+	catCDModeCountersunkDiameter
+};
+
+#endif // CATHoleDefs_IDL

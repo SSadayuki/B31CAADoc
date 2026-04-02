@@ -1,0 +1,65 @@
+#ifndef CATIAProductDocument_IDL
+#define CATIAProductDocument_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+#include "CATIADocument.idl"
+interface CATIAProduct;
+//interface CATIAReferenceProducts;
+
+  // At the initialization of a ProductDocument a product is created
+  // which name is "Root Product". The name of this product can be overwritten
+  // using the SetName method.
+  // This root product (whatever its name) is unique in a ProductDocument
+  // and is retrieved by the get_Product property
+  // Part references can also be created in the ProductDocument in the intent
+  // of creating instances from these part references 
+  // These Part references are contained in the PartReferences collection
+
+    /**
+     * Represents the Document object for product structures.
+     * When a ProductDocument is created, a root product is created
+     * whose parent is the ProductDocument object. Its default name
+     * is RootProduct, which can be overwritten thanks to the  
+     * the @href CATIABase#Name property.
+     * This root product is at the top of the product tree structure contained
+     * in the document. It has no difference with the other contained products,
+     * except it has no father product in the product tree structure within
+     * the document.
+     */
+interface CATIAProductDocument : CATIADocument
+{
+
+//  retrieves the root product in the document
+    /**
+     * Returns the root product.
+     * @sample
+     * This example retrieves the root product of the <tt>MyProductDoc</tt>
+     * ProductDocument in <tt>RootProduct</tt>.
+     * <pre>
+     * Dim RootProduct As Product
+     * Set RootProduct = MyProductDoc.<font color="red">Product</font>
+     * </pre>
+     */
+#pragma PROPERTY Product
+  HRESULT get_Product(out /*IDLRETVAL*/ CATIAProduct oRootProduct);
+
+};
+
+// Interface name : CATIAProductDocument
+#pragma ID CATIAProductDocument "DCE:c9090bfc-5b42-11d1-a124080009dca4ae"
+#pragma DUAL CATIAProductDocument
+
+// VB object name : ProductDocument
+#pragma ID ProductDocument "DCE:e195c2b4-5b42-11d1-a124080009dca4ae"
+#pragma ALIAS CATIAProductDocument ProductDocument
+
+
+#endif

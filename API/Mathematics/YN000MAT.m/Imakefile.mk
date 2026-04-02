@@ -1,0 +1,24 @@
+#
+BUILT_OBJECT_TYPE = NONE
+#
+LINK_WITH = \
+  JS0ERROR \
+  JS0CORBA \
+  JS0MT
+
+#
+OS = COMMON
+#
+
+OS = Windows_NT
+#if os win_b64
+LOCAL_CCFLAGS = /D_SSE
+LOCAL_ASFLAGS = /D_SSE /D_WIN64
+#elif os intel_a
+OPTIMIZATION_CPP = /O2
+LOCAL_CCFLAGS = /D_SSE
+LOCAL_ASFLAGS = /D_SSE
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+#

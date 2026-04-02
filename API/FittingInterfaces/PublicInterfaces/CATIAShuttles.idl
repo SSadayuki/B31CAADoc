@@ -1,0 +1,67 @@
+#ifndef CATIAShuttles_IDL
+#define CATIAShuttles_IDL
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R5
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1  
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//===================================================================
+// CATIAShuttless.idl
+// Automation interface for the Shuttles element 
+//===================================================================
+#include "CATIACollection.idl"
+#include "CATIAShuttle.idl"
+
+/**  
+ * The interface to access a CATIAShuttles  
+ * <p>
+ * Using this prefered syntax will enable mkdoc to document your class.
+ */
+interface CATIAShuttles : CATIACollection 
+{
+	/**
+	* Creates a new Shuttle and adds it to the Shuttles collection.
+	* @return The created Shuttle
+	* <! @sample >
+	* <dt><b>Example:</b>
+	* <dd>
+	* The following example creates a Shuttle <tt>newShuttle</tt>
+	* in the Shuttles collection.
+	* <pre>
+	* Set newShuttles = Shuttles.<font color="red">Add</font>
+	* </pre>	
+	*/
+	HRESULT Add(out /*IDLRETVAL*/ CATIAShuttle oNewShuttle);
+	/**
+	* Creates a new Shuttle from the selection and adds it to the Shuttles collection.
+	* @return The created Shuttle
+	* <! @sample >
+	* <dt><b>Example:</b>
+	* <dd>
+	* The following example creates a Shuttle <tt>newShuttle</tt>
+	* in the Shuttles collection.
+	* <pre>
+	* Set newShuttles = Shuttles.<font color="red">Add</font>
+	* </pre>	
+	*/
+	HRESULT AddFromSel(out /*IDLRETVAL*/ CATIAShuttle oNewShuttle);
+	HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAShuttle oShuttle);
+	HRESULT Remove(in CATIAShuttle iShuttle);
+};
+
+// Interface name : CATIAShuttless
+#pragma ID CATIAShuttles "DCE:c8b6c144-4bfe-11d4-9eee00508b67522f"
+#pragma DUAL CATIAShuttles
+
+// VB object name : PathFinders (Id used in Visual Basic)
+#pragma ID Shuttles "DCE:c8b6c145-4bfe-11d4-9eee00508b67522f"
+#pragma ALIAS CATIAShuttles Shuttles
+
+#endif
+#endif

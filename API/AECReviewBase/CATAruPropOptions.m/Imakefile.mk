@@ -1,0 +1,33 @@
+#
+# AECPropOptions module pour edit properties et tools options
+#
+
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH= AD0XXBAS AC0XXLNK \
+CO0LSTPV CO0LSTST CO0RCINT \
+JS03TRA JS0CORBA JS0ERROR JS0FM JS0LIB0 JS0SCBAK JS0STR \
+CD0WIN CD0FRAME DI0PANV2 \
+NS0S1MSG NS0S3STR \
+OM0EDPRO AECBUtilities \
+AECReviewItfCPP CK0FEAT ON0FRAME \
+AC0CATPL CATDlgStandard RepAECGeo CATCdbEntity VE0MDL CATObjectSpecsModeler CATMathematics YP00IMPL \
+ MF0STARTUP AC0SPBAS CATGmoUtilities CATVisualization CATLiteralFeatures \
+ MecModItfCPP CATGitInterfaces CATDialogEngine
+
+#------------
+#VE0BASE VE0MDL NS0S1MSG NS0S3STR \
+
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_IID= AECReviewInterfacesUUID
+#else
+LINK_WITH_IID=
+#endif
+
+OS = COMMON
+# removed 032502 kny
+# DI0STATE DI0GRAF DI0APPLI CATGmoInterfaces ON0GRAPH VE0GRPH2 CATSketcherInterfaces PartItf 
+# removed 040802 kny
+# CATGmoIntegration CATDialogEngine 
+# added 040902 mge - CATDialogEngine for Link error
+

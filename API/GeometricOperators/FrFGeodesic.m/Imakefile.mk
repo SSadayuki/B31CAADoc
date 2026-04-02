@@ -1,0 +1,21 @@
+#
+BUILT_OBJECT_TYPE=NONE
+OS=COMMON
+#
+
+LINK_WITH= \
+  YP00IMPL \
+  YP00TRST \
+  JS0CORBA \
+  YN000MAT \
+  YN000FUN \
+  CO0LSTPV \
+  Y30UIUTI \
+  FrFOpeUtil
+#
+OS = Windows_NT
+#if os win_b64
+#else
+OPTIMIZATION_CPP = /O2
+#endif
+#

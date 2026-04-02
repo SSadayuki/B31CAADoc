@@ -1,0 +1,211 @@
+/* -*-c++-*- */
+#ifndef CATIAHybridShapeLineTangency_IDL
+#define CATIAHybridShapeLineTangency_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//           
+// CATIAHybridShapeLineTangency:         
+// Exposed interface for HybridShapeLineTangency
+//           
+// Janvier 2000 Creation
+//=================================================================
+#include "CATIAHybridShapeLine.idl"
+#include "CATIALength.idl"
+#include "CATIAReference.idl"
+
+/**
+ * Line tangent to a curve. 
+ * <b>Role</b>: To access data of the line feature created to
+ *  be tangent to a curve at a given point.
+ * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeLineTangency object.
+ * @see CATIAReference 
+ * @see CATIALength 
+ * @see CATIAHybridShapeFactory
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeLineTangency : CATIAHybridShapeLine
+{
+
+
+ /**
+ * Returns or Sets the curve to which the line will be tangent.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIATriDimFeatEdge or @href CATIABiDimFeatEdge.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oCurve</code> the reference curve    
+ * for the <code>LineTangency</code> hybrid shape feature.
+ * <pre>
+ * Dim oCurve As Reference
+ * Set oCurve = LineTangency.<font color="red">Curve</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Curve
+ HRESULT get_Curve ( out /*IDLRETVAL*/  CATIAReference   oCurve);
+ HRESULT put_Curve ( in           CATIAReference   iCurve);
+
+
+ /**
+ * Returns or Sets the starting point of the line.
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAVertex.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oPoint</code> the starting point    
+ * for the <code>LineTangency</code> hybrid shape feature.
+ * <pre>
+ * Dim oPoint As Reference
+ * Set oPoint = LineTangency.<font color="red">Point</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Point
+ HRESULT get_Point ( out /*IDLRETVAL*/  CATIAReference   oPoint);
+ HRESULT put_Point ( in           CATIAReference   iPoint);
+
+
+
+ /**
+ * Returns or Sets the support surface.
+ * <br> Note: Support surface is not mandatory<br>
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * @href CATIAFace.
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oSurface</code> the suupporting Surface (if exist) 
+ * for the <code>LineTangency</code> hybrid shape feature.
+ * <pre>
+ * Dim oSurface As Reference
+ * Set oSurface = LineTangency.<font color="red">Surface</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Support
+ HRESULT get_Support ( out /*IDLRETVAL*/  CATIAReference   oSurface);
+ HRESULT put_Support ( in           CATIAReference   iSurface);
+
+ /**
+ * Returns or Sets the line orientation.
+ * <br> Orientation allows to reverse the line direction from the reference point.
+ * <br> For a line of L length, it is the same as creating this line with -L length :
+ *  Orientation : can be 1 or -1
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oOrientation</code> the starting length   
+ * for the <code>LineTangency</code> hybrid shape feature.
+ * <pre>
+ * Dim oOrientation As long
+ * Set oOrientation = LineTangency.<font color="red">Orientation</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY Orientation
+ HRESULT get_Orientation (out /*IDLRETVAL*/  long       oOrientation);
+ HRESULT put_Orientation (in       long       iOrientation);
+
+
+
+ /**
+ * Returns the start length of the line.
+ * <br> Start length : extension of the line, beginning at the starting point
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oStart</code> the beginning offset length   
+ * for the <code>LineTangency</code> hybrid shape feature.
+ * <pre>
+ * Dim oStart As  CATIALength 
+ * Set oStart = LineTangency.<font color="red">BeginOffset</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY BeginOffset
+ HRESULT get_BeginOffset ( out /*IDLRETVAL*/  CATIALength   oStart);
+
+
+ /**
+ * Returns the end length of the line.
+ * <br> End length : extension of the line, beginning at the ending point
+ * <dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>oEnd</code> the starting length   
+ * for the <code>LineTangency</code> hybrid shape feature.
+ * <pre>
+ * Dim oEnd As  CATIALength 
+ * Set oEnd = LineTangency.<font color="red">EndOffset</font>
+ * </pre>
+ * </dl>
+ */ 
+#pragma PROPERTY EndOffset
+ HRESULT get_EndOffset ( out /*IDLRETVAL*/  CATIALength   oEnd);
+
+ //  ================
+ //  == METHODS ==
+ //  ================
+ /**
+ * Gets the length type
+ * Default is 0.
+ *   @param oType
+ *   The length type = 0 : length               - the line is limited by its extremities
+ *                   = 1 : infinite             - the line is infinite
+ *                   = 2 : infinite start point - the line is infinite on the side of the start point
+ *                   = 3 : infinite end point   - the line is infinite on the side of the end point
+ */
+ HRESULT GetLengthType (out /*IDLRETVAL*/  long  oType);
+ /**
+ * Sets the length type
+ * Default is 0.
+ *   @param iType
+ *   The length type = 0 : length               - the line is limited by its extremities
+ *                   = 1 : infinite             - the line is infinite
+ *                   = 2 : infinite start point - the line is infinite on the side of the start point
+ *                   = 3 : infinite end point   - the line is infinite on the side of the end point
+ */
+ HRESULT SetLengthType(in long iType);
+ /**
+ * Sets the symmetrical extension of the line (start = -end).
+ *   @param iSym
+ *       Symetry flag  
+ */
+ HRESULT SetSymmetricalExtension(in boolean iSym);
+
+ /**
+ * Gets whether the symmetrical extension of the line is active.
+ *   @param oSym
+ *       Symetry flag  
+ */
+ HRESULT GetSymmetricalExtension(out /*IDLRETVAL*/ boolean oSym);
+ /**
+ * Removes the support surface.
+ */
+ HRESULT RemoveSupport();
+};
+
+
+// Interface name : CATIAHybridShapeLineTangency
+#pragma ID CATIAHybridShapeLineTangency "DCE:89d76603-4e90-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeLineTangency
+
+// VB object name : HybridShapeLineTangency (Id used in Visual Basic)
+#pragma ID HybridShapeLineTangency "DCE:89d76901-2d6c-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeLineTangency HybridShapeLineTangency
+#endif
+
+
+// CATIAHybridShapeLineTangency_IDL         

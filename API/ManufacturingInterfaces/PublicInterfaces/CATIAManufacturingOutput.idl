@@ -1,0 +1,120 @@
+#ifndef CATIAManufacturingOutput_IDL
+#define CATIAManufacturingOutput_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAManufacturingOutput:                           
+// Exposed interface for Manufacturing Output Stream creation
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+#include "CATIABase.idl"
+#include "CATBSTR.idl" 
+
+//-----------------------------------------------------------------
+
+/**
+ * Object that represents the output machining code.
+ */
+interface CATIAManufacturingOutput : CATIABase
+{
+    //        ===================
+    //        == WRITE METHODS ==
+    //        ===================
+    //
+    /**
+     * Write the specified string to the underlying output stream.
+     */
+    HRESULT    write_Chars (in CATBSTR iText);
+
+    /**
+     * Write the specified double to the underlying output stream.
+     */
+    HRESULT    write_Double (in double iVal);
+
+    /**
+     * Write the specified long to the underlying output stream.
+     */
+    HRESULT    write_Long (in long iVal);
+
+    /**
+     * Create a New Line in the underlying output stream.
+     */
+    HRESULT    NewLine ();
+
+    /**
+     * Specify that the line is ended. 
+     */
+    HRESULT    EndLine ();
+
+    /**
+     * Create a New Block in the underlying output stream.
+     */
+    HRESULT    NewBlock ();
+
+    /**
+     * Specify that the Block is ended. 
+     */
+    HRESULT    EndBlock ();
+
+    /**
+     * Increment the tabulation of the current block of text by the specified number of characters. 
+     */
+    HRESULT    IncrementTabulation (in long iTab);
+
+    /**
+     * Decrement the tabulation of the current block of text by the specified number of characters. 
+     */
+    HRESULT    DecrementTabulation (in long iTab);
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+    //
+    /**
+     * Close the Stream.
+     */
+    HRESULT    CloseStream ( );
+
+    /**
+     * Flush all Data in the Stream.
+     */
+    HRESULT    Flush ( );
+
+    /**
+     * Set the number of lines of the buffer before it will be flushed (default is 200).
+     * @param iLines
+        *       The integer value of the number of lines
+     */
+    HRESULT    SetBufferLength (in	long	iLines);
+
+#pragma PROPERTY Size
+
+    /**
+     * Returns the number of bytes written to this data output.
+     * @param oBytes
+        *       The integer value of the number of bytes
+     */
+    HRESULT    get_Size (out /*IDLRETVAL*/ long	oBytes);
+
+};
+
+// Interface Name : CATIAManufacturingOutput
+#pragma ID CATIAManufacturingOutput "DCE:11356d6e-6a7c-11d2-a200006094b92c5a"
+#pragma DUAL CATIAManufacturingOutput
+ 
+// VB Object Name : ManufacturingOutput
+#pragma ID ManufacturingOutput "DCE:feb48ca0-6a7c-11d2-a200006094b92c5a"
+#pragma ALIAS CATIAManufacturingOutput ManufacturingOutput
+
+#endif
+// CATIAManufacturingOutput_IDL

@@ -1,0 +1,198 @@
+//======================================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//======================================================================================
+//
+// CATIASampled.idl
+// Automation interface for the Sampled element 
+//
+//======================================================================================
+//
+//
+//======================================================================================
+
+
+#ifndef CATIASampled_IDL
+#define CATIASampled_IDL
+
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+/*IDLREP*/
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+enum CatSampledSplitType
+{
+    CatSampledSplitOnSeg,
+    CatSampledSplitOnShot
+};
+
+
+/**
+ * Possible values of how analysis is to be used when it is added to a sampled
+ * based object.
+ * @param CatSampledAnalysisOff
+ *      Mode to set the analysis to Off
+ * @param CatSampledAnalysisOn
+ *      Mode to set the analysis to On
+ * @param CatSampledAnalysisStop
+ *      Mode to set the analysis to Stop
+ * @param CatSampledAnalysisVerbose
+ *      Mode to set the analysis to Verbose
+ */
+enum CatSampledAnalysisMode
+{
+    CatSampledAnalysisOff,
+    CatSampledAnalysisOn,
+    CatSampledAnalysisStop,
+    CatSampledAnalysisVerbose
+};
+
+
+interface CATIAShots;
+
+
+/**  
+ * The interface to access a CATIASampled based object.  The Sampled class 
+ * defines characteristics for simulatable tasks within DMU Fitting.  CATIASampled
+ * is the parent class for tracks.  Key samples are recorded (as shots or CATIAShots)
+ * for an object and then during simulation the object is interpolated with these 
+ * shots over time. 
+ */
+
+
+interface CATIASampled : CATIABase 
+{
+
+    /**
+     * Returns or sets the Sampled object.
+     * <b>Role:/b> Retrieves/stores the object that will be used in the sampled based 
+     * simulation.  Please note that the object will move to the shots defined in the 
+     * sampled.
+     */
+#pragma PROPERTY Object
+    HRESULT get_Object                      (out /*IDLRETVAL*/ CATBaseDispatch oObject);
+    HRESULT put_Object                      (in CATBaseDispatch iObject);
+
+    
+    /**
+     * Sets the object in the sampled.
+     * <b>Role:</b> Stores the object that will be used in the sampled based simulation.
+     * The object will not move and the sample's shots will be repositioned relative to 
+     * the object position.
+     */
+    HRESULT SetObjectKeepingPosition        (in CATBaseDispatch iObject);
+
+
+    /**
+     * @nodoc
+     */
+#pragma PROPERTY Handle
+    HRESULT get_Handle                      (out /*IDLRETVAL*/ CATBaseDispatch oHandle);
+    HRESULT put_Handle                      (in CATBaseDispatch iHandle);
+
+
+    /**
+     * Retrieves/sets the sampled's interpolater.
+     * <b>Role:</b> Retrieves/sets the interpolator used by the sampled during 
+     * simulation.  Note that the name of the interpolater is used (which is a 
+     * string).
+     */
+#pragma PROPERTY Interpolater
+    HRESULT get_Interpolater                (out /*IDLRETVAL*/ CATBSTR oInterpolater);
+    HRESULT put_Interpolater                (in CATBSTR iInterpolater);
+
+
+    /**
+     * Retrieves/sets the sampled's time.
+     * <b>Role:</b> Retrieves/sets the internal time associated to the current
+     * sampled object.  Note that the time is handled as a double.
+     */
+#pragma PROPERTY Time
+    HRESULT get_Time                        (out /*IDLRETVAL*/ double oTime);
+    HRESULT put_Time                        (in double iTime);
+
+
+    /**
+     * Returns the total duration 
+     */
+    HRESULT GetTotalDuration                (out /*IDLRETVAL*/ double oDuration);
+
+
+    /**
+     * Returns or sets the Sampled object.
+     */
+#pragma PROPERTY Scaling
+    HRESULT get_Scaling                     (out /*IDLRETVAL*/ double oScaling);
+    HRESULT put_Scaling                     (in double iScaling);
+
+
+    /**
+     * Returns or sets the Sampled object.
+     */
+    HRESULT GetKnownInterpolaters           (inout CATSafeArrayVariant oInterpolaters);
+
+
+    /**
+     * Returns or sets the Sampled object.
+     */
+    HRESULT RemoveAnalyses                  ();
+
+    /**
+     * Add (bind) an analysis object to a Track.
+     * @param iObject
+     *   The analysis to add (bind) to the Track
+     * @param iAnalysisMode
+     *   Indicates the analysis status for iAnalysis
+     *      CatSampledAnalysisOff
+     *      CatSampledAnalysisOn,
+     *      CatSampledAnalysisStop
+     *      CatSampledAnalysisVerbose
+     * @param iMonitorMode
+     *   Indicates the monitor status for iAnalysis - Off (0) or On (1)
+     */
+    HRESULT BindAnalysis                    (in CATBaseDispatch iObject, in CatSampledAnalysisMode iAnalysisMode, in boolean iMonitorMode);
+
+
+    /**
+     * Returns or sets the Sampled object.
+     */
+#pragma PROPERTY Shots
+    HRESULT get_Shots                       (out /*IDLRETVAL*/ CATIAShots oShots);
+
+    /**
+     * Returns or sets the Sampled object.
+     */
+    HRESULT ReverseTime                     ();
+
+    /**
+     * Returns or sets the Sampled object.
+     */
+    HRESULT Append                          (in CATSafeArrayVariant iTracks, out /*IDLRETVAL*/ CATIASampled oResultTrack);
+
+    /**
+     * Returns or sets the Sampled object.
+     */
+    HRESULT Split                           (in CatSampledSplitType iType, in short iIndice);
+
+    /**
+     * Returns or sets the Sampled object.
+     */
+    HRESULT BreakInheritance                ();
+
+};
+
+// Interface name : CATIASampled
+#pragma ID CATIASampled "DCE:dfaedaf9-6ba3-440d-ae683bd2197f6572"
+#pragma DUAL CATIASampled
+
+// VB object name : Track (Id used in Visual Basic)
+#pragma ID Sampled "DCE:2f344a16-3824-445a-be3e8f3dc6beffe8"
+#pragma ALIAS CATIASampled Sampled
+
+#endif

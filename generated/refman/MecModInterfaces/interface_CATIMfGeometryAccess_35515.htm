@@ -1,0 +1,592 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>MecModInterfaces CATIMfGeometryAccess Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../MecModInterfaces.htm" href="../MecModInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "MecModInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIMfGeometryAccess"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>MecModInterfaces Framework:  CATIMfGeometryAccess Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIMfGeometryAccess_35515','CATIMfGeometryAccess','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIMfGeometryAccess</b>
+</p>
+<p>
+<b><i> Interface to get selecting objects and topological cells through generic naming or symbolic information.</i></b><br>
+
+ Methods of this interfaces are called on a source shape feature.
+ They retrieve selecting objects or topological cells from
+ the specified source shape feature,
+ a key word <tt>iKey</tt>, 
+ if needed, a profile element <tt>iProfileElement</tt> of a sketch, and
+ a <tt>iFeature</tt> to specify the search domain.
+ <br>For example, the <tt>CATIRsur</tt> selecting objects associated with the lateral face of Pad.3 
+ extruded from Line.7 are found with 
+ <tt>Pad.3->GetBReps(MfKeyExtrudedFrom,Line.7,List)</tt>.
+ Without any <tt>iFeature</tt>, the search is performed on the source solid (Pad.3 in the previous example).
+ The instruction <tt>Pad.3->GetBReps(MfKeyExtrudedFrom,Line.7,Fillet.6,List)</tt>
+ finds the <tt>CATIRsur</tt> selecting objects associated with the lateral face of Pad.3 
+ extruded from Line.7 on the solid after Fillet.6.
+ <br>Another example, the face BRep feature associated with the top face of Pad.6 is found with
+ <tt>Pad.6->GetBReps(MfKeyTop,List)</tt>.
+ <br>The instruction <tt>Fillet.3->GetCells(List)</tt> retrieves the Fillet.3 faces,
+ and the instruction <tt>Fillet.3->GetCells(Draft.12,List)</tt> retrieves the 
+ Fillet.3 faces as they appear on the solid after Draft.12.
+ <br><b>Legal values</b>:
+ <lu><li><tt>MfKeyTop</tt> available for a pad, a pocket, a rib, a slot, a stiffener,
+ <li><tt>MfKeyBottom</tt> available for a pad, a pocket, a rib, a slot, a stiffener,
+ <li><tt>MfKeyExtrudedFrom</tt> available for a pad, a pocket, a rib, a slot, a stiffener, a shaft, a groove,
+ <li><tt>MfKeyStart</tt> available for a shaft, a groove,
+ <li><tt>MfKeyEnd</tt> available for a shaft, a groove.</ul></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetBReps(CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"><b>GetBReps</b></a>(CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)
+</td><td id='tdright'>  Retrieves all the selecting objects.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBReps(CATUnicodeString&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"><b>GetBReps</b></a>(CATUnicodeString&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)
+</td><td id='tdright'>   Retrieves selecting objects from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBReps(CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"><b>GetBReps</b></a>(CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)
+</td><td id='tdright'>  Retrieves all the selecting objects.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBReps(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"><b>GetBReps</b></a>(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)
+</td><td id='tdright'>  Retrieves all the selecting objects from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBReps(CATUnicodeString&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"><b>GetBReps</b></a>(CATUnicodeString&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)
+</td><td id='tdright'>  Retrieves selecting objects from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBReps(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"><b>GetBReps</b></a>(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)
+</td><td id='tdright'>  Retrieves selecting objects from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBReps(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"><b>GetBReps</b></a>(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)
+</td><td id='tdright'>  Retrieves all the selecting objects from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetBReps(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"><b>GetBReps</b></a>(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)
+</td><td id='tdright'>  Retrieves selecting objects from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCells(CATLISTV(CATBaseUnknown_var)&amp;)"><b>GetCells</b></a>(CATLISTV(CATBaseUnknown_var)&amp;)
+</td><td id='tdright'>  Retrieves all the topological cells.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCells(CATUnicodeString&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"><b>GetCells</b></a>(CATUnicodeString&amp;,CATLISTV(CATBaseUnknown_var)&amp;)
+</td><td id='tdright'>  Retrieves topological faces from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCells(CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"><b>GetCells</b></a>(CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)
+</td><td id='tdright'>  Retrieves all the topological cells.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCells(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"><b>GetCells</b></a>(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)
+</td><td id='tdright'>  Retrieves topological faces from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCells(CATUnicodeString&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"><b>GetCells</b></a>(CATUnicodeString&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)
+</td><td id='tdright'>  Retrieves topological faces from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCells(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"><b>GetCells</b></a>(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)
+</td><td id='tdright'>  Retrieves topological faces from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCells(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"><b>GetCells</b></a>(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)
+</td><td id='tdright'>  Retrieves topological faces from symbolic information.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetCells(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"><b>GetCells</b></a>(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)
+</td><td id='tdright'>  Retrieves topological faces from symbolic information.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetBReps"></a><a id="GetBReps(CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetBReps</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oBreps</span>, const <script type="text/javascript"> activateLink('CATMfBRepSelectInitMode','CATMfBRepSelectInitMode')</script> <span class='param'>iInitMode</span><span class='param'>= MfInitMode_Default</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all the selecting objects.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oBreps</span></dt>
+   <dd> List of selecting objects. Query CATIBRepAccess or its derived interfaces.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitMode</span></dt>
+   <dd> use Default value only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBReps"></a><a id="GetBReps(CATUnicodeString&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetBReps</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oBreps</span>, const <script type="text/javascript"> activateLink('CATMfBRepSelectInitMode','CATMfBRepSelectInitMode')</script> <span class='param'>iInitMode</span><span class='param'>= MfInitMode_Default</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+  Retrieves selecting objects from symbolic information.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>:
+ <ul><li><tt>MfKeyTop</tt>, <tt>MfKeyBottom</tt>: available for a pad, a pocket, a rib, a slot, a stiffener,
+ <li> <tt>MfKeyStart</tt>, <tt>MfKeyEnd</tt>: available for a shaft, a groove.</ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> oBreps</span></dt>
+   <dd> List of <tt>CATIRsur</tt> selecting objects.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitMode</span></dt>
+   <dd> use Default value only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBReps"></a><a id="GetBReps(CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetBReps</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIGeometricalElement_var','CATIGeometricalElement_var&amp;')</script> <span class='param'>iFeature</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oBreps</span>, const <script type="text/javascript"> activateLink('CATMfBRepSelectInitMode','CATMfBRepSelectInitMode')</script> <span class='param'>iInitMode</span><span class='param'>= MfInitMode_Default</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all the selecting objects.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd> Search is performed at the level of <tt>iFeature</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oBreps</span></dt>
+   <dd> List of selecting objects. Query CATIBRepAccess or its derived interfaces.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitMode</span></dt>
+   <dd> use Default value only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBReps"></a><a id="GetBReps(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetBReps</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oBreps</span>, const <script type="text/javascript"> activateLink('CATMfBRepSelectInitMode','CATMfBRepSelectInitMode')</script> <span class='param'>iInitMode</span><span class='param'>= MfInitMode_Default</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all the selecting objects from symbolic information.
+ Available for lateral faces of an extruded or revolute shape feature: a pad, a pocket, a shaft, a groove, a stiffener.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>: <tt>MfKeyExtrudedFrom</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement</span></dt>
+   <dd> Profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oBreps</span></dt>
+   <dd> List of <tt>CATIRsur</tt> selecting objects.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitMode</span></dt>
+   <dd> use Default value only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBReps"></a><a id="GetBReps(CATUnicodeString&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetBReps</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATIGeometricalElement_var','CATIGeometricalElement_var&amp;')</script> <span class='param'>iFeature</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oBreps</span>, const <script type="text/javascript"> activateLink('CATMfBRepSelectInitMode','CATMfBRepSelectInitMode')</script> <span class='param'>iInitMode</span><span class='param'>= MfInitMode_Default</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves selecting objects from symbolic information.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>:
+ <ul><li><tt>MfKeyTop</tt>, <tt>MfKeyBottom</tt>: available for a pad, a pocket, a rib, a slot, a stiffener,
+ <li> <tt>MfKeyStart</tt>, <tt>MfKeyEnd</tt>: available for a shaft, a groove.</ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd> Search is performed at the level of <tt>iFeature</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oBreps</span></dt>
+   <dd> List of <tt>CATIRsur</tt> selecting objects.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitMode</span></dt>
+   <dd> use Default value only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBReps"></a><a id="GetBReps(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetBReps</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement1</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement2</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oBreps</span>, const <script type="text/javascript"> activateLink('CATMfBRepSelectInitMode','CATMfBRepSelectInitMode')</script> <span class='param'>iInitMode</span><span class='param'>= MfInitMode_Default</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves selecting objects from symbolic information.
+ Available for lateral faces of a swept shape feature: a rib, a slot.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>: <tt>MfKeyExtrudedFrom</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement1</span></dt>
+   <dd> First profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement2</span></dt>
+   <dd> Second profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oBreps</span></dt>
+   <dd> List of <tt>CATIRsur</tt> selecting objects.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitMode</span></dt>
+   <dd> use Default value only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBReps"></a><a id="GetBReps(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetBReps</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement</span>, const <script type="text/javascript"> activateLink('CATIGeometricalElement_var','CATIGeometricalElement_var&amp;')</script> <span class='param'>iFeature</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oBreps</span>, const <script type="text/javascript"> activateLink('CATMfBRepSelectInitMode','CATMfBRepSelectInitMode')</script> <span class='param'>iInitMode</span><span class='param'>= MfInitMode_Default</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all the selecting objects from symbolic information. 
+ Available for lateral faces of an extruded or revolute shape feature: a pad, a pocket, a shaft, a groove, a stiffener. 
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>: <tt>MfKeyExtrudedFrom</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement</span></dt>
+   <dd> Profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd> Search is performed at the level of <tt>iFeature</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oBreps</span></dt>
+   <dd> List of <tt>CATIRsur</tt> selecting objects.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitMode</span></dt>
+   <dd> use Default value only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetBReps"></a><a id="GetBReps(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;,CATMfBRepSelectInitMode)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetBReps</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement1</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement2</span>, const <script type="text/javascript"> activateLink('CATIGeometricalElement_var','CATIGeometricalElement_var&amp;')</script> <span class='param'>iFeature</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oBreps</span>, const <script type="text/javascript"> activateLink('CATMfBRepSelectInitMode','CATMfBRepSelectInitMode')</script> <span class='param'>iInitMode</span><span class='param'>= MfInitMode_Default</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves selecting objects from symbolic information.
+ Available for lateral faces of a swept shape feature: a rib, a slot.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>: <tt>MfKeyExtrudedFrom</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement1</span></dt>
+   <dd> First profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement2</span></dt>
+   <dd> Second profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd> Search is performed at the level of <tt>iFeature</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oBreps</span></dt>
+   <dd> List of <tt>CATIRsur</tt> selecting objects.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iInitMode</span></dt>
+   <dd> use Default value only.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCells"></a><a id="GetCells(CATLISTV(CATBaseUnknown_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetCells</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oCells</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all the topological cells.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oCells</span></dt>
+   <dd> List of cells. Query CATCell or its derived interfaces.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCells"></a><a id="GetCells(CATUnicodeString&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetCells</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oCells</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves topological faces from symbolic information.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>:
+ <ul><li><tt>MfKeyTop</tt>, <tt>MfKeyBottom</tt>: available for a pad, a pocket, a rib, a slot, a stiffener,
+ <li> <tt>MfKeyStart</tt>, <tt>MfKeyEnd</tt>: available for a shaft, a groove.</ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCells</span></dt>
+   <dd> List of <tt>CATFace</tt> cells.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCells"></a><a id="GetCells(CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetCells</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIGeometricalElement_var','CATIGeometricalElement_var&amp;')</script> <span class='param'>iFeature</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oCells</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves all the topological cells.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd> Search is performed at the level of <tt>iFeature</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCells</span></dt>
+   <dd> List of topological cells. Query CATCell or its derived interfaces.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCells"></a><a id="GetCells(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetCells</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oCells</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves topological faces from symbolic information.
+ Available for lateral faces of an extruded or revolute shape feature: a pad, a pocket, a shaft, a groove.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>: <tt>MfKeyExtrudedFrom</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement</span></dt>
+   <dd> Profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCells</span></dt>
+   <dd> List of <tt>CATFace</tt> cells.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCells"></a><a id="GetCells(CATUnicodeString&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetCells</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATIGeometricalElement_var','CATIGeometricalElement_var&amp;')</script> <span class='param'>iFeature</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oCells</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves topological faces from symbolic information.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>:
+ <ul><li><tt>MfKeyTop</tt>, <tt>MfKeyBottom</tt>: available for a pad, a pocket, a rib, a slot, a stiffener,
+ <li> <tt>MfKeyStart</tt>, <tt>MfKeyEnd</tt>: available for a shaft, a groove.</ul>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd> Search is performed at the level of <tt>iFeature</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCells</span></dt>
+   <dd> List of <tt>CATFace</tt> cells.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCells"></a><a id="GetCells(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetCells</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement1</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement2</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oCells</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves topological faces from symbolic information.
+ Available for lateral faces of a swept shape feature: a rib, a slot.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>: <tt>MfKeyExtrudedFrom</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement1</span></dt>
+   <dd> First profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement2</span></dt>
+   <dd> Second profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCells</span></dt>
+   <dd> List of <tt>CATFace</tt> cells.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCells"></a><a id="GetCells(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetCells</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement</span>, const <script type="text/javascript"> activateLink('CATIGeometricalElement_var','CATIGeometricalElement_var&amp;')</script> <span class='param'>iFeature</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oCells</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves topological faces from symbolic information.
+ Available for lateral faces of an extruded or revolute shape feature: a pad, a pocket, a shaft, a groove, a stiffener.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>: <tt>MfKeyExtrudedFrom</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement</span></dt>
+   <dd> Profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd> Search is performed at the level of <tt>iFeature</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCells</span></dt>
+   <dd> List of <tt>CATFace</tt> cells.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetCells"></a><a id="GetCells(CATUnicodeString&amp;,CATBaseUnknown_var&amp;,CATBaseUnknown_var&amp;,CATIGeometricalElement_var&amp;,CATLISTV(CATBaseUnknown_var)&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetCells</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iKey</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement1</span>, const <script type="text/javascript"> activateLink('CATBaseUnknown_var','CATBaseUnknown_var&amp;')</script> <span class='param'>iProfileElement2</span>, const <script type="text/javascript"> activateLink('CATIGeometricalElement_var','CATIGeometricalElement_var&amp;')</script> <span class='param'>iFeature</span>,<script type="text/javascript"> activateLink('CATLISTV(CATBaseUnknown_var)','CATLISTV(CATBaseUnknown_var)&amp;')</script> <span class='param'>oCells</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves topological faces from symbolic information.
+ Available for lateral faces of a swept shape feature: a rib, a slot.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iKey</span></dt>
+   <dd> Key word.
+ <br><b>Legal values</b>: <tt>MfKeyExtrudedFrom</tt>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement1</span></dt>
+   <dd> First profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProfileElement2</span></dt>
+   <dd> Second profile element.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd> Search is performed at the level of <tt>iFeature</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oCells</span></dt>
+   <dd> List of <tt>CATFace</tt> cells.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIMfGeometryAccess.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATMecModInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

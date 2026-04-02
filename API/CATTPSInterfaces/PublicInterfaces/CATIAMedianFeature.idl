@@ -1,0 +1,39 @@
+#ifndef CATIAMedianFeature_IDL
+#define CATIAMedianFeature_IDL
+
+// COPYRIGHT Dassault Systemes 2018
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+/**
+ * Interface for accessing Median Feature modifier on a Semantic GDT 
+ * (ISO Standard only).
+ */
+interface CATIAMedianFeature : CATIABase 
+{
+  #pragma PROPERTY Modifier
+  /**
+   * Retrieves Median Feature modifier display.
+   * <br />Empty string is returned if modifier not applied; this could suggest
+   * that either:
+   * <br />  _ Median Feature modifier display has been formally switched off,
+   * <br />  _ Median Feature is not displayed if Dimension of Visualization is
+   *           existing for given GDT.
+   */
+  HRESULT get_Modifier (inout /*IDLRETVAL*/ CATBSTR oModifier);
+};
+
+// Interface name : CATIAMedianFeature
+#pragma ID CATIAMedianFeature "DCE:2b65cbf2-362f-44dd-9dfdf175b25847f7"
+#pragma DUAL CATIAMedianFeature
+
+// VB object name : MedianFeature (Id used in Visual Basic)
+#pragma ID MedianFeature "DCE:be14269c-f236-4782-9a5c896c065762e0"
+#pragma ALIAS CATIAMedianFeature MedianFeature
+
+#endif

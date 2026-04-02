@@ -1,0 +1,351 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+#ifndef CATIADrawingLeader_IDL
+#define CATIADrawingLeader_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CatSymbolParameters.idl"
+
+interface CATIADrawingLeaders;
+
+ /** 
+  * Represents a drawing leader in a drawing view.
+  */
+
+interface CATIADrawingLeader : CATIABase
+{
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets symbol type of head side.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the symbol type of head side on <tt>MyLeader</tt> drawing leader.
+  * <pre>
+  * oSymbol = MyLeader.<font color="red">HeadSymbol</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY HeadSymbol
+  HRESULT get_HeadSymbol(out /*IDLRETVAL*/ CatSymbolType oSymbol);
+  HRESULT put_HeadSymbol(in CatSymbolType iSymbol);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the status of all around.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the status of all around on <tt>MyLeader</tt> drawing leader.
+  * <pre>
+  * oSymbol = MyLeader.<font color="red">AllAround</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY AllAround
+  HRESULT get_AllAround(out /*IDLRETVAL*/ boolean oAllAround);
+  HRESULT put_AllAround(in boolean iAllAround);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the number of points of leader path.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the number of points on <tt>MyLeader</tt> drawing leader.
+  * <pre>
+  * oNbPoint = MyLeader.<font color="red">NbPoint</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY NbPoint
+  HRESULT get_NbPoint(out /*IDLRETVAL*/ long oNbPoint);
+
+//------------------------------------------------------------------------------
+ /**
+  * Add a point to an leader.
+  * @param iNum
+  *   Point number. Point will be inserted at iNum+1 position.
+  * @param iX
+  *   X coordinates of point to add.
+  * @param iY
+  *   Y coordinates of point to add.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds a point to <tt>MyLeader</tt>.
+  * <pre>
+  * iNum = 1
+  * iX = 10.
+  * iY = 20.
+  * MyLeader.<font color="red">AddPoint</font> iNum, iX, iY
+  * </pre>
+  * </dl>
+  */
+  HRESULT AddPoint(in long iNum, in double iX, in double iY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Remove a point from an leader.
+  * @param iNum
+  *   Point number to delete.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example removes a point from <tt>MyLeader</tt>.
+  * <pre>
+  * iNum = 2
+  * MyLeader.<font color="red">RemovePoint</font> iNum
+  * </pre>
+  * </dl>
+  */
+  HRESULT RemovePoint(in long iNum);
+
+//------------------------------------------------------------------------------
+ /**
+  * Modify a point of an leader.
+  * @param iNum
+  *   Point number to modify.
+  * @param iX
+  *   X coordinates of new point.
+  * @param iY
+  *   Y coordinates of new point.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example modifys a point to <tt>MyLeader</tt>.
+  * <pre>
+  * iNum = 1
+  * iX = -10.
+  * iY = -20.
+  * MyLeader.<font color="red">ModifyPoint</font> iNum, iX, iY
+  * </pre>
+  * </dl>
+  */
+  HRESULT ModifyPoint(in long iNum, in double iX, in double iY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get leader path.
+  * @param oPoints
+  *   List of points coordinates (X1,Y1,X2,Y2,.....Xn,Yn).
+  * @return oNbPoints
+  *   Number of points.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets points of <tt>MyLeader</tt> path.
+  * <pre>
+  * oNbPoints = MyLeader.<font color="red">GetPoints</font>(oPoints)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetPoints(inout CATSafeArrayVariant oPoints, out /*IDLRETVAL*/ long oNbPoints);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get leader point coordinates.
+  * @param iNum
+  *   Point number.
+  * @param oX
+  *   X coordinates of point.
+  * @param oY
+  *   Y coordinates of point.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets a point to <tt>MyLeader</tt>.
+  * <pre>
+  * iNum = 1
+  * MyLeader.<font color="red">GetPoint</font>(iNum, oX, oY)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetPoint(in long iNum, inout double oX, inout double oY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets target element of head side.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the target element of head side on <tt>MyLeader</tt> drawing leader.
+  * <pre>
+  * oTarget = MyLeader.<font color="red">HeadTarget</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY HeadTarget	 
+  HRESULT get_HeadTarget(out /*IDLRETVAL*/ CATBaseDispatch oTarget);
+  HRESULT put_HeadTarget(in CATBaseDispatch iTarget);
+
+//------------------------------------------------------------------------------
+ /**
+  * Add an interruption to an leader.
+  * @param iFirstPointX
+  *   X coordinates of first point.
+  * @param iFirstPointY
+  *   Y coordinates of first point.
+  * @param iSecondPointX
+  *   X coordinates of second point.
+  * @param iSecondPointY
+  *   Y coordinates of second point.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds an interruption to <tt>MyLeader</tt>.
+  * <pre>
+  * iFirstPointX = 10.
+  * iFirstPointY = 20.
+  * iSecondPointX = 20.
+  * iSecondPointY = 20.
+  * MyLeader.<font color="red">AddInterruption</font> iFirstPointX, iFirstPointY, iSecondPointX, iSecondPointY
+  * </pre>
+  * </dl>
+  */
+  HRESULT AddInterruption(in double iFirstPointX, in double iFirstPointY, in double iSecondPointX, in double iSecondPointY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Remove an interruption to an leader.
+  * @param iNum
+  *   Interruption number to delete.
+  * <dt> <dd> - If iNum equals to 0, all interruptions will be removed. 
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example removes an interruption from <tt>MyLeader</tt>.
+  * <pre>
+  * iNum = 2
+  * MyLeader.<font color="red">RemoveInterruption</font> iNum
+  * </pre>
+  * </dl>
+  */
+  HRESULT RemoveInterruption(in long iNum);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the number of interruptions of leader path.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the number of interruptions on <tt>MyLeader</tt> drawing leader.
+  * <pre>
+  * oNbInterruption = MyLeader.<font color="red">NbInterruption</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY NbInterruption
+  HRESULT get_NbInterruption(out /*IDLRETVAL*/ long oNbInterruption);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get leader path.
+  * @param oInterruptions
+  *   List of interruptions coordinates (X1,Y1,X2,Y2,.....Xn,Yn).
+  * @return oNbInterruptions
+  *   Number of interruptions.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets interruptions of <tt>MyLeader</tt> path.
+  * <pre>
+  * oNbInterruptions = MyLeader.<font color="red">GetInterruptions</font>(oInterruptions)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetInterruptions(inout CATSafeArrayVariant oInterruptions, out /*IDLRETVAL*/ long oNbInterruptions);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets anchor point.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the anchor point on <tt>MyLeader</tt> drawing leader.
+  * <pre>
+  * oAnchorPoint = MyLeader.<font color="red">AnchorPoint</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY AnchorPoint
+  HRESULT get_AnchorPoint(out /*IDLRETVAL*/ long oAnchorPoint);
+  HRESULT put_AnchorPoint(in long iAnchorPoint);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the anchor symbol of the drawing leader.
+  * AnchorSymbol
+  *   0  : No anchor symbol
+  *
+  *   1  : All-Around style (circle)                                          - For GDT, Text, Table
+  *   2  : All-Over   (2 concentric circles)                                  - For GDT, Text, Table
+  *   3  : AllAboutWithHorLine  (square with an horizontal line)              - For GDT, Text, Table
+  *   4  : AllAboutWithVerLine  (square with a vertical line)                 - For GDT, Text, Table
+  *   5  : AllAroundPartial (half circle)                                     - For GDT, Text, Table
+  *   6  : AllOverPartial   (2 half concentric circles)                       - For GDT, Text, Table
+  *   7  : AllAboutWithHorLinePartial  (half square with an horizontal line)  - For GDT, Text, Table
+  *   8  : AllAboutWithVerLinePartial  (half square with an vertical line)    - For GDT, Text, Table
+  *
+  *   9  : Flag (Flag)                                - For welding annotation only 
+  *   10 : FlagAndAllAround  (Flag And AllAround)     - For welding annotation only 
+  *
+  * @precondition : Flag and FlagAndAllAround are only available for leader belonging to a Welding Symbol. 
+  *                 AnchorSymbols 0 to 8 are available for leader that belongs to a Text, Table or GDT. 
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>anchorSymbol</tt> the AnchorSymbol coordinate of the 
+  * <tt>MyLeader</tt> drawing leader.
+  * <pre>
+  * anchorSymbol = MyLeader.<font color="red">AnchorSymbol</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY AnchorSymbol 
+ HRESULT get_AnchorSymbol(out /*IDLRETVAL*/ long oAnchorSymbol);
+ HRESULT put_AnchorSymbol(in long iAnchorSymbol);
+
+//----------------------------------------------------------------------------------
+ /**
+  * Returns the secondary drawing leader collection of the drawing leader.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>LeaderCollection</tt> the collection of
+  * leaders of the <tt>Myleader</tt> drawing leader.
+  * <pre>
+  * Dim LeaderCollection As DrawingLeaders
+  * Set LeaderCollection = MyLeader.<font color="red">Leaders</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Leaders
+  HRESULT get_Leaders(out /*IDLRETVAL*/ CATIADrawingLeaders oLeaders);
+
+};
+
+#pragma ID CATIADrawingLeader "DCE:59FE66E1-2C53-11d6-BE91000347C379C9"
+#pragma DUAL CATIADrawingLeader
+
+// Visual Basic name
+#pragma ID DrawingLeader "DCE:59FE66E2-2C53-11d6-BE91000347C379C9"
+#pragma ALIAS CATIADrawingLeader DrawingLeader
+
+#endif

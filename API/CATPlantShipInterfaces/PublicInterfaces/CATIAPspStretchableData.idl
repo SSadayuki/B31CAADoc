@@ -1,0 +1,80 @@
+#ifndef CATIAPspStretchableData_IDL
+#define CATIAPspStretchableData_IDL
+
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+interface CATIAPspListOfDoubles;
+
+
+#include "CATIAProduct.idl"
+#include "CATIABase.idl"
+
+
+/**
+ * Represents the PspStretchableData object.
+ * <b>Role</b>: To access the technological data on stretchable objects.
+ */
+interface CATIAPspStretchableData : CATIABase
+{
+ /**
+  * Returns the points defining the object.
+  * @param iRelAxis
+  *   The relative axis object (Nothing means relative to parent).
+  * @return
+  *  List of points defining object. A list of X-Y-Z coordinates of the points. 
+  *  3 doubles per point.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspStretchableData
+  * Dim objArg1 As Product
+  * Dim objArg2 As PspListOfDoubles
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">ListDefinitionPoints</font> (objArg1)
+  * </pre>
+  *    
+  */
+
+  HRESULT ListDefinitionPoints (
+            in CATIAProduct	iRelAxis,
+            out /*IDLRETVAL*/ CATIAPspListOfDoubles oListPoints );
+
+
+ /**
+  * Returns the bend radii.
+  * @return
+  *   List of bend radius.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspStretchableData  
+  * Dim objArg1 As PspListOfDoubles
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListBendData</font> 
+  * </pre>
+  *    
+  */
+
+  HRESULT ListBendData (            
+            out /*IDLRETVAL*/ CATIAPspListOfDoubles oListOfBendRadius );
+
+        
+};
+
+// Interface name : CATIAPspStretchableData
+#pragma ID CATIAPspStretchableData "DCE:f91edc68-8093-4714-aa910d089a1bd613"
+#pragma DUAL CATIAPspStretchableData
+
+// VB object name : PspStretchableData
+#pragma ID PspStretchableData      "DCE:98ad5bdb-0a5f-4a1c-8ab433520b4f92a1"
+#pragma ALIAS CATIAPspStretchableData PspStretchableData
+
+#endif

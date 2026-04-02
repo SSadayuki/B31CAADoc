@@ -1,0 +1,61 @@
+/** 
+	* @quickReview NHD 10:11:02 Tubing Migration Settings
+*/
+#ifndef CATIATubingMigrSettingAtt_IDL
+#define CATIATubingMigrSettingAtt_IDL
+/*IDLREP*/
+// COPYRIGHT DASSAULT SYSTEMES 2003
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATBSTR.idl"          
+#include "CATIASettingController.idl"
+//#include "CATV4IV4V5SpecDraftMigrationEnum.h"
+/** 
+* Represents the V4/V5 TUBING setting controller object.
+* <b>Role</b>: The V4/V5 TUBING setting controller object deals with the setting
+* parameters displayed in the V4/V5 TUBING property page.
+* To access this property page:
+* <ul>
+*  <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+*  <li>Click + left of </b>General</b> to unfold the workbench list</li>   
+*  <li>Click </b>Compatibility</b></li>
+* </ul> 
+* <br><b>The different options for V4/TUBING tab</b>:
+* <table>
+*   <tr><td>Tubing Function display</td>  
+* </table>
+*/
+interface CATIATubingMigrSettingAtt : CATIASettingController
+{
+	/**
+	* <br><b>Role</b>: The Tubing Function Display setting parameter manages the tubig function
+	* of the step by step update and reroute during a Copy/Paste As Spec when solids are involved. 
+	*/   
+#pragma PROPERTY   Affiche_Fundisplay
+	HRESULT get_Affiche_Fundisplay(inout /*IDLRETVAL*/ CATBSTR    oAfficheFund) ;
+	HRESULT put_Affiche_Fundisplay(in  CATBSTR  iAfficheFund); 
+	/** 
+	* Retrieves information about the "Function Display Attribute" setting parameter.
+	* <br>Refer to @href CATIASettingController for a detailed description.
+	*/
+	HRESULT GetAffiche_FundisplayInfo(inout CATBSTR AdminLevel,inout CATBSTR oLocked,
+		out /*IDLRETVAL*/ boolean oModified)  ;    
+	/** 
+	* Locks or unlocks the "Function Display Report" setting parameter.
+	* <br>Refer to @href CATIASettingController for a detailed description.
+	*/
+	HRESULT SetAffiche_FundisplayLock(in boolean iLock); 
+};
+
+//Interface Name 
+#pragma ID CATIATubingMigrSettingAtt "DCE:79AC0588-EB33-4fa1-82671A3271D0A289" 
+#pragma DUAL CATIATubingMigrSettingAtt
+
+//VB Object Name 
+#pragma ID TubingMigrSettingAtt "DCE:EEAD3BAA-6A37-4c7e-86D13C56FC66F4C1"
+#pragma ALIAS CATIATubingMigrSettingAtt TubingMigrSettingAtt
+
+#endif
+
+

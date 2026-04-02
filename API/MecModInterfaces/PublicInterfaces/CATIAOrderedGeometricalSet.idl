@@ -1,0 +1,154 @@
+#ifndef CATIAOrderedGeometricalSet_IDL
+#define CATIAOrderedGeometricalSet_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//                                   
+// CATIAOrderedGeometricalSet:                           
+// Exposed interface for ordered geometrical set
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Apr04	Creation						 JM Gautier
+//=================================================================
+
+#include "CATIABase.idl"
+
+interface CATIABodies;
+interface CATIAHybridBodies;
+interface CATIAGeometricElements;
+interface CATIAHybridShapes;
+interface CATIAHybridShape;
+interface CATIASketches;
+interface CATIAOrderedGeometricalSets;
+
+/**
+ * The object is an ordered geometrical set.
+ * The ordered geometrical set manages a set of hybrid shapes,
+ * a set of bodies and a set of ordered geometrical sets.
+ *<br>
+ * It belongs to the @href CATIAOrderedGeometricalSets collection of a @href CATIAPart  
+ * or @href CATIAOrderedGeometricalSet object.
+ */
+//-----------------------------------------------------------------
+interface CATIAOrderedGeometricalSet : CATIABase
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+
+#pragma PROPERTY HybridShapes
+    
+	/**
+	* Returns the list of hybrid shapes included in the ordered geometrical set.
+	* @return oHybridShapes
+    *   The list of hybrid shapes in the ordered geometrical set (@see CATIAHybridShapes<br>
+    *   for more information).
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>HybridShapes1</tt> the list of <br> 
+	* hybrid shapes in the ordered geometrical set<tt>OrderedGeometricalSet1</tt>:
+    * <pre>
+	* Dim HybridShapes1 As HybridShapes
+    * Set HybridShapes1 = OrderedGeometricalSet1.<b>HybridShapes</b>
+    * </pre>
+    * </dl>
+    */
+    HRESULT get_HybridShapes ( out /*IDLRETVAL*/ CATIAHybridShapes oHybridShapes );
+
+#pragma PROPERTY Bodies
+    /**
+    * Returns the ordered geometrical set's Bodies collection.
+    * <! sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>bodyColl</tt> the collection
+    * of bodies of the ordered geometrical set <tt>OrderedGeometricalSet1</tt> :
+    * <pre>
+    * Set bodyColl = OrderedGeometricalSet1.<font color="red">Bodies</font>
+    *</pre>
+    * </dl>
+    */
+    HRESULT    get_Bodies  ( out  /*IDLRETVAL*/ CATIABodies  oBodies );
+
+#pragma PROPERTY OrderedGeometricalSets
+    /**
+    * Returns the ordered geometrical set's OrderedGeometricalSets collection.
+    * <! sample >
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>OrderedGeometricalSetColl</tt> the collection
+    * of  ordered geometrical set of the ordered geometrical set <tt>OrderedGeometricalSet1</tt> :
+    * <pre>
+    * Set OrderedGeometricalSetColl = OrderedGeometricalSet1.<font color="red">OrderedGeometricalSets</font>
+    *</pre>
+    * </dl>
+    */
+    HRESULT    get_OrderedGeometricalSets  ( out  /*IDLRETVAL*/ CATIAOrderedGeometricalSets  oOrderedGeometricalSets );
+
+
+    //
+    //    ON CONTAINED SKETCHES
+    //    =====================
+    //
+    /**
+     * Returns the ordered geometrical set's Sketches collection.
+     * These sketches are those inside the ordered geometrical set at all levels.
+     * <! sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>sketchesCollection</tt> the collection
+     * of sketches of an ordered geometrical set :
+     * <pre>
+     * Set sketchesCollection = OrderedGeometricalSet1.<font color="red">OrderedSketches</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY OrderedSketches
+    HRESULT    get_OrderedSketches ( out    /*IDLRETVAL*/  CATIASketches  oSketches );
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+	/**
+	* Inserts a hybrid shape to the ordered geometrical set.
+	* @param iHybridShape
+	*   The hybrid shape to insert.
+	* <! @sample >
+	* </dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example inserts the hybrid shape <tt>HybridShape1</tt>
+	* to the ordered geometrical set <tt>OrderedGeometricalSet1</tt>:
+	* <pre>
+	* OrderedGeometricalSet1.InsertHybridShape (HybridShape1)
+	* </pre>
+	* </dl>
+	*/
+    HRESULT   InsertHybridShape (in CATIAHybridShape iHybridShape);
+ 	
+};
+
+// Interface name : CATIAOrderedGeometricalSet
+
+#pragma ID CATIAOrderedGeometricalSet "DCE:005930b2-6a08-4bba-ac779620a242c9c1"
+#pragma DUAL CATIAOrderedGeometricalSet
+
+// VB object name : OrderedGeometricalSet (Id used in Visual Basic)
+
+#pragma ID OrderedGeometricalSet "DCE:e7c3270e-7fc1-49bd-a1e43d54e5dc5756"
+#pragma ALIAS CATIAOrderedGeometricalSet OrderedGeometricalSet
+
+#endif
+// CATIAOrderedGeometricalSet_IDL
+

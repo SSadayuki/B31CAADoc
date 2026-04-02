@@ -1,0 +1,149 @@
+#ifndef CATIAHybridShapeBoundary_IDL
+#define CATIAHybridShapeBoundary_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeBoundary:         
+//   Exposed interface for HybridShape Boundary
+//   Used to compute the boundary of surface        
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+
+
+//-----------------------------------------------------------------
+ /**
+  * Represents the hybrid shape boundary feature object.
+  * <b>Role</b>: To access the data of the hybrid shape boundary feature object.
+  * This data includes:
+  * <ul>
+  *	<li>The boundary propagation</li>
+  * <li>The initial element used for the boundary propagation</li>
+  *	<li>The boundary support</li>
+  * </ul>
+  * <p>Use the  CATIAHybridShapeFactory to create a HybridShapeBoundary object.
+  * @see CATIAHybridShapeFactory 
+  */ 
+interface CATIAHybridShapeBoundary : CATIAHybridShape
+{
+ //  ================
+ //  == PROPERTIES ==
+ //  ================
+
+
+ /**
+  * Returns or sets the boundary propagation.
+  * <br><b>Legal values</b>: xxxxxxxxxx
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>Prop</code> the boundary propagation
+  * of the <code>ShpBoundary</code> hybrid shape boundary feature.
+  * <pre>
+  * Prop = ShpBoundary.<font color="red">Propagation</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY Propagation
+ HRESULT get_Propagation ( out /*IDLRETVAL*/ long    oProp);
+ HRESULT put_Propagation ( in                long    iProp);
+
+
+ /**
+  * Returns or sets the element used to initialize the boundary propagation.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIABiDimFeatEdge.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>InitElem</code> the initial element
+  * of the <code>ShpBoundary</code> hybrid shape boundary feature.
+  * <pre>
+  * Dim InitElem As Reference
+  * InitElem = ShpBoundary.<font color="red">InitialElement</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY InitialElement
+ HRESULT get_InitialElement ( out /*IDLRETVAL*/ CATIAReference oObject );
+ HRESULT put_InitialElement ( in                CATIAReference oObject );
+
+
+ /**
+  * Returns or sets the support surface around which the boundary is computed.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAFace.
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>SupSurf</code> the initial element
+  * of the <code>ShpBoundary</code> hybrid shape boundary feature.
+  * <pre>
+  * Dim SupSurf As Reference
+  * SupSurf = ShpBoundary.<font color="red">Support</font>
+  * </pre>
+  * </dl>
+  */ 
+#pragma PROPERTY Support
+ HRESULT get_Support ( out /*IDLRETVAL*/ CATIAReference oObject );
+ HRESULT put_Support ( in                CATIAReference oObject );
+
+/**
+ * Removes or sets the starting limit(i.e Limit1) of the boundary
+ */ 
+#pragma PROPERTY To
+ HRESULT get_To ( out /*IDLRETVAL*/ CATIAReference opIATo );
+ HRESULT put_To ( in                CATIAReference ipIATo );
+
+/**
+ * Removes or sets the ending limit(i.e Limit2) of the boundary
+ */ 
+#pragma PROPERTY From
+ HRESULT get_From ( out /*IDLRETVAL*/ CATIAReference opIAFrom );
+ HRESULT put_From ( in                CATIAReference ipIAFrom );
+
+/**
+ * Gets or sets the Starting Limit Orientation (i.e same or inverse)
+ */
+#pragma PROPERTY ToOrientation
+ HRESULT get_ToOrientation ( out /*IDLRETVAL*/ long oToOrientation );
+ HRESULT put_ToOrientation ( in                long iToOrientation );
+
+/**
+ * Gets or sets the Ending Limit Orientation (i.e same or inverse)
+ */
+#pragma PROPERTY FromOrientation
+ HRESULT get_FromOrientation ( out /*IDLRETVAL*/ long oFromOrientation );
+ HRESULT put_FromOrientation ( in                long iFromOrientation );
+};
+
+
+// Interface name : CATIAHybridShapeBoundary
+#pragma ID CATIAHybridShapeBoundary "DCE:8a838f17-10ad-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeBoundary
+
+
+// VB object name : HybridShapeBoundary (Id used in Visual Basic)
+#pragma ID HybridShapeBoundary "DCE:8a839008-ef9c-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeBoundary HybridShapeBoundary
+
+
+#endif
+// CATIAHybridShapeBoundary_IDL
+

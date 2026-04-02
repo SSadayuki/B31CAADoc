@@ -1,0 +1,129 @@
+#ifndef CATIAArrWorkbench_IDL
+#define CATIAArrWorkbench_IDL
+// Copyright Dassault Systemes 1999
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+interface CATIAArrangementProduct;
+interface CATIAArrNomenclatureTree;
+interface CATIADocument;
+interface CATIAProduct;
+
+#include "CATIAWorkbench.idl"
+  
+  /**
+   * Returns the Arrangement Workbench.
+   * <b> Role: </b>
+   * Use this interface to manage the ArrNomenclatureTree object,
+   * create Arrangement objects (such as ArrangementArea, ArrangementRun etc).
+   */
+interface CATIAArrWorkbench : CATIAWorkbench
+{
+  /**
+   * Returns the ArrNomenclatureTree. 
+   *
+   */
+#pragma PROPERTY ArrNomenclatureTree
+  HRESULT get_ArrNomenclatureTree(out /*IDLRETVAL*/ CATIAArrNomenclatureTree oArrNomenclatureTree);
+
+  /**
+   * This method allows the user to add a nomenclature tree if the get_ArrNomenclatureTree
+   * returns a Return code of E_FAIL. Basically, the workbench could not locate the 
+   * startup instance to generate the necessary NomenclatureTree information. 
+   */
+  HRESULT AddNomenclatureTree(out /*IDLRETVAL*/ CATIAArrNomenclatureTree oArrNomenclatureTree);
+
+  /**
+   * @nodoc
+   * This method creates a ".feat" document.
+   * @param  iDocType
+   *       The type of document to create. Use ".feat" type to create the document.
+   * @return oFeatDoc
+   *       The newly created Document.
+   */
+  HRESULT CreateFeatDocument (in CATBSTR iDocType, out /*IDLRETVAL*/ CATIADocument oFeatDoc);
+
+  /**
+   * @nodoc
+   * This method save a ".feat" document and remove its LifeCycleObject
+   * param iSaveAsFileName
+   *       Path where the ".feat" document created with <tt>CreateFeatDocument</tt>
+   *       needs to be saved.
+   * param iFeatDoc
+   *       The Document created with <tt>CreateFeatDocument</tt>. 
+   */
+  HRESULT SaveFeatDocument (in CATBSTR iSaveAsFileName, in CATIADocument iFeatDoc);
+
+  /**
+   * @nodoc
+   * This method calculates the foot print (projection onto the floor) areas
+   */
+  HRESULT CalculateFootprint (in CATIAProduct iArrProduct, out /*IDLRETVAL*/ double oDblSize);
+
+  /**
+   * @nodoc
+   * This method calculates the length of a run
+   * @param  iArrProduct (run)        
+   */
+  HRESULT CalculateRunLength (in CATIAProduct iArrRun, out /*IDLRETVAL*/ double oDblLength);
+
+  /**
+   * @nodoc
+   * This method returns the current user unit
+   * @param  iUnitName, such as "AREA", "LENGTH", "MASS"...
+   * @param  oValueString
+   */
+  HRESULT GetCurrentUnits (in CATBSTR iUnitName, inout /*IDLRETVAL*/ CATBSTR oValueString);
+
+  /**
+   * This method converts a Product to an ArrangementProduct.
+   * @param  iProduct
+   *         Input Product to be converted.
+   * @return oArrProduct
+   *         Converted ArrangementProduct.
+   * @see CATIAProduct
+   */
+
+  HRESULT ConvertProductToArrangementProduct(in                CATIAProduct            iProduct, 
+                                             out /*IDLRETVAL*/ CATIAArrangementProduct oArrProduct);
+
+  /**
+   * This method converts an ArrangementProduct back to a Product.
+   * @param   iArrProduct
+   *          Input ArrangementProduct to be converted.
+   * @return  oProduct    As CATIAProduct
+   *          Converted Product.
+   * @see CATIAProduct
+   */
+
+  HRESULT ConvertArrangementProductToProduct(in                CATIAArrangementProduct iArrProduct, 
+                                             out /*IDLRETVAL*/ CATIAProduct oProduct);
+
+ /**
+  * This method returns a interface handle as specified by the input interface name and the
+  * input interface handle.
+  * <pre>
+  * Dim interfaceFound As AnyObject
+  * Set interfaceFound = CATIAArrWorkbench.<font color="red">FindInterface</font>("InterfaceNameToFind",CATIAProduct_iObject)
+  * </pre>
+  * @param iInterfaceName
+  *   interface name to search for ("CATIAxxxx")
+  * @param iObject
+  *   The object to search for the required interface.
+  * @return oInterfaceFound
+  *   interface handle found
+  */
+  HRESULT FindInterface (in CATBSTR iInterfaceName, in CATBaseDispatch iObject, out /*IDLRETVAL*/ CATBaseDispatch oInterfaceFound);
+};
+
+// Interface name : CATIAArrWorkbench
+#pragma ID CATIAArrWorkbench "DCE:786382ee-ec60-11d2-8b9f006094eb54df"
+#pragma DUAL CATIAArrWorkbench
+
+// VB object name : ArrWorkbench
+#pragma ID ArrWorkbench "DCE:d8982692-ec60-11d2-8b9f006094eb54df"
+#pragma ALIAS CATIAArrWorkbench ArrWorkbench
+
+#endif

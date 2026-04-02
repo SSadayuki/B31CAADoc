@@ -1,0 +1,200 @@
+#ifndef CATIASchAppCntrDocLink_IDL 
+#define CATIASchAppCntrDocLink_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchAppConnector;
+interface  CATIASchListOfObjects;
+interface  CATIASchListOfBSTRs;
+interface  CATIASchListOfLongs;
+interface  CATIADocument;
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic connector.
+  */
+
+interface CATIASchAppCntrDocLink : CATIABase
+{
+  /**
+  * Create an external link to another connector.
+  * @param iSchConnector
+  *   The connector to link to.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrDocLink
+  * Dim objArg1 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">AppLink</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppLink ( 
+    in CATIASchAppConnector iSchConnector );
+    
+  /**
+  * Remove external link to another connector.
+  * @param iUnpublish
+  *   iUnpublish = 0, do not delete publication connector (default)
+  *   iUnpublish > 0, delete publication connector
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrDocLink
+  * Dim intVar1 As Integer
+  *  ...
+  * objThisIntf.<font color="red">AppUnLink</font>intVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppUnLink ( 
+    in long iUnpublish );
+    
+  /**
+  * @deprecated V5R18 
+  * Use @href CATIASchAppCntrDocLink#AppGetLinkedDocs instead.
+  * Get a list of linked connector(s) and its document names or publication
+  * name.
+  * @param oLCntrs
+  *   A list of connectors that are linked to this connector.
+  * @param oLDocumentNames
+  *   A list of document names containing the linked connector.
+  * @param oPublicationName
+  *   The publication name of the connector(s) linked to this connector.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrDocLink
+  * Dim objArg1 As SchListOfObjects
+  * Dim objArg2 As SchListOfBSTRs
+  * Dim strVar3 As String
+  *  ...
+  * objThisIntf.<font color="red">AppGetLink</font>objArg1,objArg2,strVar3
+  * </pre>
+  *    
+  */
+  HRESULT AppGetLink ( 
+    inout CATIASchListOfObjects oLCntrs, 
+    inout CATIASchListOfBSTRs oLDocumentNames, 
+    inout CATBSTR oPublicationName );
+    
+  /**
+  * Query whether this connector and input connector can be linked.
+  * @param iSchConnector
+  *   The connector to link to.
+  * @param oBYes
+  *   If TRUE, connectors can be linked.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrDocLink
+  * Dim objArg1 As SchAppConnector
+  * Dim bVar2 As boolean
+  *  ...
+  * objThisIntf.<font color="red">AppIsLinkable</font>objArg1,bVar2
+  * </pre>
+  *    
+  */
+  HRESULT AppIsLinkable ( 
+    in CATIASchAppConnector iSchConnector, 
+    inout boolean oBYes );
+    
+  /**
+  * Publish this connector to make it available for linking.
+  * @param iPublicationName
+  *   The publication name of connector.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrDocLink
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">AppLinkInit</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT AppLinkInit ( 
+    in CATBSTR iPublicationName );
+    
+  /**
+  * Get a list of linked connectors, their documents' names, uuids, and
+  * 'open in session' statuses, and a publication name of the connectors.
+  * @param oPublicationName
+  *   The publication name of the connector(s) linked to this connector.
+  * @param oLDocumentName
+  *   A list of document names of the documents containing the linked connector(s).
+  * @param oLDocumentUuid
+  *   A list of document UUIDs of the documents containing the linked connector(s).
+  * @param oLOpenStatus
+  *   A list of integer flags specifying whether a linked document is open 
+  *   in the session or not (1 - yes; 0 - no).
+  * @param oLCntr
+  *   A list of connectors that are linked to this connector.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrDocLink
+  * Dim strVar1 As String
+  * Dim objArg2 As SchListOfBSTRs
+  * Dim objArg3 As SchListOfBSTRs
+  * Dim objArg4 As SchListOfLongs
+  * Dim objArg5 As SchListOfObjects
+  *  ...
+  * objThisIntf.<font color="red">AppGetLinkedDocs</font>strVar1,objArg2,objArg3,objArg4,objArg5
+  * </pre>
+  *    
+  */
+  HRESULT AppGetLinkedDocs (
+    inout CATBSTR oPublicationName,
+    inout CATIASchListOfBSTRs oLDocumentName, 
+    inout CATIASchListOfBSTRs oLDocumentUuid, 
+    inout CATIASchListOfLongs oLOpenStatus,
+    inout CATIASchListOfObjects oLCntr);
+    
+  /**
+  * Open a linked document.
+  * @param iDocumentName
+  *   Name of the document (from oLDocumentName list in AppGetLinkedDocs).
+  * @param iDocumentUuid
+  *   Uuid of the document (from oLDocumentUuid list in AppGetLinkedDocs).
+  * @param oDocument
+  *   Pointer to the document.
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrDocLink
+  * Dim strVar1 As String
+  * Dim strVar2 As String
+  * Dim objArg3 As Document
+  *  ...
+  * objThisIntf.<font color="red">AppOpenLinkedDoc</font>strVar1,strVar2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT AppOpenLinkedDoc (
+    in CATBSTR iDocumentName,
+    in CATBSTR iDocumentUuid,
+    inout CATIADocument oDocument);
+
+};
+    
+// Interface name : CATIASchAppCntrDocLink
+#pragma ID CATIASchAppCntrDocLink "DCE:3f7f224a-456f-4531-9d8a76bc5c470a50"
+#pragma DUAL CATIASchAppCntrDocLink
+    
+// VB object name : SchAppCntrDocLink
+#pragma ID SchAppCntrDocLink "DCE:09b91eed-f78b-4c6d-9e054d4ea2863b91"
+#pragma ALIAS CATIASchAppCntrDocLink SchAppCntrDocLink
+    
+#endif 

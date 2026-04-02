@@ -1,0 +1,130 @@
+#ifndef CATIASchMovable_IDL 
+#define CATIASchMovable_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Manage the transformation of a schematic component.
+  */
+
+
+interface CATIASchMovable : CATIABase
+{
+  /**
+  * Transform a schematic object with a transformation matrix.
+  * @param iDb6TransMatrix
+  *   Transformation matrix.
+  *   See @href CATIASchGRRComp#GetTransformation2D
+  *   for explanation of this argument.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchMovable
+  * Dim dbVar1(6) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">Transform</font>dbVar1
+  * </pre>
+  *    
+  */
+  HRESULT Transform ( 
+    in CATSafeArrayVariant iDb6TransMatrix );
+    
+  /**
+  * Translate a schematic object with a vector.
+  * @param iDb2Vector
+  *   X-Y components of a translation vector.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchMovable
+  * Dim dbVar1(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">Translate</font>dbVar1
+  * </pre>
+  *    
+  */
+  HRESULT Translate ( 
+    in CATSafeArrayVariant iDb2Vector );
+    
+  /**
+  * Rotate a schematic object with an angle in radian.
+  * @param iDb1RotationAngleInRadian
+  *   Rotation angle (from x-axis) in radian.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchMovable
+  *
+  *  ...
+  * objThisIntf.<font color="red">Rotate</font>
+  * </pre>
+  *    
+  */
+  HRESULT Rotate ( 
+    in double iDb1RotationAngleInRadian );
+    
+  /**
+  * Scale a schematic object with a scale factor.
+  * @param oDb1ScaleFactor
+  *   The current scale factor of the component.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchMovable
+  *
+  *  ...
+  * objThisIntf.<font color="red">Scale</font>
+  * </pre>
+  *    
+  */
+  HRESULT Scale ( 
+    in double iDb1ScaleFactor );
+    
+  /**
+  * Scale a list of schematic objects with a scale factor.
+  * @param iLCntblToScale
+  *   List of selected objects to scale.
+  * @param oDb1ScaleFactor
+  *   The current scale factor.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchMovable
+  * Dim objArg1 As SchListOfObjects
+  *
+  *  ...
+  * objThisIntf.<font color="red">ScaleSelectedObjects</font>objArg1,objArg1
+  * </pre>
+  *    
+  */
+  HRESULT ScaleSelectedObjects ( 
+    in CATIASchListOfObjects iLCntblToScale, 
+    in double iDb1ScaleFactor );
+    
+};
+    
+// Interface name : CATIASchMovable
+#pragma ID CATIASchMovable "DCE:71229b43-d27a-4596-a9c9d056e5cd700d"
+#pragma DUAL CATIASchMovable
+    
+// VB object name : SchMovable
+#pragma ID SchMovable "DCE:7b975e34-b677-43e7-abdbdfba26ac9bcf"
+#pragma ALIAS CATIASchMovable SchMovable
+    
+#endif 
+    

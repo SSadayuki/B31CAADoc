@@ -1,0 +1,124 @@
+#ifndef CATIARotate_IDL
+#define CATIARotate_IDL
+/*IDLREP*/
+
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2001
+
+//=================================================================
+//                                   
+// CATIARotate:                           
+// Exposed interface for rotate
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+#include "CATIAShape.idl"
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+
+/**
+ * Represents the shape rotate feature object. 
+ * This solid feature is created from 
+ * an underlying HybridShapeRotate aggregated by the Rotate.
+ *
+ * <b>Role</b>: To access the data of the hybrid shape rotate feature object.
+ * This data includes:
+ * <ul>
+ * <li> The element to be rotated </li>
+ * <li> The rotation axis </li>
+ * <li> The angle and its value </li>
+ * </ul>
+ * Use the CATIAShapeFactory to create ShapeFeature object.
+ * @see CATIAShapeFactory
+ */
+//-----------------------------------------------------------------
+interface CATIARotate : CATIAShape
+{
+
+ /**
+ * @nodoc
+ * Deprecated R11
+ */ 
+#pragma PROPERTY ElemToRotate
+ HRESULT get_ElemToRotate ( out /*IDLRETVAL*/ CATIAReference   oX);
+ HRESULT put_ElemToRotate ( in CATIAReference iX);
+
+
+
+ /**
+ * Returns or sets the rotation axis.<br>
+ * To set the property, you can use one of the following @href CATIABoundary objects: 
+ * @href CATIARectilinearTriDimFeatEdge, @href CATIARectilinearBiDimFeatEdge or @href CATIARectilinearMonoDimFeatEdge. 
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>RotationAxis</code> the rotation axis for the <code>Rotate</code> hybrid shape feature.
+ *<pre>
+ * Dim RotationAxis As Reference
+ * Set RotationAxis = Rotate.<font color="red">Axis</font>
+ *</pre>
+ *</dl>	
+ */ 
+#pragma PROPERTY Axis
+ HRESULT get_Axis ( out /*IDLRETVAL*/  CATIAReference   oX);
+ HRESULT put_Axis ( in               CATIAReference   iX);
+
+
+
+ /**
+ * Returns the rotation angle.
+ */ 
+#pragma PROPERTY Angle
+ HRESULT get_Angle (out /*IDLRETVAL*/ CATIAAngle    oProp);
+
+
+
+ /**
+ * Returns or sets the rotation angle value.
+ * <dl>
+ * <dt><b>Example</b>:
+ * This example retrieves in <code>AngleValue</code> the angle value for the <code>Rotate</code> hybrid shape feature.
+ *<pre>
+ * Dim AngleValue As double
+ * Set AngleValue = Rotate.<font color="red">AngleValue</font>
+ *</pre>
+ *</dl>	
+ */
+#pragma PROPERTY AngleValue
+ HRESULT get_AngleValue ( out /*IDLRETVAL*/  double   oX);
+ HRESULT put_AngleValue ( in               double   iX);
+
+ /**
+  * Gets the underlying HybridShapeRotate.
+  *<dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example explains how to retrieve the underlying HybridShape Rotate
+  * <pre>
+  *  Dim oHybridShape as AnyObject
+  *  Set oHybridShape=oRotate.HybridShape
+  *  oHybridShape.SectionCoupling = 2
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY HybridShape
+ HRESULT get_HybridShape (out /*IDLRETVAL*/ CATIAHybridShape oHybridShapeRotate);
+
+};
+
+#pragma ID CATIARotate "DCE:c101f6b0-fc3e-11d4-9efc00508b5fe787"
+#pragma DUAL CATIARotate
+
+#pragma ID Rotate  "DCE:ce5f5380-fc3e-11d4-9efc00508b5fe787"
+#pragma ALIAS CATIARotate Rotate
+
+
+#endif
+// CATIARotate_IDL
+

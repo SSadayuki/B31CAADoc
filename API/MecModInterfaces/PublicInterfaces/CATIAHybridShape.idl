@@ -1,0 +1,93 @@
+#ifndef CATIAHybridShape_IDL
+#define CATIAHybridShape_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+//								   
+// CATIAHybridShape:						   
+// Exposed interface for HybridShape Base
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// dec 97 Creation					PFS
+// Apr99 ajout AppendHybridShape	PFS/JM Gautier
+// May99 deriver de CATIAGeometricElement au lieu de CATIABase PFS/JGR  	
+//=================================================================
+#include "CATIAGeometricElement.idl"
+
+/**
+ * Represents the hybrid shape object.
+ */
+interface CATIAHybridShape : CATIABase
+{
+
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+
+  /**
+   * Computes the result of the hybrid shape.
+   */
+ 	HRESULT	Compute();
+
+	/**
+	* Appends a hybrid shape to another hybrid shape.
+	* @param iHybridShape
+	*   The hybrid shape to append.
+	* <! @sample >
+	* </dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example appends the hybrid shape <tt>newHybridShape</tt>
+	* to the hybrid shape <tt>oldHybridShape</tt>:
+	* <pre>
+	* oldHybridShape.AppendHybridShape (newHybridShape)
+	* </pre>
+	* </dl>
+	*/
+    HRESULT   AppendHybridShape (in CATIAHybridShape iHybridShape);
+	
+	/**
+	* Returns the thickness of the hybrid shape. 
+	* <br> The thickness is a CATIAHybridShapeThickness.
+	* <! @sample >
+    * <dl>
+    * <dt><b>Example:</b>
+	* <dd>The following example returns the thickness <tt>ExtrudeThickness</tt> of the extrude <tt>Extrude.1</tt>
+	* as the origin point of the axis system <tt>AxisSystem0</tt>:
+    * <pre>
+	* Dim Extrude1 As AnyObject
+	* Set Extrude1 = HybridBody1.HybridShapes.Item  ( "Extrude.1" ) 
+	* Dim Thickness1 As HybridShapeThickness
+	* Set Thickness1 = Extrude1.<font color="red">Thickness</font>
+    *</pre>
+    * </dl>
+	*/
+#pragma PROPERTY Thickness
+	HRESULT get_Thickness(out /*IDLRETVAL*/ CATIAHybridShape oThickness);
+
+};
+
+
+// Interface name : CATIAHybridShape
+#pragma ID CATIAHybridShape "DCE:8964042e-d4fd-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShape
+
+// VB object name : HybridShape (Id used in Visual Basic)
+#pragma ID HybridShape "DCE:89640433-25a5-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShape HybridShape
+
+
+#endif
+// CATIAHybridShapeBASE_IDL
+

@@ -1,0 +1,135 @@
+// COPYRIGHT Dassault Systemes 2009.
+//=============================================================================
+// CATIASfmOpeningContoursMgr
+//   Conotur Manager Interface to GetAvailableStdOpeningContours & GetStdOpeningContourParams
+//=============================================================================
+// Usage notes:
+//   Interface for automation integration
+//=============================================================================
+// Nov. 2010  Creation                                         Deshmane Rahul
+//=============================================================================
+#ifndef CATIASfmOpeningContoursMgr_IDL
+#define CATIASfmOpeningContoursMgr_IDL
+
+/*IDLREP*/
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIABase.idl"
+#include "CATIAReference.idl"
+#include "CATBSTR.idl"
+#include "CATSafeArray.idl"
+#include "CATIASfmStandardContourParameters.idl"
+#include "CATIASfmReferences.idl"
+interface  CATISpecObject; 
+interface CATListValCATISpecObject_var; 
+
+/**
+* Gets CATIASfmOpeningContoursMgr.Use this manager to GetAvailableStdOpeningContours & GetStdOpeningContourParams.
+* <dl>
+* <dt>Example</dt>:
+*<dd>
+* Retrives the Manager from factory
+* <pre>
+*  'Get the Factory
+*  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+*  'Retrieve the Contour Manager
+*  Dim ObjSfmContourMgr As SfmOpeningContoursMgr
+*  Set ObjSfmContourMgr = Factory.GetOpeningMgr(Part1, "SfmOpeningContoursMgr")
+* </pre>
+* </dl> 
+*/
+
+interface CATIASfmOpeningContoursMgr: CATIABase
+{   
+  /**
+  * Get The list of Available Contours.
+  * @param oListContourNames [out] 
+  *     Available Contour names
+  * @return
+  *   <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  *<dd>
+  * The Example demonstrates how to see available contours. Choose the required contour from the list.
+  * <pre>
+  *  'Get the Factory
+  *  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+  *  'Get the Contour Manager
+  *  Dim ObjSfmContourMgr As SfmOpeningContoursMgr
+  *  Set ObjSfmContourMgr = Factory.GetOpeningMgr(Part1, "SfmOpeningContoursMgr")
+  *  'Get The List of Available Contours
+  *  Dim oListContourNames() As Variant
+  *  ObjSfmContourMgr.GetAvailableStdOpeningContours oListContourNames
+  *  'Display The List of Available Contours
+  *  Dim NbOfContour As Long
+  *  NbOfContour = UBound(oListContourNames)
+  *  Display List of contours
+  *  For i = 0 To NbOfContour
+  *  MsgBox oListContourNames(i)
+  *  Next
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetAvailableStdOpeningContours (out CATSafeArrayVariant oListContourNames);
+
+  /**
+  * Get The list of Parameters for a selected Contour Name.The list varies depending on the type of contour.
+  * @param iContourName [in] 
+  *     Contour names for which parameters need to be set.
+  * @param oListCkeParms [out] 
+  *     List of Parameters.
+  * @return
+  *   <code>S_OK</code> if everything ran ok
+  * <dl>
+  * <dt>Example</dt>:
+  *<dd>
+  * The Example demonstartes what parameters are required to be set for a chosen contour.Here "Sfm_Rect" is the chosen contour.
+  * <pre>
+  *  'Retrieve the Factory
+  *  Set Factory =  part1.GetCustomerFactory("SfmFunctionFactory")
+  *  'Retrieve the Contour Manager
+  *  Dim ObjSfmContourMgr As SfmOpeningContoursMgr
+  *  Set ObjSfmContourMgr = Factory.GetOpeningMgr(Part1, "SfmOpeningContoursMgr")
+  *  ' Enter Contour Name for which Parameter values need to be set
+  *  Dim oListCkeParms As SfmStandardContourParameters
+  *  Set oListCkeParms = ObjSfmContourMgr.GetStdOpeningContourParams("Sfm_Rect")
+  * 'Display List of Parameters for Selected Contour
+  *  Dim NbOfParam As Long
+  *  NbOfParam = oListCkeParms.Count
+  *  Dim ContourParam As Parameter
+  *  Dim ContourParamName As String
+  *  For i = 1 To NbOfParam
+  *  Set ContourParam = oListCkeParms.Item(i)
+  *  ContourParamName = oListCkeParms.Item(i).Name
+  *  MsgBox ContourParamName
+  * 'Set Contour Parameter Values
+  * If ContourParamName = "Sfm_Width" Then
+  *   ContourParam.ValuateFromString ("1000mm")
+  *   End If
+  * If ContourParamName = "Sfm_Height" Then
+  *  ContourParam.ValuateFromString ("5000mm")
+  *   End If
+  * If ContourParamName = "Sfm_CornerRadius" Then
+  *  ContourParam.ValuateFromString ("10mm")
+  *   End If
+  *   Next
+  * </pre>
+  * </dl> 
+  */
+  HRESULT GetStdOpeningContourParams (in CATBSTR iContourName,
+    out /*IDLRETVAL*/CATIASfmStandardContourParameters oListCkeParms);
+
+};
+
+// Interface name : CATIASfmOpeningContoursMgr
+#pragma ID CATIASfmOpeningContoursMgr "DCE:AD4ECA36-ADAA-4279-8EBD9C91FA0E197A"                                           
+#pragma DUAL CATIASfmOpeningContoursMgr
+
+// VB object name : SfmOpeningContoursMgr
+#pragma ID SfmOpeningContoursMgr "DCE:69077036-6450-45a0-9A812D574BE00329"                            
+#pragma ALIAS CATIASfmOpeningContoursMgr SfmOpeningContoursMgr
+
+#endif

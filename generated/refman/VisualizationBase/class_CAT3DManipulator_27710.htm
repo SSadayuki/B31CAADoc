@@ -1,0 +1,260 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>VisualizationBase CAT3DManipulator Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../VisualizationBase.htm" href="../VisualizationBase.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "VisualizationBase";	}
+		function getCurrentObjectName() { 
+ 	return "CAT3DManipulator"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>VisualizationBase Framework: CAT3DManipulator <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CAT3DManipulator_27710','CAT3DManipulator','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CAT3DManipulator</b>
+</p>
+<p>
+<b><i> Class to control a 3D representation.</i></b><br>
+
+ <b>Role</b>:
+ A CAT3DManipulator is a Controller attached to a 3D representation providing 
+ a proposition of a new position for 3D manipulation after the representation
+ selected by the user has been manipulated.
+ <p>
+ Usage of manipulators
+ <ul>
+ <li>In the instanciation : 
+	<ol> 
+	<li>	Instanciate a manipulator connected to the representation :
+		  <pre>CAT3DManipulator * _Manip = new 
+		    CAT3DManipulator( this, "MYName", MYRep, CAT3DManipulator::Translation);</pre>
+	
+	<li>	Position the manipulator	
+		  <pre>_Manip->SetPosition( PositionComputedFromNewModelization)</pre>
+			
+	<li>	Set characteristics (Invariants)   Note: Do it after SetPosition()
+		  <pre>Manip->SetTranslationDirection( CATMathJ);</pre>
+			
+	<li> 	Branch a callback in you father command to be informed about the manipulation
+		  <pre>AddAnalyseNotificationCB( _Manip, CATManipulator::GetCATManipulate(), 
+		    (CATCommandMethod) &MYCommand::MYCallback, NULL);</pre>
+	</ol>
+ <li>In the callback,
+	<ol>
+     <li> Read data of manipulation
+		<ul>
+		<li> read the RESULT of the manipulation
+		<pre>CATMathAxis Position = ((CAT3DManipulator *)Command)->GetPosition();</pre>
+
+		<li> read the event elementary TRANSFORMATION of the manipulation
+	        <pre>CATTransformationNotification *TransfoNotif =
+	        ((CATTransformationNotification *) Command->SendCommandSpecificObject(
+	        CATTransformationNotification::ClassName(), Notification));
+	        CATMathTransformation *Transformation = TransfoNotif->GetNotification();
+		</pre></ul>
+	<li>	In the callback, Update your modelization
+	    
+	<li>    In the callback, Reposition the manipulator if needed (usualy when there is constraints)
+		  	<pre>_Manip->SetPosition( PositionComputedFromNewModelization)</pre>
+	</ol>			
+ </ul></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CAT3DManipulator(CATCommand*,CATString&amp;,CAT3DRep*,ManipulationStyle,ManipulationStyle)"><b>CAT3DManipulator</b></a>(CATCommand*,CATString&amp;,CAT3DRep*,ManipulationStyle,ManipulationStyle)
+</td><td id='tdright'>  Construction of the manipulator.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetPosition()"><b>GetPosition</b></a>()
+</td><td id='tdright'>  Gets the current position of the manipulator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPosition(CATMathAxis&amp;)"><b>SetPosition</b></a>(CATMathAxis&amp;)
+</td><td id='tdright'>  Sets the position of the manipulator.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRotationLine(CATMathLine&amp;)"><b>SetRotationLine</b></a>(CATMathLine&amp;)
+</td><td id='tdright'>  Sets the invariant line of LineRotation and PlaneMovement.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetRotationPoint(CATMathPoint&amp;)"><b>SetRotationPoint</b></a>(CATMathPoint&amp;)
+</td><td id='tdright'>  Sets the invariant point of PointRotation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTranslationDirection(CATMathDirection&amp;)"><b>SetTranslationDirection</b></a>(CATMathDirection&amp;)
+</td><td id='tdright'>  Sets the invariant direction of DirectionTranslation.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetTranslationPlane(CATMathPlane&amp;)"><b>SetTranslationPlane</b></a>(CATMathPlane&amp;)
+</td><td id='tdright'>  Sets the invariant plane of PlaneTranslation and PlaneMovement.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+<nav id = 'idxnav'> <table class = 'fill' id='idxtab' ><tbody>					<tr><th colspan = '2'>Enumerated Type Index</th></tr> 
+ <tr><td  id='tdleft'> 
+    <a href="#ManipulationStyle"><b>ManipulationStyle</b></a>
+</td><td id='tdrigth'>  Defines the different types of manipulation available for
+ a 3D representation.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CAT3DManipulator"></a><a id="CAT3DManipulator(CATCommand*,CATString&amp;,CAT3DRep*,ManipulationStyle,ManipulationStyle)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CAT3DManipulator</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATCommand','CATCommand*')</script> <span class='param'>iFather</span>, const <script type="text/javascript"> activateLink('CATString','CATString&amp;')</script> <span class='param'>iName</span>,<script type="text/javascript"> activateLink('CAT3DRep','CAT3DRep*')</script> <span class='param'>iRep</span>, const <script type="text/javascript"> activateLink('ManipulationStyle','ManipulationStyle')</script> <span class='param'>iFirstStyle</span><span class='param'>=NoManipulation</span>, const <script type="text/javascript"> activateLink('ManipulationStyle','ManipulationStyle')</script> <span class='param'>iSecondStyle</span><span class='param'>=NoManipulation</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Construction of the manipulator.  
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFirstStyle</span></dt>
+   <dd> = style of manipulation used by Mouse Left button drag  
+ </ dd>
+    <dt><span class='paramitem'> iSecondStyle</span></dt>
+   <dd> = style of manipulation used by Mouse Left+Middle buttons drag (left THEN middle)
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetPosition"></a><a id="GetPosition()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('CATMathAxis','CATMathAxis')</script>  <span class='objname'>GetPosition</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('const','const')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Gets the current position of the manipulator. 
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPosition"></a><a id="SetPosition(CATMathAxis&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetPosition</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathAxis','CATMathAxis&amp;')</script> <span class='param'>iPosition</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the position of the manipulator.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRotationLine"></a><a id="SetRotationLine(CATMathLine&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRotationLine</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathLine','CATMathLine&amp;')</script> <span class='param'>iLine</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the invariant line of LineRotation and PlaneMovement.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetRotationPoint"></a><a id="SetRotationPoint(CATMathPoint&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetRotationPoint</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPoint','CATMathPoint&amp;')</script> <span class='param'>iPoint</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the invariant point of PointRotation.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTranslationDirection"></a><a id="SetTranslationDirection(CATMathDirection&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTranslationDirection</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathDirection','CATMathDirection&amp;')</script> <span class='param'>iWAxis</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the invariant direction of DirectionTranslation.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetTranslationPlane"></a><a id="SetTranslationPlane(CATMathPlane&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetTranslationPlane</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATMathPlane','CATMathPlane&amp;')</script> <span class='param'>iPlane</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the invariant plane of PlaneTranslation and PlaneMovement.
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+ <h2  class='title2'>Enumerated Types</h2> <br><dl>
+<dt class='dt1'><a id="ManipulationStyle"/>ManipulationStyle</dt>
+  <dd class='dd1'>
+
+enum <b>ManipulationStyle</b> {<pre class='light'>
+  NoManipulation,
+  DirectionTranslation,
+  PlaneTranslation,
+  PlaneMovement,
+  LineRotation,
+  PointRotation,
+  FrontestPlaneTranslation
+</pre>}
+ Defines the different types of manipulation available for
+ a 3D representation.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> NoManipulation</span></dt>
+   <dd>             The CAT3DManipulator does no specific work 
+ </ dd>
+    <dt><span class='paramitem'> DirectionTranslation</span></dt>
+   <dd>       The CAT3Dmanipulator contrains its position along a given direction during the manipulation 
+ </ dd>
+    <dt><span class='paramitem'> PlaneTranslation</span></dt>
+   <dd>           The CAT3Dmanipulator contrains its position along a given plane during the manipulation 
+ </ dd>
+    <dt><span class='paramitem'> PlaneMovement</span></dt>
+   <dd>              Do not use  
+ </ dd>
+    <dt><span class='paramitem'> LineRotation</span></dt>
+   <dd>               The CAT3Dmanipulator contrains its position on a circle normal to a given axis 
+ </ dd>
+    <dt><span class='paramitem'> PointRotation</span></dt>
+   <dd>              The CAT3Dmanipulator contrains its position on a sphere centered on a given point 
+ </ dd>
+    <dt><span class='paramitem'> FrontestPlaneTranslation</span></dt>
+   <dd>   The CAT3Dmanipulator contrains its position along a plane parallel to the screen
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CAT3DManipulator.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATViz</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

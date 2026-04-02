@@ -1,0 +1,67 @@
+#ifdef LOCAL_DEFINITION_FOR_IID
+LINK_WITH_FOR_IID = \
+SystemUUID
+#else
+LINK_WITH_FOR_IID =
+#endif
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+LINK_WITH=$(LINK_WITH_FOR_IID)  JS03TRA JS0SCBAK JS0CORBA JS0STR JS0CATOS JS0LIB0 JS0MRSHL JS0CATLM JT0TRCBK JS0MT JS0STDLIB CATSysMainThreadMQ
+
+#
+OS = aix_a64
+SYS_INCPATH =
+SYS_LIBS = 
+#
+OS = aix_a
+SYS_INCPATH =
+#SYS_LIBS = -lXm -lXt -lXi -lX11
+SYS_LIBS = 
+
+#
+OS = HP-UX
+SYS_INCPATH =   
+SYS_LIBPATH = -L/opt/graphics/PEX5/lib
+#SYS_LIBS = -lPEX5 -lXm -lXt -lXi -lX11
+SYS_LIBS = 
+
+#
+OS = IRIX
+SYS_INCPATH =
+SYS_LIBPATH =
+#SYS_LIBS = -lXm -lXt -lXi -lX11
+SYS_LIBS = 
+
+LOCAL_CCFLAGS  = -float 
+LOCAL_CFLAGS   = -float 
+
+
+#
+OS = SunOS
+SH_LINK_WITH = $(LINK_WITH)
+SYS_INCPATH = -I/usr/dt/include -I/usr/openwin/include -I/opt/SUNWits/Graphics-sw/xgl/include
+#SYS_LIBPATH = -L/usr/dt/lib -L/usr/dt/lib -L//opt/SUNWits/Graphics-sw/xgl/lib
+#SYS_LIBS = -lXm -lXt -lXi -lX11
+SYS_LIBS =
+# Remove the default Fortran libs
+FORTRAN_LIBS = 
+
+#LOCAL_CCFLAGS  = -DMOTIF12_HEADERS
+#LOCAL_CFLAGS   = -DMOTIF12_HEADERS
+
+#
+OS = Linux
+MOTIF_INCPATH = -I/usr/include/X11 -I/usr/local/include -I/usr/X11R6/share/include
+MOTIF_LIBPATH = -L/usr/X11R6/lib   -L/usr/local/lib
+MOTIF_LIBS    = -lXm -lXt -lXmu -lXi -lX11 -lnsl
+SYS_INCPATH = $(MOTIF_INCPATH)
+SYS_LIBPATH = $(MOTIF_LIBPATH)
+SYS_LIBS = $(MOTIF_LIBS)
+
+#
+OS = Windows_NT
+SYS_LIBS = netapi32.lib
+LINK_WITH=$(LINK_WITH_FOR_IID) CATSysCATIAAI CATSysCATIASF CATSysCrossBrand JS03TRA JS0SCBAK JS0CORBA JS0STR JS0CATOS JS0LIB0 JS0MRSHL JS0CATLM JT0TRCBK JS0MT JS0STDLIB CATSysMainThreadMQ

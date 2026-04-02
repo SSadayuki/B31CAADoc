@@ -1,0 +1,21 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= NONE
+
+BUILD = NO
+
+#
+OS = AIX
+
+#
+OS = HP-UX
+
+#
+OS = IRIX
+
+#
+OS = SunOS
+
+#
+OS = Windows_NT

@@ -1,0 +1,195 @@
+#ifndef CATIAExpertRuleBaseComponentRuntimes_IDL
+#define CATIAExpertRuleBaseComponentRuntimes_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+
+
+interface CATIAExpertRuleBaseComponentRuntime ;
+
+
+/**
+ * Represents the collection of ExpertRuleBase (ExpertChecks, ExpertRules, and ExpertRuleSets) components.
+ *
+ * This collection
+ * can be seen flattened (with Item/Count) or hierarchised (with
+ * ShallowItem/ShallowCount).
+ * <p>
+ * Be careful : the flattened view can be misleading. For instance,
+ * if there are two ExpertChecks with the same name, you will be
+ * able to access only <b>one</b> of them (with the methods
+ * @href CATIAExpertRuleBaseComponentRuntimes#Item and
+ * @href CATIAExpertRuleBaseComponentRuntimes#Remove )
+ */
+interface CATIAExpertRuleBaseComponentRuntimes : CATIACollection
+{
+     /**
+     * Returns a RuleBase component using its index or its name from the entire RuleBase collection.
+	 *
+	 * <p>
+	 * If several Expert components have the same name, the use of
+	 * name is <b>unpredicted</b>.
+     * @param iIndex
+     *   The index or the name of the Rule Base component to retrieve from
+     *   the collection of Rule Base Components.
+     *   As a numerics, this index is the rank of the Rule Base Component
+     *   in the collection.
+     *   The index of the first component in the collection is 1, and
+     *   the index of the last component is <tt>Count</tt>.
+     *   As a string, it is the name you assigned to the component using
+     *   the @href CATIABase#Name property or when creating the component.
+     * @return The retrieved Rule base component.
+	 * </dl>
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the last component in a <tt>RuleSet</tt>
+     * collection. 
+     * <pre>
+	 *  Dim lastRuleBaseComponent as ExpertRuleBaseComponentRuntime
+     *  Set lastRuleBaseComponent = RuleSet.<font color="red">Item</font>(RuleCollection.Count)
+     * </pre>
+     * </dl>
+     */
+    HRESULT     Item
+                ( in                CATVariant							 iIndex,
+				  out /*IDLRETVAL*/ CATIAExpertRuleBaseComponentRuntime         oExpertRuleBaseComponentRuntime 
+                );
+
+     /**
+     * Returns a <b>first-level-depth</b> RuleBase component using its index or its name from the RuleBase collection.
+	 *
+     * @param iIndex
+     *   The index or the name of the Rule Base component to retrieve from
+     *   the collection of Rule Base Components.
+     *   As a numerics, this index is the rank of the Rule Base Component
+     *   in the collection.
+     *   The index of the first component in the collection is 1, and
+     *   the index of the last component is ShallowCount.
+     *   As a string, it is the name you assigned to the component using
+     *   the @href CATIABase#Name property or when creating the component.
+     * @return The retrieved Rule base component.
+	 * </dl>
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the last component in a <tt>RuleSet</tt>
+     * collection. 
+     * <pre>
+	 *  Dim lastRuleBaseComponent as ExpertRuleBaseComponentRuntime
+     *  Set lastRuleBaseComponent = RuleSet.<font color="red">ShallowItem</font>(RuleCollection.ShallowCount)
+     * </pre>
+     * </dl>
+     */
+    HRESULT     ShallowItem
+                ( in                CATVariant							 iIndex,
+				  out /*IDLRETVAL*/ CATIAExpertRuleBaseComponentRuntime         oExpertRuleBaseComponentRuntime 
+                );
+
+
+    /**
+     * Returns the number of <b>first-level-depth</b> objects in the collection.
+     * This is handy to scan the objects in a collection.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves in  <tt>ObjectNumber</tt> the number of objects
+     * currently gathered in <tt>MyCollection</tt>.
+     * <pre>
+     * ObjectNumber = MyCollection.<font color="red">ShallowCount</font>
+     * </pre>
+     * </dl>
+     */
+	HRESULT		ShallowCount
+				( out /*IDLRETVAL*/					long				oNbItems );
+
+  
+	/**
+	* Removes an Expert component from the  Rule Base collection.
+	* If the expert component is a RuleSet all the rules, checks and rulesets embedded in the
+	* Ruleset will be also removed.
+	* <p>
+	* If several Expert components have the same name, the use of
+	* name is <b>unpredicted</b>.
+	* @param iIndex
+	* The index or the name of the component to retrieve from
+	* the collection.
+	* As a numerics, this index is the rank of the expert component
+	* in the collection.
+	* The index of the first component in the collection is 1, and
+	* the index of the last component is <tt>Count</tt>.
+	* As a string, it is the name you assigned to the component using
+	* the @href CATIABase#Name property or when creating the Expert component.
+	* </dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example removes the Expert component named <tt>density</tt> from
+	* the <tt>relations</tt> collection.
+	* <pre>
+	* Dim CATDocs As Document
+	* Set CATDocs   = CATIA.Documents
+	* Dim partdoc As PartDocument
+	* Set partdoc   = CATDocs.Add("CATPart")
+	* Dim part As Part
+	* Set part      = partdoc.Part
+	* Set massCheck    = part.Relations.Item("RuleBase").RuleSet.ExpertRuleBaseComponentRuntimes.<font color="red">Remove</font>("density")
+	* </pre>
+	* </dl>
+	*/
+	HRESULT Remove(in CATVariant iIndex);
+
+	/**
+	* Removes an <b>first-level-depth</b> Expert component from the  Rule Base collection.
+	* If the expert component is a RuleSet all the rules, checks and rulesets embedded in the
+	* Ruleset will be also removed.
+	* <p>
+	* @param iIndex
+	* The index or the name of the component to retrieve from
+	* the collection.
+	* As a numerics, this index is the rank of the expert component
+	* in the collection.
+	* The index of the first component in the collection is 1, and
+	* the index of the last component is <tt>ShallowCount</tt>.
+	* As a string, it is the name you assigned to the component using
+	* the @href CATIABase#Name property or when creating the Expert component.
+	* </dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* This example removes the Expert component named <tt>density</tt> from
+	* the <tt>relations</tt> collection.
+	* <pre>
+	* Dim CATDocs As Document
+	* Set CATDocs   = CATIA.Documents
+	* Dim partdoc As PartDocument
+	* Set partdoc   = CATDocs.Add("CATPart")
+	* Dim part As Part
+	* Set part      = partdoc.Part
+	* Set massCheck    = part.Relations.Item("RuleBase").RuleSet.ExpertRuleBaseComponentRuntimes.<font color="red">ShallowRemove</font>("density")
+	* </pre>
+	* </dl>
+	*/
+	HRESULT ShallowRemove(in CATVariant iIndex);
+};
+
+// Interface name : CATIAExpertRuleBaseComponentRuntimes
+#pragma ID CATIAExpertRuleBaseComponentRuntimes "DCE:985e050e-bf11-11d4-9efc00d0b752954c"
+#pragma DUAL CATIAExpertRuleBaseComponentRuntimes
+
+// VB object name : Relation (Id used in Visual Basic)
+#pragma ID ExpertRuleBaseComponentRuntimes "DCE:afd7f17e-bf11-11d4-9efc00d0b752954c"
+#pragma ALIAS CATIAExpertRuleBaseComponentRuntimes ExpertRuleBaseComponentRuntimes
+
+#endif
+// CATIAExpertRuleBaseComponentRuntimes_IDL
+

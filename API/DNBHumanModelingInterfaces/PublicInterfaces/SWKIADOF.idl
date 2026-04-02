@@ -1,0 +1,401 @@
+// COPYRIGHT DASSAULT SYSTEMES 2008
+#ifndef SWKIADOF_IDL
+#define SWKIADOF_IDL
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+/*IDLREP*/
+
+// ****************************************************************************
+// Framework DNBHumanModelingInterfaces
+// Copyright Safework Inc.
+// ****************************************************************************
+//  Abstract:
+//  ---------
+//
+//  Interfaces for Journalling
+//
+// ****************************************************************************
+//  Usage:
+//  ------
+//
+// ****************************************************************************
+//  Inheritance:
+//  ------------
+//
+//  SWKIAManikinPart
+//
+// ****************************************************************************
+//  Main Methods:
+//  -------------
+//
+//   get_Value
+//   put_Value
+//
+//   get_ValueAsString
+//   put_ValueAsString
+//
+//   get_DefaultValue
+//
+//   ResetValue
+//
+//   get_Score
+//   get_MaxScore
+//   SetLimitsToMatchBestPrefAngle
+//
+//   get_Number
+//
+//   get_MinValue
+//   get_MinValueInterSegment
+//   put_MinValue
+//
+//   get_MaxValue
+//   get_MaxValueInterSegment
+//   put_MaxValue
+//
+//   get_MinValueAsPercentile
+//   put_MinValueAsPercentile
+//
+//   get_MaxValueAsPercentile
+//   put_MaxValueAsPercentile
+//
+//   get_LimitsLocked
+//   put_LimitsLocked
+//
+//   get_ValueLocked
+//   put_ValueLocked
+//
+//   get_MinMean
+//   get_MinMeanInterSegment
+//   get_MinStdDev
+//   get_MaxMean
+//   get_MaxMeanInterSegment
+//   get_MaxStdDev
+//
+//   get_FullName
+// ****************************************************************************
+//  History
+//  -------
+//
+//  Author: Jean-Guy AUGUSTIN
+//  Date  : 02/02/00
+//  Goal  : Creation
+// ****************************************************************************
+//
+// --- DNBHumanModelingInterfaces
+#include "SWKIAManikinPart.idl"
+
+
+/**
+  *  This interface deals with a degree of freedom (DOF) of a manikin.
+  **/
+interface SWKIADOF : SWKIAManikinPart
+{
+ // ===========================================================================
+ //  get_Value
+ //  ---------
+ //  put_Value
+ //  ---------
+ //
+    /**
+      * Returns or sets the value of a DOF.<br>
+      * The value read or set is always in radians.
+      **/
+#pragma PROPERTY Value
+    HRESULT get_Value(out /*IDLRETVAL*/ double poValue);
+    HRESULT put_Value(in double piValue);
+
+ // ===========================================================================
+ //  get_ValueAsString
+ //  -----------------
+ //  put_ValueAsString
+ //  -----------------
+ //
+    /**
+      * Returns or sets the value of a DOF, as a string.
+      * @sample
+      * myManikin.Body.GetSegment("<font color=green>LSLeTh</font>").
+      * ValueAsString = "<font color=green>10deg</font>"
+      **/
+#pragma PROPERTY ValueAsString
+    HRESULT get_ValueAsString(inout /*IDLRETVAL*/ CATBSTR pioValue);
+    HRESULT put_ValueAsString(in CATBSTR piValue);
+
+
+ // ===========================================================================
+ //  get_DefaultValue
+ //  ----------------
+ //
+    /**
+      * Returns the default value of a DOF.
+      * The value read is always in radians.
+      **/
+#pragma PROPERTY DefaultValue
+    HRESULT get_DefaultValue(out /*IDLRETVAL*/ double poDefaultValue);
+
+
+ // ===========================================================================
+ //  ResetValue
+ //  ----------
+ //
+    /**
+      * Sets the value of the DOF to its default value.
+      **/
+    HRESULT ResetValue();
+
+
+ // ===========================================================================
+ //  get_Score
+ //  ---------
+ //
+    /**
+      * Returns the score corresponding to the DOF's current value.
+      **/
+#pragma PROPERTY Score
+    HRESULT get_Score(out /*IDLRETVAL*/ double poScore);
+
+
+ // ===========================================================================
+ //  get_MaxScore
+ //  ------------
+ //
+    /**
+      * Returns the highest score that this DOF can take.
+      **/
+#pragma PROPERTY MaxScore
+    HRESULT get_MaxScore(out /*IDLRETVAL*/ double poMaxScore);
+
+
+ // ===========================================================================
+ //  SetLimitsToMatchBestPrefAngle
+ //  -----------------------------
+ //
+    /**
+      * Set the angular limitations to match with the best pref angle.
+      * The purpose of this method is to set the angular limitations of
+      * this DOF so that these limitations correspond to the best range
+      * of motion, that is, the range of motion where the postural score
+      * is the highest.<br>
+      * <br>
+      * This method travels the different preferred angles on the DOF,
+      * then chooses the one with the highest score.  If several
+      * preferred angles are found with the highest score, then
+      * the last one with the highest score is taken.<br>
+      * <br>
+      * If no preferred angles have been defined on this DOF, then
+      * the angular limitations are not modified.
+      **/
+    HRESULT SetLimitsToMatchBestPrefAngle();
+
+
+ // ===========================================================================
+ //  get_Number
+ //  ----------
+ //
+    /**
+      * Returns the number of the DOF.  This number is an integer
+      * between 0 and 2.
+      * @see  SWKIASegment
+      **/
+#pragma PROPERTY Number
+    HRESULT get_Number(out /*IDLRETVAL*/ long poNumber);
+
+
+ // ===========================================================================
+ //  get_MinValue
+ //  ------------
+ //  get_MinValueInterSegment
+ //  ------------
+ //  put_MinValue
+ //  ------------
+ //
+    /**
+      * Returns or sets the lowest value that a DOF can take.<br>
+      * When setting the value, the new value given<br>
+      * cannot be lower than the statistical value found<br>
+      * in the limits database.  This statistical minimum<br>
+      * value can be obtained by a call to property<br>
+      * <code>StatisticalMinValue</code>.
+      **/
+#pragma PROPERTY MinValue
+    HRESULT get_MinValue(out /*IDLRETVAL*/ double poMinValue);
+    HRESULT get_MinValueInterSegment(out /*IDLRETVAL*/ double poMinValue);
+    HRESULT put_MinValue(in double piMinValue);
+
+
+ // ===========================================================================
+ //  get_MaxValue
+ //  ------------
+ //  get_MaxValueInterSegment
+ //  ------------
+ //  put_MaxValue
+ //  ------------
+ //
+    /**
+      * Returns or sets the highest value that a DOF can take.<br>
+      * When setting the value, the new value given<br>
+      * cannot be higher than the statistical value found<br>
+      * in the limits database.  This statistical maximum<br>
+      * value can be obtained by a call to property<br>
+      * <code>StatisticalMaxValue</code>.
+      **/
+#pragma PROPERTY MaxValue
+    HRESULT get_MaxValue(out /*IDLRETVAL*/ double poMaxValue);
+    HRESULT put_MaxValue(in double piMaxValue);
+
+
+ // ===========================================================================
+ //  get_MinValueAsPercentile
+ //  ------------------------
+ //  put_MinValueAsPercentile
+ //  ------------------------
+ //
+    /**
+      * Returns or sets the lowest value that a DOF can take.<br>
+      * When reading the value, the number returned<br>
+      * will take a percentile format, that is, will<br>
+      * be between 0.0 and 100.0 exclusise.<br>
+      * <br>
+      * When setting the value, the new value given<br>
+      * must also lie in the range [ 0.0 ; 100.0 ].
+      **/
+#pragma PROPERTY MinValueAsPercentile
+    HRESULT get_MinValueAsPercentile(out /*IDLRETVAL*/ double poMinValueAsPercentile);
+    HRESULT put_MinValueAsPercentile(in double piMinValueAsPercentile);
+
+
+ // ===========================================================================
+ //  get_MaxValueAsPercentile
+ //  ------------------------
+ //  put_MaxValueAsPercentile
+ //  ------------------------
+ //
+    /**
+      * Returns or sets the highest value that a DOF can take.<br>
+      * When reading the value, the number returned<br>
+      * will take a percentile format, that is, will<br>
+      * be between 0.0 and 100.0 inclusive.<br>
+      * <br>
+      * When setting the value, the new value given<br>
+      * must also lie in the range [ 0.0 ; 100.0 ].
+      **/
+#pragma PROPERTY MaxValueAsPercentile
+    HRESULT get_MaxValueAsPercentile(out /*IDLRETVAL*/ double poMaxValueAsPercentile);
+    HRESULT put_MaxValueAsPercentile(in double piMaxValueAsPercentile);
+
+
+ // ===========================================================================
+ //  get_LimitsLocked
+ //  ----------------
+ //  put_LimitsLocked
+ //  ----------------
+ //
+    /**
+      * Sets a lock on the limits.<br>
+      * When the value of this property is <code>TRUE</code>, the DOF travel
+      * limits are locked, therefore the min and max values cannot
+      * be changed.<br>
+      * When the value is <code>FALSE</code>, the DOF limits are unlocked
+      * and can be changed.  By default, the DOF limits are locked and
+      * the application must unlock these limits before changing them.
+      **/
+#pragma PROPERTY LimitsLocked
+    HRESULT get_LimitsLocked(out /*IDLRETVAL*/ boolean poLimitsLocked);
+    HRESULT put_LimitsLocked(in boolean piLimitsLocked);
+
+
+// ===========================================================================
+ //  get_ValueLocked
+ //  ---------------
+ //  put_ValueLocked
+ //  ---------------
+ //
+    /**
+      * Sets a lock on the value.<br>
+      * When the value of this property is <code>TRUE</code>, the DOF's
+      * current value is locked and cannot be changed.<br>
+      *
+      * When this property is set to <code>FALSE</code>, the DOF value
+      * is unlocked and can be changed again.
+      *
+      * Locking a value on a DOF means that this DOF will ne take any
+      * other value than the current one, and will not be changed by
+      * an inverse kinematics resolution, for instance.
+      **/
+#pragma PROPERTY ValueLocked
+    HRESULT get_ValueLocked(out /*IDLRETVAL*/ boolean poValueLocked);
+    HRESULT put_ValueLocked(in boolean piValueLocked);
+
+// ===========================================================================
+ //  get_MinMean
+ //  -----------
+ //  get_MinMeanInterSegment
+ //  -----------
+    /**
+      * Returns the mean value of the lower limit of the DOF (in radians).<br>
+      **/
+#pragma PROPERTY MinMean
+    HRESULT get_MinMean(out /*IDLRETVAL*/ double poMinMean);
+    HRESULT get_MinMeanInterSegment(out /*IDLRETVAL*/ double poMinMean);
+
+// ===========================================================================
+ //  get_MinStdDev
+ //  -------------
+    /**
+      * Returns the standard deviation value of the lower limit of the DOF (in radians).<br>
+      **/
+#pragma PROPERTY MinStdDev
+    HRESULT get_MinStdDev(out /*IDLRETVAL*/ double poMinStdDev);
+
+
+// ===========================================================================
+ //  get_MaxMean
+ //  -----------
+ //  get_MaxMeanInterSegment
+ //  -----------
+    /**
+      * Returns the mean value of the upper limit of the DOF (in radians).<br>
+      **/
+#pragma PROPERTY MaxMean
+    HRESULT get_MaxMean(out /*IDLRETVAL*/ double poMaxMean);
+    HRESULT get_MaxMeanInterSegment(out /*IDLRETVAL*/ double poMaxMean);
+
+// ===========================================================================
+ //  get_MaxStdDev
+ //  -------------
+    /**
+      * Returns the standard deviation value of the upper limit of the DOF (in radians).<br>
+      **/
+#pragma PROPERTY MaxStdDev
+    HRESULT get_MaxStdDev(out /*IDLRETVAL*/ double poMaxStdDev);
+
+
+ // ===========================================================================
+ //  get_FullName
+ //  ------------
+ //
+    /**
+      * Returns the full name of the degree of freedom
+      * (e.g. "flexion/extension").<br>
+      * This property is different from the property<br>
+      * <code>Name</code> of <code>AnyObject</code>,<br>
+      * which gives the short name or abbreviated name<br>
+      * of the DOF (e.g. "DOF1").<br>
+      * <br>
+      **/
+#pragma PROPERTY FullName
+    HRESULT get_FullName(inout /*IDLRETVAL*/ CATBSTR pioFullName);
+};
+
+// Interface name : SWKIADOF
+#pragma ID SWKIADOF "DCE:748819e2-d9a7-11d3-8097005004d3fe74"
+#pragma DUAL SWKIADOF
+
+// VB object name : SWKDOF (Id used in Visual Basic)
+#pragma ID SWKDOF "DCE:748819e3-d9a7-11d3-8097005004d3fe74"
+#pragma ALIAS SWKIADOF SWKDOF
+
+#endif

@@ -1,0 +1,75 @@
+#ifndef CATIAView_IDL
+#define CATIAView_IDL
+
+// COPYRIGHT Dassault Systemes 2003 - 2018
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAAnnotations;
+
+interface CATIATPSView : CATIABase 
+{
+  /**
+  * Gets view type.
+  * @param oViewType
+  *  The view type
+  *  <br><b>Legal values</b>:
+  *  <ul>
+  *   <li>1: Front View</li>
+  *   <li>2: Section View</li>
+  *   <li>3: Cut View</li>
+  *  </ul>
+  */
+#pragma PROPERTY ViewType
+  HRESULT get_ViewType (out /*IDLRETVAL*/ long oViewType);
+
+  /**
+  * Reads view annoation plane.
+  * @param oMathPlane
+  *  Mathematical plane definition of the View.
+  */
+#pragma PROPERTY AnnotationPlane
+  HRESULT get_AnnotationPlane (out /*IDLRETVAL*/ CATSafeArrayVariant oMathPlane);
+
+  /**
+  * Retrieves the TPS components of the View.
+  *   @param oAnnots
+  *     Collection of returned component.
+  */
+#pragma PROPERTY Annotations
+  HRESULT get_Annotations (out /*IDLRETVAL*/ CATIAAnnotations oAnnots );
+
+  /**
+  * Sets / Gets the ratio of current View.
+  *   @param RatioValue
+  *     Ratio applied to the View.
+  */
+#pragma PROPERTY DisplayRatio
+  HRESULT put_DisplayRatio( in double RatioValue );
+  HRESULT get_DisplayRatio( out /*IDLRETVAL*/ double RatioValue );
+
+  /**
+  * Gets / Sets the annotation Sketch associated under the current View.
+  *   @param Layout2DLView
+  *     2D Layout View used by current View as annotation sketch
+  */
+#pragma PROPERTY AnnotationSketch
+  HRESULT put_AnnotationSketch( in CATIABase Layout2DLView );
+  HRESULT get_AnnotationSketch( out /*IDLRETVAL*/ CATIABase Layout2DLView );
+};
+
+// Interface name : CATIATPSView
+#pragma ID CATIATPSView "DCE:ec173ab3-e9f8-4a65-9bf84ea0051fd65d"
+#pragma DUAL CATIATPSView
+
+// VB object name : View (Id used in Visual Basic)
+#pragma ID TPSView "DCE:6534e306-bffe-43bd-b62b45578a7e82d4"
+#pragma ALIAS CATIATPSView TPSView
+
+#endif

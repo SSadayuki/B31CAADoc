@@ -1,0 +1,255 @@
+#ifndef CATIAChamfer_IDL
+#define CATIAChamfer_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//								   
+// CATIAChamfer:						   
+// Exposed interface for Mechanical Chamfer along (ribbons of) Edges
+// or Faces								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Nov97 Creation					Ph Baucher
+// Dec97 Modification					 L Lalere
+//=================================================================
+#include "CATIADressUpShape.idl"
+
+#include "CATChamferDefs.idl"
+
+interface CATIAReferences;
+interface CATIAReference;
+interface CATIALength;
+interface CATIAAngle;
+
+/**
+ * Represents the chamfer shape.
+ * A chamfer is made up of a list of geometrical elements
+ * to process, such as faces, and is defined using a couple of parameters,
+ * such as two lengthes, or a length and an angle.
+ */
+//-----------------------------------------------------------------
+interface CATIAChamfer : CATIADressUpShape
+{
+	//		================
+	//		== PROPERTIES ==
+	//		================
+	// 	ON CHAMFER MODE
+	//	---------------
+	//
+    /**
+     * Returns or sets the chamfer definition mode.
+     * The chamfer definition mode enables the chamfer to be defined
+     * using either two lengthes or a length and an angle.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>mode</tt> how the parameters
+     * of the <tt>firstChamfer</tt> chamfer are defined, and then sets it
+     * to <tt>catTwoLengthChamfer</tt>:
+     * <pre>
+     * Set mode = firstChamfer.<font color="red">Mode</font>
+     * firstChamfer.<font color="red">Mode</font> = catTwoLengthChamfer
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Mode
+	HRESULT get_Mode ( out /*IDLRETVAL*/ CatChamferMode oMode );
+	HRESULT put_Mode ( in                CatChamferMode iMode );
+
+	//
+	//	ON PROPAGATION MODE
+	//	-------------------------
+	//
+    /**
+     * Returns or sets the propagation mode of the geometrical elements
+     * to be chamfered.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>prop</tt> the propagation mode
+     * of the <tt>firstChamfer</tt> chamfer, and then sets it to
+     * <tt>catMinimalChamfer</tt>:
+     * <pre>
+     * Set prop = firstChamfer.<font color="red">Propagation</font>
+     * firstChamfer.<font color="red">Propagation</font> = catMinimalChamfer
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Propagation
+	HRESULT	get_Propagation	( out /*IDLRETVAL*/ CatChamferPropagation oPropagation );
+	HRESULT put_Propagation ( in                CatChamferPropagation iPropagation );
+
+        //
+        //      ON ORIENTATION (reverse or not)
+        //      -------------------------
+        //
+    /**
+     * Returns or sets the chamfer orientation.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>orient</tt> the orientation mode
+     * of the <tt>firstChamfer</tt> chamfer, and then sets it to
+     * <tt>catReverseChamfer</tt>:
+     * <pre>
+     * Set orient = firstChamfer.<font color="red">Orientation</font>
+     * firstChamfer.<font color="red">Orientation</font> = catReverseChamfer
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Orientation
+        HRESULT get_Orientation ( out /*IDLRETVAL*/ CatChamferOrientation oOrientation );
+        HRESULT put_Orientation ( in                CatChamferOrientation iOrientation );
+
+	//
+	//	ON LENGTH ONE
+	//	-------------
+	//
+    /**
+     * Returns the chamfer first length.
+     * This is the first length if the chamfer is defined by two lengthes,
+     * or the chamfer if the chamfer is defined by a length and an angle.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>length1</tt> the first length of
+     * the <tt>firstChamfer</tt> chamfer:
+     * <pre>
+     * Set length1 = firstChamfer.<font color="red">Length1</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Length1
+	HRESULT	get_Length1 ( out /*IDLRETVAL*/ CATIALength oLength1 );
+
+	//
+	//	ON LENGTH TWO
+	//	-------------
+	//
+    /**
+     * Returns the chamfer second length.
+     * This is valid only if the chamfer is defined using two lengthes,
+     * that is if the chamfer definition mode @href CatChamferMode
+     * is set to <tt>catTwoLengthChamfer</tt>.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>length2</tt> the second length
+     * of the <tt>firstChamfer</tt> chamfer:
+     * <pre>
+     * Set length2 = firstChamfer.<font color="red">Length2</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY Length2
+	HRESULT	get_Length2 ( out /*IDLRETVAL*/ CATIALength  oLength2 );
+
+        //
+        //      ON ANGLE
+        //      --------
+        //
+    /**
+     * Returns the chamfer angle.
+     * This is valid only if the chamfer is defined using a length and an angle,
+     * that is if the chamfer definition mode @href CatChamferMode
+     * is set to <tt>catLengthAngleChamfer</tt>.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>angle</tt> the angle of
+     * the <tt>firstChamfer</tt> chamfer:
+     * <pre>
+     * Set angle = firstChamfer.<font color="red">Angle</font>
+     *</pre>
+     * </dl>
+     */
+#pragma PROPERTY Angle
+        HRESULT get_Angle ( out /*IDLRETVAL*/ CATIAAngle  oAngle );
+
+ 
+        //
+        //      ON ELEMENTS TO CHAMFER
+        //      ----------------------
+        //
+    /**
+     * Returns the collection of geometrical elements to be chamfered.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>list</tt> the list of elements
+     * of the <tt>firstChamfer</tt> chamfer:
+     * <pre>
+     * Set list = firstChamfer.<font color="red">ElementsToChamfer</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY ElementsToChamfer
+        HRESULT get_ElementsToChamfer ( out /*IDLRETVAL*/ CATIAReferences oElementsToChamfer );
+
+	//		=============
+	//		== METHODS ==
+	//		=============
+	//
+	//	ADD AN ELEMENT TO CHAMFER
+	//	-------------------------
+	//
+    /**
+     * Adds a new geometrical element to be chamfered.
+     * @param iElementToChamfer
+     *   The new element to be chamfered<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIATriDimFeatEdge.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new element <tt>element</tt>
+     * to be chamfered for the <tt>firstChamfer</tt> chamfer:
+     * <pre>
+     * firstChamfer.<font color="red">AddElementToChamfer</font>(element)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	AddElementToChamfer ( in CATIAReference iElementToChamfer ) ;
+	//
+	//	WITHDRAW AN ELEMENT TO CHAMFER
+	//	------------------------------
+	//
+    /**
+     * Withdraws a geometrical element from those to be chamfered.
+     * @param iElementToWithdraw
+     *   The existing element to withdraw<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIATriDimFeatEdge.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws an existing element <tt>element</tt>
+     * to be chamfered from the <tt>firstChamfer</tt> chamfer:
+     * <pre>
+     * firstChamfer.<font color="red">WithdrawElementToChamfer</font>(element)
+     * </pre>
+     * </dl>
+     */
+	HRESULT	WithdrawElementToChamfer ( in CATIAReference iElementToWithdraw ) ;
+};
+
+// Interface Name : CATIAChamfer
+#pragma ID CATIAChamfer "DCE:8142dd37-bef4-0000-0280030ba6000000"
+#pragma DUAL CATIAChamfer
+ 
+// VB Object Name : Chamfer
+#pragma ID Chamfer "DCE:8142dd3d-5bc2-0000-0280030ba6000000"
+#pragma ALIAS CATIAChamfer Chamfer
+
+#endif
+// CATIAChamfer_IDL
+

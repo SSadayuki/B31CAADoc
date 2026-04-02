@@ -1,0 +1,29 @@
+#
+# LOAD MODULE
+#
+BUILT_OBJECT_TYPE=LOAD MODULE
+PROGRAM_NAME=CATScriptParser
+
+LINK_WITH = CATScriptEngine JS0DSPA JS03TRA NS0S3STR
+
+ 
+#
+OS = HP-UX
+BUILD =  NO
+
+#
+OS = IRIX
+BUILD =  NO
+
+#
+OS = SunOS
+BUILD =  NO
+
+#
+OS = Linux
+BUILD =  NO
+
+#
+OS = AIX
+BUILD =  NO
+

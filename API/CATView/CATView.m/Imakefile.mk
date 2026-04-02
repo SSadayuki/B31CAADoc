@@ -1,0 +1,27 @@
+# COPYRIGHT DASSAULT SYSTEMES 2004
+BUILT_OBJECT_TYPE=SHARED LIBRARY 
+ 
+LINK_WITH = CATViewItf\
+			JS0GROUP JS0FM\
+			DI0PANV2\
+			CATMathematics CATMathStream\
+			CATViz
+
+OS = aix_a
+SYS_LIBS = -lXm -lXt -lXi -lX11 
+
+OS = aix_a64
+SYS_LIBS = -lXm -lXt -lXi -lX11
+
+OS = HP-UX
+SYS_LIBS = -lXm -lXt -lXi -lX11
+
+OS = IRIX
+SYS_LIBS = -lXm -lXt -lXi -lX11
+LOCAL_CCFLAGS  = -float
+LOCAL_CFLAGS   = -float 
+
+OS = SunOS
+SYS_LIBS = -lXm -lXt -lXi -lX11
+#LOCAL_CFLAGS = -DMOTIF12_HEADERS
+#LOCAL_CCFLAGS = -DMOTIF12_HEADERS

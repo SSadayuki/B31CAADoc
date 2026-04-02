@@ -1,0 +1,95 @@
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+#ifndef CATIAExpertCheck_IDL
+#define CATIAExpertCheck_IDL
+/*IDLREP*/
+
+
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAExpertCheckRuntime.idl"
+
+
+/**
+ * Represents the edition part of a check.
+ *
+ * The following example shows how to access the Check check1
+ * from an existing RuleSet RS1 of the RuleBase RB1
+ * <pre>
+ * Dim CATDocs As Document
+ * Set CATDocs   = CATIA.Documents
+ * Dim partdoc As PartDocument
+ * Set partdoc   = CATDocs.Add("CATPart")
+ * Dim part As Part
+ * Set part      = partdoc.Part
+ * Dim relations As Relations
+ * Set relations = part.Relations
+ * Dim Rulebase As ExpertRuleBaseRuntime
+ * Set RuleBase  = relations.Item("RB1")
+ * Dim Ruleset As ExpertRuleSetRuntime
+ * Set RuleSet	 = RuleBase.RuleSet.ExpertRuleBaseComponentRuntimes.Item("RS1")
+ * Dim Check1 As ExpertCheckRuntime
+ * Set Check1	 = RuleSet.ExpertRuleBaseComponentRuntimes.Item("Check1")
+ * </pre>
+ * @see CATIARelations, CATIAExpertRuleBase
+ */
+interface CATIAExpertCheck : CATIAExpertCheckRuntime
+{
+	/**
+	* Returns or sets the variable scope of an Expert Check.
+	*
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Check1.Variables = "H:Hole; P: Pad"
+	* </pre>
+	* </dl>
+	*/
+#pragma PROPERTY Variables 
+	HRESULT get_Variables(inout /*IDLRETVAL*/ CATBSTR oVariablesBSTR);
+	HRESULT put_Variables(in CATBSTR iVariablesBSTR);
+
+	/**
+	* Returns or sets the body of a Check.
+	*
+	* <dl>
+	* <dt><b>Example:</b>
+	* <dd>
+	* <pre>
+	* Check1.Body = "H.Diameter > 20mm AND GetSubString(P.Name, 1, 6) == ""myPad."""
+	* </pre>
+	* </dl>
+	*/
+#pragma PROPERTY Body
+	HRESULT get_Body(inout /*IDLRETVAL*/ CATBSTR oBodyBSTR);
+	HRESULT put_Body(in CATBSTR iBodyBSTR);	 
+
+	/**
+	 * Returns or sets the language of a check.
+	 *
+	 * <dl>
+	 * <dt>1<dd>KWE language
+	 * <dt>2<dd>VB Script
+	 * </dl>
+	 */
+#pragma PROPERTY Language
+    HRESULT    get_Language (inout /*IDLRETVAL*/ long oLanguage);
+    HRESULT    put_Language (in long iLanguage);
+};
+
+// Interface name : CATIAExpertCheck
+#pragma ID CATIAExpertCheck "DCE:96fbc284-bcfe-11d2-9b5b006094eb7eca"
+#pragma DUAL CATIAExpertCheck
+
+// VB object name : ExpertCheck (Id used in Visual Basic)
+#pragma ID ExpertCheck "DCE:9791f6aa-bcfe-11d2-9b5b006094eb7eca"
+#pragma ALIAS CATIAExpertCheck ExpertCheck
+
+#endif
+// CATIAExpertCheck_IDL
+

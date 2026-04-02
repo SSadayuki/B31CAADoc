@@ -1,0 +1,117 @@
+#ifndef CATIAPCBHoleAndPattern_IDL
+#define CATIAPCBHoleAndPattern_IDL
+
+/*IDLREP*/
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//--------------------------------------------------------------------------
+// Document object
+// gha Oct.99
+//
+//--------------------------------------------------------------------------
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"	
+#include "CATBSTR.idl"
+
+ 
+ /** 
+   interface to manage a PCB Hole and  PCB Pattern of Hole
+  */
+
+
+interface CATIAPCBHoleAndPattern : CATIABase
+{
+//----------------------------------------------------------------------------------
+  /**
+  * Allow to get and set the Plating Style of a hole
+  *  The possible values are : PTH, NPTH 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY PlatingStyle
+  HRESULT get_PlatingStyle(out /*IDLRETVAL*/  CATBSTR  oPlatingStyle);
+  HRESULT put_PlatingStyle(in  CATBSTR  iPlatingStyle);
+ 
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the Associated Part  
+  * of a hole
+  * The possible values are : 
+  *    the name of the instance of component in which the hole is defined. 
+  *    BOARD if the hole is defined in the Board part
+  *    PANEL If the hole is defined in the Panel part
+  *    NOREFDES is the hole is defined in a non Electronic Part. 
+ 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY AssociatedPartName
+ HRESULT get_AssociatedPartName(out /*IDLRETVAL*/ CATBSTR oAssociatedPartName);
+ HRESULT put_AssociatedPartName(in  CATBSTR iAssociatedPartName);
+
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the function of the hole 
+  * The differents values are :
+  *    PIN if the hole is associated with a component pin
+  *    VIA if the hole is associated with  a conductive via
+  *    MTG if the hole is used for mounting purposes
+  *    TOOL if the hole is used for tooling purposes
+  *    Other  ( User defined ) 
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+
+#pragma PROPERTY HoleType
+ HRESULT get_HoleType(out /*IDLRETVAL*/ CATBSTR  oHoleType);
+ HRESULT put_HoleType (in  CATBSTR  iHoleType);
+
+//----------------------------------------------------------------------------------
+
+   /**
+  * Allow to get and set the Operating power rating of a component
+  * The possible value are MCAD,ECAD, UNOWNED
+  * @return <UL> 
+  *         <LH>The result of the method:
+  *         <LI>S_OK if succeeded
+  *         <LI>E_FAIL if failed
+  *         </UL> 
+  */
+#pragma PROPERTY HoleOwner
+
+ HRESULT get_HoleOwner(out /*IDLRETVAL*/  CATBSTR  oHoleOwner);
+ HRESULT put_HoleOwner(in  CATBSTR  iHoleOwner);
+
+
+};
+
+// Interface name : CATIAPCBHoleAndPattern
+// Interface name : CATIAPCBHoleAndPattern
+#pragma ID CATIAPCBHoleAndPattern "DCE:d1a84f05-e968-4194-a68f79e243588653"
+		
+#pragma DUAL CATIAPCBHoleAndPattern
+
+// VB object name : PCBHoleAndPattern
+#pragma ID PCBHoleAndPattern "DCE:f9ee7473-968a-4c8f-9d4f61a7f3c88a92"
+							
+#pragma ALIAS CATIAPCBHoleAndPattern PCBHoleAndPattern
+#endif

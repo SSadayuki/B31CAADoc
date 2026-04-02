@@ -1,0 +1,107 @@
+#ifndef CATIAUserSurfaces_IDL
+#define CATIAUserSurfaces_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+interface CATIAProduct;
+interface CATIAReference;
+interface CATIAReferences;
+interface CATIAUserSurface;
+
+interface CATIAUserSurfaces : CATIACollection
+{  
+  /**
+   * Use this method in a Part.
+   * Creates a new user surface and adds it to the Surfaces collection.
+   * @param iSupport
+   *   The first reference that will support the user surface
+   * @return
+   *   The created user surface
+   * <! @sample >
+   * <dt><b>Example:</b>
+   * <dd>
+   * The following example creates a user surface names <tt>NewUserSurf</tt>
+   * from the reference <tt>Ref</tt>
+   * in the Surfaces collection of the <tt>rootPart</tt> part
+   * in the <tt>partDoc</tt> part document. 
+   * <pre>
+   * Set rootPart = partDoc.Part
+   * Set NewUserSurf = rootPart.UserSurfaces.<font color="red">Add</font>(Ref)
+   * </pre>
+   */
+
+  HRESULT Generate (in CATIAReference iSupport,
+                    out /*IDLRETVAL*/ CATIAUserSurface oUserSurf);
+
+  /**
+   * Use this method in a Product.
+   * Creates a new user surface and adds it to the Surfaces collection.
+   * @param iProduct
+   *   The level on which you want to create annotation (part or product).
+   * @param iProdInst
+   *   The product instance where there is the geometry.
+   * @param iSupport
+   *   The first reference that will support the user surface
+   * @return
+   *   The created user surface
+   */
+  HRESULT GenerateInAProductCtx (in CATIAProduct   iProduct,
+                                 in CATIAProduct   iProdInst,
+                                 in CATIAReference iSupport,
+                                 out /*IDLRETVAL*/ CATIAUserSurface oUserSurf);
+
+  /**
+   * Usefull to create a User Surface Node from two others User Surface.
+   * Creates a new user surface and adds it to the Surfaces collection.
+   * @param iFirstUserSurf
+   *   The first User Surface to use.
+   * @param iSecondUserSurf
+   *   The second User Surface to use.
+   * @return
+   *   The created user surface
+   */
+  HRESULT MakeUserSurfaceNode (in CATIAUserSurface iFirstUserSurf,
+                               in CATIAUserSurface iSecondUserSurf,
+                               out /*IDLRETVAL*/ CATIAUserSurface oNodeUserSurf);
+
+  /**
+   * Find a user surface inside the collection.
+   * @param iIndex
+   *   The position of the users surface in the collection
+   * @return
+   *   The user surface that is in the iIndex position in the collection
+   */
+  HRESULT Item (in CATVariant iIndex,
+                out /*IDLRETVAL*/ CATIAUserSurface oUserSurf);
+
+  /**
+   * Usefull to create a User Surface Node from a list of User Surfaces.
+   * Creates a new user surface and adds it to the Surfaces collection.
+   * @param iListOfUserSurfaces
+   *   The list User Surfaces to use.
+   * @return
+   *   The created user surface
+   */
+  HRESULT MakeUserSurfaceNode2 (in CATSafeArrayVariant iListOfUserSurfaces,
+                               out /*IDLRETVAL*/ CATIAUserSurface oNodeUserSurf);
+
+};
+
+// Interface name : CATIAUserSurfaces
+#pragma ID CATIAUserSurfaces "DCE:c5534376-a0ce-11d3-9c940008c725d79e"
+#pragma DUAL CATIAUserSurfaces
+
+// VB object name : UserSurfaces
+#pragma ID UserSurfaces "DCE:c5534376-a0ce-11d3-9c940008c725d79f"
+#pragma ALIAS CATIAUserSurfaces UserSurfaces
+
+#endif

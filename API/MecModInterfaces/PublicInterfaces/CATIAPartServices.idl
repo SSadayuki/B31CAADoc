@@ -1,0 +1,116 @@
+#ifndef CATIAPartServices_IDL
+#define CATIAPartServices_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2020
+//=================================================================
+//                                   
+// CATIAPartServices:                           
+// Exposed interface for services of the part
+//                                   
+//=================================================================
+// Usage notes:
+// 
+//=================================================================
+
+#include "CATIABase.idl"
+
+interface CATIAReference;
+interface CATIAReferences;
+
+/**
+   * The object exposes services for the part.
+   *<br>
+   * This object is available thanks to @href CATIAPart 
+   *   Set myPart = CATIA.ActiveDocument.Part
+   *   ' Get Service Object by querying on part - extension of CATIA Base
+   *   Set partServices = myPart.GetItem("CATPartServices")
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <pre>
+   *   Set part1 = CATIA.ActiveDocument.Part
+   *   Set partServices1 = myPart.GetItem("CATPartServices")
+   * </pre>
+   * </dl>
+ */
+
+//-----------------------------------------------------------------
+interface CATIAPartServices : CATIABase
+{
+   /**
+   * Get the sub elements of a geometric object or a body.
+   * @param iObject
+   *   A geometric object or a body
+   * @param iSubElementDimension
+   *   The dimension of sub elements wanted: 0 for vertex, 1 for edge, 2 for face.
+   * @param iDuplicates
+   *   Allow duplicate sub elements in the list. FALSE will remove duplicates (same label and selecting feature).
+   * @param oSubElements
+   *   List of the sub elements 
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>The following example returns the vertices of a pad
+   * <pre>
+   *  Set part1 = CATIA.ActiveDocument.Part
+   *  Set bodies1 = part1.Bodies
+   *  Set body1 = bodies1.Item("PartBody")
+   *  Set shapes1 = body1.Shapes
+   *  Set pad1 = shapes1.Item("Pad.1")
+   *  Set partServices1 = myPart.GetItem("CATPartServices")
+   *  Set references1 = partServices1.GetSubElements(pad1, 0, True)
+   * </pre>
+   * </dl>
+   */
+
+   HRESULT GetSubElements(in CATIABase iObject, in long iSubElementDimension, in boolean iDuplicates, out /*IDLRETVAL*/ CATIAReferences oSubElements);
+
+   /**
+   * Get the sub elements of a geometric object or a body that are the closest to a geometric object or a body.
+   * @param iObject
+   *   A geometric object or a body
+   * @param iSubElementDimension
+   *   The dimension of sub elements wanted: 0 for vertex, 1 for edge, 2 for face.
+   * @param iNearObject
+   *   A geometric object or a body to be close to
+   * @param oSubElements
+   *   List of the sub elements of iObject (without duplicates) closest to iNearObject.
+   * <! @sample >
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd>The following example returns the vertices of a pad that are the closest to a point.
+   * <pre>
+   *  Set part1 = CATIA.ActiveDocument.Part
+   *  Set bodies1 = part1.Bodies
+   *  Set body1 = bodies1.Item("PartBody")
+   *  Set shapes1 = body1.Shapes
+   *  Set pad1 = shapes1.Item("Pad.1")
+   *  Set point1 = shapes1.Item("Point.1")
+   *  Set partServices1 = myPart.GetItem("CATPartServices")
+   *  Set references1 = partServices1.GetSubNearElements(pad1, 0, point1)
+   * </pre>
+   * </dl>
+   */
+
+   HRESULT GetNearSubElements(in CATIABase iObject, in long iSubElementDimension, in CATIABase iNearObject, out /*IDLRETVAL*/ CATIAReferences oSubElements);
+
+};
+
+// Interface : CATIAPartServices
+#pragma ID CATIAPartServices "DCE:116b88f3-c75a-4deb-88e83e3b8fdfa215"
+#pragma DUAL CATIAPartServices
+
+// VB object name : PartServices (Id used in Visual Basic)
+#pragma ID PartServices "DCE:b9772729-1e95-4b00-84866d84d823e689"
+#pragma ALIAS CATIAPartServices PartServices
+
+#endif
+// CATIAPartServices_IDL
+

@@ -1,0 +1,789 @@
+#ifndef CATIAHybridShapeBlend_IDL
+#define CATIAHybridShapeBlend_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+ /**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeBlend:         
+// Exposed interface for HybridShape Blend
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril2000 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIARealParam.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+
+/**
+ * Represents the hybrid shape blended surface object.
+ * <b>Role</b>: To access the data of the hybrid shape blended surface object.
+ * <p>This data includes:
+ * <ul>
+ * <li>Two support surfaces, one at each limit of the blended surface</li>
+ * <li>Two curves, one for each support surface</li>
+ * <li>The curve closing points</li>
+ * </ul>
+ * <p>Use the CATIAHybridShapeFactory to create a HybridShapeBlend object.
+ * @see CATIAHybridShapeFactory
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapeBlend : CATIAHybridShape
+{
+ /**
+  * Sets a curve to the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend to which the curve will be set.
+  *     <br><b>Legal values</b>: 1 for the first curve, and 2 for the second one
+  *   @param iCurve
+  *     The curve to be set.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIATriDimFeatEdge and @href CATIABiDimFeatEdge.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the <code>CurveForBlend</code> curve to the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * ShpBlend.<font color="red">SetCurve</font> 2, CurveForBlend
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetCurve (in                long            iBlendLimit,
+                   in                CATIAReference  iCurve);
+
+ /**
+  * Returns a curve from the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend from which the curve will be retrieved.
+  *     <br><b>Legal values</b>: 1 for the first curve, and 2 for the second one
+  *   @return
+  *     The retrieved curve
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>BlendCurve</code> the curve of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * Dim BlendCurve As Reference
+  * BlendCurve = ShpBlend.<font color="red">GetCurve</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetCurve (in                long            iBlendLimit,
+                   out   /*IDLRETVAL*/  CATIAReference  oCurve);
+
+
+ /**
+  * Sets a new closing point to a closed curve of the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend whose curve will be set a new closing point.
+  *     <br><b>Legal values</b>: 1 for the first curve, and 2 for the second one
+  *   @param iClosingPoint
+  *     The closing point to be set.
+  *     This point must lay on the curve of the blend limit.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAVertex.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the <code>Point10</code> point as the closing point to the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * ShpBlend.<font color="red">SetClosingPoint</font> 2, Point10
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetClosingPoint (in                long            iBlendLimit,
+                          in                CATIAReference  iClosingPoint);
+
+ /**
+  * Returns the closing point of a closed curve of the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend whose curve closing point is returned.
+  *     <br><b>Legal values</b>: 1 for the first curve, and 2 for the second one
+  *   @return
+  *      The retrieved closing point
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>ClosingPoint</code> the closing point of the curve
+  * of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * Dim ClosingPoint As Reference
+  * ClosingPoint = ShpBlend.<font color="red">GetClosingPoint</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetClosingPoint (in                long            iBlendLimit,
+                          out   /*IDLRETVAL*/  CATIAReference  oClosingPoint);
+
+ /**
+  * Unsets the closing point of a closed curve of the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend whose curve closing point is unset.
+  *     <br><b>Legal values</b>: 1 for the first curve, and 2 for the second one
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example unsets the closing point of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * ShpBlend.<font color="red">UnsetClosingPoint</font> 2
+  * </pre>
+  * </dl>
+  */
+ HRESULT UnsetClosingPoint (in                long            iBlendLimit);
+
+ /**
+  * Sets the orientation of a curve of the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend whose curve orientation is to be set.
+  *     <br><b>Legal values</b>: 1 for the first curve, and 2 for the second one
+  *   @param iOrientation
+  *      The orientation to set to the curve.
+  *     <br><b>Legal values</b>: 1 for direct and -1 for reverse
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the orientation of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature to direct.
+  * <pre>
+  * ShpBlend.<font color="red">SetOrientation</font> 2, 1
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetOrientation (in                long            iBlendLimit,
+                         in                long            iOrientation);
+
+ /**
+  * Returns the orientation of a curve of the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend whose curve orientation is to be retrieved.
+  *     <br><b>Legal values</b>: 1 for the first curve, and 2 for the second one
+  *   @return
+  *      The orientation to set to the curve.
+  *     <br><b>Legal values</b>: 1 for direct and -1 for reverse
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>Orientation</code> the orientation of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * Orientation = ShpBlend.<font color="red">GetOrientation</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetOrientation (in                long            iBlendLimit,
+                         out   /*IDLRETVAL*/  long            oOrientation);
+ 
+ /**
+  * Sets a support to the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend whose support is to be set.
+  *     <br><b>Legal values</b>: 1 for the first support, and 2 for the second one
+  *   @param iSupport
+  *     The support surface to be set.
+  *     The curve of the blend limit must lay on the surface.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAFace.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the <code>SupportSurf</code> surface as the support of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * ShpBlend.<font color="red">SetSupport</font> 2, SupportSurf
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetSupport (in                long            iBlendLimit,
+                     in                CATIAReference  iSupport);
+
+ /**
+  * Returns a support from the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend whose support is to be retrieved.
+  *     <br><b>Legal values</b>: 1 for the first support, and 2 for the second one
+  *   @return
+  *     The retrieved support surface
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>SupportSurf</code> the support surface of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * Dim SupportSurf As Reference 
+  * SupportSurf = ShpBlend.<font color="red">GetSupport</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetSupport (in                long            iBlendLimit,
+                     out   /*IDLRETVAL*/ CATIAReference  oSupport);
+
+ /**
+  * Unsets a support from the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend whose support is to be unset.
+  *     <br><b>Legal values</b>: 1 for the first support, and 2 for the second one
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example unsets the support surface of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * ShpBlend.<font color="red">UnsetSupport</font> 2
+  * </pre>
+  * </dl>
+  */
+ HRESULT UnsetSupport (in                long            iBlendLimit);
+
+
+ /**
+  * Sets the transition orientation to a limit of the blend. 
+  * <br><b>Role</b>:
+  * Let <tt>T</tt> be the tangent to the wire, 
+  * and <tt>N</tt> be the normal to the skin body.
+  * The transition orientation defines how the blend goes from the initial wires: it takes the 
+  * direction of <tt>iTransition*(T^N)</tt>, where <tt>^</tt> is the cross product.
+  *   @param iBlendLimit
+  *     The limit of the blend whose transition orientation is to be set.
+  *     <br><b>Legal values</b>: 1 for the first support, and 2 for the second one
+  *   @param iTransition
+  *      The value of transition orientation. 
+  *     <br><b>Legal values</b>: 1 for direct and -1 for reverse
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the transition orientation of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature to reverse.
+  * <pre>
+  * ShpBlend.<font color="red">SetTransition</font> 2, -1
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetTransition (in                long            iBlendLimit,
+                        in                long            iTransition);
+
+ /**
+  * Returns the transition orientation from a limit of the blend. 
+  * <br>
+  * Let <tt>T</tt> be the tangent to the wire, 
+  * and <tt>N</tt> be the normal to the skin body.
+  * The transition orientation defines how the blend goes from the initial wires: it takes the 
+  * direction of <tt>iTransition*(T^N)</tt>, where <tt>^</tt> is the cross product.
+  *   @param iBlendLimit
+  *     The limit of the blend whose transition orientation is to be retrieved.
+  *     <br><b>Legal values</b>: 1 for the first support, and 2 for the second one
+  *   @return
+  *      The retrieved value of transition orientation. 
+  *     <br><b>Legal values</b>: 1 for direct and -1 for reverse
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>TransOrientation</code> the transition orientation
+  * of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * TransOrientation = ShpBlend.<font color="red">GetTransition</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetTransition (in                long            iBlendLimit,
+                        out /*IDLRETVAL*/ long            oTransition);
+
+ /**
+  * Sets the continuity to a limit of the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend whose continuity is to be set.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @param iContinuity
+  *     The continuity to set
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>0 <dd>Point continuity
+  *       <dt>1 <dd>Tangency continuity
+  *       <dt>2 <dd>Curvature continuity
+  *     </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the continuity of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature to tangency continuity.
+  * <pre>
+  * ShpBlend.<font color="red">SetContinuity</font> 2, 1
+  * </pre>
+  */
+ HRESULT SetContinuity (in                long            iBlendLimit,
+                        in                long            iContinuity);
+
+ /**
+  * Retrieves the continuity of a limit of the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend whose continuity is to be retrieved.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @return
+  *     The retrieved continuity.
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>0 <dd>Point continuity
+  *       <dt>1 <dd>Tangency continuity
+  *       <dt>2 <dd>Curvature continuity
+  *     </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>Continuity</code> the continuity of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * Continuity = ShpBlend.<font color="red">GetContinuity</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetContinuity (in                long            iBlendLimit,
+                        out /*IDLRETVAL*/ long            oContinuity);
+
+ /**
+  * Sets whether a support of the blend is to be trimmed off.
+  * <br>
+  * If the support is set to be trimmed, it will be trimmed using
+  * the curve then joined to the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend whose support is to be trimmed.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @param iTrimSupport
+  *     The trim support mode
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>1 <dd>No trim
+  *       <dt>2 <dd>The support will be trimmed
+  *     </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets that the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature should be trimmed off.
+  * <pre>
+  * ShpBlend.<font color="red">SetTrimSupport</font> 2, 2
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetTrimSupport  (in                long            iBlendLimit,
+                          in                long            iTrimSupport);
+
+ /**
+  * Returns whether a support of the blend will be trimmed off.
+  * <br>
+  * If the support is set to be trimmed, it will be trimmed using
+  * the curve then joined to the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend whose support is to be trimmed.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @return
+  *     The trim support mode
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>1 <dd>No trim
+  *       <dt>2 <dd>The support will be trimmed
+  *     </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves whether the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature should be trimmed off.
+  * <pre>
+  * IsTrimmed = ShpBlend.<font color="red">GetTrimSupport</font>(2)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetTrimSupport  (in                long            iBlendLimit,
+                          out /*IDLRETVAL*/ long            oTrimSupport);
+
+ /**
+  * Sets the type of border to a limit of the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend whose type of border is to be set.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @param iBorder
+  *     The type of border
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>1 <dd>The border of the blend will be tangent to the border of the support surface, 
+  *                 or if the curve ends on the border of a face of the support surface, then
+  *                 the border of the blend will be tangent to the border face.
+  *       <dt>2 <dd>The border of the blend is not constrained.
+  *       <dt>3 <dd>The border of the blend will be tangent to the border of the support surface
+  *                 at the start extremity of the curve,
+  *                 or if the curve ends on the border of a face of the support surface, then
+  *                 the border of the blend will be tangent to the border face at the start extremity
+  *                 of the curve.
+  *       <dt>4 <dd>The border of the blend will be tangent to the border of the support surface
+  *                 at the end extremity of the curve,
+  *                 or if the curve ends on the border of a face of the support surface, then
+  *                 the border of the blend will be tangent to the border face at the end extremity
+  *                 of the curve.
+  *     </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the type of border of the second limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature to "no constraint".
+  * <pre>
+  * ShpBlend.<font color="red">SetBorderMode</font> 2, 2
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetBorderMode (in long iBlendLimit,
+                        in long iBorder);
+
+ /**
+  * Returns the type of border to a limit of the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend whose type of border is to be retrieved.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @return
+  *     The type of border
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>1 <dd>The border of the blend will be tangent to the border of the support surface, 
+  *                 or if the curve ends on the border of a face of the support surface, then
+  *                 the border of the blend will be tangent to the border face.
+  *       <dt>2 <dd>The border of the blend is not constrained.
+  *     </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>BorderType</code> the type of border of the first limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * BorderType = ShpBlend.<font color="red">GetBorderMode</font>(1)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetBorderMode (in                long iBlendLimit,
+                        out /*IDLRETVAL*/ long oBorder);
+
+
+ /**
+  * Sets the tension values to a limit of the blend. 
+  * The values must be expressed as doubles and must be positive.
+  *   @param iBlendLimit
+  *     The limit of the blend to which the tension values are to be set.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @param iTensionType
+  *     The tension type
+  *     <br><b>Legal values</b>: 
+  *     <dl>
+  *       <dt>1 <dd>Default tension
+  *       <dt>2 <dd>Constant tension
+  *       <dt>3 <dd>Linear tension
+  *     </dl>
+  *   @param iFirstTension
+  *      The value for the first tension. It must be used with any tension type
+  *      <br><b>Legal values</b>: it must be a double and positive.
+  *   @param iSecondTension
+  *      The value for the second tension. It can be used with linear tension only
+  *      <br><b>Legal values</b>: it must be a double and positive.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the tension values
+  * of the tension, supposed to be a linear tension, of the first limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature to respectively 1.5 and 0.5.
+  * <pre>
+  * ShpBlend.<font color="red">SetTensionInDouble</font> 1, 3, 1.5, 0.5
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetTensionInDouble (in long   iBlendLimit,
+                             in long   iTensionType,
+							 in double iFirstTension,
+                             in double iSecondTension);
+
+ /**
+  * Returns the tension values of a limit of the blend.
+  *   @param iBlendLimit
+  *     The limit of the blend from which the tension type and values are to be retrieved.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @param iRank
+  *     The rank of the value to retrieve among those available, depending on the tension type.
+  *     <br><b>Legal values</b>: <tt>iRank</tt> can take the following values:
+  *      <dl>
+  *        <dt>1  <dd>With default tension and constant tension, for the unique available value,
+  *                   and with linear tension for the first value
+  *        <dt>2  <dd>With linear tension for the second value
+  *      </dl>
+  *   @return
+  *      The retrieved tension value
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>TensionVal</code> the tension value
+  * of the tension, supposed to be a constant tension, of the first limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * Dim ConstTensionVal As RealParam
+  * Set ConstTensionVal = ShpBlend.<font color="red">GetTensionInDouble</font>(1, 1)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetTensionInDouble (in                long            iBlendLimit,
+                             in                long            iRank,
+                             out /*IDLRETVAL*/ CATIARealParam  oTension);
+ 
+  /**
+  * Sets the tension type of a limit of the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend for which the tension type is to be set.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @param iBlendLimit
+  *     The value of tension type
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>1 <dd>Default tension
+  *       <dt>2 <dd>Constant tension
+  *       <dt>3 <dd>Linear tension
+  *		  <dt>4 <dd>SType  tension
+  *     </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example sets the tension type as Default Tension for the first limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * ShpBlend.<font color="red">SetTensionType</font> 1, 1
+  * </pre>
+  * </dl>
+  */
+ HRESULT SetTensionType     (in                long iBlendLimit,
+                             in				   long iTensionType);
+
+ /**
+  * Returns the tension type of a limit of the blend. 
+  *   @param iBlendLimit
+  *     The limit of the blend from which the tension type is to be retrieved.
+  *     <br><b>Legal values</b>: 1 for the first limit, and 2 for the second one
+  *   @return
+  *     The value of tension type
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>1 <dd>Default tension
+  *       <dt>2 <dd>Constant tension
+  *       <dt>3 <dd>Linear tension
+		  <dt>4 <dd>SType  tension
+  *     </dl>
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>TensionType</code> the tension type
+  * of the first limit
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * TensionType.<font color="red">GetTensionType</font>(1)
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetTensionType     (in                long iBlendLimit,
+                             out /*IDLRETVAL*/ long oTensionType);
+
+
+ /**
+  * Inserts a coupling into the blend.
+  * @param iPosition 
+  *   The position of the coupling in the list of couplings.
+  *   Setting <tt>iPosition</tt> to 0 inserts the coupling at the end of the list.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example inserts a coupling at the end of the coupling list
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * ShpBlend.<font color="red">InsertCouplingt</font> 0
+  * </pre>
+  * </dl>
+  */ 
+	HRESULT InsertCoupling(in long iPosition);
+
+ /**
+  * Inserts a coupling point to a coupling of the blend.
+  * @param iCouplingIndex 
+  *   The index of the coupling in the list of couplings into which the coupling
+  *   point will be inserted.
+  * @param iPosition 
+  *   The position of the coupling point in the list of coupling points.
+  *   Setting <tt>iPosition</tt> to 0 inserts the coupling point at the end of the list.
+  * @param iPoint
+  *   The coupling point to be inserted.
+  *   This point must lay on the section with the same position.
+  * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+  * @href CATIAVertex.
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example inserts the <code>Point23</code> point into the third coupling at the end
+  * of the list of coupling points
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * ShpBlend.<font color="red">InsertCouplingPoint</font> 3, 0, Point23
+  * </pre>
+  * </dl>
+  */ 
+	HRESULT InsertCouplingPoint(in long           iCouplingIndex,
+	                            in long           iPosition,
+			                    in CATIAReference iPoint);
+
+ /**
+  * Returns or sets the type of coupling between the limits of the blend.
+  * <br>
+  * <b>Legal values</b>: The values representing the type of coupling can be:
+  * <dl>
+  *   <dt>1 <dd>Ratio: the curves are coupled according to the curvilinear abscissa ratio
+  *   <dt>2 <dd>Tangency: the curves are coupled according to their tangency discontinuity points.
+  *             If they do not have the same number of tangency discontinuity points,
+  *             they cannot be coupled and an error message is displayed
+  *   <dt>3 <dd>Tangency then curvature: the curves are coupled according to their tangency
+  *             discontinuity points first, then according to their curvature discontinuity points.
+  *             If they do not have the same number of tangency and curvature discontinuity points,
+  *             they cannot be coupled and an error message is displayed
+  *   <dt>4 <dd>Vertices: the curves are coupled according to their vertices.
+  *             If they do not have the same number of vertices, they cannot be coupled
+  *             and an error message is displayed
+  *   <dt>5 <dd>Spine: coupling is completely driven by a curve (called spine)
+  * </dl>
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>CouplingVal</code> the coupling value
+  * of the <code>ShpBlend</code> hybrid shape blended feature.
+  * <pre>
+  * CouplingVal = ShpBlend.<font color="red">Coupling</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Coupling
+ HRESULT get_Coupling (out /*IDLRETVAL*/ long            oCoupling);
+ HRESULT put_Coupling (in                long            iCoupling);
+
+  /**
+   * Returns or sets a curve used as spine for coupling in Blend computation.
+   * Setting the spine curve also changes coupling mode to CATGSMSpineCoupling.
+   * In order to remove the spine, set another coupling mode.
+   *   @param iSpine
+   *      spine curve
+   */
+#pragma PROPERTY Spine
+   HRESULT get_Spine(out /*IDLRETVAL*/ CATIAReference      oSpine);
+   HRESULT put_Spine(in                CATIAReference      iSpine);
+
+/**
+  * Returns or sets information whether a blending operation is smoothed or not.
+  * <br>TRUE if the blending operation is smoothed, or FALSE otherwise (FALSE if not specified).
+  */ 
+#pragma PROPERTY SmoothAngleThresholdActivity
+ HRESULT get_SmoothAngleThresholdActivity(out /*IDLRETVAL*/ boolean  oSmooth);
+ HRESULT put_SmoothAngleThresholdActivity(in boolean iSmooth);
+
+ /**
+  * Returns the angular threshold.
+  */ 
+#pragma PROPERTY SmoothAngleThreshold
+ HRESULT get_SmoothAngleThreshold(out /*IDLRETVAL*/ CATIAAngle  opIAAngle);
+
+ /**
+  * Returns or sets information whether a deviation from guide curves is allowed or not.
+  * <br>Gives the information on performing smoothing during blending operation.
+  * <br>TRUE if a deviation from guide curves is allowed, or FALSE otherwise (FALSE if not specified).
+  */
+#pragma PROPERTY SmoothDeviationActivity
+ HRESULT get_SmoothDeviationActivity(out /*IDLRETVAL*/ boolean  oActivity);
+ HRESULT put_SmoothDeviationActivity(in boolean iActivity);
+
+ /**
+  * Returns the deviation value (length) from guide curves allowed during a sweeping operation in order to smooth it.
+  */ 
+#pragma PROPERTY SmoothDeviation
+ HRESULT get_SmoothDeviation(out /*IDLRETVAL*/ CATIALength opIALength);
+
+/**
+  * Returns or sets the ruled developable surface mode.
+  * <br>TRUE means that the mode is enabled and FALSE means that it is disabled.
+  */
+#pragma PROPERTY RuledDevelopableSurface
+ HRESULT get_RuledDevelopableSurface(out /*IDLRETVAL*/ boolean  oMode);
+ HRESULT put_RuledDevelopableSurface(in boolean iiMode);
+
+/**
+  * Returns or sets the ruled developable surface connection type.
+  *   @param iBlendLimit
+  *     The limit of the blend for which the connection type is to be set.
+  *     <br><b>Legal values</b>: 1 for the start limit, and 2 for the end one
+  *   @param oBlendConnection
+  *     The value of connection type
+  *     <br><b>Legal values</b>:
+  *     <dl>
+  *       <dt>1 <dd>Connect to both extremities
+  *       <dt>2 <dd>Free first curve
+  *       <dt>3 <dd>Free second curve
+  *     </dl>
+  * </dl>
+  */
+ HRESULT GetRuledDevelopableSurfaceConnection(in long iBlendLimit,
+		  out /*IDLRETVAL*/ long oBlendConnection);
+
+  HRESULT SetRuledDevelopableSurfaceConnection(in long iBlendLimit,
+		  in long iBlendConnection);
+
+
+// =============
+// METHODS
+// =============
+
+ /**
+  * Sets the angular threshold.
+  * @param iAngle 
+  *   The angular threshold
+  */ 
+ HRESULT SetSmoothAngleThreshold(in double  iAngle);
+
+ /**
+  * Sets the deviation value (length) from guide curves allowed during sweeping
+  * operation in order to smooth it.
+  * @param iLength 
+  *   The deviation value
+  */ 
+ HRESULT SetSmoothDeviation(in double  iLength);
+
+};
+
+
+
+
+
+// Interface name : CATIAHybridShapeBlend
+#pragma ID CATIAHybridShapeBlend "DCE:d54bceb0-0561-11d4-85100000863e1bce"
+#pragma DUAL CATIAHybridShapeBlend
+
+
+// VB object name : HybridShapeBlend (Id used in Visual Basic)
+#pragma ID HybridShapeBlend "DCE:d76737e0-0561-11d4-85100000863e1bce"
+#pragma ALIAS CATIAHybridShapeBlend HybridShapeBlend
+
+
+#endif
+// CATIAHybridShapeBlend_IDL
+

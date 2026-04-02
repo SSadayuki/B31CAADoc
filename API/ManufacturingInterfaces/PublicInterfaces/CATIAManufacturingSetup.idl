@@ -1,0 +1,687 @@
+#ifndef CATIAManufacturingSetup_IDL
+#define CATIAManufacturingSetup_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//=================================================================
+//								   
+// CATIAManufacturingSetup:						   
+// Exposed interface for ManufacturingSetup
+//								   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sep99 Creation				       K. Bouharb
+// Aut01 Ajout GetManufacturingView        O. Periou
+// 03/20/02 Ajout DesignGeometriesCount/ListDesignGeometries/
+//                StockGeometriesCount/ListStockGeometries/
+//                InProcessModelBodiesCount/ListInProcessModelBodies  PHD
+// Jun02 Ajout GetToolChangePoint                     C.PETIT
+// Sep02 Added : put_MachiningAxisSystem                  C.Vasseur
+// Sep02 Added : get_MachiningAxisSystem                  C.Vasseur
+// 020927 Added : GetProductInstance                      C.Vasseur
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingActivity.idl"
+#include "CATIAMfgActivities.idl"
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CATIAProduct.idl"
+#include "CATIAManufacturingMachine.idl"
+#include "CATIAParameter.idl"
+#include "CATIAManufacturingView.idl"
+#include "CATIAManufacturingMachiningAxis.idl"
+
+
+/**
+ * A ManufacturingSetup for a Manufacturing Document.
+ */
+interface CATIAManufacturingSetup : CATIAManufacturingActivity
+{
+
+#pragma PROPERTY Programs
+
+  /**
+  * Give the List of Programs linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the list of Programs <tt>ProgramsList</tt> linked to the manufacturing Setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set ProgramsList = CurrentSetup.Programs
+  *</pre>
+  * </dl>
+  */
+HRESULT get_Programs(out /*IDLRETVAL*/ CATIAMfgActivities oPrograms);  
+
+
+#pragma PROPERTY Comment
+ 
+  /**
+  * Return the Default Comment of a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the comment <tt>SetupComment</tt> of to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set CurrentSetup.<font color="red">Comment</font>= "SetupComment"
+  *</pre>
+  * </dl>
+  */
+	HRESULT get_Comment (inout /*IDLRETVAL*/ CATBSTR oComment);
+ 
+  /**
+  * Modify the Default Comment of a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example modify the comment <tt>SetupComment</tt> of to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">Comment</font>(SetupComment)
+  *</pre>
+  * </dl>
+  */
+	HRESULT put_Comment (in CATBSTR iComment);
+
+#pragma PROPERTY Product
+
+  /**
+  * Associate the Product to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example associates the Product <tt>iProduct</tt> to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * CurrentSetup.Product = iProduct
+  *</pre>
+  * </dl>
+  */
+HRESULT put_Product (in CATIAProduct iProduct);  
+
+  /**
+  * Give the Product linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the <tt>Product</tt> linked to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set Product = CurrentSetup.Product
+  *</pre>
+  * </dl>
+  */
+HRESULT get_Product (out /*IDLRETVAL*/ CATIAProduct oProduct);  
+
+#pragma PROPERTY Machine
+ 
+  /**
+  * Give the Machine linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the <tt>Machine</tt> linked to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set Machine = CurrentSetup.Machine
+  *</pre>
+  * </dl>
+  */
+HRESULT get_Machine (out /*IDLRETVAL*/ CATIAManufacturingMachine oMachine);  
+
+  /**
+  * Initialise the Machine linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example initialise the Machine<tt>MachineToBeSet</tt> in the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">Machine</font>(MachineToBeSet)
+  *</pre>
+  * </dl>
+  */
+HRESULT put_Machine (in CATIAManufacturingMachine iMachine);  
+
+#pragma PROPERTY MachiningAxisSystem
+
+  /**
+  * Retrieves the Machining Axis system from a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the Machining Axis system <tt>oMachiningAxis</tt> from the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set oMachiningAxis = CurrentSetup.<font color="red">MachiningAxisSystem</font>
+  *</pre>
+  * </dl>
+  */
+
+HRESULT get_MachiningAxisSystem (out /*IDLRETVAL*/ CATIAManufacturingMachiningAxis oMachiningAxis);  
+
+  /**
+  * Associates a Machining Axis system to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example associates the Machining Axis system <tt>iMachiningAxis</tt> to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * CurrentSetup.<font color="red">MachiningAxisSystem</font>= iMachiningAxis
+  *</pre>
+  * </dl>
+  */
+
+HRESULT put_MachiningAxisSystem (in CATIAManufacturingMachiningAxis iMachiningAxis);  
+
+// Method SetToolChangePointByName
+
+  /**
+  * Initialise the ToolChange point of the machine linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example initialise the point <tt>PT23</tt> as ToolChangePoint  in the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">SetToolChangePointByName</font>(PT23)
+  *</pre>
+  * </dl>
+  */
+HRESULT SetToolChangePointByName (in CATBSTR iPointName);  
+
+// Method SetToolChangePoint
+
+  /**
+  * Initialise the ToolChange point of the machine linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example initialise the point with coordinates <tt>X,Y,Z</tt> as ToolChangePoint  in the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">SetToolChangePoint</font>(X,Y,Z)
+  *</pre>
+  * </dl>
+  */
+HRESULT SetToolChangePoint (in double iX,in double iY,in double iZ);  
+
+// Method GetToolChangePoint
+
+  /**
+  * Get the ToolChange point of the machine linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example gets the point with coordinates <tt>X,Y,Z</tt> as ToolChangePoint  in the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">GetToolChangePoint</font>(X,Y,Z)
+  *</pre>
+  * </dl>
+  */
+HRESULT GetToolChangePoint (out double oX, out double oY, out double oZ);  
+
+// Method CreateMachine
+
+  /**
+  * Initialise the Manufacturing Machine linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example initialise the machine <tt>Mfg3AxisWithTableRotationMachine</tt> as Manufacturing Machine in the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">CreateMachine</font>(Mfg3AxisWithTableRotationMachine)
+  *</pre>
+  * </dl>
+  */
+HRESULT CreateMachine (in CATBSTR iTypeMachine, out /*IDLRETVAL*/ CATIAManufacturingMachine oMachine);  
+
+// Method GetManufacturingView
+
+  /**
+  * Retrieves the Manufacturing View from a  Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrievec the Manufacturing View <tt>MfgView</tt> from the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set MfgView = CurrentSetup.<font color="red">GetManufacturingView</font>
+  *</pre>
+  * </dl>
+  */
+HRESULT GetManufacturingView (out /*IDLRETVAL*/ CATIAManufacturingView oManufacuringView);  
+
+// Method GetPartName
+  /**
+  * Retrieves the Name of the Design Part from a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the Name of the Design Part<tt>oPartName</tt> from the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set oPartName = CurrentSetup.<font color="red">GetPartName</font>
+  *</pre>
+  * </dl>
+  */
+HRESULT GetPartName (inout /*IDLRETVAL*/ CATBSTR oPartName);
+
+// Method GetMachiningAxisSystemName
+  /**
+  * Retrieves the Name of the Machining Axis system from a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the Name of the Machining Axis system<tt>oMachiningAxisSystemName</tt> from the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set oMachiningAxisSystemName = CurrentSetup.<font color="red">GetMachiningAxisSystemName</font>
+  *</pre>
+  * </dl>
+  */
+HRESULT GetMachiningAxisSystemName (inout /*IDLRETVAL*/ CATBSTR oMachiningAxisSystemName);
+
+// Method GetStockFromSetup
+  /**
+  * Retrieves the path of the Stock file from a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the  the path of the Stock file<tt>oStockPath</tt> from the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">GetStockFromSetup</font>(oStockPath)
+  *</pre>
+  * </dl>
+  */
+HRESULT GetStockFromSetup (in  CATBSTR oStockPath);
+
+
+// Method DesignGeometriesCount
+  /**
+  * Returns the number of design geometries from a Manufacturing Setup.
+  * @param oDesignGeometriesListSize
+  *   The number of design geometries of this setup
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the number of design geometries of 
+  * the setup <tt>CurrentSetup</tt> in <tt>DesignGeometriesListSize</tt>.
+  * <pre>
+  * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim DesignGeometriesListSize As Long
+  * DesignGeometriesListSize = CurrentSetup.<font color="red">DesignGeometriesCount</font>
+  * </pre>
+  * </dl>
+  */
+HRESULT DesignGeometriesCount ( out /*IDLRETVAL*/ long oDesignGeometriesListSize);
+
+// Method ListDesignGeometries
+  /**
+  * Retrieves the design geometries list from a Manufacturing Setup.
+  * Each of these geometries may be either a Product or a Body.
+  * @param oListOfDesignGeometries
+  *   The retrieved list.
+  *   <br>
+  *   The array must be previously initialized
+  *   using the @href #DesignGeometriesCount method.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the design geometries list of 
+  * the manufacturing setup <tt>CurrentSetup</tt> in <tt>ListOfDesignGeometries</tt>.
+  * <pre>
+   * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim DesignGeometriesListSize As Long
+  * DesignGeometriesListSize = CurrentSetup.DesignGeometriesCount
+  * If DesignGeometriesListSize > 0 Then
+  *   Dim ListOfDesignGeometries() As Variant
+  *   Redim ListOfDesignGeometries(DesignGeometriesListSize-1)
+  *   CurrentSetup.<font color="red">ListDesignGeometries</font>(ListOfDesignGeometries)
+  * End If
+  * </pre>
+  * </dl>
+  */
+HRESULT ListDesignGeometries ( inout CATSafeArrayVariant oListOfDesignGeometries);
+
+// Method ListDesignGeometriesProducts
+  /**
+  * Retrieves the design geometries products list from a Manufacturing Setup.
+  * Each of these geometries may be either a Product or a Body.
+  * @param oListOfDesignGeometriesProducts
+  *   The retrieved list.
+  *   <br>
+  *   The array must be previously initialized
+  *   using the @href #DesignGeometriesCount method.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the design geometries list of 
+  * the manufacturing setup <tt>CurrentSetup</tt> in <tt>ListOfDesignGeometriesProducts</tt>.
+  * <pre>
+   * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim DesignGeometriesListSize As Long
+  * DesignGeometriesListSize = CurrentSetup.DesignGeometriesCount
+  * If DesignGeometriesListSize > 0 Then
+  *   Dim ListOfDesignGeometries() As Variant
+  *   Redim ListOfDesignGeometries(DesignGeometriesListSize-1)
+  *   CurrentSetup.<font color="red">ListDesignGeometriesProducts</font>(ListOfDesignGeometriesProducts)
+  * End If
+  * </pre>
+  * </dl>
+  */
+HRESULT ListDesignGeometriesProducts ( inout CATSafeArrayVariant oListOfDesignGeometriesProducts);
+
+// Method StockDesignGeometriesCount
+  /**
+  * Returns the number of stock geometries from a Manufacturing Setup.
+  * @param oStockGeometriesListSize
+  *   The number of stock geometries of this setup
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the number of stock geometries of 
+  * the setup <tt>CurrentSetup</tt> in <tt>StockGeometriesListSize</tt>.
+  * <pre>
+  * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim StockGeometriesListSize As Long
+  * StockGeometriesListSize = CurrentSetup.<font color="red">StockGeometriesCount</font>
+  * </pre>
+  * </dl>
+  */		
+HRESULT StockGeometriesCount ( out /*IDLRETVAL*/ long oStockGeometriesListSize);
+
+// Method ListStockGeometries
+  /**
+  * Retrieves the stock geometries list from a Manufacturing Setup.
+  * Each of these geometries may be either a Product or a Body.
+  * @param oListOfStockGeometries
+  *   The retrieved list.
+  *   <br>
+  *   The array must be previously initialized
+  *   using the @href #StockGeometriesCount method.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the stock geometries list of 
+  * the manufacturing setup <tt>CurrentSetup</tt> in <tt>ListOfStockGeometries</tt>.
+  * <pre>
+   * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim StockGeometriesListSize As Long
+  * StockGeometriesListSize = CurrentSetup.StockGeometriesCount
+  * If StockGeometriesListSize > 0 Then
+  *   Dim ListOfStockGeometries() As Variant
+  *   Redim ListOfStockGeometries(StockGeometriesListSize-1)
+  *   CurrentSetup.<font color="red">ListStockGeometries</font>(ListOfStockGeometries)
+  * End If
+  * </pre>
+  * </dl>
+  */
+HRESULT ListStockGeometries ( inout CATSafeArrayVariant oListOfStockGeometries);
+
+// Method ListStockGeometriesProducts
+  /**
+  * Retrieves the Stock geometries products list from a Manufacturing Setup.
+  * Each of these geometries may be either a Product or a Body.
+  * @param oListOfStockGeometriesProducts
+  *   The retrieved list.
+  *   <br>
+  *   The array must be previously initialized
+  *   using the @href #StockGeometriesCount method.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the Stock geometries list of 
+  * the manufacturing setup <tt>CurrentSetup</tt> in <tt>ListOfStockGeometriesProducts</tt>.
+  * <pre>
+   * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim StockGeometriesListSize As Long
+  * StockGeometriesListSize = CurrentSetup.StockGeometriesCount
+  * If StockGeometriesListSize > 0 Then
+  *   Dim ListOfStockGeometries() As Variant
+  *   Redim ListOfStockGeometries(StockGeometriesListSize-1)
+  *   CurrentSetup.<font color="red">ListStockGeometriesProducts</font>(ListOfStockGeometriesProducts)
+  * End If
+  * </pre>
+  * </dl>
+  */
+HRESULT ListStockGeometriesProducts ( inout CATSafeArrayVariant oListOfStockGeometriesProducts);
+
+// Method FixtureDesignGeometriesCount
+  /**
+  * Returns the number of fixture geometries from a Manufacturing Setup.
+  * @param oFixtureGeometriesListSize
+  *   The number of fixture geometries of this setup
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the number of fixture geometries of 
+  * the setup <tt>CurrentSetup</tt> in <tt>FixtureGeometriesListSize</tt>.
+  * <pre>
+  * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim FixtureGeometriesListSize As Long
+  * FixtureGeometriesListSize = CurrentSetup.<font color="red">FixtureGeometriesCount</font>
+  * </pre>
+  * </dl>
+  */		
+HRESULT FixtureGeometriesCount ( out /*IDLRETVAL*/ long oFixtureGeometriesListSize);
+
+// Method ListFixtureGeometries
+  /**
+  * Retrieves the fixture geometries list from a Manufacturing Setup.
+  * Each of these geometries may be either a Product or a Body.
+  * @param oListOfFixtureGeometries
+  *   The retrieved list.
+  *   <br>
+  *   The array must be previously initialized
+  *   using the @href #FixtureGeometriesCount method.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the fixture geometries list of 
+  * the manufacturing setup <tt>CurrentSetup</tt> in <tt>ListOfFixtureGeometries</tt>.
+  * <pre>
+   * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim FixtureGeometriesListSize As Long
+  * FixtureGeometriesListSize = CurrentSetup.FixtureGeometriesCount
+  * If FixtureGeometriesListSize > 0 Then
+  *   Dim ListOfFixtureGeometries() As Variant
+  *   Redim ListOfFixtureGeometries(FixtureGeometriesListSize-1)
+  *   CurrentSetup.<font color="red">ListFixtureGeometries</font>(ListOfFixtureGeometries)
+  * End If
+  * </pre>
+  * </dl>
+  */
+
+HRESULT ListFixtureGeometries ( inout CATSafeArrayVariant oListOfFixtureGeometries);
+	
+// Method ListFixtureGeometriesProducts
+  /**
+  * Retrieves the Fixture geometries products list from a Manufacturing Setup.
+  * Each of these geometries may be either a Product or a Body.
+  * @param oListOfFixtureGeometriesProducts
+  *   The retrieved list.
+  *   <br>
+  *   The array must be previously initialized
+  *   using the @href #FixtureGeometriesCount method.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the Fixture geometries list of 
+  * the manufacturing setup <tt>CurrentSetup</tt> in <tt>ListOfFixtureGeometriesProducts</tt>.
+  * <pre>
+   * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim FixtureGeometriesListSize As Long
+  * FixtureGeometriesListSize = CurrentSetup.FixtureGeometriesCount
+  * If FixtureGeometriesListSize > 0 Then
+  *   Dim ListOfFixtureGeometries() As Variant
+  *   Redim ListOfFixtureGeometries(FixtureGeometriesListSize-1)
+  *   CurrentSetup.<font color="red">ListFixtureGeometriesProducts</font>(ListOfFixtureGeometriesProducts)
+  * End If
+  * </pre>
+  * </dl>
+  */
+HRESULT ListFixtureGeometriesProducts ( inout CATSafeArrayVariant oListOfFixtureGeometriesProducts);
+
+// Method InProcessModelBodiesCount
+  /**
+  * Returns the number of In Process Model Bodies from a Manufacturing Setup.
+  * @param oIPMBodiesListSize
+  *   The number of In Process Model Bodies of this setup
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the number of In Process Model Bodies  of 
+  * the setup <tt>CurrentSetup</tt> in <tt>IPMBodiesListSize</tt>.
+  * <pre>
+  * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim IPMBodiesListSize As Long
+  * IPMBodiesListSize = CurrentSetup.<font color="red">InProcessModelBodiesCount</font>
+  * </pre>
+  * </dl>
+  */
+HRESULT InProcessModelBodiesCount ( out /*IDLRETVAL*/ long oIPMBodiesListSize);
+
+
+// Method ListInProcessModelBodies
+  /**
+  * Retrieves the In Process Model Bodies list from a Manufacturing Setup.
+  * @param oListOfIPMBodies
+  *   The retrieved list.
+  *   <br>
+  *   The array must be previously initialized
+  *   using the @href #InProcessModelBodiesCount method.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the In Process Model Bodies list of 
+  * the manufacturing setup <tt>CurrentSetup</tt> in <tt>ListOfIPMBodies</tt>.
+  * <pre>
+   * Dim CurrentSetup As ManufacturingSetup
+  * Set CurrentSetup = ...
+  * Dim IPMBodiesListSize As Long
+  * IPMBodiesListSize = CurrentSetup.InProcessModelBodiesCount
+  * If IPMBodiesListSize > 0 Then
+  *   Dim ListOfIPMBodies() As Variant
+  *   Redim ListOfIPMBodies(IPMBodiesListSize-1)
+  *   CurrentSetup.<font color="red">ListInProcessModelBodies</font>(ListOfIPMBodies)
+  * End If
+  * </pre>
+  * </dl>
+  */
+HRESULT ListInProcessModelBodies ( inout CATSafeArrayVariant oListOfIPMBodies);
+
+// Method GetProductInstance
+  /**
+  * Give the Product of  the ProductList linked to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example returns the <tt>Product</tt> linked to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * Set Product = CurrentSetup.<font color="red">GetProductInstance</font>
+  *</pre>
+  * </dl>
+  */
+HRESULT GetProductInstance (out /*IDLRETVAL*/ CATIAProduct oProduct);  
+
+// Method SetSafetyPlane
+
+  /**
+  * Associates a Safety Plane to a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example associates the Safety Plane <tt>iSafetyPlane</tt> belonging to the Product <tt>iProduct</tt> to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">SetSafetyPlane</font>(iSafetyPlane,iProduct)
+  *</pre>
+  * </dl>
+  */
+
+HRESULT SetSafetyPlane(in CATIABase iSafetyPlane, in CATIAProduct iProduct);  
+
+  /**
+  * Retrieves the Safety Plane from a Manufacturing Setup.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example retrieves the Safety Plane <tt>oMathPLane</tt> from the manufacturing setup <tt>CurrentSetup</tt>
+  * The size of oMathPlane is 9 (origin, first direction, second direction) 
+  * <pre>
+  * Set oMathPlane= CurrentSetup.<font color="red">GetSafetyPlane </font>
+  *</pre>
+  * </dl>
+  */
+
+HRESULT GetSafetyPlane (out /*IDLRETVAL*/ CATSafeArrayVariant oMathPlane);
+
+  /**
+  * Associate the Product to a Manufacturing Setup and reconciliate links.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example associates the Product <tt>iProduct</tt> to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">SetProductAndReconciliate</font>(iProduct)
+  *</pre>
+  * </dl>
+  */
+HRESULT SetProductAndReconciliate (in CATIAProduct iProduct);
+
+  /**
+  * Associates a stock to a Manufacturing Setup.<br>
+  * The stock must be either a Body feature (Geometrical Set, Ordered Geometrical Set, PartBody, Body.n) either a CGR product.
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example associates the stock <tt>iStock</tt> belonging to the Product <tt>iProduct</tt> to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">SetStock</font>(iStock,iProduct)
+  *</pre>
+  * </dl>
+  */
+HRESULT SetStock(in CATIABase iStock, in CATIAProduct iProduct);
+
+  /**
+  * Associates the design part to a Manufacturing Setup.<br>
+  * The part must be a Body feature (Geometrical Set, Ordered Geometrical Set, PartBody, Body.n) 
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example associates the part <tt>iPart</tt> belonging to the Product <tt>iProduct</tt> to the manufacturing setup <tt>CurrentSetup</tt>
+  * <pre>
+  * call CurrentSetup.<font color="red">SetPart</font>(iPart,iProduct)
+  *</pre>
+  * </dl>
+  */
+HRESULT SetDesignPart(in CATIABase iPart, in CATIAProduct iProduct);
+
+  /**
+  * ReadMfgData.
+  * Read Manufacturing V4 data.
+  * iFileName = Path for V4 product
+  * iNCMILLSET = NC sets
+  * Acts Same as command "Read Manufacturing data from V4 model" in NC Manufacturing Review workbench
+  * Call on Current Manufacturngsetup
+  */
+
+HRESULT ReadMfgData (in CATBSTR iFileName, in CATSafeArrayVariant  iNCMILLSET);
+
+  /**
+  * ImportCATSetting.
+  * Import the CATSetting in xml format from a specified location.
+  * XMLFilePath = Path to the xml file. eg, "D:\dirs\settings.xml"
+  * Call on Current Manufacturngsetup
+  */
+
+HRESULT ImportCATSetting ( in CATBSTR XMLFilePath);
+
+  /**
+  * ExportCATSetting.
+  * Export All Machining CATSetting file to a location in xml format.
+  * dirPath = Absolute path to the location where all settings should be exported. eg, "D:\dirs\"
+  * Call on Current Manufacturngsetup
+  */
+
+HRESULT ExportCATSetting ( in CATBSTR dirPath);
+
+};
+
+// Interface name : CATIAManufacturingSetup
+#pragma ID CATIAManufacturingSetup "DCE:6f879e50-61fd-11d3-a7250004ac379fac"
+#pragma DUAL CATIAManufacturingSetup
+
+// VB object name : ManufacturingSetup (Id used in Visual Basic)
+#pragma ID ManufacturingSetup "DCE:8217ef70-61fd-11d3-a7250004ac379fac"
+#pragma ALIAS CATIAManufacturingSetup ManufacturingSetup
+
+#endif // CATIAManufacturingSetup_IDL
+
+
+
+
+

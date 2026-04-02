@@ -1,0 +1,70 @@
+#ifndef CATIAMfgToolMotions_IDL
+#define CATIAMfgToolMotions_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//								   
+// CATIAMfgToolMotions:						   
+// Exposed interface for MfgToolMotions
+//								   
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIACollection.idl"
+#include "CATIAManufacturingToolMotion.idl"
+#include "CATVariant.idl"
+
+/**
+* The collection of MfgToolMotions related to the Manufacturing Document .<br>
+*/
+
+interface CATIAMfgToolMotions : CATIACollection
+
+{
+
+// Method Add
+
+  /**
+  * This method adds the specified CATIAManufacturingToolMotion in the current list CATIAMfgToolMotions. <br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example adds in CATIAMfgToolMotions <tt>ListToolMotions</tt> the CATIAManufacturingToolMotion <tt>ThisToolMotion</tt>
+  * <pre>
+  * ListToolMotions.<font color="red">Add</font>(ThisToolMotion)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT     Add( in CATIAManufacturingToolMotion iRealObj);
+
+// Method GetElement
+
+  /**
+  * This method return the specified CATIAManufacturingToolMotion in the current list CATIAMfgToolMotions. <br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example return the CATIAManufacturingToolMotion <tt>ThisToolMotion</tt> in CATIAMfgToolMotions <tt>ListToolMotions</tt> in position
+  * <tt>NumPos</tt>:
+  * <pre>
+  * Set ThisToolMotion = ListToolMotions.<font color="red">GetElement</font>(Numpos)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT     GetElement(in long iIndex, out /*IDLRETVAL*/ CATIAManufacturingToolMotion oItem);
+
+};
+
+// Interface name : CATIAMfgToolMotions
+#pragma ID CATIAMfgToolMotions "DCE:99380acf-c9c3-4b7f-a30c0c2f1b88c4b5"
+#pragma DUAL CATIAMfgToolMotions
+
+// VB object name : MfgToolMotions (Id used in Visual Basic)
+#pragma ID MfgToolMotions "DCE:3b25d160-ee74-4d51-a40f2dfcff3483d5"
+#pragma ALIAS CATIAMfgToolMotions MfgToolMotions
+
+#endif // CATIAMfgToolMotions_IDL

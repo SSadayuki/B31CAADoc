@@ -1,0 +1,460 @@
+#ifndef CATIASchRoute_IDL 
+#define CATIASchRoute_IDL 
+    
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004       
+    
+interface  CATIASchGRRRoute;
+interface  CATIASchAppConnector;
+interface  CATIASchListOfDoubles;
+interface  CATIASchRoute;
+interface  CATIASchAppConnection;
+    
+#include "CatSchIDLRouteMode.idl"
+    
+#include "CATBSTR.idl"
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic route data.
+  */
+
+interface CATIASchRoute : CATIABase
+{
+  /**
+  * Compress a the defining points of a route, removing coincident points.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  *  ...
+  * objThisIntf.<font color="red">Compress</font>
+  * </pre>
+  *    
+  */
+  HRESULT Compress ( );
+    
+  /**
+  * Add a list of point to a route. 
+  * Modify the route according to the route mode
+  * @param iGRR
+  *   graphical primitive of the route to add points to
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param iLDbPtPathToAdd
+  *   A list of X-Y coordinates of points to be added. 2 doubles per point.
+  * @param iAfterWhichPtNum
+  *   The point number to add the points after. Use 0 to indicate adding
+  *   before the first point.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim dbVar2(x) As CATSafeArrayVariant
+  * Dim intVar4 As Integer
+  *  ...
+  * objThisIntf.<font color="red">AddPoints</font>objArg1,dbVar2,intVar4
+  * </pre>
+  *    
+  */
+  HRESULT AddPoints ( 
+    in CATIASchGRRRoute iGRR, 
+    in CATSafeArrayVariant iLDb2PtPathToAdd, 
+    in long iAfterWhichPtNum );
+    
+  /**
+  * Remove points from route. 
+  * Modify the route according to the route mode.
+  * @param iGRR
+  *   graphical primitive of the route to remove the points from
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param iNumOfPtsToRemove
+  *   The number of points to be removed
+  * @param iAfterWhichPtNum
+  *   The point number at which to start removing the point.  
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim intVar2 As Integer
+  * Dim intVar3 As Integer
+  *  ...
+  * objThisIntf.<font color="red">RemovePoints</font>objArg1,intVar2,intVar3
+  * </pre>
+  *    
+  */
+  HRESULT RemovePoints ( 
+    in CATIASchGRRRoute iGRR, 
+    in long iNumOfPtsToRemove, 
+    in long iAfterWhichPtNum );
+    
+  /**
+  * Change the position of the extremity of the route. 
+  * 
+  * @param iGRR
+  *   graphical primitive of the route to reshape
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param iRouteCntr
+  *   Route connector whose position is to be modified (CATISchAppConnector
+  *   interface pointer).
+  * @param iDb2DeltaXY
+  *   Delta X-Y coordinates of the extremity move
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim objArg2 As SchAppConnector
+  * Dim dbVar3(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">ReshapeExtremity</font>objArg1,objArg2,dbVar3
+  * </pre>
+  *    
+  */
+  HRESULT ReshapeExtremity ( 
+    in CATIASchGRRRoute iGRR, 
+    in CATIASchAppConnector iRouteCntr, 
+    in CATSafeArrayVariant iDb2DeltaXY );
+    
+  /**
+  * Change the position of the extremity of the route. 
+  * Modify the route according to the route mode.
+  * @param iERouteMode
+  *   Routing mode.
+  * @param iGRR
+  *   graphical primitive of the route to reshape
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param iRouteCntr
+  *   Route connector whose position is to be modified (CATISchConnector
+  *   interface pointer).
+  * @param iDb2PtToMoveCntrTo
+  *   X-Y coordinates of the point to move the connector to.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  *
+  * Dim objArg2 As SchGRRRoute
+  * Dim objArg3 As SchAppConnector
+  * Dim dbVar4(2) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">ReshapeExtremity2</font>CatSchIDLRouteMode_Enum,objArg2,objArg3,dbVar4
+  * </pre>
+  *    
+  */
+  HRESULT ReshapeExtremity2 ( 
+    in CatSchIDLRouteMode iERouteMode, 
+    in CATIASchGRRRoute iGRR, 
+    in CATIASchAppConnector iRouteCntr, 
+    in CATSafeArrayVariant iDb2PtToMoveCntrTo );
+    
+  /**
+  * Get the defining points of a route.
+  * @param iGRR
+  *   graphical primitive of the route get the path from
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param oLDbPtPath
+  *   A list of X-Y coordinates of points. 2 doubles per point.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim objArg2 As SchListOfDoubles
+  *  ...
+  * objThisIntf.<font color="red">GetPath</font>objArg1,objArg2
+  * </pre>
+  *    
+  */
+  HRESULT GetPath ( 
+    in CATIASchGRRRoute iGRR, 
+    inout CATIASchListOfDoubles oLDb2PtPath);
+    
+  /**
+  * Set the defining points of a route.
+  * @param iGRR
+  *   graphical primitive of the route to set the path on
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param iLDbPtPath
+  *   A list of X-Y coordinates of points to be set. 2 doubles per point.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim dbVar2(x) As CATSafeArrayVariant
+  *  ...
+  * objThisIntf.<font color="red">SetPath</font>objArg1,dbVar2
+  * </pre>
+  *    
+  */
+  HRESULT SetPath ( 
+    in CATIASchGRRRoute iGRR, 
+    in CATSafeArrayVariant iLDb2PtPath);
+    
+  /**
+  * Break a route into 2 pieces. The old route is shortened and a new
+  * route is created.
+  * @param iGRR
+  *   graphical primitive of the route to be broken
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param iDb2Pt1
+  *   X-Y coordinates of point 1 to break the route at (this point is
+  *   <b>mandatory</b>).
+  * @param iDb2Pt2
+  *   X-Y coordinates of point 2 to break the route at (this point is
+  *   <b>optional</b>). If provided the points in between point 1 and this
+  *   point will be eliminated. Point 1 is the last point of the shortened
+  *   old route and point 2 is the first point of the new route. If this point
+  *   is not provided (sends in a NULL). point 1 and point 2 are the same.
+  * @param oNewSchRoute
+  *   The new Schematic route object
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim dbVar2(2) As CATSafeArrayVariant
+  * Dim dbVar3(2) As CATSafeArrayVariant
+  * Dim objArg4 As SchRoute
+  *  ...
+  * objThisIntf.<font color="red">Break</font>objArg1,dbVar2,dbVar3,objArg4
+  * </pre>
+  *    
+  */
+  HRESULT Break ( 
+    in CATIASchGRRRoute iGRR, 
+    in CATSafeArrayVariant iDb2Pt1, 
+    in CATSafeArrayVariant iDb2Pt2, 
+    inout CATIASchRoute oNewSchRoute );
+    
+  /**
+  * Concatenate 2 routes into one. Only works for those that have only one
+  * line graphic object. The first route is elongated and is modified.
+  * The second route is deleted.
+  * @param iSchRoute1Cntr
+  *   Connector of this route
+  *   to concatenate with the second route.
+  * @param iSchRoute2
+  *   Second route to be concatenate to the first. iSchRoute2 will be deleted.
+  * @param iSchRoute2Cntr
+  *   Connector of second route to concatenate with the first route.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchAppConnector
+  * Dim objArg2 As SchRoute
+  * Dim objArg3 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">Concatenate</font>objArg1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT Concatenate ( 
+    in CATIASchAppConnector iSchRoute1Cntr, 
+    in CATIASchRoute iSchRoute2, 
+    in CATIASchAppConnector iSchRoute2Cntr );
+    
+  /**
+  * Concatenate 2 routes into one. Only works for those that have only one
+  * line graphic object. The first route is elongated and is modified.
+  * The second route is unchanged.
+  * @param iSchRoute1Cntr
+  *   Connector of this route
+  *   to concatenate with the second route.
+  * @param iSchRoute2
+  *   Second route to be concatenate to the first. iSchRoute2 will be unchanged.
+  * @param iSchRoute2Cntr
+  *   Connector of second route to concatenate with the first route.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchAppConnector
+  * Dim objArg2 As SchRoute
+  * Dim objArg3 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">ConcatenateKeepRoute2</font>objArg1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT ConcatenateKeepRoute2 ( 
+    in CATIASchAppConnector iSchRoute1Cntr, 
+    in CATIASchRoute iSchRoute2, 
+    in CATIASchAppConnector iSchRoute2Cntr );
+    
+  /**
+  * Create a branch from this route.
+  * @param iGRRMain
+  *   graphical primitive of the "this" route to branch from
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param iSchBranchRoute
+  *   The route to create a branch connection to (from this route)
+  * @param iSchBranchRouteCntr
+  *   The extremity connector of the branch
+  * @param oBranchCntn
+  *   The branch connection created
+  * @param oNewBranchCntr
+  *   The new branch connector created on "this" route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim objArg2 As SchRoute
+  * Dim objArg3 As SchAppConnector
+  * Dim objArg4 As SchAppConnection
+  * Dim objArg5 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">Branch</font>objArg1,objArg2,objArg3,objArg4,objArg5
+  * </pre>
+  *    
+  */
+  HRESULT Branch ( 
+    in CATIASchGRRRoute iGRRMain, 
+    in CATIASchRoute iSchBranchRoute, 
+    in CATIASchAppConnector iSchBranchRouteCntr, 
+    inout CATIASchAppConnection oBranchCntn, 
+    inout CATIASchAppConnector oNewBranchCntr );
+    
+  /**
+  * Query whether it is OK to modify (add or remove) the points.
+  * @param iGRR
+  *   graphical primitive of the route to query.
+  *   (if NULL, assume there is only one graphical primitive).
+  * @param oBYes
+  *   If TRUE, then it is OK to add or remove the points from the route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim bVar2 As boolean
+  *  ...
+  * objThisIntf.<font color="red">OKToModifyPoints</font>objArg1,bVar2
+  * </pre>
+  *    
+  */
+  HRESULT OKToModifyPoints ( 
+    in CATIASchGRRRoute iGRR, 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether it is OK to break.
+  * @param iGRR
+  *   graphical primitive of the route to query.
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param oBYes
+  *   If TRUE, then it is OK to break the route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim bVar2 As boolean
+  *  ...
+  * objThisIntf.<font color="red">OKToBreak</font>objArg1,bVar2
+  * </pre>
+  *    
+  */
+  HRESULT OKToBreak ( 
+    in CATIASchGRRRoute iGRR, 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether it is OK to concatenate.
+  * @param iGRR
+  *   graphical primitive of the route to query.
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param oBYes
+  *   If TRUE, then it is OK to concatenate the route with another
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim bVar2 As boolean
+  *  ...
+  * objThisIntf.<font color="red">OKToConcatenate</font>objArg1,bVar2
+  * </pre>
+  *    
+  */
+  HRESULT OKToConcatenate ( 
+    in CATIASchGRRRoute iGRR, 
+    inout boolean oBYes );
+    
+  /**
+  * Query whether it is OK to create a branch.
+  * @param iGRR
+  *   graphical primitive of the route to query.
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param iBranchClassType
+  *   Class type of the branch to create.
+  * @param oBYes
+  *   If TRUE, then it is OK to create a branch from a route
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim strVar2 As String
+  * Dim bVar3 As boolean
+  *  ...
+  * objThisIntf.<font color="red">OKToBranch</font>objArg1,strVar2,bVar3
+  * </pre>
+  *    
+  */
+  HRESULT OKToBranch ( 
+    in CATIASchGRRRoute iGRR, 
+    in CATBSTR iBranchClassType, 
+    inout boolean oBYes );
+    
+  /**
+  * Get extremity connectors of the route.
+  * @param iGRR
+  *   graphical primitive of the route to query.
+  *   (if NULL, assume there is only one graphical primitive)
+  * @param oRouteCntr1
+  *   Route connector at first extremity
+  * @param oRouteCntr2
+  *   Route connector at second extremity
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchRoute
+  * Dim objArg1 As SchGRRRoute
+  * Dim objArg2 As SchAppConnector
+  * Dim objArg3 As SchAppConnector
+  *  ...
+  * objThisIntf.<font color="red">GetExtremityCntrs</font>objArg1,objArg2,objArg3
+  * </pre>
+  *    
+  */
+  HRESULT GetExtremityCntrs ( 
+    in CATIASchGRRRoute iGRR, 
+    inout CATIASchAppConnector oRouteCntr1, 
+    inout CATIASchAppConnector oRouteCntr2 );
+    
+};
+    
+// Interface name : CATIASchRoute
+#pragma ID CATIASchRoute "DCE:bd42329f-a3cf-48ff-a7de94fe69a9078a"
+#pragma DUAL CATIASchRoute
+    
+// VB object name : SchRoute
+#pragma ID SchRoute "DCE:edf0336b-3c13-455e-8063aa8510a8e3da"
+#pragma ALIAS CATIASchRoute SchRoute
+    
+#endif 
+    

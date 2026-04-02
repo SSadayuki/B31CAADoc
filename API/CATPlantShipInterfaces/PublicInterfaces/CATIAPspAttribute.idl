@@ -1,0 +1,290 @@
+#ifndef CATIAPspAttribute_IDL
+#define CATIAPspAttribute_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+*/
+
+
+#include "CatPspIDLDomainID.idl"
+#include "CatPspIDLAttrDataType.idl"
+#include "CATIAPspListOfBSTRs.idl"
+#include "CATIAPspListOfLongs.idl"
+#include "CATIAPspListOfDoubles.idl"
+#include "CATIAParameter.idl"  // Required for Java compilation
+#include "CATIABase.idl"
+/**
+ * Represents Attribute Interface to query Plant Ship objects' attributes.
+ * <b>Role</b>: To query and reset attributes.
+ */
+
+interface CATIAPspAttribute : CATIABase
+{
+ /**
+  * Retrieves a list of Attributes of an object in the the input domain ID.
+  * @param iDomainID
+  *  Domain ID. If set to catPspIDLNone, then it will return attributes in 
+  *  all the domains.
+  * @return
+  *  List of attributes
+  *   ( A list of CATIAPspGroupables)
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim objArg1 As CatPspIDLDomainID
+  * Dim objArg2 As PspListOfBSTRs
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">ListAttributes</font> (objArg1)
+  * </pre>
+  *    
+  */
+	
+  HRESULT ListAttributes ( 
+    in CatPspIDLDomainID iDomainID,
+    out /*IDLRETVAL*/ CATIAPspListOfBSTRs oLAttributeNames );
+
+ /**
+  * Query whether the input attribute is discrete or not.
+  * @param iAttributeName
+  *  Attribute Name
+  * @param obStatus
+  *  TRUE if attribute is discrete else FALSE
+  * @return
+  *  Discrete Type value 1-Standard 2-Encoded discrete
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim boolVar2 As Boolean
+  * Dim shortVar3  As Short
+  *  ...
+  * shortVar3 = objThisIntf.<font color="red">IsDiscrete</font> (strVar1,boolVar2)
+  * </pre>
+  *    
+  */
+    	
+  HRESULT IsDiscrete ( 
+      in CATBSTR iAttributeName,
+      out boolean obStatus,
+      out /*IDLRETVAL*/ short oDiscreteType );
+
+ /**
+  * Retrieves type of the input attribute.
+  * If the type of the attribute is  catPspIDLMultiString use GetMultiStringAttributeValues.
+  * for others, use GetParameter().
+  * @param iAttributeName
+  *  Attribute Name
+  * @return
+  * Type of the attribute.  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim eType As CatPspIDLAttrDataType
+  * 
+  *  ...
+  * eType = objThisIntf.<font color="red">GetType</font> (strVar1)
+  * 
+  * </pre>
+  *    
+  */
+    	
+  HRESULT GetType ( 
+      in CATBSTR iAttributeName,      
+      out /*IDLRETVAL*/ CatPspIDLAttrDataType oType );
+
+ /**
+  * Retrieve parameter for the input attribute name.
+  * @param iAttributeName
+  *  Attribute Name
+  * @return
+  *   Parameter of the attribute      
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim ObjVar2 As Parameter
+  * 
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">GetParameter</font> (strVar1 )
+  * </pre>
+  *    
+  */
+
+  HRESULT GetParameter ( 
+      in CATBSTR iAttributeName,      
+      out /*IDLRETVAL*/ CATIAParameter oParm );
+
+
+/**
+  * Retrieves String values for the input attribute the type catPspIDLMultiString.
+  * @param iAttributeName
+  *  Attribute Name
+  * @return
+  *   List of string values
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim objArg2 As PspListOfBSTRs
+  * 
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">GetMultiStringAttributeValues</font> (strVar1)
+  * </pre>
+  *    
+  */
+  HRESULT GetMultiStringAttributeValues ( 
+      in CATBSTR iAttributeName,      
+      out /*IDLRETVAL*/ CATIAPspListOfBSTRs oLMultiStringValues );
+    
+ /**
+  * RetrievesString discrete values for the input attribute. 
+  * @param iAttributeName
+  *  Attribute Name
+  * @return
+  *   Discrete list of string values
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim objArg2 As PspListOfBSTRs
+  * 
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">ListStringDiscreteValues</font> (strVar1)
+  * </pre>
+  *    
+  */
+  HRESULT ListStringDiscreteValues ( 
+      in CATBSTR iAttributeName,      
+      out /*IDLRETVAL*/ CATIAPspListOfBSTRs oLDiscreteValues );
+      
+ /**
+  * Retrieves double discrete values for the input attribute.
+  * @param iAttributeName
+  *  Attribute Name
+  * @return
+  *   Discrete list of double values
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim objArg2 As PspListOfDoubles
+  * 
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">ListDoubleDiscreteValues</font> (strVar1 )
+  * </pre>
+  *    
+  */
+  HRESULT ListDoubleDiscreteValues ( 
+      in CATBSTR iAttributeName,      
+      out /*IDLRETVAL*/ CATIAPspListOfDoubles oLDBDiscreteValues );
+      
+ /**
+  * Retrieve integer (long) discrete values for the input attribute.  
+  * @param iAttributeName
+  *  Attribute Name
+  * @return
+  *   Discrete list of integer values
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim objArg2 As PspListOfLongs
+  * 
+  *  ...
+  * Set objArg2 = objThisIntf.<font color="red">ListIntegerDiscreteValues</font> (strVar1)
+  * </pre>
+  *    
+  */
+  
+  HRESULT ListIntegerDiscreteValues ( 
+      in CATBSTR iAttributeName,      
+      out /*IDLRETVAL*/ CATIAPspListOfLongs oLIntDiscreteValues );
+
+
+ /**
+  * Retrieves Encoded-decoded discrete values for the input attribute.  
+  * @param iAttributeName
+  *  Attribute Name
+  * @param oLDiscreteEncodedValues
+  *   Discrete list of encoded string values
+  * @param oLDiscreteDecodedValue
+  *   Discrete list of decoded string values
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim objArg2 As PspListOfBSTRs
+  * Dim objArg3 As PspListOfBSTRs
+  * 
+  *  ...
+  * objThisIntf.<font color="red">ListEncodedDecodedDiscreteValues</font> strVar1, objArg2, objArg3
+  * </pre>
+  *    
+  */
+  HRESULT ListEncodedDecodedDiscreteValues ( 
+      in CATBSTR iAttributeName,      
+      out CATIAPspListOfBSTRs oLDiscreteEncodedValues,
+      out CATIAPspListOfBSTRs oLDiscreteDecodedValue
+       );
+
+ /**
+  * Retrieve Derived status for the input attribute.  
+  * @param iAttributeName
+  *  Attribute Name
+  * @return
+  *   TRUE if the attribute is derived  
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  * Dim bIsDerived As boolean
+  *  
+  *  ...
+  * bIsDerived = objThisIntf.<font color="red">IsDerived</font> (strVar1)
+  * </pre>
+  *    
+  */
+  HRESULT IsDerived ( 
+      in CATBSTR iAttributeName,      
+      out /*IDLRETVAL*/ boolean oBIsDerived );
+
+ /**
+  * Reset derived status of the attribute to not-derived.
+  * @param iAttributeName
+  *  Attribute Name
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspAttribute
+  * Dim strVar1 As CATBSTR
+  *
+  *  ...
+  * objThisIntf.<font color="red">ResetDerivedAttr</font> strVar1 
+  * </pre>
+  *    
+  */
+  HRESULT ResetDerivedAttr ( in CATBSTR iAttributeName );
+        
+};
+
+// Interface name : CATIAPspAttribute
+#pragma ID CATIAPspAttribute "DCE:7bd89052-ce33-11d4-8e4100d0b7acbb09"
+#pragma DUAL CATIAPspAttribute
+
+// VB object name : PspAttribute
+#pragma ID PspAttribute "DCE:8636299c-ce33-11d4-8e4100d0b7acbb09"
+#pragma ALIAS CATIAPspAttribute PspAttribute
+
+#endif

@@ -1,0 +1,110 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIADistances.idl
+//   This automation interface allows to manage CATIADistance collection.
+//
+//===================================================================
+#ifndef CATIADistances_IDL
+#define CATIADistances_IDL
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R5
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIADistance.idl"
+#include "CATIAGroup.idl"
+#include "CATVariant.idl"
+
+/**  
+ * A collection of all Distance objects currently managed by the application.
+ * <p>The method <tt>GetTechnologicalObject("Distances")</tt> on the root product, allows you to retrieve this collection.
+ */
+interface CATIADistances : CATIACollection
+{
+  /**
+   * Creates a Distance object which takes all products of the document into account
+   * and adds it to the Distances collection.
+   * @return
+   *    The created Distance
+   * @sample
+   *    This example creates a new Distance in the <tt>TheDistances</tt> collection.
+   *    <pre>
+   *    Dim NewDistance As Distance
+   *    Set NewDistance = TheDistances.<font color="red">Add</font>
+   *    </pre>
+   */
+  HRESULT Add(out /*IDLRETVAL*/ CATIADistance oDistance);
+
+  /**
+   * Creates a Distance object which takes all products in the selection into account
+   * and adds it to the Distances collection.
+   * @return
+   *    The created Distance
+   * @sample
+   *    This example creates a new Distance in the <tt>TheDistances</tt> collection.
+   *    <pre>
+   *    Dim NewDistance As Distance
+   *    Set NewDistance = TheDistances.<font color="red">AddFromSel</font>
+   *    </pre>
+   */
+  HRESULT AddFromSel(out /*IDLRETVAL*/ CATIADistance oDistance);
+
+  /**
+   * Returns a Distance object using its index or its name from the Distances collection.
+   * @param iIndex
+   *    The index or the name of the Distance to retrieve from the collection of Distances.
+   *    As a numerics, this index is the rank of the Distance in the collection.
+   *    The index of the first Distance in the collection is 1, and
+   *    the index of the last Distance is Count.
+   *    As a string, it is the name you assigned to the Distance.
+   * @sample
+   *    This example retrieves in <tt>ThisDistance</tt> the ninth Distance,
+   *    and in <tt>ThatDistance</tt> the Distance named
+   *    <tt>Distance Of MyProduct</tt> from the <tt>TheDistances</tt> collection. 
+   *    <pre>
+   *    Dim ThisDistance As Distance
+   *    Set ThisDistance = TheDistances.<font color="red">Item</font>(9)
+   *    Dim ThatDistance As Distance
+   *    Set ThatDistance = TheDistances.<font color="red">Item</font>("Distance Of MyProduct")
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIADistance oDistance);
+
+  /**
+   * Removes a Distance object from the Distances collection.
+   * @param iIndex
+   *    The index or the name of the Distance to remove from the collection of Distances.
+   *    As a numerics, this index is the rank of the Distance in the collection.
+   *    The index of the first Distance in the collection is 1, and
+   *    the index of the last Distance is Count.
+   *    As a string, it is the name you assigned to the Distance.
+   * @sample
+   *    The following example removes the tenth Distance and the Distance named
+   *    <tt>Distance Of MyProduct</tt> from the <tt>TheDistances</tt> collection.
+   *    <pre>
+   *    TheDistances.<font color="red">Remove</font>(10)
+   *    TheDistances.<font color="red">Remove</font>("Distance Of MyProduct")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIADistances
+#pragma ID CATIADistances "DCE:3142dd4c-45f0-11d4-9468006094eb3826"
+#pragma DUAL CATIADistances
+
+// VB object name : Distances (Id used in Visual Basic)
+#pragma ID Distances "DCE:3198b1f4-45f0-11d4-9468006094eb3826"
+#pragma ALIAS CATIADistances Distances
+
+#endif
+#endif

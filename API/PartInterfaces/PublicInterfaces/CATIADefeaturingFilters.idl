@@ -1,0 +1,110 @@
+#ifndef CATIADefeaturingFilters_IDL
+#define CATIADefeaturingFilters_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2014
+//=================================================================
+//                                   
+// CATIADefeaturingFilters:                           
+// Exposed interface for Defeaturing filters collection
+//                                   
+//=================================================================
+
+#include "CATIACollection.idl"
+#include "CATBSTR.idl"
+#include "CATVariant.idl"
+
+interface CATIACollection;
+interface CATIADefeaturingFilter;
+
+/**
+ * Represents the filter collection of a defeaturing object.
+ */
+//-----------------------------------------------------------------
+interface CATIADefeaturingFilters : CATIACollection
+{
+  //		================
+	//		== PROPERTIES ==
+	//		================
+
+  //		================
+	//		==  METHODS   ==
+	//		================
+  
+  //    DEFEATURING FILTERS
+  //    -------------
+  //
+  //
+
+  /**
+    * Returns the filter of the Defeaturing filters collection using its index or its name.
+    * @param iFilterId
+    *   The index or the name of the filter to retrieve 
+    *   As a numerics, must be in [1;<tt>Count</tt>])
+    * @return oFilter
+    *   The filter (see @href CATIADefeaturingFilter for list of possible actions)
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example returns in <tt>myFilter</tt> the filter number <tt>theIndex</tt> of Defeaturing collection <tt>firstDefeaturingFilters</tt>:
+    * <pre>
+    * Set myFilter = firstDefeaturingFilters.<font color="red">Item</font>(theIndex)
+    *</pre>
+    * </dl>
+    */
+  HRESULT    Item ( in CATVariant iFilterId, out /*IDLRETVAL*/ CATIADefeaturingFilter oFilter );
+
+  /**
+    * Creates a new filter and adds it to the Defeaturing filters collection.
+    * @param iFilterTypeToAdd
+    *   The type of the new filter to add among :
+    *     - "DefeaturingFilletFilter"
+    *     - "DefeaturingHoleFilter" 
+    *     - or any user-defined filter's type
+    * @return oAddedFilterIndex
+    *   The added filter's index - equals to 0 if FAILED
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example adds a new filter of type <tt>theFilterType</tt> to defeaturing colelction <tt>firstDefeaturingFilters</tt> and returns the index <tt>theIndex</tt> of the new filter
+    * <pre>
+    * Set theIndex = firstDefeaturingFilters.<font color="red">Add</font>(theFilterType)
+    *</pre>
+    * </dl>
+    */
+  HRESULT    Add ( in CATBSTR iFilterTypeToAdd, out /*IDLRETVAL*/ long oAddedFilterIndex );
+
+  /**
+    * Removes a filter from the Defeaturing filters collection and deletes it, using its index or its name.
+    * @param iFilterId
+    *   The index or the name of the filter to retrieve 
+    *   As a numerics, must be in [1;<tt>Count</tt>])
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The two following examples remove the filter number <tt>theIndex</tt> from Defeaturing collection <tt>firstDefeaturingFilters</tt>:
+    * <pre>
+    * Call firstDefeaturingFilters.<font color="red">Remove</font>(theIndex)
+    * firstDefeaturingFilters.<font color="red">Remove</font> theIndex
+    *</pre>
+    * </dl>
+    */
+  HRESULT    Remove ( in CATVariant iFilterId );
+};
+
+// Interface name : CATIADefeaturingFilters
+#pragma ID CATIADefeaturingFilters "DCE:0f1249bb-43d7-437e-85140682969cd05c"
+#pragma DUAL CATIADefeaturingFilters
+//
+// VB object name : DefeaturingFilters (Id used in Visual Basic)
+#pragma ID DefeaturingFilters "DCE:726ba0bb-6131-4c49-83b78bd3e440dbca"
+#pragma ALIAS CATIADefeaturingFilters DefeaturingFilters
+//
+
+
+#endif
+// CATIADefeaturingFilters_IDL
+

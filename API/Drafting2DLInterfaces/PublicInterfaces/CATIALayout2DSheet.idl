@@ -1,0 +1,373 @@
+// COPYRIGHT Dassault Systemes 2005
+//===================================================================
+//
+// CATIALayout2DSheet.idl
+// Automation interface for the 2DLayoutSheet element 
+//
+//===================================================================
+//
+// Usage notes:
+//               The interface to access a CATIALayout2DSheet  
+//
+//===================================================================
+#ifndef CATIALayout2DSheet_IDL
+#define CATIALayout2DSheet_IDL
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+interface CATIALayout2DViews;
+interface CATIADrawingPageSetup;
+
+#include "CATIA2DPrintArea.idl"
+#include "CATBaseDispatch.idl"
+#include "CatPaperSize.idl"
+#include "CatSheetProjectionMethod.idl"
+#include "CatPaperOrientation.idl"
+#include "CatVisuIn3DMode.idl"
+#include "CatRenderingMode.idl"
+#include "CATSafeArray.idl"
+
+#include "CATIABase.idl"
+
+/**
+* The interface to access a Layout2D Sheet.
+*/
+
+interface CATIALayout2DSheet : CATIABase 
+{
+ //----------------------------------------------------------------------------------
+ 
+ /**
+  * Returns the Layout2D view collection of the Layout2D sheet.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves in <tt>ViewCollection</tt> the collection of
+  * views 2DL of the <tt>MySheet</tt> Layout2D sheet.
+  * <pre>
+  * Dim ViewCollection As Layout2DViews
+  * Set ViewCollection = MySheet.<font color="red">Views</font>.
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Views
+  HRESULT get_Views(out /*IDLRETVAL*/ CATIALayout2DViews oViews);
+
+ /**
+  * Returns the page setup.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the page setup for the <tt>MySheet</tt>
+  * Layout2D sheet.
+  * <pre>
+  * Dim MySheetPageSetup As DrawingPageSetup
+  * Set MySheetPageSetup = MySheet.<font color="red">PageSetup</font>
+  * </pre>
+	* </dl>
+  */
+#pragma PROPERTY PageSetup
+  HRESULT get_PageSetup(out /*IDLRETVAL*/ CATIADrawingPageSetup oPageSetup);
+
+ /**
+  * Returns the print area definition object.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example returns the print area for the <tt>MySheet</tt>
+  * Layout2D sheet 2DL.
+  * <pre>
+  * Dim MyPrintArea As PrintArea
+  * Set MyPrintArea = MySheet.<font color="red">PrintArea</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PrintArea
+  HRESULT get_PrintArea( out /*IDLRETVAL*/ CATIA2DPrintArea oPrintArea );
+
+ //----------------------------------------------------------------------------------
+
+ /**
+  * Gets or Sets the paper width of the layout sheet.
+  * @param oPaperWidth
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example get the width of the <tt>Sheet1</tt>.
+  * <pre>
+  * Sheet1.<font color="red">GetPaperWidth</font> oPaperWidth
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PaperWidth
+  HRESULT get_PaperWidth(out /*IDLRETVAL*/ double oPaperWidth);
+  HRESULT put_PaperWidth(in double oPaperWidth);
+
+
+ /**
+  * Gets or Sets the paper width of the layout sheet.
+  * @param oPaperHeight
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example get the height of the <tt>Layout2DSheet1</tt>.
+  * <pre>
+  * Layout2DSheet1.<font color="red">GetPaperHeight</font> oPaperHeight
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PaperHeight
+  HRESULT get_PaperHeight(out /*IDLRETVAL*/ double oPaperHeight);
+  HRESULT put_PaperHeight(in  double oPaperHeight);
+
+ /**
+  * Returns or sets the paper size.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the page size for the <tt>MySheet</tt>
+  * Layout2D sheet to <tt>catPaperA4</tt>.
+  * <pre>
+  * MySheet.<font color="red">PaperSize</font> = catPaperA4
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PaperSize
+  HRESULT get_PaperSize(out /*IDLRETVAL*/ CatPaperSize oPaperSize);
+  HRESULT put_PaperSize(in  CatPaperSize iPaperSize);
+
+ /**
+  * Returns or sets the paper format name.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the paper format name for the <tt>MySheet</tt>
+  * Layout2D sheet to <tt>DSFormat1</tt>.
+  * <pre>
+  * MySheet.<font color="red">PaperName</font> = DSFormat1
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY PaperName
+  HRESULT get_PaperName(inout /*IDLRETVAL*/ CATBSTR oPaperName);
+  HRESULT put_PaperName(in  CATBSTR iPaperName);
+
+ /**
+  * Returns or sets the paper orientation.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the paper orientation for the <tt>MySheet</tt>
+  * Layout2D sheet to <tt>catPaperLandscape</tt>.
+  * <pre>
+  * MySheet.<font color="red">Orientation</font> = catPaperLandscape
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY Orientation
+  HRESULT get_Orientation(out /*IDLRETVAL*/ CatPaperOrientation orientation);
+  HRESULT put_Orientation(in  CatPaperOrientation orientation);
+  
+ /**
+  * Returns or sets the scale of the Layout2D sheet.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the scale of the <tt>MySheet</tt> Layout2D sheet to 0.5.
+  * <pre>
+  * MySheet.<font color="red">SheetScale</font> = 0.5
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY SheetScale	 
+  HRESULT get_SheetScale(out /*IDLRETVAL*/ double oSheetScale);
+  HRESULT put_SheetScale(in double iSheetScale);
+
+ /**
+  * Returns or sets the sheet projection mode .
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example sets the projection mode of the <tt>MySheet</tt> Layout2D sheet to catFirstAngle.
+  * <pre>
+  * MySheet.<font color="red">ProjectionMethod</font> = catFirstAngle
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ProjectionMethod	 
+  HRESULT get_ProjectionMethod(out /*IDLRETVAL*/ CatSheetProjectionMethod oProjMethod);
+  HRESULT put_ProjectionMethod(in CatSheetProjectionMethod iProjMethod);
+
+ //----------------------------------------------------------------------------------
+ 
+ /**
+  * Activates the Layout2D sheet.
+  * Activating a Layout2D sheet means that this Layout2D sheet is the one on which
+  * the end user is now working.
+  * The window in the application's window collection which contains this
+  * Layout2D sheet becomes the active one.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example activates the <tt>MySheet</tt> layout2dsheet.
+  * <pre>
+  * MySheet.<font color="red">Activate</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT Activate();
+
+ /**
+  * Checks whether the sheet is a detail sheet.
+  * <br>TRUE if the sheet is a detail sheet.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example checks whether <tt>MySheet</tt> is a detail sheet.
+  * <pre>
+  * IsDetail = MySheet.<font color="red">IsDetail</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT IsDetail(out /*IDLRETVAL*/ boolean oIsDetail);
+
+ /**
+  * Prints the Layout2D sheet according to its page setup on the default printer.
+  * @param iRenderingMode
+  *   The rendering mode to use for the backgrounds of the views in the sheet.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example prints the <tt>Layout2DSheet1</tt> 
+  * on the default printer.
+  * <pre>
+  * Layout2DSheet1.<font color="red">PrintOut</font> catRenderShadingWithEdges
+  * </pre>
+  * </dl>
+  */
+  HRESULT PrintOut(in CatRenderingMode iRenderingMode);
+
+  /**
+  * Prints the Layout2D sheet according its page setup 
+  * in a file instead of being sent to a printer.
+  * @param fileName
+  *   The full pathname of the file receiving the data.
+  * @param iRenderingMode
+  *   The rendering mode to use for the backgrounds of the views in the sheet.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example prints the <tt>Layout2DSheet1</tt> 
+  * in a file.
+  * <pre>
+  * Layout2DSheet1.<font color="red">PrintToFile</font> "e:\temp\sheet1.prn",catRenderShadingWithEdges
+  * </pre>
+  * </dl>
+  */
+  HRESULT PrintToFile(in CATBSTR fileName,in CatRenderingMode iRenderingMode);
+
+  /**
+  * Prints the Layout2D sheet according to its page setup on the default printer.
+  * If a rendering mode has been stored on the 2D Layout, it is used during print
+  * process for the backgrounds. Otherwise, "Shading with edges" rendering mode is used.
+  * <! @sample >
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example prints the <tt>Layout2DSheet1</tt> 
+  * on the default printer.
+  * <pre>
+  * Layout2DSheet1.<font color="red">PrintOut2</font>
+  * </pre>
+  * </dl>
+  */
+  HRESULT PrintOut2();
+
+  /**
+  * Prints the Layout2D sheet according its page setup 
+  * in a file instead of being sent to a printer.
+  * If a rendering mode has been stored on the 2D Layout, it is used during print
+  * process for the backgrounds. Otherwise, "Shading with edges" rendering mode is used.
+  * @param fileName
+  * The full pathname of the file receiving the data.
+  * <!-- @sample -->
+  * </dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example prints the <tt>Layout2DSheet1</tt> 
+  * in a file.
+  * <pre>
+  * Layout2DSheet1.<font color="red">PrintToFile2</font> "e:\temp\sheet1.prn"
+  * </pre>
+  * </dl>
+  */
+  HRESULT PrintToFile2(in CATBSTR fileName);
+
+ /**
+  * Set/Get the 3D visualization mode of the sheet in the 3D Viewer
+  * ie in the 3D windows and in the background of each view in every 2D context.
+  * @see CatVisuIn3DMode
+  */
+#pragma PROPERTY VisuIn3D
+  HRESULT get_VisuIn3D(out /*IDLRETVAL*/ CatVisuIn3DMode oMode);
+  HRESULT put_VisuIn3D(in CatVisuIn3DMode iMode);
+
+  /**
+   * Changes the positions of the views in this sheet according to the given 
+   * ordered list.
+   * iOrderedViews is the result of a permutation applied to 
+   * the list of <b>all</b> the views of this sheet with the following
+   * constraint: the two first elements of the list must be 
+   * respectively the sheet's mainview and background view.
+   *
+   * <!-- @sample -->
+   * <dl>
+   * <dt><b>Example:</b>
+   * <dd> 
+   * This example modifies the  views order of a sheet made of 
+   * a mainview, a backgroundview and two user-created views.
+   * (user-created views are inverted).
+   * <pre>
+   * Set drw =  CATIA.ActiveDocument.Part.GetItem("CATLayoutRoot")
+   * Set drwviewsorder = drwsheetsorder.Sheets.ActiveSheet
+   * Set drwviews = drwviewsorder.Views
+   * Set mainview = drwviews.item(1)
+   * Set backview = drwviews.item(2)
+   * Set view1 = drwviews.item(3)
+   * Set view2 = drwviews.item(4)
+   * newvieworder = Array(mainview, backview, view2, view1)
+   * drwviewsorder.<font color="red">reorder_Views</font>(newvieworder)
+   * </pre>
+   * </dl>
+   */
+  HRESULT reorder_Views(in CATSafeArrayVariant iOrderedViews);
+
+};
+
+// Interface name : CATIALayout2DSheet
+#pragma ID CATIALayout2DSheet "DCE:2fd59737-26b3-44b1-962bff522173924a"
+#pragma DUAL CATIALayout2DSheet
+
+// VB object name : Layout2DSheet (Id used in Visual Basic)
+#pragma ID Layout2DSheet "DCE:d55fdbfa-e1c7-4324-b3fa76c545cd5125"
+#pragma ALIAS CATIALayout2DSheet Layout2DSheet
+
+#endif

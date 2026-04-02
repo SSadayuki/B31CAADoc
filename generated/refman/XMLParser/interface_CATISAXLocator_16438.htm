@@ -1,0 +1,208 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>XMLParser CATISAXLocator Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../XMLParser.htm" href="../XMLParser.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "XMLParser";	}
+		function getCurrentObjectName() { 
+ 	return "CATISAXLocator"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>XMLParser Framework:  CATISAXLocator Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATISAXLocator_16438','CATISAXLocator','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATISAXLocator</b>
+</p>
+<p>
+<b><i> Interface for associating a SAX event with a document location.</i></b><br>
+
+
+ <p>If a SAX parser provides location information to the SAX
+ application, it does so by implementing this interface and then
+ passing an instance to the application using the document
+ handler's <script type="text/javascript"> activateLinkAnchor('CATISAXDocumentHandler','SetDocumentLocator','CATISAXDocumentHandler.SetDocumentLocator') </script> method.  The application can use the
+ object to obtain the location of any other document handler event
+ in the XML source document.</p>
+
+ <p>Note that the results returned by the object will be valid only
+ during the scope of each document handler method: the application
+ will receive unpredictable results if it attempts to use the
+ locator at any other time.</p>
+
+ <p>SAX parsers are not required to supply a locator, but they are
+ very strong encouraged to do so.  If the parser supplies a
+ locator, it must do so before reporting any other document events.
+ If no locator has been set by the time the application receives
+ the 
+<script type="text/javascript"> activateLinkAnchor('CATISAXDocumentHandler','StartDocument','CATISAXDocumentHandler.StartDocument') </script> event, the application should assume that a locator is not available.</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATISAXDocumentHandler','SetDocumentLocator','CATISAXDocumentHandler.SetDocumentLocator') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetColumnNumber(int&amp;)"><b>GetColumnNumber</b></a>(int&amp;)
+</td><td id='tdright'>  Retrieves the column number where the current document event ends.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLineNumber(int&amp;)"><b>GetLineNumber</b></a>(int&amp;)
+</td><td id='tdright'>  Retrieves the line number where the current document event ends.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPublicId(CATUnicodeString&amp;)"><b>GetPublicId</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the public identifier for the current document event.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetSystemId(CATUnicodeString&amp;)"><b>GetSystemId</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the system identifier for the current document event.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetColumnNumber"></a><a id="GetColumnNumber(int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetColumnNumber</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>oNumber</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the column number where the current document event ends.
+ Note that this is the column number of the first
+ character after the text associated with the document
+ event.  The first column in a line is position 1.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNumber</span></dt>
+   <dd> The column number, or -1 if none is available.
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetLineNumber','GetLineNumber') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLineNumber"></a><a id="GetLineNumber(int&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetLineNumber</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int&amp;')</script> <span class='param'>oNumber</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the line number where the current document event ends.
+ Note that this is the line position of the first character
+ after the text associated with the document event.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNumber</span></dt>
+   <dd> The line number, or -1 if none is available.
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetColumnNumber','GetColumnNumber') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPublicId"></a><a id="GetPublicId(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetPublicId</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oPublicId</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the public identifier for the current document event.
+ <p>This will be the public identifier
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oPublicId</span></dt>
+   <dd> A string containing the public identifier
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <tt>S_OK</tt> upon success, or <tt>E_FAIL</tt> if no public identifier is available.
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetPublicId','GetPublicId') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetSystemId"></a><a id="GetSystemId(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetSystemId</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oSystemId</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the system identifier for the current document event.
+
+ <p>If the system identifier is a URL, the parser must resolve it
+ fully before passing it to the application.</p>
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oSystemId</span></dt>
+   <dd> A string containing the system identifier.
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>  <tt>S_OK</tt> upon success, or <tt>E_FAIL</tt> if no system identifier is available.
+ 
+ </ dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetSystemId','GetSystemId') </script></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATISAXLocator.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATXMLParserItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

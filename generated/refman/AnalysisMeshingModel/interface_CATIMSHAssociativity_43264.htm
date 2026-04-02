@@ -1,0 +1,556 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>AnalysisMeshingModel CATIMSHAssociativity Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../AnalysisMeshingModel.htm" href="../AnalysisMeshingModel.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "AnalysisMeshingModel";	}
+		function getCurrentObjectName() { 
+ 	return "CATIMSHAssociativity"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>AnalysisMeshingModel Framework:  CATIMSHAssociativity Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIMSHAssociativity_43264','CATIMSHAssociativity','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIMSHAssociativity</b>
+</p>
+<p>
+<b><i> Interface representing the <b>Mesh Associativity</b>.</i></b><br>
+
+ <b>Role</b>: The <b>Mesh Associativity</b> is the object which manage all links between
+ the <b>Mesh</b> (nodes and elements) and the geometry.
+ <br>In order to be consistent the following rules should be applied 
+ when creating links between nodes/elements and geometry:
+ <ul><li>Do not link finite element objects (nodes and elements) with more than one geometric object.
+ <li>Link finite element objects (nodes and elements) with geometric object of same dimension: node with vertex,
+ finite element's edge with geometric edge, finite element's face with geometric face.
+ <li>Create links with topological objects, rather than geometrical objects: vertex/point, edge/curve , face/surface.
+ <li>If a finite element has only one edge, associate the entire element to the geometry rather than the element's edge.
+ In the same manner, if a finite element has only one face, associate the entire element to the geometry rather than the element's face.</ul></p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AddLinkedEdges(int,int,CATMSHAssElementEdge*)"><b>AddLinkedEdges</b></a>(int,int,CATMSHAssElementEdge*)
+</td><td id='tdright'>  Associate a set of finite element's edges to a geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddLinkedElements(int,int,CATMSHElement* const*)"><b>AddLinkedElements</b></a>(int,int,CATMSHElement* const*)
+</td><td id='tdright'>  Associate a set of finite elements to a geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddLinkedFaces(int,int,CATMSHAssElementFace*)"><b>AddLinkedFaces</b></a>(int,int,CATMSHAssElementFace*)
+</td><td id='tdright'>  Associate a set of finite element's faces to a geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#AddLinkedNodes(int,int,CATMSHNode* const*)"><b>AddLinkedNodes</b></a>(int,int,CATMSHNode* const*)
+</td><td id='tdright'>  Associate a set of finite element nodes to a geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetElementEdgesLinkedTo(CATIProduct*,CATBaseUnknown*,CATMSHAssElementEdge*&amp;,int,int)"><b>GetElementEdgesLinkedTo</b></a>(CATIProduct*,CATBaseUnknown*,CATMSHAssElementEdge*&amp;,int,int)
+</td><td id='tdright'>  Retreives all finite element's edges associated to a geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetElementFacesLinkedTo(CATIProduct*,CATBaseUnknown*,CATMSHAssElementFace*&amp;,int,int)"><b>GetElementFacesLinkedTo</b></a>(CATIProduct*,CATBaseUnknown*,CATMSHAssElementFace*&amp;,int,int)
+</td><td id='tdright'>  Retreives all finite element's faces associated to a geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLink(CATIProduct*,CATGeometry*)"><b>GetLink</b></a>(CATIProduct*,CATGeometry*)
+</td><td id='tdright'>  Creates or retreives a link between the <b>Mesh</b> and the geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetMeshPartsOn(CATIProduct*,CATBaseUnknown*,CATMSHListOfMeshPart*&amp;)"><b>GetMeshPartsOn</b></a>(CATIProduct*,CATBaseUnknown*,CATMSHListOfMeshPart*&amp;)
+</td><td id='tdright'>  Retreives the list of <b>Mesh Parts</b> which have a given support.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNodesLinkedTo(int,CATIProduct*[],CATBaseUnknown*[],CATMSHNode**&amp;,int,int)"><b>GetNodesLinkedTo</b></a>(int,CATIProduct*[],CATBaseUnknown*[],CATMSHNode**&amp;,int,int)
+</td><td id='tdright'>  Retreives all the finite element nodes associated to a set of geometries.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfElementEdgesLinkedTo(CATIProduct*,CATBaseUnknown*,int)"><b>GetNumberOfElementEdgesLinkedTo</b></a>(CATIProduct*,CATBaseUnknown*,int)
+</td><td id='tdright'>  Retreives a finite element's edges associated to a geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfElementFacesLinkedTo(CATIProduct*,CATBaseUnknown*,int)"><b>GetNumberOfElementFacesLinkedTo</b></a>(CATIProduct*,CATBaseUnknown*,int)
+</td><td id='tdright'>  Retreives the number of finite element's faces associated to a geometry.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNumberOfNodesLinkedTo(int,CATIProduct*[],CATBaseUnknown*[],int)"><b>GetNumberOfNodesLinkedTo</b></a>(int,CATIProduct*[],CATBaseUnknown*[],int)
+</td><td id='tdright'>  Retreives the number of finite element nodes associated to a set of geometries.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AddLinkedEdges"></a><a id="AddLinkedEdges(int,int,CATMSHAssElementEdge*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddLinkedEdges</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNulink</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNumberOfEdges</span>,<script type="text/javascript"> activateLink('CATMSHAssElementEdge','CATMSHAssElementEdge*')</script> <span class='param'>iLinkedEdges</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Associate a set of finite element's edges to a geometry.
+ <br>The geometry is identified by the corresponding link tag, see 
+<script type="text/javascript"> activateLinkAnchor('','GetLink','GetLink') </script> method. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNulink</span></dt>
+   <dd>   The link tag corresponding to the geometry. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNumberOfEdges</span></dt>
+   <dd>   The number of finite element's edge to associate. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLinkedEdges</span></dt>
+   <dd>   An array containing pointer to the finite element's edges to associate.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddLinkedElements"></a><a id="AddLinkedElements(int,int,CATMSHElement* const*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddLinkedElements</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNulink</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNumberOfElements</span>,<script type="text/javascript"> activateLink('CATMSHElement* const','CATMSHElement* const*')</script> <span class='param'>iLinkedElements</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Associate a set of finite elements to a geometry.
+ <br>The geometry is identified by the corresponding link tag, see 
+<script type="text/javascript"> activateLinkAnchor('','GetLink','GetLink') </script> method. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNulink</span></dt>
+   <dd>   The link tag corresponding to the geometry. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNumberOfElements</span></dt>
+   <dd>   The number of finite elements to associate. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLinkedElements</span></dt>
+   <dd>   An array containing pointer to the finite elements to associate.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddLinkedFaces"></a><a id="AddLinkedFaces(int,int,CATMSHAssElementFace*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddLinkedFaces</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNulink</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNumberOfFaces</span>,<script type="text/javascript"> activateLink('CATMSHAssElementFace','CATMSHAssElementFace*')</script> <span class='param'>iLinkedFaces</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Associate a set of finite element's faces to a geometry.
+ <br>The geometry is identified by the corresponding link tag, see 
+<script type="text/javascript"> activateLinkAnchor('','GetLink','GetLink') </script> method. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNulink</span></dt>
+   <dd>   The link tag corresponding to the geometry. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNumberOfFaces</span></dt>
+   <dd>   The number of finite element's face to associate. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLinkedFaces</span></dt>
+   <dd>   An array containing pointer to the finite element's faces to associate.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="AddLinkedNodes"></a><a id="AddLinkedNodes(int,int,CATMSHNode* const*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>AddLinkedNodes</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNulink</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNumberOfNodes</span>,<script type="text/javascript"> activateLink('CATMSHNode* const','CATMSHNode* const*')</script> <span class='param'>iLinkedNodes</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Associate a set of finite element nodes to a geometry.
+ <br>The geometry is identified by the corresponding link tag, see 
+<script type="text/javascript"> activateLinkAnchor('','GetLink','GetLink') </script> method. 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNulink</span></dt>
+   <dd>   The link tag corresponding to the geometry. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iNumberOfNodes</span></dt>
+   <dd>   The number of finite element nodes to associate. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iLinkedNodes</span></dt>
+   <dd>   An array containing pointer to the finite element nodes to associate.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetElementEdgesLinkedTo"></a><a id="GetElementEdgesLinkedTo(CATIProduct*,CATBaseUnknown*,CATMSHAssElementEdge*&amp;,int,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetElementEdgesLinkedTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIProduct','CATIProduct*')</script> <span class='param'>iProduct</span>,<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iGeometry</span>,<script type="text/javascript"> activateLink('CATMSHAssElementEdge','CATMSHAssElementEdge*&amp;')</script> <span class='param'>ioElementEdges</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iActiveOnly</span><span class='param'>= 0 </span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iAssembly</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retreives all finite element's edges associated to a geometry.
+ <br>The geometry is identified by the following:
+ <ul><li>The product instance containing the geometry to link.
+ <li>The geometry itself that could be either:
+ <ul><li>A BRep object see 
+<script type="text/javascript"> activateLinkAnchor('CATIBRepAccess','','CATIBRepAccess') </script>. <li>A mechanical feature see 
+<script type="text/javascript"> activateLinkAnchor('CATIMechanicalFeature','','CATIMechanicalFeature') </script> </ul></ul> 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProduct</span></dt>
+   <dd>   The product instance. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGeometry</span></dt>
+   <dd>   The geometry (BRep object or mechanical feature). 
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioElementEdges</span></dt>
+   <dd>   An array containing the assocaited element's faces.
+   <br><b>Lifecycle rules deviation</b>: If <b>ioElementEdges</b> is set to NULL before calling this method, an array of appropriate size is allocated and should be desallocated by the callee.
+    Otherwise, the <b>ioElementEdges</b> array is assumed to be allocated with enougth space to store ouputs.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iActiveOnly</span></dt>
+   <dd>   The element activivity flag (see 
+<script type="text/javascript"> activateLinkAnchor('CATMSHElement','','CATMSHElement') </script> ).   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>all associated element's edges are returned.
+   <dt>1</dt><dd>only edges corresponding to active elements are returned.</dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAssembly</span></dt>
+   <dd>   To specify the target in the context of assembly of Analysis:
+   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>the element's edges are searched in the current Analysis.
+   <dt>1</dt><dd>the element's edges are searched in the current Analysis and all sub Analysis.</dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The number of finite element's edges associated to the geometry.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetElementFacesLinkedTo"></a><a id="GetElementFacesLinkedTo(CATIProduct*,CATBaseUnknown*,CATMSHAssElementFace*&amp;,int,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetElementFacesLinkedTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIProduct','CATIProduct*')</script> <span class='param'>iProduct</span>,<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iGeometry</span>,<script type="text/javascript"> activateLink('CATMSHAssElementFace','CATMSHAssElementFace*&amp;')</script> <span class='param'>ioElementFaces</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iActiveOnly</span><span class='param'>= 0 </span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iAssembly</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retreives all finite element's faces associated to a geometry.
+ <br>The geometry is identified by the following:
+ <ul><li>The product instance containing the geometry to link.
+ <li>The geometry itself that could be either:
+ <ul><li>A BRep object see 
+<script type="text/javascript"> activateLinkAnchor('CATIBRepAccess','','CATIBRepAccess') </script>. <li>A mechanical feature see 
+<script type="text/javascript"> activateLinkAnchor('CATIMechanicalFeature','','CATIMechanicalFeature') </script> </ul></ul> 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProduct</span></dt>
+   <dd>   The product instance. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGeometry</span></dt>
+   <dd>   The geometry (BRep object or mechanical feature). 
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioElementFaces</span></dt>
+   <dd>   An array containing the associated element's faces.
+   <br><b>Lifecycle rules deviation</b>: If <b>ioElementFaces</b> is set to NULL before calling this method, an array of appropriate size is allocated and should be desallocated by the callee.
+    Otherwise, the <b>ioElementFaces</b> array is assumed to be allocated with enougth space to store ouputs.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iActiveOnly</span></dt>
+   <dd>   The element activivity flag (see 
+<script type="text/javascript"> activateLinkAnchor('CATMSHElement','','CATMSHElement') </script> ).   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>all associated element's faces are returned.
+   <dt>1</dt><dd>only faces corresponding to active elements are returned.</dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAssembly</span></dt>
+   <dd>   To specify the target in the context of assembly of Analysis:
+   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>the element's faces are searched in the current Analysis.
+   <dt>1</dt><dd>the element's faces are searched in the current Analysis and all sub Analysis.</dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The number of finite element's faces associated to the geometry.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLink"></a><a id="GetLink(CATIProduct*,CATGeometry*)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetLink</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIProduct','CATIProduct*')</script> <span class='param'>iProduct</span>,<script type="text/javascript"> activateLink('CATGeometry','CATGeometry*')</script> <span class='param'>iGeometry</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Creates or retreives a link between the <b>Mesh</b> and the geometry.
+ <br><b>Role</b>: This method creates or retreives a link to a geometric object. The link is
+ identified by a integer tag that should be used in methods 
+<script type="text/javascript"> activateLinkAnchor('','AddLinkedNodes','AddLinkedNodes') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','AddLinkedEdges','AddLinkedEdges') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','AddLinkedFaces','AddLinkedFaces') </script> or 
+<script type="text/javascript"> activateLinkAnchor('','AddLinkedElements','AddLinkedElements') </script>.  <br>In order to store associativity between several instance, the geometry is identified by the following:  
+ <ul><li>The product instance containing the geometry to link.
+ <li>The geometry itself.</ul>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProduct</span></dt>
+   <dd>   The product instance. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGeometry</span></dt>
+   <dd>   The geometry to link. 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    An integer tag representing the link.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetMeshPartsOn"></a><a id="GetMeshPartsOn(CATIProduct*,CATBaseUnknown*,CATMSHListOfMeshPart*&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetMeshPartsOn</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIProduct','CATIProduct*')</script> <span class='param'>iProduct</span>,<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iSupport</span>,<script type="text/javascript"> activateLink('CATMSHListOfMeshPart','CATMSHListOfMeshPart*&amp;')</script> <span class='param'>oListOfMeshParts</span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retreives the list of <b>Mesh Parts</b> which have a given support.
+ <br>The support is identified by a geometry and a product instance.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProduct</span></dt>
+   <dd>   The product instance. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGeometry</span></dt>
+   <dd>   The geometry (BRep object or mechanical feature). 
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListOfMeshParts</span></dt>
+   <dd>   The list of <b>Mesh Parts</b> found on this support (geometry + product). 
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    An HRESULT.
+   <br><b>Legal values</b>:
+   <dl><dt>S_OK</dt><dd>The list of <b>Mesh Parts</b> has been successfully retreived.
+   <dt>E_FAIL</dt><dd> The list of <b>Mesh Parts</b> has not been retreived.
+   </dl>
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNodesLinkedTo"></a><a id="GetNodesLinkedTo(int,CATIProduct*[],CATBaseUnknown*[],CATMSHNode**&amp;,int,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNodesLinkedTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbGeometries</span>,<script type="text/javascript"> activateLink('CATIProduct','CATIProduct*[]')</script> <span class='param'>iProducts</span>,<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*[]')</script> <span class='param'>iGeometries</span>,<script type="text/javascript"> activateLink('CATMSHNode','CATMSHNode**&amp;')</script> <span class='param'>ioNodes</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iActiveOnly</span><span class='param'>= 0 </span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iAssembly</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retreives all the finite element nodes associated to a set of geometries.
+ <br>The geometries are identified by the following:
+ <ul><li>The product instance containing the geometry to link.
+ <li>The geometry that could be either:
+ <ul><li>A BRep object see 
+<script type="text/javascript"> activateLinkAnchor('CATIBRepAccess','','CATIBRepAccess') </script>. <li>A mechanical feature see 
+<script type="text/javascript"> activateLinkAnchor('CATIMechanicalFeature','','CATIMechanicalFeature') </script> </ul></ul> <br>Finite element nodes inherit from elements associativity, i.e. if an element's edge is associated to a geometry all corresponding nodes are considered
+ as associated to this geometry. In the same maner if an element's face is associated to a geometry all corresponding nodes are considered
+ as associated to this geometry.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbGeometries</span></dt>
+   <dd>   The number of geometries. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProducts</span></dt>
+   <dd>   An array containing for each geometry the corresponding product instance. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGeometries</span></dt>
+   <dd>   An array containing the geometries (BRep objects or mechanical features). 
+ 
+ </ dd>
+    <dt><span class='paramitem'> ioNodes</span></dt>
+   <dd>   An array containing the assocaited nodes.
+   <br><b>Lifecycle rules deviation</b>: If <b>ioNodes</b> is set to NULL before calling this method, an array of appropriate size is allocated and should be desallocated by the callee.
+    Otherwise, the <b>ioNodes</b> array is assumed to be allocated with enougth space to store ouputs.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iActiveOnly</span></dt>
+   <dd>   The element activivity flag (see 
+<script type="text/javascript"> activateLinkAnchor('CATMSHElement','','CATMSHElement') </script> ).   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>all associated nodes are returned.
+   <dt>1</dt><dd>only nodes corresponding to active elements are returned.</dl>
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAssembly</span></dt>
+   <dd>   To specify the target in the context of assembly of Analysis:
+   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>the nodes are searched in the current Analysis.
+   <dt>1</dt><dd>the nodes are searched in the current Analysis and all sub Analysis.</dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The number of finite element nodes associated to the geometries.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfElementEdgesLinkedTo"></a><a id="GetNumberOfElementEdgesLinkedTo(CATIProduct*,CATBaseUnknown*,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNumberOfElementEdgesLinkedTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIProduct','CATIProduct*')</script> <span class='param'>iProduct</span>,<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iGeometry</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iAssembly</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retreives a finite element's edges associated to a geometry.
+ <br>The geometry is identified by the following:
+ <ul><li>The product instance containing the geometry to link.
+ <li>The geometry itself that could be either:
+ <ul><li>A BRep object see 
+<script type="text/javascript"> activateLinkAnchor('CATIBRepAccess','','CATIBRepAccess') </script>. <li>A mechanical feature see 
+<script type="text/javascript"> activateLinkAnchor('CATIMechanicalFeature','','CATIMechanicalFeature') </script> </ul></ul> 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProduct</span></dt>
+   <dd>   The product instance. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGeometry</span></dt>
+   <dd>   The geometry (BRep object or mechanical feature). 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAssembly</span></dt>
+   <dd>   To specify the target in the context of assembly of Analysis:
+   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>the element's edges are searched in the current Analysis.
+   <dt>1</dt><dd>the element's edges are searched in the current Analysis and all sub Analysis.</dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The number of finite element's edges associated to the geometry.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfElementFacesLinkedTo"></a><a id="GetNumberOfElementFacesLinkedTo(CATIProduct*,CATBaseUnknown*,int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNumberOfElementFacesLinkedTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIProduct','CATIProduct*')</script> <span class='param'>iProduct</span>,<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iGeometry</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iAssembly</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retreives the number of finite element's faces associated to a geometry.
+ <br>The geometry is identified by the following:
+ <ul><li>The product instance containing the geometry to link.
+ <li>The geometry itself that could be either:
+ <ul><li>A BRep object see 
+<script type="text/javascript"> activateLinkAnchor('CATIBRepAccess','','CATIBRepAccess') </script>. <li>A mechanical feature see 
+<script type="text/javascript"> activateLinkAnchor('CATIMechanicalFeature','','CATIMechanicalFeature') </script> </ul></ul> 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iProduct</span></dt>
+   <dd>   The product instance. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGeometry</span></dt>
+   <dd>   The geometry (BRep object or mechanical feature). 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAssembly</span></dt>
+   <dd>   To specify the target in the context of assembly of Analysis:
+   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>the element's faces are searched in the current Analysis.
+   <dt>1</dt><dd>the element's faces are searched in the current Analysis and all sub Analysis.</dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The number of finite element's faces associated to the geometry.
+ </ dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNumberOfNodesLinkedTo"></a><a id="GetNumberOfNodesLinkedTo(int,CATIProduct*[],CATBaseUnknown*[],int)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('int','int')</script>  <span class='objname'>GetNumberOfNodesLinkedTo</span><span class = 'signature'>(<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iNbGeometries</span>,<script type="text/javascript"> activateLink('CATIProduct','CATIProduct*[]')</script> <span class='param'>iProducts</span>,<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*[]')</script> <span class='param'>iGeometries</span>,<script type="text/javascript"> activateLink('int','int')</script> <span class='param'>iAssembly</span><span class='param'>= 0 </span>)</span><script type="text/javascript"> activateLink('=0','=0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retreives the number of finite element nodes associated to a set of geometries.
+ <br>The geometries are identified by the following:
+ <ul><li>The product instance containing the geometry to link.
+ <li>The geometry that could be either:
+ <ul><li>A BRep object see 
+<script type="text/javascript"> activateLinkAnchor('CATIBRepAccess','','CATIBRepAccess') </script>. <li>A mechanical feature see 
+<script type="text/javascript"> activateLinkAnchor('CATIMechanicalFeature','','CATIMechanicalFeature') </script> </ul></ul> <br>Finite element nodes inherit from elements associativity, i.e. if an element's edge is associated to a geometry all corresponding nodes are considered
+ as associated to this geometry. In the same maner if an element's face is associated to a geometry all corresponding nodes are considered
+ as associated to this geometry.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNbGeometries</span></dt>
+   <dd>   The number of geometries. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iProducts</span></dt>
+   <dd>   An array containing for each geometry the corresponding product instance. 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iGeometries</span></dt>
+   <dd>   An array containing the geometries (BRep objects or mechanical features). 
+ 
+ </ dd>
+    <dt><span class='paramitem'> iAssembly</span></dt>
+   <dd>   To specify the target in the context of assembly of Analysis:
+   <br><b>Legal values</b>: 
+   <dl><dt>0</dt><dd>the nodes are searched in the current Analysis.
+   <dt>1</dt><dd>the nodes are searched in the current Analysis and all sub Analysis.</dl>
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>    The number of finite element nodes associated to the geometries.
+ </ dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIMSHAssociativity.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATAmtModel</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

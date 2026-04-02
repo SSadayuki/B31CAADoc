@@ -1,0 +1,31 @@
+# 
+IMPACT_ON_IMPORT = YES
+BUILT_OBJECT_TYPE = NONE
+#
+OS = COMMON
+LINK_WITH =
+SYS_LIBPATH = 
+
+OS = AIX
+SYS_LIBS = -lxlf -lxlf90 -lxlfpad
+
+OS = IRIX
+LINK_WITH = 
+SYS_LIBS = -lftn
+
+OS = Windows_NT
+LOCAL_CCFLAGS = /D_CATNoWarningPromotion_  
+LOCAL_CFLAGS = /D_CATNoWarningPromotion_ 
+
+#if (defined MK_MSCVER) && (MK_MSCVER < 1400)
+SYS_LIBS = DFORDLL.LIB
+#endif
+
+OS = HP-UX
+SYS_INCPATH =
+SYS_LIBS = -lf
+
+OS = SunOS
+SYS_INCPATH = 
+SYS_LIBS = -lF77
+SYS_LIBPATH =

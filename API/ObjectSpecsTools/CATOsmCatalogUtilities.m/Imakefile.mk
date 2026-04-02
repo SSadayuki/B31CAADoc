@@ -1,0 +1,13 @@
+BUILT_OBJECT_TYPE=SHARED LIBRARY
+
+#if os Windows
+CXX_WARNINGPROMOTE=CATOstWarningPromote.h
+#endif
+
+COMMON_LINK_WITH=JS0GROUP CATObjectModelerBase CATObjectSpecsModeler ObjectModelerSystem CATOmx JS0ZLIB
+
+#ifdef (CATIAR206)
+LINK_WITH=$(COMMON_LINK_WITH) CATSysTS CATPLMIdentificationAccess
+#else
+LINK_WITH=$(COMMON_LINK_WITH)
+#endif

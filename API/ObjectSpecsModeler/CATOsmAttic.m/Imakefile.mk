@@ -1,0 +1,6 @@
+BUILT_OBJECT_TYPE=NONE
+BUILD=NO
+
+#if os Windows
+CXX_WARNINGPROMOTE=CATOsmWarningPromote.h
+#endif

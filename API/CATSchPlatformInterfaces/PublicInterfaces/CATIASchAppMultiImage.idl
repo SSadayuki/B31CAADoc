@@ -1,0 +1,123 @@
+#ifndef CATIASchAppMultiImage_IDL 
+#define CATIASchAppMultiImage_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004    
+    
+#include "CATIABase.idl"
+#include "CATBSTR.idl"
+#include "CatSchIDLMultiImageStatus.idl"
+
+interface CATIASchAppMultiImageMaster;
+interface CATIADocument;
+
+ /** 
+  * Interface to manage the image object in the Multi-Image-Object concept.
+  */
+
+interface CATIASchAppMultiImage : CATIABase
+{
+  /**
+  * Get the master object of this image.
+  * @param oMasterImage
+  *   Pointer to the master object.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppMultiImage
+  * Dim objMaster As SchMultiImageMaster
+  *  ...
+  * Set objMaster = objThisIntf.<font color="red">AppGetMasterObject</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppGetMasterObject (
+    out /*IDLRETVAL*/ CATIASchAppMultiImageMaster oMasterImage);
+
+  /**
+  * Get the document where the master of this image object resides.
+  * @param oDocument
+  *   Pointer to the document.
+  * @param oDocumentName
+  *   Name of the document containing the master.
+  *	@param oSymbolicLinkName
+  *   Name of the symbolic link.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppMultiImage
+  * Dim objDoc As Document
+  * Dim strDocName As String
+  * Dim strLinkName As String
+  *  ...
+  * objThisIntf.<font color="red">AppGetMasterDocument</font> objDoc,strDocName,strLinkName
+  * </pre>
+  *    
+  */
+  HRESULT AppGetMasterDocument (
+    inout CATIADocument oDocument,
+    inout CATBSTR oDocumentName,
+    inout CATBSTR oSymbolicLinkName);
+
+  /**
+  * Update the image object.
+  * @param iMasterImage
+  *   This is an optional input. 
+  *   Not NULL - the application has a handle on the master to update 
+  *   this image (for example in DSA application, the application will 
+  *   make sure the ID of this image is the same as the input master).
+  *   NULL - the application will find the master based on the specific way
+  *   it models the MIO concept.
+  * Sample case: the application will make sure the ID of this image is the same as the input master.
+  * @param oImage
+  *   Pointer to a new image object created if existing image object has to be
+  *   replaced during the update process.
+  *   This pointer is NULL if the image object is not replaced.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppMultiImage
+  * Dim objMaster As SchAppMultiImageMaster
+  * Dim objNewImage As SchAppMultiImage
+  *  ...
+  * objThisIntf.<font color="red">AppUpdate</font> objMaster,objNewImage
+  * </pre>
+  *
+  */
+  HRESULT AppUpdate (
+    in CATIASchAppMultiImageMaster iMasterImage,
+    inout CATIASchAppMultiImage oImage);
+
+  /**
+  * Check if the image object is up-to-date.
+  * @param oStatus
+  *   Status of the image object.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppMultiImage
+  *  ...
+  * objThisIntf.<font color="red">AppIsUpToDate</font> CatSchIDLMultiImageStatus_Enum
+  * </pre>
+  *    
+  */
+  HRESULT AppIsUpToDate (
+    inout CatSchIDLMultiImageStatus oStatus);
+
+};
+    
+// Interface name : CATIASchAppMultiImage
+#pragma ID CATIASchAppMultiImage "DCE:cafe8dae-825a-4003-a269c7eeeeba914e"
+#pragma DUAL CATIASchAppMultiImage
+    
+// VB object name : SchAppMultiImage
+#pragma ID SchAppMultiImage "DCE:89fa29a4-9947-41c1-a2e83488f6bc7019"
+#pragma ALIAS CATIASchAppMultiImage SchAppMultiImage
+    
+#endif 

@@ -1,0 +1,343 @@
+#ifndef CATIAAnalysisGeneralSettingAtt_IDL
+#define CATIAAnalysisGeneralSettingAtt_IDL
+// COPYRIGHT DASSAULT SYSTEMES 2003
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+ * Interface to handle the Analysis & Simulation "GeneralSetting".
+ */
+interface CATIAAnalysisGeneralSettingAtt : CATIASettingController
+{
+
+  //------------------------------------------------------
+  //  Element Identifier Visibility attribute
+  //------------------------------------------------------
+#pragma PROPERTY DefaultAnalysisFlag
+/**
+ * Retrieves if a default analysis Case will be created.
+ */
+  HRESULT get_DefaultAnalysisFlag(out /*IDLRETVAL*/  long oIdAllowed);
+/**
+ * Sets that a default analysis Case will be created.
+ */
+  HRESULT put_DefaultAnalysisFlag(in                 long iIdAllowed);
+
+/** 
+ * Retrieves environment informations for the default flag.
+ * <br><b>Role</b>:Retrieves the state of the default flag in the current environment. 
+ * @param AdminLevel
+ *       <br>If the parameter is locked, AdminLevel gives the administration
+ *       level that imposes the value of the parameter.
+ *	 <br>If the parameter is not locked, AdminLevel gives the administration
+ *       level that will give the value of the parameter after a reset.
+ * @param oLocked   Indicates if the parameter has been locked.
+ * @param oModified Indicates if the parameter has been explicitly modified or remain
+ *      to the administrated value.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */ 
+  HRESULT GetDefaultAnalysisFlagInfo (inout CATBSTR ioAdminLevel, inout	CATBSTR	ioLocked,
+                                      out  /*IDLRETVAL*/	boolean		oModified);
+/** 
+ * Locks or unlocks the flag.
+ * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+ * possible in the current administrated. In user mode this method 
+ * will always return E_FAIL.
+ * @param iLocked The locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ * <b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */
+HRESULT SetDefaultAnalysisFlagLock( in  boolean iLocked );
+
+#pragma PROPERTY DefaultAnalysisTemplate
+/**
+ * Retrieves the name of the default analysis Case that will be created.
+ */
+  HRESULT get_DefaultAnalysisTemplate(inout /*IDLRETVAL*/  CATBSTR oIdTemplate);
+/**
+ * Sets the name of the default analysis Case that will be created.
+ */
+  HRESULT put_DefaultAnalysisTemplate(in                   CATBSTR iIdTemplate);
+
+/** 
+ * Retrieves environment informations for the default template.
+ * <br><b>Role</b>:Retrieves the state of the default template in the current environment. 
+ * @param AdminLevel
+ *       <br>If the parameter is locked, AdminLevel gives the administration
+ *       level that imposes the value of the parameter.
+ *	 <br>If the parameter is not locked, AdminLevel gives the administration
+ *       level that will give the value of the parameter after a reset.
+ * @param oLocked   Indicates if the parameter has been locked.
+ * @param oModified Indicates if the parameter has been explicitly modified or remain
+ *      to the administrated value.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */ 
+  HRESULT GetDefaultAnalysisTemplateInfo (inout CATBSTR ioAdminLevel, inout	CATBSTR	ioLocked,
+                                      out  /*IDLRETVAL*/	boolean		oModified);
+/** 
+ * Locks or unlocks the flag.
+ * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+ * possible in the current administrated. In user mode this method 
+ * will always return E_FAIL.
+ * @param iLocked The locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ * <b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */
+  HRESULT SetDefaultAnalysisTemplateLock( in  boolean iLocked );
+
+#pragma PROPERTY ViewAnalysisParameter
+/**
+ * Retrieves if the Parameter set is visible in the feature tree of the analysis document.
+ */
+  HRESULT get_ViewAnalysisParameter(out /*IDLRETVAL*/  long oIdVisibility);
+/**
+ * Sets the Parameter set as visible in the feature tree of the analysis document.
+ */
+  HRESULT put_ViewAnalysisParameter(in                 long iIdVisibility);
+
+/** 
+ * Retrieves environment informations for the parameter.
+ * <br><b>Role</b>:Retrieves the state of the parameter in the current environment. 
+ * @param AdminLevel
+ *       <br>If the parameter is locked, AdminLevel gives the administration
+ *       level that imposes the value of the parameter.
+ *	 <br>If the parameter is not locked, AdminLevel gives the administration
+ *       level that will give the value of the parameter after a reset.
+ * @param oLocked   Indicates if the parameter has been locked.
+ * @param oModified Indicates if the parameter has been explicitly modified or remain
+ *      to the administrated value.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */ 
+
+  HRESULT GetViewAnalysisParameterInfo (inout CATBSTR ioAdminLevel, inout	CATBSTR	ioLocked,
+                                      out  /*IDLRETVAL*/	boolean		oModified);
+/** 
+ * Locks or unlocks the flag.
+ * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+ * possible in the current administrated. In user mode this method 
+ * will always return E_FAIL.
+ * @param iLocked The locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ * <b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */
+  HRESULT SetViewAnalysisParameterLock( in  boolean iLocked );
+
+#pragma PROPERTY ViewAnalysisRelation
+/**
+ * Retrieves if the Relation set is visible in the feature tree of the analysis document.
+ */
+  HRESULT get_ViewAnalysisRelation(out /*IDLRETVAL*/  long oIdVisibility);
+/**
+ * Sets the Relation set as visible in the feature tree of the analysis document.
+ */
+  HRESULT put_ViewAnalysisRelation(in                 long iIdVisibility);
+
+/** 
+ * Retrieves environment informations for the parameter.
+ * <br><b>Role</b>:Retrieves the state of the parameter in the current environment. 
+ * @param AdminLevel
+ *       <br>If the parameter is locked, AdminLevel gives the administration
+ *       level that imposes the value of the parameter.
+ *	 <br>If the parameter is not locked, AdminLevel gives the administration
+ *       level that will give the value of the parameter after a reset.
+ * @param oLocked   Indicates if the parameter has been locked.
+ * @param oModified Indicates if the parameter has been explicitly modified or remain
+ *      to the administrated value.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */ 
+  HRESULT GetViewAnalysisRelationInfo (inout CATBSTR ioAdminLevel, inout	CATBSTR	ioLocked,
+                                      out  /*IDLRETVAL*/	boolean		oModified);
+/** 
+ * Locks or unlocks the flag.
+ * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+ * possible in the current administrated. In user mode this method 
+ * will always return E_FAIL.
+ * @param iLocked The locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ * <b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */
+  HRESULT SetViewAnalysisRelationLock( in  boolean iLocked );
+
+#pragma PROPERTY AnalysisLoadMode
+/**
+ * Retrieves if pointed document will be loaded.
+ */
+  HRESULT get_AnalysisLoadMode(out /*IDLRETVAL*/  long oIdLoadMode);
+/**
+ * Sets the pointed document not to be loaded.
+ */
+  HRESULT put_AnalysisLoadMode(in                 long iIdLoadMode);
+
+/** 
+ * Retrieves environment informations for the parameter.
+ * <br><b>Role</b>:Retrieves the state of the parameter in the current environment. 
+ * @param AdminLevel
+ *       <br>If the parameter is locked, AdminLevel gives the administration
+ *       level that imposes the value of the parameter.
+ *	 <br>If the parameter is not locked, AdminLevel gives the administration
+ *       level that will give the value of the parameter after a reset.
+ * @param oLocked   Indicates if the parameter has been locked.
+ * @param oModified Indicates if the parameter has been explicitly modified or remain
+ *      to the administrated value.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */ 
+  HRESULT GetAnalysisLoadModeInfo (inout CATBSTR ioAdminLevel, inout	CATBSTR	ioLocked,
+                                      out  /*IDLRETVAL*/	boolean		oModified);
+/** 
+ * Locks or unlocks the flag.
+ * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+ * possible in the current administrated. In user mode this method 
+ * will always return E_FAIL.
+ * @param iLocked The locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ * <b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */
+  HRESULT SetAnalysisLoadModeLock( in  boolean iLocked );
+
+#pragma PROPERTY AnalysisCacheMode
+/**
+ * Tells if Product Structure Cache Mode will be handled.
+ */
+  HRESULT get_AnalysisCacheMode(out /*IDLRETVAL*/  long oIdCacheMode);
+/**
+ * Sets the Product Structure Cache Mde to be respected.
+ */
+  HRESULT put_AnalysisCacheMode(in                 long iIdCacheMode);
+
+/** 
+ * Retrieves environment informations for the parameter.
+ * <br><b>Role</b>:Retrieves the state of the parameter in the current environment. 
+ * @param AdminLevel
+ *       <br>If the parameter is locked, AdminLevel gives the administration
+ *       level that imposes the value of the parameter.
+ *	 <br>If the parameter is not locked, AdminLevel gives the administration
+ *       level that will give the value of the parameter after a reset.
+ * @param oLocked   Indicates if the parameter has been locked.
+ * @param oModified Indicates if the parameter has been explicitly modified or remain
+ *      to the administrated value.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */ 
+  HRESULT GetAnalysisCacheModeInfo (inout CATBSTR ioAdminLevel, inout	CATBSTR	ioLocked,
+                                      out  /*IDLRETVAL*/	boolean		oModified);
+/** 
+ * Locks or unlocks the flag.
+ * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+ * possible in the current administrated. In user mode this method 
+ * will always return E_FAIL.
+ * @param iLocked The locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ * <b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */
+  HRESULT SetAnalysisCacheModeLock( in  boolean iLocked );
+
+#pragma PROPERTY AnalysisNamingAuto
+/**
+ * Tells if Automatic naming will be activated.
+ */
+  HRESULT get_AnalysisNamingAuto(out /*IDLRETVAL*/  long oIdCacheMode);
+/**
+ * Sets the Automatic naming to be activated.
+ */
+  HRESULT put_AnalysisNamingAuto(in                 long iIdCacheMode);
+
+/** 
+ * Retrieves environment informations for the parameter.
+ * <br><b>Role</b>:Retrieves the state of the parameter in the current environment. 
+ * @param AdminLevel
+ *       <br>If the parameter is locked, AdminLevel gives the administration
+ *       level that imposes the value of the parameter.
+ *	 <br>If the parameter is not locked, AdminLevel gives the administration
+ *       level that will give the value of the parameter after a reset.
+ * @param oLocked   Indicates if the parameter has been locked.
+ * @param oModified Indicates if the parameter has been explicitly modified or remain
+ *      to the administrated value.
+ * @return
+ *	<b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */ 
+  HRESULT GetAnalysisNamingAutoInfo (inout CATBSTR ioAdminLevel, inout	CATBSTR	ioLocked,
+                                      out  /*IDLRETVAL*/	boolean		oModified);
+/** 
+ * Locks or unlocks the flag.
+ * <br><b>Role</b>:Locks or unlocks the parameter if it is 
+ * possible in the current administrated. In user mode this method 
+ * will always return E_FAIL.
+ * @param iLocked The locking operation to be performed
+ *	<b>Legal values</b>:
+ *	<br><tt>TRUE :</tt>   to lock the parameter.
+ * 	<br><tt>FALSE:</tt>   to unlock the parameter.
+ * @return
+ * <b>Legal values</b>:
+ *	<br><tt>S_OK :</tt>   on Success
+ * 	<br><tt>E_FAIL:</tt>  on failure
+ */
+  HRESULT SetAnalysisNamingAutoLock( in  boolean iLocked );
+
+  //------------------------------------------------------
+
+};
+// Interface name : CATIAAnalysisGeneralSettingAtt
+#pragma ID CATIAAnalysisGeneralSettingAtt "DCE:FD13CE97-3B52-4c1b-861ADAADE90BFDB1"
+#pragma DUAL CATIAAnalysisGeneralSettingAtt
+
+// VB object name : AnalysisGeneralSettingAtt (Id used in Visual Basic)
+#pragma ID AnalysisGeneralSettingAtt "DCE:566C59F8-BF0C-44bf-A5185512AEFCB634"
+#pragma ALIAS CATIAAnalysisGeneralSettingAtt AnalysisGeneralSettingAtt
+
+#endif

@@ -1,0 +1,93 @@
+#ifndef CATIAPspGroup_IDL
+#define CATIAPspGroup_IDL
+/*IDLREP*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+
+#include "CATIAPspGroupable.idl"
+#include "CATIABase.idl"
+
+interface CATIAPspListOfObjects;
+ 
+/**
+ * Represent the Group.
+ * <b>Role</b>: It manages group members in making logical relationship. 
+ */
+
+interface CATIAPspGroup : CATIABase
+{
+   
+/**
+  * Returns a list of Members of the Group.
+  *
+  *
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspGroup  
+  * Dim objArg1 As PspListOfObjects
+  * 
+  *  ...
+  * Set ObjArg1 = objThisIntf.<font color="red">Members</font>
+  * </pre>
+  *    
+  */
+ #pragma PROPERTY Members		
+ HRESULT get_Members(	out /*IDLRETVAL*/ CATIAPspListOfObjects oLMembers);
+
+
+ /** 
+  * Adds a member to the group.
+  *
+  * @param iGroupable
+  *  Member to add
+  * 
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspGroup  
+  * Dim objArg1 As PspGroupable
+  * 
+  *  ...
+  *  objThisIntf.<font color="red">AddMember</font> objArg1
+  * </pre>
+  *    
+  */
+ HRESULT AddMember(	in CATIAPspGroupable iGroupable);
+
+/** 
+  * Removes a member from the group.
+  *
+  * @param iGroupable
+  *  	a member to be removed
+  *   
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As PspGroup  
+  * Dim objArg1 As PspGroupable
+  * 
+  *  ...
+  *  objThisIntf.<font color="red">RemoveMember</font> objArg1
+  * </pre>
+  *    
+  */
+ HRESULT RemoveMember(	in CATIAPspGroupable iGroupable);
+
+};
+
+// Interface name : CATIAPspGroup   
+#pragma ID CATIAPspGroup "DCE:f2bd94c1-3214-4bd6-a59bd465813af169"
+#pragma DUAL CATIAPspGroup                        
+
+
+// VB object name : PspGroup                        
+#pragma ID PspGroup            "DCE:4bd945ce-a3f2-4df3-9f7a4c869bf7e4f1"                             
+#pragma ALIAS CATIAPspGroup PspGroup
+
+#endif

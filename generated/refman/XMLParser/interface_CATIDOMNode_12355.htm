@@ -1,0 +1,1149 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>XMLParser CATIDOMNode Interface </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../XMLParser.htm" href="../XMLParser.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "XMLParser";	}
+		function getCurrentObjectName() { 
+ 	return "CATIDOMNode"; } 
+	function getCurrentType() { 
+ 	return "interface"; }  
+ </script><h1 class='title1'>XMLParser Framework:  CATIDOMNode Interface </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('interface_CATIDOMNode_12355','CATIDOMNode','0');</script>
+<section id='objdesc'>
+<p><b>Usage: an implementation of this interface is supplied and you must use it as is. You should not reimplement it.</b></p>
+<hr/>
+<p>
+ interface <b>CATIDOMNode</b>
+</p>
+<p>
+<b><i> Interface used as the primary datatype for the entire Document Object Model.</i></b><br>
+ 
+ It represents a single node in the document tree. 
+ While all objects implementing the <script type="text/javascript"> activateLinkAnchor('CATIDOMNode','','CATIDOMNode') </script> interface expose  methods for dealing with children, not all objects implementing the 
+ 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMNode','','CATIDOMNode') </script> interface may have children. For example,  
+<script type="text/javascript"> activateLinkAnchor('CATIDOMText','','CATIDOMText') </script> nodes may not have children, and adding children to  such nodes results in a 
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> being raised. <p>The methods 
+<script type="text/javascript"> activateLinkAnchor('','GetNodeName','GetNodeName') </script>, 
+<script type="text/javascript"> activateLinkAnchor('','GetNodeValue','GetNodeValue') </script> and 
+<script type="text/javascript"> activateLinkAnchor('','GetAttributes','GetAttributes') </script>  are included as a mechanism to get at node 
+ information without casting down to the specific derived interface. In 
+ cases where there is no obvious mapping of these attributes for a 
+ specific 
+<script type="text/javascript"> activateLinkAnchor('','NodeType','NodeType') </script> (e.g., 
+<script type="text/javascript"> activateLinkAnchor('','GetNodeValue','GetNodeValue') </script> for an  
+<script type="text/javascript"> activateLinkAnchor('CATIDOMElement','','CATIDOMElement') </script> or 
+<script type="text/javascript"> activateLinkAnchor('','GetAttributes','GetAttributes') </script> for a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMComment','','CATIDOMComment') </script> ),  this returns empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> or <tt>NULL_var</tt> values.  Note that the specialized interfaces 
+ may contain additional and more convenient mechanisms to get and set the 
+ relevant information.
+ <p>The return values of 
+<script type="text/javascript"> activateLinkAnchor('','GetNodeName','GetNodeName') </script>,  
+<script type="text/javascript"> activateLinkAnchor('','GetNodeValue','GetNodeValue') </script>, and 
+<script type="text/javascript"> activateLinkAnchor('','GetAttributes','GetAttributes') </script> methods vary according to the  node type as follows: 
+ <br>
+ <table border='1'>
+ <tr>
+ <th>Interface</th>
+ <th>GetNodeName</th>
+ <th>GetNodeValue</th>
+ <th>GetAttributes</th>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMAttr','','CATIDOMAttr') </script> </td> <td valign='top' rowspan='1' colspan='1'>name of 
+ attribute</td>
+ <td valign='top' rowspan='1' colspan='1'>value of attribute</td>
+ <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMCDATASection','','CATIDOMCDATASection') </script> </td> <td valign='top' rowspan='1' colspan='1'><code>"#cdata-section"</code></td>
+ <td valign='top' rowspan='1' colspan='1'>
+ content of the CDATA Section</td>
+ <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMComment','','CATIDOMComment') </script> </td> <td valign='top' rowspan='1' colspan='1'><code>"#comment"</code></td>
+ <td valign='top' rowspan='1' colspan='1'>content of 
+ the comment</td>
+ <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocument','','CATIDOMDocument') </script> </td> <td valign='top' rowspan='1' colspan='1'><code>"#document"</code></td>
+ <td valign='top' rowspan='1' colspan='1'>empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> </td> <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentFragment','','CATIDOMDocumentFragment') </script> </td> <td valign='top' rowspan='1' colspan='1'>
+ <code>"#document-fragment"</code></td>
+ <td valign='top' rowspan='1' colspan='1'>empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> </td> <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentType','','CATIDOMDocumentType') </script> </td> <td valign='top' rowspan='1' colspan='1'>document type name</td>
+ <td valign='top' rowspan='1' colspan='1'>empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> </td> <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMElement','','CATIDOMElement') </script> </td> <td valign='top' rowspan='1' colspan='1'>tag name</td>
+ <td valign='top' rowspan='1' colspan='1'>empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> </td> <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMNamedNodeMap','','CATIDOMNamedNodeMap') </script> </td> </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMEntity','','CATIDOMEntity') </script> </td> <td valign='top' rowspan='1' colspan='1'>entity name</td>
+ <td valign='top' rowspan='1' colspan='1'>empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> </td> <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMEntityReference','','CATIDOMEntityReference') </script> </td> <td valign='top' rowspan='1' colspan='1'>name of entity referenced</td>
+ <td valign='top' rowspan='1' colspan='1'>empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> </td> <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMNotation','','CATIDOMNotation') </script> </td> <td valign='top' rowspan='1' colspan='1'>notation name</td>
+ <td valign='top' rowspan='1' colspan='1'>empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> </td> <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMProcessingInstruction','','CATIDOMProcessingInstruction') </script> </td> <td valign='top' rowspan='1' colspan='1'>target</td>
+ <td valign='top' rowspan='1' colspan='1'>entire content excluding the target</td>
+ <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ <tr>
+ <td valign='top' rowspan='1' colspan='1'>
+<script type="text/javascript"> activateLinkAnchor('CATIDOMText','','CATIDOMText') </script> </td> <td valign='top' rowspan='1' colspan='1'>
+ <code>"#text"</code></td>
+ <td valign='top' rowspan='1' colspan='1'>content of the text node</td>
+ <td valign='top' rowspan='1' colspan='1'>NULL_var</td>
+ </tr>
+ </table>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#AppendChild(CATIDOMNode_var&amp;)"><b>AppendChild</b></a>(CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Adds the node <tt>iNewChild</tt> to the end of the list of children 
+ of this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#CloneNode(CATBoolean,CATIDOMNode_var&amp;)"><b>CloneNode</b></a>(CATBoolean,CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Returns a duplicate of this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetAttributes(CATIDOMNamedNodeMap_var&amp;)"><b>GetAttributes</b></a>(CATIDOMNamedNodeMap_var&amp;)
+</td><td id='tdright'>  Retrieves a <tt>CATIDOMNamedNodeMap</tt> containing the attributes of this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetChildNodes(CATIDOMNodeList_var&amp;)"><b>GetChildNodes</b></a>(CATIDOMNodeList_var&amp;)
+</td><td id='tdright'>  Retrieves a <tt>CATIDOMNodeList</tt> that contains all children of this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetFirstChild(CATIDOMNode_var&amp;)"><b>GetFirstChild</b></a>(CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Retrieves the first child of this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLastChild(CATIDOMNode_var&amp;)"><b>GetLastChild</b></a>(CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Retrieves the last child of this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetLocalName(CATUnicodeString&amp;)"><b>GetLocalName</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the local part of the qualified name of this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNamespaceURI(CATUnicodeString&amp;)"><b>GetNamespaceURI</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the namespace URI of this node, or an empty <tt>CATUnicodeString</tt> if it is 
+ unspecified.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNextSibling(CATIDOMNode_var&amp;)"><b>GetNextSibling</b></a>(CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Retrieves node immediately following this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNodeName(CATUnicodeString&amp;)"><b>GetNodeName</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the name of this node, depending on its type.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNodeType(NodeType&amp;)"><b>GetNodeType</b></a>(NodeType&amp;)
+</td><td id='tdright'>  Retrieves the enum value representing the type of the underlying object.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetNodeValue(CATUnicodeString&amp;)"><b>GetNodeValue</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the value of this node, depending on its type.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetOwnerDocument(CATIDOMDocument_var&amp;)"><b>GetOwnerDocument</b></a>(CATIDOMDocument_var&amp;)
+</td><td id='tdright'>  Retrieves the <tt>CATIDOMDocument</tt> object associated with this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetParentNode(CATIDOMNode_var&amp;)"><b>GetParentNode</b></a>(CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Retrieves the parent of this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPrefix(CATUnicodeString&amp;)"><b>GetPrefix</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Retrieves the namespace prefix
+ of this node, or an empty <tt>CATUnicodeString</tt> if it is 
+ unspecified.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#GetPreviousSibling(CATIDOMNode_var&amp;)"><b>GetPreviousSibling</b></a>(CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Retrieves node immediately preceding this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#HasAttributes(CATBoolean&amp;)"><b>HasAttributes</b></a>(CATBoolean&amp;)
+</td><td id='tdright'>  Returns whether this node (if it is an element) has any attributes.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#HasChildNodes(CATBoolean&amp;)"><b>HasChildNodes</b></a>(CATBoolean&amp;)
+</td><td id='tdright'>  Returns whether this node has any children.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#InsertBefore(CATIDOMNode_var&amp;,CATIDOMNode_var&amp;)"><b>InsertBefore</b></a>(CATIDOMNode_var&amp;,CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Inserts the node <tt>iNewChild</tt> before the existing child node
+ <tt>iRefChild</tt>.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#IsSupported(CATUnicodeString&amp;,CATUnicodeString&amp;,CATBoolean&amp;)"><b>IsSupported</b></a>(CATUnicodeString&amp;,CATUnicodeString&amp;,CATBoolean&amp;)
+</td><td id='tdright'>  Tests whether the DOM implementation implements a specific feature and 
+ that feature is supported by this node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#Normalize()"><b>Normalize</b></a>()
+</td><td id='tdright'>  Puts all <tt>CATIDOMText</tt> nodes in the full depth of the sub-tree 
+ underneath this <tt>CATIDOMNode</tt>, including attribute nodes, into a 
+ "normal" form.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#RemoveChild(CATIDOMNode_var&amp;)"><b>RemoveChild</b></a>(CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Removes the child node indicated by <tt>iOldChild</tt> from the list 
+ of children.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#ReplaceChild(CATIDOMNode_var&amp;,CATIDOMNode_var&amp;)"><b>ReplaceChild</b></a>(CATIDOMNode_var&amp;,CATIDOMNode_var&amp;)
+</td><td id='tdright'>  Replaces the child node <tt>iOldChild</tt> with <tt>iNewChild</tt>
+ in the list of children.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetNodeValue(CATUnicodeString&amp;)"><b>SetNodeValue</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Sets the value of the node.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetPrefix(CATUnicodeString&amp;)"><b>SetPrefix</b></a>(CATUnicodeString&amp;)
+</td><td id='tdright'>  Sets the namespace prefix of this node.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+<nav id = 'idxnav'> <table class = 'fill' id='idxtab' ><tbody>					<tr><th colspan = '2'>Enumerated Type Index</th></tr> 
+ <tr><td  id='tdleft'> 
+    <a href="#NodeType"><b>NodeType</b></a>
+</td><td id='tdrigth'>  Possible node types.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="AppendChild"></a><a id="AppendChild(CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>AppendChild</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>iNewChild</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Adds the node <tt>iNewChild</tt> to the end of the list of children 
+ of this node.
+
+ If the <tt>iNewChild</tt> is already in the tree, it is first removed.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> newChild</span></dt>
+   <dd> The node to add.If it is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentFragment','','CATIDOMDocumentFragment') </script> object, the entire contents of the document fragment are moved 
+ into the child list of this node
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2203</td>
+        <td class="errtd">HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not 
+   allow children of the type of the <tt>iNewChild</tt> node, or if 
+   the node to append is one of this node's ancestors.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2204</td>
+        <td class="errtd">WRONG_DOCUMENT_ERR: Raised if <tt>iNewChild</tt> was created 
+   from a different document than the one that created this node.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2207</td>
+        <td class="errtd">NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.</td>
+     </tr>
+   </table>
+ </dd>
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentFragment','','CATIDOMDocumentFragment') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="CloneNode"></a><a id="CloneNode(CATBoolean,CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>CloneNode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean')</script> <span class='param'>iDeep</span>,<script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>oNewNode</span>)</span><script type="text/javascript"> activateLink('0',' = 0 ')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns a duplicate of this node.
+
+ This function serves as a generic copy constructor for nodes.
+ The duplicate node has no parent (
+<script type="text/javascript"> activateLinkAnchor('','GetParentNode','GetParentNode') </script> returns <tt>NULL_var</tt>.). <br>Cloning a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMElement','','CATIDOMElement') </script> copies all attributes and their values, including those generated by the XML processor to represent
+ defaulted attributes, but this method does not copy any text it contains
+ unless it is a deep clone, since the text is contained in a child
+ 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMText','','CATIDOMText') </script> node. Cloning any other type of node simply returns a copy of this node.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iDeep</span></dt>
+   <dd> If <tt>TRUE</tt>, recursively clones the subtree under the
+   specified node; if <tt>FALSE</tt>, clones only the node itself (and
+   its attributes, if it is an <tt>CATIDOMElement</tt>).
+ 
+ </ dd>
+    <dt><span class='paramitem'> oNewNode</span></dt>
+   <dd> The duplicate node.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIDOMElement','','CATIDOMElement') </script>, <script type="text/javascript"> activateLinkAnchor('CATIDOMText','','CATIDOMText') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetAttributes"></a><a id="GetAttributes(CATIDOMNamedNodeMap_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetAttributes</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDOMNamedNodeMap_var','CATIDOMNamedNodeMap_var&amp;')</script> <span class='param'>oAttributes</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves a <tt>CATIDOMNamedNodeMap</tt> containing the attributes of this node.
+ This method sets <tt>oAttributes</tt> to <tt>NULL_var</tt> if this node is not 
+ an 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMElement','','CATIDOMElement') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oAttributes</span></dt>
+   <dd>  The retrieved CATIDOMNamedNodeMap containing the attributes of this node.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIDOMNamedNodeMap','','CATIDOMNamedNodeMap') </script>, <script type="text/javascript"> activateLinkAnchor('CATIDOMElement','','CATIDOMElement') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetChildNodes"></a><a id="GetChildNodes(CATIDOMNodeList_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetChildNodes</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDOMNodeList_var','CATIDOMNodeList_var&amp;')</script> <span class='param'>oChildNodes</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves a <tt>CATIDOMNodeList</tt> that contains all children of this node.
+
+ If there are no children, this is a <tt>CATIDOMNodeList</tt> containing no nodes.
+ The content of the returned <tt>CATIDOMNodeList</tt> is "live" in the sense
+ that, for instance, changes to the children of the node object that
+ it was created from are immediately reflected in the nodes returned by
+ the <tt>CATIDOMNodeList</tt> accessors; it is not a static snapshot of the
+ content of the node. This is true for every <tt>CATIDOMNodeList</tt>,
+ including the ones returned by the 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMElement','GetElementsByTagName','CATIDOMElement.GetElementsByTagName') </script> method.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oParentNode</span></dt>
+   <dd>  The retrieved list of children of the node.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIDOMNodeList','','CATIDOMNodeList') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetFirstChild"></a><a id="GetFirstChild(CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetFirstChild</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>oFirstChild</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the first child of this node. 
+ If there is no such node, <tt>oFirstChild</tt> is set to <tt>NULL_var</tt>.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oFirstChild</span></dt>
+   <dd>  The retrieved first child of this node.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLastChild"></a><a id="GetLastChild(CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetLastChild</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>oLastChild</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the last child of this node. 
+ If there is no such node, <tt>oLastChild</tt> is set to <tt>NULL_var</tt>.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oLastChild</span></dt>
+   <dd>  The retrieved last child of this node.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetLocalName"></a><a id="GetLocalName(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetLocalName</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oLocalName</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the local part of the qualified name of this node.
+ <br>For nodes of any type other than <tt>ELEMENT_NODE</tt> and 
+ <tt>ATTRIBUTE_NODE</tt> and nodes created with a DOM Level 1 
+ method, such as 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocument','CreateElement','CATIDOMDocument.CreateElement') </script> method, this is always  an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oLocalName</span></dt>
+   <dd> the local part of the qualified name of this node
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNamespaceURI"></a><a id="GetNamespaceURI(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetNamespaceURI</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oNamespaceURI</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the namespace URI of this node, or an empty <tt>CATUnicodeString</tt> if it is 
+ unspecified.
+ <br>This is not a computed value that is the result of a namespace 
+ lookup based on an examination of the namespace declarations in 
+ scope. It is merely the namespace URI given at creation time.
+ <br>For nodes of any type other than <tt>ELEMENT_NODE</tt> and 
+ <tt>ATTRIBUTE_NODE</tt> and nodes created with a DOM Level 1 
+ method, such as 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocument','CreateElement','CATIDOMDocument.CreateElement') </script> method, this is always an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script>.Per  the Namespaces in XML Specification  an attribute does not inherit 
+ its namespace from the element it is attached to. If an attribute is 
+ not explicitly given a namespace, it simply has no namespace.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNamespaceURI</span></dt>
+   <dd> the namespace URI of this node, or an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> if it is  unspecified.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNextSibling"></a><a id="GetNextSibling(CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetNextSibling</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>oNextSibling</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves node immediately following this node. 
+ If there is no such node, <tt>oNextSibling</tt> is set to <tt>NULL_var</tt>.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNextSibling</span></dt>
+   <dd>  The retrieved node immediately following this node.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNodeName"></a><a id="GetNodeName(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetNodeName</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oNodeName</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the name of this node, depending on its type.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNodeName</span></dt>
+   <dd>  The retrieved name of the node.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNodeType"></a><a id="GetNodeType(NodeType&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetNodeType</span><span class = 'signature'>(<script type="text/javascript"> activateLink('NodeType','NodeType&amp;')</script> <span class='param'>oNodeType</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the enum value representing the type of the underlying object.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNodeType</span></dt>
+   <dd>  The retrieved type of the node.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','NodeType','NodeType') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetNodeValue"></a><a id="GetNodeValue(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetNodeValue</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oNodeValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the value of this node, depending on its type.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oNodeValue</span></dt>
+   <dd>  The retrieved value of the node.
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2202</td>
+        <td class="errtd">DOMSTRING_SIZE_ERR: Raised when it would return more characters than supported by the underlying implementation.</td>
+     </tr>
+   </table>
+ </dd>
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','SetNodeValue','SetNodeValue') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetOwnerDocument"></a><a id="GetOwnerDocument(CATIDOMDocument_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetOwnerDocument</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDOMDocument_var','CATIDOMDocument_var&amp;')</script> <span class='param'>oOwnerDocument</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the <tt>CATIDOMDocument</tt> object associated with this node.
+
+ This is also the <tt>CATIDOMDocument</tt> object used to create new nodes. 
+ When this node is a <tt>CATIDOMDocument</tt> or a <tt>CATIDOMDocumentType</tt>,
+ which is not used with any <tt>CATIDOMDocument</tt> yet, <tt>oOwnerDocument</tt> is
+ set to <tt>NULL_var</tt>.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oOwnerDocument</span></dt>
+   <dd>  The retrieved <tt>CATIDOMDocument</tt> object associated with this node.
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIDOMDocument','','CATIDOMDocument') </script>, <script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentType','','CATIDOMDocumentType') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetParentNode"></a><a id="GetParentNode(CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetParentNode</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>oParentNode</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the parent of this node.
+
+ All nodes, except 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocument','','CATIDOMDocument') </script>, 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentFragment','','CATIDOMDocumentFragment') </script>,  and 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMAttr','','CATIDOMAttr') </script> may have a parent. However, if a node has just been created and not yet added to the tree,
+ or if it has been removed from the tree, a <tt>NULL_var</tt> CATIDOMNode
+ is returned.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oParentNode</span></dt>
+   <dd>  The retrieved parent of the node.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPrefix"></a><a id="GetPrefix(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetPrefix</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>oPrefix</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the namespace prefix
+ of this node, or an empty <tt>CATUnicodeString</tt> if it is 
+ unspecified. 
+ When this node is of any type other than <tt>ELEMENT_NODE</tt> and
+ <tt>ATTRIBUTE_NODE</tt> this is always an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> and setting it has no effect.
+ <p>
+ For nodes created with a DOM Level 1 method, such as the
+ 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocument','CreateElement','CATIDOMDocument.CreateElement') </script> method, this is an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oPrefix</span></dt>
+   <dd> the namespace prefix of this node, or an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> if it is  unspecified.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="GetPreviousSibling"></a><a id="GetPreviousSibling(CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>GetPreviousSibling</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>oPreviousSibling</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves node immediately preceding this node. 
+ If there is no such node, <tt>oPreviousSibling</tt> is set to <tt>NULL_var</tt>.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oPreviousSibling</span></dt>
+   <dd>  The retrieved node immediately preceding this node.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="HasAttributes"></a><a id="HasAttributes(CATBoolean&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>HasAttributes</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean&amp;')</script> <span class='param'>oResult</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns whether this node (if it is an element) has any attributes.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oResult</span></dt>
+   <dd>  <tt>TRUE</tt> if this node has any attributes, <tt>FALSE</tt> otherwise.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="HasChildNodes"></a><a id="HasChildNodes(CATBoolean&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>HasChildNodes</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBoolean','CATBoolean&amp;')</script> <span class='param'>oHasChildren</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Returns whether this node has any children.
+ Returns <tt>TRUE</tt> if this node has any children, 
+ <tt>FALSE</tt> otherwise.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oHasChildren</span></dt>
+   <dd> The retrieve boolean specifying whether this node has any children.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="InsertBefore"></a><a id="InsertBefore(CATIDOMNode_var&amp;,CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>InsertBefore</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>iNewChild</span>, const <script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>iRefChild</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Inserts the node <tt>iNewChild</tt> before the existing child node
+ <tt>iRefChild</tt>.
+
+ If <tt>iRefChild</tt> equals <tt>NULL_var</tt>,
+ inserts <tt>iNewChild</tt> at the end of the list of children.
+ <br>If <tt>iNewChild</tt> is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentFragment','','CATIDOMDocumentFragment') </script> object, all of its children are inserted, in the same order, before
+ <tt>iRefChild</tt>. If the <tt>iNewChild</tt> is already in the
+ tree, it is first removed.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNewChild</span></dt>
+   <dd> The node to insert.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iRefChild</span></dt>
+   <dd> The reference node, i.e., the node before which the new node must be inserted.
+
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2203</td>
+        <td class="errtd">HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not
+   allow children of the type of the <tt>iNewChild</tt> node, or if
+   the node to insert is one of this node's ancestors.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2204</td>
+        <td class="errtd">WRONG_DOCUMENT_ERR: Raised if <tt>iNewChild</tt> was created
+   from a different document than the one that created this node.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2207</td>
+        <td class="errtd">NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2208</td>
+        <td class="errtd">NOT_FOUND_ERR: Raised if <tt>iRefChild</tt> is not a child of
+   this node.</td>
+     </tr>
+   </table>
+ </dd>
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentFragment','','CATIDOMDocumentFragment') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="IsSupported"></a><a id="IsSupported(CATUnicodeString&amp;,CATUnicodeString&amp;,CATBoolean&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>IsSupported</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iFeature</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iVersion</span>,<script type="text/javascript"> activateLink('CATBoolean','CATBoolean&amp;')</script> <span class='param'>oResult</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Tests whether the DOM implementation implements a specific feature and 
+ that feature is supported by this node.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iFeature</span></dt>
+   <dd>  name of the feature to test. This is the same name 
+ which can be passed to the method 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMImplementation','HasFeature','CATIDOMImplementation.HasFeature') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> iVersion</span></dt>
+   <dd>  The version number of the feature to test. In Level 2, version 1, 
+ this is the string "2.0". If the version is not 
+ specified, supporting any version of the feature will cause the 
+ method to return <tt>TRUE</tt>.
+ 
+ </ dd>
+    <dt><span class='paramitem'> oResult</span></dt>
+   <dd> <tt>TRUE</tt> if the specified feature is 
+   supported on this node, <tt>FALSE</tt> otherwise.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="Normalize"></a><a id="Normalize()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>Normalize</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('0','= 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Puts all <tt>CATIDOMText</tt> nodes in the full depth of the sub-tree 
+ underneath this <tt>CATIDOMNode</tt>, including attribute nodes, into a 
+ "normal" form.
+ In the normal form, only structure (e.g., elements, comments, 
+ processing instructions, CDATA sections, and entity references) 
+ separates <tt>CATIDOMText</tt> nodes, i.e., there are neither adjacent 
+ <tt>CATIDOMText</tt> nodes nor empty <tt>CATIDOMText</tt> nodes.
+ This can be used to ensure that the DOM view of a document is the same as if 
+ it were saved and re-loaded, and is useful when operations (such as 
+ XPointer lookups) that depend on a particular document tree 
+ structure are to be used.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIDOMText','','CATIDOMText') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="RemoveChild"></a><a id="RemoveChild(CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>RemoveChild</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>iOldChild</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Removes the child node indicated by <tt>iOldChild</tt> from the list 
+ of children.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> oldChild</span></dt>
+   <dd> The node being removed.
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2207</td>
+        <td class="errtd">NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2208</td>
+        <td class="errtd">NOT_FOUND_ERR: Raised if <tt>iRefChild</tt> is not a child of
+   this node.</td>
+     </tr>
+   </table>
+ </dd>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="ReplaceChild"></a><a id="ReplaceChild(CATIDOMNode_var&amp;,CATIDOMNode_var&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>ReplaceChild</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>iNewChild</span>, const <script type="text/javascript"> activateLink('CATIDOMNode_var','CATIDOMNode_var&amp;')</script> <span class='param'>iOldChild</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Replaces the child node <tt>iOldChild</tt> with <tt>iNewChild</tt>
+ in the list of children.
+
+ If the <tt>iNewChild</tt> is already in the tree, it is first removed.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNewChild</span></dt>
+   <dd> The new node to put in the child list.
+ 
+ </ dd>
+    <dt><span class='paramitem'> iOldChild</span></dt>
+   <dd> The node being replaced in the list.
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2203</td>
+        <td class="errtd">HIERARCHY_REQUEST_ERR: Raised if this node is of a type that does not
+   allow children of the type of the <tt>iNewChild</tt> node, or it
+   the node to put in is one of this node's ancestors.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2204</td>
+        <td class="errtd">WRONG_DOCUMENT_ERR: Raised if <tt>iNewChild</tt> was created
+   from a different document than the one that created this node.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2207</td>
+        <td class="errtd">NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2208</td>
+        <td class="errtd">NOT_FOUND_ERR: Raised if <tt>iRefChild</tt> is not a child of
+   this node.</td>
+     </tr>
+   </table>
+ </dd>
+
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetNodeValue"></a><a id="SetNodeValue(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetNodeValue</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iNodeValue</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the value of the node.
+
+ Any node which can have a nodeValue will
+ also accept requests to set it to a string. The exact response to
+ this varies from node to node -- Attribute, for example, stores
+ its values in its children and has to replace them with a new Text
+ holding the replacement value.
+
+ For most types of Node, value is an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script> and attempting to set it will raise a 
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> (NO_MODIFICATION_ALLOWED_ERR). This will also be thrown if the node is read-only.
+
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iNodeValue</span></dt>
+   <dd>  The value to set for the node.
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2207</td>
+        <td class="errtd">NO_MODIFICATION_ALLOWED_ERR: Raised when the node is readonly.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2202</td>
+        <td class="errtd">DOMSTRING_SIZE_ERR: Raised when it would return more characters than supported by the underlying implementation.</td>
+     </tr>
+   </table>
+ </dd>
+
+ 
+ </ dd>
+</dl></dd>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('','GetNodeValue','GetNodeValue') </script></dd>
+</dl>
+</dd>
+<dt class='dtmethod' >
+  <a id="SetPrefix"></a><a id="SetPrefix(CATUnicodeString&amp;)"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('HRESULT','HRESULT')</script>  <span class='objname'>SetPrefix</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iPrefix</span>)</span><script type="text/javascript"> activateLink('0',' = 0')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the namespace prefix of this node.
+ <br>Note that setting this attribute, when permitted, changes the 
+ result of the 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMNode','GetNodeName','CATIDOMNode.GetNodeName') </script> method, which returns the qualified name, as  well as the 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMElement','GetTagName','CATIDOMElement.GetTagName') </script> and 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMAttr','GetName','CATIDOMAttr.GetName') </script> methods, when  applicable.
+ <br>Note also that changing the prefix of an attribute that is known to 
+ have a default value, does not make a new attribute with the default 
+ value and the original prefix appear, since the result of 
+ 
+<script type="text/javascript"> activateLinkAnchor('','GetNamespaceURI','GetNamespaceURI') </script> and 
+<script type="text/javascript"> activateLinkAnchor('','GetLocalName','GetLocalName') </script> methods does not change. <br>For nodes of any type other than <tt>ELEMENT_NODE</tt> and 
+ <tt>ATTRIBUTE_NODE</tt> and nodes created with a DOM Level 1 
+ method, such as 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocument','CreateElement','CATIDOMDocument.CreateElement') </script> method, this is always  an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script>.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iPrefix</span></dt>
+   <dd> the namespace prefix of this node
+
+ </dl>
+ <dt><b>Errors Returned</b>:</dt>
+ <dd>
+   <table class="errtab">
+     <tr>
+       <th class="errth">Error Class</th>
+       <th class="errth">Error Id</th>
+       <th class="errth">Description</th>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2205</td>
+        <td class="errtd">INVALID_CHARACTER_ERR: Raised if the specified prefix contains an 
+   illegal character.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2207</td>
+        <td class="errtd">NO_MODIFICATION_ALLOWED_ERR: Raised if this node is readonly.</td>
+     </tr>
+     <tr>
+        <td class="errtd">
+<script type="text/javascript"> activateLinkAnchor('CATDOMException','','CATDOMException') </script> </td>        <td class="errtd">XMLParserERR_2214</td>
+        <td class="errtd">NAMESPACE_ERR: Raised if the specified <tt>iPrefix</tt> is 
+   malformed, if the 
+<script type="text/javascript"> activateLinkAnchor('','GetNamespaceURI','GetNamespaceURI') </script> of this node returns    an empty 
+<script type="text/javascript"> activateLinkAnchor('CATUnicodeString','','CATUnicodeString') </script>, if the specified prefix is "xml" and the    
+<script type="text/javascript"> activateLinkAnchor('','GetNamespaceURI','GetNamespaceURI') </script> of this node is different from "   http://www.w3.org/XML/1998/namespace", if this node is an attribute 
+   and the specified prefix is "xmlns" and the 
+   
+<script type="text/javascript"> activateLinkAnchor('','GetNamespaceURI','GetNamespaceURI') </script> of this node is different from "   http://www.w3.org/2000/xmlns/", or if this node is an attribute and 
+   the qualified name of this node is "xmlns"</td>
+     </tr>
+   </table>
+ </dd>
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+ <h2  class='title2'>Enumerated Types</h2> <br><dl>
+<dt class='dt1'><a id="NodeType"/>NodeType</dt>
+  <dd class='dd1'>
+
+enum <b>NodeType</b> {<pre class='light'>
+  ELEMENT_NODE,
+  ATTRIBUTE_NODE,
+  TEXT_NODE,
+  CDATA_SECTION_NODE,
+  ENTITY_REFERENCE_NODE,
+  ENTITY_NODE,
+  PROCESSING_INSTRUCTION_NODE,
+  COMMENT_NODE,
+  DOCUMENT_NODE,
+  DOCUMENT_TYPE_NODE,
+  DOCUMENT_FRAGMENT_NODE,
+  NOTATION_NODE
+</pre>}
+ Possible node types.
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> ELEMENT_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMElement','','CATIDOMElement') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> ATTRIBUTE_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMAttr','','CATIDOMAttr') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> TEXT_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMText','','CATIDOMText') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> CDATA_SECTION_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMCDATASection','','CATIDOMCDATASection') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> ENTITY_REFERENCE_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMEntityReference','','CATIDOMEntityReference') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> ENTITY_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMEntity','','CATIDOMEntity') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> PROCESSING_INSTRUCTION_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMProcessingInstruction','','CATIDOMProcessingInstruction') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> COMMENT_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMComment','','CATIDOMComment') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> DOCUMENT_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocument','','CATIDOMDocument') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> DOCUMENT_TYPE_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentType','','CATIDOMDocumentType') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> DOCUMENT_FRAGMENT_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMDocumentFragment','','CATIDOMDocumentFragment') </script>. 
+ </ dd>
+    <dt><span class='paramitem'> NOTATION_NODE</span></dt>
+   <dd> The node is a 
+<script type="text/javascript"> activateLinkAnchor('CATIDOMNotation','','CATIDOMNotation') </script>.
+ </ dd>
+</dl></dd>
+</dl>
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIDOMNode.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATXMLParserItf</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

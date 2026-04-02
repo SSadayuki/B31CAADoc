@@ -1,0 +1,113 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>CATPDMBase CATPDMBase Framework:E2ESendTo   Global Function  </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../CATPDMBase.htm" href="../CATPDMBase.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "CATPDMBase";	}
+		function getCurrentObjectName() { 
+ 	return "E2ESendTo"; } 
+	function getCurrentType() { 
+ 	return "global function"; }  
+ </script><h1 class='title1'>CATPDMBase Framework:E2ESendTo   Global Function  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+
+<br><section id='objdef'><dl><dt class='dt1'><span class = 'method'><script type="text/javascript"> activateLink('HRESULT',' HRESULT')</script>  <span class='objname'>E2ESendTo</span><span class = 'signature'>( const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iWPId</span>, const <script type="text/javascript"> activateLink('CATUnicodeString','CATUnicodeString&amp;')</script> <span class='param'>iWPVersion</span>,<script type="text/javascript"> activateLink('CATLISTV(CATUnicodeString)','CATLISTV(CATUnicodeString)&amp;')</script> <span class='param'>oListOldObjIds</span>,<script type="text/javascript"> activateLink('CATLISTV(CATUnicodeString)','CATLISTV(CATUnicodeString)&amp;')</script> <span class='param'>oListOldObjVersions</span>,<script type="text/javascript"> activateLink('CATLISTV(CATUnicodeString)','CATLISTV(CATUnicodeString)&amp;')</script> <span class='param'>oListOldObjTypes</span>,<script type="text/javascript"> activateLink('CATLISTV(CATUnicodeString)','CATLISTV(CATUnicodeString)&amp;')</script> <span class='param'>oListNewObjIds</span>,<script type="text/javascript"> activateLink('CATLISTV(CATUnicodeString)','CATLISTV(CATUnicodeString)&amp;')</script> <span class='param'>oListNewObjVersions</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='dd1'>
+  Function which allows to clone a workpackage giving its unique identifier
+
+ <br><b>Role</b>: Create a new workpackage by cloning all elements from the original structure
+ These elemnest include Document Reviions and their associated Part Versiosns as well
+<p>
+ 
+<dl  class='desclist'>
+  <dt> <b>Parameters:</b></dt>
+  <dd>
+    <dl class='paramlist' >
+    <dt><span class='paramitem'> iWPId</span></dt>
+   <dd>    (input) The name (V_ID) of the root document to be cloned
+ 
+ </ dd>
+    <dt><span class='paramitem'> iWPVersion</span></dt>
+   <dd>    (input) The vertsion number (V_version) of the root document
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListOldObjIds</span></dt>
+   <dd>     (output) The names of the objects which have been actually cloned from the Workpackage.
+     <br>These objects may be either Part Versions or Document Revisions
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListOldObjVersions</span></dt>
+   <dd>    (output) The version numbers of the objects which have been actually cloned from the Workpackage
+    (including Part Versions and Document Revisions)
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListOldObjTypes</span></dt>
+   <dd>    (output) The types of the objects which have been actually cloned from the Workpackage
+    If the object is a PartVersion, type is “Reference”, if object is a document, type is the extension, 
+    CATPart, CATProduct, etc
+
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListNewObjIds</span></dt>
+   <dd>     (output) The names (V_ID’s) of the new objects whiuch have been created from the originals
+    (including Part Versions and Document Revisions)
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListNewObjVersions</span></dt>
+   <dd>    (output) The version numbers (V_version’s) of the objects which have been created from the originals 
+    (including Part Versions and Document Revisions)
+ 
+ </ dd>
+    <dt><span class='paramitem'> oListOldObjTypes</span></dt>
+   <dd>    (output) The types of the objects which have been created from the originals
+    If the object is a PartVersion, type is “Reference”, if object is a document, type is the extension, 
+    CATPart, CATProduct, etc
+
+ 
+ </ dd>
+</dl></dd>
+  <dt class='return'> <b>Returns:</b> </dt> 
+  <dd>     <ul>
+     <li><tt>S_OK</tt>: Function executed successfully</li> 
+     <li><tt>E_FAIL</tt>: Function has failed. Possible errors may be: 
+       <ul>
+        <li>Connection to ENOVIA V5 Server was not established</li>
+        <li>Service not supported on the current Server</li>
+        <li>No WP found with the input id and version </li>
+        <li>Some P&O privelege are missing for the current user 
+        <li>Abnormal error</li>
+       </ul>
+      </li>
+  </ul>
+ </ dd>
+</dl>
+</dd></dl>
+</section></section'>
+<hr/>
+ This object is included in the file: <b>CATPDMInteropServices.h</b><br>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

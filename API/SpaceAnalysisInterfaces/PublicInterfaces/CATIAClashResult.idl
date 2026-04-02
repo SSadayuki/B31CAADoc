@@ -1,0 +1,65 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//===================================================================
+//
+// CATIAClashResult.idl
+//   This automation interface allows the query of ClashResult data.
+//
+//===================================================================
+#ifndef CATIAClashResult_IDL
+#define CATIAClashResult_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATIAConflicts.idl"
+#include "CatClashExportType.idl"
+
+/**  
+ * Represents the ClashResult object.
+ * The ClashResult object is a set of conflicts resulting from a clash detection.
+ */
+interface CATIAClashResult : CATIABase
+{
+  /**
+   * Returns the collection of computed Conflicts.
+   * @sample
+   *    This example retrieves the conflicts of <tt>NewClashResult</tt> ClashResult.
+   *    <pre>
+   *    Dim NewConflicts As Conflicts
+   *    Set NewConflicts = NewClashResult.<font color="red">Conflicts</font>
+   *    </pre>
+   */
+#pragma PROPERTY Conflicts
+  HRESULT get_Conflicts (out /*IDLRETVAL*/ CATIAConflicts oConflicts);
+
+  /**
+   * Exports the results in a XML file.
+   * @param iType
+   *    The type of export.
+   * @param iPath
+   *    The path of the file.
+   * @sample
+   *    This example exports the results of <tt>NewClashResult</tt> ClashResult.
+   *    <pre>
+   *    Dim ThePath As String
+   *    NewClashResult.<font color="red">Export</font> CatClashExportTypeXMLResultOnly, "c:\tmp\sample.xml"
+   *    </pre>
+   */
+  HRESULT Export (in CatClashExportType iType, in CATBSTR iPath);
+};
+
+// Interface name : CATIAClashResult
+#pragma ID CATIAClashResult "DCE:0a015216-7047-463f-8fb9cc0f354410ad"
+#pragma DUAL CATIAClashResult
+
+// VB object name : ClashResult (Id used in Visual Basic)
+#pragma ID ClashResult "DCE:742648c6-859f-482d-9c4bae07ad5eba9a"
+#pragma ALIAS CATIAClashResult ClashResult
+
+#endif

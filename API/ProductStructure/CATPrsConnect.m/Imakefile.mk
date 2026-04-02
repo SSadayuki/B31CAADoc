@@ -1,0 +1,28 @@
+# COPYRIGHT DASSAULT SYSTEMES 1999
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE= NONE
+
+# LOCAL_CCFLAGS = -DPRODSTRU_DEBUG 
+#LOCAL_CCFLAGS = -DASMTRACE
+LOCAL_CCFLAGS = -DCATPDMLogIntegration
+#LOCAL_CCFLAGS = -DPRODSTRU_PROTO
+
+LINK_WITH = JS0GROUP JS0FM CATObjectSpecsModeler \
+			CATObjectModelerBase AC0XXLNK \
+			VE0MDL AS0STARTUP CATInteractiveInterfaces 	AS0STARTUP \
+			CATProductStructureInterfaces ProductStructureInterfacesUUID FeatureModelerExt 
+
+
+#
+#
+OS = AIX
+# 
+OS = HP-UX
+#
+OS = IRIX
+#
+OS = SunOS
+
+OS = Windows_NT

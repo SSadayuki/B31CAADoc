@@ -1,0 +1,161 @@
+#ifndef CATIAManufacturingCopyTransformation_IDL
+#define CATIAManufacturingCopyTransformation_IDL
+/*IDLREP*/
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2004
+//=================================================================
+//								   
+// CATIAManufacturingCopyTransformation:						   
+// Exposed interface for CopyTransformation
+//								   
+//=================================================================
+// Oct 04 Creation
+//=================================================================
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATIAManufacturingActivity.idl"
+#include "CATIAParameter.idl"
+#include "CATIALength.idl"
+
+/*
+interface CATIAManufacturingPrecedences;
+interface CATIAManufacturingToolMotion;
+interface CATIAMfgToolMotions;
+*/
+
+/**
+ * Interface representing the Manufacturing Copy Transformation object.
+ *
+ * <br><b>Role</b>: Component that implements CATIAManufacturingCopyOrder is MfgCopyOrder. 
+ * This interface allows to modify the Copy Tranformation and to get the start and end points
+ * of the computed trajectory.
+ */
+
+interface CATIAManufacturingCopyTransformation : CATIAManufacturingActivity
+{
+// Method AddOperation
+ 
+  /**
+  * Add a Manufacturing Operation to a Copy Transformation.<br>
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example adds a manufacturing operation <tt>myOperation</tt>, as a reference for the 
+  * Copy Transformation <tt>CopyTransformation</tt>
+  * <pre>
+  * call myOperation.<font color="red">AddOperation</font>(CopyTransformation)
+  *</pre>
+  * </dl>
+  */
+
+  HRESULT	AddOperation(in CATIAManufacturingActivity iManufacturingActivity);
+
+// Method SetCopyTransformation
+ 
+  /**
+  * Set the 'Number of Copies', 'Ordering' and 'Transformation Type' of a Copy Tranformation. <br>
+  * @param iOrdering
+  *   <b>Legal values</b>: iOrdering can be
+  *   <dl>
+  *     <dt><tt>"EachOperationNTime"</tt>	<dd>
+  *     <dt><tt>"AllOperationsNTime"</tt>	<dd>
+  *   </dl>
+  * @param iTransformationType
+  *   <b>Legal values</b>: iTransformationType can be
+  *   <dl>
+  *     <dt><tt>"Translation"</tt>	<dd>
+  *     <dt><tt>"Rotation"</tt>		<dd>
+  *     <dt><tt>"Mirror"</tt>		<dd>
+  *     <dt><tt>"AxisToAxis"</tt>	<dd>
+  *     <dt><tt>"Scale"</tt>		<dd>
+  *     <dt><tt>"Affinity"</tt>		<dd>
+  *     <dt><tt>"Matrix"</tt>		<dd>
+  *   </dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example does that for the Copy Transformation <tt>CopyTransformation</tt> :
+  * <pre>
+  * call CopyTransformation.<font color="red">SetCopyTransformation</font>(iNumberOfCopies, "EachOperationNTime", "Translation")
+  *</pre>
+  */
+
+  HRESULT	SetCopyTransformation(in long iNumberOfCopies, in CATBSTR iOrdering, in CATBSTR iTransformationType);
+
+// Method SetCopyTransformationTranslationAttributes
+ 
+  /**
+  * Set the 'Translation Type', 'Distance Along X', 'Distance Along Y' and 'Distance Along Z' of a 
+  * Copy Tranformation which has a Translation as transformation. <br>
+  * @param iTranslationType
+  *   <b>Legal values</b>: iTranslationType can be
+  *   <dl>
+  *     <dt><tt>"AbsoluteCoordinates"</tt>	<dd>
+  *     <dt><tt>"CurrentCoordinates"</tt>	<dd>
+  *   </dl>
+  * @param iDistanceAlongX
+  *  distance along X in mm.
+  * @param iDistanceAlongY
+  *  distance along Y in mm.
+  * @param iDistanceAlongZ
+  *  distance along Z in mm.
+  * <dt><b>Example:</b>
+  * <dd>The following example does that for the Copy Transformation <tt>CopyTransformation</tt> :
+  * <pre>
+  * call CopyTransformation.<font color="red">SetCopyTransformationTranslationAttributes</font>("AbsoluteCoordinates", 0.0, 100.0, 0.0)
+  *</pre>
+  */
+
+  HRESULT	SetCopyTransformationTranslationAttributes(in CATBSTR iTranslationType,
+													   in double iDistanceAlongX,
+													   in double iDistanceAlongY,
+													   in double iDistanceAlongZ);
+   /**
+    * Retrieves the Manufacturing Copy Order Operation's trajectory start point.
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example retrieves in <tt>oStartPoint</tt> the start point
+    * of the Machining Operation <tt>Operation</tt>
+    * <pre>
+    * Dim oStartPoint(3)
+    * call Operation.<font color="red">GetTrajectoryStartPointCoord</font>(oStartPoint)
+    * x = oStartPoint(0)
+    * y = oStartPoint(1)
+    * z = oStartPoint(2)
+    * </pre>
+    * </dl>
+    */
+	HRESULT GetTrajectoryStartPointCoord ( inout CATSafeArrayVariant oStartPoint);
+
+ 
+   /**
+    * Retrieves the Manufacturing Copy Order trajectory end point.
+    * <dl>
+    * <dt><b>Example:</b>
+    * <dd>The following example retrieves in <tt>oEndPoint</tt> the end point
+    * of the Manufacturing Copy Order <tt>CopyOrder</tt>
+    * <pre>
+    * Dim oEndPoint(3)
+    * call CopyOrder.<font color="red">GetTrajectoryEndPointCoord</font>(oEndPoint)
+    * x = oEndPoint(0)
+    * y = oEndPoint(1)
+    * z = oEndPoint(2)
+    * </pre>
+    * </dl>
+    */
+    HRESULT GetTrajectoryEndPointCoord ( inout CATSafeArrayVariant oEndPoint);
+
+};
+
+// Interface name : CATIAManufacturingCopyTransformation
+#pragma ID CATIAManufacturingCopyTransformation "DCE:8C0996F0-1D08-4c4b-AB7098311B90C046"
+#pragma DUAL CATIAManufacturingCopyTransformation
+
+// VB object name : ManufacturingCopyTransformation (Id used in Visual Basic)
+#pragma ID ManufacturingCopyTransformation "DCE:1C62E121-5E1E-475f-9A690081C409244D"
+#pragma ALIAS CATIAManufacturingCopyTransformation ManufacturingCopyTransformation
+
+
+#endif // CATIAManufacturingCopyTransformation_IDL
+

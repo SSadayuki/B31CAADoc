@@ -1,0 +1,227 @@
+#ifndef CATIAInteropSettingAtt_IDL
+#define CATIAInteropSettingAtt_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2003
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+#include "CATIASettingController.idl"
+#include "CATBSTR.idl"
+
+/**
+* Represents the object to handle the setting parameters of the "V4 Data Reading" 
+* tab page.
+* <b>Role</b>: This interface is implemented by a component named
+* CATV4IInteropSettingCtrl which represents the controller of the Setting. 
+* The setting parameters of the tab are the following:
+* <ul> 
+* <li>"Display only elements with Sensitive Attribute"</li>
+* <li>"Display 3D elements labels"</li>
+* <li>"Open in Light Mode: 2D Data are not taken into account"</li> 
+* <li>"Reading Code page"</li>
+* <li>"PROJECT File Path"</li>
+* <li>"DLNAME"</li>
+* <li>"Prj Warn"</li>
+* <li>"Characters Equivalence Table Path"</li>
+* </ul>
+* To access this property page:
+* <ul>
+*  <li>Click the <b>Options</b> command in the <b>Tools</b> menu</li>
+*  <li>Click + left of </b>General</b> to unfold the workbench list</li>   
+*  <li>Click </b>Compatibility</b></li>
+* </ul> 
+* <br>This interface defines:
+* <ul>
+* <li>A method to get each parameter</li>
+* <li>A method to set the value of each parameter</li>
+* <li>A method to lock/unlock each parameter</li>
+* <li>A method to retrieve the informations concerning each parameter</li>
+* </ul>
+*/
+interface CATIAInteropSettingAtt : CATIASettingController
+{  
+/**
+ * Retrieves or sets the state of the "Display only elements with Sensitive Attribute" 
+ * setting parameter.
+ * <br><b>Role</b>: The "Display only elements with Sensitive Attribute" mode 
+ *					enables you to decide whether to display or not the elements 
+ *					which were sensitive to the shading mode in CATIA Version 4.
+ */
+		#pragma PROPERTY   DisplayMode 
+		 
+	HRESULT get_DisplayMode(out /*IDLRETVAL*/ boolean  oStateOfDisp);  
+	HRESULT put_DisplayMode(in boolean iStateOfDisp);  
+
+/** 
+ * Retrieves information about the "Display only elements with Sensitive Attribute"
+ * setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetDisplayModeLock (in boolean iLock);  
+
+/** 
+ * Retrieves information about the "Display only elements with Sensitive Attribute"
+ * setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetDisplayModeInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified);  
+				
+							
+/**
+ * Retrieves or sets the state of the "Display 3D elements labels" setting parameter.
+ * <br><b>Role</b>: The "Display 3D elements labels" mode is activated in order to 
+ *					enable the reading of the 3D text associated to the V4 elements.
+ */
+		#pragma PROPERTY   DisplayV4Text3D  
+
+	HRESULT get_DisplayV4Text3D(out /*IDLRETVAL*/ boolean  oStateOf3DText);  
+	HRESULT put_DisplayV4Text3D(in boolean iStateOf3DText);  
+
+/** 
+ * Locks or unlocks the "Display 3D elements labels" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetDisplayV4Text3DLock (in boolean iLock);  
+
+/** 
+ * Retrieves information about the "Display 3D elements labels" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetDisplayV4Text3DInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked,  out /*IDLRETVAL*/ boolean oModified); 
+
+
+/**
+ * Retrieves or sets the state of the "Open in Light Mode: 2D Data are not taken into
+ * account" setting parameter.
+ * <br><b>Role</b>: This mode is activated in order to disable the reading of DRAW data
+ *					in a V4 Model.
+ */
+		#pragma PROPERTY   Draw 
+	HRESULT get_Draw( inout /*IDLRETVAL*/ CATBSTR oStateOfNoDraft); 
+	HRESULT put_Draw( in CATBSTR iStateOfNoDraft);         
+
+/** 
+ * Locks or unlocks the "Open in Light Mode: 2D Data are not taken into
+ * account" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetDrawLock (in boolean iLock); 
+
+/** 
+ * Retrieves information about the "Open in Light Mode: 2D Data are not taken into
+ * account" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetDrawInfo(inout CATBSTR AdminLevel, inout CATBSTR oLocked,out /*IDLRETVAL*/ boolean oModified); 
+
+/**
+ * Retrieves or sets the value of the "Reading Code page" setting parameter. 
+ * <br><b>Role</b>: The "Reading Code page" declares the language to identify the data read 
+ *					if this data is not labeled. It is stored in the CATIA data to 
+ *					be written when saving Version 5 CATPart documents as CATIA Version 4 
+ *					models. 
+ */
+		#pragma PROPERTY   Code_page  
+	HRESULT get_Code_page(inout /*IDLRETVAL*/ CATBSTR  oDefaultCPage);  
+	HRESULT put_Code_page(in CATBSTR iDefaultCPage);  
+
+/** 
+ * Locks or unlocks the "Reading Code page" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetCode_pageLock (in boolean iLock);  
+
+/** 
+ * Retrieves information about the "Reading Code page" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetCode_pageInfo (inout CATBSTR AdminLevel, inout CATBSTR oLocked,  out /*IDLRETVAL*/ boolean oModified); 
+					
+					
+/**
+ * Retrieves or sets the value of the "PROJECT File Path" setting parameter.
+ * <br><b>Role</b>: The "PROJECT File Path" field contains the location of 
+ *									the external project file referenced by the V4 model. 
+ */		
+		#pragma PROPERTY   PROJECT_File_Path 
+	HRESULT get_PROJECT_File_Path( inout /*IDLRETVAL*/ CATBSTR oDefaultPrj); 
+	HRESULT put_PROJECT_File_Path( in CATBSTR iDefaultPrj);  
+	
+/** 
+ * Locks or unlocks the "PROJECT File Path" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetPROJECT_File_PathLock (in boolean iLock); 
+
+/** 
+ * Retrieves information about the "PROJECT File Path" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetPROJECT_File_PathInfo(inout CATBSTR AdminLevel, inout CATBSTR oLocked,  out /*IDLRETVAL*/ boolean oModified); 
+								  
+/**
+ * Retrieves or sets the "DLNAME" setting parameter.
+ * <br><b>Role</b>: Retrieves the DLNAME referenced by the Model.
+*/
+		#pragma PROPERTY   Dlname 
+	HRESULT get_Dlname( inout /*IDLRETVAL*/ CATBSTR oDefaultDlname); 
+	HRESULT put_Dlname( in CATBSTR iDefaultDlname);    
+	
+/** 
+ * Locks or unlocks the "DLNAME" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT SetDlnameLock (in boolean iLock); 
+
+/** 
+ * Retrieves information about the "DlNAME" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetDlnameInfo(inout CATBSTR AdminLevel, inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified);
+
+
+/**
+ * Retrieves the location of the "Characters Equivalence Table Path" setting parameter.
+ * <br><b>Role</b>: The "Characters Equivalence Table" allows to convert characters contained
+ *									in CATIA V4 documents. It is mainly used to generate V5 compliant names
+ *									from V4 names by replacing special characters (", *, /, etc...) by standard 
+ *									characters.
+*/
+		#pragma PROPERTY   Conversion_Table 
+	HRESULT get_Conversion_Table( inout /*IDLRETVAL*/ CATBSTR oDefaultTab); 
+	HRESULT put_Conversion_Table( in CATBSTR iDefaultTab);
+	
+
+/** 
+ * Locks or unlocks the "Characters Equivalence Table Path"  setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+ 	HRESULT SetConversion_TableLock (in boolean iLock); 
+
+/** 
+ * Retrieves information about the "Characters Equivalence Table Path" setting parameter.
+ * <br>Refer to @href CATIASettingController for a detailed description.
+ */
+	HRESULT GetConversion_TableInfo(inout CATBSTR AdminLevel,  inout CATBSTR oLocked, out /*IDLRETVAL*/ boolean oModified); 
+		                              
+};
+
+//Interface Name
+#pragma ID CATIAInteropSettingAtt "DCE:aa061555-62f4-0000-02800310fe000000" 
+#pragma DUAL CATIAInteropSettingAtt
+	
+	//VB Object Name
+#pragma ID InteropSettingAtt "DCE:aa066b9c-4ee6-0000-02800310fe000000"
+#pragma ALIAS CATIAInteropSettingAtt InteropSettingAtt
+
+#endif
+
+
+
+

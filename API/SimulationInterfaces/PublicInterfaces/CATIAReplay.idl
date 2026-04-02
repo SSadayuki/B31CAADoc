@@ -1,0 +1,134 @@
+#ifndef CATIAReplay_IDL
+#define CATIAReplay_IDL
+/*IDLREP*/
+
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+// CATIAReplay.idl
+// Automation interface for the Replay element 
+//===================================================================
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CATIAProduct.idl" 
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+/**  
+ * The interface to access a CATIAReplay  
+ * <p>
+ * Use this interface to customize the Replay object
+ */
+
+
+interface CATIAReplay : CATIABase 
+{
+  /**
+   * Adds a product to be taken into account in the Replay object.
+   * @param iProduct
+   *	CATIAProduct. Product to add.
+   * @param oChannel
+   *	Channel number.
+   */
+	HRESULT AddProductMotion
+ 			(in CATIAProduct iProduct, 
+			 out /*IDLRETVAL*/ long oChannel);
+
+  /**
+   * Adds a sample(set of values) for a channel at a specific time
+   * @param iChannel
+   *	Channel number.
+   * @param iCurrentTime
+   *	Time.
+   * @param iPosition
+   *	Array of values to consider the the specified channel.
+   */
+	HRESULT AddSample
+ 			(in long   iChannel,
+			 in double iCurrentTime,
+			 in CATSafeArrayVariant iPosition);
+
+  /**
+   * Get the number of channel related to products.
+   * @param oNbChannel
+   *	Number of channel associated to products.
+   */
+	HRESULT GetNbProductMotion
+ 			(out /*IDLRETVAL*/ long oNbChannel);
+
+  /**
+   * Get the product for a channel.
+   * @param iChannel
+   *	Channel index.
+   * @param oProduct
+   *	Product.
+   */
+	HRESULT GetProduct
+ 			(in long iChannel, 
+			 out /*IDLRETVAL*/ CATIAProduct oProduct);
+
+  /**
+   * Get the number of samples for a channel number.
+   * @param iChannel
+   *	Channel index.
+   * @param oNbSample
+   *	Number of samples.
+   */
+	HRESULT GetNbSample
+ 			(in long iChannel, 
+			 out /*IDLRETVAL*/ long oNbSample);
+
+  /**
+   * Get the sample time.
+   * @param iChannel
+   *	Channel index.
+   * @param iSample
+   *	Sample index.
+   * @param oTime
+   *	Time value.
+   */
+	HRESULT GetSampleTime
+ 			(in long iChannel, 
+			 in long iSample, 
+			 out /*IDLRETVAL*/ double oTime);
+
+  /**
+   * Get the sample values.
+   * @param iChannel
+   *	Channel index.
+   * @param iSample
+   *	Sample index.
+   * @param oPosition
+   *	Array of values.
+   */
+	HRESULT GetSamplePosition
+ 			(in long iChannel, 
+			 in long iSample, 
+			 inout CATSafeArrayVariant oPosition);
+
+  /**
+   * Remove a specific sample.
+   * @param iChannel
+   *	Channel index.
+   * @param iSample
+   *	Sample index.
+   */
+	HRESULT RemoveSample
+ 			(in long iChannel, 
+			 in long iSample);
+};
+
+// Interface name : CATIAReplay
+#pragma ID CATIAReplay "DCE:79b86272-385c-11d3-b911006094b9a56c"
+#pragma DUAL CATIAReplay
+
+// VB object name : Replay (Id used in Visual Basic)
+#pragma ID Replay "DCE:79b86273-385c-11d3-b911006094b9a56c"
+#pragma ALIAS CATIAReplay Replay
+
+#endif
+

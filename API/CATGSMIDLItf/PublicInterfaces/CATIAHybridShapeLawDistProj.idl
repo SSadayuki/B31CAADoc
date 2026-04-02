@@ -1,0 +1,171 @@
+#ifndef CATIAHybridShapeLawDistProj_IDL
+#define CATIAHybridShapeLawDistProj_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeLawDistProj:         
+// Exposed interface for HybridShape Law
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation       
+//=================================================================
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+#include "CATSafeArray.idl"
+
+/**
+  * Interface to law feature. 
+  * <b>Role</b>: Allows you to access data of a law feature created by using  
+  * a reference line and a definition curve.
+  * @see CATIAHybridShapeFactory
+  */
+//-----------------------------------------------------------------
+interface CATIAHybridShapeLawDistProj : CATIAHybridShape
+{
+/**
+ * Returns or sets the reference line of the law. 
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href  CATIARectilinearTriDimFeatEdge or @href CATIARectilinearBiDimFeatEdge. 
+ */ 
+#pragma PROPERTY Reference
+ HRESULT get_Reference (out /*IDLRETVAL*/ CATIAReference   oElem);
+ HRESULT put_Reference (in     CATIAReference   iElem);
+
+ /**
+ * Returns or sets the definition curve of the law. 
+ * <br>Sub-element(s) supported (see @href CATIABoundary object): 
+ * see @href  CATIATriDimFeatEdge or @href CATIABiDimFeatEdge. 
+ */ 
+#pragma PROPERTY Definition
+ HRESULT get_Definition (out /*IDLRETVAL*/ CATIAReference   oElem);
+ HRESULT put_Definition (in     CATIAReference   iElem);
+
+ /**
+ * Returns or sets the scaling ratio of the law. 
+ */ 
+#pragma PROPERTY Scaling
+ HRESULT get_Scaling (out /*IDLRETVAL*/ double   oScale);
+ HRESULT put_Scaling (in     double   iScale);
+
+ /**
+ * Returns or sets the applied unit symbol for heterogeneous law. 
+ */ 
+#pragma PROPERTY AppliedUnitSymbol
+ HRESULT put_AppliedUnitSymbol (in     CATBSTR iSymbol);
+
+ /**
+  * Returns the applied unit symbol.
+  * @param oSymbol 
+  *   The symbol of applied unit
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oSymbol</code> the applied unit symbol
+  * of the <code>hybridShapeLawDist</code> hybrid shape law feature.
+  * <pre>
+  * Dim oSymbol
+  * hybridShapeLawDist.<font color="red">GetAppliedUnitSymbol</font>oSymbol
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetAppliedUnitSymbol (inout CATBSTR oSymbol);
+
+ /**
+ * Returns or sets the measure unit symbol for heterogeneous law. 
+ */ 
+#pragma PROPERTY MeasureUnitSymbol
+ HRESULT put_MeasureUnitSymbol (in     CATBSTR iSymbol);
+
+ /**
+  * Returns the measure unit symbol.
+  * @param oSymbol 
+  *   The symbol of measure unit
+  * </dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oSymbol</code> the measure unit symbol
+  * of the <code>hybridShapeLawDist</code> hybrid shape law feature.
+  * <pre>
+  * Dim oSymbol
+  * hybridShapeLawDist.<font color="red">GetMeasureUnitSymbol</font>oSymbol
+  * </pre>
+  * </dl>
+  */
+ HRESULT GetMeasureUnitSymbol (inout CATBSTR oSymbol);
+
+ /**
+  * Retrieves the support plane normal. 
+  * @param oNormal
+  *   The support plane normal
+  */ 
+ HRESULT GetPlaneNormal (inout  CATSafeArrayVariant  oNormal);
+ /**
+  * Sets the support plane normal. 
+  * @param iNormal
+  *   The support plane normal
+  */
+ HRESULT PutPlaneNormal (in     CATSafeArrayVariant  iNormal);
+
+ /**
+ * Returns or sets the positive value direction. 
+ */ 
+#pragma PROPERTY PositiveDirectionOrientation
+ HRESULT get_PositiveDirectionOrientation (out /*IDLRETVAL*/ long oOri);
+ HRESULT put_PositiveDirectionOrientation (in     long iOri);
+
+ /**
+ *  Queries whether Heterogeneous Law mode is active or not.
+ *   @param oHeterogeneousLaw
+ *       heterogeneous law mode =  TRUE  :  Heterogeneous Law mode is active.
+ *                              =  FALSE : Heterogeneous Law mode is inactive.
+ */
+ HRESULT IsHeterogeneousLaw (out /*IDLRETVAL*/ boolean oHeterogeneousLaw);
+
+ /**
+ * Queries whether evolution parameter is on reference curve (default) or on definition curve,or
+ * sets evolution parameter on reference curve  or on definition curve.
+ * Possible values of ParameterOnDefinition = TRUE  : Parameter on definition curve.
+ *                                          = FALSE : Parameter on reference curve.
+ * </dl>
+ * <dt><b>Example</b>:
+ * <dd>
+ * This example retrieves in <code>ParOnDef</code> the ParameterOnDefinition status
+ * of the <code>hybridShapeLawDist</code> hybrid shape law feature.
+ * <pre>
+ * Dim ParOnDef As boolean
+ * ParOnDef = hybridShapeLawDist.<font color="red">ParameterOnDefinition</font>
+ * </pre>
+ * </dl>
+ */
+#pragma PROPERTY ParameterOnDefinition
+ HRESULT get_ParameterOnDefinition (out /*IDLRETVAL*/ boolean oParameterOnDefinition);
+ HRESULT put_ParameterOnDefinition (in     boolean iParameterOnDefinition);
+
+};
+
+
+// Interface name : CATIAHybridShapeLawDistProj
+#pragma ID CATIAHybridShapeLawDistProj "DCE:a7f36178-9492-11d4-9f2400508b130755"
+#pragma DUAL CATIAHybridShapeLawDistProj
+
+
+// VB object name : HybridShapeLawDistProj (Id used in Visual Basic)
+#pragma ID HybridShapeLawDistProj "DCE:b2cbe528-9492-11d4-9f2400508b130755"
+#pragma ALIAS CATIAHybridShapeLawDistProj HybridShapeLawDistProj
+
+
+#endif
+// CATIAHybridShapeLawDistProj_IDL
+

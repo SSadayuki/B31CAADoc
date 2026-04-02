@@ -1,0 +1,70 @@
+#ifndef CATIATranslate_IDL
+#define CATIATranslate_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+// COPYRIGHT DASSAULT SYSTEMES 2001
+
+//=================================================================                                   
+// CATIATranslate:                           
+// Exposed interface for translation
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+#include "CATIAShape.idl"
+#include "CATIAHybridShape.idl"
+#include "CATIAReference.idl"
+
+ /**
+ * Represents the hybrid shape translate feature object. 
+ * This solid feature is 
+ * created from an underlying HybridShapeTranslate aggregated by the Translate.
+ * <b>Role</b>: To access the data of the hybrid shape translate feature object.
+ * This data includes:
+ *<ul>
+ *<li> The element to translate </li>
+ *<li> The translation direction </li>
+ *<li> The translation distance and its value </li>
+ *</ul>
+ * Use the CATIAHybridShapeFactory to create HybridShapeFeature object.
+ * @see CATIAHybridShapeFactory
+ */
+//-------------------------------------------------------------------------------
+interface CATIATranslate : CATIAShape
+{
+
+#pragma PROPERTY HybridShape
+ 
+ /**
+  * Gets the underlying HybridShapeTranslate.
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>The following example explains how to retrieve the underlying HybridShape Translate
+  * <pre>
+  *  Dim oHybridShape as AnyObject
+  *  Set oHybridShape=oTranslate.HybridShape
+  *  oHybridShape.ElemToTranslate = reference1
+  * </pre>
+  * </dl>
+  */
+    HRESULT get_HybridShape (out /*IDLRETVAL*/ CATIAHybridShape oHybridShapeTranslate);
+
+};
+
+#pragma ID CATIATranslate "DCE:977315e0-fcff-11d4-9efc00508b5fe787"
+#pragma DUAL CATIATranslate
+
+// VB object name Translate: (Id used in Visual Basic)
+#pragma ID Translate  "DCE:d8aa6814-fd00-11d4-9fa500508b130a6d"
+#pragma ALIAS CATIATranslate Translate
+
+
+#endif
+// CATIATranslate_IDL
+

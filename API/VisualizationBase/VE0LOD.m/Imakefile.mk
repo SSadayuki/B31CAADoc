@@ -1,0 +1,9 @@
+#
+# SHARED LIBRARY
+#
+BUILT_OBJECT_TYPE=NONE
+
+OS = IRIX
+LOCAL_CCFLAGS  = -float
+LOCAL_CFLAGS   = -float 
+

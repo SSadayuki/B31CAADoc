@@ -1,0 +1,43 @@
+#
+BUILT_OBJECT_TYPE=LOAD MODULE
+#
+# LOAD MODULE  
+#
+OS = COMMON
+
+
+#
+
+#
+OS = AIX
+BUILD = NO
+
+#
+OS = HP-UX															    
+BUILD = NO
+
+#
+OS = IRIX
+BUILD = NO
+
+#
+OS = SunOS
+
+BUILD = NO
+
+## @linux mcf 2004-06-02.09:59:03 [BUILD=NO on Linux] ##
+OS = Linux
+BUILD = NO
+
+
+#
+OS = Windows_NT
+BUILD=NO
+#LINK_WITH = FDI 
+
+#SYS_INCPATH =
+#SYS_LIBPATH =
+#SYS_LIBS = 
+#SH_SYS_LIBPATH = $(SYS_LIBPATH)
+#LOCAL_CCFLAGS =
+#LOCAL_CFLAGS = /SUBSYSTEM:WINDOWS

@@ -1,0 +1,313 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+#ifndef CATIADrawingArrow_IDL
+#define CATIADrawingArrow_IDL
+
+/*IDLREP*/
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+#include "CATBaseDispatch.idl"
+#include "CATIABase.idl"
+#include "CATSafeArray.idl"
+#include "CatSymbolParameters.idl"
+
+ /** 
+  * Represents a drawing arrow in a drawing view.
+  */
+
+interface CATIADrawingArrow : CATIABase
+{
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets symbol type of head side.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the symbol type of head side on <tt>MyArrow</tt> drawing arrow.
+  * <pre>
+  * oSymbol = MyArrow.<font color="red">HeadSymbol</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY HeadSymbol
+  HRESULT get_HeadSymbol(out /*IDLRETVAL*/ CatSymbolType oSymbol);
+  HRESULT put_HeadSymbol(in CatSymbolType iSymbol);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets symbol type of tail side.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the symbol type of tail side on <tt>MyArrow</tt> drawing arrow.
+  * <pre>
+  * oSymbol = MyArrow.<font color="red">TailSymbol</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TailSymbol
+  HRESULT get_TailSymbol(out /*IDLRETVAL*/ CatSymbolType oSymbol);
+  HRESULT put_TailSymbol(in CatSymbolType iSymbol);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the number of points of arrow path.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the number of points on <tt>MyArrow</tt> drawing arrow.
+  * <pre>
+  * oNbPoint = MyArrow.<font color="red">NbPoint</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY NbPoint
+  HRESULT get_NbPoint(out /*IDLRETVAL*/ long oNbPoint);
+
+//------------------------------------------------------------------------------
+ /**
+  * Add a point to an arrow.
+  * @param iNum
+  *   Point number. Point will be inserted at iNum+1 position.
+  * @param iX
+  *   X coordinates of point to add.
+  * @param iY
+  *   Y coordinates of point to add.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds a point to <tt>MyArrow</tt>.
+  * <pre>
+  * iNum = 1
+  * iX = 10.
+  * iY = 20.
+  * MyArrow.<font color="red">AddPoint</font> iNum, iX, iY
+  * </pre>
+  * </dl>
+  */
+  HRESULT AddPoint(in long iNum, in double iX, in double iY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Remove a point from an arrow.
+  * @param iNum
+  *   Point number to delete.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example removes a point from <tt>MyArrow</tt>.
+  * <pre>
+  * iNum = 2
+  * MyArrow.<font color="red">RemovePoint</font> iNum
+  * </pre>
+  * </dl>
+  */
+  HRESULT RemovePoint(in long iNum);
+
+//------------------------------------------------------------------------------
+ /**
+  * Modify a point of an Arrow.
+  * @param iNum
+  *   Point number to modify.
+  * @param iX
+  *   X coordinates of new point.
+  * @param iY
+  *   Y coordinates of new point.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example modifys a point to <tt>MyArrow</tt>.
+  * <pre>
+  * iNum = 1
+  * iX = -10.
+  * iY = -20.
+  * MyArrow.<font color="red">ModifyPoint</font> iNum, iX, iY
+  * </pre>
+  * </dl>
+  */
+  HRESULT ModifyPoint(in long iNum, in double iX, in double iY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get arrow path.
+  * @param oPoints
+  *   List of points coordinates (X1,Y1,X2,Y2,.....Xn,Yn).
+  * @return oNbPoints
+  *   Number of points.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets points of <tt>MyArrow</tt> path.
+  * <pre>
+  * oNbPoints = MyArrow.<font color="red">GetPoints</font>(oPoints)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetPoints(inout CATSafeArrayVariant oPoints, out /*IDLRETVAL*/ long oNbPoints);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get arrow point coordinates.
+  * @param iNum
+  *   Point number.
+  * @param oX
+  *   X coordinates of point.
+  * @param oY
+  *   Y coordinates of point.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets a point to <tt>MyArrow</tt>.
+  * <pre>
+  * iNum = 1
+  * MyArrow.<font color="red">GetPoint</font>(iNum, oX, oY)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetPoint(in long iNum, inout double oX, inout double oY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets target element of head side.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the target element of head side on <tt>MyArrow</tt> drawing arrow.
+  * <pre>
+  * oTarget = MyArrow.<font color="red">HeadTarget</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY HeadTarget	 
+  HRESULT get_HeadTarget(out /*IDLRETVAL*/ CATBaseDispatch oTarget);
+  HRESULT put_HeadTarget(in CATBaseDispatch iTarget);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets target element of tail side.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the target element of tail side on <tt>MyArrow</tt> drawing arrow.
+  * <pre>
+  * oTarget = MyArrow.<font color="red">TailTarget</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY TailTarget
+  HRESULT get_TailTarget(out /*IDLRETVAL*/ CATBaseDispatch oTarget);
+  HRESULT put_TailTarget(in CATBaseDispatch iTarget);
+
+//------------------------------------------------------------------------------
+ /**
+  * Add an interruption to an arrow.
+  * @param iFirstPointX
+  *   X coordinates of first point.
+  * @param iFirstPointY
+  *   Y coordinates of first point.
+  * @param iSecondPointX
+  *   X coordinates of second point.
+  * @param iSecondPointY
+  *   Y coordinates of second point.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example adds an interruption to <tt>MyArrow</tt>.
+  * <pre>
+  * iFirstPointX = 10.
+  * iFirstPointY = 20.
+  * iSecondPointX = 20.
+  * iSecondPointY = 20.
+  * MyArrow.<font color="red">AddInterruption</font> iFirstPointX, iFirstPointY, iSecondPointX, iSecondPointY
+  * </pre>
+  * </dl>
+  */
+  HRESULT AddInterruption(in double iFirstPointX, in double iFirstPointY, in double iSecondPointX, in double iSecondPointY);
+
+//------------------------------------------------------------------------------
+ /**
+  * Remove an interruption to an arrow.
+  * @param iNum
+  *   Interruption number to delete.
+  * <dt> <dd> - If iNum equals to 0, all interruptions will be removed. 
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example removes an interruption from <tt>MyArrow</tt>.
+  * <pre>
+  * iNum = 2
+  * MyArrow.<font color="red">RemoveInterruption</font> iNum
+  * </pre>
+  * </dl>
+  */
+  HRESULT RemoveInterruption(in long iNum);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns the number of interruptions of arrow path.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the number of interruptions on <tt>MyArrow</tt> drawing arrow.
+  * <pre>
+  * oNbInterruption = MyArrow.<font color="red">NbInterruption</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY NbInterruption
+  HRESULT get_NbInterruption(out /*IDLRETVAL*/ long oNbInterruption);
+
+//------------------------------------------------------------------------------
+ /**
+  * Get arrow path.
+  * @param oInterruptions
+  *   List of interruptions coordinates (X1,Y1,X2,Y2,.....Xn,Yn).
+  * @return oNbInterruptions
+  *   Number of interruptions.
+  * <!-- @sample -->
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example gets interruptions of <tt>MyArrow</tt> path.
+  * <pre>
+  * oNbInterruptions = MyArrow.<font color="red">GetInterruptions</font>(oInterruptions)
+  * </pre>
+  * </dl>
+  */
+  HRESULT GetInterruptions(inout CATSafeArrayVariant oInterruptions, out /*IDLRETVAL*/ long oNbInterruptions);
+
+//------------------------------------------------------------------------------
+ /**
+  * Returns or sets the scale on extremities mode.
+  * <!-- @sample -->
+  * <dl>
+  * <dt><b>Example:</b>
+  * <dd>
+  * This example retrieves the target element of head side on <tt>MyArrow</tt> drawing arrow.
+  * <pre>
+  * oScaleOnExtremities = MyArrow.<font color="red">ScaleOnExtremities</font>
+  * </pre>
+  * </dl>
+  */
+#pragma PROPERTY ScaleOnExtremities
+  HRESULT get_ScaleOnExtremities(out /*IDLRETVAL*/ boolean oScaleOnExtremities);
+  HRESULT put_ScaleOnExtremities(in boolean iScaleOnExtremities);
+
+};
+
+#pragma ID CATIADrawingArrow "DCE:896EFCE1-26B0-11d6-BE8F000347C379C9"
+#pragma DUAL CATIADrawingArrow
+
+// Visual Basic name
+#pragma ID DrawingArrow "DCE:896EFCE2-26B0-11d6-BE8F000347C379C9"
+#pragma ALIAS CATIADrawingArrow DrawingArrow
+
+#endif

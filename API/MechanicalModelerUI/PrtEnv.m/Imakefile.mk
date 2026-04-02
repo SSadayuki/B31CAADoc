@@ -1,0 +1,7 @@
+#
+# PARTEDT
+#
+
+BUILT_OBJECT_TYPE= NONE
+
+OS = IRIX

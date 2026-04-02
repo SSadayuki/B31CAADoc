@@ -1,0 +1,95 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAInertias.idl
+//   This automation interface allows to manage CATIAInerta collection.
+//
+//===================================================================
+#ifndef CATIAInertias_IDL
+#define CATIAInertias_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIAInertia.idl"
+#include "CATVariant.idl"
+
+
+/**  
+ * A collection of all inertia objects currently managed by the application.
+ * <p>WARNING: this collection will be DEPRECATED in the next release. It is recommended to use the method
+ * <tt>GetTechnologicalObject("Inertia")</tt> on the product to analyze, to retrieve an <tt>Inertia</tt> object.
+ */
+interface CATIAInertias : CATIACollection
+{
+  /**
+   * Creates an Inertia object from an object and adds it to the Inertias collection.
+   * @param iObject
+   *    The Object
+   * @return
+   *    The created Inertia
+   * @sample
+   *    This example creates a new Inertia from a product <tt>TheProduct</tt>
+   *    in the <tt>TheInertias</tt> collection.
+   *    <pre>
+   *    Dim NewInertia As Inertia
+   *    Set NewInertia = TheInertias.<font color="red">Add</font>(TheProduct)
+   *    </pre>
+   */
+  HRESULT Add(in CATIABase iObject, out /*IDLRETVAL*/ CATIAInertia oInertia);
+
+  /**
+   * Returns an Inertia object using its index or its name from the Inertias collection.
+   * @param iIndex
+   *    The index or the name of the Inertia to retrieve from the collection of inertias.
+   *    As a numerics, this index is the rank of the Inertia in the collection.
+   *    The index of the first Inertia in the collection is 1, and
+   *    the index of the last Inertia is Count.
+   *    As a string, it is the name you assigned to the Inertia.
+   * @sample
+   *    This example retrieves in <tt>ThisInertia</tt> the ninth Inertia,
+   *    and in <tt>ThatInertia</tt> the Inertia named
+   *    <tt>Inertia Of MyProduct</tt> from the <tt>TheInertias</tt> collection. 
+   *    <pre>
+   *    Dim ThisInertia As Inertia
+   *    Set ThisInertia = TheInertias.<font color="red">Item</font>(9)
+   *    Dim ThatInertia As Inertia
+   *    Set ThatInertia = TheInertias.<font color="red">Item</font>("Inertia Of MyProduct")
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAInertia oInertia);
+
+  /**
+   * Removes an Inertia object from the Inertias collection.
+   * @param iIndex
+   *    The index or the name of the Inertia to remove from the collection of inertias.
+   *    As a numerics, this index is the rank of the Inertia in the collection.
+   *    The index of the first Inertia in the collection is 1, and
+   *    the index of the last Inertia is Count.
+   *    As a string, it is the name you assigned to the Inertia.
+   * @sample
+   *    The following example removes the tenth Inertia and the Inertia named
+   *    <tt>Inertia Of MyProduct</tt> from the <tt>TheInertias</tt> collection.
+   *    <pre>
+   *    TheInertias.<font color="red">Remove</font>(10)
+   *    TheInertias.<font color="red">Remove</font>("Inertia Of MyProduct")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAInertias
+#pragma ID CATIAInertias "DCE:f98879e6-21a3-11d4-9463006094eb3826"
+#pragma DUAL CATIAInertias
+
+// VB object name : Inertias (Id used in Visual Basic)
+#pragma ID Inertias "DCE:115b3932-21a4-11d4-9463006094eb3826"
+#pragma ALIAS CATIAInertias Inertias
+
+#endif

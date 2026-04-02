@@ -1,0 +1,30 @@
+BUILT_OBJECT_TYPE=LOAD MODULE
+
+OS = COMMON
+PROGRAM_NAME = runOrbix
+
+LINK_WITH = JS0GROUP
+
+
+#
+OS = AIX
+BUILD=NO
+
+#
+OS = HP-UX
+BUILD=NO
+
+#
+OS = IRIX
+BUILD=NO
+
+#
+OS = SunOS
+BUILD=NO
+
+#
+OS = Windows_NT
+SYS_LIBS=netapi32.lib
+
+
+

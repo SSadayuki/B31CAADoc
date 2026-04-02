@@ -1,0 +1,87 @@
+#ifndef CATIASchAppZone_IDL 
+#define CATIASchAppZone_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchAppConnectable;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic zone.
+  */
+
+interface CATIASchAppZone : CATIABase
+{
+  /**
+  * Add an application connectable object to the zone as member.
+  * @param iAppCntblToAdd
+  *   The application connectable object to be added to the zone.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppZone
+  * Dim objArg1 As SchAppConnectable
+  *  ...
+  * objThisIntf.<font color="red">AppAddZoneMember</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppAddZoneMember ( 
+    in CATIASchAppConnectable iAppCntblToAdd );
+    
+  /**
+  * Remove an application connectable object to the zone as member.
+  * @param iAppCntblToRemove
+  *   The application connectable object to be removed to the zone.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppZone
+  * Dim objArg1 As SchAppConnectable
+  *  ...
+  * objThisIntf.<font color="red">AppRemoveZoneMember</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT AppRemoveZoneMember ( 
+    in CATIASchAppConnectable iAppCntblToRemove );
+    
+  /**
+  * List all members of an application zone.
+  * @param oLAppCntbl
+  *   A list of zone members (application connectables).
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppZone
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">AppListZoneMembers</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppListZoneMembers ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLAppCntbl );
+    
+};
+    
+// Interface name : CATIASchAppZone
+#pragma ID CATIASchAppZone "DCE:628836f9-c9b0-45b1-b84841af30279a05"
+#pragma DUAL CATIASchAppZone
+    
+// VB object name : SchAppZone
+#pragma ID SchAppZone "DCE:64928d73-df60-465c-b9866a85b3b8bd39"
+#pragma ALIAS CATIASchAppZone SchAppZone
+    
+#endif 
+    

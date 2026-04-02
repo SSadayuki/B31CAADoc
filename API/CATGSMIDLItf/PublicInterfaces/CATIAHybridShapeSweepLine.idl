@@ -1,0 +1,1087 @@
+#ifndef CATIAHybridShapeSweepLine_IDL
+#define CATIAHybridShapeSweepLine_IDL
+
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapeSweepLine:         
+// Exposed interface for HybridShape SweepLine
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Sept 1999 : Creation   
+//=================================================================
+
+#include "CATIAHybridShapeSweep.idl"
+#include "CATIAReference.idl"
+#include "CATIAAngle.idl"
+#include "CATIALength.idl"
+#include "CATIAHybridShapeDirection.idl"
+/**
+* Represents the sweep line object.
+*/ 
+interface CATIAHybridShapeSweepLine : CATIAHybridShapeSweep
+{
+
+  /**
+  * Returns or sets the sweep operation first guide curve.
+  */
+#pragma PROPERTY FirstGuideCrv
+  HRESULT get_FirstGuideCrv(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_FirstGuideCrv(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the sweep operation second guide curve.
+  */ 
+#pragma PROPERTY SecondGuideCrv
+  HRESULT get_SecondGuideCrv(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_SecondGuideCrv(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the sweep operation first guide surface.
+  */ 
+#pragma PROPERTY FirstGuideSurf
+  HRESULT get_FirstGuideSurf(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_FirstGuideSurf(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the sweep operation second guide surface.
+  */ 
+#pragma PROPERTY SecondGuideSurf
+  HRESULT get_SecondGuideSurf(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_SecondGuideSurf(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the sweep operation spine (optional).
+  */ 
+#pragma PROPERTY Spine  
+  HRESULT get_Spine(out /*IDLRETVAL*/ CATIAReference Elem);
+  HRESULT put_Spine(in CATIAReference Elem);
+
+  /**
+  * Returns or sets the linear sweep mode.
+  * <br>Legal mode values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined linear profile swept surface (CATGSMLinearSweep_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Linear profile swept surface defined by two guide curves
+  *       (CATGSMLinearSweep_TwoGuides)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Linear profile swept surface defined by a guide curve and an angle
+  *       (CATGSMLinearSweep_GuideAndAngleCurve)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>Linear profile swept surface defined by a guide curve and a middle curve
+  *       (CATGSMLinearSweep_GuideAndMiddle)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Linear profile swept surface defined by a guide curve and an angle from a reference surface
+  *       (CATGSMLinearSweep_GuideAndRefSurfaceAngle)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">5</td>
+  *   <td>Linear profile swept surface defined by a guide curve and a tangency surface
+  *       (CATGSMLinearSweep_GuideAndTangencySurface)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">6</td>
+  *   <td>Linear profile swept surface defined by a guide curve and a draft directio
+  *       (CATGSMLinearSweep_GuideAndDraftDirection)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">7</td>
+  *   <td>Linear profile swept surface defined by two tangency surfaces
+  *       (CATGSMLinearSweep_TwoTangencySurfaces)</td>
+  * </tr>
+  *  </table>
+  */   
+#pragma PROPERTY Mode  
+  HRESULT get_Mode(out /*IDLRETVAL*/ long Elem);
+  HRESULT put_Mode(in long Elem);
+
+
+  /**
+  * Returns the angle values useful in some linear sweep types.
+  * @param iI 
+  *   The angle value index
+  * @return 
+  *   The angle value
+  */
+  HRESULT GetAngle(in long iI, out /*IDLRETVAL*/ CATIAAngle Elem);
+
+  /**
+  * Sets the angle values useful in some linear sweep types.
+  * @param iI 
+  *   The angle value index
+  * @param iElem 
+  *   The angle value
+  */ 
+  HRESULT SetAngle(in long iI, in double iElem);
+
+  /**
+  * Returns or sets the angular law type.
+  * <br>Legal angular law type values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined law type (CATGSMBasicLawType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Constant law type (CATGSMBasicLawType_Constant)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Linear law type (CATGSMBasicLawType_Linear)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>S law type (CATGSMBasicLawType_SType)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>
+  * </tr>
+  * </table>
+  */
+#pragma PROPERTY AngleLawType
+  HRESULT get_AngleLawType(out /*IDLRETVAL*/ long oElem);
+  HRESULT put_AngleLawType(in long iElem);
+
+  /**
+  * Returns or sets whether the angular law has to be inverted.
+  * <br>Legal angular law inversion values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>The angular law has NOT to be inverted</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>The angular law has to be inverted</td>
+  * </tr>
+  *  </table>
+  */
+#pragma PROPERTY AngleLawInversion
+  HRESULT get_AngleLawInversion(out /*IDLRETVAL*/ long oElem);
+  HRESULT put_AngleLawInversion(in long iElem);
+
+  /**
+  * Returns or sets the angular law.
+  */
+#pragma PROPERTY AngleLaw
+  HRESULT get_AngleLaw(out /*IDLRETVAL*/ CATIAReference oElem);
+  HRESULT put_AngleLaw(in CATIAReference iElem);
+
+  /**
+  * Returns the length values useful in some linear sweep types.
+  * @param iI 
+  *   The length value index
+  * @return 
+  *   The length value
+  */
+  HRESULT GetLength(in long iI, out /*IDLRETVAL*/ CATIALength Elem);
+
+  /**
+  * Sets the linear values useful in some linear sweep types.
+  * @param iI 
+  *   The linear value index
+  * @param iElem 
+  *   The linear value
+  */ 
+  HRESULT SetLength(in long iI, in double iElem);
+
+  /**
+  * Returns or sets the first length law useful in some linear sweep types.
+  */
+#pragma PROPERTY FirstLengthLaw
+  HRESULT get_FirstLengthLaw(out /*IDLRETVAL*/ CATIAReference oElem);
+  HRESULT put_FirstLengthLaw(in CATIAReference iElem);
+
+  /**
+  * Retrieves the first length law useful in some linear sweep types.
+  * @param oLength1
+  *   The length law start value
+  * @param oLength2
+  *   The length law end value
+  * @param oLawType
+  *   The length law type
+  * <br>Legal length law type values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined law type (CATGSMBasicLawType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Constant law type (CATGSMBasicLawType_Constant)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Linear law type (CATGSMBasicLawType_Linear)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>S law type (CATGSMBasicLawType_SType)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>
+  * </tr>
+  * </table>
+  */
+  HRESULT GetFirstLengthLaw(out CATIALength oLength1, out CATIALength oLength2, out long oLawType);
+
+  /**
+  * Sets the first length law useful in some linear sweep types.
+  * @param iLength1
+  *   The length law start value
+  * @param iLength2
+  *   The length law end value
+  * @param iLawType
+  *   The length law type
+  * <br>Legal length law type values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined law type (CATGSMBasicLawType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Constant law type (CATGSMBasicLawType_Constant)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Linear law type (CATGSMBasicLawType_Linear)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>S law type (CATGSMBasicLawType_SType)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>
+  * </tr>
+  * </table>
+  */
+  HRESULT SetFirstLengthLaw(in double iLength1, in double iLength2, in long iLawType);
+
+  /**
+  * Returns or sets whether the first length law has to be inverted.
+  * <br>Legal length law inversion values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>The length law has NOT to be inverted</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>The length law has to be inverted</td>
+  * </tr>
+  *  </table>
+  */
+#pragma PROPERTY FirstLengthLawInversion
+  HRESULT get_FirstLengthLawInversion(out /*IDLRETVAL*/ long oElem);
+  HRESULT put_FirstLengthLawInversion(in long iElem);
+
+  /**
+  * Returns or sets second length law useful in some linear sweep types.
+  */
+#pragma PROPERTY SecondLengthLaw
+  HRESULT get_SecondLengthLaw(out /*IDLRETVAL*/ CATIAReference oElem);
+  HRESULT put_SecondLengthLaw(in CATIAReference iElem);
+
+  /**
+  * Retrieves the second length law useful in some linear sweep types.
+  * @param oLength1
+  *   The length law start value
+  * @param oLength2
+  *   The length law end value
+  * @param oLawType
+  *   The length law type
+  * <br>Legal length law type values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined law type (CATGSMBasicLawType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Constant law type (CATGSMBasicLawType_Constant)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Linear law type (CATGSMBasicLawType_Linear)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>S law type (CATGSMBasicLawType_SType)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>
+  * </tr>
+  * </table>
+  */
+  HRESULT GetSecondLengthLaw(out CATIALength oLength1, out CATIALength oLength2, out long oLawType);
+
+  /**
+  * Sets the second length law useful in some linear sweep types.
+  * @param iLength1
+  *   The length law start value
+  * @param iLength2
+  *   The length law end value
+  * @param iLawType
+  *   The length law type
+  * <br>Legal length law type values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined law type (CATGSMBasicLawType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Constant law type (CATGSMBasicLawType_Constant)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Linear law type (CATGSMBasicLawType_Linear)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>S law type (CATGSMBasicLawType_SType)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>
+  * </tr>
+  * </table>
+  */
+  HRESULT SetSecondLengthLaw(in double iLength1, in double iLength2, in long iLawType);
+
+  /**
+  * Returns or sets whether the second length law has to be inverted.
+  * <br>Legal length law inversion values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>The length law has NOT to be inverted</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>The length law has to be inverted</td>
+  * </tr>
+  *  </table>
+  */
+#pragma PROPERTY SecondLengthLawInversion
+  HRESULT get_SecondLengthLawInversion(out /*IDLRETVAL*/ long oElem);
+  HRESULT put_SecondLengthLawInversion(in long iElem);
+
+  /**
+  * Retrieves the choice number associated with each solution
+  * of a given linear sweep case.
+  * <br>Example: a linear sweep with one guide curve and a tangency surface may
+  * lead to several possible solutions.
+  * @param oVal1
+  *   The solution number (from 1 to n)
+  * @param oVal2
+  *   In the example, the shell orientation : -1, +1 or 0 (both +1 and -1)
+  * @param val3
+  *   In the example, the wire orientation : -1, +1 or 0 (both +1 and -1)
+  */ 
+  HRESULT GetChoiceNo(out long oVal1, out long oVal2, out long oVal3);
+
+  /**
+  * Sets the choice number associated with each solution
+  * of a given linear sweep case.
+  * <br>Example: a linear sweep with one guide curve and a tangency surface may
+  * lead to several possible solutions.
+  * @param iVal1
+  *   The solution number (from 1 to n)
+  * @param iVal2
+  *   In the example, the shell orientation : -1, +1 or 0 (both +1 and -1)
+  * @param iVal3
+  *   In the example, the wire orientation : -1, +1 or 0 (both +1 and -1)
+  */ 
+  HRESULT SetChoiceNo(in long iVal1, in long iVal2, in long iVal3);
+
+  /**
+  * Returns or sets the trim option.
+  * <br>
+  * <br>Legal trim option values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>No trim computed or trim undefined (CATGSMSweepTrimMode_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Trim computed (CATGSMSweepTrimMode_On)</td>
+  * </tr>
+  *  </table>
+  */
+#pragma PROPERTY TrimOption  
+  HRESULT get_TrimOption(out /*IDLRETVAL*/ long Elem);
+  HRESULT put_TrimOption(in long Elem);
+
+  /**
+  * Returns or sets the trim option for the second tangency surface.
+  * <br>
+  * <br>Legal trim option values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>No trim computed or trim undefined (CATGSMSweepTrimMode_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Trim computed (CATGSMSweepTrimMode_On)</td>
+  * </tr>
+  *  </table>
+  */
+#pragma PROPERTY SecondTrimOption  
+  HRESULT get_SecondTrimOption(out /*IDLRETVAL*/ long Elem);
+  HRESULT put_SecondTrimOption(in long Elem);
+
+  // =============
+  // PROPERTIES
+  // =============
+
+  /**
+  * Returns whether the sweeping operation is smoothed.
+  * <br>TRUE if the sweeping operation is smoothed, or FALSE otherwise (FALSE if not specified).
+  */ 
+#pragma PROPERTY SmoothActivity
+  HRESULT get_SmoothActivity(out /*IDLRETVAL*/ boolean  oSmooth);
+  HRESULT put_SmoothActivity(in boolean iSmooth);
+
+  /**
+  * Returns the angular threshold.
+  */ 
+#pragma PROPERTY SmoothAngleThreshold
+  HRESULT get_SmoothAngleThreshold(out /*IDLRETVAL*/ CATIAAngle  opIAAngle);
+
+  /**
+  * Returns or sets whether a deviation from guide curves is allowed.
+  * <br>This property gives the information on performing smoothing during sweeping operation.
+  * <br>TRUE if a deviation from guide curves is allowed, or FALSE otherwise (FALSE if not specified).
+  */
+#pragma PROPERTY GuideDeviationActivity
+  HRESULT get_GuideDeviationActivity(out /*IDLRETVAL*/ boolean  oActivity);
+  HRESULT put_GuideDeviationActivity(in boolean iActivity);
+
+  /**
+  * Returns the deviation value (length) from guide curves allowed during a sweeping operation in order to smooth it.
+  */ 
+#pragma PROPERTY GuideDeviation
+  HRESULT get_GuideDeviation(out /*IDLRETVAL*/ CATIALength opIALength);
+
+  /**
+  * Returns or sets the draft computation mode.
+  */
+#pragma PROPERTY DraftComputationMode
+  HRESULT get_DraftComputationMode (out /*IDLRETVAL*/ long oDraftCompType) ;
+  HRESULT put_DraftComputationMode(in                long iDraftCompType) ;
+
+  /**
+  * Returns or sets the draft direction.
+  * <dl>
+  * <dt>Example</dt>:
+  * <dd>
+  * This example retrieves in <code>oDirection</code> the direction of the <code>LinearSweep</code> feature.
+  * <pre>
+  * Dim oDirection As CATIAHybridShapeDirection
+  * Set oDirection = LinearSweep.<font color="red">DraftDirection</font>
+  * </pre>
+  * </dl> 
+  */ 
+#pragma PROPERTY DraftDirection
+  HRESULT get_DraftDirection ( out /*IDLRETVAL*/ CATIAHybridShapeDirection oDir);
+  HRESULT put_DraftDirection ( in                CATIAHybridShapeDirection iDir);
+
+  // =============
+  // METHODS
+  // ==============
+  /**
+  * Retrieves the number of guides curves.
+  * @param oNum 
+  *   The number of guide curves
+  */ 
+  HRESULT GetNbGuideCrv(out long oNum);
+
+  /**
+  * Removes a guide curve.
+  */ 
+  HRESULT RemoveGuideCrv();
+
+  /**
+  * Retrieves the number of guide surfaces.
+  * @param oNum 
+  *   The number of guides surfaces
+  */ 
+  HRESULT GetNbGuideSur(out long oNum);
+
+  /**
+  * Removes a guide surface.
+  */ 
+  HRESULT RemoveGuideSur();
+
+  /**
+  * @deprecated V5R16 CATHybridShapeSweepLine#GetRelimiters
+  * Retrieves the elements relimiting the spine (or the default spine).
+  * @param opIAElem1 
+  *   The first relimiting feature (plane or point)
+  * @param opIAElem2
+  *   The second relimiting feature (plane or point)
+  */ 
+  HRESULT GetLongitudinalRelimiters(out CATIAReference  opIAElem1, out CATIAReference opIAElem2);
+
+  /**
+  * @deprecated V5R16 CATHybridShapeSweepLine#SetRelimiters
+  * Sets the elements relimiting the spine (or the default spine).
+  * @param ipIAElem1 
+  *   The first relimiting feature (plane or point)
+  * @param ipIAElem2
+  *   The second relimiting feature (plane or point)
+  */ 
+  HRESULT SetLongitudinalRelimiters(in CATIAReference  ipIAElem1, in CATIAReference ipIAElem2) ;
+
+  /**
+  * Retrieves the elements relimiting the spine (or the default spine).
+  * @param opIAElem1 
+  *   The first relimiting feature (plane or point)
+  * @param opOrient1
+  *   Split direction for the first relimitation<br>
+  *   0 means that the beginning of the spine (considering its orientation) is removed, 1 means that the end of the spine is removed
+  * @param opIAElem2
+  *   The second relimiting feature (plane or point)
+  * @param opOrient2
+  *   Split direction for the second relimitation
+  */
+  HRESULT GetRelimiters(out CATIAReference  opIAElem1, out long opOrient1, out CATIAReference opIAElem2, out long opOrient2);
+
+  /**
+  *	 Sets the elements relimiting the spine (or the default spine).
+  *  @param ipIAElem1 
+  *	  The first relimiting feature (plane or point)
+  *  @param ipOrient1
+  *   Split direction for the first relimitation<br>
+  *   0 means that the beginning of the spine (considering its orientation) is removed, 1 means that the end of the spine is removed
+  *  @param ipIAElem2
+  *   The second relimiting feature (plane or point)
+  *  @param ipOrient2
+  *   Split direction for the second relimitation
+  */ 
+  HRESULT SetRelimiters(in CATIAReference  ipIAElem1, in long ipOrient1, in CATIAReference ipIAElem2, in long ipOrient2) ;
+
+  /**
+  * Retrieves the number of angles.
+  * @param oAng 
+  *   The number of angles
+  */ 
+  HRESULT GetNbAngle(out long oAng);
+
+  /**
+  * Removes an angle. 
+  */ 
+  HRESULT RemoveAngle();
+
+  /**
+  * Retrieves the angular law useful in some linear sweep types.
+  * @param opStartAng
+  *   The angular law start value
+  * @param opEndAng
+  *   The angular law end value
+  * @param oLawType
+  *   The angular law type
+  * <br>Legal angular law type values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined law type (CATGSMBasicLawType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Constant law type (CATGSMBasicLawType_Constant)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Linear law type (CATGSMBasicLawType_Linear)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>S law type (CATGSMBasicLawType_SType)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>
+  * </tr>
+  * </table>
+  */
+  HRESULT GetAngularLaw(out CATIAAngle opStartAng, out CATIAAngle opEndAng, out long oLawType);
+
+  /**
+  * Sets the angular law useful in some linear sweep types.
+  * @param iStartAng
+  *   The angular law start value
+  * @param iEndAng
+  *   The angular law end value
+  * @param iLawType
+  *   The angular law type
+  * <br>Legal angular law type values are: 
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined law type (CATGSMBasicLawType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Constant law type (CATGSMBasicLawType_Constant)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>Linear law type (CATGSMBasicLawType_Linear)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>S law type (CATGSMBasicLawType_SType)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Law specified by a GSD law feature (CATGSMBasicLawType_Advanced)</td>
+  * </tr>
+  * </table>
+  */
+  HRESULT SetAngularLaw(in double iStartAng, in double iEndAng, in long iLawType);
+
+
+  /**
+  * Retrieves the number of lengths.
+  * @param oLen 
+  *   The number of lengths
+  */ 
+  HRESULT GetNbLength(out long oLen);
+
+  /**
+  * Removes a length.
+  */ 
+  HRESULT RemoveLength();
+
+  /**
+  * Sets the angular threshold.
+  * @param  iAngle 
+  *   The angle numerical value
+  */ 
+  HRESULT SetSmoothAngleThreshold(in double  iAngle);
+
+  /**
+  * Sets the deviation value (length) from guide curves allowed during sweeping
+  * operation in order to smooth it.
+  * @param  iLength 
+  *   The deviation value
+  */ 
+  HRESULT SetGuideDeviation(in double  iLength);
+
+  /**
+  * Retrieves the draft angle location element.
+  * @param iLoc
+  *  The draft angle location position in the list
+  * @param opIAElement
+  *  The geometric element at that location and where the draft angle applies
+  * @param oAngle
+  *  The draft angle
+  */ 
+  HRESULT GetDraftAngleDefinitionLocation(in long iLoc, out CATIAReference opIAElement, out CATIAAngle oAngle);
+
+  /**
+  * Retrieves the draft angle location list size.
+  * @param oCount
+  *   The draft angle location list size
+  */ 
+  HRESULT GetDraftAngleDefinitionLocationsNb(out long oCount);
+
+  /**
+  * Adds a draft angle location.
+  * @param ipIALocElem
+  *  The geometric element where the draft angle applies
+  * @param iAng
+  *  The draft angle
+  */ 
+  HRESULT AddDraftAngleDefinitionLocation(in CATIAReference ipIALocElem, in double iAng);
+
+  /**
+  * Removes a draft angle location.
+  * @param iPos
+  *  The position in the list of the draft angle location to remove
+  */ 
+  HRESULT RemoveDraftAngleDefinitionLocationPosition(in long iPos);
+
+  /**
+  * Retrieves the first length definition type.
+  * @param oFirstType
+  *  The first length definition type
+  *  <br>Legal length definition types are:
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined length type (CATGSMLinearSweepLengthType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Length of the swept line in
+  *       the sweeping plane from the guide curve (CATGSMLinearSweepLengthType_Standard)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>No numerical value is required,
+  *       equivalent to standard length at zero (CATGSMLinearSweepLengthType_FromCurve)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>Up to or from a geometrical
+  *       reference (a surface) (CATGSMLinearSweepLengthType_Reference)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Only for draft surfaces,
+  *       the length is computed in the draft direction from an extremum point on
+  *       the guide curve (CATGSMLinearSweepLengthType_FromExtremum)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">5</td>
+  *   <td>Only for draft surfaces,
+  *       the length will be used in a way similar to euclidean parallel curve
+  *       distance on the swept surface (CATGSMLinearSweepLengthType_AlongSurface)</td>
+  * </tr>
+  * </table>
+  * @param opIAElem
+  *  The geometric element where the first length definition type applies
+  */
+  HRESULT GetFirstLengthDefinitionType (out long oFirstType, out CATIAReference  opIAElem) ;
+
+  /**
+  * Sets the first length definition type.
+  * @param iFirstType
+  *  The first length definition type
+  *  <br>Legal length definition types are:
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined length type (CATGSMLinearSweepLengthType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Length of the swept line in
+  *       the sweeping plane from the guide curve (CATGSMLinearSweepLengthType_Standard)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>No numerical value is required,
+  *       equivalent to standard length at zero (CATGSMLinearSweepLengthType_FromCurve)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>Up to or from a geometrical
+  *       reference (a surface) (CATGSMLinearSweepLengthType_Reference)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Only for draft surfaces,
+  *       the length is computed in the draft direction from an extremum point on
+  *       the guide curve (CATGSMLinearSweepLengthType_FromExtremum)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">5</td>
+  *   <td>Only for draft surfaces,
+  *       the length will be used in a way similar to euclidean parallel curve
+  *       distance on the swept surface (CATGSMLinearSweepLengthType_AlongSurface)</td>
+  * </tr>
+  * </table>
+  * @param ipIAElem
+  *  The geometric element where the first length definition type applies
+  */
+  HRESULT SetFirstLengthDefinitionType(in  long iFirstType, in CATIAReference  ipIAElem) ;
+
+  /**
+  * Retrieves the second length definition type.
+  * @param oSecondType
+  *  The second length definition type
+  *  <br>Legal length definition types are:
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined length type (CATGSMLinearSweepLengthType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Length of the swept line in
+  *       the sweeping plane from the guide curve (CATGSMLinearSweepLengthType_Standard)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>No numerical value is required,
+  *       equivalent to standard length at zero (CATGSMLinearSweepLengthType_FromCurve)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>Up to or from a geometrical
+  *       reference (a surface) (CATGSMLinearSweepLengthType_Reference)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Only for draft surfaces,
+  *       the length is computed in the draft direction from an extremum point on
+  *       the guide curve (CATGSMLinearSweepLengthType_FromExtremum)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">5</td>
+  *   <td>Only for draft surfaces,
+  *       the length will be used in a way similar to euclidean parallel curve
+  *       distance on the swept surface (CATGSMLinearSweepLengthType_AlongSurface)</td>
+  * </tr>
+  * </table>
+  * @param opIAElem
+  *  The geometric element where the second length definition type applies
+  */
+  HRESULT GetSecondLengthDefinitionType (out long oSecondType, out CATIAReference  opIAElem) ;
+
+  /**
+  * Sets the second length definition type.
+  * @param iSecondType
+  *  The second length definition type
+  *  <br>Legal length definition types are:
+  * <table>
+  * <tr>
+  *   <td valign="top">0</td>
+  *   <td>Undefined length type (CATGSMLinearSweepLengthType_None)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">1</td>
+  *   <td>Length of the swept line in
+  *       the sweeping plane from the guide curve (CATGSMLinearSweepLengthType_Standard)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">2</td>
+  *   <td>No numerical value is required,
+  *       equivalent to standard length at zero (CATGSMLinearSweepLengthType_FromCurve)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">3</td>
+  *   <td>Up to or from a geometrical
+  *       reference (a surface) (CATGSMLinearSweepLengthType_Reference)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">4</td>
+  *   <td>Only for draft surfaces,
+  *       the length is computed in the draft direction from an extremum point on
+  *       the guide curve (CATGSMLinearSweepLengthType_FromExtremum)</td>
+  * </tr>
+  * <tr>
+  *   <td valign="top">5</td>
+  *   <td>Only for draft surfaces,
+  *       the length will be used in a way similar to euclidean parallel curve
+  *       distance on the swept surface (CATGSMLinearSweepLengthType_AlongSurface)</td>
+  * </tr>
+  * </table>
+  * @param ipIAElem
+  *  The geometric element where the second length definition type applies
+  */
+  HRESULT SetSecondLengthDefinitionType(in long iSecondType, in CATIAReference  ipIAElem) ;
+
+  /**
+  * Inserts a geometrical element and a value necessary for draft angle definition
+  * after a given position in the lists.
+  *   @param iElem
+  *      Geometrical element
+  *   @param iAngle
+  *      Angular parameter
+  *   @param iPos
+  *      Position in lists.
+  * To insert in the beginning of the list put iPos = 0.
+  */
+  HRESULT InsertDraftAngleDefinitionLocation(in CATIAReference iElem,
+    in CATIAAngle iAngle, 
+    in long iPos);
+
+  /**
+  * Removes all geometrical elements and values necessary for draft angle definition.
+  */
+  HRESULT RemoveAllDraftAngleDefinitionLocations();
+
+  /**
+  * Gets a sequence which identifies a solution amongst all possibilities
+  * of a line-profile swept surface, case CATGSMLinearSweep_TwoTangencySurfaces.
+  *   @param oSurfOri1
+  *      This orientation determines the location of the results with regard to
+  *      the first surface. Possible values are: <BR>
+  *      * +1 : the result is in the semi-space defined by the normal to the surface, <BR>
+  *      * -1 : the result is in the semi-space defined by the opposite to the normal to the surface, <BR>
+  *      * 0  : no orientation is specified, all the results are output, <BR>
+  *      * 2  : the result changes of semi-space along the spine. <BR>
+  *   @param oSurfOri2
+  *      This orientation determines the location of the results with regard to
+  *      the second surface.
+  *      Possible values are as for oSurfOri1.
+  *   @param oSurfCouplOri1
+  *      This orientation determines the location of the results with regard to
+  *      the trihedron defined by the the spine, the normal to the first surface and
+  *      the tangent to the linear profile. Possible values are: <BR>
+  *      * +1 : the output results are such that the triedron is counter clockwise, <BR>
+  *      * -1 : the output results are such that the triedron is clockwise, <BR>
+  *      * 0  : no orientation is specified, all the results are output, <BR>
+  *      * 2  : the orientation of the trihedron changes along the spine.
+  *   @param oSurfCouplOri2
+  *      This orientation determines the location of the results with regard to
+  *      the trihedron defined by the the spine, the normal to the second surface and
+  *      the tangent to the linear profile.
+  *      Possible values are as for oSurfCouplOri1.
+  *   @param oNo
+  *      Given the previous orientations, solution number in a distance ordered list.
+  */
+  HRESULT GetChoiceNbSurfaces (  out long oSurfOri1,
+    out long oSurfOri2,
+    out long oSurfCouplOri1,
+    out long oSurfCouplOri2,
+    out long oNo);
+  /**
+  * Sets a sequence which identifies a solution amongst all possibilities
+  * of a line-profile swept surface, case CATGSMLinearSweep_TwoTangencySurfaces.
+  *   @param iSurfOri1
+  *      This orientation determines the location of the results with regard to
+  *      the first surface. Possible values are: <BR>
+  *      * +1 : the result is in the semi-space defined by the normal to the surface, <BR>
+  *      * -1 : the result is in the semi-space defined by the opposite to the normal to the , <BR>
+  *      * 0  : no orientation is specified, all the results are output, <BR>
+  *      * 2  : the result changes of semi-space along the spine. <BR>
+  *   @param iSurfOri2
+  *      This orientation determines the location of the results with regard to
+  *      the second surface.
+  *      Possible values are as for iSurfOri1.
+  *   @param iSurfCouplOri1
+  *      This orientation determines the location of the results with regard to
+  *      the trihedron defined by the the spine, the normal to the first surface and
+  *      the tangent to the linear profile. Possible values are: <BR>
+  *      * +1 : the output results are such that the triedron is counter clockwise, <BR>
+  *      * -1 : the output results are such that the triedron is clockwise, <BR>
+  *      * 0  : no orientation is specified, all the results are output, <BR>
+  *      * 2  : the orientation of the trihedron changes along the spine.
+  *   @param iSurfCouplOri2
+  *      This orientation determines the location of the results with regard to
+  *      the trihedron defined by the the spine, the normal to the second surface and
+  *      the tangent to the linear profile.
+  *      Possible values are as for iSurfCouplOri2.
+  *   @param iNo
+  *      Given the previous orientations, solution number in a distance ordered list.
+  */
+  HRESULT SetChoiceNbSurfaces (  in  long iSurfOri1,
+    in  long iSurfOri2,
+    in  long iSurfCouplOri1,
+    in  long iSurfCouplOri2,
+    in  long iNo);
+
+  /**
+  * Gets length law types.
+  *   @param oFirstType
+  *      First type of law.
+  *   @param oSecondType
+  *      Second type of law.
+  *   oFirstType and oSecondType = 0 : Undefined law type
+  *								 = 1 : Constant law type
+  *								 = 2 : Linear law type
+  *								 = 3 : S law type
+  *								 = 4 : Law specified by a GSD law feature
+  *								 = 5 : Law specified by a set of points and parameters
+  */
+  HRESULT GetLengthLawTypes(out long oFirstType, out long oSecondType);
+  /**
+  * Sets length law types.
+  *   @param iFirstType
+  *      First type of law.
+  *   @param iSecondType
+  *      Second type of law.
+  *   iFirstType and iSecondType = 0 : Undefined law type
+  *								 = 1 : Constant law type
+  *								 = 2 : Linear law type
+  *								 = 3 : S law type
+  *								 = 4 : Law specified by a GSD law feature
+  *								 = 5 : Law specified by a set of points and parameters
+  */
+  HRESULT SetLengthLawTypes(in long iFirstType, in long iSecondType);
+
+  /**
+  * Returns or sets the context on Sweep feature.
+  * <ul>
+  * <li><b>0</b> This option creates Swept surface.</li>
+  * <li><b>1</b> This option creates Swept volume.</li>
+  * </ul>
+  * <br> Note: Setting volume result requires GSO License. 
+  * <dl>
+  * <dt><b>Example</b>:
+  * <dd>
+  * This example retrieves in <code>oContext</code> the context
+  * for the <code>Sweep</code> hybrid shape feature.
+  * <pre>
+  * Dim oContext
+  * Set oContext = Sweep.<font color="red">Context</font>
+  * </pre>
+  * </dl>
+  */
+
+#pragma PROPERTY Context
+  HRESULT get_Context ( out /*IDLRETVAL*/ long oContext );
+  HRESULT put_Context ( in                long iContext );
+
+  /**
+  * Returns or sets the choice number, which corresponds to each solution
+  * of a given linear sweep case.
+  * <br>For example: a linear sweep with reference surface leads
+  * to four possible solutions.
+  */
+#pragma PROPERTY SolutionNo 
+  HRESULT get_SolutionNo(out /*IDLRETVAL*/ long Elem);
+  HRESULT put_SolutionNo(in long Elem);
+
+  /**
+  * Returns or sets whether canonical surfaces of the swept surface are detected.
+  * <br><b>Legal values</b>:
+    *  <table>
+  *     <tr> <td>0</td> <td>No detection of canonical surface is performed.</td> </tr>
+  *     <tr> <td>2</td> <td>Detection of canonical surfaces is performed.</td> </tr>
+  *  </table>
+  */
+  
+#pragma PROPERTY CanonicalDetection
+  HRESULT get_CanonicalDetection(out /*IDLRETVAL*/ long oDetection);
+  HRESULT put_CanonicalDetection(in long iDetection);
+
+};
+
+// Interface name : CATIAHybridShapeSweepLine
+#pragma ID CATIAHybridShapeSweepLine "DCE:8d01da12-6566-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapeSweepLine
+
+// VB object name : HybridShapeSweepLine (Id used in Visual Basic)
+#pragma ID HybridShapeSweepLine "DCE:8d01da1c-5c8d-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapeSweepLine HybridShapeSweepLine
+
+#endif

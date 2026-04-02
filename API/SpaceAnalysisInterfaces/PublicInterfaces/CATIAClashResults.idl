@@ -1,0 +1,98 @@
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//===================================================================
+//
+// CATIAClashResults.idl
+//   This automation interface allows to manage CATIAClashResult collection.
+//
+//===================================================================
+#ifndef CATIAClashResults_IDL
+#define CATIAClashResults_IDL
+
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+
+#include "CATIAClashResult.idl"
+#include "CatClashImportType.idl"
+#include "CATVariant.idl"
+
+/**  
+ * A collection of all ClashResult objects currently managed by the application.
+ * <p>The results linked to a specification are not managed thru this collection (see @href CATIAClashes ).
+ * <p>The method <tt>GetTechnologicalObject("ClashResults")</tt> on the root product, allows you to retrieve this collection.
+ */
+interface CATIAClashResults : CATIACollection
+{
+  /**
+   * Creates a ClashResult object from a XML file
+   * and adds it to the ClashResults collection.
+   * @param iPath
+   *    The path of the XML file.
+   * @param iType
+   *    The type of import.
+   * @return
+   *    The created ClashResult
+   * @sample
+   *    This example creates a new ClashResult in the <tt>TheClashResults</tt> collection.
+   *    <pre>
+   *    Dim NewClashResult As ClashResult
+   *    Set NewClashResult = TheClashResults.<font color="red">AddFromXML</font>("c:\tmp\sample.xml", CatClashImportTypeClashOnly)
+   *    </pre>
+   */
+  HRESULT AddFromXML(in CATBSTR iPath, in CatClashImportType iType, out /*IDLRETVAL*/ CATIAClashResult oClashResult);
+
+  /**
+   * Returns a ClashResult object using its index or its name from the ClashResults collection.
+   * @param iIndex
+   *    The index or the name of the ClashResult to retrieve from the collection of ClashResults.
+   *    As a numerics, this index is the rank of the ClashResult in the collection.
+   *    The index of the first ClashResult in the collection is 1, and
+   *    the index of the last ClashResult is Count.
+   *    As a string, it is the name you assigned to the ClashResult.
+   * @sample
+   *    This example retrieves in <tt>ThisClashResult</tt> the ninth ClashResult,
+   *    and in <tt>ThatClashResult</tt> the ClashResult named
+   *    <tt>ClashResult Of MyProduct</tt> from the <tt>TheClashResults</tt> collection. 
+   *    <pre>
+   *    Dim ThisClashResult As ClashResult
+   *    Set ThisClashResult = TheClashResults.<font color="red">Item</font>(9)
+   *    Dim ThatClashResult As ClashResult
+   *    Set ThatClashResult = TheClashResults.<font color="red">Item</font>("ClashResult Of MyProduct")
+   *    </pre>
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAClashResult oClashResult);
+
+  /**
+   * Removes a ClashResult object from the ClashResults collection.
+   * @param iIndex
+   *    The index or the name of the ClashResult to remove from the collection of ClashResults.
+   *    As a numerics, this index is the rank of the ClashResult in the collection.
+   *    The index of the first ClashResult in the collection is 1, and
+   *    the index of the last ClashResult is Count.
+   *    As a string, it is the name you assigned to the ClashResult.
+   * @sample
+   *    The following example removes the tenth ClashResult and the ClashResult named
+   *    <tt>ClashResult Of MyProduct</tt> from the <tt>TheClashResults</tt> collection.
+   *    <pre>
+   *    TheClashResults.<font color="red">Remove</font>(10)
+   *    TheClashResults.<font color="red">Remove</font>("ClashResult Of MyProduct")
+   *    </pre>
+   */
+  HRESULT Remove(in CATVariant iIndex);
+
+};
+
+// Interface name : CATIAClashResults
+#pragma ID CATIAClashResults "DCE:34b4e600-62ab-4bea-a9f54019bf60f37e"
+#pragma DUAL CATIAClashResults
+
+// VB object name : ClashResults (Id used in Visual Basic)
+#pragma ID ClashResults "DCE:5bd65a78-db11-49e7-a3b4aa8be57d848c"
+#pragma ALIAS CATIAClashResults ClashResults
+
+#endif

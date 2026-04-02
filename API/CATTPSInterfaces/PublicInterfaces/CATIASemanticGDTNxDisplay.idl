@@ -1,0 +1,63 @@
+#ifndef CATIASemanticGDTNxDisplay_IDL
+#define CATIASemanticGDTNxDisplay_IDL
+
+// COPYRIGHT Dassault Systemes 2018
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+interface CATIASemanticGDTCommonZone;
+
+/**
+ * Interface to distinguish Collection of features from Separate features GDT.
+ */
+interface CATIASemanticGDTNxDisplay : CATIABase
+{
+  #pragma PROPERTY InstanceCount
+    /**
+     * Gets count of instances.
+     */
+    HRESULT get_InstanceCount (out /*IDLRETVAL*/ long oInstanceCount);
+
+    /**
+    * Checks if GDT is Separate Features.
+    * In ASME Standard this is indicated with the "INDIVIDUALLY" text linked to the GDT.
+    * @param oIsSeparate
+    * <ul>
+    * <li>TRUE: The GDT is applied on several elements as many separate specifications. </li>
+    * <li>FALSE: The GDT is not applied with a separate consideration. It must be a collection.</li>
+    */
+    HRESULT IsASeparate (out /*IDLRETVAL*/ boolean oIsSeparate);
+
+    /**
+    * Checks if GDT is Collection of Features.
+    * In ISO Standard, GDT may have a CZ modifier on tolerance value.
+    * @param oIsColl
+    * <ul>
+    * <li>TRUE: The GDT is applied on several elements considered as a collection </li>
+    * <li>FALSE: The GDT is not applied with a collection consideration. It must be a separate.</li>
+    */
+    HRESULT IsACollection (out /*IDLRETVAL*/ boolean oIsColl);
+
+    /**
+    * Gets the GDT on the Common Zone interface to access CZ modifier information.
+    * Method is only returning a valid object if ISO Standard is applied.
+    * @param oCommonZone
+    *   Common Zone related information.
+    */
+    HRESULT CommonZone (out /*IDLRETVAL*/ CATIASemanticGDTCommonZone oCommonZone);
+};
+
+// Interface name : CATIASemanticGDTNxDisplay
+#pragma ID CATIASemanticGDTNxDisplay "DCE:462d506f-482e-4078-aaf27ada966ee66e"
+#pragma DUAL CATIASemanticGDTNxDisplay
+
+// VB object name : SemanticGDTNxDisplay (Id used in Visual Basic)
+#pragma ID SemanticGDTNxDisplay "DCE:1224fa61-c8d7-4bf5-af3f9a9e099014e8"
+#pragma ALIAS CATIASemanticGDTNxDisplay SemanticGDTNxDisplay
+
+#endif

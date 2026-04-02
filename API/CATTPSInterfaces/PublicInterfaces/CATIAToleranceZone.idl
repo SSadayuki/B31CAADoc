@@ -1,0 +1,40 @@
+#ifndef CATIAToleranceZone_IDL
+#define CATIAToleranceZone_IDL
+
+// COPYRIGHT Dassault Systemes 2002
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+/**
+ * Interface for accessing tolerance zone informations of a TPS.
+ */
+interface CATIAToleranceZone : CATIABase 
+{
+   /**
+     * Retrieves tolerance zone value (in millimeters).
+     */
+  #pragma PROPERTY Value
+    HRESULT get_Value (out /*IDLRETVAL*/ double oValue);
+    HRESULT put_Value (in double iValue);
+   /**
+     * Retrieves tolerance zone form.
+     */
+  #pragma PROPERTY Form
+    HRESULT get_Form (inout /*IDLRETVAL*/ CATBSTR oForm);
+    HRESULT put_Form (in CATBSTR iForm);
+};
+
+// Interface name : CATIAToleranceZone
+#pragma ID CATIAToleranceZone "DCE:b170cfec-158b-11d6-be7b0002b341dd3a"
+#pragma DUAL CATIAToleranceZone
+
+// VB object name : ToleranceZone (Id used in Visual Basic)
+#pragma ID ToleranceZone "DCE:b170cfed-158b-11d6-be7b0002b341dd3a"
+#pragma ALIAS CATIAToleranceZone ToleranceZone
+
+#endif

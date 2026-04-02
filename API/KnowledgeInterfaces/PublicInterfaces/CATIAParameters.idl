@@ -1,0 +1,328 @@
+#ifndef CATIAParameters_IDL
+#define CATIAParameters_IDL
+/*IDLREP*/
+
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATBSTR.idl"
+#include "CATVariant.idl"
+
+interface CATIAParameter;
+interface CATIAStrParam;
+interface CATIAIntParam;
+interface CATIABoolParam;
+interface CATIARealParam;
+interface CATIADimension;
+interface CATIAUnits;
+interface CATIAListParameter;
+interface CATIAParameterSet;
+
+/**
+ * Represents the Parameters collection of the part or the product.
+ * The following example shows how to retrieve it:
+ *  <pre>
+*	Dim CATDocs As Documents
+ * Set CATDocs = CATIA.Documents
+ * Dim part1 As Document
+ * Set part1   = CATDocs.Add("CATPart")
+ * Dim parameterList As Parameters
+ *  Set parameterList = part1.Part.Parameters
+ *  </pre>
+ */
+
+//-----------------------------------------------------------------
+interface CATIAParameters : CATIACollection
+{
+    //=====================================
+    //============   Methods  =============
+    //=====================================
+    /**
+     * Creates a string parameter and adds it to
+     * the part's collection of  parameters.
+     * @param iName
+     *    The parameter name
+     * @param iValue
+     *    The parameter value
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <tt>responsible</tt> string parameter
+     * and adds it to the newly created part:
+     * <pre>
+     *  Set CATDocs = CATIA.Documents
+     *  Set part1   = CATDocs.Add("CATPart")
+     *  Set density = part1.Part.Parameters.<font color="red">CreateString</font> ("responsible", "The Boss")
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateString
+                (in                   CATBSTR             iName,
+                 in                   CATBSTR             iValue,
+                 out   /*IDLRETVAL*/  CATIAStrParam       oParameter);
+
+
+
+    /**
+     * Creates a real parameter and adds it to
+     * the part's collection of  parameters.
+     * @param iName
+     *    The parameter name
+     * @param iValue
+     *    The parameter value
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <tt>ReliabilityRate</tt> real parameter
+     * and adds it to the newly created part:
+     * <pre>
+  	 *	Dim CATDocs As Documents
+ 		 * Set CATDocs = CATIA.Documents
+ 		 * Dim part1 As Document
+ 		 * Set part1   = CATDocs.Add("CATPart")
+		 * Dim rate As RealParam
+     *  Set rate = part1.Part.Parameters.<font color="red">CreateReal</font> ("ReliabilityRate", 2.5 )
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateReal
+                (in                   CATBSTR             iName,
+                 in                   double              iValue,
+                 out   /*IDLRETVAL*/  CATIARealParam      oParameter);
+
+    /**
+     * Creates an integer parameter</b> and adds it to
+     * the part's collection of  parameters.
+     * @param iName
+     *    The parameter name
+     * @param iValue
+     *    The parameter value
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <tt>RevisionNumber</tt> integer parameter
+     * and adds it to the newly created part:
+     * <pre>
+  	 *	Dim CATDocs As Documents
+ 		 * Set CATDocs = CATIA.Documents
+ 		 * Dim part1 As Document
+ 		 * Set part1   = CATDocs.Add("CATPart")
+		 * Dim revision As IntParam
+     *  Set revision = part1.Part.Parameters.<font color="red">CreateInteger</font> ("RevisionRumber", 17)
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateInteger
+                (in                   CATBSTR             iName,
+                 in                   long                iValue,
+                 out   /*IDLRETVAL*/  CATIAIntParam       oParameter);
+
+    /**
+     * Creates a boolean parameter and adds it to
+     * the part's collection of  parameters.
+     * @param iName
+     *    The parameter name
+     * @param iValue
+     *    The parameter value
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <tt>checked</tt> boolean parameter
+     * and adds it to the newly created part:
+     * <pre>
+  	 *	Dim CATDocs As Documents
+ 		 * Set CATDocs = CATIA.Documents
+ 		 * Dim part1 As Document
+ 		 * Set part1   = CATDocs.Add("CATPart")
+		 * Dim chk As BooleanParam
+     *  Set chk = part1.Part.Parameters.<font color="red">CreateBoolean</font> ("checked", False)
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateBoolean
+                (in                   CATBSTR             iName,
+                 in                   boolean             iValue,
+                 out   /*IDLRETVAL*/  CATIABoolParam      oParameter);
+
+    /**
+     * Creates a user dimension and adds it to
+     * the part's collection of  parameters.
+     * @param iName
+     *    The dimension name
+     * @param iMagnitude
+     *    The dimension magnitude.
+     *    Units are those of the IS system.
+     *    Valid magnitudes are:
+     *    <ul>
+     *    <li>"LENGTH": the unit is the meter.
+     *    <li>"ANGLE": the unit is the radian.
+     *    </ul>
+     *    The @href CATIADimension object provides the @href CATIADimension#ValuateFromString method
+     *    with which you may express the value in any unit for a given
+     *    dimension (see the example below).
+     * @param iValue
+     *    The dimension value provided as a real number
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates a <tt>LENGTH</tt> dimension
+     * and adds it to the newly created part. The initial value
+     * is expressed in meters. The new value is expressed in 
+     * millimeters. 
+     * <pre>
+		 * Dim depth As Dimension
+     * Set depth = parameters.<font color="red">CreateDimension</font>("depth", "LENGTH", 20)
+     * depth.ValuateFromString("300mm");
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateDimension
+                (in                   CATBSTR             iName,
+                 in                   CATBSTR             iMagnitude,
+                 in                   double              iValue,
+                 out   /*IDLRETVAL*/  CATIADimension      oParameter);
+
+	/**
+     * Creates a list parameter and adds it to
+     * the part's collection of  parameters.
+     * @param iName
+     *    The parameter name
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example creates the <tt>ListName</tt> list parameter
+     * and adds it to the newly created part:
+     * <pre>
+     *  Set CATDocs = CATIA.Documents
+     *  Set part1   = CATDocs.Add("CATPart")
+     *  Set list1 = part1.Part.Parameters.<font color="red">CreateList</font> ("ListName")
+     * </pre>
+     * </dl>
+     */
+    HRESULT     CreateList
+                (in                   CATBSTR             iName,
+                 out   /*IDLRETVAL*/  CATIAListParameter       oParameter);
+
+    /**
+     * Retrieves a parameter  using its index or its name from the
+     * from the Parameters collection.
+     * @param iIndex
+     *   The index or the name of the parameter to retrieve from
+     *   the collection of parameters.
+     *   As a numerics, this index is the rank of the parameter
+     *   in the collection.
+     *   The index of the first parameter in the collection is 1, and
+     *   the index of the last parameter is Count.
+     *   As a string, it is the name you assigned to the parameter using
+     *   the @href CATIABase#Name property or when creating the parameter.
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example retrieves the last parameter in the <tt>parameters</tt>
+     * collection:
+     * <pre>
+     * Set lastParameter = parameters.<font color="red">Item</font>(parameters.Count)
+     * </pre>
+     * </dl>
+     */
+    HRESULT     Item
+                ( in                CATVariant            iIndex
+                , out /*IDLRETVAL*/ CATIAParameter        oParameter
+                );
+
+    /**
+     * Removes a parameter from the Parameters collection. 
+     * @param iIndex
+     *   The index or the name of the parameter to remove from
+     *   the collection of parameters.
+     *   As a numerics, this index is the rank of the parameter
+     *   in the collection.
+     *   The index of the first parameter in the collection is 1, and
+     *   the index of the last parameter is Count.
+     *   As a string, it is the name you assigned to the parameter using
+     *   the @href CATIABase#Name property or when creating the parameter.
+     * <! @sample >
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example removes the "depth" parameter from the <tt>parameters</tt>
+     * collection. 
+     * <pre>
+     * parameters.<font color="red">Remove</font>("depth")
+     * </pre>
+     * </dl>
+     */
+     HRESULT   Remove(in CATVariant iIndex);
+
+
+	/**
+	* Returns a sub-collection of parameters aggregated to an object.<br>
+	* @param iObject
+	* The object used to filter the whole parameter 
+	* collection to get the resulting sub-collection.
+	* @param iRecursively
+	* A flag to specify if children parameters are to be searched for in the returned collection
+	* <! @sample >
+    * <dt><b>Example:</b>
+	* <dd>
+    * This example shows how to retrieve a collection of parameters that are
+		* associated to a Pad.
+    * <pre>
+	* Dim Parameters1 As Parameters
+	* Set Parameters1 = CATIA.ActiveDocument.Part.Parameters gets the collection of parameters in the part
+	* Dim Body0 As AnyObject
+	* Set Body0 = CATIA.ActiveDocument.Part.Bodies.Item  ( "MechanicalTool.1" ) 
+	* Dim Pad1 As AnyObject
+	* Set Pad1 = Body0.Shapes.Item  ( "Pad.1" ) gets the pad Pad.1
+	* Dim Parameters2 As Parameters
+	* Set Parameters2 = Parameters1.SubList(Pad1,TRUE) gets the collection of parameters that are under the pad Pad.1
+	* </pre>
+	* </dl>
+	*/
+	HRESULT SubList(in CATIABase iObject, in boolean iRecursively, out /*IDLRETVAL*/ CATIAParameters oListParameters);
+
+	/**
+	* Returns the collection of units.
+	*/
+#pragma PROPERTY Units
+	HRESULT get_Units(inout /*IDLRETVAL*/ CATIAUnits oUnits);
+
+	/**
+	* Returns a correct name of a feature to use it in a relation.
+	*/
+	HRESULT GetNameToUseInRelation(in CATIABase iObject, inout /*IDLRETVAL*/ CATBSTR oName);
+
+	/**
+	* Creates a set of parameters and appends it to argument iFather.
+	*/
+	HRESULT CreateSetOfParameters(in CATIABase iFather);
+
+	/**
+	* Returns the root parameter set of a document. If it doesn't exist, it is created.
+	*/ 
+#pragma PROPERTY RootParameterSet
+	HRESULT get_RootParameterSet(inout /*IDLRETVAL*/ CATIAParameterSet oParameterSet);
+};
+
+// Interface name : CATIAParameters
+#pragma ID CATIAParameters "DCE:60ce5a40-5478-11d1-a2720000f87546fd"
+#pragma DUAL CATIAParameters
+
+// VB object name : Parameters (Id used in Visual Basic)
+#pragma ID Parameters "DCE:610eb9be-5478-11d1-a2720000f87546fd"
+#pragma ALIAS CATIAParameters Parameters
+
+
+#endif
+// CATIAParameters_IDL
+

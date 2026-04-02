@@ -1,0 +1,67 @@
+#ifndef CATIABoolParam_IDL
+#define CATIABoolParam_IDL
+/*IDLREP*/
+               
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/** 
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIAEnumParam.idl"
+
+/**
+ * Represents the boolean parameter.
+ * The following example shows how to create it:
+ *  <pre>
+ *	Dim CATDocs As Documents
+ *  Set CATDocs      = CATIA.Documents
+ *	Dim part1 As Document
+ *  Set part1        = CATDocs.Add("CATPart")
+ *	Dim availability As BooleanParam
+ *  Set availability = part1.Parameters.CreateBoolean("availability", True)
+ *  </pre>
+ */
+
+//-----------------------------------------------------------------
+interface CATIABoolParam : CATIAEnumParam
+{
+    //===========================
+    //======= Properties ========
+    //===========================
+    //....ON VALUE
+    /**
+     * Returns or sets the value of the boolean parameter.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * This example sets the <tt>availability</tt> boolean parameter value to True
+     * if its value is False:
+     * <pre>
+     * If (availability.<font color="red">Value</font> = False)  Then
+     *     availability.<font color="red">Value</font> = True
+     * End If
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY Value
+    HRESULT    get_Value    
+                ( out /*IDLRETVAL*/   boolean             oValue );
+    HRESULT    put_Value    
+                ( in                  boolean             iValue );
+};
+
+// Interface name : CATIABoolParam
+#pragma ID CATIABoolParam "DCE:7e1498cb-5464-11d1-a2720000f87546fd"
+#pragma DUAL CATIABoolParam
+
+// VB object name : BoolParam (Id used in Visual Basic)
+#pragma ID BoolParam "DCE:7e66d9ec-5464-11d1-a2720000f87546fd"
+#pragma ALIAS CATIABoolParam BoolParam
+
+
+#endif
+// CATIABoolParam_IDL
+

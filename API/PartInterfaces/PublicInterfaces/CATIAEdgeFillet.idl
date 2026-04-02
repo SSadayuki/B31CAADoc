@@ -1,0 +1,144 @@
+#ifndef CATIAEdgeFillet_IDL
+#define CATIAEdgeFillet_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATIAEdgeFillet:                           
+// Exposed interface for Mechanical Fillet
+//                                   
+//=================================================================
+
+#include "CATIAFillet.idl"
+#include "CATFilletDefs.idl"
+
+interface CATIAReferences;
+interface CATIAReference;
+
+/**
+ * Represents the edges-based fillet shape.
+ * It is the base object for constant radius edge fillets and
+ * variable radius edge fillets.
+ * @see CATIAConstRadEdgeFillet, CATIAVarRadEdgeFillet
+ */
+
+//-----------------------------------------------------------------
+interface CATIAEdgeFillet : CATIAFillet
+{
+    //        ================
+    //        == PROPERTIES ==
+    //        ================
+    //
+    //    ON EDGES PROPAGATION MODE
+    //    -------------------------
+    //
+    /**
+     * Returns or sets the edge fillet propagation mode.
+     * This propagation mode is used when computing the edges to be filleted.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>mode</tt> the edge fillet
+     * propagation mode of the <tt>firstEdgeFillet</tt> edge fillet,
+     * and then sets it to <tt>CATMinimalFilletEdgePropagation</tt>,
+     * so that a minimum numbers of edges will be filleted:
+     * <pre>
+     * Set mode = firstEdgeFillet.<font color="red">EdgePropagation</font>
+     * Set firstEdgeFillet.<font color="red">EdgePropagation</font> = CATMinimalFilletEdgePropagation
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY EdgePropagation
+    HRESULT    get_EdgePropagation ( out /*IDLRETVAL*/ CatFilletEdgePropagation oPropagation ) ;
+    HRESULT    put_EdgePropagation ( in                CatFilletEdgePropagation iPropagation ) ;
+
+    //
+    //    ON EDGES TO KEEP 
+    //    ----------------
+    //
+    /**
+     * Returns the collection of edges to keep by the edge fillet.
+     * <! @sample >
+     * <dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example returns in <tt>edges</tt>
+     * the edges to keep of the
+     * constant radius edge fillet <tt>firstCstEdgeFillet</tt>:
+     * <pre>
+     * Set edges = firstCstEdgeFillet.<font color="red">EdgesToKeep</font>
+     * </pre>
+     * </dl>
+     */
+#pragma PROPERTY EdgesToKeep
+    HRESULT    get_EdgesToKeep ( out /*IDLRETVAL*/ CATIAReferences oEdgesToKeep );
+
+
+    // ADDING AN EDGE TO KEEP
+    // ----------------------
+    //
+    /**
+     * Adds a new edge to keep by the filleting operation.
+     * The edge to keep is not modified by the fillet.
+     * @param iEdgeToKeep
+     *   The edge to keep by the filleting operation<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIATriDimFeatEdge.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example adds the new <tt>edge</tt> edge
+     * to be kept from filleting by the constant radius edge fillet
+     * <tt>firstCstEdgeFillet</tt>:
+     * <pre>
+     * firstCstEdgeFillet.<font color="red">AddEdgeToKeep</font>(edge)
+     * </pre>
+     * </dl>
+     */
+    HRESULT   AddEdgeToKeep ( in CATIAReference iEdgeToKeep );
+
+    // WITHDRAW AN EDGE TO KEEP
+    // ------------------------
+    //
+    /**
+     * Withdraws an edge from those kept by a filleting operation.
+     * @param iEdgeToWithdraw
+     *   The edge to withdraw<br>
+     * The following @href CATIABoundary object is supported: 
+     * @href CATIATriDimFeatEdge.
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>The following example withdraws the <tt>edge</tt> edge
+     * from those kept from filleting by the constant radius edge fillet
+     * <tt>firstCstEdgeFillet</tt>:
+     * <pre>
+     * firstCstEdgeFillet.<font color="red">WithdrawEdgeToKeep</font>(edge)
+     * </pre>
+     * </dl>
+     */
+    HRESULT   WithdrawEdgeToKeep ( in CATIAReference iEdgeToWithdraw );
+
+
+
+
+};
+
+// Interface name : CATIAEdgeFillet
+#pragma ID CATIAEdgeFillet "DCE:283e27f7-610a-11d1-a27d0000f87546fd"
+#pragma DUAL CATIAEdgeFillet
+
+// VB object name : EdgeFillet (Id used in Visual Basic)
+#pragma ID EdgeFillet "DCE:28644d97-610a-11d1-a27d0000f87546fd"
+#pragma ALIAS CATIAEdgeFillet EdgeFillet
+
+
+#endif
+// CATIAEdgeFillet_IDL
+

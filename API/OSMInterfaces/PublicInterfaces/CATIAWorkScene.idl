@@ -1,0 +1,250 @@
+// COPYRIGHT DASSAULT SYSTEMES 2000
+//===================================================================
+//
+// CATIAWorkScene.idl
+//   This automation interface allows to manage a Scene.
+//
+//===================================================================
+//
+//  Jan 2000  Creation: OBE
+//
+//===================================================================
+#ifndef CATIAWorkScene_IDL
+#define CATIAWorkScene_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIABase.idl"
+
+#include "CATBSTR.idl"
+#include "CATIAMove.idl"
+#include "CATIAPosition.idl"
+#include "CatProductSource.idl"
+#include "CatFileType.idl"
+#include "CatRepType.idl"
+#include "CATIAProduct.idl"
+#include "CATIAScene.idl"
+
+interface CATIACollection;
+interface CATIAReference;
+
+/**
+ * Represent the scene.
+ * A scene stores a state of a product in a given ProductDocument.
+ * <p>This state is composed of product properties, graphical attibutes, activation status
+ * and position for each component of the product.
+ */
+interface CATIAWorkScene : CATIABase
+{
+  /**
+   * Returns whether the product has a master shape representation in the scene.
+   * @param iProduct
+   *    The product
+   * @return
+   *    True if the product has a master shape representation.
+   * @sample
+   *    This example returns whether the <tt>Engine</tt> product has a master shape representation
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    HasMSRep = Configuration1.<font color="red">HasAMasterShapeRepresentation</font>(Engine)
+   *    </pre>
+   */
+  HRESULT HasAMasterShapeRepresentation ( in CATIAProduct iProduct, out  /*IDLRETVAL*/ boolean oHasAShape);
+  /**
+   * Retrieves the product's master shape representation.
+   * @param iProduct.
+   *    The product
+   * @param iLoadIfNecessary
+   *   Parameter to set to True if the master shape representation
+   *   should be loaded to determine if it exists, or to False otherwise.
+   * @return
+   *    The product's master shape representation.
+   * @sample
+   *    This example retrieves the <tt>Engine</tt> product's master shape representation
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim MSRep As Object
+   *    Set MSRep = Configuration1.<font color="red">GetMasterShapeRepresentation</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetMasterShapeRepresentation ( in CATIAProduct iProduct, in boolean  iLoadIfNecessary
+                                        ,out  /*IDLRETVAL*/ CATBaseDispatch oMasterShapeRep);
+  /**
+   * Returns the product's part number.
+   * @param iProduct
+   *    The product.
+   * @return
+   *    The product's part number.
+   * @sample
+   *    This example retrieves the <tt>Engine</tt> product's part number
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim PartNumber As String
+   *    PartNumber = Configuration1.<font color="red">GetPartNumber</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetPartNumber (in CATIAProduct iProduct, inout /*IDLRETVAL*/ CATBSTR oPartNumber);
+  /**
+   * Returns the product's revision number.
+   * @param iProduct
+   *    The product.
+   * @return
+   *    The product's revision number.
+   * @sample
+   *    This example retrieves the <tt>Engine</tt> product's revision number
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim Revision As String
+   *    Revision = Configuration1.<font color="red">GetRevision</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetRevision (in CATIAProduct iProduct, inout /*IDLRETVAL*/ CATBSTR oRevision);
+  /**
+   * Returns the product's definition.
+   * @param iProduct
+   *    The product.
+   * @return
+   *    The product's definition.
+   * @sample
+   *    This example retrieves the <tt>Engine</tt> product's definition
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim Definition As String
+   *    Definition = Configuration1.<font color="red">GetDefinition</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetDefinition (in CATIAProduct iProduct, inout /*IDLRETVAL*/ CATBSTR oDefinition);
+
+  /**
+   * Returns the product's nomenclature.
+   * @param iProduct
+   *    The product.
+   * @return
+   *    The product's nomenclature.
+   * @sample
+   *    This example retrieves the <tt>Engine</tt> product's nomenclature
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim Nomenclature As String
+   *    Nomenclature = Configuration1.<font color="red">GetNomenclature</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetNomenclature (in CATIAProduct iProduct, inout /*IDLRETVAL*/ CATBSTR oNomenclature);
+
+  /**
+   * Returns the product's source.
+   * @param iProduct
+   *    The product.
+   * @return
+   *    The product's source.
+   * @sample
+   *    This example retrieves the <tt>Engine</tt> product's source
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim Source
+   *    Source = Configuration1.<font color="red">GetSource</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetSource (in CATIAProduct iProduct, inout /*IDLRETVAL*/ CatProductSource oSource);
+
+  /**
+   * Returns the product's description.
+   * @param iProduct
+   *    The product.
+   * @return
+   *    The product's description.
+   * @sample
+   *    This example retrieves the <tt>Engine</tt> product's description
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim Description As String
+   *    Description = Configuration1.<font color="red">GetDescription</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetDescription (in CATIAProduct iProduct, inout /*IDLRETVAL*/ CATBSTR oDescription);
+
+  /**
+   * Returns the product's move object.
+   * The move object is aggregated by the product object
+   * and itself aggregates a movable object
+   * to which you can apply a move transformation
+   * by means of an isometry matrix. It moves your product
+   * master shape representation according to this isometry.
+   * @param iProduct
+   *    The product
+   * @return
+   *    The move.
+   * @sample
+   *    This example retrieves the <tt>EngineMove</tt> move from the <tt>Engine</tt> product
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim EngineMove As Move
+   *    Set EngineMove = Configuration1.<font color="red">GetMove</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetMove(in CATIAProduct iProduct, out /*IDLRETVAL*/ CATIAMove oMove);
+
+  /**
+   * Returns the product's position object in the scene.
+   * The position object is the object aggregated by the product object that
+   * holds the position of the master shape representation in the space.
+   * @param iProduct
+   *    The product
+   * @return
+   *    The position.
+   * @sample
+   *    This example retrieves the <tt>EnginePosition</tt> position from the <tt>Engine</tt> product
+   *    in the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim EnginePosition As Position
+   *    Set EnginePosition = Configuration1.<font color="red">GetPosition</font>(Engine)
+   *    </pre>
+   */
+  HRESULT GetPosition(in CATIAProduct iProduct, out /*IDLRETVAL*/ CATIAPosition oPosition); 
+
+  /**
+   * Create a ProductScene in Partial mode from the current Scene.
+   * @return
+   *    The new ProductScene.
+   * @sample
+   *    This example creates the <tt>PartialScene</tt> ProductScene from the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim PartialScene As ProductScene
+   *    Set PartialScene = Configuration1.<font color="red">UpgradeToPartial</font>
+   *    </pre>
+   */
+  HRESULT UpgradeToPartial(out /*IDLRETVAL*/ CATIAScene oProductScene);
+
+  /**
+   * Create a ProductScene in Full mode from the current Scene.
+   * @return
+   *    The new ProductScene.
+   * @sample
+   *    This example creates the <tt>FullScene</tt> ProductScene from the <tt>Configuration1</tt> scene.
+   *    <pre>
+   *    Dim FullScene As ProductScene
+   *    Set FullScene = Configuration1.<font color="red">UpgradeToFull</font>
+   *    </pre>
+   */
+  HRESULT UpgradeToFull(out /*IDLRETVAL*/ CATIAScene oProductScene);
+
+};
+
+// Interface name : CATIAWorkScene
+#pragma ID CATIAWorkScene "DCE:e5e79d5a-cf56-11d3-876d006094eb3996"
+#pragma DUAL CATIAWorkScene
+
+// VB object name : Scene (Id used in Visual Basic)
+#pragma ID Scene "DCE:e5e79d5b-cf56-11d3-876d006094eb3996"
+#pragma ALIAS CATIAWorkScene Scene
+
+#endif
+
+
+
+
+

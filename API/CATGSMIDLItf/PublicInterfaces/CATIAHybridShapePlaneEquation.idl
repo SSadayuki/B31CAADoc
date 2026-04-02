@@ -1,0 +1,174 @@
+#ifndef CATIAHybridShapePlaneEquation_IDL
+#define CATIAHybridShapePlaneEquation_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 2000
+
+/**
+  * @CAA2Level L1
+  * @CAA2Usage U3
+  */
+
+
+//=================================================================
+//=================================================================
+//           
+// CATIAHybridShapePlaneEquation:         
+// Exposed interface for HybridShape PlaneEquation
+//           
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Avril98 Creation
+//=================================================================
+#include "CATIAHybridShapePlane.idl"
+#include "CATIALength.idl"
+#include "CATIARealParam.idl"
+
+/**
+ * Plane define by an equation plane.
+ * <b>Role</b>:  Allows to access data of the plane feature created by its
+ * cartesian equation.
+ * Plane equation is Ax+By+Cz = D.
+ */
+
+//-----------------------------------------------------------------
+interface CATIAHybridShapePlaneEquation : CATIAHybridShapePlane
+{
+    //        =============
+    //        == METHODS ==
+    //        =============
+
+#pragma PROPERTY A
+
+
+
+
+
+ /**
+ * Gets A coefficient for plane equation. 
+ * @param oA 
+ *   A Coefficient of cartesian plane 
+ *   @see CATIARealParam 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_A ( out /*IDLRETVAL*/  CATIARealParam   oA);
+
+#pragma PROPERTY B
+
+
+
+
+
+ /**
+  * Gets B coefficient for plane equation. 
+  * @param oB 
+ *   B Coefficient of cartesian plane 
+ *   @see CATIARealParam 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_B ( out /*IDLRETVAL*/  CATIARealParam   oB);
+
+#pragma PROPERTY C
+
+
+
+
+
+ /**
+  * Gets C coefficient for plane equation. 
+  * @param oC 
+ *   C Coefficient of cartesian plane 
+ *   return value for CATScript applications, with (IDLRETVAL) function type
+ *   @see CATIARealParam 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_C ( out /*IDLRETVAL*/  CATIARealParam   oC);
+
+#pragma PROPERTY D
+
+
+
+
+
+ /**
+  * Gets D coefficient for plane equation. 
+ * @param oD 
+ *   D Coefficient of cartesian plane 
+ *   @see CATIALength 
+ * @return HRESULT 
+ *   S_OK   if Ok 
+ *   E_FAIL else 
+ *   return error code for C++ Implementations
+ * @see CATIAHybridShapeFactory 
+ */ 
+ HRESULT get_D ( out /*IDLRETVAL*/  CATIALength   oD);
+
+ //  ================
+ //  == METHODS ==
+ //  ================
+
+ /**
+ * Gets the reference point.
+ *   @param oReferencePoint
+ *      reference  point 
+ */
+ HRESULT GetReferencePoint(out /*IDLRETVAL*/ CATIAReference  oReferencePoint);
+
+ /**
+ * Sets the reference point.
+ *   @param iReferencePoint
+ *      reference  point 
+ */
+ HRESULT SetReferencePoint(in     CATIAReference  iReferencePoint);
+
+/**
+ * Returns or Sets the reference Axis System for PlaneEquation feature.
+ *<br>This data is not mandatory, if element is null, the absolute axis system is taken.
+ *<br>When an element is given, X, Y and Z are considered in this Axis system.
+ *<br>If reference point is not specified, X,Y and Z are measured from origin of this axis system.
+ *<dl>
+ *<dt>Example</dt>:
+ *<dd>
+ * This example retrieves in <code>oRefAxis</code> the reference Axis System for <code>PlaneEquation</code> feature.
+ * <pre>
+ * Dim oRefAxis As CATIAReference
+ * Set oRefAxis  = PlaneEquation.<font color="red">RefAxisSystem</font>
+ * </pre>
+ * </dl> 
+ */ 
+#pragma PROPERTY RefAxisSystem
+ HRESULT get_RefAxisSystem ( out /*IDLRETVAL*/  CATIAReference   oRefAxis);
+ HRESULT put_RefAxisSystem ( in                 CATIAReference   iRefAxis);
+
+};
+
+
+
+
+
+// Interface name : CATIAHybridShapePlaneEquation
+#pragma ID CATIAHybridShapePlaneEquation "DCE:89d7661f-4ece-0000-0280020e60000000"
+#pragma DUAL CATIAHybridShapePlaneEquation
+
+// VB object name : HybridShapePlaneEquation (Id used in Visual Basic)
+#pragma ID HybridShapePlaneEquation "DCE:89d7691d-21dc-0000-0280020e60000000"
+#pragma ALIAS CATIAHybridShapePlaneEquation HybridShapePlaneEquation
+
+
+#endif
+
+

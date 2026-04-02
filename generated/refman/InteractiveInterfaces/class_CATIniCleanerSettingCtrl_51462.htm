@@ -1,0 +1,227 @@
+<!doctype html >
+<html>
+<head>
+ <meta http-equiv="Content-Language" content="en-us"> 
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+ <meta name="Generator" content="CppGene v1.1">
+ <meta http-equiv="Expires" content="Tue, 04 Dec 1993 21:29:02 GMT">
+ <title>InteractiveInterfaces CATIniCleanerSettingCtrl Class </title>
+<link href="../_index/cdg.css" rel="stylesheet" type="text/css"> 
+<link rel="Stylesheet" type="text/css" href="../../../caav5.css">
+<script language="Javascript" id="jsLinkjs" type="text/javascript" src="../_index/jslink.js"></script> 
+<script language="Javascript" id="jsFwLinkjs" type="text/javascript" src="jsFwLink.js"></script> 
+<script language="Javascript" id="jsTreejs" type="text/javascript" src="../_index/jsTree.js"></script>  
+</head>
+<body>
+<header><nav id='topnav'><div id="indexView" class="menu1">	 
+ <a id="multiview" class="onglet" rel="../_index/main.htm" href="../_index/main.htm">All Frameworks</a>   
+ <a id="multiview" class="onglet"  rel="../_index/tree.htm" href="../_index/tree.htm">Class Hierarchy</a>   
+ <a id="multiview" class="onglet"  rel="../InteractiveInterfaces.htm" href="../InteractiveInterfaces.htm">This Framework</a>
+<a id="multiview" class="onglet"  rel="../_index/HomeIdx.htm" href="../_index/HomeIdx.htm">Indexes</a>  
+ <a id="multiviewP" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'0')"  >Previous</a>  
+ 	<a id="multiviewN" class="onglet" href="javascript:openLinkNP(getCurrentObjectName(),getCurrentType(),'1')"  >Next</a> 
+ </div></nav><hr/> 
+<script type="text/javascript" > 
+ 	function getCurrentLevel() { 
+ return "";	} 
+	function getCurrentFw() { 
+	return "InteractiveInterfaces";	}
+		function getCurrentObjectName() { 
+ 	return "CATIniCleanerSettingCtrl"; } 
+	function getCurrentType() { 
+ 	return "class"; }  
+ function writeClassCharacteristic() { 
+ 	    var objtype = getCurrentType(); 
+ 	    var objname = getCurrentObjectName(); 
+ 	    var objdsCh = getDsCharacteristic(objname, objtype); 
+ 	    if (objdsCh!=null) document.write(objdsCh); 
+ 	} 
+ 	</script><h1 class='title1'>InteractiveInterfaces Framework: CATIniCleanerSettingCtrl <i> <script type="text/javascript" > writeClassCharacteristic(); </script>  </i>  </h1></header><main id='main'> 
+ 
+<section id='maindesc'>
+<script type="text/javascript" > 
+ generatedFatherClass('class_CATIniCleanerSettingCtrl_51462','CATIniCleanerSettingCtrl','0');</script>
+<section id='objdesc'>
+<p><b>Usage: you must use this class as is. You should never derive it.</b></p>
+<hr/>
+<p>
+ public class <b>CATIniCleanerSettingCtrl</b>
+</p>
+<p>
+<b><i> Class to delete a setting controller.</i></b><br>
+
+ <b>Role:</b>This class must be a static data of your 
+ setting controller implementation. 
+ <br><br>Sample to create the setting controller implementation:
+ <br><b>Header file:</b>
+ <pre>
+#include "CATBaseUnknown.h"  // To derive from
+#include "CATIniCleanerSettingCtrl.h"
+
+class  MySettingCtrl : public CATBaseUnknown
+{
+   // Used in conjunction with CATImplementClass in the .cpp file
+   CATDeclareClass;
+
+   public:
+
+   MySettingCtrl();
+   virtual ~MySettingCtrl();
+
+   // Method called by a global function
+   // This method creates an unic controler or retrieves it.
+   // 
+   static HRESULT GetSettingController(MySettingCtrl ** oCtrl);
+
+ private:
+
+   // Copy constructor, not implemented
+   // Set as private to prevent from compiler automatic creation as public.
+   MySettingCtrl(const MySettingCtrl &iObjectToCopy);
+
+ private:
+
+   static CATIniCleanerSettingCtrl _CleanerCtrl ;
+
+
+};
+ </pre>
+ <b>Cpp file:</b>
+ <pre>
+
+#include "MySettingCtrl.h"
+#include "CATErrorDef.h"
+
+ //To initialize the static data 
+CATIniCleanerSettingCtrl MySettingCtrl::_CleanerCtrl ;
+
+ //To declare that this class is a component main class 
+CATImplementClass(MySettingCtrl, 
+                   Implementation, CATBaseUnknown , CATNull);
+
+
+
+MySettingCtrl::MySettingCtrl()
+{
+}
+
+
+MySettingCtrl::~MySettingCtrl()
+{
+}
+
+HRESULT MySettingCtrl::GetSettingController(
+                       MySettingCtrl ** oCtrl)
+{
+    HRESULT rc = S_OK ;
+
+    if ( NULL != oCtrl )
+    {
+       CATBaseUnknown * Ctrl = _CleanerCtrl.GetController();
+       if ( NULL == Ctrl )
+       {
+          MySettingCtrl * SettingController = NULL;
+          SettingController = new MySettingCtrl();
+          if ( NULL == SettingController )
+          {
+             rc = E_OUTOFMEMORY ;
+          }else
+          {
+             // The cleaner keeps the unic instance
+             // SetController has made an Addref
+             _CleanerCtrl.SetController(SettingController);
+
+             *oCtrl = SettingController ;
+          }
+       }else
+       {
+          *oCtrl = (MySettingCtrl*) Ctrl ;
+       }
+
+    }else rc = E_FAIL ;
+
+    return rc ;
+
+}
+ </pre>
+ <dl  class='desclist'>
+  <dt> <b>See also:</b></dt> 
+  <dd> <script type="text/javascript"> activateLinkAnchor('CATIIniSettingManagment','','CATIIniSettingManagment') </script></dd>
+</dl>
+</p>
+</section>
+<br class='brsect'/><section id='idxsum'>
+<article id='ctoridx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Constructor and Destructor Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#CATIniCleanerSettingCtrl()"><b>CATIniCleanerSettingCtrl</b></a>()
+</td><td id='tdright'>  Constructs an instance
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#~CATIniCleanerSettingCtrl()"><b>~CATIniCleanerSettingCtrl</b></a>()
+</td><td id='tdright'> </td></tr> </tbody></table></nav>
+</article>
+<article id='methoidx'>
+<nav id='idxnav'> <table class='fill' id='idxtab' ><tbody> 
+<tr><th colspan = '2'>Method Index</th></tr>
+ <tr><td id='tdleft'>
+    <a href="#GetController()"><b>GetController</b></a>()
+</td><td id='tdright'>  Retrieves the setting controller.
+</td></tr>  <tr><td id='tdleft'>
+    <a href="#SetController(CATBaseUnknown*)"><b>SetController</b></a>(CATBaseUnknown*)
+</td><td id='tdright'>  Sets the setting controller.
+</td></tr> </tbody></table></nav>
+</article>
+<article id='enumidx'>
+</article>
+<article id='dataidx'>
+</article>
+</section>
+<br class='brsect'/><section id='objdef'>
+<article id='ctordef'  class='defblock'>
+ <h2 class='title2'>Constructor and Destructor</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="CATIniCleanerSettingCtrl"></a><a id="CATIniCleanerSettingCtrl()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>CATIniCleanerSettingCtrl</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Constructs an instance
+</dd>
+<dt class='dtmethod' >
+  <a id="~CATIniCleanerSettingCtrl"></a><a id="~CATIniCleanerSettingCtrl()"></a>
+<span class = 'method'>public virtual <script type="text/javascript"> activateLink('','')</script>  <span class='objname'>~CATIniCleanerSettingCtrl</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+</dd>
+</dl><br class='brart'/>
+</article >
+<article id='methoddef'  class='defblock'>
+ <h2 class='title2'>Methods</h2> <br> <dl>
+<dt class='dtmethod' >
+  <a id="GetController"></a><a id="GetController()"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown *')</script>  <span class='objname'>GetController</span><span class = 'signature'>()</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Retrieves the setting controller.
+</dd>
+<dt class='dtmethod' >
+  <a id="SetController"></a><a id="SetController(CATBaseUnknown*)"></a>
+<span class = 'method'>public <script type="text/javascript"> activateLink('void','void')</script>  <span class='objname'>SetController</span><span class = 'signature'>(<script type="text/javascript"> activateLink('CATBaseUnknown','CATBaseUnknown*')</script> <span class='param'>iController</span>)</span><script type="text/javascript"> activateLink('','')</script>  </span></dt>
+  <dd class='ddmethod'>
+ Sets the setting controller.
+ <br><b>Role</b>: The last controller is released if it exists, and
+ in all cases, the instance keeps a pointer on the setting controller.
+ This pointer is released in the destructor of this class.
+</dd>
+</dl><br class='brart'/>
+</article>
+<article id='enumdef'  class='defblock'>
+</article>
+<article id='datadef'  class='defblock'>
+</article>
+</section>
+<hr/>
+ This object is included in the file: <b>CATIniCleanerSettingCtrl.h</b><br>
+If needed, your Imakefile.mk should include the module: <b>CATInteractiveInterfaces</b>
+</section>
+</main><footer><hr/><p><i>Copyright &#169; 1999-2019, Dassault Syst&#232;mes. All rights reserved.</i></p></footer>
+</body>
+</html>
+

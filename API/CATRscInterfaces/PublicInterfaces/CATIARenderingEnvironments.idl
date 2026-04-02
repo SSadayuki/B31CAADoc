@@ -1,0 +1,95 @@
+#ifndef CATIARenderingEnvironments_IDL
+#define CATIARenderingEnvironments_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 2002
+//=================================================================
+//                                   
+// CATIARenderingEnvironments:                           
+// Exposed interface for Rendering Environments collection
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+// Jun02 Creation					A. Schmitt
+//=================================================================
+
+#include "CATIACollection.idl"
+#include "CATIARenderingEnvironment.idl"
+#include "CATVariant.idl"
+
+/**
+ * A collection of all the Rendering Environments objects.
+ */
+
+//-----------------------------------------------------------------
+interface CATIARenderingEnvironments : CATIACollection
+{
+    /**
+     * Returns an environment index in the environments collection.
+     * @param iIndex
+     *   The index of the environment to retrieve in the collection of environments.
+     *   Compared with other collections, you cannot use the name of the
+     *   environment as argument.
+     * @return The retrieved environment
+     * <! @sample >
+     * </dl>
+     * <dt><b>Example:</b>
+     * <dd>
+     * The following example returns in <tt>MyEnvironment</tt> the sixth
+     * environment in a environment collection.
+     * <pre>
+     * Dim MyEnvironment As RenderingEnvironment
+     * Set MyEnvironment = RenderingEnvironments.<font color="red">Item</font>(6)
+     * </pre>
+     */
+    HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIARenderingEnvironment oEnvironment);
+
+    /**
+     * Adds a new environment to the environments collection.
+	 * @param iEnvironmentType
+     *   The type of the environment to create choosen among:
+	 *   <dl>
+     *     <dt>1<dd> For cubical environment
+	 *     <dt>2<dd> For spherical environment
+     *     <dt>3<dd> For cylindrical environment
+     *   </dl>
+     *   
+     */
+    HRESULT Add(in short iEnvironmentType, out /*IDLRETVAL*/ CATIARenderingEnvironment oEnvironment);
+
+    /**
+     * Removes a environment from the environments collection.
+     */
+    HRESULT Remove(in CATVariant iIndex);
+
+	/**
+     * Removes all environments.of the collection
+     */
+    HRESULT RemoveAll();
+};
+
+// Interface Name : CATIARenderingEnvironments
+#pragma ID CATIARenderingEnvironments "DCE:5cb5cd90-9999-11d6-805e0030f113d1bf"
+#pragma DUAL CATIARenderingEnvironments
+ 
+// VB Object Name : RenderingEnvironments
+#pragma ID RenderingEnvironments "DCE:6558ede0-9999-11d6-805e0030f113d1bf"
+#pragma ALIAS CATIARenderingEnvironments RenderingEnvironments
+
+#endif
+// CATIAMaterials_IDL
+
+
+
+
+
+
+

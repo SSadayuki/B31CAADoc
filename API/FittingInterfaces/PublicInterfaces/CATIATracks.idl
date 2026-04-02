@@ -1,0 +1,61 @@
+#ifndef CATIATracks_IDL
+#define CATIATracks_IDL
+
+/*IDLREP*/
+
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+//===================================================================
+// CATIATracks.idl
+// Automation interface for the Tracks element 
+//===================================================================
+
+#include "CATIACollection.idl"
+#include "CATIASampleds.idl"
+#include "CATVariant.idl"
+
+
+    /**
+     * A collection of all the track objects contained in the current
+     * document.
+     */
+
+
+interface CATIATracks : CATIASampleds
+{
+    /**
+      * Creates a track in the collection, from information from an
+      * external file.
+      * @param iFileName
+      *    The path to a valid xml file.
+      * 
+      * <! @sample >
+      * <dt><b>Example:</b>
+      * <dd>
+      * The following example reads a file called <tt>exmple.xml</tt>
+      * and creates a track in the tracks collection.
+      * <pre>
+      * myTracks.<font color="red">AddFromFile ("example.xml")</font>
+      * </pre>
+      */
+    HRESULT AddFromFile (in CATBSTR iFileName);
+};
+
+
+// Interface name : CATIATracks
+#pragma ID CATIATracks "DCE:9487ad00-ae71-11d4-9efb00508b67522f"
+#pragma DUAL CATIATracks
+
+
+// VB object name : Tracks (Id used in Visual Basic)
+#pragma ID Tracks "DCE:9487ad01-ae71-11d4-9efb00508b67522f"
+#pragma ALIAS CATIATracks Tracks
+
+
+#endif

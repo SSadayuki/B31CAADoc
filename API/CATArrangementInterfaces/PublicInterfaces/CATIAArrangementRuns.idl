@@ -1,0 +1,95 @@
+// COPYRIGHT Dassault Systemes 2000
+//===================================================================
+//
+// CATIAArrangementRuns.idl
+// Automation interface for the ArrangementRuns element 
+//
+
+#ifndef CATIAArrangementRuns_IDL
+#define CATIAArrangementRuns_IDL
+/*IDLREP*/
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATSafeArray.idl"
+#include "CATVariant.idl"
+
+interface CATIAMove;
+interface CATIAArrangementRun;
+
+/**  
+ * A collection object of ArrangementRun objects.
+ * <b> Role: </b>
+ * Use this collection object to manage ArrangementRun objects.
+ */
+interface CATIAArrangementRuns : CATIACollection 
+{
+
+  /**
+   * Creates an ArrangementRun and adds it to the collection.
+   *
+   * @param iRelAxis
+   *   Relative Axis to be considered.
+   * @param iListofMathPoints
+   *   List of points through which to route.
+   * @param iMathDirection
+   *   Starting routing direction.
+   * @return
+   *   Returns the newly created ArrangementRun object and adds it to the collection.
+   */
+
+  HRESULT AddRun(in CATIAMove           iRelAxis,
+                 in CATSafeArrayVariant iListofMathPoints,
+                 in CATSafeArrayVariant iMathDirection,
+                 out /*IDLRETVAL*/ CATIAArrangementRun oArrRun);
+
+
+  /**
+   * Returns the specified ArrangementRun item of the collection object.
+   * 
+   * @param iIndex
+   *   The index or the name of the ArrangementRun to retrieve from this collection.
+   *   <dl>
+   *   <dt> To retrieve a specific object by number, use the rank of the ArrangementRun in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To retrieve a specific ArrangementRun by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   * @return
+   *    The retrieved ArrangementRun object.
+   */
+  HRESULT Item(in CATVariant iIndex, out /*IDLRETVAL*/ CATIAArrangementRun oArrRun);
+
+  /**
+   * Removes the specified ArrangementRun object from the collection.
+   * 
+   * @param iIndex
+   *   The index or the name of the ArrangementRun to remove from this collection.
+   *   <dl>
+   *   <dt> To remove a specific object by number, use the rank of the ArrangementRun in that collection.</dt>
+   *   <dd>
+   *   Note that the index of the first element in the collection is 1, and
+   *   the index of the last  element is Count.
+   *   </dd>
+   *   To remove a specific ArrangementRun by name, use name that you assigned using
+   *   the @href CATIABase#Name property.
+   */
+   HRESULT Remove(in CATVariant iIndex);
+
+
+};
+
+// Interface name : CATIAArrangementRuns
+#pragma ID CATIAArrangementRuns "DCE:998dcddc-ba53-11d4-8df200d0b7acadba"
+#pragma DUAL CATIAArrangementRuns
+
+// VB object name : ArrangementRuns (Id used in Visual Basic)
+#pragma ID ArrangementRuns "DCE:998dcddd-ba53-11d4-8df200d0b7acadba"
+#pragma ALIAS CATIAArrangementRuns ArrangementRuns
+
+#endif

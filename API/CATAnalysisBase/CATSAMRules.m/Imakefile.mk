@@ -1,0 +1,23 @@
+
+#
+BUILT_OBJECT_TYPE = NONE
+#
+OS = COMMON
+
+LINK_WITH = CATSAM0Core JS0CORBA JS0ZLIB CATXMLParserItf CATBinaryXml \
+            Mathematics
+
+LOCAL_CCFLAGS = $(CCFLAGS_SAM)
+LOCAL_CFLAGS = $(CCFLAGS_SAM)
+
+OS = AIX
+
+OS = HP-UX
+
+OS = IRIX
+
+OS = SunOS
+
+OS = Windows_NT
+OPTIMIZATION_CPP =  /Oxt /Gy /GF /GR- 
+

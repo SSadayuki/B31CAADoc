@@ -1,0 +1,61 @@
+#ifndef CATIAAnnotationSets_IDL
+#define CATIAAnnotationSets_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATIABase.idl"
+
+interface CATIAAnnotationSet;
+interface CATIAProduct;
+
+/**
+ * Interface for collection of Annotations' Set
+ */
+interface CATIAAnnotationSets : CATIACollection
+{
+  /**
+   * @nodoc.
+   * Add a set.
+   */
+  HRESULT Add (in CATBSTR        iStandard,
+               out /*IDLRETVAL*/ CATIAAnnotationSet oSet);
+
+  /**
+   * Add a set in the product.
+   */
+  HRESULT AddInAProduct (in CATIAProduct   iProduct,
+                         in CATBSTR        iStandard,
+                         out /*IDLRETVAL*/ CATIAAnnotationSet oSet);
+
+  /**
+   * Retrieve a set.
+   */
+  HRESULT Item (in CATVariant iIndex,
+                out /*IDLRETVAL*/ CATIABase  oSet);
+
+  /**
+    * Loads the Annotation Sets list.
+    * This method is very useful when a cgr document containing Annotation Set
+    * is inserted in the product, because the Annotation Set is not automatically loaded
+    * If the Annotation Set is already loaded nothing happens.
+    */
+   HRESULT LoadAnnotationSetsList ();
+
+};
+
+// Interface name : CATIAAnnotationSets
+#pragma ID CATIAAnnotationSets "DCE:bd8fdc70-9b60-11d3-9c940008c725d79e"
+#pragma DUAL CATIAAnnotationSets
+
+// VB object name : AnnotationSets 
+#pragma ID AnnotationSets "DCE:bd8fdc70-9b60-11d3-9c940008c725d79f"
+#pragma ALIAS CATIAAnnotationSets AnnotationSets
+
+#endif

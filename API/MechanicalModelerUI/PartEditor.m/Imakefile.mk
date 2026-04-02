@@ -1,0 +1,28 @@
+#
+# SHARED LIBRARY SkinGraph
+#
+BUILT_OBJECT_TYPE=NONE
+
+#BUILT_OBJECT_TYPE=SHARED LIBRARY
+#LINK_WITH= YN000MAT YN000MFL \
+#           DI0PANV2 CD0FRAME CD0WIN DI0STATE \
+#           VE0GRPH2 CATDialogEngine\
+#           ON0GRAPH ON0FRAME \
+#           ON0GRBAS ON0GREXT ON0MAIN ON0PROP \
+#           JS0CORBA JS0SCBAK JS0STR JS0FM NS0S3STR \
+#           VE0BASE \
+#           CK0FEAT CATKnowledgeModeler KnowledgeItf\
+#           MF0STARTUP \
+#           MMUISettings \
+#           CO0LSTST CO0LSTPV CO0RCINT \
+#           CP0SPEC AC0SPBAS AC0SPCHECK AC0SPDOC
+#
+#OS = AIX
+#
+#OS = HP-UX
+#
+#OS = IRIX
+#
+#OS = SunOS
+#
+#OS = Windows_NT

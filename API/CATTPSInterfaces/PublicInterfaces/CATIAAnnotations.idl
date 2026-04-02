@@ -1,0 +1,47 @@
+#ifndef CATIAAnnotations_IDL
+#define CATIAAnnotations_IDL
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+#include "CATIABase.idl"
+#include "CATIAAnnotation.idl"
+
+/**
+ * Interface for collection of TPS objects CATIAAnnotation.
+ */
+interface CATIAAnnotations : CATIACollection
+{
+  /**
+  * Retrieves an Annotation managing by CATIAAnnotation.
+  * Deprecated method: Item method is replaced by Item2 has. 
+  */
+  HRESULT Item (in CATVariant iIndex, out /*IDLRETVAL*/ CATIABase oAnnot);
+
+  /**
+   * Add an Annotation.
+   */
+  HRESULT Add (in CATIAAnnotation iAnnot);
+
+  /**
+    * Retrieve an Annotation using interface CATIAAnnotation2
+    */
+  HRESULT Item2 (in CATVariant iIndex, out /*IDLRETVAL*/ CATIABase oAnnot);
+
+};
+
+// Interface name : CATIAAnnotations
+#pragma ID CATIAAnnotations "DCE:bf6a77d6-a0ce-11d3-9c940008c725d79e"
+#pragma DUAL CATIAAnnotations
+
+// VB object name : Annotations
+#pragma ID Annotations "DCE:bf6a77d6-a0ce-11d3-9c940008c725d79f"
+#pragma ALIAS CATIAAnnotations Annotations
+
+#endif

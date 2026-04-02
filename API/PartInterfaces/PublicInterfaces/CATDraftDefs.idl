@@ -1,0 +1,76 @@
+#ifndef CATDraftDefs_IDL
+#define CATDraftDefs_IDL
+/*IDLREP*/
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U1
+ */
+
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1997
+//=================================================================
+//                                   
+// CATDraftDefs:                           
+// enumerations for Mechanical Draft
+//                                   
+//=================================================================
+// Usage notes:
+//
+//=================================================================
+
+/**
+ * Draft mode.
+ * The draft consists in the envelope of a cone propagated along the
+ * neutral edge.
+ * @param catStandardDraftMode
+ *    The draft's neutral element must be input
+ * @param catReflectKeepFaceDraftMode
+ *    The draft's neutral element is computed while maintaining
+ *    the adjacent faces
+ * @param catReflectKeepEdgeDraftMode
+ *    The draft's neutral element is computed while maintaining
+ *    the adjacent edges
+ */
+enum CatDraftMode    
+{
+    catStandardDraftMode ,
+    catReflectKeepFaceDraftMode ,
+    catReflectKeepEdgeDraftMode
+};
+
+/**
+ * Draft neutral propagation.
+ * The draft neutral element can consist in only the selected element
+ * or can be propagated to all the tangent surfaces
+ * @param catNoneDraftNeutralPropagationMode
+ *    The neutral element consists in only the selected surface
+ * @param catSmoothDraftNeutralPropagationMode
+ *    The neutral element consists in the selected surface and all
+ *    its adjacent tangent surfaces
+ */
+
+enum CatDraftNeutralPropagationMode
+{
+    catNoneDraftNeutralPropagationMode ,
+    catSmoothDraftNeutralPropagationMode
+};
+
+/**
+ * Multi Selection Mode.
+ * The elements to be drafted can be selected explicitly
+ * or can implicitly selected as neighbors of the neutral face
+ * @param catNoneDraftMultiselectionMode
+ *    The elements to be drafted can be selected explicitly
+ * @param catMultiselectionByNeutralMode
+ *    The elements to be drafted are the neighbors of the neutral face
+ */
+
+enum CatDraftMultiselectionMode
+{
+    catNoneDraftMultiselectionMode ,
+    catDraftMultiselectionByNeutralMode
+};
+#endif
+// CATDraftDefs_IDL
+

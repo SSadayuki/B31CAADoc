@@ -1,0 +1,184 @@
+#ifndef CATIABasicComponent_IDL
+#define CATIABasicComponent_IDL
+/*IDLREP*/
+//=================================================================
+// COPYRIGHT DASSAULT SYSTEMES 1998
+//=================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+#include "CATIABase.idl"
+#include "CATVariant.idl"
+#include "CATIAReference.idl"
+#include "CATIAProduct.idl"
+#include "CATIAPart.idl"
+
+interface CATIABasicComponents;
+interface CATIAAnalysisEntities;
+interface CATIAAnalysisSupports;
+/**
+ * Interface designed to manage <b>Analysis Basic Components</b>.<br>
+ * <p>
+ * A <b>Basic Component</b> is the low level of physical descriptive data.
+ * It is a "brick" dedicated to build the <b>Analysis Entity</b> or an <b>Analysis Set</b> .<br> <p>
+ * A <b>Basic Components</b> can contain several <b>Blocks</b>.
+ * A <b>Block</b> is identified by a label.
+ * It contains entity data of the same type, organized in superimposed tables.
+ * <p>
+ * To create <b>Analysis Entities</b> with a complex structure, we have also created
+ * a particular <b>Basic Component</b> dedicated to encapsulate other <b>Basic Components</b>.
+ */                                 
+//-----------------------------------------------------------------
+interface CATIABasicComponent : CATIABase
+{
+
+/**
+  * Returns the type of the Basic Component.
+  * @return The string that represent the Basic Component type.
+  */
+#pragma PROPERTY Type
+    HRESULT get_Type(inout /*IDLRETVAL*/ CATBSTR oType);
+
+/**
+  * Returns the collection of Basic Components agregated by the basic component. 
+  * It can be (scalar value, vector, tensor,...). Depending on the type of the Basic component,
+  * the collection can be empty.
+  * @sample
+  * This example retrieves <tt>Basic components</tt> collection <br>
+  * <pre>
+  * Dim MyBasicComp As BasicComponent
+  * Dim myBasicComponents As BasicComponents
+  * Set myBasicComponents = MyBasicComp.BasicComponents
+  */
+#pragma PROPERTY BasicComponents
+	HRESULT get_BasicComponents(out /*IDLRETVAL*/ CATIABasicComponents oComponents);
+
+/**
+  * Returns the collection of Entities agregated by the basic component.
+  * Depending on the type of the Basic component,the collection can be empty.
+  * @sample
+  * This example retrieves <tt>Basic components</tt> collection <br>
+  * <pre>
+  * Dim MyBasicComp As BasicComponent
+  * Dim myEntities AnalysisEntities
+  * Set myEntities = MyBasicComp.AnalysisEntities
+  */
+#pragma PROPERTY Entities
+	HRESULT get_Entities(out /*IDLRETVAL*/ CATIAAnalysisEntities oEntities);
+
+/**
+ * Return one of the dimensions information of the Basic Component structure.
+ * @param oLinesNumber = Number of lines.
+ */
+    HRESULT GetLinesNumber(in CATBSTR iLabel,out /*IDLRETVAL*/ long oLinesNumber);
+
+/**
+ * Return one of the dimensions information of the Basic Component structure.
+ * @param oColumnsNumber = Number of Columns.
+ */
+    HRESULT GetColumnsNumber(in CATBSTR iLabel,out /*IDLRETVAL*/ long oColumnsNumber);
+
+/**
+ * Return one of the dimensions information of the Basic Component structure.
+ * @param oLayersNumber = Number of Layers.
+ */
+    HRESULT GetLayersNumber(in CATBSTR iLabel,out /*IDLRETVAL*/ long oLayersNumber);
+
+ /**
+ * Return the value corresponding to the given coordinates.<br>
+ * @param iLabel = Label of the block containing the value.<br>
+ * @param iLineIndex = line index of the value.<br>
+ * @param iColumnIndex = column index of the value.<br>
+ * @param iLayerIndex = layer index of the value.<br>
+ * If the the component has a single value, set these 3 parameters
+ * to 0.<br>
+ */
+
+    HRESULT GetValue(in CATBSTR iLabel,in long iLineIndex,
+		     in long iColumnIndex,in long iLayerIndex,inout /*IDLRETVAL*/ CATVariant iValue); 
+/**
+ * Set the value corresponding to the given coordinates.<br>
+ * @param iLabel = Label of the block containing the value.<br>
+ * @param iLineIndex = line index of the value.<br>
+ * @param iColumnIndex = column index of the value.<br>
+ * @param iLayerIndex = layer index of the value.<br>
+ * If the the component has a single value, set these 3 parameters
+ * to 0.<br>
+ */
+    HRESULT SetValue(in CATBSTR iLabel, 
+		     in long iLineIndex, 
+		     in long iColumnIndex,
+		     in long iLayerIndex,
+	 	     in CATVariant iValue); 
+
+/**
+  * Creates a new support and add it to the description of the basic component.
+  * @param iReference the CATIA Reference that represent the object to linked.<br>
+  * @param iSupport  the CATIA Reference that represent the object to linked.<br>
+  * @see CATIAReference , CATIAProduct
+  */
+	HRESULT AddSupportFromReference(in CATIAReference iReference,
+									in CATIAReference iSupport);
+
+/**
+  * Creates a new support and add it to the description of the basic component.
+  * @param iProduct  the CATIA Product that represent the object to linked.<br>
+  * @param iSupport  the CATIA Reference that represent the object to linked.<br>
+  * @see CATIAReference , CATIAProduct
+  */
+
+	HRESULT AddSupportFromProduct(in CATIAProduct iProduct,
+								  in CATIAReference iSupport);
+
+/**
+  * Creates a new support and add it to the description of the Basic Component.
+  * @param iProduct  the CATIA Product that represent the object to linked.<br>
+  * @param iPublication  the CATIA Publication that represent the object to linked.<br>
+  * @see CATIAPublication , CATIAProduct
+  */
+  HRESULT AddSupportFromPublication(in CATIAProduct   iProduct,
+                           in CATIAPublication iPublication);
+
+/**
+ * Sets the reference corresponding to the given component.<br>
+ * @param iLabel  The label of the block containing the value.<br>
+ * @param iLineIndex  The line index of the value.<br>
+ * @param iColumnIndex  The column index of the value.<br>
+ * @param iLayerIndex  The layer index of the value.<br>
+ * If the the component has a single value, assign 0 to the 3 parameters.
+ */
+  HRESULT SetReference(in CATBSTR iLabel, 
+		    in long iLineIndex, 
+		    in long iColumnIndex,
+		    in long iLayerIndex,
+	 	    in CATIAReference iValue); 
+
+/**
+ * Sets the dimensions of the basic component.<br>
+ * @param iLineCount  Number of lines.<br>
+ * @param iColumnCount  Number of columns.<br>
+ * @param iLayerCount  Number of layers.<br>
+ */
+  HRESULT SetDimensions(in long iLineCount,in long iColumnCount,in long iLayerCount) ;
+
+  /**
+  * Returns the list of Analysis Supports.
+  * The support defines the area on which the analysis is applied on.
+  */
+#pragma PROPERTY AnalysisSupports
+  HRESULT get_AnalysisSupports(out /*IDLRETVAL*/ CATIAAnalysisSupports oSupports);
+
+};
+
+// Interface name : CATIABasicComponent
+#pragma ID CATIABasicComponent "DCE:7121dbee-9a7d-11d2-97ba0008c71933b6"
+#pragma DUAL CATIABasicComponent
+
+// VB object name : BasicComponent (Id used in Visual Basic)
+#pragma ID BasicComponent "DCE:79c066ae-9a7d-11d2-97ba0008c71933b6"
+#pragma ALIAS CATIABasicComponent BasicComponent
+
+#endif
+// CATIABasicComponent_IDL
+

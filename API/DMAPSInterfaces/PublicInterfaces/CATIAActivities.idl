@@ -1,0 +1,68 @@
+#ifndef CATIAActivities_IDL
+#define CATIAActivities_IDL
+/*IDLREP*/
+
+// COPYRIGHT DASSAULT SYSTEMES 1999
+
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+
+
+#include "CATIACollection.idl"
+#include "CATVariant.idl"
+interface CATIAActivity;    
+
+
+/**
+* The collection of activities related to the current activity.<br>
+* It respectively manages the children hierarchy, the 
+* downstream control flow, the uptream control flow, the downstream product 
+* flow or the upstream product flow.<br>
+*/
+interface CATIAActivities : CATIACollection
+{
+/**
+* This method gets the specified activity on the current activities 
+* management.
+* @param iIndex
+* The activity identifier
+* @return oActivity
+* The activity 
+*/
+
+  HRESULT     Item( in CATVariant iIndex, out /*IDLRETVAL*/ CATIAActivity oActivity);
+
+/**
+* This method removes the specified activity on the current activities 
+* management.
+* @param iIndex
+* The activity identifier
+*/
+
+  HRESULT     Remove( in CATVariant iIndex);
+
+
+ 
+  /**
+	* This method adds the specified activity as a precedence constraint 
+	* @param iActivity
+	* The activity Handle
+	*/
+
+  HRESULT     Add( in CATIAActivity iActivity );
+
+};
+
+// Interface name : CATIAActivities
+#pragma ID CATIAActivities "DCE:d83a4a12-2c7c-11d2-beb6006094198597"
+#pragma DUAL CATIAActivities
+
+
+// VB object name : Activities   
+#pragma ID Activities "DCE:4111119c-2c7d-11d2-beb6006094198597"
+#pragma ALIAS CATIAActivities Activities
+
+
+#endif

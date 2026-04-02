@@ -1,0 +1,153 @@
+// COPYRIGHT Dassault Systemes 2002
+//===================================================================
+/**
+ * @CAA2Level L1
+ * @CAA2Usage U3
+ */
+ 
+#ifndef CATIADMOWrappings_IDL
+#define CATIADMOWrappings_IDL
+/*IDLREP*/
+
+#include "CATIACollection.idl"
+#include "CATIADMOWrapping.idl"
+#include "CATVariant.idl"
+#include "CATSafeArray.idl"
+
+#include "CATIAV5Level.h"
+#ifdef CATIAV5R8
+#include "CATIAGroup.idl"
+#include "CATIADocument.idl"
+#endif
+
+interface CATIAProduct;
+
+/**
+ * Interface to compute Wrappings
+ */
+
+interface CATIADMOWrappings : CATIACollection 
+{
+#ifdef CATIAV5R8
+
+/**
+ * Compute a wrapping on the selected products.
+ * @param GroupOfSelectedProducts
+ *   The selected products on which you want to perform a wrapping.
+ * @param iAccuracy
+ *   The grain accuracy.
+ * @param iRation
+ *   The ratio.
+ * @param iAccuracyForSimplification
+ *   The accuracy for the simplification. equals -1 if no simplification
+ *   is to be performed.
+ * @return 
+ *   WrappingDocument: Document containing the result.
+ */
+
+      HRESULT ComputeAWrapping(in CATIAGroup GroupOfSelectedProducts, 
+	  in double iAccuracy, in double iRation, in double iAccuracyForSimplification, 
+	  out /*IDLRETVAL*/ CATIADocument WrappingDocument);
+
+
+/**
+ * Compute a wrapping on the selected products, according to a reference product.
+ * @param GroupOfSelectedProducts
+ *   The selected products on which you want to perform a wrapping.
+ * @param iReferenceProduct
+ *   Product taken as a reference.
+ * @param iAccuracy
+ *   The grain accuracy.
+ * @param iRation
+ *   The ratio.
+ * @param iAccuracyForSimplification
+ *   The accuracy for the simplification. equals -1 if no simplification
+ *   is to be performed.
+ * @return 
+ *   WrappingDocument: Document containing the result.
+ */
+
+      HRESULT ComputeAWrappingWithAReference(in CATIAGroup iGroupOfSelectedProducts, 
+	  in CATIAProduct iReferenceProduct, in double iAccuracy, in double iRation, 
+	  in double iAccuracyForSimplification, 
+	  out /*IDLRETVAL*/ CATIADocument WrappingDocument);
+
+/**
+ * Returns the name of the associated shape.
+ */
+
+      HRESULT WrappingShapeName(out /*IDLRETVAL*/ CATBSTR Name);
+
+#endif
+
+
+/**
+ * Compute a wrapping on the selected products. <b>This method is deprecated!</b>
+ * @param iProductToWrapping
+ *   The selected products on which you want to perform a wrapping.
+ * @param iAccuracy
+ *   The grain accuracy.
+ * @param iRatio
+ *   The ratio.
+ * @param iShapeName
+ *   The associated shape name.
+ * @param iActivatedShape
+ *   Do we activate the shape ?
+ * @param iDefaultShape
+ *   Do we activate the shape as default shape ?
+ * @return 
+ *   oWrapping: Document containing the result.
+ */
+
+	  HRESULT Add	(	in CATIAProduct iProductToWrapping, 
+						in double iAccuracy, 
+						in double iRatio, 						
+						in CATBSTR iShapeName, 
+						in long iActivatedShape, 
+						in long iDefaultShape, 
+						out /*IDLRETVAL*/ CATIADMOWrapping oWrapping );	
+
+
+/**
+ * Cleans up.
+ */
+
+	  HRESULT CleanUp();
+
+	  /**
+	  * Compute a wrapping using convex hull algorithm on the selected products, according to a reference product.
+	  * @param iGroupOfSelectedProducts
+	  *   The selected products to wrap.
+	  * @param iReferenceProduct
+	  *   Product taken as a reference.
+	  * @param iAccuracy
+	  *   The grain accuracy (accuracy value > 0 and units in mm).
+	  * @param iPerformSimplification
+	  *   set to true for simplification and set to false for no simplification
+	  * @param iAccuracyForSimplification
+	  *   The accuracy for the simplification (accuracy value > 0 and units in mm).
+	  *   The accuracy value is taken into account only if the @param
+	  *   iPerformSimplification is set to true.
+	  * @return
+	  *   WrappingDocument: Document containing the result.
+	  */
+
+	  HRESULT ComputeWrappingWithConvexHull(
+		  in CATIAGroup iGroupOfSelectedProducts,
+		  in CATIAProduct iReferenceProduct,
+		  in double iAccuracy,
+		  in boolean iPerformSimplification,
+		  in double iAccuracyForSimplification,
+		  out /*IDLRETVAL*/ CATIADocument WrappingDocument);
+
+};
+
+// Interface name : CATIADMOWrappings
+#pragma ID CATIADMOWrappings "DCE:8bc57901-2062-0000-0280030b35000000"
+#pragma DUAL CATIADMOWrappings
+
+// VB object name : Wrappings (Id used in Visual Basic)
+#pragma ID Wrappings "DCE:8bc57943-8823-0000-0280030b35000000"
+#pragma ALIAS CATIADMOWrappings Wrappings
+
+#endif

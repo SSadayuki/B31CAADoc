@@ -1,0 +1,94 @@
+#ifndef CATIASchAppCntrName_IDL 
+#define CATIASchAppCntrName_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIASchListOfBSTRs;
+    
+    
+#include "CATBSTR.idl"
+    
+#include "CATIABase.idl"
+
+ /** 
+  * Manage a schematic connector.
+  */
+
+interface CATIASchAppCntrName : CATIABase
+{
+  /**
+  * List connector names allowed.
+  * @param oLConnectorNamesAllowed
+  *   A list of connector names allowed.
+  *   The caller must allocate memory for the first level pointer 
+  *   (i.e. oLConnectorNamesAllowed) and release the second level
+  *   pointer (i.e. *oLConnectorNamesAllowed) after usage.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrName
+  * Dim objArg1 As SchListOfBSTRs
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">AppListNames</font>
+  * </pre>
+  *    
+  */
+  HRESULT AppListNames ( 
+    out /*IDLRETVAL*/ CATIASchListOfBSTRs oLConnectorNamesAllowed );
+    
+  /**
+  * Get the application connector name.
+  * @param oName
+  *   The connector name.
+  *   The caller must allocate memory for the first level pointer 
+  *   (i.e. oName) and release the second level
+  *   pointer (i.e. *oName) after usage.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrName
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">GetName</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT GetName ( 
+    inout CATBSTR oName );
+    
+  /**
+  * Set the application connector name.
+  * @param oName
+  *   The connector name.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchAppCntrName
+  * Dim strVar1 As String
+  *  ...
+  * objThisIntf.<font color="red">SetName</font>strVar1
+  * </pre>
+  *    
+  */
+  HRESULT SetName ( 
+    in CATBSTR iName );
+    
+};
+    
+// Interface name : CATIASchAppCntrName
+#pragma ID CATIASchAppCntrName "DCE:1d72326c-e9f7-4e96-a63b09fe0d58c7e4"
+#pragma DUAL CATIASchAppCntrName
+    
+// VB object name : SchAppCntrName
+#pragma ID SchAppCntrName "DCE:9b46b996-cc0c-43e3-bb3ae13c2c56f3a9"
+#pragma ALIAS CATIASchAppCntrName SchAppCntrName
+    
+#endif 
+    

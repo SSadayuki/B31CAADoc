@@ -1,0 +1,108 @@
+#ifndef CATIASchDropOffView_IDL 
+#define CATIASchDropOffView_IDL 
+    
+/*IDLREP*/
+    
+/**
+* @CAA2Level L1
+* @CAA2Usage U3
+*/
+
+//	COPYRIGHT DASSAULT SYSTEMES 2004
+    
+interface  CATIADrawingView;
+interface  CATIASchListOfObjects;
+    
+    
+#include "CATSafeArray.idl"
+    
+#include "CATIABase.idl"
+
+
+ /** 
+  * Manage the drop off views in a schematic viewer.
+  */
+
+
+interface CATIASchDropOffView : CATIABase
+{
+  /**
+  * Adds a drafting view to the schematics diagram.
+  * @param iView
+  *   pointer to drafting view to add
+  * @param oView
+  *   pointer to newly added drafting in this document
+  * @param iDb2PosXY
+  *   pointer to XY coordinate for placement, if NULL, the position is the same 
+  *   as that of the input view.
+  * @param iDb1Scale
+  *   scale of view added, if NULL, scale is assumed to be that of the input view.
+  * @param iDb1Angle
+  *   The view orientation, if NULL, orientation is assumed to be that of the input view.
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchDropOffView
+  * Dim objArg1 As DrawingView
+  * Dim objArg2 As DrawingView
+  * Dim dbVar3(2) As CATSafeArrayVariant
+  *
+  *
+  *  ...
+  * objThisIntf.<font color="red">AddDropOffView</font>objArg1,objArg2,dbVar3,dbVar3,dbVar3
+  * </pre>
+  *    
+  */
+  HRESULT AddDropOffView ( 
+    in CATIADrawingView iView, 
+    inout CATIADrawingView oView, 
+    in CATSafeArrayVariant iDb2PosXY, 
+    in double iDb1Scale, 
+    in double iDb1Angl );
+    
+  /**
+  * Removes a drafting view from the schematics diagram.
+  * @param iViewToRemove
+  *   pointer to drafting view to remove
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchDropOffView
+  * Dim objArg1 As DrawingView
+  *  ...
+  * objThisIntf.<font color="red">RemoveDropOffView</font>objArg1
+  * </pre>
+  *    
+  */
+  HRESULT RemoveDropOffView ( 
+    in CATIADrawingView iViewToRemove );
+    
+  /**
+  * Lists drafting views in this schematics diagram.
+  * @param oLDropOffViews
+  *   A list of drafting views
+  *    
+  * @sample
+  * <pre>
+  * Dim objThisIntf As SchDropOffView
+  * Dim objArg1 As SchListOfObjects
+  *  ...
+  * Set objArg1 = objThisIntf.<font color="red">ListDropOffViews</font>
+  * </pre>
+  *    
+  */
+  HRESULT ListDropOffViews ( 
+    out /*IDLRETVAL*/ CATIASchListOfObjects oLDropOffViews );
+    
+};
+    
+// Interface name : CATIASchDropOffView
+#pragma ID CATIASchDropOffView "DCE:85ec7140-1930-4dc5-a6fe1a26d0f01288"
+#pragma DUAL CATIASchDropOffView
+    
+// VB object name : SchDropOffView
+#pragma ID SchDropOffView "DCE:58218945-7618-41cd-84fef4cc45a2f9fd"
+#pragma ALIAS CATIASchDropOffView SchDropOffView
+    
+#endif 
+    
